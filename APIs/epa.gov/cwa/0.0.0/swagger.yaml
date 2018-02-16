@@ -112,11 +112,7 @@ parameters:
     required: false
     type: string
   p_act:
-    description: Active Permits/Facilities Flag.  Provide Y or N to filter results to facilities with active permits.
-    enum:
-      - 'Y'
-      - 'N'
-      - A
+    description: 'Active Permits/Facilities Flag.  Provide Y or N to filter results to facilities with active permits.  A Y will select ICIS NPDES permits with a status of effective, continued, or expired.'
     in: query
     name: p_act
     required: false
@@ -661,6 +657,47 @@ parameters:
     name: p_ieay
     required: false
     type: number
+  p_imp_cau_grp:
+    description: 'Facility is discharging a pollutant group causing a waterbody to be impaired.  Enter 1 through 34 (the internal number of the pollutant group); or enter a partial name such as Dioxin,Temp,tUrBidity.'
+    enum:
+      - ALGAL GROWTH
+      - AMMONIA
+      - BIOTOXINS
+      - CAUSE UNKNOWN
+      - CAUSE UNKNOWN - FISH KILLS
+      - CAUSE UNKNOWN - IMPAIRED BIOTA
+      - CHLORINE
+      - DIOXINS
+      - FISH CONSUMPTION ADVISORY
+      - FLOW ALTERATION(S)
+      - HABITAT ALTERATIONS
+      - MERCURY
+      - METALS (OTHER THAN MERCURY)
+      - NOXIOUS AQUATIC PLANTS
+      - NUISANCE EXOTIC SPECIES
+      - NUISANCE NATIVE SPECIES
+      - NUTRIENTS
+      - OIL AND GREASE
+      - ORGANIC ENRICHMENT/OXYGEN DEPLETION
+      - OTHER CAUSE
+      - PATHOGENS
+      - PESTICIDES
+      - PH/ACIDITY/CAUSTIC CONDITIONS
+      - POLYCHLORINATED BIPHENYLS (PCBS)
+      - RADIATION
+      - SALINITY/TOTAL DISSOLVED SOLIDS/CHLORIDES/SULFATES
+      - SEDIMENT
+      - 'TASTE, COLOR AND ODOR'
+      - TEMPERATURE
+      - TOTAL TOXICS
+      - TOXIC INORGANICS
+      - TOXIC ORGANICS
+      - TRASH
+      - TURBIDITY
+    in: query
+    name: p_imp_cau_grp
+    required: false
+    type: string
   p_imp_pol:
     description: Facility is discharging pollutants that are potentially contributing to the impairment of local waterbodies according to the ATTAINS database.
     enum:
@@ -709,6 +746,39 @@ parameters:
     description: Multi-Sector General Purpose Permit Sector Code.  Enter a value to filter results.
     in: query
     name: p_iswssID
+    required: false
+    type: string
+  p_iv:
+    description: |
+      Facility has a violation status of 'In Viol' during any of the selected quarters. 
+
+      Range: Fiscal Year 2017 Quarter 4 (or 13) to Fiscal Year 2014 Quarter 4 (or 1)
+
+      Multiple values are comma delimited.
+
+
+      ||||||  Fiscal Years ||||||
+      - FY2017 or FY17 or 2017 or 17
+      - FY2016 or FY16 or 2016 or 16
+      - FY2015 or FY15 or 2015 or 15
+      - FY2014 or FY14 or 2014 or 14
+
+      ||||| Fiscal Quarters |||||
+      - FY2017Q4 or FY17Q4 or 20174 or 174 or 13
+      - FY2017Q3 or FY17Q3 or 20173 or 173 or 12
+      - FY2017Q2 or FY17Q2 or 20172 or 172 or 11
+      - FY2017Q1 or FY17Q1 or 20171 or 171 or 10
+      - FY2016Q4 or FY16Q4 or 20164 or 164 or 9
+      - FY2016Q3 or FY16Q3 or 20163 or 163 or 8
+      - FY2016Q2 or FY16Q2 or 20162 or 162 or 7
+      - FY2016Q1 or FY16Q1 or 20161 or 161 or 6
+      - FY2015Q4 or FY15Q4 or 20154 or 154 or 5
+      - FY2015Q3 or FY15Q3 or 20153 or 153 or 4
+      - FY2015Q2 or FY15Q2 or 20152 or 152 or 3
+      - FY2015Q1 or FY15Q1 or 20151 or 151 or 2
+      - FY2014Q4 or FY14Q4 or 20144 or 144 or 1
+    in: query
+    name: p_iv
     required: false
     type: string
   p_last_dmr_within:
@@ -1601,8 +1671,10 @@ paths:
         - $ref: '#/parameters/p_ieay'
         - $ref: '#/parameters/p_ieaa'
         - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_iv'
         - $ref: '#/parameters/p_impw'
         - $ref: '#/parameters/p_imp_pol'
+        - $ref: '#/parameters/p_imp_cau_grp'
         - $ref: '#/parameters/p_trep'
         - $ref: '#/parameters/p_pm'
         - $ref: '#/parameters/p_pd'
@@ -1776,8 +1848,10 @@ paths:
         - $ref: '#/parameters/p_ieay'
         - $ref: '#/parameters/p_ieaa'
         - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_iv'
         - $ref: '#/parameters/p_impw'
         - $ref: '#/parameters/p_imp_pol'
+        - $ref: '#/parameters/p_imp_cau_grp'
         - $ref: '#/parameters/p_trep'
         - $ref: '#/parameters/p_pm'
         - $ref: '#/parameters/p_pd'
@@ -1952,8 +2026,10 @@ paths:
         - $ref: '#/parameters/p_ieay'
         - $ref: '#/parameters/p_ieaa'
         - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_iv'
         - $ref: '#/parameters/p_impw'
         - $ref: '#/parameters/p_imp_pol'
+        - $ref: '#/parameters/p_imp_cau_grp'
         - $ref: '#/parameters/p_trep'
         - $ref: '#/parameters/p_pm'
         - $ref: '#/parameters/p_pd'
@@ -2124,8 +2200,10 @@ paths:
         - $ref: '#/parameters/p_ieay'
         - $ref: '#/parameters/p_ieaa'
         - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_iv'
         - $ref: '#/parameters/p_impw'
         - $ref: '#/parameters/p_imp_pol'
+        - $ref: '#/parameters/p_imp_cau_grp'
         - $ref: '#/parameters/p_trep'
         - $ref: '#/parameters/p_pm'
         - $ref: '#/parameters/p_pd'
@@ -3300,9 +3378,12 @@ definitions:
   cwa1_Facilities:
     description: Facilities Object
     properties:
-      ActiveLower48:
+      AIRIDs:
+        description: Air Facility System (AFS) ID.
+        example: DC0000001100195254
+        title: AIR Facility System ID
         type: string
-      AirIDs:
+      ActiveLower48:
         type: string
       AlrExceedences:
         type: string
@@ -3663,7 +3744,7 @@ definitions:
         example: 'N'
         title: Major/Minor Status Flag
         type: string
-      CWPNaicsCodes:
+      CWPNAICSCodes:
         description: Indicates the facility's or permit's primary North American Industry Classification System (NAICS) Code.
         example: '236220'
         title: NAICS Code
@@ -3710,13 +3791,13 @@ definitions:
         description: 'Count of the number of quarters, out of the last twelve quarters, in which the permit is considered in Significant Non-compliance (SNC).'
         example: '0'
         type: string
-      CWPSNCEventDesc:
-        description: Describes the event that resulted in the facility's status of Significant Noncompliance.
-        type: string
-      CWPSicCodes:
+      CWPSICCodes:
         description: Indicates the facility's or permit's primary Standard Industrial Classification (SIC) Code.
         example: '4911'
         title: SIC Code
+        type: string
+      CWPSNCEventDesc:
+        description: Describes the event that resulted in the facility's status of Significant Noncompliance.
         type: string
       CWPState:
         description: Facility location - two-digit state abbreviation.
@@ -3818,15 +3899,15 @@ definitions:
         example: '0'
         title: Current Violation Flag
         type: string
-      DmrImpairedPoll:
+      DMRImpairedPoll:
         description: The pollutants with limits or monitoring requirements in a facility's NPDES permit with the potential to contribute to impairment of local waterbodies
         example: 'Mercury | Oil and grease | Solids, total suspended | Temperature, water deg. centigrade | Temperature, water deg. fahrenheit | pH'
         type: string
-      DmrPounds:
+      DMRPounds:
         description: Total pounds of pollutants discharged by the NPDES ID for the most recent complete calendar year.
         example: '500696'
         type: string
-      DmrTwpe:
+      DMRTwpe:
         description: Total toxic-weighted pounds equivalent (TWPE) discharged by the NPDES ID for the most recent complete calendar year. TWPE is the mass of a pollutant or chemical discharged that accounts for its relative toxicity.
         example: '1.15'
         type: string
@@ -3858,16 +3939,28 @@ definitions:
       EjscreenFlagUs:
         type: string
       ElectrRptWaiverEffDate:
+        description: This is the effective date for a  waiver from electronic reporting in compliance with this part. This data element should always be populated for a waiver.
+        title: Electronic Reporting Waiver Effective Date
         type: string
       ElectrRptWaiverExpDate:
+        description: This is the expiration date for a temporary waiver from electronic reporting in compliance with this part. This data element should be left blank if the permittee has a permanent waiver from electronic reporting or if the permittee does not have a waiver from electronic reporting in compliance with this part.
+        title: Electronic Reporting Waiver Expiration Date
         type: string
       ElectrRptWaiverTypeCode:
+        description: 'The unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Reporting Waiver Type Code
         type: string
       ElectrRptWaiverTypeDesc:
+        description: 'Description of the unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Waiver Type Code Description
         type: string
       ElectrSubmissionTypeCode:
+        description: This is the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code
         type: string
       ElectrSubmissionTypeDesc:
+        description: This is the description of the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code Description
         type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
@@ -3976,7 +4069,9 @@ definitions:
         description: This is the name of the organization issuing or granting a permit.
         title: Permit Issuing Agency
         type: string
-      LastDmrValueRcvdDate:
+      LastDMRValueRcvdDate:
+        type: string
+      LimPollutant:
         type: string
       Lower48:
         description: Flag showing Y/N whether location is within the contiguous (lower 48) United States.
@@ -3999,7 +4094,7 @@ definitions:
         example: '1'
         title: Max Score
         type: string
-      MissDmrQtrs:
+      MissDMRQtrs:
         type: string
       MsgpCorrectiveActionSmmry:
         type: string
@@ -4014,6 +4109,12 @@ definitions:
       MsgpVisualAssessmentSmmry:
         type: string
       NPDESDataGroups:
+        description: This is the code indicating the NPDES eReporting Rule Data Group that applies to the data.
+        title: NPDES Data Group Codes
+        type: string
+      NPDESDataGroupsDescs:
+        description: Description for each NPDES Data Group eReporting rule code related to the current NPDES permit.
+        title: NPDES Data Group Codes Descriptions
         type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
@@ -4094,6 +4195,8 @@ definitions:
         example: POTW
         type: string
       PermittingAgency:
+        description: This is the type of organization issuing or granting a permit.
+        title: Permitting Agency
         type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
@@ -4230,6 +4333,11 @@ definitions:
         example: '1'
         title: Violation Flag
         type: string
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - SourceID
       - EPASystem
@@ -4293,8 +4401,8 @@ definitions:
       - FacTRIPotwTrans
       - CWP13qtrsComplStatus
       - CWPDaysLastInspection
-      - CWPSicCodes
-      - CWPNaicsCodes
+      - CWPSICCodes
+      - CWPNAICSCodes
       - CWPCaseIDs
       - CWPTotalDesignFlowNmbr
       - CWPActualAverageFlowNmbr
@@ -4318,7 +4426,7 @@ definitions:
       - BeachCloseLastYearFlg
       - BeachCloseLast2yrsFlg
       - ChesapeakeBayFlag
-      - AirIDs
+      - AIRIDs
       - RCRAIDs
       - TRIIDs
       - SDWAIDs
@@ -4326,9 +4434,9 @@ definitions:
       - FacDerivedWBDName
       - CWPFIPSCode
       - PollInViolation
-      - DmrPounds
-      - DmrTwpe
-      - DmrImpairedPoll
+      - DMRPounds
+      - DMRTwpe
+      - DMRImpairedPoll
       - CurrSvFlag
       - ViolFlag
       - CurrVioFlag
@@ -4352,11 +4460,11 @@ definitions:
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
-      - LastDmrValueRcvdDate
+      - LastDMRValueRcvdDate
       - Lower48
       - ActiveLower48
       - EffExceeds
-      - MissDmrQtrs
+      - MissDMRQtrs
       - PastCalYrAverageFlow
       - PastCalYrConvPollutants
       - PastCalYrToxicPollutants
@@ -4412,7 +4520,7 @@ definitions:
       - BioReportDate
       - BioTotalVolumeAmt
       - BioCommentText
-      - BioFacTypes
+      - BioReportingObligations
       - BioTrtmntProcesses
       - BioAnalyMethodCatgrys
       - BioAnalyMethods
@@ -4472,6 +4580,9 @@ definitions:
       - ElectrRptWaiverExpDate
       - ElectrSubmissionTypeCode
       - ElectrSubmissionTypeDesc
+      - NPDESDataGroupsDescs
+      - WebDocs
+      - LimPollutant
       - Score
     type: object
   cwa1_MapData:
@@ -4780,9 +4891,12 @@ definitions:
   cwa2_Facilities:
     description: Facilities Object
     properties:
-      ActiveLower48:
+      AIRIDs:
+        description: Air Facility System (AFS) ID.
+        example: DC0000001100195254
+        title: AIR Facility System ID
         type: string
-      AirIDs:
+      ActiveLower48:
         type: string
       AlrExceedences:
         type: string
@@ -5143,7 +5257,7 @@ definitions:
         example: 'N'
         title: Major/Minor Status Flag
         type: string
-      CWPNaicsCodes:
+      CWPNAICSCodes:
         description: Indicates the facility's or permit's primary North American Industry Classification System (NAICS) Code.
         example: '236220'
         title: NAICS Code
@@ -5190,13 +5304,13 @@ definitions:
         description: 'Count of the number of quarters, out of the last twelve quarters, in which the permit is considered in Significant Non-compliance (SNC).'
         example: '0'
         type: string
-      CWPSNCEventDesc:
-        description: Describes the event that resulted in the facility's status of Significant Noncompliance.
-        type: string
-      CWPSicCodes:
+      CWPSICCodes:
         description: Indicates the facility's or permit's primary Standard Industrial Classification (SIC) Code.
         example: '4911'
         title: SIC Code
+        type: string
+      CWPSNCEventDesc:
+        description: Describes the event that resulted in the facility's status of Significant Noncompliance.
         type: string
       CWPState:
         description: Facility location - two-digit state abbreviation.
@@ -5298,15 +5412,15 @@ definitions:
         example: '0'
         title: Current Violation Flag
         type: string
-      DmrImpairedPoll:
+      DMRImpairedPoll:
         description: The pollutants with limits or monitoring requirements in a facility's NPDES permit with the potential to contribute to impairment of local waterbodies
         example: 'Mercury | Oil and grease | Solids, total suspended | Temperature, water deg. centigrade | Temperature, water deg. fahrenheit | pH'
         type: string
-      DmrPounds:
+      DMRPounds:
         description: Total pounds of pollutants discharged by the NPDES ID for the most recent complete calendar year.
         example: '500696'
         type: string
-      DmrTwpe:
+      DMRTwpe:
         description: Total toxic-weighted pounds equivalent (TWPE) discharged by the NPDES ID for the most recent complete calendar year. TWPE is the mass of a pollutant or chemical discharged that accounts for its relative toxicity.
         example: '1.15'
         type: string
@@ -5338,16 +5452,28 @@ definitions:
       EjscreenFlagUs:
         type: string
       ElectrRptWaiverEffDate:
+        description: This is the effective date for a  waiver from electronic reporting in compliance with this part. This data element should always be populated for a waiver.
+        title: Electronic Reporting Waiver Effective Date
         type: string
       ElectrRptWaiverExpDate:
+        description: This is the expiration date for a temporary waiver from electronic reporting in compliance with this part. This data element should be left blank if the permittee has a permanent waiver from electronic reporting or if the permittee does not have a waiver from electronic reporting in compliance with this part.
+        title: Electronic Reporting Waiver Expiration Date
         type: string
       ElectrRptWaiverTypeCode:
+        description: 'The unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Reporting Waiver Type Code
         type: string
       ElectrRptWaiverTypeDesc:
+        description: 'Description of the unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Waiver Type Code Description
         type: string
       ElectrSubmissionTypeCode:
+        description: This is the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code
         type: string
       ElectrSubmissionTypeDesc:
+        description: This is the description of the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code Description
         type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
@@ -5456,7 +5582,9 @@ definitions:
         description: This is the name of the organization issuing or granting a permit.
         title: Permit Issuing Agency
         type: string
-      LastDmrValueRcvdDate:
+      LastDMRValueRcvdDate:
+        type: string
+      LimPollutant:
         type: string
       Lower48:
         description: Flag showing Y/N whether location is within the contiguous (lower 48) United States.
@@ -5479,7 +5607,7 @@ definitions:
         example: '1'
         title: Max Score
         type: string
-      MissDmrQtrs:
+      MissDMRQtrs:
         type: string
       MsgpCorrectiveActionSmmry:
         type: string
@@ -5494,6 +5622,12 @@ definitions:
       MsgpVisualAssessmentSmmry:
         type: string
       NPDESDataGroups:
+        description: This is the code indicating the NPDES eReporting Rule Data Group that applies to the data.
+        title: NPDES Data Group Codes
+        type: string
+      NPDESDataGroupsDescs:
+        description: Description for each NPDES Data Group eReporting rule code related to the current NPDES permit.
+        title: NPDES Data Group Codes Descriptions
         type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
@@ -5579,6 +5713,8 @@ definitions:
         example: POTW
         type: string
       PermittingAgency:
+        description: This is the type of organization issuing or granting a permit.
+        title: Permitting Agency
         type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
@@ -5715,6 +5851,11 @@ definitions:
         example: '1'
         title: Violation Flag
         type: string
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - ObjectId
       - SourceID
@@ -5779,8 +5920,8 @@ definitions:
       - FacTRIPotwTrans
       - CWP13qtrsComplStatus
       - CWPDaysLastInspection
-      - CWPSicCodes
-      - CWPNaicsCodes
+      - CWPSICCodes
+      - CWPNAICSCodes
       - CWPCaseIDs
       - CWPTotalDesignFlowNmbr
       - CWPActualAverageFlowNmbr
@@ -5804,7 +5945,7 @@ definitions:
       - BeachCloseLastYearFlg
       - BeachCloseLast2yrsFlg
       - ChesapeakeBayFlag
-      - AirIDs
+      - AIRIDs
       - RCRAIDs
       - TRIIDs
       - SDWAIDs
@@ -5812,9 +5953,9 @@ definitions:
       - FacDerivedWBDName
       - CWPFIPSCode
       - PollInViolation
-      - DmrPounds
-      - DmrTwpe
-      - DmrImpairedPoll
+      - DMRPounds
+      - DMRTwpe
+      - DMRImpairedPoll
       - CurrSvFlag
       - ViolFlag
       - CurrVioFlag
@@ -5838,11 +5979,11 @@ definitions:
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
-      - LastDmrValueRcvdDate
+      - LastDMRValueRcvdDate
       - Lower48
       - ActiveLower48
       - EffExceeds
-      - MissDmrQtrs
+      - MissDMRQtrs
       - PastCalYrAverageFlow
       - PastCalYrConvPollutants
       - PastCalYrToxicPollutants
@@ -5898,6 +6039,7 @@ definitions:
       - BioReportDate
       - BioTotalVolumeAmt
       - BioCommentText
+      - BioReportingObligations
       - BioTrtmntProcesses
       - BioAnalyMethodCatgrys
       - BioAnalyMethods
@@ -5957,6 +6099,9 @@ definitions:
       - ElectrRptWaiverExpDate
       - ElectrSubmissionTypeCode
       - ElectrSubmissionTypeDesc
+      - NPDESDataGroupsDescs
+      - WebDocs
+      - LimPollutant
       - Score
     type: object
   cwa2_Results:
@@ -6592,7 +6737,7 @@ definitions:
         example: 'N'
         title: Major/Minor Status Flag
         type: string
-      CWPNaicsCodes:
+      CWPNAICSCodes:
         description: Indicates the facility's or permit's primary North American Industry Classification System (NAICS) Code.
         example: '236220'
         title: NAICS Code
@@ -6639,13 +6784,13 @@ definitions:
         description: 'Count of the number of quarters, out of the last twelve quarters, in which the permit is considered in Significant Non-compliance (SNC).'
         example: 2
         type: number
-      CWPSNCEventDesc:
-        description: Describes the event that resulted in the facility's status of Significant Noncompliance.
-        type: string
-      CWPSicCodes:
+      CWPSICCodes:
         description: Indicates the facility's or permit's primary Standard Industrial Classification (SIC) Code.
         example: '4911'
         title: SIC Code
+        type: string
+      CWPSNCEventDesc:
+        description: Describes the event that resulted in the facility's status of Significant Noncompliance.
         type: string
       CWPState:
         description: Facility location - two-digit state abbreviation.
@@ -6747,15 +6892,15 @@ definitions:
         example: 1
         title: Current Violation Flag
         type: number
-      DmrImpairedPoll:
+      DMRImpairedPoll:
         description: The pollutants with limits or monitoring requirements in a facility's NPDES permit with the potential to contribute to impairment of local waterbodies
         example: 'Mercury | Oil and grease | Solids, total suspended | Temperature, water deg. centigrade | Temperature, water deg. fahrenheit | pH'
         type: string
-      DmrPounds:
+      DMRPounds:
         description: Total pounds of pollutants discharged by the NPDES ID for the most recent complete calendar year.
         example: 4012
         type: number
-      DmrTwpe:
+      DMRTwpe:
         description: Total toxic-weighted pounds equivalent (TWPE) discharged by the NPDES ID for the most recent complete calendar year. TWPE is the mass of a pollutant or chemical discharged that accounts for its relative toxicity.
         example: 1.15
         type: number
@@ -6787,16 +6932,28 @@ definitions:
       EjscreenFlagUs:
         type: string
       ElectrRptWaiverEffDate:
+        description: This is the effective date for a  waiver from electronic reporting in compliance with this part. This data element should always be populated for a waiver.
+        title: Electronic Reporting Waiver Effective Date
         type: string
       ElectrRptWaiverExpDate:
+        description: This is the expiration date for a temporary waiver from electronic reporting in compliance with this part. This data element should be left blank if the permittee has a permanent waiver from electronic reporting or if the permittee does not have a waiver from electronic reporting in compliance with this part.
+        title: Electronic Reporting Waiver Expiration Date
         type: string
       ElectrRptWaiverTypeCode:
+        description: 'The unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Reporting Waiver Type Code
         type: string
       ElectrRptWaiverTypeDesc:
+        description: 'Description of the unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Waiver Type Code Description
         type: string
       ElectrSubmissionTypeCode:
+        description: This is the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code
         type: string
       ElectrSubmissionTypeDesc:
+        description: This is the description of the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code Description
         type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
@@ -6896,7 +7053,9 @@ definitions:
         description: This is the name of the organization issuing or granting a permit.
         title: Permit Issuing Agency
         type: string
-      LastDmrValueRcvdDate:
+      LastDMRValueRcvdDate:
+        type: string
+      LimPollutant:
         type: string
       Lower48:
         description: Flag showing Y/N whether location is within the contiguous (lower 48) United States.
@@ -6919,7 +7078,7 @@ definitions:
         example: 1
         title: Max Score
         type: number
-      MissDmrQtrs:
+      MissDMRQtrs:
         example: 0
         type: number
       MsgpCorrectiveActionSmmry:
@@ -6935,6 +7094,12 @@ definitions:
       MsgpVisualAssessmentSmmry:
         type: string
       NPDESDataGroups:
+        description: This is the code indicating the NPDES eReporting Rule Data Group that applies to the data.
+        title: NPDES Data Group Codes
+        type: string
+      NPDESDataGroupsDescs:
+        description: Description for each NPDES Data Group eReporting rule code related to the current NPDES permit.
+        title: NPDES Data Group Codes Descriptions
         type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
@@ -7015,6 +7180,8 @@ definitions:
         example: POTW
         type: string
       PermittingAgency:
+        description: This is the type of organization issuing or granting a permit.
+        title: Permitting Agency
         type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
@@ -7151,6 +7318,11 @@ definitions:
         example: 1
         title: Violation Flag
         type: number
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - SourceID
       - EPASystem
@@ -7212,8 +7384,8 @@ definitions:
       - FacTRIPotwTrans
       - CWP13qtrsComplStatus
       - CWPDaysLastInspection
-      - CWPSicCodes
-      - CWPNaicsCodes
+      - CWPSICCodes
+      - CWPNAICSCodes
       - CWPCaseIDs
       - CWPTotalDesignFlowNmbr
       - CWPActualAverageFlowNmbr
@@ -7245,9 +7417,9 @@ definitions:
       - FacDerivedWBDName
       - CWPFIPSCode
       - PollInViolation
-      - DmrPounds
-      - DmrTwpe
-      - DmrImpairedPoll
+      - DMRPounds
+      - DMRTwpe
+      - DMRImpairedPoll
       - CurrSvFlag
       - ViolFlag
       - CurrVioFlag
@@ -7271,11 +7443,11 @@ definitions:
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
-      - LastDmrValueRcvdDate
+      - LastDMRValueRcvdDate
       - Lower48
       - ActiveLower48
       - EffExceeds
-      - MissDmrQtrs
+      - MissDMRQtrs
       - PastCalYrAverageFlow
       - PastCalYrConvPollutants
       - PastCalYrToxicPollutants
@@ -7331,7 +7503,7 @@ definitions:
       - BioReportDate
       - BioTotalVolumeAmt
       - BioCommentText
-      - BioFacTypes
+      - BioReportingObligations
       - BioTrtmntProcesses
       - BioAnalyMethodCatgrys
       - BioAnalyMethods
@@ -7391,6 +7563,9 @@ definitions:
       - ElectrRptWaiverExpDate
       - ElectrSubmissionTypeCode
       - ElectrSubmissionTypeDesc
+      - NPDESDataGroupsDescs
+      - WebDocs
+      - LimPollutant
       - Score
     type: object
   met_Results:

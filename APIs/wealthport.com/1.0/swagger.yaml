@@ -4,16 +4,16 @@ schemes:
 host: api.wealthport.com
 basePath: /gateway/public/endpoints/1.0
 info:
-  description: 'Wealthport provides a simple, lightweight and open Web API based on the Open API 2.0 standard (<a href="https://www.openapis.org" target="_blank">https://www.openapis.org</a>). Our APIs offer a variety of operations related to managing Sources, Folders, Orders and Recipes. There are operations to submit and track Jobs, upload and download data files and many more.'
-  termsOfService: 'https://www.wealthport.com/terms-of-service'
-  title: Wealthport
+  description: 'Onedot provides a simple, lightweight and open Web API based on the Open API 2.0 standard (<a href="https://www.openapis.org" target="_blank">https://www.openapis.org</a>). Our APIs offer a variety of operations related to managing Sources, Folders, Orders and Recipes. There are operations to submit and track Jobs, upload and download data files and many more.'
+  termsOfService: 'https://www.onedot.com/terms-of-service'
+  title: Wealthport API
   version: '1.0'
   x-apisguru-categories:
     - analytics
     - machine_learning
   x-logo:
     backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/522665269001342977/FKB9gZgO.png'
+    url: 'https://pbs.twimg.com/profile_images/912326535566196737/gQPnTTPZ_400x400.jpg'
   x-origin:
     - format: swagger
       url: 'https://wealthport.github.io/wealthport-api-docs/swagger.json'
@@ -72,10 +72,7 @@ paths:
             $ref: '#/definitions/Folder_Request'
       responses:
         '201':
-          description: Folder successfully created and available at the returned URL
-          schema:
-            format: url
-            type: string
+          description: Folder successfully created and available at the returned location with the returned ID
         '400':
           description: Wrong or missing mandatory arguments
         '401':
@@ -290,7 +287,7 @@ paths:
         - text/plain
       responses:
         '200':
-          description: 'Job has finished, potentially with errors, result is available and Job ID is returned'
+          description: 'Job has finished, potentially with errors, result is available and Job ID is returned in the response'
           headers:
             Location:
               description: URL to the Get Result operation to retrieve the result
@@ -359,10 +356,7 @@ paths:
             $ref: '#/definitions/Order_Request'
       responses:
         '201':
-          description: Order successfully created and available at the returned URL
-          schema:
-            format: url
-            type: string
+          description: Order successfully created and available at the returned location with the returned ID
         '400':
           description: Wrong or missing mandatory arguments
         '401':
@@ -480,12 +474,14 @@ paths:
         - text/plain
       responses:
         '202':
-          description: 'Order has been submitted, Job is running and Job ID is returned'
+          description: 'Order has been submitted, Job is running and Job ID is returned in the response'
           headers:
             Location:
               description: URL to the Get Status operation to poll for processing status updates
               format: url
               type: string
+          schema:
+            type: string
         '400':
           description: 'Wrong or missing mandatory arguments, order has no recipe or is not valid otherwise'
         '401':
@@ -658,10 +654,7 @@ paths:
             $ref: '#/definitions/Source_Request'
       responses:
         '201':
-          description: Source successfully created and available at the returned URL
-          schema:
-            format: url
-            type: string
+          description: Source successfully created and available at the returned location with the returned ID
         '400':
           description: Wrong or missing mandatory arguments
         '401':
@@ -871,308 +864,10 @@ definitions:
     required:
       - id
     type: object
-  Existing_Folder:
-    description: Represents an existing folder.
-    properties:
-      bytes:
-        description: Size of the folder (in bytes)
-        example: '1048576'
-        format: int64
-        minimum: -1
-        type: integer
-      created:
-        description: ISO 8601 Date when he folder has been created
-        format: date-time
-        type: string
-      creator:
-        description: User ID of the user who created the folder
-        example: 899afd84-4051-471c-8438-48cb47816af1
-        maxLength: 36
-        minLength: 36
-        type: string
-      id:
-        description: Unique ID of the folder
-        example: 55ccb8ea-e15a-48f3-a2ba-c700f0d67a04
-        maxLength: 36
-        minLength: 36
-        type: string
-      name:
-        description: Name of the folder
-        example: My Folder
-        maxLength: 255
-        minLength: 1
-        type: string
-    required:
-      - bytes
-      - created
-      - creator
-      - id
-      - name
-    type: object
-    xml:
-      name: folder
-  Existing_Order:
-    description: Represents an existing order.
-    properties:
-      bytes:
-        description: Size of the order (in bytes)
-        example: '1048576'
-        format: int64
-        minimum: -1
-        type: integer
-      created:
-        description: ISO 8601 Date when the order has been created
-        format: date-time
-        type: string
-      creator:
-        description: User ID of the user who created the order
-        example: 54a27cac-a457-443d-a3d5-c67fc20701ad
-        maxLength: 36
-        minLength: 36
-        type: string
-      folders:
-        description: Array of folder IDs to be referenced by the order
-        example: '[199abf1c-e250-45d6-a6b7-bb27aeacfad8, bf9b3da6-61c1-46a5-b873-c7ffa035153e]'
-        items:
-          type: string
-        type: array
-        uniqueItems: true
-        xml:
-          name: folder
-          wrapped: true
-      id:
-        description: Unique ID of the order
-        example: 44144a40-3dcd-469b-bd7d-04cf6797f6b6
-        maxLength: 36
-        minLength: 36
-        type: string
-      name:
-        description: Name of the order
-        example: My Order
-        maxLength: 255
-        minLength: 1
-        type: string
-      recipe:
-        description: Recipe to use when processing the order
-        example: d7927569-3431-4d23-a329-ec480385f6db
-        maxLength: 36
-        minLength: 36
-        type: string
-      sources:
-        description: Array of source IDs to be referenced by the order
-        example: '[29e2e192-8a57-43b1-be7d-929fc7461650, 4ce89cce-c96e-4c90-9cfa-75e7fd13adc9]'
-        items:
-          type: string
-        type: array
-        uniqueItems: true
-        xml:
-          name: source
-          wrapped: true
-    required:
-      - bytes
-      - created
-      - creator
-      - id
-      - name
-    type: object
-    xml:
-      name: order
-  Existing_Recipe:
-    description: Represents an existing recipe.
-    properties:
-      created:
-        description: ISO 8601 Date when the recipe has been created
-        format: date-time
-        type: string
-      creator:
-        description: User ID of the user who created the recipe
-        example: 9d7ce0d7-5c90-493d-9b4b-5254752ce68f
-        maxLength: 36
-        minLength: 36
-        type: string
-      id:
-        description: Unique ID of the recipe
-        example: 249a1f57-fae5-4ba0-b3fc-f65cc28b63d4
-        maxLength: 36
-        minLength: 36
-        type: string
-      name:
-        description: Name of the recipe
-        example: My Recipe
-        maxLength: 255
-        minLength: 1
-        type: string
-    required:
-      - created
-      - creator
-      - id
-      - name
-    type: object
-    xml:
-      name: recipe
-  Existing_Source:
-    description: Represents an existing source.
-    properties:
-      bytes:
-        description: Size of the source (in bytes)
-        example: '1048576'
-        format: int64
-        minimum: -1
-        type: integer
-      created:
-        description: ISO 8601 Date when the source has been created
-        format: date-time
-        type: string
-      creator:
-        description: User ID of the user that created the source
-        example: a33f3d36-df1b-41b2-ab5d-54dd57c40414
-        maxLength: 36
-        minLength: 36
-        type: string
-      encoding:
-        description: Encoding of the source
-        example: UTF-8
-        maxLength: 2147483647
-        minLength: 1
-        type: string
-      folder:
-        description: Optional folder ID of the folder containing the source
-        example: 55e94cc2-89e5-4dad-8786-7d1b2daf9ac8
-        maxLength: 36
-        minLength: 36
-        type: string
-      folderName:
-        type: string
-      id:
-        description: Unique ID of the source
-        example: 1df110bf-8f71-44c8-b6b9-a5e1d49b4a6b
-        maxLength: 36
-        minLength: 36
-        type: string
-      mime:
-        description: MIME type of the source
-        enum:
-          - text/csv
-          - text/tab-separated-values
-          - text/x-bar-separated-values
-          - text/x-semicolon-separated-values
-          - application/x-ldjson
-          - application/xml
-          - application/vnd.ms-excel
-          - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-        example: text/csv
-        maxLength: 255
-        minLength: 1
-        type: string
-      name:
-        description: Name of the source
-        example: File.csv
-        maxLength: 255
-        minLength: 1
-        type: string
-    required:
-      - bytes
-      - created
-      - creator
-      - id
-      - mime
-      - name
-    type: object
-    xml:
-      name: source
-  Folder_Request:
-    description: Represents a folder to be created or updated.
-    properties:
-      name:
-        description: Name of the folder
-        example: My Folder
-        maxLength: 255
-        minLength: 1
-        type: string
-    required:
-      - name
-    type: object
-    xml:
-      name: folder
-  Order_Request:
-    description: Represents an order to be created or updated.
-    properties:
-      folders:
-        description: Array of folder IDs to be referenced by the order
-        example: '[199abf1c-e250-45d6-a6b7-bb27aeacfad8, bf9b3da6-61c1-46a5-b873-c7ffa035153e]'
-        items:
-          type: string
-        type: array
-        uniqueItems: true
-        xml:
-          name: folder
-          wrapped: true
-      name:
-        description: Name of the order
-        example: My Order
-        maxLength: 255
-        minLength: 1
-        type: string
-      recipe:
-        description: Recipe to use when processing the order
-        example: 66c5becb-5482-40c8-a192-cac702e17613
-        maxLength: 36
-        minLength: 36
-        type: string
-      sources:
-        description: Array of source IDs to be referenced by the order
-        example: '[29e2e192-8a57-43b1-be7d-929fc7461650, 4ce89cce-c96e-4c90-9cfa-75e7fd13adc9]'
-        items:
-          type: string
-        type: array
-        uniqueItems: true
-        xml:
-          name: source
-          wrapped: true
-    required:
-      - name
-    type: object
-    xml:
-      name: order
-  Source_Request:
-    description: Represents a source to be created or updated.
-    properties:
-      encoding:
-        description: Encoding of the source
-        example: UTF-8
-        maxLength: 2147483647
-        minLength: 1
-        type: string
-      folder:
-        description: Folder ID of the folder containing the source
-        example: 07187b90-2bbb-4508-90f7-6b23139204e2
-        maxLength: 36
-        minLength: 36
-        type: string
-      mime:
-        description: MIME type of the source
-        enum:
-          - text/csv
-          - text/tab-separated-values
-          - text/x-bar-separated-values
-          - text/x-semicolon-separated-values
-          - application/x-ldjson
-          - application/xml
-          - application/vnd.ms-excel
-          - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-        example: text/csv
-        maxLength: 2147483647
-        minLength: 1
-        type: string
-      name:
-        description: Name of the source
-        example: File.csv
-        maxLength: 255
-        minLength: 1
-        type: string
-    required:
-      - mime
-      - name
-    type: object
-    xml:
-      name: source
+  Existing_Folder: {}
+  Existing_Order: {}
+  Existing_Recipe: {}
+  Existing_Source: {}
+  Folder_Request: {}
+  Order_Request: {}
+  Source_Request: {}

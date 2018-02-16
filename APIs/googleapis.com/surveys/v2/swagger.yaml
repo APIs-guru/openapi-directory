@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/surveys/v2/rest'
       version: v1
@@ -177,15 +177,15 @@ paths:
       description: Updates a MobileAppPanel. Currently the only property that can be updated is the owners property.
       operationId: surveys.mobileapppanels.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MobileAppPanel'
         - description: External URL ID for the panel.
           in: path
           name: panelId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/MobileAppPanel'
       responses:
         '200':
           description: Successful response
@@ -281,14 +281,14 @@ paths:
       description: Begins running a survey.
       operationId: surveys.surveys.start
       parameters:
-        - in: path
-          name: resourceId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/SurveysStartRequest'
+        - in: path
+          name: resourceId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -405,15 +405,15 @@ paths:
       description: Updates a survey. Currently the only property that can be updated is the owners property.
       operationId: surveys.surveys.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Survey'
         - description: External URL ID for the survey.
           in: path
           name: surveyUrlId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Survey'
       responses:
         '200':
           description: Successful response
@@ -435,15 +435,15 @@ paths:
       description: Retrieves any survey results that have been produced so far. Results are formatted as an Excel file. You must add "?alt=media" to the URL as an argument to get results.
       operationId: surveys.results.get
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ResultsGetRequest'
         - description: External URL ID for the survey.
           in: path
           name: surveyUrlId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ResultsGetRequest'
       responses:
         '200':
           description: Successful response

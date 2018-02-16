@@ -7,6 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
+    x-twitter: youtube
   description: Schedules reporting jobs containing your YouTube Analytics data and downloads the resulting bulk data reports in the form of CSV files.
   license:
     name: Creative Commons Attribution 3.0
@@ -18,12 +19,13 @@ info:
     url: 'https://console.developers.google.com'
   x-apisguru-categories:
     - analytics
+    - media
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/880847083980414977/v_j8c_Qa_400x400.jpg'
+    url: 'https://twitter.com/youtube/profile_image?size=original'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://youtubereporting.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -137,11 +139,24 @@ paths:
       operationId: youtubereporting.jobs.list
       parameters:
         - description: |-
+            If set to true, also system-managed jobs will be returned; otherwise only
+            user-created jobs will be returned. System-managed jobs can neither be
+            modified nor deleted.
+          in: query
+          name: includeSystemManaged
+          type: boolean
+        - description: |-
             The content owner's external ID on which behalf the user is acting on. If
             not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           type: string
+        - description: |-
+            Requested page size. Server may return fewer jobs than requested.
+            If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             A token identifying a page of results the server should return. Typically,
             this is the value of
@@ -150,19 +165,6 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: |-
-            If set to true, also system-managed jobs will be returned; otherwise only
-            user-created jobs will be returned. System-managed jobs can neither be
-            modified nor deleted.
-          in: query
-          name: includeSystemManaged
-          type: boolean
-        - description: |-
-            Requested page size. Server may return fewer jobs than requested.
-            If unspecified, server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -181,32 +183,32 @@ paths:
         - jobs
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a job and returns it.
       operationId: youtubereporting.jobs.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
         - description: |-
             The content owner's external ID on which behalf the user is acting on. If
             not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
       responses:
         '200':
           description: Successful response
@@ -288,18 +290,18 @@ paths:
         - jobs
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/jobs/{jobId}/reports':
     get:
       description: |-
@@ -307,6 +309,10 @@ paths:
         Returns NOT_FOUND if the job does not exist.
       operationId: youtubereporting.jobs.reports.list
       parameters:
+        - description: 'If set, only reports created after the specified date/time are returned.'
+          in: query
+          name: createdAfter
+          type: string
         - description: The ID of the job.
           in: path
           name: jobId
@@ -319,15 +325,11 @@ paths:
           name: onBehalfOfContentOwner
           type: string
         - description: |-
-            If set, only reports whose start time is smaller than the specified
-            date/time are returned.
+            Requested page size. Server may return fewer report types than requested.
+            If unspecified, server will pick an appropriate default.
           in: query
-          name: startTimeBefore
-          type: string
-        - description: 'If set, only reports created after the specified date/time are returned.'
-          in: query
-          name: createdAfter
-          type: string
+          name: pageSize
+          type: integer
         - description: |-
             A token identifying a page of results the server should return. Typically,
             this is the value of
@@ -343,11 +345,11 @@ paths:
           name: startTimeAtOrAfter
           type: string
         - description: |-
-            Requested page size. Server may return fewer report types than requested.
-            If unspecified, server will pick an appropriate default.
+            If set, only reports whose start time is smaller than the specified
+            date/time are returned.
           in: query
-          name: pageSize
-          type: integer
+          name: startTimeBefore
+          type: string
       responses:
         '200':
           description: Successful response
@@ -366,18 +368,18 @@ paths:
         - jobs
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/jobs/{jobId}/reports/{reportId}':
     get:
       description: Gets the metadata of a specific report.
@@ -388,16 +390,16 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The ID of the report to retrieve.
-          in: path
-          name: reportId
-          required: true
-          type: string
         - description: |-
             The content owner's external ID on which behalf the user is acting on. If
             not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
+          type: string
+        - description: The ID of the report to retrieve.
+          in: path
+          name: reportId
+          required: true
           type: string
       responses:
         '200':
@@ -417,18 +419,18 @@ paths:
         - jobs
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/media/{resourceName}':
     get:
       description: |-
@@ -436,9 +438,7 @@ paths:
         on the URI `/v1/media/{+name}?alt=media`.
       operationId: youtubereporting.media.download
       parameters:
-        - description: |-
-            Name of the media that is being downloaded.  See
-            ReadRequest.resource_name.
+        - description: Name of the media that is being downloaded.
           in: path
           name: resourceName
           required: true
@@ -448,7 +448,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Media'
+            $ref: '#/definitions/GdataMedia'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
@@ -462,31 +462,23 @@ paths:
         - media
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   /v1/reportTypes:
     get:
       description: Lists report types.
       operationId: youtubereporting.reportTypes.list
       parameters:
-        - description: |-
-            A token identifying a page of results the server should return. Typically,
-            this is the value of
-            ListReportTypesResponse.next_page_token
-            returned in response to the previous call to the `ListReportTypes` method.
-          in: query
-          name: pageToken
-          type: string
         - description: |-
             If set to true, also system-managed report types will be returned;
             otherwise only the report types that can be used to create new reporting
@@ -495,16 +487,24 @@ paths:
           name: includeSystemManaged
           type: boolean
         - description: |-
+            The content owner's external ID on which behalf the user is acting on. If
+            not set, the user is acting for himself (his own channel).
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
+        - description: |-
             Requested page size. Server may return fewer report types than requested.
             If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           type: integer
         - description: |-
-            The content owner's external ID on which behalf the user is acting on. If
-            not set, the user is acting for himself (his own channel).
+            A token identifying a page of results the server should return. Typically,
+            this is the value of
+            ListReportTypesResponse.next_page_token
+            returned in response to the previous call to the `ListReportTypes` method.
           in: query
-          name: onBehalfOfContentOwner
+          name: pageToken
           type: string
       responses:
         '200':
@@ -524,18 +524,18 @@ paths:
         - reportTypes
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   Empty:
     description: |-
@@ -549,6 +549,305 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  GdataBlobstore2Info:
+    description: gdata
+    properties:
+      blobGeneration:
+        description: gdata
+        format: int64
+        type: string
+      blobId:
+        description: gdata
+        type: string
+      downloadReadHandle:
+        description: gdata
+        format: byte
+        type: string
+      readToken:
+        description: gdata
+        type: string
+      uploadMetadataContainer:
+        description: gdata
+        format: byte
+        type: string
+    type: object
+  GdataCompositeMedia:
+    description: gdata
+    properties:
+      blobRef:
+        description: gdata
+        format: byte
+        type: string
+      blobstore2Info:
+        $ref: '#/definitions/GdataBlobstore2Info'
+        description: gdata
+      cosmoBinaryReference:
+        description: gdata
+        format: byte
+        type: string
+      crc32cHash:
+        description: gdata
+        format: uint32
+        type: integer
+      inline:
+        description: gdata
+        format: byte
+        type: string
+      length:
+        description: gdata
+        format: int64
+        type: string
+      md5Hash:
+        description: gdata
+        format: byte
+        type: string
+      objectId:
+        $ref: '#/definitions/GdataObjectId'
+        description: gdata
+      path:
+        description: gdata
+        type: string
+      referenceType:
+        description: gdata
+        enum:
+          - PATH
+          - BLOB_REF
+          - INLINE
+          - BIGSTORE_REF
+          - COSMO_BINARY_REFERENCE
+        type: string
+      sha1Hash:
+        description: gdata
+        format: byte
+        type: string
+    type: object
+  GdataContentTypeInfo:
+    description: gdata
+    properties:
+      bestGuess:
+        description: gdata
+        type: string
+      fromBytes:
+        description: gdata
+        type: string
+      fromFileName:
+        description: gdata
+        type: string
+      fromHeader:
+        description: gdata
+        type: string
+      fromUrlPath:
+        description: gdata
+        type: string
+    type: object
+  GdataDiffChecksumsResponse:
+    description: gdata
+    properties:
+      checksumsLocation:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+      chunkSizeBytes:
+        description: gdata
+        format: int64
+        type: string
+      objectLocation:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+      objectSizeBytes:
+        description: gdata
+        format: int64
+        type: string
+      objectVersion:
+        description: gdata
+        type: string
+    type: object
+  GdataDiffDownloadResponse:
+    description: gdata
+    properties:
+      objectLocation:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+    type: object
+  GdataDiffUploadRequest:
+    description: gdata
+    properties:
+      checksumsInfo:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+      objectInfo:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+      objectVersion:
+        description: gdata
+        type: string
+    type: object
+  GdataDiffUploadResponse:
+    description: gdata
+    properties:
+      objectVersion:
+        description: gdata
+        type: string
+      originalObject:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+    type: object
+  GdataDiffVersionResponse:
+    description: gdata
+    properties:
+      objectSizeBytes:
+        description: gdata
+        format: int64
+        type: string
+      objectVersion:
+        description: gdata
+        type: string
+    type: object
+  GdataDownloadParameters:
+    description: gdata
+    properties:
+      allowGzipCompression:
+        description: gdata
+        type: boolean
+      ignoreRange:
+        description: gdata
+        type: boolean
+    type: object
+  GdataMedia:
+    description: gdata
+    properties:
+      algorithm:
+        description: gdata
+        type: string
+      bigstoreObjectRef:
+        description: gdata
+        format: byte
+        type: string
+      blobRef:
+        description: gdata
+        format: byte
+        type: string
+      blobstore2Info:
+        $ref: '#/definitions/GdataBlobstore2Info'
+        description: gdata
+      compositeMedia:
+        description: gdata
+        items:
+          $ref: '#/definitions/GdataCompositeMedia'
+        type: array
+      contentType:
+        description: gdata
+        type: string
+      contentTypeInfo:
+        $ref: '#/definitions/GdataContentTypeInfo'
+        description: gdata
+      cosmoBinaryReference:
+        description: gdata
+        format: byte
+        type: string
+      crc32cHash:
+        description: gdata
+        format: uint32
+        type: integer
+      diffChecksumsResponse:
+        $ref: '#/definitions/GdataDiffChecksumsResponse'
+        description: gdata
+      diffDownloadResponse:
+        $ref: '#/definitions/GdataDiffDownloadResponse'
+        description: gdata
+      diffUploadRequest:
+        $ref: '#/definitions/GdataDiffUploadRequest'
+        description: gdata
+      diffUploadResponse:
+        $ref: '#/definitions/GdataDiffUploadResponse'
+        description: gdata
+      diffVersionResponse:
+        $ref: '#/definitions/GdataDiffVersionResponse'
+        description: gdata
+      downloadParameters:
+        $ref: '#/definitions/GdataDownloadParameters'
+        description: gdata
+      filename:
+        description: gdata
+        type: string
+      hash:
+        description: gdata
+        type: string
+      hashVerified:
+        description: gdata
+        type: boolean
+      inline:
+        description: gdata
+        format: byte
+        type: string
+      isPotentialRetry:
+        default: true
+        description: gdata
+        type: boolean
+      length:
+        description: gdata
+        format: int64
+        type: string
+      md5Hash:
+        description: gdata
+        format: byte
+        type: string
+      mediaId:
+        description: gdata
+        format: byte
+        type: string
+      objectId:
+        $ref: '#/definitions/GdataObjectId'
+        description: gdata
+      path:
+        description: gdata
+        type: string
+      referenceType:
+        description: gdata
+        enum:
+          - PATH
+          - BLOB_REF
+          - INLINE
+          - GET_MEDIA
+          - COMPOSITE_MEDIA
+          - BIGSTORE_REF
+          - DIFF_VERSION_RESPONSE
+          - DIFF_CHECKSUMS_RESPONSE
+          - DIFF_DOWNLOAD_RESPONSE
+          - DIFF_UPLOAD_REQUEST
+          - DIFF_UPLOAD_RESPONSE
+          - COSMO_BINARY_REFERENCE
+          - ARBITRARY_BYTES
+        type: string
+      sha1Hash:
+        description: gdata
+        format: byte
+        type: string
+      sha256Hash:
+        description: gdata
+        format: byte
+        type: string
+      timestamp:
+        description: gdata
+        format: uint64
+        type: string
+      token:
+        description: gdata
+        type: string
+    type: object
+  GdataObjectId:
+    description: gdata
+    properties:
+      bucketName:
+        description: gdata
+        type: string
+      generation:
+        description: gdata
+        format: int64
+        type: string
+      objectName:
+        description: gdata
+        type: string
     type: object
   Job:
     description: A job creating reports of a specific type.
@@ -630,13 +929,6 @@ definitions:
         items:
           $ref: '#/definitions/Report'
         type: array
-    type: object
-  Media:
-    description: Media resource.
-    properties:
-      resourceName:
-        description: Name of the media resource.
-        type: string
     type: object
   Report:
     description: |-

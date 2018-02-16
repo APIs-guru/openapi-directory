@@ -1,0 +1,449 @@
+swagger: '2.0'
+info:
+  version: '2017-10-26'
+  x-release: v4
+  title: Amazon Transcribe Service
+  description: Operations and objects for transcribing speech to text.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: transcribe
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/transcribe-2017-10-26.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/transcribe/'
+host: transcribe.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: GetTranscriptionJob
+      description: 'Returns information about a transcription job. To see the status of the job, check the <code>Status</code> field. If the status is <code>COMPLETE</code>, the job is finished and you can find the results at the location specified in the <code>TranscriptionFileUri</code> field.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTranscriptionJobResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetTranscriptionJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTranscriptionJobs':
+    post:
+      operationId: ListTranscriptionJobs
+      description: Lists transcription jobs with the specified status.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTranscriptionJobsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTranscriptionJobsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartTranscriptionJob':
+    post:
+      operationId: StartTranscriptionJob
+      description: Starts an asynchronous job to transcribe speech to text.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartTranscriptionJobResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartTranscriptionJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  BadRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/FailureReason'
+    description: 'There is a problem with one of the input fields. Check the S3 bucket name, make sure that the job name is not a duplicate, and confirm that you are using the correct file format. Then resend your request.'
+  ConflictException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The <code>JobName</code> field is a duplicate of a previously entered job name. Resend your request with a different name.
+  DateTime:
+    type: string
+    format: date-time
+  FailureReason:
+    type: string
+  GetTranscriptionJobRequest:
+    type: object
+    required:
+      - TranscriptionJobName
+    properties:
+      TranscriptionJobName:
+        $ref: '#/definitions/TranscriptionJobName'
+        description: The name of the job.
+  GetTranscriptionJobResponse:
+    type: object
+    properties:
+      TranscriptionJob:
+        $ref: '#/definitions/TranscriptionJob'
+        description: An object that contains the results of the transcription job.
+  InternalFailureException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: There was an internal error. Check the error message and try your request again.
+  LanguageCode:
+    type: string
+    enum:
+      - en-US
+      - es-US
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'Either you have sent too many requests or your input file is longer than 2 hours. Wait before you resend your request, or use a smaller file and resend the request.'
+  ListTranscriptionJobsRequest:
+    type: object
+    required:
+      - Status
+    properties:
+      Status:
+        $ref: '#/definitions/TranscriptionJobStatus'
+        description: 'When specified, returns only transcription jobs with the specified status.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous request to <code>ListTranscriptionJobs</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of jobs to return in the response.
+  ListTranscriptionJobsResponse:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/TranscriptionJobStatus'
+        description: The requested status of the jobs returned.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>ListTranscriptionJobs</code> operation returns a page of jobs at a time. The size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListTranscriptionJobs</code> operation to return in the next page of jobs.'
+      TranscriptionJobSummaries:
+        $ref: '#/definitions/TranscriptionJobSummaries'
+        description: A list of objects containing summary information for a transcription job.
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  Media:
+    type: object
+    properties:
+      MediaFileUri:
+        $ref: '#/definitions/Uri'
+        description: '<p>The S3 location of the input media file. The general form is:</p> <p> <code> https://&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-west-2.amazonaws.com/examplebucket/example.mp4</code> </p> <p> <code>https://s3-us-west-2.amazonaws.com/examplebucket/mediadocs/example.mp4</code> </p>'
+    description: Describes the input media file in a transcription request.
+  MediaFormat:
+    type: string
+    enum:
+      - mp3
+      - mp4
+      - wav
+      - flac
+  MediaSampleRateHertz:
+    type: integer
+    minimum: 8000
+    maximum: 48000
+  NextToken:
+    type: string
+    maxLength: 8192
+  NotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: We can't find the requested job. Check the job name and try your request again.
+  StartTranscriptionJobRequest:
+    type: object
+    required:
+      - TranscriptionJobName
+      - LanguageCode
+      - MediaFormat
+      - Media
+    properties:
+      TranscriptionJobName:
+        $ref: '#/definitions/TranscriptionJobName'
+        description: The name of the job. The name must be unique within an AWS account.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code for the language used in the input media file.
+      MediaSampleRateHertz:
+        $ref: '#/definitions/MediaSampleRateHertz'
+        description: 'The sample rate, in Hertz, of the audio track in the input media file. '
+      MediaFormat:
+        $ref: '#/definitions/MediaFormat'
+        description: The format of the input media file.
+      Media:
+        $ref: '#/definitions/Media'
+        description: An object that describes the input media for a transcription job.
+  StartTranscriptionJobResponse:
+    type: object
+    properties:
+      TranscriptionJob:
+        $ref: '#/definitions/TranscriptionJob'
+        description: An object containing details of the asynchronous transcription job.
+  String:
+    type: string
+  Transcript:
+    type: object
+    properties:
+      TranscriptFileUri:
+        $ref: '#/definitions/Uri'
+        description: '<p>The S3 location where the transcription result is stored. The general form of this Uri is:</p> <p> <code> https://&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-west-2.amazonaws.com/examplebucket/example.json</code> </p> <p> <code>https://s3-us-west-2.amazonaws.com/examplebucket/mediadocs/example.json</code> </p>'
+    description: Describes the output of a transcription job.
+  TranscriptionJob:
+    type: object
+    properties:
+      TranscriptionJobName:
+        $ref: '#/definitions/TranscriptionJobName'
+        description: A name to identify the transcription job.
+      TranscriptionJobStatus:
+        $ref: '#/definitions/TranscriptionJobStatus'
+        description: The identifier assigned to the job when it was created.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code for the input speech.
+      MediaSampleRateHertz:
+        $ref: '#/definitions/MediaSampleRateHertz'
+        description: 'The sample rate, in Hertz, of the audio track in the input media file. '
+      MediaFormat:
+        $ref: '#/definitions/MediaFormat'
+        description: The format of the input media file.
+      Media:
+        $ref: '#/definitions/Media'
+        description: An object that describes the input media for a transcription job.
+      Transcript:
+        $ref: '#/definitions/Transcript'
+        description: An object that describes the output of the transcription job.
+      CreationTime:
+        $ref: '#/definitions/DateTime'
+        description: Timestamp of the date and time that the job was created.
+      CompletionTime:
+        $ref: '#/definitions/DateTime'
+        description: Timestamp of the date and time that the job completed.
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains information about why the job failed.'
+    description: Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation.
+  TranscriptionJobName:
+    type: string
+    pattern: '^[0-9a-zA-Z._-]+'
+    minLength: 1
+    maxLength: 200
+  TranscriptionJobStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - FAILED
+      - COMPLETED
+  TranscriptionJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TranscriptionJobSummary'
+  TranscriptionJobSummary:
+    type: object
+    properties:
+      TranscriptionJobName:
+        $ref: '#/definitions/TranscriptionJobName'
+        description: The name assigned to the transcription job when it was created.
+      CreationTime:
+        $ref: '#/definitions/DateTime'
+        description: Timestamp of the date and time that the job was created.
+      CompletionTime:
+        $ref: '#/definitions/DateTime'
+        description: Timestamp of the date and time that the job completed.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code for the input speech.
+      TranscriptionJobStatus:
+        $ref: '#/definitions/TranscriptionJobStatus'
+        description: 'The status of the transcription job. When the status is <code>COMPLETED</code>, use the <code>GetTranscriptionJob</code> operation to get the results of the transcription.'
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains a description of the error.'
+    description: Provides a summary of information about a transcription job.
+  Uri:
+    type: string
+    minLength: 1
+    maxLength: 2000

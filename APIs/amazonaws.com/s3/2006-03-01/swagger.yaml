@@ -4,13 +4,14 @@ info:
   x-release: s3
   title: Amazon Simple Storage Service
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -35,6 +36,7 @@ host: s3.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - text/xml
@@ -58,19 +60,23 @@ security:
 paths:
   '/{Bucket}/{Key}':
     delete:
-      operationId: DeleteObject
-      description: 'Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn''t a null version, Amazon S3 does not remove any objects.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html</p>'
+      operationId: AbortMultipartUpload
+      description: '<p>Aborts a multipart upload.</p><p>To verify that all parts have been removed, so you don''t get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html</p>'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/DeleteObjectOutput'
+            $ref: '#/definitions/AbortMultipartUploadOutput'
+        '480':
+          description: NoSuchUpload
+          schema:
+            $ref: '#/definitions/NoSuchUpload'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteObjectRequest'
+            $ref: '#/definitions/AbortMultipartUploadRequest'
         - name: Bucket
           in: path
           type: string
@@ -84,7 +90,89 @@ paths:
           collectionFormat: csv
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+    post:
+      operationId: CompleteMultipartUpload
+      description: 'Completes a multipart upload by assembling previously uploaded parts.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadComplete.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CompleteMultipartUploadOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CompleteMultipartUploadRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+    put:
+      operationId: CopyObject
+      description: 'Creates a copy of an object that is already stored in Amazon S3.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectCOPY.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyObjectOutput'
+        '480':
+          description: ObjectNotInActiveTierError
+          schema:
+            $ref: '#/definitions/ObjectNotInActiveTierError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
   '/{Bucket}':
+    put:
+      operationId: CreateBucket
+      description: 'Creates a new bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateBucketOutput'
+        '480':
+          description: BucketAlreadyExists
+          schema:
+            $ref: '#/definitions/BucketAlreadyExists'
+        '481':
+          description: BucketAlreadyOwnedByYou
+          schema:
+            $ref: '#/definitions/BucketAlreadyOwnedByYou'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateBucketRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
     delete:
       operationId: DeleteBucket
       description: 'Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html</p>'
@@ -101,8 +189,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}/{Key}?uploads':
     post:
       operationId: CreateMultipartUpload
@@ -132,20 +218,18 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?analytics':
-    get:
-      operationId: GetBucketAnalyticsConfiguration
-      description: Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
+    delete:
+      operationId: DeleteBucketAnalyticsConfiguration
+      description: Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketAnalyticsConfigurationOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketAnalyticsConfigurationRequest'
+            $ref: '#/definitions/DeleteBucketAnalyticsConfigurationRequest'
         - name: Bucket
           in: path
           type: string
@@ -153,20 +237,37 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?cors':
-    get:
-      operationId: GetBucketCors
-      description: 'Returns the cors configuration for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html</p>'
+    delete:
+      operationId: DeleteBucketCors
+      description: 'Deletes the cors configuration information set for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html</p>'
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketCorsOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketCorsRequest'
+            $ref: '#/definitions/DeleteBucketCorsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?encryption':
+    delete:
+      operationId: DeleteBucketEncryption
+      description: Deletes the server-side encryption configuration from the bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBucketEncryptionRequest'
         - name: Bucket
           in: path
           type: string
@@ -174,20 +275,18 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?inventory':
-    get:
-      operationId: GetBucketInventoryConfiguration
-      description: Returns an inventory configuration (identified by the inventory ID) from the bucket.
+    delete:
+      operationId: DeleteBucketInventoryConfiguration
+      description: Deletes an inventory configuration (identified by the inventory ID) from the bucket.
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketInventoryConfigurationOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketInventoryConfigurationRequest'
+            $ref: '#/definitions/DeleteBucketInventoryConfigurationRequest'
         - name: Bucket
           in: path
           type: string
@@ -195,20 +294,18 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?lifecycle':
-    get:
-      operationId: GetBucketLifecycle
-      description: 'Deprecated, see the GetBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html</p>'
+    delete:
+      operationId: DeleteBucketLifecycle
+      description: 'Deletes the lifecycle configuration from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html</p>'
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketLifecycleOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketLifecycleRequest'
+            $ref: '#/definitions/DeleteBucketLifecycleRequest'
         - name: Bucket
           in: path
           type: string
@@ -310,7 +407,32 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?tagging':
+  '/{Bucket}/{Key}#DeleteObject':
+    delete:
+      operationId: DeleteObject
+      description: 'Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn''t a null version, Amazon S3 does not remove any objects.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteObjectOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?tagging#DeleteObjectTagging':
     delete:
       operationId: DeleteObjectTagging
       description: Removes the tag-set from an existing object.
@@ -331,14 +453,11 @@ paths:
           required: true
         - name: Key
           in: path
-          type: array
+          type: string
           required: true
-          items:
-            type: string
-          collectionFormat: csv
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?delete':
+  '/{Bucket}?delete#DeleteObjects':
     post:
       operationId: DeleteObjects
       description: 'This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/multiobjectdeleteapi.html</p>'
@@ -359,7 +478,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?accelerate':
+  '/{Bucket}?accelerate#GetBucketAccelerateConfiguration':
     get:
       operationId: GetBucketAccelerateConfiguration
       description: Returns the accelerate configuration of a bucket.
@@ -380,7 +499,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?acl':
+  '/{Bucket}?acl#GetBucketAcl':
     get:
       operationId: GetBucketAcl
       description: 'Gets the access control policy for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html</p>'
@@ -395,6 +514,111 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketAclRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?analytics#GetBucketAnalyticsConfiguration':
+    get:
+      operationId: GetBucketAnalyticsConfiguration
+      description: Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketAnalyticsConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketAnalyticsConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?cors#GetBucketCors':
+    get:
+      operationId: GetBucketCors
+      description: 'Returns the cors configuration for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketCorsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketCorsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?encryption#GetBucketEncryption':
+    get:
+      operationId: GetBucketEncryption
+      description: Returns the server-side encryption configuration of a bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketEncryptionOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketEncryptionRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?inventory#GetBucketInventoryConfiguration':
+    get:
+      operationId: GetBucketInventoryConfiguration
+      description: Returns an inventory configuration (identified by the inventory ID) from the bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketInventoryConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketInventoryConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?lifecycle#GetBucketLifecycle':
+    get:
+      operationId: GetBucketLifecycle
+      description: 'Deprecated, see the GetBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketLifecycleOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketLifecycleRequest'
         - name: Bucket
           in: path
           type: string
@@ -1182,6 +1406,25 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?encryption#PutBucketEncryption':
+    put:
+      operationId: PutBucketEncryption
+      description: 'Creates a new server-side encryption configuration (or replaces an existing one, if present).'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketEncryptionRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?inventory#PutBucketInventoryConfiguration':
     put:
       operationId: PutBucketInventoryConfiguration
@@ -1627,6 +1870,15 @@ definitions:
         description: A list of grants.
       Owner:
         $ref: '#/definitions/Owner'
+  AccessControlTranslation:
+    type: object
+    required:
+      - Owner
+    properties:
+      Owner:
+        $ref: '#/definitions/OwnerOverride'
+        description: The override value for the owner of the replica object.
+    description: Container for information regarding the access control for replicas.
   AccountId:
     type: string
   AllowedHeader:
@@ -1836,6 +2088,47 @@ definitions:
       $ref: '#/definitions/CORSRule'
     xml:
       wrapped: false
+  CSVInput:
+    type: object
+    properties:
+      FileHeaderInfo:
+        $ref: '#/definitions/FileHeaderInfo'
+        description: 'Describes the first line of input. Valid values: None, Ignore, Use.'
+      Comments:
+        $ref: '#/definitions/Comments'
+        description: Single character used to indicate a row should be ignored when present at the start of a row.
+      QuoteEscapeCharacter:
+        $ref: '#/definitions/QuoteEscapeCharacter'
+        description: Single character used for escaping the quote character inside an already escaped value.
+      RecordDelimiter:
+        $ref: '#/definitions/RecordDelimiter'
+        description: Value used to separate individual records.
+      FieldDelimiter:
+        $ref: '#/definitions/FieldDelimiter'
+        description: Value used to separate individual fields in a record.
+      QuoteCharacter:
+        $ref: '#/definitions/QuoteCharacter'
+        description: Value used for escaping where the field delimiter is part of the value.
+    description: Describes how a CSV-formatted input object is formatted.
+  CSVOutput:
+    type: object
+    properties:
+      QuoteFields:
+        $ref: '#/definitions/QuoteFields'
+        description: Indicates whether or not all output fields should be quoted.
+      QuoteEscapeCharacter:
+        $ref: '#/definitions/QuoteEscapeCharacter'
+        description: Single character used for escaping the quote character inside an already escaped value.
+      RecordDelimiter:
+        $ref: '#/definitions/RecordDelimiter'
+        description: Value used to separate individual records.
+      FieldDelimiter:
+        $ref: '#/definitions/FieldDelimiter'
+        description: Value used to separate individual fields in a record.
+      QuoteCharacter:
+        $ref: '#/definitions/QuoteCharacter'
+        description: Value used for escaping where the field delimiter is part of the value.
+    description: Describes how CSV-formatted results are formatted.
   CacheControl:
     type: string
   CloudFunction:
@@ -1856,6 +2149,8 @@ definitions:
   CloudFunctionInvocationRole:
     type: string
   Code:
+    type: string
+  Comments:
     type: string
   CommonPrefix:
     type: object
@@ -1931,6 +2226,8 @@ definitions:
       KeyPrefixEquals:
         $ref: '#/definitions/KeyPrefixEquals'
         description: 'The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied.'
+  ConfirmRemoveSelfBucketAccess:
+    type: boolean
   ContentDisposition:
     type: string
   ContentEncoding:
@@ -2071,6 +2368,9 @@ definitions:
     example:
       Bucket: examplebucket
     properties: {}
+  DeleteBucketEncryptionRequest:
+    type: object
+    properties: {}
   DeleteBucketInventoryConfigurationRequest:
     type: object
     properties: {}
@@ -2205,6 +2505,8 @@ definitions:
       wrapped: false
   Delimiter:
     type: string
+  Description:
+    type: string
   Destination:
     type: object
     required:
@@ -2213,9 +2515,19 @@ definitions:
       Bucket:
         $ref: '#/definitions/BucketName'
         description: Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.
+      Account:
+        $ref: '#/definitions/AccountId'
+        description: Account ID of the destination bucket. Currently this is only being verified if Access Control Translation is enabled
       StorageClass:
         $ref: '#/definitions/StorageClass'
         description: The class of storage used to store the object.
+      AccessControlTranslation:
+        $ref: '#/definitions/AccessControlTranslation'
+        description: Container for information regarding the access control for replicas.
+      EncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: Container for information regarding encryption based configuration for replicas.
+    description: Container for replication destination information.
   DisplayName:
     type: string
   ETag:
@@ -2227,6 +2539,28 @@ definitions:
     enum:
       - url
     description: 'Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.'
+  Encryption:
+    type: object
+    required:
+      - EncryptionType
+    properties:
+      EncryptionType:
+        $ref: '#/definitions/ServerSideEncryption'
+        description: 'The server-side encryption algorithm used when storing job results in Amazon S3 (e.g., AES256, aws:kms).'
+      KMSKeyId:
+        $ref: '#/definitions/SSEKMSKeyId'
+        description: 'If the encryption type is aws:kms, this optional value specifies the AWS KMS key ID to use for encryption of job results.'
+      KMSContext:
+        $ref: '#/definitions/KMSContext'
+        description: 'If the encryption type is aws:kms, this optional value can be used to specify the encryption context for the restore results.'
+    description: Describes the server-side encryption that will be applied to the restore results.
+  EncryptionConfiguration:
+    type: object
+    properties:
+      ReplicaKmsKeyID:
+        $ref: '#/definitions/ReplicaKmsKeyID'
+        description: The id of the KMS key used to encrypt the replica object.
+    description: Container for information regarding encryption based configuration for replicas.
   Error:
     type: object
     properties:
@@ -2291,8 +2625,22 @@ definitions:
       $ref: '#/definitions/ExposeHeader'
     xml:
       wrapped: false
+  Expression:
+    type: string
+  ExpressionType:
+    type: string
+    enum:
+      - SQL
   FetchOwner:
     type: boolean
+  FieldDelimiter:
+    type: string
+  FileHeaderInfo:
+    type: string
+    enum:
+      - USE
+      - IGNORE
+      - NONE
   FilterRule:
     type: object
     properties:
@@ -2363,6 +2711,14 @@ definitions:
     type: object
     example:
       Bucket: examplebucket
+    properties: {}
+  GetBucketEncryptionOutput:
+    type: object
+    properties:
+      ServerSideEncryptionConfiguration:
+        $ref: '#/definitions/ServerSideEncryptionConfiguration'
+  GetBucketEncryptionRequest:
+    type: object
     properties: {}
   GetBucketInventoryConfigurationOutput:
     type: object
@@ -2748,6 +3104,13 @@ definitions:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: Name of the Principal.
+  InputSerialization:
+    type: object
+    properties:
+      CSV:
+        $ref: '#/definitions/CSVInput'
+        description: Describes the serialization of a CSV-encoded object.
+    description: Describes the serialization format of the object.
   InventoryConfiguration:
     type: object
     required:
@@ -2792,6 +3155,16 @@ definitions:
       S3BucketDestination:
         $ref: '#/definitions/InventoryS3BucketDestination'
         description: 'Contains the bucket name, file format, bucket owner (optional), and prefix (optional) where inventory results are published.'
+  InventoryEncryption:
+    type: object
+    properties:
+      SSES3:
+        $ref: '#/definitions/SSES3'
+        description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+      SSEKMS:
+        $ref: '#/definitions/SSEKMS'
+        description: Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+    description: Contains the type of server-side encryption used to encrypt the inventory results.
   InventoryFilter:
     type: object
     required:
@@ -2804,6 +3177,7 @@ definitions:
     type: string
     enum:
       - CSV
+      - ORC
   InventoryFrequency:
     type: string
     enum:
@@ -2825,6 +3199,7 @@ definitions:
       - ETag
       - IsMultipartUploaded
       - ReplicationStatus
+      - EncryptionStatus
   InventoryOptionalFields:
     type: array
     items:
@@ -2847,6 +3222,9 @@ definitions:
       Prefix:
         $ref: '#/definitions/Prefix'
         description: The prefix that is prepended to all inventory results.
+      Encryption:
+        $ref: '#/definitions/InventoryEncryption'
+        description: Contains the type of server-side encryption used to encrypt the inventory results.
   InventorySchedule:
     type: object
     required:
@@ -2861,6 +3239,8 @@ definitions:
     type: boolean
   IsTruncated:
     type: boolean
+  KMSContext:
+    type: string
   KeyCount:
     type: integer
   KeyMarker:
@@ -3349,6 +3729,8 @@ definitions:
     properties: {}
   Location:
     type: string
+  LocationPrefix:
+    type: string
   LoggingEnabled:
     type: object
     properties:
@@ -3398,6 +3780,14 @@ definitions:
     enum:
       - COPY
       - REPLACE
+  MetadataEntry:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/MetadataKey'
+      Value:
+        $ref: '#/definitions/MetadataValue'
+    description: A metadata key-value pair to store with an object.
   MetadataKey:
     type: string
   MetadataValue:
@@ -3665,6 +4055,20 @@ definitions:
     type: string
     enum:
       - STANDARD
+  OutputLocation:
+    type: object
+    properties:
+      S3:
+        $ref: '#/definitions/S3Location'
+        description: Describes an S3 location that will receive the results of the restore request.
+    description: Describes the location where the restore job's output is stored.
+  OutputSerialization:
+    type: object
+    properties:
+      CSV:
+        $ref: '#/definitions/CSVOutput'
+        description: Describes the serialization of CSV-encoded Select results.
+    description: Describes how results of the Select job are serialized.
   Owner:
     type: object
     properties:
@@ -3672,6 +4076,10 @@ definitions:
         $ref: '#/definitions/DisplayName'
       ID:
         $ref: '#/definitions/ID'
+  OwnerOverride:
+    type: string
+    enum:
+      - Destination
   Part:
     type: object
     properties:
@@ -3782,6 +4190,15 @@ definitions:
     properties:
       CORSConfiguration:
         $ref: '#/definitions/CORSConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketEncryptionRequest:
+    type: object
+    required:
+      - ServerSideEncryptionConfiguration
+    properties:
+      ServerSideEncryptionConfiguration:
+        $ref: '#/definitions/ServerSideEncryptionConfiguration'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketInventoryConfigurationRequest:
@@ -4063,7 +4480,18 @@ definitions:
       wrapped: false
   Quiet:
     type: boolean
+  QuoteCharacter:
+    type: string
+  QuoteEscapeCharacter:
+    type: string
+  QuoteFields:
+    type: string
+    enum:
+      - ALWAYS
+      - ASNEEDED
   Range:
+    type: string
+  RecordDelimiter:
     type: string
   Redirect:
     type: object
@@ -4098,6 +4526,8 @@ definitions:
     type: string
   ReplaceKeyWith:
     type: string
+  ReplicaKmsKeyID:
+    type: string
   ReplicationConfiguration:
     type: object
     required:
@@ -4127,8 +4557,13 @@ definitions:
       Status:
         $ref: '#/definitions/ReplicationRuleStatus'
         description: The rule is ignored if status is not Enabled.
+      SourceSelectionCriteria:
+        $ref: '#/definitions/SourceSelectionCriteria'
+        description: Container for filters that define which source objects should be replicated.
       Destination:
         $ref: '#/definitions/Destination'
+        description: Container for replication destination information.
+    description: Container for information about a particular replication rule.
   ReplicationRuleStatus:
     type: string
     enum:
@@ -4198,17 +4633,37 @@ definitions:
         $ref: '#/definitions/RestoreRequest'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  RestoreOutputPath:
+    type: string
   RestoreRequest:
     type: object
-    required:
-      - Days
     properties:
       Days:
         $ref: '#/definitions/Days'
-        description: Lifetime of the active copy in days
+        description: Lifetime of the active copy in days. Do not use with restores that specify OutputLocation.
       GlacierJobParameters:
         $ref: '#/definitions/GlacierJobParameters'
-        description: Glacier related prameters pertaining to this job.
+        description: Glacier related parameters pertaining to this job. Do not use with restores that specify OutputLocation.
+      Type:
+        $ref: '#/definitions/RestoreRequestType'
+        description: Type of restore request.
+      Tier:
+        $ref: '#/definitions/Tier'
+        description: Glacier retrieval tier at which the restore will be processed.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The optional description for the job.
+      SelectParameters:
+        $ref: '#/definitions/SelectParameters'
+        description: Describes the parameters for Select job types.
+      OutputLocation:
+        $ref: '#/definitions/OutputLocation'
+        description: Describes the location where the restore job's output is stored.
+    description: Container for restore job parameters.
+  RestoreRequestType:
+    type: string
+    enum:
+      - SELECT
   Role:
     type: string
   RoutingRule:
@@ -4263,6 +4718,36 @@ definitions:
       FilterRules:
         $ref: '#/definitions/FilterRuleList'
     description: Container for object key name prefix and suffix filtering rules.
+  S3Location:
+    type: object
+    required:
+      - BucketName
+      - Prefix
+    properties:
+      BucketName:
+        $ref: '#/definitions/BucketName'
+        description: The name of the bucket where the restore results will be placed.
+      Prefix:
+        $ref: '#/definitions/LocationPrefix'
+        description: The prefix that is prepended to the restore results for this request.
+      Encryption:
+        $ref: '#/definitions/Encryption'
+      CannedACL:
+        $ref: '#/definitions/ObjectCannedACL'
+        description: The canned ACL to apply to the restore results.
+      AccessControlList:
+        $ref: '#/definitions/Grants'
+        description: A list of grants that control access to the staged results.
+      Tagging:
+        $ref: '#/definitions/Tagging'
+        description: The tag-set that is applied to the restore results.
+      UserMetadata:
+        $ref: '#/definitions/UserMetadata'
+        description: A list of metadata to store with the restore results in S3.
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The class of storage used to store the restore results.
+    description: Describes an S3 location that will receive the results of the restore request.
   SSECustomerAlgorithm:
     type: string
   SSECustomerKey:
@@ -4270,16 +4755,105 @@ definitions:
     format: password
   SSECustomerKeyMD5:
     type: string
+  SSEKMS:
+    type: object
+    required:
+      - KeyId
+    properties:
+      KeyId:
+        $ref: '#/definitions/SSEKMSKeyId'
+        description: Specifies the ID of the AWS Key Management Service (KMS) master encryption key to use for encrypting Inventory reports.
+    description: Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
   SSEKMSKeyId:
     type: string
     format: password
+  SSES3:
+    type: object
+    properties: {}
+    description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+  SelectParameters:
+    type: object
+    required:
+      - InputSerialization
+      - ExpressionType
+      - Expression
+      - OutputSerialization
+    properties:
+      InputSerialization:
+        $ref: '#/definitions/InputSerialization'
+        description: Describes the serialization format of the object.
+      ExpressionType:
+        $ref: '#/definitions/ExpressionType'
+        description: 'The type of the provided expression (e.g., SQL).'
+      Expression:
+        $ref: '#/definitions/Expression'
+        description: The expression that is used to query the object.
+      OutputSerialization:
+        $ref: '#/definitions/OutputSerialization'
+        description: Describes how the results of the Select job are serialized.
+    description: Describes the parameters for Select job types.
   ServerSideEncryption:
     type: string
     enum:
       - AES256
       - 'aws:kms'
+  ServerSideEncryptionByDefault:
+    type: object
+    required:
+      - SSEAlgorithm
+    properties:
+      SSEAlgorithm:
+        $ref: '#/definitions/ServerSideEncryption'
+        description: Server-side encryption algorithm to use for the default encryption.
+      KMSMasterKeyID:
+        $ref: '#/definitions/SSEKMSKeyId'
+        description: 'KMS master key ID to use for the default encryption. This parameter is allowed if SSEAlgorithm is aws:kms.'
+    description: 'Describes the default server-side encryption to apply to new objects in the bucket. If Put Object request does not specify any server-side encryption, this default encryption will be applied.'
+  ServerSideEncryptionConfiguration:
+    type: object
+    required:
+      - Rules
+    properties:
+      Rules:
+        $ref: '#/definitions/ServerSideEncryptionRules'
+        description: Container for information about a particular server-side encryption configuration rule.
+    description: Container for server-side encryption configuration rules. Currently S3 supports one rule only.
+  ServerSideEncryptionRule:
+    type: object
+    properties:
+      ApplyServerSideEncryptionByDefault:
+        $ref: '#/definitions/ServerSideEncryptionByDefault'
+        description: 'Describes the default server-side encryption to apply to new objects in the bucket. If Put Object request does not specify any server-side encryption, this default encryption will be applied.'
+    description: Container for information about a particular server-side encryption configuration rule.
+  ServerSideEncryptionRules:
+    type: array
+    items:
+      $ref: '#/definitions/ServerSideEncryptionRule'
+    xml:
+      wrapped: false
   Size:
     type: integer
+  SourceSelectionCriteria:
+    type: object
+    properties:
+      SseKmsEncryptedObjects:
+        $ref: '#/definitions/SseKmsEncryptedObjects'
+        description: Container for filter information of selection of KMS Encrypted S3 objects.
+    description: Container for filters that define which source objects should be replicated.
+  SseKmsEncryptedObjects:
+    type: object
+    required:
+      - Status
+    properties:
+      Status:
+        $ref: '#/definitions/SseKmsEncryptedObjectsStatus'
+        description: The replication for KMS encrypted S3 objects is disabled if status is not Enabled.
+    description: Container for filter information of selection of KMS Encrypted S3 objects.
+  SseKmsEncryptedObjectsStatus:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
   StartAfter:
     type: string
   StorageClass:
@@ -4451,7 +5025,7 @@ definitions:
     type: object
     example:
       Bucket: examplebucket
-      CopySource: bucketname/sourceobjectkey
+      CopySource: /bucketname/sourceobjectkey
       Key: examplelargeobject
       PartNumber: '1'
       UploadId: exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--
@@ -4473,6 +5047,10 @@ definitions:
       Body:
         $ref: '#/definitions/Body'
         description: Object data.
+  UserMetadata:
+    type: array
+    items:
+      $ref: '#/definitions/MetadataEntry'
   Value:
     type: string
   VersionIdMarker:

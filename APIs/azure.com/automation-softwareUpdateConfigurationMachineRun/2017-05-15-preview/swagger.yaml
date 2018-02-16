@@ -1,0 +1,467 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+basePath: /
+info:
+  contact:
+    name: Mohamed Enein
+  description: APIs for managing software update configurations.
+  title: Update Management
+  version: 2017-05-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: automation-softwareUpdateConfigurationMachineRun
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationMachineRuns':
+    get:
+      description: Return list of software update configuration machine runs
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations'
+      operationId: SoftwareUpdateConfigurationMachineRuns_List
+      parameters:
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+        - description: The name of the automation account.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Identifies this specific client request.
+          in: header
+          name: clientRequestId
+          required: false
+          type: string
+        - description: 'The filter to apply on the operation. You can use the following filters: ''properties/osType'', ''properties/status'', ''properties/startTime'', and ''properties/softwareUpdateConfiguration/name'''
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: number of entries you skip before returning results
+          in: query
+          name: $skip
+          required: false
+          type: string
+        - description: Maximum number of entries returned in the results collection
+          in: query
+          name: $top
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Return list of software update configuration machine runs.
+          schema:
+            description: result of listing all software update configuration machine runs
+            properties:
+              nextLink:
+                description: link to next page of results.
+                type: string
+              value:
+                description: outer object returned when listing all software update configuration machine runs
+                items:
+                  description: Software update configuration machine run model.
+                  properties:
+                    id:
+                      description: Resource Id of the software update configuration machine run
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Name of the software update configuration machine run
+                      readOnly: true
+                      type: string
+                    properties:
+                      description: Software update configuration machine run properties.
+                      properties:
+                        configuredDuration:
+                          description: configured duration for the software update configuration run.
+                          readOnly: true
+                          type: string
+                        correlationId:
+                          description: correlation id of the software update configuration machine run
+                          format: uuid
+                          readOnly: true
+                          type: string
+                        createdBy:
+                          description: 'createdBy property, which only appears in the response.'
+                          readOnly: true
+                          type: string
+                        creationTime:
+                          description: 'Creation time of theresource, which only appears in the response.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        endTime:
+                          description: End time of the software update configuration machine run.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        job:
+                          description: Software update configuration machine run job navigation properties.
+                          properties:
+                            id:
+                              description: Id of the job associated with the software update configuration run
+                              readOnly: true
+                              type: string
+                          type: object
+                        lastModifiedBy:
+                          description: 'lastModifiedBy property, which only appears in the response.'
+                          readOnly: true
+                          type: string
+                        lastModifiedTime:
+                          description: 'Last time resource was modified, which only appears in the response.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        osType:
+                          description: Operating system target of the software update configuration triggered this run
+                          readOnly: true
+                          type: string
+                        softwareUpdateConfiguration:
+                          description: Software update configuration Run Navigation model.
+                          properties:
+                            name:
+                              description: Name of the software update configuration triggered the software update configuration run
+                              readOnly: true
+                              type: string
+                          type: object
+                        sourceComputerId:
+                          description: source computer id of the software update configuration machine run
+                          format: uuid
+                          readOnly: true
+                          type: string
+                        startTime:
+                          description: Start time of the software update configuration machine run.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        status:
+                          description: Status of the software update configuration machine run.
+                          readOnly: true
+                          type: string
+                        targetComputer:
+                          description: name of the updated computer
+                          readOnly: true
+                          type: string
+                        targetComputerType:
+                          description: type of the updated computer.
+                          readOnly: true
+                          type: string
+                  type: object
+                  x-ms-azure-resource: false
+                type: array
+        '404':
+          description: 'Resource group, or account doesn''t exist.'
+      tags:
+        - Software Update Configuration Machine Run
+      x-ms-examples:
+        List software update configuration machine runs:
+          parameters:
+            api-version: 2017-05-15-preview
+            automationAccountName: myaccount
+            resourceGroupName: mygroup
+            subscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com:443/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationRuns?api-version=2017-05-15-preview&_=1508725900015&$skip=100'
+                value:
+                  - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationMachineRuns/ca440719-34a4-4234-a1a9-3f84faf7788f
+                    name: ca440719-34a4-4234-a1a9-3f84faf7788f
+                    properties:
+                      configuredDuration: PT2H
+                      correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
+                      creationTime: '2017-10-23T02:33:30.7484961+00:00'
+                      endTime: '2017-10-23T02:33:36.4166667+00:00'
+                      job: {}
+                      lastModifiedBy: ''
+                      lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
+                      osType: Windows
+                      softwareUpdateConfiguration:
+                        name: mypatch
+                      sourceComputerId: 3d3f24bf-7037-424e-bfba-aae3b9752f8e
+                      startTime: '2017-10-23T02:33:30.7484961+00:00'
+                      status: Succeeded
+                      targetComputer: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Compute/virtualMachines/myvm
+                      targetComputerType: AzureVirtualMachines
+                  - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationMachineRuns/ca440719-34a4-4234-a1a9-3f84faf7789f
+                    name: ca440719-34a4-4234-a1a9-3f84faf7789f
+                    properties:
+                      configuredDuration: PT2H
+                      correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
+                      creationTime: '2017-10-23T02:33:30.7484961+00:00'
+                      endTime: '2017-10-23T02:33:36.4166667+00:00'
+                      job: {}
+                      lastModifiedBy: ''
+                      lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
+                      osType: Windows
+                      softwareUpdateConfiguration:
+                        name: mypatch
+                      sourceComputerId: 3d3f24bf-7037-424e-bfba-aae3b9752f8e
+                      startTime: '2017-10-23T02:33:30.7484961+00:00'
+                      status: Succeeded
+                      targetComputer: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Compute/virtualMachines/myvm2
+                      targetComputerType: AzureVirtualMachines
+              headers: {}
+            '404':
+              code: NotFound
+              message: '{"Message":"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount"}'
+        List software update configuration machine runs for a specific software update configuration run:
+          parameters:
+            $filter: $filter=properties/correlationId%20eq%200b943e57-44d3-4f05-898c-6e92aa617e59
+            api-version: 2017-05-15-preview
+            automationAccountName: myaccount
+            resourceGroupName: mygroup
+            subscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com:443/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationRuns?api-version=2017-05-15-preview&_=1508725900015&$skip=100'
+                value:
+                  - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationMachineRuns/ca440719-34a4-4234-a1a9-3f84faf7788f
+                    name: ca440719-34a4-4234-a1a9-3f84faf7788f
+                    properties:
+                      configuredDuration: PT2H
+                      correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
+                      creationTime: '2017-10-23T02:33:30.7484961+00:00'
+                      endTime: '2017-10-23T02:33:36.4166667+00:00'
+                      job: {}
+                      lastModifiedBy: ''
+                      lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
+                      osType: Windows
+                      softwareUpdateConfiguration:
+                        name: mypatch
+                      sourceComputerId: 3d3f24bf-7037-424e-bfba-aae3b9752f8e
+                      startTime: '2017-10-23T02:33:30.7484961+00:00'
+                      status: Succeeded
+                      targetComputer: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Compute/virtualMachines/myvm
+                      targetComputerType: AzureVirtualMachines
+                  - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationMachineRuns/ca440719-34a4-4234-a1a9-3f84faf7789f
+                    name: ca440719-34a4-4234-a1a9-3f84faf7789f
+                    properties:
+                      configuredDuration: PT2H
+                      correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
+                      creationTime: '2017-10-23T02:33:30.7484961+00:00'
+                      endTime: '2017-10-23T02:33:36.4166667+00:00'
+                      job: {}
+                      lastModifiedBy: ''
+                      lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
+                      osType: Windows
+                      softwareUpdateConfiguration:
+                        name: mypatch
+                      sourceComputerId: 3d3f24bf-7037-424e-bfba-aae3b9752f8e
+                      startTime: '2017-10-23T02:33:30.7484961+00:00'
+                      status: Succeeded
+                      targetComputer: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Compute/virtualMachines/myvm2
+                      targetComputerType: AzureVirtualMachines
+              headers: {}
+            '404':
+              code: NotFound
+              message: '{"Message":"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount"}'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationMachineRuns/{softwareUpdateConfigurationMachineRunId}':
+    get:
+      description: Get a single software update configuration machine run by Id.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations'
+      operationId: SoftwareUpdateConfigurationMachineRuns_GetById
+      parameters:
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+        - description: The name of the automation account.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The Id of the software update configuration machine run.
+          format: uuid
+          in: path
+          name: softwareUpdateConfigurationMachineRunId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Identifies this specific client request.
+          in: header
+          name: clientRequestId
+          required: false
+          type: string
+      responses:
+        '200':
+          description: A single software update configuration machine run.
+          schema:
+            description: Software update configuration machine run model.
+            properties:
+              id:
+                description: Resource Id of the software update configuration machine run
+                readOnly: true
+                type: string
+              name:
+                description: Name of the software update configuration machine run
+                readOnly: true
+                type: string
+              properties:
+                description: Software update configuration machine run properties.
+                properties:
+                  configuredDuration:
+                    description: configured duration for the software update configuration run.
+                    readOnly: true
+                    type: string
+                  correlationId:
+                    description: correlation id of the software update configuration machine run
+                    format: uuid
+                    readOnly: true
+                    type: string
+                  createdBy:
+                    description: 'createdBy property, which only appears in the response.'
+                    readOnly: true
+                    type: string
+                  creationTime:
+                    description: 'Creation time of theresource, which only appears in the response.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  endTime:
+                    description: End time of the software update configuration machine run.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  job:
+                    description: Software update configuration machine run job navigation properties.
+                    properties:
+                      id:
+                        description: Id of the job associated with the software update configuration run
+                        readOnly: true
+                        type: string
+                    type: object
+                  lastModifiedBy:
+                    description: 'lastModifiedBy property, which only appears in the response.'
+                    readOnly: true
+                    type: string
+                  lastModifiedTime:
+                    description: 'Last time resource was modified, which only appears in the response.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  osType:
+                    description: Operating system target of the software update configuration triggered this run
+                    readOnly: true
+                    type: string
+                  softwareUpdateConfiguration:
+                    description: Software update configuration Run Navigation model.
+                    properties:
+                      name:
+                        description: Name of the software update configuration triggered the software update configuration run
+                        readOnly: true
+                        type: string
+                    type: object
+                  sourceComputerId:
+                    description: source computer id of the software update configuration machine run
+                    format: uuid
+                    readOnly: true
+                    type: string
+                  startTime:
+                    description: Start time of the software update configuration machine run.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  status:
+                    description: Status of the software update configuration machine run.
+                    readOnly: true
+                    type: string
+                  targetComputer:
+                    description: name of the updated computer
+                    readOnly: true
+                    type: string
+                  targetComputerType:
+                    description: type of the updated computer.
+                    readOnly: true
+                    type: string
+            type: object
+            x-ms-azure-resource: false
+        '404':
+          description: 'Resource group, account, or software update configuration machine run doesn''t exist.'
+      tags:
+        - Software Update Configuration Machine Run
+      x-ms-examples:
+        Get software update configuration machine run:
+          parameters:
+            api-version: 2017-05-15-preview
+            automationAccountName: myaccount
+            resourceGroupName: mygroup
+            softwareUpdateConfigurationMachineRunId: ca440719-34a4-4234-a1a9-3f84faf7788f
+            subscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab
+          responses:
+            '200':
+              body:
+                id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationMachineRuns/ca440719-34a4-4234-a1a9-3f84faf7788f
+                name: ca440719-34a4-4234-a1a9-3f84faf7788f
+                properties:
+                  configuredDuration: PT2H
+                  correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
+                  creationTime: '2017-10-23T02:33:30.7484961+00:00'
+                  endTime: '2017-10-23T02:33:36.4166667+00:00'
+                  job: {}
+                  lastModifiedBy: ''
+                  lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
+                  osType: Windows
+                  softwareUpdateConfiguration:
+                    name: mypatch
+                  sourceComputerId: 3d3f24bf-7037-424e-bfba-aae3b9752f8e
+                  startTime: '2017-10-23T02:33:30.7484961+00:00'
+                  status: Succeeded
+                  targetComputer: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Compute/virtualMachines/myvm
+                  targetComputerType: AzureVirtualMachines
+              headers: {}
+            '404':
+              code: NotFound
+              message: '{"Message":"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount"}'

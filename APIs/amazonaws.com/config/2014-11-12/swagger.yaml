@@ -5,13 +5,14 @@ info:
   title: AWS Config
   description: '<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config</p> <p>This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config.</p> <p>The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href="http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>.</p> <p>For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html">What Is AWS Config?</a> in the <i>AWS Config Developer Guide</i>.</p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: config.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -1043,6 +1045,10 @@ definitions:
     type: string
   AwsRegion:
     type: string
+  BaseResourceId:
+    type: string
+    minLength: 1
+    maxLength: 768
   Boolean:
     type: boolean
   ChannelName:
@@ -1085,7 +1091,7 @@ definitions:
         $ref: '#/definitions/StringWithCharLimit256'
         description: The type of the AWS resource that was evaluated.
       ResourceId:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/BaseResourceId'
         description: The ID of the AWS resource that was evaluated.
       Compliance:
         $ref: '#/definitions/Compliance'
@@ -1172,7 +1178,7 @@ definitions:
       nextDeliveryTime:
         $ref: '#/definitions/Date'
         description: The time that the next delivery occurs.
-    description: A list that contains the status of the delivery of either the snapshot or the configuration history to the specified Amazon S3 bucket.
+    description: Provides status of the delivery of the snapshot or the configuration history to the specified Amazon S3 bucket. Also provides the status of notifications about the Amazon S3 delivery to the specified Amazon SNS topic.
   ConfigRule:
     type: object
     required:
@@ -1560,7 +1566,7 @@ definitions:
         $ref: '#/definitions/StringWithCharLimit256'
         description: 'The types of AWS resources for which you want compliance information; for example, <code>AWS::EC2::Instance</code>. For this action, you can specify that the resource type is an AWS account by specifying <code>AWS::::Account</code>.'
       ResourceId:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/BaseResourceId'
         description: 'The ID of the AWS resource for which you want compliance information. You can specify only one resource ID. If you specify a resource ID, you must also specify a type for <code>ResourceType</code>.'
       ComplianceTypes:
         $ref: '#/definitions/ComplianceTypes'
@@ -1700,7 +1706,7 @@ definitions:
         $ref: '#/definitions/StringWithCharLimit256'
         description: The type of AWS resource that was evaluated.
       ComplianceResourceId:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/BaseResourceId'
         description: The ID of the AWS resource that was evaluated.
       ComplianceType:
         $ref: '#/definitions/ComplianceType'
@@ -1754,7 +1760,7 @@ definitions:
         $ref: '#/definitions/StringWithCharLimit256'
         description: The type of AWS resource that was evaluated.
       ResourceId:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/BaseResourceId'
         description: The ID of the evaluated AWS resource.
     description: 'Identifies an AWS Config rule that evaluated an AWS resource, and provides the type and ID of the resource that the rule evaluated.'
   EvaluationResults:
@@ -1809,7 +1815,7 @@ definitions:
         $ref: '#/definitions/StringWithCharLimit256'
         description: The type of the AWS resource for which you want compliance information.
       ResourceId:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/BaseResourceId'
         description: The ID of the AWS resource for which you want compliance information.
       ComplianceTypes:
         $ref: '#/definitions/ComplianceTypes'
@@ -2285,6 +2291,20 @@ definitions:
       - 'AWS::Redshift::EventSubscription'
       - 'AWS::CloudWatch::Alarm'
       - 'AWS::CloudFormation::Stack'
+      - 'AWS::DynamoDB::Table'
+      - 'AWS::AutoScaling::AutoScalingGroup'
+      - 'AWS::AutoScaling::LaunchConfiguration'
+      - 'AWS::AutoScaling::ScalingPolicy'
+      - 'AWS::AutoScaling::ScheduledAction'
+      - 'AWS::CodeBuild::Project'
+      - 'AWS::WAF::RateBasedRule'
+      - 'AWS::WAF::Rule'
+      - 'AWS::WAF::WebACL'
+      - 'AWS::WAFRegional::RateBasedRule'
+      - 'AWS::WAFRegional::Rule'
+      - 'AWS::WAFRegional::WebACL'
+      - 'AWS::CloudFront::Distribution'
+      - 'AWS::CloudFront::StreamingDistribution'
   ResourceTypeList:
     type: array
     items:
@@ -2307,12 +2327,12 @@ definitions:
         description: The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for <code>ComplianceResourceId</code>.
       TagKey:
         $ref: '#/definitions/StringWithCharLimit128'
-        description: The tag key that is applied to only those AWS resources that you want you want to trigger an evaluation for the rule.
+        description: The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.
       TagValue:
         $ref: '#/definitions/StringWithCharLimit256'
         description: 'The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for <code>TagValue</code>, you must also specify a value for <code>TagKey</code>.'
       ComplianceResourceId:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/BaseResourceId'
         description: 'The IDs of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for <code>ComplianceResourceTypes</code>.'
     description: 'Defines which resources trigger an evaluation for an AWS Config rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one resource ID. Specify a scope to constrain which resources trigger an evaluation for a rule. Otherwise, evaluations for the rule are triggered when any resource in your recording group changes in configuration.'
   Source:

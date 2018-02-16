@@ -1421,6 +1421,68 @@ paths:
       summary: Partially updates a room.
       tags:
         - Rooms
+  '/api/hotel/v0/hotels/{hotelId}/yieldable_rateplans/{rateplanCode}/$rates':
+    put:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: "Saves Yieldable Rate Prices for existing Yieldable Rateplan. The rateplan has been created before and with this End Point we \r\n            create or update the rate prices. If the Yieldable rateplan prices exist it updates them with the new price if not it creates new price entries.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
+      operationId: YieldableRates_SavePrices
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the hotelId which identifies Hotel for which the operation will be performed.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: Specifies the rateplanCode for which the operation will be performed.
+          in: path
+          name: rateplanCode
+          required: true
+          type: string
+        - description: Specifies the the Yieldable rateplan and prices details to be created or updated.
+          in: body
+          name: yieldableRatePrices
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/YieldableRateTimeSlice'
+            type: array
+      responses:
+        '200':
+          description: Saving the Yieldable rateplan prices was successful. You will get back the confirmation.
+          schema:
+            $ref: '#/definitions/Object'
+        '400':
+          description: Bad request. Request body erroneous.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Saves Yieldable Rate Prices for existing Yieldable Rateplan.
+      tags:
+        - YieldableRates
 definitions:
   AccessControlInfo:
     properties:
@@ -1780,6 +1842,9 @@ definitions:
         items:
           type: string
         type: array
+      is_yieldable:
+        description: Gives the information if this rateplan is Yieldable rateplan
+        type: boolean
       market_code:
         description: The code of the market segment the rate plan is linked to
         type: string
@@ -2086,6 +2151,9 @@ definitions:
         items:
           type: string
         type: array
+      is_yieldable:
+        description: Gives the information if this rateplan is Yieldable rateplan
+        type: boolean
       market_code:
         description: The code of the market segment the rate plan is linked to
         type: string
@@ -2628,4 +2696,25 @@ definitions:
         type: integer
     required:
       - _count
+    type: object
+  YieldableRateTimeSlice:
+    properties:
+      date:
+        format: date-time
+        type: string
+      number_of_persons:
+        description: Number of persons for which the rate price is saved
+        format: int32
+        type: integer
+      rate_value:
+        description: 'Rate value amount, which should be unique for the combination of rateplan, date, room type and numer of persons'
+        format: double
+        type: number
+      room_type:
+        description: Room Type code for which the rate price is saved
+        type: string
+    required:
+      - room_type
+      - number_of_persons
+      - rate_value
     type: object

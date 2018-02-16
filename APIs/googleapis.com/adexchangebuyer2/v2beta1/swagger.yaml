@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://adexchangebuyer.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -124,32 +124,17 @@ parameters:
     type: string
 tags:
   - name: accounts
+  - name: bidders
 paths:
   '/v2beta1/accounts/{accountId}/clients':
     get:
       description: Lists all the clients for the current sponsor buyer.
       operationId: adexchangebuyer2.accounts.clients.list
       parameters:
-        - description: Unique numerical account ID of the sponsor buyer to list the clients for.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListClientsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.clients.list method.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer clients than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -180,17 +165,10 @@ paths:
       description: Creates a new client buyer.
       operationId: adexchangebuyer2.accounts.clients.create
       parameters:
-        - description: |-
-            Unique numerical account ID for the buyer of which the client buyer
-            is a customer; the sponsor buyer to create a client for. (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Client'
       responses:
         '200':
           description: Successful response
@@ -208,13 +186,11 @@ paths:
       description: Gets a client buyer with a given client account ID.
       operationId: adexchangebuyer2.accounts.clients.get
       parameters:
-        - description: Numerical account ID of the client's sponsor buyer. (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: Numerical account ID of the client buyer to retrieve. (required)
-          in: path
+        - in: path
           name: clientAccountId
           required: true
           type: string
@@ -248,22 +224,14 @@ paths:
       description: Updates an existing client buyer.
       operationId: adexchangebuyer2.accounts.clients.update
       parameters:
-        - description: |-
-            Unique numerical account ID for the buyer of which the client buyer
-            is a customer; the sponsor buyer to update a client for. (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: Unique numerical account ID of the client to update. (required)
-          in: path
+        - in: path
           name: clientAccountId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Client'
       responses:
         '200':
           description: Successful response
@@ -283,38 +251,14 @@ paths:
         with a given account ID.
       operationId: adexchangebuyer2.accounts.clients.invitations.list
       parameters:
-        - description: Numerical account ID of the client's sponsor buyer. (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            Numerical account ID of the client buyer to list invitations for.
-            (required)
-            You must either specify a string representation of a
-            numerical account identifier or the `-` character
-            to list all the invitations for all the clients
-            of a given sponsor buyer.
-          in: path
+        - in: path
           name: clientAccountId
           required: true
           type: string
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListClientUserInvitationsResponse.nextPageToken
-            returned from the previous call to the
-            clients.invitations.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Requested page size. Server may return fewer clients than requested.
-            If unspecified, server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -347,22 +291,14 @@ paths:
         an Ad Exchange client buyer account.
       operationId: adexchangebuyer2.accounts.clients.invitations.create
       parameters:
-        - description: Numerical account ID of the client's sponsor buyer. (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            Numerical account ID of the client buyer that the user
-            should be associated with. (required)
-          in: path
+        - in: path
           name: clientAccountId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ClientUserInvitation'
       responses:
         '200':
           description: Successful response
@@ -380,20 +316,15 @@ paths:
       description: Retrieves an existing client user invitation.
       operationId: adexchangebuyer2.accounts.clients.invitations.get
       parameters:
-        - description: Numerical account ID of the client's sponsor buyer. (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            Numerical account ID of the client buyer that the user invitation
-            to be retrieved is associated with. (required)
-          in: path
+        - in: path
           name: clientAccountId
           required: true
           type: string
-        - description: Numerical identifier of the user invitation to retrieve. (required)
-          in: path
+        - in: path
           name: invitationId
           required: true
           type: string
@@ -430,38 +361,14 @@ paths:
         sponsor buyer account ID.
       operationId: adexchangebuyer2.accounts.clients.users.list
       parameters:
-        - description: |-
-            Numerical account ID of the sponsor buyer of the client to list users for.
-            (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            The account ID of the client buyer to list users for. (required)
-            You must specify either a string representation of a
-            numerical account identifier or the `-` character
-            to list all the client users for all the clients
-            of a given sponsor buyer.
-          in: path
+        - in: path
           name: clientAccountId
           required: true
           type: string
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListClientUsersResponse.nextPageToken
-            returned from the previous call to the
-            accounts.clients.users.list method.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer clients than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -493,20 +400,15 @@ paths:
       description: Retrieves an existing client user.
       operationId: adexchangebuyer2.accounts.clients.users.get
       parameters:
-        - description: Numerical account ID of the client's sponsor buyer. (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            Numerical account ID of the client buyer
-            that the user to be retrieved is associated with. (required)
-          in: path
+        - in: path
           name: clientAccountId
           required: true
           type: string
-        - description: Numerical identifier of the user to retrieve. (required)
-          in: path
+        - in: path
           name: userId
           required: true
           type: string
@@ -542,27 +444,18 @@ paths:
         Only the user status can be changed on update.
       operationId: adexchangebuyer2.accounts.clients.users.update
       parameters:
-        - description: Numerical account ID of the client's sponsor buyer. (required)
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            Numerical account ID of the client buyer that the user to be retrieved
-            is associated with. (required)
-          in: path
+        - in: path
           name: clientAccountId
           required: true
           type: string
-        - description: Numerical identifier of the user to retrieve. (required)
-          in: path
+        - in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ClientUser'
       responses:
         '200':
           description: Successful response
@@ -580,46 +473,9 @@ paths:
       description: Lists creatives.
       operationId: adexchangebuyer2.accounts.creatives.list
       parameters:
-        - description: |-
-            The account to list the creatives from.
-            Specify "-" to list all creatives the current user has access to.
-          in: path
+        - in: path
           name: accountId
           required: true
-          type: string
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListCreativesResponse.next_page_token
-            returned from the previous call to 'ListCreatives' method.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer creatives than requested
-            (due to timeout constraint) even if more are available via another call.
-            If unspecified, server will pick an appropriate default.
-            Acceptable values are 1 to 1000, inclusive.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            An optional query string to filter creatives. If no filter is specified,
-            all active creatives will be returned.
-            Supported queries are:
-            <ul>
-            <li>accountId=<i>account_id_string</i>
-            <li>creativeId=<i>creative_id_string</i>
-            <li>dealsStatus: {approved, conditionally_approved, disapproved,
-                               not_checked}
-            <li>openAuctionStatus: {approved, conditionally_approved, disapproved,
-                                      not_checked}
-            <li>attribute: {a numeric attribute from the list of attributes}
-            <li>disapprovalReason: {a reason from DisapprovalReason
-            </ul>
-            Example: 'accountId=12345 AND (dealsStatus:disapproved AND disapprovalReason:unacceptable_content) OR attribute:47'
-          in: query
-          name: query
           type: string
       responses:
         '200':
@@ -651,28 +507,10 @@ paths:
       description: Creates a creative.
       operationId: adexchangebuyer2.accounts.creatives.create
       parameters:
-        - description: |-
-            The account that this creative belongs to.
-            Can be used to filter the response of the
-            creatives.list
-            method.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            Indicates if multiple creatives can share an ID or not. Default is
-            NO_DUPLICATES (one ID per creative).
-          enum:
-            - NO_DUPLICATES
-            - FORCE_ENABLE_DUPLICATE_IDS
-          in: query
-          name: duplicateIdMode
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
       responses:
         '200':
           description: Successful response
@@ -690,13 +528,11 @@ paths:
       description: Gets a creative.
       operationId: adexchangebuyer2.accounts.creatives.get
       parameters:
-        - description: The account the creative belongs to.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: The ID of the creative to retrieve.
-          in: path
+        - in: path
           name: creativeId
           required: true
           type: string
@@ -730,28 +566,14 @@ paths:
       description: Updates a creative.
       operationId: adexchangebuyer2.accounts.creatives.update
       parameters:
-        - description: |-
-            The account that this creative belongs to.
-            Can be used to filter the response of the
-            creatives.list
-            method.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            The buyer-defined creative ID of this creative.
-            Can be used to filter the response of the
-            creatives.list
-            method.
-          in: path
+        - in: path
           name: creativeId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
       responses:
         '200':
           description: Successful response
@@ -769,50 +591,13 @@ paths:
       description: List all creative-deal associations.
       operationId: adexchangebuyer2.accounts.creatives.dealAssociations.list
       parameters:
-        - description: |-
-            The account to list the associations from.
-            Specify "-" to list all creatives the current user has access to.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            The creative ID to list the associations from.
-            Specify "-" to list all creatives under the above account.
-          in: path
+        - in: path
           name: creativeId
           required: true
-          type: string
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListDealAssociationsResponse.next_page_token
-            returned from the previous call to 'ListDealAssociations' method.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Requested page size. Server may return fewer associations than requested.
-            If unspecified, server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            An optional query string to filter deal associations. If no filter is
-            specified, all associations will be returned.
-            Supported queries are:
-            <ul>
-            <li>accountId=<i>account_id_string</i>
-            <li>creativeId=<i>creative_id_string</i>
-            <li>dealsId=<i>deals_id_string</i>
-            <li>dealsStatus:{approved, conditionally_approved, disapproved,
-                              not_checked}
-            <li>openAuctionStatus:{approved, conditionally_approved, disapproved,
-                                     not_checked}
-            </ul>
-            Example: 'dealsId=12345 AND dealsStatus:disapproved'
-          in: query
-          name: query
           type: string
       responses:
         '200':
@@ -859,20 +644,14 @@ paths:
       description: Associate an existing deal with a creative.
       operationId: adexchangebuyer2.accounts.creatives.dealAssociations.add
       parameters:
-        - description: The account the creative belongs to.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: The ID of the creative associated with the deal.
-          in: path
+        - in: path
           name: creativeId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AddDealAssociationRequest'
       responses:
         '200':
           description: Successful response
@@ -904,20 +683,14 @@ paths:
       description: Remove the association between a deal and a creative.
       operationId: adexchangebuyer2.accounts.creatives.dealAssociations.remove
       parameters:
-        - description: The account the creative belongs to.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: The ID of the creative associated with the deal.
-          in: path
+        - in: path
           name: creativeId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemoveDealAssociationRequest'
       responses:
         '200':
           description: Successful response
@@ -951,22 +724,14 @@ paths:
         topics when the creative changes status.
       operationId: adexchangebuyer2.accounts.creatives.stopWatching
       parameters:
-        - description: The account of the creative to stop notifications for.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            The creative ID of the creative to stop notifications for.
-            Specify "-" to specify stopping account level notifications.
-          in: path
+        - in: path
           name: creativeId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StopWatchingCreativeRequest'
       responses:
         '200':
           description: Successful response
@@ -1000,25 +765,14 @@ paths:
         topic when the creative changes status.
       operationId: adexchangebuyer2.accounts.creatives.watch
       parameters:
-        - description: The account of the creative to watch.
-          in: path
+        - in: path
           name: accountId
           required: true
           type: string
-        - description: |-
-            The creative ID to watch for status changes.
-            Specify "-" to watch all creatives under the above account.
-            If both creative-level and account-level notifications are
-            sent, only a single notification will be sent to the
-            creative-level notification topic.
-          in: path
+        - in: path
           name: creativeId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/WatchCreativeRequest'
       responses:
         '200':
           description: Successful response
@@ -1031,31 +785,447 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
-  '/v2beta1/accounts/{accountId}/filterSets':
+  '/v2beta1/{filterSetName}/bidMetrics':
     get:
-      description: Lists all filter sets for the account with the given account ID.
-      operationId: adexchangebuyer2.accounts.filterSets.list
+      description: Lists all metrics that are measured in terms of number of bids.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.bidMetrics.list
       parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
+        - in: path
+          name: filterSetName
           required: true
           type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListFilterSetsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.list
-            method.
-          in: query
-          name: pageToken
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListBidMetricsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/bidResponseErrors':
+    get:
+      description: |-
+        List all errors that occurred in bid responses, with the number of bid
+        responses affected for each reason.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.bidResponseErrors.list
+      parameters:
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListBidResponseErrorsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/bidResponsesWithoutBids':
+    get:
+      description: |-
+        List all reasons for which bid responses were considered to have no
+        applicable bids, with the number of bid responses affected for each reason.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.bidResponsesWithoutBids.list
+      parameters:
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListBidResponsesWithoutBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/filteredBidRequests':
+    get:
+      description: |-
+        List all reasons that caused a bid request not to be sent for an
+        impression, with the number of bid requests not sent for each reason.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.filteredBidRequests.list
+      parameters:
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListFilteredBidRequestsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/filteredBids':
+    get:
+      description: |-
+        List all reasons for which bids were filtered, with the number of bids
+        filtered for each reason.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.filteredBids.list
+      parameters:
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListFilteredBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/filteredBids/{creativeStatusId}/creatives':
+    get:
+      description: |-
+        List all creatives associated with a specific reason for which bids were
+        filtered, with the number of bids filtered for each creative.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.filteredBids.creatives.list
+      parameters:
+        - in: path
+          name: creativeStatusId
+          required: true
+          type: string
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListCreativeStatusBreakdownByCreativeResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/filteredBids/{creativeStatusId}/details':
+    get:
+      description: |-
+        List all details associated with a specific reason for which bids were
+        filtered, with the number of bids filtered for each detail.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.filteredBids.details.list
+      parameters:
+        - in: path
+          name: creativeStatusId
+          required: true
+          type: string
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListCreativeStatusBreakdownByDetailResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/impressionMetrics':
+    get:
+      description: Lists all metrics that are measured in terms of number of impressions.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.impressionMetrics.list
+      parameters:
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListImpressionMetricsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/losingBids':
+    get:
+      description: |-
+        List all reasons for which bids lost in the auction, with the number of
+        bids that lost for each reason.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.losingBids.list
+      parameters:
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListLosingBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{filterSetName}/nonBillableWinningBids':
+    get:
+      description: |-
+        List all reasons for which winning bids were not billable, with the number
+        of bids not billed for each reason.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.nonBillableWinningBids.list
+      parameters:
+        - in: path
+          name: filterSetName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListNonBillableWinningBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{name}':
+    delete:
+      description: |-
+        Deletes the requested filter set from the account with the given account
+        ID.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.delete
+      parameters:
+        - in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    get:
+      description: |-
+        Retrieves the requested filter set for the account with the given account
+        ID.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.get
+      parameters:
+        - in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/FilterSet'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - bidders
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/{ownerName}/filterSets':
+    get:
+      description: Lists all filter sets for the account with the given account ID.
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.list
+      parameters:
+        - in: path
+          name: ownerName
+          required: true
           type: string
       responses:
         '200':
@@ -1068,7 +1238,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
-        - accounts
+        - bidders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1085,79 +1255,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates the specified filter set for the account with the given account ID.
-      operationId: adexchangebuyer2.accounts.filterSets.create
+      operationId: adexchangebuyer2.bidders.accounts.filterSets.create
       parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FilterSet'
-        - description: |-
-            Whether the filter set is transient, or should be persisted indefinitely.
-            By default, filter sets are not transient.
-            If transient, it will be available for at least 1 hour after creation.
-          in: query
-          name: isTransient
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/FilterSet'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}':
-    delete:
-      description: |-
-        Deletes the requested filter set from the account with the given account
-        ID.
-      operationId: adexchangebuyer2.accounts.filterSets.delete
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to delete.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    get:
-      description: |-
-        Retrieves the requested filter set for the account with the given account
-        ID.
-      operationId: adexchangebuyer2.accounts.filterSets.get
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to get.
-          in: path
-          name: filterSetId
+        - in: path
+          name: ownerName
           required: true
           type: string
       responses:
@@ -1171,625 +1272,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/bidMetrics':
-    get:
-      description: Lists all metrics that are measured in terms of number of bids.
-      operationId: adexchangebuyer2.accounts.filterSets.bidMetrics.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListBidMetricsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.bidMetrics.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListBidMetricsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/bidResponseErrors':
-    get:
-      description: |-
-        List all errors that occurred in bid responses, with the number of bid
-        responses affected for each reason.
-      operationId: adexchangebuyer2.accounts.filterSets.bidResponseErrors.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListBidResponseErrorsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.bidResponseErrors.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListBidResponseErrorsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/bidResponsesWithoutBids':
-    get:
-      description: |-
-        List all reasons for which bid responses were considered to have no
-        applicable bids, with the number of bid responses affected for each reason.
-      operationId: adexchangebuyer2.accounts.filterSets.bidResponsesWithoutBids.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListBidResponsesWithoutBidsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.bidResponsesWithoutBids.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListBidResponsesWithoutBidsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBidRequests':
-    get:
-      description: |-
-        List all reasons that caused a bid request not to be sent for an
-        impression, with the number of bid requests not sent for each reason.
-      operationId: adexchangebuyer2.accounts.filterSets.filteredBidRequests.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListFilteredBidRequestsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.filteredBidRequests.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListFilteredBidRequestsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBids':
-    get:
-      description: |-
-        List all reasons for which bids were filtered, with the number of bids
-        filtered for each reason.
-      operationId: adexchangebuyer2.accounts.filterSets.filteredBids.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListFilteredBidsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.filteredBids.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListFilteredBidsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBids/{creativeStatusId}/creatives':
-    get:
-      description: |-
-        List all creatives associated with a specific reason for which bids were
-        filtered, with the number of bids filtered for each creative.
-      operationId: adexchangebuyer2.accounts.filterSets.filteredBids.creatives.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: |-
-            The ID of the creative status for which to retrieve a breakdown by
-            creative.
-            See
-            [creative-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/creative-status-codes).
-          in: path
-          name: creativeStatusId
-          required: true
-          type: integer
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListCreativeStatusBreakdownByCreativeResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.filteredBids.creatives.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListCreativeStatusBreakdownByCreativeResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBids/{creativeStatusId}/details':
-    get:
-      description: |-
-        List all details associated with a specific reason for which bids were
-        filtered, with the number of bids filtered for each detail.
-      operationId: adexchangebuyer2.accounts.filterSets.filteredBids.details.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: |-
-            The ID of the creative status for which to retrieve a breakdown by detail.
-            See
-            [creative-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/creative-status-codes).
-            Details are only available for statuses 10, 14, 15, 17, 18, 19, 86, and 87.
-          in: path
-          name: creativeStatusId
-          required: true
-          type: integer
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListCreativeStatusBreakdownByDetailResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.filteredBids.details.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListCreativeStatusBreakdownByDetailResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/impressionMetrics':
-    get:
-      description: Lists all metrics that are measured in terms of number of impressions.
-      operationId: adexchangebuyer2.accounts.filterSets.impressionMetrics.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListImpressionMetricsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.impressionMetrics.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListImpressionMetricsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/losingBids':
-    get:
-      description: |-
-        List all reasons for which bids lost in the auction, with the number of
-        bids that lost for each reason.
-      operationId: adexchangebuyer2.accounts.filterSets.losingBids.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListLosingBidsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.losingBids.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListLosingBidsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/nonBillableWinningBids':
-    get:
-      description: |-
-        List all reasons for which winning bids were not billable, with the number
-        of bids not billed for each reason.
-      operationId: adexchangebuyer2.accounts.filterSets.nonBillableWinningBids.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListNonBillableWinningBidsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.nonBillableWinningBids.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListNonBillableWinningBidsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
+        - bidders
 definitions:
   AbsoluteDateRange:
     description: |-
@@ -2522,6 +2005,16 @@ definitions:
           - DISPLAY
           - VIDEO
         type: string
+      name:
+        description: |-
+          A user-defined name of the filter set. Filter set names must be unique
+          globally and match one of the patterns:
+
+          - `bidders/*/filterSets/*` (for accessing bidder-level troubleshooting
+          data)
+          - `bidders/*/accounts/*/filterSets/*` (for accessing buyer-level
+          troubleshooting data)
+        type: string
       ownerAccountId:
         description: |-
           The account ID of the buyer who owns this filter set.
@@ -2703,8 +2196,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListBidMetricsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.bidMetrics.list
+          field in the subsequent call to the bidMetrics.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -2723,8 +2215,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListBidResponseErrorsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.bidResponseErrors.list
+          field in the subsequent call to the bidResponseErrors.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -2745,8 +2236,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListBidResponsesWithoutBidsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.bidResponsesWithoutBids.list
+          field in the subsequent call to the bidResponsesWithoutBids.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -2820,8 +2310,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListCreativeStatusBreakdownByCreativeRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.filteredBids.creatives.list
+          field in the subsequent call to the filteredBids.creatives.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -2852,8 +2341,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListCreativeStatusBreakdownByDetailRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.filteredBids.details.list
+          field in the subsequent call to the filteredBids.details.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -2926,8 +2414,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListFilteredBidRequestsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.filteredBidRequests.list
+          field in the subsequent call to the filteredBidRequests.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -2948,8 +2435,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListFilteredBidsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.filteredBids.list
+          field in the subsequent call to the filteredBids.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -2968,8 +2454,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListImpressionMetricsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.impressionMetrics.list
+          field in the subsequent call to the impressionMetrics.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -2988,8 +2473,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListLosingBidsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.losingBids.list
+          field in the subsequent call to the losingBids.list
           method to retrieve the next page of results.
         type: string
     type: object
@@ -3003,8 +2487,7 @@ definitions:
           A token to retrieve the next page of results.
           Pass this value in the
           ListNonBillableWinningBidsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.nonBillableWinningBids.list
+          field in the subsequent call to the nonBillableWinningBids.list
           method to retrieve the next page of results.
         type: string
       nonBillableWinningBidStatusRows:
@@ -3266,17 +2749,7 @@ definitions:
     properties: {}
     type: object
   TimeInterval:
-    description: |-
-      An interval of time, with an absolute start and end.
-      This is included in the response, for several reasons:
-      1) The request may have specified start or end times relative to the time the
-         request was sent; the response indicates the corresponding absolute time
-         interval.
-      2) The request may have specified an end time past the latest time for which
-         data was available (e.g. if requesting data for the today); the response
-         indicates the latest time for which data was actually returned.
-      3) The response data for a single request may be broken down into multiple
-         time intervals, if a time series was requested.
+    description: 'An interval of time, with an absolute start and end.'
     properties:
       endTime:
         description: |-

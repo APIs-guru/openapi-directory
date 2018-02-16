@@ -1461,6 +1461,11 @@ definitions:
         example: '$3,000.00'
         title: Federal Penalty
         type: string
+      Lead:
+        description: 'The lead agency (e.g., EPA, State) conducting the inspection'
+        example: EPA
+        title: Lead Agency
+        type: string
       MaxScore:
         description: '[Col. 121]'
         example: '1'
@@ -1525,6 +1530,9 @@ definitions:
         example: 05/5/2005
         title: Settlement Date
         type: string
+      StateLocPenaltyAmt:
+        title: State Local Penalty Amount
+        type: string
       TotalCompActionAmt:
         description: 'For civil enforcement actions, the value of the costs incurred by the defendant/respondent to attain compliance with the law and restore the environment. This value does not include penalties, cost recovery, or costs associated with SEPs.'
         example: '279450'
@@ -1560,6 +1568,8 @@ definitions:
       - DateClosed
       - EnfOutcome
       - CostRecovery
+      - Lead
+      - StateLocPenaltyAmt
       - SEPCategories
       - SEPTexts
       - MaxScore

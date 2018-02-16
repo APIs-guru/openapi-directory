@@ -16,12 +16,14 @@ info:
   version: v1beta3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta3/rest'
       version: v1
@@ -129,11 +131,6 @@ paths:
       description: 'Lists instances for a given project, in alphabetical order by instance name.'
       operationId: sql.instances.list
       parameters:
-        - description: Project ID of the project for which to list Cloud SQL instances.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The maximum number of results to return per response.
           in: query
           name: maxResults
@@ -141,6 +138,11 @@ paths:
         - description: A previously-returned page token representing part of the larger set of results to view.
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the project for which to list Cloud SQL instances.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -170,15 +172,15 @@ paths:
       description: Creates a new Cloud SQL instance.
       operationId: sql.instances.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DatabaseInstance'
         - description: Project ID of the project to which the newly created Cloud SQL instances should belong.
           in: path
           name: project
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DatabaseInstance'
       responses:
         '200':
           description: Successful response
@@ -208,15 +210,15 @@ paths:
       description: Creates a Cloud SQL instance as a clone of a source instance.
       operationId: sql.instances.clone
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesCloneRequest'
         - description: Project ID of the source as well as the clone Cloud SQL instance.
           in: path
           name: project
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstancesCloneRequest'
       responses:
         '200':
           description: Successful response
@@ -238,14 +240,14 @@ paths:
       description: Deletes a Cloud SQL instance.
       operationId: sql.instances.delete
       parameters:
-        - description: Project ID of the project that contains the instance to be deleted.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance to be deleted.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -268,14 +270,14 @@ paths:
       description: Retrieves information about a Cloud SQL instance.
       operationId: sql.instances.get
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Database instance ID. This does not include the project ID.
           in: path
           name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -306,20 +308,20 @@ paths:
       description: Updates the settings of a Cloud SQL instance. This method supports patch semantics.
       operationId: sql.instances.patch
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DatabaseInstance'
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DatabaseInstance'
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -340,20 +342,20 @@ paths:
       description: Updates the settings of a Cloud SQL instance.
       operationId: sql.instances.update
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DatabaseInstance'
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DatabaseInstance'
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -375,19 +377,14 @@ paths:
       description: Lists all backup runs associated with a Cloud SQL instance.
       operationId: sql.backupRuns.list
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
+        - description: Identifier for the backup configuration. This gets generated automatically when a backup configuration is created.
+          in: query
+          name: backupConfiguration
           required: true
           type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
-          required: true
-          type: string
-        - description: Identifier for the backup configuration. This gets generated automatically when a backup configuration is created.
-          in: query
-          name: backupConfiguration
           required: true
           type: string
         - description: Maximum number of backup runs per response.
@@ -397,6 +394,11 @@ paths:
         - description: A previously-returned page token representing part of the larger set of results to view.
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -427,16 +429,6 @@ paths:
       description: Retrieves information about a specified backup run for a Cloud SQL instance.
       operationId: sql.backupRuns.get
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Cloud SQL instance ID. This does not include the project ID.
-          in: path
-          name: instance
-          required: true
-          type: string
         - description: Identifier for the backup configuration. This gets generated automatically when a backup configuration is created.
           in: path
           name: backupConfiguration
@@ -445,6 +437,16 @@ paths:
         - description: 'The start time of the four-hour backup window. The backup can occur any time in the window. The time is in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
           in: query
           name: dueTime
+          required: true
+          type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -484,20 +486,20 @@ paths:
       description: Exports data from a Cloud SQL instance to a Google Cloud Storage bucket as a MySQL dump file.
       operationId: sql.instances.export
       parameters:
-        - description: Project ID of the project that contains the instance to be exported.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesExportRequest'
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstancesExportRequest'
+        - description: Project ID of the project that contains the instance to be exported.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -523,20 +525,20 @@ paths:
       description: Imports data into a Cloud SQL instance from a MySQL dump file stored in a Google Cloud Storage bucket.
       operationId: sql.instances.import
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesImportRequest'
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstancesImportRequest'
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -554,11 +556,6 @@ paths:
       description: Lists all operations that have been performed on a Cloud SQL instance.
       operationId: sql.operations.list
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
@@ -571,6 +568,11 @@ paths:
         - description: A previously-returned page token representing part of the larger set of results to view.
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -601,11 +603,6 @@ paths:
       description: Retrieves information about a specific operation that was performed on a Cloud SQL instance.
       operationId: sql.operations.get
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
@@ -614,6 +611,11 @@ paths:
         - description: Instance operation ID.
           in: path
           name: operation
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -653,14 +655,14 @@ paths:
       description: Promotes the read replica instance to be a stand-alone Cloud SQL instance.
       operationId: sql.instances.promoteReplica
       parameters:
-        - description: ID of the project that contains the read replica.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL read replica instance name.
           in: path
           name: instance
+          required: true
+          type: string
+        - description: ID of the project that contains the read replica.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -692,14 +694,14 @@ paths:
       description: Deletes all client certificates and generates a new server SSL certificate for a Cloud SQL instance.
       operationId: sql.instances.resetSslConfig
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -731,14 +733,14 @@ paths:
       description: Restarts a Cloud SQL instance.
       operationId: sql.instances.restart
       parameters:
-        - description: Project ID of the project that contains the instance to be restarted.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance to be restarted.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -770,16 +772,6 @@ paths:
       description: Restores a backup of a Cloud SQL instance.
       operationId: sql.instances.restoreBackup
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Cloud SQL instance ID. This does not include the project ID.
-          in: path
-          name: instance
-          required: true
-          type: string
         - description: The identifier of the backup configuration. This gets generated automatically when a backup configuration is created.
           in: query
           name: backupConfiguration
@@ -788,6 +780,16 @@ paths:
         - description: 'The start time of the four-hour backup window. The backup can occur any time in the window. The time is in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
           in: query
           name: dueTime
+          required: true
+          type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -819,20 +821,20 @@ paths:
       description: Sets the password for the root user of the specified Cloud SQL instance.
       operationId: sql.instances.setRootPassword
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceSetRootPasswordRequest'
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstanceSetRootPasswordRequest'
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -854,14 +856,14 @@ paths:
       description: Lists all of the current SSL certificates defined for a Cloud SQL instance.
       operationId: sql.sslCerts.list
       parameters:
-        - description: Project ID of the project for which to list Cloud SQL instances.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
+          required: true
+          type: string
+        - description: Project ID of the project for which to list Cloud SQL instances.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -892,20 +894,20 @@ paths:
       description: 'Creates an SSL certificate and returns the certificate, the associated private key, and the server certificate authority.'
       operationId: sql.sslCerts.insert
       parameters:
-        - description: Project ID of the project to which the newly created Cloud SQL instances should belong.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SslCertsInsertRequest'
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SslCertsInsertRequest'
+        - description: Project ID of the project to which the newly created Cloud SQL instances should belong.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -927,14 +929,14 @@ paths:
       description: Deletes an SSL certificate from a Cloud SQL instance.
       operationId: sql.sslCerts.delete
       parameters:
-        - description: Project ID of the project that contains the instance to be deleted.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance to be deleted.
+          in: path
+          name: project
           required: true
           type: string
         - description: Sha1 FingerPrint.
@@ -962,14 +964,14 @@ paths:
       description: Retrieves an SSL certificate as specified by its SHA-1 fingerprint.
       operationId: sql.sslCerts.get
       parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
           required: true
           type: string
         - description: Sha1 FingerPrint.
@@ -1052,6 +1054,9 @@ definitions:
         default: 'sql#backupConfiguration'
         description: 'This is always sql#backupConfiguration.'
         type: string
+      replicationLogArchivingEnabled:
+        description: Whether replication log archiving is enabled. Replication log archiving is required for the point-in-time recovery (PITR) feature. PostgreSQL instances only.
+        type: boolean
       startTime:
         description: 'Start time for the daily backup configuration in UTC timezone in the 24 hour format - HH:MM.'
         type: string
@@ -1135,6 +1140,10 @@ definitions:
       kind:
         default: 'sql#cloneContext'
         description: 'This is always sql#cloneContext.'
+        type: string
+      pitrTimestampMs:
+        description: 'The epoch timestamp, in milliseconds, of the time to which a point-in-time recovery (PITR) is performed. PostgreSQL instances only. For MySQL instances, use the binLogCoordinates property.'
+        format: int64
         type: string
       sourceInstanceName:
         description: Name of the Cloud SQL instance to be cloned.

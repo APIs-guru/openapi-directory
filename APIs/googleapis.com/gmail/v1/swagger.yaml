@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'
       version: v1
@@ -44,7 +44,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/gmail.labels': Manage mailbox labels
       'https://www.googleapis.com/auth/gmail.metadata': 'View your email message metadata such as labels and headers, but not the email body'
       'https://www.googleapis.com/auth/gmail.modify': View and modify but not delete your email
-      'https://www.googleapis.com/auth/gmail.readonly': View your emails messages and settings
+      'https://www.googleapis.com/auth/gmail.readonly': View your email messages and settings
       'https://www.googleapis.com/auth/gmail.send': Send email on your behalf
       'https://www.googleapis.com/auth/gmail.settings.basic': Manage your basic mail settings
       'https://www.googleapis.com/auth/gmail.settings.sharing': 'Manage your sensitive mail settings, including who can manage your mail'
@@ -60,7 +60,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/gmail.labels': Manage mailbox labels
       'https://www.googleapis.com/auth/gmail.metadata': 'View your email message metadata such as labels and headers, but not the email body'
       'https://www.googleapis.com/auth/gmail.modify': View and modify but not delete your email
-      'https://www.googleapis.com/auth/gmail.readonly': View your emails messages and settings
+      'https://www.googleapis.com/auth/gmail.readonly': View your email messages and settings
       'https://www.googleapis.com/auth/gmail.send': Send email on your behalf
       'https://www.googleapis.com/auth/gmail.settings.basic': Manage your basic mail settings
       'https://www.googleapis.com/auth/gmail.settings.sharing': 'Manage your sensitive mail settings, including who can manage your mail'
@@ -114,12 +114,6 @@ paths:
       description: Lists the drafts in the user's mailbox.
       operationId: gmail.users.drafts.list
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - default: false
           description: Include drafts from SPAM and TRASH in the results.
           in: query
@@ -137,6 +131,12 @@ paths:
         - description: 'Only return draft messages matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid: is:unread".'
           in: query
           name: q
+          type: string
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':
@@ -176,16 +176,16 @@ paths:
       description: Creates a new draft with the DRAFT label.
       operationId: gmail.users.drafts.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Draft'
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Draft'
       responses:
         '200':
           description: Successful response
@@ -221,16 +221,16 @@ paths:
       description: 'Sends the specified, existing draft to the recipients in the To, Cc, and Bcc headers.'
       operationId: gmail.users.drafts.send
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Draft'
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Draft'
       responses:
         '200':
           description: Successful response
@@ -256,15 +256,15 @@ paths:
       description: Immediately and permanently deletes the specified draft. Does not simply trash it.
       operationId: gmail.users.drafts.delete
       parameters:
+        - description: The ID of the draft to delete.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the draft to delete.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -289,17 +289,6 @@ paths:
       description: Gets the specified draft.
       operationId: gmail.users.drafts.get
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
-        - description: The ID of the draft to retrieve.
-          in: path
-          name: id
-          required: true
-          type: string
         - default: full
           description: The format to return the draft in.
           enum:
@@ -309,6 +298,17 @@ paths:
             - raw
           in: query
           name: format
+          type: string
+        - description: The ID of the draft to retrieve.
+          in: path
+          name: id
+          required: true
+          type: string
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':
@@ -348,21 +348,21 @@ paths:
       description: Replaces a draft's content.
       operationId: gmail.users.drafts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Draft'
+        - description: The ID of the draft to update.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - description: The ID of the draft to update.
-          in: path
-          name: id
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Draft'
       responses:
         '200':
           description: Successful response
@@ -388,12 +388,6 @@ paths:
       description: Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing historyId).
       operationId: gmail.users.history.list
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - collectionFormat: multi
           description: History types to be returned by the function
           in: query
@@ -422,6 +416,12 @@ paths:
         - description: 'Required. Returns history records after the specified startHistoryId. The supplied startHistoryId should be obtained from the historyId of a message, thread, or previous list response. History IDs increase chronologically but are not contiguous with random gaps in between valid IDs. Supplying an invalid or out of date startHistoryId typically returns an HTTP 404 error code. A historyId is typically valid for at least a week, but in some rare circumstances may be valid for only a few hours. If you receive an HTTP 404 error response, your application should perform a full sync. If you receive no nextPageToken in the response, there are no updates to retrieve and you can store the returned historyId for a future request.'
           in: query
           name: startHistoryId
+          type: string
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':
@@ -506,16 +506,16 @@ paths:
       description: Creates a new label.
       operationId: gmail.users.labels.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Label'
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Label'
       responses:
         '200':
           description: Successful response
@@ -541,15 +541,15 @@ paths:
       description: Immediately and permanently deletes the specified label and removes it from any messages and threads that it is applied to.
       operationId: gmail.users.labels.delete
       parameters:
+        - description: The ID of the label to delete.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the label to delete.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -574,15 +574,15 @@ paths:
       description: Gets the specified label.
       operationId: gmail.users.labels.get
       parameters:
+        - description: The ID of the label to retrieve.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the label to retrieve.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -625,21 +625,21 @@ paths:
       description: Updates the specified label. This method supports patch semantics.
       operationId: gmail.users.labels.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Label'
+        - description: The ID of the label to update.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - description: The ID of the label to update.
-          in: path
-          name: id
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Label'
       responses:
         '200':
           description: Successful response
@@ -664,21 +664,21 @@ paths:
       description: Updates the specified label.
       operationId: gmail.users.labels.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Label'
+        - description: The ID of the label to update.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - description: The ID of the label to update.
-          in: path
-          name: id
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Label'
       responses:
         '200':
           description: Successful response
@@ -773,12 +773,10 @@ paths:
       description: 'Directly inserts a message into only this user''s mailbox similar to IMAP APPEND, bypassing most scanning and classification. Does not send a message.'
       operationId: gmail.users.messages.insert
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Message'
         - default: false
           description: Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
           in: query
@@ -792,10 +790,12 @@ paths:
           in: query
           name: internalDateSource
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Message'
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -829,16 +829,16 @@ paths:
       description: Deletes many messages by message ID. Provides no guarantees that messages were not already deleted or even existed at all.
       operationId: gmail.users.messages.batchDelete
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchDeleteMessagesRequest'
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BatchDeleteMessagesRequest'
       responses:
         '200':
           description: Successful response
@@ -862,16 +862,16 @@ paths:
       description: Modifies the labels on the specified messages.
       operationId: gmail.users.messages.batchModify
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchModifyMessagesRequest'
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BatchModifyMessagesRequest'
       responses:
         '200':
           description: Successful response
@@ -901,12 +901,10 @@ paths:
       description: 'Imports a message into only this user''s mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. Does not send a message.'
       operationId: gmail.users.messages.import
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Message'
         - default: false
           description: Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
           in: query
@@ -930,10 +928,12 @@ paths:
           in: query
           name: processForCalendar
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Message'
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -969,16 +969,16 @@ paths:
       description: 'Sends the specified message to the recipients in the To, Cc, and Bcc headers.'
       operationId: gmail.users.messages.send
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Message'
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Message'
       responses:
         '200':
           description: Successful response
@@ -1008,15 +1008,15 @@ paths:
       description: Immediately and permanently deletes the specified message. This operation cannot be undone. Prefer messages.trash instead.
       operationId: gmail.users.messages.delete
       parameters:
+        - description: The ID of the message to delete.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the message to delete.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -1033,17 +1033,6 @@ paths:
       description: Gets the specified message.
       operationId: gmail.users.messages.get
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
-        - description: The ID of the message to retrieve.
-          in: path
-          name: id
-          required: true
-          type: string
         - default: full
           description: The format to return the message in.
           enum:
@@ -1054,6 +1043,11 @@ paths:
           in: query
           name: format
           type: string
+        - description: The ID of the message to retrieve.
+          in: path
+          name: id
+          required: true
+          type: string
         - collectionFormat: multi
           description: 'When given and format is METADATA, only include headers specified.'
           in: query
@@ -1061,6 +1055,12 @@ paths:
             type: string
           name: metadataHeaders
           type: array
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1106,21 +1106,21 @@ paths:
       description: Modifies the labels on the specified message.
       operationId: gmail.users.messages.modify
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ModifyMessageRequest'
+        - description: The ID of the message to modify.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - description: The ID of the message to modify.
-          in: path
-          name: id
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ModifyMessageRequest'
       responses:
         '200':
           description: Successful response
@@ -1150,15 +1150,15 @@ paths:
       description: Moves the specified message to the trash.
       operationId: gmail.users.messages.trash
       parameters:
+        - description: The ID of the message to Trash.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the message to Trash.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -1190,15 +1190,15 @@ paths:
       description: Removes the specified message from the trash.
       operationId: gmail.users.messages.untrash
       parameters:
+        - description: The ID of the message to remove from Trash.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the message to remove from Trash.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -1222,10 +1222,9 @@ paths:
       description: Gets the specified message attachment.
       operationId: gmail.users.messages.attachments.get
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
+        - description: The ID of the attachment.
           in: path
-          name: userId
+          name: id
           required: true
           type: string
         - description: The ID of the message containing the attachment.
@@ -1233,9 +1232,10 @@ paths:
           name: messageId
           required: true
           type: string
-        - description: The ID of the attachment.
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
-          name: id
+          name: userId
           required: true
           type: string
       responses:
@@ -1363,16 +1363,16 @@ paths:
         This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.updateAutoForwarding
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AutoForwarding'
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AutoForwarding'
       responses:
         '200':
           description: Successful response
@@ -1432,16 +1432,16 @@ paths:
       description: Creates a filter.
       operationId: gmail.users.settings.filters.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Filter'
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Filter'
       responses:
         '200':
           description: Successful response
@@ -1459,15 +1459,15 @@ paths:
       description: Deletes a filter.
       operationId: gmail.users.settings.filters.delete
       parameters:
+        - description: The ID of the filter to be deleted.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the filter to be deleted.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -1484,15 +1484,15 @@ paths:
       description: Gets a filter.
       operationId: gmail.users.settings.filters.get
       parameters:
+        - description: The ID of the filter to be fetched.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the filter to be fetched.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -1577,16 +1577,16 @@ paths:
         This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.forwardingAddresses.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ForwardingAddress'
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ForwardingAddress'
       responses:
         '200':
           description: Successful response
@@ -1607,15 +1607,15 @@ paths:
         This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.forwardingAddresses.delete
       parameters:
+        - description: The forwarding address to be deleted.
+          in: path
+          name: forwardingEmail
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The forwarding address to be deleted.
-          in: path
-          name: forwardingEmail
           required: true
           type: string
       responses:
@@ -1632,15 +1632,15 @@ paths:
       description: Gets the specified forwarding address.
       operationId: gmail.users.settings.forwardingAddresses.get
       parameters:
+        - description: The forwarding address to be retrieved.
+          in: path
+          name: forwardingEmail
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The forwarding address to be retrieved.
-          in: path
-          name: forwardingEmail
           required: true
           type: string
       responses:
@@ -1722,16 +1722,16 @@ paths:
       description: Updates IMAP settings.
       operationId: gmail.users.settings.updateImap
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ImapSettings'
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ImapSettings'
       responses:
         '200':
           description: Successful response
@@ -1791,16 +1791,16 @@ paths:
       description: Updates POP settings.
       operationId: gmail.users.settings.updatePop
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PopSettings'
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PopSettings'
       responses:
         '200':
           description: Successful response
@@ -1863,16 +1863,16 @@ paths:
         This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendAs'
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SendAs'
       responses:
         '200':
           description: Successful response
@@ -1893,15 +1893,15 @@ paths:
         This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.delete
       parameters:
+        - description: The send-as alias to be deleted.
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The send-as alias to be deleted.
-          in: path
-          name: sendAsEmail
           required: true
           type: string
       responses:
@@ -1918,15 +1918,15 @@ paths:
       description: Gets the specified send-as alias. Fails with an HTTP 404 error if the specified address is not a member of the collection.
       operationId: gmail.users.settings.sendAs.get
       parameters:
+        - description: The send-as alias to be retrieved.
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The send-as alias to be retrieved.
-          in: path
-          name: sendAsEmail
           required: true
           type: string
       responses:
@@ -1968,21 +1968,21 @@ paths:
         Addresses other than the primary address for the account can only be updated by service account clients that have been delegated domain-wide authority. This method supports patch semantics.
       operationId: gmail.users.settings.sendAs.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendAs'
+        - description: The send-as alias to be updated.
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - description: The send-as alias to be updated.
-          in: path
-          name: sendAsEmail
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SendAs'
       responses:
         '200':
           description: Successful response
@@ -2006,21 +2006,21 @@ paths:
         Addresses other than the primary address for the account can only be updated by service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendAs'
+        - description: The send-as alias to be updated.
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - description: The send-as alias to be updated.
-          in: path
-          name: sendAsEmail
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SendAs'
       responses:
         '200':
           description: Successful response
@@ -2042,15 +2042,15 @@ paths:
       description: Lists S/MIME configs for the specified send-as alias.
       operationId: gmail.users.settings.sendAs.smimeInfo.list
       parameters:
+        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
-          in: path
-          name: sendAsEmail
           required: true
           type: string
       responses:
@@ -2093,21 +2093,21 @@ paths:
       description: Insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key.
       operationId: gmail.users.settings.sendAs.smimeInfo.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SmimeInfo'
+        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
-          in: path
-          name: sendAsEmail
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SmimeInfo'
       responses:
         '200':
           description: Successful response
@@ -2129,10 +2129,9 @@ paths:
       description: Deletes the specified S/MIME config for the specified send-as alias.
       operationId: gmail.users.settings.sendAs.smimeInfo.delete
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
+        - description: The immutable ID for the SmimeInfo.
           in: path
-          name: userId
+          name: id
           required: true
           type: string
         - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
@@ -2140,9 +2139,10 @@ paths:
           name: sendAsEmail
           required: true
           type: string
-        - description: The immutable ID for the SmimeInfo.
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
-          name: id
+          name: userId
           required: true
           type: string
       responses:
@@ -2163,10 +2163,9 @@ paths:
       description: Gets the specified S/MIME config for the specified send-as alias.
       operationId: gmail.users.settings.sendAs.smimeInfo.get
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
+        - description: The immutable ID for the SmimeInfo.
           in: path
-          name: userId
+          name: id
           required: true
           type: string
         - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
@@ -2174,9 +2173,10 @@ paths:
           name: sendAsEmail
           required: true
           type: string
-        - description: The immutable ID for the SmimeInfo.
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
-          name: id
+          name: userId
           required: true
           type: string
       responses:
@@ -2228,10 +2228,9 @@ paths:
       description: Sets the default S/MIME config for the specified send-as alias.
       operationId: gmail.users.settings.sendAs.smimeInfo.setDefault
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
+        - description: The immutable ID for the SmimeInfo.
           in: path
-          name: userId
+          name: id
           required: true
           type: string
         - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
@@ -2239,9 +2238,10 @@ paths:
           name: sendAsEmail
           required: true
           type: string
-        - description: The immutable ID for the SmimeInfo.
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
-          name: id
+          name: userId
           required: true
           type: string
       responses:
@@ -2274,15 +2274,15 @@ paths:
         This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.verify
       parameters:
+        - description: The send-as alias to be verified.
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The send-as alias to be verified.
-          in: path
-          name: sendAsEmail
           required: true
           type: string
       responses:
@@ -2342,16 +2342,16 @@ paths:
       description: Updates vacation responder settings.
       operationId: gmail.users.settings.updateVacation
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/VacationSettings'
         - default: me
           description: User's email address. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/VacationSettings'
       responses:
         '200':
           description: Successful response
@@ -2410,12 +2410,6 @@ paths:
       description: Lists the threads in the user's mailbox.
       operationId: gmail.users.threads.list
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - default: false
           description: Include threads from SPAM and TRASH in the results.
           in: query
@@ -2440,6 +2434,12 @@ paths:
         - description: 'Only return threads matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid: is:unread". Parameter cannot be used when accessing the api using the gmail.metadata scope.'
           in: query
           name: q
+          type: string
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':
@@ -2478,15 +2478,15 @@ paths:
       description: Immediately and permanently deletes the specified thread. This operation cannot be undone. Prefer threads.trash instead.
       operationId: gmail.users.threads.delete
       parameters:
+        - description: ID of the Thread to delete.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: ID of the Thread to delete.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -2503,17 +2503,6 @@ paths:
       description: Gets the specified thread.
       operationId: gmail.users.threads.get
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
-        - description: The ID of the thread to retrieve.
-          in: path
-          name: id
-          required: true
-          type: string
         - default: full
           description: The format to return the messages in.
           enum:
@@ -2523,6 +2512,11 @@ paths:
           in: query
           name: format
           type: string
+        - description: The ID of the thread to retrieve.
+          in: path
+          name: id
+          required: true
+          type: string
         - collectionFormat: multi
           description: 'When given and format is METADATA, only include headers specified.'
           in: query
@@ -2530,6 +2524,12 @@ paths:
             type: string
           name: metadataHeaders
           type: array
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2575,21 +2575,21 @@ paths:
       description: Modifies the labels applied to the thread. This applies to all messages in the thread.
       operationId: gmail.users.threads.modify
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ModifyThreadRequest'
+        - description: The ID of the thread to modify.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - description: The ID of the thread to modify.
-          in: path
-          name: id
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ModifyThreadRequest'
       responses:
         '200':
           description: Successful response
@@ -2619,15 +2619,15 @@ paths:
       description: Moves the specified thread to the trash.
       operationId: gmail.users.threads.trash
       parameters:
+        - description: The ID of the thread to Trash.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the thread to Trash.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -2659,15 +2659,15 @@ paths:
       description: Removes the specified thread from the trash.
       operationId: gmail.users.threads.untrash
       parameters:
+        - description: The ID of the thread to remove from Trash.
+          in: path
+          name: id
+          required: true
+          type: string
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the thread to remove from Trash.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -2699,16 +2699,16 @@ paths:
       description: Set up or update a push notification watch on the given user mailbox.
       operationId: gmail.users.watch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/WatchRequest'
         - default: me
           description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/WatchRequest'
       responses:
         '200':
           description: Successful response
@@ -2957,6 +2957,9 @@ definitions:
   Label:
     description: Labels are used to categorize messages and threads within the user's mailbox.
     properties:
+      color:
+        $ref: '#/definitions/LabelColor'
+        description: The color to assign to the label. Color is only available for labels that have their type set to user.
       id:
         description: The immutable ID of the label.
         type: string
@@ -2997,6 +3000,19 @@ definitions:
         enum:
           - system
           - user
+        type: string
+    type: object
+  LabelColor:
+    properties:
+      backgroundColor:
+        description: |-
+          The background color represented as hex string #RRGGBB (ex #000000). This field is required in order to set the color of a label. Only the following predefined set of color values are allowed:
+          #000000, #434343, #666666, #999999, #cccccc, #efefef, #f3f3f3, #ffffff, #fb4c2f, #ffad47, #fad165, #16a766, #43d692, #4a86e8, #a479e2, #f691b3, #f6c5be, #ffe6c7, #fef1d1, #b9e4d0, #c6f3de, #c9daf8, #e4d7f5, #fcdee8, #efa093, #ffd6a2, #fce8b3, #89d3b2, #a0eac9, #a4c2f4, #d0bcf1, #fbc8d9, #e66550, #ffbc6b, #fcda83, #44b984, #68dfa9, #6d9eeb, #b694e8, #f7a7c0, #cc3a21, #eaa041, #f2c960, #149e60, #3dc789, #3c78d8, #8e63ce, #e07798, #ac2b16, #cf8933, #d5ae49, #0b804b, #2a9c68, #285bac, #653e9b, #b65775, #822111, #a46a21, #aa8831, #076239, #1a764d, #1c4587, #41236d, #83334c
+        type: string
+      textColor:
+        description: |-
+          The text color of the label, represented as hex string. This field is required in order to set the color of a label. Only the following predefined set of color values are allowed:
+          #000000, #434343, #666666, #999999, #cccccc, #efefef, #f3f3f3, #ffffff, #fb4c2f, #ffad47, #fad165, #16a766, #43d692, #4a86e8, #a479e2, #f691b3, #f6c5be, #ffe6c7, #fef1d1, #b9e4d0, #c6f3de, #c9daf8, #e4d7f5, #fcdee8, #efa093, #ffd6a2, #fce8b3, #89d3b2, #a0eac9, #a4c2f4, #d0bcf1, #fbc8d9, #e66550, #ffbc6b, #fcda83, #44b984, #68dfa9, #6d9eeb, #b694e8, #f7a7c0, #cc3a21, #eaa041, #f2c960, #149e60, #3dc789, #3c78d8, #8e63ce, #e07798, #ac2b16, #cf8933, #d5ae49, #0b804b, #2a9c68, #285bac, #653e9b, #b65775, #822111, #a46a21, #aa8831, #076239, #1a764d, #1c4587, #41236d, #83334c
         type: string
     type: object
   ListDraftsResponse:

@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - developer_tools
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/siteVerification/v1/rest'
       version: v1
@@ -152,15 +154,15 @@ paths:
       description: Attempt verification of a website or domain.
       operationId: siteVerification.webResource.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SiteVerificationWebResourceResource'
         - description: The method to use for verifying a site or domain.
           in: query
           name: verificationMethod
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SiteVerificationWebResourceResource'
       responses:
         '200':
           description: Successful response
@@ -230,15 +232,15 @@ paths:
       description: Modify the list of owners for your website or domain. This method supports patch semantics.
       operationId: siteVerification.webResource.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SiteVerificationWebResourceResource'
         - description: The id of a verified site or domain.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SiteVerificationWebResourceResource'
       responses:
         '200':
           description: Successful response
@@ -255,15 +257,15 @@ paths:
       description: Modify the list of owners for your website or domain.
       operationId: siteVerification.webResource.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SiteVerificationWebResourceResource'
         - description: The id of a verified site or domain.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SiteVerificationWebResourceResource'
       responses:
         '200':
           description: Successful response

@@ -1,0 +1,340 @@
+swagger: '2.0'
+info:
+  version: '2017-09-30'
+  x-release: v4
+  title: Amazon Kinesis Video Streams Archived Media
+  description: <p/>
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: kinesis-video-archived-media
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/kinesis-video-archived-media-2017-09-30.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/kinesisvideo/'
+host: kinesisvideo.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /getMediaForFragmentList:
+    post:
+      operationId: GetMediaForFragmentList
+      description: '<p>Gets media for a list of fragments (specified by fragment number) from the archived data in a Kinesis video stream.</p> <note> <p>This operation is only available for the AWS SDK for Java. It is not supported in AWS SDKs for other languages.</p> </note> <p>The following limits apply when using the <code>GetMediaForFragmentList</code> API:</p> <ul> <li> <p>A client can call <code>GetMediaForFragmentList</code> up to five times per second per stream. </p> </li> <li> <p>Kinesis Video Streams sends media data at a rate of up to 25 megabytes per second (or 200 megabits per second) during a <code>GetMediaForFragmentList</code> session. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMediaForFragmentListOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '482':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '483':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMediaForFragmentListInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listFragments:
+    post:
+      operationId: ListFragments
+      description: Returns a list of <a>Fragment</a> objects from the specified stream and start location within the archived data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFragmentsOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '482':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '483':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFragmentsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  ClientLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Kinesis Video Streams has throttled the request because you have exceeded the limit of allowed client calls. Try making the call later.
+  ContentType:
+    type: string
+    pattern: '^[a-zA-Z0-9_\.\-]+$'
+    minLength: 1
+    maxLength: 128
+  ErrorMessage:
+    type: string
+  Fragment:
+    type: object
+    properties:
+      FragmentNumber:
+        $ref: '#/definitions/String'
+        description: The index value of the fragment.
+      FragmentSizeInBytes:
+        $ref: '#/definitions/Long'
+        description: 'The total fragment size, including information about the fragment and contained media data.'
+      ProducerTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The time stamp from the producer corresponding to the fragment.
+      ServerTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The time stamp from the AWS server corresponding to the fragment.
+      FragmentLengthInMilliseconds:
+        $ref: '#/definitions/Long'
+        description: The playback duration or other time value associated with the fragment.
+    description: Represents a segment of video or other time-delimited data.
+  FragmentList:
+    type: array
+    items:
+      $ref: '#/definitions/Fragment'
+  FragmentNumberList:
+    type: array
+    items:
+      $ref: '#/definitions/FragmentNumberString'
+  FragmentNumberString:
+    type: string
+    pattern: '^[0-9]+$'
+    minLength: 1
+    maxLength: 128
+  FragmentSelector:
+    type: object
+    required:
+      - FragmentSelectorType
+      - TimestampRange
+    properties:
+      FragmentSelectorType:
+        $ref: '#/definitions/FragmentSelectorType'
+        description: The origin of the time stamps to use (Server or Producer).
+      TimestampRange:
+        $ref: '#/definitions/TimestampRange'
+        description: The range of time stamps to return.
+    description: Describes the time stamp range and time stamp origin of a range of fragments.
+  FragmentSelectorType:
+    type: string
+    enum:
+      - PRODUCER_TIMESTAMP
+      - SERVER_TIMESTAMP
+  GetMediaForFragmentListInput:
+    type: object
+    required:
+      - StreamName
+      - Fragments
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream from which to retrieve fragment media.
+      Fragments:
+        $ref: '#/definitions/FragmentNumberList'
+        description: A list of the numbers of fragments for which to retrieve media. You retrieve these values with <a>ListFragments</a>.
+  GetMediaForFragmentListOutput:
+    type: object
+    properties:
+      Payload:
+        $ref: '#/definitions/Payload'
+        description: '<p>The payload that Kinesis Video Streams returns is a sequence of chunks from the specified stream. For information about the chunks, see <a href="docs.aws.amazon.com/acuity/latest/dg/API_dataplane_PutMedia.html">PutMedia</a>. The chunks that Kinesis Video Streams returns in the <code>GetMediaForFragmentList</code> call also include the following additional Matroska (MKV) tags: </p> <ul> <li> <p>AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.</p> </li> <li> <p>AWS_KINESISVIDEO_SERVER_SIDE_TIMESTAMP - Server-side time stamp of the fragment.</p> </li> <li> <p>AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side time stamp of the fragment.</p> </li> </ul> <p>The following tags will be included if an exception occurs:</p> <ul> <li> <p>AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment that threw the exception</p> </li> <li> <p>AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the exception</p> </li> <li> <p>AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the exception</p> </li> </ul>'
+  InvalidArgumentException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'A specified parameter exceeds its restrictions, is not supported, or can''t be used.'
+  ListFragmentsInput:
+    type: object
+    required:
+      - StreamName
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream from which to retrieve a fragment list.
+      MaxResults:
+        $ref: '#/definitions/PageLimit'
+        description: 'The total number of fragments to return. If the total number of fragments available is more than the value specified in <code>max-results</code>, then a <a>ListFragmentsOutput$NextToken</a> is provided in the output that you can use to resume pagination.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: A token to specify where to start paginating. This is the <a>ListFragmentsOutput$NextToken</a> from a previously truncated response.
+      FragmentSelector:
+        $ref: '#/definitions/FragmentSelector'
+        description: Describes the time stamp range and time stamp origin for the range of fragments to return.
+  ListFragmentsOutput:
+    type: object
+    properties:
+      Fragments:
+        $ref: '#/definitions/FragmentList'
+        description: A list of fragment numbers that correspond to the time stamp range provided.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'If the returned list is truncated, the operation returns this token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+  Long:
+    type: integer
+  NotAuthorizedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Status Code: 403, The caller is not authorized to perform an operation on the given stream, or the token has expired.'
+  PageLimit:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  Payload:
+    type: string
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Kinesis Video Streams can't find the stream that you specified.
+  StreamName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 256
+  String:
+    type: string
+    minLength: 1
+  Timestamp:
+    type: string
+    format: date-time
+  TimestampRange:
+    type: object
+    required:
+      - StartTimestamp
+      - EndTimestamp
+    properties:
+      StartTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The starting time stamp in the range of time stamps for which to return fragments.
+      EndTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The ending time stamp in the range of time stamps for which to return fragments.
+    description: The range of time stamps for which to return fragments.

@@ -1,0 +1,2602 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: 'Provides create, read, update and delete functionality for Azure SQL Database resources including recommendations and operations.'
+  title: Azure SQL Database
+  version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/sql.core.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: sql-sql.core
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for the request.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  DatabaseExpandParameter:
+    description: 'A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.'
+    in: query
+    name: $expand
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupParameter:
+    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ServerNameParameter:
+    description: The name of the server.
+    in: path
+    name: serverName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The subscription ID that identifies an Azure subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+  TransparentDataEncryptionNameParameter:
+    description: The name of the transparent data encryption configuration.
+    enum:
+      - current
+    in: path
+    name: transparentDataEncryptionName
+    required: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: TransparentDataEncryptionName
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/serviceTierAdvisors':
+    get:
+      description: Returns service tier advisors for specified database.
+      operationId: ServiceTierAdvisors_ListByDatabase
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of database.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceTierAdvisorListResult'
+      tags:
+        - ServiceTierAdvisors
+      x-ms-examples:
+        Get a list of a service tier advisors:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: sqlcrudtest-9187
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              value:
+                - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187/serviceTierAdvisors/Current
+                  name: Current
+                  properties:
+                    activeTimeRatio: 0
+                    avgDtu: 0
+                    confidence: 1
+                    currentServiceLevelObjective: S0
+                    currentServiceLevelObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                    maxDtu: 0
+                    maxSizeInGB: 0.0234375
+                    minDtu: 0
+                    observationPeriodEnd: '2017-07-26T13:00:00Z'
+                    observationPeriodStart: '2017-07-12T12:00:00Z'
+                    serviceLevelObjectiveUsageMetrics:
+                      - inRangeTimeRatio: 1
+                        serviceLevelObjective: Basic
+                        serviceLevelObjectiveId: dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
+                  type: Microsoft.Sql/servers/databases/serviceTierAdvisors
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/serviceTierAdvisors/{serviceTierAdvisorName}':
+    get:
+      description: Gets a service tier advisor.
+      operationId: ServiceTierAdvisors_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of database.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: The name of service tier advisor.
+          in: path
+          name: serviceTierAdvisorName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceTierAdvisor'
+      tags:
+        - ServiceTierAdvisors
+      x-ms-examples:
+        Get a service tier advisor:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: sqlcrudtest-9187
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            serviceTierAdvisorName: Current
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187/serviceTierAdvisors/Current
+                name: Current
+                properties:
+                  activeTimeRatio: 0
+                  avgDtu: 0
+                  confidence: 1
+                  currentServiceLevelObjective: S0
+                  currentServiceLevelObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  maxDtu: 0
+                  maxSizeInGB: 0.0234375
+                  minDtu: 0
+                  observationPeriodEnd: '2017-07-26T13:00:00Z'
+                  observationPeriodStart: '2017-07-12T12:00:00Z'
+                  serviceLevelObjectiveUsageMetrics:
+                    - inRangeTimeRatio: 1
+                      serviceLevelObjective: Basic
+                      serviceLevelObjectiveId: dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
+                type: Microsoft.Sql/servers/databases/serviceTierAdvisors
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{transparentDataEncryptionName}':
+    get:
+      description: Gets a database's transparent data encryption configuration.
+      operationId: TransparentDataEncryptions_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the database for which the transparent data encryption applies.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - $ref: '#/parameters/TransparentDataEncryptionNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransparentDataEncryption'
+      tags:
+        - TransparentDataEncryption
+      x-ms-examples:
+        Get a database's transparent data encryption configuration:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: sqlcrudtest-9187
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+            transparentDataEncryptionName: current
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187/transparentDataEncryption/current
+                location: North Europe
+                name: current
+                properties:
+                  status: Enabled
+                type: Microsoft.Sql/servers/databases/transparentDataEncryption
+    put:
+      description: Creates or updates a database's transparent data encryption configuration.
+      operationId: TransparentDataEncryptions_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the database for which setting the transparent data encryption applies.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - $ref: '#/parameters/TransparentDataEncryptionNameParameter'
+        - description: The required parameters for creating or updating transparent data encryption.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/TransparentDataEncryption'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransparentDataEncryption'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/TransparentDataEncryption'
+      tags:
+        - TransparentDataEncryption
+      x-ms-examples:
+        Create or update a database's transparent data encryption configuration:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: sqlcrudtest-9187
+            parameters:
+              properties:
+                status: Enabled
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+            transparentDataEncryptionName: current
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187/transparentDataEncryption/current
+                location: North Europe
+                name: current
+                properties:
+                  status: Enabled
+                type: Microsoft.Sql/servers/databases/transparentDataEncryption
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187/transparentDataEncryption/current
+                location: North Europe
+                name: current
+                properties:
+                  status: Enabled
+                type: Microsoft.Sql/servers/databases/transparentDataEncryption
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{transparentDataEncryptionName}/operationResults':
+    get:
+      description: Returns a database's transparent data encryption operation result.
+      operationId: TransparentDataEncryptionActivities_ListByConfiguration
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the database for which the transparent data encryption applies.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - $ref: '#/parameters/TransparentDataEncryptionNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransparentDataEncryptionActivityListResult'
+      tags:
+        - TransparentDataEncryption
+      x-ms-examples:
+        List a database's transparent data encryption activities:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: sqlcrudtest-9187
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+            transparentDataEncryptionName: current
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187/transparentDataEncryption/current/operationResults/current
+                    location: West US
+                    name: current
+                    properties:
+                      percentComplete: 100
+                      status: Encrypting
+                    type: Microsoft.Sql/servers/databases/transparentDataEncryption/operationResults
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolActivity':
+    get:
+      description: Returns elastic pool activities.
+      operationId: ElasticPoolActivities_ListByElasticPool
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the elastic pool for which to get the current activity.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPoolActivityListResult'
+      tags:
+        - ElasticPools
+      x-ms-examples:
+        List Elastic pool activity:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: '8749'
+            resourceGroupName: sqlcrudtest-4291
+            serverName: sqlcrudtest-6574
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4291/providers/Microsoft.Sql/servers/sqlcrudtest-6574/elasticPools/8749/elasticPoolActivity/851f1672-f7f0-46f6-a262-ee9b51e18e97
+                    location: Japan East
+                    name: 851f1672-f7f0-46f6-a262-ee9b51e18e97
+                    properties:
+                      elasticPoolName: '8749'
+                      endTime: '2017-02-10T02:03:23.263Z'
+                      operation: CREATE
+                      operationId: 851f1672-f7f0-46f6-a262-ee9b51e18e97
+                      percentComplete: 100
+                      requestedDatabaseDtuCap: 5
+                      requestedDatabaseDtuGuarantee: 0
+                      requestedDtuGuarantee: 100
+                      requestedStorageLimitInGB: 9
+                      requestedStorageLimitInMB: 10000
+                      serverName: sqlcrudtest-6574
+                      startTime: '2017-02-10T02:03:06.16Z'
+                      state: COMPLETED
+                    type: Microsoft.Sql/servers/elasticPools/elasticPoolActivity
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolDatabaseActivity':
+    get:
+      description: Returns activity on databases inside of an elastic pool.
+      operationId: ElasticPoolDatabaseActivities_ListByElasticPool
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the elastic pool.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPoolDatabaseActivityListResult'
+      tags:
+        - ElasticPools
+      x-ms-examples:
+        List elastic pool database activity:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: '7537'
+            resourceGroupName: sqlcrudtest-4673
+            serverName: sqlcrudtest-603
+            subscriptionId: 9d4e2ad0-e20b-4464-9219-353bded52513
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/9d4e2ad0-e20b-4464-9219-353bded52513/resourceGroups/sqlcrudtest-4673/providers/Microsoft.Sql/servers/sqlcrudtest-603/elasticPools/7537/elasticPoolDatabaseActivity/3a3272b3-f1fe-423c-9feb-7b843157eda5
+                    location: Japan East
+                    name: 3a3272b3-f1fe-423c-9feb-7b843157eda5
+                    properties:
+                      currentElasticPoolName: '7537'
+                      currentServiceObjective: ElasticPool
+                      databaseName: '2396'
+                      endTime: '2016-10-23T03:08:02.95'
+                      operation: UPDATE
+                      operationId: 3a3272b3-f1fe-423c-9feb-7b843157eda5
+                      percentComplete: 100
+                      serverName: sqlcrudtest-603
+                      startTime: '2016-10-23T03:07:12.577'
+                      state: COMPLETED
+                    type: Microsoft.Sql/servers/elasticPools/elasticPoolDatabaseActivity
+                  - id: /subscriptions/9d4e2ad0-e20b-4464-9219-353bded52513/resourceGroups/sqlcrudtest-4673/providers/Microsoft.Sql/servers/sqlcrudtest-603/elasticPools/7537/elasticPoolDatabaseActivity/95108a78-384e-48d3-b4de-7bf23b93a26d
+                    location: Japan East
+                    name: 95108a78-384e-48d3-b4de-7bf23b93a26d
+                    properties:
+                      currentElasticPoolName: '7537'
+                      currentServiceObjective: ElasticPool
+                      databaseName: '2396'
+                      endTime: '2016-10-23T03:06:49.197'
+                      operation: CREATE
+                      operationId: 95108a78-384e-48d3-b4de-7bf23b93a26d
+                      percentComplete: 100
+                      serverName: sqlcrudtest-603
+                      startTime: '2016-10-23T03:06:11.19'
+                      state: COMPLETED
+                    type: Microsoft.Sql/servers/elasticPools/elasticPoolDatabaseActivity
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools':
+    get:
+      description: Returns recommended elastic pools.
+      operationId: RecommendedElasticPools_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendedElasticPoolListResult'
+      tags:
+        - RecommendedElasticPools
+      x-ms-examples:
+        List recommended elastic pools:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/recommendedElasticPools/ElasticPool1
+                    name: ElasticPool1
+                    properties:
+                      databaseDtuMax: 200.5
+                      databaseDtuMin: 100.6
+                      databaseEdition: Standard
+                      databases: []
+                      dtu: 1000
+                      maxObservedDtu: 900.2
+                      maxObservedStorageMB: 350
+                      metrics:
+                        - dateTime: '2015-04-01T00:00:00Z'
+                          dtu: 100.5
+                          sizeGB: 15.4
+                        - dateTime: '2015-04-02T00:00:00Z'
+                          dtu: 135
+                          sizeGB: 12.754
+                        - dateTime: '2015-04-03T00:00:00Z'
+                          dtu: 135
+                          sizeGB: 12.754
+                      observationPeriodEnd: '2014-11-15T00:00:00Z'
+                      observationPeriodStart: '2014-11-01T00:00:00Z'
+                      storageMB: 1000.3
+                    type: Microsoft.Sql/servers/recommendedElasticPools
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/recommendedElasticPools/ElasticPool2
+                    name: ElasticPool2
+                    properties:
+                      databaseDtuMax: 200
+                      databaseDtuMin: 100
+                      databaseEdition: Standard
+                      databases:
+                        - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/master
+                          location: Southeast Asia
+                          name: master
+                          properties:
+                            collation: SQL_Latin1_General_CP1_CI_AS
+                            creationDate: '2015-04-17T08:36:48.237Z'
+                            currentServiceObjectiveId: 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+                            databaseId: 28acaef5-d228-4660-bb67-546ec8482496
+                            defaultSecondaryLocation: Japan East
+                            edition: System
+                            kind: 'v12.0,system'
+                            maxSizeBytes: '5368709120'
+                            requestedServiceObjectiveId: 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+                            serviceLevelObjective: System2
+                            status: Online
+                          type: Microsoft.Sql/servers/databases
+                      dtu: 1000
+                      maxObservedDtu: 450
+                      maxObservedStorageMB: 900
+                      observationPeriodEnd: '2014-11-15T00:00:00Z'
+                      observationPeriodStart: '2014-11-01T00:00:00Z'
+                      storageMB: 1000
+                    type: Microsoft.Sql/servers/recommendedElasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}':
+    get:
+      description: Gets a recommented elastic pool.
+      operationId: RecommendedElasticPools_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the recommended elastic pool to be retrieved.
+          in: path
+          name: recommendedElasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendedElasticPool'
+      tags:
+        - RecommendedElasticPools
+      x-ms-examples:
+        Get a recommended elastic pool:
+          parameters:
+            api-version: '2014-04-01'
+            recommendedElasticPoolName: ElasticPool1
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/recommendedElasticPools/ElasticPool1
+                name: ElasticPool1
+                properties:
+                  databaseDtuMax: 200.5
+                  databaseDtuMin: 100.6
+                  databaseEdition: Standard
+                  databases: []
+                  dtu: 1000
+                  maxObservedDtu: 900.2
+                  maxObservedStorageMB: 350
+                  metrics:
+                    - dateTime: '2015-04-01T00:00:00Z'
+                      dtu: 100.5
+                      sizeGB: 15.4
+                    - dateTime: '2015-04-02T00:00:00Z'
+                      dtu: 135
+                      sizeGB: 12.754
+                    - dateTime: '2015-04-03T00:00:00Z'
+                      dtu: 135
+                      sizeGB: 12.754
+                  observationPeriodEnd: '2014-11-15T00:00:00Z'
+                  observationPeriodStart: '2014-11-01T00:00:00Z'
+                  storageMB: 1000.3
+                type: Microsoft.Sql/servers/recommendedElasticPools
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/metrics':
+    get:
+      description: Returns recommented elastic pool metrics.
+      operationId: RecommendedElasticPools_ListMetrics
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the recommended elastic pool to be retrieved.
+          in: path
+          name: recommendedElasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendedElasticPoolListMetricsResult'
+      tags:
+        - RecommendedElasticPools
+      x-ms-examples:
+        Get recommended elastic pool metrics:
+          parameters:
+            api-version: '2014-04-01'
+            recommendedElasticPoolName: sqlcrudtest-2080_pool1
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - dateTime: '2017-07-24T12:00:00Z'
+                    dtu: 0.01758824557626567
+                    sizeGB: 0.921875
+                  - dateTime: '2017-07-25T12:00:00Z'
+                    dtu: 0.018937532104510685
+                    sizeGB: 0.921875
+      x-ms-pageable: {}
+definitions:
+  ElasticPoolActivity:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents the activity on an elastic pool.
+    properties:
+      location:
+        description: The geo-location where the resource lives
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      properties:
+        $ref: '#/definitions/ElasticPoolActivityProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  ElasticPoolActivityListResult:
+    description: Represents the response to a list elastic pool activity request.
+    properties:
+      value:
+        description: The list of elastic pool activities.
+        items:
+          $ref: '#/definitions/ElasticPoolActivity'
+        type: array
+    required:
+      - value
+  ElasticPoolActivityProperties:
+    description: Represents the properties of an elastic pool.
+    properties:
+      elasticPoolName:
+        description: The name of the elastic pool.
+        readOnly: true
+        type: string
+      endTime:
+        description: The time the operation finished (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code if available.
+        format: int32
+        readOnly: true
+        type: integer
+      errorMessage:
+        description: The error message if available.
+        readOnly: true
+        type: string
+      errorSeverity:
+        description: The error severity if available.
+        format: int32
+        readOnly: true
+        type: integer
+      operation:
+        description: The operation name.
+        readOnly: true
+        type: string
+      operationId:
+        description: The unique operation ID.
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      percentComplete:
+        description: The percentage complete if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDatabaseDtuCap:
+        description: The requested per database DTU cap.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDatabaseDtuGuarantee:
+        description: The requested per database DTU guarantee.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDatabaseDtuMax:
+        description: The requested max DTU per database if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDatabaseDtuMin:
+        description: The requested min DTU per database if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDtu:
+        description: The requested DTU for the pool if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDtuGuarantee:
+        description: The requested DTU guarantee.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedElasticPoolName:
+        description: The requested name for the elastic pool if available.
+        readOnly: true
+        type: string
+      requestedStorageLimitInGB:
+        description: The requested storage limit for the pool in GB if available.
+        format: int64
+        readOnly: true
+        type: integer
+      requestedStorageLimitInMB:
+        description: The requested storage limit in MB.
+        format: int32
+        readOnly: true
+        type: integer
+      serverName:
+        description: The name of the server the elastic pool is in.
+        readOnly: true
+        type: string
+      startTime:
+        description: The time the operation started (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: The current state of the operation.
+        readOnly: true
+        type: string
+  ElasticPoolDatabaseActivity:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents the activity on an elastic pool.
+    properties:
+      location:
+        description: The geo-location where the resource lives
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      properties:
+        $ref: '#/definitions/ElasticPoolDatabaseActivityProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  ElasticPoolDatabaseActivityListResult:
+    description: Represents the response to a list elastic pool database activity request.
+    properties:
+      value:
+        description: The list of elastic pool database activities.
+        items:
+          $ref: '#/definitions/ElasticPoolDatabaseActivity'
+        type: array
+    required:
+      - value
+  ElasticPoolDatabaseActivityProperties:
+    description: Represents the properties of an elastic pool database activity.
+    properties:
+      currentElasticPoolName:
+        description: The name of the current elastic pool the database is in if available.
+        readOnly: true
+        type: string
+      currentServiceObjective:
+        description: The name of the current service objective if available.
+        readOnly: true
+        type: string
+      databaseName:
+        description: The database name.
+        readOnly: true
+        type: string
+      endTime:
+        description: The time the operation finished (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code if available.
+        format: int32
+        readOnly: true
+        type: integer
+      errorMessage:
+        description: The error message if available.
+        readOnly: true
+        type: string
+      errorSeverity:
+        description: The error severity if available.
+        format: int32
+        readOnly: true
+        type: integer
+      operation:
+        description: The operation name.
+        readOnly: true
+        type: string
+      operationId:
+        description: The unique operation ID.
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      percentComplete:
+        description: The percentage complete if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedElasticPoolName:
+        description: The name for the elastic pool the database is moving into if available.
+        readOnly: true
+        type: string
+      requestedServiceObjective:
+        description: The name of the requested service objective if available.
+        readOnly: true
+        type: string
+      serverName:
+        description: The name of the server the elastic pool is in.
+        readOnly: true
+        type: string
+      startTime:
+        description: The time the operation started (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: The current state of the operation.
+        readOnly: true
+        type: string
+  OperationImpact:
+    description: 'The impact of an operation, both in absolute and relative terms.'
+    properties:
+      changeValueAbsolute:
+        description: The absolute impact to dimension.
+        format: double
+        readOnly: true
+        type: number
+      changeValueRelative:
+        description: The relative impact to dimension (null if not applicable)
+        format: double
+        readOnly: true
+        type: number
+      name:
+        description: The name of the impact dimension.
+        readOnly: true
+        type: string
+      unit:
+        description: The unit in which estimated impact to dimension is measured.
+        readOnly: true
+        type: string
+  ProxyResource:
+    allOf:
+      - description: ARM resource.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: ARM proxy resource.
+  RecommendedElasticPool:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a recommented elastic pool.
+    properties:
+      properties:
+        $ref: '#/definitions/RecommendedElasticPoolProperties'
+        description: The properites representing the resource.
+        x-ms-client-flatten: true
+  RecommendedElasticPoolListMetricsResult:
+    description: Represents the response to a list recommended elastic pool metrics request.
+    properties:
+      value:
+        description: The list of recommended elastic pools metrics.
+        items:
+          $ref: '#/definitions/RecommendedElasticPoolMetric'
+        type: array
+    required:
+      - value
+  RecommendedElasticPoolListResult:
+    description: Represents the response to a list recommended elastic pool request.
+    properties:
+      value:
+        description: The list of recommended elastic pools hosted in the server.
+        items:
+          $ref: '#/definitions/RecommendedElasticPool'
+        type: array
+    required:
+      - value
+  RecommendedElasticPoolMetric:
+    description: Represents recommended elastic pool metric.
+    properties:
+      dateTime:
+        description: The time of metric (ISO8601 format).
+        format: date-time
+        type: string
+      dtu:
+        description: 'Gets or sets the DTUs (Database Transaction Units). See https://azure.microsoft.com/documentation/articles/sql-database-what-is-a-dtu/'
+        format: double
+        type: number
+      sizeGB:
+        description: Gets or sets size in gigabytes.
+        format: double
+        type: number
+  RecommendedElasticPoolProperties:
+    description: Represents the properties of a recommented elastic pool.
+    properties:
+      databaseDtuMax:
+        description: The maximum DTU for the database.
+        format: double
+        type: number
+      databaseDtuMin:
+        description: The minimum DTU for the database.
+        format: double
+        type: number
+      databaseEdition:
+        description: The edition of the recommended elastic pool. The ElasticPoolEdition enumeration contains all the valid editions.
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ElasticPoolEdition
+      databases:
+        description: The list of databases in this pool. Expanded property
+        items:
+          allOf:
+            - allOf:
+                - description: ARM resource.
+                  properties:
+                    id:
+                      description: Resource ID.
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Resource name.
+                      readOnly: true
+                      type: string
+                    type:
+                      description: Resource type.
+                      readOnly: true
+                      type: string
+                  x-ms-azure-resource: true
+              description: ARM tracked top level resource.
+              properties:
+                location:
+                  description: Resource location.
+                  type: string
+                  x-ms-mutability:
+                    - read
+                    - create
+                tags:
+                  additionalProperties:
+                    type: string
+                  description: Resource tags.
+                  type: object
+                  x-ms-mutability:
+                    - read
+                    - create
+                    - update
+              required:
+                - location
+          description: Represents a database.
+          properties:
+            kind:
+              description: Kind of database.  This is metadata used for the Azure portal experience.
+              readOnly: true
+              type: string
+            properties:
+              description: Represents the properties of a database.
+              properties:
+                collation:
+                  description: 'The collation of the database. If createMode is not Default, this value is ignored.'
+                  type: string
+                  x-ms-mutability:
+                    - create
+                    - read
+                containmentState:
+                  description: The containment state of the database.
+                  format: int64
+                  readOnly: true
+                  type: integer
+                createMode:
+                  description: |-
+                    Specifies the mode of database creation.
+
+                    Default: regular database creation.
+
+                    Copy: creates a database as a copy of an existing database. sourceDatabaseId must be specified as the resource ID of the source database.
+
+                    OnlineSecondary/NonReadableSecondary: creates a database as a (readable or nonreadable) secondary replica of an existing database. sourceDatabaseId must be specified as the resource ID of the existing primary database.
+
+                    PointInTimeRestore: Creates a database by restoring a point in time backup of an existing database. sourceDatabaseId must be specified as the resource ID of the existing database, and restorePointInTime must be specified.
+
+                    Recovery: Creates a database by restoring a geo-replicated backup. sourceDatabaseId must be specified as the recoverable database resource ID to restore.
+
+                    Restore: Creates a database by restoring a backup of a deleted database. sourceDatabaseId must be specified. If sourceDatabaseId is the database's original resource ID, then sourceDatabaseDeletionDate must be specified. Otherwise sourceDatabaseId must be the restorable dropped database resource ID and sourceDatabaseDeletionDate is ignored. restorePointInTime may also be specified to restore from an earlier point in time.
+
+                    RestoreLongTermRetentionBackup: Creates a database by restoring from a long term retention vault. recoveryServicesRecoveryPointResourceId must be specified as the recovery point resource ID.
+
+                    Copy, NonReadableSecondary, OnlineSecondary and RestoreLongTermRetentionBackup are not supported for DataWarehouse edition.
+                  enum:
+                    - Copy
+                    - Default
+                    - NonReadableSecondary
+                    - OnlineSecondary
+                    - PointInTimeRestore
+                    - Recovery
+                    - Restore
+                    - RestoreLongTermRetentionBackup
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: CreateMode
+                  x-ms-mutability:
+                    - create
+                creationDate:
+                  description: The creation date of the database (ISO8601 format).
+                  format: date-time
+                  readOnly: true
+                  type: string
+                currentServiceObjectiveId:
+                  description: The current service level objective ID of the database. This is the ID of the service level objective that is currently active.
+                  format: uuid
+                  readOnly: true
+                  type: string
+                databaseId:
+                  description: The ID of the database.
+                  format: uuid
+                  readOnly: true
+                  type: string
+                defaultSecondaryLocation:
+                  description: The default secondary region for this database.
+                  readOnly: true
+                  type: string
+                earliestRestoreDate:
+                  description: This records the earliest start date and time that restore is available for this database (ISO8601 format).
+                  format: date-time
+                  readOnly: true
+                  type: string
+                edition:
+                  description: 'The edition of the database. The DatabaseEditions enumeration contains all the valid editions. If createMode is NonReadableSecondary or OnlineSecondary, this value is ignored. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: "Capabilities_ListByLocation." or use the Azure CLI command `az sql db list-editions -l westus --query [].name` .'
+                  enum:
+                    - Web
+                    - Business
+                    - Basic
+                    - Standard
+                    - Premium
+                    - PremiumRS
+                    - Free
+                    - Stretch
+                    - DataWarehouse
+                    - System
+                    - System2
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: DatabaseEdition
+                elasticPoolName:
+                  description: 'The name of the elastic pool the database is in. If elasticPoolName and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveName is ignored. Not supported for DataWarehouse edition.'
+                  type: string
+                failoverGroupId:
+                  description: The resource identifier of the failover group containing this database.
+                  readOnly: true
+                  type: string
+                maxSizeBytes:
+                  description: 'The max size of the database expressed in bytes. If createMode is not Default, this value is ignored. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: "Capabilities_ListByLocation."'
+                  type: string
+                readScale:
+                  description: 'Conditional. If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition.'
+                  enum:
+                    - Enabled
+                    - Disabled
+                  type: string
+                  x-ms-enum:
+                    name: ReadScale
+                recommendedIndex:
+                  description: The recommended indices for this database.
+                  items:
+                    allOf:
+                      - allOf:
+                          - description: ARM resource.
+                            properties:
+                              id:
+                                description: Resource ID.
+                                readOnly: true
+                                type: string
+                              name:
+                                description: Resource name.
+                                readOnly: true
+                                type: string
+                              type:
+                                description: Resource type.
+                                readOnly: true
+                                type: string
+                            x-ms-azure-resource: true
+                        description: ARM proxy resource.
+                    description: Represents a database recommended index.
+                    properties:
+                      properties:
+                        description: Represents the properties of a database recommended index.
+                        properties:
+                          action:
+                            description: 'The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance.'
+                            enum:
+                              - Create
+                              - Drop
+                              - Rebuild
+                            readOnly: true
+                            type: string
+                            x-ms-enum:
+                              name: RecommendedIndexAction
+                          columns:
+                            description: Columns over which to build index
+                            items:
+                              type: string
+                            readOnly: true
+                            type: array
+                          created:
+                            description: The UTC datetime showing when this resource was created (ISO8601 format).
+                            format: date-time
+                            readOnly: true
+                            type: string
+                          estimatedImpact:
+                            description: The estimated impact of doing recommended index action.
+                            items:
+                              description: 'The impact of an operation, both in absolute and relative terms.'
+                              properties:
+                                changeValueAbsolute:
+                                  description: The absolute impact to dimension.
+                                  format: double
+                                  readOnly: true
+                                  type: number
+                                changeValueRelative:
+                                  description: The relative impact to dimension (null if not applicable)
+                                  format: double
+                                  readOnly: true
+                                  type: number
+                                name:
+                                  description: The name of the impact dimension.
+                                  readOnly: true
+                                  type: string
+                                unit:
+                                  description: The unit in which estimated impact to dimension is measured.
+                                  readOnly: true
+                                  type: string
+                            readOnly: true
+                            type: array
+                          includedColumns:
+                            description: The list of column names to be included in the index
+                            items:
+                              type: string
+                            readOnly: true
+                            type: array
+                          indexScript:
+                            description: The full build index script
+                            readOnly: true
+                            type: string
+                          indexType:
+                            description: 'The type of index (CLUSTERED, NONCLUSTERED, COLUMNSTORE, CLUSTERED COLUMNSTORE)'
+                            enum:
+                              - CLUSTERED
+                              - NONCLUSTERED
+                              - COLUMNSTORE
+                              - CLUSTERED COLUMNSTORE
+                            readOnly: true
+                            type: string
+                            x-ms-enum:
+                              name: RecommendedIndexType
+                          lastModified:
+                            description: The UTC datetime of when was this resource last changed (ISO8601 format).
+                            format: date-time
+                            readOnly: true
+                            type: string
+                          reportedImpact:
+                            description: The values reported after index action is complete.
+                            items:
+                              description: 'The impact of an operation, both in absolute and relative terms.'
+                              properties:
+                                changeValueAbsolute:
+                                  description: The absolute impact to dimension.
+                                  format: double
+                                  readOnly: true
+                                  type: number
+                                changeValueRelative:
+                                  description: The relative impact to dimension (null if not applicable)
+                                  format: double
+                                  readOnly: true
+                                  type: number
+                                name:
+                                  description: The name of the impact dimension.
+                                  readOnly: true
+                                  type: string
+                                unit:
+                                  description: The unit in which estimated impact to dimension is measured.
+                                  readOnly: true
+                                  type: string
+                            readOnly: true
+                            type: array
+                          schema:
+                            description: The schema where table to build index over resides
+                            readOnly: true
+                            type: string
+                          state:
+                            description: The current recommendation state.
+                            enum:
+                              - Active
+                              - Pending
+                              - Executing
+                              - Verifying
+                              - Pending Revert
+                              - Reverting
+                              - Reverted
+                              - Ignored
+                              - Expired
+                              - Blocked
+                              - Success
+                            readOnly: true
+                            type: string
+                            x-ms-enum:
+                              name: RecommendedIndexState
+                          table:
+                            description: The table on which to build index.
+                            readOnly: true
+                            type: string
+                  readOnly: true
+                  type: array
+                recoveryServicesRecoveryPointResourceId:
+                  description: 'Conditional. If createMode is RestoreLongTermRetentionBackup, then this value is required. Specifies the resource ID of the recovery point to restore from.'
+                  type: string
+                  x-ms-mutability:
+                    - create
+                requestedServiceObjectiveId:
+                  description: 'The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: "Capabilities_ListByLocation." or use the Azure CLI command `az sql db list-editions --location <location> --query [].supportedServiceLevelObjectives[].name` .'
+                  format: uuid
+                  type: string
+                requestedServiceObjectiveName:
+                  description: 'The name of the configured service level objective of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of serviceLevelObjective property. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: "Capabilities_ListByLocation." or use the Azure CLI command `az sql db list-editions --location <location> --query [].supportedServiceLevelObjectives[].name` .'
+                  enum:
+                    - System
+                    - System0
+                    - System1
+                    - System2
+                    - System3
+                    - System4
+                    - System2L
+                    - System3L
+                    - System4L
+                    - Free
+                    - Basic
+                    - S0
+                    - S1
+                    - S2
+                    - S3
+                    - S4
+                    - S6
+                    - S7
+                    - S9
+                    - S12
+                    - P1
+                    - P2
+                    - P3
+                    - P4
+                    - P6
+                    - P11
+                    - P15
+                    - PRS1
+                    - PRS2
+                    - PRS4
+                    - PRS6
+                    - DW100
+                    - DW200
+                    - DW300
+                    - DW400
+                    - DW500
+                    - DW600
+                    - DW1000
+                    - DW1200
+                    - DW1000c
+                    - DW1500
+                    - DW1500c
+                    - DW2000
+                    - DW2000c
+                    - DW3000
+                    - DW2500c
+                    - DW3000c
+                    - DW6000
+                    - DW5000c
+                    - DW6000c
+                    - DW7500c
+                    - DW10000c
+                    - DW15000c
+                    - DW30000c
+                    - DS100
+                    - DS200
+                    - DS300
+                    - DS400
+                    - DS500
+                    - DS600
+                    - DS1000
+                    - DS1200
+                    - DS1500
+                    - DS2000
+                    - ElasticPool
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ServiceObjectiveName
+                restorePointInTime:
+                  description: 'Conditional. If createMode is PointInTimeRestore, this value is required. If createMode is Restore, this value is optional. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database''s earliestRestoreDate value.'
+                  format: date-time
+                  type: string
+                  x-ms-mutability:
+                    - create
+                sampleName:
+                  description: 'Indicates the name of the sample schema to apply when creating this database. If createMode is not Default, this value is ignored. Not supported for DataWarehouse edition.'
+                  enum:
+                    - AdventureWorksLT
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: SampleName
+                  x-ms-mutability:
+                    - create
+                serviceLevelObjective:
+                  description: The current service level objective of the database.
+                  enum:
+                    - System
+                    - System0
+                    - System1
+                    - System2
+                    - System3
+                    - System4
+                    - System2L
+                    - System3L
+                    - System4L
+                    - Free
+                    - Basic
+                    - S0
+                    - S1
+                    - S2
+                    - S3
+                    - S4
+                    - S6
+                    - S7
+                    - S9
+                    - S12
+                    - P1
+                    - P2
+                    - P3
+                    - P4
+                    - P6
+                    - P11
+                    - P15
+                    - PRS1
+                    - PRS2
+                    - PRS4
+                    - PRS6
+                    - DW100
+                    - DW200
+                    - DW300
+                    - DW400
+                    - DW500
+                    - DW600
+                    - DW1000
+                    - DW1200
+                    - DW1000c
+                    - DW1500
+                    - DW1500c
+                    - DW2000
+                    - DW2000c
+                    - DW3000
+                    - DW2500c
+                    - DW3000c
+                    - DW6000
+                    - DW5000c
+                    - DW6000c
+                    - DW7500c
+                    - DW10000c
+                    - DW15000c
+                    - DW30000c
+                    - DS100
+                    - DS200
+                    - DS300
+                    - DS400
+                    - DS500
+                    - DS600
+                    - DS1000
+                    - DS1200
+                    - DS1500
+                    - DS2000
+                    - ElasticPool
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ServiceObjectiveName
+                serviceTierAdvisors:
+                  description: The list of service tier advisors for this database. Expanded property
+                  items:
+                    allOf:
+                      - allOf:
+                          - description: ARM resource.
+                            properties:
+                              id:
+                                description: Resource ID.
+                                readOnly: true
+                                type: string
+                              name:
+                                description: Resource name.
+                                readOnly: true
+                                type: string
+                              type:
+                                description: Resource type.
+                                readOnly: true
+                                type: string
+                            x-ms-azure-resource: true
+                        description: ARM proxy resource.
+                    description: Represents a Service Tier Advisor.
+                    properties:
+                      properties:
+                        description: Represents the properties of a Service Tier Advisor.
+                        properties:
+                          activeTimeRatio:
+                            description: The activeTimeRatio for service tier advisor.
+                            format: double
+                            readOnly: true
+                            type: number
+                          avgDtu:
+                            description: Gets or sets avgDtu for service tier advisor.
+                            format: double
+                            readOnly: true
+                            type: number
+                          confidence:
+                            description: Gets or sets confidence for service tier advisor.
+                            format: double
+                            readOnly: true
+                            type: number
+                            x-nullable: false
+                          currentServiceLevelObjective:
+                            description: Gets or sets currentServiceLevelObjective for service tier advisor.
+                            readOnly: true
+                            type: string
+                          currentServiceLevelObjectiveId:
+                            description: Gets or sets currentServiceLevelObjectiveId for service tier advisor.
+                            format: uuid
+                            readOnly: true
+                            type: string
+                          databaseSizeBasedRecommendationServiceLevelObjective:
+                            description: Gets or sets databaseSizeBasedRecommendationServiceLevelObjective for service tier advisor.
+                            readOnly: true
+                            type: string
+                          databaseSizeBasedRecommendationServiceLevelObjectiveId:
+                            description: Gets or sets databaseSizeBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+                            format: uuid
+                            readOnly: true
+                            type: string
+                          disasterPlanBasedRecommendationServiceLevelObjective:
+                            description: Gets or sets disasterPlanBasedRecommendationServiceLevelObjective for service tier advisor.
+                            readOnly: true
+                            type: string
+                          disasterPlanBasedRecommendationServiceLevelObjectiveId:
+                            description: Gets or sets disasterPlanBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+                            format: uuid
+                            readOnly: true
+                            type: string
+                          maxDtu:
+                            description: Gets or sets maxDtu for service tier advisor.
+                            format: double
+                            readOnly: true
+                            type: number
+                          maxSizeInGB:
+                            description: Gets or sets maxSizeInGB for service tier advisor.
+                            format: double
+                            readOnly: true
+                            type: number
+                          minDtu:
+                            description: Gets or sets minDtu for service tier advisor.
+                            format: double
+                            readOnly: true
+                            type: number
+                          observationPeriodEnd:
+                            description: The observation period start (ISO8601 format).
+                            format: date-time
+                            readOnly: true
+                            type: string
+                          observationPeriodStart:
+                            description: The observation period start (ISO8601 format).
+                            format: date-time
+                            readOnly: true
+                            type: string
+                          overallRecommendationServiceLevelObjective:
+                            description: Gets or sets overallRecommendationServiceLevelObjective for service tier advisor.
+                            readOnly: true
+                            type: string
+                          overallRecommendationServiceLevelObjectiveId:
+                            description: Gets or sets overallRecommendationServiceLevelObjectiveId for service tier advisor.
+                            format: uuid
+                            readOnly: true
+                            type: string
+                          serviceLevelObjectiveUsageMetrics:
+                            description: Gets or sets serviceLevelObjectiveUsageMetrics for the service tier advisor.
+                            items:
+                              description: A Slo Usage Metric.
+                              properties:
+                                inRangeTimeRatio:
+                                  description: Gets or sets inRangeTimeRatio for SLO usage metric.
+                                  format: double
+                                  readOnly: true
+                                  type: number
+                                  x-nullable: false
+                                serviceLevelObjective:
+                                  description: The serviceLevelObjective for SLO usage metric.
+                                  enum:
+                                    - System
+                                    - System0
+                                    - System1
+                                    - System2
+                                    - System3
+                                    - System4
+                                    - System2L
+                                    - System3L
+                                    - System4L
+                                    - Free
+                                    - Basic
+                                    - S0
+                                    - S1
+                                    - S2
+                                    - S3
+                                    - S4
+                                    - S6
+                                    - S7
+                                    - S9
+                                    - S12
+                                    - P1
+                                    - P2
+                                    - P3
+                                    - P4
+                                    - P6
+                                    - P11
+                                    - P15
+                                    - PRS1
+                                    - PRS2
+                                    - PRS4
+                                    - PRS6
+                                    - DW100
+                                    - DW200
+                                    - DW300
+                                    - DW400
+                                    - DW500
+                                    - DW600
+                                    - DW1000
+                                    - DW1200
+                                    - DW1000c
+                                    - DW1500
+                                    - DW1500c
+                                    - DW2000
+                                    - DW2000c
+                                    - DW3000
+                                    - DW2500c
+                                    - DW3000c
+                                    - DW6000
+                                    - DW5000c
+                                    - DW6000c
+                                    - DW7500c
+                                    - DW10000c
+                                    - DW15000c
+                                    - DW30000c
+                                    - DS100
+                                    - DS200
+                                    - DS300
+                                    - DS400
+                                    - DS500
+                                    - DS600
+                                    - DS1000
+                                    - DS1200
+                                    - DS1500
+                                    - DS2000
+                                    - ElasticPool
+                                  readOnly: true
+                                  type: string
+                                  x-ms-enum:
+                                    modelAsString: true
+                                    name: ServiceObjectiveName
+                                serviceLevelObjectiveId:
+                                  description: The serviceLevelObjectiveId for SLO usage metric.
+                                  format: uuid
+                                  readOnly: true
+                                  type: string
+                                  x-nullable: false
+                            readOnly: true
+                            type: array
+                          usageBasedRecommendationServiceLevelObjective:
+                            description: Gets or sets usageBasedRecommendationServiceLevelObjective for service tier advisor.
+                            readOnly: true
+                            type: string
+                          usageBasedRecommendationServiceLevelObjectiveId:
+                            description: Gets or sets usageBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+                            format: uuid
+                            readOnly: true
+                            type: string
+                  readOnly: true
+                  type: array
+                sourceDatabaseDeletionDate:
+                  description: 'Conditional. If createMode is Restore and sourceDatabaseId is the deleted database''s original resource id when it existed (as opposed to its current restorable dropped database id), then this value is required. Specifies the time that the database was deleted.'
+                  format: date-time
+                  type: string
+                  x-ms-mutability:
+                    - create
+                sourceDatabaseId:
+                  description: 'Conditional. If createMode is Copy, NonReadableSecondary, OnlineSecondary, PointInTimeRestore, Recovery, or Restore, then this value is required. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as the new database being created.'
+                  type: string
+                  x-ms-mutability:
+                    - create
+                status:
+                  description: The status of the database.
+                  readOnly: true
+                  type: string
+                transparentDataEncryption:
+                  description: The transparent data encryption info for this database.
+                  items:
+                    allOf:
+                      - allOf:
+                          - description: ARM resource.
+                            properties:
+                              id:
+                                description: Resource ID.
+                                readOnly: true
+                                type: string
+                              name:
+                                description: Resource name.
+                                readOnly: true
+                                type: string
+                              type:
+                                description: Resource type.
+                                readOnly: true
+                                type: string
+                            x-ms-azure-resource: true
+                        description: ARM proxy resource.
+                    description: Represents a database transparent data encryption configuration.
+                    properties:
+                      location:
+                        description: Resource location.
+                        readOnly: true
+                        type: string
+                      properties:
+                        description: Represents the properties of a database transparent data encryption.
+                        properties:
+                          status:
+                            description: The status of the database transparent data encryption.
+                            enum:
+                              - Enabled
+                              - Disabled
+                            type: string
+                            x-ms-enum:
+                              name: TransparentDataEncryptionStatus
+                  readOnly: true
+                  type: array
+                zoneRedundant:
+                  description: 'Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.'
+                  type: boolean
+        readOnly: true
+        type: array
+      dtu:
+        description: The DTU for the recommended elastic pool.
+        format: double
+        type: number
+      maxObservedDtu:
+        description: Gets maximum observed DTU.
+        format: double
+        readOnly: true
+        type: number
+      maxObservedStorageMB:
+        description: Gets maximum observed storage in megabytes.
+        format: double
+        readOnly: true
+        type: number
+      metrics:
+        description: The list of databases housed in the server. Expanded property
+        items:
+          $ref: '#/definitions/RecommendedElasticPoolMetric'
+        readOnly: true
+        type: array
+      observationPeriodEnd:
+        description: The observation period start (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      observationPeriodStart:
+        description: The observation period start (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      storageMB:
+        description: Gets storage size in megabytes.
+        format: double
+        type: number
+  RecommendedIndex:
+    allOf:
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+    description: Represents a database recommended index.
+    properties:
+      properties:
+        description: Represents the properties of a database recommended index.
+        properties:
+          action:
+            description: 'The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance.'
+            enum:
+              - Create
+              - Drop
+              - Rebuild
+            readOnly: true
+            type: string
+            x-ms-enum:
+              name: RecommendedIndexAction
+          columns:
+            description: Columns over which to build index
+            items:
+              type: string
+            readOnly: true
+            type: array
+          created:
+            description: The UTC datetime showing when this resource was created (ISO8601 format).
+            format: date-time
+            readOnly: true
+            type: string
+          estimatedImpact:
+            description: The estimated impact of doing recommended index action.
+            items:
+              description: 'The impact of an operation, both in absolute and relative terms.'
+              properties:
+                changeValueAbsolute:
+                  description: The absolute impact to dimension.
+                  format: double
+                  readOnly: true
+                  type: number
+                changeValueRelative:
+                  description: The relative impact to dimension (null if not applicable)
+                  format: double
+                  readOnly: true
+                  type: number
+                name:
+                  description: The name of the impact dimension.
+                  readOnly: true
+                  type: string
+                unit:
+                  description: The unit in which estimated impact to dimension is measured.
+                  readOnly: true
+                  type: string
+            readOnly: true
+            type: array
+          includedColumns:
+            description: The list of column names to be included in the index
+            items:
+              type: string
+            readOnly: true
+            type: array
+          indexScript:
+            description: The full build index script
+            readOnly: true
+            type: string
+          indexType:
+            description: 'The type of index (CLUSTERED, NONCLUSTERED, COLUMNSTORE, CLUSTERED COLUMNSTORE)'
+            enum:
+              - CLUSTERED
+              - NONCLUSTERED
+              - COLUMNSTORE
+              - CLUSTERED COLUMNSTORE
+            readOnly: true
+            type: string
+            x-ms-enum:
+              name: RecommendedIndexType
+          lastModified:
+            description: The UTC datetime of when was this resource last changed (ISO8601 format).
+            format: date-time
+            readOnly: true
+            type: string
+          reportedImpact:
+            description: The values reported after index action is complete.
+            items:
+              description: 'The impact of an operation, both in absolute and relative terms.'
+              properties:
+                changeValueAbsolute:
+                  description: The absolute impact to dimension.
+                  format: double
+                  readOnly: true
+                  type: number
+                changeValueRelative:
+                  description: The relative impact to dimension (null if not applicable)
+                  format: double
+                  readOnly: true
+                  type: number
+                name:
+                  description: The name of the impact dimension.
+                  readOnly: true
+                  type: string
+                unit:
+                  description: The unit in which estimated impact to dimension is measured.
+                  readOnly: true
+                  type: string
+            readOnly: true
+            type: array
+          schema:
+            description: The schema where table to build index over resides
+            readOnly: true
+            type: string
+          state:
+            description: The current recommendation state.
+            enum:
+              - Active
+              - Pending
+              - Executing
+              - Verifying
+              - Pending Revert
+              - Reverting
+              - Reverted
+              - Ignored
+              - Expired
+              - Blocked
+              - Success
+            readOnly: true
+            type: string
+            x-ms-enum:
+              name: RecommendedIndexState
+          table:
+            description: The table on which to build index.
+            readOnly: true
+            type: string
+  RecommendedIndexProperties:
+    description: Represents the properties of a database recommended index.
+    properties:
+      action:
+        description: 'The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance.'
+        enum:
+          - Create
+          - Drop
+          - Rebuild
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: RecommendedIndexAction
+      columns:
+        description: Columns over which to build index
+        items:
+          type: string
+        readOnly: true
+        type: array
+      created:
+        description: The UTC datetime showing when this resource was created (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      estimatedImpact:
+        description: The estimated impact of doing recommended index action.
+        items:
+          description: 'The impact of an operation, both in absolute and relative terms.'
+          properties:
+            changeValueAbsolute:
+              description: The absolute impact to dimension.
+              format: double
+              readOnly: true
+              type: number
+            changeValueRelative:
+              description: The relative impact to dimension (null if not applicable)
+              format: double
+              readOnly: true
+              type: number
+            name:
+              description: The name of the impact dimension.
+              readOnly: true
+              type: string
+            unit:
+              description: The unit in which estimated impact to dimension is measured.
+              readOnly: true
+              type: string
+        readOnly: true
+        type: array
+      includedColumns:
+        description: The list of column names to be included in the index
+        items:
+          type: string
+        readOnly: true
+        type: array
+      indexScript:
+        description: The full build index script
+        readOnly: true
+        type: string
+      indexType:
+        description: 'The type of index (CLUSTERED, NONCLUSTERED, COLUMNSTORE, CLUSTERED COLUMNSTORE)'
+        enum:
+          - CLUSTERED
+          - NONCLUSTERED
+          - COLUMNSTORE
+          - CLUSTERED COLUMNSTORE
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: RecommendedIndexType
+      lastModified:
+        description: The UTC datetime of when was this resource last changed (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      reportedImpact:
+        description: The values reported after index action is complete.
+        items:
+          description: 'The impact of an operation, both in absolute and relative terms.'
+          properties:
+            changeValueAbsolute:
+              description: The absolute impact to dimension.
+              format: double
+              readOnly: true
+              type: number
+            changeValueRelative:
+              description: The relative impact to dimension (null if not applicable)
+              format: double
+              readOnly: true
+              type: number
+            name:
+              description: The name of the impact dimension.
+              readOnly: true
+              type: string
+            unit:
+              description: The unit in which estimated impact to dimension is measured.
+              readOnly: true
+              type: string
+        readOnly: true
+        type: array
+      schema:
+        description: The schema where table to build index over resides
+        readOnly: true
+        type: string
+      state:
+        description: The current recommendation state.
+        enum:
+          - Active
+          - Pending
+          - Executing
+          - Verifying
+          - Pending Revert
+          - Reverting
+          - Reverted
+          - Ignored
+          - Expired
+          - Blocked
+          - Success
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: RecommendedIndexState
+      table:
+        description: The table on which to build index.
+        readOnly: true
+        type: string
+  Resource:
+    description: ARM resource.
+    properties:
+      id:
+        description: Resource ID.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  ServiceTierAdvisor:
+    allOf:
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+    description: Represents a Service Tier Advisor.
+    properties:
+      properties:
+        description: Represents the properties of a Service Tier Advisor.
+        properties:
+          activeTimeRatio:
+            description: The activeTimeRatio for service tier advisor.
+            format: double
+            readOnly: true
+            type: number
+          avgDtu:
+            description: Gets or sets avgDtu for service tier advisor.
+            format: double
+            readOnly: true
+            type: number
+          confidence:
+            description: Gets or sets confidence for service tier advisor.
+            format: double
+            readOnly: true
+            type: number
+            x-nullable: false
+          currentServiceLevelObjective:
+            description: Gets or sets currentServiceLevelObjective for service tier advisor.
+            readOnly: true
+            type: string
+          currentServiceLevelObjectiveId:
+            description: Gets or sets currentServiceLevelObjectiveId for service tier advisor.
+            format: uuid
+            readOnly: true
+            type: string
+          databaseSizeBasedRecommendationServiceLevelObjective:
+            description: Gets or sets databaseSizeBasedRecommendationServiceLevelObjective for service tier advisor.
+            readOnly: true
+            type: string
+          databaseSizeBasedRecommendationServiceLevelObjectiveId:
+            description: Gets or sets databaseSizeBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+            format: uuid
+            readOnly: true
+            type: string
+          disasterPlanBasedRecommendationServiceLevelObjective:
+            description: Gets or sets disasterPlanBasedRecommendationServiceLevelObjective for service tier advisor.
+            readOnly: true
+            type: string
+          disasterPlanBasedRecommendationServiceLevelObjectiveId:
+            description: Gets or sets disasterPlanBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+            format: uuid
+            readOnly: true
+            type: string
+          maxDtu:
+            description: Gets or sets maxDtu for service tier advisor.
+            format: double
+            readOnly: true
+            type: number
+          maxSizeInGB:
+            description: Gets or sets maxSizeInGB for service tier advisor.
+            format: double
+            readOnly: true
+            type: number
+          minDtu:
+            description: Gets or sets minDtu for service tier advisor.
+            format: double
+            readOnly: true
+            type: number
+          observationPeriodEnd:
+            description: The observation period start (ISO8601 format).
+            format: date-time
+            readOnly: true
+            type: string
+          observationPeriodStart:
+            description: The observation period start (ISO8601 format).
+            format: date-time
+            readOnly: true
+            type: string
+          overallRecommendationServiceLevelObjective:
+            description: Gets or sets overallRecommendationServiceLevelObjective for service tier advisor.
+            readOnly: true
+            type: string
+          overallRecommendationServiceLevelObjectiveId:
+            description: Gets or sets overallRecommendationServiceLevelObjectiveId for service tier advisor.
+            format: uuid
+            readOnly: true
+            type: string
+          serviceLevelObjectiveUsageMetrics:
+            description: Gets or sets serviceLevelObjectiveUsageMetrics for the service tier advisor.
+            items:
+              description: A Slo Usage Metric.
+              properties:
+                inRangeTimeRatio:
+                  description: Gets or sets inRangeTimeRatio for SLO usage metric.
+                  format: double
+                  readOnly: true
+                  type: number
+                  x-nullable: false
+                serviceLevelObjective:
+                  description: The serviceLevelObjective for SLO usage metric.
+                  enum:
+                    - System
+                    - System0
+                    - System1
+                    - System2
+                    - System3
+                    - System4
+                    - System2L
+                    - System3L
+                    - System4L
+                    - Free
+                    - Basic
+                    - S0
+                    - S1
+                    - S2
+                    - S3
+                    - S4
+                    - S6
+                    - S7
+                    - S9
+                    - S12
+                    - P1
+                    - P2
+                    - P3
+                    - P4
+                    - P6
+                    - P11
+                    - P15
+                    - PRS1
+                    - PRS2
+                    - PRS4
+                    - PRS6
+                    - DW100
+                    - DW200
+                    - DW300
+                    - DW400
+                    - DW500
+                    - DW600
+                    - DW1000
+                    - DW1200
+                    - DW1000c
+                    - DW1500
+                    - DW1500c
+                    - DW2000
+                    - DW2000c
+                    - DW3000
+                    - DW2500c
+                    - DW3000c
+                    - DW6000
+                    - DW5000c
+                    - DW6000c
+                    - DW7500c
+                    - DW10000c
+                    - DW15000c
+                    - DW30000c
+                    - DS100
+                    - DS200
+                    - DS300
+                    - DS400
+                    - DS500
+                    - DS600
+                    - DS1000
+                    - DS1200
+                    - DS1500
+                    - DS2000
+                    - ElasticPool
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ServiceObjectiveName
+                serviceLevelObjectiveId:
+                  description: The serviceLevelObjectiveId for SLO usage metric.
+                  format: uuid
+                  readOnly: true
+                  type: string
+                  x-nullable: false
+            readOnly: true
+            type: array
+          usageBasedRecommendationServiceLevelObjective:
+            description: Gets or sets usageBasedRecommendationServiceLevelObjective for service tier advisor.
+            readOnly: true
+            type: string
+          usageBasedRecommendationServiceLevelObjectiveId:
+            description: Gets or sets usageBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+            format: uuid
+            readOnly: true
+            type: string
+  ServiceTierAdvisorListResult:
+    description: Represents the response to a list service tier advisor request.
+    properties:
+      value:
+        description: The list of service tier advisors for specified database.
+        items:
+          $ref: '#/definitions/ServiceTierAdvisor'
+        type: array
+    required:
+      - value
+  ServiceTierAdvisorProperties:
+    description: Represents the properties of a Service Tier Advisor.
+    properties:
+      activeTimeRatio:
+        description: The activeTimeRatio for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      avgDtu:
+        description: Gets or sets avgDtu for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      confidence:
+        description: Gets or sets confidence for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      currentServiceLevelObjective:
+        description: Gets or sets currentServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      currentServiceLevelObjectiveId:
+        description: Gets or sets currentServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      databaseSizeBasedRecommendationServiceLevelObjective:
+        description: Gets or sets databaseSizeBasedRecommendationServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      databaseSizeBasedRecommendationServiceLevelObjectiveId:
+        description: Gets or sets databaseSizeBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      disasterPlanBasedRecommendationServiceLevelObjective:
+        description: Gets or sets disasterPlanBasedRecommendationServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      disasterPlanBasedRecommendationServiceLevelObjectiveId:
+        description: Gets or sets disasterPlanBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      maxDtu:
+        description: Gets or sets maxDtu for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      maxSizeInGB:
+        description: Gets or sets maxSizeInGB for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      minDtu:
+        description: Gets or sets minDtu for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      observationPeriodEnd:
+        description: The observation period start (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      observationPeriodStart:
+        description: The observation period start (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      overallRecommendationServiceLevelObjective:
+        description: Gets or sets overallRecommendationServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      overallRecommendationServiceLevelObjectiveId:
+        description: Gets or sets overallRecommendationServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      serviceLevelObjectiveUsageMetrics:
+        description: Gets or sets serviceLevelObjectiveUsageMetrics for the service tier advisor.
+        items:
+          description: A Slo Usage Metric.
+          properties:
+            inRangeTimeRatio:
+              description: Gets or sets inRangeTimeRatio for SLO usage metric.
+              format: double
+              readOnly: true
+              type: number
+              x-nullable: false
+            serviceLevelObjective:
+              description: The serviceLevelObjective for SLO usage metric.
+              enum:
+                - System
+                - System0
+                - System1
+                - System2
+                - System3
+                - System4
+                - System2L
+                - System3L
+                - System4L
+                - Free
+                - Basic
+                - S0
+                - S1
+                - S2
+                - S3
+                - S4
+                - S6
+                - S7
+                - S9
+                - S12
+                - P1
+                - P2
+                - P3
+                - P4
+                - P6
+                - P11
+                - P15
+                - PRS1
+                - PRS2
+                - PRS4
+                - PRS6
+                - DW100
+                - DW200
+                - DW300
+                - DW400
+                - DW500
+                - DW600
+                - DW1000
+                - DW1200
+                - DW1000c
+                - DW1500
+                - DW1500c
+                - DW2000
+                - DW2000c
+                - DW3000
+                - DW2500c
+                - DW3000c
+                - DW6000
+                - DW5000c
+                - DW6000c
+                - DW7500c
+                - DW10000c
+                - DW15000c
+                - DW30000c
+                - DS100
+                - DS200
+                - DS300
+                - DS400
+                - DS500
+                - DS600
+                - DS1000
+                - DS1200
+                - DS1500
+                - DS2000
+                - ElasticPool
+              readOnly: true
+              type: string
+              x-ms-enum:
+                modelAsString: true
+                name: ServiceObjectiveName
+            serviceLevelObjectiveId:
+              description: The serviceLevelObjectiveId for SLO usage metric.
+              format: uuid
+              readOnly: true
+              type: string
+              x-nullable: false
+        readOnly: true
+        type: array
+      usageBasedRecommendationServiceLevelObjective:
+        description: Gets or sets usageBasedRecommendationServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      usageBasedRecommendationServiceLevelObjectiveId:
+        description: Gets or sets usageBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+  SloUsageMetric:
+    description: A Slo Usage Metric.
+    properties:
+      inRangeTimeRatio:
+        description: Gets or sets inRangeTimeRatio for SLO usage metric.
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      serviceLevelObjective:
+        description: The serviceLevelObjective for SLO usage metric.
+        enum:
+          - System
+          - System0
+          - System1
+          - System2
+          - System3
+          - System4
+          - System2L
+          - System3L
+          - System4L
+          - Free
+          - Basic
+          - S0
+          - S1
+          - S2
+          - S3
+          - S4
+          - S6
+          - S7
+          - S9
+          - S12
+          - P1
+          - P2
+          - P3
+          - P4
+          - P6
+          - P11
+          - P15
+          - PRS1
+          - PRS2
+          - PRS4
+          - PRS6
+          - DW100
+          - DW200
+          - DW300
+          - DW400
+          - DW500
+          - DW600
+          - DW1000
+          - DW1200
+          - DW1000c
+          - DW1500
+          - DW1500c
+          - DW2000
+          - DW2000c
+          - DW3000
+          - DW2500c
+          - DW3000c
+          - DW6000
+          - DW5000c
+          - DW6000c
+          - DW7500c
+          - DW10000c
+          - DW15000c
+          - DW30000c
+          - DS100
+          - DS200
+          - DS300
+          - DS400
+          - DS500
+          - DS600
+          - DS1000
+          - DS1200
+          - DS1500
+          - DS2000
+          - ElasticPool
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceObjectiveName
+      serviceLevelObjectiveId:
+        description: The serviceLevelObjectiveId for SLO usage metric.
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM tracked top level resource.
+    properties:
+      location:
+        description: Resource location.
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    required:
+      - location
+  TransparentDataEncryption:
+    allOf:
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+    description: Represents a database transparent data encryption configuration.
+    properties:
+      location:
+        description: Resource location.
+        readOnly: true
+        type: string
+      properties:
+        description: Represents the properties of a database transparent data encryption.
+        properties:
+          status:
+            description: The status of the database transparent data encryption.
+            enum:
+              - Enabled
+              - Disabled
+            type: string
+            x-ms-enum:
+              name: TransparentDataEncryptionStatus
+  TransparentDataEncryptionActivity:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a database transparent data encryption Scan.
+    properties:
+      location:
+        description: Resource location.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/TransparentDataEncryptionActivityProperties'
+        description: Represents the properties of the resource.
+        x-ms-client-flatten: true
+  TransparentDataEncryptionActivityListResult:
+    description: Represents the response to a list database transparent data encryption activity request.
+    properties:
+      value:
+        description: The list of database transparent data encryption activities.
+        items:
+          $ref: '#/definitions/TransparentDataEncryptionActivity'
+        type: array
+    required:
+      - value
+  TransparentDataEncryptionActivityProperties:
+    description: Represents the properties of a database transparent data encryption Scan.
+    properties:
+      percentComplete:
+        description: The percent complete of the transparent data encryption scan for a database.
+        format: float
+        readOnly: true
+        type: number
+      status:
+        description: The status of the database.
+        enum:
+          - Encrypting
+          - Decrypting
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: TransparentDataEncryptionActivityStatus
+  TransparentDataEncryptionProperties:
+    description: Represents the properties of a database transparent data encryption.
+    properties:
+      status:
+        description: The status of the database transparent data encryption.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          name: TransparentDataEncryptionStatus

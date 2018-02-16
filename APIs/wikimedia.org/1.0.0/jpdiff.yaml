@@ -1,0 +1,32 @@
+- op: add
+  path: /definitions/summary/properties/coordinates/required
+  value:
+    - lat
+    - lon
+- op: test
+  path: /definitions/summary/properties/coordinates/requiredProperties
+  value:
+    - lat
+    - lon
+- op: remove
+  path: /definitions/summary/properties/coordinates/requiredProperties
+- op: test
+  path: '/paths/~1media~1math~1check~1{type}/post/security'
+  value:
+    - header_match:
+        - header: x-client-ip
+          patterns:
+            - internal
+- op: remove
+  path: '/paths/~1media~1math~1check~1{type}/post/security'
+- op: test
+  path: /securityDefinitions/header_match
+  value:
+    description: Checks client ip against one of the predefined whitelists
+    x-error-message: This client is not allowed to use the endpoint
+    x-is-api: true
+    x-whitelists:
+      internal:
+        - '/^(?:::ffff:)?(?:10|127)\./'
+- op: remove
+  path: /securityDefinitions/header_match

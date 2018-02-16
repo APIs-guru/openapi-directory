@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - marketing
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://manufacturers.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -131,6 +133,16 @@ paths:
       operationId: manufacturers.accounts.products.list
       parameters:
         - description: |-
+            Maximum number of product statuses to return in the response, used for
+            paging.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             Parent ID in the format `accounts/{account_id}`.
 
             `account_id` - The ID of the Manufacturer Center account.
@@ -139,16 +151,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Maximum number of product statuses to return in the response, used for
-            paging.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -162,19 +164,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{parent}/products/{name}':
     delete:
       description: Deletes the product from a Manufacturer Center account.
@@ -229,15 +231,6 @@ paths:
       operationId: manufacturers.accounts.products.get
       parameters:
         - description: |-
-            Parent ID in the format `accounts/{account_id}`.
-
-            `account_id` - The ID of the Manufacturer Center account.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
             Name in the format `{target_country}:{content_language}:{product_id}`.
 
             `target_country`   - The target country of the product as a CLDR territory
@@ -250,6 +243,15 @@ paths:
                                  https://support.google.com/manufacturers/answer/6124116#id.
           in: path
           name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Parent ID in the format `accounts/{account_id}`.
+
+            `account_id` - The ID of the Manufacturer Center account.
+          in: path
+          name: parent
           required: true
           type: string
           x-reservedExpansion: true
@@ -266,19 +268,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Inserts or updates the product in a Manufacturer Center account.
@@ -463,7 +465,7 @@ definitions:
         type: string
       productType:
         description: |-
-          The category of the product. For more information, see
+          The type or category of the product. For more information, see
           https://support.google.com/manufacturers/answer/6124116#producttype.
         items:
           type: string
@@ -498,11 +500,10 @@ definitions:
         description: |-
           The suggested retail price (MSRP) of the product. For more information,
           see https://support.google.com/manufacturers/answer/6124116#price.
-      targetAccountId:
+      targetClientId:
         description: |-
-          The target account id. Should only be used in the accounts of the data
+          The target client id. Should only be used in the accounts of the data
           partners.
-        format: int64
         type: string
       theme:
         description: |-
@@ -601,6 +602,8 @@ definitions:
           - DECODING_ERROR
           - TOO_BIG
           - CRAWL_SKIPPED
+          - HOSTLOADED
+          - HTTP_404
         type: string
       type:
         description: |-

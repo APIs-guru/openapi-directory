@@ -5,18 +5,19 @@ info:
   title: Amazon Lex Model Building Service
   description: '<fullname>Amazon Lex Build-Time Actions</fullname> <p> Amazon Lex is an AWS service for building conversational voice and text interfaces. Use these actions to create, update, and delete conversational bots for new and existing client applications. </p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
-  x-serviceName: models.lex
+  x-serviceName: lex-models
   x-origin:
     - contentType: application/json
       url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/lex-models-2017-04-19.normal.json'
@@ -36,6 +37,7 @@ host: models.lex.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -140,6 +142,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -191,6 +197,10 @@ paths:
             $ref: '#/definitions/CreateIntentVersionRequest'
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -246,6 +256,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -297,6 +311,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -308,6 +326,106 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/bots/{botName}/aliases/{name}':
+    delete:
+      operationId: DeleteBotAlias
+      description: '<p>Deletes an alias for the specified bot. </p> <p>You can''t delete an alias that is used in the association between a bot and a messaging channel. If an alias is used in a channel association, the <code>DeleteBot</code> operation returns a <code>ResourceInUseException</code> exception that includes a reference to the channel association that refers to the bot. You can remove the reference to the alias by deleting the channel association. If you get the same exception again, delete the referring association until the <code>DeleteBotAlias</code> operation is successful.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBotAliasRequest'
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: botName
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetBotAlias
+      description: '<p>Returns information about an Amazon Lex bot alias. For more information about aliases, see <a>versioning-aliases</a>.</p> <p>This operation requires permissions for the <code>lex:GetBotAlias</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBotAliasResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBotAliasRequest'
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: botName
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     put:
       operationId: PutBotAlias
       description: '<p>Creates an alias for the specified version of the bot or replaces an alias for the specified bot. To change the version of the bot that the alias points to, replace the alias. For more information about aliases, see <a>versioning-aliases</a>.</p> <p>This operation requires permissions for the <code>lex:PutBotAlias</code> action. </p>'
@@ -350,6 +468,59 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+  '/bots/{botName}/aliases/{aliasName}/channels/{name}':
+    delete:
+      operationId: DeleteBotChannelAssociation
+      description: '<p>Deletes the association between an Amazon Lex bot and a messaging platform.</p> <p>This operation requires permission for the <code>lex:DeleteBotChannelAssociation</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBotChannelAssociationRequest'
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: botName
+          in: path
+          type: string
+          required: true
+        - name: aliasName
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -360,7 +531,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/bots/{botName}/aliases/{aliasName}/channels/{name}':
     get:
       operationId: GetBotChannelAssociation
       description: '<p>Returns information about the association between an Amazon Lex bot and a messaging platform.</p> <p>This operation requires permissions for the <code>lex:GetBotChannelAssociation</code> action.</p>'
@@ -403,16 +573,10 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+        - name: name
+          in: query
+          type: string
+          required: true
   '/bots/{name}/versions/{version}':
     delete:
       operationId: DeleteBotVersion
@@ -456,6 +620,14 @@ paths:
           required: true
         - name: version
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
           type: string
           required: true
     parameters:
@@ -509,6 +681,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -520,6 +696,68 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/intents/{name}/versions/{version}':
+    delete:
+      operationId: DeleteIntentVersion
+      description: '<p>Deletes a specific version of an intent. To delete all versions of a intent, use the <a>DeleteIntent</a> operation. </p> <p>This operation requires permissions for the <code>lex:DeleteIntentVersion</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteIntentVersionRequest'
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: version
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetIntent
       description: '<p> Returns information about an intent. In addition to the intent name, you must specify the intent version. </p> <p> This operation requires permissions to perform the <code>lex:GetIntent</code> action. </p>'
@@ -558,16 +796,14 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
+          type: string
+          required: true
   '/slottypes/{name}':
     delete:
       operationId: DeleteSlotType
@@ -607,6 +843,10 @@ paths:
             $ref: '#/definitions/DeleteSlotTypeRequest'
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -664,6 +904,14 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -677,7 +925,7 @@ paths:
   '/bots/{botName}/utterances/{userId}':
     delete:
       operationId: DeleteUtterances
-      description: '<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot unless the <code>childDirected</code> field in the bot is set to <code>true</code>. Utterances are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinately for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>'
+      description: '<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -724,7 +972,7 @@ paths:
   '/bots/{name}/versions/{versionoralias}':
     get:
       operationId: GetBot
-      description: '<p>Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias. </p> <p> The GetBot operation requires permissions for the <code>lex:GetBot</code> action. </p>'
+      description: '<p>Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias. </p> <p> This operation requires permissions for the <code>lex:GetBot</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -758,6 +1006,10 @@ paths:
           required: true
         - name: versionoralias
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -919,6 +1171,10 @@ paths:
           required: false
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -1121,6 +1377,92 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /exports/:
+    get:
+      operationId: GetExport
+      description: 'Exports the contents of a Amazon Lex resource in a specified format. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetExportResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetExportRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/imports/{importId}':
+    get:
+      operationId: GetImport
+      description: Gets information about an import job started with the <code>StartImport</code> operation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetImportResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetImportRequest'
+        - name: importId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/intents/{name}/versions/':
     get:
       operationId: GetIntentVersions
@@ -1164,6 +1506,10 @@ paths:
           required: false
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -1266,6 +1612,14 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1319,6 +1673,10 @@ paths:
           required: false
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -1385,7 +1743,7 @@ paths:
   '/bots/{botname}/utterances?view=aggregation':
     get:
       operationId: GetUtterancesView
-      description: '<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <p>Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p> <p>If the bot''s <code>childDirected</code> field is set to <code>true</code>, utterances for the bot are not stored and cannot be retrieved with the <code>GetUtterancesView</code> operation. For more information, see <a>PutBot</a>.</p> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>'
+      description: '<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <note> <p>Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p> </note> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -1426,7 +1784,7 @@ paths:
   '/bots/{name}/versions/$LATEST':
     put:
       operationId: PutBot
-      description: '<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don''t provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don''t specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>'
+      description: '<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name, a locale, and whether the bot is directed toward children under age 13. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with the minimum information, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don''t provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don''t specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1462,6 +1820,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1475,7 +1837,7 @@ paths:
   '/intents/{name}/versions/$LATEST':
     put:
       operationId: PutIntent
-      description: '<p>Creates an intent or replaces an existing intent.</p> <p>To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an <code>OrderPizza</code> intent. </p> <p>To create an intent or replace an existing intent, you must provide the following:</p> <ul> <li> <p>Intent name. For example, <code>OrderPizza</code>.</p> </li> <li> <p>Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."</p> </li> <li> <p>Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.</p> </li> <li> <p>How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application. </p> </li> </ul> <p>You can specify other optional information in the request, such as:</p> <ul> <li> <p>A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"</p> </li> <li> <p>A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"</p> </li> </ul> <p>If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the <code>$LATEST</code> version of the slot type with the values in the request. Amazon Lex removes fields that you don''t provide in the request. If you don''t specify the required fields, Amazon Lex throws an exception.</p> <p>For more information, see <a>how-it-works</a>.</p> <p>This operation requires permissions for the <code>lex:PutIntent</code> action.</p>'
+      description: '<p>Creates an intent or replaces an existing intent.</p> <p>To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an <code>OrderPizza</code> intent. </p> <p>To create an intent or replace an existing intent, you must provide the following:</p> <ul> <li> <p>Intent name. For example, <code>OrderPizza</code>.</p> </li> <li> <p>Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."</p> </li> <li> <p>Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.</p> </li> <li> <p>How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application. </p> </li> </ul> <p>You can specify other optional information in the request, such as:</p> <ul> <li> <p>A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"</p> </li> <li> <p>A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"</p> </li> </ul> <p>If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the <code>$LATEST</code> version of the intent with the values in the request. Amazon Lex removes fields that you don''t provide in the request. If you don''t specify the required fields, Amazon Lex throws an exception. When you update the <code>$LATEST</code> version of an intent, the <code>status</code> field of any bot that uses the <code>$LATEST</code> version of the intent is set to <code>NOT_BUILT</code>.</p> <p>For more information, see <a>how-it-works</a>.</p> <p>This operation requires permissions for the <code>lex:PutIntent</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -1511,6 +1873,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1524,7 +1890,7 @@ paths:
   '/slottypes/{name}/versions/$LATEST':
     put:
       operationId: PutSlotType
-      description: '<p>Creates a custom slot type or replaces an existing custom slot type.</p> <p>To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see <a>how-it-works</a>.</p> <p>If you specify the name of an existing slot type, the fields in the request replace the existing values in the <code>$LATEST</code> version of the slot type. Amazon Lex removes the fields that you don''t provide in the request. If you don''t specify required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutSlotType</code> action.</p>'
+      description: '<p>Creates a custom slot type or replaces an existing custom slot type.</p> <p>To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see <a>how-it-works</a>.</p> <p>If you specify the name of an existing slot type, the fields in the request replace the existing values in the <code>$LATEST</code> version of the slot type. Amazon Lex removes the fields that you don''t provide in the request. If you don''t specify required fields, Amazon Lex throws an exception. When you update the <code>$LATEST</code> version of a slot type, if a bot uses the <code>$LATEST</code> version of an intent that contains the slot type, the bot''s <code>status</code> field is set to <code>NOT_BUILT</code>.</p> <p>This operation requires permissions for the <code>lex:PutSlotType</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -1560,6 +1926,47 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /imports/:
+    post:
+      operationId: StartImport
+      description: Starts a job to import a resource to Amazon Lex.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartImportResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartImportRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1573,12 +1980,12 @@ paths:
 definitions:
   AliasName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
     maxLength: 100
   AliasNameOrListAll:
     type: string
-    pattern: '^(-|^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*))$'
+    pattern: '^(-|^([A-Za-z]_?)+$)$'
     minLength: 1
     maxLength: 100
   BadRequestException:
@@ -1587,6 +1994,8 @@ definitions:
       message:
         $ref: '#/definitions/String'
     description: 'The request is not well formed. For example, a value is invalid or a required field is missing. Check the field values, and try again.'
+  Blob:
+    type: string
   Boolean:
     type: boolean
   BotAliasMetadata:
@@ -1642,6 +2051,12 @@ definitions:
       botConfiguration:
         $ref: '#/definitions/ChannelConfigurationMap'
         description: 'Provides information necessary to communicate with the messaging platform. '
+      status:
+        $ref: '#/definitions/ChannelStatus'
+        description: '<p>The status of the bot channel. </p> <ul> <li> <p> <code>CREATED</code> - The channel has been created and is ready for use.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Channel creation is in progress.</p> </li> <li> <p> <code>FAILED</code> - There was an error creating the channel. For information about the reason for the failure, see the <code>failureReason</code> field.</p> </li> </ul>'
+      failureReason:
+        $ref: '#/definitions/String'
+        description: 'If <code>status</code> is <code>FAILED</code>, Amazon Lex provides the reason that it failed to create the association.'
     description: Represents an association between an Amazon Lex bot and an external messaging platform.
   BotChannelAssociationList:
     type: array
@@ -1649,7 +2064,7 @@ definitions:
       $ref: '#/definitions/BotChannelAssociation'
   BotChannelName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
     maxLength: 100
   BotMetadata:
@@ -1680,7 +2095,7 @@ definitions:
       $ref: '#/definitions/BotMetadata'
   BotName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 2
     maxLength: 50
   BotVersions:
@@ -1743,12 +2158,19 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/String'
+  ChannelStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - CREATED
+      - FAILED
   ChannelType:
     type: string
     enum:
       - Facebook
       - Slack
       - Twilio-Sms
+      - Kik
   CodeHook:
     type: object
     required:
@@ -1777,6 +2199,7 @@ definitions:
     enum:
       - PlainText
       - SSML
+      - CustomPayload
   Count:
     type: integer
   CreateBotVersionRequest:
@@ -1917,9 +2340,12 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the <code>$LATEST</code> version of the slot type.
+      valueSelectionStrategy:
+        $ref: '#/definitions/SlotValueSelectionStrategy'
+        description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
   CustomOrBuiltinSlotTypeName:
     type: string
-    pattern: '^([a-zA-Z]|AMAZON.)+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^((AMAZON\.)_?|[A-Za-z]_?)+'
     minLength: 1
     maxLength: 100
   DeleteBotAliasRequest:
@@ -1961,6 +2387,9 @@ definitions:
       value:
         $ref: '#/definitions/Value'
         description: The value of the slot type.
+      synonyms:
+        $ref: '#/definitions/SynonymList'
+        description: Additional values related to the slot type value.
     description: '<p>Each slot type can have a set of values. Each enumeration value represents a value the slot type can take. </p> <p>For example, a pizza ordering bot could have a slot type that specifies the type of crust that the pizza should have. The slot type could include the values </p> <ul> <li> <p>thick</p> </li> <li> <p>thin</p> </li> <li> <p>stuffed</p> </li> </ul>'
   EnumerationValues:
     type: array
@@ -1968,6 +2397,17 @@ definitions:
       $ref: '#/definitions/EnumerationValue'
     minItems: 1
     maxItems: 10000
+  ExportStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - READY
+      - FAILED
+  ExportType:
+    type: string
+    enum:
+      - ALEXA_SKILLS_KIT
+      - LEX
   FollowUpPrompt:
     type: object
     required:
@@ -2064,6 +2504,12 @@ definitions:
       botConfiguration:
         $ref: '#/definitions/ChannelConfigurationMap'
         description: Provides information that the messaging platform needs to communicate with the Amazon Lex bot.
+      status:
+        $ref: '#/definitions/ChannelStatus'
+        description: '<p>The status of the bot channel. </p> <ul> <li> <p> <code>CREATED</code> - The channel has been created and is ready for use.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Channel creation is in progress.</p> </li> <li> <p> <code>FAILED</code> - There was an error creating the channel. For information about the reason for the failure, see the <code>failureReason</code> field.</p> </li> </ul>'
+      failureReason:
+        $ref: '#/definitions/String'
+        description: 'If <code>status</code> is <code>FAILED</code>, Amazon Lex provides the reason that it failed to create the association.'
   GetBotChannelAssociationsRequest:
     type: object
     properties: {}
@@ -2231,6 +2677,60 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the response is truncated, the response includes a pagination token that you can use in your next request to fetch the next page of slot types.'
+  GetExportRequest:
+    type: object
+    properties: {}
+  GetExportResponse:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the bot being exported.
+      version:
+        $ref: '#/definitions/NumericalVersion'
+        description: The version of the bot being exported.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the exported resource.
+      exportType:
+        $ref: '#/definitions/ExportType'
+        description: The format of the exported data.
+      exportStatus:
+        $ref: '#/definitions/ExportStatus'
+        description: <p>The status of the export. </p> <ul> <li> <p> <code>IN_PROGRESS</code> - The export is in progress.</p> </li> <li> <p> <code>READY</code> - The export is complete.</p> </li> <li> <p> <code>FAILED</code> - The export could not be completed.</p> </li> </ul>
+      failureReason:
+        $ref: '#/definitions/String'
+        description: 'If <code>status</code> is <code>FAILED</code>, Amazon Lex provides the reason that it failed to export the resource.'
+      url:
+        $ref: '#/definitions/String'
+        description: An S3 pre-signed URL that provides the location of the exported resource. The exported resource is a ZIP archive that contains the exported resource in JSON format. The structure of the archive may change. Your code should not rely on the archive structure.
+  GetImportRequest:
+    type: object
+    properties: {}
+  GetImportResponse:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name given to the import job.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource imported.
+      mergeStrategy:
+        $ref: '#/definitions/MergeStrategy'
+        description: The action taken when there was a conflict between an existing resource and a resource in the import file.
+      importId:
+        $ref: '#/definitions/String'
+        description: The identifier for the specific import job.
+      importStatus:
+        $ref: '#/definitions/ImportStatus'
+        description: 'The status of the import job. If the status is <code>FAILED</code>, you can get the reason for the failure from the <code>failureReason</code> field.'
+      failureReason:
+        $ref: '#/definitions/StringList'
+        description: A string that describes why an import job failed to complete.
+      createdDate:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp for the date and time that the import job was created.
   GetIntentRequest:
     type: object
     example:
@@ -2443,6 +2943,9 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the <code>$LATEST</code> version of the slot type.
+      valueSelectionStrategy:
+        $ref: '#/definitions/SlotValueSelectionStrategy'
+        description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
   GetSlotTypeVersionsRequest:
     type: object
     properties: {}
@@ -2499,6 +3002,16 @@ definitions:
       utterances:
         $ref: '#/definitions/ListsOfUtterances'
         description: 'An array of <a>UtteranceList</a> objects, each containing a list of <a>UtteranceData</a> objects describing the utterances that were processed by your bot. The response contains a maximum of 100 <code>UtteranceData</code> objects for each version.'
+  GroupNumber:
+    type: integer
+    minimum: 1
+    maximum: 5
+  ImportStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETE
+      - FAILED
   Intent:
     type: object
     required:
@@ -2516,8 +3029,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Intent'
-    minItems: 1
-    maxItems: 100
   IntentMetadata:
     type: object
     properties:
@@ -2543,7 +3054,7 @@ definitions:
       $ref: '#/definitions/IntentMetadata'
   IntentName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
     maxLength: 100
   IntentUtteranceList:
@@ -2581,6 +3092,8 @@ definitions:
     type: string
     enum:
       - en-US
+      - en-GB
+      - de-DE
   LocaleList:
     type: array
     items:
@@ -2589,6 +3102,11 @@ definitions:
     type: integer
     minimum: 1
     maximum: 50
+  MergeStrategy:
+    type: string
+    enum:
+      - OVERWRITE_LATEST
+      - FAIL_ON_CONFLICT
   Message:
     type: object
     required:
@@ -2601,22 +3119,25 @@ definitions:
       content:
         $ref: '#/definitions/ContentString'
         description: The text of the message.
+      groupNumber:
+        $ref: '#/definitions/GroupNumber'
+        description: 'Identifies the message group that the message belongs to. When a group is assigned to a message, Amazon Lex returns one message from each group in the response.'
     description: The message object that provides the message text and its type.
   MessageList:
     type: array
     items:
       $ref: '#/definitions/Message'
     minItems: 1
-    maxItems: 5
+    maxItems: 15
   MessageVersion:
     type: string
     minLength: 1
     maxLength: 5
   Name:
     type: string
-    pattern: '[a-zA-Z]+'
+    pattern: '[a-zA-Z_]+'
     minLength: 1
-    maxLength: 64
+    maxLength: 100
   NextToken:
     type: string
   NotFoundException:
@@ -2755,13 +3276,15 @@ definitions:
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new bot, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a bot, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
       processBehavior:
         $ref: '#/definitions/ProcessBehavior'
-        description: '<p>If you set the <code>processBehavior</code> element to <code>Build</code>, Amazon Lex builds the bot so that it can be run. If you set the element to <code>Save</code>Amazon Lex saves the bot, but doesn''t build it. </p> <p>If you don''t specify this value, the default value is <code>Save</code>.</p>'
+        description: '<p>If you set the <code>processBehavior</code> element to <code>BUILD</code>, Amazon Lex builds the bot so that it can be run. If you set the element to <code>SAVE</code> Amazon Lex saves the bot, but doesn''t build it. </p> <p>If you don''t specify this value, the default value is <code>BUILD</code>.</p>'
       locale:
         $ref: '#/definitions/Locale'
         description: <p> Specifies the target locale for the bot. Any intent used in the bot must be compatible with the locale of the bot. </p> <p>The default is <code>en-US</code>.</p>
       childDirected:
         $ref: '#/definitions/Boolean'
         description: '<p>For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA.</p> <p>If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ.</a> </p>'
+      createVersion:
+        $ref: '#/definitions/Boolean'
   PutBotResponse:
     type: object
     example:
@@ -2837,6 +3360,8 @@ definitions:
       childDirected:
         $ref: '#/definitions/Boolean'
         description: '<p>For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA.</p> <p>If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ.</a> </p>'
+      createVersion:
+        $ref: '#/definitions/Boolean'
   PutIntentRequest:
     type: object
     example:
@@ -2925,7 +3450,7 @@ definitions:
         description: A description of the intent.
       slots:
         $ref: '#/definitions/SlotList'
-        description: 'An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see &lt;xref linkend="how-it-works"/&gt;. '
+        description: 'An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see <a>how-it-works</a>. '
       sampleUtterances:
         $ref: '#/definitions/IntentUtteranceList'
         description: '<p>An array of utterances (strings) that a user might say to signal the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas". </p> <p>In each utterance, a slot name is enclosed in curly braces. </p>'
@@ -2946,13 +3471,15 @@ definitions:
         description: '<p> Specifies a Lambda function to invoke for each user input. You can invoke this Lambda function to personalize user interaction. </p> <p>For example, suppose your bot determines that the user is John. Your Lambda function might retrieve John''s information from a backend database and prepopulate some of the values. For example, if you find that John is gluten intolerant, you might set the corresponding intent slot, <code>GlutenIntolerant</code>, to true. You might find John''s phone number and set the corresponding session attribute. </p>'
       fulfillmentActivity:
         $ref: '#/definitions/FulfillmentActivity'
-        description: '<p> Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, <code>fulfillmentActivity</code> defines how the bot places an order with a local pizza store. </p> <p> You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). </p>'
+        description: '<p>Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, <code>fulfillmentActivity</code> defines how the bot places an order with a local pizza store. </p> <p> You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). </p>'
       parentIntentSignature:
         $ref: '#/definitions/BuiltinIntentSignature'
         description: 'A unique identifier for the built-in intent to base this intent on. To find the signature for an intent, see <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents">Standard Built-in Intents</a> in the <i>Alexa Skills Kit</i>.'
       checksum:
         $ref: '#/definitions/String'
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new intent, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a intent, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
+      createVersion:
+        $ref: '#/definitions/Boolean'
   PutIntentResponse:
     type: object
     example:
@@ -3085,6 +3612,8 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the <code>$LATEST</code>version of the intent created or updated.
+      createVersion:
+        $ref: '#/definitions/Boolean'
   PutSlotTypeRequest:
     type: object
     example:
@@ -3099,10 +3628,15 @@ definitions:
         description: A description of the slot type.
       enumerationValues:
         $ref: '#/definitions/EnumerationValues'
-        description: A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take.
+        description: '<p>A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take. Each value can have a list of <code>synonyms</code>, which are additional values that help train the machine learning model about the values that it resolves for a slot. </p> <p>When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The <code>valueSelectionStrategy</code> field indicates the option to use. </p>'
       checksum:
         $ref: '#/definitions/String'
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new slot type, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a slot type, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
+      valueSelectionStrategy:
+        $ref: '#/definitions/SlotValueSelectionStrategy'
+        description: '<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
+      createVersion:
+        $ref: '#/definitions/Boolean'
   PutSlotTypeResponse:
     type: object
     example:
@@ -3137,6 +3671,11 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the <code>$LATEST</code> version of the slot type.
+      valueSelectionStrategy:
+        $ref: '#/definitions/SlotValueSelectionStrategy'
+        description: 'The slot resolution strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
+      createVersion:
+        $ref: '#/definitions/Boolean'
   ReferenceType:
     type: string
     enum:
@@ -3162,6 +3701,12 @@ definitions:
         $ref: '#/definitions/Version'
         description: The version of the resource that is using the resource that you are trying to delete.
     description: 'Describes the resource that refers to the resource that you are attempting to delete. This object is returned as part of the <code>ResourceInUseException</code> exception. '
+  ResourceType:
+    type: string
+    enum:
+      - BOT
+      - INTENT
+      - SLOT_TYPE
   ResponseCard:
     type: string
     minLength: 1
@@ -3217,7 +3762,7 @@ definitions:
     maxItems: 100
   SlotName:
     type: string
-    pattern: '^[a-zA-Z]+(((_|.)[a-zA-Z]+)*|([a-zA-Z]+(_|.))*|(_|.))'
+    pattern: '^([A-Za-z](-|_|.)?)+$'
     minLength: 1
     maxLength: 100
   SlotTypeMetadata:
@@ -3245,7 +3790,7 @@ definitions:
       $ref: '#/definitions/SlotTypeMetadata'
   SlotTypeName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
     maxLength: 100
   SlotUtteranceList:
@@ -3254,6 +3799,48 @@ definitions:
       $ref: '#/definitions/Utterance'
     minItems: 0
     maxItems: 10
+  SlotValueSelectionStrategy:
+    type: string
+    enum:
+      - ORIGINAL_VALUE
+      - TOP_RESOLUTION
+  StartImportRequest:
+    type: object
+    required:
+      - payload
+      - resourceType
+      - mergeStrategy
+    properties:
+      payload:
+        $ref: '#/definitions/Blob'
+        description: 'A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the <code>resourceType</code> field.'
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: <p>Specifies the type of resource to export. Each resource also exports any resources that it depends on. </p> <ul> <li> <p>A bot exports dependent intents.</p> </li> <li> <p>An intent exports dependent slot types.</p> </li> </ul>
+      mergeStrategy:
+        $ref: '#/definitions/MergeStrategy'
+        description: <p>Specifies the action that the <code>StartImport</code> operation should take when there is an existing resource with the same name.</p> <ul> <li> <p>FAIL_ON_CONFLICT - The import operation is stopped on the first conflict between a resource in the import file and an existing resource. The name of the resource causing the conflict is in the <code>failureReason</code> field of the response to the <code>GetImport</code> operation.</p> <p>OVERWRITE_LATEST - The import operation proceeds even if there is a conflict with an existing resource. The $LASTEST version of the existing resource is overwritten with the data from the import file.</p> </li> </ul>
+  StartImportResponse:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name given to the import job.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource to import.
+      mergeStrategy:
+        $ref: '#/definitions/MergeStrategy'
+        description: The action to take when there is a merge conflict.
+      importId:
+        $ref: '#/definitions/String'
+        description: The identifier for the specific import job.
+      importStatus:
+        $ref: '#/definitions/ImportStatus'
+        description: 'The status of the import job. If the status is <code>FAILED</code>, you can get the reason for the failure using the <code>GetImport</code> operation.'
+      createdDate:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp for the date and time that the import job was requested.
   Statement:
     type: object
     required:
@@ -3280,6 +3867,14 @@ definitions:
       - Missed
   String:
     type: string
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SynonymList:
+    type: array
+    items:
+      $ref: '#/definitions/Value'
   Timestamp:
     type: string
     format: date-time

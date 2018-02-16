@@ -17,13 +17,13 @@ info:
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-apisguru-categories:
-    - prediction
+    - machine_learning
   x-logo:
     url: 'https://www.google.com/images/icons/feature/predictionapi-64.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/prediction/v1.5/rest'
       version: v1
@@ -111,15 +111,15 @@ paths:
       description: Submit input and request an output against a hosted model.
       operationId: prediction.hostedmodels.predict
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Input'
         - description: The name of a hosted model.
           in: path
           name: hostedModelName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Input'
       responses:
         '200':
           description: Successful response
@@ -260,15 +260,15 @@ paths:
       description: Add new data to a trained model.
       operationId: prediction.trainedmodels.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Update'
         - description: The unique name for the predictive model.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Update'
       responses:
         '200':
           description: Successful response
@@ -324,15 +324,15 @@ paths:
       description: Submit model id and request a prediction.
       operationId: prediction.trainedmodels.predict
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Input'
         - description: The unique name for the predictive model.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Input'
       responses:
         '200':
           description: Successful response

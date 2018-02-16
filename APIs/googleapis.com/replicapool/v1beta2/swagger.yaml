@@ -16,12 +16,14 @@ info:
   version: v1beta2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/replicapool/v1beta2/rest'
       version: v1
@@ -101,16 +103,6 @@ paths:
       description: Retrieves the list of Instance Group Manager resources contained within the specified zone.
       operationId: replicapool.instanceGroupManagers.list
       parameters:
-        - description: The Google Developers Console project name.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone in which the instance group manager resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: Optional. Filter expression for filtering listed resources.
           in: query
           name: filter
@@ -125,6 +117,16 @@ paths:
         - description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: The Google Developers Console project name.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone in which the instance group manager resides.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -162,14 +164,13 @@ paths:
       description: 'Creates an instance group manager, as well as the instance group and the specified number of instances.'
       operationId: replicapool.instanceGroupManagers.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManager'
         - description: The Google Developers Console project name.
           in: path
           name: project
-          required: true
-          type: string
-        - description: The name of the zone in which the instance group manager resides.
-          in: path
-          name: zone
           required: true
           type: string
         - description: Number of instances that should exist.
@@ -178,10 +179,11 @@ paths:
           name: size
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstanceGroupManager'
+        - description: The name of the zone in which the instance group manager resides.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -203,6 +205,11 @@ paths:
       description: 'Deletes the instance group manager and all instances contained within. If you''d like to delete the manager without deleting the instances, you must first abandon the instances to remove them from the group.'
       operationId: replicapool.instanceGroupManagers.delete
       parameters:
+        - description: Name of the Instance Group Manager resource to delete.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -211,11 +218,6 @@ paths:
         - description: The name of the zone in which the instance group manager resides.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the Instance Group Manager resource to delete.
-          in: path
-          name: instanceGroupManager
           required: true
           type: string
       responses:
@@ -238,6 +240,11 @@ paths:
       description: Returns the specified Instance Group Manager resource.
       operationId: replicapool.instanceGroupManagers.get
       parameters:
+        - description: Name of the instance resource to return.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -246,11 +253,6 @@ paths:
         - description: The name of the zone in which the instance group manager resides.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the instance resource to return.
-          in: path
-          name: instanceGroupManager
           required: true
           type: string
       responses:
@@ -298,6 +300,15 @@ paths:
       description: 'Removes the specified instances from the managed instance group, and from any target pools of which they were members, without deleting the instances.'
       operationId: replicapool.instanceGroupManagers.abandonInstances
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManagersAbandonInstancesRequest'
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -308,15 +319,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the instance group manager.
-          in: path
-          name: instanceGroupManager
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstanceGroupManagersAbandonInstancesRequest'
       responses:
         '200':
           description: Successful response
@@ -346,6 +348,15 @@ paths:
       description: 'Deletes the specified instances. The instances are deleted, then removed from the instance group and any target pools of which they were a member. The targetSize of the instance group manager is reduced by the number of instances deleted.'
       operationId: replicapool.instanceGroupManagers.deleteInstances
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManagersDeleteInstancesRequest'
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -356,15 +367,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the instance group manager.
-          in: path
-          name: instanceGroupManager
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstanceGroupManagersDeleteInstancesRequest'
       responses:
         '200':
           description: Successful response
@@ -394,6 +396,15 @@ paths:
       description: 'Recreates the specified instances. The instances are deleted, then recreated using the instance group manager''s current instance template.'
       operationId: replicapool.instanceGroupManagers.recreateInstances
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManagersRecreateInstancesRequest'
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -404,15 +415,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the instance group manager.
-          in: path
-          name: instanceGroupManager
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstanceGroupManagersRecreateInstancesRequest'
       responses:
         '200':
           description: Successful response
@@ -442,19 +444,14 @@ paths:
       description: 'Resizes the managed instance group up or down. If resized up, new instances are created using the current instance template. If resized down, instances are removed in the order outlined in Resizing a managed instance group.'
       operationId: replicapool.instanceGroupManagers.resize
       parameters:
-        - description: The Google Developers Console project name.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone in which the instance group manager resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the instance group manager.
           in: path
           name: instanceGroupManager
+          required: true
+          type: string
+        - description: The Google Developers Console project name.
+          in: path
+          name: project
           required: true
           type: string
         - description: Number of instances that should exist in this Instance Group Manager.
@@ -463,6 +460,11 @@ paths:
           name: size
           required: true
           type: integer
+        - description: The name of the zone in which the instance group manager resides.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -492,6 +494,15 @@ paths:
       description: Sets the instance template to use when creating new instances in this group. Existing instances are not affected.
       operationId: replicapool.instanceGroupManagers.setInstanceTemplate
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManagersSetInstanceTemplateRequest'
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -502,15 +513,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the instance group manager.
-          in: path
-          name: instanceGroupManager
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstanceGroupManagersSetInstanceTemplateRequest'
       responses:
         '200':
           description: Successful response
@@ -540,6 +542,15 @@ paths:
       description: Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.
       operationId: replicapool.instanceGroupManagers.setTargetPools
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManagersSetTargetPoolsRequest'
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -550,15 +561,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the instance group manager.
-          in: path
-          name: instanceGroupManager
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstanceGroupManagersSetTargetPoolsRequest'
       responses:
         '200':
           description: Successful response
@@ -580,16 +582,6 @@ paths:
       description: Retrieves the list of operation resources contained within the specified zone.
       operationId: replicapool.zoneOperations.list
       parameters:
-        - description: Name of the project scoping this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone scoping this request.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: Optional. Filter expression for filtering listed resources.
           in: query
           name: filter
@@ -604,6 +596,16 @@ paths:
         - description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Name of the project scoping this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the zone scoping this request.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -634,6 +636,11 @@ paths:
       description: Retrieves the specified zone-specific operation resource.
       operationId: replicapool.zoneOperations.get
       parameters:
+        - description: Name of the operation resource to return.
+          in: path
+          name: operation
+          required: true
+          type: string
         - description: Name of the project scoping this request.
           in: path
           name: project
@@ -642,11 +649,6 @@ paths:
         - description: Name of the zone scoping this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the operation resource to return.
-          in: path
-          name: operation
           required: true
           type: string
       responses:

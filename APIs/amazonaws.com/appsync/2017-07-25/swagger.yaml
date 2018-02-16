@@ -1,0 +1,1968 @@
+swagger: '2.0'
+info:
+  version: '2017-07-25'
+  x-release: v4
+  title: AWS AppSync
+  description: AWS AppSync provides API actions for creating and interacting with data sources using GraphQL from your application.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: appsync
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/appsync-2017-07-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/appsync/'
+host: appsync.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/v1/apis/{apiId}/apikeys':
+    post:
+      operationId: CreateApiKey
+      description: Creates a unique key that you can distribute to clients who are executing your API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateApiKeyResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '486':
+          description: ApiKeyLimitExceededException
+          schema:
+            $ref: '#/definitions/ApiKeyLimitExceededException'
+        '487':
+          description: ApiKeyValidityOutOfBoundsException
+          schema:
+            $ref: '#/definitions/ApiKeyValidityOutOfBoundsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateApiKeyRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListApiKeys
+      description: Lists the API keys for a given API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListApiKeysResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListApiKeysRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+  '/v1/apis/{apiId}/datasources':
+    post:
+      operationId: CreateDataSource
+      description: Creates a <code>DataSource</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDataSourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDataSourceRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDataSources
+      description: Lists the data sources for a given API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDataSourcesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDataSourcesRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+  /v1/apis:
+    post:
+      operationId: CreateGraphqlApi
+      description: Creates a <code>GraphqlApi</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateGraphqlApiResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '486':
+          description: ApiLimitExceededException
+          schema:
+            $ref: '#/definitions/ApiLimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateGraphqlApiRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListGraphqlApis
+      description: Lists your GraphQL APIs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListGraphqlApisResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListGraphqlApisRequest'
+  '/v1/apis/{apiId}/types/{typeName}/resolvers':
+    post:
+      operationId: CreateResolver
+      description: <p>Creates a <code>Resolver</code> object.</p> <p>A resolver converts incoming requests into a format that a data source can understand and converts the data source's responses into GraphQL.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateResolverResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateResolverRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: typeName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListResolvers
+      description: Lists the resolvers for a given API and type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListResolversResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResolversRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: typeName
+          in: path
+          type: string
+          required: true
+  '/v1/apis/{apiId}/types':
+    post:
+      operationId: CreateType
+      description: Creates a <code>Type</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTypeResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTypeRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListTypes
+      description: Lists the types for a given API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTypesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTypesRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+  '/v1/apis/{apiId}/apikeys/{id}':
+    delete:
+      operationId: DeleteApiKey
+      description: Deletes an API key.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApiKeyResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApiKeyRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateApiKey
+      description: Updates an API key.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApiKeyResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: ApiKeyValidityOutOfBoundsException
+          schema:
+            $ref: '#/definitions/ApiKeyValidityOutOfBoundsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApiKeyRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: id
+          in: path
+          type: string
+          required: true
+  '/v1/apis/{apiId}/datasources/{name}':
+    delete:
+      operationId: DeleteDataSource
+      description: Deletes a <code>DataSource</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDataSourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDataSourceRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetDataSource
+      description: Retrieves a <code>DataSource</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDataSourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDataSourceRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: UpdateDataSource
+      description: Updates a <code>DataSource</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDataSourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDataSourceRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: path
+          type: string
+          required: true
+  '/v1/apis/{apiId}':
+    delete:
+      operationId: DeleteGraphqlApi
+      description: Deletes a <code>GraphqlApi</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteGraphqlApiResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteGraphqlApiRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetGraphqlApi
+      description: Retrieves a <code>GraphqlApi</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetGraphqlApiResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetGraphqlApiRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: UpdateGraphqlApi
+      description: Updates a <code>GraphqlApi</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateGraphqlApiResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateGraphqlApiRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+  '/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}':
+    delete:
+      operationId: DeleteResolver
+      description: Deletes a <code>Resolver</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteResolverResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResolverRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: typeName
+          in: path
+          type: string
+          required: true
+        - name: fieldName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetResolver
+      description: Retrieves a <code>Resolver</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetResolverResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetResolverRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: typeName
+          in: path
+          type: string
+          required: true
+        - name: fieldName
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: UpdateResolver
+      description: Updates a <code>Resolver</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateResolverResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateResolverRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: typeName
+          in: path
+          type: string
+          required: true
+        - name: fieldName
+          in: path
+          type: string
+          required: true
+  '/v1/apis/{apiId}/types/{typeName}':
+    delete:
+      operationId: DeleteType
+      description: Deletes a <code>Type</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTypeResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTypeRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: typeName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetType
+      description: Retrieves a <code>Type</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTypeResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetTypeRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: typeName
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: UpdateType
+      description: Updates a <code>Type</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTypeResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTypeRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: typeName
+          in: path
+          type: string
+          required: true
+  '/v1/apis/{apiId}/schema':
+    get:
+      operationId: GetIntrospectionSchema
+      description: Retrieves the introspection schema for a GraphQL API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetIntrospectionSchemaResponse'
+        '480':
+          description: GraphQLSchemaException
+          schema:
+            $ref: '#/definitions/GraphQLSchemaException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetIntrospectionSchemaRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apis/{apiId}/schemacreation':
+    get:
+      operationId: GetSchemaCreationStatus
+      description: Retrieves the current status of a schema creation operation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSchemaCreationStatusResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSchemaCreationStatusRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartSchemaCreation
+      description: <p>Adds a new schema to your GraphQL API.</p> <p>This operation is asynchronous. Use to determine when it has completed.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartSchemaCreationResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartSchemaCreationRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+definitions:
+  ApiKey:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/String'
+        description: The API key ID.
+      description:
+        $ref: '#/definitions/String'
+        description: A description of the purpose of the API key.
+      expires:
+        $ref: '#/definitions/Long'
+        description: 'The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.'
+    description: Describes an API key.
+  ApiKeyLimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The API key exceeded a limit. Try your request again.
+  ApiKeyValidityOutOfBoundsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The API key expiration must be set to a value between 1 and 365 days.
+  ApiKeys:
+    type: array
+    items:
+      $ref: '#/definitions/ApiKey'
+  ApiLimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The GraphQL API exceeded a limit. Try your request again.
+  AuthenticationType:
+    type: string
+    enum:
+      - API_KEY
+      - AWS_IAM
+      - AMAZON_COGNITO_USER_POOLS
+  BadRequestException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The request is not well formed. For example, a value is invalid or a required field is missing. Check the field values, and try again. '
+  Blob:
+    type: string
+  Boolean:
+    type: boolean
+  ConcurrentModificationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Another modification is being made. That modification must complete before you can make your change. '
+  CreateApiKeyRequest:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/String'
+        description: A description of the purpose of the API key.
+      expires:
+        $ref: '#/definitions/Long'
+        description: 'The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time.'
+  CreateApiKeyResponse:
+    type: object
+    properties:
+      apiKey:
+        $ref: '#/definitions/ApiKey'
+        description: The API key.
+  CreateDataSourceRequest:
+    type: object
+    required:
+      - name
+      - type
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: A user-supplied name for the <code>DataSource</code>.
+      description:
+        $ref: '#/definitions/String'
+        description: A description of the <code>DataSource</code>.
+      type:
+        $ref: '#/definitions/DataSourceType'
+        description: The type of the <code>DataSource</code>.
+      serviceRoleArn:
+        $ref: '#/definitions/String'
+        description: The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+      dynamodbConfig:
+        $ref: '#/definitions/DynamodbDataSourceConfig'
+        description: DynamoDB settings.
+      lambdaConfig:
+        $ref: '#/definitions/LambdaDataSourceConfig'
+        description: AWS Lambda settings.
+      elasticsearchConfig:
+        $ref: '#/definitions/ElasticsearchDataSourceConfig'
+        description: Amazon Elasticsearch settings.
+  CreateDataSourceResponse:
+    type: object
+    properties:
+      dataSource:
+        $ref: '#/definitions/DataSource'
+        description: The <code>DataSource</code> object.
+  CreateGraphqlApiRequest:
+    type: object
+    required:
+      - name
+      - authenticationType
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: A user-supplied name for the <code>GraphqlApi</code>.
+      authenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: 'The authentication type: API key, IAM, or Amazon Cognito User Pools.'
+      userPoolConfig:
+        $ref: '#/definitions/UserPoolConfig'
+        description: The Amazon Cognito User Pool configuration.
+  CreateGraphqlApiResponse:
+    type: object
+    properties:
+      graphqlApi:
+        $ref: '#/definitions/GraphqlApi'
+        description: The <code>GraphqlApi</code>.
+  CreateResolverRequest:
+    type: object
+    required:
+      - fieldName
+      - dataSourceName
+      - requestMappingTemplate
+    properties:
+      fieldName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the field to attach the resolver to.
+      dataSourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the data source for which the resolver is being created.
+      requestMappingTemplate:
+        $ref: '#/definitions/MappingTemplate'
+        description: <p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>
+      responseMappingTemplate:
+        $ref: '#/definitions/MappingTemplate'
+        description: The mapping template to be used for responses from the data source.
+  CreateResolverResponse:
+    type: object
+    properties:
+      resolver:
+        $ref: '#/definitions/Resolver'
+        description: The <code>Resolver</code> object.
+  CreateTypeRequest:
+    type: object
+    required:
+      - definition
+      - format
+    properties:
+      definition:
+        $ref: '#/definitions/String'
+        description: '<p>The type definition, in GraphQL Schema Definition Language (SDL) format.</p> <p>For more information, see the <a href="http://graphql.org/learn/schema/">GraphQL SDL documentation</a>.</p>'
+      format:
+        $ref: '#/definitions/TypeDefinitionFormat'
+        description: 'The type format: SDL or JSON.'
+  CreateTypeResponse:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/Type'
+        description: The <code>Type</code> object.
+  DataSource:
+    type: object
+    properties:
+      dataSourceArn:
+        $ref: '#/definitions/String'
+        description: The data source ARN.
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the data source.
+      description:
+        $ref: '#/definitions/String'
+        description: The description of the data source.
+      type:
+        $ref: '#/definitions/DataSourceType'
+        description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when the required information can be computed on the fly without connecting to a back-end data source.</p> </li> </ul>'
+      serviceRoleArn:
+        $ref: '#/definitions/String'
+        description: The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+      dynamodbConfig:
+        $ref: '#/definitions/DynamodbDataSourceConfig'
+        description: DynamoDB settings.
+      lambdaConfig:
+        $ref: '#/definitions/LambdaDataSourceConfig'
+        description: Lambda settings.
+      elasticsearchConfig:
+        $ref: '#/definitions/ElasticsearchDataSourceConfig'
+        description: Amazon Elasticsearch settings.
+    description: Describes a data source.
+  DataSourceType:
+    type: string
+    enum:
+      - AWS_LAMBDA
+      - AMAZON_DYNAMODB
+      - AMAZON_ELASTICSEARCH
+      - NONE
+  DataSources:
+    type: array
+    items:
+      $ref: '#/definitions/DataSource'
+  DefaultAction:
+    type: string
+    enum:
+      - ALLOW
+      - DENY
+  DeleteApiKeyRequest:
+    type: object
+    properties: {}
+  DeleteApiKeyResponse:
+    type: object
+    properties: {}
+  DeleteDataSourceRequest:
+    type: object
+    properties: {}
+  DeleteDataSourceResponse:
+    type: object
+    properties: {}
+  DeleteGraphqlApiRequest:
+    type: object
+    properties: {}
+  DeleteGraphqlApiResponse:
+    type: object
+    properties: {}
+  DeleteResolverRequest:
+    type: object
+    properties: {}
+  DeleteResolverResponse:
+    type: object
+    properties: {}
+  DeleteTypeRequest:
+    type: object
+    properties: {}
+  DeleteTypeResponse:
+    type: object
+    properties: {}
+  DynamodbDataSourceConfig:
+    type: object
+    required:
+      - tableName
+      - awsRegion
+    properties:
+      tableName:
+        $ref: '#/definitions/String'
+        description: The table name.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS region.
+      useCallerCredentials:
+        $ref: '#/definitions/Boolean'
+        description: Set to TRUE to use Amazon Cognito credentials with this data source.
+    description: Describes a DynamoDB data source configuration.
+  ElasticsearchDataSourceConfig:
+    type: object
+    required:
+      - endpoint
+      - awsRegion
+    properties:
+      endpoint:
+        $ref: '#/definitions/String'
+        description: The endpoint.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS region.
+    description: Describes an Elasticsearch data source configuration.
+  ErrorMessage:
+    type: string
+  GetDataSourceRequest:
+    type: object
+    properties: {}
+  GetDataSourceResponse:
+    type: object
+    properties:
+      dataSource:
+        $ref: '#/definitions/DataSource'
+        description: The <code>DataSource</code> object.
+  GetGraphqlApiRequest:
+    type: object
+    properties: {}
+  GetGraphqlApiResponse:
+    type: object
+    properties:
+      graphqlApi:
+        $ref: '#/definitions/GraphqlApi'
+        description: The <code>GraphqlApi</code> object.
+  GetIntrospectionSchemaRequest:
+    type: object
+    properties: {}
+  GetIntrospectionSchemaResponse:
+    type: object
+    properties:
+      schema:
+        $ref: '#/definitions/Blob'
+        description: '<p>The schema, in GraphQL Schema Definition Language (SDL) format.</p> <p>For more information, see the <a href="http://graphql.org/learn/schema/">GraphQL SDL documentation</a>.</p>'
+  GetResolverRequest:
+    type: object
+    properties: {}
+  GetResolverResponse:
+    type: object
+    properties:
+      resolver:
+        $ref: '#/definitions/Resolver'
+        description: The <code>Resolver</code> object.
+  GetSchemaCreationStatusRequest:
+    type: object
+    properties: {}
+  GetSchemaCreationStatusResponse:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/SchemaStatus'
+        description: 'The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.'
+      details:
+        $ref: '#/definitions/String'
+        description: Detailed information about the status of the schema creation operation.
+  GetTypeRequest:
+    type: object
+    properties: {}
+  GetTypeResponse:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/Type'
+        description: The <code>Type</code> object.
+  GraphQLSchemaException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The GraphQL schema is not valid.
+  GraphqlApi:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The API name.
+      apiId:
+        $ref: '#/definitions/String'
+        description: The API ID.
+      authenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type.
+      userPoolConfig:
+        $ref: '#/definitions/UserPoolConfig'
+        description: The Amazon Cognito User Pool configuration.
+      arn:
+        $ref: '#/definitions/String'
+        description: The ARN.
+      uris:
+        $ref: '#/definitions/MapOfStringToString'
+        description: The URIs.
+    description: Describes a GraphQL API.
+  GraphqlApis:
+    type: array
+    items:
+      $ref: '#/definitions/GraphqlApi'
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: An internal AWS AppSync error occurred. Try your request again.
+  LambdaDataSourceConfig:
+    type: object
+    required:
+      - lambdaFunctionArn
+    properties:
+      lambdaFunctionArn:
+        $ref: '#/definitions/String'
+        description: The ARN for the Lambda function.
+    description: Describes a Lambda data source configuration.
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The request exceeded a limit. Try your request again.
+  ListApiKeysRequest:
+    type: object
+    properties: {}
+  ListApiKeysResponse:
+    type: object
+    properties:
+      apiKeys:
+        $ref: '#/definitions/ApiKeys'
+        description: The <code>ApiKey</code> objects.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+  ListDataSourcesRequest:
+    type: object
+    properties: {}
+  ListDataSourcesResponse:
+    type: object
+    properties:
+      dataSources:
+        $ref: '#/definitions/DataSources'
+        description: The <code>DataSource</code> objects.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+  ListGraphqlApisRequest:
+    type: object
+    properties: {}
+  ListGraphqlApisResponse:
+    type: object
+    properties:
+      graphqlApis:
+        $ref: '#/definitions/GraphqlApis'
+        description: The <code>GraphqlApi</code> objects.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+  ListResolversRequest:
+    type: object
+    properties: {}
+  ListResolversResponse:
+    type: object
+    properties:
+      resolvers:
+        $ref: '#/definitions/Resolvers'
+        description: The <code>Resolver</code> objects.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+  ListTypesRequest:
+    type: object
+    properties: {}
+  ListTypesResponse:
+    type: object
+    properties:
+      types:
+        $ref: '#/definitions/TypeList'
+        description: The <code>Type</code> objects.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+  Long:
+    type: integer
+  MapOfStringToString:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  MappingTemplate:
+    type: string
+    minLength: 0
+    maxLength: 65536
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 25
+  NotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The resource specified in the request was not found. Check the resource and try again.
+  OutputType:
+    type: string
+    enum:
+      - SDL
+      - JSON
+  PaginationToken:
+    type: string
+    pattern: '[\\S]+'
+  Resolver:
+    type: object
+    properties:
+      typeName:
+        $ref: '#/definitions/ResourceName'
+        description: The resolver type name.
+      fieldName:
+        $ref: '#/definitions/ResourceName'
+        description: The resolver field name.
+      dataSourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The resolver data source name.
+      resolverArn:
+        $ref: '#/definitions/String'
+        description: The resolver ARN.
+      requestMappingTemplate:
+        $ref: '#/definitions/MappingTemplate'
+        description: The request mapping template.
+      responseMappingTemplate:
+        $ref: '#/definitions/MappingTemplate'
+        description: The response mapping template.
+    description: Describes a resolver.
+  Resolvers:
+    type: array
+    items:
+      $ref: '#/definitions/Resolver'
+  ResourceName:
+    type: string
+    pattern: '[_A-Za-z][_0-9A-Za-z]*'
+  SchemaStatus:
+    type: string
+    enum:
+      - PROCESSING
+      - ACTIVE
+      - DELETING
+  StartSchemaCreationRequest:
+    type: object
+    required:
+      - definition
+    properties:
+      definition:
+        $ref: '#/definitions/Blob'
+        description: 'The schema definition, in GraphQL schema language format.'
+  StartSchemaCreationResponse:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/SchemaStatus'
+        description: 'The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.'
+  String:
+    type: string
+  Type:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The type name.
+      description:
+        $ref: '#/definitions/String'
+        description: The type description.
+      arn:
+        $ref: '#/definitions/String'
+        description: The type ARN.
+      definition:
+        $ref: '#/definitions/String'
+        description: The type definition.
+      format:
+        $ref: '#/definitions/TypeDefinitionFormat'
+        description: 'The type format: SDL or JSON.'
+    description: Describes a type.
+  TypeDefinitionFormat:
+    type: string
+    enum:
+      - SDL
+      - JSON
+  TypeList:
+    type: array
+    items:
+      $ref: '#/definitions/Type'
+  UnauthorizedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: You are not authorized to perform this operation.
+  UpdateApiKeyRequest:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/String'
+        description: A description of the purpose of the API key.
+      expires:
+        $ref: '#/definitions/Long'
+        description: The time after which the API key expires. The date is represented as seconds since the epoch.
+  UpdateApiKeyResponse:
+    type: object
+    properties:
+      apiKey:
+        $ref: '#/definitions/ApiKey'
+        description: The API key.
+  UpdateDataSourceRequest:
+    type: object
+    required:
+      - type
+    properties:
+      description:
+        $ref: '#/definitions/String'
+        description: The new description for the data source.
+      type:
+        $ref: '#/definitions/DataSourceType'
+        description: The new data source type.
+      serviceRoleArn:
+        $ref: '#/definitions/String'
+        description: The new service role ARN for the data source.
+      dynamodbConfig:
+        $ref: '#/definitions/DynamodbDataSourceConfig'
+        description: The new DynamoDB configuration.
+      lambdaConfig:
+        $ref: '#/definitions/LambdaDataSourceConfig'
+        description: The new Lambda configuration.
+      elasticsearchConfig:
+        $ref: '#/definitions/ElasticsearchDataSourceConfig'
+        description: The new Elasticsearch configuration.
+  UpdateDataSourceResponse:
+    type: object
+    properties:
+      dataSource:
+        $ref: '#/definitions/DataSource'
+        description: The updated <code>DataSource</code> object.
+  UpdateGraphqlApiRequest:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: The new name for the <code>GraphqlApi</code> object.
+      authenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The new authentication type for the <code>GraphqlApi</code> object.
+      userPoolConfig:
+        $ref: '#/definitions/UserPoolConfig'
+        description: The new Amazon Cognito User Pool configuration for the <code>GraphqlApi</code> object.
+  UpdateGraphqlApiResponse:
+    type: object
+    properties:
+      graphqlApi:
+        $ref: '#/definitions/GraphqlApi'
+        description: The updated <code>GraphqlApi</code> object.
+  UpdateResolverRequest:
+    type: object
+    required:
+      - dataSourceName
+      - requestMappingTemplate
+    properties:
+      dataSourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The new data source name.
+      requestMappingTemplate:
+        $ref: '#/definitions/MappingTemplate'
+        description: The new request mapping template.
+      responseMappingTemplate:
+        $ref: '#/definitions/MappingTemplate'
+        description: The new response mapping template.
+  UpdateResolverResponse:
+    type: object
+    properties:
+      resolver:
+        $ref: '#/definitions/Resolver'
+        description: The updated <code>Resolver</code> object.
+  UpdateTypeRequest:
+    type: object
+    required:
+      - format
+    properties:
+      definition:
+        $ref: '#/definitions/String'
+        description: The new definition.
+      format:
+        $ref: '#/definitions/TypeDefinitionFormat'
+        description: 'The new type format: SDL or JSON.'
+  UpdateTypeResponse:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/Type'
+        description: The updated <code>Type</code> object.
+  UserPoolConfig:
+    type: object
+    required:
+      - userPoolId
+      - awsRegion
+      - defaultAction
+    properties:
+      userPoolId:
+        $ref: '#/definitions/String'
+        description: The user pool ID.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS region in which the user pool was created.
+      defaultAction:
+        $ref: '#/definitions/DefaultAction'
+        description: The action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication doesn't match the Amazon Cognito User Pool configuration.
+      appIdClientRegex:
+        $ref: '#/definitions/String'
+        description: A regular expression for validating the incoming Amazon Cognito User Pool app client ID.
+    description: Describes an Amazon Cognito User Pool configuration.

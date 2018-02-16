@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - analytics
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/tagmanager/v1/rest'
       version: v1
@@ -180,14 +182,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the account in storage.'
-          in: query
-          name: fingerprint
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Account'
+        - description: 'When provided, this fingerprint must match the fingerprint of the account in storage.'
+          in: query
+          name: fingerprint
+          type: string
       responses:
         '200':
           description: Successful response
@@ -331,6 +333,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Container'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -340,10 +346,6 @@ paths:
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Container'
       responses:
         '200':
           description: Successful response
@@ -404,15 +406,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
       responses:
         '200':
           description: Successful response
@@ -507,6 +509,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -521,10 +527,6 @@ paths:
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
       responses:
         '200':
           description: Successful response
@@ -546,6 +548,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -560,10 +566,6 @@ paths:
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
       responses:
         '200':
           description: Successful response
@@ -624,15 +626,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Folder'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Folder'
       responses:
         '200':
           description: Successful response
@@ -727,24 +729,24 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Folder'
         - description: The GTM Container ID.
           in: path
           name: containerId
-          required: true
-          type: string
-        - description: The GTM Folder ID.
-          in: path
-          name: folderId
           required: true
           type: string
         - description: 'When provided, this fingerprint must match the fingerprint of the folder in storage.'
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Folder'
+        - description: The GTM Folder ID.
+          in: path
+          name: folderId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -819,6 +821,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Folder'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -850,10 +856,6 @@ paths:
             type: string
           name: variableId
           type: array
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Folder'
       responses:
         '200':
           description: Successful response
@@ -882,6 +884,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -892,10 +898,6 @@ paths:
           name: environmentId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
       responses:
         '200':
           description: Successful response
@@ -956,15 +958,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Tag'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Tag'
       responses:
         '200':
           description: Successful response
@@ -1059,24 +1061,24 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Tag'
         - description: The GTM Container ID.
           in: path
           name: containerId
-          required: true
-          type: string
-        - description: The GTM Tag ID.
-          in: path
-          name: tagId
           required: true
           type: string
         - description: 'When provided, this fingerprint must match the fingerprint of the tag in storage.'
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Tag'
+        - description: The GTM Tag ID.
+          in: path
+          name: tagId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1137,15 +1139,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Trigger'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Trigger'
       responses:
         '200':
           description: Successful response
@@ -1240,24 +1242,24 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Trigger'
         - description: The GTM Container ID.
           in: path
           name: containerId
-          required: true
-          type: string
-        - description: The GTM Trigger ID.
-          in: path
-          name: triggerId
           required: true
           type: string
         - description: 'When provided, this fingerprint must match the fingerprint of the trigger in storage.'
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Trigger'
+        - description: The GTM Trigger ID.
+          in: path
+          name: triggerId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1318,15 +1320,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Variable'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Variable'
       responses:
         '200':
           description: Successful response
@@ -1421,24 +1423,24 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Variable'
         - description: The GTM Container ID.
           in: path
           name: containerId
-          required: true
-          type: string
-        - description: The GTM Variable ID.
-          in: path
-          name: variableId
           required: true
           type: string
         - description: 'When provided, this fingerprint must match the fingerprint of the variable in storage.'
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Variable'
+        - description: The GTM Variable ID.
+          in: path
+          name: variableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1513,15 +1515,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateContainerVersionRequestVersionOptions'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateContainerVersionRequestVersionOptions'
       responses:
         '200':
           description: Successful response
@@ -1620,6 +1622,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ContainerVersion'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -1634,10 +1640,6 @@ paths:
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ContainerVersion'
       responses:
         '200':
           description: Successful response
@@ -1897,15 +1899,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserAccess'
         - description: The GTM User ID.
           in: path
           name: permissionId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserAccess'
       responses:
         '200':
           description: Successful response
@@ -1944,6 +1946,7 @@ definitions:
           enum:
             - delete
             - edit
+            - editWorkspace
             - manage
             - publish
             - read
@@ -1999,6 +2002,26 @@ definitions:
           enum:
             - advertiserId
             - advertisingTrackingEnabled
+            - ampBrowserLanguage
+            - ampCanonicalHost
+            - ampCanonicalPath
+            - ampCanonicalUrl
+            - ampClientId
+            - ampClientMaxScrollX
+            - ampClientMaxScrollY
+            - ampClientScreenHeight
+            - ampClientScreenWidth
+            - ampClientScrollX
+            - ampClientScrollY
+            - ampClientTimestamp
+            - ampClientTimezone
+            - ampGtmEvent
+            - ampPageDownloadTime
+            - ampPageLoadTime
+            - ampPageViewId
+            - ampReferrer
+            - ampTitle
+            - ampTotalEngagedTime
             - appId
             - appName
             - appVersionCode
@@ -2013,11 +2036,39 @@ definitions:
             - containerVersion
             - debugMode
             - deviceName
+            - elementVisibilityFirstTime
+            - elementVisibilityRatio
+            - elementVisibilityRecentTime
+            - elementVisibilityTime
             - environmentName
             - errorLine
             - errorMessage
             - errorUrl
             - event
+            - eventName
+            - firebaseEventParameterCampaign
+            - firebaseEventParameterCampaignAclid
+            - firebaseEventParameterCampaignAnid
+            - firebaseEventParameterCampaignClickTimestamp
+            - firebaseEventParameterCampaignContent
+            - firebaseEventParameterCampaignCp1
+            - firebaseEventParameterCampaignGclid
+            - firebaseEventParameterCampaignSource
+            - firebaseEventParameterCampaignTerm
+            - firebaseEventParameterCurrency
+            - firebaseEventParameterDynamicLinkAcceptTime
+            - firebaseEventParameterDynamicLinkLinkid
+            - firebaseEventParameterNotificationMessageDeviceTime
+            - firebaseEventParameterNotificationMessageId
+            - firebaseEventParameterNotificationMessageName
+            - firebaseEventParameterNotificationMessageTime
+            - firebaseEventParameterNotificationTopic
+            - firebaseEventParameterPreviousAppVersion
+            - firebaseEventParameterPreviousOsVersion
+            - firebaseEventParameterPrice
+            - firebaseEventParameterProductId
+            - firebaseEventParameterQuantity
+            - firebaseEventParameterValue
             - formClasses
             - formElement
             - formId
@@ -2039,7 +2090,18 @@ definitions:
             - randomNumber
             - referrer
             - resolution
+            - scrollDepthDirection
+            - scrollDepthThreshold
+            - scrollDepthUnits
             - sdkVersion
+            - videoCurrentTime
+            - videoDuration
+            - videoPercent
+            - videoProvider
+            - videoStatus
+            - videoTitle
+            - videoUrl
+            - videoVisible
           type: string
         type: array
       fingerprint:
@@ -2064,6 +2126,7 @@ definitions:
         description: 'List of Usage Contexts for the Container. Valid values include: web, android, ios.'
         items:
           enum:
+            - amp
             - android
             - androidSdk5
             - ios
@@ -2084,6 +2147,7 @@ definitions:
           enum:
             - delete
             - edit
+            - editWorkspace
             - manage
             - publish
             - read
@@ -2556,6 +2620,9 @@ definitions:
       parentFolderId:
         description: Parent folder id.
         type: string
+      paused:
+        description: True if the tag is paused.
+        type: boolean
       priority:
         $ref: '#/definitions/Parameter'
         description: User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag's priority can be a positive or negative value. The default value is 0.
@@ -2617,14 +2684,14 @@ definitions:
       containerId:
         description: GTM Container ID.
         type: string
+      continuousTimeMinMilliseconds:
+        $ref: '#/definitions/Parameter'
+        description: A visibility trigger minimum continuous visible time (in milliseconds). Only valid for AMP Visibility trigger.
       customEventFilter:
         description: 'Used in the case of custom event, which is fired iff all Conditions are true.'
         items:
           $ref: '#/definitions/Condition'
         type: array
-      enableAllVideos:
-        $ref: '#/definitions/Parameter'
-        description: 'Reloads the videos in the page that don''t already have the YT API enabled. If false, only capture events from videos that already have the API enabled. Only valid for YouTube triggers.'
       eventName:
         $ref: '#/definitions/Parameter'
         description: Name of the GTM event that is fired. Only valid for Timer triggers.
@@ -2636,44 +2703,78 @@ definitions:
       fingerprint:
         description: The fingerprint of the GTM Trigger as computed at storage time. This value is recomputed whenever the trigger is modified.
         type: string
+      horizontalScrollPercentageList:
+        $ref: '#/definitions/Parameter'
+        description: List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled horizontally. Only valid for AMP scroll triggers.
       interval:
         $ref: '#/definitions/Parameter'
         description: Time between triggering recurring Timer Events (in milliseconds). Only valid for Timer triggers.
+      intervalSeconds:
+        $ref: '#/definitions/Parameter'
+        description: Time between Timer Events to fire (in seconds). Only valid for AMP Timer trigger.
       limit:
         $ref: '#/definitions/Parameter'
         description: 'Limit of the number of GTM events this Timer Trigger will fire. If no limit is set, we will continue to fire GTM events until the user leaves the page. Only valid for Timer triggers.'
+      maxTimerLengthSeconds:
+        $ref: '#/definitions/Parameter'
+        description: Max time to fire Timer Events (in seconds). Only valid for AMP Timer trigger.
       name:
         description: Trigger display name.
         type: string
+      parameter:
+        description: Additional parameters.
+        items:
+          $ref: '#/definitions/Parameter'
+        type: array
       parentFolderId:
         description: Parent folder id.
         type: string
+      selector:
+        $ref: '#/definitions/Parameter'
+        description: 'A click trigger CSS selector (i.e. "a", "button" etc.). Only valid for AMP Click trigger.'
+      totalTimeMinMilliseconds:
+        $ref: '#/definitions/Parameter'
+        description: A visibility trigger minimum total visible time (in milliseconds). Only valid for AMP Visibility trigger.
       triggerId:
         description: The Trigger ID uniquely identifies the GTM Trigger.
         type: string
       type:
         description: Defines the data layer event that causes this trigger.
         enum:
-          - ajaxSubmission
           - always
+          - ampClick
+          - ampScroll
+          - ampTimer
+          - ampVisibility
           - click
           - customEvent
           - domReady
+          - elementVisibility
           - formSubmission
           - historyChange
           - jsError
           - linkClick
           - pageview
+          - scrollDepth
           - timer
           - windowLoaded
-          - youTube
+          - youTubeVideo
         type: string
       uniqueTriggerId:
         $ref: '#/definitions/Parameter'
         description: 'Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don''t exist until then. Only valid for Form Submit, Link Click and Timer triggers.'
-      videoPercentageList:
+      verticalScrollPercentageList:
         $ref: '#/definitions/Parameter'
-        description: List of integer percentage values. The trigger will fire as each percentage is reached in any instrumented videos. Only valid for YouTube triggers.
+        description: List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled vertically. Only valid for AMP scroll triggers.
+      visibilitySelector:
+        $ref: '#/definitions/Parameter'
+        description: 'A visibility trigger CSS selector (i.e. "#id"). Only valid for AMP Visibility trigger.'
+      visiblePercentageMax:
+        $ref: '#/definitions/Parameter'
+        description: A visibility trigger maximum percent visibility. Only valid for AMP Visibility trigger.
+      visiblePercentageMin:
+        $ref: '#/definitions/Parameter'
+        description: A visibility trigger minimum percent visibility. Only valid for AMP Visibility trigger.
       waitForTags:
         $ref: '#/definitions/Parameter'
         description: Whether or not we should delay the form submissions or link opening until all of the tags have fired (by preventing the default action and later simulating the default action). Only valid for Form Submission and Link Click triggers.

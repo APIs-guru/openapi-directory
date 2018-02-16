@@ -1856,9 +1856,12 @@ definitions:
   rcr1_Facilities:
     description: Facilities Object
     properties:
-      ActiveLower48:
+      AIRIDs:
+        description: Air Facility System (AFS) ID.
+        example: DC0000001100195254
+        title: AIR Facility System ID
         type: string
-      AirIDs:
+      ActiveLower48:
         type: string
       CWAIDs:
         type: string
@@ -1977,7 +1980,7 @@ definitions:
       FacPopulationDensity:
         example: '9611.17'
         type: string
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacTRILandReleases:
         example: '11.7'
@@ -2135,7 +2138,7 @@ definitions:
         type: string
       RCRAMapIcon:
         type: string
-      RCRANaics:
+      RCRANAICS:
         type: string
       RCRAName:
         type: string
@@ -2217,6 +2220,11 @@ definitions:
         example: '1'
         title: Violation Flag
         type: string
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - SourceID
       - EPASystem
@@ -2239,13 +2247,13 @@ definitions:
       - FacUsMexBorderFlg
       - RCRAImpWaterFlg
       - RCRAUniverse
-      - RCRANaics
-      - FacSicCodes
+      - RCRANAICS
+      - FacSICCodes
       - FacPercentMinority
       - FacPopulationDensity
       - FacFederalAgencyCode
       - ChesapeakeBayFlag
-      - AirIDs
+      - AIRIDs
       - CWAIDs
       - RCRAIDs
       - TRIIDs
@@ -2597,9 +2605,12 @@ definitions:
   rcr2_Facilities:
     description: Facilities Object
     properties:
-      ActiveLower48:
+      AIRIDs:
+        description: Air Facility System (AFS) ID.
+        example: DC0000001100195254
+        title: AIR Facility System ID
         type: string
-      AirIDs:
+      ActiveLower48:
         type: string
       CWAIDs:
         type: string
@@ -2718,7 +2729,7 @@ definitions:
       FacPopulationDensity:
         example: '9611.17'
         type: string
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacTRILandReleases:
         example: '11.7'
@@ -2881,7 +2892,7 @@ definitions:
         type: string
       RCRAMapIcon:
         type: string
-      RCRANaics:
+      RCRANAICS:
         type: string
       RCRAName:
         type: string
@@ -2963,6 +2974,11 @@ definitions:
         example: '1'
         title: Violation Flag
         type: string
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - ObjectId
       - SourceID
@@ -2986,13 +3002,13 @@ definitions:
       - FacUsMexBorderFlg
       - RCRAImpWaterFlg
       - RCRAUniverse
-      - RCRANaics
-      - FacSicCodes
+      - RCRANAICS
+      - FacSICCodes
       - FacPercentMinority
       - FacPopulationDensity
       - FacFederalAgencyCode
       - ChesapeakeBayFlag
-      - AirIDs
+      - AIRIDs
       - CWAIDs
       - RCRAIDs
       - TRIIDs
@@ -3430,7 +3446,7 @@ definitions:
       FacPopulationDensity:
         example: 9611.17
         type: number
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacTRILandReleases:
         example: '11.7'
@@ -3588,7 +3604,7 @@ definitions:
         type: string
       RCRAMapIcon:
         type: string
-      RCRANaics:
+      RCRANAICS:
         type: string
       RCRAName:
         type: string
@@ -3670,6 +3686,11 @@ definitions:
         example: 1
         title: Violation Flag
         type: number
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - SourceID
       - EPASystem
@@ -3690,8 +3711,8 @@ definitions:
       - FacUsMexBorderFlg
       - RCRAImpWaterFlg
       - RCRAUniverse
-      - RCRANaics
-      - FacSicCodes
+      - RCRANAICS
+      - FacSICCodes
       - FacPercentMinority
       - FacPopulationDensity
       - FacFederalAgencyCode

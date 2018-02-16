@@ -1,0 +1,2177 @@
+swagger: '2.0'
+schemes:
+  - http
+host: rest.rgd.mcw.edu
+basePath: /rgdws
+info:
+  contact:
+    email: RGD.Data2@mcw.edu
+    name: Rat Genome Database
+    url: 'http://rgd.mcw.edu'
+    x-twitter: medicalcollege
+  description: The RGD REST API provides programmatic access to information and annotation stored in the Rat Genome Database
+  license:
+    name: Creative Commons
+    url: 'https://creativecommons.org/licenses/by/4.0/legalcode'
+  termsOfService: 'http://rgd.mcw.edu/wg/citing-rgd'
+  title: Rat Genome Database
+  version: '1.1'
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: 'https://twitter.com/medicalcollege/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'http://rest.rgd.mcw.edu/rgdws/v2/api-docs'
+      version: '2.0'
+  x-providerName: mcw.edu
+consumes:
+  - application/json
+produces:
+  - '*/*'
+tags:
+  - name: Pathway
+  - description: Strain Web Service
+    name: strain-web-service
+  - description: Phenotype Web Service
+    name: phenotype-web-service
+  - description: Pathway Web Service
+    name: pathway-web-service
+  - name: QTL
+  - name: Phenotype
+  - description: NIH Data Commons
+    name: NIHdatacommons
+  - description: Alliance of Genome Resources
+    name: AGR
+  - description: Stats Web Service
+    name: stats-web-service
+  - name: Annotation
+  - name: Gene
+  - name: Lookup
+  - description: QTL Web Service
+    name: qtl-web-service
+  - description: Annotation Web Service
+    name: annotation-web-service
+  - description: Lookup Web Service
+    name: lookup-web-service
+  - name: Rat Strain
+  - description: Gene Web Service
+    name: gene-web-service
+paths:
+  '/annotations/accId/{rgdId}':
+    get:
+      operationId: getTermAccIdsUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/MapPair'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns a list ontology term accession IDs annotated to an rgd object
+      tags:
+        - Annotation
+  '/annotations/count/{accId}/{includeChildren}':
+    get:
+      operationId: getAnnotationCountByAccIdUsingGET
+      parameters:
+        - description: Ontology term accession ID
+          in: path
+          name: accId
+          required: true
+          type: string
+        - description: 'true: return annotations for the term and children, false: return annotations for the term only '
+          in: path
+          name: includeChildren
+          required: true
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns annotation count for ontology accession ID
+      tags:
+        - Annotation
+  '/annotations/count/{accId}/{speciesTypeKey}/{includeChildren}':
+    get:
+      operationId: getAnnotationCountByAccIdAndSpeciesUsingGET
+      parameters:
+        - description: Ontology term accession ID
+          in: path
+          name: accId
+          required: true
+          type: string
+        - description: A list of species type keys can be found using the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: 'true: return annotations for the term and children, false: return annotations for the term only '
+          in: path
+          name: includeChildren
+          required: true
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns annotation count for ontology accession ID and speicies
+      tags:
+        - Annotation
+  '/annotations/count/{accId}/{speciesTypeKey}/{includeChildren}/{objectType}':
+    get:
+      operationId: getAnnotationCountByAccIdAndObjectTypeUsingGET
+      parameters:
+        - description: Ontology term accession ID
+          in: path
+          name: accId
+          required: true
+          type: string
+        - description: A list of species type keys can be found using the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: 'true: return annotations for the term and children, false: return annotations for the term only '
+          in: path
+          name: includeChildren
+          required: true
+          type: boolean
+        - description: A list of object types can be found using the lookup service
+          format: int32
+          in: path
+          name: objectType
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns annotation count for ontology accession ID and object type
+      tags:
+        - Annotation
+  '/annotations/reference/{refRgdId}':
+    get:
+      operationId: getAnnotsByRefrerenceUsingGET
+      parameters:
+        - description: Reference RGD ID
+          format: int32
+          in: path
+          name: refRgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Annotation'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns a list of annotations for a reference
+      tags:
+        - Annotation
+  '/annotations/rgdId/{rgdId}':
+    get:
+      operationId: getAnnotationsByRgdIdUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Annotation'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns a list of annotations by RGD ID
+      tags:
+        - Annotation
+  '/annotations/rgdId/{rgdId}/{ontologyPrefix}':
+    get:
+      operationId: getAnnotationsByRgdIdAndOntologyUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+        - description: 'Ontology Prefix.  The prefix can be found left of the semicolon in an ontology term accession ID.  As an example, term accession PW:0000034 has the ontology prefix PW'
+          in: path
+          name: ontologyPrefix
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Annotation'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns a list of annotations by RGD ID and ontology prefix
+      tags:
+        - Annotation
+  '/annotations/{accId}/{rgdId}':
+    get:
+      operationId: getAnnotationsByAccIdAndRgdIdUsingGET
+      parameters:
+        - description: Ontology Term Accession ID
+          in: path
+          name: accId
+          required: true
+          type: string
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Annotation'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns a list of annotations by RGD ID and ontology term accession ID
+      tags:
+        - Annotation
+  '/annotations/{accId}/{speciesTypeKey}/{includeChildren}':
+    get:
+      operationId: getAnnotationsUsingGET
+      parameters:
+        - description: Ontology term accession ID
+          in: path
+          name: accId
+          required: true
+          type: string
+        - description: A list of species type keys can be found using the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: 'true: return annotations for the term and children, false: return annotations for the term only '
+          in: path
+          name: includeChildren
+          required: true
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Annotation'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns a list annotations for an ontology term or a term and it's children
+      tags:
+        - Annotation
+  '/genes/affyId/{affyId}/{speciesTypeKey}':
+    get:
+      operationId: getGenesByAffyIdUsingGET
+      parameters:
+        - description: Affymetrix ID
+          in: path
+          name: affyId
+          required: true
+          type: string
+        - description: A list of RGD species type keys can be found in the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes for an affymetrix ID
+      tags:
+        - Gene
+  '/genes/alias/{aliasSymbol}/{speciesTypeKey}':
+    get:
+      operationId: getGenesByAliasSymbolUsingGET
+      parameters:
+        - description: Gene alias symbol
+          in: path
+          name: aliasSymbol
+          required: true
+          type: string
+        - description: A list of RGD species type keys can be found in the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes for an alias and species
+      tags:
+        - Gene
+  '/genes/allele/{rgdId}':
+    get:
+      operationId: getGeneAllelesUsingGET
+      parameters:
+        - description: RGD ID of gene
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of gene alleles
+      tags:
+        - Gene
+  '/genes/annotation/{accId}/{speciesTypeKey}':
+    get:
+      operationId: getGenesAnnotatedUsingGET
+      parameters:
+        - description: Ontology term accession ID
+          in: path
+          name: accId
+          required: true
+          type: string
+        - description: Species type key.  A list of species type keys can be found in the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes annotated to an ontology term
+      tags:
+        - Gene
+  '/genes/keyword/{keyword}/{speciesTypeKey}':
+    get:
+      operationId: getGenesByKeywordUsingGET
+      parameters:
+        - description: Search keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+        - description: Species type key.  A list of species type keys can be found in the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes by keyword and species type key
+      tags:
+        - Gene
+  '/genes/map/{mapKey}':
+    get:
+      operationId: getGeneByMapKeyUsingGET
+      parameters:
+        - description: A list of RGD assembly map keys can be found in the lookup service
+          format: int32
+          in: path
+          name: mapKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/MappedGene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of all genes with position information for an assembly
+      tags:
+        - Gene
+  '/genes/ortholog/{rgdId}':
+    get:
+      operationId: getGeneOrthologsUsingGET
+      parameters:
+        - description: RGD ID of a gene
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of gene orthologs
+      tags:
+        - Gene
+  '/genes/species/{speciesTypeKey}':
+    get:
+      operationId: getGenesBySpeciesUsingGET
+      parameters:
+        - description: A list of RGD species type keys can be found in the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of all genes for a species in RGD
+      tags:
+        - Gene
+  '/genes/{chr}/{start}/{stop}/{mapKey}':
+    get:
+      operationId: getGenesByPositionUsingGET
+      parameters:
+        - description: Chromosome
+          in: path
+          name: chr
+          required: true
+          type: string
+        - description: Start Position
+          format: int64
+          in: path
+          name: start
+          required: true
+          type: integer
+        - description: Stop Position
+          format: int64
+          in: path
+          name: stop
+          required: true
+          type: integer
+        - description: A list of RGD assembly map keys can be found in the lookup service
+          format: int32
+          in: path
+          name: mapKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes position and map key
+      tags:
+        - Gene
+  '/genes/{rgdId}':
+    get:
+      operationId: getGeneByRgdIdUsingGET
+      parameters:
+        - description: The RGD ID of a Gene in RGD
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Gene'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get a gene record by RGD ID
+      tags:
+        - Gene
+  '/genes/{symbol}/{speciesTypeKey}':
+    get:
+      operationId: getGeneBySymbolUsingGET
+      parameters:
+        - description: Gene Symbol
+          in: path
+          name: symbol
+          required: true
+          type: string
+        - description: Species type key.  A list of species type keys can be found in the lookup service
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Gene'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get a gene record by symbol and species type key
+      tags:
+        - Gene
+  /lookup/geneTypes:
+    get:
+      operationId: getGeneTypesUsingGET
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns a list of gene types avialable in RGD
+      tags:
+        - Lookup
+  '/lookup/maps/{speciesTypeKey}':
+    get:
+      operationId: getMapsUsingGET
+      parameters:
+        - description: 'RGD species type key. A full list of keys is available throught the lookup service.  1=human, 2=mouse, 3=rat,ect'
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Map'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list assembly maps for a species
+      tags:
+        - Lookup
+  /lookup/speciesTypeKeys:
+    get:
+      operationId: getSpeciesTypesUsingGET
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a Map of species type keys available in RGD
+      tags:
+        - Lookup
+  '/pathways/diagrams/search/{searchString}':
+    get:
+      operationId: searchPathwaysUsingGET
+      parameters:
+        - description: Free text search string
+          in: path
+          name: searchString
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Pathway'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of pathways based on search term
+      tags:
+        - Pathway
+  '/pathways/diagramsForCategory/{category}':
+    get:
+      operationId: getPathwaysWithDiagramsForCategoryUsingGET
+      parameters:
+        - description: Pathway Category
+          in: path
+          name: category
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Pathway'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of pathways based on category provided
+      tags:
+        - Pathway
+  '/phenotype/phenominer/chart/{speciesTypeKey}/{termString}':
+    get:
+      operationId: getChartInfoUsingGET
+      parameters:
+        - description: 'Species Type Key - 3=rat 4=chinchilla '
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: List of term accession IDs
+          in: path
+          name: termString
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of pathways based on search term and species type.  3=rat 4=chinchilla
+      tags:
+        - Phenotype
+  '/qtls/{chr}/{start}/{stop}/{mapKey}':
+    get:
+      operationId: getQtlListByPositionUsingGET
+      parameters:
+        - description: Chromosome
+          in: path
+          name: chr
+          required: true
+          type: string
+        - description: Start Position
+          format: int64
+          in: path
+          name: start
+          required: true
+          type: integer
+        - description: Stop Position
+          format: int64
+          in: path
+          name: stop
+          required: true
+          type: integer
+        - description: A list of assembly map keys can be found using the lookup service
+          format: int32
+          in: path
+          name: mapKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/QTL'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns a list QTL for given position and assembly map
+      tags:
+        - QTL
+  '/qtls/{rgdId}':
+    get:
+      operationId: getQTLByRgdIdUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/QTL'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a QTL for provided RGD ID
+      tags:
+        - QTL
+  '/stats/count/activeObject/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getActiveObjectCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of active objects by type, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/geneType/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getGeneTypeCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of gene types, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/objectStatus/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getObjectStatusCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of objects with given status, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/objectWithRefSeq/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getObjectsWithRefSeqCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of objects with reference sequence(s), by object type, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/objectWithReference/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getObjectsWithReferenceCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of objects with reference, by object type, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getObjectsWithXDBsCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: objectKey
+          format: int32
+          in: path
+          name: objectKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of objects with external database ids, by database id, for specified species, object type and date'
+      tags:
+        - Statistics
+  '/stats/count/proteinInteraction/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getProteinInteractionCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of protein interactions, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/qtlInheritanceType/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getQtlInheritanceTypeCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of strains, by qtl inheritance type, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/retiredObject/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getRetiredObjectCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of retired objects by type, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/strainType/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getStrainTypeCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of strain types, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/withdrawnObject/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getWithdrawnObjectCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of withdrawn objects by type, for specified species and date'
+      tags:
+        - Statistics
+  '/stats/count/xdb/{speciesTypeKey}/{dateYYYYMMDD}':
+    get:
+      operationId: getXdbsCountUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateYYYYMMDD
+          in: path
+          name: dateYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count of external database ids, for specied species and date'
+      tags:
+        - Statistics
+  '/stats/diff/activeObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getActiveObjectDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of active objects, by type, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/geneType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getGeneTypeDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of gene types, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/objectStatus/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getObjectStatusDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of objects with given status, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/objectWithRefSeq/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getObjectsWithRefSeqDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of objects with reference sequence(s), by object type, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/objectWithReference/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getObjectsWithReferenceDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of objects with reference, by object type, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getObjectsWithXDBsDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: objectKey
+          format: int32
+          in: path
+          name: objectKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of objects with external database ids, by database id, for specified species, object type and date range'
+      tags:
+        - Statistics
+  '/stats/diff/proteinInteraction/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getProteinInteractionDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of protein interactions, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/qtlInheritanceType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getQtlInheritanceTypeDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of strains, by qtl inheritance type, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/retiredObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getRetiredObjectDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of retired objects, by type, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/strainType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getStrainTypeDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of strain types, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/withdrawnObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getWithdrawnObjectDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of withdrawn objects, by type, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/diff/xdb/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
+    get:
+      operationId: getXdbsDiffUsingGET
+      parameters:
+        - description: speciesTypeKey
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: dateFromYYYYMMDD
+          in: path
+          name: dateFromYYYYMMDD
+          required: true
+          type: string
+        - description: dateToYYYYMMDD
+          in: path
+          name: dateToYYYYMMDD
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Count difference of external database ids, for specified species and date range'
+      tags:
+        - Statistics
+  '/stats/term/{accId}/{filterAccId}':
+    get:
+      operationId: getTermStatsUsingGET
+      parameters:
+        - description: accId
+          in: path
+          name: accId
+          required: true
+          type: string
+        - description: filterAccId
+          in: path
+          name: filterAccId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              format: int32
+              type: integer
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: getTermStats
+      tags:
+        - Statistics
+  /strains/all:
+    get:
+      operationId: getAllStrainsUsingGET
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Strain'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return all active strains in RGD
+      tags:
+        - Rat Strain
+  '/strains/{chr}/{start}/{stop}/{mapKey}':
+    get:
+      operationId: getStrainsByPositionUsingGET
+      parameters:
+        - description: Chromosome
+          in: path
+          name: chr
+          required: true
+          type: string
+        - description: Start Position
+          format: int64
+          in: path
+          name: start
+          required: true
+          type: integer
+        - description: Stop Position
+          format: int64
+          in: path
+          name: stop
+          required: true
+          type: integer
+        - description: RGD Map Key (available through lookup service)
+          format: int32
+          in: path
+          name: mapKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Strain'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return all active strains by position
+      tags:
+        - Rat Strain
+  '/strains/{rgdId}':
+    get:
+      operationId: getStrainByRgdIdUsingGET
+      parameters:
+        - description: RGD ID of the strain
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Strain'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a strain by RGD ID
+      tags:
+        - Rat Strain
+definitions:
+  Annotation:
+    properties:
+      annotatedObjectRgdId:
+        format: int32
+        type: integer
+      aspect:
+        type: string
+      createdBy:
+        format: int32
+        type: integer
+      createdDate:
+        format: date-time
+        type: string
+      dataSrc:
+        type: string
+      evidence:
+        type: string
+      expRgdId:
+        format: int32
+        type: integer
+      key:
+        format: int32
+        type: integer
+      lastModifiedBy:
+        format: int32
+        type: integer
+      lastModifiedDate:
+        format: date-time
+        type: string
+      notes:
+        type: string
+      objectName:
+        type: string
+      objectSymbol:
+        type: string
+      qualifier:
+        type: string
+      refRgdId:
+        format: int32
+        type: integer
+      relativeTo:
+        type: string
+      rgdObjectKey:
+        format: int32
+        type: integer
+      speciesTypeKey:
+        format: int32
+        type: integer
+      term:
+        type: string
+      termAcc:
+        type: string
+      withInfo:
+        type: string
+      xrefSource:
+        type: string
+    type: object
+  Gene:
+    properties:
+      description:
+        type: string
+      function:
+        type: string
+      key:
+        format: int32
+        type: integer
+      name:
+        type: string
+      ncbiAnnotStatus:
+        type: string
+      nomenReviewDate:
+        format: date-time
+        type: string
+      notes:
+        type: string
+      product:
+        type: string
+      refSeqStatus:
+        type: string
+      rgdId:
+        format: int32
+        type: integer
+      soAccId:
+        type: string
+      speciesTypeKey:
+        format: int32
+        type: integer
+      symbol:
+        type: string
+      type:
+        type: string
+      variant:
+        type: boolean
+    type: object
+  Map:
+    properties:
+      dbsnpVersion:
+        type: string
+      description:
+        type: string
+      key:
+        format: int32
+        type: integer
+      methodKey:
+        format: int32
+        type: integer
+      name:
+        type: string
+      notes:
+        type: string
+      primaryRefAssembly:
+        type: boolean
+      rank:
+        format: int32
+        type: integer
+      rgdId:
+        format: int32
+        type: integer
+      speciesTypeKey:
+        format: int32
+        type: integer
+      ucscAssemblyId:
+        type: string
+      unit:
+        type: string
+      version:
+        type: string
+    type: object
+  MapPair:
+    properties:
+      keyValue:
+        type: string
+      stringValue:
+        type: string
+    type: object
+  MappedGene:
+    properties:
+      chromosome:
+        type: string
+      gene:
+        $ref: '#/definitions/Gene'
+      mapKey:
+        format: int32
+        type: integer
+      start:
+        format: int64
+        type: integer
+      stop:
+        format: int64
+        type: integer
+      strand:
+        type: string
+    type: object
+  Pathway:
+    properties:
+      description:
+        type: string
+      hasAlteredPath:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      objectList:
+        items:
+          $ref: '#/definitions/PathwayObject'
+        type: array
+      pathwayCategories:
+        items:
+          type: string
+        type: array
+      referenceList:
+        items:
+          $ref: '#/definitions/Reference'
+        type: array
+    type: object
+  PathwayObject:
+    properties:
+      accId:
+        type: string
+      id:
+        type: string
+      objDesc:
+        type: string
+      objName:
+        type: string
+      typeId:
+        format: int32
+        type: integer
+      typeName:
+        type: string
+      url:
+        type: string
+      xdb_key:
+        format: int32
+        type: integer
+    type: object
+  QTL:
+    properties:
+      chromosome:
+        type: string
+      flank1RgdId:
+        format: int32
+        type: integer
+      flank2RgdId:
+        format: int32
+        type: integer
+      inheritanceType:
+        type: string
+      key:
+        format: int32
+        type: integer
+      linkageImage:
+        type: string
+      lod:
+        format: double
+        type: number
+      lodImage:
+        type: string
+      mostSignificantCmoTerm:
+        type: string
+      name:
+        type: string
+      notes:
+        type: string
+      peakOffset:
+        format: int32
+        type: integer
+      peakRgdId:
+        format: int32
+        type: integer
+      pvalue:
+        format: double
+        type: number
+      rgdId:
+        format: int32
+        type: integer
+      sourceUrl:
+        type: string
+      speciesTypeKey:
+        format: int32
+        type: integer
+      symbol:
+        type: string
+      variance:
+        format: double
+        type: number
+    type: object
+  Reference:
+    properties:
+      citation:
+        type: string
+      doi:
+        type: string
+      editors:
+        type: string
+      issue:
+        type: string
+      key:
+        format: int32
+        type: integer
+      notes:
+        type: string
+      pages:
+        type: string
+      pubDate:
+        format: date-time
+        type: string
+      pubStatus:
+        type: string
+      publication:
+        type: string
+      publisher:
+        type: string
+      publisherCity:
+        type: string
+      refAbstract:
+        type: string
+      referenceType:
+        type: string
+      rgdId:
+        format: int32
+        type: integer
+      speciesTypeKey:
+        format: int32
+        type: integer
+      title:
+        type: string
+      urlWebReference:
+        type: string
+      volume:
+        type: string
+    type: object
+  Status:
+    properties:
+      cryopreservedEmbryo:
+        type: boolean
+      cryopreservedSperm:
+        type: boolean
+      cryorecovery:
+        type: boolean
+      key:
+        format: int32
+        type: integer
+      liveAnimals:
+        type: boolean
+      statusDate:
+        format: date-time
+        type: string
+      strainRgdId:
+        format: int32
+        type: integer
+    type: object
+  Strain:
+    properties:
+      backgroundStrainRgdId:
+        format: int32
+        type: integer
+      chrAltered:
+        type: string
+      color:
+        type: string
+      geneticStatus:
+        type: string
+      genetics:
+        type: string
+      imageUrl:
+        type: string
+      inbredGen:
+        type: string
+      key:
+        format: int32
+        type: integer
+      lastStatus:
+        type: string
+      lastStatusObject:
+        $ref: '#/definitions/Status'
+      modificationMethod:
+        type: string
+      name:
+        type: string
+      notes:
+        type: string
+      origin:
+        type: string
+      researchUse:
+        type: string
+      rgdId:
+        format: int32
+        type: integer
+      source:
+        type: string
+      speciesTypeKey:
+        format: int32
+        type: integer
+      statusLog:
+        items:
+          $ref: '#/definitions/Status'
+        type: array
+      strain:
+        type: string
+      strainTypeName:
+        type: string
+      substrain:
+        type: string
+      symbol:
+        type: string
+    type: object

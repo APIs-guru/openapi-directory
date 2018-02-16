@@ -5,13 +5,14 @@ info:
   title: Amazon Elastic Transcoder
   description: <fullname>AWS Elastic Transcoder Service</fullname> <p>The AWS Elastic Transcoder Service.</p>
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: elastictranscoder.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -98,6 +100,58 @@ security:
   - hmac: []
 paths:
   '/2012-09-25/jobs/{Id}':
+    delete:
+      operationId: CancelJob
+      description: '<p>The CancelJob operation cancels an unfinished job.</p> <note> <p>You can only cancel a job that has a status of <code>Submitted</code>. To prevent a pipeline from starting to process a job while you''re getting the job identifier, use <a>UpdatePipelineStatus</a> to temporarily pause the pipeline.</p> </note>'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelJobResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          schema:
+            $ref: '#/definitions/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelJobRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ReadJob
       description: The ReadJob operation returns detailed information about a job.
@@ -153,16 +207,6 @@ paths:
               matcher: path
               state: failure
               argument: Job.Status
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2012-09-25/jobs:
     post:
       operationId: CreateJob
@@ -213,6 +257,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2012-09-25/pipelines:
+    post:
+      operationId: CreatePipeline
+      description: The CreatePipeline operation creates a pipeline with settings that you specify.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePipelineResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          schema:
+            $ref: '#/definitions/IncompatibleVersionException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePipelineRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListPipelines
       description: The ListPipelines operation gets a list of the pipelines associated with the current AWS account.
@@ -248,6 +340,41 @@ paths:
           in: query
           description: Pagination token
           required: false
+  /2012-09-25/presets:
+    post:
+      operationId: CreatePreset
+      description: '<p>The CreatePreset operation creates a preset with settings that you specify.</p> <important> <p>Elastic Transcoder checks the CreatePreset settings to ensure that they meet Elastic Transcoder requirements and to determine whether they comply with H.264 standards. If your settings are not valid for Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response (<code>ValidationException</code>) and does not create the preset. If the settings are valid for Elastic Transcoder but aren''t strictly compliant with the H.264 standard, Elastic Transcoder creates the preset and returns a warning message in the response. This helps you determine whether your settings comply with the H.264 standard while giving you greater flexibility with respect to the video that Elastic Transcoder produces.</p> </important> <p>Elastic Transcoder uses the H.264 video-compression format. For more information, see the International Telecommunication Union publication <i>Recommendation ITU-T H.264: Advanced video coding for generic audiovisual services</i>.</p>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePresetResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          schema:
+            $ref: '#/definitions/IncompatibleVersionException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePresetRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -258,7 +385,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /2012-09-25/presets:
     get:
       operationId: ListPresets
       description: The ListPresets operation gets a list of the default presets included with Elastic Transcoder and the presets that you've added in an AWS region.
@@ -294,6 +420,49 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/2012-09-25/pipelines/{Id}':
+    delete:
+      operationId: DeletePipeline
+      description: '<p>The DeletePipeline operation removes a pipeline.</p> <p> You can only delete a pipeline that has never been used or that is not currently in use (doesn''t contain any active jobs). If the pipeline is currently in use, <code>DeletePipeline</code> returns an error. </p>'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeletePipelineResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          schema:
+            $ref: '#/definitions/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeletePipelineRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -304,7 +473,44 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2012-09-25/pipelines/{Id}':
+    get:
+      operationId: ReadPipeline
+      description: The ReadPipeline operation gets detailed information about a pipeline.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ReadPipelineResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          schema:
+            $ref: '#/definitions/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReadPipelineRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdatePipeline
       description: '<p> Use the <code>UpdatePipeline</code> operation to update settings for a pipeline.</p> <important> <p>When you change pipeline settings, your changes take effect immediately. Jobs that you have already submitted and that Elastic Transcoder has not started to process are affected in addition to jobs that you submit after you change settings. </p> </important>'
@@ -347,6 +553,45 @@ paths:
           in: path
           type: string
           required: true
+  '/2012-09-25/presets/{Id}':
+    delete:
+      operationId: DeletePreset
+      description: <p>The DeletePreset operation removes a preset that you've added in an AWS region.</p> <note> <p>You can't delete the default presets that are included with Elastic Transcoder.</p> </note>
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeletePresetResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          schema:
+            $ref: '#/definitions/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeletePresetRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -357,7 +602,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2012-09-25/presets/{Id}':
     get:
       operationId: ReadPreset
       description: The ReadPreset operation gets detailed information about a preset.
@@ -396,16 +640,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2012-09-25/jobsByPipeline/{PipelineId}':
     get:
       operationId: ListJobsByPipeline

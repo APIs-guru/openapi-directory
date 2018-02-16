@@ -1,0 +1,4617 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.haloapi.com
+basePath: /stats
+info:
+  contact:
+    x-twitter: halo
+  description: API that provides statistical data about Players and Matches.
+  title: Stats
+  version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/halo/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://developer.haloapi.com/docs/services/58acdf27e2f7f71ad0dad84b/export?DocumentFormat=Swagger'
+      version: '2.0'
+  x-providerName: haloapi.com
+  x-serviceName: stats
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+paths:
+  '/h5/arena/matches/{matchId}':
+    get:
+      description: |
+        <p>Retrieves detailed statistics for a Match with the Arena Game Mode.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Post-Game Carnage Report: Arena" to "Halo 5 - Match Result - Arena".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+                <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>May 16, 2016:</strong></p>
+            <ul>
+                <li>Documented HTTP 503 Response Code.</li>
+                <li>Added documentation for the "MatchSpeedWinAmount", "ObjectivesCompletedAmount", and "BoostData" fields.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Added documentation for the "GameVariantResourceId", "MapVariantResourceId", and "PlayerScore" fields.</li>
+                <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Match Result - Arena
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Result.
+          examples:
+            application/json:
+              GameBaseVariantId: guid
+              GameVariantId: guid
+              GameVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 2
+              IsMatchOver: boolean
+              IsTeamGame: boolean
+              MapId: guid
+              MapVariantId: guid
+              MapVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 3
+              PlayerStats:
+                - AvgLifeTimeOfPlayer: string
+                  BoostData:
+                    CardConsumed: bool
+                    DefinitionId: guid
+                  CreditsEarned:
+                    BoostAmount: int
+                    PlayerRankAmount: int
+                    Result: int
+                    SpartanRankModifier: double
+                    TimePlayedAmount: double
+                    TotalCreditsEarned: int
+                  CurrentCsr:
+                    Csr: int
+                    DesignationId: int
+                    PercentToNextTier: int
+                    Rank: int
+                    Tier: int
+                  DNF: boolean
+                  DestroyedEnemyVehicles:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  EnemyKills:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  FlexibleStats:
+                    ImpulseStatCounts:
+                      - Count: int
+                        Id: guid
+                    ImpulseTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                    MedalStatCounts:
+                      - Count: int
+                        Id: guid
+                    MedalTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                  Impulses:
+                    - Count: int
+                      Id: int
+                  KilledByOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  KilledOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  MeasurementMatchesLeft: int
+                  MedalAwards:
+                    - Count: int
+                      MedalId: int
+                  MetaCommendationDeltas:
+                    - Id: guid
+                      MetRequirements:
+                        - Data1: int
+                          Data2: int
+                          Data3: int
+                          Data4: int
+                      PreviousMetRequirements:
+                        - Data1: int
+                          Data2: int
+                          Data3: int
+                          Data4: int
+                  Player:
+                    Gamertag: string
+                  PreviousCsr:
+                    Csr: int
+                    DesignationId: int
+                    PercentToNextTier: int
+                    Rank: int
+                    Tier: int
+                  ProgressiveCommendationDeltas:
+                    - Id: guid
+                      PreviousProgress: int
+                      Progress: int
+                  Rank: int
+                  RewardSets:
+                    - CommendationLevelId: guid
+                      CommendationSource: guid
+                      RewardSet: guid
+                      RewardSourceType: int
+                      SpartanRankSource: int
+                  TeamId: int
+                  TotalAssassinations: int
+                  TotalAssists: int
+                  TotalDeaths: int
+                  TotalGamesCompleted: int
+                  TotalGamesLost: int
+                  TotalGamesTied: int
+                  TotalGamesWon: int
+                  TotalGrenadeDamage: double
+                  TotalGrenadeKills: int
+                  TotalGroundPoundDamage: double
+                  TotalGroundPoundKills: int
+                  TotalHeadshots: int
+                  TotalKills: int
+                  TotalMeleeDamage: double
+                  TotalMeleeKills: int
+                  TotalPowerWeaponDamage: double
+                  TotalPowerWeaponGrabs: int
+                  TotalPowerWeaponKills: int
+                  TotalPowerWeaponPossessionTime: string
+                  TotalShotsFired: int
+                  TotalShotsLanded: int
+                  TotalShoulderBashDamage: double
+                  TotalShoulderBashKills: int
+                  TotalSpartanKills: int
+                  TotalTimePlayed: string
+                  TotalWeaponDamage: double
+                  WeaponStats:
+                    - TotalDamageDealt: double
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      WeaponId:
+                        Attachments:
+                          - int
+                        StockId: int
+                  WeaponWithMostKills:
+                    TotalDamageDealt: double
+                    TotalHeadshots: int
+                    TotalKills: int
+                    TotalPossessionTime: string
+                    TotalShotsFired: int
+                    TotalShotsLanded: int
+                    WeaponId:
+                      Attachments:
+                        - int
+                      StockId: int
+                  XpInfo:
+                    BoostAmount: int
+                    MatchSpeedWinAmount: int
+                    ObjectivesCompletedAmount: int
+                    PerformanceXP: int
+                    PlayerRankXPAward: int
+                    PlayerTimePerformanceXPAward: int
+                    PrevSpartanRank: int
+                    PrevTotalXP: int
+                    SpartanRank: int
+                    SpartanRankMatchXPScalar: double
+                    TotalXP: int
+              PlaylistId: guid
+              SeasonId: guid
+              TeamStats:
+                - Rank: int
+                  RoundStats:
+                    - Rank: int
+                      RoundNumber: int
+                      Score: uint32
+                  Score: uint32
+                  TeamId: int
+              TotalDuration: string
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/campaign/matches/{matchId}':
+    get:
+      description: |
+        <p>Retrieves detailed statistics for a Match with the Campaign Game Mode.</p>
+        <p>Every time a player plays a portion of a Campaign Mission, a Match will be generated whether the player finishes the Mission or not. If the "Match" ends because the Mission was completed, this will be indicated in the response.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Post-Game Carnage Report: Campaign" to "Halo 5 - Match Result - Campaign".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>May 16, 2016:</strong></p>
+            <ul>
+                <li>Documented HTTP 503 Response Code.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Added documentation for the "GameVariantResourceId", "MapVariantResourceId", and "PlayerScore" fields.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Match Result - Campaign
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Result.
+          examples:
+            application/json:
+              Difficulty: int
+              GameBaseVariantId: guid
+              GameVariantId: guid
+              GameVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: int
+              IsMatchOver: boolean
+              IsTeamGame: boolean
+              MapId: guid
+              MapVariantId: guid
+              MapVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: int
+              MissionCompleted: boolean
+              PlayerStats:
+                - AvgLifeTimeOfPlayer: string
+                  BiggestKillScore: int
+                  DNF: boolean
+                  DestroyedEnemyVehicles:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  EnemyKills:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  FlexibleStats:
+                    ImpulseStatCounts:
+                      - Count: int
+                        Id: guid
+                    ImpulseTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                    MedalStatCounts:
+                      - Count: int
+                        Id: guid
+                    MedalTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                  Impulses:
+                    - Count: int
+                      Id: int
+                  MedalAwards:
+                    - Count: int
+                      MedalId: int
+                  Player:
+                    Gamertag: string
+                  Rank: int
+                  Score: uint32
+                  TeamId: int
+                  TotalAssassinations: int
+                  TotalAssists: int
+                  TotalDeaths: int
+                  TotalGamesCompleted: int
+                  TotalGamesLost: int
+                  TotalGamesTied: int
+                  TotalGamesWon: int
+                  TotalGrenadeDamage: double
+                  TotalGrenadeKills: int
+                  TotalGroundPoundDamage: double
+                  TotalGroundPoundKills: int
+                  TotalHeadshots: int
+                  TotalKills: int
+                  TotalMeleeDamage: double
+                  TotalMeleeKills: int
+                  TotalPowerWeaponDamage: double
+                  TotalPowerWeaponGrabs: int
+                  TotalPowerWeaponKills: int
+                  TotalPowerWeaponPossessionTime: string
+                  TotalShotsFired: int
+                  TotalShotsLanded: int
+                  TotalShoulderBashDamage: double
+                  TotalShoulderBashKills: int
+                  TotalSpartanKills: int
+                  TotalTimePlayed: string
+                  TotalWeaponDamage: double
+                  WeaponStats:
+                    - TotalDamageDealt: double
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      WeaponId:
+                        Attachments:
+                          - int
+                        StockId: int
+                  WeaponWithMostKills:
+                    TotalDamageDealt: double
+                    TotalHeadshots: int
+                    TotalKills: int
+                    TotalPossessionTime: string
+                    TotalShotsFired: int
+                    TotalShotsLanded: int
+                    WeaponId:
+                      Attachments:
+                        - int
+                      StockId: int
+              PlaylistId: guid
+              Skulls:
+                - int
+              TotalDuration: string
+              TotalMissionPlaythroughTime: string
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/companies/{companyId}':
+    get:
+      description: |
+        <p>Retrieves information about the Company. The response will contain the Company's name, status, and members.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>July 14, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Company
+      parameters:
+        - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
+          in: path
+          name: companyId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'The response body will contain the Company name, status, and members.'
+          examples:
+            application/json: |
+              {
+                // The ID of the company.
+                "Id": "guid",
+
+                // The name of the company.
+                "Name": "string",
+
+                // Information about the creator of the company. The creator might not necessarily be a
+                // member of the company.
+                "Creator": {
+
+                  // The company creator's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                },
+
+                // The highest number of users that were (or are) in this company.
+                "PeakMembershipCount": "int",
+
+                // Indicates the date that the company is suspended until. This is expressed as an ISO
+                // 8601 combined Date and Time.
+                "SuspendedUntilDate": {
+
+                  "ISO8601Date": "string"
+                },
+
+                // The current members of the company. If the company does not have any members, this
+                // list will be empty. 
+                "Members": [
+                  {
+                     // Information about the member. 
+                    "Player": {
+
+                      // The member's gamertag.
+                      "Gamertag": "string",
+
+                      // Internal use only. This will always be null.
+                      "Xuid": null
+                    },
+
+                    // The role of the member in the company. This field will contain one of the
+                    // following values:
+                    //   Member = 0,
+                    //   Lieutenant = 1,
+                    //   Leader = 2
+                    "Role": "int",
+
+                    // The date when the member was added to the company. The time component of this
+                    // date is always set to "00:00:00". This is expressed as an ISO 8601 combined Date
+                    // and Time.
+                    "JoinedDate": {
+
+                      "ISO8601Date": "string"
+                    },
+
+                    // The date when the member's role was last modified. The time component of this
+                    // date is always set to "00:00:00". This is expressed as an ISO 8601 combined Date
+                    // and Time.
+                    "LastModifiedDate": {
+
+                      "ISO8601Date": "string"
+                  }
+                ],
+
+                // The date when the company was created. The time component of this date is always set
+                // to "00:00:00". This is expressed as an ISO 8601 combined Date and Time.
+                "CreatedDate": {
+
+                  "ISO8601Date": "string"
+                },
+
+                // The date when the company was last modified. The time component of this date is
+                // always set to "00:00:00". This is expressed as an ISO 8601 combined Date and Time.
+                "LastModifiedDate": {
+
+                  "ISO8601Date": "string"
+                }
+              }
+        '404':
+          description: Specified Company was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/companies/{companyId}/commendations':
+    get:
+      description: |
+        <p>Retrieves the commendation state for a Company.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>July 14, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Company Commendations
+      parameters:
+        - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
+          in: path
+          name: companyId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the commendation state for the Company.
+          examples:
+            application/json:
+              LastUpdatedDateUtc:
+                ISO8601Date: string
+              MetaCommendations:
+                - Id: guid
+                  MetRequirements:
+                    - Data1: int
+                      Data2: int
+                      Data3: int
+                      Data4: int
+              ProgressiveCommendations:
+                - CompletedLevels:
+                    - CompletedDateUtc:
+                        ISO8601Date: string
+                      Id: guid
+                  Id: guid
+                  Progress: int
+        '404':
+          description: Specified Company was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/custom/matches/{matchId}':
+    get:
+      description: |
+        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+                <li>Added documentation for "PresentInMatch".</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Post-Game Carnage Report: Custom" to "Halo 5 - Match Result - Custom".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+                <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>May 16, 2016:</strong></p>
+            <ul>
+                <li>Documented HTTP 503 Response Code.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Added documentation for the "GameVariantResourceId", "MapVariantResourceId", and "PlayerScore" fields.</li>
+                <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Match Result - Custom
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Result.
+          examples:
+            application/json:
+              GameBaseVariantId: guid
+              GameVariantId: guid
+              GameVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 2
+              IsMatchOver: boolean
+              IsTeamGame: boolean
+              MapId: guid
+              MapVariantId: guid
+              MapVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 3
+              PlayerStats:
+                - AvgLifeTimeOfPlayer: string
+                  DNF: boolean
+                  DestroyedEnemyVehicles:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  EnemyKills:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  FlexibleStats:
+                    ImpulseStatCounts:
+                      - Count: int
+                        Id: guid
+                    ImpulseTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                    MedalStatCounts:
+                      - Count: int
+                        Id: guid
+                    MedalTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                  Impulses:
+                    - Count: int
+                      Id: int
+                  KilledByOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  KilledOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  MedalAwards:
+                    - Count: int
+                      MedalId: int
+                  Player:
+                    Gamertag: string
+                  PresentInMatch: boolean
+                  Rank: int
+                  TeamId: int
+                  TotalAssassinations: int
+                  TotalAssists: int
+                  TotalDeaths: int
+                  TotalGamesCompleted: int
+                  TotalGamesLost: int
+                  TotalGamesTied: int
+                  TotalGamesWon: int
+                  TotalGrenadeDamage: double
+                  TotalGrenadeKills: int
+                  TotalGroundPoundDamage: double
+                  TotalGroundPoundKills: int
+                  TotalHeadshots: int
+                  TotalKills: int
+                  TotalMeleeDamage: double
+                  TotalMeleeKills: int
+                  TotalPowerWeaponDamage: double
+                  TotalPowerWeaponGrabs: int
+                  TotalPowerWeaponKills: int
+                  TotalPowerWeaponPossessionTime: string
+                  TotalShotsFired: int
+                  TotalShotsLanded: int
+                  TotalShoulderBashDamage: double
+                  TotalShoulderBashKills: int
+                  TotalSpartanKills: int
+                  TotalTimePlayed: string
+                  TotalWeaponDamage: double
+                  WeaponStats:
+                    - TotalDamageDealt: double
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      WeaponId:
+                        Attachments:
+                          - int
+                        StockId: int
+                  WeaponWithMostKills:
+                    TotalDamageDealt: double
+                    TotalHeadshots: int
+                    TotalKills: int
+                    TotalPossessionTime: string
+                    TotalShotsFired: int
+                    TotalShotsLanded: int
+                    WeaponId:
+                      Attachments:
+                        - int
+                      StockId: int
+              PlaylistId: guid
+              TeamStats:
+                - Rank: int
+                  RoundStats:
+                    - Rank: int
+                      RoundNumber: int
+                      Score: uint32
+                  Score: uint32
+                  TeamId: int
+              TotalDuration: string
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/customlocal/matches/{matchId}':
+    get:
+      description: |
+        <p>Retrieves detailed statistics for a Match with the Custom Local Game Mode. Games with the Custom Local Game Mode are played on Local Servers. For games played on Xbox Live Servers, use the "Halo 5 - Match Result - Custom" Endpoint.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Match Result - Custom Local
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Result.
+          examples:
+            application/json:
+              GameBaseVariantId: guid
+              GameVariantId: guid
+              GameVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 2
+              IsMatchOver: boolean
+              IsTeamGame: boolean
+              MapId: guid
+              MapVariantId: guid
+              MapVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 3
+              PlayerStats:
+                - AvgLifeTimeOfPlayer: string
+                  DNF: boolean
+                  DestroyedEnemyVehicles:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  EnemyKills:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  FlexibleStats:
+                    ImpulseStatCounts:
+                      - Count: int
+                        Id: guid
+                    ImpulseTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                    MedalStatCounts:
+                      - Count: int
+                        Id: guid
+                    MedalTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                  Impulses:
+                    - Count: int
+                      Id: int
+                  KilledByOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  KilledOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  MedalAwards:
+                    - Count: int
+                      MedalId: int
+                  Player:
+                    Gamertag: string
+                  PresentInMatch: boolean
+                  Rank: int
+                  TeamId: int
+                  TotalAssassinations: int
+                  TotalAssists: int
+                  TotalDeaths: int
+                  TotalGamesCompleted: int
+                  TotalGamesLost: int
+                  TotalGamesTied: int
+                  TotalGamesWon: int
+                  TotalGrenadeDamage: double
+                  TotalGrenadeKills: int
+                  TotalGroundPoundDamage: double
+                  TotalGroundPoundKills: int
+                  TotalHeadshots: int
+                  TotalKills: int
+                  TotalMeleeDamage: double
+                  TotalMeleeKills: int
+                  TotalPowerWeaponDamage: double
+                  TotalPowerWeaponGrabs: int
+                  TotalPowerWeaponKills: int
+                  TotalPowerWeaponPossessionTime: string
+                  TotalShotsFired: int
+                  TotalShotsLanded: int
+                  TotalShoulderBashDamage: double
+                  TotalShoulderBashKills: int
+                  TotalSpartanKills: int
+                  TotalTimePlayed: string
+                  TotalWeaponDamage: double
+                  WeaponStats:
+                    - TotalDamageDealt: double
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      WeaponId:
+                        Attachments:
+                          - int
+                        StockId: int
+                  WeaponWithMostKills:
+                    TotalDamageDealt: double
+                    TotalHeadshots: int
+                    TotalKills: int
+                    TotalPossessionTime: string
+                    TotalShotsFired: int
+                    TotalShotsLanded: int
+                    WeaponId:
+                      Attachments:
+                        - int
+                      StockId: int
+              PlaylistId: guid
+              TeamStats:
+                - Rank: int
+                  RoundStats:
+                    - Rank: int
+                      RoundNumber: int
+                      Score: uint32
+                  Score: uint32
+                  TeamId: int
+              TotalDuration: string
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/matches/{matchId}/events':
+    get:
+      description: |
+        <p>Retrieves a set of Events related to the Match specified. Events are only available once the Match has completed.</p>
+        <p>The set of Events may grow over time as data becomes available.</p>
+        <p>This Endpoint does not have the accuracy guarantees of other Endpoints have, so please use with caution. This endpoint may not return Matches before December 1, 2015.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Events for Match" to "Halo 5 - Match Events".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>May 20, 2016:</strong></p>
+            <ul>
+                <li>The Endpoint now correctly reports the "Content-Type" Response Header as "application/json".</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>May 16, 2016:</strong></p>
+            <ul>
+                <li>Documented HTTP 503 Response Code.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Added new types of events to the Endpoint: Impulses, Medals, Player Spawns, Round Stats, Round Ends, Weapon Drops, Weapon Pickups, and Weapon Pickup Pads.</li>
+                <li>Fixed an issue that caused the API to consistently return HTTP 500's for matches where a player left and rejoined the match.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Match Events
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Events.
+          examples:
+            application/json:
+              GameEvents:
+                - Assistants:
+                    - Gamertag: string
+                  DeathDisposition: int
+                  EventName: string
+                  ImpulseId: int
+                  IsAssassination: boolean
+                  IsGroundPound: boolean
+                  IsHeadshot: boolean
+                  IsMelee: boolean
+                  IsShoulderBash: boolean
+                  IsWeapon: boolean
+                  Killer:
+                    Gamertag: string
+                  KillerAgent: int
+                  KillerWeaponAttachmentIds:
+                    - int
+                  KillerWeaponStockId: int
+                  KillerWorldLocation:
+                    x: double
+                    'y': double
+                    z: double
+                  MedalId: int
+                  Player:
+                    Gamertag: string
+                  RoundIndex: int
+                  ShotsFired: int
+                  ShotsLanded: int
+                  TimeSinceStart: string
+                  TimeWeaponActiveAsPrimary: string
+                  Victim:
+                    Gamertag: string
+                  VictimAgent: int
+                  VictimAttachmentIds:
+                    - int
+                  VictimStockId: int
+                  VictimWorldLocation:
+                    x: double
+                    'y': double
+                    z: double
+                  WeaponAttachmentIds:
+                    - int
+                  WeaponStockId: int
+              IsCompleteSetOfEvents: boolean
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/player-leaderboards/csr/{seasonId}/{playlistId}':
+    get:
+      description: |
+        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists of the top Players with a CSR of 1800 or above for a given Playlist in a Season.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>July 31, 2017:</strong></p>
+            <ul>
+                <li>Clarified documentation for which players are included in the leaderboard.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Player Leaderboard" to "Halo 5 - Leaderboard Player CSR".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Leaderboard - Player CSR
+      parameters:
+        - description: The ID for the Season.
+          in: path
+          name: seasonId
+          required: true
+          type: string
+        - description: The ID for the Playlist.
+          in: path
+          name: playlistId
+          required: true
+          type: string
+        - description: |-
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+
+            When omitted, 200 is assumed.
+
+            When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
+
+            When the value is greater than the allowed range [1,250], the maximum allowed value is used instead.
+
+            The "Count" field in the response will confirm the actual value that was used.
+          in: query
+          name: count
+          type: number
+      responses:
+        '200':
+          description: The response body will contain the Players in the Leaderboard. An empty list will be returned if no Players are in the Leaderboard.
+          examples:
+            application/json:
+              Count: int
+              Links: links
+              ResultCount: int
+              Results:
+                - PlayerId:
+                    GamerTag: string
+                  Rank: int
+                  Score:
+                    Csr: int
+                    DesignationId: int
+                    PercentToNextTier: int
+                    Rank: int
+                    Tier: int
+              Start: int
+        '404':
+          description: 'The Season does not exist, or the Playlist either does not exist or is not part of the given Season.'
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/players/{player}/commendations':
+    get:
+      description: |
+        <p>Retrieves the commendation state for a Player.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>July 14, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Commendations
+      parameters:
+        - description: The Player's Gamertag.
+          in: path
+          name: player
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the commendation state for the Player.
+          examples:
+            application/json:
+              LastUpdatedDateUtc:
+                ISO8601Date: string
+              MetaCommendations:
+                - Id: guid
+                  MetRequirements:
+                    - Data1: int
+                      Data2: int
+                      Data3: int
+                      Data4: int
+              ProgressiveCommendations:
+                - CompletedLevels:
+                    - CompletedDateUtc:
+                        ISO8601Date: string
+                      Id: guid
+                  Id: guid
+                  Progress: int
+        '404':
+          description: Specified Player was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5/players/{player}/matches':
+    get:
+      description: |
+        <p>Retrieves a list of Matches that the Player has participated in and which have completed processing. If the Player is currently in a match, it is not returned in this API.</p>
+        <p>This endpoint will include games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added support for the Custom Local Game mode.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Matches for Player" to "Halo 5 - Player Match History".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Clarified documentation for the "MapVariant" and "GameVariant" fields.</li>
+                <li>Corrected "OwnerType" values for the "MapVariant" and "GameVariant" fields.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Match History
+      parameters:
+        - description: The Player's Gamertag.
+          in: path
+          name: player
+          required: true
+          type: string
+        - description: |-
+            Indicates what Game Mode(s) the client is interested in getting Matches for (arena, campaign, custom, customlocal, or warzone).
+
+            When the parameter is omitted or empty, Matches from all modes are returned. When a client would like to receive Matches spanning multiple Modes, separate the Modes with a comma (e.g. "arena,custom"). There is no significance to the order the Modes are specified in this parameter.
+
+            When an invalid Mode is specified, HTTP 400 ("Bad Request") is returned.
+
+            When a valid Mode is specified more than once, HTTP 400 ("Bad Request") is returned.
+          in: query
+          name: modes
+          type: string
+        - description: |-
+            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
+
+            When omitted, zero is assumed.
+
+            When the value contains a non-digit, HTTP 400 ("Bad Request") is returned.
+          in: query
+          name: start
+          type: number
+        - description: |-
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+
+            When omitted, 25 is assumed.
+
+            When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
+
+            When the value is greater than the allowed range [1,25], the maximum allowed value is used instead. The "Count" field in the response will confirm the actual value that was used.
+          in: query
+          name: count
+          type: number
+      responses:
+        '200':
+          description: The response body will contain the Player's recent Matches. An empty list will be returned if the Player has not played any Matches in the specified Game Mode(s).
+          examples:
+            application/json: |
+              {
+                // The starting point that was used. When the "start" query string parameter is
+                // specified, this value is identical. When "start" is omitted, the default value is
+                // returned.
+                "Start": "int",  
+
+                // The number of results that the service attempted to retrieve to satisfy this
+                // request. Normally this value is equal to the "count" parameter. If the client
+                // specified a count parameter greater than the maximum allowed, this value contains
+                // the maximum allowed amount.
+                "Count": "int",
+
+                // The number of results that are actually being returned in this response. This field
+                // is named "ResultCount" to avoid confusion with "Count".
+                "ResultCount": "int",
+
+                // A list of recent matches. Matches are listed in reverse chronological order with the
+                // most recently started match first.
+                "Results": [
+                  {
+                    // Internal use only. A set of related resource links.
+                    "Links": "links",
+
+                    "Id": {
+
+                      // The ID for this match. More match details are available via the applicable
+                      // Match Result Endpoint.
+                      "MatchId": "guid",
+
+                      // The game mode applicable to this match. Options are: 
+                      //   Error = 0, 
+                      //   Arena = 1, 
+                      //   Campaign = 2, 
+                      //   Custom = 3, 
+                      //   Warzone = 4,
+                      //   CustomLocal = 6.
+                      "GameMode": "int",
+
+                    },
+
+                    // The ID of the playlist (aka "Hopper") for the match. 
+                    // Hoppers are used in Arena and Warzone. In Arena, they function just as you would
+                    // expect, similar to previous Halo titles. Warzone uses hoppers as well. There
+                    // will be multiple Warzone hoppers which contain a rotating playlist of scenarios
+                    // to play. 
+                    // Null for campaign & custom games. 
+                    // Playlists are available via the Metadata API.
+                    "HopperId": "guid",
+
+                    // The ID of the base map for this match. Maps are available via the Metadata API.
+                    "MapId": "guid",
+
+                    // The variant of the map for this match. There are two sources of map variants:
+                    // official map variants available via the Metadata API and user-generated map
+                    // variants which are not available via the APIs currently. This will be null for
+                    // campaign games.
+                    "MapVariant": {
+
+                      // The resource type. 3 indicates map variant.
+                      "ResourceType": 3,
+
+                      // The ID of the map variant. Official map variants are available via the
+                      // Metadata API.
+                      "ResourceId": "guid",
+
+                      // The source of the map variant. Options are:
+                      //   Unknown = 0,
+                      //   User-generated = 1,
+                      //   Official = 3.
+                      "OwnerType": "int",
+
+                      // The gamertag of the user that created the map variant if this is a
+                      // user-generated map variant, or null otherwise. 
+                      "Owner": "string"
+                    }
+                    // The ID of the game base variant for this match. Game base variants are available
+                    // via the Metadata API.
+                    "GameBaseVariantId": "guid",
+
+                    // The variant of the game for this match. There are two sources of game variants:
+                    // official game variants available via the Metadata API and user-generated game
+                    // variants which are not available via the APIs currently. This will be null for
+                    // campaign games.
+                    "GameVariant": {
+
+                      // The resource type. 2 indicates game variant.
+                      "ResourceType": 2,
+
+                      // The ID of the game variant. Official game variants are available via the
+                      // Metadata API.
+                      "ResourceId": "guid",        
+
+                      // The source of the game variant. Options are:
+                      //   Unknown = 0,
+                      //   User-generated = 1,
+                      //   Official = 3.
+                      "OwnerType": "int",
+
+                      // The gamertag of the user that created the game variant if this is a
+                      // user-generated game variant, or null otherwise. 
+                      "Owner": "string"
+                    },
+
+                    // The length of the match. This is expressed as an ISO 8601 Duration.
+                    "MatchDuration": "string",
+
+                    // The date and time when match ended. Note that this is different than the
+                    // processing date, once matches end they typically take a small amount of time to
+                    // process. The processing date is not available through this API. The time
+                    // component of this date is always set to "00:00:00". This is expressed as an ISO
+                    // 8601 combined Date and Time.
+                    "MatchCompletedDate": {
+
+                      "ISO8601Date": "string"
+                    },
+
+                    // Provides team data. This list contains all team that Won or Tied. Losing teams
+                    // are not included. This list is empty for campaign games. 
+                    "Teams": [
+                      {
+                        // The ID for the team. The team's ID dictates the team's color. Team colors
+                        // are available via the Metadata API.
+                        "Id": "int",
+
+                        // The team's score at the end of the match. The way the score is determined is
+                        // based off the game base variant being played: 
+                        //   Breakout = number of rounds won,
+                        //   CTF = number of flag captures,
+                        //   Slayer = number of kills,
+                        //   Strongholds = number of points,
+                        //   Warzone = number of points.
+                        // Score can be a negative value. Unfortunately, this value is returned as an
+                        // unsigned 32-bit integer. This means that if the score is -1, the score
+                        // reported is 4,294,967,295.
+                        "Score": "uint32",
+
+                        // The team's rank at the end of the match.
+                        "Rank": "int"
+                      }
+                    ],
+
+                    // This field contains the player's data. This will only contain data for the
+                    // player specified in the request.
+                    "Players": [
+                      {          
+                        "Player": {
+
+                          // The player's gamertag.
+                          "Gamertag": "string",
+
+                          // Internal use only. This will always be null.
+                          "Xuid": null
+                        },
+
+                        // The ID of the team that the player was on when the match ended. Zero for
+                        // campaign games.
+                        "TeamId": "int",
+
+                        // The player's team-agnostic ranking in this match.
+                        "Rank": "int",
+
+                        // Indicates what result the player received at the conclusion of the match.
+                        // Options are:
+                        //   Did Not Finish = 0, 
+                        //   Lost = 1, 
+                        //   Tied = 2, 
+                        //   Won = 3. 
+                        // Did Not Finish: The player was not present when the match ended.
+                        // Lost: The player was on a team that was assigned a loss, typically this is
+                        // when a team does not have rank = 1. 
+                        // Won: The player was on the team that was assigned the win, typically this is
+                        // the team that has rank = 1. 
+                        // Tied: The player was on the team that was awarded a tie. Typically this is
+                        // when the player is on the team with rank = 1, and there is at least one
+                        // other team with rank = 1. Ties are only for rank = 1 teams. Consider the
+                        // scenario when exactly one team is rank = 1, and two teams are rank = 2.
+                        // Players on the rank=1 team will have "Won", players on the rank = 2 teams
+                        // will have "Lost". For ties, this documentation states 'typically' because
+                        // the game may have unique rules for multi-team and FFA scenarios, in which
+                        // multiple teams are awarded a win.
+                        "Result": "int",
+
+                        // The number of enemy kills the player had during this match. This includes
+                        // other Spartans and Enemy AI.
+                        "TotalKills": "int",
+
+                        // The number of times this player died during the match.
+                        "TotalDeaths": "int",
+
+                        // The number of assists credited to the player during the match. This includes
+                        // other Spartans and Enemy AI.
+                        "TotalAssists": "int",
+
+                        // Internal use only. This will always be null.
+                        "PreMatchRatings": null,
+
+                        // Internal use only. This will always be null.
+                        "PostMatchRatings": null
+                      }
+                    ],
+
+                    // Whether this was a team-based game or not (e.g. free-for-all).
+                    "IsTeamGame": "boolean",
+
+                    // The ID of the season for this match if it was played in a seasonal playlist.
+                    // Null if the match was played in a non-seasonal playlist. This will only be set
+                    // for Arena matches and will be null for all other game modes.
+                    "SeasonId": null,
+
+                    // Internal use only. Do not use.
+                    "MatchCompletedDateFidelity": "int"
+                  }
+                ]
+              }
+        '400':
+          description: An unsupported value was provided for a query string parameter.
+        '404':
+          description: Specified Player was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /h5/servicerecords/arena:
+    get:
+      description: |
+        <p>Retrieves Service Records for the Arena Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Service Record: Arena" to "Halo 5 - Player Service Records - Arena".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Added documentation for the "CsrPercentile" field.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Service Records - Arena
+      parameters:
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+          in: query
+          name: players
+          required: true
+          type: string
+        - description: 'When specified, this indicates the Season to request the Arena Playlist Stats for. If this is not specified, the default is the current Season. Seasons are available via the Metadata API.'
+          in: query
+          name: seasonId
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Service Records for the requested player(s).
+          examples:
+            application/json: |
+              {
+                // Set of responses. One per user queried.
+                "Results": [
+                  {
+                    // The player's gamertag.
+                    "Id": "string",
+
+                    // The result of the query for the player. One of the following:
+                    //   Success = 0,
+                    //   NotFound = 1,
+                    //   ServiceFailure = 2,
+                    //   ServiceUnavailable = 3
+                    // It is possible for different requests from the batch to succeed and fail
+                    // independently.
+                    "ResultCode": "int",
+
+                    // The Service Record result for the player. Only set if ResultCode is Success.
+                    "Result": {
+
+                      // Arena stats data.
+                      "ArenaStats": {
+
+                        // List of arena stats by playlist. This is the ONLY set of stats in the
+                        // response that respects the Season ID request parameter. If no Season ID was
+                        // specified, these will be the stats for the current season. If an invalid
+                        // Season ID was specified, this will be empty.
+                        "ArenaPlaylistStats": [
+                          {
+                            // The playlist ID. Playlists are available via the Metadata API.
+                            "PlaylistId": "guid",
+
+                            // The player's measurement matches left. If this field is greater than
+                            // zero, then the player will not have a CSR yet.
+                            "MeasurementMatchesLeft": "int",
+
+                            // The highest Competitive Skill Ranking (CSR) achieved by the player. This
+                            // is included because a player's CSR can drop based on performance.
+                            "HighestCsr": {
+
+                              // The CSR tier. CSR Tiers are designation-specific and are available via
+                              // the Metadata API.
+                              "Tier": "int",
+
+                              // The Designation of the CSR. CSR Designations are available via the
+                              // Metadata API.
+                              "DesignationId": "int",
+
+                              // The CSR value. Zero for normal (Diamond and below) designations.
+                              "Csr": "int",
+
+                              // The percentage of progress towards the next CSR tier.
+                              "PercentToNextTier": "int",
+
+                              // If the CSR is Onyx or Champion, the player's leaderboard ranking. Null
+                              // otherwise.
+                              "Rank": "int"
+                            },
+
+                            // The current Competitive Skill Ranking (CSR) of the player.
+                            "Csr": {
+
+                              // The CSR tier. CSR Tiers are designation-specific and are available via
+                              // the Metadata API.
+                              "Tier": "int",
+
+                              // The Designation of the CSR. CSR Designations are available via the
+                              // Metadata API.
+                              "DesignationId": "int",
+
+                              // The CSR value. Zero for normal (Diamond and below) designations.
+                              "Csr": "int",
+
+                              // The percentage of progress towards the next CSR tier.
+                              "PercentToNextTier": "int",
+
+                              // If the CSR is Onyx or Champion, the player's leaderboard ranking. Null
+                              // otherwise.
+                              "Rank": "int"
+                            },
+
+                            // Number represents within what percent of the top players the user is
+                            // (top 2 percent for example). Can be null if list is not ranked or if
+                            // player has not completed their measurement matches. Does not work for
+                            // pre-season.
+                            "CsrPercentile": "int"
+                            // Total number of kills done by the player. This includes melee kills,
+                            // shoulder bash kills and Spartan charge kills, all power weapons, AI
+                            // kills and vehicle destructions. 
+                            "TotalKills": "int",
+
+                            // Total number of headshots done by the player.
+                            "TotalHeadshots": "int",
+
+                            // Total weapon damage dealt by the player.
+                            "TotalWeaponDamage": "double",
+
+                            // Total number of shots fired by the player.
+                            "TotalShotsFired": "int",
+
+                            // Total number of shots landed by the player.
+                            "TotalShotsLanded": "int",
+
+                            // The weapon the player used to get the most kills.
+                            "WeaponWithMostKills": {
+
+                              "WeaponId": {
+
+                                // The ID of the weapon. Weapons are available via the Metadata API.
+                                "StockId": "int",
+
+                                // Any attachments the weapon had.
+                                "Attachments": [ 
+                                  "int" 
+                                ]
+                              },
+
+                              // The number of shots fired for this weapon.
+                              "TotalShotsFired": "int",
+
+                              // The number of shots landed for this weapon.
+                              "TotalShotsLanded": "int",
+
+                              // The number of headshots for this weapon.
+                              "TotalHeadshots": "int",
+
+                              // The number of kills for this weapon.
+                              "TotalKills": "int",
+
+                              // The total damage dealt for this weapon.
+                              "TotalDamageDealt": "double",
+
+                              // The total possession time for this weapon. This is expressed as an ISO
+                              // 8601 Duration.
+                              "TotalPossessionTime": "string"
+                            },
+
+                            // Total number of melee kills by the player.
+                            "TotalMeleeKills": "int",
+
+                            // Total melee damage dealt by the player.
+                            "TotalMeleeDamage": "double",
+
+                            // Total number of assassinations by the player.
+                            "TotalAssassinations": "int",
+
+                            // Total number of ground pound kills by the player.
+                            "TotalGroundPoundKills": "int",
+
+                            // Total ground pound damage dealt by the player.
+                            "TotalGroundPoundDamage": "double",
+
+                            // Total number of shoulder bash kills by the player.
+                            "TotalShoulderBashKills": "int",
+
+                            // Total shoulder bash damage dealt by the player.
+                            "TotalShoulderBashDamage": "double",
+
+                            // Total grenade damage dealt by the player.
+                            "TotalGrenadeDamage": "double",
+
+                            // Total number of power weapon kills by the player.
+                            "TotalPowerWeaponKills": "int",
+
+                            // Total power weapon damage dealt by the player.
+                            "TotalPowerWeaponDamage": "double",
+
+                            // Total number of power weapon grabs by the player.
+                            "TotalPowerWeaponGrabs": "int",
+
+                            // Total power weapon possession by the player. This is expressed as an ISO
+                            // 8601 Duration.
+                            "TotalPowerWeaponPossessionTime": "string",
+
+                            // Total number of deaths by the player.
+                            "TotalDeaths": "int",
+
+                            // Total number of assists by the player.
+                            "TotalAssists": "int",
+
+                            // Total number of games the player has completed.
+                            "TotalGamesCompleted": "int",
+
+                            // Total number of games won by the player.
+                            "TotalGamesWon": "int",
+
+                            // Total number of games lost by the player.
+                            "TotalGamesLost": "int",
+
+                            // Total number of games tied by the player.
+                            "TotalGamesTied": "int",
+
+                            // Total timed played by the player.
+                            "TotalTimePlayed": "string",
+
+                            // Total number of grenade kills by the player.
+                            "TotalGrenadeKills": "int",
+
+                            // The set of Medals earned by the player.
+                            "MedalAwards": [
+                              {
+                                // The ID of the Medal. Medals are available via the Metadata API.
+                                "MedalId": "int",
+
+                                // The number of times the Medal was earned.
+                                "Count": "int"
+                              }
+                            ], 
+
+                            // List of enemy vehicles destroyed. Vehicles are available via the
+                            // Metadata API. Note: this stat measures enemy vehicles, not any vehicle
+                            // destruction.
+                            "DestroyedEnemyVehicles": [
+                              {
+                                // The enemy this entry references
+                                "Enemy": {
+
+                                  // The Base ID for the enemy.
+                                  "BaseId": "int",
+
+                                  // The attachments (variants) for the enemy.
+                                  "Attachments": [
+                                    "int"
+                                  ]
+                                },
+
+                                // Total number of kills on the enemy by the player
+                                "TotalKills": "int"
+                              }
+                            ],
+
+                            // List of enemies killed, per enemy type. Enemies are available via the
+                            // Metadata API.
+                            "EnemyKills": [
+                              {
+                                // The enemy this entry references
+                                "Enemy": {
+
+                                  // The Base ID for the enemy.
+                                  "BaseId": "int",
+
+                                  // The attachments (variants) for the enemy.
+                                  "Attachments": [
+                                    "int"
+                                  ]
+                                },
+
+                                // Total number of kills on the enemy by the player
+                                "TotalKills": "int"
+                              }
+                            ],
+
+                            // The set of weapons (weapons and vehicles included) used by the player.
+                            "WeaponStats": [
+                              {
+                                "WeaponId": {
+
+                                  // The ID of the weapon. Weapons are available via the Metadata API.
+                                  "StockId": "int",
+
+                                  // Any attachments the weapon had.
+                                  "Attachments": [ 
+                                    "int" 
+                                  ]
+                                },
+
+                                // The number of shots fired for this weapon.
+                                "TotalShotsFired": "int",
+
+                                // The number of shots landed for this weapon.
+                                "TotalShotsLanded": "int",
+
+                                // The number of headshots for this weapon.
+                                "TotalHeadshots": "int",
+
+                                // The number of kills for this weapon.
+                                "TotalKills": "int",
+
+                                // The total damage dealt for this weapon.
+                                "TotalDamageDealt": "double",
+
+                                // The total possession time for this weapon. This is expressed as an
+                                // ISO 8601 Duration.
+                                "TotalPossessionTime": "string"
+                              }
+                            ],
+
+                            // The set of Impulses (invisible Medals) earned by the player.
+                            "Impulses": [
+                              {
+                                // The ID of the Impulse. Impulses are available via the Metadata API.
+                                "Id": "int",
+
+                                // The number of times the Impulse was earned.
+                                "Count": "int"
+                              }
+                            ],
+
+                            // Total number of Spartan kills by the player.
+                            "TotalSpartanKills": "int"
+                          }
+                        ],
+
+                        // The highest obtained CSR by the player in arena across all seasons. If the
+                        // player hasn't finished measurement matches yet for any playlist, this value
+                        // is null.
+                        "HighestCsrAttained": {
+
+                          // The CSR tier. CSR Tiers are designation-specific and are available via the
+                          // Metadata API.
+                          "Tier": "int",
+
+                          // The Designation of the CSR. CSR Designations are available via the
+                          // Metadata API.
+                          "DesignationId": "int",
+
+                          // The CSR value. Zero for normal (Diamond and below) designations.
+                          "Csr": "int",
+
+                          // The percentage of progress towards the next CSR tier.
+                          "PercentToNextTier": "int",
+
+                          // If the CSR is Onyx or Champion, the player's leaderboard ranking. Null
+                          // otherwise.
+                          "Rank": "int"
+                        },
+
+                        // List of arena stats by GameBaseVariant across all seasons.
+                        "ArenaGameBaseVariantStats": [
+                          {
+                            // The game base variant specific stats. Flexible stats are available via
+                            // the Metadata API.
+                            "FlexibleStats": {
+
+                              // The set of flexible stats that are derived from medal events.
+                              "MedalStatCounts": [
+                                {
+                                  // The ID of the flexible stat.
+                                  "Id": "guid",
+
+                                  // The number of times this flexible stat was earned.
+                                  "Count": "int"
+                                }
+                              ],
+
+                              // The set of flexible stats that are derived from impulse events.
+                              "ImpulseStatCounts": [
+                                {
+                                  // The ID of the flexible stat.
+                                  "Id": "guid",
+
+                                  // The number of times this flexible stat was earned.
+                                  "Count": "int"
+                                }
+                              ],
+
+                              // The set of flexible stats that are derived from medal time lapses.
+                              "MedalTimelapses": [
+                                {
+                                  // The ID of the flexible stat.
+                                  "Id": "guid",
+
+                                  // The amount of time the flexible stat was earned for. This is
+                                  // expressed as an ISO 8601 Duration.
+                                  "Timelapse": "string"
+                                }
+                              ],    
+
+                              // The set of flexible stats that are derived from impulse time lapses.
+                              "ImpulseTimelapses": [
+                                {
+                                  // The ID of the flexible stat.
+                                  "Id": "guid",
+
+                                  // The amount of time the flexible stat was earned for. This is
+                                  // expressed as an ISO 8601 Duration.
+                                  "Timelapse": "string"
+                                }
+                              ]
+                            },
+
+                            // The ID of the game base variant. Game base variants are available via
+                            // the Metadata API.
+                            "GameBaseVariantId": "guid",
+
+                            // Total number of kills done by the player. This includes melee kills,
+                            // shoulder bash kills and Spartan charge kills, all power weapons, AI
+                            // kills and vehicle destructions. 
+                            "TotalKills": "int",
+
+                            // Total number of headshots done by the player.
+                            "TotalHeadshots": "int",
+
+                            // Total weapon damage dealt by the player.
+                            "TotalWeaponDamage": "double",
+
+                            // Total number of shots fired by the player.
+                            "TotalShotsFired": "int",
+
+                            // Total number of shots landed by the player.
+                            "TotalShotsLanded": "int",
+
+                            // The weapon the player used to get the most kills.
+                            "WeaponWithMostKills": {
+
+                              "WeaponId": {
+
+                                // The ID of the weapon. Weapons are available via the Metadata API.
+                                "StockId": "int",
+
+                                // Any attachments the weapon had.
+                                "Attachments": [ 
+                                  "int" 
+                                ]
+                              },
+
+                              // The number of shots fired for this weapon.
+                              "TotalShotsFired": "int",
+
+                              // The number of shots landed for this weapon.
+                              "TotalShotsLanded": "int",
+
+                              // The number of headshots for this weapon.
+                              "TotalHeadshots": "int",
+
+                              // The number of kills for this weapon.
+                              "TotalKills": "int",
+
+                              // The total damage dealt for this weapon.
+                              "TotalDamageDealt": "double",
+
+                              // The total possession time for this weapon. This is expressed as an ISO
+                              // 8601 Duration.
+                              "TotalPossessionTime": "string"
+                            },
+
+                            // Total number of melee kills by the player.
+                            "TotalMeleeKills": "int",
+
+                            // Total melee damage dealt by the player.
+                            "TotalMeleeDamage": "double",
+
+                            // Total number of assassinations by the player.
+                            "TotalAssassinations": "int",
+
+                            // Total number of ground pound kills by the player.
+                            "TotalGroundPoundKills": "int",
+
+                            // Total ground pound damage dealt by the player.
+                            "TotalGroundPoundDamage": "double",
+
+                            // Total number of shoulder bash kills by the player.
+                            "TotalShoulderBashKills": "int",
+
+                            // Total shoulder bash damage dealt by the player.
+                            "TotalShoulderBashDamage": "double",
+
+                            // Total grenade damage dealt by the player.
+                            "TotalGrenadeDamage": "double",
+
+                            // Total number of power weapon kills by the player.
+                            "TotalPowerWeaponKills": "int",
+
+                            // Total power weapon damage dealt by the player.
+                            "TotalPowerWeaponDamage": "double",
+
+                            // Total number of power weapon grabs by the player.
+                            "TotalPowerWeaponGrabs": "int",
+
+                            // Total power weapon possession by the player. This is expressed as an ISO
+                            // 8601 Duration.
+                            "TotalPowerWeaponPossessionTime": "string",
+
+                            // Total number of deaths by the player.
+                            "TotalDeaths": "int",
+
+                            // Total number of assists by the player.
+                            "TotalAssists": "int",
+
+                            // Total number of games the player has completed.
+                            "TotalGamesCompleted": "int",
+
+                            // Total number of games won by the player.
+                            "TotalGamesWon": "int",
+
+                            // Total number of games lost by the player.
+                            "TotalGamesLost": "int",
+
+                            // Total number of games tied by the player.
+                            "TotalGamesTied": "int",
+
+                            // Total timed played by the player.
+                            "TotalTimePlayed": "string",
+
+                            // Total number of grenade kills by the player.
+                            "TotalGrenadeKills": "int",
+
+                            // The set of Medals earned by the player.
+                            "MedalAwards": [
+                              {
+                                // The ID of the Medal. Medals are available via the Metadata API.
+                                "MedalId": "int",
+
+                                // The number of times the Medal was earned.
+                                "Count": "int"
+                              }
+                            ], 
+
+                            // List of enemy vehicles destroyed. Vehicles are available via the
+                            // Metadata API. Note: this stat measures enemy vehicles, not any vehicle
+                            // destruction.
+                            "DestroyedEnemyVehicles": [
+                              {
+                                // The enemy this entry references
+                                "Enemy": {
+
+                                  // The Base ID for the enemy.
+                                  "BaseId": "int",
+
+                                  // The attachments (variants) for the enemy.
+                                  "Attachments": [
+                                    "int"
+                                  ]
+                                },
+
+                                // Total number of kills on the enemy by the player
+                                "TotalKills": "int"
+                              }
+                            ],
+
+                            // List of enemies killed, per enemy type. Enemies are available via the
+                            // Metadata API.
+                            "EnemyKills": [
+                              {
+                                // The enemy this entry references
+                                "Enemy": {
+
+                                  // The Base ID for the enemy.
+                                  "BaseId": "int",
+
+                                  // The attachments (variants) for the enemy.
+                                  "Attachments": [
+                                    "int"
+                                  ]
+                                },
+
+                                // Total number of kills on the enemy by the player
+                                "TotalKills": "int"
+                              }
+                            ],
+
+                            // The set of weapons (weapons and vehicles included) used by the player.
+                            "WeaponStats": [
+                              {
+                                "WeaponId": {
+
+                                  // The ID of the weapon. Weapons are available via the Metadata API.
+                                  "StockId": "int",
+
+                                  // Any attachments the weapon had.
+                                  "Attachments": [ 
+                                    "int" 
+                                  ]
+                                },
+
+                                // The number of shots fired for this weapon.
+                                "TotalShotsFired": "int",
+
+                                // The number of shots landed for this weapon.
+                                "TotalShotsLanded": "int",
+
+                                // The number of headshots for this weapon.
+                                "TotalHeadshots": "int",
+
+                                // The number of kills for this weapon.
+                                "TotalKills": "int",
+
+                                // The total damage dealt for this weapon.
+                                "TotalDamageDealt": "double",
+
+                                // The total possession time for this weapon. This is expressed as an
+                                // ISO 8601 Duration.
+                                "TotalPossessionTime": "string"
+                              }
+                            ],
+
+                            // The set of Impulses (invisible Medals) earned by the player.
+                            "Impulses": [
+                              {
+                                // The ID of the Impulse. Impulses are available via the Metadata API.
+                                "Id": "int",
+
+                                // The number of times the Impulse was earned.
+                                "Count": "int"
+                              }
+                            ],
+
+                            // Total number of Spartan kills by the player.
+                            "TotalSpartanKills": "int"
+                          }
+                        ],
+
+                        // A list of up to three game base variants with the highest win rate across
+                        // all seasons by the user. If there is a tie, the game base variant with more
+                        // completed games is higher. If there's still a tie, the game base variant IDs
+                        // are sorted and selected.
+                        "TopGameBaseVariants": [
+                          {
+                            // Rank between 1-3
+                            "GameBaseVariantRank": "int",
+
+                            // Number of games played in game base variant
+                            "NumberOfMatchesCompleted": "int",
+
+                            // Id of the game base variant
+                            "GameBaseVariantId": "guid",
+
+                            // Number of matches won on game base variant
+                            "NumberOfMatchesWon": "int"
+                          }
+                        ],
+
+                        // The ID for the playlist that pertains to the highest obtained CSR field
+                        // across all seasons. If the CSR is null, so is this field. 
+                        "HighestCsrPlaylistId": "guid",
+
+                        // The ID for the season that pertains to the highest obtained CSR field across
+                        // all seasons. If the CSR is null, so is this field.
+                        "HighestCsrSeasonId": "guid",
+
+                        // The ID for the Season of the stats in ArenaPlaylistStats. If no Season ID
+                        // was specified on the request, then this is the ID of the current season.
+                        "ArenaPlaylistStatsSeasonId": "guid",
+
+                        // Total number of kills done by the player. This includes melee kills,
+                        // shoulder bash kills and Spartan charge kills, all power weapons, AI kills
+                        // and vehicle destructions. 
+                        "TotalKills": "int",
+
+                        // Total number of headshots done by the player.
+                        "TotalHeadshots": "int",
+
+                        // Total weapon damage dealt by the player.
+                        "TotalWeaponDamage": "double",
+
+                        // Total number of shots fired by the player.
+                        "TotalShotsFired": "int",
+
+                        // Total number of shots landed by the player.
+                        "TotalShotsLanded": "int",
+
+                        // The weapon the player used to get the most kills.
+                        "WeaponWithMostKills": {
+
+                          "WeaponId": {
+
+                            // The ID of the weapon. Weapons are available via the Metadata API.
+                            "StockId": "int",
+
+                            // Any attachments the weapon had.
+                            "Attachments": [ 
+                              "int" 
+                            ]
+                          },
+
+                          // The number of shots fired for this weapon.
+                          "TotalShotsFired": "int",
+
+                          // The number of shots landed for this weapon.
+                          "TotalShotsLanded": "int",
+
+                          // The number of headshots for this weapon.
+                          "TotalHeadshots": "int",
+
+                          // The number of kills for this weapon.
+                          "TotalKills": "int",
+
+                          // The total damage dealt for this weapon.
+                          "TotalDamageDealt": "double",
+
+                          // The total possession time for this weapon. This is expressed as an ISO
+                          // 8601 Duration.
+                          "TotalPossessionTime": "string"
+                        },
+
+                        // Total number of melee kills by the player.
+                        "TotalMeleeKills": "int",
+
+                        // Total melee damage dealt by the player.
+                        "TotalMeleeDamage": "double",
+
+                        // Total number of assassinations by the player.
+                        "TotalAssassinations": "int",
+
+                        // Total number of ground pound kills by the player.
+                        "TotalGroundPoundKills": "int",
+
+                        // Total ground pound damage dealt by the player.
+                        "TotalGroundPoundDamage": "double",
+
+                        // Total number of shoulder bash kills by the player.
+                        "TotalShoulderBashKills": "int",
+
+                        // Total shoulder bash damage dealt by the player.
+                        "TotalShoulderBashDamage": "double",
+
+                        // Total grenade damage dealt by the player.
+                        "TotalGrenadeDamage": "double",
+
+                        // Total number of power weapon kills by the player.
+                        "TotalPowerWeaponKills": "int",
+
+                        // Total power weapon damage dealt by the player.
+                        "TotalPowerWeaponDamage": "double",
+
+                        // Total number of power weapon grabs by the player.
+                        "TotalPowerWeaponGrabs": "int",
+
+                        // Total power weapon possession by the player. This is expressed as an ISO
+                        // 8601 Duration.
+                        "TotalPowerWeaponPossessionTime": "string",
+
+                        // Total number of deaths by the player.
+                        "TotalDeaths": "int",
+
+                        // Total number of assists by the player.
+                        "TotalAssists": "int",
+
+                        // Total number of games the player has completed.
+                        "TotalGamesCompleted": "int",
+
+                        // Total number of games won by the player.
+                        "TotalGamesWon": "int",
+
+                        // Total number of games lost by the player.
+                        "TotalGamesLost": "int",
+
+                        // Total number of games tied by the player.
+                        "TotalGamesTied": "int",
+
+                        // Total timed played by the player.
+                        "TotalTimePlayed": "string",
+
+                        // Total number of grenade kills by the player.
+                        "TotalGrenadeKills": "int",
+
+                        // The set of Medals earned by the player.
+                        "MedalAwards": [
+                          {
+                            // The ID of the Medal. Medals are available via the Metadata API.
+                            "MedalId": "int",
+
+                            // The number of times the Medal was earned.
+                            "Count": "int"
+                          }
+                        ], 
+
+                        // List of enemy vehicles destroyed. Vehicles are available via the Metadata
+                        // API. Note: this stat measures enemy vehicles, not any vehicle destruction.
+                        "DestroyedEnemyVehicles": [
+                          {
+                            // The enemy this entry references
+                            "Enemy": {
+
+                              // The Base ID for the enemy.
+                              "BaseId": "int",
+
+                              // The attachments (variants) for the enemy.
+                              "Attachments": [
+                                "int"
+                              ]
+                            },
+
+                            // Total number of kills on the enemy by the player
+                            "TotalKills": "int"
+                          }
+                        ],
+
+                        // List of enemies killed, per enemy type. Enemies are available via the
+                        // Metadata API.
+                        "EnemyKills": [
+                          {
+                            // The enemy this entry references
+                            "Enemy": {
+
+                              // The Base ID for the enemy.
+                              "BaseId": "int",
+
+                              // The attachments (variants) for the enemy.
+                              "Attachments": [
+                                "int"
+                              ]
+                            },
+
+                            // Total number of kills on the enemy by the player
+                            "TotalKills": "int"
+                          }
+                        ],
+
+                        // The set of weapons (weapons and vehicles included) used by the player.
+                        "WeaponStats": [
+                          {
+                            "WeaponId": {
+
+                              // The ID of the weapon. Weapons are available via the Metadata API.
+                              "StockId": "int",
+
+                              // Any attachments the weapon had.
+                              "Attachments": [ 
+                                "int" 
+                              ]
+                            },
+
+                            // The number of shots fired for this weapon.
+                            "TotalShotsFired": "int",
+
+                            // The number of shots landed for this weapon.
+                            "TotalShotsLanded": "int",
+
+                            // The number of headshots for this weapon.
+                            "TotalHeadshots": "int",
+
+                            // The number of kills for this weapon.
+                            "TotalKills": "int",
+
+                            // The total damage dealt for this weapon.
+                            "TotalDamageDealt": "double",
+
+                            // The total possession time for this weapon. This is expressed as an ISO
+                            // 8601 Duration.
+                            "TotalPossessionTime": "string"
+                          }
+                        ],
+
+                        // The set of Impulses (invisible Medals) earned by the player.
+                        "Impulses": [
+                          {
+                            // The ID of the Impulse. Impulses are available via the Metadata API.
+                            "Id": "int",
+
+                            // The number of times the Impulse was earned.
+                            "Count": "int"
+                          }
+                        ],
+
+                        // Total number of Spartan kills by the player.
+                        "TotalSpartanKills": "int"
+                      },
+
+                      // Information about the player for whom this data was returned.
+                      "PlayerId": {
+
+                        // The gamertag of the player queried.
+                        "GamerTag": "string",
+
+                        // Internal use only. This will always be null.
+                        "Xuid": null
+                      },
+
+                      // The player's Spartan Rank.
+                      "SpartanRank": "int",
+
+                      // The player's XP.
+                      "Xp": "int"
+                    }
+                  }
+                ],
+
+                // Internal use only. A set of related resource links.
+                "Links": null
+              }
+        '404':
+          description: One or more Gamertags don't pass validation rules.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /h5/servicerecords/campaign:
+    get:
+      description: |
+        <p>Retrieves Service Records for the Campaign Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Service Record: Campaign" to "Halo 5 - Player Service Records - Campaign".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Service Records - Campaign
+      parameters:
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+          in: query
+          name: players
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Service Records for the requested player(s).
+          examples:
+            application/json:
+              Results:
+                - Id: string
+                  Result:
+                    CampaignStat:
+                      CampaignMissionStats:
+                        - CoopStats:
+                            int:
+                              AllSkullsOn: bool
+                              FastestCompletionTime: string
+                              HighestScore: int
+                              Skulls:
+                                - int
+                              TotalTimesCompleted: int
+                          DestroyedEnemyVehicles:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          EnemyKills:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          FlexibleStats:
+                            ImpulseStatCounts:
+                              - Count: int
+                                Id: guid
+                            ImpulseTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                            MedalStatCounts:
+                              - Count: int
+                                Id: guid
+                            MedalTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                          Impulses:
+                            - Count: int
+                              Id: int
+                          MedalAwards:
+                            - Count: int
+                              MedalId: int
+                          MissionId: guid
+                          SoloStats:
+                            int:
+                              AllSkullsOn: bool
+                              FastestCompletionTime: string
+                              HighestScore: int
+                              Skulls:
+                                - int
+                              TotalTimesCompleted: int
+                          TotalAssassinations: int
+                          TotalAssists: int
+                          TotalDeaths: int
+                          TotalGamesCompleted: int
+                          TotalGamesLost: int
+                          TotalGamesTied: int
+                          TotalGamesWon: int
+                          TotalGrenadeDamage: double
+                          TotalGrenadeKills: int
+                          TotalGroundPoundDamage: double
+                          TotalGroundPoundKills: int
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalMeleeDamage: double
+                          TotalMeleeKills: int
+                          TotalPowerWeaponDamage: double
+                          TotalPowerWeaponGrabs: int
+                          TotalPowerWeaponKills: int
+                          TotalPowerWeaponPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          TotalShoulderBashDamage: double
+                          TotalShoulderBashKills: int
+                          TotalSpartanKills: int
+                          TotalTimePlayed: string
+                          TotalWeaponDamage: double
+                          WeaponStats:
+                            - TotalDamageDealt: double
+                              TotalHeadshots: int
+                              TotalKills: int
+                              TotalPossessionTime: string
+                              TotalShotsFired: int
+                              TotalShotsLanded: int
+                              WeaponId:
+                                Attachments:
+                                  - int
+                                StockId: int
+                          WeaponWithMostKills:
+                            TotalDamageDealt: double
+                            TotalHeadshots: int
+                            TotalKills: int
+                            TotalPossessionTime: string
+                            TotalShotsFired: int
+                            TotalShotsLanded: int
+                            WeaponId:
+                              Attachments:
+                                - int
+                              StockId: int
+                      DestroyedEnemyVehicles:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      EnemyKills:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      Impulses:
+                        - Count: int
+                          Id: int
+                      MedalAwards:
+                        - Count: int
+                          MedalId: int
+                      TotalAssassinations: int
+                      TotalAssists: int
+                      TotalDeaths: int
+                      TotalGamesCompleted: int
+                      TotalGamesLost: int
+                      TotalGamesTied: int
+                      TotalGamesWon: int
+                      TotalGrenadeDamage: double
+                      TotalGrenadeKills: int
+                      TotalGroundPoundDamage: double
+                      TotalGroundPoundKills: int
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalMeleeDamage: double
+                      TotalMeleeKills: int
+                      TotalPowerWeaponDamage: double
+                      TotalPowerWeaponGrabs: int
+                      TotalPowerWeaponKills: int
+                      TotalPowerWeaponPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      TotalShoulderBashDamage: double
+                      TotalShoulderBashKills: int
+                      TotalSpartanKills: int
+                      TotalTimePlayed: string
+                      TotalWeaponDamage: double
+                      WeaponStats:
+                        - TotalDamageDealt: double
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          WeaponId:
+                            Attachments:
+                              - int
+                            StockId: int
+                      WeaponWithMostKills:
+                        TotalDamageDealt: double
+                        TotalHeadshots: int
+                        TotalKills: int
+                        TotalPossessionTime: string
+                        TotalShotsFired: int
+                        TotalShotsLanded: int
+                        WeaponId:
+                          Attachments:
+                            - int
+                          StockId: int
+                    PlayerId:
+                      GamerTag: string
+                    SpartanRank: int
+                    Xp: int
+                  ResultCode: int
+        '404':
+          description: One or more Gamertags don't pass validation rules.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /h5/servicerecords/custom:
+    get:
+      description: |
+        <p>Retrieves Service Records for the Custom Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Player Service Records - Custom Local" Endpoint.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Service Record: Custom" to "Halo 5 - Player Service Records - Custom".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Service Records - Custom
+      parameters:
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+          in: query
+          name: players
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Service Records for the requested player(s).
+          examples:
+            application/json:
+              Results:
+                - Id: string
+                  Result:
+                    CustomStats:
+                      CustomGameBaseVariantStats:
+                        - DestroyedEnemyVehicles:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          EnemyKills:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          FlexibleStats:
+                            ImpulseStatCounts:
+                              - Count: int
+                                Id: guid
+                            ImpulseTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                            MedalStatCounts:
+                              - Count: int
+                                Id: guid
+                            MedalTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                          GameBaseVariantId: guid
+                          Impulses:
+                            - Count: int
+                              Id: int
+                          MedalAwards:
+                            - Count: int
+                              MedalId: int
+                          TotalAssassinations: int
+                          TotalAssists: int
+                          TotalDeaths: int
+                          TotalGamesCompleted: int
+                          TotalGamesLost: int
+                          TotalGamesTied: int
+                          TotalGamesWon: int
+                          TotalGrenadeDamage: double
+                          TotalGrenadeKills: int
+                          TotalGroundPoundDamage: double
+                          TotalGroundPoundKills: int
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalMeleeDamage: double
+                          TotalMeleeKills: int
+                          TotalPowerWeaponDamage: double
+                          TotalPowerWeaponGrabs: int
+                          TotalPowerWeaponKills: int
+                          TotalPowerWeaponPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          TotalShoulderBashDamage: double
+                          TotalShoulderBashKills: int
+                          TotalSpartanKills: int
+                          TotalTimePlayed: string
+                          TotalWeaponDamage: double
+                          WeaponStats:
+                            - TotalDamageDealt: double
+                              TotalHeadshots: int
+                              TotalKills: int
+                              TotalPossessionTime: string
+                              TotalShotsFired: int
+                              TotalShotsLanded: int
+                              WeaponId:
+                                Attachments:
+                                  - int
+                                StockId: int
+                          WeaponWithMostKills:
+                            TotalDamageDealt: double
+                            TotalHeadshots: int
+                            TotalKills: int
+                            TotalPossessionTime: string
+                            TotalShotsFired: int
+                            TotalShotsLanded: int
+                            WeaponId:
+                              Attachments:
+                                - int
+                              StockId: int
+                      DestroyedEnemyVehicles:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      EnemyKills:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      Impulses:
+                        - Count: int
+                          Id: int
+                      MedalAwards:
+                        - Count: int
+                          MedalId: int
+                      TopGameBaseVariants:
+                        - GameBaseVariantId: guid
+                          GameBaseVariantRank: int
+                          NumberOfMatchesCompleted: int
+                          NumberOfMatchesWon: int
+                      TotalAssassinations: int
+                      TotalAssists: int
+                      TotalDeaths: int
+                      TotalGamesCompleted: int
+                      TotalGamesLost: int
+                      TotalGamesTied: int
+                      TotalGamesWon: int
+                      TotalGrenadeDamage: double
+                      TotalGrenadeKills: int
+                      TotalGroundPoundDamage: double
+                      TotalGroundPoundKills: int
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalMeleeDamage: double
+                      TotalMeleeKills: int
+                      TotalPowerWeaponDamage: double
+                      TotalPowerWeaponGrabs: int
+                      TotalPowerWeaponKills: int
+                      TotalPowerWeaponPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      TotalShoulderBashDamage: double
+                      TotalShoulderBashKills: int
+                      TotalSpartanKills: int
+                      TotalTimePlayed: string
+                      TotalWeaponDamage: double
+                      WeaponStats:
+                        - TotalDamageDealt: double
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          WeaponId:
+                            Attachments:
+                              - int
+                            StockId: int
+                      WeaponWithMostKills:
+                        TotalDamageDealt: double
+                        TotalHeadshots: int
+                        TotalKills: int
+                        TotalPossessionTime: string
+                        TotalShotsFired: int
+                        TotalShotsLanded: int
+                        WeaponId:
+                          Attachments:
+                            - int
+                          StockId: int
+                    PlayerId:
+                      GamerTag: string
+                    SpartanRank: int
+                    Xp: int
+                  ResultCode: int
+        '404':
+          description: One or more Gamertags don't pass validation rules.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /h5/servicerecords/customlocal:
+    get:
+      description: |
+        <p>Retrieves Service Records for the Custom Local Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Local Game Mode are played on Local Servers. For games played on Xbox Live Servers, use the "Halo 5 - Player Service Records - Custom" Endpoint. A player's Custom Local Service Record summarizes games played on or after December 22, 2017.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Service Records - Custom Local
+      parameters:
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+          in: query
+          name: players
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Service Records for the requested player(s).
+          examples:
+            application/json:
+              Results:
+                - Id: string
+                  Result:
+                    CustomStats:
+                      CustomGameBaseVariantStats:
+                        - DestroyedEnemyVehicles:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          EnemyKills:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          FlexibleStats:
+                            ImpulseStatCounts:
+                              - Count: int
+                                Id: guid
+                            ImpulseTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                            MedalStatCounts:
+                              - Count: int
+                                Id: guid
+                            MedalTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                          GameBaseVariantId: guid
+                          Impulses:
+                            - Count: int
+                              Id: int
+                          MedalAwards:
+                            - Count: int
+                              MedalId: int
+                          TotalAssassinations: int
+                          TotalAssists: int
+                          TotalDeaths: int
+                          TotalGamesCompleted: int
+                          TotalGamesLost: int
+                          TotalGamesTied: int
+                          TotalGamesWon: int
+                          TotalGrenadeDamage: double
+                          TotalGrenadeKills: int
+                          TotalGroundPoundDamage: double
+                          TotalGroundPoundKills: int
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalMeleeDamage: double
+                          TotalMeleeKills: int
+                          TotalPowerWeaponDamage: double
+                          TotalPowerWeaponGrabs: int
+                          TotalPowerWeaponKills: int
+                          TotalPowerWeaponPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          TotalShoulderBashDamage: double
+                          TotalShoulderBashKills: int
+                          TotalSpartanKills: int
+                          TotalTimePlayed: string
+                          TotalWeaponDamage: double
+                          WeaponStats:
+                            - TotalDamageDealt: double
+                              TotalHeadshots: int
+                              TotalKills: int
+                              TotalPossessionTime: string
+                              TotalShotsFired: int
+                              TotalShotsLanded: int
+                              WeaponId:
+                                Attachments:
+                                  - int
+                                StockId: int
+                          WeaponWithMostKills:
+                            TotalDamageDealt: double
+                            TotalHeadshots: int
+                            TotalKills: int
+                            TotalPossessionTime: string
+                            TotalShotsFired: int
+                            TotalShotsLanded: int
+                            WeaponId:
+                              Attachments:
+                                - int
+                              StockId: int
+                      DestroyedEnemyVehicles:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      EnemyKills:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      Impulses:
+                        - Count: int
+                          Id: int
+                      MedalAwards:
+                        - Count: int
+                          MedalId: int
+                      TopGameBaseVariants:
+                        - GameBaseVariantId: guid
+                          GameBaseVariantRank: int
+                          NumberOfMatchesCompleted: int
+                          NumberOfMatchesWon: int
+                      TotalAssassinations: int
+                      TotalAssists: int
+                      TotalDeaths: int
+                      TotalGamesCompleted: int
+                      TotalGamesLost: int
+                      TotalGamesTied: int
+                      TotalGamesWon: int
+                      TotalGrenadeDamage: double
+                      TotalGrenadeKills: int
+                      TotalGroundPoundDamage: double
+                      TotalGroundPoundKills: int
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalMeleeDamage: double
+                      TotalMeleeKills: int
+                      TotalPowerWeaponDamage: double
+                      TotalPowerWeaponGrabs: int
+                      TotalPowerWeaponKills: int
+                      TotalPowerWeaponPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      TotalShoulderBashDamage: double
+                      TotalShoulderBashKills: int
+                      TotalSpartanKills: int
+                      TotalTimePlayed: string
+                      TotalWeaponDamage: double
+                      WeaponStats:
+                        - TotalDamageDealt: double
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          WeaponId:
+                            Attachments:
+                              - int
+                            StockId: int
+                      WeaponWithMostKills:
+                        TotalDamageDealt: double
+                        TotalHeadshots: int
+                        TotalKills: int
+                        TotalPossessionTime: string
+                        TotalShotsFired: int
+                        TotalShotsLanded: int
+                        WeaponId:
+                          Attachments:
+                            - int
+                          StockId: int
+                    PlayerId:
+                      GamerTag: string
+                    SpartanRank: int
+                    Xp: int
+                  ResultCode: int
+        '404':
+          description: One or more Gamertags don't pass validation rules.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /h5/servicerecords/warzone:
+    get:
+      description: |
+        <p>Retrieves Service Records for the Warzone Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Service Record: Warzone" to "Halo 5 - Player Service Records - Warzone".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Service Records - Warzone
+      parameters:
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+          in: query
+          name: players
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Service Records for the requested player(s).
+          examples:
+            application/json:
+              Results:
+                - Id: string
+                  Result:
+                    PlayerId:
+                      GamerTag: string
+                    SpartanRank: int
+                    WarzoneStat:
+                      DestroyedEnemyVehicles:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      EnemyKills:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      Impulses:
+                        - Count: int
+                          Id: int
+                      MedalAwards:
+                        - Count: int
+                          MedalId: int
+                      ScenarioStats:
+                        - DestroyedEnemyVehicles:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          EnemyKills:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          FlexibleStats:
+                            ImpulseStatCounts:
+                              - Count: int
+                                Id: guid
+                            ImpulseTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                            MedalStatCounts:
+                              - Count: int
+                                Id: guid
+                            MedalTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                          GameBaseVariantId: guid
+                          Impulses:
+                            - Count: int
+                              Id: int
+                          MapId: guid
+                          MedalAwards:
+                            - Count: int
+                              MedalId: int
+                          TotalAssassinations: int
+                          TotalAssists: int
+                          TotalDeaths: int
+                          TotalGamesCompleted: int
+                          TotalGamesLost: int
+                          TotalGamesTied: int
+                          TotalGamesWon: int
+                          TotalGrenadeDamage: double
+                          TotalGrenadeKills: int
+                          TotalGroundPoundDamage: double
+                          TotalGroundPoundKills: int
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalMeleeDamage: double
+                          TotalMeleeKills: int
+                          TotalPiesEarned: int
+                          TotalPowerWeaponDamage: double
+                          TotalPowerWeaponGrabs: int
+                          TotalPowerWeaponKills: int
+                          TotalPowerWeaponPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          TotalShoulderBashDamage: double
+                          TotalShoulderBashKills: int
+                          TotalSpartanKills: int
+                          TotalTimePlayed: string
+                          TotalWeaponDamage: double
+                          WeaponStats:
+                            - TotalDamageDealt: double
+                              TotalHeadshots: int
+                              TotalKills: int
+                              TotalPossessionTime: string
+                              TotalShotsFired: int
+                              TotalShotsLanded: int
+                              WeaponId:
+                                Attachments:
+                                  - int
+                                StockId: int
+                          WeaponWithMostKills:
+                            TotalDamageDealt: double
+                            TotalHeadshots: int
+                            TotalKills: int
+                            TotalPossessionTime: string
+                            TotalShotsFired: int
+                            TotalShotsLanded: int
+                            WeaponId:
+                              Attachments:
+                                - int
+                              StockId: int
+                      TotalAssassinations: int
+                      TotalAssists: int
+                      TotalDeaths: int
+                      TotalGamesCompleted: int
+                      TotalGamesLost: int
+                      TotalGamesTied: int
+                      TotalGamesWon: int
+                      TotalGrenadeDamage: double
+                      TotalGrenadeKills: int
+                      TotalGroundPoundDamage: double
+                      TotalGroundPoundKills: int
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalMeleeDamage: double
+                      TotalMeleeKills: int
+                      TotalPiesEarned: int
+                      TotalPowerWeaponDamage: double
+                      TotalPowerWeaponGrabs: int
+                      TotalPowerWeaponKills: int
+                      TotalPowerWeaponPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      TotalShoulderBashDamage: double
+                      TotalShoulderBashKills: int
+                      TotalSpartanKills: int
+                      TotalTimePlayed: string
+                      TotalWeaponDamage: double
+                      WeaponStats:
+                        - TotalDamageDealt: double
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          WeaponId:
+                            Attachments:
+                              - int
+                            StockId: int
+                      WeaponWithMostKills:
+                        TotalDamageDealt: double
+                        TotalHeadshots: int
+                        TotalKills: int
+                        TotalPossessionTime: string
+                        TotalShotsFired: int
+                        TotalShotsLanded: int
+                        WeaponId:
+                          Attachments:
+                            - int
+                          StockId: int
+                    Xp: int
+                  ResultCode: int
+        '404':
+          description: One or more Gamertags don't pass validation rules.
+        '500':
+          description: Internal Server Error
+  '/h5/warzone/matches/{matchId}':
+    get:
+      description: |
+        <p>Retrieves detailed statistics for a Match with the Warzone Game Mode.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Post-Game Carnage Report: Warzone" to "Halo 5 - Match Result - Warzone".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+                <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>May 16, 2016:</strong></p>
+            <ul>
+                <li>Documented HTTP 503 Response Code.</li>
+                <li>Added documentation for the "MatchSpeedWinAmount", "ObjectivesCompletedAmount", and "BoostData" fields.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Added documentation for the "GameVariantResourceId", "MapVariantResourceId", and "PlayerScore" fields.</li>
+                <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Match Result - Warzone
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Result.
+          examples:
+            application/json:
+              GameBaseVariantId: guid
+              GameVariantId: guid
+              GameVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 2
+              IsMatchOver: boolean
+              IsTeamGame: boolean
+              MapId: guid
+              MapVariantId: guid
+              MapVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 3
+              ObjectivesCompleted: int
+              PlayerStats:
+                - AvgLifeTimeOfPlayer: string
+                  BoostData:
+                    CardConsumed: bool
+                    DefinitionId: guid
+                  CreditsEarned:
+                    BoostAmount: int
+                    PlayerRankAmount: int
+                    Result: int
+                    SpartanRankModifier: double
+                    TimePlayedAmount: double
+                    TotalCreditsEarned: int
+                  DNF: boolean
+                  DestroyedEnemyVehicles:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  EnemyKills:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  FlexibleStats:
+                    ImpulseStatCounts:
+                      - Count: int
+                        Id: guid
+                    ImpulseTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                    MedalStatCounts:
+                      - Count: int
+                        Id: guid
+                    MedalTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                  Impulses:
+                    - Count: int
+                      Id: int
+                  KilledByOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  KilledOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  MedalAwards:
+                    - Count: int
+                      MedalId: int
+                  MetaCommendationDeltas:
+                    - Id: guid
+                      MetRequirements:
+                        - Data1: int
+                          Data2: int
+                          Data3: int
+                          Data4: int
+                      PreviousMetRequirements:
+                        - Data1: int
+                          Data2: int
+                          Data3: int
+                          Data4: int
+                  Player:
+                    Gamertag: string
+                  ProgressiveCommendationDeltas:
+                    - Id: guid
+                      PreviousProgress: int
+                      Progress: int
+                  Rank: int
+                  RewardSets:
+                    - CommendationLevelId: guid
+                      CommendationSource: guid
+                      RewardSet: guid
+                      RewardSourceType: int
+                      SpartanRankSource: int
+                  TeamId: int
+                  TotalAssassinations: int
+                  TotalAssists: int
+                  TotalDeaths: int
+                  TotalGamesCompleted: int
+                  TotalGamesLost: int
+                  TotalGamesTied: int
+                  TotalGamesWon: int
+                  TotalGrenadeDamage: double
+                  TotalGrenadeKills: int
+                  TotalGroundPoundDamage: double
+                  TotalGroundPoundKills: int
+                  TotalHeadshots: int
+                  TotalKills: int
+                  TotalMeleeDamage: double
+                  TotalMeleeKills: int
+                  TotalPiesEarned: int
+                  TotalPowerWeaponDamage: double
+                  TotalPowerWeaponGrabs: int
+                  TotalPowerWeaponKills: int
+                  TotalPowerWeaponPossessionTime: string
+                  TotalShotsFired: int
+                  TotalShotsLanded: int
+                  TotalShoulderBashDamage: double
+                  TotalShoulderBashKills: int
+                  TotalSpartanKills: int
+                  TotalTimePlayed: string
+                  TotalWeaponDamage: double
+                  WarzoneLevel: int
+                  WeaponStats:
+                    - TotalDamageDealt: double
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      WeaponId:
+                        Attachments:
+                          - int
+                        StockId: int
+                  WeaponWithMostKills:
+                    TotalDamageDealt: double
+                    TotalHeadshots: int
+                    TotalKills: int
+                    TotalPossessionTime: string
+                    TotalShotsFired: int
+                    TotalShotsLanded: int
+                    WeaponId:
+                      Attachments:
+                        - int
+                      StockId: int
+                  XpInfo:
+                    BoostAmount: int
+                    MatchSpeedWinAmount: int
+                    ObjectivesCompletedAmount: int
+                    PerformanceXP: int
+                    PlayerRankXPAward: int
+                    PlayerTimePerformanceXPAward: int
+                    PrevSpartanRank: int
+                    PrevTotalXP: int
+                    SpartanRank: int
+                    SpartanRankMatchXPScalar: double
+                    TotalXP: int
+              PlaylistId: guid
+              TeamStats:
+                - Rank: int
+                  RoundStats:
+                    - Rank: int
+                      RoundNumber: int
+                      Score: uint32
+                  Score: uint32
+                  TeamId: int
+              TotalDuration: string
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5pc/custom/matches/{matchId}':
+    get:
+      description: |
+        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+                <li>Added documentation for "PresentInMatch".</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Post-Game Carnage Report: Custom" to "Halo 5 - Match Result - Custom".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+                <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>May 16, 2016:</strong></p>
+            <ul>
+                <li>Documented HTTP 503 Response Code.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Added documentation for the "GameVariantResourceId", "MapVariantResourceId", and "PlayerScore" fields.</li>
+                <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 PC - Match Result - Custom
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 PC - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Result.
+          examples:
+            application/json:
+              GameBaseVariantId: guid
+              GameVariantId: guid
+              GameVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 2
+              IsMatchOver: boolean
+              IsTeamGame: boolean
+              MapId: guid
+              MapVariantId: guid
+              MapVariantResourceId:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 3
+              PlayerStats:
+                - AvgLifeTimeOfPlayer: string
+                  DNF: boolean
+                  DestroyedEnemyVehicles:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  EnemyKills:
+                    - Enemy:
+                        Attachments:
+                          - int
+                        BaseId: int
+                      TotalKills: int
+                  FlexibleStats:
+                    ImpulseStatCounts:
+                      - Count: int
+                        Id: guid
+                    ImpulseTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                    MedalStatCounts:
+                      - Count: int
+                        Id: guid
+                    MedalTimelapses:
+                      - Id: guid
+                        Timelapse: string
+                  Impulses:
+                    - Count: int
+                      Id: int
+                  KilledByOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  KilledOpponentDetails:
+                    - GamerTag: string
+                      TotalKills: int
+                  MedalAwards:
+                    - Count: int
+                      MedalId: int
+                  Player:
+                    Gamertag: string
+                  PresentInMatch: boolean
+                  Rank: int
+                  TeamId: int
+                  TotalAssassinations: int
+                  TotalAssists: int
+                  TotalDeaths: int
+                  TotalGamesCompleted: int
+                  TotalGamesLost: int
+                  TotalGamesTied: int
+                  TotalGamesWon: int
+                  TotalGrenadeDamage: double
+                  TotalGrenadeKills: int
+                  TotalGroundPoundDamage: double
+                  TotalGroundPoundKills: int
+                  TotalHeadshots: int
+                  TotalKills: int
+                  TotalMeleeDamage: double
+                  TotalMeleeKills: int
+                  TotalPowerWeaponDamage: double
+                  TotalPowerWeaponGrabs: int
+                  TotalPowerWeaponKills: int
+                  TotalPowerWeaponPossessionTime: string
+                  TotalShotsFired: int
+                  TotalShotsLanded: int
+                  TotalShoulderBashDamage: double
+                  TotalShoulderBashKills: int
+                  TotalSpartanKills: int
+                  TotalTimePlayed: string
+                  TotalWeaponDamage: double
+                  WeaponStats:
+                    - TotalDamageDealt: double
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      WeaponId:
+                        Attachments:
+                          - int
+                        StockId: int
+                  WeaponWithMostKills:
+                    TotalDamageDealt: double
+                    TotalHeadshots: int
+                    TotalKills: int
+                    TotalPossessionTime: string
+                    TotalShotsFired: int
+                    TotalShotsLanded: int
+                    WeaponId:
+                      Attachments:
+                        - int
+                      StockId: int
+              PlaylistId: guid
+              TeamStats:
+                - Rank: int
+                  RoundStats:
+                    - Rank: int
+                      RoundNumber: int
+                      Score: uint32
+                  Score: uint32
+                  TeamId: int
+              TotalDuration: string
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/h5pc/players/{player}/matches':
+    get:
+      description: |
+        <p>Retrieves a list of Matches that the Player has participated in and which have completed processing. If the Player is currently in a match, it is not returned in this API.</p>
+        <p>This endpoint will include games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added support for the Custom Local Game mode.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Matches for Player" to "Halo 5 - Player Match History".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>April 20, 2016:</strong></p>
+            <ul>
+                <li>Clarified documentation for the "MapVariant" and "GameVariant" fields.</li>
+                <li>Corrected "OwnerType" values for the "MapVariant" and "GameVariant" fields.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 PC - Player Match History
+      parameters:
+        - description: The Player's Gamertag.
+          in: path
+          name: player
+          required: true
+          type: string
+        - description: |-
+            Indicates what Game Mode(s) the client is interested in getting Matches for (arena, campaign, custom, or warzone).
+
+            When the parameter is omitted or empty, Matches from all modes are returned. When a client would like to receive Matches spanning multiple Modes, separate the Modes with a comma (e.g. "arena,custom"). There is no significance to the order the Modes are specified in this parameter.
+
+            When an invalid Mode is specified, HTTP 400 ("Bad Request") is returned.
+
+            When a valid Mode is specified more than once, HTTP 400 ("Bad Request") is returned.
+          in: query
+          name: modes
+          type: string
+        - description: |-
+            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
+
+            When omitted, zero is assumed.
+
+            When the value contains a non-digit, HTTP 400 ("Bad Request") is returned.
+          in: query
+          name: start
+          type: number
+        - description: |-
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+
+            When omitted, 25 is assumed.
+
+            When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
+
+            When the value is greater than the allowed range [1,25], the maximum allowed value is used instead. The "Count" field in the response will confirm the actual value that was used.
+          in: query
+          name: count
+          type: number
+      responses:
+        '200':
+          description: The response body will contain the Player's recent Matches. An empty list will be returned if the Player has not played any Matches in the specified Game Mode(s).
+          examples:
+            application/json: |
+              {
+                // The starting point that was used. When the "start" query string parameter is
+                // specified, this value is identical. When "start" is omitted, the default value is
+                // returned.
+                "Start": "int",  
+
+                // The number of results that the service attempted to retrieve to satisfy this
+                // request. Normally this value is equal to the "count" parameter. If the client
+                // specified a count parameter greater than the maximum allowed, this value contains
+                // the maximum allowed amount.
+                "Count": "int",
+
+                // The number of results that are actually being returned in this response. This field
+                // is named "ResultCount" to avoid confusion with "Count".
+                "ResultCount": "int",
+
+                // A list of recent matches. Matches are listed in reverse chronological order with the
+                // most recently started match first.
+                "Results": [
+                  {
+                    // Internal use only. A set of related resource links.
+                    "Links": "links",
+
+                    "Id": {
+
+                      // The ID for this match. More match details are available via the applicable
+                      // Match Result Endpoint.
+                      "MatchId": "guid",
+
+                      // The game mode applicable to this match. Options are: 
+                      //   Error = 0, 
+                      //   Arena = 1, 
+                      //   Campaign = 2, 
+                      //   Custom = 3, 
+                      //   Warzone = 4,
+                      //   CustomLocal = 6.
+                      "GameMode": "int",
+
+                    },
+
+                    // The ID of the playlist (aka "Hopper") for the match. 
+                    // Hoppers are used in Arena and Warzone. In Arena, they function just as you would
+                    // expect, similar to previous Halo titles. Warzone uses hoppers as well. There
+                    // will be multiple Warzone hoppers which contain a rotating playlist of scenarios
+                    // to play. 
+                    // Null for campaign & custom games. 
+                    // Playlists are available via the Metadata API.
+                    "HopperId": "guid",
+
+                    // The ID of the base map for this match. Maps are available via the Metadata API.
+                    "MapId": "guid",
+
+                    // The variant of the map for this match. There are two sources of map variants:
+                    // official map variants available via the Metadata API and user-generated map
+                    // variants which are not available via the APIs currently. This will be null for
+                    // campaign games.
+                    "MapVariant": {
+
+                      // The resource type. 3 indicates map variant.
+                      "ResourceType": 3,
+
+                      // The ID of the map variant. Official map variants are available via the
+                      // Metadata API.
+                      "ResourceId": "guid",
+
+                      // The source of the map variant. Options are:
+                      //   Unknown = 0,
+                      //   User-generated = 1,
+                      //   Official = 3.
+                      "OwnerType": "int",
+
+                      // The gamertag of the user that created the map variant if this is a
+                      // user-generated map variant, or null otherwise. 
+                      "Owner": "string"
+                    }
+                    // The ID of the game base variant for this match. Game base variants are available
+                    // via the Metadata API.
+                    "GameBaseVariantId": "guid",
+
+                    // The variant of the game for this match. There are two sources of game variants:
+                    // official game variants available via the Metadata API and user-generated game
+                    // variants which are not available via the APIs currently. This will be null for
+                    // campaign games.
+                    "GameVariant": {
+
+                      // The resource type. 2 indicates game variant.
+                      "ResourceType": 2,
+
+                      // The ID of the game variant. Official game variants are available via the
+                      // Metadata API.
+                      "ResourceId": "guid",        
+
+                      // The source of the game variant. Options are:
+                      //   Unknown = 0,
+                      //   User-generated = 1,
+                      //   Official = 3.
+                      "OwnerType": "int",
+
+                      // The gamertag of the user that created the game variant if this is a
+                      // user-generated game variant, or null otherwise. 
+                      "Owner": "string"
+                    },
+
+                    // The length of the match. This is expressed as an ISO 8601 Duration.
+                    "MatchDuration": "string",
+
+                    // The date and time when match ended. Note that this is different than the
+                    // processing date, once matches end they typically take a small amount of time to
+                    // process. The processing date is not available through this API. The time
+                    // component of this date is always set to "00:00:00". This is expressed as an ISO
+                    // 8601 combined Date and Time.
+                    "MatchCompletedDate": {
+
+                      "ISO8601Date": "string"
+                    },
+
+                    // Provides team data. This list contains all team that Won or Tied. Losing teams
+                    // are not included. This list is empty for campaign games. 
+                    "Teams": [
+                      {
+                        // The ID for the team. The team's ID dictates the team's color. Team colors
+                        // are available via the Metadata API.
+                        "Id": "int",
+
+                        // The team's score at the end of the match. The way the score is determined is
+                        // based off the game base variant being played: 
+                        //   Breakout = number of rounds won,
+                        //   CTF = number of flag captures,
+                        //   Slayer = number of kills,
+                        //   Strongholds = number of points,
+                        //   Warzone = number of points.
+                        // Score can be a negative value. Unfortunately, this value is returned as an
+                        // unsigned 32-bit integer. This means that if the score is -1, the score
+                        // reported is 4,294,967,295.
+                        "Score": "uint32",
+
+                        // The team's rank at the end of the match.
+                        "Rank": "int"
+                      }
+                    ],
+
+                    // This field contains the player's data. This will only contain data for the
+                    // player specified in the request.
+                    "Players": [
+                      {          
+                        "Player": {
+
+                          // The player's gamertag.
+                          "Gamertag": "string",
+
+                          // Internal use only. This will always be null.
+                          "Xuid": null
+                        },
+
+                        // The ID of the team that the player was on when the match ended. Zero for
+                        // campaign games.
+                        "TeamId": "int",
+
+                        // The player's team-agnostic ranking in this match.
+                        "Rank": "int",
+
+                        // Indicates what result the player received at the conclusion of the match.
+                        // Options are:
+                        //   Did Not Finish = 0, 
+                        //   Lost = 1, 
+                        //   Tied = 2, 
+                        //   Won = 3. 
+                        // Did Not Finish: The player was not present when the match ended.
+                        // Lost: The player was on a team that was assigned a loss, typically this is
+                        // when a team does not have rank = 1. 
+                        // Won: The player was on the team that was assigned the win, typically this is
+                        // the team that has rank = 1. 
+                        // Tied: The player was on the team that was awarded a tie. Typically this is
+                        // when the player is on the team with rank = 1, and there is at least one
+                        // other team with rank = 1. Ties are only for rank = 1 teams. Consider the
+                        // scenario when exactly one team is rank = 1, and two teams are rank = 2.
+                        // Players on the rank=1 team will have "Won", players on the rank = 2 teams
+                        // will have "Lost". For ties, this documentation states 'typically' because
+                        // the game may have unique rules for multi-team and FFA scenarios, in which
+                        // multiple teams are awarded a win.
+                        "Result": "int",
+
+                        // The number of enemy kills the player had during this match. This includes
+                        // other Spartans and Enemy AI.
+                        "TotalKills": "int",
+
+                        // The number of times this player died during the match.
+                        "TotalDeaths": "int",
+
+                        // The number of assists credited to the player during the match. This includes
+                        // other Spartans and Enemy AI.
+                        "TotalAssists": "int",
+
+                        // Internal use only. This will always be null.
+                        "PreMatchRatings": null,
+
+                        // Internal use only. This will always be null.
+                        "PostMatchRatings": null
+                      }
+                    ],
+
+                    // Whether this was a team-based game or not (e.g. free-for-all).
+                    "IsTeamGame": "boolean",
+
+                    // The ID of the season for this match if it was played in a seasonal playlist.
+                    // Null if the match was played in a non-seasonal playlist. This will only be set
+                    // for Arena matches and will be null for all other game modes.
+                    "SeasonId": null,
+
+                    // Internal use only. Do not use.
+                    "MatchCompletedDateFidelity": "int"
+                  }
+                ]
+              }
+        '400':
+          description: An unsupported value was provided for a query string parameter.
+        '404':
+          description: Specified Player was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /h5pc/servicerecords/custom:
+    get:
+      description: |
+        <p>Retrieves Service Records for the Custom Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Player Service Records - Custom Local" Endpoint.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>December 22, 2017:</strong></p>
+            <ul>
+                <li>Added Game Mode clarifications to the Endpoint description.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Service Record: Custom" to "Halo 5 - Player Service Records - Custom".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 PC - Player Service Records - Custom
+      parameters:
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+          in: query
+          name: players
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Service Records for the requested player(s).
+          examples:
+            application/json:
+              Results:
+                - Id: string
+                  Result:
+                    CustomStats:
+                      CustomGameBaseVariantStats:
+                        - DestroyedEnemyVehicles:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          EnemyKills:
+                            - Enemy:
+                                Attachments:
+                                  - int
+                                BaseId: int
+                              TotalKills: int
+                          FlexibleStats:
+                            ImpulseStatCounts:
+                              - Count: int
+                                Id: guid
+                            ImpulseTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                            MedalStatCounts:
+                              - Count: int
+                                Id: guid
+                            MedalTimelapses:
+                              - Id: guid
+                                Timelapse: string
+                          GameBaseVariantId: guid
+                          Impulses:
+                            - Count: int
+                              Id: int
+                          MedalAwards:
+                            - Count: int
+                              MedalId: int
+                          TotalAssassinations: int
+                          TotalAssists: int
+                          TotalDeaths: int
+                          TotalGamesCompleted: int
+                          TotalGamesLost: int
+                          TotalGamesTied: int
+                          TotalGamesWon: int
+                          TotalGrenadeDamage: double
+                          TotalGrenadeKills: int
+                          TotalGroundPoundDamage: double
+                          TotalGroundPoundKills: int
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalMeleeDamage: double
+                          TotalMeleeKills: int
+                          TotalPowerWeaponDamage: double
+                          TotalPowerWeaponGrabs: int
+                          TotalPowerWeaponKills: int
+                          TotalPowerWeaponPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          TotalShoulderBashDamage: double
+                          TotalShoulderBashKills: int
+                          TotalSpartanKills: int
+                          TotalTimePlayed: string
+                          TotalWeaponDamage: double
+                          WeaponStats:
+                            - TotalDamageDealt: double
+                              TotalHeadshots: int
+                              TotalKills: int
+                              TotalPossessionTime: string
+                              TotalShotsFired: int
+                              TotalShotsLanded: int
+                              WeaponId:
+                                Attachments:
+                                  - int
+                                StockId: int
+                          WeaponWithMostKills:
+                            TotalDamageDealt: double
+                            TotalHeadshots: int
+                            TotalKills: int
+                            TotalPossessionTime: string
+                            TotalShotsFired: int
+                            TotalShotsLanded: int
+                            WeaponId:
+                              Attachments:
+                                - int
+                              StockId: int
+                      DestroyedEnemyVehicles:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      EnemyKills:
+                        - Enemy:
+                            Attachments:
+                              - int
+                            BaseId: int
+                          TotalKills: int
+                      Impulses:
+                        - Count: int
+                          Id: int
+                      MedalAwards:
+                        - Count: int
+                          MedalId: int
+                      TopGameBaseVariants:
+                        - GameBaseVariantId: guid
+                          GameBaseVariantRank: int
+                          NumberOfMatchesCompleted: int
+                          NumberOfMatchesWon: int
+                      TotalAssassinations: int
+                      TotalAssists: int
+                      TotalDeaths: int
+                      TotalGamesCompleted: int
+                      TotalGamesLost: int
+                      TotalGamesTied: int
+                      TotalGamesWon: int
+                      TotalGrenadeDamage: double
+                      TotalGrenadeKills: int
+                      TotalGroundPoundDamage: double
+                      TotalGroundPoundKills: int
+                      TotalHeadshots: int
+                      TotalKills: int
+                      TotalMeleeDamage: double
+                      TotalMeleeKills: int
+                      TotalPowerWeaponDamage: double
+                      TotalPowerWeaponGrabs: int
+                      TotalPowerWeaponKills: int
+                      TotalPowerWeaponPossessionTime: string
+                      TotalShotsFired: int
+                      TotalShotsLanded: int
+                      TotalShoulderBashDamage: double
+                      TotalShoulderBashKills: int
+                      TotalSpartanKills: int
+                      TotalTimePlayed: string
+                      TotalWeaponDamage: double
+                      WeaponStats:
+                        - TotalDamageDealt: double
+                          TotalHeadshots: int
+                          TotalKills: int
+                          TotalPossessionTime: string
+                          TotalShotsFired: int
+                          TotalShotsLanded: int
+                          WeaponId:
+                            Attachments:
+                              - int
+                            StockId: int
+                      WeaponWithMostKills:
+                        TotalDamageDealt: double
+                        TotalHeadshots: int
+                        TotalKills: int
+                        TotalPossessionTime: string
+                        TotalShotsFired: int
+                        TotalShotsLanded: int
+                        WeaponId:
+                          Attachments:
+                            - int
+                          StockId: int
+                    PlayerId:
+                      GamerTag: string
+                    SpartanRank: int
+                    Xp: int
+                  ResultCode: int
+        '404':
+          description: One or more Gamertags don't pass validation rules.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/hw2/matches/{matchId}':
+    get:
+      description: |
+        <p>Retrieves detailed statistics for a Match. Matches can be retrieved before they are completed; however, the data for in-progress Matches is only updated every few minutes.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>September 5, 2017:</strong></p>
+            <ul>
+                <li>Documented new game mode "Terminus Firefight".</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Match Result
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Result.
+          examples:
+            application/json:
+              GameMode: int
+              IsMatchComplete: bool
+              MapId: string
+              MatchDuration: string
+              MatchEndReason: int
+              MatchId: guid
+              MatchStartDate:
+                ISO8601Date: string
+              MatchType: int
+              Players:
+                int:
+                  CardStats:
+                    guid:
+                      TotalPlays: int
+                  ComputerDifficulty: int
+                  ComputerPlayerId: int
+                  HumanPlayerId:
+                    Gamertag: string
+                  IsHuman: bool
+                  LeaderId: int
+                  LeaderPowerStats:
+                    string:
+                      TimesCast: int
+                  PlayerCompletedMatch: bool
+                  PlayerMatchOutcome: int
+                  PointStats:
+                    string:
+                      TimesCaptured: int
+                  RatingProgress:
+                    PreviousCsr:
+                      Designation: int
+                      MeasurementMatchesRemaining: int
+                      PercentToNextTier: int
+                      Rank: int
+                      Raw: int
+                      Tier: int
+                    PreviousMmr:
+                      LastModifiedDate:
+                        ISO8601Date: string
+                      Rating: double
+                      Variance: double
+                    UpdatedCsr:
+                      Designation: int
+                      MeasurementMatchesRemaining: int
+                      PercentToNextTier: int
+                      Rank: int
+                      Raw: int
+                      Tier: int
+                    UpdatedMmr:
+                      LastModifiedDate:
+                        ISO8601Date: string
+                      Rating: double
+                      Variance: double
+                  TeamId: int
+                  TeamPlayerIndex: int
+                  TimeInMatch: string
+                  UnitStats:
+                    string:
+                      TotalBuilt: int
+                      TotalDestroyed: int
+                      TotalLost: int
+                  WaveStats:
+                    int:
+                      WaveDuration: string
+                  XPProgress:
+                    ChallengesXP: int
+                    CompletedSpartanRanks:
+                      - Id: guid
+                        PacksAwarded:
+                          - guid
+                    GameplayXP: int
+                    PreviousTotalXP: int
+                    UpdatedTotalXP: int
+              PlaylistId: guid
+              SeasonId: guid
+              Teams:
+                int:
+                  MatchOutcome: int
+                  ObjectiveScore: int
+                  TeamSize: int
+              VictoryCondition: int
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/hw2/matches/{matchId}/events':
+    get:
+      description: |
+        <p>Retrieves a set of Events related to the Match specified. Events are only available once the Match has completed. Events are not available for Matches played with the Custom Match Type.</p>
+        <p>The set of Events may grow over time as data becomes available.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>September 5, 2017:</strong></p>
+            <ul>
+                <li>Documented new game mode "Terminus Firefight".</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Match Events
+      parameters:
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Match Events.
+          examples:
+            application/json:
+              GameEvents:
+                - GameEvent
+              IsCompleteSetOfEvents: bool
+        '404':
+          description: The specified Match could not be found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/hw2/player-leaderboards/csr/{seasonId}/{playlistId}':
+    get:
+      description: |
+        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists of the top Players with a CSR of 1800 or above for a given Playlist in a Season.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>July 31, 2017:</strong></p>
+            <ul>
+                <li>Clarified documentation for which players are included in the leaderboard.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>July 14, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Leaderboard - Player CSR
+      parameters:
+        - description: The ID for the Season.
+          in: path
+          name: seasonId
+          required: true
+          type: string
+        - description: The ID for the Playlist.
+          in: path
+          name: playlistId
+          required: true
+          type: string
+        - description: |-
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+
+            When omitted, 200 is assumed.
+
+            When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
+
+            When the value is greater than the allowed range [1,250], the maximum allowed value is used instead.
+
+            The "Count" field in the response will confirm the actual value that was used.
+          in: query
+          name: count
+          type: number
+      responses:
+        '200':
+          description: The response body will contain the Players in the Leaderboard. An empty list will be returned if no Players are in the Leaderboard.
+          examples:
+            application/json:
+              Count: int
+              Links: links
+              ResultCount: int
+              Results:
+                - PlayerId:
+                    GamerTag: string
+                  Rank: int
+                  Score:
+                    Csr: int
+                    DesignationId: int
+                    PercentToNextTier: int
+                    Rank: int
+                    Tier: int
+              Start: int
+        '404':
+          description: 'The Season does not exist, or the Playlist either does not exist or is not part of the given Season.'
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/hw2/players/{player}/campaign-progress':
+    get:
+      description: |
+        <p>Retrieves the Campaign Progress state for a Player.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Player Campaign Progress
+      parameters:
+        - description: The Player's Gamertag.
+          in: path
+          name: player
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Campaign Progress for the Player.
+          examples:
+            application/json:
+              CampaignXP: int
+              Levels:
+                int:
+                  FirstCompletionDate:
+                    ISO8601Date: string
+                  SkullsUnlocked:
+                    - int
+                  SoloCompletion:
+                    int:
+                      BestCompletionTime: string
+                      BestScore: int
+                      BonusObjectivesCompleted:
+                        - int
+                      CriticalObjectivesCompleted:
+                        - int
+                      OptionalObjectivesCompleted:
+                        - int
+                  TotalCooperativePlayTime: string
+                  TotalSoloPlayTime: string
+              LogsUnlocked:
+                - int
+        '404':
+          description: Specified Player was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/hw2/players/{player}/matches':
+    get:
+      description: |
+        <p>Retrieves a list of Matches that the Player has participated in. If the Player is currently in a Match, it is not returned in this API.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>September 5, 2017:</strong></p>
+            <ul>
+                <li>Documented new game mode "Terminus Firefight".</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Player Match History
+      parameters:
+        - description: The Player's Gamertag.
+          in: path
+          name: player
+          required: true
+          type: string
+        - description: |-
+            Indicates what Match Type the client is interested in getting Matches for ("custom" or "matchmaking").
+
+            When the parameter is omitted or empty, Matches from all Match Types are returned.
+
+            When an invalid Mode is specified, HTTP 400 ("Bad Request") is returned.
+          in: query
+          name: matchType
+          type: string
+        - description: |-
+            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
+
+            When omitted, zero is assumed.
+
+            When the value contains a non-digit, HTTP 400 ("Bad Request") is returned.
+          in: query
+          name: start
+          type: number
+        - description: |-
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+
+            When omitted, 25 is assumed.
+
+            When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
+
+            When the value is greater than the allowed range [1,25], the maximum allowed value is used instead. The "Count" field in the response will confirm the actual value that was used.
+          in: query
+          name: count
+          type: number
+      responses:
+        '200':
+          description: The response body will contain the Match History for the Player.
+          examples:
+            application/json:
+              Count: int
+              Links: {}
+              ResultCount: int
+              Results:
+                - GameMode: int
+                  LeaderId: int
+                  MapId: string
+                  MatchId: guid
+                  MatchStartDate:
+                    ISO8601Date: string
+                  MatchType: int
+                  PlayerCompletedMatch: bool
+                  PlayerIndex: int
+                  PlayerMatchDuration: string
+                  PlayerMatchOutcome: int
+                  PlaylistId: guid
+                  RatingProgress:
+                    PreviousCsr:
+                      Designation: int
+                      MeasurementMatchesRemaining: int
+                      PercentToNextTier: int
+                      Rank: int
+                      Raw: int
+                      Tier: int
+                    PreviousMmr:
+                      LastModifiedDate:
+                        ISO8601Date: string
+                      Rating: double
+                      Variance: double
+                    UpdatedCsr:
+                      Designation: int
+                      MeasurementMatchesRemaining: int
+                      PercentToNextTier: int
+                      Rank: int
+                      Raw: int
+                      Tier: int
+                    UpdatedMmr:
+                      LastModifiedDate:
+                        ISO8601Date: string
+                      Rating: double
+                      Variance: double
+                  SeasonId: guid
+                  TeamId: int
+                  TeamPlayerIndex: int
+                  Teams:
+                    int:
+                      TeamSize: int
+                  XPProgress:
+                    ChallengesXP: int
+                    CompletedSpartanRanks:
+                      - Id: guid
+                        PacksAwarded:
+                          - guid
+                    GameplayXP: int
+                    PreviousTotalXP: int
+                    UpdatedTotalXP: int
+              Start: int
+        '404':
+          description: Specified Player was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/hw2/players/{player}/stats':
+    get:
+      description: |
+        <p>Retrieves high-level aggregations across the lifetime of a Player.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>September 5, 2017:</strong></p>
+            <ul>
+                <li>Added additional fields: "GameMode" and "HighestObjectiveScoreByTeamSize".</li>
+                <li>Documented new game mode "Terminus Firefight".</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Player Stats Summary
+      parameters:
+        - description: The Player's Gamertag.
+          in: path
+          name: player
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Stats Summary for the Player.
+          examples:
+            application/json:
+              CustomSummary:
+                CustomModeStats:
+                  - Summary
+                CustomStats: Summary
+                SkirmishStats:
+                  MultiplayerModeStats:
+                    - Summary
+                  MultiplayerStats: Summary
+                  SinglePlayerModeStats:
+                    - Summary
+                  SinglePlayerStats: Summary
+              MatchmakingSummary:
+                RankedModeStats:
+                  - Summary
+                RankedPlaylistStats:
+                  - Summary
+                SocialModeStats:
+                  - Summary
+                SocialPlaylistStats:
+                  - Summary
+        '404':
+          description: Specified Player was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/hw2/players/{player}/stats/seasons/{seasonId}':
+    get:
+      description: |
+        <p>Retrieves high-level aggregations across a Season for a Player.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>September 5, 2017:</strong></p>
+            <ul>
+                <li>Added additional pivots of data: "CustomModeStats", "SinglePlayerModeStats", "MultiplayerModeStats", "SocialModeStats", and "RankedModeStats".</li>
+                <li>Added additional fields to the "Summary" contract: "GameMode" and "HighestObjectiveScoreByTeamSize".</li>
+                <li>Documented new game mode "Terminus Firefight".</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Player Season Stats Summary
+      parameters:
+        - description: The Player's Gamertag.
+          in: path
+          name: player
+          required: true
+          type: string
+        - description: A Season ID or "current" for the current Season. Seasons are available via the Metadata API.
+          in: path
+          name: seasonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Stats Summary for the Player.
+          examples:
+            application/json:
+              RankedPlaylistStats:
+                - GameMode: int
+                  HighestCsr:
+                    Designation: int
+                    MeasurementMatchesRemaining: int
+                    PercentToNextTier: int
+                    Rank: int
+                    Raw: int
+                    Tier: int
+                  HighestObjectiveScoreByTeamSize:
+                    int: int
+                  HighestWaveCompleted: int
+                  LeaderStats:
+                    string:
+                      TotalLeaderPowersCast: int
+                      TotalMatchesCompleted: int
+                      TotalMatchesLost: int
+                      TotalMatchesStarted: int
+                      TotalMatchesWon: int
+                      TotalTimePlayed: string
+                  PlaylistClassification: int
+                  PlaylistId: guid
+                  TotalCardPlays: int
+                  TotalMatchesCompleted: int
+                  TotalMatchesLost: int
+                  TotalMatchesStarted: int
+                  TotalMatchesWon: int
+                  TotalPointCaptures: int
+                  TotalTimePlayed: string
+                  TotalUnitsBuilt: int
+                  TotalUnitsDestroyed: int
+                  TotalUnitsLost: int
+              SeasonId: guid
+        '404':
+          description: Specified Player was not found.
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/hw2/playlist/{playlistId}/rating':
+    get:
+      description: |
+        <p>Retrieves Playlist Ratings in the current season for one or more Players.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Player Playlist Ratings
+      parameters:
+        - description: The ID of the Playlist to get Ratings for.
+          in: path
+          name: playlistId
+          required: true
+          type: string
+        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be specified.
+          in: query
+          name: players
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Playlist Ratings for the Player(s).
+          examples:
+            application/json:
+              Links: {}
+              Results:
+                - Id: string
+                  Result:
+                    Csr:
+                      Designation: int
+                      MeasurementMatchesRemaining: int
+                      PercentToNextTier: int
+                      Rank: int
+                      Raw: int
+                      Tier: int
+                    Mmr:
+                      LastModifiedDate:
+                        ISO8601Date: ''
+                      Rating: double
+                      Variance: double
+                  ResultCode: int
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /hw2/xp:
+    get:
+      description: |
+        <p>Retrieves XP and Rank information for one or more players.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo Wars 2 - Player XPs
+      parameters:
+        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be specified.
+          in: query
+          name: players
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the XPs for the Player(s).
+          examples:
+            application/json:
+              Links: {}
+              Results:
+                - Id: string
+                  Result:
+                    CampaignXp: int
+                    LastUpdatedDateUtc:
+                      ISO8601Date: string
+                    MultiplayerXp: int
+                    SpartanRankId: guid
+                    TotalXp: int
+                  ResultCode: int
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable

@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - marketing
   x-logo:
     url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/doubleclickbidmanager/v1/rest'
       version: v1
@@ -286,15 +288,15 @@ paths:
       description: Runs a stored query to generate a report.
       operationId: doubleclickbidmanager.queries.runquery
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RunQueryRequest'
         - description: Query ID to run.
           in: path
           name: queryId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RunQueryRequest'
       responses:
         '200':
           description: Successful response

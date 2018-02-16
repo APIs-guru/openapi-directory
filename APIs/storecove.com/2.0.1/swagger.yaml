@@ -10,7 +10,7 @@ info:
   title: Storecove
   version: 2.0.1
   x-apisguru-categories:
-    - finance
+    - financial
   x-logo:
     backgroundColor: '#FFFFFF'
     url: 'https://www.storecove.com/assets/v2/logo-b0d52166b7aedce1c08416e14480dcefd5db3f8a68704a6b802c37b189dd8894.png'
@@ -35,6 +35,8 @@ tags:
   - name: Shops
   - name: ShopAccounts
   - name: ShopAccountRequests
+  - name: LegalEntities
+  - name: PeppolIdentifiers
 paths:
   /invoice_submissions:
     post:
@@ -98,6 +100,220 @@ paths:
       summary: Preflight an invoice recipient
       tags:
         - InvoiceSubmissions
+  /legal_entities:
+    post:
+      description: Create a new LegalEntity.
+      operationId: create_legal_entity
+      parameters:
+        - description: LegalEntity to create
+          in: body
+          name: legal_entity
+          required: true
+          schema:
+            $ref: '#/definitions/LegalEntityCreate'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/LegalEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Create a new LegalEntity
+      tags:
+        - LegalEntities
+  '/legal_entities/{id}':
+    delete:
+      description: Delete a specific LegalEntity.
+      operationId: delete_legal_entity
+      parameters:
+        - description: legal_entity id
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Delete LegalEntity
+      tags:
+        - LegalEntities
+    get:
+      description: Get a specific LegalEntity.
+      operationId: get_legal_entity
+      parameters:
+        - description: legal_entity id
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/LegalEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Get LegalEntity
+      tags:
+        - LegalEntities
+    patch:
+      description: Update a specific LegalEntity.
+      operationId: update_legal_entity
+      parameters:
+        - description: legal_entity id
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: LegalEntity updates
+          in: body
+          name: legal_entity
+          required: true
+          schema:
+            $ref: '#/definitions/LegalEntityUpdate'
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/LegalEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Update LegalEntity
+      tags:
+        - LegalEntities
+  '/legal_entities/{legal_entity_id}/peppol_identifiers':
+    post:
+      description: Create a new PeppolIdentifier.
+      operationId: create_peppol_identifier
+      parameters:
+        - description: PeppolIdentifier to create
+          in: body
+          name: peppol_identifier
+          required: true
+          schema:
+            $ref: '#/definitions/PeppolIdentifierCreate'
+        - in: path
+          name: legal_entity_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PeppolIdentifier'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Create a new PeppolIdentifier
+      tags:
+        - PeppolIdentifiers
+  '/legal_entities/{legal_entity_id}/peppol_identifiers/iso6523-actorid-upis/{scheme}/{identifier}':
+    delete:
+      description: Delete a specific PeppolIdentifier.
+      operationId: delete_peppol_identifier
+      parameters:
+        - description: The id of the LegalEntity this PeppolIdentifier belongs to
+          format: int64
+          in: path
+          name: legal_entity_id
+          required: true
+          type: integer
+        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<_company>>.'
+          in: path
+          name: scheme
+          required: true
+          type: string
+        - description: PEPPOL identifier
+          in: path
+          name: identifier
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Delete PeppolIdentifier
+      tags:
+        - PeppolIdentifiers
+    patch:
+      description: Update a specific PeppolIdentifier.
+      operationId: update_peppol_identifier
+      parameters:
+        - description: The id of the LegalEntity this PeppolIdentifier belongs to
+          format: int64
+          in: path
+          name: legal_entity_id
+          required: true
+          type: integer
+        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<_company>>.'
+          in: path
+          name: scheme
+          required: true
+          type: string
+        - description: PEPPOL identifier
+          in: path
+          name: identifier
+          required: true
+          type: string
+        - description: PeppolIdentifier updates
+          in: body
+          name: peppol_identifier
+          required: true
+          schema:
+            $ref: '#/definitions/PeppolIdentifierUpdate'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PeppolIdentifier'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Update PeppolIdentifier
+      tags:
+        - PeppolIdentifiers
   /shop_account_requests:
     get:
       description: |-
@@ -162,7 +378,7 @@ paths:
       operationId: delete_shop_account_request
       parameters:
         - description: shop_account_request id
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -184,7 +400,7 @@ paths:
       operationId: get_shop_account_request
       parameters:
         - description: shop_account_request id
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -208,7 +424,7 @@ paths:
       operationId: update_shop_account_request
       parameters:
         - description: shop_account_request id
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -321,7 +537,7 @@ paths:
       operationId: delete_shop_account
       parameters:
         - description: shop_account id
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -343,7 +559,7 @@ paths:
       operationId: get_shop_account
       parameters:
         - description: shop_account id
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -367,7 +583,7 @@ paths:
       operationId: update_shop_account
       parameters:
         - description: shop_account id
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1006,11 +1222,15 @@ definitions:
   InvoiceRecipient:
     description: 'Ids that identify this invoice recipient. The list of identifiers should match with the accountingCustomerParty. I.e., you should not be sending an invoice for one accountingCustomerParty to the publicIdentifier of another.'
     properties:
-      fallbackEmail:
-        description: The email address the invoice should be sent to if none of the other identifiers can be used
-        format: email
+      emails:
+        description: The email addresses the invoice should be sent to if none of the other identifiers can be used
+        items:
+          description: The email address the invoice should be sent to
+          format: email
+          title: Email
+          type: string
         title: Fallback email
-        type: string
+        type: array
       id:
         description: Your id for this organization. This should match the id that you use for the Storecove widget (if you use that).
         minLength: 2
@@ -1181,6 +1401,66 @@ definitions:
     title: Invoice submission result
     type: object
   LegalEntity:
+    allOf:
+      - $ref: '#/definitions/LegalEntityUpdate'
+      - properties:
+          peppol_identifiers:
+            items:
+              $ref: '#/definitions/PeppolIdentifier'
+            type: array
+  LegalEntityCreate:
+    properties:
+      city:
+        description: The city.
+        maxLength: 64
+        minLength: 2
+        title: City
+        type: string
+      country:
+        $ref: '#/definitions/Country'
+      county:
+        description: 'County, if applicable'
+        maxLength: 64
+        title: County
+        type: string
+      line1:
+        description: The first address line.
+        maxLength: 64
+        minLength: 2
+        title: Address line 1
+        type: string
+      line2:
+        description: 'The second address line, if applicable'
+        maxLength: 64
+        title: Address line 2
+        type: string
+      party_name:
+        description: The name of the company.
+        maxLength: 64
+        minLength: 2
+        title: Company name
+        type: string
+      zip:
+        description: The zipcode.
+        maxLength: 32
+        minLength: 2
+        title: Zipcode
+        type: string
+    required:
+      - party_name
+      - line1
+      - city
+      - zip
+      - country
+  LegalEntityIdentifier:
+    properties:
+      identifier:
+        type: string
+      scheme:
+        type: string
+      scheme_agency:
+        type: string
+  LegalEntityShop:
     properties:
       city:
         type: string
@@ -1200,13 +1480,43 @@ definitions:
         type: string
       zip:
         type: string
-  LegalEntityIdentifier:
+  LegalEntityUpdate:
     properties:
-      identifier:
+      city:
+        description: The city.
+        maxLength: 64
+        minLength: 2
+        title: City
         type: string
-      scheme:
+      country:
+        $ref: '#/definitions/Country'
+      county:
+        description: 'County, if applicable'
+        maxLength: 64
+        title: County
         type: string
-      scheme_agency:
+      line1:
+        description: The first address line.
+        maxLength: 64
+        minLength: 2
+        title: Address line 1
+        type: string
+      line2:
+        description: 'The second address line, if applicable'
+        maxLength: 64
+        title: Address line 2
+        type: string
+      party_name:
+        description: The name of the company.
+        maxLength: 64
+        minLength: 2
+        title: Company name
+        type: string
+      zip:
+        description: The zipcode.
+        maxLength: 32
+        minLength: 2
+        title: Zipcode
         type: string
   Logos:
     properties:
@@ -1281,8 +1591,6 @@ definitions:
           lastName:
             title: Last name
             type: string
-        required:
-          - email
         title: Contact
         type: object
     required:
@@ -1290,6 +1598,40 @@ definitions:
       - address
     title: Party
     type: object
+  PeppolIdentifier:
+    allOf:
+      - $ref: '#/definitions/PeppolIdentifierUpdate'
+  PeppolIdentifierCreate:
+    properties:
+      identifier:
+        description: The identifier.
+        maxLength: 64
+        minLength: 2
+        title: Identifier
+        type: string
+      scheme:
+        description: The scheme of the identifier. See <<_company>> for a list.
+        maxLength: 64
+        minLength: 2
+        title: Type
+        type: string
+    required:
+      - identifier
+      - scheme
+  PeppolIdentifierUpdate:
+    properties:
+      identifier:
+        description: The identifier.
+        maxLength: 64
+        minLength: 2
+        title: Identifier
+        type: string
+      scheme:
+        description: The scheme of the identifier. See <<_company>> for a list.
+        maxLength: 64
+        minLength: 2
+        title: Type
+        type: string
   PreflightInvoiceRecipientResult:
     description: The result of preflighting an invoice recipient
     properties:
@@ -1311,7 +1653,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: 'The scheme of the public identifier, e.g. chambre of commerce number (for The Netherlands: NL:KVK), VAT, IBAN, or NL:OIN (OIN is a Dutch government organizaton id). The full list can be found on https://joinup.ec.europa.eu/svn/peppol/TransportInfrastructure/PEPPOL_Policy%20for%20use%20of%20identifiers-300.pdf.'
+        description: The scheme of the identifier. See <<_company>> for a list.
         minLength: 3
         title: Scheme
         type: string
@@ -1335,7 +1677,7 @@ definitions:
         type: integer
       legal_entities:
         items:
-          $ref: '#/definitions/LegalEntity'
+          $ref: '#/definitions/LegalEntityShop'
         type: array
       logo:
         $ref: '#/definitions/Logos'

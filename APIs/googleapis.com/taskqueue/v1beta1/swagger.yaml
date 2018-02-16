@@ -16,12 +16,14 @@ info:
   version: v1beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/taskqueue/v1beta1/rest'
       version: v1
@@ -97,6 +99,10 @@ paths:
       description: Get detailed information about a TaskQueue.
       operationId: taskqueue.taskqueues.get
       parameters:
+        - description: Whether to get stats. Optional.
+          in: query
+          name: getStats
+          type: boolean
         - description: The project under which the queue lies.
           in: path
           name: project
@@ -107,10 +113,6 @@ paths:
           name: taskqueue
           required: true
           type: string
-        - description: Whether to get stats. Optional.
-          in: query
-          name: getStats
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -187,6 +189,16 @@ paths:
       description: Lease 1 or more tasks from a TaskQueue.
       operationId: taskqueue.tasks.lease
       parameters:
+        - description: The lease in seconds.
+          in: query
+          name: leaseSecs
+          required: true
+          type: integer
+        - description: The number of tasks to lease.
+          in: query
+          name: numTasks
+          required: true
+          type: integer
         - description: The project under which the queue lies.
           in: path
           name: project
@@ -197,16 +209,6 @@ paths:
           name: taskqueue
           required: true
           type: string
-        - description: The number of tasks to lease.
-          in: query
-          name: numTasks
-          required: true
-          type: integer
-        - description: The lease in seconds.
-          in: query
-          name: leaseSecs
-          required: true
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -233,14 +235,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The taskqueue to delete a task from.
-          in: path
-          name: taskqueue
-          required: true
-          type: string
         - description: The id of the task to delete.
           in: path
           name: task
+          required: true
+          type: string
+        - description: The taskqueue to delete a task from.
+          in: path
+          name: taskqueue
           required: true
           type: string
       responses:
@@ -266,14 +268,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The taskqueue in which the task belongs.
-          in: path
-          name: taskqueue
-          required: true
-          type: string
         - description: The task to get properties of.
           in: path
           name: task
+          required: true
+          type: string
+        - description: The taskqueue in which the task belongs.
+          in: path
+          name: taskqueue
           required: true
           type: string
       responses:

@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://serviceuser.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -140,16 +142,16 @@ paths:
         "servicemanagement.services.bind" permission for.
       operationId: serviceuser.services.search
       parameters:
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             Token identifying which result to start with; returned by a previous list
             call.
           in: query
           name: pageToken
           type: string
-        - description: Requested size of the next page of data.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -167,34 +169,34 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}:disable':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Disable a service so it can no longer be used with a
@@ -204,6 +206,10 @@ paths:
         Operation<response: google.protobuf.Empty>
       operationId: serviceuser.projects.services.disable
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DisableServiceRequest'
         - description: |-
             Name of the consumer and the service to disable for that consumer.
 
@@ -217,10 +223,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DisableServiceRequest'
       responses:
         '200':
           description: Successful response
@@ -239,19 +241,19 @@ paths:
         - projects
   '/v1/{name}:enable':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Enable a service so it can be used with a project.
@@ -261,6 +263,10 @@ paths:
         Operation<response: google.protobuf.Empty>
       operationId: serviceuser.projects.services.enable
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EnableServiceRequest'
         - description: |-
             Name of the consumer and the service to enable for that consumer.
 
@@ -271,10 +277,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EnableServiceRequest'
       responses:
         '200':
           description: Successful response
@@ -296,6 +298,16 @@ paths:
       description: List enabled services for the specified consumer.
       operationId: serviceuser.projects.services.list
       parameters:
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             List enabled services for the specified parent.
 
@@ -306,16 +318,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            Token identifying which result to start with; returned by a previous list
-            call.
-          in: query
-          name: pageToken
-          type: string
-        - description: Requested size of the next page of data.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -333,19 +335,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   Api:
     description: |-
@@ -591,43 +593,6 @@ definitions:
           firebaserules.googleapis.com.
         type: string
     type: object
-  AuthorizationRule:
-    description: |-
-      Authorization rule for API services.
-
-      It specifies the permission(s) required for an API element for the overall
-      API request to succeed. It is typically used to mark request message fields
-      that contain the name of the resource and indicates the permissions that
-      will be checked on that resource.
-
-      For example:
-
-          package google.storage.v1;
-
-          message CopyObjectRequest {
-            string source = 1 [
-              (google.api.authz).permissions = "storage.objects.get"];
-
-            string destination = 2 [
-              (google.api.authz).permissions =
-                  "storage.objects.create,storage.objects.update"];
-          }
-    properties:
-      permissions:
-        description: |-
-          The required permissions. The acceptable values vary depend on the
-          authorization system used. For Google APIs, it should be a comma-separated
-          Google IAM permission values. When multiple permissions are listed, the
-          semantics is not defined by the system. Additional documentation must
-          be provided manually.
-        type: string
-      selector:
-        description: |-
-          Selects the API elements to which this rule applies.
-
-          Refer to selector for syntax details.
-        type: string
-    type: object
   Backend:
     description: '`Backend` defines the backend configuration for a service.'
     properties:
@@ -648,8 +613,8 @@ definitions:
         type: string
       deadline:
         description: |-
-          The number of seconds to wait for a response from a request.  The
-          default depends on the deployment context.
+          The number of seconds to wait for a response from a request.  The default
+          deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
         format: double
         type: number
       minDeadline:
@@ -663,6 +628,58 @@ definitions:
           Selects the methods to which this rule applies.
 
           Refer to selector for syntax details.
+        type: string
+    type: object
+  Billing:
+    description: |-
+      Billing related configuration of the service.
+
+      The following example shows how to configure monitored resources and metrics
+      for billing:
+
+          monitored_resources:
+          - type: library.googleapis.com/branch
+            labels:
+            - key: /city
+              description: The city where the library branch is located in.
+            - key: /name
+              description: The name of the branch.
+          metrics:
+          - name: library.googleapis.com/book/borrowed_count
+            metric_kind: DELTA
+            value_type: INT64
+          billing:
+            consumer_destinations:
+            - monitored_resource: library.googleapis.com/branch
+              metrics:
+              - library.googleapis.com/book/borrowed_count
+    properties:
+      consumerDestinations:
+        description: |-
+          Billing configurations for sending metrics to the consumer project.
+          There can be multiple consumer destinations per service, each one must have
+          a different monitored resource type. A metric can be used in at most
+          one consumer destination.
+        items:
+          $ref: '#/definitions/BillingDestination'
+        type: array
+    type: object
+  BillingDestination:
+    description: |-
+      Configuration of a specific billing destination (Currently only support
+      bill against consumer project).
+    properties:
+      metrics:
+        description: |-
+          Names of the metrics to report to this billing destination.
+          Each name must be defined in Service.metrics section.
+        items:
+          type: string
+        type: array
+      monitoredResource:
+        description: |-
+          The monitored resource type. The type must be defined in
+          Service.monitored_resources section.
         type: string
     type: object
   Context:
@@ -939,8 +956,8 @@ definitions:
       aliases:
         description: |-
           DEPRECATED: This field is no longer supported. Instead of using aliases,
-          please specify multiple google.api.Endpoint for each of the intented
-          alias.
+          please specify multiple google.api.Endpoint for each of the intended
+          aliases.
 
           Additional names that this endpoint will be hosted on.
         items:
@@ -955,15 +972,6 @@ definitions:
           the browser to determine whether the subsequent cross-origin request is
           allowed to proceed.
         type: boolean
-      apis:
-        description: |-
-          The list of APIs served by this endpoint.
-
-          If no APIs are specified this translates to "all APIs" exported by the
-          service, as defined in the top-level service configuration.
-        items:
-          type: string
-        type: array
       features:
         description: The list of features enabled on this endpoint.
         items:
@@ -1350,15 +1358,6 @@ definitions:
         items:
           $ref: '#/definitions/HttpRule'
         type: array
-      authorizations:
-        description: |-
-          Specifies the permission(s) required for an API element for the overall
-          API request to succeed. It is typically used to mark request message fields
-          that contain the name of the resource and indicates the permissions that
-          will be checked on that resource.
-        items:
-          $ref: '#/definitions/AuthorizationRule'
-        type: array
       body:
         description: |-
           The name of the request field whose value is mapped to the HTTP body, or
@@ -1400,56 +1399,6 @@ definitions:
         type: string
       put:
         description: Used for updating a resource.
-        type: string
-      responseBody:
-        description: |-
-          The name of the response field whose value is mapped to the HTTP body of
-          response. Other response fields are ignored. This field is optional. When
-          not set, the response message will be used as HTTP body of response.
-          NOTE: the referred field must be not a repeated field and must be present
-          at the top-level of response message type.
-        type: string
-      restCollection:
-        description: |-
-          DO NOT USE. This is an experimental field.
-
-          Optional. The REST collection name is by default derived from the URL
-          pattern. If specified, this field overrides the default collection name.
-          Example:
-
-              rpc AddressesAggregatedList(AddressesAggregatedListRequest)
-                  returns (AddressesAggregatedListResponse) {
-                option (google.api.http) = {
-                  get: "/v1/projects/{project_id}/aggregated/addresses"
-                  rest_collection: "projects.addresses"
-                };
-              }
-
-          This method has the automatically derived collection name
-          "projects.aggregated". Because, semantically, this rpc is actually an
-          operation on the "projects.addresses" collection, the `rest_collection`
-          field is configured to override the derived collection name.
-        type: string
-      restMethodName:
-        description: |-
-          DO NOT USE. This is an experimental field.
-
-          Optional. The rest method name is by default derived from the URL
-          pattern. If specified, this field overrides the default method name.
-          Example:
-
-              rpc CreateResource(CreateResourceRequest)
-                  returns (CreateResourceResponse) {
-                option (google.api.http) = {
-                  post: "/v1/resources",
-                  body: "resource",
-                  rest_method_name: "insert"
-                };
-              }
-
-          This method has the automatically derived rest method name
-          "create", but for backwards compatibility with apiary, it is specified as
-          insert.
         type: string
       selector:
         description: |-
@@ -1721,6 +1670,8 @@ definitions:
         description: |-
           A concise name for the metric, which can be displayed in user interfaces.
           Use sentence case without an ending period, for example "Request count".
+          This field is optional but it is recommended to be set for any metrics
+          associated with user-visible concepts, such as Quota.
         type: string
       labels:
         description: |-
@@ -1744,15 +1695,7 @@ definitions:
           - CUMULATIVE
         type: string
       name:
-        description: |-
-          The resource name of the metric descriptor. Depending on the
-          implementation, the name typically includes: (1) the parent resource name
-          that defines the scope of the metric type or of its data; and (2) the
-          metric's URL-encoded type, which also appears in the `type` field of this
-          descriptor. For example, following is the resource name of a custom
-          metric within the GCP project `my-project-id`:
-
-              "projects/my-project-id/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
+        description: The resource name of the metric descriptor.
         type: string
       type:
         description: |-
@@ -2124,7 +2067,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:
@@ -2392,25 +2335,15 @@ definitions:
           The name of the metric this quota limit applies to. The quota limits with
           the same metric will be checked together during runtime. The metric must be
           defined within the service config.
-
-          Used by metric-based quotas only.
         type: string
       name:
         description: |-
-          Name of the quota limit. The name is used to refer to the limit when
-          overriding the default limit on per-consumer basis.
+          Name of the quota limit.
 
-          For metric-based quota limits, the name must be provided, and it must be
-          unique within the service. The name can only include alphanumeric
-          characters as well as '-'.
+          The name must be provided, and it must be unique within the service. The
+          name can only include alphanumeric characters as well as '-'.
 
           The maximum length of the limit name is 64 characters.
-
-          The name of a limit is used as a unique identifier for this limit.
-          Therefore, once a limit has been put into use, its name should be
-          immutable. You can use the display_name field to provide a user-friendly
-          name for the limit. The display name can be evolved over time without
-          affecting the identity of the limit.
         type: string
       unit:
         description: |-
@@ -2418,28 +2351,20 @@ definitions:
           Metric.unit. The supported unit kinds are determined by the quota
           backend system.
 
-          The [Google Service Control](https://cloud.google.com/service-control)
-          supports the following unit components:
-          * One of the time intevals:
-            * "/min"  for quota every minute.
-            * "/d"  for quota every 24 hours, starting 00:00 US Pacific Time.
-            * Otherwise the quota won't be reset by time, such as storage limit.
-          * One and only one of the granted containers:
-            * "/{project}" quota for a project
-
           Here are some examples:
           * "1/min/{project}" for quota per minute per project.
 
           Note: the order of unit components is insignificant.
           The "1" at the beginning is required to follow the metric unit syntax.
-
-          Used by metric-based quotas only.
         type: string
       values:
         additionalProperties:
           format: int64
           type: string
-        description: 'Tiered limit values, currently only STANDARD is supported.'
+        description: |-
+          Tiered limit values. You must specify this as a key:value pair, with an
+          integer value that is the maximum number of requests allowed for the
+          specified unit. Currently only STANDARD is supported.
         type: object
     type: object
   SearchServicesResponse:
@@ -2498,6 +2423,9 @@ definitions:
       backend:
         $ref: '#/definitions/Backend'
         description: API backend configuration.
+      billing:
+        $ref: '#/definitions/Billing'
+        description: Billing configuration.
       configVersion:
         description: |-
           The semantic version of the service configuration. The config version
@@ -2915,7 +2843,9 @@ definitions:
               allow_unregistered_calls: true
     properties:
       allowUnregisteredCalls:
-        description: 'True, if the method allows unregistered calls; false otherwise.'
+        description: |-
+          If true, the selected method allows unregistered calls, e.g. calls
+          that don't identify any user or application.
         type: boolean
       selector:
         description: |-
@@ -2926,8 +2856,10 @@ definitions:
         type: string
       skipServiceControl:
         description: |-
-          True, if the method should skip service control. If so, no control plane
-          feature (like quota and billing) will be enabled.
+          If true, the selected method should skip service control and the control
+          plane features, such as quota and billing, will not be available.
+          This flag is used by Google Cloud Endpoints to bypass checks for internal
+          methods, such as service health check methods.
         type: boolean
     type: object
   Visibility:

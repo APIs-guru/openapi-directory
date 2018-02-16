@@ -2,20 +2,21 @@ swagger: '2.0'
 schemes:
   - https
 host: api.apitore.com
-basePath: /api/11
+basePath: /api/52
 info:
-  description: 'Japanese sentiment analyzer.<BR />[Endpoint] https://api.apitore.com/api/11'
+  description: 'Japanese sentiment analyzer.<BR />[Endpoint] https://api.apitore.com/api/52'
   title: Sentiment APIs
   version: 1.0.6
   x-apisguru-categories:
     - developer_tools
-  x-description-language: jp
+    - text
   x-logo:
-    url: 'https://apitore.com/img/apis/11.jpg'
+    url: 'https://apitore.com/img/apis/52.jpg'
   x-origin:
     - format: swagger
-      url: 'https://api.apitore.com/json/11'
+      url: 'https://api.apitore.com/json/52'
       version: '2.0'
+  x-preferred: true
   x-providerName: apitore.com
   x-serviceName: sentimentApis
 consumes:
@@ -23,29 +24,32 @@ consumes:
 produces:
   - application/json
 tags:
-  - description: Sentiment Controller
-    name: sentiment-controller
+  - description: Sentiment Many Controller
+    name: sentiment-many-controller
 paths:
-  /sentiment/predict:
-    get:
-      description: 'Sentiment Analysis, last update at 2017-5-12.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/word2vec-response">word2vec-response</a><BR />&nbsp; Class: com.apitore.banana.response.sentiment.SentimentResponseEntity<BR />'
-      operationId: predictUsingGET
+  /sentiments/predict:
+    post:
+      description: 'Sentiment Analysis, last update at 2017-5-12.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/word2vec-response">word2vec-response</a><BR />&nbsp; Class: com.apitore.banana.response.sentiment.ListSentimentResponseEntity<BR />'
+      operationId: predictUsingPOST
       parameters:
         - description: Access Token
           in: query
           name: access_token
           required: true
           type: string
-        - description: text
-          in: query
-          name: text
+        - description: req
+          in: body
+          name: req
           required: true
-          type: string
+          schema:
+            $ref: '#/definitions/SentimentRequestEntity'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/SentimentResponseEntity'
+            $ref: '#/definitions/ListSentimentResponseEntity'
+        '201':
+          description: Created
         '401':
           description: Unauthorized
         '403':
@@ -54,8 +58,34 @@ paths:
           description: Not Found
       summary: Sentiment predict
       tags:
-        - sentiment-controller
+        - sentiment-many-controller
 definitions:
+  ListSentimentResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      log:
+        description: Log message
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      sentimentlist:
+        description: 'Output: sentiment list'
+        items:
+          $ref: '#/definitions/SentimentResponseEntity'
+        type: array
+      startTime:
+        description: Start date
+        type: string
+    required:
+      - endTime
+      - log
+      - processTime
+      - sentimentlist
+      - startTime
+    type: object
   SentimentEntity:
     properties:
       score:
@@ -68,6 +98,16 @@ definitions:
     required:
       - score
       - sentiment
+    type: object
+  SentimentRequestEntity:
+    properties:
+      texts:
+        description: 'texts [max 1MB]'
+        items:
+          type: string
+        type: array
+    required:
+      - texts
     type: object
   SentimentResponseEntity:
     properties:

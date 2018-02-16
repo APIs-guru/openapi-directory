@@ -1,0 +1,1430 @@
+swagger: '2.0'
+schemes:
+  - https
+host: art19.com
+basePath: /
+info:
+  contact:
+    email: support@art19.com
+    name: ART19 Engineering Team
+    x-twitter: art19co
+  description: 'The ART19 Content API conforms to the JSON-API specification. Details and examples can be found at http://jsonapi.org. <br/><br/>API requests <b>MUST</b> use the HTTP Accept header:<br/><code>Accept: application/vnd.api+json</code><br/><br/>API requests <b>MUST</b> be authenticated using the HTTP Authorization header: <br/><code>Authorization: Token token="your-token", credential="your-credential"</code>'
+  termsOfService: 'https://art19.com/business-terms'
+  title: ART19 Content
+  version: 1.0.0
+  x-apisguru-categories:
+    - media
+  x-logo:
+    url: 'https://twitter.com/art19co/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://art19.com/swagger_json/v1/external/1.0.0.json'
+      version: '2.0'
+  x-providerName: art19.com
+consumes:
+  - application/vnd.api+json
+produces:
+  - application/vnd.api+json
+securityDefinitions:
+  api_key:
+    description: 'Authorization: Token token="your-token", credential="your-credential"'
+    in: header
+    name: Authentication
+    type: apiKey
+security:
+  - api_key: []
+paths:
+  /classification_inclusions:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: Sort by created_at
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ClassificationInclusionDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - ClassificationInclusion
+  '/classification_inclusions/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ClassificationInclusion'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - ClassificationInclusion
+  /classifications:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          type: string
+        - description: Filter by type
+          in: query
+          name: type
+          type: string
+        - description: Filter by value
+          in: query
+          name: q
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: 'Sort by created_at, value, updated_at'
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ClassificationDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - Classification
+  '/classifications/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Classification'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - Classification
+  /credits:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          type: string
+        - description: Filter by creditable_id
+          in: query
+          name: creditable_id
+          type: string
+        - description: Filter by creditable_type
+          in: query
+          name: creditable_type
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: 'Sort by created_at, position, updated_at'
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreditDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - Credit
+  '/credits/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Credit'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - Credit
+  /episodes:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: Filter by Series
+          in: query
+          name: series_id
+          type: string
+        - description: Filter by Season
+          in: query
+          name: season_id
+          type: string
+        - description: Filter by title
+          in: query
+          name: q
+          type: string
+        - description: Filter by released_at year
+          in: query
+          name: year
+          type: string
+        - description: Filter by released_at month
+          in: query
+          name: month
+          type: string
+        - description: Filter by RSS episodes only
+          in: query
+          name: rss
+          type: boolean
+        - description: 'Sort by created_at, released_at, released_or_created_at, sort_title, title, updated_at'
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EpisodesDocument'
+        '400':
+          description: 'Bad Request - At least one filter (ids, series_id, or season_id) must be provided'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: Number of seconds before a retry may succeed
+              type: integer
+      summary: Fetch resource collection
+      tags:
+        - Episode
+  '/episodes/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Series'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: Number of seconds before a retry may succeed
+              type: integer
+      summary: Fetch resource
+      tags:
+        - Episode
+  '/episodes/{id}/next_sibling':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Filter by RSS episodes only
+          in: query
+          name: rss
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Series'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: Number of seconds before a retry may succeed
+              type: integer
+      summary: Fetch next resource
+      tags:
+        - Episode
+  '/episodes/{id}/previous_sibling':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Filter by RSS episodes only
+          in: query
+          name: rss
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Series'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: Number of seconds before a retry may succeed
+              type: integer
+      summary: Fetch previous resource
+      tags:
+        - Episode
+  /images:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          required: true
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: Sort by created_at
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ImageDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - Image
+  '/images/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Image'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - Image
+  /media_assets:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          required: true
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: Sort by created_at
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MediaAssetDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - MediaAsset
+  '/media_assets/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MediaAsset'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - MediaAsset
+  /networks:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          type: string
+        - description: Filter by name
+          in: query
+          name: q
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: 'Sort by created_at, name, updated_at'
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/NetworkDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - Network
+  '/networks/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Network'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - Network
+  /people:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          type: string
+        - description: Filter by first_name and last_name
+          in: query
+          name: q
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Filter by excluding ids
+          in: query
+          name: 'exclude_ids[]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: 'Sort by created_at, first_name, last_name, updated_at'
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PersonDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - Person
+  '/people/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Person'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - Person
+  /seasons:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          type: string
+        - description: Filter by Series
+          in: query
+          name: series_id
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: 'Sort by created_at, sort_title, title, updated_at'
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SeasonDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - Season
+  '/seasons/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Season'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - Season
+  /series:
+    get:
+      parameters:
+        - description: Filter by ID's
+          in: query
+          name: 'ids[]'
+          type: string
+        - description: Filter by Network
+          in: query
+          name: network_id
+          type: string
+        - description: Filter by page number
+          in: query
+          name: 'page[number]'
+          type: integer
+        - description: Change page size
+          in: query
+          name: 'page[size]'
+          type: integer
+        - description: Filter by title
+          in: query
+          name: q
+          type: string
+        - description: 'Sort by created_at, episode_released_at, sort_title, title, updated_at'
+          in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SeriesDocument'
+        '401':
+          description: Unauthorized
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource collection
+      tags:
+        - Series
+  '/series/{id}':
+    get:
+      parameters:
+        - description: UUID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Series'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      summary: Fetch resource
+      tags:
+        - Series
+definitions:
+  Classification:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              created_at:
+                format: date-time
+                type: string
+              metadata:
+                type: object
+              parent_id:
+                format: uuid
+                type: string
+              tree_path:
+                items:
+                  format: uuid
+                  type: string
+                type: array
+              type:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+              value:
+                type: string
+              value_path:
+                type: string
+          id:
+            format: uuid
+            type: string
+          type:
+            type: string
+  ClassificationDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Classification'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  ClassificationInclusion:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              classification_id:
+                format: uuid
+                type: string
+              classification_type:
+                type: string
+              classified_id:
+                format: uuid
+                type: string
+              classified_type:
+                type: string
+              created_at:
+                format: date-time
+                type: string
+              primary:
+                type: boolean
+              updated_at:
+                format: date-time
+                type: string
+          id:
+            format: uuid
+            type: string
+          relationships:
+            properties:
+              classification:
+                properties:
+                  data:
+                    $ref: '#/definitions/ResourceIdentifier'
+          type:
+            type: string
+  ClassificationInclusionDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/ClassificationInclusion'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  Credit:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              created_at:
+                format: date-time
+                type: string
+              creditable_id:
+                format: uuid
+                type: string
+              creditable_type:
+                type: string
+              position:
+                type: integer
+              type:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+          id:
+            format: uuid
+            type: string
+          relationships:
+            properties:
+              person:
+                properties:
+                  data:
+                    $ref: '#/definitions/ResourceIdentifier'
+          type:
+            type: string
+  CreditDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Credit'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  Episode:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              allow_user_comments:
+                description: Credential must own the series
+                type: boolean
+              cascaded_cover_image_id:
+                format: uuid
+                type: string
+              cover_image_id:
+                format: uuid
+                type: string
+              created_at:
+                format: date-time
+                type: string
+              description:
+                type: string
+              description_is_html:
+                type: boolean
+              description_plain:
+                type: string
+              file_name:
+                type: string
+              listen_count:
+                description: Credential must have stats access to series
+                type: integer
+              premium_status:
+                type: string
+              published:
+                type: boolean
+              release_immediately:
+                description: Credential must own the series
+                type: boolean
+              released_at:
+                format: date-time
+                type: string
+              rss_guid:
+                type: string
+              sort_title:
+                type: string
+              status:
+                type: string
+              title:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+            title: Episode.Attributes
+          id:
+            format: uuid
+            type: string
+          relationships:
+            properties:
+              classification_inclusions:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+                title: ClassificationInclusions
+              credits:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+                title: Credits
+              default_marker_points:
+                description: Credential must own the series
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+                title: DefaultMarkerPoints
+              episode_versions:
+                description: Credential must own the series
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+                title: EpisodeVersions
+              images:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+                title: Images
+              season:
+                properties:
+                  data:
+                    $ref: '#/definitions/ResourceIdentifier'
+                title: Season
+              segment_lists:
+                description: Credential must own the series
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+                title: SegmentLists
+              series:
+                properties:
+                  data:
+                    $ref: '#/definitions/ResourceIdentifier'
+                title: Series
+              taggings:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+                title: Taggings
+              tags:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+                title: Tags
+            title: Episode.Relationships
+          type:
+            type: string
+        title: Episode.Data
+  EpisodesDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Episode'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  Image:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              bucket_id:
+                format: uuid
+                type: string
+              bucket_type:
+                type: string
+              created_at:
+                format: date-time
+                type: string
+              crop_data:
+                properties:
+                  height:
+                    format: float
+                    type: number
+                  left:
+                    format: float
+                    type: number
+                  top:
+                    format: float
+                    type: number
+                  width:
+                    format: float
+                    type: number
+              status:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+          id:
+            format: uuid
+            type: string
+          relationships:
+            properties:
+              media_assets:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+          type:
+            type: string
+  ImageDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Image'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  Links:
+    properties:
+      first:
+        type: string
+      last:
+        type: string
+      next:
+        type: string
+      prev:
+        type: string
+      self:
+        type: string
+  MediaAsset:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              attachment_id:
+                format: uuid
+                type: string
+              attachment_type:
+                type: string
+              cdn_url:
+                type: string
+              created_at:
+                format: date-time
+                type: string
+              file_name:
+                type: string
+              file_size:
+                type: string
+              size_height:
+                type: integer
+              size_width:
+                type: integer
+              style:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+          id:
+            format: uuid
+            type: string
+          type:
+            type: string
+  MediaAssetDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/MediaAsset'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  Network:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              copyright:
+                type: string
+              cover_image_id:
+                format: uuid
+                type: string
+              created_at:
+                format: date-time
+                type: string
+              description:
+                type: string
+              facebook_url:
+                type: string
+              global_id:
+                type: string
+              linkedin_url:
+                type: string
+              name:
+                type: string
+              public_email:
+                type: string
+              public_page_enabled:
+                type: boolean
+              slug:
+                type: string
+              tumblr_url:
+                type: string
+              twitter_url:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+              website_url:
+                type: string
+          id:
+            format: uuid
+            type: string
+          relationships:
+            properties:
+              images:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              series:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+          type:
+            type: string
+  NetworkDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Network'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  Person:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              avatar_id:
+                format: uuid
+                type: string
+              biography:
+                type: string
+              born:
+                format: date
+                type: string
+              created_at:
+                format: date-time
+                type: string
+              died:
+                format: date
+                type: string
+              first_name:
+                type: string
+              from_country:
+                type: string
+              from_locality:
+                type: string
+              from_region:
+                type: string
+              last_name:
+                type: string
+              public_email:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+          id:
+            format: uuid
+            type: string
+          type:
+            type: string
+  PersonDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Person'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  ResourceIdentifier:
+    properties:
+      id:
+        format: uuid
+        type: string
+      type:
+        type: string
+  Season:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              cascaded_cover_image_id:
+                format: uuid
+                type: string
+              cover_image_id:
+                format: uuid
+                type: string
+              created_at:
+                format: date-time
+                type: string
+              description:
+                type: string
+              description_is_html:
+                type: boolean
+              description_plain:
+                type: string
+              first_released_episode_id:
+                format: uuid
+                type: string
+              last_released_episode_id:
+                format: uuid
+                type: string
+              sort_title:
+                type: string
+              status:
+                type: string
+              title:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+          id:
+            format: uuid
+            type: string
+          relationships:
+            properties:
+              classification_inclusions:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              credits:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              episodes:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              images:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              series:
+                properties:
+                  data:
+                    $ref: '#/definitions/ResourceIdentifier'
+              taggings:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              tags:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+          type:
+            type: string
+  SeasonDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Season'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  Series:
+    properties:
+      data:
+        properties:
+          attributes:
+            properties:
+              cover_image_id:
+                format: uuid
+                type: string
+              created_at:
+                format: date-time
+                type: string
+              description:
+                type: string
+              description_is_html:
+                type: boolean
+              description_plain:
+                type: string
+              facebook_url:
+                type: string
+              global_id:
+                type: string
+              itunes_subscription_url:
+                type: string
+              linkedin_url:
+                type: string
+              podcast_subscription_url:
+                type: string
+              public_page_enabled:
+                type: boolean
+              rss_author:
+                type: string
+              rss_copyright:
+                type: string
+              rss_email:
+                type: string
+              rss_owner:
+                type: string
+              slug:
+                type: string
+              sort_title:
+                type: string
+              status:
+                type: string
+              stitcher_subscription_url:
+                type: string
+              title:
+                type: string
+              tumblr_url:
+                type: string
+              twitter_url:
+                type: string
+              updated_at:
+                format: date-time
+                type: string
+              website_url:
+                type: string
+          id:
+            format: uuid
+            type: string
+          relationships:
+            properties:
+              classification_inclusions:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              credits:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              episodes:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              images:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              network:
+                properties:
+                  data:
+                    $ref: '#/definitions/ResourceIdentifier'
+              seasons:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              taggings:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+              tags:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/definitions/ResourceIdentifier'
+                    type: array
+          type:
+            type: string
+  SeriesDocument:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Series'
+        type: array
+      links:
+        $ref: '#/definitions/Links'

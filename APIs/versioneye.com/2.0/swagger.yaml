@@ -1017,6 +1017,63 @@ paths:
       summary: update project with new file
       tags:
         - projects
+    put:
+      consumes:
+        - application/json
+      description: |-
+
+        To use this resource you need either an active session or you have to append
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+
+        With this Endpoint an existing project can be updated. This are the fields which 
+        can be updated: 
+
+        ```
+        {
+          public: false,
+          name: "toto",
+          description: "beschreibung",
+          license: "Lizenz",
+          version: "Versionio"
+        }
+        ```
+                    
+      operationId: putProjectsProjectKey
+      parameters:
+        - description: Project ID
+          in: path
+          name: project_key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: update project properites
+      summary: update project properites
+      tags:
+        - projects
+  '/projects/{project_key}/dependencies':
+    get:
+      description: |-
+
+        This Endpoint returns a list of ALL dependencies of the project. This list includes
+        dependencies of child projects as well.
+
+        To use this resource you need either an active session or you have to append
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: getProjectsProjectKeyDependencies
+      parameters:
+        - description: Project ID or project_key
+          in: path
+          name: project_key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: get a list of ALL dependencies
+      summary: get a list of ALL dependencies
+      tags:
+        - projects
   '/projects/{project_key}/licenses':
     get:
       description: |-

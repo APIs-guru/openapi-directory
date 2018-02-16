@@ -1,0 +1,137 @@
+paths:
+  /user/active/servers:
+    get:
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/active/sessions:
+    get:
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/active/terminate:
+    post:
+      parameters:
+        '0':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Routing\v4\UserModel5'
+              - '#/definitions/UserModel5'
+        _t: a
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/collections:
+    get:
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/locations:
+    get:
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/masters:
+    get:
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/password:
+    patch:
+      parameters:
+        '0':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Routing\v4\UserModel1'
+              - '#/definitions/UserModel1'
+        _t: a
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+    post:
+      parameters:
+        '0':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Routing\v4\UserModel3'
+              - '#/definitions/UserModel3'
+        _t: a
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+    put:
+      parameters:
+        '0':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Routing\v4\UserModel2'
+              - '#/definitions/UserModel2'
+        _t: a
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/projects:
+    get:
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/register:
+    get:
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+    post:
+      parameters:
+        '0':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Routing\v4\UserModel4'
+              - '#/definitions/UserModel4'
+        _t: a
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'
+  /user/tests:
+    get:
+      responses:
+        '200':
+          schema:
+            $ref:
+              - '#/definitions/blazemeter\Model\ApiResponse'
+              - '#/definitions/ApiResponse'

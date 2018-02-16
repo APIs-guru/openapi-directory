@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2/rest'
       version: v1
@@ -137,14 +137,14 @@ paths:
       description: 'Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.'
       operationId: content.accounts.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/AccountsCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -198,14 +198,14 @@ paths:
       description: Retrieves and updates tax settings of multiple accounts in a single request.
       operationId: content.accounttax.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/AccounttaxCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -230,14 +230,14 @@ paths:
     post:
       operationId: content.datafeeds.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/DatafeedsCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -288,17 +288,17 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products. This method can only be called for non-multi-client accounts.
+      description: Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products.
       operationId: content.inventory.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/InventoryCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -321,7 +321,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Retrieves or modifies multiple orders in a single request. This method can only be called for non-multi-client accounts.
+      description: Retrieves or modifies multiple orders in a single request.
       operationId: content.orders.custombatch
       parameters:
         - in: body
@@ -350,17 +350,17 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Retrieves, inserts, and deletes multiple products in a single request. This method can only be called for non-multi-client accounts.'
+      description: 'Retrieves, inserts, and deletes multiple products in a single request.'
       operationId: content.products.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ProductsCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -383,7 +383,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Gets the statuses of multiple products in a single request. This method can only be called for non-multi-client accounts.
+      description: Gets the statuses of multiple products in a single request.
       operationId: content.productstatuses.custombatch
       parameters:
         - in: body
@@ -419,14 +419,14 @@ paths:
       description: Retrieves and updates the shipping settings of multiple accounts in a single request.
       operationId: content.shippingsettings.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ShippingsettingsCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -441,18 +441,18 @@ paths:
         - shippingsettings
   '/{merchantId}/accounts':
     get:
-      description: Lists the sub-accounts in your Merchant Center account. This method can only be called for multi-client accounts.
+      description: Lists the sub-accounts in your Merchant Center account.
       operationId: content.accounts.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: 'The maximum number of accounts to return in the response, used for paging.'
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the managing account. This must be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -478,22 +478,22 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a Merchant Center sub-account. This method can only be called for multi-client accounts.
+      description: Creates a Merchant Center sub-account.
       operationId: content.accounts.insert
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Account'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: The ID of the managing account. This must be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -508,14 +508,9 @@ paths:
         - accounts
   '/{merchantId}/accounts/{accountId}':
     delete:
-      description: Deletes a Merchant Center sub-account. This method can only be called for multi-client accounts.
+      description: Deletes a Merchant Center sub-account.
       operationId: content.accounts.delete
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account.
           in: path
           name: accountId
@@ -525,6 +520,16 @@ paths:
           in: query
           name: dryRun
           type: boolean
+        - default: false
+          description: Flag to delete sub-accounts with products. The default value is false.
+          in: query
+          name: force
+          type: boolean
+        - description: 'The ID of the managing account. This must be a multi-client account, and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -536,17 +541,17 @@ paths:
       tags:
         - accounts
     get:
-      description: 'Retrieves a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
+      description: Retrieves a Merchant Center account.
       operationId: content.accounts.get
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account.
           in: path
           name: accountId
+          required: true
+          type: string
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
           required: true
           type: string
       responses:
@@ -570,27 +575,27 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account. This method supports patch semantics.'
+      description: Updates a Merchant Center account. This method supports patch semantics.
       operationId: content.accounts.patch
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Account'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -604,27 +609,27 @@ paths:
       tags:
         - accounts
     put:
-      description: 'Updates a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
+      description: Updates a Merchant Center account.
       operationId: content.accounts.update
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Account'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -647,7 +652,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Claims the website of a Merchant Center sub-account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
+      description: Claims the website of a Merchant Center sub-account.
       operationId: content.accounts.claimwebsite
       parameters:
         - description: The ID of the account whose website is claimed.
@@ -655,12 +660,12 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: The ID of the managing account.
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
           type: string
-        - description: Flag to remove any existing claim on the requested website by another account and replace it with a claim from this account.
+        - description: 'Only available to selected merchants. When set to True, this flag removes any existing claim on the requested website by another account and replaces it with a claim from this account.'
           in: query
           name: overwrite
           type: boolean
@@ -678,18 +683,18 @@ paths:
         - accounts
   '/{merchantId}/accountstatuses':
     get:
-      description: Lists the statuses of the sub-accounts in your Merchant Center account. This method can only be called for multi-client accounts.
+      description: Lists the statuses of the sub-accounts in your Merchant Center account.
       operationId: content.accountstatuses.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: 'The maximum number of account statuses to return in the response, used for paging.'
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the managing account. This must be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -716,17 +721,17 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/accountstatuses/{accountId}':
     get:
-      description: 'Retrieves the status of a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
+      description: Retrieves the status of a Merchant Center account.
       operationId: content.accountstatuses.get
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account.
           in: path
           name: accountId
+          required: true
+          type: string
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
           required: true
           type: string
       responses:
@@ -751,18 +756,18 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/accounttax':
     get:
-      description: Lists the tax settings of the sub-accounts in your Merchant Center account. This method can only be called for multi-client accounts.
+      description: Lists the tax settings of the sub-accounts in your Merchant Center account.
       operationId: content.accounttax.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: 'The maximum number of tax settings to return in the response, used for paging.'
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the managing account. This must be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -789,17 +794,17 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/accounttax/{accountId}':
     get:
-      description: 'Retrieves the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
+      description: Retrieves the tax settings of the account.
       operationId: content.accounttax.get
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account for which to get/update account tax settings.
           in: path
           name: accountId
+          required: true
+          type: string
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
           required: true
           type: string
       responses:
@@ -823,27 +828,27 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account. This method supports patch semantics.'
+      description: Updates the tax settings of the account. This method supports patch semantics.
       operationId: content.accounttax.patch
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account for which to get/update account tax settings.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/AccountTax'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -857,27 +862,27 @@ paths:
       tags:
         - accounttax
     put:
-      description: 'Updates the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
+      description: Updates the tax settings of the account.
       operationId: content.accounttax.update
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account for which to get/update account tax settings.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/AccountTax'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -892,18 +897,18 @@ paths:
         - accounttax
   '/{merchantId}/datafeeds':
     get:
-      description: Lists the datafeeds in your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Lists the configurations for datafeeds in your Merchant Center account.
       operationId: content.datafeeds.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: 'The maximum number of products to return in the response, used for paging.'
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the account that manages the datafeeds. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -929,21 +934,22 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Registers a datafeed configuration with your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Registers a datafeed configuration with your Merchant Center account.
       operationId: content.datafeeds.insert
       parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Datafeed'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -958,14 +964,11 @@ paths:
         - datafeeds
   '/{merchantId}/datafeeds/{datafeedId}':
     delete:
-      description: Deletes a datafeed configuration from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Deletes a datafeed configuration from your Merchant Center account.
       operationId: content.datafeeds.delete
       parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: path
+        - description: The ID of the datafeed.
+          in: path
           name: datafeedId
           required: true
           type: string
@@ -973,6 +976,11 @@ paths:
           in: query
           name: dryRun
           type: boolean
+        - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -984,15 +992,17 @@ paths:
       tags:
         - datafeeds
     get:
-      description: Retrieves a datafeed configuration from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Retrieves a datafeed configuration from your Merchant Center account.
       operationId: content.datafeeds.get
       parameters:
-        - in: path
-          name: merchantId
+        - description: The ID of the datafeed.
+          in: path
+          name: datafeedId
           required: true
           type: string
-        - in: path
-          name: datafeedId
+        - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
           required: true
           type: string
       responses:
@@ -1016,14 +1026,15 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a datafeed configuration of your Merchant Center account. This method can only be called for non-multi-client accounts. This method supports patch semantics.
+      description: Updates a datafeed configuration of your Merchant Center account. This method supports patch semantics.
       operationId: content.datafeeds.patch
       parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: path
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Datafeed'
+        - description: The ID of the datafeed.
+          in: path
           name: datafeedId
           required: true
           type: string
@@ -1031,10 +1042,11 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Datafeed'
+        - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1048,14 +1060,15 @@ paths:
       tags:
         - datafeeds
     put:
-      description: Updates a datafeed configuration of your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Updates a datafeed configuration of your Merchant Center account.
       operationId: content.datafeeds.update
       parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: path
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Datafeed'
+        - description: The ID of the datafeed.
+          in: path
           name: datafeedId
           required: true
           type: string
@@ -1063,10 +1076,11 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Datafeed'
+        - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1081,18 +1095,18 @@ paths:
         - datafeeds
   '/{merchantId}/datafeedstatuses':
     get:
-      description: Lists the statuses of the datafeeds in your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Lists the statuses of the datafeeds in your Merchant Center account.
       operationId: content.datafeedstatuses.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: 'The maximum number of products to return in the response, used for paging.'
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the account that manages the datafeeds. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -1119,15 +1133,25 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/datafeedstatuses/{datafeedId}':
     get:
-      description: Retrieves the status of a datafeed from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Retrieves the status of a datafeed from your Merchant Center account.
       operationId: content.datafeedstatuses.get
       parameters:
-        - in: path
-          name: merchantId
+        - description: 'The country for which to get the datafeed status. If this parameter is provided then language must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.'
+          in: query
+          name: country
+          type: string
+        - description: The ID of the datafeed.
+          in: path
+          name: datafeedId
           required: true
           type: string
-        - in: path
-          name: datafeedId
+        - description: 'The language for which to get the datafeed status. If this parameter is provided then country must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.'
+          in: query
+          name: language
+          type: string
+        - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
           required: true
           type: string
       responses:
@@ -1160,12 +1184,25 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Updates price and availability of a product in your Merchant Center account. This operation does not update the expiration date of the product. This method can only be called for non-multi-client accounts.
+      description: Updates price and availability of a product in your Merchant Center account.
       operationId: content.inventory.set
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InventorySetRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: The ID of the account that contains the product. This account cannot be a multi-client account.
           in: path
           name: merchantId
+          required: true
+          type: string
+        - description: The REST id of the product for which to update price and availability.
+          in: path
+          name: productId
           required: true
           type: string
         - description: The code of the store for which to update price and availability. Use online to update price and availability of an online product.
@@ -1173,19 +1210,6 @@ paths:
           name: storeCode
           required: true
           type: string
-        - description: The ID of the product for which to update price and availability.
-          in: path
-          name: productId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InventorySetRequest'
       responses:
         '200':
           description: Successful response
@@ -1200,14 +1224,9 @@ paths:
         - inventory
   '/{merchantId}/orders':
     get:
-      description: Lists the orders in your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Lists the orders in your Merchant Center account.
       operationId: content.orders.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: |-
             Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.
             We recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.
@@ -1220,6 +1239,11 @@ paths:
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: 'The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. "placedDate desc" stands for listing orders by placement date, from oldest to most recent. "placedDate asc" stands for listing orders by placement date, from most recent to oldest. In future releases we''ll support other sorting criteria.'
           enum:
             - placedDate asc
@@ -1280,10 +1304,10 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/orders/{orderId}':
     get:
-      description: Retrieves an order from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Retrieves an order from your Merchant Center account.
       operationId: content.orders.get
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1323,10 +1347,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Marks an order as acknowledged. This method can only be called for non-multi-client accounts.
+      description: Marks an order as acknowledged.
       operationId: content.orders.acknowledge
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersAcknowledgeRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1336,10 +1364,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersAcknowledgeRequest'
       responses:
         '200':
           description: Successful response
@@ -1362,10 +1386,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Cancels all line items in an order, making a full refund. This method can only be called for non-multi-client accounts.'
+      description: 'Cancels all line items in an order, making a full refund.'
       operationId: content.orders.cancel
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCancelRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1375,10 +1403,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCancelRequest'
       responses:
         '200':
           description: Successful response
@@ -1401,10 +1425,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Cancels a line item, making a full refund. This method can only be called for non-multi-client accounts.'
+      description: 'Cancels a line item, making a full refund.'
       operationId: content.orders.cancellineitem
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCancelLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1414,15 +1442,50 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCancelLineItemRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersCancelLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/inStoreRefundLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Notifies that item return and refund was handled directly in store.
+      operationId: content.orders.instorerefundlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersInStoreRefundLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersInStoreRefundLineItemResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -1440,10 +1503,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Refund a portion of the order, up to the full amount paid. This method can only be called for non-multi-client accounts.'
+      description: 'Refund a portion of the order, up to the full amount paid.'
       operationId: content.orders.refund
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersRefundRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1453,15 +1520,50 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersRefundRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersRefundResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/rejectReturnLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Rejects return on an line item.
+      operationId: content.orders.rejectreturnlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersRejectReturnLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersRejectReturnLineItemResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -1479,10 +1581,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Returns a line item. This method can only be called for non-multi-client accounts.
+      description: Returns a line item.
       operationId: content.orders.returnlineitem
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersReturnLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1492,15 +1598,89 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersReturnLineItemRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersReturnLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/returnRefundLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns and refunds a line item. Note that this method can only be called on fully shipped orders.
+      operationId: content.orders.returnrefundlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersReturnRefundLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersReturnRefundLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/setLineItemMetadata':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets (overrides) merchant provided annotations on the line item.
+      operationId: content.orders.setlineitemmetadata
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersSetLineItemMetadataRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersSetLineItemMetadataResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -1518,10 +1698,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Marks line item(s) as shipped. This method can only be called for non-multi-client accounts.
+      description: Marks line item(s) as shipped.
       operationId: content.orders.shiplineitems
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersShipLineItemsRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1531,15 +1715,50 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersShipLineItemsRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersShipLineItemsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/updateLineItemShippingDetails':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates ship by and delivery by dates for a line item.
+      operationId: content.orders.updatelineitemshippingdetails
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateLineItemShippingDetailsRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersUpdateLineItemShippingDetailsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -1557,10 +1776,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Updates the merchant order ID for a given order. This method can only be called for non-multi-client accounts.
+      description: Updates the merchant order ID for a given order.
       operationId: content.orders.updatemerchantorderid
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateMerchantOrderIdRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1570,10 +1793,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersUpdateMerchantOrderIdRequest'
       responses:
         '200':
           description: Successful response
@@ -1596,10 +1815,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Updates a shipment''s status, carrier, and/or tracking ID. This method can only be called for non-multi-client accounts.'
+      description: 'Updates a shipment''s status, carrier, and/or tracking ID.'
       operationId: content.orders.updateshipment
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateShipmentRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1609,10 +1832,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersUpdateShipmentRequest'
       responses:
         '200':
           description: Successful response
@@ -1627,10 +1846,10 @@ paths:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
     get:
-      description: Retrieves an order using merchant order id. This method can only be called for non-multi-client accounts.
+      description: Retrieves an order using merchant order id.
       operationId: content.orders.getbymerchantorderid
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1662,14 +1881,9 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/products':
     get:
-      description: Lists the products in your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Lists the products in your Merchant Center account.
       operationId: content.products.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
           in: query
           name: includeInvalidInsertedItems
@@ -1678,6 +1892,11 @@ paths:
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the account that contains the products. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -1703,22 +1922,22 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Uploads a product to your Merchant Center account. If an item with the same channel, contentLanguage, offerId, and targetCountry already exists, this method updates that entry. This method can only be called for non-multi-client accounts.'
+      description: 'Uploads a product to your Merchant Center account. If an item with the same channel, contentLanguage, offerId, and targetCountry already exists, this method updates that entry.'
       operationId: content.products.insert
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Product'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: The ID of the account that contains the product. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1733,23 +1952,23 @@ paths:
         - products
   '/{merchantId}/products/{productId}':
     delete:
-      description: Deletes a product from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Deletes a product from your Merchant Center account.
       operationId: content.products.delete
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the product.
-          in: path
-          name: productId
-          required: true
-          type: string
         - description: Flag to run the request in dry-run mode.
           in: query
           name: dryRun
           type: boolean
+        - description: The ID of the account that contains the product. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The REST id of the product.
+          in: path
+          name: productId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1761,15 +1980,15 @@ paths:
       tags:
         - products
     get:
-      description: Retrieves a product from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Retrieves a product from your Merchant Center account.
       operationId: content.products.get
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that contains the product. This account cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
           type: string
-        - description: The ID of the product.
+        - description: The REST id of the product.
           in: path
           name: productId
           required: true
@@ -1796,7 +2015,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/productstatuses':
     get:
-      description: Lists the statuses of the products in your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Lists the statuses of the products in your Merchant Center account.
       operationId: content.productstatuses.list
       parameters:
         - description: Flag to include full product data in the results of the list request. The default value is false.
@@ -1811,7 +2030,7 @@ paths:
           in: query
           name: maxResults
           type: integer
-        - description: The ID of the managing account.
+        - description: The ID of the account that contains the products. This account cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -1842,19 +2061,19 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/productstatuses/{productId}':
     get:
-      description: Gets the status of a product from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Gets the status of a product from your Merchant Center account.
       operationId: content.productstatuses.get
       parameters:
         - description: Flag to include full product data in the result of this get request. The default value is false.
           in: query
           name: includeAttributes
           type: boolean
-        - description: The ID of the managing account.
+        - description: The ID of the account that contains the product. This account cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
           type: string
-        - description: The ID of the product.
+        - description: The REST id of the product.
           in: path
           name: productId
           required: true
@@ -1881,18 +2100,18 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/shippingsettings':
     get:
-      description: Lists the shipping settings of the sub-accounts in your Merchant Center account. This method can only be called for multi-client accounts.
+      description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
       operationId: content.shippingsettings.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: 'The maximum number of shipping settings to return in the response, used for paging.'
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the managing account. This must be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -1919,17 +2138,17 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/shippingsettings/{accountId}':
     get:
-      description: 'Retrieves the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
+      description: Retrieves the shipping settings of the account.
       operationId: content.shippingsettings.get
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account for which to get/update shipping settings.
           in: path
           name: accountId
+          required: true
+          type: string
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
           required: true
           type: string
       responses:
@@ -1953,27 +2172,27 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account. This method supports patch semantics.'
+      description: Updates the shipping settings of the account. This method supports patch semantics.
       operationId: content.shippingsettings.patch
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account for which to get/update shipping settings.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ShippingSettings'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1987,27 +2206,27 @@ paths:
       tags:
         - shippingsettings
     put:
-      description: 'Updates the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
+      description: Updates the shipping settings of the account.
       operationId: content.shippingsettings.update
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account for which to get/update shipping settings.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ShippingSettings'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2050,6 +2269,36 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{merchantId}/supportedHolidays':
+    get:
+      description: Retrieves supported holidays for an account.
+      operationId: content.shippingsettings.getsupportedholidays
+      parameters:
+        - description: The ID of the account for which to retrieve the supported holidays.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ShippingsettingsGetSupportedHolidaysResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - shippingsettings
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{merchantId}/testorders':
     parameters:
       - $ref: '#/parameters/alt'
@@ -2060,18 +2309,18 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sandbox only. Creates a test order. This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Creates a test order.
       operationId: content.orders.createtestorder
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/OrdersCreateTestOrderRequest'
+        - description: The ID of the account that should manage the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2094,10 +2343,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment". This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
       operationId: content.orders.advancetestorder
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -2121,10 +2370,10 @@ paths:
         - orders
   '/{merchantId}/testordertemplates/{templateName}':
     get:
-      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox. This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
       operationId: content.orders.gettestordertemplate
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that should manage the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -2171,6 +2420,9 @@ definitions:
         items:
           $ref: '#/definitions/AccountAdwordsLink'
         type: array
+      googleMyBusinessLink:
+        $ref: '#/definitions/AccountGoogleMyBusinessLink'
+        description: The GMB account which is linked or in the process of being linked with the Merchant Center accounnt.
       id:
         description: Merchant Center account ID.
         format: uint64
@@ -2196,6 +2448,11 @@ definitions:
       websiteUrl:
         description: The merchant's website.
         type: string
+      youtubeChannelLinks:
+        description: 'List of linked YouTube channels that are active or pending approval. To create a new link request, add a new link with status active to the list. It will remain in a pending state until approved or rejected in the YT Creator Studio interface. To delete an active link, or to cancel a link request, remove it from the list.'
+        items:
+          $ref: '#/definitions/AccountYouTubeChannelLink'
+        type: array
     type: object
   AccountAdwordsLink:
     properties:
@@ -2205,6 +2462,15 @@ definitions:
         type: string
       status:
         description: 'Status of the link between this Merchant Center account and the AdWords account. Upon retrieval, it represents the actual status of the link and can be either active if it was approved in Google AdWords or pending if it''s pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status active when it''s still pending or with status pending when it''s already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status inactive is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.'
+        type: string
+    type: object
+  AccountGoogleMyBusinessLink:
+    properties:
+      gmbEmail:
+        description: The GMB email address.
+        type: string
+      status:
+        description: Status of the link between this Merchant Center account and the GMB account.
         type: string
     type: object
   AccountIdentifier:
@@ -2361,6 +2627,15 @@ definitions:
         description: User's email address.
         type: string
     type: object
+  AccountYouTubeChannelLink:
+    properties:
+      channelId:
+        description: Channel ID.
+        type: string
+      status:
+        description: 'Status of the link between this Merchant Center account and the YouTube channel. Upon retrieval, it represents the actual status of the link and can be either active if it was approved in YT Creator Studio or pending if it''s pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status active when it''s still pending or with status pending when it''s already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status inactive is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.'
+        type: string
+    type: object
   AccountsAuthInfoResponse:
     properties:
       accountIdentifiers:
@@ -2406,6 +2681,9 @@ definitions:
         description: 'An entry ID, unique within the batch request.'
         format: uint32
         type: integer
+      force:
+        description: Whether the account should be deleted if the account has offers. Only applicable if the method is delete.
+        type: boolean
       merchantId:
         description: The ID of the managing account.
         format: uint64
@@ -2642,7 +2920,7 @@ definitions:
         description: The two-letter ISO 639-1 language in which the attributes are defined in the data feed.
         type: string
       contentLanguage:
-        description: The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.
+        description: '[DEPRECATED] Please use targets[].language instead. The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.'
         type: string
       contentType:
         description: 'The type of data feed. For product inventory feeds, only feeds for local stores, not online stores, are supported.'
@@ -2661,7 +2939,7 @@ definitions:
         format: int64
         type: string
       intendedDestinations:
-        description: The list of intended destinations (corresponds to checked check boxes in Merchant Center).
+        description: '[DEPRECATED] Please use targets[].includedDestinations instead. The list of intended destinations (corresponds to checked check boxes in Merchant Center).'
         items:
           type: string
         type: array
@@ -2673,8 +2951,13 @@ definitions:
         description: A descriptive name of the data feed.
         type: string
       targetCountry:
-        description: 'The country where the items in the feed will be included in the search index, represented as a CLDR territory code.'
+        description: '[DEPRECATED] Please use targets[].country instead. The country where the items in the feed will be included in the search index, represented as a CLDR territory code.'
         type: string
+      targets:
+        description: 'The targets this feed should apply to (country, language, destinations).'
+        items:
+          $ref: '#/definitions/DatafeedTarget'
+        type: array
     type: object
   DatafeedFetchSchedule:
     description: 'The required fields vary based on the frequency of fetching. For a monthly fetch schedule, day_of_month and hour are required. For a weekly fetch schedule, weekday and hour are required. For a daily fetch schedule, only hour is required.'
@@ -2725,6 +3008,9 @@ definitions:
   DatafeedStatus:
     description: 'The status of a datafeed, i.e., the result of the last retrieval of the datafeed computed asynchronously when the feed processing is finished.'
     properties:
+      country:
+        description: 'The country for which the status is reported, represented as a  CLDR territory code.'
+        type: string
       datafeedId:
         description: The ID of the feed for which the status is reported.
         format: uint64
@@ -2745,6 +3031,9 @@ definitions:
       kind:
         default: 'content#datafeedStatus'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedStatus".'
+        type: string
+      language:
+        description: The two-letter ISO 639-1 language for which the status is reported.
         type: string
       lastUploadDate:
         description: The last date at which the feed was uploaded.
@@ -2789,6 +3078,25 @@ definitions:
         type: string
       value:
         description: The problematic value.
+        type: string
+    type: object
+  DatafeedTarget:
+    properties:
+      country:
+        description: 'The country where the items in the feed will be included in the search index, represented as a  CLDR territory code.'
+        type: string
+      excludedDestinations:
+        description: The list of destinations to exclude for this target (corresponds to unchecked check boxes in Merchant Center).
+        items:
+          type: string
+        type: array
+      includedDestinations:
+        description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in the excluded_destination field.
+        items:
+          type: string
+        type: array
+      language:
+        description: 'The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targets[].country.'
         type: string
     type: object
   DatafeedsCustomBatchRequest:
@@ -2875,9 +3183,15 @@ definitions:
         description: 'An entry ID, unique within the batch request.'
         format: uint32
         type: integer
+      country:
+        description: The country for which to get the datafeed status. If this parameter is provided then language must also be provided. Note that for multi-target datafeeds this parameter is required.
+        type: string
       datafeedId:
-        description: The ID of the data feed to get or delete.
+        description: The ID of the data feed to get.
         format: uint64
+        type: string
+      language:
+        description: The language for which to get the datafeed status. If this parameter is provided then country must also be provided. Note that for multi-target datafeeds this parameter is required.
         type: string
       merchantId:
         description: The ID of the managing account.
@@ -2928,6 +3242,11 @@ definitions:
     type: object
   DeliveryTime:
     properties:
+      holidayCutoffs:
+        description: 'Holiday cutoff definitions. If configured, they specify order cutoff times for holiday-specific shipping.'
+        items:
+          $ref: '#/definitions/HolidayCutoff'
+        type: array
       maxTransitTimeInDays:
         description: 'Maximum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Must be greater than or equal to minTransitTimeInDays. Required.'
         format: uint32
@@ -2985,15 +3304,56 @@ definitions:
           type: string
         type: array
       prices:
-        description: 'be "infinity". For example [{"value": "10", "currency": "USD"}, {"value": "500", "currency": "USD"}, {"value": "infinity", "currency": "USD"}] represents the headers "<= $10", " $500". All prices within a service must have the same currency. Must be non-empty. Can only be set if all other fields are not set.'
+        description: 'A list of inclusive order price upper bounds. The last price''s value can be "infinity". For example [{"value": "10", "currency": "USD"}, {"value": "500", "currency": "USD"}, {"value": "infinity", "currency": "USD"}] represents the headers "<= $10", " $500". All prices within a service must have the same currency. Must be non-empty. Can only be set if all other fields are not set.'
         items:
           $ref: '#/definitions/Price'
         type: array
       weights:
-        description: 'be "infinity". For example [{"value": "10", "unit": "kg"}, {"value": "50", "unit": "kg"}, {"value": "infinity", "unit": "kg"}] represents the headers "<= 10kg", " 50kg". All weights within a service must have the same unit. Must be non-empty. Can only be set if all other fields are not set.'
+        description: 'A list of inclusive order weight upper bounds. The last weight''s value can be "infinity". For example [{"value": "10", "unit": "kg"}, {"value": "50", "unit": "kg"}, {"value": "infinity", "unit": "kg"}] represents the headers "<= 10kg", " 50kg". All weights within a service must have the same unit. Must be non-empty. Can only be set if all other fields are not set.'
         items:
           $ref: '#/definitions/Weight'
         type: array
+    type: object
+  HolidayCutoff:
+    properties:
+      deadlineDate:
+        description: 'Date of the order deadline, in ISO 8601 format. E.g. "2016-11-29" for 29th November 2016. Required.'
+        type: string
+      deadlineHour:
+        description: 'Hour of the day on the deadline date until which the order has to be placed to qualify for the delivery guarantee. Possible values are: 0 (midnight), 1, ..., 12 (noon), 13, ..., 23. Required.'
+        format: uint32
+        type: integer
+      deadlineTimezone:
+        description: Timezone identifier for the deadline hour. A list of identifiers can be found in  the AdWords API documentation. E.g. "Europe/Zurich". Required.
+        type: string
+      holidayId:
+        description: Unique identifier for the holiday. Required.
+        type: string
+      visibleFromDate:
+        description: Date on which the deadline will become visible to consumers in ISO 8601 format. E.g. "2016-10-31" for 31st October 2016. Required.
+        type: string
+    type: object
+  HolidaysHoliday:
+    properties:
+      countryCode:
+        description: 'The CLDR territory code of the country in which the holiday is available. E.g. "US", "DE", "GB". A holiday cutoff can only be configured in a shipping settings service with matching delivery country. Always present.'
+        type: string
+      date:
+        description: 'Date of the holiday, in ISO 8601 format. E.g. "2016-12-25" for Christmas 2016. Always present.'
+        type: string
+      deliveryGuaranteeDate:
+        description: 'Date on which the order has to arrive at the customer''s, in ISO 8601 format. E.g. "2016-12-24" for 24th December 2016. Always present.'
+        type: string
+      deliveryGuaranteeHour:
+        description: 'Hour of the day in the delivery location''s timezone on the guaranteed delivery date by which the order has to arrive at the customer''s. Possible values are: 0 (midnight), 1, ..., 12 (noon), 13, ..., 23. Always present.'
+        format: uint64
+        type: string
+      id:
+        description: Unique identifier for the holiday to be used when configuring holiday cutoffs. Always present.
+        type: string
+      type:
+        description: The holiday type. Always present.
+        type: string
     type: object
   Installment:
     properties:
@@ -3317,6 +3677,11 @@ definitions:
     type: object
   OrderLineItem:
     properties:
+      annotations:
+        description: Annotations that are attached to the line item.
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
       cancellations:
         description: Cancellations of the line item.
         items:
@@ -3457,7 +3822,7 @@ definitions:
   OrderLineItemShippingDetailsMethod:
     properties:
       carrier:
-        description: The carrier for the shipping. Optional.
+        description: 'The carrier for the shipping. Optional. See shipments[].carrier for a list of acceptable values.'
         type: string
       maxDaysInTransit:
         description: Maximum transit time.
@@ -3470,6 +3835,15 @@ definitions:
         description: Minimum transit time.
         format: uint32
         type: integer
+    type: object
+  OrderMerchantProvidedAnnotation:
+    properties:
+      key:
+        description: Key for additional merchant provided (as key-value pairs) annotation about the line item.
+        type: string
+      value:
+        description: Value for additional merchant provided (as key-value pairs) annotation about the line item.
+        type: string
     type: object
   OrderPaymentMethod:
     properties:
@@ -3491,7 +3865,17 @@ definitions:
         description: The billing phone number.
         type: string
       type:
-        description: 'The type of instrument (VISA, Mastercard, etc).'
+        description: |-
+          The type of instrument.
+
+          Acceptable values are:  
+          - "AMEX" 
+          - "DISCOVER" 
+          - "JCB" 
+          - "MASTERCARD" 
+          - "UNIONPAY" 
+          - "VISA" 
+          - ""
         type: string
     type: object
   OrderPromotion:
@@ -3581,7 +3965,26 @@ definitions:
   OrderShipment:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: |-
+          The carrier handling the shipment.
+
+          Acceptable values are:  
+          - "gsx" 
+          - "ups" 
+          - "usps" 
+          - "fedex" 
+          - "dhl" 
+          - "ecourier" 
+          - "cxt" 
+          - "google" 
+          - "ontrac" 
+          - "emsy" 
+          - "ont" 
+          - "deliv" 
+          - "dynamex" 
+          - "lasership" 
+          - "mpx" 
+          - "uds"
         type: string
       creationDate:
         description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -3607,7 +4010,10 @@ definitions:
   OrderShipmentLineItemShipment:
     properties:
       lineItemId:
-        description: The id of the line item that is shipped.
+        description: The id of the line item that is shipped. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to ship. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity that is shipped.
@@ -3642,11 +4048,20 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to cancellation amount in amountPretax.
       lineItemId:
-        description: The ID of the line item to cancel.
+        description: The ID of the line item to cancel. Either lineItemId or productId is required.
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -3730,6 +4145,9 @@ definitions:
       cancelLineItem:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryCancelLineItem'
         description: Required for cancelLineItem method.
+      inStoreRefundLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryInStoreRefundLineItem'
+        description: Required for inStoreReturnLineItem method.
       merchantId:
         description: The ID of the managing account.
         format: uint64
@@ -3749,12 +4167,24 @@ definitions:
       refund:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryRefund'
         description: Required for refund method.
+      rejectReturnLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryRejectReturnLineItem'
+        description: Required for rejectReturnLineItem method.
       returnLineItem:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryReturnLineItem'
         description: Required for returnLineItem method.
+      returnRefundLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryReturnRefundLineItem'
+        description: Required for returnRefundLineItem method.
+      setLineItemMetadata:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntrySetLineItemMetadata'
+        description: Required for setLineItemMetadata method.
       shipLineItems:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItems'
         description: Required for shipLineItems method.
+      updateLineItemShippingDetails:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails'
+        description: Required for updateLineItemShippingDate method.
       updateShipment:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryUpdateShipment'
         description: Required for updateShipment method.
@@ -3773,8 +4203,17 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to cancellation amount in amountPretax.
       lineItemId:
-        description: The ID of the line item to cancel.
+        description: The ID of the line item to cancel. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -3787,13 +4226,63 @@ definitions:
         description: The explanation of the reason.
         type: string
     type: object
+  OrdersCustomBatchRequestEntryInStoreRefundLineItem:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Required.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax. Required.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryRefund:
     properties:
       amount:
         $ref: '#/definitions/Price'
         description: The amount that is refunded.
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
       reason:
         description: The reason for the refund.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntryRejectReturnLineItem:
+    properties:
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
         type: string
       reasonText:
         description: The explanation of the reason.
@@ -3802,7 +4291,10 @@ definitions:
   OrdersCustomBatchRequestEntryReturnLineItem:
     properties:
       lineItemId:
-        description: The ID of the line item to return.
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -3815,10 +4307,48 @@ definitions:
         description: The explanation of the reason.
         type: string
     type: object
+  OrdersCustomBatchRequestEntryReturnRefundLineItem:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'The amount that is refunded. Optional, but if filled then both amountPretax and amountTax must be set.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntrySetLineItemMetadata:
+    properties:
+      annotations:
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryShipLineItems:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: 'Deprecated. Please use shipmentInfo instead. The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       lineItems:
         description: Line items to ship.
@@ -3826,16 +4356,48 @@ definitions:
           $ref: '#/definitions/OrderShipmentLineItemShipment'
         type: array
       shipmentId:
+        description: Deprecated. Please use shipmentInfo instead. The ID of the shipment.
+        type: string
+      shipmentInfos:
+        description: Shipment information. This field is repeated because a single line item can be shipped in several packages (and have several tracking IDs).
+        items:
+          $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+        type: array
+      trackingId:
+        description: Deprecated. Please use shipmentInfo instead. The tracking id for the shipment.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo:
+    properties:
+      carrier:
+        description: 'The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
+        type: string
+      shipmentId:
         description: The ID of the shipment.
         type: string
       trackingId:
         description: The tracking id for the shipment.
         type: string
     type: object
+  OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails:
+    properties:
+      deliverByDate:
+        description: 'Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated.'
+        type: string
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      shipByDate:
+        description: 'Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated.'
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryUpdateShipment:
     properties:
       carrier:
-        description: The carrier handling the shipment. Not updated if missing.
+        description: 'The carrier handling the shipment. Not updated if missing. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       shipmentId:
         description: The ID of the shipment.
@@ -3899,6 +4461,44 @@ definitions:
         $ref: '#/definitions/TestOrder'
         description: The requested test order template.
     type: object
+  OrdersInStoreRefundLineItemRequest:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Required.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax. Required.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersInStoreRefundLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersInStoreRefundLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersInStoreRefundLineItemResponse".'
+        type: string
+    type: object
   OrdersListResponse:
     properties:
       kind:
@@ -3918,6 +4518,12 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: The amount that is refunded.
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
         type: string
@@ -3938,13 +4544,48 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRefundResponse".'
         type: string
     type: object
-  OrdersReturnLineItemRequest:
+  OrdersRejectReturnLineItemRequest:
     properties:
       lineItemId:
-        description: The ID of the line item to return.
+        description: The ID of the line item to return. Either lineItemId or productId is required.
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersRejectReturnLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersRejectReturnLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRejectReturnLineItemResponse".'
+        type: string
+    type: object
+  OrdersReturnLineItemRequest:
+    properties:
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -3967,10 +4608,74 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersReturnLineItemResponse".'
         type: string
     type: object
+  OrdersReturnRefundLineItemRequest:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'The amount that is refunded. Optional, but if filled then both amountPretax and amountTax must be set.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersReturnRefundLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersReturnRefundLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersReturnRefundLineItemResponse".'
+        type: string
+    type: object
+  OrdersSetLineItemMetadataRequest:
+    properties:
+      annotations:
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+    type: object
+  OrdersSetLineItemMetadataResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersSetLineItemMetadataResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersSetLineItemMetadataResponse".'
+        type: string
+    type: object
   OrdersShipLineItemsRequest:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: 'Deprecated. Please use shipmentInfo instead. The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       lineItems:
         description: Line items to ship.
@@ -3981,10 +4686,15 @@ definitions:
         description: The ID of the operation. Unique across all operations for a given order.
         type: string
       shipmentId:
-        description: The ID of the shipment.
+        description: Deprecated. Please use shipmentInfo instead. The ID of the shipment.
         type: string
+      shipmentInfos:
+        description: Shipment information. This field is repeated because a single line item can be shipped in several packages (and have several tracking IDs).
+        items:
+          $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+        type: array
       trackingId:
-        description: The tracking id for the shipment.
+        description: Deprecated. Please use shipmentInfo instead. The tracking id for the shipment.
         type: string
     type: object
   OrdersShipLineItemsResponse:
@@ -3995,6 +4705,34 @@ definitions:
       kind:
         default: 'content#ordersShipLineItemsResponse'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersShipLineItemsResponse".'
+        type: string
+    type: object
+  OrdersUpdateLineItemShippingDetailsRequest:
+    properties:
+      deliverByDate:
+        description: 'Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated.'
+        type: string
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      shipByDate:
+        description: 'Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated.'
+        type: string
+    type: object
+  OrdersUpdateLineItemShippingDetailsResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersUpdateLineItemShippingDetailsResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersUpdateLineItemShippingDetailsResponse".'
         type: string
     type: object
   OrdersUpdateMerchantOrderIdRequest:
@@ -4019,7 +4757,7 @@ definitions:
   OrdersUpdateShipmentRequest:
     properties:
       carrier:
-        description: The carrier handling the shipment. Not updated if missing.
+        description: 'The carrier handling the shipment. Not updated if missing. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
@@ -4199,7 +4937,9 @@ definitions:
         description: Global Trade Item Number (GTIN) of the item.
         type: string
       id:
-        description: The REST id of the product.
+        description: |-
+          The REST id of the product. Content API methods that operate on products take this as their productId parameter.
+          The REST id for a product is of the form channel:contentLanguage:targetCountry:offerId.
         type: string
       identifierExists:
         description: 'False when the item does not have unique product identifiers appropriate to its category, such as GTIN, MPN, and brand. Required according to the Unique Product Identifier Rules for all target countries except for Canada.'
@@ -4248,7 +4988,9 @@ definitions:
         format: int64
         type: string
       offerId:
-        description: An identifier of the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.
+        description: |-
+          A unique identifier for the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.
+          Note: Content API methods that operate on products take the REST id of the product, not this identifier.
         type: string
       onlineOnly:
         description: Whether an item is available for purchase only online.
@@ -4452,6 +5194,11 @@ definitions:
       googleExpirationDate:
         description: 'Date on which the item expires in Google Shopping, in ISO 8601 format.'
         type: string
+      itemLevelIssues:
+        description: A list of all issues associated with the product.
+        items:
+          $ref: '#/definitions/ProductStatusItemLevelIssue'
+        type: array
       kind:
         default: 'content#productStatus'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#productStatus".'
@@ -4501,6 +5248,9 @@ definitions:
     type: object
   ProductStatusDestinationStatus:
     properties:
+      approvalPending:
+        description: Whether the approval status might change due to further processing.
+        type: boolean
       approvalStatus:
         description: The destination's approval status.
         type: string
@@ -4508,7 +5258,25 @@ definitions:
         description: The name of the destination
         type: string
       intention:
-        description: 'Whether the destination is required, excluded, selected by default or should be validated.'
+        description: Provided for backward compatibility only. Always set to "required".
+        type: string
+    type: object
+  ProductStatusItemLevelIssue:
+    properties:
+      attributeName:
+        description: 'The attribute''s name, if the issue is caused by a single attribute.'
+        type: string
+      code:
+        description: The error code of the issue.
+        type: string
+      destination:
+        description: The destination the issue applies to.
+        type: string
+      resolution:
+        description: Whether the issue can be resolved by the merchant.
+        type: string
+      servability:
+        description: How this issue affects serving of the offer.
         type: string
     type: object
   ProductTax:
@@ -4743,6 +5511,9 @@ definitions:
       deliveryTime:
         $ref: '#/definitions/DeliveryTime'
         description: Time spent in various aspects from order to the delivery of the product. Required.
+      minimumOrderValue:
+        $ref: '#/definitions/Price'
+        description: 'Minimum order value for this service. If set, indicates that customers will have to spend at least this amount. All prices within a service must have the same currency.'
       name:
         description: Free-form name of the service. Must be unique within target account. Required.
         type: string
@@ -4841,6 +5612,18 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedCarriersResponse".'
         type: string
     type: object
+  ShippingsettingsGetSupportedHolidaysResponse:
+    properties:
+      holidays:
+        description: A list of holidays applicable for delivery guarantees. May be empty.
+        items:
+          $ref: '#/definitions/HolidaysHoliday'
+        type: array
+      kind:
+        default: 'content#shippingsettingsGetSupportedHolidaysResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedHolidaysResponse".'
+        type: string
+    type: object
   ShippingsettingsListResponse:
     properties:
       kind:
@@ -4886,6 +5669,9 @@ definitions:
         items:
           $ref: '#/definitions/TestOrderLineItem'
         type: array
+      notificationMode:
+        description: Determines if test order must be pulled by merchant or pushed to merchant via push integration.
+        type: string
       paymentMethod:
         $ref: '#/definitions/TestOrderPaymentMethod'
         description: The details of the payment method.

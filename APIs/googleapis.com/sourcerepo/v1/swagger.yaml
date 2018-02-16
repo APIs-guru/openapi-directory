@@ -17,12 +17,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - developer_tools
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://sourcerepo.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -38,6 +40,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/source.full_control': Manage your source code repositories
       'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
       'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
     type: oauth2
@@ -47,6 +50,7 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/source.full_control': Manage your source code repositories
       'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
       'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
@@ -154,6 +158,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.full_control'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
           Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_only'
@@ -186,6 +194,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.full_control'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
           Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_only'
@@ -196,19 +208,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}/repos':
     get:
       description: |-
@@ -248,6 +260,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.full_control'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
           Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_only'
@@ -258,34 +274,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{parent}/repos':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a repo in the given project with the given name.
@@ -294,6 +310,10 @@ paths:
         `ALREADY_EXISTS`.
       operationId: sourcerepo.projects.repos.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Repo'
         - description: |-
             The project in which to create the repo. Values are of the form
             `projects/<project>`.
@@ -302,10 +322,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Repo'
       responses:
         '200':
           description: Successful response
@@ -316,6 +332,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
           Oauth2c:
@@ -353,6 +373,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.full_control'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
           Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_only'
@@ -363,40 +387,44 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
       operationId: sourcerepo.projects.repos.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
             See the operation documentation for the appropriate value for this field.
@@ -405,10 +433,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -419,6 +443,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
           Oauth2c:
@@ -431,19 +459,19 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
@@ -451,6 +479,10 @@ paths:
         permissions, not a NOT_FOUND error.
       operationId: sourcerepo.projects.repos.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
             See the operation documentation for the appropriate value for this field.
@@ -459,10 +491,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestIamPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -473,6 +501,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
           Oauth2c:
@@ -598,6 +630,14 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
+          This field is GOOGLE_INTERNAL.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -633,76 +673,6 @@ definitions:
           Required
         type: string
     type: object
-  CloudAuditOptions:
-    description: Write a Cloud Audit log
-    properties:
-      logName:
-        description: The log_name to populate in the Cloud Audit Record.
-        enum:
-          - UNSPECIFIED_LOG_NAME
-          - ADMIN_ACTIVITY
-          - DATA_ACCESS
-        type: string
-    type: object
-  Condition:
-    description: A condition to be met.
-    properties:
-      iam:
-        description: Trusted attributes supplied by the IAM system.
-        enum:
-          - NO_ATTR
-          - AUTHORITY
-          - ATTRIBUTION
-          - APPROVER
-          - JUSTIFICATION_TYPE
-        type: string
-      op:
-        description: An operator to apply the subject with.
-        enum:
-          - NO_OP
-          - EQUALS
-          - NOT_EQUALS
-          - IN
-          - NOT_IN
-          - DISCHARGED
-        type: string
-      svc:
-        description: Trusted attributes discharged by the service.
-        type: string
-      sys:
-        description: |-
-          Trusted attributes supplied by any service that owns resources and uses
-          the IAM system for access control.
-        enum:
-          - NO_ATTR
-          - REGION
-          - SERVICE
-          - NAME
-          - IP
-        type: string
-      value:
-        description: DEPRECATED. Use 'values' instead.
-        type: string
-      values:
-        description: The objects of the condition. This is mutually exclusive with 'value'.
-        items:
-          type: string
-        type: array
-    type: object
-  CounterOptions:
-    description: Options for counters
-    properties:
-      field:
-        description: The field value to attribute.
-        type: string
-      metric:
-        description: The metric to update.
-        type: string
-    type: object
-  DataAccessOptions:
-    description: Write a Data Access (Gin) log
-    properties: {}
-    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -715,6 +685,39 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
     type: object
   ListReposResponse:
     description: Response for ListRepos.  The size is not set in the returned repositories.
@@ -731,23 +734,10 @@ definitions:
           $ref: '#/definitions/Repo'
         type: array
     type: object
-  LogConfig:
-    description: Specifies what kind of log the caller must write
-    properties:
-      cloudAudit:
-        $ref: '#/definitions/CloudAuditOptions'
-        description: Cloud audit options.
-      counter:
-        $ref: '#/definitions/CounterOptions'
-        description: Counter options.
-      dataAccess:
-        $ref: '#/definitions/DataAccessOptions'
-        description: Data access options.
-    type: object
   MirrorConfig:
     description: |-
       Configuration to automatically mirror a repository from another
-      hosting service, for example GitHub or BitBucket.
+      hosting service, for example GitHub or Bitbucket.
     properties:
       deployKeyId:
         description: |-
@@ -761,7 +751,7 @@ definitions:
       webhookId:
         description: |-
           ID of the webhook listening to updates to trigger mirroring.
-          Removing this webook from the other hosting service will stop
+          Removing this webhook from the other hosting service will stop
           Google Cloud Source Repositories from receiving notifications,
           and thereby disabling mirroring.
         type: string
@@ -808,7 +798,6 @@ definitions:
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
-          Multiple `bindings` must not be specified for the same `role`.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -829,20 +818,6 @@ definitions:
         type: string
       iamOwned:
         type: boolean
-      rules:
-        description: |-
-          If more than one rule is specified, the rules are applied in the following
-          manner:
-          - All matching LOG rules are always applied.
-          - If any DENY/DENY_WITH_LOG rule matches, permission is denied.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is
-            granted.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if no rule applies, permission is denied.
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
       version:
         description: Version of the `Policy`. The default version is 0.
         format: int32
@@ -853,7 +828,9 @@ definitions:
     properties:
       mirrorConfig:
         $ref: '#/definitions/MirrorConfig'
-        description: How this repository mirrors a repository managed by another service.
+        description: |-
+          How this repository mirrors a repository managed by another service.
+          Read-only field.
       name:
         description: |-
           Resource name of the repository, of the form
@@ -862,66 +839,15 @@ definitions:
         type: string
       size:
         description: |-
-          The disk usage of the repo, in bytes.
-          Only returned by GetRepo.
+          The disk usage of the repo, in bytes. Read-only field. Size is only
+          returned by GetRepo.
         format: int64
         type: string
       url:
-        description: URL to clone the repository from Google Cloud Source Repositories.
+        description: |-
+          URL to clone the repository from Google Cloud Source Repositories.
+          Read-only field.
         type: string
-    type: object
-  Rule:
-    description: A rule to be applied in a Policy.
-    properties:
-      action:
-        description: Required
-        enum:
-          - NO_ACTION
-          - ALLOW
-          - ALLOW_WITH_LOG
-          - DENY
-          - DENY_WITH_LOG
-          - LOG
-        type: string
-      conditions:
-        description: Additional restrictions that must be met
-        items:
-          $ref: '#/definitions/Condition'
-        type: array
-      description:
-        description: Human-readable description of the rule.
-        type: string
-      in:
-        description: |-
-          If one or more 'in' clauses are specified, the rule matches if
-          the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
-        items:
-          type: string
-        type: array
-      logConfig:
-        description: |-
-          The config returned to callers of tech.iam.IAM.CheckPolicy for any entries
-          that match the LOG action.
-        items:
-          $ref: '#/definitions/LogConfig'
-        type: array
-      notIn:
-        description: |-
-          If one or more 'not_in' clauses are specified, the rule matches
-          if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
-          The format for in and not_in entries is the same as for members in a
-          Binding (see google/iam/v1/policy.proto).
-        items:
-          type: string
-        type: array
-      permissions:
-        description: |-
-          A permission is a string of form '<service>.<resource type>.<verb>'
-          (e.g., 'storage.buckets.list'). A value of '*' matches all permissions,
-          and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
-        items:
-          type: string
-        type: array
     type: object
   SetIamPolicyRequest:
     description: Request message for `SetIamPolicy` method.

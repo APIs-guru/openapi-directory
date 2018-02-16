@@ -22,7 +22,7 @@ info:
     - media
     - open_data
   x-logo:
-    url: 'https://developer.bbc.co.uk/sites/default/files/Nitro%20On%20White.png'
+    url: 'https://github.com/Mermade/bbcparse/blob/master/nitroApi/nitro-logo.png?raw=true'
   x-origin:
     - contentType: application/json
       converter:
@@ -1132,6 +1132,7 @@ paths:
             * images: mixin to add image information for a programme
             * is_embeddable: mixin to add embeddable information for a programme
             * previous_next: mixin to return the programmes which appear before and after a programme (as determined by the sort applied in the request)
+            * programme_type: mixin to return the programme type
             * related_links: mixin to return information about related links to a programme
             * titles: mixin to return ancestor programme titles
             * versions_availability: mixin to return information about programmes that are currently available
@@ -1149,6 +1150,7 @@ paths:
             - images
             - is_embeddable
             - previous_next
+            - programme_type
             - related_links
             - titles
             - versions_availability
@@ -2977,6 +2979,8 @@ definitions:
         $ref: '#/definitions/previous_next_mixin'
       programme_formats:
         $ref: '#/definitions/programme_formats'
+      programme_type:
+        $ref: '#/definitions/programme_type'
       related_links:
         $ref: '#/definitions/related_links'
       release_date_group:
@@ -3533,6 +3537,8 @@ definitions:
         $ref: '#/definitions/previous_next_mixin'
       programme_formats:
         $ref: '#/definitions/programme_formats'
+      programme_type:
+        $ref: '#/definitions/programme_type'
       related_links:
         $ref: '#/definitions/related_links'
       release_date_group:
@@ -4501,6 +4507,14 @@ definitions:
     required:
       - format
     type: object
+  programme_type:
+    additionalProperties: false
+    properties:
+      value:
+        type: string
+    required:
+      - value
+    type: object
   prohibits:
     additionalProperties: false
     properties:
@@ -4842,6 +4856,8 @@ definitions:
         $ref: '#/definitions/previous_next_mixin'
       programme_formats:
         $ref: '#/definitions/programme_formats'
+      programme_type:
+        $ref: '#/definitions/programme_type'
       related_links:
         $ref: '#/definitions/related_links'
       release_date_group:

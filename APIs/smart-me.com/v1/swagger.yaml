@@ -6,6 +6,8 @@ info:
   description: With the smart-me REST API you get Access to all your devices in the smart-me Cloud and you can add your own devices. So it's a easy way to add the smart-me Cloud support to your Hardware or Software Product.
   title: smart-me
   version: v1
+  x-apisguru-categories:
+    - iot
   x-logo:
     url: 'http://smart-me.com/Images/bootstrap/logo.png'
   x-origin:
@@ -100,6 +102,42 @@ paths:
       summary: Gets all available Actions of a Device
       tags:
         - Actions
+  /api/ChargingUser:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: ChargingUser_Get
+      parameters:
+        - description: The ID of the user
+          format: int64
+          in: query
+          name: userId
+          required: true
+          type: integer
+        - description: The current Date
+          format: int64
+          in: query
+          name: date
+          required: true
+          type: integer
+        - description: The Password token
+          in: query
+          name: passwordToken
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+      summary: Gets the informations for the user.
+      tags:
+        - ChargingUser
   /api/CustomDevice:
     get:
       consumes: []
@@ -394,6 +432,28 @@ paths:
       summary: Gets all Devices by it's Sub Type (e.g. E-Charging Station)
       tags:
         - DevicesBySubType
+  '/api/Folder/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets the Values for a folder or a meter
+      operationId: Folder_Get
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FolderData'
+      summary: Gets the Values for a folder or a meter
+      tags:
+        - Folder
   /api/MBus:
     post:
       consumes:
@@ -560,6 +620,101 @@ paths:
       summary: Gets the informations for the user.
       tags:
         - User
+  '/api/Values/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Values_Get
+      parameters:
+        - description: The ID of the device
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ValuesData'
+      summary: Gets all (last) values of a device
+      tags:
+        - Values
+  '/api/ValuesInPast/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets the Values for a device at a given Date. The first Value found before the given Date is returned.
+      operationId: ValuesInPast_Get
+      parameters:
+        - description: The ID of the device
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the date of the value
+          format: date-time
+          in: query
+          name: date
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ValuesData'
+      summary: "Gets all (last) values of a device\r\n            The first Value found before the given Date is returned."
+      tags:
+        - ValuesInPast
+  '/api/ValuesInPastMultiple/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: ValuesInPastMultiple_Get
+      parameters:
+        - description: The ID of the device
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The date when the first value should start
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: The date when the last value should start
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+        - description: The interval in minutes betwenn the values. 0 means as fast as possible. Only 1000 values can be get in one call.
+          format: int32
+          in: query
+          name: interval
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ValuesData'
+            type: array
+      summary: Gets multiple values of a device. This call needs a smart-me professional licence.
+      tags:
+        - ValuesInPastMultiple
   /api/VirtualBillingMeterActive:
     get:
       consumes: []
@@ -699,6 +854,89 @@ paths:
       summary: "Calculates a virtual meter from a formula. \r\n            A meter is coded as ID(\"METERID\")"
       tags:
         - VirtualMeterCalculateFormula
+  /api/VirtualTariff:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets all Virtual Tariffs of a user
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/VirtualTariffsOfFolder'
+            type: array
+      summary: Gets all Virtual Tariffs of a user
+      tags:
+        - VirtualTariff
+  '/api/VirtualTariff/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets all virtual tariffs of a folder
+      parameters:
+        - description: The ID of the Folder
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualTariffsOfFolder'
+      summary: Gets all virtual tariffs of a folder
+      tags:
+        - VirtualTariff
+  /api/VirtualTariffConsumption:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets the consumption of a folder with a virtuall tariffs.
+      operationId: VirtualTariffConsumption_Get
+      parameters:
+        - description: The ID of the Folder
+          in: query
+          name: folderId
+          required: true
+          type: string
+        - description: The start date (UTC)
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: The end date (UTC)
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/VirtualTariffConsumptionData'
+            type: array
+      summary: Gets the consumption of a folder with a virtuall tariffs.
+      tags:
+        - VirtualTariffConsumption
 definitions:
   AccessTokenToPut:
     description: Container Class for the Put action of an Access Token
@@ -819,6 +1057,14 @@ definitions:
         description: The Number of the Active Tariff
         format: int32
         type: integer
+      AnalogOutput1:
+        description: The analog output number 1 (PWM signal) (0 - 32183)
+        format: int32
+        type: integer
+      AnalogOutput2:
+        description: The analog output number 2 (PWM signal) (0 - 32183)
+        format: int32
+        type: integer
       CounterReading:
         description: The Meter Counter Reading (Total Energy used)
         format: double
@@ -876,6 +1122,18 @@ definitions:
           - MeterTypeSolarLog
           - MeterTypeVirtualMeter
         type: string
+      DigitalInput1:
+        description: The digital input number 1
+        type: boolean
+      DigitalInput2:
+        description: The digital input number 2
+        type: boolean
+      DigitalOutput1:
+        description: The digital output number 1
+        type: boolean
+      DigitalOutput2:
+        description: The digital output number 2
+        type: boolean
       FamilyType:
         description: The Family Type of the device.
         enum:
@@ -1103,6 +1361,42 @@ definitions:
         format: date-time
         type: string
     type: object
+  FolderData:
+    description: Container class for the folder API
+    properties:
+      ElectricityCounterValue:
+        description: The Counter values for electricity (kWh)
+        format: double
+        type: number
+      ElectricityPower:
+        description: The Power for electricity (kW)
+        format: double
+        type: number
+      GasCounterValue:
+        description: The Counter values for Gas (m3)
+        format: double
+        type: number
+      GasFlowRate:
+        description: The Flow Rate for Gas (m3/h)
+        format: double
+        type: number
+      HeatCounterValue:
+        description: The Counter values for Heat (kWh)
+        format: double
+        type: number
+      HeatPower:
+        description: The Power for Heat (kW)
+        format: double
+        type: number
+      WaterCounterValue:
+        description: The Counter values for Water (m3)
+        format: double
+        type: number
+      WaterFlowRate:
+        description: The Flow Rate for Water (m3/h)
+        format: double
+        type: number
+    type: object
   InputInformation:
     description: Informations about the Inputs of a Meter or Folder
     properties:
@@ -1168,6 +1462,12 @@ definitions:
   OutputInformation:
     description: Informations about the Outputs of a Meter or Folder
     properties:
+      ActionType:
+        description: The type of the Output
+        enum:
+          - OnOffAction
+          - AnalogAction
+        type: string
       Name:
         description: The Name of the Output
         type: string
@@ -1224,4 +1524,103 @@ definitions:
       ID:
         description: The ID of the Virtual meter to deactivate
         type: string
+    type: object
+  ValueData:
+    description: API Container for a (Device) Value
+    properties:
+      Obis:
+        description: "The Obis code of this value. \r\n            A description you can find here:\r\n            http://wiki.smart-me.com/index.php/Obis_codes"
+        type: string
+      Value:
+        description: The Value
+        format: double
+        type: number
+    type: object
+  ValuesData:
+    description: API Container for a Meter Value
+    properties:
+      Date:
+        description: The Date of the Value
+        format: date-time
+        type: string
+      DeviceId:
+        description: The ID of the device
+        type: string
+      Values:
+        description: All values
+        items:
+          $ref: '#/definitions/ValueData'
+        type: array
+    type: object
+  VirtualTariff:
+    description: Container class for the virtual tariffs
+    properties:
+      Factor:
+        description: Says how many of the active power is used in this tariff. This is calculated from the last meter values.
+        format: double
+        type: number
+      Id:
+        description: The ID of the virtual tariff
+        type: string
+      Name:
+        description: The name of this tariff
+        type: string
+      Type:
+        description: The Type of the tariff
+        enum:
+          - Battery
+          - Solar
+          - Normal
+        type: string
+      Unit:
+        description: The Unit of this value
+        type: string
+      Value:
+        description: The Counter Value of this tariff
+        format: double
+        type: number
+    type: object
+  VirtualTariffConsumptionData:
+    description: Container class for the virtual tariff consumption
+    properties:
+      Consumption:
+        description: The consumption (e.g. kWh) of this tariff
+        format: double
+        type: number
+      Currency:
+        description: The currency of the price
+        type: string
+      Name:
+        description: The Name of this virtual tariff
+        type: string
+      Price:
+        description: The price of the energy in this timerange
+        format: double
+        type: number
+      TariffType:
+        description: The type of the virtual tariff (e.g. solar)
+        enum:
+          - Battery
+          - Solar
+          - Normal
+        type: string
+    type: object
+  VirtualTariffsOfFolder:
+    description: Container class for a Virtual Tariff
+    properties:
+      Date:
+        description: The DateTime (UTC) of this virtual tarfifs
+        format: date-time
+        type: string
+      FolderId:
+        description: The ID of the Folder
+        type: string
+      Name:
+        description: The name of this folder
+        type: string
+      VirtualTariffs:
+        description: The Name of the Virtual Tariff
+        items:
+          $ref: '#/definitions/VirtualTariff'
+        type: array
     type: object

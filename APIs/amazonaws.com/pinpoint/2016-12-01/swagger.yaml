@@ -4,13 +4,14 @@ info:
   x-release: v4
   title: Amazon Pinpoint
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -35,6 +36,7 @@ host: pinpoint.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -97,6 +99,54 @@ security:
   - hmac: []
 paths:
   /v1/apps:
+    post:
+      operationId: CreateApp
+      description: Creates or updates an app.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateAppResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAppRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApps
       description: Returns information about your apps.
@@ -135,6 +185,49 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAppsRequest'
+  '/v1/apps/{application-id}/campaigns':
+    post:
+      operationId: CreateCampaign
+      description: Creates or updates a campaign.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCampaignResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCampaignRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -145,7 +238,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/campaigns':
     get:
       operationId: GetCampaigns
       description: Returns information about your campaigns.
@@ -188,6 +280,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/jobs/import':
+    post:
+      operationId: CreateImportJob
+      description: Creates or updates an import job.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateImportJobResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateImportJobRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -198,7 +333,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/jobs/import':
     get:
       operationId: GetImportJobs
       description: Returns information about your import jobs.
@@ -241,6 +375,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/segments':
+    post:
+      operationId: CreateSegment
+      description: Used to create or update a segment.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSegmentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSegmentRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -251,7 +428,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/segments':
     get:
       operationId: GetSegments
       description: Used to get information about your segments.
@@ -294,6 +470,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/channels/adm':
+    delete:
+      operationId: DeleteAdmChannel
+      description: Delete an ADM channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAdmChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAdmChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -304,7 +523,185 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetAdmChannel
+      description: Get an ADM channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAdmChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAdmChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateAdmChannel
+      description: Update an ADM channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAdmChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAdmChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
   '/v1/apps/{application-id}/channels/apns':
+    delete:
+      operationId: DeleteApnsChannel
+      description: Deletes the APNs channel for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApnsChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApnsChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetApnsChannel
+      description: Returns information about the APNs channel for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetApnsChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetApnsChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateApnsChannel
       description: Use to update the APNs channel for an app.
@@ -347,6 +744,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/channels/apns_sandbox':
+    delete:
+      operationId: DeleteApnsSandboxChannel
+      description: Delete an APNS sandbox channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApnsSandboxChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApnsSandboxChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -357,7 +797,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/channels/apns_sandbox':
+    get:
+      operationId: GetApnsSandboxChannel
+      description: Get an APNS sandbox channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetApnsSandboxChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetApnsSandboxChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateApnsSandboxChannel
       description: Update an APNS sandbox channel
@@ -400,6 +881,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/channels/apns_voip':
+    delete:
+      operationId: DeleteApnsVoipChannel
+      description: Delete an APNS VoIP channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApnsVoipChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApnsVoipChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -410,7 +934,280 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetApnsVoipChannel
+      description: Get an APNS VoIP channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetApnsVoipChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetApnsVoipChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateApnsVoipChannel
+      description: Update an APNS VoIP channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApnsVoipChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApnsVoipChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+  '/v1/apps/{application-id}/channels/apns_voip_sandbox':
+    delete:
+      operationId: DeleteApnsVoipSandboxChannel
+      description: Delete an APNS VoIP sandbox channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApnsVoipSandboxChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApnsVoipSandboxChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetApnsVoipSandboxChannel
+      description: Get an APNS VoipSandbox channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetApnsVoipSandboxChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetApnsVoipSandboxChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateApnsVoipSandboxChannel
+      description: Update an APNS VoIP sandbox channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApnsVoipSandboxChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApnsVoipSandboxChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
   '/v1/apps/{application-id}':
+    delete:
+      operationId: DeleteApp
+      description: Deletes an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAppResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAppRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApp
       description: Returns information about an app.
@@ -453,6 +1250,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/channels/baidu':
+    delete:
+      operationId: DeleteBaiduChannel
+      description: Delete a BAIDU GCM channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteBaiduChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBaiduChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -463,7 +1303,193 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetBaiduChannel
+      description: Get a BAIDU GCM channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBaiduChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBaiduChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateBaiduChannel
+      description: Update a BAIDU GCM channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateBaiduChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateBaiduChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
   '/v1/apps/{application-id}/campaigns/{campaign-id}':
+    delete:
+      operationId: DeleteCampaign
+      description: Deletes a campaign.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCampaignResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteCampaignRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: campaign-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetCampaign
+      description: Returns information about a campaign.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCampaignResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCampaignRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: campaign-id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateCampaign
       description: Use to update a campaign.
@@ -510,6 +1536,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/channels/email':
+    delete:
+      operationId: DeleteEmailChannel
+      description: Delete an email channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteEmailChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteEmailChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -520,7 +1589,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/channels/email':
+    get:
+      operationId: GetEmailChannel
+      description: Get an email channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEmailChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEmailChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateEmailChannel
       description: Update an email channel
@@ -563,6 +1673,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/eventstream':
+    delete:
+      operationId: DeleteEventStream
+      description: Deletes the event stream for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteEventStreamResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteEventStreamRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -573,7 +1726,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/eventstream':
+    get:
+      operationId: GetEventStream
+      description: Returns the event stream for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEventStreamResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEventStreamRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     post:
       operationId: PutEventStream
       description: Use to create or update the event stream for an app.
@@ -616,6 +1810,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/channels/gcm':
+    delete:
+      operationId: DeleteGcmChannel
+      description: Deletes the GCM channel for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteGcmChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteGcmChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -626,7 +1863,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/channels/gcm':
+    get:
+      operationId: GetGcmChannel
+      description: Returns information about the GCM channel for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetGcmChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetGcmChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateGcmChannel
       description: Use to update the GCM channel for an app.
@@ -669,6 +1947,53 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/segments/{segment-id}':
+    delete:
+      operationId: DeleteSegment
+      description: Deletes a segment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSegmentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSegmentRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: segment-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -679,7 +2004,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/segments/{segment-id}':
+    get:
+      operationId: GetSegment
+      description: Returns information about a segment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSegmentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSegmentRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: segment-id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateSegment
       description: Use to update a segment.
@@ -726,6 +2096,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/channels/sms':
+    delete:
+      operationId: DeleteSmsChannel
+      description: Delete an SMS channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSmsChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSmsChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -736,7 +2149,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/channels/sms':
+    get:
+      operationId: GetSmsChannel
+      description: Get an SMS channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSmsChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSmsChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateSmsChannel
       description: Update an SMS channel
@@ -779,6 +2233,49 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/settings':
+    get:
+      operationId: GetApplicationSettings
+      description: Used to request the settings for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetApplicationSettingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetApplicationSettingsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -789,7 +2286,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/settings':
     put:
       operationId: UpdateApplicationSettings
       description: Used to update the settings for an app.
@@ -832,16 +2328,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/campaigns/{campaign-id}/activities':
     get:
       operationId: GetCampaignActivities
@@ -1018,6 +2504,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/endpoints/{endpoint-id}':
+    get:
+      operationId: GetEndpoint
+      description: Returns information about an endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEndpointResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEndpointRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: endpoint-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateEndpoint
       description: Use to update an endpoint.
@@ -1064,16 +2606,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/jobs/import/{job-id}':
     get:
       operationId: GetImportJob
@@ -1359,6 +2891,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/users-messages':
+    post:
+      operationId: SendUsersMessages
+      description: Send a batch of messages to users
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SendUsersMessagesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SendUsersMessagesRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/endpoints':
     put:
       operationId: UpdateEndpointsBatch
@@ -1413,18 +2998,132 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  ADMChannelRequest:
+    type: object
+    properties:
+      ClientId:
+        $ref: '#/definitions/__string'
+        description: Client ID as gotten from Amazon
+      ClientSecret:
+        $ref: '#/definitions/__string'
+        description: Client secret as gotten from Amazon
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+    description: Amazon Device Messaging channel definition.
+  ADMChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: Platform type. Will be "ADM"
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Amazon Device Messaging channel definition.
+  ADMMessage:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: 'The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user''s device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL'
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The message body of the notification, the email body or the text message.'
+      ConsolidationKey:
+        $ref: '#/definitions/__string'
+        description: Optional. Arbitrary string used to indicate multiple messages are logically the same and that ADM is allowed to drop previously enqueued messages in favor of this one.
+      Data:
+        $ref: '#/definitions/MapOf__string'
+        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+      ExpiresAfter:
+        $ref: '#/definitions/__string'
+        description: Optional. Number of seconds ADM should retain the message if the device is offline
+      IconReference:
+        $ref: '#/definitions/__string'
+        description: The icon image name of the asset saved in your application.
+      ImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used as the large icon to the notification content view.
+      ImageUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used in the push notification.
+      MD5:
+        $ref: '#/definitions/__string'
+        description: Optional. Base-64-encoded MD5 checksum of the data parameter. Used to verify data integrity
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
+      SilentPush:
+        $ref: '#/definitions/__boolean'
+        description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+      SmallImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
+      Sound:
+        $ref: '#/definitions/__string'
+        description: 'Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/'
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+      Title:
+        $ref: '#/definitions/__string'
+        description: The message title that displays above the message on the user's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
+    description: ADM Message.
   APNSChannelRequest:
     type: object
     properties:
+      BundleId:
+        $ref: '#/definitions/__string'
+        description: The bundle id used for APNs Tokens.
       Certificate:
         $ref: '#/definitions/__string'
         description: The distribution certificate from Apple.
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
       PrivateKey:
         $ref: '#/definitions/__string'
         description: The certificate private key.
+      TeamId:
+        $ref: '#/definitions/__string'
+        description: The team id used for APNs Tokens.
+      TokenKey:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+      TokenKeyId:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
     description: Apple Push Notification Service channel definition.
   APNSChannelResponse:
     type: object
@@ -1435,9 +3134,18 @@ definitions:
       CreationDate:
         $ref: '#/definitions/__string'
         description: When was this segment created
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      HasTokenKey:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a token key for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: Channel ID. Not used. Present only for backwards compatibility.
@@ -1472,12 +3180,21 @@ definitions:
       Category:
         $ref: '#/definitions/__string'
         description: Provide this key with a string value that represents the notification's type. This value corresponds to the value in the identifier property of one of your app's registered categories.
+      CollapseId:
+        $ref: '#/definitions/__string'
+        description: Multiple notifications with the same collapse identifier are displayed to the user as a single notification. The value of this key must not exceed 64 bytes.
       Data:
         $ref: '#/definitions/MapOf__string'
         description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
       MediaUrl:
         $ref: '#/definitions/__string'
         description: The URL that points to a video used in the push notification.
+      PreferredAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: 'The preferred authentication method, either "CERTIFICATE" or "TOKEN"'
+      Priority:
+        $ref: '#/definitions/__string'
+        description: Is this a transaction priority message or lower priority.
       RawContent:
         $ref: '#/definitions/__string'
         description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
@@ -1493,6 +3210,9 @@ definitions:
       ThreadId:
         $ref: '#/definitions/__string'
         description: 'Provide this key with a string value that represents the app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together.'
+      TimeToLive:
+        $ref: '#/definitions/__integer'
+        description: 'This parameter specifies how long (in seconds) the message should be kept if APNS is unable to deliver the notification the first time. If the value is 0, APNS treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to APNS'
       Title:
         $ref: '#/definitions/__string'
         description: The message title that displays above the message on the user's device.
@@ -1503,15 +3223,30 @@ definitions:
   APNSSandboxChannelRequest:
     type: object
     properties:
+      BundleId:
+        $ref: '#/definitions/__string'
+        description: The bundle id used for APNs Tokens.
       Certificate:
         $ref: '#/definitions/__string'
         description: The distribution certificate from Apple.
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
       PrivateKey:
         $ref: '#/definitions/__string'
         description: The certificate private key.
+      TeamId:
+        $ref: '#/definitions/__string'
+        description: The team id used for APNs Tokens.
+      TokenKey:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+      TokenKeyId:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
     description: Apple Development Push Notification Service channel definition.
   APNSSandboxChannelResponse:
     type: object
@@ -1522,9 +3257,18 @@ definitions:
       CreationDate:
         $ref: '#/definitions/__string'
         description: When was this segment created
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      HasTokenKey:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a token key for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -1544,6 +3288,142 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Apple Development Push Notification Service channel definition.
+  APNSVoipChannelRequest:
+    type: object
+    properties:
+      BundleId:
+        $ref: '#/definitions/__string'
+        description: The bundle id used for APNs Tokens.
+      Certificate:
+        $ref: '#/definitions/__string'
+        description: The distribution certificate from Apple.
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      PrivateKey:
+        $ref: '#/definitions/__string'
+        description: The certificate private key.
+      TeamId:
+        $ref: '#/definitions/__string'
+        description: The team id used for APNs Tokens.
+      TokenKey:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+      TokenKeyId:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+    description: Apple VoIP Push Notification Service channel definition.
+  APNSVoipChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      HasTokenKey:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a token key for authentication.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who made the last change
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be APNS.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Apple VoIP Push Notification Service channel definition.
+  APNSVoipSandboxChannelRequest:
+    type: object
+    properties:
+      BundleId:
+        $ref: '#/definitions/__string'
+        description: The bundle id used for APNs Tokens.
+      Certificate:
+        $ref: '#/definitions/__string'
+        description: The distribution certificate from Apple.
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      PrivateKey:
+        $ref: '#/definitions/__string'
+        description: The certificate private key.
+      TeamId:
+        $ref: '#/definitions/__string'
+        description: The team id used for APNs Tokens.
+      TokenKey:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+      TokenKeyId:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+    description: Apple VoIP Developer Push Notification Service channel definition.
+  APNSVoipSandboxChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      HasTokenKey:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a token key for authentication.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who made the last change
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be APNS.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Apple VoIP Developer Push Notification Service channel definition.
   Action:
     type: string
     enum:
@@ -1695,6 +3575,99 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
     description: Simple message object.
+  BaiduChannelRequest:
+    type: object
+    properties:
+      ApiKey:
+        $ref: '#/definitions/__string'
+        description: Platform credential API key from Baidu.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      SecretKey:
+        $ref: '#/definitions/__string'
+        description: Platform credential Secret key from Baidu.
+    description: Baidu Cloud Push credentials
+  BaiduChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      Credential:
+        $ref: '#/definitions/__string'
+        description: The Baidu API key from Baidu.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who made the last change
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be BAIDU
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Baidu Cloud Messaging channel definition
+  BaiduMessage:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: 'The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user''s device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL'
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The message body of the notification, the email body or the text message.'
+      Data:
+        $ref: '#/definitions/MapOf__string'
+        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+      IconReference:
+        $ref: '#/definitions/__string'
+        description: The icon image name of the asset saved in your application.
+      ImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used as the large icon to the notification content view.
+      ImageUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used in the push notification.
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
+      SilentPush:
+        $ref: '#/definitions/__boolean'
+        description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+      SmallImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
+      Sound:
+        $ref: '#/definitions/__string'
+        description: 'Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/'
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+      Title:
+        $ref: '#/definitions/__string'
+        description: The message title that displays above the message on the user's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
+    description: Baidu Message.
   CampaignEmailMessage:
     type: object
     properties:
@@ -1717,6 +3690,12 @@ definitions:
       Daily:
         $ref: '#/definitions/__integer'
         description: The maximum number of messages that the campaign can send daily.
+      MaximumDuration:
+        $ref: '#/definitions/__integer'
+        description: The maximum duration of a campaign from the scheduled start. Must be a minimum of 60 seconds.
+      MessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: The maximum number of messages per second that the campaign will send. This is a best effort maximum cap and can go as high as 20000 and as low as 50
       Total:
         $ref: '#/definitions/__integer'
         description: The maximum total number of messages that the campaign can send.
@@ -1832,9 +3811,12 @@ definitions:
       - GCM
       - APNS
       - APNS_SANDBOX
+      - APNS_VOIP
+      - APNS_VOIP_SANDBOX
       - ADM
       - SMS
       - EMAIL
+      - BAIDU
   CreateAppRequest:
     type: object
     required:
@@ -1933,6 +3915,16 @@ definitions:
         $ref: '#/definitions/__string'
         description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
     description: Default Push Notification Message.
+  DeleteAdmChannelRequest:
+    type: object
+    properties: {}
+  DeleteAdmChannelResponse:
+    type: object
+    required:
+      - ADMChannelResponse
+    properties:
+      ADMChannelResponse:
+        $ref: '#/definitions/ADMChannelResponse'
   DeleteApnsChannelRequest:
     type: object
     properties: {}
@@ -1953,6 +3945,26 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
+  DeleteApnsVoipChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  DeleteApnsVoipSandboxChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
   DeleteAppRequest:
     type: object
     properties: {}
@@ -1963,6 +3975,16 @@ definitions:
     properties:
       ApplicationResponse:
         $ref: '#/definitions/ApplicationResponse'
+  DeleteBaiduChannelRequest:
+    type: object
+    properties: {}
+  DeleteBaiduChannelResponse:
+    type: object
+    required:
+      - BaiduChannelResponse
+    properties:
+      BaiduChannelResponse:
+        $ref: '#/definitions/BaiduChannelResponse'
   DeleteCampaignRequest:
     type: object
     properties: {}
@@ -1994,7 +4016,6 @@ definitions:
     properties:
       EventStream:
         $ref: '#/definitions/EventStream'
-    description: DeleteEventStream Response
   DeleteGcmChannelRequest:
     type: object
     properties: {}
@@ -2032,6 +4053,9 @@ definitions:
       - THROTTLED
       - TEMPORARY_FAILURE
       - PERMANENT_FAILURE
+      - UNKNOWN_FAILURE
+      - OPT_OUT
+      - DUPLICATE
   DimensionType:
     type: string
     enum:
@@ -2040,9 +4064,15 @@ definitions:
   DirectMessageConfiguration:
     type: object
     properties:
+      ADMMessage:
+        $ref: '#/definitions/ADMMessage'
+        description: The message to ADM channels. Overrides the default push notification message.
       APNSMessage:
         $ref: '#/definitions/APNSMessage'
         description: The message to APNS channels. Overrides the default push notification message.
+      BaiduMessage:
+        $ref: '#/definitions/BaiduMessage'
+        description: The message to Baidu GCM channels. Overrides the default push notification message.
       DefaultMessage:
         $ref: '#/definitions/DefaultMessage'
         description: The default message for all channels.
@@ -2094,6 +4124,9 @@ definitions:
       FromAddress:
         $ref: '#/definitions/__string'
         description: The email address used to send emails from.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -2225,6 +4258,25 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The region of the endpoint location. For example, corresponds to a state in US.'
     description: Endpoint location data
+  EndpointMessageResult:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/__string'
+        description: Address that endpoint message was delivered to.
+      DeliveryStatus:
+        $ref: '#/definitions/DeliveryStatus'
+        description: Delivery status of message.
+      StatusCode:
+        $ref: '#/definitions/__integer'
+        description: Downstream service status code.
+      StatusMessage:
+        $ref: '#/definitions/__string'
+        description: Status message for message delivery.
+      UpdatedToken:
+        $ref: '#/definitions/__string'
+        description: If token was updated as part of delivery. (This is GCM Specific)
+    description: The result from sending a message to an endpoint.
   EndpointRequest:
     type: object
     properties:
@@ -2326,10 +4378,26 @@ definitions:
       User:
         $ref: '#/definitions/EndpointUser'
         description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
-      ShardId:
-        $ref: '#/definitions/__string'
-        description: The ShardId of endpoint
     description: Endpoint response
+  EndpointSendConfiguration:
+    type: object
+    properties:
+      BodyOverride:
+        $ref: '#/definitions/__string'
+        description: Body override. If specified will override default body.
+      Context:
+        $ref: '#/definitions/MapOf__string'
+        description: A map of custom attributes to attributes to be attached to the message for this address. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: A map of substitution values for the message to be merged with the DefaultMessage's substitutions. Substitutions on this map take precedence over the all other substitutions.
+      TitleOverride:
+        $ref: '#/definitions/__string'
+        description: Title override. If specified will override default title if applicable.
+    description: Endpoint send configuration.
   EndpointUser:
     type: object
     properties:
@@ -2413,6 +4481,9 @@ definitions:
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: Channel ID. Not used. Present only for backwards compatibility.
@@ -2456,6 +4527,9 @@ definitions:
       ImageUrl:
         $ref: '#/definitions/__string'
         description: The URL that points to an image used in the push notification.
+      Priority:
+        $ref: '#/definitions/__string'
+        description: Is this a transaction priority message or lower priority.
       RawContent:
         $ref: '#/definitions/__string'
         description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
@@ -2474,6 +4548,9 @@ definitions:
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
         description: Default message substitutions. Can be overridden by individual address substitutions.
+      TimeToLive:
+        $ref: '#/definitions/__integer'
+        description: 'This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks, and the default value is 4 weeks.'
       Title:
         $ref: '#/definitions/__string'
         description: The message title that displays above the message on the user's device.
@@ -2481,6 +4558,16 @@ definitions:
         $ref: '#/definitions/__string'
         description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
     description: GCM Message.
+  GetAdmChannelRequest:
+    type: object
+    properties: {}
+  GetAdmChannelResponse:
+    type: object
+    required:
+      - ADMChannelResponse
+    properties:
+      ADMChannelResponse:
+        $ref: '#/definitions/ADMChannelResponse'
   GetApnsChannelRequest:
     type: object
     properties: {}
@@ -2501,6 +4588,26 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
+  GetApnsVoipChannelRequest:
+    type: object
+    properties: {}
+  GetApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  GetApnsVoipSandboxChannelRequest:
+    type: object
+    properties: {}
+  GetApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
   GetAppRequest:
     type: object
     properties: {}
@@ -2531,6 +4638,16 @@ definitions:
     properties:
       ApplicationsResponse:
         $ref: '#/definitions/ApplicationsResponse'
+  GetBaiduChannelRequest:
+    type: object
+    properties: {}
+  GetBaiduChannelResponse:
+    type: object
+    required:
+      - BaiduChannelResponse
+    properties:
+      BaiduChannelResponse:
+        $ref: '#/definitions/BaiduChannelResponse'
   GetCampaignActivitiesRequest:
     type: object
     properties: {}
@@ -2604,7 +4721,7 @@ definitions:
   GetEventStreamRequest:
     type: object
     properties: {}
-    description: GetEventStream Request
+    description: GetEventStreamRequest
   GetEventStreamResponse:
     type: object
     required:
@@ -2612,7 +4729,6 @@ definitions:
     properties:
       EventStream:
         $ref: '#/definitions/EventStream'
-    description: GetEventStream Response
   GetGcmChannelRequest:
     type: object
     properties: {}
@@ -2899,6 +5015,24 @@ definitions:
           $ref: '#/definitions/__string'
         value:
           $ref: '#/definitions/AttributeDimension'
+  MapOfEndpointMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/EndpointMessageResult'
+  MapOfEndpointSendConfiguration:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/EndpointSendConfiguration'
   MapOfListOf__string:
     type: array
     items:
@@ -2908,6 +5042,15 @@ definitions:
           $ref: '#/definitions/__string'
         value:
           $ref: '#/definitions/ListOf__string'
+  MapOfMapOfEndpointMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/MapOfEndpointMessageResult'
   MapOfMessageResult:
     type: array
     items:
@@ -3002,9 +5145,15 @@ definitions:
   MessageConfiguration:
     type: object
     properties:
+      ADMMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to ADM channels. Overrides the default message.
       APNSMessage:
         $ref: '#/definitions/Message'
         description: The message that the campaign delivers to APNS channels. Overrides the default message.
+      BaiduMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to Baidu channels. Overrides the default message.
       DefaultMessage:
         $ref: '#/definitions/Message'
         description: The default message for all channels.
@@ -3027,6 +5176,9 @@ definitions:
       Context:
         $ref: '#/definitions/MapOf__string'
         description: A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+      Endpoints:
+        $ref: '#/definitions/MapOfEndpointSendConfiguration'
+        description: 'A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value.'
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
         description: Message configuration.
@@ -3037,6 +5189,9 @@ definitions:
       ApplicationId:
         $ref: '#/definitions/__string'
         description: Application id of the message.
+      EndpointResult:
+        $ref: '#/definitions/MapOfEndpointMessageResult'
+        description: 'A map containing a multi part response for each address, with the endpointId as the key and the result as the value.'
       RequestId:
         $ref: '#/definitions/__string'
         description: Original request Id for which this message was delivered.
@@ -3093,7 +5248,6 @@ definitions:
       WriteEventStream:
         $ref: '#/definitions/WriteEventStream'
         description: EventStream to write.
-    description: PutEventStream Request
   PutEventStreamResponse:
     type: object
     required:
@@ -3140,6 +5294,9 @@ definitions:
       SenderId:
         $ref: '#/definitions/__string'
         description: Sender identifier of your messages.
+      ShortCode:
+        $ref: '#/definitions/__string'
+        description: ShortCode registered with phone provider.
     description: SMS Channel Request
   SMSChannelResponse:
     type: object
@@ -3153,6 +5310,9 @@ definitions:
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -3395,6 +5555,46 @@ definitions:
     properties:
       MessageResponse:
         $ref: '#/definitions/MessageResponse'
+  SendUsersMessageRequest:
+    type: object
+    properties:
+      Context:
+        $ref: '#/definitions/MapOf__string'
+        description: A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+      MessageConfiguration:
+        $ref: '#/definitions/DirectMessageConfiguration'
+        description: Message configuration.
+      Users:
+        $ref: '#/definitions/MapOfEndpointSendConfiguration'
+        description: 'A map of destination endpoints, with the EndpointId as the key Endpoint Message Configuration as the value.'
+    description: Send message request.
+  SendUsersMessageResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id of the message.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: Original request Id for which this message was delivered.
+      Result:
+        $ref: '#/definitions/MapOfMapOfEndpointMessageResult'
+        description: A map containing of UserId to Map of EndpointId to Endpoint Message Result.
+    description: User send message response.
+  SendUsersMessagesRequest:
+    type: object
+    required:
+      - SendUsersMessageRequest
+    properties:
+      SendUsersMessageRequest:
+        $ref: '#/definitions/SendUsersMessageRequest'
+  SendUsersMessagesResponse:
+    type: object
+    required:
+      - SendUsersMessageResponse
+    properties:
+      SendUsersMessageResponse:
+        $ref: '#/definitions/SendUsersMessageResponse'
   SetDimension:
     type: object
     properties:
@@ -3443,6 +5643,20 @@ definitions:
         $ref: '#/definitions/__string'
         description: The custom name of a variation of the campaign used for A/B testing.
     description: Treatment resource
+  UpdateAdmChannelRequest:
+    type: object
+    required:
+      - ADMChannelRequest
+    properties:
+      ADMChannelRequest:
+        $ref: '#/definitions/ADMChannelRequest'
+  UpdateAdmChannelResponse:
+    type: object
+    required:
+      - ADMChannelResponse
+    properties:
+      ADMChannelResponse:
+        $ref: '#/definitions/ADMChannelResponse'
   UpdateApnsChannelRequest:
     type: object
     required:
@@ -3471,6 +5685,34 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
+  UpdateApnsVoipChannelRequest:
+    type: object
+    required:
+      - APNSVoipChannelRequest
+    properties:
+      APNSVoipChannelRequest:
+        $ref: '#/definitions/APNSVoipChannelRequest'
+  UpdateApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  UpdateApnsVoipSandboxChannelRequest:
+    type: object
+    required:
+      - APNSVoipSandboxChannelRequest
+    properties:
+      APNSVoipSandboxChannelRequest:
+        $ref: '#/definitions/APNSVoipSandboxChannelRequest'
+  UpdateApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
   UpdateApplicationSettingsRequest:
     type: object
     required:
@@ -3485,6 +5727,20 @@ definitions:
     properties:
       ApplicationSettingsResource:
         $ref: '#/definitions/ApplicationSettingsResource'
+  UpdateBaiduChannelRequest:
+    type: object
+    required:
+      - BaiduChannelRequest
+    properties:
+      BaiduChannelRequest:
+        $ref: '#/definitions/BaiduChannelRequest'
+  UpdateBaiduChannelResponse:
+    type: object
+    required:
+      - BaiduChannelResponse
+    properties:
+      BaiduChannelResponse:
+        $ref: '#/definitions/BaiduChannelResponse'
   UpdateCampaignRequest:
     type: object
     required:
@@ -3642,9 +5898,6 @@ definitions:
           The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
            Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
            Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
-      ExternalId:
-        $ref: '#/definitions/__string'
-        description: The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
       RoleArn:
         $ref: '#/definitions/__string'
         description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.

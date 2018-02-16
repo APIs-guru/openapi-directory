@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/blogger/v2/rest'
       version: v1
@@ -285,11 +285,6 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: ID of the post to fetch posts from.
-          in: path
-          name: postId
-          required: true
-          type: string
         - description: Whether the body content of the comments is included.
           in: query
           name: fetchBodies
@@ -301,6 +296,11 @@ paths:
         - description: Continuation token if request is paged.
           in: query
           name: pageToken
+          type: string
+        - description: ID of the post to fetch posts from.
+          in: path
+          name: postId
+          required: true
           type: string
         - description: 'Earliest date of comment to fetch, a date-time with RFC 3339 formatting.'
           in: query
@@ -336,14 +336,14 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: ID of the post to fetch posts from.
-          in: path
-          name: postId
-          required: true
-          type: string
         - description: The ID of the comment to get.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: ID of the post to fetch posts from.
+          in: path
+          name: postId
           required: true
           type: string
       responses:

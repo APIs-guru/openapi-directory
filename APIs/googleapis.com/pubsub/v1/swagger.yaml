@@ -25,7 +25,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://pubsub.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -133,19 +133,51 @@ tags:
 paths:
   '/v1/{name}':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Updates an existing snapshot. Note that certain properties of a
+        snapshot are not modifiable.
+      operationId: pubsub.projects.snapshots.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateSnapshotRequest'
+        - description: The name of the snapshot.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Snapshot'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
     put:
       description: Creates the given topic with the given name.
       operationId: pubsub.projects.topics.create
@@ -182,11 +214,76 @@ paths:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
+  '/v1/{project}/snapshots':
+    get:
+      description: Lists the existing snapshots.
+      operationId: pubsub.projects.snapshots.list
+      parameters:
+        - description: Maximum number of snapshots to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The value returned by the last `ListSnapshotsResponse`; indicates that this
+            is a continuation of a prior `ListSnapshots` call, and that the system
+            should return the next page of data.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The name of the cloud project that snapshots belong to.
+            Format is `projects/{project}`.
+          in: path
+          name: project
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListSnapshotsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{project}/subscriptions':
     get:
       description: Lists matching subscriptions.
       operationId: pubsub.projects.subscriptions.list
       parameters:
+        - description: Maximum number of subscriptions to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The value returned by the last `ListSubscriptionsResponse`; indicates that
+            this is a continuation of a prior `ListSubscriptions` call, and that the
+            system should return the next page of data.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             The name of the cloud project that subscriptions belong to.
             Format is `projects/{project}`.
@@ -195,17 +292,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            The value returned by the last `ListSubscriptionsResponse`; indicates that
-            this is a continuation of a prior `ListSubscriptions` call, and that the
-            system should return the next page of data.
-          in: query
-          name: pageToken
-          type: string
-        - description: Maximum number of subscriptions to return.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -223,24 +309,35 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{project}/topics':
     get:
       description: Lists matching topics.
       operationId: pubsub.projects.topics.list
       parameters:
+        - description: Maximum number of topics to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The value returned by the last `ListTopicsResponse`; indicates that this is
+            a continuation of a prior `ListTopics` call, and that the system should
+            return the next page of data.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             The name of the cloud project that topics belong to.
             Format is `projects/{project}`.
@@ -249,17 +346,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            The value returned by the last `ListTopicsResponse`; indicates that this is
-            a continuation of a prior `ListTopics` call, and that the system should
-            return the next page of data.
-          in: query
-          name: pageToken
-          type: string
-        - description: Maximum number of topics to return.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -277,19 +363,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{resource}:getIamPolicy':
     get:
       description: |-
@@ -323,40 +409,44 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
       operationId: pubsub.projects.topics.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
             See the operation documentation for the appropriate value for this field.
@@ -365,10 +455,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -387,19 +473,19 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
@@ -411,6 +497,10 @@ paths:
         may "fail open" without warning.
       operationId: pubsub.projects.topics.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
             See the operation documentation for the appropriate value for this field.
@@ -419,10 +509,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestIamPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -439,6 +525,81 @@ paths:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
+  '/v1/{snapshot}':
+    delete:
+      description: |-
+        Removes an existing snapshot. All messages retained in the snapshot
+        are immediately dropped. After a snapshot is deleted, a new one may be
+        created with the same name, but the new one has no association with the old
+        snapshot or its subscription, unless the same subscription is specified.
+      operationId: pubsub.projects.snapshots.delete
+      parameters:
+        - description: |-
+            The name of the snapshot to delete.
+            Format is `projects/{project}/snapshots/{snap}`.
+          in: path
+          name: snapshot
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
+    get:
+      description: Gets the configuration details of a snapshot.
+      operationId: pubsub.projects.snapshots.get
+      parameters:
+        - description: |-
+            The name of the snapshot to get.
+            Format is `projects/{project}/snapshots/{snap}`.
+          in: path
+          name: snapshot
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Snapshot'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{subscription}':
     delete:
       description: |-
@@ -502,34 +663,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{subscription}:acknowledge':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Acknowledges the messages associated with the `ack_ids` in the
@@ -541,6 +702,10 @@ paths:
         than once will not result in an error.
       operationId: pubsub.projects.subscriptions.acknowledge
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AcknowledgeRequest'
         - description: |-
             The subscription whose message is being acknowledged.
             Format is `projects/{project}/subscriptions/{sub}`.
@@ -549,10 +714,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AcknowledgeRequest'
       responses:
         '200':
           description: Successful response
@@ -571,19 +732,19 @@ paths:
         - projects
   '/v1/{subscription}:modifyAckDeadline':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Modifies the ack deadline for a specific message. This method is useful
@@ -593,6 +754,10 @@ paths:
         subscription-level `ackDeadlineSeconds` used for subsequent messages.
       operationId: pubsub.projects.subscriptions.modifyAckDeadline
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ModifyAckDeadlineRequest'
         - description: |-
             The name of the subscription.
             Format is `projects/{project}/subscriptions/{sub}`.
@@ -601,10 +766,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ModifyAckDeadlineRequest'
       responses:
         '200':
           description: Successful response
@@ -623,19 +784,19 @@ paths:
         - projects
   '/v1/{subscription}:modifyPushConfig':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Modifies the `PushConfig` for a specified subscription.
@@ -646,6 +807,10 @@ paths:
         continuously through the call regardless of changes to the `PushConfig`.
       operationId: pubsub.projects.subscriptions.modifyPushConfig
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ModifyPushConfigRequest'
         - description: |-
             The name of the subscription.
             Format is `projects/{project}/subscriptions/{sub}`.
@@ -654,10 +819,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ModifyPushConfigRequest'
       responses:
         '200':
           description: Successful response
@@ -676,19 +837,19 @@ paths:
         - projects
   '/v1/{subscription}:pull':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Pulls messages from the server. Returns an empty list if there are no
@@ -697,6 +858,10 @@ paths:
         subscription.
       operationId: pubsub.projects.subscriptions.pull
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PullRequest'
         - description: |-
             The subscription from which messages should be pulled.
             Format is `projects/{project}/subscriptions/{sub}`.
@@ -705,15 +870,58 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PullRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/PullResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
+  '/v1/{subscription}:seek':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Seeks an existing subscription to a point in time or to a given snapshot,
+        whichever is provided in the request.
+      operationId: pubsub.projects.subscriptions.seek
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SeekRequest'
+        - description: The subscription to affect.
+          in: path
+          name: subscription
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SeekResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -788,24 +996,89 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{topic}/snapshots':
+    get:
+      description: Lists the names of the snapshots on this topic.
+      operationId: pubsub.projects.topics.snapshots.list
+      parameters:
+        - description: Maximum number of snapshot names to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The value returned by the last `ListTopicSnapshotsResponse`; indicates
+            that this is a continuation of a prior `ListTopicSnapshots` call, and
+            that the system should return the next page of data.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The name of the topic that snapshots are attached to.
+            Format is `projects/{project}/topics/{topic}`.
+          in: path
+          name: topic
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTopicSnapshotsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{topic}/subscriptions':
     get:
-      description: Lists the name of the subscriptions for this topic.
+      description: Lists the names of the subscriptions on this topic.
       operationId: pubsub.projects.topics.subscriptions.list
       parameters:
+        - description: Maximum number of subscription names to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The value returned by the last `ListTopicSubscriptionsResponse`; indicates
+            that this is a continuation of a prior `ListTopicSubscriptions` call, and
+            that the system should return the next page of data.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             The name of the topic that subscriptions are attached to.
             Format is `projects/{project}/topics/{topic}`.
@@ -814,17 +1087,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            The value returned by the last `ListTopicSubscriptionsResponse`; indicates
-            that this is a continuation of a prior `ListTopicSubscriptions` call, and
-            that the system should return the next page of data.
-          in: query
-          name: pageToken
-          type: string
-        - description: Maximum number of subscription names to return.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -842,34 +1104,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{topic}:publish':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
@@ -877,6 +1139,10 @@ paths:
          either a non-empty data field, or at least one attribute.
       operationId: pubsub.projects.topics.publish
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublishRequest'
         - description: |-
             The messages in the request will be published on this topic.
             Format is `projects/{project}/topics/{topic}`.
@@ -885,10 +1151,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PublishRequest'
       responses:
         '200':
           description: Successful response
@@ -955,6 +1217,22 @@ definitions:
           Required
         type: string
     type: object
+  CreateSnapshotRequest:
+    description: Request for the `CreateSnapshot` method.
+    properties:
+      subscription:
+        description: |-
+          The subscription whose backlog the snapshot retains.
+          Specifically, the created snapshot is guaranteed to retain:
+           (a) The existing backlog on the subscription. More precisely, this is
+               defined as the messages in the subscription's backlog that are
+               unacknowledged upon the successful completion of the
+               `CreateSnapshot` request; as well as:
+           (b) Any messages published to the subscription's topic following the
+               successful completion of the CreateSnapshot request.
+          Format is `projects/{project}/subscriptions/{sub}`.
+        type: string
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -967,6 +1245,20 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  ListSnapshotsResponse:
+    description: Response for the `ListSnapshots` method.
+    properties:
+      nextPageToken:
+        description: |-
+          If not empty, indicates that there may be more snapshot that match the
+          request; this value should be passed in a new `ListSnapshotsRequest`.
+        type: string
+      snapshots:
+        description: The resulting snapshots.
+        items:
+          $ref: '#/definitions/Snapshot'
+        type: array
     type: object
   ListSubscriptionsResponse:
     description: Response for the `ListSubscriptions` method.
@@ -981,6 +1273,21 @@ definitions:
         description: The subscriptions that match the request.
         items:
           $ref: '#/definitions/Subscription'
+        type: array
+    type: object
+  ListTopicSnapshotsResponse:
+    description: Response for the `ListTopicSnapshots` method.
+    properties:
+      nextPageToken:
+        description: |-
+          If not empty, indicates that there may be more snapshots that match
+          the request; this value should be passed in a new
+          `ListTopicSnapshotsRequest` to get more snapshots.
+        type: string
+      snapshots:
+        description: The names of the snapshots that match the request.
+        items:
+          type: string
         type: array
     type: object
   ListTopicSubscriptionsResponse:
@@ -1043,7 +1350,7 @@ definitions:
           An empty `pushConfig` indicates that the Pub/Sub system should
           stop pushing messages from the given subscription and allow
           messages to be pulled and acknowledged - effectively pausing
-          the subscription if `Pull` is not called.
+          the subscription if `Pull` or `StreamingPull` is not called.
     type: object
   Policy:
     description: |-
@@ -1077,7 +1384,7 @@ definitions:
           }
 
       For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       bindings:
         description: |-
@@ -1101,7 +1408,7 @@ definitions:
         format: byte
         type: string
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object
@@ -1232,6 +1539,34 @@ definitions:
         $ref: '#/definitions/PubsubMessage'
         description: The message.
     type: object
+  SeekRequest:
+    description: Request for the `Seek` method.
+    properties:
+      snapshot:
+        description: |-
+          The snapshot to seek to. The snapshot's topic must be the same as that of
+          the provided subscription.
+          Format is `projects/{project}/snapshots/{snap}`.
+        type: string
+      time:
+        description: |-
+          The time to seek to.
+          Messages retained in the subscription that were published before this
+          time are marked as acknowledged, and messages retained in the
+          subscription that were published after this time are marked as
+          unacknowledged. Note that this operation affects only those messages
+          retained in the subscription (configured by the combination of
+          `message_retention_duration` and `retain_acked_messages`). For example,
+          if `time` corresponds to a point before the message retention
+          window (or to a point before the system's notion of the subscription
+          creation time), only retained messages will be marked as unacknowledged,
+          and already-expunged messages will not be restored.
+        format: google-datetime
+        type: string
+    type: object
+  SeekResponse:
+    properties: {}
+    type: object
   SetIamPolicyRequest:
     description: Request message for `SetIamPolicy` method.
     properties:
@@ -1242,6 +1577,30 @@ definitions:
           the policy is limited to a few 10s of KB. An empty policy is a
           valid policy but certain Cloud Platform services (such as Projects)
           might reject them.
+    type: object
+  Snapshot:
+    description: A snapshot resource.
+    properties:
+      expireTime:
+        description: |-
+          The snapshot is guaranteed to exist up until this time.
+          A newly-created snapshot expires no later than 7 days from the time of its
+          creation. Its exact lifetime is determined at creation by the existing
+          backlog in the source subscription. Specifically, the lifetime of the
+          snapshot is `7 days - (age of oldest unacked message in the subscription)`.
+          For example, consider a subscription whose oldest unacked message is 3 days
+          old. If a snapshot is created from this subscription, the snapshot -- which
+          will always capture this 3-day-old backlog as long as the snapshot
+          exists -- will expire in 4 days. The service will refuse to create a
+          snapshot that would expire in less than 1 hour after creation.
+        format: google-datetime
+        type: string
+      name:
+        description: The name of the snapshot.
+        type: string
+      topic:
+        description: The name of the topic from which this snapshot is retaining messages.
+        type: string
     type: object
   Subscription:
     description: A subscription resource.
@@ -1257,7 +1616,8 @@ definitions:
           For pull subscriptions, this value is used as the initial value for the ack
           deadline. To override this value for a given message, call
           `ModifyAckDeadline` with the corresponding `ack_id` if using
-          pull.
+          non-streaming pull or send the `ack_id` in a
+          `StreamingModifyAckDeadlineRequest` if using streaming pull.
           The minimum custom deadline you can specify is 10 seconds.
           The maximum custom deadline you can specify is 600 seconds (10 minutes).
           If this parameter is 0, a default value of 10 seconds is used.
@@ -1269,6 +1629,16 @@ definitions:
           system will eventually redeliver the message.
         format: int32
         type: integer
+      messageRetentionDuration:
+        description: |-
+          How long to retain unacknowledged messages in the subscription's backlog,
+          from the moment a message is published.
+          If `retain_acked_messages` is true, then this also configures the retention
+          of acknowledged messages, and thus configures how far back in time a `Seek`
+          can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
+          minutes.
+        format: google-duration
+        type: string
       name:
         description: |-
           The name of the subscription. It must have the format
@@ -1284,6 +1654,13 @@ definitions:
           If push delivery is used with this subscription, this field is
           used to configure it. An empty `pushConfig` signifies that the subscriber
           will pull and ack messages using API methods.
+      retainAckedMessages:
+        description: |-
+          Indicates whether to retain acknowledged messages. If true, then
+          messages are not expunged from the subscription's backlog, even if they are
+          acknowledged, until they fall out of the `message_retention_duration`
+          window.
+        type: boolean
       topic:
         description: |-
           The name of the topic from which this subscription is receiving messages.
@@ -1327,5 +1704,31 @@ definitions:
           underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
           signs (`%`). It must be between 3 and 255 characters in length, and it
           must not start with `"goog"`.
+        type: string
+    type: object
+  UpdateSnapshotRequest:
+    description: Request for the UpdateSnapshot method.
+    properties:
+      snapshot:
+        $ref: '#/definitions/Snapshot'
+        description: The updated snpashot object.
+      updateMask:
+        description: |-
+          Indicates which fields in the provided snapshot to update.
+          Must be specified and non-empty.
+        format: google-fieldmask
+        type: string
+    type: object
+  UpdateSubscriptionRequest:
+    description: Request for the UpdateSubscription method.
+    properties:
+      subscription:
+        $ref: '#/definitions/Subscription'
+        description: The updated subscription object.
+      updateMask:
+        description: |-
+          Indicates which fields in the provided subscription to update.
+          Must be specified and non-empty.
+        format: google-fieldmask
         type: string
     type: object

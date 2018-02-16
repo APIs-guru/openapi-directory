@@ -19,6 +19,32 @@ The API should meet the following critera:
 
 The easiest way to request an API to be added is to use the [web form](https://apis.guru/add-api/).
 
+### Adding an API via a Pull-Request
+
+Clone the repo locally, if you haven't already done so, and run the following
+
+* create a new branch for the PR
+* change into the APIs directory
+* run `../scripts/collection add -c {category} [-l {logo-url}|-t {twitter handle}] {format} {url-to-definition}`
+
+Where `{category}` is one of the values from [/resources/categories.yaml](/resources/categories.yaml), and `{format}` is one of:
+
+  * `swagger_2`
+  * `swagger_1`
+  * `api_blueprint`
+  * `raml`
+  * `io_docs`
+  * `google`
+  * `wadl`
+
+If your API definition is unofficial, also specify the `--unofficial` flag.
+
+If there are no validation errors:
+
+* commit your change
+* push your change
+* create a Pull Request
+
 ## Amending an API definition
 
 ### Adding information
@@ -43,7 +69,7 @@ Please issue a Pull Request, it is not necessary to raise an Issue as well.
 
 First please see if you can make your fix upstream with the owner of the API definition, this benefits everyone and is less work than maintaining patches.
 
-Check the `info.contact` section of the API definition or the `x-origin` to see if there is an email contact, or a GitHub repository you can contribute to.
+Check the `info.contact` section of the API definition or the `x-origin` to see if there is an email or Twitter contact, or a GitHub repository you can contribute to.
 
 #### Do not amend swagger.yaml files directly
 
@@ -67,7 +93,9 @@ Issue the command `node ../scripts/collection fixup {path/to/swagger.yaml}`
 
 Edit the `swagger.yaml` file and save.
 
-Issue the command `node ../scripts/collection validate {directory-name}` to ensure the definition is still valid.
+Issue the command `node ../scripts/collection update {directory-name}` to reprocess the definition from source.
+
+As long as there are no errors...
 
 Commit your change with an informative commit message, and push to the new branch on your fork.
 

@@ -463,7 +463,152 @@ paths:
               </Station>
   /StationParking:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns parking information at a station based on a given StationCode. Omit\r\nthe StationCode to return parking information for all stations.</p>\r\n\r\n<p>If a station has no parking, the StationsParking element will contain no\r\nchild elements.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>StationsParking</td>\r\n\r\n<td>\r\nArray containing station parking information (<a href=\r\n\"#StationParking\">StationParking</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationParking\" name=\"StationParking\">StationParking\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Code</td>\r\n\r\n<td>Station code. Useful when returning parking information for all\r\nstations. Use this value in other rail-related APIs to retrieve\r\ndata about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Notes</td>\r\n\r\n<td>When not NULL, provides additional parking resources such as\r\nnearby lots.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>AllDayParking</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#AllDayParking\">all-day\r\nparking</a> options.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>ShortTermParking</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#ShortTermParking\">short-term\r\nparking</a> options.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"AllDayParking\" name=\"AllDayParking\">AllDayParking\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TotalCount</td>\r\n\r\n<td>Number of all-day parking spots available at a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RiderCost</td>\r\n\r\n<td>All-day cost per day for Metro riders. NULL when no all-day\r\nspots are available. For most stations, this value is identical to\r\nthe NonRiderCost.<br>\r\n<br>\r\nFor cases where the NonRiderCost is different, the lower cost per\r\nday requires a valid rail trip using a SmarTrip&reg; card\r\noriginating from a station other than the one where the patron\r\nparked. To receive this lower rate, patrons must pay for their\r\nparking with the same SmarTrip&reg; card used to enter/exit\r\nMetrorail, and must exit the parking lot within two hours of\r\nexiting Metrorail.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>NonRiderCost</td>\r\n\r\n<td>All-day cost per day for non-Metro riders. NULL when no all-day\r\nspots are available.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"ShortTermParking\" name=\r\n\"ShortTermParking\">ShortTermParking Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TotalCount</td>\r\n\r\n<td>Number of short-term parking spots available at a station\r\n(parking meters).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Notes</td>\r\n\r\n<td>Misc. information relating to short-term parking. NULL when no\r\nshort-term spots are available.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
+      description: |-
+        <h4 class="text-primary">Description</h4>
+
+        <p>Returns parking information at a station based on a given StationCode. Omit
+        the StationCode to return parking information for all stations.</p>
+
+        <p>If a station has no parking, the StationsParking element will contain no
+        child elements.</p>
+
+        <h4 class="text-primary">Response Elements</h4>
+
+        <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+        <th class="col-md-3">Element</th>
+
+        <th>Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+        <td>StationsParking</td>
+
+        <td>
+        Array containing station parking information (<a href=
+        "#StationParking">StationParking</a>).
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="StationParking" name="StationParking">StationParking
+        Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>Code</td>
+
+        <td>Station code. Useful when returning parking information for all
+        stations. Use this value in other rail-related APIs to retrieve
+        data about a station.</td>
+        </tr>
+
+        <tr>
+        <td>Notes</td>
+
+        <td>When not NULL, provides additional parking resources such as
+        nearby lots.</td>
+        </tr>
+
+        <tr>
+        <td>AllDayParking</td>
+
+        <td>
+        Structure describing <a href="#AllDayParking">all-day
+        parking</a> options.
+        </td>
+        </tr>
+
+        <tr>
+        <td>ShortTermParking</td>
+
+        <td>
+        Structure describing <a href="#ShortTermParking">short-term
+        parking</a> options.
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="AllDayParking" name="AllDayParking">AllDayParking
+        Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>TotalCount</td>
+
+        <td>Number of all-day parking spots available at a station.</td>
+        </tr>
+
+        <tr>
+        <td>RiderCost</td>
+
+        <td>All-day cost per day (weekday) for Metro riders. NULL when no all-day
+        spots are available. For most stations, this value is identical to
+        the NonRiderCost.<br>
+        <br>
+        For cases where the NonRiderCost is different, the lower cost per
+        day requires a valid rail trip using a SmarTrip&reg; card
+        originating from a station other than the one where the patron
+        parked. To receive this lower rate, patrons must pay for their
+        parking with the same SmarTrip&reg; card used to enter/exit
+        Metrorail, and must exit the parking lot within two hours of
+        exiting Metrorail.</td>
+        </tr>
+
+        <tr>
+        <td>NonRiderCost</td>
+
+        <td>All-day cost per day (weekday) for non-Metro riders. NULL when no all-day
+        spots are available.</td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="ShortTermParking" name=
+        "ShortTermParking">ShortTermParking Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>SaturdayRiderCost</td>
+
+        <td>Similar to RiderCost, except denoting Saturday prices.</td>
+        </tr>
+
+        <tr>
+        <td>SaturdayNonRiderCost</td>
+
+        <td>Similar to NonRiderCost, except denoting Saturday prices.</td>
+        </tr>
+
+        <tr>
+        <td>TotalCount</td>
+
+        <td>Number of short-term parking spots available at a station
+        (parking meters).</td>
+        </tr>
+
+        <tr>
+        <td>Notes</td>
+
+        <td>Misc. information relating to short-term parking. NULL when no
+        short-term spots are available.</td>
+        </tr>
+        </tbody>
+        </table>
       operationId: XML - Parking Information
       parameters:
         - description: Station code.  Use the Station List method to return a list of all station codes.
@@ -489,8 +634,10 @@ paths:
                           <Notes>325 spaces metered for 12-hr. max. @ $1.00 per 60 mins.</Notes>
                           <AllDayParking>
                               <TotalCount>808</TotalCount>
-                              <RiderCost>4.60</RiderCost>
-                              <NonRiderCost>4.60</NonRiderCost>
+                              <RiderCost>4.45</RiderCost>
+                              <NonRiderCost>4.45</NonRiderCost>
+                              <SaturdayRiderCost>2.00</SaturdayRiderCost>
+                              <SaturdayNonRiderCost>2.00</SaturdayNonRiderCost>
                           </AllDayParking>
                           <ShortTermParking>
                               <TotalCount>15</TotalCount>
@@ -1491,7 +1638,152 @@ paths:
               StationTogether2: ''
   /json/jStationParking:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns parking information at a station based on a given StationCode. Omit\r\nthe StationCode to return parking information for all stations.</p>\r\n\r\n<p>If a station has no parking, the StationsParking element will contain no\r\nchild elements.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>StationsParking</td>\r\n\r\n<td>\r\nArray containing station parking information (<a href=\r\n\"#StationParking\">StationParking</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationParking\" name=\"StationParking\">StationParking\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Code</td>\r\n\r\n<td>Station code. Useful when returning parking information for all\r\nstations. Use this value in other rail-related APIs to retrieve\r\ndata about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Notes</td>\r\n\r\n<td>When not NULL, provides additional parking resources such as\r\nnearby lots.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>AllDayParking</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#AllDayParking\">all-day\r\nparking</a> options.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>ShortTermParking</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#ShortTermParking\">short-term\r\nparking</a> options.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"AllDayParking\" name=\"AllDayParking\">AllDayParking\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TotalCount</td>\r\n\r\n<td>Number of all-day parking spots available at a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RiderCost</td>\r\n\r\n<td>All-day cost per day for Metro riders. NULL when no all-day\r\nspots are available. For most stations, this value is identical to\r\nthe NonRiderCost.<br>\r\n<br>\r\nFor cases where the NonRiderCost is different, the lower cost per\r\nday requires a valid rail trip using a SmarTrip&reg; card\r\noriginating from a station other than the one where the patron\r\nparked. To receive this lower rate, patrons must pay for their\r\nparking with the same SmarTrip&reg; card used to enter/exit\r\nMetrorail, and must exit the parking lot within two hours of\r\nexiting Metrorail.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>NonRiderCost</td>\r\n\r\n<td>All-day cost per day for non-Metro riders. NULL when no all-day\r\nspots are available.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"ShortTermParking\" name=\r\n\"ShortTermParking\">ShortTermParking Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TotalCount</td>\r\n\r\n<td>Number of short-term parking spots available at a station\r\n(parking meters).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Notes</td>\r\n\r\n<td>Misc. information relating to short-term parking. NULL when no\r\nshort-term spots are available.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
+      description: |-
+        <h4 class="text-primary">Description</h4>
+
+        <p>Returns parking information at a station based on a given StationCode. Omit
+        the StationCode to return parking information for all stations.</p>
+
+        <p>If a station has no parking, the StationsParking element will contain no
+        child elements.</p>
+
+        <h4 class="text-primary">Response Elements</h4>
+
+        <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+        <th class="col-md-3">Element</th>
+
+        <th>Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+        <td>StationsParking</td>
+
+        <td>
+        Array containing station parking information (<a href=
+        "#StationParking">StationParking</a>).
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="StationParking" name="StationParking">StationParking
+        Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>Code</td>
+
+        <td>Station code. Useful when returning parking information for all
+        stations. Use this value in other rail-related APIs to retrieve
+        data about a station.</td>
+        </tr>
+
+        <tr>
+        <td>Notes</td>
+
+        <td>When not NULL, provides additional parking resources such as
+        nearby lots.</td>
+        </tr>
+
+        <tr>
+        <td>AllDayParking</td>
+
+        <td>
+        Structure describing <a href="#AllDayParking">all-day
+        parking</a> options.
+        </td>
+        </tr>
+
+        <tr>
+        <td>ShortTermParking</td>
+
+        <td>
+        Structure describing <a href="#ShortTermParking">short-term
+        parking</a> options.
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="AllDayParking" name="AllDayParking">AllDayParking
+        Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>TotalCount</td>
+
+        <td>Number of all-day parking spots available at a station.</td>
+        </tr>
+
+        <tr>
+        <td>RiderCost</td>
+
+        <td>All-day cost per day (weekday) for Metro riders. NULL when no all-day
+        spots are available. For most stations, this value is identical to
+        the NonRiderCost.<br>
+        <br>
+        For cases where the NonRiderCost is different, the lower cost per
+        day requires a valid rail trip using a SmarTrip&reg; card
+        originating from a station other than the one where the patron
+        parked. To receive this lower rate, patrons must pay for their
+        parking with the same SmarTrip&reg; card used to enter/exit
+        Metrorail, and must exit the parking lot within two hours of
+        exiting Metrorail.</td>
+        </tr>
+
+        <tr>
+        <td>NonRiderCost</td>
+
+        <td>All-day cost per day (weekday) for non-Metro riders. NULL when no all-day
+        spots are available.</td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="ShortTermParking" name=
+        "ShortTermParking">ShortTermParking Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>SaturdayRiderCost</td>
+
+        <td>Similar to RiderCost, except denoting Saturday prices.</td>
+        </tr>
+
+        <tr>
+        <td>SaturdayNonRiderCost</td>
+
+        <td>Similar to NonRiderCost, except denoting Saturday prices.</td>
+        </tr>
+
+        <tr>
+        <td>TotalCount</td>
+
+        <td>Number of short-term parking spots available at a station
+        (parking meters).</td>
+        </tr>
+
+        <tr>
+        <td>Notes</td>
+
+        <td>Misc. information relating to short-term parking. NULL when no
+        short-term spots are available.</td>
+        </tr>
+        </tbody>
+        </table>
       operationId: JSON - Parking Information
       parameters:
         - description: Station code.  Use the Station List method to return a list of all station codes.
@@ -1510,8 +1802,10 @@ paths:
             application/json:
               StationsParking:
                 - AllDayParking:
-                    NonRiderCost: 4.6
-                    RiderCost: 4.6
+                    NonRiderCost: 4.45
+                    RiderCost: 4.45
+                    SaturdayNonRiderCost: 2
+                    SaturdayRiderCost: 2
                     TotalCount: 808
                   Code: F06
                   Notes: 325 spaces metered for 12-hr. max. @ $1.00 per 60 mins.
@@ -1954,6 +2248,3 @@ paths:
                   Name: Glenmont
                   StationTogether1: ''
                   StationTogether2: ''
-x-servers:
-  - url: 'http://wmataapimgmt01.azure-api.net'
-  - url: 'https://wmataapimgmt01.azure-api.net'

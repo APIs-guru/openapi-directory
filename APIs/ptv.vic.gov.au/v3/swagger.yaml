@@ -7,11 +7,11 @@ info:
   contact:
     name: Public Transport Victoria
     url: 'http://ptv.vic.gov.au/digital'
-  description: "The PTV Timetable API provides direct access to Public Transport Victoria’s public transport timetable data.\r\n\r\nThe API returns scheduled timetable, route and stop data for all metropolitan and regional train, tram and bus services in Victoria, including Night Network(Night Train and Night Tram data are included in metropolitan train and tram services data, respectively, whereas Night Bus is a separate route type).\r\n\r\nThe API also returns real-time data for metropolitan train, tram and bus services (where this data is made available to PTV), as well as disruption information, stop facility information, and access to myki ticket outlet data.\r\n\r\nThis Swagger is for Version 3 of the PTV Timetable API. By using this documentation you agree to comply with the licence and terms of service.\r\n\r\nTrain timetable data is updated daily, while the remaining data is updated weekly, taking into account any planned timetable changes (for example, due to holidays or planned disruptions). The PTV timetable API is the same API used by PTV for its apps. To access the most up to date data PTV has (including real-time data) you must use the API dynamically.\r\n\r\nYou can access the PTV Timetable API through a HTTP or HTTPS interface, as follows:\r\n\r\n    base URL / version number / API name / query string\r\nThe base URL is either:\r\n  *  http://timetableapi.ptv.vic.gov.au\r\nor\r\n  *  https://timetableapi.ptv.vic.gov.au\r\n\r\nThe Swagger JSON file is available at http://timetableapi.ptv.vic.gov.au/swagger/docs/v3\r\n\r\nFrequently asked questions are available on the PTV website at http://ptv.vic.gov.au/apifaq\r\n\r\nLinks to the following information are also provided on the PTV website at http://ptv.vic.gov.au/ptv-timetable-api/\r\n* How to register for an API key and calculate a signature\r\n* PTV Timetable API V2 to V3 Migration Guide\r\n* Documentation for Version 2 of the PTV Timetable API\r\n* PTV Timetable API Data Quality Statement\r\n\r\nAll information about how to use the API is in this documentation. PTV cannot provide technical support for the API.\r\n"
+  description: "The PTV Timetable API provides direct access to Public Transport Victoria’s public transport timetable data.\r\n\r\nThe API returns scheduled timetable, route and stop data for all metropolitan and regional train, tram and bus services in Victoria, including Night Network(Night Train and Night Tram data are included in metropolitan train and tram services data, respectively, whereas Night Bus is a separate route type).\r\n\r\nThe API also returns real-time data for metropolitan train, tram and bus services (where this data is made available to PTV), as well as disruption information, stop facility information, and access to myki ticket outlet data.\r\n\r\nThis Swagger is for Version 3 of the PTV Timetable API. By using this documentation you agree to comply with the licence and terms of service.\r\n\r\nTrain timetable data is updated daily, while the remaining data is updated weekly, taking into account any planned timetable changes (for example, due to holidays or planned disruptions). The PTV timetable API is the same API used by PTV for its apps. To access the most up to date data PTV has (including real-time data) you must use the API dynamically.\r\n\r\nYou can access the PTV Timetable API through a HTTP or HTTPS interface, as follows:\r\n\r\n    base URL / version number / API name / query string\r\nThe base URL is either:\r\n  *  http://timetableapi.ptv.vic.gov.au\r\nor\r\n  *  https://timetableapi.ptv.vic.gov.au\r\n\r\nThe Swagger JSON file is available at http://timetableapi.ptv.vic.gov.au/swagger/docs/v3\r\n\r\nFrequently asked questions are available on the PTV website at http://ptv.vic.gov.au/apifaq\r\n\r\nLinks to the following information are also provided on the PTV website at http://ptv.vic.gov.au/ptv-timetable-api/\r\n* How to register for an API key and calculate a signature\r\n* PTV Timetable API V2 to V3 Migration Guide\r\n* Documentation for Version 2 of the PTV Timetable API\r\n* PTV Timetable API Data Quality Statement\r\n\r\nAll information about how to use the API is in this documentation. PTV cannot provide technical support for the API.\r\n\r\nCredits: This page has been based on Steve Bennett's http://opentransportdata.org/, used with permission.\r\n"
   license:
     name: Creative Commons Attribution 4.0 International
     url: 'https://creativecommons.org/licenses/by/4.0/'
-  termsOfService: 'See http://ptv.vic.gov.au/ptv-timetable-api/'
+  termsOfService: 'http://ptv.vic.gov.au/ptv-timetable-api/'
   title: PTV Timetable API - Version 3
   version: v3
   x-apisguru-categories:
@@ -769,6 +769,60 @@ paths:
       summary: View all trip/service runs for a specific route ID
       tags:
         - Runs
+  '/v3/runs/route/{route_id}/route_type/{route_type}':
+    get:
+      deprecated: false
+      operationId: Runs_ForRouteAndRouteType
+      parameters:
+        - description: Identifier of route; values returned by Routes API - v3/routes.
+          format: int32
+          in: path
+          name: route_id
+          required: true
+          type: integer
+        - description: Number identifying transport mode; values returned via RouteTypes API
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+          format: int32
+          in: path
+          name: route_type
+          required: true
+          type: integer
+        - description: Please ignore
+          in: query
+          name: token
+          required: false
+          type: string
+        - description: Your developer id
+          in: query
+          name: devid
+          required: false
+          type: string
+        - description: Authentication signature for request
+          in: query
+          name: signature
+          required: false
+          type: string
+      responses:
+        '200':
+          description: All trip/service run details for the specified route ID and route type.
+          schema:
+            $ref: '#/definitions/V3.RunsResponse'
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/V3.ErrorResponse'
+        '403':
+          description: Access Denied
+          schema:
+            $ref: '#/definitions/V3.ErrorResponse'
+      summary: View all trip/service runs for a specific route ID and route type
+      tags:
+        - Runs
   '/v3/runs/{run_id}':
     get:
       deprecated: false
@@ -1124,6 +1178,11 @@ paths:
         - description: Placeholder for future development; currently unavailable
           in: query
           name: stop_ticket
+          required: false
+          type: boolean
+        - description: Incdicates whether the stop_id is a GTFS ID or not
+          in: query
+          name: gtfs
           required: false
           type: boolean
         - description: Please ignore

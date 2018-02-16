@@ -7,31 +7,33 @@ info:
   description: |-
     Containers are virtual software objects that include all the elements that an app needs to run. A container has the benefits of resource isolation and allocation but is more portable and efficient than, for example, a virtual machine.
 
-     This documentation describes the IBM Containers API, which is based on the Docker Remote API. The API provides endpoints that you can use to create and manage your single containers and container groups in Bluemix. Endpoints are summarized under the following tags: 
+     This documentation describes the IBM Containers API, which is based on the Docker Remote API. The API provides endpoints that you can use to create and manage your single containers and container groups in Bluemix. Endpoints are summarized under the following tags:
 
-    - **Authentication**: Retrieve and refresh your TLS certificates. 
-    - **Private Docker images registry**: Create your own private Docker images registry in Bluemix by setting a namespace for your organization. 
-    - **Images**: View, build, and push your images to your private Bluemix registry so you can use them with IBM Containers. You can also scan your container images with the Vulnerability Advisor against standard policies set by the organization manager and a database of known Ubuntu issues. 
-    - **Single Containers**: Create and manage single containers in Bluemix. Use a single container to implement short-lived processes or to run simple tests as you develop an app or service. To make your single container available from the internet, review the `Public IP addresses` endpoints. 
-    - **Container Groups**: Create and manage your container groups in Bluemix. A container group consists of multiple single containers that are all created from the same container image and as a consequence are configured in the same way. Container groups offer further options at no cost to make your app highly available. These options include in-built load balancing, auto-recovery of unhealthy container instances, and auto-scaling of container instances based on CPU and memory usage. Map a public route to your container group to make your app accessible from the internet.  
-    - **Public IP addresses**: Use these endpoints to request public IP addresses for your space. You can bind this IP address to your container to make your container accessible from the internet. 
-    - **File shares**: Create, list and delete file shares in a space. A file share is a NFS storage system that hosts Docker volumes.  
-    - **Volumes**: Create and manage container volumes in your space to persist the data of your containers.  
+    - **Authentication**: Retrieve and refresh your TLS certificates.
+    - **Private Docker images registry**: Create your own private Docker images registry in Bluemix by setting a namespace for your organization.
+    - **Images**: View, build, and push your images to your private Bluemix registry so you can use them with IBM Containers. You can also scan your container images with the Vulnerability Advisor against standard policies set by the organization manager and a database of known Ubuntu issues.
+    - **Single Containers**: Create and manage single containers in Bluemix. Use a single container to implement short-lived processes or to run simple tests as you develop an app or service. To make your single container available from the internet, review the `Public IP addresses` endpoints.
+    - **Container Groups**: Create and manage your container groups in Bluemix. A container group consists of multiple single containers that are all created from the same container image and as a consequence are configured in the same way. Container groups offer further options at no cost to make your app highly available. These options include in-built load balancing, auto-recovery of unhealthy container instances, and auto-scaling of container instances based on CPU and memory usage. Map a public route to your container group to make your app accessible from the internet.
+    - **Public IP addresses**: Use these endpoints to request public IP addresses for your space. You can bind this IP address to your container to make your container accessible from the internet.
+    - **File shares**: Create, list and delete file shares in a space. A file share is a NFS storage system that hosts Docker volumes.
+    - **Volumes**: Create and manage container volumes in your space to persist the data of your containers.
 
 
-     Each API request requires an HTTP header that includes the 'X-Auth-Token’ and 'X-Auth-Project-Id’ parameter. 
+     Each API request requires an HTTP header that includes the 'X-Auth-Token’ and 'X-Auth-Project-Id’ parameter.
 
     - **X-Auth-Token**: The JSON web token (JWT) that you receive when logging into the Bluemix platform. It allows you to use the IBM Containers REST API, access services, and resources. Run `cf oauth-token` to retrieve your access token information.
     - **X-Auth-Project-Id**: The unique ID of your organization space where you want to create or work with your containers. Run `cf space <space_name> --guid`, where `<space_name>` is the name of your space, to retrieve your space ID.
 
 
-     For further information about how containers work in the IBM Containers service, review the documentation under https://new-console.ng.bluemix.net/docs/containers/container_index.html. 
+     For further information about how containers work in the IBM Containers service, review the documentation under https://new-console.ng.bluemix.net/docs/containers/container_index.html.
   license:
     name: (C) Copyright IBM Corp. 2016 All Rights Reserved.
   title: IBM Containers
   version: 3.0.0
+  x-apisguru-categories:
+    - developer_tools
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/875126609501495297/NWAUHB3O_400x400.jpg'
+    url: 'https://pbs.twimg.com/profile_images/925367546471223296/t0eKqcyC_400x400.jpg'
   x-origin:
     - format: swagger
       url: 'http://ccsapi-doc.mybluemix.net/swagger.json'
@@ -102,9 +104,9 @@ paths:
       consumes:
         - application/json
       description: |-
-        This endpoint creates and starts a single container in your space based on the Docker image that is specified in the Image field of the request json. A single container in IBM Containers is similar to a container that you create in your local Docker environment. Single containers are a good way to start with IBM Containers and to learn about how containers work in the IBM Cloud and the features that IBM Containers provides. They are also recommended when you want to run simple app tests or during the development process of an app. 
+        This endpoint creates and starts a single container in your space based on the Docker image that is specified in the Image field of the request json. A single container in IBM Containers is similar to a container that you create in your local Docker environment. Single containers are a good way to start with IBM Containers and to learn about how containers work in the IBM Cloud and the features that IBM Containers provides. They are also recommended when you want to run simple app tests or during the development process of an app.
 
-         In the Docker API there are two separate APIs to create and start a container. However in IBM Containers a container is created and started in a single API call. Therefore, this API merges parameters from the Docker API to create and start container. 
+         In the Docker API there are two separate APIs to create and start a container. However in IBM Containers a container is created and started in a single API call. Therefore, this API merges parameters from the Docker API to create and start container.
 
          To create a container with IBM Containers, you must at least define the image that the container is based on.
 
@@ -291,7 +293,7 @@ paths:
 
 
 
-        - Name: The container group name must start with a letter and then can include uppercase letters, lowercase letters, numbers, periods (.), underscores (_), or hyphens (-). 
+        - Name: The container group name must start with a letter and then can include uppercase letters, lowercase letters, numbers, periods (.), underscores (_), or hyphens (-).
         - Image: You must include the full path to the image in your private Bluemix registry in the format:`registry.ng.bluemix.net/<namespace>/<image>`.
       parameters:
         - description: The Bluemix JSON web token that you receive when logging into Bluemix. Run `cf oauth-token` to retrieve your access token.
@@ -398,11 +400,11 @@ paths:
         - Container Groups
     patch:
       description: |-
-        Update the number of container instances that run in a container group (corresponding IBM Containers command: `cf ic group update <option> <group>`). 
+        Update the number of container instances that run in a container group (corresponding IBM Containers command: `cf ic group update <option> <group>`).
 
-        Note: You can run only one update at a time.  
+        Note: You can run only one update at a time.
 
-         The desired number is the number of container instances that you require. It must be within the current limits of Max and Min. To increase the number of desired container instances above the Max value, you must first execute an update on the Max value. Once this update is completed, you can increase the desired number of container instances. 
+         The desired number is the number of container instances that you require. It must be within the current limits of Max and Min. To increase the number of desired container instances above the Max value, you must first execute an update on the Max value. Once this update is completed, you can increase the desired number of container instances.
       parameters:
         - description: The Bluemix JSON web token that you receive when logging into Bluemix. Run `cf oauth-token` to retrieve your access token.
           in: header
@@ -483,9 +485,9 @@ paths:
   '/containers/groups/{name_or_id}/unmaproute':
     post:
       description: |-
-        This endpoint unmaps a public route from a container group (corresponding IBM Containers command: `cf ic route unmap -n <host> -d <domain> <group>`). If no other public route is mapped to the container group, then the container group is no longer available from the internet. 
+        This endpoint unmaps a public route from a container group (corresponding IBM Containers command: `cf ic route unmap -n <host> -d <domain> <group>`). If no other public route is mapped to the container group, then the container group is no longer available from the internet.
 
-         When you unmap a route from a container group, the route is not deleted and can be mapped to other container groups. 
+         When you unmap a route from a container group, the route is not deleted and can be mapped to other container groups.
       parameters:
         - description: The Bluemix JSON web token that you receive when logging into Bluemix. Run `cf oauth-token` to retrieve your access token.
           in: header
@@ -621,7 +623,7 @@ paths:
         - Quota
     put:
       description: |-
-        This endpoint updates the quota that is allocated to a Bluemix space. 
+        This endpoint updates the quota that is allocated to a Bluemix space.
 
          **Note**: Only paid accounts are eligbile to update the space quota. If you are using a free-trial account, upgrade to a paid account first.
       parameters:
@@ -656,11 +658,11 @@ paths:
   /containers/usage:
     get:
       description: |-
-        This endpoint returns a list of available container sizes and the quota limit and usage for the space. 
+        This endpoint returns a list of available container sizes and the quota limit and usage for the space.
 
         - Container sizes: A list of available container sizes indicating the amount of container memory, disk space and virtual CPUs that can be assigned to the container.
-        - Quota limit: Lists the number of containers, public IP addresses, available container memory, and virtual CPUS that are allocated to a space. 
-        - Quota usage: Lists the current number of containers, images, and public IP addresses in a space that is counted towards your quota limit. 
+        - Quota limit: Lists the number of containers, public IP addresses, available container memory, and virtual CPUS that are allocated to a space.
+        - Quota usage: Lists the current number of containers, images, and public IP addresses in a space that is counted towards your quota limit.
       parameters:
         - description: The Bluemix JSON web token that you receive when logging into Bluemix. Run `cf oauth-token` to retrieve your access token.
           in: header
@@ -788,7 +790,7 @@ paths:
           required: true
           type: string
         - description: |-
-            The public IP address that you want to bind to your container. 
+            The public IP address that you want to bind to your container.
 
             Note: The public IP address must be available in the space and not bound to a container. Run `cf ic ip list` or call the `GET /containers/floating-ips` endpoint.
           in: path
@@ -831,7 +833,7 @@ paths:
           required: true
           type: string
         - description: |-
-            The public IP address that you want to unbind from your container. 
+            The public IP address that you want to unbind from your container.
 
              Note: After unbinding a public IP address, this IP address will still be allocated to the space and can be used to be bound to other containers.
           in: path
@@ -1215,15 +1217,15 @@ paths:
   '/registry/namespaces/{namespace}':
     get:
       description: |-
-        This endpoint checks whether a namespace is available in Bluemix and can be used to set up the private Docker images registry for an organization. When a HTTP code `201 Ok` is returned, the namespace is already assigned to another organization in Bluemix and cannot be used. When a HTTP code `404 Not found` is returned, the namespace can be used for your organization. 
+        This endpoint checks whether a namespace is available in Bluemix and can be used to set up the private Docker images registry for an organization. When a HTTP code `201 Ok` is returned, the namespace is already assigned to another organization in Bluemix and cannot be used. When a HTTP code `404 Not found` is returned, the namespace can be used for your organization.
 
-         Consider the following rules when choosing a namespace for your organization: 
+         Consider the following rules when choosing a namespace for your organization:
 
-        - Every organization can have one namespace at a time only 
-        - The namespace must be unique in Bluemix. 
-        - The namespace can be 4-30 characters long. 
-        - The namespace must start with at least one letter or number. 
-        - The namespace can only contain lowercase letters, numbers or underscores (_). 
+        - Every organization can have one namespace at a time only
+        - The namespace must be unique in Bluemix.
+        - The namespace can be 4-30 characters long.
+        - The namespace must start with at least one letter or number.
+        - The namespace can only contain lowercase letters, numbers or underscores (_).
       parameters:
         - description: The Bluemix JSON web token that you receive when logging into Bluemix. Run `cf oauth-token` to retrieve your access token.
           in: header
@@ -1256,14 +1258,14 @@ paths:
         - Private Docker images registry
     put:
       description: |-
-        Set up your own Docker images registry in Bluemix by defining a namespace for your organization (corresponding IBM Containers command: `cf ic namespace set <namespace>`). The namespace is used to generate a unique URL to your private Bluemix registry. In your private registry you store all Docker images that you want to share across your organization. To create a container from an image, you must first push the image to your registry. 
+        Set up your own Docker images registry in Bluemix by defining a namespace for your organization (corresponding IBM Containers command: `cf ic namespace set <namespace>`). The namespace is used to generate a unique URL to your private Bluemix registry. In your private registry you store all Docker images that you want to share across your organization. To create a container from an image, you must first push the image to your registry.
 
-         The namespace cannot be changed after is has been set. Consider the following rules to choose a namespace for your organization: 
+         The namespace cannot be changed after is has been set. Consider the following rules to choose a namespace for your organization:
 
-        - Every organization can have one namespace at a time only 
-        - The namespace must be unique in Bluemix. 
-        - The namespace can be 4-30 characters long. 
-        - The namespace must start with at least one letter or number. 
+        - Every organization can have one namespace at a time only
+        - The namespace must be unique in Bluemix.
+        - The namespace can be 4-30 characters long.
+        - The namespace must start with at least one letter or number.
         - The namespace can only contain lowercase letters, numbers or underscores (_).
       parameters:
         - description: The Bluemix JSON web token that you receive when logging into Bluemix. Run `cf oauth-token` to retrieve your access token.
@@ -1352,9 +1354,9 @@ paths:
   /volumes/create:
     post:
       description: |-
-        This endpoints creates a new volume in your space (corresponding IBM Containers command: `cf ic volume create VOLNAME`). A volume is used to persist and access app data between container restarts. Volumes are hosted on file shares that define the available actual storage in Bluemix and the number of input and output transactions per second (IOPS). 
+        This endpoints creates a new volume in your space (corresponding IBM Containers command: `cf ic volume create VOLNAME`). A volume is used to persist and access app data between container restarts. Volumes are hosted on file shares that define the available actual storage in Bluemix and the number of input and output transactions per second (IOPS).
 
-         After you have created a volume, you must mount it to a container by using the `--volume` option in the `cf ic run` (single containers) or `cf ic group create` (container groups) command. You can also define the volume as part of the HTTP body and send a request to the `POST /containers/create` (single containers) or `POST /containers/groups` (container groups) endpoints. 
+         After you have created a volume, you must mount it to a container by using the `--volume` option in the `cf ic run` (single containers) or `cf ic group create` (container groups) command. You can also define the volume as part of the HTTP body and send a request to the `POST /containers/create` (single containers) or `POST /containers/groups` (container groups) endpoints.
 
          Note: If you mount multiple containers in a space to the same volume, they share the data in the volume and can access them anytime. When a container is deleted, the associated volume is not removed.
       parameters:
@@ -1397,11 +1399,11 @@ paths:
   /volumes/fs/create:
     post:
       description: |-
-        This endpoint creates a new file share in a space (corresponding IBM Containers command: `cf ic volume fs-create FSNAME FSSIZE FSIOPS`). 
+        This endpoint creates a new file share in a space (corresponding IBM Containers command: `cf ic volume fs-create FSNAME FSSIZE FSIOPS`).
 
          A file share is a persistent NFS-based (Network File System) storage system that hosts Docker volumes in a Bluemix space and allows a user to store and access container and app-related files. To store files in a file share, you must create a container volume and save the data into this volume.
 
-         As soon as you create your first volume in a space with the `cf ic volume create VOLNAME` command or the `POST /volumes/create` API endpoint, a default file share with 20 GB at 4 IOPS (Input Output operations Per Second) is created at no cost. 
+         As soon as you create your first volume in a space with the `cf ic volume create VOLNAME` command or the `POST /volumes/create` API endpoint, a default file share with 20 GB at 4 IOPS (Input Output operations Per Second) is created at no cost.
 
         The organization manager can create file shares with specific storage size and IOPS to meet the storage needs of the space. File shares can be provisioned in sizes from 20 GB to 12 TB and at IOPS per GB of 0.25, 2 or 4. Run `cf ic volume fs-flavor-list` or call the `GET /volumes/fs/flavors/json` API endpoint to retrieve a list of available file share sizes. The file share size in relation to the number of IOPS impacts the speed that data can be read and written from and to the container volume.
       parameters:
@@ -1496,7 +1498,7 @@ paths:
       description: |-
         This endpoint deletes a file share from a space (corresponding IBM Containers command: `cf ic volume fs-rm FSNAME`).
 
-         Before you can delete a file share, all mounted volumes must be deleted first. To delete a volume, run `cf ic volume rm VOLNAME` or call the `DELETE /volumes/{name}` API endpoint. 
+         Before you can delete a file share, all mounted volumes must be deleted first. To delete a volume, run `cf ic volume rm VOLNAME` or call the `DELETE /volumes/{name}` API endpoint.
 
          **Note:** To delete a file share you must have been granted organization developer rights.
       parameters:

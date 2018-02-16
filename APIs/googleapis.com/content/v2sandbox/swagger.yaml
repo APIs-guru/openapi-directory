@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2sandbox/rest'
       version: v1
@@ -101,7 +101,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Retrieves or modifies multiple orders in a single request. This method can only be called for non-multi-client accounts.
+      description: Retrieves or modifies multiple orders in a single request.
       operationId: content.orders.custombatch
       parameters:
         - in: body
@@ -122,14 +122,9 @@ paths:
         - orders
   '/{merchantId}/orders':
     get:
-      description: Lists the orders in your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Lists the orders in your Merchant Center account.
       operationId: content.orders.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: |-
             Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.
             We recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.
@@ -142,6 +137,11 @@ paths:
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: 'The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. "placedDate desc" stands for listing orders by placement date, from oldest to most recent. "placedDate asc" stands for listing orders by placement date, from most recent to oldest. In future releases we''ll support other sorting criteria.'
           enum:
             - placedDate asc
@@ -202,10 +202,10 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/orders/{orderId}':
     get:
-      description: Retrieves an order from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Retrieves an order from your Merchant Center account.
       operationId: content.orders.get
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -245,10 +245,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Marks an order as acknowledged. This method can only be called for non-multi-client accounts.
+      description: Marks an order as acknowledged.
       operationId: content.orders.acknowledge
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersAcknowledgeRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -258,10 +262,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersAcknowledgeRequest'
       responses:
         '200':
           description: Successful response
@@ -284,10 +284,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Cancels all line items in an order, making a full refund. This method can only be called for non-multi-client accounts.'
+      description: 'Cancels all line items in an order, making a full refund.'
       operationId: content.orders.cancel
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCancelRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -297,10 +301,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCancelRequest'
       responses:
         '200':
           description: Successful response
@@ -323,10 +323,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Cancels a line item, making a full refund. This method can only be called for non-multi-client accounts.'
+      description: 'Cancels a line item, making a full refund.'
       operationId: content.orders.cancellineitem
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCancelLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -336,15 +340,50 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCancelLineItemRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersCancelLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/inStoreRefundLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Notifies that item return and refund was handled directly in store.
+      operationId: content.orders.instorerefundlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersInStoreRefundLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersInStoreRefundLineItemResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -362,10 +401,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Refund a portion of the order, up to the full amount paid. This method can only be called for non-multi-client accounts.'
+      description: 'Refund a portion of the order, up to the full amount paid.'
       operationId: content.orders.refund
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersRefundRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -375,15 +418,50 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersRefundRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersRefundResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/rejectReturnLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Rejects return on an line item.
+      operationId: content.orders.rejectreturnlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersRejectReturnLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersRejectReturnLineItemResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -401,10 +479,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Returns a line item. This method can only be called for non-multi-client accounts.
+      description: Returns a line item.
       operationId: content.orders.returnlineitem
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersReturnLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -414,15 +496,89 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersReturnLineItemRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersReturnLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/returnRefundLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns and refunds a line item. Note that this method can only be called on fully shipped orders.
+      operationId: content.orders.returnrefundlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersReturnRefundLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersReturnRefundLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/setLineItemMetadata':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets (overrides) merchant provided annotations on the line item.
+      operationId: content.orders.setlineitemmetadata
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersSetLineItemMetadataRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersSetLineItemMetadataResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -440,10 +596,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Marks line item(s) as shipped. This method can only be called for non-multi-client accounts.
+      description: Marks line item(s) as shipped.
       operationId: content.orders.shiplineitems
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersShipLineItemsRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -453,15 +613,50 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersShipLineItemsRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersShipLineItemsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/updateLineItemShippingDetails':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates ship by and delivery by dates for a line item.
+      operationId: content.orders.updatelineitemshippingdetails
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateLineItemShippingDetailsRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersUpdateLineItemShippingDetailsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -479,10 +674,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Updates the merchant order ID for a given order. This method can only be called for non-multi-client accounts.
+      description: Updates the merchant order ID for a given order.
       operationId: content.orders.updatemerchantorderid
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateMerchantOrderIdRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -492,10 +691,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersUpdateMerchantOrderIdRequest'
       responses:
         '200':
           description: Successful response
@@ -518,10 +713,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Updates a shipment''s status, carrier, and/or tracking ID. This method can only be called for non-multi-client accounts.'
+      description: 'Updates a shipment''s status, carrier, and/or tracking ID.'
       operationId: content.orders.updateshipment
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateShipmentRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -531,10 +730,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersUpdateShipmentRequest'
       responses:
         '200':
           description: Successful response
@@ -549,10 +744,10 @@ paths:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
     get:
-      description: Retrieves an order using merchant order id. This method can only be called for non-multi-client accounts.
+      description: Retrieves an order using merchant order id.
       operationId: content.orders.getbymerchantorderid
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -592,18 +787,18 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sandbox only. Creates a test order. This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Creates a test order.
       operationId: content.orders.createtestorder
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/OrdersCreateTestOrderRequest'
+        - description: The ID of the account that should manage the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -626,10 +821,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment". This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
       operationId: content.orders.advancetestorder
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -653,10 +848,10 @@ paths:
         - orders
   '/{merchantId}/testordertemplates/{templateName}':
     get:
-      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox. This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
       operationId: content.orders.gettestordertemplate
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that should manage the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -871,6 +1066,11 @@ definitions:
     type: object
   OrderLineItem:
     properties:
+      annotations:
+        description: Annotations that are attached to the line item.
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
       cancellations:
         description: Cancellations of the line item.
         items:
@@ -1011,7 +1211,7 @@ definitions:
   OrderLineItemShippingDetailsMethod:
     properties:
       carrier:
-        description: The carrier for the shipping. Optional.
+        description: 'The carrier for the shipping. Optional. See shipments[].carrier for a list of acceptable values.'
         type: string
       maxDaysInTransit:
         description: Maximum transit time.
@@ -1024,6 +1224,15 @@ definitions:
         description: Minimum transit time.
         format: uint32
         type: integer
+    type: object
+  OrderMerchantProvidedAnnotation:
+    properties:
+      key:
+        description: Key for additional merchant provided (as key-value pairs) annotation about the line item.
+        type: string
+      value:
+        description: Value for additional merchant provided (as key-value pairs) annotation about the line item.
+        type: string
     type: object
   OrderPaymentMethod:
     properties:
@@ -1045,7 +1254,17 @@ definitions:
         description: The billing phone number.
         type: string
       type:
-        description: 'The type of instrument (VISA, Mastercard, etc).'
+        description: |-
+          The type of instrument.
+
+          Acceptable values are:  
+          - "AMEX" 
+          - "DISCOVER" 
+          - "JCB" 
+          - "MASTERCARD" 
+          - "UNIONPAY" 
+          - "VISA" 
+          - ""
         type: string
     type: object
   OrderPromotion:
@@ -1135,7 +1354,26 @@ definitions:
   OrderShipment:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: |-
+          The carrier handling the shipment.
+
+          Acceptable values are:  
+          - "gsx" 
+          - "ups" 
+          - "usps" 
+          - "fedex" 
+          - "dhl" 
+          - "ecourier" 
+          - "cxt" 
+          - "google" 
+          - "ontrac" 
+          - "emsy" 
+          - "ont" 
+          - "deliv" 
+          - "dynamex" 
+          - "lasership" 
+          - "mpx" 
+          - "uds"
         type: string
       creationDate:
         description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -1161,7 +1399,10 @@ definitions:
   OrderShipmentLineItemShipment:
     properties:
       lineItemId:
-        description: The id of the line item that is shipped.
+        description: The id of the line item that is shipped. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to ship. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity that is shipped.
@@ -1196,11 +1437,20 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to cancellation amount in amountPretax.
       lineItemId:
-        description: The ID of the line item to cancel.
+        description: The ID of the line item to cancel. Either lineItemId or productId is required.
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -1284,6 +1534,9 @@ definitions:
       cancelLineItem:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryCancelLineItem'
         description: Required for cancelLineItem method.
+      inStoreRefundLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryInStoreRefundLineItem'
+        description: Required for inStoreReturnLineItem method.
       merchantId:
         description: The ID of the managing account.
         format: uint64
@@ -1303,12 +1556,24 @@ definitions:
       refund:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryRefund'
         description: Required for refund method.
+      rejectReturnLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryRejectReturnLineItem'
+        description: Required for rejectReturnLineItem method.
       returnLineItem:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryReturnLineItem'
         description: Required for returnLineItem method.
+      returnRefundLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryReturnRefundLineItem'
+        description: Required for returnRefundLineItem method.
+      setLineItemMetadata:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntrySetLineItemMetadata'
+        description: Required for setLineItemMetadata method.
       shipLineItems:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItems'
         description: Required for shipLineItems method.
+      updateLineItemShippingDetails:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails'
+        description: Required for updateLineItemShippingDate method.
       updateShipment:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryUpdateShipment'
         description: Required for updateShipment method.
@@ -1327,8 +1592,17 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to cancellation amount in amountPretax.
       lineItemId:
-        description: The ID of the line item to cancel.
+        description: The ID of the line item to cancel. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -1341,13 +1615,63 @@ definitions:
         description: The explanation of the reason.
         type: string
     type: object
+  OrdersCustomBatchRequestEntryInStoreRefundLineItem:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Required.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax. Required.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryRefund:
     properties:
       amount:
         $ref: '#/definitions/Price'
         description: The amount that is refunded.
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
       reason:
         description: The reason for the refund.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntryRejectReturnLineItem:
+    properties:
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
         type: string
       reasonText:
         description: The explanation of the reason.
@@ -1356,7 +1680,10 @@ definitions:
   OrdersCustomBatchRequestEntryReturnLineItem:
     properties:
       lineItemId:
-        description: The ID of the line item to return.
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -1369,10 +1696,48 @@ definitions:
         description: The explanation of the reason.
         type: string
     type: object
+  OrdersCustomBatchRequestEntryReturnRefundLineItem:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'The amount that is refunded. Optional, but if filled then both amountPretax and amountTax must be set.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntrySetLineItemMetadata:
+    properties:
+      annotations:
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryShipLineItems:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: 'Deprecated. Please use shipmentInfo instead. The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       lineItems:
         description: Line items to ship.
@@ -1380,16 +1745,48 @@ definitions:
           $ref: '#/definitions/OrderShipmentLineItemShipment'
         type: array
       shipmentId:
+        description: Deprecated. Please use shipmentInfo instead. The ID of the shipment.
+        type: string
+      shipmentInfos:
+        description: Shipment information. This field is repeated because a single line item can be shipped in several packages (and have several tracking IDs).
+        items:
+          $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+        type: array
+      trackingId:
+        description: Deprecated. Please use shipmentInfo instead. The tracking id for the shipment.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo:
+    properties:
+      carrier:
+        description: 'The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
+        type: string
+      shipmentId:
         description: The ID of the shipment.
         type: string
       trackingId:
         description: The tracking id for the shipment.
         type: string
     type: object
+  OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails:
+    properties:
+      deliverByDate:
+        description: 'Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated.'
+        type: string
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      shipByDate:
+        description: 'Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated.'
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryUpdateShipment:
     properties:
       carrier:
-        description: The carrier handling the shipment. Not updated if missing.
+        description: 'The carrier handling the shipment. Not updated if missing. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       shipmentId:
         description: The ID of the shipment.
@@ -1453,6 +1850,44 @@ definitions:
         $ref: '#/definitions/TestOrder'
         description: The requested test order template.
     type: object
+  OrdersInStoreRefundLineItemRequest:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Required.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax. Required.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersInStoreRefundLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersInStoreRefundLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersInStoreRefundLineItemResponse".'
+        type: string
+    type: object
   OrdersListResponse:
     properties:
       kind:
@@ -1472,6 +1907,12 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: The amount that is refunded.
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
         type: string
@@ -1492,13 +1933,48 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRefundResponse".'
         type: string
     type: object
-  OrdersReturnLineItemRequest:
+  OrdersRejectReturnLineItemRequest:
     properties:
       lineItemId:
-        description: The ID of the line item to return.
+        description: The ID of the line item to return. Either lineItemId or productId is required.
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersRejectReturnLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersRejectReturnLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRejectReturnLineItemResponse".'
+        type: string
+    type: object
+  OrdersReturnLineItemRequest:
+    properties:
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -1521,10 +1997,74 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersReturnLineItemResponse".'
         type: string
     type: object
+  OrdersReturnRefundLineItemRequest:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'The amount that is refunded. Optional, but if filled then both amountPretax and amountTax must be set.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersReturnRefundLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersReturnRefundLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersReturnRefundLineItemResponse".'
+        type: string
+    type: object
+  OrdersSetLineItemMetadataRequest:
+    properties:
+      annotations:
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+    type: object
+  OrdersSetLineItemMetadataResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersSetLineItemMetadataResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersSetLineItemMetadataResponse".'
+        type: string
+    type: object
   OrdersShipLineItemsRequest:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: 'Deprecated. Please use shipmentInfo instead. The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       lineItems:
         description: Line items to ship.
@@ -1535,10 +2075,15 @@ definitions:
         description: The ID of the operation. Unique across all operations for a given order.
         type: string
       shipmentId:
-        description: The ID of the shipment.
+        description: Deprecated. Please use shipmentInfo instead. The ID of the shipment.
         type: string
+      shipmentInfos:
+        description: Shipment information. This field is repeated because a single line item can be shipped in several packages (and have several tracking IDs).
+        items:
+          $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+        type: array
       trackingId:
-        description: The tracking id for the shipment.
+        description: Deprecated. Please use shipmentInfo instead. The tracking id for the shipment.
         type: string
     type: object
   OrdersShipLineItemsResponse:
@@ -1549,6 +2094,34 @@ definitions:
       kind:
         default: 'content#ordersShipLineItemsResponse'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersShipLineItemsResponse".'
+        type: string
+    type: object
+  OrdersUpdateLineItemShippingDetailsRequest:
+    properties:
+      deliverByDate:
+        description: 'Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated.'
+        type: string
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      shipByDate:
+        description: 'Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated.'
+        type: string
+    type: object
+  OrdersUpdateLineItemShippingDetailsResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersUpdateLineItemShippingDetailsResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersUpdateLineItemShippingDetailsResponse".'
         type: string
     type: object
   OrdersUpdateMerchantOrderIdRequest:
@@ -1573,7 +2146,7 @@ definitions:
   OrdersUpdateShipmentRequest:
     properties:
       carrier:
-        description: The carrier handling the shipment. Not updated if missing.
+        description: 'The carrier handling the shipment. Not updated if missing. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
@@ -1621,6 +2194,9 @@ definitions:
         items:
           $ref: '#/definitions/TestOrderLineItem'
         type: array
+      notificationMode:
+        description: Determines if test order must be pulled by merchant or pushed to merchant via push integration.
+        type: string
       paymentMethod:
         $ref: '#/definitions/TestOrderPaymentMethod'
         description: The details of the payment method.

@@ -46,20 +46,25 @@ If you see some APIs are not updated for more than 2 weeks please open [an issue
 
 Existing integrations
 --------------------------
+
+![Sponsored by](branding/sponsor1.gif)
+
  - https://any-api.com - Documentation and Test Consoles for Public APIs
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
  - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
  - https://datafire.io - allows you to process and transfer data between APIs, databases, and more
  - [Material Swagger UI Hub](https://darosh.github.io/angular-swagger-ui-material/hub/) - testing and exploring hub for Material Swagger UI demo
- - [Paw](https://luckymarmot.com/paw) - The most powerful HTTP client for Mac - You can import definitions and directly play with the APIs, [see how](https://luckymarmot.com/paw/doc/examples/search-apis).
+ - [Paw](https://luckymarmot.com/paw) - The most powerful HTTP client for Mac - You can import definitions and directly play with the APIs, [see how](https://luckymarmot.com/paw/doc/examples/search-apis)
+ - [Bitscoop](https://bitscoop.com/) - A better way to create and maintain integrations
 
 Also used as test suite in following projects:
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
  - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
  - [ReDoc](https://github.com/Rebilly/ReDoc) - Swagger-generated API Reference Documentation
  - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq Open API (Swagger) Addon
- - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for Swagger(OpenApi) Request parameters and Response objects.
+ - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for Swagger(OpenApi) Request parameters and Response objects
+ - [swagger-search](https://github.com/IG-Group/swagger-search) - An application that collects and indexes swagger docs from your microservices architecture
 
 
 
@@ -86,6 +91,7 @@ Some definitions are taken from Open Source projects:
  - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) description for Instagram API
  - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) definition for BBC Nitro and iBL APIs
  - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI (aka Swagger 2.0) description for Medium API
+ - [faragorn/open-api-specs](https://github.com/faragorn/open-api-specs) - OpenAPI definition for Giphy API
 
 [banner]: https://apis.guru/branding/banner.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social

@@ -5,13 +5,14 @@ info:
   title: Amazon Import/Export Snowball
   description: 'AWS Snowball is a petabyte-scale data transport solution that uses secure appliances to transfer large amounts of data between your on-premises data centers and Amazon Simple Storage Service (Amazon S3). The Snowball commands described here provide access to the same functionality that is available in the AWS Snowball Management Console, which enables you to create and manage jobs for Snowball. To transfer data locally with a Snowball appliance, you''ll need to use the Snowball client or the Amazon S3 API adapter for Snowball. For more information, see the <a href="http://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html">User Guide</a>.'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: snowball.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -917,7 +919,7 @@ definitions:
         description: 'An optional description of this specific cluster, for example <code>Environmental Data Cluster-01</code>.'
       AddressId:
         $ref: '#/definitions/AddressId'
-        description: The ID for the address that you want the cluster shipped to.&gt;
+        description: The ID for the address that you want the cluster shipped to.
       KmsKeyARN:
         $ref: '#/definitions/KmsKeyARN'
         description: 'The <code>KmsKeyARN</code> value that you want to associate with this cluster. <code>KmsKeyARN</code> values are created by using the <a href="http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS). '
@@ -1597,10 +1599,10 @@ definitions:
         description: '<p>The shipping speed for a particular job. This speed doesn''t dictate how soon you''ll get the Snowball from the job''s creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
       InboundShipment:
         $ref: '#/definitions/Shipment'
-        description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being delivered to the address that you specified for a particular job.
+        description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being returned to AWS for a particular job.
       OutboundShipment:
         $ref: '#/definitions/Shipment'
-        description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being returned to AWS for a particular job.
+        description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being delivered to the address that you specified for a particular job.
     description: 'A job''s shipping information, including inbound and outbound tracking numbers and shipping speed options.'
   ShippingOption:
     type: string

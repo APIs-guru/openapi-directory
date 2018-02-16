@@ -1,5 +1,7 @@
 'use strict';
 
+const utilLib = require('util');
+
 var assert = require('assert');
 var _ = require('lodash');
 var Promise = require('bluebird');
@@ -11,6 +13,7 @@ exports.deletions = [];
 var specSources = {
   'googleapis.com': require('./google'),
   'azure.com': require('./azure'),
+  'microsoft.com': require('./azure'),
   'windows.net': require('./azure'),
   'nytimes.com': require('./ny_times'),
   'swaggerhub.com': require('./swaggerhub'),
@@ -45,14 +48,14 @@ exports.getLeads = function (specs) {
       leads = indexByOriginUrl(leads);
 
 	  // add new catalog leads (MER)
-	  for (var l in leads) {
-	  	var lead = leads[l];
-	  	var filename = util.getSwaggerPath(lead);
-		if (!specs[filename]) { // we should compare on origin url
-		  console.log('!!! Adding ' + filename);
-	  	  specs[filename] = lead;
-		}
-	  }
+	  //for (var l in leads) {
+	  //	var lead = leads[l];
+	  //	var filename = util.getSwaggerPath(lead);
+		//  if (!specs[filename]) { // we should compare on origin url
+		//    console.log('!!! Adding ' + filename);
+	  //	  specs[filename] = lead;
+		//  }
+	  //}
 
       return _(specs).mapValues((swagger, filename) => {
         var lead = leads[util.getOriginUrl(swagger)];
@@ -79,7 +82,7 @@ function indexByOriginUrl(leads) {
   return _(leads)
     .groupBy(util.getOriginUrl)
     .mapValues(function (array, url) {
-      assert(_.size(array) === 1, `Duplicate leads for "${url}" URL.`);
+      assert(_.size(array) === 1, `Duplicate leads for "${url}" URL. `+utilLib.inspect(array));
       return array[0];
     }).value();
 }

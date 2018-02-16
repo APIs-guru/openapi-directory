@@ -8,12 +8,15 @@ info:
     email: hello@authentiq.com
     name: Authentiq team
     url: 'http://authentiq.io/support'
+  description: 'Strong authentication, without the passwords.'
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   termsOfService: 'http://authentiq.com/terms/'
   title: Authentiq
   version: '6'
+  x-apisguru-categories:
+    - security
   x-logo:
     backgroundColor: '#F26641'
     url: 'https://www.authentiq.com/theme/images/authentiq-logo-a-inverse.svg'
@@ -70,6 +73,7 @@ paths:
         If called with `email` and `phone` only, a verification code 
         will be sent by email. Do a second call adding `code` to 
         complete the revocation.
+      operationId: key_revoke_nosecret
       parameters:
         - description: primary email associated to Key (ID)
           in: query
@@ -123,6 +127,7 @@ paths:
         v5: `JWT(sub, pk, devtoken, ...)`
 
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
+      operationId: key_register
       parameters:
         - $ref: '#/parameters/AuthentiqID'
       produces:
@@ -151,6 +156,7 @@ paths:
   '/key/{PK}':
     delete:
       description: Revoke an Identity (Key) with a revocation secret
+      operationId: key_revoke
       parameters:
         - $ref: '#/parameters/PK'
         - description: revokation secret
@@ -249,6 +255,7 @@ paths:
         a self-signed JWT
 
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
+      operationId: key_update
       parameters:
         - $ref: '#/parameters/PK'
         - $ref: '#/parameters/AuthentiqID'
@@ -284,6 +291,7 @@ paths:
         and PUT to update registration `JWT(sub, pk, devtoken, ...)`
 
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
+      operationId: key_bind
       parameters:
         - $ref: '#/parameters/PK'
         - $ref: '#/parameters/AuthentiqID'
@@ -318,6 +326,7 @@ paths:
       description: |
         push sign-in request
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
+      operationId: push_login_request
       parameters:
         - $ref: '#/parameters/PushToken'
         - description: URI App will connect to
@@ -352,6 +361,7 @@ paths:
       description: |
         scope verification request
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
+      operationId: sign_request
       parameters:
         - $ref: '#/parameters/Scope'
         - description: 'test only mode, using test issuer'
@@ -385,6 +395,7 @@ paths:
   '/scope/{job}':
     delete:
       description: delete a verification job
+      operationId: sign_delete
       parameters:
         - $ref: '#/parameters/JobID'
       produces:
@@ -409,6 +420,7 @@ paths:
         - delete
     get:
       description: get the status / current content of a verification job
+      operationId: sign_retrieve
       parameters:
         - $ref: '#/parameters/JobID'
       produces:
@@ -441,6 +453,7 @@ paths:
         - get
     head:
       description: HEAD to get the status of a verification job
+      operationId: sign_retrieve_head
       parameters:
         - $ref: '#/parameters/JobID'
       produces:
@@ -463,6 +476,7 @@ paths:
       consumes:
         - application/json
       description: this is a scope confirmation
+      operationId: sign_confirm
       parameters:
         - $ref: '#/parameters/JobID'
       produces:
@@ -499,6 +513,7 @@ paths:
       description: |
         authority updates a JWT with its signature
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
+      operationId: sign_update
       parameters:
         - $ref: '#/parameters/JobID'
       produces:

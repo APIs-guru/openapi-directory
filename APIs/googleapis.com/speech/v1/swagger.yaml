@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - machine_learning
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://speech.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -126,90 +128,7 @@ tags:
   - name: operations
   - name: speech
 paths:
-  /v1/operations:
-    get:
-      description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`. To
-        override the binding, API services can add a binding such as
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-        For backwards compatibility, the default name includes the operations
-        collection id, however overriding users must ensure the name binding
-        is the parent resource, without the operations collection id.
-      operationId: speech.operations.list
-      parameters:
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
-        - description: The name of the operation's parent resource.
-          in: query
-          name: name
-          type: string
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListOperationsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - operations
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   '/v1/operations/{name}':
-    delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: speech.operations.delete
-      parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - operations
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
@@ -249,57 +168,6 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v1/operations/{name}:cancel':
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-    post:
-      description: |-
-        Starts asynchronous cancellation on a long-running operation.  The server
-        makes a best effort to cancel the operation, but success is not
-        guaranteed.  If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-        Operations.GetOperation or
-        other methods to check whether the cancellation succeeded or whether the
-        operation completed despite cancellation. On successful cancellation,
-        the operation is not deleted; instead, it becomes an operation with
-        an Operation.error value with a google.rpc.Status.code of 1,
-        corresponding to `Code.CANCELLED`.
-      operationId: speech.operations.cancel
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CancelOperationRequest'
-        - description: The name of the operation resource to be cancelled.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - operations
   '/v1/speech:longrunningrecognize':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -377,35 +245,6 @@ paths:
       tags:
         - speech
 definitions:
-  CancelOperationRequest:
-    description: The request message for Operations.CancelOperation.
-    properties: {}
-    type: object
-  Empty:
-    description: |-
-      A generic empty message that you can re-use to avoid defining duplicated
-      empty messages in your APIs. A typical example is to use it as the request
-      or the response type of an API method. For instance:
-
-          service Foo {
-            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-          }
-
-      The JSON representation for `Empty` is empty JSON object `{}`.
-    properties: {}
-    type: object
-  ListOperationsResponse:
-    description: The response message for Operations.ListOperations.
-    properties:
-      nextPageToken:
-        description: The standard List next-page token.
-        type: string
-      operations:
-        description: A list of operations that matches the specified filter in the request.
-        items:
-          $ref: '#/definitions/Operation'
-        type: array
-    type: object
   LongRunningRecognizeRequest:
     description: |-
       The top-level message sent by the client for the `LongRunningRecognize`
@@ -428,7 +267,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:
@@ -492,6 +331,12 @@ definitions:
       Provides information to the recognizer that specifies how to process the
       request.
     properties:
+      enableWordConfidence:
+        description: |-
+          *Optional* If `true`, the top result includes a list of words and the
+          confidence for those words. If `false`, no word-level confidence
+          information is returned. The default is `false`.
+        type: boolean
       enableWordTimeOffsets:
         description: |-
           *Optional* If `true`, the top result includes a list of words and
@@ -601,9 +446,10 @@ definitions:
         description: |-
           *Output-only* The confidence estimate between 0.0 and 1.0. A higher number
           indicates an estimated greater likelihood that the recognized words are
-          correct. This field is typically provided only for the top hypothesis, and
-          only for `is_final=true` results. Clients should not rely on the
-          `confidence` field as it is not guaranteed to be accurate or consistent.
+          correct. This field is set only for the top alternative of a non-streaming
+          result or, of a streaming result where `is_final=true`.
+          This field is not guaranteed to be accurate and users should not rely on it
+          to be always provided.
           The default of 0.0 is a sentinel value indicating `confidence` was not set.
         format: float
         type: number
@@ -705,10 +551,7 @@ definitions:
         type: string
     type: object
   WordInfo:
-    description: |-
-      Word-specific information for recognized words. Word information is only
-      included in the response when certain request parameters are set, such
-      as `enable_word_time_offsets`.
+    description: Word-specific information for recognized words.
     properties:
       endTime:
         description: |-

@@ -1,0 +1,336 @@
+swagger: '2.0'
+schemes:
+  - https
+host: firebaseremoteconfig.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Firebase Remote Config API allows the 3P clients to manage Remote Config conditions and parameters for Firebase applications.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Firebase Remote Config
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.6.0
+      format: google
+      url: 'https://firebaseremoteconfig.googleapis.com/$discovery/rest?version=v1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: firebaseremoteconfig
+externalDocs:
+  url: 'https://firebase.google.com/docs/remote-config/'
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+paths:
+  '/v1/{project}/remoteConfig':
+    get:
+      description: |-
+        Get the latest version Remote Configuration for a project.
+        Returns the RemoteConfig as the payload, and also the eTag as a
+        response header.
+      operationId: firebaseremoteconfig.projects.getRemoteConfig
+      parameters:
+        - description: |-
+            The GMP project identifier. Required.
+            See note at the beginning of this file regarding project ids.
+          in: path
+          name: project
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemoteConfig'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    put:
+      description: |-
+        Update a RemoteConfig. We treat this as an always-existing
+        resource (when it is not found in our data store, we treat it as version
+        0, a template with zero conditions and zero parameters). Hence there are
+        no Create or Delete operations. Returns the updated template when
+        successful (and the updated eTag as a response header), or an error if
+        things go wrong.
+        Possible error messages:
+        * VALIDATION_ERROR (HTTP status 400) with additional details if the
+        template being passed in can not be validated.
+        * AUTHENTICATION_ERROR (HTTP status 401) if the request can not be
+        authenticate (e.g. no access token, or invalid access token).
+        * AUTHORIZATION_ERROR (HTTP status 403) if the request can not be
+        authorized (e.g. the user has no access to the specified project id).
+        * VERSION_MISMATCH (HTTP status 412) when trying to update when the
+        expected eTag (passed in via the "If-match" header) is not specified, or
+        is specified but does does not match the current eTag.
+        * Internal error (HTTP status 500) for Database problems or other internal
+        errors.
+      operationId: firebaseremoteconfig.projects.updateRemoteConfig
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemoteConfig'
+        - description: |-
+            The GMP project identifier. Required.
+            See note at the beginning of this file regarding project ids.
+          in: path
+          name: project
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Optional. Defaults to <code>false</code> (UpdateRemoteConfig call should
+            update the backend if there are no validation/interal errors). May be set
+            to <code>true</code> to indicate that, should no validation errors occur,
+            the call should return a "200 OK" instead of performing the update. Note
+            that other error messages (500 Internal Error, 412 Version Mismatch, etc)
+            may still result after flipping to <code>false</code>, even if getting a
+            "200 OK" when calling with <code>true</code>.
+          in: query
+          name: validateOnly
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemoteConfig'
+      tags:
+        - projects
+definitions:
+  RemoteConfig:
+    description: |-
+      *
+      The RemoteConfig consists of a list of conditions (which can be
+      thought of as named "if" statements) and a map of parameters (parameter key
+      to a structure containing an optional default value, as well as a optional
+      submap of (condition name to value when that condition is true).
+    properties:
+      conditions:
+        description: |-
+          The list of named conditions. The order *does* affect the semantics.
+          The condition_name values of these entries must be unique.
+
+          The resolved value of a config parameter P is determined as follow:
+          * Let Y be the set of values from the submap of P that refer to conditions
+            that evaluate to <code>true</code>.
+          * If Y is non empty, the value is taken from the specific submap in Y whose
+            condition_name is the earliest in this condition list.
+          * Else, if P has a default value option (condition_name is empty) then
+            the value is taken from that option.
+          * Else, parameter P has no value and is omitted from the config result.
+
+          Example: parameter key "p1", default value "v1", submap specified as
+          {"c1": v2, "c2": v3} where "c1" and "c2" are names of conditions in the
+          condition list (where "c1" in this example appears before "c2").  The
+          value of p1 would be v2 as long as c1 is true.  Otherwise, if c2 is true,
+          p1 would evaluate to v3, and if c1 and c2 are both false, p1 would evaluate
+          to v1.  If no default value was specified, and c1 and c2 were both false,
+          no value for p1 would be generated.
+        items:
+          $ref: '#/definitions/RemoteConfigCondition'
+        type: array
+      parameters:
+        additionalProperties:
+          $ref: '#/definitions/RemoteConfigParameter'
+        description: |-
+          Map of parameter keys to their optional default values and optional submap
+          of (condition name : value). Order doesn't affect semantics, and so is
+          sorted by the server. The 'key' values of the params must be unique.
+        type: object
+    type: object
+  RemoteConfigCondition:
+    description: |-
+      A single RemoteConfig Condition.  A list of these (because order matters) are
+      part of a single RemoteConfig template.
+    properties:
+      description:
+        description: |-
+          DO NOT USE. Implementation removed and will not be added unless requested.
+          A description for this Condition. Length must be less than or equal to
+          100 characters (or more precisely, unicode code points, which is defined in
+          java/com/google/wireless/android/config/ConstsExporter.java).
+          A description may contain any Unicode characters
+        type: string
+      expression:
+        description: Required.
+        type: string
+      name:
+        description: |-
+          Required.
+          A non empty and unique name of this condition.
+        type: string
+      tagColor:
+        description: |-
+          Optional.
+          The display (tag) color of this condition. This serves as part of a tag
+          (in the future, we may add tag text as well as tag color, but that is not
+          yet implemented in the UI).
+          This value has no affect on the semantics of the delivered config and it
+          is ignored by the backend, except for passing it through write/read
+          requests.
+          Not having this value or having the "CONDITION_DISPLAY_COLOR_UNSPECIFIED"
+          value (0) have the same meaning:  Let the UI choose any valid color when
+          displaying the condition.
+        enum:
+          - CONDITION_DISPLAY_COLOR_UNSPECIFIED
+          - BLUE
+          - BROWN
+          - CYAN
+          - DEEP_ORANGE
+          - GREEN
+          - INDIGO
+          - LIME
+          - ORANGE
+          - PINK
+          - PURPLE
+          - TEAL
+        type: string
+    type: object
+  RemoteConfigParameter:
+    description: |-
+      While default_value and conditional_values are each optional, at least one of
+      the two is required - otherwise, the parameter is meaningless (and an
+      exception will be thrown by the validation logic).
+    properties:
+      conditionalValues:
+        additionalProperties:
+          $ref: '#/definitions/RemoteConfigParameterValue'
+        description: |-
+          Optional - a map of (condition_name, value). The condition_name of the
+          highest priority (the one listed first in the conditions array) determines
+          the value of this parameter.
+        type: object
+      defaultValue:
+        $ref: '#/definitions/RemoteConfigParameterValue'
+        description: |-
+          Optional - value to set the parameter to, when none of the named conditions
+          evaluate to <code>true</code>.
+      description:
+        description: |-
+          Optional.
+          A description for this Parameter. Length must be less than or equal to
+          100 characters (or more precisely, unicode code points, which is defined in
+          java/com/google/wireless/android/config/ConstsExporter.java).
+          A description may contain any Unicode characters
+        type: string
+    type: object
+  RemoteConfigParameterValue:
+    description: |-
+      A RemoteConfigParameter's "value" (either the default value, or the value
+      associated with a condition name) is either a string, or the
+      "use_in_app_default" indicator (which means to leave out the parameter from
+      the returned <key, value> map that is the output of the parameter fetch).
+      We represent the "use_in_app_default" as a bool, but (when using the boolean
+      instead of the string) it should always be <code>true</code>.
+    properties:
+      useInAppDefault:
+        description: 'if true, omit the parameter from the map of fetched parameter values'
+        type: boolean
+      value:
+        description: the string to set the parameter to
+        type: string
+    type: object

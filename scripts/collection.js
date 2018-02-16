@@ -1,25 +1,26 @@
 #!/usr/bin/env node
 'use strict';
 
-var assert = require('assert');
-var fs = require('fs');
-var pathLib = require('path');
-var utilLib = require('util');
+const assert = require('assert');
+const fs = require('fs');
+const pathLib = require('path');
+const utilLib = require('util');
 
-var _ = require('lodash');
-var jp = require('json-pointer');
-var jsonPath = require('jsonpath');
-var converter = require('api-spec-converter');
-var converterVersion = require('api-spec-converter/package.json').version;
-var parseDomain = require('parse-domain');
-var jsonPatch = require('json-merge-patch');
-var YAML = require('js-yaml');
-var Promise = require('bluebird');
+const _ = require('lodash');
+const jp = require('json-pointer');
+const jsonPath = require('jsonpath');
+const converter = require('api-spec-converter');
+const converterVersion = require('api-spec-converter/package.json').version;
+const parseDomain = require('parse-domain');
+const jsonPatch = require('json-merge-patch');
+const jiff = require('jiff');
+const YAML = require('js-yaml');
+const Promise = require('bluebird');
 
-var makeRequest = require('makeRequest');
-var util = require('./util');
-var specSources = require('./spec_sources');
-var sp = require('./sortParameters.js');
+const makeRequest = require('makeRequest');
+const util = require('./util');
+const specSources = require('./spec_sources');
+const sp = require('./sortParameters.js');
 var httpCache;
 try {
   httpCache = YAML.safeLoad(fs.readFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),'utf8'));
@@ -32,6 +33,8 @@ var resolverContext = {
   anyDiff: false,
   called: false
 }
+var fromLeads = false;
+var newBlackList = [];
 
 var warnings = [];
 
@@ -71,7 +74,7 @@ converter.ResourceReaders.url = function (url) {
     headers: {
       'Accept': 'application/json,*/*',
     },
-	retries : 10
+  retries : 10
   };
   var cacheEntry = getCacheEntry(url);
   if (cacheEntry && cacheEntry.etag && resolverContext.etag && resolverContext.format !== 'swagger_1') {
@@ -80,7 +83,7 @@ converter.ResourceReaders.url = function (url) {
   return makeRequest('get', url, options)
     .then(function(result){
       if (result[0].statusCode === 304) {
-		throw new Error('Warning: 304 Not Modified');
+    throw new Error('Warning: 304 Not Modified');
         result[1] = {}; //util.exec('git show '+cacheEntry.gitHash.trim());
       }
       else {
@@ -138,6 +141,7 @@ program
 program
   .command('update')
   .description('run update')
+  .option('-i, --ignore', 'ignore validation errors')
   .option('-f, --force', 'update even if skip flag set')
   .option('-q, --quiet', 'suppress two common warnings')
   .option('-r, --resume <PROVIDER>','resume update at a particular provider')
@@ -149,6 +153,7 @@ program
   .command('validate')
   .description('validate collection')
   .option('-q, --quiet', 'suppress two common warnings')
+  .option('-f, --fix', 'test fixing in validate')
   .arguments('[DIR]')
   .action(validateCollection);
 
@@ -170,8 +175,10 @@ program
   .option('-d, --desclang <LANG>', 'specify description language')
   .option('-c, --categories <CATEGORIES>', 'csv list of categories')
   .option('-f, --fixup', 'try to fix definition')
+  .option('-i, --ignore','ignore validation errors')
   .option('-l, --logo <LOGO>', 'specify logo url')
   .option('-s, --service <NAME>', 'supply service name')
+  .option('-t, --twitter <NAME>', 'supply x-twitter account, logo not needed')
   .option('-u, --unofficial','set unofficial flag')
   .arguments('<FORMAT> <URL>')
   .action(addToCollection);
@@ -187,7 +194,8 @@ function urlsCollection() {
 function refreshCollection(dir) {
   _.each(util.getSpecs(dir), function (swagger, filename) {
     console.log(filename);
-    assert(util.getSwaggerPath(swagger) === filename);
+    if (filename.indexOf('amazonaws.com')<0)
+      assert(util.getSwaggerPath(swagger) === filename);
     util.saveSwagger(swagger);
 
     var fixupPath = util.getSwaggerPath(swagger, 'fixup.yaml')
@@ -210,26 +218,25 @@ function fixupSwagger(swaggerPath) {
 function updateCollection(dir, command) {
   specSources.getLeads(util.getSpecs(dir))
     .then(leads => _.toPairs(leads))
-	.then(leadPairs => {
-		if (command.resume) {
-			_.remove(leadPairs, function(lp){
-				console.log(lp[0],command.resume);
-				return (lp[0] < command.resume);
-			});
-		}
-		return leadPairs;
-	})
+    .then(leadPairs => {
+      if (command.resume) {
+        _.remove(leadPairs, function(lp){
+          return (lp[0] < command.resume);
+        });
+      }
+      return leadPairs;
+    })
     .each(([filename, lead]) => {
       if (lead) {
         var origin = _.cloneDeep(util.getOrigin(lead));
         if (Array.isArray(origin))
-	      origin = origin.pop();
+          origin = origin.pop();
         var source = origin.url;
         var cacheEntry = getCacheEntry(source);
-	    if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-direct'])) {
+        if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-direct'])) {
           console.log('SKIP '+source);
-	      return null;
-	    }
+          return null;
+        }
         return writeSpecFromLead(lead, command)
           .then(swagger => {
             if (swagger) {
@@ -246,6 +253,9 @@ function updateCollection(dir, command) {
     .done(function(){
       console.log('Finishing successfully');
       fs.writeFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),YAML.safeDump(httpCache, {lineWidth:-1}),'utf8');
+      if (newBlackList.length) {
+        console.warn(util.inspect(newBlackList));
+      }
     });
 }
 
@@ -262,12 +272,19 @@ function validateCollection(dir, command) {
   Promise.mapSeries(_.toPairs(specs), ([filename, swagger]) => {
     console.error('======================== ' + filename + ' ================');
     assert(!_.isEmpty(swagger.paths), 'Definition should have operations');
+    //FIXME: we can't do this check yet because of Amazon AWS and some others
+    //_.each(swagger.paths, function (path, key) {
+    //  assert(key.indexOf('?') === -1, 'Path contains hard-coded query parameters');
+    //});
     //FIXME: check location
-    //assert(util.getSwaggerPath(swagger) === filename, 'Incorect location');
+    //assert(util.getSwaggerPath(swagger) === filename, 'Incorrect location');
 
     var source = util.getOriginUrl(swagger);
 
-    return validateSwagger(swagger, source)
+    let f = validateSwagger;
+    if (command.fix) f = validateAndFix;
+
+    return f(swagger, source)
       .then(({errors, warnings}) => {
         if (warnings) {
           if (command.quiet) {
@@ -282,34 +299,74 @@ function validateCollection(dir, command) {
           logYaml(errors);
           throw Error('Validation errors detected');
         }
+        else {
+          if (command.fix) {
+            util.saveSwagger(swagger);
+          }
+        }
       });
   }).done();
 }
 
 function validatePreferred(specs) {
-  var preferred = {}
+  var preferred = {};
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
+    var version = swagger.info.version;
+    var spath = util.getSwaggerPath(swagger);
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
-	assert(Object.keys(swagger.paths).length>0, `"${id}" has no paths`);
+    //assert(Object.keys(swagger.paths).length>0, `"${id}" "${version}" has no paths`);
+    assert(Object.keys(swagger.paths).length>0, `"${spath}" has no paths`);
   });
 
   _.each(preferred, function (versions, id) {
     if (_.size(versions) === 1) {
-      versions = _.values(versions);
-      assert(_.isUndefined(versions[0]) || versions[0] === true,
-        'Preferred not true in "' + id + '"');
+      let oversion = Object.keys(versions)[0];
+      versions = _.values(versions); //?
+      //assert(_.isUndefined(versions[0]) || versions[0] === true,
+      //  'Preferred not true in "' + id + '"');
+      if (versions[0] === false) {
+        let swagger = specs[id.replace(':','/')+'/'+oversion+'/swagger.yaml'];
+        if (swagger) {
+          swagger.info["x-preferred"] = true;
+          util.saveSwagger(swagger);
+        }
+        else console.warn('Not found',id,oversion);
+      }
       return;
     }
 
     var seenTrue = false;
+    var maxVersion = '';
+    var latest = undefined;
     _.each(versions, function (value, version) {
-      assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
+      //assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
+      let swagger = specs[id.replace(':','/')+'/'+version+'/swagger.yaml'];
+      if (_.isUndefined(value)) {
+        if (swagger) {
+          swagger.info["x-preferred"] = false;
+          util.saveSwagger(swagger);
+          value = false;
+        }
+        else console.warn('Not found',id,version);
+      }
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}"`);
       assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}"`);
       seenTrue = value || seenTrue;
+      if ((version > maxVersion) && (version.indexOf('alpha')<0) && (version.indexOf('beta')<0)) {
+        maxVersion = version;
+        latest = swagger;
+      }
     });
+    if (!seenTrue) {
+      if (maxVersion && latest) {
+        console.warn('Forcing preferred true in',id,maxVersion);
+        latest.info["x-preferred"] = true;
+        util.saveSwagger(latest);
+        seenTrue = true;
+      }
+    }
     assert(seenTrue, `At least one preferred should be true in "${id}"`);
   });
 }
@@ -320,11 +377,11 @@ function addToCollection(format, url, command) {
     exPatch.info['x-serviceName'] = command.service;
   if (command.logo) {
     exPatch.info['x-logo'] = {
-	  url: command.logo
-	};
-	if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
-	  exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
-	}
+    url: command.logo
+  };
+  if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
+    exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
+  }
   }
   if (command.unofficial) {
     exPatch.info['x-unofficialSpec'] = true;
@@ -334,6 +391,11 @@ function addToCollection(format, url, command) {
   }
   if (command.desclang) {
     exPatch.info['x-description-language'] = command.desclang;
+  }
+  if (command.twitter) {
+    exPatch.info.contact = {};
+    exPatch.info.contact["x-twitter"] = command.twitter;
+    exPatch.info["x-logo"] = { url: 'https://twitter.com/'+command.twitter+'/profile_image?size=original' };
   }
 
   writeSpec(url, format, exPatch, command)
@@ -382,6 +444,9 @@ function saveFixup(fixupPath, spec, editedSpec) {
   var diff = jsondiffpatch.diff(spec, editedSpec);
   if (!_.isEmpty(diff))
     util.saveYaml(fixupPath, diff);
+  var jpdiff = jiff.diff(spec, editedSpec, {invertible:true});
+  if (!_.isEmpty(jpdiff))
+    util.saveYaml(fixupPath.replace('fixup','jpdiff'), jpdiff);
 }
 
 function appendFixup(fixupPath, spec, editedSpec) {
@@ -394,6 +459,7 @@ function appendFixup(fixupPath, spec, editedSpec) {
 }
 
 function updateCatalogLeads() {
+  fromLeads = true;
   var knownUrls = _.map(util.getSpecs(), util.getOriginUrl);
 
   specSources.getCatalogsLeads()
@@ -425,8 +491,8 @@ function writeSpec(source, format, exPatch, command) {
     anyDiff: false,
     called: false,
     source: source,
-	format: format,
-	etag: !command.slow
+    format: format,
+    etag: !command.slow
   };
 
   return converter.getSpec(source, format)
@@ -443,7 +509,7 @@ function writeSpec(source, format, exPatch, command) {
       context.swagger = swagger;
 
       delete exPatch.info.version; // testing
-	  patchSwagger(swagger, exPatch);
+      patchSwagger(swagger, exPatch);
 
       expandPathTemplates(swagger);
       replaceSpacesInSchemaNames(swagger);
@@ -455,7 +521,7 @@ function writeSpec(source, format, exPatch, command) {
     .then(validation => {
       context.validation = validation;
 
-      if (validation.errors)
+      if (validation.errors && !command.ignore)
         throw Error('Validation errors!!!');
 
       if (command && command.quiet) {
@@ -467,8 +533,12 @@ function writeSpec(source, format, exPatch, command) {
       if (validation.warnings)
         logYaml(validation.warnings);
 
-      if (validation.remotesResolved)
+      if (validation.remotesResolved) {
         context.swagger = validation.remotesResolved;
+      }
+      else {
+        console.warn('No remotesResolved returned');
+      }
 
       var filename = util.saveSwagger(context.swagger);
 
@@ -477,10 +547,10 @@ function writeSpec(source, format, exPatch, command) {
       if (!context.swagger.info.description)
         warnings.push(`Definition has no info.description "${filename}"`);
 
-	  delete exPatch.info['x-providerName'];
-	  delete exPatch.info['x-serviceName'];
-	  delete exPatch.info['x-preferred'];
-	  delete exPatch.info['x-origin'];
+      delete exPatch.info['x-providerName'];
+      delete exPatch.info['x-serviceName'];
+      delete exPatch.info['x-preferred'];
+      delete exPatch.info['x-origin'];
 
       if (Object.keys(exPatch.info).length) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
@@ -494,11 +564,16 @@ function writeSpec(source, format, exPatch, command) {
       return context.swagger;
     })
     .catch(e => {
-      if (e.message.indexOf('Can not')>=0)
-	    e.message = 'Warning: '+e.message;
-      if (resolverContext.anyDiff || (!e.message.startsWith('Warning')))
-        throw new SpecError(e, context);
-      console.log(e.message);
+      if (!fromLeads) {
+        if (e.message.indexOf('Can not')>=0)
+          e.message = 'Warning: '+e.message;
+        if (resolverContext.anyDiff || (!e.message.startsWith('Warning')))
+          throw new SpecError(e, context);
+        console.log(e.message);
+      }
+      else {
+        newBlackList.push(resolverContext.source);
+      }
     });
 }
 
@@ -690,7 +765,7 @@ function expandPathTemplates(swagger) {
 
 function replaceSpacesInSchemaNames(swagger) {
   if (_.isUndefined(swagger.definitions))
-      return;
+    return;
 
   swagger.definitions = _.mapKeys(swagger.definitions, function (value, key) {
     return replaceSpaces(key);
@@ -759,20 +834,34 @@ function fixSpec(swagger, errors) {
         if (value.indexOf(' ') !== -1)
           newValue = value = replaceSpaces(value);
 
+        if (!swagger.definitions)
+          swagger.definitions = {};
+
         if (typeof swagger.definitions[value] !== 'undefined')
           newValue = '#/definitions/' + value;
+        else if (value.indexOf('#/definitions/#/parameters')>=0) {
+          newValue = value.replace('#/definitions/','');
+        }
+        else {
+          if (value.startsWith('#/definitions/')) {
+            console.warn(error.code,value);
+            let ptr = value.replace('#/definitions/','');
+            swagger.definitions[ptr] = { };
+            fixed = true;
+          }
+        }
         break;
       case 'DUPLICATE_OPERATIONID':
         //FIXME: find better solution than to strip all duplicate 'operationId'
-		var operationIds = jsonPath.query(swagger, '$.paths[*][*].operationId');
+        var operationIds = jsonPath.query(swagger, '$.paths[*][*].operationId');
         operationIds = _.filter(operationIds, function (value, index, iteratee) {
           return _.includes(iteratee, value, index + 1);
         });
         jsonPath.apply(swagger, '$.paths[*][*].operationId', function (value) {
           if (_.find(operationIds,function(e){
-		    return e === value;
-		  })) return undefined
-		  else return value;
+            return e === value;
+          })) return undefined
+          else return (value ? value : undefined);
         });
         fixed = true;
         break;
@@ -885,11 +974,17 @@ function validateSwagger(swagger, source) {
       var relativeBase = source.split('/');
       relativeBase.pop();
       relativeBase = relativeBase.join('/');
-      spec.jsonRefs = {relativeBase: relativeBase, loaderOptions: {processContent: 
-	    function (res, cb) {
-	      cb(undefined, YAML.safeLoad(res.text,{json:true}));
+      // 'relativeBase' is for the released version of sway/json-refs, the latest version uses 'location'
+      let jsonRefs = {relativeBase: relativeBase, location: source, loaderOptions: {processContent:
+        function (res, cb) {
+          cb(undefined, YAML.safeLoad(res.text,{json:true}));
         }
-	  }};
+      }};
+      if (source.indexOf('azure.com')>=0) {
+        jsonRefs.includeInvalid = true;
+        jsonRefs.resolveCirculars = true;
+      }
+      spec.jsonRefs = jsonRefs;
       return spec;
     })
     .then(spec => spec.validate())
@@ -1009,9 +1104,9 @@ function convertToSwagger(spec) {
       _.merge(swagger.spec.info, {
         'x-providerName': parseHost(swagger.spec, spec.source)
       });
-	  if (typeof swagger.spec.info['x-origin'] == 'undefined')
+    if (typeof swagger.spec.info['x-origin'] == 'undefined')
         swagger.spec.info['x-origin'] = [];
-	  if (!Array.isArray(swagger.spec.info['x-origin']))
+    if (!Array.isArray(swagger.spec.info['x-origin']))
         swagger.spec.info['x-origin'] = [swagger.spec.info['x-origin']];
       var newOrigin = {
         format: spec.formatName,
@@ -1020,11 +1115,11 @@ function convertToSwagger(spec) {
       };
       if ((newOrigin.format !== 'swagger') || (newOrigin.version !== '2.0')) {
         newOrigin.converter = {
-            url: 'https://github.com/lucybot/api-spec-converter',
-            version: converterVersion
+          url: 'https://github.com/lucybot/api-spec-converter',
+          version: converterVersion
         };
       }
-	  if (!_.isEqual(_.last(swagger.spec.info['x-origin']),newOrigin))
+    if (!_.isEqual(_.last(swagger.spec.info['x-origin']),newOrigin))
         swagger.spec.info['x-origin'].push(newOrigin);
       return swagger.spec;
     });
@@ -1035,7 +1130,12 @@ function parseHost(swagger, altSource) {
 
   assert(swHost, 'Missing host');
   assert(!/^localhost/.test(swHost), 'Can not add localhost API');
+  if (swHost === 'raw.githubusercontent.com') {
+    throw new Error('Warning: relative/github host');
+  }
   assert(swHost !== 'raw.githubusercontent.com', 'Missing host + spec hosted on GitHub');
+  assert(swHost !== 'virtserver.swaggerhub.com', 'Cannot add swaggerhub mock server API');
+  assert(swHost !== 'example.com', 'Cannot add example.com API');
 
   var p = parseDomain(swHost);
   if (!p) p = parseDomain(altSource);
@@ -1070,12 +1170,12 @@ function applyMergePatch(target, patch) {
       return applyMergePatch(target[key], value);
 
     if ((_.isArray(target[key])) && (_.isArray(value)))
-	  return target[key].concat(value);
+    return target[key].concat(value);
 
     if ((typeof target[key] !== 'undefined') && (target[key] === value))
       return value;
 
-	if (key === 'x-providerName')
+    if (key === 'x-providerName')
       return value;
 
     assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key + ' ' + target[key] + ' ' + value);
@@ -1094,9 +1194,9 @@ process.on('exit', function() {
     }
   }
   if (specSources.deletions.length) {
-  	for (var d of specSources.deletions) {
-	  console.log('Deleted? '+d);
-	}
+    for (var d of specSources.deletions) {
+      console.log('Deleted? '+d);
+    }
   }
 });
 

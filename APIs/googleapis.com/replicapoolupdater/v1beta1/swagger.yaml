@@ -16,12 +16,14 @@ info:
   version: v1beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/replicapoolupdater/v1beta1/rest'
       version: v1
@@ -101,16 +103,6 @@ paths:
       description: Retrieves the list of Operation resources contained within the specified zone.
       operationId: replicapoolupdater.zoneOperations.list
       parameters:
-        - description: Name of the project scoping this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone scoping this request.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: Optional. Filter expression for filtering listed resources.
           in: query
           name: filter
@@ -125,6 +117,16 @@ paths:
         - description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Name of the project scoping this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the zone scoping this request.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -155,6 +157,11 @@ paths:
       description: Retrieves the specified zone-specific operation resource.
       operationId: replicapoolupdater.zoneOperations.get
       parameters:
+        - description: Name of the operation resource to return.
+          in: path
+          name: operation
+          required: true
+          type: string
         - description: Name of the project scoping this request.
           in: path
           name: project
@@ -163,11 +170,6 @@ paths:
         - description: Name of the zone scoping this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the operation resource to return.
-          in: path
-          name: operation
           required: true
           type: string
       responses:
@@ -199,16 +201,6 @@ paths:
       description: 'Lists recent updates for a given managed instance group, in reverse chronological order and paginated format.'
       operationId: replicapoolupdater.rollingUpdates.list
       parameters:
-        - description: The Google Developers Console project name.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: Optional. Filter expression for filtering listed resources.
           in: query
           name: filter
@@ -223,6 +215,16 @@ paths:
         - description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: The Google Developers Console project name.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -260,6 +262,10 @@ paths:
       description: Inserts and starts a new update.
       operationId: replicapoolupdater.rollingUpdates.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RollingUpdate'
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -270,10 +276,6 @@ paths:
           name: zone
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RollingUpdate'
       responses:
         '200':
           description: Successful response
@@ -300,14 +302,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -360,14 +362,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -391,21 +393,6 @@ paths:
       description: Lists the current status for each instance within a given update.
       operationId: replicapoolupdater.rollingUpdates.listInstanceUpdates
       parameters:
-        - description: The Google Developers Console project name.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: The name of the update.
-          in: path
-          name: rollingUpdate
-          required: true
-          type: string
         - description: Optional. Filter expression for filtering listed resources.
           in: query
           name: filter
@@ -420,6 +407,21 @@ paths:
         - description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: The Google Developers Console project name.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the update.
+          in: path
+          name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -471,14 +473,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -515,14 +517,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -559,14 +561,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:

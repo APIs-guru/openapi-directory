@@ -3,15 +3,16 @@ info:
   version: '2014-11-06'
   x-release: v4
   title: Amazon Simple Systems Manager (SSM)
-  description: '<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Systems Manager Prerequisites</a>.</p>'
+  description: '<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Systems Manager Prerequisites</a>.</p> <p>For information about other API actions you can perform on Amazon EC2 instances, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API Requests</a>. </p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: ssm.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -100,7 +102,7 @@ paths:
   /:
     post:
       operationId: AddTagsToResource
-      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances, Maintenance Windows, or Parameter Store parameters. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 10 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
+      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 50 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -435,7 +437,7 @@ paths:
   '/#CreatePatchBaseline':
     post:
       operationId: CreatePatchBaseline
-      description: Creates a patch baseline.
+      description: '<p>Creates a patch baseline.</p> <note> <p>For information about valid key and value pairs in <code>PatchFilters</code> for each supported operating system type, see <a href="http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html">PatchFilter</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -472,7 +474,7 @@ paths:
   '/#CreateResourceDataSync':
     post:
       operationId: CreateResourceDataSync
-      description: '<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a href="API_ListResourceDataSync.html">ListResourceDataSync</a> operation.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync">Configuring Resource Data Sync for Inventory</a>.</p>'
+      description: '<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a>ListResourceDataSync</a>.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync">Configuring Resource Data Sync for Inventory</a>.</p>'
       responses:
         '200':
           description: Success
@@ -531,6 +533,10 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
+        '483':
+          description: TooManyUpdates
+          schema:
+            $ref: '#/definitions/TooManyUpdates'
       parameters:
         - name: body
           in: body
@@ -976,7 +982,7 @@ paths:
   '/#DescribeAssociation':
     post:
       operationId: DescribeAssociation
-      description: Describes the associations for the specified Systems Manager document or instance.
+      description: 'Describes the association for the specified target or instance. If you created the association by using the <code>Targets</code> parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and a Systems Manager document, then you retrieve the association by specifying the document name and the instance ID. '
       responses:
         '200':
           description: Success
@@ -987,14 +993,18 @@ paths:
           schema:
             $ref: '#/definitions/AssociationDoesNotExist'
         '481':
+          description: InvalidAssociationVersion
+          schema:
+            $ref: '#/definitions/InvalidAssociationVersion'
+        '482':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
-        '482':
+        '483':
           description: InvalidDocument
           schema:
             $ref: '#/definitions/InvalidDocument'
-        '483':
+        '484':
           description: InvalidInstanceId
           schema:
             $ref: '#/definitions/InvalidInstanceId'
@@ -1024,10 +1034,18 @@ paths:
           schema:
             $ref: '#/definitions/DescribeAutomationExecutionsResult'
         '480':
+          description: InvalidFilterKey
+          schema:
+            $ref: '#/definitions/InvalidFilterKey'
+        '481':
+          description: InvalidFilterValue
+          schema:
+            $ref: '#/definitions/InvalidFilterValue'
+        '482':
           description: InvalidNextToken
           schema:
             $ref: '#/definitions/InvalidNextToken'
-        '481':
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -1037,6 +1055,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeAutomationExecutionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAutomationStepExecutions':
+    post:
+      operationId: DescribeAutomationStepExecutions
+      description: Information about all active and terminated step executions in an Automation workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAutomationStepExecutionsResult'
+        '480':
+          description: AutomationExecutionNotFoundException
+          schema:
+            $ref: '#/definitions/AutomationExecutionNotFoundException'
+        '481':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '482':
+          description: InvalidFilterKey
+          schema:
+            $ref: '#/definitions/InvalidFilterKey'
+        '483':
+          description: InvalidFilterValue
+          schema:
+            $ref: '#/definitions/InvalidFilterValue'
+        '484':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAutomationStepExecutionsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1079,7 +1142,7 @@ paths:
   '/#DescribeDocument':
     post:
       operationId: DescribeDocument
-      description: Describes the specified SSM document.
+      description: Describes the specified Systems Manager document.
       responses:
         '200':
           description: Success
@@ -1910,7 +1973,7 @@ paths:
   '/#GetDocument':
     post:
       operationId: GetDocument
-      description: Gets the contents of the specified SSM document.
+      description: Gets the contents of the specified Systems Manager document.
       responses:
         '200':
           description: Success
@@ -2212,6 +2275,10 @@ paths:
           description: ParameterNotFound
           schema:
             $ref: '#/definitions/ParameterNotFound'
+        '483':
+          description: ParameterVersionNotFound
+          schema:
+            $ref: '#/definitions/ParameterVersionNotFound'
       parameters:
         - name: body
           in: body
@@ -2315,7 +2382,7 @@ paths:
   '/#GetParametersByPath':
     post:
       operationId: GetParametersByPath
-      description: '<p>Retrieve parameters in a specific hierarchy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. </p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>'
+      description: '<p>Retrieve parameters in a specific hierarchy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. </p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p> <note> <p>This API action doesn''t support filtering by tags. </p> </note>'
       responses:
         '200':
           description: Success
@@ -2427,6 +2494,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetPatchBaselineForPatchGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListAssociationVersions':
+    post:
+      operationId: ListAssociationVersions
+      description: Retrieves all versions of an association for a specific association ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAssociationVersionsResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '482':
+          description: AssociationDoesNotExist
+          schema:
+            $ref: '#/definitions/AssociationDoesNotExist'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAssociationVersionsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2593,7 +2697,7 @@ paths:
   '/#ListComplianceItems':
     post:
       operationId: ListComplianceItems
-      description: 'For a specified resource ID, this API returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter. '
+      description: 'For a specified resource ID, this API action returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter. '
       responses:
         '200':
           description: Success
@@ -2638,7 +2742,7 @@ paths:
   '/#ListComplianceSummaries':
     post:
       operationId: ListComplianceSummaries
-      description: 'Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria you specify. '
+      description: 'Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria that you specify. '
       responses:
         '200':
           description: Success
@@ -2712,7 +2816,7 @@ paths:
   '/#ListDocuments':
     post:
       operationId: ListDocuments
-      description: Describes one or more of your SSM documents.
+      description: Describes one or more of your Systems Manager documents.
       responses:
         '200':
           description: Success
@@ -2956,7 +3060,7 @@ paths:
   '/#PutComplianceItems':
     post:
       operationId: PutComplianceItems
-      description: 'Registers a compliance type and other compliance details on a designated resource. This API lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time you send the request.'
+      description: '<p>Registers a compliance type and other compliance details on a designated resource. This action lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request.</p> <p>ComplianceType can be one of the following:</p> <ul> <li> <p>ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.</p> </li> <li> <p>ExecutionType: Specify patch, association, or Custom:<code>string</code>.</p> </li> <li> <p>ExecutionTime. The time the patch, association, or custom compliance item was applied to the instance.</p> </li> <li> <p>Id: The patch, association, or custom compliance ID.</p> </li> <li> <p>Title: A title.</p> </li> <li> <p>Status: The status of the compliance item. For example, <code>approved</code> for patches, or <code>Failed</code> for associations.</p> </li> <li> <p>Severity: A patch severity. For example, <code>critical</code>.</p> </li> <li> <p>DocumentName: A SSM document name. For example, AWS-RunPatchBaseline.</p> </li> <li> <p>DocumentVersion: An SSM document version number. For example, 4.</p> </li> <li> <p>Classification: A patch classification. For example, <code>security updates</code>.</p> </li> <li> <p>PatchBaselineId: A patch baseline ID.</p> </li> <li> <p>PatchSeverity: A patch severity. For example, <code>Critical</code>.</p> </li> <li> <p>PatchState: A patch state. For example, <code>InstancesWithFailedPatches</code>.</p> </li> <li> <p>PatchGroup: The name of a patch group.</p> </li> <li> <p>InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd''T''HH:mm:ss''Z''</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -3121,10 +3225,14 @@ paths:
           schema:
             $ref: '#/definitions/InvalidAllowedPatternException'
         '488':
+          description: ParameterMaxVersionLimitExceeded
+          schema:
+            $ref: '#/definitions/ParameterMaxVersionLimitExceeded'
+        '489':
           description: ParameterPatternMismatchException
           schema:
             $ref: '#/definitions/ParameterPatternMismatchException'
-        '489':
+        '490':
           description: UnsupportedParameterType
           schema:
             $ref: '#/definitions/UnsupportedParameterType'
@@ -3363,10 +3471,14 @@ paths:
           schema:
             $ref: '#/definitions/AutomationExecutionNotFoundException'
         '481':
+          description: AutomationStepNotFoundException
+          schema:
+            $ref: '#/definitions/AutomationStepNotFoundException'
+        '482':
           description: InvalidAutomationSignalException
           schema:
             $ref: '#/definitions/InvalidAutomationSignalException'
-        '482':
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -3477,6 +3589,14 @@ paths:
           schema:
             $ref: '#/definitions/AutomationDefinitionVersionNotFoundException'
         '484':
+          description: IdempotentParameterMismatch
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatch'
+        '485':
+          description: InvalidTarget
+          schema:
+            $ref: '#/definitions/InvalidTarget'
+        '486':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -3510,6 +3630,10 @@ paths:
           schema:
             $ref: '#/definitions/AutomationExecutionNotFoundException'
         '481':
+          description: InvalidAutomationStatusUpdateException
+          schema:
+            $ref: '#/definitions/InvalidAutomationStatusUpdateException'
+        '482':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -3532,7 +3656,7 @@ paths:
   '/#UpdateAssociation':
     post:
       operationId: UpdateAssociation
-      description: 'Updates an association. You can only update the document version, schedule, parameters, and Amazon S3 output of an association.'
+      description: 'Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.'
       responses:
         '200':
           description: Success
@@ -3578,6 +3702,14 @@ paths:
           description: InvalidTarget
           schema:
             $ref: '#/definitions/InvalidTarget'
+        '490':
+          description: InvalidAssociationVersion
+          schema:
+            $ref: '#/definitions/InvalidAssociationVersion'
+        '491':
+          description: AssociationVersionLimitExceeded
+          schema:
+            $ref: '#/definitions/AssociationVersionLimitExceeded'
       parameters:
         - name: body
           in: body
@@ -3777,7 +3909,7 @@ paths:
   '/#UpdateMaintenanceWindowTarget':
     post:
       operationId: UpdateMaintenanceWindowTarget
-      description: '<p>Modifies the target of an existing Maintenance Window. You can''t change the target type, but you can change the following:</p> <p>The target from being an ID target to a Tag target, or a Tag target to an ID target.</p> <p>The IDs of an ID target.</p> <p>The tags of a Tag target.</p> <p>The Owner.</p> <p>The Name.</p> <p>The Description.</p> <p>Also note that if a parameter is null, then the corresponding field is not modified.</p>'
+      description: '<p>Modifies the target of an existing Maintenance Window. You can''t change the target type, but you can change the following:</p> <p>The target from being an ID target to a Tag target, or a Tag target to an ID target.</p> <p>IDs for an ID target.</p> <p>Tags for a Tag target.</p> <p>Owner.</p> <p>Name.</p> <p>Description.</p> <p>If a parameter is null, then the corresponding field is not modified.</p>'
       responses:
         '200':
           description: Success
@@ -3810,7 +3942,7 @@ paths:
   '/#UpdateMaintenanceWindowTask':
     post:
       operationId: UpdateMaintenanceWindowTask
-      description: '<p>Modifies a task assigned to a Maintenance Window. You can''t change the task type, but you can change the following:</p> <p>The Task Arn. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> <p>The service role ARN.</p> <p>The task parameters.</p> <p>The task priority.</p> <p>The task MaxConcurrency and MaxErrors.</p> <p>The log location.</p> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow operation are required for this request. Optional fields that aren''t specified are be set to null.</p>'
+      description: '<p>Modifies a task assigned to a Maintenance Window. You can''t change the task type, but you can change the following values:</p> <p>Task ARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> <p>Service role ARN.</p> <p>Task parameters.</p> <p>Task priority.</p> <p>Task MaxConcurrency and MaxErrors.</p> <p>Log location.</p> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren''t specified are set to null.</p>'
       responses:
         '200':
           description: Success
@@ -3876,7 +4008,7 @@ paths:
   '/#UpdatePatchBaseline':
     post:
       operationId: UpdatePatchBaseline
-      description: Modifies an existing patch baseline. Fields not specified in the request are left unchanged.
+      description: '<p>Modifies an existing patch baseline. Fields not specified in the request are left unchanged.</p> <note> <p>For information about valid key and value pairs in <code>PatchFilters</code> for each supported operating system type, see <a href="http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html">PatchFilter</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3973,7 +4105,7 @@ definitions:
         description: Specifies the type of resource you are tagging.
       ResourceId:
         $ref: '#/definitions/ResourceId'
-        description: The resource ID you want to tag.
+        description: '<p>The resource ID you want to tag.</p> <p>For the ManagedInstance, MaintenanceWindow, and PatchBaseline values, use the ID of the resource, such as mw-01234361858c9b57b for a Maintenance Window.</p> <p>For the Document and Parameter values, use the name of the resource.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: ' One or more tags. The value parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. '
@@ -3983,6 +4115,8 @@ definitions:
   AgentErrorCode:
     type: string
     maxLength: 10
+  AggregatorSchemaOnly:
+    type: boolean
   AllowedPattern:
     type: string
     minLength: 0
@@ -4006,13 +4140,16 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       AssociationId:
         $ref: '#/definitions/AssociationId'
         description: The ID created by the system when you create an association. An association is a binding between a document and a set of targets with a schedule.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The association version.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The version of the document used in the association.
@@ -4028,6 +4165,9 @@ definitions:
       ScheduleExpression:
         $ref: '#/definitions/ScheduleExpression'
         description: A cron expression that specifies a schedule when the association runs.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The association name.
     description: Describes an association of a Systems Manager document and an instance.
   AssociationAlreadyExists:
     type: object
@@ -4038,10 +4178,13 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The association version.
       Date:
         $ref: '#/definitions/DateTime'
         description: The date when the association was made.
@@ -4078,6 +4221,9 @@ definitions:
       LastSuccessfulExecutionDate:
         $ref: '#/definitions/DateTime'
         description: The last date on which the association was successfully run.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The association name.
     description: Describes the parameters for a document.
   AssociationDescriptionList:
     type: array
@@ -4111,6 +4257,7 @@ definitions:
       - AssociationStatusName
       - LastExecutedBefore
       - LastExecutedAfter
+      - AssociationName
   AssociationFilterList:
     type: array
     items:
@@ -4130,6 +4277,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Association'
+  AssociationName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
   AssociationOverview:
     type: object
     properties:
@@ -4178,6 +4328,54 @@ definitions:
       - Pending
       - Success
       - Failed
+  AssociationVersion:
+    type: string
+    pattern: '([$]LATEST)|([1-9][0-9]*)'
+  AssociationVersionInfo:
+    type: object
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The ID created by the system when the association was created.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The association version.
+      CreatedDate:
+        $ref: '#/definitions/DateTime'
+        description: The date the association version was created.
+      Name:
+        $ref: '#/definitions/DocumentName'
+        description: The name specified when the association was created.
+      DocumentVersion:
+        $ref: '#/definitions/DocumentVersion'
+        description: The version of a Systems Manager document used when the association version was created.
+      Parameters:
+        $ref: '#/definitions/Parameters'
+        description: Parameters specified when the association version was created.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: 'The targets specified for the association when the association version was created. '
+      ScheduleExpression:
+        $ref: '#/definitions/ScheduleExpression'
+        description: The cron or rate schedule specified for the association when the association version was created.
+      OutputLocation:
+        $ref: '#/definitions/InstanceAssociationOutputLocation'
+        description: The location in Amazon S3 specified for the association when the association version was created.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The name specified for the association version when the association version was created.
+    description: Information about the association version.
+  AssociationVersionLimitExceeded:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'You have reached the maximum number versions allowed for an association. Each association has a limit of 1,000 versions. '
+  AssociationVersionList:
+    type: array
+    items:
+      $ref: '#/definitions/AssociationVersionInfo'
+    minItems: 1
   AttributeName:
     type: string
     minLength: 1
@@ -4225,6 +4423,9 @@ definitions:
       StepExecutions:
         $ref: '#/definitions/StepExecutionList'
         description: A list of details about the current state of all steps that comprise an execution. An Automation document contains a list of steps that are executed in order.
+      StepExecutionsTruncated:
+        $ref: '#/definitions/Boolean'
+        description: 'A boolean value that indicates if the response contains the full list of the Automation step executions. If true, use the DescribeAutomationStepExecutions API action to get the full list of step executions.'
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
         description: 'The key-value map of execution parameters, which were supplied when calling StartAutomationExecution.'
@@ -4234,6 +4435,39 @@ definitions:
       FailureMessage:
         $ref: '#/definitions/String'
         description: 'A message describing why an execution has failed, if the status is set to Failed.'
+      Mode:
+        $ref: '#/definitions/ExecutionMode'
+        description: The automation execution mode.
+      ParentAutomationExecutionId:
+        $ref: '#/definitions/AutomationExecutionId'
+        description: The AutomationExecutionId of the parent automation.
+      ExecutedBy:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the user who executed the automation.
+      CurrentStepName:
+        $ref: '#/definitions/String'
+        description: The name of the currently executing step.
+      CurrentAction:
+        $ref: '#/definitions/String'
+        description: The action of the currently executing step.
+      TargetParameterName:
+        $ref: '#/definitions/AutomationParameterKey'
+        description: The parameter name.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: The specified targets.
+      ResolvedTargets:
+        $ref: '#/definitions/ResolvedTargets'
+        description: A list of resolved targets in the rate control execution.
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: The MaxConcurrency value specified by the user when the execution started.
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: The MaxErrors value specified by the user when the execution started.
+      Target:
+        $ref: '#/definitions/String'
+        description: The target of the execution.
     description: Detailed information about the current state of an individual Automation execution.
   AutomationExecutionFilter:
     type: object
@@ -4243,7 +4477,7 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/AutomationExecutionFilterKey'
-        description: The aspect of the Automation execution information that should be limited.
+        description: 'One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.'
       Values:
         $ref: '#/definitions/AutomationExecutionFilterValueList'
         description: The values used to limit the execution information associated with the filter's key.
@@ -4253,6 +4487,11 @@ definitions:
     enum:
       - DocumentNamePrefix
       - ExecutionStatus
+      - ExecutionId
+      - ParentExecutionId
+      - CurrentAction
+      - StartTimeBefore
+      - StartTimeAfter
   AutomationExecutionFilterList:
     type: array
     items:
@@ -4309,13 +4548,44 @@ definitions:
       Outputs:
         $ref: '#/definitions/AutomationParameterMap'
         description: The list of execution outputs as defined in the Automation document.
+      Mode:
+        $ref: '#/definitions/ExecutionMode'
+        description: The Automation execution mode.
+      ParentAutomationExecutionId:
+        $ref: '#/definitions/AutomationExecutionId'
+        description: The ExecutionId of the parent Automation.
+      CurrentStepName:
+        $ref: '#/definitions/String'
+        description: The name of the currently executing step.
+      CurrentAction:
+        $ref: '#/definitions/String'
+        description: The action of the currently executing step.
+      FailureMessage:
+        $ref: '#/definitions/String'
+        description: The list of execution outputs as defined in the Automation document.
+      TargetParameterName:
+        $ref: '#/definitions/AutomationParameterKey'
+        description: The list of execution outputs as defined in the Automation document.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: The targets defined by the user when starting the Automation.
+      ResolvedTargets:
+        $ref: '#/definitions/ResolvedTargets'
+        description: A list of targets that resolved during the execution.
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: The MaxConcurrency value specified by the user when starting the Automation.
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: The MaxErrors value specified by the user when starting the Automation.
+      Target:
+        $ref: '#/definitions/String'
+        description: The list of execution outputs as defined in the Automation document.
     description: Details about a specific Automation execution.
   AutomationExecutionMetadataList:
     type: array
     items:
       $ref: '#/definitions/AutomationExecutionMetadata'
-    minItems: 0
-    maxItems: 50
   AutomationExecutionNotFoundException:
     type: object
     properties:
@@ -4330,6 +4600,7 @@ definitions:
       - Waiting
       - Success
       - TimedOut
+      - Cancelling
       - Cancelled
       - Failed
   AutomationParameterKey:
@@ -4357,6 +4628,12 @@ definitions:
       $ref: '#/definitions/AutomationParameterValue'
     minItems: 0
     maxItems: 10
+  AutomationStepNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The specified step name and execution ID don't exist. Verify the information and try again.
   BaselineDescription:
     type: string
     minLength: 1
@@ -4661,7 +4938,7 @@ definitions:
     properties:
       ComplianceType:
         $ref: '#/definitions/ComplianceTypeName'
-        description: 'The compliance type. For example, Association (for a State Manager association), Patch, or Custom:<code>string</code> are all valide compliance types.'
+        description: 'The compliance type. For example, Association (for a State Manager association), Patch, or Custom:<code>string</code> are all valid compliance types.'
       ResourceType:
         $ref: '#/definitions/ComplianceResourceType'
         description: The type of resource. <code>ManagedInstance</code> is currently the only supported resource type.
@@ -4679,7 +4956,7 @@ definitions:
         description: The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
       Severity:
         $ref: '#/definitions/ComplianceSeverity'
-        description: 'The severity of the compliance status. Severity can be one of the following: Critical, HIGH, Medium, Low, Informational, Unspecified.'
+        description: 'The severity of the compliance status. Severity can be one of the following: Critical, High, Medium, Low, Informational, Unspecified.'
       ExecutionSummary:
         $ref: '#/definitions/ComplianceExecutionSummary'
         description: 'A summary for the compliance item. The summary includes an execution ID, the execution type (for example, command), and the execution time.'
@@ -4786,7 +5063,7 @@ definitions:
         description: The name of the filter.
       Values:
         $ref: '#/definitions/ComplianceStringFilterValueList'
-        description: The value you want to search for.
+        description: The value for which to search.
       Type:
         $ref: '#/definitions/ComplianceQueryOperatorType'
         description: 'The type of comparison that should be performed for the value: Equal, NotEqual, BeginWith, LessThan, or GreaterThan.'
@@ -4917,6 +5194,9 @@ definitions:
       OutputLocation:
         $ref: '#/definitions/InstanceAssociationOutputLocation'
         description: An Amazon S3 bucket where you want to store the results of this request.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: Specify a descriptive name for the association.
     description: Describes the association of a Systems Manager document and an instance.
   CreateAssociationBatchResult:
     type: object
@@ -4953,6 +5233,9 @@ definitions:
       OutputLocation:
         $ref: '#/definitions/InstanceAssociationOutputLocation'
         description: An Amazon S3 bucket where you want to store the output details of the request.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: Specify a descriptive name for the association.
   CreateAssociationResult:
     type: object
     properties:
@@ -4967,13 +5250,19 @@ definitions:
     properties:
       Content:
         $ref: '#/definitions/DocumentContent'
-        description: A valid JSON string.
+        description: A valid JSON or YAML string.
       Name:
         $ref: '#/definitions/DocumentName'
-        description: A name for the Systems Manager document.
+        description: '<p>A name for the Systems Manager document.</p> <important> <p>Do not use the following to begin the names of documents you create. They are reserved by AWS for use as document prefixes:</p> <ul> <li> <p> <code>aws</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>'
       DocumentType:
         $ref: '#/definitions/DocumentType'
         description: 'The type of document to create. Valid document types include: Policy, Automation, and Command.'
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.
+      TargetType:
+        $ref: '#/definitions/TargetType'
+        description: 'Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of ''/'' the document can run on all types of resources. If you don''t specify a value, the document can''t run on any resources. For a list of valid resource types, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. '
   CreateDocumentResult:
     type: object
     properties:
@@ -4994,7 +5283,7 @@ definitions:
         description: The name of the Maintenance Window.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
-        description: 'An optional description for the Maintenance Window. We recommend specifying a description to help your organize your Maintenance Windows. '
+        description: 'An optional description for the Maintenance Window. We recommend specifying a description to help you organize your Maintenance Windows. '
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
         description: The schedule of the Maintenance Window in the form of a cron or rate expression.
@@ -5006,7 +5295,7 @@ definitions:
         description: The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
       AllowUnassociatedTargets:
         $ref: '#/definitions/MaintenanceWindowAllowUnassociatedTargets'
-        description: Whether targets must be registered with the Maintenance Window before tasks can be defined for those targets.
+        description: '<p>Enables a Maintenance Window task to execute on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the Maintenance Window </p> <p>If you don''t enable this option, then you must specify previously-registered targets when you register a task with the Maintenance Window. </p>'
       ClientToken:
         $ref: '#/definitions/ClientToken'
         description: User-provided idempotency token.
@@ -5023,7 +5312,7 @@ definitions:
     properties:
       OperatingSystem:
         $ref: '#/definitions/OperatingSystem'
-        description: 'Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS.'
+        description: Defines the operating system the patch baseline applies to. The Default value is WINDOWS.
       Name:
         $ref: '#/definitions/BaselineName'
         description: The name of the patch baseline.
@@ -5039,12 +5328,18 @@ definitions:
       ApprovedPatchesComplianceLevel:
         $ref: '#/definitions/PatchComplianceLevel'
         description: 'Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. Valid compliance severity levels include the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.'
+      ApprovedPatchesEnableNonSecurity:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly rejected patches for the baseline.
       Description:
         $ref: '#/definitions/BaselineDescription'
         description: A description of the patch baseline.
+      Sources:
+        $ref: '#/definitions/PatchSourceList'
+        description: 'Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.'
       ClientToken:
         $ref: '#/definitions/ClientToken'
         description: User-provided idempotency token.
@@ -5238,7 +5533,7 @@ definitions:
         description: The ID of the target definition to remove.
       Safe:
         $ref: '#/definitions/Boolean'
-        description: 'The system checks if the target is being referenced by a task. If the target is being referenced, the system returns and error and does not deregister the target from the Maintenance Window.'
+        description: 'The system checks if the target is being referenced by a task. If the target is being referenced, the system returns an error and does not deregister the target from the Maintenance Window.'
   DeregisterTargetFromMaintenanceWindowResult:
     type: object
     properties:
@@ -5315,13 +5610,16 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The instance ID.
       AssociationId:
         $ref: '#/definitions/AssociationId'
         description: The association ID for which you want information.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: 'Specify the association version to retrieve. To view the latest version, either specify <code>$LATEST</code> for this parameter, or omit this parameter. To view a list of all associations for an instance, use ListInstanceAssociations. To get a list of versions for a specific association, use ListAssociationVersions. '
   DescribeAssociationResult:
     type: object
     properties:
@@ -5346,6 +5644,35 @@ definitions:
       AutomationExecutionMetadataList:
         $ref: '#/definitions/AutomationExecutionMetadataList'
         description: 'The list of details about each automation execution which has occurred which matches the filter specification, if any.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
+  DescribeAutomationStepExecutionsRequest:
+    type: object
+    required:
+      - AutomationExecutionId
+    properties:
+      AutomationExecutionId:
+        $ref: '#/definitions/AutomationExecutionId'
+        description: The Automation execution ID for which you want step execution descriptions.
+      Filters:
+        $ref: '#/definitions/StepExecutionFilterList'
+        description: One or more filters to limit the number of step executions returned by the request.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      ReverseOrder:
+        $ref: '#/definitions/Boolean'
+        description: A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.
+  DescribeAutomationStepExecutionsResult:
+    type: object
+    properties:
+      StepExecutions:
+        $ref: '#/definitions/StepExecutionList'
+        description: A list of details about the current state of all steps that make up an execution.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -5395,7 +5722,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version for which you want information. Can be a specific version or the default version.
@@ -5404,7 +5731,7 @@ definitions:
     properties:
       Document:
         $ref: '#/definitions/DocumentDescription'
-        description: Information about the SSM document.
+        description: Information about the Systems Manager document.
   DescribeEffectiveInstanceAssociationsRequest:
     type: object
     required:
@@ -5852,7 +6179,7 @@ definitions:
     properties:
       Sha1:
         $ref: '#/definitions/DocumentSha1'
-        description: 'The SHA1 hash of the document, which you can use for verification purposes.'
+        description: 'The SHA1 hash of the document, which you can use for verification.'
       Hash:
         $ref: '#/definitions/DocumentHash'
         description: <p>The Sha256 or Sha1 hash created by the system when the document was created. </p> <note> <p>Sha1 hashes have been deprecated.</p> </note>
@@ -5861,16 +6188,16 @@ definitions:
         description: <p>Sha256 or Sha1.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       Owner:
         $ref: '#/definitions/DocumentOwner'
-        description: The AWS user account of the person who created the document.
+        description: The AWS user account that created the document.
       CreatedDate:
         $ref: '#/definitions/DateTime'
         description: The date when the document was created.
       Status:
         $ref: '#/definitions/DocumentStatus'
-        description: The status of the SSM document.
+        description: The status of the Systems Manager document.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
@@ -5882,7 +6209,7 @@ definitions:
         description: A description of the parameters for a document.
       PlatformTypes:
         $ref: '#/definitions/PlatformTypeList'
-        description: 'The list of OS platforms compatible with this SSM document. '
+        description: 'The list of OS platforms compatible with this Systems Manager document. '
       DocumentType:
         $ref: '#/definitions/DocumentType'
         description: 'The type of document. '
@@ -5895,7 +6222,16 @@ definitions:
       DefaultVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The default version.
-    description: 'Describes an SSM document. '
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: 'The document format, either JSON or YAML.'
+      TargetType:
+        $ref: '#/definitions/TargetType'
+        description: 'The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags, or metadata, that have been applied to the document.'
+    description: 'Describes a Systems Manager document. '
   DocumentFilter:
     type: object
     required:
@@ -5924,6 +6260,11 @@ definitions:
   DocumentFilterValue:
     type: string
     minLength: 1
+  DocumentFormat:
+    type: string
+    enum:
+      - YAML
+      - JSON
   DocumentHash:
     type: string
     maxLength: 256
@@ -5937,10 +6278,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       Owner:
         $ref: '#/definitions/DocumentOwner'
-        description: The AWS user account of the person who created the document.
+        description: The AWS user account that created the document.
       PlatformTypes:
         $ref: '#/definitions/PlatformTypeList'
         description: 'The operating system platform. '
@@ -5953,17 +6294,54 @@ definitions:
       SchemaVersion:
         $ref: '#/definitions/DocumentSchemaVersion'
         description: The schema version.
-    description: Describes the name of an SSM document.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: 'The document format, either JSON or YAML.'
+      TargetType:
+        $ref: '#/definitions/TargetType'
+        description: 'The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags, or metadata, that have been applied to the document.'
+    description: Describes the name of a Systems Manager document.
   DocumentIdentifierList:
     type: array
     items:
       $ref: '#/definitions/DocumentIdentifier'
+  DocumentKeyValuesFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/DocumentKeyValuesFilterKey'
+        description: The name of the filter key.
+      Values:
+        $ref: '#/definitions/DocumentKeyValuesFilterValues'
+        description: The value for the filter key.
+    description: '<p>One or more filters. Use a filter to return a more specific list of documents.</p> <p>For keys, you can specify one or more tags that have been applied to a document. </p> <p>Other valid values include Owner, Name, PlatformTypes, and DocumentType.</p> <p>Note that only one Owner can be specified in a request. For example: <code>Key=Owner,Values=Self</code>.</p> <p>If you use Name as a key, you can use a name prefix to return a list of documents. For example, in the AWS CLI, to return a list of all documents that begin with <code>Te</code>, run the following command:</p> <p> <code>aws ssm list-documents --filters Key=Name,Values=Te</code> </p> <p>If you specify more than two keys, only documents that are identified by all the tags are returned in the results. If you specify more than two values for a key, documents that are identified by any of the values are returned in the results.</p> <p>To specify a custom key and value pair, use the format <code>Key=tag:[tagName],Values=[valueName]</code>.</p> <p>For example, if you created a Key called region and are using the AWS CLI to call the <code>list-documents</code> command: </p> <p> <code>aws ssm list-documents --filters Key=tag:region,Values=east,west Key=Owner,Values=Self</code> </p>'
+  DocumentKeyValuesFilterKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  DocumentKeyValuesFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentKeyValuesFilter'
+    minItems: 0
+    maxItems: 6
+  DocumentKeyValuesFilterValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  DocumentKeyValuesFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentKeyValuesFilterValue'
   DocumentLimitExceeded:
     type: object
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: You can have at most 200 active SSM documents.
+    description: You can have at most 200 active Systems Manager documents.
   DocumentName:
     type: string
     pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
@@ -6046,6 +6424,9 @@ definitions:
       IsDefaultVersion:
         $ref: '#/definitions/Boolean'
         description: An identifier for the default version of the document.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: 'The document format, either JSON or YAML.'
     description: Version information about the document.
   DocumentVersionLimitExceeded:
     type: object
@@ -6066,7 +6447,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: Error returned when the ID specified for a resource (e.g. a Maintenance Window) doesn't exist.
+    description: '<p>Error returned when the ID specified for a resource, such as a Maintenance Window or Patch baseline, doesn''t exist.</p> <p>For information about resource limits in Systems Manager, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_ssm">AWS Systems Manager Limits</a>.</p>'
   DuplicateDocumentContent:
     type: object
     properties:
@@ -6097,6 +6478,11 @@ definitions:
       $ref: '#/definitions/EffectivePatch'
   ErrorCount:
     type: integer
+  ExecutionMode:
+    type: string
+    enum:
+      - Auto
+      - Interactive
   ExpirationDate:
     type: string
     format: date-time
@@ -6141,7 +6527,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: 'You attempted to register a LAMBDA or STEP_FUNCTION task in a region where there corresponding service is not available. '
+    description: 'You attempted to register a LAMBDA or STEP_FUNCTION task in a region where the corresponding service is not available. '
   GetAutomationExecutionRequest:
     type: object
     required:
@@ -6268,31 +6654,40 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version for which you want information.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: Returns the document in the specified format. The document format can be either JSON or YAML. JSON is the default format.
   GetDocumentResult:
     type: object
     properties:
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
       Content:
         $ref: '#/definitions/DocumentContent'
-        description: The contents of the SSM document.
+        description: The contents of the Systems Manager document.
       DocumentType:
         $ref: '#/definitions/DocumentType'
         description: The document type.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: 'The document format, either JSON or YAML.'
   GetInventoryRequest:
     type: object
     properties:
       Filters:
         $ref: '#/definitions/InventoryFilterList'
         description: One or more filters. Use a filter to return a more specific list of results.
+      Aggregators:
+        $ref: '#/definitions/InventoryAggregatorList'
+        description: 'Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the <code>AWS:InstanceInformation.PlatformType</code> type, you can see a count of how many Windows and Linux instances exist in your inventoried fleet.'
       ResultAttributes:
         $ref: '#/definitions/ResultAttributeList'
         description: The list of inventory item types to return.
@@ -6327,6 +6722,9 @@ definitions:
       MaxResults:
         $ref: '#/definitions/GetInventorySchemaMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      Aggregator:
+        $ref: '#/definitions/AggregatorSchemaOnly'
+        description: 'Returns inventory schemas that support aggregation. For example, this call returns the <code>AWS:InstanceInformation</code> type, because it supports aggregation based on the <code>PlatformName</code>, <code>PlatformType</code>, and <code>PlatformVersion</code> attributes.'
       SubType:
         $ref: '#/definitions/IsSubTypeSchema'
         description: Returns the sub-type schema for a specified inventory type.
@@ -6377,7 +6775,7 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution the task is part of.
+        description: The ID of the Maintenance Window execution for which the task is a part.
       TaskId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
         description: 'The ID of the specific task in the Maintenance Window task that should be retrieved. '
@@ -6404,7 +6802,7 @@ definitions:
         description: 'Retrieves the task type for a Maintenance Window. Task types include the following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.'
       Parameters:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskInvocationParameters'
-        description: The parameters used at the time the task executed.
+        description: The parameters used at the time that the task executed.
       Status:
         $ref: '#/definitions/MaintenanceWindowExecutionStatus'
         description: The task status for an invocation.
@@ -6413,13 +6811,13 @@ definitions:
         description: The details explaining the status. Details are only available for certain status values.
       StartTime:
         $ref: '#/definitions/DateTime'
-        description: The time the task started executing on the target.
+        description: The time that the task started executing on the target.
       EndTime:
         $ref: '#/definitions/DateTime'
-        description: The time the task finished executing on the target.
+        description: The time that the task finished executing on the target.
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
-        description: 'User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window. '
+        description: 'User-provided value to be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window. '
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTaskTargetId'
         description: The Maintenance Window target ID.
@@ -6544,7 +6942,7 @@ definitions:
         description: The targets where the task should execute.
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
-        description: 'TaskArn is the resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document Name/ARN. For LAMBDA tasks, TaskArn is the Function Name/ARN. For STEP_FUNCTION tasks, the TaskArn is the State Machine ARN.'
+        description: 'The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value is the state machine ARN.'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
         description: The IAM service role to assume during task execution.
@@ -6568,7 +6966,7 @@ definitions:
         description: The maximum number of errors allowed before the task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: The location in Amazon S3 where the task results will be logged.
+        description: The location in Amazon S3 where the task results are logged.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The retrieved task name.
@@ -6629,7 +7027,7 @@ definitions:
     properties:
       Path:
         $ref: '#/definitions/PSParameterName'
-        description: '<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. Examples: /Environment/Test/DBString003</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p>'
+        description: 'The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33</code> '
       Recursive:
         $ref: '#/definitions/Boolean'
         description: Retrieve all parameters within a hierarchy.
@@ -6729,6 +7127,9 @@ definitions:
       ApprovedPatchesComplianceLevel:
         $ref: '#/definitions/PatchComplianceLevel'
         description: Returns the specified compliance severity level for approved patches in the patch baseline.
+      ApprovedPatchesEnableNonSecurity:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly rejected patches for the baseline.
@@ -6744,13 +7145,16 @@ definitions:
       Description:
         $ref: '#/definitions/BaselineDescription'
         description: A description of the patch baseline.
+      Sources:
+        $ref: '#/definitions/PatchSourceList'
+        description: 'Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.'
   HierarchyLevelLimitExceededException:
     type: object
     properties:
       message:
         $ref: '#/definitions/String'
-        description: '<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. </p>'
-    description: '<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. </p>'
+        description: 'A hierarchy can have a maximum of 15 levels. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. '
+    description: 'A hierarchy can have a maximum of 15 levels. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. '
   HierarchyTypeMismatchException:
     type: object
     properties:
@@ -6765,6 +7169,11 @@ definitions:
   IamRole:
     type: string
     maxLength: 64
+  IdempotencyToken:
+    type: string
+    pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+    minLength: 36
+    maxLength: 36
   IdempotentParameterMismatch:
     type: object
     properties:
@@ -6793,6 +7202,9 @@ definitions:
       Content:
         $ref: '#/definitions/DocumentContent'
         description: The content of the association document for the instance(s).
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: Version information for the association on the instance.
     description: 'One or more association documents on the instance. '
   InstanceAssociationExecutionSummary:
     type: string
@@ -6837,6 +7249,9 @@ definitions:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The association document verions.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The version of the association applied to the instance.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The instance ID where the association was created.
@@ -6858,6 +7273,9 @@ definitions:
       OutputUrl:
         $ref: '#/definitions/InstanceAssociationOutputUrl'
         description: A URL for an Amazon S3 bucket where you want to store the results of this request.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The name of the association applied to the instance.
     description: Status information about the instance association.
   InstanceAssociationStatusInfos:
     type: array
@@ -7130,6 +7548,12 @@ definitions:
         $ref: '#/definitions/String'
         description: The request does not meet the regular expression requirement.
     description: The request does not meet the regular expression requirement.
+  InvalidAssociationVersion:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'The version you specified is not valid. Use ListAssociationVersions to view all versions of an association according to the association ID. Or, use the <code>$LATEST</code> parameter to view the latest version of the association.'
   InvalidAutomationExecutionParametersException:
     type: object
     properties:
@@ -7142,6 +7566,12 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The signal is not valid for the current Automation execution.
+  InvalidAutomationStatusUpdateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The specified update status operation is not valid.
   InvalidCommandId:
     type: object
     properties: {}
@@ -7257,7 +7687,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: You must specify values for all required parameters in the SSM document. You can only supply values to parameters defined in the SSM document.
+    description: You must specify values for all required parameters in the Systems Manager document. You can only supply values to parameters defined in the Systems Manager document.
   InvalidPermissionType:
     type: object
     properties:
@@ -7275,7 +7705,7 @@ definitions:
   InvalidResourceType:
     type: object
     properties: {}
-    description: 'The resource type is not valid. If you are attempting to tag an instance, the instance must be a registered, managed instance.'
+    description: 'The resource type is not valid. For example, if you are attempting to tag an instance, the instance must be a registered, managed instance.'
   InvalidResultAttributeException:
     type: object
     properties:
@@ -7287,7 +7717,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: 'The role name can''t contain invalid characters. Also verify that you specified an IAM role for notifications that includes the required trust policy. For information about configuring the IAM role for Run Command notifications, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html">Configuring Amazon SNS Notifications for Run Command</a> in the <i>Amazon EC2 Systems Manager User Guide</i>.'
+    description: 'The role name can''t contain invalid characters. Also verify that you specified an IAM role for notifications that includes the required trust policy. For information about configuring the IAM role for Run Command notifications, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html">Configuring Amazon SNS Notifications for Run Command</a> in the <i>AWS Systems Manager User Guide</i>.'
   InvalidSchedule:
     type: object
     properties:
@@ -7312,6 +7742,26 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The update is not valid.
+  InventoryAggregator:
+    type: object
+    properties:
+      Expression:
+        $ref: '#/definitions/InventoryAggregatorExpression'
+        description: The inventory type and attribute name for aggregation.
+      Aggregators:
+        $ref: '#/definitions/InventoryAggregatorList'
+        description: Nested aggregators to further refine aggregation for an inventory type.
+    description: Specifies the inventory type and attribute for the aggregation execution.
+  InventoryAggregatorExpression:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  InventoryAggregatorList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryAggregator'
+    minItems: 1
+    maxItems: 10
   InventoryAttributeDataType:
     type: string
     enum:
@@ -7453,6 +7903,9 @@ definitions:
       Attributes:
         $ref: '#/definitions/InventoryItemAttributeList'
         description: The schema attributes for inventory. This contains data type and attribute name.
+      DisplayName:
+        $ref: '#/definitions/InventoryTypeDisplayName'
+        description: The alias name of the inventory type. The alias name is used for display purposes.
     description: The inventory item schema definition. Users can use this to compose inventory query filters.
   InventoryItemSchemaResultList:
     type: array
@@ -7486,7 +7939,7 @@ definitions:
         description: 'ID of the inventory result entity. For example, for managed instance inventory the result will be the managed instance ID. For EC2 instance inventory, the result will be the instance ID. '
       Data:
         $ref: '#/definitions/InventoryResultItemMap'
-        description: The data section in the inventory result entity json.
+        description: The data section in the inventory result entity JSON.
     description: Inventory query results.
   InventoryResultEntityId:
     type: string
@@ -7528,6 +7981,8 @@ definitions:
           $ref: '#/definitions/InventoryResultItemKey'
         value:
           $ref: '#/definitions/InventoryResultItem'
+  InventoryTypeDisplayName:
+    type: string
   InvocationDoesNotExist:
     type: object
     properties: {}
@@ -7569,6 +8024,29 @@ definitions:
   LastSuccessfulResourceDataSyncTime:
     type: string
     format: date-time
+  ListAssociationVersionsRequest:
+    type: object
+    required:
+      - AssociationId
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The association ID for which you want to view all versions.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to start the list. Use this token to get the next set of results. '
+  ListAssociationVersionsResult:
+    type: object
+    properties:
+      AssociationVersions:
+        $ref: '#/definitions/AssociationVersionList'
+        description: Information about all versions of the association for the specified association ID.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
   ListAssociationsRequest:
     type: object
     properties:
@@ -7655,10 +8133,10 @@ definitions:
         description: One or more compliance filters. Use a filter to return a more specific list of results.
       ResourceIds:
         $ref: '#/definitions/ComplianceResourceIdList'
-        description: 'The ID for the resources from which you want to get compliance information. Currently, you can only specify one resource ID.'
+        description: 'The ID for the resources from which to get compliance information. Currently, you can only specify one resource ID.'
       ResourceTypes:
         $ref: '#/definitions/ComplianceResourceTypeList'
-        description: 'The type of resource from which you want to get compliance information. Currently, the only supported resource type is <code>ManagedInstance</code>.'
+        description: 'The type of resource from which to get compliance information. Currently, the only supported resource type is <code>ManagedInstance</code>.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'A token to start the list. Use this token to get the next set of results. '
@@ -7691,7 +8169,7 @@ definitions:
     properties:
       ComplianceSummaryItems:
         $ref: '#/definitions/ComplianceSummaryItemList'
-        description: 'A list of compliant and non-compliant summary counts based on compliance types. For example, this call returns State Manager associations, patches, or custom compliance types according to the filter criteria you specified.'
+        description: 'A list of compliant and non-compliant summary counts based on compliance types. For example, this call returns State Manager associations, patches, or custom compliance types according to the filter criteria that you specified.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. Use this token to get the next set of results.
@@ -7724,6 +8202,9 @@ definitions:
       DocumentFilterList:
         $ref: '#/definitions/DocumentFilterList'
         description: One or more filters. Use a filter to return a more specific list of results.
+      Filters:
+        $ref: '#/definitions/DocumentKeyValuesFilterList'
+        description: One or more filters. Use a filter to return a more specific list of results.
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -7735,7 +8216,7 @@ definitions:
     properties:
       DocumentIdentifiers:
         $ref: '#/definitions/DocumentIdentifierList'
-        description: The names of the SSM documents.
+        description: The names of the Systems Manager documents.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -7798,7 +8279,7 @@ definitions:
     properties:
       ResourceComplianceSummaryItems:
         $ref: '#/definitions/ResourceComplianceSummaryItemList'
-        description: 'A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch statuses, or custom items according to the filter criteria you specify. '
+        description: 'A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify. '
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. Use this token to get the next set of results.
@@ -7854,6 +8335,8 @@ definitions:
         $ref: '#/definitions/S3Region'
         description: The region where the Amazon S3 bucket is located.
     description: Information about an Amazon S3 bucket to write instance-level logs to.
+  Long:
+    type: integer
   MaintenanceWindowAllowUnassociatedTargets:
     type: boolean
   MaintenanceWindowAutomationParameters:
@@ -7861,11 +8344,11 @@ definitions:
     properties:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
-        description: The version of an SSM Automation document to use during task execution.
+        description: The version of an Automation document to use during task execution.
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
-        description: Parameters for the AUTOMATION task.
-    description: Parameters for an AUTOMATION task type.
+        description: The parameters for the AUTOMATION task.
+    description: The parameters for an AUTOMATION task type.
   MaintenanceWindowCutoff:
     type: integer
     minimum: 0
@@ -8090,14 +8573,14 @@ definitions:
     properties:
       ClientContext:
         $ref: '#/definitions/MaintenanceWindowLambdaClientContext'
-        description: Using the ClientContext you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable.
+        description: Pass client-specific information to the Lambda function that you are invoking. You can then process the client information in your Lambda function as you choose through the context variable.
       Qualifier:
         $ref: '#/definitions/MaintenanceWindowLambdaQualifier'
-        description: 'You can use this optional parameter to specify a Lambda function version or alias name. If you specify a function version, the API uses the qualified function ARN to invoke a specific Lambda function. If you specify an alias name, the API uses the alias ARN to invoke the Lambda function version to which the alias points.'
+        description: '(Optional) Specify a Lambda function version or alias name. If you specify a function version, the action uses the qualified function ARN to invoke a specific Lambda function. If you specify an alias name, the action uses the alias ARN to invoke the Lambda function version to which the alias points.'
       Payload:
         $ref: '#/definitions/MaintenanceWindowLambdaPayload'
-        description: JSON that you want to provide to your Lambda function as input.
-    description: Parameters for a LAMBDA task type.
+        description: JSON to provide to your Lambda function as input.
+    description: The parameters for a LAMBDA task type.
   MaintenanceWindowLambdaPayload:
     type: string
     maxLength: 4096
@@ -8127,13 +8610,13 @@ definitions:
         description: Information about the command(s) to execute.
       DocumentHash:
         $ref: '#/definitions/DocumentHash'
-        description: The Sha256 or Sha1 hash created by the system when the document was created. Sha1 hashes have been deprecated.
+        description: The SHA-256 or SHA-1 hash created by the system when the document was created. SHA-1 hashes have been deprecated.
       DocumentHashType:
         $ref: '#/definitions/DocumentHashType'
-        description: Sha256 or Sha1. Sha1 hashes have been deprecated.
+        description: SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
       NotificationConfig:
         $ref: '#/definitions/NotificationConfig'
-        description: Configurations for sending notifications about command status changes on a per instance basis.
+        description: Configurations for sending notifications about command status changes on a per-instance basis.
       OutputS3BucketName:
         $ref: '#/definitions/S3BucketName'
         description: The name of the Amazon S3 bucket.
@@ -8142,14 +8625,14 @@ definitions:
         description: The Amazon S3 bucket subfolder.
       Parameters:
         $ref: '#/definitions/Parameters'
-        description: Parameters for the RUN_COMMAND task execution.
+        description: The parameters for the RUN_COMMAND task execution.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: The IAM service role that to assume during task execution.
+        description: The IAM service role to assume during task execution.
       TimeoutSeconds:
         $ref: '#/definitions/TimeoutSeconds'
-        description: 'If this time is reached and the command has not already started executing, it will not execute.'
-    description: Parameters for a RUN_COMMAND task type.
+        description: 'If this time is reached and the command has not already started executing, it doesn not execute.'
+    description: The parameters for a RUN_COMMAND task type.
   MaintenanceWindowSchedule:
     type: string
     minLength: 1
@@ -8171,7 +8654,7 @@ definitions:
       Name:
         $ref: '#/definitions/MaintenanceWindowStepFunctionsName'
         description: The name of the STEP_FUNCTION task.
-    description: Parameters for the STEP_FUNCTION execution.
+    description: The parameters for the STEP_FUNCTION execution.
   MaintenanceWindowTarget:
     type: object
     properties:
@@ -8217,7 +8700,7 @@ definitions:
         description: The task ID.
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
-        description: 'TaskArn is the resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document Name/ARN. For LAMBDA tasks, it''s the Function Name/ARN. For STEP_FUNCTION tasks, it''s the State Machine ARN.'
+        description: 'The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, <code>TaskArn</code> is the Systems Manager document name or ARN. For LAMBDA tasks, it''s the function name or ARN. For STEP_FUNCTION tasks, it''s the state machine ARN.'
       Type:
         $ref: '#/definitions/MaintenanceWindowTaskType'
         description: 'The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or STEP_FUNCTION.'
@@ -8263,17 +8746,17 @@ definitions:
     properties:
       RunCommand:
         $ref: '#/definitions/MaintenanceWindowRunCommandParameters'
-        description: Parameters for a RUN_COMMAND task type.
+        description: The parameters for a RUN_COMMAND task type.
       Automation:
         $ref: '#/definitions/MaintenanceWindowAutomationParameters'
-        description: Parameters for a AUTOMATION task type.
+        description: The parameters for a AUTOMATION task type.
       StepFunctions:
         $ref: '#/definitions/MaintenanceWindowStepFunctionsParameters'
-        description: Parameters for a STEP_FUNCTION task type.
+        description: The parameters for a STEP_FUNCTION task type.
       Lambda:
         $ref: '#/definitions/MaintenanceWindowLambdaParameters'
-        description: Parameters for a LAMBDA task type.
-    description: Parameters for task execution.
+        description: The parameters for a LAMBDA task type.
+    description: The parameters for task execution.
   MaintenanceWindowTaskList:
     type: array
     items:
@@ -8403,7 +8886,7 @@ definitions:
         description: An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
       NotificationEvents:
         $ref: '#/definitions/NotificationEventList'
-        description: 'The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html">Setting Up Events and Notifications</a> in the <i>Amazon EC2 Systems Manager User Guide</i>.'
+        description: 'The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html">Setting Up Events and Notifications</a> in the <i>AWS Systems Manager User Guide</i>.'
       NotificationType:
         $ref: '#/definitions/NotificationType'
         description: 'Command: Receive notification when the status of a command changes. Invocation: For commands sent to multiple instances, receive notification on a per-instance basis when the status of a command changes. '
@@ -8433,6 +8916,7 @@ definitions:
       - AMAZON_LINUX
       - UBUNTU
       - REDHAT_ENTERPRISE_LINUX
+      - SUSE
   OwnerInformation:
     type: string
     minLength: 1
@@ -8441,11 +8925,13 @@ definitions:
   PSParameterName:
     type: string
     minLength: 1
-    maxLength: 1024
+    maxLength: 2048
   PSParameterValue:
     type: string
     minLength: 1
     maxLength: 4096
+  PSParameterVersion:
+    type: integer
   Parameter:
     type: object
     properties:
@@ -8458,6 +8944,9 @@ definitions:
       Value:
         $ref: '#/definitions/PSParameterValue'
         description: The parameter value.
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: The parameter version.
     description: An Amazon EC2 Systems Manager parameter in Parameter Store.
   ParameterAlreadyExists:
     type: object
@@ -8467,7 +8956,7 @@ definitions:
     description: The parameter already exists. You can't create duplicate parameters.
   ParameterDescription:
     type: string
-    minLength: 1
+    minLength: 0
     maxLength: 1024
   ParameterHistory:
     type: object
@@ -8496,6 +8985,9 @@ definitions:
       AllowedPattern:
         $ref: '#/definitions/AllowedPattern'
         description: <p>Parameter names can include the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: The parameter version.
     description: Information about parameter usage.
   ParameterHistoryList:
     type: array
@@ -8516,6 +9008,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Parameter'
+  ParameterMaxVersionLimitExceeded:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The parameter exceeded the maximum number of allowed versions.
   ParameterMetadata:
     type: object
     properties:
@@ -8540,6 +9038,9 @@ definitions:
       AllowedPattern:
         $ref: '#/definitions/AllowedPattern'
         description: <p>A parameter name can include only the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: The parameter version.
     description: Metada includes information like the ARN of the last user and the date/time the parameter was last used.
   ParameterMetadataList:
     type: array
@@ -8616,6 +9117,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ParameterValue'
+  ParameterVersionNotFound:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: 'The specified parameter version was not found. Verify the parameter name and version, and try again.'
   Parameters:
     type: array
     items:
@@ -8637,7 +9144,7 @@ definitions:
       Values:
         $ref: '#/definitions/ParametersFilterValueList'
         description: The filter values.
-    description: One or more filters. Use a filter to return a more specific list of results.
+    description: 'This data type is deprecated. Instead, use <a>ParameterStringFilter</a>.'
   ParametersFilterKey:
     type: string
     enum:
@@ -8712,7 +9219,7 @@ definitions:
         description: The name of the patch baseline.
       OperatingSystem:
         $ref: '#/definitions/OperatingSystem'
-        description: 'Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS. '
+        description: 'Defines the operating system the patch baseline applies to. The Default value is WINDOWS. '
       BaselineDescription:
         $ref: '#/definitions/BaselineDescription'
         description: The description of the patch baseline.
@@ -8805,11 +9312,11 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/PatchFilterKey'
-        description: 'The key for the filter (PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID)'
+        description: <p>The key for the filter.</p> <p>See <a>PatchFilter</a> for lists of valid keys for each operating system type.</p>
       Values:
         $ref: '#/definitions/PatchFilterValueList'
-        description: The value for the filter key.
-    description: Defines a patch filter.
+        description: <p>The value for the filter key.</p> <p>See <a>PatchFilter</a> for lists of valid values for each key based on operating system type.</p>
+    description: '<p>Defines a patch filter.</p> <p>A patch filter consists of key/value pairs, but not all keys are valid for all operating system types. For example, the key <code>PRODUCT</code> is valid for all supported operating system types. The key <code>MSRC_SEVERITY</code>, however, is valid only for Windows operating systems, and the key <code>SECTION</code> is valid only for Ubuntu operating systems.</p> <p>Refer to the following sections for information about which keys may be used with each major operating system, and which values are valid for each key.</p> <p> <b>Windows Operating Systems</b> </p> <p>The supported keys for Windows operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>MSRC_SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Windows7</code> </p> </li> <li> <p> <code>Windows8</code> </p> </li> <li> <p> <code>Windows8.1</code> </p> </li> <li> <p> <code>Windows8Embedded</code> </p> </li> <li> <p> <code>Windows10</code> </p> </li> <li> <p> <code>Windows10LTSB</code> </p> </li> <li> <p> <code>WindowsServer2008</code> </p> </li> <li> <p> <code>WindowsServer2008R2</code> </p> </li> <li> <p> <code>WindowsServer2012</code> </p> </li> <li> <p> <code>WindowsServer2012R2</code> </p> </li> <li> <p> <code>WindowsServer2016</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>CriticalUpdates</code> </p> </li> <li> <p> <code>DefinitionUpdates</code> </p> </li> <li> <p> <code>Drivers</code> </p> </li> <li> <p> <code>FeaturePacks</code> </p> </li> <li> <p> <code>SecurityUpdates</code> </p> </li> <li> <p> <code>ServicePacks</code> </p> </li> <li> <p> <code>Tools</code> </p> </li> <li> <p> <code>UpdateRollups</code> </p> </li> <li> <p> <code>Updates</code> </p> </li> <li> <p> <code>Upgrades</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>MSRC_SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Moderate</code> </p> </li> <li> <p> <code>Low</code> </p> </li> <li> <p> <code>Unspecified</code> </p> </li> </ul> <p> <b>Ubuntu Operating Systems</b> </p> <p>The supported keys for Ubuntu operating systems are <code>PRODUCT</code>, <code>PRIORITY</code>, and <code>SECTION</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Ubuntu14.04</code> </p> </li> <li> <p> <code>Ubuntu16.04</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>PRIORITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Required</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Standard</code> </p> </li> <li> <p> <code>Optional</code> </p> </li> <li> <p> <code>Extra</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SECTION</code> </p> <p>Only the length of the key value is validated. Minimum length is 1. Maximum length is 64.</p> <p> <b>Amazon Linux Operating Systems</b> </p> <p>The supported keys for Amazon Linux operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>AmazonLinux2012.03</code> </p> </li> <li> <p> <code>AmazonLinux2012.09</code> </p> </li> <li> <p> <code>AmazonLinux2013.03</code> </p> </li> <li> <p> <code>AmazonLinux2013.09</code> </p> </li> <li> <p> <code>AmazonLinux2014.03</code> </p> </li> <li> <p> <code>AmazonLinux2014.09</code> </p> </li> <li> <p> <code>AmazonLinux2015.03</code> </p> </li> <li> <p> <code>AmazonLinux2015.09</code> </p> </li> <li> <p> <code>AmazonLinux2016.03</code> </p> </li> <li> <p> <code>AmazonLinux2016.09</code> </p> </li> <li> <p> <code>AmazonLinux2017.03</code> </p> </li> <li> <p> <code>AmazonLinux2017.09</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Security</code> </p> </li> <li> <p> <code>Bugfix</code> </p> </li> <li> <p> <code>Enhancement</code> </p> </li> <li> <p> <code>Recommended</code> </p> </li> <li> <p> <code>Newpackage</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Medium</code> </p> </li> <li> <p> <code>Low</code> </p> </li> </ul> <p> <b>RedHat Enterprise Linux (RHEL) Operating Systems</b> </p> <p>The supported keys for RedHat Enterprise Linux operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>RedhatEnterpriseLinux6.5</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux6.6</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux6.7</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux6.8</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux6.9</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.0</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.1</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.2</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.3</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.4</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Security</code> </p> </li> <li> <p> <code>Bugfix</code> </p> </li> <li> <p> <code>Enhancement</code> </p> </li> <li> <p> <code>Recommended</code> </p> </li> <li> <p> <code>Newpackage</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Medium</code> </p> </li> <li> <p> <code>Low</code> </p> </li> </ul> <p> <b>SUSE Linux Enterprise Server (SUSE) Operating Systems</b> </p> <p>The supported keys for SUSE operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Suse12.0</code> </p> </li> <li> <p> <code>Suse12.1</code> </p> </li> <li> <p> <code>Suse12.2</code> </p> </li> <li> <p> <code>Suse12.3</code> </p> </li> <li> <p> <code>Suse12.4</code> </p> </li> <li> <p> <code>Suse12.5</code> </p> </li> <li> <p> <code>Suse12.6</code> </p> </li> <li> <p> <code>Suse12.7</code> </p> </li> <li> <p> <code>Suse12.8</code> </p> </li> <li> <p> <code>Suse12.9</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Security</code> </p> </li> <li> <p> <code>Recommended</code> </p> </li> <li> <p> <code>Optional</code> </p> </li> <li> <p> <code>Feature</code> </p> </li> <li> <p> <code>Document</code> </p> </li> <li> <p> <code>Yast</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Moderate</code> </p> </li> <li> <p> <code>Low</code> </p> </li> </ul>'
   PatchFilterGroup:
     type: object
     required:
@@ -8950,6 +9457,9 @@ definitions:
       ApproveAfterDays:
         $ref: '#/definitions/ApproveAfterDays'
         description: The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline.
+      EnableNonSecurity:
+        $ref: '#/definitions/Boolean'
+        description: 'For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is ''false''. Applies to Linux instances only.'
     description: Defines an approval rule for a patch baseline.
   PatchRuleGroup:
     type: object
@@ -8968,6 +9478,47 @@ definitions:
     maxItems: 10
   PatchSeverity:
     type: string
+  PatchSource:
+    type: object
+    required:
+      - Name
+      - Products
+      - Configuration
+    properties:
+      Name:
+        $ref: '#/definitions/PatchSourceName'
+        description: The name specified to identify the patch source.
+      Products:
+        $ref: '#/definitions/PatchSourceProductList'
+        description: 'The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7". For lists of supported product values, see <a>PatchFilter</a>.'
+      Configuration:
+        $ref: '#/definitions/PatchSourceConfiguration'
+        description: '<p>The value of the yum repo configuration. For example:</p> <p> <code>cachedir=/var/cache/yum/$basesearch</code> </p> <p> <code>$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debualevel=2</code> </p>'
+    description: 'Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only.'
+  PatchSourceConfiguration:
+    type: string
+    minLength: 1
+    maxLength: 512
+    format: password
+  PatchSourceList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchSource'
+    minItems: 0
+    maxItems: 20
+  PatchSourceName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,50}$'
+  PatchSourceProduct:
+    type: string
+    minLength: 1
+    maxLength: 128
+  PatchSourceProductList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchSourceProduct'
+    minItems: 1
+    maxItems: 20
   PatchStatus:
     type: object
     properties:
@@ -9028,7 +9579,7 @@ definitions:
         description: 'Information about the compliance as defined by the resource type. For example, for a patch compliance type, <code>Items</code> includes information about the PatchSeverity, Classification, etc.'
       ItemContentHash:
         $ref: '#/definitions/ComplianceItemContentHash'
-        description: 'MD5 or Sha256 content hash. The content hash is used to determine if existing information should be overwritten or ignored. If the content hashes match, ,the request to put compliance information is ignored.'
+        description: 'MD5 or SHA-256 content hash. The content hash is used to determine if existing information should be overwritten or ignored. If the content hashes match, the request to put compliance information is ignored.'
   PutComplianceItemsResult:
     type: object
     properties: {}
@@ -9056,10 +9607,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/PSParameterName'
-        description: The name of the parameter that you want to add to the system.
+        description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>For information about parameter name requirements and restrictions, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about">About Creating Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>'
       Description:
         $ref: '#/definitions/ParameterDescription'
-        description: Information about the parameter that you want to add to the system
+        description: Information about the parameter that you want to add to the system.
       Value:
         $ref: '#/definitions/PSParameterValue'
         description: The parameter value that you want to add to the system.
@@ -9077,7 +9628,10 @@ definitions:
         description: 'A regular expression used to validate the parameter value. For example, for String types with values restricted to numbers, you can specify the following: AllowedPattern=^\d+$ '
   PutParameterResult:
     type: object
-    properties: {}
+    properties:
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: 'The new version number of a parameter. If you edit a parameter value, Parameter Store automatically creates a new version and assigns this new version a unique ID. You can reference a parameter version ID in API actions or in Systems Manager documents (SSM documents). By default, if you don''t specify a specific version, the system returns the latest parameter value when a parameter is called.'
   RegisterDefaultPatchBaselineRequest:
     type: object
     required:
@@ -9178,7 +9732,7 @@ definitions:
         description: The parameters that should be passed to the task when it is executed.
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
-        description: 'Parameters the task should use during execution. Populate only the fields that match the task type. All other fields should be empty. '
+        description: 'The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty. '
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
         description: 'The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.'
@@ -9233,6 +9787,16 @@ definitions:
   RemoveTagsFromResourceResult:
     type: object
     properties: {}
+  ResolvedTargets:
+    type: object
+    properties:
+      ParameterValues:
+        $ref: '#/definitions/TargetParameterList'
+        description: A list of parameter values sent to targets that resolved during the Automation execution.
+      Truncated:
+        $ref: '#/definitions/Boolean'
+        description: A boolean value indicating whether the resolved target list is truncated.
+    description: Information about targets that resolved during the Automation execution.
   ResourceComplianceSummaryItem:
     type: object
     properties:
@@ -9265,6 +9829,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceComplianceSummaryItem'
+  ResourceDataSyncAWSKMSKeyARN:
+    type: string
+    pattern: 'arn:.*'
+    minLength: 1
+    maxLength: 512
   ResourceDataSyncAlreadyExistsException:
     type: object
     properties:
@@ -9345,6 +9914,9 @@ definitions:
       Region:
         $ref: '#/definitions/ResourceDataSyncS3Region'
         description: The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.
+      AWSKMSKeyARN:
+        $ref: '#/definitions/ResourceDataSyncAWSKMSKeyARN'
+        description: The ARN of an encryption key for a destination in Amazon S3. Must belong to the same region as the destination Amazon S3 bucket.
     description: Information about the target Amazon S3 bucket for the Resource Data Sync.
   ResourceDataSyncS3Format:
     type: string
@@ -9371,7 +9943,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: Error returned when the caller has exceeded the default resource limits (e.g. too many Maintenance Windows have been created).
+    description: '<p>Error returned when the caller has exceeded the default resource limits. For example, too many Maintenance Windows or Patch baselines have been created.</p> <p>For information about resource limits in Systems Manager, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_ssm">AWS Systems Manager Limits</a>.</p>'
   ResourceType:
     type: string
     enum:
@@ -9381,9 +9953,11 @@ definitions:
   ResourceTypeForTagging:
     type: string
     enum:
+      - Document
       - ManagedInstance
       - MaintenanceWindow
       - Parameter
+      - PatchBaseline
   ResponseCode:
     type: integer
   ResultAttribute:
@@ -9539,6 +10113,9 @@ definitions:
     enum:
       - Approve
       - Reject
+      - StartStep
+      - StopStep
+      - Resume
   SnapshotDownloadUrl:
     type: string
   SnapshotId:
@@ -9566,6 +10143,24 @@ definitions:
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
         description: 'A key-value map of execution parameters, which match the declared parameters in the Automation document.'
+      ClientToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: 'User-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can''t be reused.'
+      Mode:
+        $ref: '#/definitions/ExecutionMode'
+        description: 'The execution mode of the automation. Valid modes include the following: Auto and Interactive. The default mode is Auto.'
+      TargetParameterName:
+        $ref: '#/definitions/AutomationParameterKey'
+        description: The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify Targets.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: A key-value mapping to target resources. Required if you specify TargetParameterName.
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: 'The maximum number of targets allowed to run this task in parallel. You can specify a number, such as 10, or a percentage, such as 10%. The default value is 10.'
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: '<p>The number of errors that are allowed before the system stops running the automation on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops running the automation when the fourth error is received. If you specify 0, then the system stops running the automation on additional targets after the first error result is returned. If you run an automation on 50 resources and set max-errors to 10%, then the system stops running the automation on additional targets when the sixth error is received.</p> <p>Executions that are already running an automation when max-errors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one at a time.</p>'
   StartAutomationExecutionResult:
     type: object
     properties:
@@ -9598,6 +10193,15 @@ definitions:
       Action:
         $ref: '#/definitions/AutomationActionName'
         description: The action this step performs. The action determines the behavior of the step.
+      TimeoutSeconds:
+        $ref: '#/definitions/Long'
+        description: The timeout seconds of the step.
+      OnFailure:
+        $ref: '#/definitions/String'
+        description: The action to take if the step fails. The default value is Abort.
+      MaxAttempts:
+        $ref: '#/definitions/Integer'
+        description: The maximum number of tries to run the action of the step. The default value is 1.
       ExecutionStartTime:
         $ref: '#/definitions/DateTime'
         description: 'If a step has begun execution, this contains the time the step started. If the step is in Pending status, this field is not populated.'
@@ -9625,13 +10229,55 @@ definitions:
       FailureDetails:
         $ref: '#/definitions/FailureDetails'
         description: Information about the Automation failure.
+      StepExecutionId:
+        $ref: '#/definitions/String'
+        description: The unique ID of a step execution.
+      OverriddenParameters:
+        $ref: '#/definitions/AutomationParameterMap'
+        description: A user-specified list of parameters to override when executing a step.
     description: Detailed information about an the execution state of an Automation step.
+  StepExecutionFilter:
+    type: object
+    required:
+      - Key
+      - Values
+    properties:
+      Key:
+        $ref: '#/definitions/StepExecutionFilterKey'
+        description: 'One or more keys to limit the results. Valid filter keys include the following: StepName, Action, StepExecutionId, StepExecutionStatus, StartTimeBefore, StartTimeAfter.'
+      Values:
+        $ref: '#/definitions/StepExecutionFilterValueList'
+        description: The values of the filter key.
+    description: A filter to limit the amount of step execution information returned by the call.
+  StepExecutionFilterKey:
+    type: string
+    enum:
+      - StartTimeBefore
+      - StartTimeAfter
+      - StepExecutionStatus
+      - StepExecutionId
+      - StepName
+      - Action
+  StepExecutionFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/StepExecutionFilter'
+    minItems: 1
+    maxItems: 6
+  StepExecutionFilterValue:
+    type: string
+    minLength: 1
+    maxLength: 150
+  StepExecutionFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/StepExecutionFilterValue'
+    minItems: 1
+    maxItems: 10
   StepExecutionList:
     type: array
     items:
       $ref: '#/definitions/StepExecution'
-    minItems: 0
-    maxItems: 100
   StopAutomationExecutionRequest:
     type: object
     required:
@@ -9640,9 +10286,17 @@ definitions:
       AutomationExecutionId:
         $ref: '#/definitions/AutomationExecutionId'
         description: The execution ID of the Automation to stop.
+      Type:
+        $ref: '#/definitions/StopType'
+        description: 'The stop request type. Valid types include the following: Cancel and Complete. The default type is Cancel.'
   StopAutomationExecutionResult:
     type: object
     properties: {}
+  StopType:
+    type: string
+    enum:
+      - Complete
+      - Cancel
   String:
     type: string
   StringDateTime:
@@ -9670,7 +10324,7 @@ definitions:
       Value:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
-    description: 'Metadata that you assign to your managed instances. Tags enable you to categorize your managed instances in different ways, for example, by purpose, owner, or environment.'
+    description: 'Metadata that you assign to your AWS resources. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. In Systems Manager, you can apply tags to documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines.'
   TagKey:
     type: string
     pattern: '^\(\?!^\(\?i\)aws:\)\(\?=^[\p\{L\}\p\{Z\}\p\{N\}_.:/=\+\-@]*$\).*$'
@@ -9708,6 +10362,14 @@ definitions:
     pattern: '^[\p{L}\p{Z}\p{N}_.:/=\-@]*$'
     minLength: 1
     maxLength: 128
+  TargetParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterValue'
+  TargetType:
+    type: string
+    pattern: '^\/[\w\.\-\:\/]*$'
+    maxLength: 200
   TargetValue:
     type: string
   TargetValues:
@@ -9749,7 +10411,7 @@ definitions:
         $ref: '#/definitions/InventoryItemTypeName'
       Message:
         $ref: '#/definitions/String'
-    description: 'The <code>Context</code> attribute you specified for the <code>InventoryItem</code> is not allowed for this inventory type. You can only use the <code>Context</code> attribute with inventory types like <code>AWS:ComplianceItem</code>.'
+    description: 'The <code>Context</code> attribute that you specified for the <code>InventoryItem</code> is not allowed for this inventory type. You can only use the <code>Context</code> attribute with inventory types like <code>AWS:ComplianceItem</code>.'
   UnsupportedInventorySchemaVersionException:
     type: object
     properties:
@@ -9800,6 +10462,12 @@ definitions:
       Targets:
         $ref: '#/definitions/Targets'
         description: The targets of the association.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The name of the association that you want to update.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: 'This parameter is provided for concurrency control purposes. You must specify the latest association version in the service. If you want to ensure that this request succeeds, either specify <code>$LATEST</code>, or omit this parameter.'
   UpdateAssociationResult:
     type: object
     properties:
@@ -9815,7 +10483,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
@@ -9861,6 +10529,12 @@ definitions:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The version of the document that you want to update.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: Specify the document format for the new document version. Systems Manager supports JSON and YAML documents. JSON is the default format.
+      TargetType:
+        $ref: '#/definitions/TargetType'
+        description: Specify a new target type for the document.
   UpdateDocumentResult:
     type: object
     properties:
@@ -9898,7 +10572,7 @@ definitions:
         description: Whether the Maintenance Window is enabled.
       Replace:
         $ref: '#/definitions/Boolean'
-        description: 'If you specify True, then all fields that are required by the CreateMaintenanceWindow API are also required for this API request. Optional fields that are not specified will be set to null. '
+        description: 'If True, then all fields that are required by the CreateMaintenanceWindow action are also required for this API request. Optional fields that are not specified are set to null. '
   UpdateMaintenanceWindowResult:
     type: object
     properties:
@@ -9934,13 +10608,13 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID for which you want to modify the target.
+        description: The Maintenance Window ID with which to modify the target.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
-        description: The target ID that you want to modify.
+        description: The target ID to modify.
       Targets:
         $ref: '#/definitions/Targets'
-        description: The targets that you want to add or replace.
+        description: The targets to add or replace.
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
         description: User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
@@ -9952,7 +10626,7 @@ definitions:
         description: An optional description for the update.
       Replace:
         $ref: '#/definitions/Boolean'
-        description: 'If you specify True, then all fields that are required by the RegisterTargetWithMaintenanceWindow API are also required for this API request. Optional fields that are not specified will be set to null.'
+        description: 'If True, then all fields that are required by the RegisterTargetWithMaintenanceWindow action are also required for this API request. Optional fields that are not specified are set to null.'
   UpdateMaintenanceWindowTargetResult:
     type: object
     properties:
@@ -9982,55 +10656,55 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID that contains the task that you want to modify.
+        description: The Maintenance Window ID that contains the task to modify.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The task ID that you want to modify.
+        description: The task ID to modify.
       Targets:
         $ref: '#/definitions/Targets'
-        description: 'The targets (either instances or tags) that you want to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. '
+        description: 'The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. '
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
-        description: The task ARN that you want to modify.
+        description: The task ARN to modify.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: 'The IAM service role ARN that you want to modify. The system assumes this role during task exectuion. '
+        description: 'The IAM service role ARN to modify. The system assumes this role during task execution. '
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: '<p>The parameters that you want to modify. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
+        description: '<p>The parameters to modify. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
-        description: Parameters the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.
+        description: The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
-        description: 'The new task priority that you want to specify. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.'
+        description: 'The new task priority to specify. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.'
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: The new <code>MaxConcurrency</code> value you want to specify. <code>MaxConcurrency</code> is the number of targets that are allowed to run this task in parallel.
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
-        description: The new <code>MaxErrors</code> value you want to specify. <code>MaxErrors</code> is the maximum number of errors that are allowed before the task stops being scheduled.
+        description: The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum number of errors that are allowed before the task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: The new logging location in Amazon S3 that you want to specify.
+        description: The new logging location in Amazon S3 to specify.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The new task name that you want to specify.
+        description: The new task name to specify.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
-        description: The new task description that you want to specify.
+        description: The new task description to specify.
       Replace:
         $ref: '#/definitions/Boolean'
-        description: 'If you specify True, then all fields that are required by the RegisterTaskWithMaintenanceWndow API are also required for this API request. Optional fields that are not specified will be set to null.'
+        description: 'If True, then all fields that are required by the RegisterTaskWithMaintenanceWndow action are also required for this API request. Optional fields that are not specified are set to null.'
   UpdateMaintenanceWindowTaskResult:
     type: object
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID that was updated.
+        description: The ID of the Maintenance Window that was updated.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The Maintenance Window task ID that was updated.
+        description: The task ID of the Maintenance Window that was updated.
       Targets:
         $ref: '#/definitions/Targets'
         description: The updated target values.
@@ -10102,12 +10776,21 @@ definitions:
       ApprovedPatchesComplianceLevel:
         $ref: '#/definitions/PatchComplianceLevel'
         description: Assigns a new compliance severity level to an existing patch baseline.
+      ApprovedPatchesEnableNonSecurity:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly rejected patches for the baseline.
       Description:
         $ref: '#/definitions/BaselineDescription'
         description: A description of the patch baseline.
+      Sources:
+        $ref: '#/definitions/PatchSourceList'
+        description: 'Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.'
+      Replace:
+        $ref: '#/definitions/Boolean'
+        description: 'If True, then all fields that are required by the CreatePatchBaseline action are also required for this API request. Optional fields that are not specified are set to null.'
   UpdatePatchBaselineResult:
     type: object
     properties:
@@ -10132,6 +10815,9 @@ definitions:
       ApprovedPatchesComplianceLevel:
         $ref: '#/definitions/PatchComplianceLevel'
         description: The compliance severity level assigned to the patch baseline after the update completed.
+      ApprovedPatchesEnableNonSecurity:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly rejected patches for the baseline.
@@ -10144,6 +10830,9 @@ definitions:
       Description:
         $ref: '#/definitions/BaselineDescription'
         description: A description of the Patch Baseline.
+      Sources:
+        $ref: '#/definitions/PatchSourceList'
+        description: 'Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.'
   Url:
     type: string
   Version:

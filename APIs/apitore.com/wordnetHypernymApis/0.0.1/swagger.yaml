@@ -1,0 +1,115 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/42
+info:
+  description: 'Return hypernym words.<BR />[Endpoint] https://api.apitore.com/api/42'
+  title: WordNet hypernym APIs
+  version: 0.0.1
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: 'https://apitore.com/img/apis/42.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/42'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: wordnetHypernymApis
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Wordnet Simple Parts Controller
+    name: wordnet-simple-parts-controller
+paths:
+  /wordnet-simple/hypernym:
+    get:
+      description: 'Japanese WordNet.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/wordnet-response">wordnet-response</a><BR />&nbsp; Class: com.apitore.banana.response.de.sciss.ws4j.LinksResponseEntity<BR />'
+      operationId: simpleHypernymUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: Word
+          in: query
+          name: word
+          required: true
+          type: string
+        - default: 'n,v,a,r'
+          description: 'Part-of-speech. You can specify several pos by csv format. [n:noun,v:verb,a:adjective,r:adverb]'
+          in: query
+          name: pos
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LinksResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Simple WordNet WebAPI. Return hypernym words.
+      tags:
+        - wordnet-simple-parts-controller
+definitions:
+  LinkWordsEntity:
+    properties:
+      labelen:
+        description: Link label En
+        type: string
+      labelja:
+        description: Link label Ja
+        type: string
+      pos:
+        description: Input part-of-speech
+        type: string
+      words:
+        description: Link words
+        items:
+          type: string
+        type: array
+    required:
+      - labelen
+      - labelja
+      - pos
+      - words
+    type: object
+  LinksResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      entries:
+        description: Entries
+        items:
+          $ref: '#/definitions/LinkWordsEntity'
+        type: array
+      log:
+        description: Log message
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+      word:
+        description: Input word
+        type: string
+    required:
+      - endTime
+      - entries
+      - log
+      - processTime
+      - startTime
+      - word
+    type: object

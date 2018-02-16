@@ -16,12 +16,14 @@ info:
   version: v2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/fusiontables/v2/rest'
       version: v1
@@ -106,6 +108,10 @@ paths:
         - DESCRIBE
       operationId: fusiontables.query.sqlGet
       parameters:
+        - description: Whether column names are included (in the first row). Default is true.
+          in: query
+          name: hdrs
+          type: boolean
         - description: |-
             A SQL statement which can be any of 
             - SELECT
@@ -115,10 +121,6 @@ paths:
           name: sql
           required: true
           type: string
-        - description: Whether column names are included (in the first row). Default is true.
-          in: query
-          name: hdrs
-          type: boolean
         - description: 'Whether typed values are returned in the (JSON) response: numbers for numeric values and parsed geometries for KML values. Default is true.'
           in: query
           name: typed
@@ -159,6 +161,10 @@ paths:
         - CREATE statement.
       operationId: fusiontables.query.sql
       parameters:
+        - description: Whether column names are included in the first row. Default is true.
+          in: query
+          name: hdrs
+          type: boolean
         - description: |-
             A Fusion Tables SQL statement, which can be any of 
             - SELECT
@@ -172,10 +178,6 @@ paths:
           name: sql
           required: true
           type: string
-        - description: Whether column names are included in the first row. Default is true.
-          in: query
-          name: hdrs
-          type: boolean
         - description: 'Whether typed values are returned in the (JSON) response: numbers for numeric values and parsed geometries for KML values. Default is true.'
           in: query
           name: typed
@@ -269,11 +271,6 @@ paths:
       description: Imports a new table.
       operationId: fusiontables.table.importTable
       parameters:
-        - description: The name to be assigned to the new table.
-          in: query
-          name: name
-          required: true
-          type: string
         - description: 'The delimiter used to separate cell values. This can only consist of a single character. Default is ,.'
           in: query
           name: delimiter
@@ -281,6 +278,11 @@ paths:
         - description: The encoding of the content. Default is UTF-8. Use auto-detect if you are unsure of the encoding.
           in: query
           name: encoding
+          type: string
+        - description: The name to be assigned to the new table.
+          in: query
+          name: name
+          required: true
           type: string
       responses:
         '200':
@@ -351,19 +353,19 @@ paths:
       description: 'Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated. This method supports patch semantics.'
       operationId: fusiontables.table.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
+        - description: Whether the view definition is also updated. The specified view definition replaces the existing one. Only a view can be updated with a new definition.
+          in: query
+          name: replaceViewDefinition
+          type: boolean
         - description: ID of the table that is being updated.
           in: path
           name: tableId
           required: true
           type: string
-        - description: Whether the view definition is also updated. The specified view definition replaces the existing one. Only a view can be updated with a new definition.
-          in: query
-          name: replaceViewDefinition
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
       responses:
         '200':
           description: Successful response
@@ -380,19 +382,19 @@ paths:
       description: 'Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated.'
       operationId: fusiontables.table.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
+        - description: Whether the view definition is also updated. The specified view definition replaces the existing one. Only a view can be updated with a new definition.
+          in: query
+          name: replaceViewDefinition
+          type: boolean
         - description: ID of the table that is being updated.
           in: path
           name: tableId
           required: true
           type: string
-        - description: Whether the view definition is also updated. The specified view definition replaces the existing one. Only a view can be updated with a new definition.
-          in: query
-          name: replaceViewDefinition
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
       responses:
         '200':
           description: Successful response
@@ -410,11 +412,6 @@ paths:
       description: Retrieves a list of columns.
       operationId: fusiontables.column.list
       parameters:
-        - description: Table whose columns are being listed.
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: Maximum number of columns to return. Default is 5.
           in: query
           minimum: 0
@@ -423,6 +420,11 @@ paths:
         - description: Continuation token specifying which result page to return.
           in: query
           name: pageToken
+          type: string
+        - description: Table whose columns are being listed.
+          in: path
+          name: tableId
+          required: true
           type: string
       responses:
         '200':
@@ -452,15 +454,15 @@ paths:
       description: Adds a new column to the table.
       operationId: fusiontables.column.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Column'
         - description: Table for which a new column is being added.
           in: path
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Column'
       responses:
         '200':
           description: Successful response
@@ -478,14 +480,14 @@ paths:
       description: Deletes the specified column.
       operationId: fusiontables.column.delete
       parameters:
-        - description: Table from which the column is being deleted.
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: Name or identifier for the column being deleted.
           in: path
           name: columnId
+          required: true
+          type: string
+        - description: Table from which the column is being deleted.
+          in: path
+          name: tableId
           required: true
           type: string
       responses:
@@ -502,14 +504,14 @@ paths:
       description: Retrieves a specific column by its ID.
       operationId: fusiontables.column.get
       parameters:
-        - description: Table to which the column belongs.
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: Name or identifier for the column that is being requested.
           in: path
           name: columnId
+          required: true
+          type: string
+        - description: Table to which the column belongs.
+          in: path
+          name: tableId
           required: true
           type: string
       responses:
@@ -540,20 +542,20 @@ paths:
       description: Updates the name or type of an existing column. This method supports patch semantics.
       operationId: fusiontables.column.patch
       parameters:
-        - description: Table for which the column is being updated.
-          in: path
-          name: tableId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Column'
         - description: Name or identifier for the column that is being updated.
           in: path
           name: columnId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Column'
+        - description: Table for which the column is being updated.
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -570,20 +572,20 @@ paths:
       description: Updates the name or type of an existing column.
       operationId: fusiontables.column.update
       parameters:
-        - description: Table for which the column is being updated.
-          in: path
-          name: tableId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Column'
         - description: Name or identifier for the column that is being updated.
           in: path
           name: columnId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Column'
+        - description: Table for which the column is being updated.
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -609,15 +611,15 @@ paths:
       description: Copies a table.
       operationId: fusiontables.table.copy
       parameters:
+        - description: 'Whether to also copy tabs, styles, and templates. Default is false.'
+          in: query
+          name: copyPresentation
+          type: boolean
         - description: ID of the table that is being copied.
           in: path
           name: tableId
           required: true
           type: string
-        - description: 'Whether to also copy tabs, styles, and templates. Default is false.'
-          in: query
-          name: copyPresentation
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -649,11 +651,6 @@ paths:
       description: Imports more rows into a table.
       operationId: fusiontables.table.importRows
       parameters:
-        - description: The table into which new rows are being imported.
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: 'The delimiter used to separate cell values. This can only consist of a single character. Default is ,.'
           in: query
           name: delimiter
@@ -674,11 +671,46 @@ paths:
           in: query
           name: startLine
           type: integer
+        - description: The table into which new rows are being imported.
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/Import'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
+      tags:
+        - table
+  '/tables/{tableId}/refetch':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Replaces rows of the table with the rows of the spreadsheet that is first imported from. Current rows remain visible until all replacement rows are ready.
+      operationId: fusiontables.table.refetchSheet
+      parameters:
+        - description: Table whose rows will be replaced from the spreadsheet.
+          in: path
+          name: tableId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Task'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
@@ -701,11 +733,6 @@ paths:
       description: Replaces rows of an existing table. Current rows remain visible until all replacement rows are ready.
       operationId: fusiontables.table.replaceRows
       parameters:
-        - description: Table whose rows will be replaced.
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: 'The delimiter used to separate cell values. This can only consist of a single character. Default is ,.'
           in: query
           name: delimiter
@@ -726,6 +753,11 @@ paths:
           in: query
           name: startLine
           type: integer
+        - description: Table whose rows will be replaced.
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -743,11 +775,6 @@ paths:
       description: Retrieves a list of styles.
       operationId: fusiontables.style.list
       parameters:
-        - description: Table whose styles are being listed
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: Maximum number of styles to return. Optional. Default is 5.
           in: query
           minimum: 0
@@ -756,6 +783,11 @@ paths:
         - description: Continuation token specifying which result page to return. Optional.
           in: query
           name: pageToken
+          type: string
+        - description: Table whose styles are being listed
+          in: path
+          name: tableId
+          required: true
           type: string
       responses:
         '200':
@@ -785,15 +817,15 @@ paths:
       description: Adds a new style for the table.
       operationId: fusiontables.style.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StyleSetting'
         - description: Table for which a new style is being added
           in: path
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StyleSetting'
       responses:
         '200':
           description: Successful response
@@ -811,16 +843,16 @@ paths:
       description: Deletes a style.
       operationId: fusiontables.style.delete
       parameters:
-        - description: Table from which the style is being deleted
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: Identifier (within a table) for the style being deleted
           in: path
           name: styleId
           required: true
           type: integer
+        - description: Table from which the style is being deleted
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -835,16 +867,16 @@ paths:
       description: Gets a specific style.
       operationId: fusiontables.style.get
       parameters:
-        - description: Table to which the requested style belongs
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: Identifier (integer) for a specific style in a table
           in: path
           name: styleId
           required: true
           type: integer
+        - description: Table to which the requested style belongs
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -873,20 +905,20 @@ paths:
       description: Updates an existing style. This method supports patch semantics.
       operationId: fusiontables.style.patch
       parameters:
-        - description: Table whose style is being updated.
-          in: path
-          name: tableId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StyleSetting'
         - description: Identifier (within a table) for the style being updated.
           in: path
           name: styleId
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StyleSetting'
+        - description: Table whose style is being updated.
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -903,20 +935,20 @@ paths:
       description: Updates an existing style.
       operationId: fusiontables.style.update
       parameters:
-        - description: Table whose style is being updated.
-          in: path
-          name: tableId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StyleSetting'
         - description: Identifier (within a table) for the style being updated.
           in: path
           name: styleId
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StyleSetting'
+        - description: Table whose style is being updated.
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -934,11 +966,6 @@ paths:
       description: Retrieves a list of tasks.
       operationId: fusiontables.task.list
       parameters:
-        - description: Table whose tasks are being listed.
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: Maximum number of tasks to return. Default is 5.
           in: query
           minimum: 0
@@ -952,6 +979,11 @@ paths:
           in: query
           name: startIndex
           type: integer
+        - description: Table whose tasks are being listed.
+          in: path
+          name: tableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1044,11 +1076,6 @@ paths:
       description: Retrieves a list of templates.
       operationId: fusiontables.template.list
       parameters:
-        - description: Identifier for the table whose templates are being requested
-          in: path
-          name: tableId
-          required: true
-          type: string
         - description: Maximum number of templates to return. Optional. Default is 5.
           in: query
           minimum: 0
@@ -1057,6 +1084,11 @@ paths:
         - description: Continuation token specifying which results page to return. Optional.
           in: query
           name: pageToken
+          type: string
+        - description: Identifier for the table whose templates are being requested
+          in: path
+          name: tableId
+          required: true
           type: string
       responses:
         '200':
@@ -1086,15 +1118,15 @@ paths:
       description: Creates a new template for the table.
       operationId: fusiontables.template.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Template'
         - description: Table for which a new template is being created
           in: path
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Template'
       responses:
         '200':
           description: Successful response
@@ -1174,6 +1206,10 @@ paths:
       description: Updates an existing template. This method supports patch semantics.
       operationId: fusiontables.template.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Template'
         - description: Table to which the updated template belongs
           in: path
           name: tableId
@@ -1184,10 +1220,6 @@ paths:
           name: templateId
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Template'
       responses:
         '200':
           description: Successful response
@@ -1204,6 +1236,10 @@ paths:
       description: Updates an existing template
       operationId: fusiontables.template.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Template'
         - description: Table to which the updated template belongs
           in: path
           name: tableId
@@ -1214,10 +1250,6 @@ paths:
           name: templateId
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Template'
       responses:
         '200':
           description: Successful response

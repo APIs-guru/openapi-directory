@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/adexchangebuyer/v1.4/rest'
       version: v1
@@ -158,19 +158,19 @@ paths:
       description: Updates an existing account. This method supports patch semantics.
       operationId: adexchangebuyer.accounts.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
+        - description: Confirmation for erasing bidder and cookie matching urls.
+          in: query
+          name: confirmUnsafeAccountChange
+          type: boolean
         - description: The account id
           in: path
           name: id
           required: true
           type: integer
-        - description: Confirmation for erasing bidder and cookie matching urls.
-          in: query
-          name: confirmUnsafeAccountChange
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
       responses:
         '200':
           description: Successful response
@@ -187,19 +187,19 @@ paths:
       description: Updates an existing account.
       operationId: adexchangebuyer.accounts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
+        - description: Confirmation for erasing bidder and cookie matching urls.
+          in: query
+          name: confirmUnsafeAccountChange
+          type: boolean
         - description: The account id
           in: path
           name: id
           required: true
           type: integer
-        - description: Confirmation for erasing bidder and cookie matching urls.
-          in: query
-          name: confirmUnsafeAccountChange
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
       responses:
         '200':
           description: Successful response
@@ -609,11 +609,6 @@ paths:
           name: endDateTime
           required: true
           type: string
-        - description: The start time of the report in ISO 8601 timestamp format using UTC.
-          in: query
-          name: startDateTime
-          required: true
-          type: string
         - description: 'Maximum number of entries returned on one result page. If not set, the default is 100. Optional.'
           in: query
           maximum: 1000
@@ -623,6 +618,11 @@ paths:
         - description: 'A continuation token, used to page through performance reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.'
           in: query
           name: pageToken
+          type: string
+        - description: The start time of the report in ISO 8601 timestamp format using UTC.
+          in: query
+          name: startDateTime
+          required: true
           type: string
       responses:
         '200':
@@ -767,15 +767,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
         - description: The specific id of the configuration to update.
           in: path
           name: configId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
       responses:
         '200':
           description: Successful response
@@ -797,15 +797,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
         - description: The specific id of the configuration to update.
           in: path
           name: configId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
       responses:
         '200':
           description: Successful response
@@ -831,14 +831,14 @@ paths:
       description: Update a given private auction proposal
       operationId: adexchangebuyer.marketplaceprivateauction.updateproposal
       parameters:
-        - in: path
-          name: privateAuctionId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UpdatePrivateAuctionProposalRequest'
+        - in: path
+          name: privateAuctionId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1001,14 +1001,14 @@ paths:
       description: List all the deals for a given proposal
       operationId: adexchangebuyer.marketplacedeals.list
       parameters:
+        - description: Query string to retrieve specific deals.
+          in: query
+          name: pqlQuery
+          type: string
         - description: The proposalId to get deals for. To search across all proposals specify order_id = '-' as part of the URL.
           in: path
           name: proposalId
           required: true
-          type: string
-        - description: Query string to retrieve specific deals.
-          in: query
-          name: pqlQuery
           type: string
       responses:
         '200':
@@ -1043,15 +1043,15 @@ paths:
       description: Delete the specified deals from the proposal
       operationId: adexchangebuyer.marketplacedeals.delete
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeleteOrderDealsRequest'
         - description: The proposalId to delete deals from.
           in: path
           name: proposalId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DeleteOrderDealsRequest'
       responses:
         '200':
           description: Successful response
@@ -1077,15 +1077,15 @@ paths:
       description: Add new deals for the specified proposal
       operationId: adexchangebuyer.marketplacedeals.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddOrderDealsRequest'
         - description: proposalId for which deals need to be added.
           in: path
           name: proposalId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AddOrderDealsRequest'
       responses:
         '200':
           description: Successful response
@@ -1111,15 +1111,15 @@ paths:
       description: Replaces all the deals in the proposal with the passed in deals
       operationId: adexchangebuyer.marketplacedeals.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditAllOrderDealsRequest'
         - description: The proposalId to edit deals on.
           in: path
           name: proposalId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EditAllOrderDealsRequest'
       responses:
         '200':
           description: Successful response
@@ -1137,14 +1137,14 @@ paths:
       description: Get all the notes associated with a proposal
       operationId: adexchangebuyer.marketplacenotes.list
       parameters:
+        - description: 'Query string to retrieve specific notes. To search the text contents of notes, please use syntax like "WHERE note.note = "foo" or "WHERE note.note LIKE "%bar%"'
+          in: query
+          name: pqlQuery
+          type: string
         - description: The proposalId to get notes for. To search across all proposals specify order_id = '-' as part of the URL.
           in: path
           name: proposalId
           required: true
-          type: string
-        - description: 'Query string to retrieve specific notes. To search the text contents of notes, please use syntax like "WHERE note.note = "foo" or "WHERE note.note LIKE "%bar%"'
-          in: query
-          name: pqlQuery
           type: string
       responses:
         '200':
@@ -1179,15 +1179,15 @@ paths:
       description: Add notes to the proposal
       operationId: adexchangebuyer.marketplacenotes.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddOrderNotesRequest'
         - description: The proposalId to add notes for.
           in: path
           name: proposalId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AddOrderNotesRequest'
       responses:
         '200':
           description: Successful response
@@ -1241,6 +1241,10 @@ paths:
       description: Update the given proposal. This method supports patch semantics.
       operationId: adexchangebuyer.proposals.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Proposal'
         - description: The proposal id to update.
           in: path
           name: proposalId
@@ -1263,10 +1267,6 @@ paths:
           name: updateAction
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Proposal'
       responses:
         '200':
           description: Successful response
@@ -1283,6 +1283,10 @@ paths:
       description: Update the given proposal
       operationId: adexchangebuyer.proposals.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Proposal'
         - description: The proposal id to update.
           in: path
           name: proposalId
@@ -1305,10 +1309,6 @@ paths:
           name: updateAction
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Proposal'
       responses:
         '200':
           description: Successful response

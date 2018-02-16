@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/civicinfo/v2/rest'
       version: v1
@@ -80,14 +80,14 @@ paths:
       description: Searches for political divisions by their natural name or OCD ID.
       operationId: civicinfo.divisions.search
       parameters:
-        - description: 'The search query. Queries can cover any parts of a OCD ID or a human readable division name. All words given in the query are treated as required patterns. In addition to that, most query operators of the Apache Lucene library are supported. See http://lucene.apache.org/core/2_9_4/queryparsersyntax.html'
-          in: query
-          name: query
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/DivisionSearchRequest'
+        - description: 'The search query. Queries can cover any parts of a OCD ID or a human readable division name. All words given in the query are treated as required patterns. In addition to that, most query operators of the Apache Lucene library are supported. See http://lucene.apache.org/core/2_9_4/queryparsersyntax.html'
+          in: query
+          name: query
+          type: string
       responses:
         '200':
           description: Successful response
@@ -136,6 +136,10 @@ paths:
           in: query
           name: address
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RepresentativeInfoRequest'
         - default: true
           description: 'Whether to return information about offices and officials. If false, only the top-level district information will be returned.'
           in: query
@@ -177,10 +181,6 @@ paths:
             type: string
           name: roles
           type: array
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RepresentativeInfoRequest'
       responses:
         '200':
           description: Successful response
@@ -201,11 +201,10 @@ paths:
       description: Looks up representative information for a single geographic division.
       operationId: civicinfo.representatives.representativeInfoByDivision
       parameters:
-        - description: The Open Civic Data division identifier of the division to look up.
-          in: path
-          name: ocdId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DivisionRepresentativeInfoRequest'
         - collectionFormat: multi
           description: A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned.
           in: query
@@ -223,6 +222,11 @@ paths:
             type: string
           name: levels
           type: array
+        - description: The Open Civic Data division identifier of the division to look up.
+          in: path
+          name: ocdId
+          required: true
+          type: string
         - description: 'If true, information about all divisions contained in the division requested will be included as well. For example, if querying ocd-division/country:us/district:dc, this would also return all DC''s wards and ANCs.'
           in: query
           name: recursive
@@ -246,10 +250,6 @@ paths:
             type: string
           name: roles
           type: array
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DivisionRepresentativeInfoRequest'
       responses:
         '200':
           description: Successful response
@@ -275,6 +275,10 @@ paths:
           name: address
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/VoterInfoRequest'
         - default: '0'
           description: 'The unique ID of the election to look up. A list of election IDs can be obtained at https://www.googleapis.com/civicinfo/{version}/elections'
           in: query
@@ -290,10 +294,6 @@ paths:
           in: query
           name: returnAllAvailableData
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/VoterInfoRequest'
       responses:
         '200':
           description: Successful response

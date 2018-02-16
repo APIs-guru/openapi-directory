@@ -3,15 +3,16 @@ info:
   version: '2015-09-21'
   x-release: v4
   title: Amazon EC2 Container Registry
-  description: 'Amazon EC2 Container Registry (Amazon ECR) is a managed AWS Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using AWS IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.'
+  description: 'Amazon EC2 Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: ecr.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -211,7 +213,7 @@ paths:
   '/#CompleteLayerUpload':
     post:
       operationId: CompleteLayerUpload
-      description: '<p>Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      description: '<p>Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
         '200':
           description: Success
@@ -296,6 +298,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateRepositoryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLifecyclePolicy':
+    post:
+      operationId: DeleteLifecyclePolicy
+      description: Deletes the specified lifecycle policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLifecyclePolicyResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
+          description: LifecyclePolicyNotFoundException
+          schema:
+            $ref: '#/definitions/LifecyclePolicyNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLifecyclePolicyRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -564,6 +607,88 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLifecyclePolicy':
+    post:
+      operationId: GetLifecyclePolicy
+      description: Retrieves the specified lifecycle policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLifecyclePolicyResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
+          description: LifecyclePolicyNotFoundException
+          schema:
+            $ref: '#/definitions/LifecyclePolicyNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLifecyclePolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLifecyclePolicyPreview':
+    post:
+      operationId: GetLifecyclePolicyPreview
+      description: Retrieves the results of the specified lifecycle policy preview request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLifecyclePolicyPreviewResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
+          description: LifecyclePolicyPreviewNotFoundException
+          schema:
+            $ref: '#/definitions/LifecyclePolicyPreviewNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLifecyclePolicyPreviewRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetRepositoryPolicy':
     post:
       operationId: GetRepositoryPolicy
@@ -738,6 +863,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutLifecyclePolicy':
+    post:
+      operationId: PutLifecyclePolicy
+      description: Creates or updates a lifecycle policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutLifecyclePolicyResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutLifecyclePolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#SetRepositoryPolicy':
     post:
       operationId: SetRepositoryPolicy
@@ -765,6 +927,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetRepositoryPolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartLifecyclePolicyPreview':
+    post:
+      operationId: StartLifecyclePolicyPreview
+      description: Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartLifecyclePolicyPreviewResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
+          description: LifecyclePolicyNotFoundException
+          schema:
+            $ref: '#/definitions/LifecyclePolicyNotFoundException'
+        '484':
+          description: LifecyclePolicyPreviewInProgressException
+          schema:
+            $ref: '#/definitions/LifecyclePolicyPreviewInProgressException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartLifecyclePolicyPreviewRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1018,6 +1225,32 @@ definitions:
   CreationTimestamp:
     type: string
     format: date-time
+  DeleteLifecyclePolicyRequest:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: 'The name of the repository that is associated with the repository policy to&#8232; delete.'
+  DeleteLifecyclePolicyResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      lifecyclePolicyText:
+        $ref: '#/definitions/LifecyclePolicyText'
+        description: The JSON repository policy text.
+      lastEvaluatedAt:
+        $ref: '#/definitions/EvaluationTimestamp'
+        description: The time stamp of the last time that the lifecycle policy was run.
   DeleteRepositoryPolicyRequest:
     type: object
     required:
@@ -1063,7 +1296,7 @@ definitions:
         description: The name of the repository to delete.
       force:
         $ref: '#/definitions/ForceFlag'
-        description: Force the deletion of the repository if it contains images.
+        description: ' If a repository contains images, forces the deletion.'
   DeleteRepositoryResponse:
     type: object
     example:
@@ -1154,6 +1387,9 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
         description: The error message associated with the exception.
     description: The specified layer upload does not contain any layer parts.
+  EvaluationTimestamp:
+    type: string
+    format: date-time
   ExceptionMessage:
     type: string
   ExpirationTimestamp:
@@ -1209,6 +1445,79 @@ definitions:
       layerDigest:
         $ref: '#/definitions/LayerDigest'
         description: The digest of the image layer to download.
+  GetLifecyclePolicyPreviewRequest:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository with the policy to retrieve.
+      imageIds:
+        $ref: '#/definitions/ImageIdentifierList'
+        description: The list of imageIDs to be included.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value returned from a previous paginated&#8232; <code>GetLifecyclePolicyPreviewRequest</code> request where <code>maxResults</code> was used and the&#8232; results exceeded the value of that parameter. Pagination continues from the end of the&#8232; previous results that returned the <code>nextToken</code> value. This value is&#8232; <code>null</code> when there are no more results to return.'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of repository results returned by <code>GetLifecyclePolicyPreviewRequest</code> in&#8232; paginated output. When this parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns&#8232; <code>maxResults</code> results in a single page along with a <code>nextToken</code>&#8232; response element. The remaining results of the initial request can be seen by sending&#8232; another <code>GetLifecyclePolicyPreviewRequest</code> request with the returned <code>nextToken</code>&#8232; value. This value can be between 1 and 100. If this&#8232; parameter is not used, then <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#8232; 100 results and a <code>nextToken</code> value, if&#8232; applicable.'
+      filter:
+        $ref: '#/definitions/LifecyclePolicyPreviewFilter'
+        description: 'An optional parameter that filters results based on image tag status and all tags, if tagged.'
+  GetLifecyclePolicyPreviewResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      lifecyclePolicyText:
+        $ref: '#/definitions/LifecyclePolicyText'
+        description: The JSON repository policy text.
+      status:
+        $ref: '#/definitions/LifecyclePolicyPreviewStatus'
+        description: The status of the lifecycle policy preview request.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>GetLifecyclePolicyPreview</code> request. When the results of a <code>GetLifecyclePolicyPreview</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+      previewResults:
+        $ref: '#/definitions/LifecyclePolicyPreviewResultList'
+        description: The results of the lifecycle policy preview request.
+      summary:
+        $ref: '#/definitions/LifecyclePolicyPreviewSummary'
+        description: The list of images that is returned as a result of the action.
+  GetLifecyclePolicyRequest:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository with the policy to retrieve.
+  GetLifecyclePolicyResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      lifecyclePolicyText:
+        $ref: '#/definitions/LifecyclePolicyText'
+        description: The JSON repository policy text.
+      lastEvaluatedAt:
+        $ref: '#/definitions/EvaluationTimestamp'
+        description: The time stamp of the last time that the lifecycle policy was run.
   GetRepositoryPolicyRequest:
     type: object
     required:
@@ -1221,7 +1530,7 @@ definitions:
         description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
         $ref: '#/definitions/RepositoryName'
-        description: The name of the repository whose policy you want to retrieve.
+        description: The name of the repository with the policy to retrieve.
   GetRepositoryPolicyResponse:
     type: object
     example:
@@ -1265,13 +1574,20 @@ definitions:
         $ref: '#/definitions/ImageManifest'
         description: The image manifest associated with the image.
     description: An object representing an Amazon ECR image.
+  ImageActionType:
+    type: string
+    enum:
+      - EXPIRE
   ImageAlreadyExistsException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ExceptionMessage'
         description: The error message associated with the exception.
-    description: 'The specified image has already been pushed, and there are no changes to the manifest or image tag since the last push.'
+    description: 'The specified image has already been pushed, and there were no changes to the manifest or image tag after the last push.'
+  ImageCount:
+    type: integer
+    minimum: 0
   ImageDetail:
     type: object
     properties:
@@ -1370,10 +1686,10 @@ definitions:
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
-        description: 'The AWS account ID associated with the registry that you intend to upload layers to. If you do not specify a registry, the default registry is assumed.'
+        description: 'The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
         $ref: '#/definitions/RepositoryName'
-        description: The name of the repository that you intend to upload layers to.
+        description: The name of the repository to which you intend to upload layers.
   InitiateLayerUploadResponse:
     type: object
     properties:
@@ -1506,6 +1822,82 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
         description: The error message associated with the exception.
     description: 'The specified layers could not be found, or the specified layer is not valid for this repository.'
+  LifecyclePolicyNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The lifecycle policy could not be found, and no policy is set to the repository.'
+  LifecyclePolicyPreviewFilter:
+    type: object
+    properties:
+      tagStatus:
+        $ref: '#/definitions/TagStatus'
+        description: The tag status of the image.
+    description: The filter for the lifecycle policy preview.
+  LifecyclePolicyPreviewInProgressException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The previous lifecycle policy preview request has not completed. Please try again later.
+  LifecyclePolicyPreviewNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: There is no dry run for this repository.
+  LifecyclePolicyPreviewResult:
+    type: object
+    properties:
+      imageTags:
+        $ref: '#/definitions/ImageTagList'
+        description: The list of tags associated with this image.
+      imageDigest:
+        $ref: '#/definitions/ImageDigest'
+        description: The <code>sha256</code> digest of the image manifest.
+      imagePushedAt:
+        $ref: '#/definitions/PushTimestamp'
+        description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository.'
+      action:
+        $ref: '#/definitions/LifecyclePolicyRuleAction'
+        description: The type of action to be taken.
+      appliedRulePriority:
+        $ref: '#/definitions/LifecyclePolicyRulePriority'
+        description: The priority of the applied rule.
+    description: The result of the lifecycle policy preview.
+  LifecyclePolicyPreviewResultList:
+    type: array
+    items:
+      $ref: '#/definitions/LifecyclePolicyPreviewResult'
+  LifecyclePolicyPreviewStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETE
+      - EXPIRED
+      - FAILED
+  LifecyclePolicyPreviewSummary:
+    type: object
+    properties:
+      expiringImageTotalCount:
+        $ref: '#/definitions/ImageCount'
+        description: The number of expiring images.
+    description: The summary of the lifecycle policy preview request.
+  LifecyclePolicyRuleAction:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/ImageActionType'
+        description: The type of action to be taken.
+    description: The type of action to be taken.
+  LifecyclePolicyRulePriority:
+    type: integer
+    minimum: 1
+  LifecyclePolicyText:
+    type: string
+    minLength: 100
+    maxLength: 10240
   LimitExceededException:
     type: object
     properties:
@@ -1529,10 +1921,10 @@ definitions:
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
-        description: 'The AWS account ID associated with the registry that contains the repository to list images in. If you do not specify a registry, the default registry is assumed.'
+        description: 'The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
         $ref: '#/definitions/RepositoryName'
-        description: The repository whose image IDs are to be listed.
+        description: The repository with image IDs to be listed.
       nextToken:
         $ref: '#/definitions/NextToken'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
@@ -1561,7 +1953,6 @@ definitions:
     maximum: 100
   MediaType:
     type: string
-    pattern: '\w{1,127}\/[-+.\w]{1,127}'
   MediaTypeList:
     type: array
     items:
@@ -1602,6 +1993,33 @@ definitions:
       image:
         $ref: '#/definitions/Image'
         description: Details of the image uploaded.
+  PutLifecyclePolicyRequest:
+    type: object
+    required:
+      - repositoryName
+      - lifecyclePolicyText
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do&#8232; not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository to receive the policy.
+      lifecyclePolicyText:
+        $ref: '#/definitions/LifecyclePolicyText'
+        description: The JSON repository policy text to apply to the repository.
+  PutLifecyclePolicyResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      lifecyclePolicyText:
+        $ref: '#/definitions/LifecyclePolicyText'
+        description: The JSON repository policy text.
   RegistryId:
     type: string
     pattern: '[0-9]{12}'
@@ -1610,7 +2028,7 @@ definitions:
     properties:
       repositoryArn:
         $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, the AWS account ID of the repository owner, the repository namespace, and then the repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
+        description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
       registryId:
         $ref: '#/definitions/RegistryId'
         description: The AWS account ID associated with the registry that contains the repository.
@@ -1619,10 +2037,10 @@ definitions:
         description: The name of the repository.
       repositoryUri:
         $ref: '#/definitions/Url'
-        description: The URI for the repository. You can use this URI for Docker <code>push</code> and <code>pull</code> operations.
+        description: The URI for the repository. You can use this URI for Docker <code>push</code> or <code>pull</code> operations.
       createdAt:
         $ref: '#/definitions/CreationTimestamp'
-        description: 'The date and time, in JavaScript date/time format, when the repository was created.'
+        description: 'The date and time, in JavaScript date format, when the repository was created.'
     description: An object representing a repository.
   RepositoryAlreadyExistsException:
     type: object
@@ -1708,6 +2126,35 @@ definitions:
       policyText:
         $ref: '#/definitions/RepositoryPolicyText'
         description: The JSON repository policy text applied to the repository.
+  StartLifecyclePolicyPreviewRequest:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository to be evaluated.
+      lifecyclePolicyText:
+        $ref: '#/definitions/LifecyclePolicyText'
+        description: 'The policy to be evaluated against. If you do not specify a policy, the current policy for the repository is used.'
+  StartLifecyclePolicyPreviewResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      lifecyclePolicyText:
+        $ref: '#/definitions/LifecyclePolicyText'
+        description: The JSON repository policy text.
+      status:
+        $ref: '#/definitions/LifecyclePolicyPreviewStatus'
+        description: The status of the lifecycle policy preview request.
   TagStatus:
     type: string
     enum:
@@ -1727,10 +2174,10 @@ definitions:
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
-        description: 'The AWS account ID associated with the registry that you are uploading layer parts to. If you do not specify a registry, the default registry is assumed.'
+        description: 'The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
         $ref: '#/definitions/RepositoryName'
-        description: The name of the repository that you are uploading layer parts to.
+        description: The name of the repository to which you are uploading layer parts.
       uploadId:
         $ref: '#/definitions/UploadId'
         description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the layer part upload.

@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/urlshortener/v1/rest'
       version: v1
@@ -96,11 +96,6 @@ paths:
       description: Expands a short URL or gets creation time and analytics.
       operationId: urlshortener.url.get
       parameters:
-        - description: 'The short URL, including the protocol.'
-          in: query
-          name: shortUrl
-          required: true
-          type: string
         - description: Additional information to return.
           enum:
             - ANALYTICS_CLICKS
@@ -108,6 +103,11 @@ paths:
             - FULL
           in: query
           name: projection
+          type: string
+        - description: 'The short URL, including the protocol.'
+          in: query
+          name: shortUrl
+          required: true
           type: string
       responses:
         '200':

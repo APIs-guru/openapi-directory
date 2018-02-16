@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://cloudbilling.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -162,18 +162,18 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   /v1/services:
     get:
@@ -241,18 +241,18 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/{name}/billingInfo':
     get:
@@ -284,18 +284,18 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
@@ -332,6 +332,10 @@ paths:
         *open* billing account.
       operationId: cloudbilling.projects.updateBillingInfo
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProjectBillingInfo'
         - description: |-
             The resource name of the project associated with the billing information
             that you want to update. For example, `projects/tokyo-rain-123`.
@@ -340,10 +344,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProjectBillingInfo'
       responses:
         '200':
           description: Successful response
@@ -360,8 +360,9 @@ paths:
     get:
       description: |-
         Lists the projects associated with a billing account. The current
-        authenticated user must be an [owner of the billing
-        account](https://support.google.com/cloud/answer/4430947).
+        authenticated user must have the "billing.resourceAssociations.list" IAM
+        permission, which is often given to billing account
+        [viewers](https://support.google.com/cloud/answer/4430947).
       operationId: cloudbilling.billingAccounts.projects.list
       parameters:
         - description: |-
@@ -398,18 +399,18 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/{parent}/skus':
     get:
@@ -426,9 +427,10 @@ paths:
         - description: |-
             Optional exclusive end time of the time range for which the pricing
             versions will be returned. Timestamps in the future are not allowed.
-            Maximum allowable time range is 1 month (31 days). Time range as a whole
-            is optional. If not specified, the latest pricing will be returned (up to
-            12 hours old at most).
+            The time range has to be within a single calendar month in
+            America/Los_Angeles timezone. Time range as a whole is optional. If not
+            specified, the latest pricing will be returned (up to 12 hours old at
+            most).
           in: query
           name: endTime
           type: string
@@ -454,9 +456,10 @@ paths:
         - description: |-
             Optional inclusive start time of the time range for which the pricing
             versions will be returned. Timestamps in the future are not allowed.
-            Maximum allowable time range is 1 month (31 days). Time range as a whole
-            is optional. If not specified, the latest pricing will be returned (up to
-            12 hours old at most).
+            The time range has to be within a single calendar month in
+            America/Los_Angeles timezone. Time range as a whole is optional. If not
+            specified, the latest pricing will be returned (up to 12 hours old at
+            most).
           in: query
           name: startTime
           type: string
@@ -710,13 +713,21 @@ definitions:
           doesn't require aggregation.
       currencyConversionRate:
         description: |-
-          Conversion rate for currency conversion, from USD to the currency specified
-          in the request. If the currency is not specified this defaults to 1.0.
+          Conversion rate used for currency conversion, from USD to the currency
+          specified in the request. This includes any surcharge collected for billing
+          in non USD currency. If a currency is not specified in the request this
+          defaults to 1.0.
           Example: USD * currency_conversion_rate = JPY
         format: double
         type: number
       effectiveTime:
-        description: The timestamp from which this pricing was effective.
+        description: |-
+          The timestamp from which this pricing was effective within the requested
+          time range. This is guaranteed to be greater than or equal to the
+          start_time field in the request and less than the end_time field in the
+          request. If a time range was not specified in the request this field will
+          be equivalent to a time within the last 12 hours, indicating the latest
+          pricing info.
         format: google-datetime
         type: string
       pricingExpression:

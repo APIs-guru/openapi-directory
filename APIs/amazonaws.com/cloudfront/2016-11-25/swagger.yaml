@@ -5,13 +5,14 @@ info:
   title: Amazon CloudFront
   description: '<fullname>Amazon CloudFront</fullname> <p>This is the <i>Amazon CloudFront API Reference</i>. This guide is for developers who need detailed information about the CloudFront API actions, data types, and errors. For detailed information about CloudFront features and their associated API calls, see the <i>Amazon CloudFront Developer Guide</i>.</p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -35,6 +36,7 @@ externalDocs:
 host: cloudfront.amazonaws.com
 basePath: /
 schemes:
+  - https
   - http
 consumes:
   - text/xml
@@ -97,6 +99,50 @@ security:
   - hmac: []
 paths:
   /2016-11-25/origin-access-identity/cloudfront:
+    post:
+      operationId: CreateCloudFrontOriginAccessIdentity
+      description: 'Creates a new origin access identity. If you''re using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCloudFrontOriginAccessIdentityResult'
+        '480':
+          description: CloudFrontOriginAccessIdentityAlreadyExists
+          schema:
+            $ref: '#/definitions/CloudFrontOriginAccessIdentityAlreadyExists'
+        '481':
+          description: MissingBody
+          schema:
+            $ref: '#/definitions/MissingBody'
+        '482':
+          description: TooManyCloudFrontOriginAccessIdentities
+          schema:
+            $ref: '#/definitions/TooManyCloudFrontOriginAccessIdentities'
+        '483':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '484':
+          description: InconsistentQuantities
+          schema:
+            $ref: '#/definitions/InconsistentQuantities'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCloudFrontOriginAccessIdentityRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListCloudFrontOriginAccessIdentities
       description: Lists origin access identities.
@@ -125,6 +171,173 @@ paths:
           in: query
           description: Pagination token
           required: false
+  /2016-11-25/distribution:
+    post:
+      operationId: CreateDistribution
+      description: Creates a new web distribution. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/distribution</code>/<code>distribution ID</code> resource.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDistributionResult'
+        '480':
+          description: CNAMEAlreadyExists
+          schema:
+            $ref: '#/definitions/CNAMEAlreadyExists'
+        '481':
+          description: DistributionAlreadyExists
+          schema:
+            $ref: '#/definitions/DistributionAlreadyExists'
+        '482':
+          description: InvalidOrigin
+          schema:
+            $ref: '#/definitions/InvalidOrigin'
+        '483':
+          description: InvalidOriginAccessIdentity
+          schema:
+            $ref: '#/definitions/InvalidOriginAccessIdentity'
+        '484':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '485':
+          description: TooManyTrustedSigners
+          schema:
+            $ref: '#/definitions/TooManyTrustedSigners'
+        '486':
+          description: TrustedSignerDoesNotExist
+          schema:
+            $ref: '#/definitions/TrustedSignerDoesNotExist'
+        '487':
+          description: InvalidViewerCertificate
+          schema:
+            $ref: '#/definitions/InvalidViewerCertificate'
+        '488':
+          description: InvalidMinimumProtocolVersion
+          schema:
+            $ref: '#/definitions/InvalidMinimumProtocolVersion'
+        '489':
+          description: MissingBody
+          schema:
+            $ref: '#/definitions/MissingBody'
+        '490':
+          description: TooManyDistributionCNAMEs
+          schema:
+            $ref: '#/definitions/TooManyDistributionCNAMEs'
+        '491':
+          description: TooManyDistributions
+          schema:
+            $ref: '#/definitions/TooManyDistributions'
+        '492':
+          description: InvalidDefaultRootObject
+          schema:
+            $ref: '#/definitions/InvalidDefaultRootObject'
+        '493':
+          description: InvalidRelativePath
+          schema:
+            $ref: '#/definitions/InvalidRelativePath'
+        '494':
+          description: InvalidErrorCode
+          schema:
+            $ref: '#/definitions/InvalidErrorCode'
+        '495':
+          description: InvalidResponseCode
+          schema:
+            $ref: '#/definitions/InvalidResponseCode'
+        '496':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '497':
+          description: InvalidRequiredProtocol
+          schema:
+            $ref: '#/definitions/InvalidRequiredProtocol'
+        '498':
+          description: NoSuchOrigin
+          schema:
+            $ref: '#/definitions/NoSuchOrigin'
+        '499':
+          description: TooManyOrigins
+          schema:
+            $ref: '#/definitions/TooManyOrigins'
+        '500':
+          description: TooManyCacheBehaviors
+          schema:
+            $ref: '#/definitions/TooManyCacheBehaviors'
+        '501':
+          description: TooManyCookieNamesInWhiteList
+          schema:
+            $ref: '#/definitions/TooManyCookieNamesInWhiteList'
+        '502':
+          description: InvalidForwardCookies
+          schema:
+            $ref: '#/definitions/InvalidForwardCookies'
+        '503':
+          description: TooManyHeadersInForwardedValues
+          schema:
+            $ref: '#/definitions/TooManyHeadersInForwardedValues'
+        '504':
+          description: InvalidHeadersForS3Origin
+          schema:
+            $ref: '#/definitions/InvalidHeadersForS3Origin'
+        '505':
+          description: InconsistentQuantities
+          schema:
+            $ref: '#/definitions/InconsistentQuantities'
+        '506':
+          description: TooManyCertificates
+          schema:
+            $ref: '#/definitions/TooManyCertificates'
+        '507':
+          description: InvalidLocationCode
+          schema:
+            $ref: '#/definitions/InvalidLocationCode'
+        '508':
+          description: InvalidGeoRestrictionParameter
+          schema:
+            $ref: '#/definitions/InvalidGeoRestrictionParameter'
+        '509':
+          description: InvalidProtocolSettings
+          schema:
+            $ref: '#/definitions/InvalidProtocolSettings'
+        '510':
+          description: InvalidTTLOrder
+          schema:
+            $ref: '#/definitions/InvalidTTLOrder'
+        '511':
+          description: InvalidWebACLId
+          schema:
+            $ref: '#/definitions/InvalidWebACLId'
+        '512':
+          description: TooManyOriginCustomHeaders
+          schema:
+            $ref: '#/definitions/TooManyOriginCustomHeaders'
+        '513':
+          description: TooManyQueryStringParameters
+          schema:
+            $ref: '#/definitions/TooManyQueryStringParameters'
+        '514':
+          description: InvalidQueryStringParameters
+          schema:
+            $ref: '#/definitions/InvalidQueryStringParameters'
+        '515':
+          description: TooManyDistributionsWithLambdaAssociations
+          schema:
+            $ref: '#/definitions/TooManyDistributionsWithLambdaAssociations'
+        '516':
+          description: TooManyLambdaFunctionAssociations
+          schema:
+            $ref: '#/definitions/TooManyLambdaFunctionAssociations'
+        '517':
+          description: InvalidLambdaFunctionAssociation
+          schema:
+            $ref: '#/definitions/InvalidLambdaFunctionAssociation'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDistributionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -135,7 +348,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /2016-11-25/distribution:
     get:
       operationId: ListDistributions
       description: 'List distributions. '
@@ -164,16 +376,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2016-11-25/distribution?WithTags:
     post:
       operationId: CreateDistributionWithTags
@@ -356,6 +558,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2016-11-25/distribution/{DistributionId}/invalidation':
+    post:
+      operationId: CreateInvalidation
+      description: 'Create a new invalidation. '
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateInvalidationResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: MissingBody
+          schema:
+            $ref: '#/definitions/MissingBody'
+        '482':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '483':
+          description: NoSuchDistribution
+          schema:
+            $ref: '#/definitions/NoSuchDistribution'
+        '484':
+          description: BatchTooLarge
+          schema:
+            $ref: '#/definitions/BatchTooLarge'
+        '485':
+          description: TooManyInvalidationsInProgress
+          schema:
+            $ref: '#/definitions/TooManyInvalidationsInProgress'
+        '486':
+          description: InconsistentQuantities
+          schema:
+            $ref: '#/definitions/InconsistentQuantities'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateInvalidationRequest'
+        - name: DistributionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListInvalidations
       description: 'Lists invalidation batches. '
@@ -396,6 +654,69 @@ paths:
           in: path
           type: string
           required: true
+  /2016-11-25/streaming-distribution:
+    post:
+      operationId: CreateStreamingDistribution
+      description: '<p>Creates a new RMTP distribution. An RTMP distribution is similar to a web distribution, but an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP. </p> <p>To create a new web distribution, submit a <code>POST</code> request to the <i>CloudFront API version</i>/distribution resource. The request body must include a document with a <i>StreamingDistributionConfig</i> element. The response echoes the <code>StreamingDistributionConfig</code> element and returns other information about the RTMP distribution.</p> <p>To get the status of your request, use the <i>GET StreamingDistribution</i> API action. When the value of <code>Enabled</code> is <code>true</code> and the value of <code>Status</code> is <code>Deployed</code>, your distribution is ready. A distribution usually deploys in less than 15 minutes.</p> <p>For more information about web distributions, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html">Working with RTMP Distributions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <important> <p>Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a web distribution or an RTMP distribution, and when you invalidate objects. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there''s a mismatch between the number of values you say you''re specifying in the <code>Quantity</code> element and the number of values specified.</p> </important>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateStreamingDistributionResult'
+        '480':
+          description: CNAMEAlreadyExists
+          schema:
+            $ref: '#/definitions/CNAMEAlreadyExists'
+        '481':
+          description: StreamingDistributionAlreadyExists
+          schema:
+            $ref: '#/definitions/StreamingDistributionAlreadyExists'
+        '482':
+          description: InvalidOrigin
+          schema:
+            $ref: '#/definitions/InvalidOrigin'
+        '483':
+          description: InvalidOriginAccessIdentity
+          schema:
+            $ref: '#/definitions/InvalidOriginAccessIdentity'
+        '484':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '485':
+          description: TooManyTrustedSigners
+          schema:
+            $ref: '#/definitions/TooManyTrustedSigners'
+        '486':
+          description: TrustedSignerDoesNotExist
+          schema:
+            $ref: '#/definitions/TrustedSignerDoesNotExist'
+        '487':
+          description: MissingBody
+          schema:
+            $ref: '#/definitions/MissingBody'
+        '488':
+          description: TooManyStreamingDistributionCNAMEs
+          schema:
+            $ref: '#/definitions/TooManyStreamingDistributionCNAMEs'
+        '489':
+          description: TooManyStreamingDistributions
+          schema:
+            $ref: '#/definitions/TooManyStreamingDistributions'
+        '490':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '491':
+          description: InconsistentQuantities
+          schema:
+            $ref: '#/definitions/InconsistentQuantities'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateStreamingDistributionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -406,7 +727,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /2016-11-25/streaming-distribution:
     get:
       operationId: ListStreamingDistributions
       description: 'List streaming distributions. '
@@ -435,16 +755,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2016-11-25/streaming-distribution?WithTags:
     post:
       operationId: CreateStreamingDistributionWithTags
@@ -523,6 +833,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2016-11-25/origin-access-identity/cloudfront/{Id}':
+    delete:
+      operationId: DeleteCloudFrontOriginAccessIdentity
+      description: 'Delete an origin access identity. '
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '482':
+          description: NoSuchCloudFrontOriginAccessIdentity
+          schema:
+            $ref: '#/definitions/NoSuchCloudFrontOriginAccessIdentity'
+        '483':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+        '484':
+          description: CloudFrontOriginAccessIdentityInUse
+          schema:
+            $ref: '#/definitions/CloudFrontOriginAccessIdentityInUse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteCloudFrontOriginAccessIdentityRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetCloudFrontOriginAccessIdentity
       description: 'Get the information about an origin access identity. '
@@ -549,6 +905,43 @@ paths:
           in: path
           type: string
           required: true
+  '/2016-11-25/distribution/{Id}':
+    delete:
+      operationId: DeleteDistribution
+      description: 'Delete a distribution. '
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: DistributionNotDisabled
+          schema:
+            $ref: '#/definitions/DistributionNotDisabled'
+        '482':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '483':
+          description: NoSuchDistribution
+          schema:
+            $ref: '#/definitions/NoSuchDistribution'
+        '484':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDistributionRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -559,7 +952,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2016-11-25/distribution/{Id}':
     get:
       operationId: GetDistribution
       description: 'Get the information about a distribution. '
@@ -596,6 +988,43 @@ paths:
               matcher: path
               state: success
               argument: Distribution.Status
+  '/2016-11-25/streaming-distribution/{Id}':
+    delete:
+      operationId: DeleteStreamingDistribution
+      description: '<p>Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.</p> <p> <b>To delete an RTMP distribution using the CloudFront API</b>:</p> <ol> <li> <p>Disable the RTMP distribution.</p> </li> <li> <p>Submit a <code>GET Streaming Distribution Config</code> request to get the current configuration and the <code>Etag</code> header for the distribution. </p> </li> <li> <p>Update the XML document that was returned in the response to your <code>GET Streaming Distribution Config</code> request to change the value of <code>Enabled</code> to <code>false</code>.</p> </li> <li> <p>Submit a <code>PUT Streaming Distribution Config</code> request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Streaming Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to the <code>PUT Streaming Distribution Config</code> request to confirm that the distribution was successfully disabled.</p> </li> <li> <p>Submit a <code>GET Streaming Distribution Config</code> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> <li> <p>Submit a <code>DELETE Streaming Distribution</code> request. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Streaming Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to your <code>DELETE Streaming Distribution</code> request to confirm that the distribution was successfully deleted.</p> </li> </ol> <p>For information about deleting a distribution using the CloudFront console, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html">Deleting a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: StreamingDistributionNotDisabled
+          schema:
+            $ref: '#/definitions/StreamingDistributionNotDisabled'
+        '482':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '483':
+          description: NoSuchStreamingDistribution
+          schema:
+            $ref: '#/definitions/NoSuchStreamingDistribution'
+        '484':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteStreamingDistributionRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -606,7 +1035,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2016-11-25/streaming-distribution/{Id}':
     get:
       operationId: GetStreamingDistribution
       description: 'Gets information about a specified RTMP distribution, including the distribution configuration.'
@@ -643,6 +1071,33 @@ paths:
               matcher: path
               state: success
               argument: StreamingDistribution.Status
+  '/2016-11-25/origin-access-identity/cloudfront/{Id}/config':
+    get:
+      operationId: GetCloudFrontOriginAccessIdentityConfig
+      description: 'Get the configuration information about an origin access identity. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCloudFrontOriginAccessIdentityConfigResult'
+        '480':
+          description: NoSuchCloudFrontOriginAccessIdentity
+          schema:
+            $ref: '#/definitions/NoSuchCloudFrontOriginAccessIdentity'
+        '481':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCloudFrontOriginAccessIdentityConfigRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -653,7 +1108,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2016-11-25/origin-access-identity/cloudfront/{Id}/config':
     put:
       operationId: UpdateCloudFrontOriginAccessIdentity
       description: 'Update an origin access identity. '
@@ -704,6 +1158,33 @@ paths:
           in: path
           type: string
           required: true
+  '/2016-11-25/distribution/{Id}/config':
+    get:
+      operationId: GetDistributionConfig
+      description: 'Get the configuration information about a distribution. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDistributionConfigResult'
+        '480':
+          description: NoSuchDistribution
+          schema:
+            $ref: '#/definitions/NoSuchDistribution'
+        '481':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDistributionConfigRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -714,7 +1195,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2016-11-25/distribution/{Id}/config':
     put:
       operationId: UpdateDistribution
       description: 'Update a distribution. '
@@ -885,16 +1365,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2016-11-25/distribution/{DistributionId}/invalidation/{Id}':
     get:
       operationId: GetInvalidation
@@ -951,6 +1421,42 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2016-11-25/streaming-distribution/{Id}/config':
+    get:
+      operationId: GetStreamingDistributionConfig
+      description: 'Get the configuration information about a streaming distribution. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetStreamingDistributionConfigResult'
+        '480':
+          description: NoSuchStreamingDistribution
+          schema:
+            $ref: '#/definitions/NoSuchStreamingDistribution'
+        '481':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetStreamingDistributionConfigRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateStreamingDistribution
       description: 'Update a streaming distribution. '
@@ -1021,16 +1527,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2016-11-25/distributionsByWebACLId/{WebACLId}':
     get:
       operationId: ListDistributionsByWebACLId

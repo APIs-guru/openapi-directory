@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/dns/v1/rest'
       version: v1
@@ -145,11 +147,6 @@ paths:
       description: Enumerate ManagedZones that have been created but not yet deleted.
       operationId: dns.managedZones.list
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Restricts the list to return only zones with this domain name.
           in: query
           name: dnsName
@@ -161,6 +158,11 @@ paths:
         - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -198,15 +200,15 @@ paths:
       description: Create a new ManagedZone.
       operationId: dns.managedZones.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedZone'
         - description: Identifies the project addressed by this request.
           in: path
           name: project
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedZone'
       responses:
         '200':
           description: Successful response
@@ -228,14 +230,14 @@ paths:
       description: Delete a previously created ManagedZone.
       operationId: dns.managedZones.delete
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
+          required: true
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -256,14 +258,14 @@ paths:
       description: Fetch the representation of an existing ManagedZone.
       operationId: dns.managedZones.get
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
+          required: true
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -303,11 +305,6 @@ paths:
       description: Enumerate Changes to a ResourceRecordSet collection.
       operationId: dns.changes.list
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
@@ -320,6 +317,11 @@ paths:
         - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
         - default: changeSequence
           description: Sorting criterion. The only supported value is change sequence.
@@ -368,20 +370,20 @@ paths:
       description: Atomically update the ResourceRecordSet collection.
       operationId: dns.changes.create
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Change'
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Change'
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -403,9 +405,9 @@ paths:
       description: Fetch the representation of an existing Change.
       operationId: dns.changes.get
       parameters:
-        - description: Identifies the project addressed by this request.
+        - description: 'The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.'
           in: path
-          name: project
+          name: changeId
           required: true
           type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
@@ -413,9 +415,9 @@ paths:
           name: managedZone
           required: true
           type: string
-        - description: 'The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.'
+        - description: Identifies the project addressed by this request.
           in: path
-          name: changeId
+          name: project
           required: true
           type: string
       responses:
@@ -455,11 +457,6 @@ paths:
       description: Enumerate ResourceRecordSets that have been created but not yet deleted.
       operationId: dns.resourceRecordSets.list
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
@@ -476,6 +473,11 @@ paths:
         - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
         - description: 'Restricts the list to return only records of this type. If present, the "name" parameter must also be present.'
           in: query

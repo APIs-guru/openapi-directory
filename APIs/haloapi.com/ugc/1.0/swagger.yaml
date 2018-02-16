@@ -1,0 +1,344 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.haloapi.com
+basePath: /ugc
+info:
+  contact:
+    x-twitter: halo
+  description: API that provides Metadata about User-Generated Content (Maps and Game Variants).
+  title: UGC
+  version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/halo/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://developer.haloapi.com/docs/services/58acde2921091812784ce8c3/export?DocumentFormat=Swagger'
+      version: '2.0'
+  x-providerName: haloapi.com
+  x-serviceName: ugc
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+paths:
+  '/h5/players/{player}/gamevariants':
+    get:
+      description: |
+        <p>Retrieves a list of Game Variants created by a Player.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "List Game Variants" to "Halo 5 - Player Game Variants".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>August 5, 2016:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Game Variants
+      parameters:
+        - description: The Gamertag of the Player that owns the listed Game Variants.
+          in: path
+          name: player
+          required: true
+          type: string
+        - description: 'When specified, this indicates the starting index (0-based) for which the list of results will begin at.'
+          in: query
+          name: start
+          type: number
+        - description: 'When specified, this indicates the maximum quantity of items the caller would like returned in the response.'
+          in: query
+          name: count
+          type: number
+        - description: 'When specified, this indicates what field should be used to sort the results as the primary sort order. When omitted, "modified" (descending) is the assumed primary sort order. Allowed sort fields are: name, description, accessibility, created, modified, bookmarkCount.'
+          in: query
+          name: sort
+          type: number
+        - description: 'When specified, this indicates the ordering that will be applied. When omitted, "desc" is assumed. Allowed order values are: asc, desc.'
+          in: query
+          name: order
+          type: number
+      responses:
+        '200':
+          description: The response body will contain a list of the Player-created Game Variants.
+          examples:
+            application/json:
+              Count: int
+              Links: links
+              ResultCount: int
+              Results:
+                - AccessControl: int
+                  Banned: boolean
+                  BaseGame:
+                    Owner: string
+                    OwnerType: int
+                    ResourceId: guid
+                    ResourceType: 8
+                  BaseGameEngineType: int
+                  CreationTimeUtc:
+                    ISO8601Date: string
+                  Description: string
+                  GameType: int
+                  Identity:
+                    Owner: string
+                    OwnerType: 1
+                    ResourceId: guid
+                    ResourceType: 2
+                  LastModifiedTimeUtc:
+                    ISO8601Date: string
+                  Links: links
+                  MatchDurationInSeconds: int
+                  Name: sring
+                  NumberOfLives: int
+                  NumberOfRounds: int
+                  ScoreToWin: int
+                  Stats:
+                    BookmarkCount: int
+                    HasCallerBookmarked: false
+              Start: int
+              TotalCount: int
+        '400':
+          description: Specified Gamertag is malformed.
+        '404':
+          description: The player does not exist.
+        '500':
+          description: Internal Server Error
+  '/h5/players/{player}/gamevariants/{variant}':
+    get:
+      description: |
+        <p>Retrieves Metadata about a Player-created Game Variant.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Get Game Variant" to "Halo 5 - Player Game Variant".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>August 5, 2016:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Game Variant
+      parameters:
+        - description: The Gamertag of the Player that owns the Game Variant.
+          in: path
+          name: player
+          required: true
+          type: string
+        - description: The ID for the Game Variant.
+          in: path
+          name: variant
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Metadata for the Player-created Game Variant.
+          examples:
+            application/json:
+              AccessControl: int
+              Banned: boolean
+              BaseGame:
+                Owner: string
+                OwnerType: int
+                ResourceId: guid
+                ResourceType: 8
+              BaseGameEngineType: int
+              CreationTimeUtc:
+                ISO8601Date: string
+              Description: string
+              GameType: int
+              Identity:
+                Owner: string
+                OwnerType: 1
+                ResourceId: guid
+                ResourceType: 2
+              LastModifiedTimeUtc:
+                ISO8601Date: string
+              Links: links
+              MatchDurationInSeconds: int
+              Name: sring
+              NumberOfLives: int
+              NumberOfRounds: int
+              ScoreToWin: int
+              Stats:
+                BookmarkCount: int
+                HasCallerBookmarked: false
+        '400':
+          description: Specified Gamertag is malformed or the Game Variant ID is malformed.
+        '404':
+          description: The player does not exist or the Game Variant does not exist in the provided Player's file share.
+        '500':
+          description: Internal Server Error
+  '/h5/players/{player}/mapvariants':
+    get:
+      description: |
+        <p>Retrieves a list Map Variants created by a Player.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "List Map Variants" to "Halo 5 - Player Map Variants".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>August 5, 2016:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Map Variants
+      parameters:
+        - description: The Gamertag of the Player that owns the listed Map Variants.
+          in: path
+          name: player
+          required: true
+          type: string
+        - description: 'When specified, this indicates the starting index (0-based) for which the list of results will begin at.'
+          in: query
+          name: start
+          type: number
+        - description: 'When specified, this indicates the maximum quantity of items the caller would like returned in the response.'
+          in: query
+          name: count
+          type: number
+        - description: 'When specified, this indicates what field should be used to sort the results as the primary sort order. When omitted, "modified" (descending) is the assumed primary sort order. Allowed sort fields are: name, description, accessibility, created, modified, bookmarkCount.'
+          in: query
+          name: sort
+          type: number
+        - description: 'When specified, this indicates the ordering that will be applied. When omitted, "desc" is assumed. Allowed order values are: asc, desc.'
+          in: query
+          name: order
+          type: number
+      responses:
+        '200':
+          description: The response body will contain a list of the Player-created Map Variants.
+          examples:
+            application/json:
+              Count: int
+              Links: links
+              ResultCount: int
+              Results:
+                - AccessControl: int
+                  Banned: boolean
+                  BaseMap:
+                    Owner: string
+                    OwnerType: int
+                    ResourceId: guid
+                    ResourceType: 9
+                  CreationTimeUtc:
+                    ISO8601Date: string
+                  Description: string
+                  Identity:
+                    Owner: string
+                    OwnerType: 1
+                    ResourceId: guid
+                    ResourceType: 3
+                  LastModifiedTimeUtc:
+                    ISO8601Date: string
+                  Links: links
+                  Name: string
+                  Stats:
+                    BookmarkCount: int
+                    HasCallerBookmarked: false
+              Start: int
+              TotalCount: int
+        '400':
+          description: Specified Gamertag is malformed.
+        '404':
+          description: The Player does not exist.
+        '500':
+          description: Internal Server Error
+  '/h5/players/{player}/mapvariants/{variant}':
+    get:
+      description: |
+        <p>Retrieves Metadata about a Player-created Map Variant.</p>
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>February 21, 2017:</strong></p>
+            <ul>
+                <li>Renamed Endpoint from "Get Map Variant" to "Halo 5 - Player Map Variant".</li>
+                <li>Removed "{title}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <p><strong>August 5, 2016:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo 5 - Player Map Variant
+      parameters:
+        - description: The Gamertag of the Player that owns the Map Variant.
+          in: path
+          name: player
+          required: true
+          type: string
+        - description: The ID for the Map Variant.
+          in: path
+          name: variant
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the Metadata for the Player-created Map Variant.
+          examples:
+            application/json:
+              Count: int
+              Links: links
+              ResultCount: int
+              Results:
+                - AccessControl: int
+                  Banned: boolean
+                  BaseMap:
+                    Owner: string
+                    OwnerType: int
+                    ResourceId: guid
+                    ResourceType: 9
+                  CreationTimeUtc:
+                    ISO8601Date: string
+                  Description: string
+                  Identity:
+                    Owner: string
+                    OwnerType: 1
+                    ResourceId: guid
+                    ResourceType: 3
+                  LastModifiedTimeUtc:
+                    ISO8601Date: string
+                  Links: links
+                  Name: string
+                  Stats:
+                    BookmarkCount: int
+                    HasCallerBookmarked: false
+              Start: int
+              TotalCount: int
+        '400':
+          description: Specified Gamertag is malformed or the Map Variant ID is malformed.
+        '404':
+          description: The Player does not exist or the Map Variant does not exist in the provided Player's file share.
+        '500':
+          description: Internal Server Error

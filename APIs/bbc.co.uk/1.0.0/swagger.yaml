@@ -144,12 +144,191 @@ parameters:
     name: until
     required: false
     type: string
+tags:
+  - name: Experience
+  - description: '<a href="https://confluence.dev.bbc.co.uk/display/RMServices/Playspace+API+Client+Documetation">Client Documentation</a>'
+    name: Playspace
+  - name: Categories
+  - name: Networks
+  - name: Broadcasts
+  - name: Collections
+  - name: Podcasts
+  - name: Programmes
+  - name: Personalised Categories
+  - name: Personalised Networks
+  - name: Personalised Plays
+  - name: Radio
+  - name: Music
+  - name: Music Export
 paths:
-  /categories.json:
+  /broadcasts:
+    get:
+      description: |
+        All broadcasts
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: Filter by Service ID. E.g. bbc_radio_fourfm
+          in: query
+          name: service_id
+          required: false
+          type: string
+        - description: Filter by date. E.g. 2016-06-17
+          in: query
+          name: date
+          required: false
+          type: string
+        - description: 'Sort by provided query. E.g. ''start_at'' sorts in ascending order, and ''-start_at'' sorts in descending order'
+          enum:
+            - start_at
+            - '-start_at'
+            - end_at
+            - '-end_at'
+          in: query
+          name: sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BroadcastsResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Broadcasts
+      tags:
+        - Broadcasts
+  /broadcasts/latest:
+    get:
+      description: |
+        Broadcasts for the current day
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: Filter by Service ID. E.g. bbc_radio_fourfm
+          in: query
+          name: service_id
+          required: false
+          type: string
+        - description: Filter what is on air. E.g. 'now' returns current programme being broadcasted.
+          enum:
+            - now
+            - previous
+            - next
+          in: query
+          name: on_air
+          required: false
+          type: string
+        - description: Filter what will be on air next in minutes. E.g. '240' returns programmes broadcasted in the next four hurs
+          in: query
+          name: next
+          required: false
+          type: string
+        - description: Filter what was on air previously in minutes. E.g. '240' returns programmes broadcasted in the previous four hurs
+          in: query
+          name: previous
+          required: false
+          type: string
+        - description: 'Sort by provided query. E.g. ''start_at'' sorts in ascending order, and ''-start_at'' sorts in descending order'
+          enum:
+            - start_at
+            - '-start_at'
+            - end_at
+            - '-end_at'
+          in: query
+          name: sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BroadcastsResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Latest Broadcasts
+      tags:
+        - Broadcasts
+  '/broadcasts/{pid}':
+    get:
+      description: |
+        Find broadcast by PID
+      operationId: getBroadcastByPid
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BroadcastsResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Broadcasts by PID
+      tags:
+        - Broadcasts
+  /categories:
     get:
       description: |
         Retrieve Categories
-      operationId: getCategories
       parameters:
         - description: API_KEY
           in: header
@@ -172,12 +351,37 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/CategoryErrorResponse'
-      schemes:
-        - http
-      summary: Categories
+      summary: List of categories
       tags:
         - Categories
-  '/collections/{pid}/members.json':
+  '/categories/{id}':
+    get:
+      description: |
+        Retrieve Categories by ID
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Retrieve information about the category. E.g. 'sport-football-europeanchampionship'
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CategoriesResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/CategoryErrorResponse'
+      summary: Category by ID
+      tags:
+        - Categories
+  '/collections/{pid}/members':
     get:
       description: |
         Episodes and Clips from Collection
@@ -221,6 +425,31 @@ paths:
       summary: Collection Members
       tags:
         - Collections
+  /experience/homepage:
+    get:
+      description: |
+        Homepage Experience
+      operationId: getExperienceHomepage
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ExperienceResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Homepage Experience
+      tags:
+        - Experience
   /music/popular/artists:
     get:
       description: |
@@ -270,7 +499,7 @@ paths:
         - http
       summary: Popular Artists
       tags:
-        - Music Popularity
+        - Music
   '/music/popular/artists/{id}':
     get:
       description: |
@@ -315,7 +544,7 @@ paths:
         - http
       summary: Single Artist Popularity
       tags:
-        - Music Popularity
+        - Music
   /music/popular/playlists:
     get:
       description: |
@@ -365,7 +594,7 @@ paths:
         - http
       summary: Popular Playlists
       tags:
-        - Music Popularity
+        - Music
   '/music/popular/playlists/{id}':
     get:
       description: |
@@ -410,7 +639,7 @@ paths:
         - http
       summary: Single Playlist Popularity
       tags:
-        - Music Popularity
+        - Music
   /music/popular/tracks:
     get:
       description: |
@@ -475,7 +704,7 @@ paths:
         - http
       summary: Popular Tracks
       tags:
-        - Music Popularity
+        - Music
   '/music/popular/tracks/{id}':
     get:
       description: |
@@ -535,7 +764,109 @@ paths:
         - http
       summary: Single Track Popularity
       tags:
-        - Music Popularity
+        - Music
+  /my/categories/follows:
+    delete:
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - in: body
+          name: Body
+          required: true
+          schema:
+            $ref: '#/definitions/Body_1'
+      responses:
+        '202':
+          description: Request successfully sent to UAS.
+        '400':
+          description: The request was malformed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Unfollow category
+      tags:
+        - Personalised Categories
+    get:
+      description: |
+        List of followed categories for a given user.
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PersonalisedCategoriesResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: List of followed categories
+      tags:
+        - Personalised Categories
+    post:
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - in: body
+          name: Body
+          required: true
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '202':
+          description: Request successfully sent to UAS.
+        '400':
+          description: The request was malformed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Follow category
+      tags:
+        - Personalised Categories
   /my/music/export:
     get:
       description: |
@@ -814,7 +1145,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: Favourite Tracks or Clips
       tags:
-        - Personalised Music
+        - Music
     post:
       description: |
         Add multiple tracks and/or clips to a BBC Music user's favourites.
@@ -858,7 +1189,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: Favourite Tracks or Clips
       tags:
-        - Personalised Music
+        - Music
     put:
       description: |
         Update tracks or clips from a BBC Music user favourites.
@@ -902,7 +1233,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: Favourite Tracks or Clips
       tags:
-        - Personalised Music
+        - Music
   '/my/music/favourites/{type}':
     get:
       description: |
@@ -963,7 +1294,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: Favourite Tracks or Clips by Type
       tags:
-        - Personalised Music
+        - Music
   '/my/music/favourites/{type}/{id}':
     delete:
       description: |
@@ -1011,7 +1342,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: Favourite Track or Clip
       tags:
-        - Personalised Music
+        - Music
     get:
       description: |
         Check to see if a single track or clip entity is in a users favourites - determines UX of add button.
@@ -1058,7 +1389,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: Favourite Track or Clip
       tags:
-        - Personalised Music
+        - Music
     post:
       description: |
         Add track or clip to a BBC Music user favourites.
@@ -1113,7 +1444,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: Favourite Track or Clip
       tags:
-        - Personalised Music
+        - Music
     put:
       description: |
         Update tracks or clips from a BBC Music user favourites.
@@ -1168,7 +1499,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: Favourite Track or Clip
       tags:
-        - Personalised Music
+        - Music
   /my/music/follows:
     get:
       description: |
@@ -1244,7 +1575,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
       tags:
-        - Personalised Music
+        - Music
     post:
       description: |
         Add networks, categories, artists, playlists, networks, genres or services in a users follows
@@ -1319,7 +1650,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
       tags:
-        - Personalised Music
+        - Music
     put:
       description: |
         Update networks, categories, artists, playlists, networks, genres or services in a users follows
@@ -1394,7 +1725,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
       tags:
-        - Personalised Music
+        - Music
   '/my/music/follows/{type}':
     get:
       description: |
@@ -1482,7 +1813,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: 'Followed Networks, Categories, Artists, Playlists and Genres by Type'
       tags:
-        - Personalised Music
+        - Music
   '/my/music/follows/{type}/{id}':
     delete:
       description: |
@@ -1557,7 +1888,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: 'Followed Network, Category, Artist, Playlist and Genre'
       tags:
-        - Personalised Music
+        - Music
     get:
       description: |
         Check to see if a single network, category, artist, playlist, network, genre or service entity is in a users follows - determines UX of add button.
@@ -1631,7 +1962,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: 'Followed Network, Category, Artist, Playlist and Genre'
       tags:
-        - Personalised Music
+        - Music
     post:
       description: |
         Add a single network, category, artist, playlist, network, genre or service entity is in a users follows
@@ -1713,7 +2044,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: 'Followed Network, Category, Artist, Playlist and Genre'
       tags:
-        - Personalised Music
+        - Music
     put:
       description: |
         Update a single network, category, artist, playlist, network, genre or service entity is in a users follows
@@ -1795,7 +2126,7 @@ paths:
             $ref: '#/definitions/PersonalisedMusicErrorResponse'
       summary: 'Followed Network, Category, Artist, Playlist and Genre'
       tags:
-        - Personalised Music
+        - Music
   /my/music/preferences/export:
     delete:
       description: |
@@ -2088,11 +2419,8 @@ paths:
       summary: Music Export Vendor Preferences
       tags:
         - Music Export
-  /my/plays:
-    post:
-      description: |
-        Write play events to the [User Activity Service](https://confluence.dev.bbc.co.uk/display/activity/About+the+User+Activity+Service).
-      operationId: writePlayEvent
+  /my/networks/follows:
+    delete:
       parameters:
         - default: Bearer OAUTH_TOKEN
           description: Bearer OAUTH_TOKEN
@@ -2105,12 +2433,133 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: Write Play Request
-          in: body
-          name: writePlayRequest
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - in: body
+          name: Body
           required: true
           schema:
-            $ref: '#/definitions/writePlayRequest'
+            $ref: '#/definitions/Body_3'
+      responses:
+        '202':
+          description: Request successfully sent to UAS.
+        '400':
+          description: The request was malformed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Unfollow network
+      tags:
+        - Personalised Networks
+    get:
+      description: |
+        List of followed networks for a given user.
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PersonalisedNetworksResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: List of followed networks
+      tags:
+        - Personalised Networks
+    post:
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - in: body
+          name: Body
+          required: true
+          schema:
+            $ref: '#/definitions/Body_2'
+      responses:
+        '202':
+          description: Request successfully sent to UAS.
+        '400':
+          description: The request was malformed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Follow network
+      tags:
+        - Personalised Networks
+  /my/plays:
+    post:
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - in: body
+          name: Body
+          required: true
+          schema:
+            $ref: '#/definitions/Body_4'
       responses:
         '202':
           description: Request successfully sent to UAS.
@@ -2127,7 +2576,88 @@ paths:
       summary: Write Play Event
       tags:
         - Personalised Plays
-  /my/programmes/recommendations.json:
+  /my/playspace/containers/suggested:
+    get:
+      description: |
+        Suggested Playspace Container
+      operationId: suggestContainer
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Clip or Episode PID of the previous or first content item in the Playspace stream.
+          in: query
+          name: previous_pid
+          required: true
+          type: string
+        - description: Container ID of the previous container in the Playspace stream.
+          in: query
+          name: previous_container
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PlayspaceContainer'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Suggested Playspace Container
+      tags:
+        - Playspace
+  '/my/playspace/containers/{id}':
+    get:
+      description: |
+        Playspace Container by ID
+      operationId: getContainer
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Playspace Container ID
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PlayspaceContainer'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: No Playspace container with given ID could be found.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Playspace Container by ID
+      tags:
+        - Playspace
+  /my/programmes/recommendations:
     get:
       description: |
         Recommended Programmes from the Audience Platforms' Recomendations Service
@@ -2177,7 +2707,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       summary: Recommended Programmes
       tags:
-        - Recommendations
+        - Programmes
   /my/radio/favourites:
     get:
       description: |
@@ -2242,7 +2772,7 @@ paths:
         - https
       summary: Favourite Episodes and Clips
       tags:
-        - Personalised Radio
+        - Radio
     post:
       description: |
         Add User favourites
@@ -2286,7 +2816,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Favourite Episodes and Clips
       tags:
-        - Personalised Radio
+        - Radio
     put:
       description: |
         Update user favourites
@@ -2330,7 +2860,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Favourite Episodes and Clips
       tags:
-        - Personalised Radio
+        - Radio
   '/my/radio/favourites/{type}':
     get:
       description: |
@@ -2401,7 +2931,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Favourite Episodes and Clips by Type
       tags:
-        - Personalised Radio
+        - Radio
   '/my/radio/favourites/{type}/{pid}':
     delete:
       description: |
@@ -2449,7 +2979,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Favourite Episode or Clip
       tags:
-        - Personalised Radio
+        - Radio
     get:
       description: |
         Check to see if a single clip or episode entity is in a users favourites - determines UX of add button.
@@ -2505,7 +3035,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Favourite Episode or Clip
       tags:
-        - Personalised Radio
+        - Radio
     post:
       description: |
         Add User favourite
@@ -2560,7 +3090,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Favourite Episode or Clip
       tags:
-        - Personalised Radio
+        - Radio
     put:
       description: |
         Update user favourite
@@ -2615,7 +3145,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Favourite Episode or Clip
       tags:
-        - Personalised Radio
+        - Radio
   /my/radio/follows:
     get:
       description: |
@@ -2678,7 +3208,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Followed Brands and Series
       tags:
-        - Personalised Radio
+        - Radio
     post:
       description: |
         Add 'brand' or 'series' items to a users iPlayer Radio follows
@@ -2722,7 +3252,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Followed Brands and Series
       tags:
-        - Personalised Radio
+        - Radio
     put:
       description: |
         Update 'brands' or 'series' items from a users iPlayer Radio follows
@@ -2766,7 +3296,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Followed Brands and Series
       tags:
-        - Personalised Radio
+        - Radio
   '/my/radio/follows/{type}':
     get:
       description: |
@@ -2837,7 +3367,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Followed Brands or Series by Type
       tags:
-        - Personalised Radio
+        - Radio
   '/my/radio/follows/{type}/{pid}':
     delete:
       description: |
@@ -2885,7 +3415,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Followed Brand or Series
       tags:
-        - Personalised Radio
+        - Radio
     get:
       description: |
         Check to see if a single brand or series entity is in a users follows - determines UX of add button.
@@ -2932,7 +3462,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Followed Brand or Series
       tags:
-        - Personalised Radio
+        - Radio
     post:
       description: |
         Add 'brand' or 'series' items from a users iPlayer Radio follows
@@ -2987,7 +3517,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Followed Brand or Series
       tags:
-        - Personalised Radio
+        - Radio
     put:
       description: |
         Update 'brand' or 'series' items from a users iPlayer Radio follows
@@ -3042,7 +3572,7 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Followed Brand or Series
       tags:
-        - Personalised Radio
+        - Radio
   /my/radio/plays:
     get:
       description: |
@@ -3105,8 +3635,8 @@ paths:
             $ref: '#/definitions/PersonalisedRadioErrorResponse'
       summary: Played Episode or Clip
       tags:
-        - Personalised Radio
-  /podcasts.json:
+        - Radio
+  /podcasts:
     get:
       description: |
         Retrieve all Podcasts
@@ -3175,12 +3705,10 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/PodcastErrorResponse'
-      schemes:
-        - http
       summary: All Podcasts
       tags:
         - Podcasts
-  /podcasts/featured.json:
+  /podcasts/featured:
     get:
       description: |
         Retrieve featured podcasts
@@ -3200,12 +3728,10 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/PodcastErrorResponse'
-      schemes:
-        - http
       summary: Featured Podcasts
       tags:
         - Podcasts
-  '/podcasts/{pid}.json':
+  '/podcasts/{pid}':
     get:
       description: |
         Retrieve data about the podcast with the supplied PID
@@ -3240,12 +3766,10 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/PodcastErrorResponse'
-      schemes:
-        - http
       summary: Podcast
       tags:
         - Podcasts
-  '/podcasts/{pid}/episodes.json':
+  '/podcasts/{pid}/episodes':
     get:
       description: |
         Retrieve all episodes for a specific podcast
@@ -3280,37 +3804,9 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/PodcastErrorResponse'
-      schemes:
-        - http
       summary: Podcast Episodes
       tags:
         - Podcasts
-  /radio/categories.json:
-    get:
-      deprecated: true
-      description: |
-        All iPlayer Radio categories - contains business logic for blend of PIPs genres and formats.
-      operationId: getRadioCategories
-      parameters:
-        - description: API_KEY
-          in: header
-          name: X-API-Key
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/RadioCategoriesResponse'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/RadioErrorResponse'
-      schemes:
-        - http
-      summary: Categories
-      tags:
-        - Radio
   /radio/networks.json:
     get:
       description: |
@@ -3341,12 +3837,10 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/RadioErrorResponse'
-      schemes:
-        - http
       summary: Networks
       tags:
-        - Radio
-  /radio/popular.json:
+        - Networks
+  /radio/popular:
     get:
       description: |
         Retrieve Popular Episodes & Clips
@@ -3445,12 +3939,10 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/PopularErrorResponse'
-      schemes:
-        - http
       summary: Popular Episodes & Clips
       tags:
-        - Popularity
-  /radio/programmes.json:
+        - Programmes
+  /radio/programmes:
     get:
       description: |
         Provides a paginated list of programmes by PID (brand, series, episode and clip). Accepts various filters and sorting methods.
@@ -3522,12 +4014,10 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/RadioErrorResponse'
-      schemes:
-        - http
-      summary: Programmes
+      summary: Radio programmes
       tags:
-        - Radio
-  '/radio/programmes/{pid}.json':
+        - Programmes
+  '/radio/programmes/{pid}':
     get:
       description: |
         Find programmes by PID (brand, series, episode and clip)
@@ -3556,245 +4046,9 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/RadioErrorResponse'
-      schemes:
-        - http
-      summary: Programme by Pid
+      summary: Available radio programme by Pid
       tags:
-        - Radio
-  /radio/v1/programmes.json:
-    get:
-      deprecated: true
-      description: |
-        Find programmes by PID (brand, series, episode and clip). Accepts one or many pids separated by commas.
-
-        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-        and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
-         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
-      operationId: getRadioProgrammesV1
-      parameters:
-        - description: API_KEY
-          in: header
-          name: X-API-Key
-          required: true
-          type: string
-        - description: Returns programme information for one or more pids
-          in: query
-          name: pids
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/ProgrammesResponse'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/RadioErrorResponse'
-      schemes:
-        - http
-      summary: Programmes
-      tags:
-        - Radio
-  '/radio/v1/programmes/{pid}.json':
-    get:
-      deprecated: true
-      description: |
-        Find programmes by PID (brand, series, episode and clip)
-
-        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-        and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
-         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
-      operationId: getRadioProgrammesByPidV1
-      parameters:
-        - description: API_KEY
-          in: header
-          name: X-API-Key
-          required: true
-          type: string
-        - description: pid
-          in: path
-          name: pid
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/ProgrammesResponse'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/RadioErrorResponse'
-      schemes:
-        - http
-      summary: Programme by Pid
-      tags:
-        - Radio
-  /v2/broadcasts:
-    get:
-      description: |
-        All broadcasts
-      parameters:
-        - description: API_KEY
-          in: header
-          name: X-API-Key
-          required: true
-          type: string
-        - description: Paginated results offset
-          in: query
-          name: offset
-          required: false
-          type: integer
-        - description: Paginated results limit
-          in: query
-          name: limit
-          required: false
-          type: integer
-        - description: Filter by Service ID. E.g. bbc_radio_fourfm
-          in: query
-          name: service_id
-          required: false
-          type: string
-        - description: Filter by date. E.g. 2016-06-17
-          in: query
-          name: date
-          required: false
-          type: string
-        - description: 'Sort by provided query. E.g. ''start_at'' sorts in ascending order, and ''-start_at'' sorts in descending order'
-          enum:
-            - start_at
-            - '-start_at'
-            - end_at
-            - '-end_at'
-          in: query
-          name: sort
-          required: false
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/BroadcastsResponse'
-        '401':
-          description: There was an error with the supplied `Authorization` header.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      schemes:
-        - https
-      summary: Broadcasts
-      tags:
-        - Schedules
-  /v2/broadcasts/latest:
-    get:
-      description: |
-        Broadcasts for the current day
-      parameters:
-        - description: API_KEY
-          in: header
-          name: X-API-Key
-          required: true
-          type: string
-        - description: Paginated results offset
-          in: query
-          name: offset
-          required: false
-          type: integer
-        - description: Paginated results limit
-          in: query
-          name: limit
-          required: false
-          type: integer
-        - description: Filter by Service ID. E.g. bbc_radio_fourfm
-          in: query
-          name: service_id
-          required: false
-          type: string
-        - description: Filter what is on air. E.g. 'now' returns current programme being broadcasted.
-          enum:
-            - now
-            - previous
-            - next
-          in: query
-          name: on_air
-          required: false
-          type: string
-        - description: Filter what will be on air next in minutes. E.g. '240' returns programmes broadcasted in the next four hurs
-          in: query
-          name: next
-          required: false
-          type: string
-        - description: Filter what was on air previously in minutes. E.g. '240' returns programmes broadcasted in the previous four hurs
-          in: query
-          name: previous
-          required: false
-          type: string
-        - description: 'Sort by provided query. E.g. ''start_at'' sorts in ascending order, and ''-start_at'' sorts in descending order'
-          enum:
-            - start_at
-            - '-start_at'
-            - end_at
-            - '-end_at'
-          in: query
-          name: sort
-          required: false
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/BroadcastsResponse'
-        '401':
-          description: There was an error with the supplied `Authorization` header.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      schemes:
-        - https
-      summary: Latest Broadcasts
-      tags:
-        - Schedules
-  '/v2/broadcasts/{pid}':
-    get:
-      description: |
-        Find broadcast by PID
-      operationId: getBroadcastByPid
-      parameters:
-        - description: API_KEY
-          in: header
-          name: X-API-Key
-          required: true
-          type: string
-        - description: pid
-          in: path
-          name: pid
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/BroadcastsResponse'
-        '401':
-          description: There was an error with the supplied `Authorization` header.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      schemes:
-        - https
-      summary: Broadcasts by PID
-      tags:
-        - Schedules
+        - Programmes
 definitions:
   AncestorSummary:
     properties:
@@ -3857,6 +4111,85 @@ definitions:
       - type
       - version_pid
       - version_type
+    type: object
+  Body:
+    properties:
+      category_id:
+        type: string
+      platform:
+        enum:
+          - responsiveweb
+          - app
+        type: string
+    required:
+      - category_id
+      - platform
+    type: object
+  Body_1:
+    properties:
+      category_id:
+        type: string
+      platform:
+        enum:
+          - responsiveweb
+          - app
+        type: string
+    required:
+      - category_id
+      - platform
+    type: object
+  Body_2:
+    properties:
+      platform:
+        enum:
+          - responsiveweb
+          - app
+        type: string
+      service_id:
+        type: string
+    required:
+      - platform
+      - service_id
+    type: object
+  Body_3:
+    properties:
+      platform:
+        enum:
+          - responsiveweb
+          - app
+        type: string
+      service_id:
+        type: string
+    required:
+      - platform
+      - service_id
+    type: object
+  Body_4:
+    properties:
+      action:
+        enum:
+          - started
+          - ended
+          - paused
+          - heartbeat
+        type: string
+      elapsed_time:
+        type: integer
+      pid:
+        type: string
+      resource_type:
+        enum:
+          - episode
+          - clip
+        type: string
+      version_pid:
+        type: string
+    required:
+      - action
+      - elapsed_time
+      - pid
+      - resource_type
+      - version_pid
     type: object
   BrandSummary:
     properties:
@@ -3991,6 +4324,8 @@ definitions:
         items:
           $ref: '#/definitions/ChildCategory'
         type: array
+      depth:
+        type: integer
       id:
         type: string
       pip_id:
@@ -4004,6 +4339,7 @@ definitions:
     required:
       - category_type
       - child_categories
+      - depth
       - id
       - pip_id
       - title
@@ -4045,6 +4381,8 @@ definitions:
     properties:
       category_type:
         type: string
+      id:
+        type: string
       key:
         type: string
       title:
@@ -4053,6 +4391,7 @@ definitions:
         type: string
     required:
       - category_type
+      - id
       - key
       - title
       - type
@@ -4065,6 +4404,8 @@ definitions:
         items:
           $ref: '#/definitions/ChildCategory'
         type: array
+      depth:
+        type: integer
       id:
         type: string
       pip_id:
@@ -4078,6 +4419,7 @@ definitions:
     required:
       - category_type
       - child_categories
+      - depth
       - id
       - pip_id
       - title
@@ -4152,6 +4494,17 @@ definitions:
       - end
       - start
     type: object
+  DisplayModule:
+    properties:
+      description:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      uri:
+        type: string
+    type: object
   Empty:
     type: object
     x-nullable: true
@@ -4224,6 +4577,18 @@ definitions:
     required:
       - $schema
       - errors
+    type: object
+  ExperienceResponse:
+    properties:
+      $schema:
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/DisplayModule'
+        type: array
+    required:
+      - $schema
+      - data
     type: object
   ExternalPartner:
     properties:
@@ -4754,6 +5119,32 @@ definitions:
     required:
       - type
     type: object
+  PersonalisedCategories:
+    properties:
+      created:
+        type: string
+      type:
+        type: string
+    required:
+      - created
+      - type
+    type: object
+  PersonalisedCategoriesResponse:
+    properties:
+      $schema:
+        type: string
+      limit:
+        type: integer
+      offset:
+        type: integer
+      total:
+        type: integer
+    required:
+      - $schema
+      - limit
+      - offset
+      - total
+    type: object
   PersonalisedMusicActivity:
     properties:
       action:
@@ -5126,6 +5517,37 @@ definitions:
       vpid:
         type: string
     type: object
+  PersonalisedNetworks:
+    properties:
+      created:
+        type: string
+      type:
+        type: string
+    required:
+      - created
+      - type
+    type: object
+  PersonalisedNetworksResponse:
+    properties:
+      $schema:
+        type: string
+      limit:
+        type: integer
+      offset:
+        type: integer
+      results:
+        items:
+          $ref: '#/definitions/PersonalisedNetworks'
+        type: array
+      total:
+        type: integer
+    required:
+      - $schema
+      - limit
+      - offset
+      - results
+      - total
+    type: object
   PersonalisedRadioActivity:
     properties:
       action:
@@ -5272,6 +5694,34 @@ definitions:
       - $schema
       - method
       - replied_at
+    type: object
+  PlayableItem:
+    properties:
+      description:
+        type: string
+      image_url:
+        type: string
+      pid:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      version_pid:
+        type: string
+    type: object
+  PlayspaceContainer:
+    properties:
+      id:
+        type: string
+      members:
+        items:
+          $ref: '#/definitions/PlayableItem'
+        type: array
+      title:
+        type: string
+      type:
+        type: string
     type: object
   Podcast:
     properties:
@@ -5633,80 +6083,6 @@ definitions:
       - results
       - total
     type: object
-  RadioCategoriesResponse:
-    properties:
-      $schema:
-        type: string
-      limit:
-        type: integer
-      offset:
-        type: integer
-      results:
-        items:
-          $ref: '#/definitions/RadioCategory'
-        type: array
-      total:
-        type: integer
-    required:
-      - $schema
-      - limit
-      - offset
-      - results
-      - total
-    type: object
-  RadioCategory:
-    properties:
-      available_episodes:
-        $ref: '#/definitions/Empty'
-      child_categories:
-        items:
-          $ref: '#/definitions/RadioChildCategory'
-        type: array
-      id:
-        type: string
-      latest_episode:
-        $ref: '#/definitions/Empty'
-      original_categories:
-        items:
-          $ref: '#/definitions/RadioOriginalCategory'
-        type: array
-      title:
-        type: string
-      translation_key:
-        type: string
-      type:
-        type: string
-    required:
-      - available_episodes
-      - child_categories
-      - id
-      - latest_episode
-      - original_categories
-      - title
-      - translation_key
-      - type
-    type: object
-  RadioChildCategory:
-    properties:
-      id:
-        type: string
-      original_categories:
-        items:
-          $ref: '#/definitions/RadioOriginalCategory'
-        type: array
-      title:
-        type: string
-      translation_key:
-        type: string
-      type:
-        type: string
-    required:
-      - id
-      - original_categories
-      - title
-      - translation_key
-      - type
-    type: object
   RadioError:
     properties:
       code:
@@ -5743,25 +6119,6 @@ definitions:
     required:
       - $schema
       - errors
-    type: object
-  RadioOriginalCategory:
-    properties:
-      category_type:
-        type: string
-      id:
-        type: string
-      key:
-        type: string
-      title:
-        type: string
-      type:
-        type: string
-    required:
-      - category_type
-      - id
-      - key
-      - title
-      - type
     type: object
   SeriesSummary:
     properties:
@@ -5837,31 +6194,4 @@ definitions:
       - short_title
       - title
       - type
-    type: object
-  writePlayRequest:
-    properties:
-      action:
-        enum:
-          - started
-          - ended
-          - paused
-          - heartbeat
-        type: string
-      elapsed_time:
-        type: integer
-      pid:
-        type: string
-      resource_type:
-        enum:
-          - episode
-          - clip
-        type: string
-      version_pid:
-        type: string
-    required:
-      - action
-      - elapsed_time
-      - pid
-      - resource_type
-      - version_pid
     type: object

@@ -16,12 +16,14 @@ info:
   version: v3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - monitoring
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://monitoring.googleapis.com/$discovery/rest?version=v3'
       version: v1
@@ -130,13 +132,61 @@ parameters:
     type: string
 tags:
   - name: projects
+  - name: uptimeCheckIps
 paths:
+  /v3/uptimeCheckIps:
+    get:
+      description: Returns the list of IPs that checkers run from
+      operationId: monitoring.uptimeCheckIps.list
+      parameters:
+        - description: 'The maximum number of results to return in a single response. The server may further constrain the maximum number of results returned in a single page. If the page_size is <=0, the server will decide the number of results to be returned. NOTE: this field is not yet implemented'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return more results from the previous method call. NOTE: this field is not yet implemented'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListUptimeCheckIpsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+      tags:
+        - uptimeCheckIps
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
-      operationId: monitoring.projects.metricDescriptors.delete
+      description: Deletes an uptime check configuration. Note that this method will fail if the uptime check configuration is referenced by an alert policy or other dependent configs that would be rendered invalid by the deletion.
+      operationId: monitoring.projects.uptimeCheckConfigs.delete
       parameters:
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
+        - description: 'The uptime check configuration to delete. The formatis projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
           in: path
           name: name
           required: true
@@ -159,10 +209,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
-      operationId: monitoring.projects.monitoredResourceDescriptors.get
+      description: Gets a single uptime check configuration.
+      operationId: monitoring.projects.uptimeCheckConfigs.get
       parameters:
-        - description: 'The monitored resource descriptor to get. The format is "projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}". The {resource_type} is a predefined type, such as cloudsql_database.'
+        - description: 'The uptime check configuration to retrieve. The formatis projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
           in: path
           name: name
           required: true
@@ -172,7 +222,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/MonitoredResourceDescriptor'
+            $ref: '#/definitions/UptimeCheckConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -193,23 +243,61 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: Updates an uptime check configuration. You can either replace the entire configuration with a new one or replace only certain fields in the current configuration by specifying the fields to be updated via "updateMask". Returns the updated configuration.
+      operationId: monitoring.projects.uptimeCheckConfigs.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UptimeCheckConfig'
+        - description: 'A unique resource name for this UptimeCheckConfig. The format is:projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].This field should be omitted when creating the uptime check configuration; on create, the resource name is assigned by the server and included in the response.'
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: 'Optional. If present, only the listed fields in the current uptime check configuration are updated with values from the new configuration. If this field is empty, then the current configuration is completely replaced with the new configuration.'
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UptimeCheckConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - projects
     put:
       description: Updates an existing group. You can change any group attributes except name.
       operationId: monitoring.projects.groups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
         - description: 'Output only. The name of this group. The format is "projects/{project_id_or_number}/groups/{group_id}". When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
           in: path
           name: name
@@ -220,10 +308,6 @@ paths:
           in: query
           name: validateOnly
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Group'
       responses:
         '200':
           description: Successful response
@@ -242,38 +326,38 @@ paths:
         - projects
   '/v3/{name}/collectdTimeSeries':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
       operationId: monitoring.projects.collectdTimeSeries.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateCollectdTimeSeriesRequest'
         - description: The project in which to create the time series. The format is "projects/PROJECT_ID_OR_NUMBER".
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateCollectdTimeSeriesRequest'
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/CreateCollectdTimeSeriesResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -294,12 +378,10 @@ paths:
       description: Lists the existing groups.
       operationId: monitoring.projects.groups.list
       parameters:
-        - description: 'The project whose groups are to be listed. The format is "projects/{project_id_or_number}".'
-          in: path
-          name: name
-          required: true
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
+          in: query
+          name: ancestorsOfGroup
           type: string
-          x-reservedExpansion: true
         - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups whose parentName field contains the group name. If no groups have this parent, the results are empty.'
           in: query
           name: childrenOfGroup
@@ -308,17 +390,19 @@ paths:
           in: query
           name: descendantsOfGroup
           type: string
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
+        - description: 'The project whose groups are to be listed. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
           type: string
+          x-reservedExpansion: true
         - description: A positive number that is the maximum number of results to return.
           in: query
           name: pageSize
           type: integer
-        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
-          name: ancestorsOfGroup
+          name: pageToken
           type: string
       responses:
         '200':
@@ -341,23 +425,27 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
         - description: 'The project in which to create the group. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
@@ -368,10 +456,6 @@ paths:
           in: query
           name: validateOnly
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Group'
       responses:
         '200':
           description: Successful response
@@ -393,33 +477,33 @@ paths:
       description: Lists the monitored resources that are members of a group.
       operationId: monitoring.projects.groups.members.list
       parameters:
+        - description: |
+            An optional list filter describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
+            resource.type = "gce_instance"
+          in: query
+          name: filter
+          type: string
+        - description: Required. The end of the time interval.
+          in: query
+          name: interval.endTime
+          type: string
+        - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
+          in: query
+          name: interval.startTime
+          type: string
         - description: 'The group whose members are listed. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
-          type: string
-        - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
-          in: query
-          name: interval.startTime
-          type: string
         - description: A positive number that is the maximum number of results to return.
           in: query
           name: pageSize
           type: integer
-        - description: Required. The end of the time interval.
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
-          name: interval.endTime
-          type: string
-        - description: |
-            An optional list filter describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
-            resource.type = "gce_instance"
-          in: query
-          name: filter
+          name: pageToken
           type: string
       responses:
         '200':
@@ -442,43 +526,43 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v3/{name}/metricDescriptors':
     get:
       description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.metricDescriptors.list
       parameters:
+        - description: |
+            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics:
+            metric.type = starts_with("custom.googleapis.com/")
+          in: query
+          name: filter
+          type: string
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
-          type: string
         - description: A positive number that is the maximum number of results to return.
           in: query
           name: pageSize
           type: integer
-        - description: |
-            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics:
-            metric.type = starts_with("custom.googleapis.com/")
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
-          name: filter
+          name: pageToken
           type: string
       responses:
         '200':
@@ -505,33 +589,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new metric descriptor. User-created metric descriptors define custom metrics.
       operationId: monitoring.projects.metricDescriptors.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MetricDescriptor'
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/MetricDescriptor'
       responses:
         '200':
           description: Successful response
@@ -557,25 +641,25 @@ paths:
       description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.monitoredResourceDescriptors.list
       parameters:
+        - description: |
+            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
+            resource.type = starts_with("gce_") AND resource.label:id
+          in: query
+          name: filter
+          type: string
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
-          type: string
         - description: A positive number that is the maximum number of results to return.
           in: query
           name: pageSize
           type: integer
-        - description: |
-            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
-            resource.type = starts_with("gce_") AND resource.label:id
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
-          name: filter
+          name: pageToken
           type: string
       responses:
         '200':
@@ -602,19 +686,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v3/{name}/timeSeries':
     get:
       description: Lists time series that match a filter. This method does not require a Stackdriver account.
@@ -634,6 +718,7 @@ paths:
             - REDUCE_STDDEV
             - REDUCE_COUNT
             - REDUCE_COUNT_TRUE
+            - REDUCE_COUNT_FALSE
             - REDUCE_FRACTION_TRUE
             - REDUCE_PERCENTILE_99
             - REDUCE_PERCENTILE_95
@@ -663,11 +748,13 @@ paths:
             - ALIGN_SUM
             - ALIGN_STDDEV
             - ALIGN_COUNT_TRUE
+            - ALIGN_COUNT_FALSE
             - ALIGN_FRACTION_TRUE
             - ALIGN_PERCENTILE_99
             - ALIGN_PERCENTILE_95
             - ALIGN_PERCENTILE_50
             - ALIGN_PERCENTILE_05
+            - ALIGN_PERCENT_CHANGE
           in: query
           name: aggregation.perSeriesAligner
           type: string
@@ -692,7 +779,7 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.'
+        - description: 'Unsupported: must be left blank. The points in each time series are returned in reverse time order.'
           in: query
           name: orderBy
           type: string
@@ -732,33 +819,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.'
       operationId: monitoring.projects.timeSeries.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateTimeSeriesRequest'
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateTimeSeriesRequest'
       responses:
         '200':
           description: Successful response
@@ -779,7 +866,100 @@ paths:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
+  '/v3/{parent}/uptimeCheckConfigs':
+    get:
+      description: 'Lists the existing valid uptime check configurations for the project, leaving out any invalid configurations.'
+      operationId: monitoring.projects.uptimeCheckConfigs.list
+      parameters:
+        - description: 'The maximum number of results to return in a single response. The server may further constrain the maximum number of results returned in a single page. If the page_size is <=0, the server will decide the number of results to be returned.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return more results from the previous method call.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'The project whose uptime check configurations are listed. The formatis projects/[PROJECT_ID].'
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListUptimeCheckConfigsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a new uptime check configuration.
+      operationId: monitoring.projects.uptimeCheckConfigs.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UptimeCheckConfig'
+        - description: 'The project in which to create the uptime check. The formatis projects/[PROJECT_ID].'
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UptimeCheckConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - projects
 definitions:
+  BasicAuthentication:
+    description: 'A type of authentication to perform against the specified resource or URL that uses username and password. Currently, only Basic authentication is supported in Uptime Monitoring.'
+    properties:
+      password:
+        description: The password to authenticate.
+        type: string
+      username:
+        description: The username to authenticate.
+        type: string
+    type: object
   BucketOptions:
     description: 'BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.'
     properties:
@@ -827,6 +1007,22 @@ definitions:
           $ref: '#/definitions/CollectdValue'
         type: array
     type: object
+  CollectdPayloadError:
+    description: Describes the error status for payloads that were not written.
+    properties:
+      error:
+        $ref: '#/definitions/Status'
+        description: 'Records the error status for the payload. If this field is present, the partial errors for nested values won''t be populated.'
+      index:
+        description: The zero-based index in CreateCollectdTimeSeriesRequest.collectd_payloads.
+        format: int32
+        type: integer
+      valueErrors:
+        description: Records the error status for values that were not written due to an error.Failed payloads for which nothing is written will not include partial value errors.
+        items:
+          $ref: '#/definitions/CollectdValueError'
+        type: array
+    type: object
   CollectdValue:
     description: A single data point from a collectd-based plugin.
     properties:
@@ -846,6 +1042,24 @@ definitions:
         $ref: '#/definitions/TypedValue'
         description: The measurement value.
     type: object
+  CollectdValueError:
+    description: Describes the error status for values that were not written.
+    properties:
+      error:
+        $ref: '#/definitions/Status'
+        description: Records the error status for the value.
+      index:
+        description: The zero-based index in CollectdPayload.values within the parent CreateCollectdTimeSeriesRequest.collectd_payloads.
+        format: int32
+        type: integer
+    type: object
+  ContentMatcher:
+    description: 'Used to perform string matching. Currently, this matches on the exact content. In the future, it can be expanded to allow for regular expressions and more complex matching.'
+    properties:
+      content:
+        description: String content to match
+        type: string
+    type: object
   CreateCollectdTimeSeriesRequest:
     description: The CreateCollectdTimeSeries request.
     properties:
@@ -860,6 +1074,15 @@ definitions:
       resource:
         $ref: '#/definitions/MonitoredResource'
         description: The monitored resource associated with the time series.
+    type: object
+  CreateCollectdTimeSeriesResponse:
+    description: The CreateCollectdTimeSeries response.
+    properties:
+      payloadErrors:
+        description: Records the error status for points that were not written due to an error.Failed requests for which nothing is written will return an error response instead.
+        items:
+          $ref: '#/definitions/CollectdPayloadError'
+        type: array
     type: object
   CreateTimeSeriesRequest:
     description: The CreateTimeSeries request.
@@ -1018,6 +1241,50 @@ definitions:
         description: 'The name of the group''s parent, if it has one. The format is "projects/{project_id_or_number}/groups/{group_id}". For groups with no parent, parentName is the empty string, "".'
         type: string
     type: object
+  HttpCheck:
+    description: Information involved in an HTTP/HTTPS uptime check request.
+    properties:
+      authInfo:
+        $ref: '#/definitions/BasicAuthentication'
+        description: The authentication information. Optional when creating an HTTP check; defaults to empty.
+      headers:
+        additionalProperties:
+          type: string
+        description: 'The list of headers to send as part of the uptime check request. If two headers have the same key and different values, they should be entered as a single header, with the value being a comma-separated list of all the desired values as described at https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31). Entering two separate headers with the same key in a Create call will cause the first to be overwritten by the second. The maximum number of headers allowed is 100.'
+        type: object
+      maskHeaders:
+        description: 'Boolean specifiying whether to encrypt the header information. Encryption should be specified for any headers related to authentication that you do not wish to be seen when retrieving the configuration. The server will be responsible for encrypting the headers. On Get/List calls, if mask_headers is set to True then the headers will be obscured with ******.'
+        type: boolean
+      path:
+        description: The path to the page to run the check against. Will be combined with the host (specified within the MonitoredResource) and port to construct the full URL. Optional (defaults to "/").
+        type: string
+      port:
+        description: 'The port to the page to run the check against. Will be combined with host (specified within the MonitoredResource) and path to construct the full URL. Optional (defaults to 80 without SSL, or 443 with SSL).'
+        format: int32
+        type: integer
+      useSsl:
+        description: 'If true, use HTTPS instead of HTTP to run the check.'
+        type: boolean
+    type: object
+  InternalChecker:
+    description: Nimbus InternalCheckers.
+    properties:
+      checkerId:
+        description: The checker ID.
+        type: string
+      displayName:
+        description: The checker's human-readable name.
+        type: string
+      gcpZone:
+        description: 'The GCP zone the uptime check should egress from. Only respected for internal uptime checks, where internal_network is specified.'
+        type: string
+      network:
+        description: The internal network to perform this uptime check on.
+        type: string
+      projectId:
+        description: The GCP project ID. Not necessarily the same as the project_id for the config.
+        type: string
+    type: object
   LabelDescriptor:
     description: A description of a label.
     properties:
@@ -1115,6 +1382,34 @@ definitions:
           $ref: '#/definitions/TimeSeries'
         type: array
     type: object
+  ListUptimeCheckConfigsResponse:
+    description: The protocol for the ListUptimeCheckConfigs response.
+    properties:
+      nextPageToken:
+        description: 'This field represents the pagination token to retrieve the next page of results. If the value is empty, it means no further results for the request. To retrieve the next page of results, the value of the next_page_token is passed to the subsequent List method call (in the request message''s page_token field).'
+        type: string
+      totalSize:
+        description: 'The total number of uptime check configurations for the project, irrespective of any pagination.'
+        format: int32
+        type: integer
+      uptimeCheckConfigs:
+        description: The returned uptime check configurations.
+        items:
+          $ref: '#/definitions/UptimeCheckConfig'
+        type: array
+    type: object
+  ListUptimeCheckIpsResponse:
+    description: The protocol for the ListUptimeCheckIps response.
+    properties:
+      nextPageToken:
+        description: 'This field represents the pagination token to retrieve the next page of results. If the value is empty, it means no further results for the request. To retrieve the next page of results, the value of the next_page_token is passed to the subsequent List method call (in the request message''s page_token field). NOTE: this field is not yet implemented'
+        type: string
+      uptimeCheckIps:
+        description: The returned list of IP addresses (including region and location) that the checkers run from.
+        items:
+          $ref: '#/definitions/UptimeCheckIp'
+        type: array
+    type: object
   Metric:
     description: 'A specific metric, identified by specifying values for all of the labels of a MetricDescriptor.'
     properties:
@@ -1134,7 +1429,7 @@ definitions:
         description: 'A detailed description of the metric, which can be used in documentation.'
         type: string
       displayName:
-        description: 'A concise name for the metric, which can be displayed in user interfaces. Use sentence case without an ending period, for example "Request count".'
+        description: 'A concise name for the metric, which can be displayed in user interfaces. Use sentence case without an ending period, for example "Request count". This field is optional but it is recommended to be set for any metrics associated with user-visible concepts, such as Quota.'
         type: string
       labels:
         description: 'The set of labels that can be used to describe a specific instance of this metric type. For example, the appengine.googleapis.com/http/server/response_latencies metric type has a label for the HTTP response code, response_code, so you can look at latencies for successful responses or just for responses that failed.'
@@ -1150,9 +1445,7 @@ definitions:
           - CUMULATIVE
         type: string
       name:
-        description: |
-          The resource name of the metric descriptor. Depending on the implementation, the name typically includes: (1) the parent resource name that defines the scope of the metric type or of its data; and (2) the metric's URL-encoded type, which also appears in the type field of this descriptor. For example, following is the resource name of a custom metric within the GCP project my-project-id:
-          "projects/my-project-id/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
+        description: The resource name of the metric descriptor.
         type: string
       type:
         description: |
@@ -1161,47 +1454,7 @@ definitions:
           "appengine.googleapis.com/http/server/response_latencies"
         type: string
       unit:
-        description: |-
-          The unit in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The supported units are a subset of The Unified Code for Units of Measure (http://unitsofmeasure.org/ucum.html) standard:Basic units (UNIT)
-          bit bit
-          By byte
-          s second
-          min minute
-          h hour
-          d dayPrefixes (PREFIX)
-          k kilo (10**3)
-          M mega (10**6)
-          G giga (10**9)
-          T tera (10**12)
-          P peta (10**15)
-          E exa (10**18)
-          Z zetta (10**21)
-          Y yotta (10**24)
-          m milli (10**-3)
-          u micro (10**-6)
-          n nano (10**-9)
-          p pico (10**-12)
-          f femto (10**-15)
-          a atto (10**-18)
-          z zepto (10**-21)
-          y yocto (10**-24)
-          Ki kibi (2**10)
-          Mi mebi (2**20)
-          Gi gibi (2**30)
-          Ti tebi (2**40)GrammarThe grammar includes the dimensionless unit 1, such as 1/s.The grammar also includes these connectors:
-          / division (as an infix operator, e.g. 1/s).
-          . multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit is as follows:
-          Expression = Component { "." Component } { "/" Component } ;
-
-          Component = [ PREFIX ] UNIT [ Annotation ]
-                    | Annotation
-                    | "1"
-                    ;
-
-          Annotation = "{" NAME "}" ;
-          Notes:
-          Annotation is just a comment if it follows a UNIT and is  equivalent to 1 if it is used alone. For examples,  {requests}/s == 1/s, By{transmitted}/s == By/s.
-          NAME is a sequence of non-blank printable ASCII characters not  containing '{' or '}'.
+        description: 'Optional. The unit in which the metric value is reported. For example, kBy/s means kilobytes/sec, and 1 is the dimensionless unit. The supported units are a subset of The Unified Code for Units of Measure standard (http://unitsofmeasure.org/ucum.html).<br><br> This field is part of the metric''s documentation, but it is ignored by Stackdriver.'
         type: string
       valueType:
         description: 'Whether the measurement is an integer, a floating-point number, etc. Some combinations of metric_kind and value_type might not be supported.'
@@ -1252,6 +1505,24 @@ definitions:
         description: 'Required. The monitored resource type. For example, the type "cloudsql_database" represents databases in Google Cloud SQL. The maximum length of this value is 256 characters.'
         type: string
     type: object
+  MonitoredResourceMetadata:
+    description: 'Auxiliary metadata for a MonitoredResource object. MonitoredResource objects contain the minimum set of information to uniquely identify a monitored resource instance. There is some other useful auxiliary metadata. Google Stackdriver Monitoring & Logging uses an ingestion pipeline to extract metadata for cloud resources of all types , and stores the metadata in this message.'
+    properties:
+      systemLabels:
+        additionalProperties:
+          description: Properties of the object.
+        description: |
+          Output only. Values for predefined system metadata labels. System labels are a kind of metadata extracted by Google Stackdriver. Stackdriver determines what system labels are useful and how to obtain their values. Some examples: "machine_image", "vpc", "subnet_id", "security_group", "name", etc. System label values can be only strings, Boolean values, or a list of strings. For example:
+          { "name": "my-test-instance",
+            "security_group": ["a", "b", "c"],
+            "spot_instance": false }
+        type: object
+      userLabels:
+        additionalProperties:
+          type: string
+        description: Output only. A map of user-defined metadata labels.
+        type: object
+    type: object
   Option:
     description: 'A protocol buffer option, which can be attached to a message, field, enumeration, etc.'
     properties:
@@ -1286,12 +1557,60 @@ definitions:
         format: double
         type: number
     type: object
+  ResourceGroup:
+    description: 'The resource submessage for group checks. It can be used instead of a monitored resource, when multiple resources are being monitored.'
+    properties:
+      groupId:
+        description: 'The group of resources being monitored. Should be only the group_id, not projects/<project_id>/groups/<group_id>.'
+        type: string
+      resourceType:
+        description: The resource type of the group members.
+        enum:
+          - RESOURCE_TYPE_UNSPECIFIED
+          - INSTANCE
+          - AWS_ELB_LOAD_BALANCER
+        type: string
+    type: object
   SourceContext:
     description: 'SourceContext represents information about the source of a protobuf element, like the file in which it is defined.'
     properties:
       fileName:
         description: 'The path-qualified name of the .proto file that contained the associated protobuf element. For example: "google/protobuf/source_context.proto".'
         type: string
+    type: object
+  Status:
+    description: |-
+      The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). The error model is designed to be:
+      Simple to use and understand for most users
+      Flexible enough to meet unexpected needsOverviewThe Status message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers understand and resolve the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package google.rpc that can be used for common error conditions.Language mappingThe Status message is the logical representation of the error model, but it is not necessarily the actual wire format. When the Status message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.Other usesThe error model and the Status message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.Example uses of this error model include:
+      Partial errors. If a service needs to return partial errors to the client, it may embed the Status in the normal response to indicate the partial errors.
+      Workflow errors. A typical workflow has multiple steps. Each step may have a Status message for error reporting.
+      Batch operations. If a client uses batch request and batch response, the Status message should be used directly inside batch response, one for each error sub-response.
+      Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the Status message.
+      Logging. If some API errors are stored in logs, the message Status could be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+        type: string
+    type: object
+  TcpCheck:
+    description: Information required for a TCP uptime check request.
+    properties:
+      port:
+        description: The port to the page to run the check against. Will be combined with host (specified within the MonitoredResource) to construct the full URL. Required.
+        format: int32
+        type: integer
     type: object
   TimeInterval:
     description: 'A time interval extending just after a start time through an end time. If the start time is the same as the end time, then the interval represents a single point in time.'
@@ -1308,6 +1627,9 @@ definitions:
   TimeSeries:
     description: A collection of data points that describes the time-varying values of a metric. A time series is identified by a combination of a fully-specified monitored resource and a fully-specified metric. This type is used for both listing and creating time series.
     properties:
+      metadata:
+        $ref: '#/definitions/MonitoredResourceMetadata'
+        description: 'Output only. The associated monitored resource metadata. When reading a a timeseries, this field will include metadata labels that are explicitly named in the reduction. When creating a timeseries, this field is ignored.'
       metric:
         $ref: '#/definitions/Metric'
         description: The associated metric. A fully-specified metric used to identify the time series.
@@ -1320,7 +1642,7 @@ definitions:
           - CUMULATIVE
         type: string
       points:
-        description: 'The data points of this time series. When listing time series, the order of the points is specified by the list method.When creating a time series, this field must contain exactly one point and the point''s type must be the same as the value type of the associated metric. If the associated metric''s descriptor must be auto-created, then the value type of the descriptor is determined by the point''s type, which must be BOOL, INT64, DOUBLE, or DISTRIBUTION.'
+        description: 'The data points of this time series. When listing time series, points are returned in reverse time order.When creating a time series, this field must contain exactly one point and the point''s type must be the same as the value type of the associated metric. If the associated metric''s descriptor must be auto-created, then the value type of the descriptor is determined by the point''s type, which must be BOOL, INT64, DOUBLE, or DISTRIBUTION.'
         items:
           $ref: '#/definitions/Point'
         type: array
@@ -1389,5 +1711,78 @@ definitions:
         type: string
       stringValue:
         description: A variable-length string value.
+        type: string
+    type: object
+  UptimeCheckConfig:
+    description: This message configures which resources and services to monitor for availability.
+    properties:
+      contentMatchers:
+        description: 'The expected content on the page the check is run against. Currently, only the first entry in the list is supported, and other entries will be ignored. The server will look for an exact match of the string in the page response''s content. This field is optional and should only be specified if a content match is required.'
+        items:
+          $ref: '#/definitions/ContentMatcher'
+        type: array
+      displayName:
+        description: 'A human-friendly name for the uptime check configuration. The display name should be unique within a Stackdriver Account in order to make it easier to identify; however, uniqueness is not enforced. Required.'
+        type: string
+      httpCheck:
+        $ref: '#/definitions/HttpCheck'
+        description: Contains information needed to make an HTTP or HTTPS check.
+      internalCheckers:
+        description: 'The internal checkers that this check will egress from. If is_internal is true and this list is empty, the check will egress from all InternalCheckers configured for the project that owns this CheckConfig.'
+        items:
+          $ref: '#/definitions/InternalChecker'
+        type: array
+      isInternal:
+        description: Denotes whether this is a check that egresses from InternalCheckers.
+        type: boolean
+      monitoredResource:
+        $ref: '#/definitions/MonitoredResource'
+        description: The monitored resource associated with the configuration.
+      name:
+        description: 'A unique resource name for this UptimeCheckConfig. The format is:projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].This field should be omitted when creating the uptime check configuration; on create, the resource name is assigned by the server and included in the response.'
+        type: string
+      period:
+        description: 'How often the uptime check is performed. Currently, only 1, 5, 10, and 15 minutes are supported. Required.'
+        format: google-duration
+        type: string
+      resourceGroup:
+        $ref: '#/definitions/ResourceGroup'
+        description: The group resource associated with the configuration.
+      selectedRegions:
+        description: 'The list of regions from which the check will be run. If this field is specified, enough regions to include a minimum of 3 locations must be provided, or an error message is returned. Not specifying this field will result in uptime checks running from all regions.'
+        items:
+          enum:
+            - REGION_UNSPECIFIED
+            - USA
+            - EUROPE
+            - SOUTH_AMERICA
+            - ASIA_PACIFIC
+          type: string
+        type: array
+      tcpCheck:
+        $ref: '#/definitions/TcpCheck'
+        description: Contains information needed to make a TCP check.
+      timeout:
+        description: The maximum amount of time to wait for the request to complete (must be between 1 and 60 seconds). Required.
+        format: google-duration
+        type: string
+    type: object
+  UptimeCheckIp:
+    description: 'Contains the region, location, and list of IP addresses where checkers in the location run from.'
+    properties:
+      ipAddress:
+        description: 'The IP address from which the uptime check originates. This is a full IP address (not an IP address range). Most IP addresses, as of this publication, are in IPv4 format; however, one should not rely on the IP addresses being in IPv4 format indefinitely and should support interpreting this field in either IPv4 or IPv6 format.'
+        type: string
+      location:
+        description: A more specific location within the region that typically encodes a particular city/town/metro (and its containing state/province or country) within the broader umbrella region category.
+        type: string
+      region:
+        description: A broad region category in which the IP address is located.
+        enum:
+          - REGION_UNSPECIFIED
+          - USA
+          - EUROPE
+          - SOUTH_AMERICA
+          - ASIA_PACIFIC
         type: string
     type: object

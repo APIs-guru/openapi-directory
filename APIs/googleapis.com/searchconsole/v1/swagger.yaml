@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://searchconsole.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -113,19 +113,19 @@ tags:
 paths:
   '/v1/urlTestingTools/mobileFriendlyTest:run':
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Runs Mobile-Friendly Test for a given URL.
       operationId: searchconsole.urlTestingTools.mobileFriendlyTest.run

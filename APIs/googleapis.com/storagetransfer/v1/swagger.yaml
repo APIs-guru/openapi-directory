@@ -24,7 +24,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://storagetransfer.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -693,7 +693,7 @@ definitions:
       * MD5 - The base64-encoded MD5 hash of the object.
 
       For an example of a valid TSV file, see
-      [Transferring data from URLs](https://cloud.google.com/storage/transfer/#urls)
+      [Transferring data from URLs](https://cloud.google.com/storage/transfer/create-url-list).
 
       When transferring data based on a URL list, keep the following in mind:
 
@@ -829,7 +829,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:
@@ -1016,8 +1016,8 @@ definitions:
       bytesFoundFromSource:
         description: |-
           Bytes found in the data source that are scheduled to be transferred,
-          which will be copied, excluded based on conditions, or skipped due to
-          failures.
+          excluding any that are filtered based on object conditions or skipped due
+          to sync.
         format: int64
         type: string
       bytesFoundOnlyFromSink:
@@ -1025,7 +1025,9 @@ definitions:
         format: int64
         type: string
       bytesFromSourceFailed:
-        description: Bytes in the data source that failed during the transfer.
+        description: |-
+          Bytes in the data source that failed to be transferred or that failed to
+          be deleted after being transferred.
         format: int64
         type: string
       bytesFromSourceSkippedBySync:
@@ -1053,8 +1055,8 @@ definitions:
       objectsFoundFromSource:
         description: |-
           Objects found in the data source that are scheduled to be transferred,
-          which will be copied, excluded based on conditions, or skipped due to
-          failures.
+          excluding any that are filtered based on object conditions or skipped due
+          to sync.
         format: int64
         type: string
       objectsFoundOnlyFromSink:
@@ -1062,7 +1064,9 @@ definitions:
         format: int64
         type: string
       objectsFromSourceFailed:
-        description: Objects in the data source that failed during the transfer.
+        description: |-
+          Objects in the data source that failed to be transferred or that failed
+          to be deleted after being transferred.
         format: int64
         type: string
       objectsFromSourceSkippedBySync:
@@ -1102,15 +1106,11 @@ definitions:
           error.
         type: string
       projectId:
-        description: |-
-          The ID of the Google Cloud Platform Console project that owns the job.
-          Required.
+        description: The ID of the Google Cloud Platform Console project that owns the job.
         type: string
       schedule:
         $ref: '#/definitions/Schedule'
-        description: |-
-          Schedule specification.
-          Required.
+        description: Schedule specification.
       status:
         description: |-
           Status of the job. This value MUST be specified for
@@ -1128,9 +1128,7 @@ definitions:
         type: string
       transferSpec:
         $ref: '#/definitions/TransferSpec'
-        description: |-
-          Transfer specification.
-          Required.
+        description: Transfer specification.
     type: object
   TransferOperation:
     description: A description of the execution of a transfer.

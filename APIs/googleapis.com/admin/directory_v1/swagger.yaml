@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/admin/directory_v1/rest'
       version: v1
@@ -153,6 +153,7 @@ tags:
   - name: notifications
   - name: orgunits
   - name: privileges
+  - name: resolvedAppAccessSettings
   - name: resources
   - name: roleAssignments
   - name: roles
@@ -227,7 +228,7 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: Full path of the organization unit or its Id
+        - description: Full path of the organizational unit or its ID
           in: query
           name: orgUnitPath
           type: string
@@ -287,7 +288,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Move or insert multiple Chrome OS Devices to Organization Unit
+      description: Move or insert multiple Chrome OS Devices to organizational unit
       operationId: directory.chromeosdevices.moveDevicesToOu
       parameters:
         - in: body
@@ -299,7 +300,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Full path of the target organization unit or its Id
+        - description: Full path of the target organizational unit or its ID
           in: query
           name: orgUnitPath
           required: true
@@ -666,7 +667,7 @@ paths:
         - mobiledevices
   '/customer/{customerId}/orgunits':
     get:
-      description: Retrieve all Organization Units
+      description: Retrieve all organizational units
       operationId: directory.orgunits.list
       parameters:
         - description: Immutable ID of the G Suite account
@@ -675,7 +676,7 @@ paths:
           required: true
           type: string
         - default: ''
-          description: the URL-encoded organization unit's path or its Id
+          description: the URL-encoded organizational unit's path or its ID
           in: query
           name: orgUnitPath
           type: string
@@ -711,7 +712,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Add Organization Unit
+      description: Add organizational unit
       operationId: directory.orgunits.insert
       parameters:
         - in: body
@@ -920,7 +921,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Name or immutable Id of the schema
+        - description: Name or immutable ID of the schema
           in: path
           name: schemaKey
           required: true
@@ -944,7 +945,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Name or immutable Id of the schema
+        - description: Name or immutable ID of the schema
           in: path
           name: schemaKey
           required: true
@@ -986,7 +987,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Name or immutable Id of the schema.
+        - description: Name or immutable ID of the schema.
           in: path
           name: schemaKey
           required: true
@@ -1016,7 +1017,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Name or immutable Id of the schema.
+        - description: Name or immutable ID of the schema.
           in: path
           name: schemaKey
           required: true
@@ -1442,6 +1443,188 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
+  '/customer/{customer}/resources/buildings':
+    get:
+      description: Retrieves a list of buildings for an account.
+      operationId: directory.resources.buildings.list
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Buildings'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a building.
+      operationId: directory.resources.buildings.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Building'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Building'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/buildings/{buildingId}':
+    delete:
+      description: Deletes a building.
+      operationId: directory.resources.buildings.delete
+      parameters:
+        - description: The ID of the building to delete.
+          in: path
+          name: buildingId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    get:
+      description: Retrieves a building.
+      operationId: directory.resources.buildings.get
+      parameters:
+        - description: The unique ID of the building to retrieve.
+          in: path
+          name: buildingId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Building'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a building. This method supports patch semantics.
+      operationId: directory.resources.buildings.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Building'
+        - description: The ID of the building to update.
+          in: path
+          name: buildingId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Building'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    put:
+      description: Updates a building.
+      operationId: directory.resources.buildings.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Building'
+        - description: The ID of the building to update.
+          in: path
+          name: buildingId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Building'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
   '/customer/{customer}/resources/calendars':
     get:
       description: Retrieves a list of calendar resources for an account.
@@ -1458,9 +1641,17 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
+        - description: 'Field(s) to sort results by in either ascending or descending order. Supported fields include resourceId, resourceName, capacity, buildingId, and floorName. If no order is specified, defaults to ascending. Should be of the form "field [asc|desc], field [asc|desc], ...". For example buildingId, capacity desc would return results sorted first by buildingId in ascending order then by capacity in descending order.'
+          in: query
+          name: orderBy
+          type: string
         - description: Token to specify the next page in the list.
           in: query
           name: pageToken
+          type: string
+        - description: 'String query used to filter results. Should be of the form "field operator value" where field can be any of supported fields and operators can be any of supported operations. Operators include ''='' for exact match and '':'' for prefix match where applicable. For prefix match, the value should always be followed by a *.'
+          in: query
+          name: query
           type: string
       responses:
         '200':
@@ -1575,7 +1766,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a calendar resource. This method supports patch semantics.
+      description: |-
+        Updates a calendar resource.
+
+        This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved. This method supports patch semantics.
       operationId: directory.resources.calendars.patch
       parameters:
         - in: body
@@ -1605,7 +1799,10 @@ paths:
       tags:
         - resources
     put:
-      description: Updates a calendar resource.
+      description: |-
+        Updates a calendar resource.
+
+        This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved.
       operationId: directory.resources.calendars.update
       parameters:
         - in: body
@@ -1627,6 +1824,229 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/features':
+    get:
+      description: Retrieves a list of features for an account.
+      operationId: directory.resources.features.list
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: Token to specify the next page in the list.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Features'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a feature.
+      operationId: directory.resources.features.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Feature'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feature'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/features/{featureKey}':
+    delete:
+      description: Deletes a feature.
+      operationId: directory.resources.features.delete
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to delete.
+          in: path
+          name: featureKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    get:
+      description: Retrieves a feature.
+      operationId: directory.resources.features.get
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to retrieve.
+          in: path
+          name: featureKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feature'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a feature. This method supports patch semantics.
+      operationId: directory.resources.features.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Feature'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to update.
+          in: path
+          name: featureKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feature'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    put:
+      description: Updates a feature.
+      operationId: directory.resources.features.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Feature'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to update.
+          in: path
+          name: featureKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feature'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/features/{oldName}/rename':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Renames a feature.
+      operationId: directory.resources.features.rename
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FeatureRename'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to rename.
+          in: path
+          name: oldName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
@@ -2038,15 +2458,15 @@ paths:
       description: Updates a customer. This method supports patch semantics.
       operationId: directory.customers.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Customer'
         - description: Id of the customer to be updated
           in: path
           name: customerKey
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Customer'
       responses:
         '200':
           description: Successful response
@@ -2063,15 +2483,15 @@ paths:
       description: Updates a customer.
       operationId: directory.customers.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Customer'
         - description: Id of the customer to be updated
           in: path
           name: customerKey
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Customer'
       responses:
         '200':
           description: Successful response
@@ -2106,7 +2526,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'Email or immutable Id of the user if only those groups are to be listed, the given user is a member of. If Id, it should match with id of user object'
+        - description: 'Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If ID, it should match with id of user object'
           in: query
           name: userKey
           type: string
@@ -2159,7 +2579,7 @@ paths:
       description: Delete Group
       operationId: directory.groups.delete
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
@@ -2178,7 +2598,7 @@ paths:
       description: Retrieve Group
       operationId: directory.groups.get
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
@@ -2211,15 +2631,15 @@ paths:
       description: Update Group. This method supports patch semantics.
       operationId: directory.groups.patch
       parameters:
-        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Group'
+        - description: 'Email or immutable ID of the group. If ID, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2236,15 +2656,15 @@ paths:
       description: Update Group
       operationId: directory.groups.update
       parameters:
-        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Group'
+        - description: 'Email or immutable ID of the group. If ID, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2262,7 +2682,7 @@ paths:
       description: List all aliases for a group
       operationId: directory.groups.aliases.list
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
@@ -2295,15 +2715,15 @@ paths:
       description: Add a alias for the group
       operationId: directory.groups.aliases.insert
       parameters:
-        - description: Email or immutable Id of the group
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Alias'
+        - description: Email or immutable ID of the group
+          in: path
+          name: groupKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2321,14 +2741,14 @@ paths:
       description: Remove a alias for the group
       operationId: directory.groups.aliases.delete
       parameters:
-        - description: Email or immutable Id of the group
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - description: The alias to be removed
           in: path
           name: alias
+          required: true
+          type: string
+        - description: Email or immutable ID of the group
+          in: path
+          name: groupKey
           required: true
           type: string
       responses:
@@ -2349,12 +2769,59 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/groups/{groupKey}/hasMember/{memberKey}':
+    get:
+      description: Checks Membership of an user within a Group
+      operationId: directory.members.hasMember
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          type: string
+        - description: Email or immutable Id of the member
+          in: path
+          name: memberKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MembersHasMember'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+      tags:
+        - members
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/groups/{groupKey}/members':
     get:
       description: Retrieve all members in a group (paginated)
       operationId: directory.members.list
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
@@ -2408,15 +2875,15 @@ paths:
       description: Add user to the specified group.
       operationId: directory.members.insert
       parameters:
-        - description: Email or immutable Id of the group
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Member'
+        - description: Email or immutable ID of the group
+          in: path
+          name: groupKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2438,12 +2905,12 @@ paths:
       description: Remove membership.
       operationId: directory.members.delete
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
           type: string
-        - description: Email or immutable Id of the member
+        - description: Email or immutable ID of the member
           in: path
           name: memberKey
           required: true
@@ -2466,12 +2933,12 @@ paths:
       description: Retrieve Group Member
       operationId: directory.members.get
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
           type: string
-        - description: Email or immutable Id of the member
+        - description: Email or immutable ID of the member
           in: path
           name: memberKey
           required: true
@@ -2512,20 +2979,20 @@ paths:
       description: Update membership of a user in the specified group. This method supports patch semantics.
       operationId: directory.members.patch
       parameters:
-        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
-          in: path
-          name: groupKey
-          required: true
-          type: string
-        - description: 'Email or immutable Id of the user. If Id, it should match with id of member object'
-          in: path
-          name: memberKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Member'
+        - description: 'Email or immutable ID of the group. If ID, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          type: string
+        - description: 'Email or immutable ID of the user. If ID, it should match with id of member object'
+          in: path
+          name: memberKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2546,20 +3013,20 @@ paths:
       description: Update membership of a user in the specified group.
       operationId: directory.members.update
       parameters:
-        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
-          in: path
-          name: groupKey
-          required: true
-          type: string
-        - description: 'Email or immutable Id of the user. If Id, it should match with id of member object'
-          in: path
-          name: memberKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Member'
+        - description: 'Email or immutable ID of the group. If ID, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          type: string
+        - description: 'Email or immutable ID of the user. If ID, it should match with id of member object'
+          in: path
+          name: memberKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2576,6 +3043,44 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
+  /resolvedappaccesssettings:
+    get:
+      description: Retrieves resolved app access settings of the logged in user.
+      operationId: directory.resolvedAppAccessSettings.GetSettings
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AppAccessCollections'
+      tags:
+        - resolvedAppAccessSettings
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /trustedapps:
+    get:
+      description: Retrieves the list of apps trusted by the admin of the logged in user.
+      operationId: directory.resolvedAppAccessSettings.ListTrustedApps
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TrustedApps'
+      tags:
+        - resolvedAppAccessSettings
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   /users:
     get:
       description: Retrieve either deleted users or all users in a domain (paginated)
@@ -2807,7 +3312,7 @@ paths:
       description: Delete user
       operationId: directory.users.delete
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -2826,11 +3331,6 @@ paths:
       description: retrieve user
       operationId: directory.users.get
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
           in: query
           name: customFieldMask
@@ -2843,6 +3343,11 @@ paths:
             - full
           in: query
           name: projection
+          type: string
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
           type: string
         - default: admin_view
           description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
@@ -2880,15 +3385,15 @@ paths:
       description: update user. This method supports patch semantics.
       operationId: directory.users.patch
       parameters:
-        - description: 'Email or immutable Id of the user. If Id, it should match with id of user object'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/User'
+        - description: 'Email or immutable ID of the user. If ID, it should match with id of user object'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2905,15 +3410,15 @@ paths:
       description: update user
       operationId: directory.users.update
       parameters:
-        - description: 'Email or immutable Id of the user. If Id, it should match with id of user object'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/User'
+        - description: 'Email or immutable ID of the user. If ID, it should match with id of user object'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2931,17 +3436,17 @@ paths:
       description: List all aliases for a user
       operationId: directory.users.aliases.list
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: Event on which subscription is intended (if subscribing)
           enum:
             - add
             - delete
           in: query
           name: event
+          type: string
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
           type: string
       responses:
         '200':
@@ -2979,15 +3484,15 @@ paths:
       description: Add a alias for the user
       operationId: directory.users.aliases.insert
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Alias'
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3017,11 +3522,6 @@ paths:
       description: Watch for changes in user aliases list
       operationId: directory.users.aliases.watch
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: Event on which subscription is intended (if subscribing)
           enum:
             - add
@@ -3033,6 +3533,11 @@ paths:
           name: resource
           schema:
             $ref: '#/definitions/Channel'
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3062,14 +3567,14 @@ paths:
       description: Remove a alias for the user
       operationId: directory.users.aliases.delete
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The alias to be removed
           in: path
           name: alias
+          required: true
+          type: string
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
           required: true
           type: string
       responses:
@@ -3129,16 +3634,16 @@ paths:
       description: Delete an ASP issued by a user.
       operationId: directory.asps.delete
       parameters:
-        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The unique ID of the ASP to be deleted.
           in: path
           name: codeId
           required: true
           type: integer
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3153,16 +3658,16 @@ paths:
       description: Get information about an ASP issued by a user.
       operationId: directory.asps.get
       parameters:
-        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The unique ID of the ASP.
           in: path
           name: codeId
           required: true
           type: integer
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3196,15 +3701,15 @@ paths:
       description: change admin status of a user
       operationId: directory.users.makeAdmin
       parameters:
-        - description: Email or immutable Id of the user as admin
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UserMakeAdmin'
+        - description: Email or immutable ID of the user as admin
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3220,7 +3725,7 @@ paths:
       description: Remove photos for the user
       operationId: directory.users.photos.delete
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -3239,7 +3744,7 @@ paths:
       description: Retrieve photo of a user
       operationId: directory.users.photos.get
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -3272,15 +3777,15 @@ paths:
       description: Add a photo for the user. This method supports patch semantics.
       operationId: directory.users.photos.patch
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UserPhoto'
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3297,15 +3802,15 @@ paths:
       description: Add a photo for the user
       operationId: directory.users.photos.update
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UserPhoto'
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3353,14 +3858,14 @@ paths:
       description: Delete all access tokens issued by a user for an application.
       operationId: directory.tokens.delete
       parameters:
-        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The Client ID of the application the token is issued to.
           in: path
           name: clientId
+          required: true
+          type: string
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
           required: true
           type: string
       responses:
@@ -3377,14 +3882,14 @@ paths:
       description: Get information about an access token issued by a user.
       operationId: directory.tokens.get
       parameters:
-        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The Client ID of the application the token is issued to.
           in: path
           name: clientId
+          required: true
+          type: string
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
           required: true
           type: string
       responses:
@@ -3420,15 +3925,15 @@ paths:
       description: Undelete a deleted user
       operationId: directory.users.undelete
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserUndelete'
         - description: The immutable id of the user
           in: path
           name: userKey
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserUndelete'
       responses:
         '200':
           description: Successful response
@@ -3482,7 +3987,7 @@ paths:
       description: Generate new backup verification codes for the user.
       operationId: directory.verificationCodes.generate
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -3510,7 +4015,7 @@ paths:
       description: Invalidate the current backup verification codes for the user.
       operationId: directory.verificationCodes.invalidate
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -3561,6 +4066,38 @@ definitions:
         description: Kind of resource this is.
         type: string
     type: object
+  AppAccessCollections:
+    description: JSON template for App Access Collections Resource object in Directory API.
+    properties:
+      blockedApiAccessBuckets:
+        description: List of blocked api access buckets.
+        items:
+          type: string
+        type: array
+      enforceSettingsForAndroidDrive:
+        description: Boolean to indicate whether to enforce app access settings on Android Drive or not.
+        type: boolean
+      errorMessage:
+        description: Error message provided by the Admin that will be shown to the user when an app is blocked.
+        type: string
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#appaccesscollection'
+        description: 'Identifies the resource as an app access collection. Value: admin#directory#appaccesscollection'
+        type: string
+      resourceId:
+        description: Unique ID of app access collection. (Readonly)
+        format: int64
+        type: string
+      resourceName:
+        description: Resource name given by the customer while creating/updating. Should be unique under given customer.
+        type: string
+      trustDomainOwnedApps:
+        description: Boolean that indicates whether to trust domain owned apps.
+        type: boolean
+    type: object
   Asp:
     description: The template that returns individual ASP (Access Code) data.
     properties:
@@ -3605,30 +4142,112 @@ definitions:
         description: 'The type of the API resource. This is always admin#directory#aspList.'
         type: string
     type: object
+  Building:
+    description: JSON template for Building object in Directory API.
+    properties:
+      buildingId:
+        description: Unique identifier for the building. The maximum length is 100 characters.
+        type: string
+      buildingName:
+        description: 'The building name as seen by users in Calendar. Must be unique for the customer. For example, "NYC-CHEL". The maximum length is 100 characters.'
+        type: string
+      coordinates:
+        $ref: '#/definitions/BuildingCoordinates'
+        description: 'The geographic coordinates of the center of the building, expressed as latitude and longitude in decimal degrees.'
+      description:
+        description: 'A brief description of the building. For example, "Chelsea Market".'
+        type: string
+      etags:
+        description: ETag of the resource.
+        type: string
+      floorNames:
+        description: 'The display names for all floors in this building. The floors are expected to be sorted in ascending order, from lowest floor to highest floor. For example, ["B2", "B1", "L", "1", "2", "2M", "3", "PH"] Must contain at least one entry.'
+        items:
+          type: string
+        type: array
+      kind:
+        default: 'admin#directory#resources#buildings#Building'
+        description: Kind of resource this is.
+        type: string
+    type: object
+  BuildingCoordinates:
+    description: JSON template for coordinates of a building in Directory API.
+    properties:
+      latitude:
+        description: Latitude in decimal degrees.
+        format: double
+        type: number
+      longitude:
+        description: Longitude in decimal degrees.
+        format: double
+        type: number
+    type: object
+  Buildings:
+    description: JSON template for Building List Response object in Directory API.
+    properties:
+      buildings:
+        description: The Buildings in this page of results.
+        items:
+          $ref: '#/definitions/Building'
+        type: array
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#resources#buildings#buildingsList'
+        description: Kind of resource this is.
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
+    type: object
   CalendarResource:
     description: JSON template for Calendar Resource object in Directory API.
     properties:
+      buildingId:
+        description: Unique ID for the building a resource is located in.
+        type: string
+      capacity:
+        description: 'Capacity of a resource, number of seats in a room.'
+        format: int32
+        type: integer
       etags:
         description: ETag of the resource.
+        type: string
+      featureInstances: {}
+      floorName:
+        description: Name of the floor a resource is located on.
+        type: string
+      floorSection:
+        description: Name of the section within a floor a resource is located in.
+        type: string
+      generatedResourceName:
+        description: 'The read-only auto-generated name of the calendar resource which includes metadata about the resource such as building name, floor, capacity, etc. For example, "NYC-2-Training Room 1A (16)".'
         type: string
       kind:
         default: 'admin#directory#resources#calendars#CalendarResource'
         description: 'The type of the resource. For calendar resources, the value is admin#directory#resources#calendars#CalendarResource.'
         type: string
+      resourceCategory:
+        description: The category of the calendar resource. Either CONFERENCE_ROOM or OTHER. Legacy data is set to CATEGORY_UNKNOWN.
+        type: string
       resourceDescription:
-        description: The brief description of the calendar resource.
+        description: 'Description of the resource, visible only to admins.'
         type: string
       resourceEmail:
-        description: The read-only email ID for the calendar resource. Generated as part of creating a new calendar resource.
+        description: The read-only email for the calendar resource. Generated as part of creating a new calendar resource.
         type: string
       resourceId:
         description: The unique ID for the calendar resource.
         type: string
       resourceName:
-        description: 'The name of the calendar resource. For example, Training Room 1A'
+        description: 'The name of the calendar resource. For example, "Training Room 1A".'
         type: string
       resourceType:
-        description: The type of the calendar resource. Used for grouping resources in the calendar user interface.
+        description: 'The type of the calendar resource, intended for non-room resources.'
+        type: string
+      userVisibleDescription:
+        description: 'Description of the resource, visible to users and admins.'
         type: string
     type: object
   CalendarResources:
@@ -3718,6 +4337,25 @@ definitions:
       bootMode:
         description: Chromebook boot mode (Read-only)
         type: string
+      deviceFiles:
+        description: List of device files to download (Read-only)
+        items:
+          properties:
+            createTime:
+              description: Date and time the file was created
+              format: date-time
+              type: string
+            downloadUrl:
+              description: File downlod URL
+              type: string
+            name:
+              description: File name
+              type: string
+            type:
+              description: File type
+              type: string
+          type: object
+        type: array
       deviceId:
         description: Unique identifier of Chrome OS Device (Read-only)
         type: string
@@ -3788,6 +4426,21 @@ definitions:
         description: Final date the device will be supported (Read-only)
         format: date-time
         type: string
+      tpmVersionInfo:
+        properties:
+          family:
+            type: string
+          firmwareVersion:
+            type: string
+          manufacturer:
+            type: string
+          specLevel:
+            type: string
+          tpmModel:
+            type: string
+          vendorSpecific:
+            type: string
+        type: object
       willAutoRenew:
         description: Will Chromebook auto renew after support end date (Read-only)
         type: boolean
@@ -3978,6 +4631,52 @@ definitions:
         description: Kind of resource this is.
         type: string
     type: object
+  Feature:
+    description: JSON template for Feature object in Directory API.
+    properties:
+      etags:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#resources#features#Feature'
+        description: Kind of resource this is.
+        type: string
+      name:
+        description: The name of the feature.
+        type: string
+    type: object
+  FeatureInstance:
+    description: JSON template for a "feature instance".
+    properties:
+      feature:
+        $ref: '#/definitions/Feature'
+    type: object
+  FeatureRename:
+    description: JSON request template for renaming a feature.
+    properties:
+      newName:
+        description: New name of the feature.
+        type: string
+    type: object
+  Features:
+    description: JSON template for Feature List Response object in Directory API.
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      features:
+        description: The Features in this page of results.
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+      kind:
+        default: 'admin#directory#resources#features#featuresList'
+        description: Kind of resource this is.
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
+    type: object
   Group:
     description: JSON template for Group resource in Directory API.
     properties:
@@ -4081,6 +4780,14 @@ definitions:
       nextPageToken:
         description: Token used to access next page of this result.
         type: string
+    type: object
+  MembersHasMember:
+    description: JSON template for Has Member response in Directory API.
+    properties:
+      isMember:
+        description: Identifies whether given user is a member or not.
+        readOnly: true
+        type: boolean
     type: object
   MobileDevice:
     description: JSON template for Mobile Device resource in Directory API.
@@ -4641,6 +5348,43 @@ definitions:
         description: 'The type of the API resource. This is always admin#directory#tokenList.'
         type: string
     type: object
+  TrustedAppId:
+    description: JSON template for Trusted App Ids Resource object in Directory API.
+    properties:
+      androidPackageName:
+        description: Android package name.
+        type: string
+      certificateHashSHA1:
+        description: SHA1 signature of the app certificate.
+        type: string
+      certificateHashSHA256:
+        description: SHA256 signature of the app certificate.
+        type: string
+      etag:
+        type: string
+      kind:
+        default: 'admin#directory#trustedappid'
+        description: Identifies the resource as a trusted AppId.
+        type: string
+    type: object
+  TrustedApps:
+    description: JSON template for Trusted Apps response object of a user in Directory API.
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#trustedapplist'
+        description: Identifies the resource as trusted apps response.
+        type: string
+      nextPageToken:
+        type: string
+      trustedApps:
+        description: Trusted Apps list.
+        items:
+          $ref: '#/definitions/TrustedAppId'
+        type: array
+    type: object
   User:
     description: JSON template for User object in Directory API.
     properties:
@@ -4682,6 +5426,7 @@ definitions:
         readOnly: true
         type: string
       externalIds: {}
+      gender: {}
       hashFunction:
         description: 'Hash function name for password. Supported are MD5, SHA-1 and crypt'
         type: string
@@ -4853,6 +5598,18 @@ definitions:
         type: string
       value:
         description: The value of the id.
+        type: string
+    type: object
+  UserGender:
+    properties:
+      addressMeAs:
+        description: 'AddressMeAs. A human-readable string containing the proper way to refer to the profile owner by humans, for example "he/him/his" or "they/them/their".'
+        type: string
+      customGender:
+        description: Custom gender.
+        type: string
+      type:
+        description: Gender.
         type: string
     type: object
   UserIm:
@@ -5037,13 +5794,17 @@ definitions:
   UserPosixAccount:
     description: 'JSON template for a POSIX account entry. Description of the field family: go/fbs-posix.'
     properties:
+      accountId:
+        description: A POSIX account field identifier. (Read-only)
+        readOnly: true
+        type: string
       gecos:
         description: The GECOS (user information) for this account.
         type: string
       gid:
         description: The default group ID.
-        format: int32
-        type: integer
+        format: uint64
+        type: string
       homeDirectory:
         description: The path to the home directory for this account.
         type: string
@@ -5058,8 +5819,8 @@ definitions:
         type: string
       uid:
         description: The POSIX compliant user ID.
-        format: int32
-        type: integer
+        format: uint64
+        type: string
       username:
         description: The username of the account.
         type: string

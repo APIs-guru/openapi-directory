@@ -30,11 +30,10 @@ externalDocs:
   url: 'https://github.com/mermade/openapi-webconverter'
 consumes:
   - application/json
-  - text/yaml
-  - multipart/form-data
+  - application/x-yaml
 produces:
   - application/json
-  - text/yaml
+  - application/x-yaml
 security: []
 tags:
   - description: Metadata functions
@@ -55,6 +54,7 @@ paths:
           name: url
           required: true
           type: string
+          x-example: 'https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json'
       responses:
         '301':
           description: Moved
@@ -65,14 +65,24 @@ paths:
     get:
       description: ''
       operationId: convertUrl
-      parameters: []
+      parameters:
+        - description: The URL to retrieve the OpenAPI 2.0 definition from
+          format: uri
+          in: query
+          name: url
+          required: true
+          type: string
+          x-example: 'https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/swagger.json'
       responses:
         '200':
           description: default
+          schema: {}
       summary: Convert a Swagger 2.0 definition to OpenAPI 3.0.x from a URL
       tags:
         - conversion
     post:
+      consumes:
+        - multipart/form-data
       description: ''
       operationId: convert
       parameters:
@@ -81,20 +91,31 @@ paths:
           name: filename
           required: false
           type: string
+          x-example: ''
         - description: The text of a Swagger 2.0 definition to convert
           in: formData
           name: source
           required: false
           type: string
+          x-example: |
+            swagger: 2.0
+            info:
+              title: API
+              version: 1.0.0
         - enum:
             - 'on'
           in: formData
           name: validate
           required: false
           type: string
+          x-example: ''
       responses:
         '200':
           description: default
+          schema: {}
+        '400':
+          description: Invalid request
+          schema: {}
       summary: 'Convert a Swagger 2.0 definition passed in the body to OpenAPI 3.0.x '
       tags:
         - conversion
@@ -106,6 +127,7 @@ paths:
       responses:
         '200':
           description: default
+          schema: {}
       summary: Get the status of the API
       tags:
         - metadata
@@ -120,13 +142,17 @@ paths:
           name: url
           required: true
           type: string
+          x-example: 'https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json'
       responses:
         '200':
           description: default
+          schema: {}
       summary: Validate an OpenAPI 3.0.x definition
       tags:
         - validation
     post:
+      consumes:
+        - multipart/form-data
       description: ''
       operationId: validate
       parameters:
@@ -135,14 +161,25 @@ paths:
           name: filename
           required: false
           type: string
+          x-example: ''
         - description: The text of an OpenAPI 3.0.x definition to validate
           in: formData
           name: source
           required: false
           type: string
+          x-example: |
+            openapi: 3.0.0
+            info:
+              title: API
+              version: 1.0.0
+            paths: {}
       responses:
         '200':
           description: default
+          schema: {}
+        '400':
+          description: Invalid request
+          schema: {}
       summary: Validate an OpenAPI 3.0.x definition supplied in the body of the request
       tags:
         - validation

@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/licensing/v1/rest'
       version: v1
@@ -104,6 +104,10 @@ paths:
       description: Assign License.
       operationId: licensing.licenseAssignments.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LicenseAssignmentInsert'
         - description: Name for product
           in: path
           name: productId
@@ -114,10 +118,6 @@ paths:
           name: skuId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LicenseAssignmentInsert'
       responses:
         '200':
           description: Successful response
@@ -203,6 +203,10 @@ paths:
       description: Assign License. This method supports patch semantics.
       operationId: licensing.licenseAssignments.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LicenseAssignment'
         - description: Name for product
           in: path
           name: productId
@@ -218,10 +222,6 @@ paths:
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LicenseAssignment'
       responses:
         '200':
           description: Successful response
@@ -238,6 +238,10 @@ paths:
       description: Assign License.
       operationId: licensing.licenseAssignments.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LicenseAssignment'
         - description: Name for product
           in: path
           name: productId
@@ -253,10 +257,6 @@ paths:
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LicenseAssignment'
       responses:
         '200':
           description: Successful response
@@ -274,16 +274,6 @@ paths:
       description: List license assignments for given product and sku of the customer.
       operationId: licensing.licenseAssignments.listForProductAndSku
       parameters:
-        - description: Name for product
-          in: path
-          name: productId
-          required: true
-          type: string
-        - description: Name for sku
-          in: path
-          name: skuId
-          required: true
-          type: string
         - description: CustomerId represents the customer for whom licenseassignments are queried
           in: query
           name: customerId
@@ -300,6 +290,16 @@ paths:
           description: Token to fetch the next page.Optional. By default server will return first page
           in: query
           name: pageToken
+          type: string
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
+          type: string
+        - description: Name for sku
+          in: path
+          name: skuId
+          required: true
           type: string
       responses:
         '200':
@@ -326,11 +326,6 @@ paths:
       description: List license assignments for given product of the customer.
       operationId: licensing.licenseAssignments.listForProduct
       parameters:
-        - description: Name for product
-          in: path
-          name: productId
-          required: true
-          type: string
         - description: CustomerId represents the customer for whom licenseassignments are queried
           in: query
           name: customerId
@@ -347,6 +342,11 @@ paths:
           description: Token to fetch the next page.Optional. By default server will return first page
           in: query
           name: pageToken
+          type: string
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
           type: string
       responses:
         '200':

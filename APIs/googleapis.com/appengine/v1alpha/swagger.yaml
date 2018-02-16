@@ -21,11 +21,11 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://appengine.googleapis.com/$discovery/rest?version=v1alpha'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: appengine
 externalDocs:
@@ -450,6 +450,14 @@ paths:
           in: query
           name: noManagedCertificate
           type: boolean
+        - description: 'Whether the domain creation should override any existing mappings for this domain. By default, overrides are rejected.'
+          enum:
+            - UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY
+            - STRICT
+            - OVERRIDE
+          in: query
+          name: overrideStrategy
+          type: string
       responses:
         '200':
           description: Successful response
@@ -843,6 +851,20 @@ definitions:
         description: 'PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: <pre> -----BEGIN CERTIFICATE----- <certificate_value> -----END CERTIFICATE----- </pre>'
         type: string
     type: object
+  CreateVersionMetadataV1Alpha:
+    description: Metadata for the given google.longrunning.Operation during a google.appengine.v1alpha.CreateVersionRequest.
+    properties:
+      cloudBuildId:
+        description: The Cloud Build ID if one was created as part of the version create. @OutputOnly
+        type: string
+    type: object
+  CreateVersionMetadataV1Beta:
+    description: Metadata for the given google.longrunning.Operation during a google.appengine.v1beta.CreateVersionRequest.
+    properties:
+      cloudBuildId:
+        description: The Cloud Build ID if one was created as part of the version create. @OutputOnly
+        type: string
+    type: object
   DomainMapping:
     description: A domain serving an App Engine application.
     properties:
@@ -978,6 +1000,8 @@ definitions:
           - FAILED_RETRYING_INTERNAL
           - FAILED_RETRYING_NOT_VISIBLE
           - FAILED_PERMANENTLY_NOT_VISIBLE
+          - FAILED_RETRYING_CAA_FORBIDDEN
+          - FAILED_RETRYING_CAA_CHECKING
         type: string
     type: object
   Operation:
@@ -1027,27 +1051,6 @@ definitions:
         description: User who requested this operation.@OutputOnly
         type: string
     type: object
-  OperationMetadataExperimental:
-    description: Metadata for the given google.longrunning.Operation.
-    properties:
-      endTime:
-        description: Time that this operation completed.@OutputOnly
-        format: google-datetime
-        type: string
-      insertTime:
-        description: Time that this operation was created.@OutputOnly
-        format: google-datetime
-        type: string
-      method:
-        description: 'API method that initiated this operation. Example: google.appengine.experimental.CustomDomains.CreateCustomDomain.@OutputOnly'
-        type: string
-      target:
-        description: 'Name of the resource that this operation is acting on. Example: apps/myapp/customDomains/example.com.@OutputOnly'
-        type: string
-      user:
-        description: User who requested this operation.@OutputOnly
-        type: string
-    type: object
   OperationMetadataV1:
     description: Metadata for the given google.longrunning.Operation.
     properties:
@@ -1080,6 +1083,8 @@ definitions:
   OperationMetadataV1Alpha:
     description: Metadata for the given google.longrunning.Operation.
     properties:
+      createVersionMetadata:
+        $ref: '#/definitions/CreateVersionMetadataV1Alpha'
       endTime:
         description: Time that this operation completed.@OutputOnly
         format: google-datetime
@@ -1109,6 +1114,8 @@ definitions:
   OperationMetadataV1Beta:
     description: Metadata for the given google.longrunning.Operation.
     properties:
+      createVersionMetadata:
+        $ref: '#/definitions/CreateVersionMetadataV1Beta'
       endTime:
         description: Time that this operation completed.@OutputOnly
         format: google-datetime

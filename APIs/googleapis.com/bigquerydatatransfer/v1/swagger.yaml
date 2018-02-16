@@ -12,7 +12,7 @@ info:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: BigQuery Data Transfer Service
+  title: BigQuery Data Transfer
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://bigquerydatatransfer.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -159,14 +159,12 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Retrieves a supported data source and returns its settings,
-        which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.get
+      description: Returns information about the particular transfer run.
+      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.get
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
-            `projects/{project_id}/dataSources/{data_source_id}`
+            `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
           in: path
           name: name
           required: true
@@ -176,7 +174,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DataSource'
+            $ref: '#/definitions/TransferRun'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
@@ -215,7 +213,7 @@ paths:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
             If it is provided, the transfer configuration will be associated with the
-            gaia id of the authorizing user.
+            authorizing user.
             In order to obtain authorization_code, please make a
             request to
             https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
@@ -237,11 +235,12 @@ paths:
           schema:
             $ref: '#/definitions/TransferConfig'
         - description: |-
-            The resource name of the transfer run.
-            Transfer run names have the form
+            The resource name of the transfer config.
+            Transfer config names have the form
             `projects/{project_id}/transferConfigs/{config_id}`.
             Where `config_id` is usually a uuid, even though it is not
-            guaranteed or required. The name is ignored when creating a transfer run.
+            guaranteed or required. The name is ignored when creating a transfer
+            config.
           in: path
           name: name
           required: true
@@ -343,6 +342,10 @@ paths:
       description: |-
         Returns true if valid credentials exist for the given data source and
         requesting user.
+        Some data sources doesn't support service account, so we need to talk to
+        them on behalf of the end user. This API just checks whether we have OAuth
+        token for the particular user, which is a pre-requisite before user can
+        create a transfer config.
       operationId: bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
       parameters:
         - in: body
@@ -375,104 +378,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - projects
-  '/v1/{name}:isEnabled':
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-    post:
-      description: Returns true if data transfer is enabled for a project.
-      operationId: bigquerydatatransfer.projects.locations.isEnabled
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IsEnabledRequest'
-        - description: |-
-            The name of the project resource in the form:
-            `projects/{project_id}`
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/IsEnabledResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - projects
-  '/v1/{name}:setEnabled':
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-    post:
-      description: |-
-        Enables or disables data transfer for a project. This
-        method requires the additional scope of
-        'https://www.googleapis.com/auth/cloudplatformprojects'
-        to manage the cloud project permissions.
-      operationId: bigquerydatatransfer.projects.locations.setEnabled
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetEnabledRequest'
-        - description: |-
-            The name of the project resource in the form:
-            `projects/{project_id}`
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/dataSources':
@@ -552,9 +457,6 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
-          enum:
-            - RUN_ATTEMPT_UNSPECIFIED
-            - LATEST
           in: query
           name: pageToken
           type: string
@@ -567,38 +469,26 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - collectionFormat: multi
-          description: Indicates how run attempts are to be pulled.
+        - description: Indicates how run attempts are to be pulled.
           enum:
             - RUN_ATTEMPT_UNSPECIFIED
             - LATEST
           in: query
-          items:
-            enum:
-              - TRANSFER_STATUS_UNSPECIFIED
-              - INACTIVE
-              - PENDING
-              - RUNNING
-              - SUCCEEDED
-              - FAILED
-              - CANCELLED
-            type: string
           name: runAttempt
           type: string
         - collectionFormat: multi
-          description: 'When specified, only transfer runs with requested statuses are returned.'
+          description: 'When specified, only transfer runs with requested states are returned.'
           in: query
           items:
             enum:
-              - TRANSFER_STATUS_UNSPECIFIED
-              - INACTIVE
+              - TRANSFER_STATE_UNSPECIFIED
               - PENDING
               - RUNNING
               - SUCCEEDED
               - FAILED
               - CANCELLED
             type: string
-          name: statuses
+          name: states
           type: array
       responses:
         '200':
@@ -732,10 +622,8 @@ paths:
         - description: |-
             The BigQuery project id where the transfer configuration should be created.
             Must be in the format /projects/{project_id}/locations/{location_id}
-            or
-            /projects/{project_id}/locations/-
-            In case when '-' is specified as location_id, location is infered from
-            the destination dataset region.
+            If specified location and location of the destination bigquery dataset
+            do not match - the request will fail.
           in: path
           name: parent
           required: true
@@ -848,7 +736,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Creates transfer runs for a time range [range_start_time, range_end_time].
+        Creates transfer runs for a time range [start_time, end_time].
         For each date - or whatever granularity the data source supports - in the
         range, one transfer run is created.
         Note that runs are created per UTC time in the time range.
@@ -924,7 +812,7 @@ definitions:
           For some data sources, data might not be complete until a few days later,
           so it's useful to refresh data automatically.
         enum:
-          - NONE
+          - DATA_REFRESH_TYPE_UNSPECIFIED
           - SLIDING_WINDOW
           - CUSTOM_SLIDING_WINDOW
         type: string
@@ -959,6 +847,10 @@ definitions:
           Disables backfilling and manual run scheduling
           for the data source.
         type: boolean
+      minimumScheduleInterval:
+        description: The minimum interval for scheduler to schedule runs.
+        format: google-duration
+        type: string
       name:
         description: Data source resource name.
         type: string
@@ -976,12 +868,6 @@ definitions:
         items:
           type: string
         type: array
-      statusUpdateDeadlineSeconds:
-        description: |-
-          The number of seconds to wait for a status update from the data source
-          before BigQuery marks the transfer as failed.
-        format: int32
-        type: integer
       supportsCustomSchedule:
         description: |-
           Specifies whether the data source supports a user defined schedule, or
@@ -1003,6 +889,12 @@ definitions:
           - BATCH
           - STREAMING
         type: string
+      updateDeadlineSeconds:
+        description: |-
+          The number of seconds to wait for an update from the data source
+          before BigQuery marks the transfer as failed.
+        format: int32
+        type: integer
     type: object
   DataSourceParameter:
     description: |-
@@ -1090,17 +982,6 @@ definitions:
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
     type: object
-  IsEnabledRequest:
-    description: A request to determine whether data transfer is enabled for the project.
-    properties: {}
-    type: object
-  IsEnabledResponse:
-    description: A response to indicate whether data transfer is enabled for the project.
-    properties:
-      enabled:
-        description: Indicates whether the project is enabled.
-        type: boolean
-    type: object
   ListDataSourcesResponse:
     description: Returns list of supported data sources and their metadata.
     properties:
@@ -1111,11 +992,10 @@ definitions:
         type: array
       nextPageToken:
         description: |-
-          The next-pagination token. For multiple-page list results,
+          Output only. The next-pagination token. For multiple-page list results,
           this token can be used as the
           `ListDataSourcesRequest.page_token`
           to request the next page of list results.
-          @OutputOnly
         type: string
     type: object
   ListLocationsResponse:
@@ -1135,16 +1015,13 @@ definitions:
     properties:
       nextPageToken:
         description: |-
-          The next-pagination token. For multiple-page list results,
+          Output only. The next-pagination token. For multiple-page list results,
           this token can be used as the
           `ListTransferConfigsRequest.page_token`
           to request the next page of list results.
-          @OutputOnly
         type: string
       transferConfigs:
-        description: |-
-          The stored pipeline transfer configurations.
-          @OutputOnly
+        description: Output only. The stored pipeline transfer configurations.
         items:
           $ref: '#/definitions/TransferConfig'
         type: array
@@ -1154,16 +1031,13 @@ definitions:
     properties:
       nextPageToken:
         description: |-
-          The next-pagination token. For multiple-page list results,
+          Output only. The next-pagination token. For multiple-page list results,
           this token can be used as the
           `GetTransferRunLogRequest.page_token`
           to request the next page of list results.
-          @OutputOnly
         type: string
       transferMessages:
-        description: |-
-          The stored pipeline transfer messages.
-          @OutputOnly
+        description: Output only. The stored pipeline transfer messages.
         items:
           $ref: '#/definitions/TransferMessage'
         type: array
@@ -1173,16 +1047,13 @@ definitions:
     properties:
       nextPageToken:
         description: |-
-          The next-pagination token. For multiple-page list results,
+          Output only. The next-pagination token. For multiple-page list results,
           this token can be used as the
           `ListTransferRunsRequest.page_token`
           to request the next page of list results.
-          @OutputOnly
         type: string
       transferRuns:
-        description: |-
-          The stored pipeline transfer runs.
-          @OutputOnly
+        description: Output only. The stored pipeline transfer runs.
         items:
           $ref: '#/definitions/TransferRun'
         type: array
@@ -1217,30 +1088,102 @@ definitions:
   ScheduleTransferRunsRequest:
     description: A request to schedule transfer runs for a time range.
     properties:
-      rangeEndTime:
-        description: End time of the range of transfer runs.
+      endTime:
+        description: |-
+          End time of the range of transfer runs. For example,
+          `"2017-05-30T00:00:00+00:00"`.
         format: google-datetime
         type: string
-      rangeStartTime:
-        description: Start time of the range of transfer runs.
+      startTime:
+        description: |-
+          Start time of the range of transfer runs. For example,
+          `"2017-05-25T00:00:00+00:00"`.
         format: google-datetime
         type: string
     type: object
   ScheduleTransferRunsResponse:
     description: A response to schedule transfer runs for a time range.
     properties:
-      createdRuns:
-        description: The transfer runs that were created.
+      runs:
+        description: The transfer runs that were scheduled.
         items:
           $ref: '#/definitions/TransferRun'
         type: array
     type: object
-  SetEnabledRequest:
-    description: A request to set whether data transfer is enabled or disabled for a project.
+  Status:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different
+      programming environments, including REST APIs and RPC APIs. It is used by
+      [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message,
+      and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` that can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
     properties:
-      enabled:
-        description: Whether data transfer should be enabled or disabled for the project.
-        type: boolean
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
+        type: string
     type: object
   TransferConfig:
     description: |-
@@ -1250,6 +1193,7 @@ definitions:
       When a new transfer configuration is created, the specified
       `destination_dataset_id` is created when needed and shared with the
       appropriate data source service account.
+      Next id: 20
     properties:
       dataRefreshWindowDays:
         description: |-
@@ -1265,10 +1209,7 @@ definitions:
         description: Data source id. Cannot be changed once data transfer is created.
         type: string
       datasetRegion:
-        description: |-
-          Region in which BigQuery dataset is located. Currently possible values are:
-          "US" and "EU".
-          @OutputOnly
+        description: Output only. Region in which BigQuery dataset is located.
         type: string
       destinationDatasetId:
         description: The BigQuery target dataset id.
@@ -1283,17 +1224,15 @@ definitions:
         type: string
       name:
         description: |-
-          The resource name of the transfer run.
-          Transfer run names have the form
+          The resource name of the transfer config.
+          Transfer config names have the form
           `projects/{project_id}/transferConfigs/{config_id}`.
           Where `config_id` is usually a uuid, even though it is not
-          guaranteed or required. The name is ignored when creating a transfer run.
+          guaranteed or required. The name is ignored when creating a transfer
+          config.
         type: string
       nextRunTime:
-        description: |-
-          Next time when data transfer will run. Output only. Applicable
-          only for batch data transfers.
-          @OutputOnly
+        description: Output only. Next time when data transfer will run.
         format: google-datetime
         type: string
       params:
@@ -1316,13 +1255,10 @@ definitions:
           https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
           NOTE: the granularity should be at least 8 hours, or less frequent.
         type: string
-      status:
-        description: |-
-          Status of the most recently updated transfer run.
-          @OutputOnly
+      state:
+        description: Output only. State of the most recently updated transfer run.
         enum:
-          - TRANSFER_STATUS_UNSPECIFIED
-          - INACTIVE
+          - TRANSFER_STATE_UNSPECIFIED
           - PENDING
           - RUNNING
           - SUCCEEDED
@@ -1330,17 +1266,16 @@ definitions:
           - CANCELLED
         type: string
       updateTime:
-        description: |-
-          Data transfer modification time. Ignored by server on input.
-          @OutputOnly
+        description: Output only. Data transfer modification time. Ignored by server on input.
         format: google-datetime
         type: string
       userId:
         description: |-
-          GaiaID of the user on whose behalf transfer is done. Applicable only
-          to data sources that do not support service accounts. When set to 0,
-          the data source service account credentials are used.
-          @OutputOnly
+          Output only. Unique ID of the user on whose behalf transfer is done.
+          Applicable only to data sources that do not support service accounts.
+          When set to 0, the data source service account credentials are used.
+          May be negative. Note, that this identifier is not stable.
+          It may change over time even for the same user.
         format: int64
         type: string
     type: object
@@ -1364,29 +1299,25 @@ definitions:
         type: string
     type: object
   TransferRun:
-    description: Represents a data transfer run.
+    description: |-
+      Represents a data transfer run.
+      Next id: 27
     properties:
       dataSourceId:
-        description: |-
-          Data source id.
-          @OutputOnly
-        type: string
-      datasetRegion:
-        description: |-
-          Region in which BigQuery dataset is located. Currently possible values are:
-          "US" and "EU".
-          @OutputOnly
+        description: Output only. Data source id.
         type: string
       destinationDatasetId:
-        description: The BigQuery target dataset id.
+        description: Output only. The BigQuery target dataset id.
         type: string
       endTime:
         description: |-
-          Time when transfer run ended. Parameter ignored by server for input
-          requests.
-          @OutputOnly
+          Output only. Time when transfer run ended.
+          Parameter ignored by server for input requests.
         format: google-datetime
         type: string
+      errorStatus:
+        $ref: '#/definitions/Status'
+        description: Status of the transfer run.
       name:
         description: |-
           The resource name of the transfer run.
@@ -1397,7 +1328,7 @@ definitions:
       params:
         additionalProperties:
           description: Properties of the object.
-        description: Data transfer specific parameters.
+        description: Output only. Data transfer specific parameters.
         type: object
       runTime:
         description: |-
@@ -1407,12 +1338,11 @@ definitions:
         type: string
       schedule:
         description: |-
-          Describes the schedule of this transfer run if it was created as part of
-          a regular schedule. For batch transfer runs that are directly created,
-          this is empty.
+          Output only. Describes the schedule of this transfer run if it was
+          created as part of a regular schedule. For batch transfer runs that are
+          scheduled manually, this is empty.
           NOTE: the system might choose to delay the schedule depending on the
           current load, so `schedule_time` doesn't always matches this.
-          @OutputOnly
         type: string
       scheduleTime:
         description: Minimum time after which a transfer run can be started.
@@ -1420,18 +1350,14 @@ definitions:
         type: string
       startTime:
         description: |-
-          Time when transfer run was started. Parameter ignored by server for input
-          requests.
-          @OutputOnly
+          Output only. Time when transfer run was started.
+          Parameter ignored by server for input requests.
         format: google-datetime
         type: string
-      status:
-        description: |-
-          Data transfer run status. Ignored for input requests.
-          @OutputOnly
+      state:
+        description: Data transfer run state. Ignored for input requests.
         enum:
-          - TRANSFER_STATUS_UNSPECIFIED
-          - INACTIVE
+          - TRANSFER_STATE_UNSPECIFIED
           - PENDING
           - RUNNING
           - SUCCEEDED
@@ -1439,15 +1365,16 @@ definitions:
           - CANCELLED
         type: string
       updateTime:
-        description: |-
-          Last time the data transfer run status was updated.
-          @OutputOnly
+        description: Output only. Last time the data transfer run state was updated.
         format: google-datetime
         type: string
       userId:
         description: |-
-          The user id for this transfer run.
-          @OutputOnly
+          Output only. Unique ID of the user on whose behalf transfer is done.
+          Applicable only to data sources that do not support service accounts.
+          When set to 0, the data source service account credentials are used.
+          May be negative. Note, that this identifier is not stable.
+          It may change over time even for the same user.
         format: int64
         type: string
     type: object

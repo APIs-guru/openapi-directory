@@ -26,16 +26,119 @@ produces:
   - application/json
 securityDefinitions:
   auth:
-    flow: application
+    authorizationUrl: 'https://api.lufthansa.com/v1/oauth/token'
+    flow: accessCode
     scopes:
       'read:LH Open API': read access
     tokenUrl: 'https://api.lufthansa.com/v1/oauth/token'
     type: oauth2
 paths:
+  '/cargo/getRoute/{origin}-{destination}/{fromDate}/{productCode}':
+    get:
+      description: Retrieve a list of all possible flights (both direct and connecting) between two airports on a given date. Routes are available for today and up to days in the future.
+      operationId: CargoGetRouteFromDateProductCodeByOriginAndDestinationGet
+      parameters:
+        - description: 'Departure Airport : 3-letter IATA airport code, e.g. FRA.'
+          in: path
+          name: origin
+          required: true
+          type: string
+        - description: 'Arrival airport : 3-letter IATA airport code, e.g. HKG.'
+          in: path
+          name: destination
+          required: true
+          type: string
+        - description: 'Departure date in the local time of the departure airport. Based on LAT (Latest Acceptance Time). format : yyyy-MM-dd eg : 2017-07-15'
+          in: path
+          name: fromDate
+          required: true
+          type: string
+        - description: 'Product code for requested service and specials : 3-letter eg: YNZ'
+          enum:
+            - FAN
+            - FCO
+            - FCP
+            - FDG
+            - FTF
+            - FUN
+            - FWN
+            - YCO
+            - YCP
+            - YDG
+            - YNB
+            - YNZ
+            - YTF
+            - YUN
+            - ZXB
+            - ZXF
+            - ZXR
+          in: path
+          name: productCode
+          required: true
+          type: string
+        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+          in: header
+          name: Accept
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples: {}
+          schema:
+            type: object
+      security:
+        - auth: []
+      summary: Retrieve all flights
+      tags:
+        - Cargo
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  '/cargo/shipmentTracking/{aWBPrefix}-{aWBNumber}':
+    get:
+      description: With this tracking service you can easily retrieve your shipment or flight status information.
+      operationId: CargoShipmentTrackingByAWBPrefixAndAWBNumberGet
+      parameters:
+        - description: 'aWBPrefix : Represents the airline that is the owner of this AWB, i.e. "020" = Lufthansa Cargo, format : [0-9]{3} e.g. 020'
+          in: path
+          name: aWBPrefix
+          required: true
+          type: string
+        - description: 'aWBNumber : The Air Waybill Number , format : [0-9]{8} e.g. 08002050'
+          in: path
+          name: aWBNumber
+          required: true
+          type: string
+        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+          in: header
+          name: Accept
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples: {}
+          schema:
+            type: object
+      security:
+        - auth: []
+      summary: Shipment Tracking
+      tags:
+        - Cargo
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
   '/offers/lounges/{location}':
     get:
       description: Lounge information
-      operationId: Lounges
+      operationId: OffersLoungesByLocationGet
       parameters:
         - description: 3-leter IATA airport or city code (e.g. 'ZRH')
           in: path
@@ -65,8 +168,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Lounges
@@ -81,7 +185,7 @@ paths:
   '/offers/seatmaps/{flightNumber}/{origin}/{destination}/{date}/{cabinClass}':
     get:
       description: Cabin layout and seat characteristics.
-      operationId: Seat Maps
+      operationId: OffersSeatmapsDestinationDateCabinClassByFlightNumberAndOriginGet
       parameters:
         - description: Flight number including carrier code and any suffix (e.g. 'LH2037')
           in: path
@@ -116,8 +220,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Seat Maps
@@ -132,7 +237,7 @@ paths:
   '/operations/flightstatus/arrivals/{airportCode}/{fromDateTime}':
     get:
       description: Status of all arrivals at a given airport up to 4 hours from the provided date time.
-      operationId: Flight Status at Arrival Airport
+      operationId: OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGet
       parameters:
         - description: 3-letter IATA aiport code (e.g. 'ZRH')
           in: path
@@ -162,8 +267,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Flight Status at Arrival Airport
@@ -178,7 +284,7 @@ paths:
   '/operations/flightstatus/departures/{airportCode}/{fromDateTime}':
     get:
       description: Status of all departures from a given airport up to 4 hours from the provided date time.
-      operationId: Flight Status at Departure Airport
+      operationId: OperationsFlightstatusDeparturesByAirportCodeAndFromDateTimeGet
       parameters:
         - description: Departure airport. 3-letter IATA airport code (e.g. 'HAM')
           in: path
@@ -208,8 +314,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Flight Status at Departure Airport
@@ -224,7 +331,7 @@ paths:
   '/operations/flightstatus/route/{origin}/{destination}/{date}':
     get:
       description: Status of flights between a given origin and destination on a given date.
-      operationId: Flight Status by Route
+      operationId: OperationsFlightstatusRouteDateByOriginAndDestinationGet
       parameters:
         - description: 3-letter IATA airport (e.g. 'FRA')
           in: path
@@ -259,8 +366,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Flight Status by Route
@@ -275,7 +383,7 @@ paths:
   '/operations/flightstatus/{flightNumber}/{date}':
     get:
       description: 'Status of a particular flight (boarding, delayed, etc.).'
-      operationId: Flight Status
+      operationId: OperationsFlightstatusByFlightNumberAndDateGet
       parameters:
         - description: Flight number including carrier code and any suffix (e.g. 'LH400')
           in: path
@@ -305,8 +413,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Flight Status
@@ -321,7 +430,7 @@ paths:
   '/operations/schedules/{origin}/{destination}/{fromDateTime}':
     get:
       description: Scheduled flights between given airports on a given date.
-      operationId: Flight Schedules
+      operationId: OperationsSchedulesFromDateTimeByOriginAndDestinationGet
       parameters:
         - description: Departure airport. 3-letter IATA airport code (e.g. 'ZRH')
           in: path
@@ -361,8 +470,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Flight Schedules
@@ -377,7 +487,7 @@ paths:
   '/references/aircraft/{aircraftCode}':
     get:
       description: List all aircraft types or one specific aircraft type.
-      operationId: Aircraft
+      operationId: ReferencesAircraftByAircraftCodeGet
       parameters:
         - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
           in: header
@@ -405,8 +515,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Aircraft
@@ -421,7 +532,7 @@ paths:
   '/references/airlines/{airlineCode}':
     get:
       description: List all airlines or one specific airline.
-      operationId: Airlines
+      operationId: ReferencesAirlinesByAirlineCodeGet
       parameters:
         - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
           in: header
@@ -449,8 +560,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Airlines
@@ -465,7 +577,7 @@ paths:
   '/references/airports/nearest/{latitude},{longitude}':
     get:
       description: 'List the 5 closest airports to the given latitude and longitude, irrespective of the radius of the reference point.'
-      operationId: Nearest Airports
+      operationId: ReferencesAirportsNearestByLatitudeAndLongitudeGet
       parameters:
         - description: Latitude in decimal format to at most 3 decimal places
           format: int32
@@ -492,8 +604,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Nearest Airports
@@ -508,7 +621,7 @@ paths:
   '/references/airports/{airportCode}':
     get:
       description: List all airports or one specific airport. All airports response is very large. It is possible to request the response in a specific language.
-      operationId: Airports
+      operationId: ReferencesAirportsByAirportCodeGet
       parameters:
         - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
           in: header
@@ -546,8 +659,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            $ref: '#/definitions/AirportResponse'
       security:
         - auth: []
       summary: Airports
@@ -562,7 +676,7 @@ paths:
   '/references/cities/{cityCode}':
     get:
       description: List all cities or one specific city. It is possible to request the response in a specific language.
-      operationId: Cities
+      operationId: ReferencesCitiesByCityCodeGet
       parameters:
         - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
           in: header
@@ -595,8 +709,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Cities
@@ -611,7 +726,7 @@ paths:
   '/references/countries/{countryCode}':
     get:
       description: List all countries or one specific country. It is possible to request the response in a specific language.
-      operationId: Countries
+      operationId: ReferencesCountriesByCountryCodeGet
       parameters:
         - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
           in: header
@@ -644,8 +759,9 @@ paths:
       responses:
         '200':
           description: ''
+          examples: {}
           schema:
-            type: string
+            type: object
       security:
         - auth: []
       summary: Countries
@@ -657,3 +773,100 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
+definitions:
+  Airport:
+    description: Array of all available airports or one airport matching the request.
+    properties:
+      AirportCode:
+        description: '3-letter IATA airport code, e.g. “TXL”.'
+        type: string
+      CityCode:
+        description: '3-letter IATA city code, e.g. “BER”.'
+        type: string
+      CountryCode:
+        description: '2-letter ISO 3166-1 country code, e.g. “DE”.'
+        type: string
+      LocationType:
+        description: ' “Airport”, “RailwayStation” or “BusStation”.'
+        type: string
+      Names:
+        description: Container for airport names.
+        properties:
+          Name:
+            description: 'Array: language specific full name of airport.'
+            items:
+              $ref: '#/definitions/Name'
+            type: array
+        type: object
+      Position:
+        description: Physical location of an airport. This data section is optional and therefore not always present.
+        properties:
+          Coordinate:
+            $ref: '#/definitions/Coordinate'
+        type: object
+      TimeZoneId:
+        description: Time zone name airport is in
+        type: string
+      UtcOffset:
+        description: Hour offset of airport to UTC time zone
+        format: float
+        type: number
+    type: object
+  AirportResource:
+    description: Root element of airport response.
+    properties:
+      Airports:
+        description: Container for airport elements.
+        properties:
+          Airport:
+            $ref: '#/definitions/Airport'
+        type: object
+      Meta:
+        description: Container for meta links.
+        properties:
+          '@Version':
+            type: string
+          Link:
+            description: 'Array: links to resource itself and other related resources.'
+            items:
+              $ref: '#/definitions/Link'
+            type: array
+          TotalCount:
+            format: int32
+            type: integer
+        type: object
+    type: object
+  AirportResponse:
+    properties:
+      AirportResource:
+        $ref: '#/definitions/AirportResource'
+    type: object
+  Coordinate:
+    description: Container for coordinates.
+    properties:
+      Latitude:
+        description: 'Decimal latitude. Range: -90 (South Pole) to +90 (North Pole), e.g. “51.540”.'
+        format: float
+        type: number
+      Longitude:
+        description: 'Decimal longitude. Range: -180 (West of Prime Meridian) to +180 (East of Prime Meridian).'
+        format: float
+        type: number
+    type: object
+  Link:
+    properties:
+      '@Href':
+        description: Link to actual a resource.
+        type: string
+      '@Rel':
+        description: 'Specifying kind of link such as ‘self’ (link that returned this response), ‘alternate’ (link that points to another resource) or ‘related’ (link that points to related resource).'
+        type: string
+    type: object
+  Name:
+    description: 2-letter ISO 639-1 language code for the corresponding item.
+    properties:
+      $:
+        type: string
+      '@LanguageCode':
+        type: string
+    type: object

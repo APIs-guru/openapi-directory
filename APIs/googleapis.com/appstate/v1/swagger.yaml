@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/appstate/v1/rest'
       version: v1
@@ -176,6 +176,14 @@ paths:
       description: Update the data associated with the input key if and only if the passed version matches the currently stored version. This method is safe in the face of concurrent writes. Maximum per-key size is 128KB.
       operationId: appstate.states.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateRequest'
+        - description: 'The version of the app state your application is attempting to update. If this does not match the current version, this method will return a conflict error. If there is no data stored on the server for this key, the update will succeed irrespective of the value of this parameter.'
+          in: query
+          name: currentStateVersion
+          type: string
         - description: The key for the data to be retrieved.
           in: path
           maximum: 3
@@ -183,14 +191,6 @@ paths:
           name: stateKey
           required: true
           type: integer
-        - description: 'The version of the app state your application is attempting to update. If this does not match the current version, this method will return a conflict error. If there is no data stored on the server for this key, the update will succeed irrespective of the value of this parameter.'
-          in: query
-          name: currentStateVersion
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UpdateRequest'
       responses:
         '200':
           description: Successful response
@@ -216,6 +216,10 @@ paths:
       description: Clears (sets to empty) the data for the passed key if and only if the passed version matches the currently stored version. This method results in a conflict error on version mismatch.
       operationId: appstate.states.clear
       parameters:
+        - description: The version of the data to be cleared. Version strings are returned by the server.
+          in: query
+          name: currentDataVersion
+          type: string
         - description: The key for the data to be retrieved.
           in: path
           maximum: 3
@@ -223,10 +227,6 @@ paths:
           name: stateKey
           required: true
           type: integer
-        - description: The version of the data to be cleared. Version strings are returned by the server.
-          in: query
-          name: currentDataVersion
-          type: string
       responses:
         '200':
           description: Successful response

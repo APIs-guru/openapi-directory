@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/adexchangebuyer/v1.2/rest'
       version: v1
@@ -148,15 +148,15 @@ paths:
       description: Updates an existing account. This method supports patch semantics.
       operationId: adexchangebuyer.accounts.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
         - description: The account id
           in: path
           name: id
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
       responses:
         '200':
           description: Successful response
@@ -173,15 +173,15 @@ paths:
       description: Updates an existing account.
       operationId: adexchangebuyer.accounts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
         - description: The account id
           in: path
           name: id
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
       responses:
         '200':
           description: Successful response

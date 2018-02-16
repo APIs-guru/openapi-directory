@@ -16,12 +16,14 @@ info:
   version: v1beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/replicapool/v1beta1/rest'
       version: v1
@@ -105,16 +107,6 @@ paths:
       description: List all replica pools.
       operationId: replicapool.pools.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone for this replica pool.
-          in: path
-          name: zone
-          required: true
-          type: string
         - default: 500
           description: 'Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)'
           in: query
@@ -125,6 +117,16 @@ paths:
         - description: Set this to the nextPageToken value returned by a previous list request to obtain the next page of results from the previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
+          required: true
+          type: string
+        - description: The zone for this replica pool.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -170,6 +172,10 @@ paths:
       description: Inserts a new replica pool.
       operationId: replicapool.pools.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Pool'
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -180,10 +186,6 @@ paths:
           name: zone
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Pool'
       responses:
         '200':
           description: Successful response
@@ -209,6 +211,11 @@ paths:
       description: Gets information about a single replica pool.
       operationId: replicapool.pools.get
       parameters:
+        - description: The name of the replica pool for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -217,11 +224,6 @@ paths:
         - description: The zone for this replica pool.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: The name of the replica pool for this request.
-          in: path
-          name: poolName
           required: true
           type: string
       responses:
@@ -268,6 +270,15 @@ paths:
       description: Deletes a replica pool.
       operationId: replicapool.pools.delete
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PoolsDeleteRequest'
+        - description: The name of the replica pool for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -278,15 +289,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the replica pool for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PoolsDeleteRequest'
       responses:
         '200':
           description: Successful response
@@ -310,21 +312,6 @@ paths:
       description: Lists all replicas in a pool.
       operationId: replicapool.replicas.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone where the replica pool lives.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: The replica pool name for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
         - default: 500
           description: 'Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)'
           in: query
@@ -335,6 +322,21 @@ paths:
         - description: Set this to the nextPageToken value returned by a previous list request to obtain the next page of results from the previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: The replica pool name for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
+          required: true
+          type: string
+        - description: The zone where the replica pool lives.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -381,24 +383,24 @@ paths:
       description: Gets information about a specific replica.
       operationId: replicapool.replicas.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone where the replica lives.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The replica pool name for this request.
           in: path
           name: poolName
           required: true
           type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
+          required: true
+          type: string
         - description: The name of the replica for this request.
           in: path
           name: replicaName
+          required: true
+          type: string
+        - description: The zone where the replica lives.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -445,19 +447,18 @@ paths:
       description: Deletes a replica from the pool.
       operationId: replicapool.replicas.delete
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone where the replica lives.
-          in: path
-          name: zone
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReplicasDeleteRequest'
         - description: The replica pool name for this request.
           in: path
           name: poolName
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
           required: true
           type: string
         - description: The name of the replica for this request.
@@ -465,10 +466,11 @@ paths:
           name: replicaName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReplicasDeleteRequest'
+        - description: The zone where the replica lives.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -502,24 +504,24 @@ paths:
       description: Restarts a replica in a pool.
       operationId: replicapool.replicas.restart
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone where the replica lives.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The replica pool name for this request.
           in: path
           name: poolName
           required: true
           type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
+          required: true
+          type: string
         - description: The name of the replica for this request.
           in: path
           name: replicaName
+          required: true
+          type: string
+        - description: The zone where the replica lives.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -555,6 +557,15 @@ paths:
       description: 'Resize a pool. This is an asynchronous operation, and multiple overlapping resize requests can be made. Replica Pools will use the information from the last resize request.'
       operationId: replicapool.pools.resize
       parameters:
+        - description: 'The desired number of replicas to resize to. If this number is larger than the existing number of replicas, new replicas will be added. If the number is smaller, then existing replicas will be deleted.'
+          in: query
+          name: numReplicas
+          type: integer
+        - description: The name of the replica pool for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -565,15 +576,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the replica pool for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
-        - description: 'The desired number of replicas to resize to. If this number is larger than the existing number of replicas, new replicas will be added. If the number is smaller, then existing replicas will be deleted.'
-          in: query
-          name: numReplicas
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -607,6 +609,15 @@ paths:
       description: Update the template used by the pool.
       operationId: replicapool.pools.updatetemplate
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Template'
+        - description: The name of the replica pool for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -617,15 +628,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the replica pool for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Template'
       responses:
         '200':
           description: Successful response

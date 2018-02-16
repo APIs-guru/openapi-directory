@@ -15,7 +15,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: swagger
       url: 'https://api.clarify.io/api-docs'
       version: '1.2'
@@ -1069,41 +1069,8 @@ definitions:
     required:
       - _class
       - _links
-  Ref_(of_Bundle):
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Ref
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks, clarify:tracks (if track created))'
-      id:
-        description: id of the bundle
-        type: string
-      track_id:
-        description: id of created track (if a track was created)
-        type: string
-    required:
-      - _class
-      - _links
-      - id
-  Ref_(of_Track):
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Ref
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, parent, clarify:bundle)'
-      id:
-        description: id of the track
-        type: string
-    required:
-      - _class
-      - _links
-      - id
+  Ref_(of_Bundle): {}
+  Ref_(of_Track): {}
   ReportPeriod:
     $ref: '#/definitions/object'
     properties:
@@ -1365,7 +1332,7 @@ definitions:
       tracks:
         description: Array of tracks
         items:
-          $ref: '#/definitions/Track (array item)'
+          $ref: '#/definitions/Track_(array_item)'
         type: array
       updated:
         description: 'Date the tracks was updated, ex. "2014-02-25T14:23:45Z"'
@@ -1383,4 +1350,4 @@ definitions:
       - updated
       - version
   object:
-    $ref: '#/definitions/object'
+    type: object

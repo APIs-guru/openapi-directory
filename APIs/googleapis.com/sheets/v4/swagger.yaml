@@ -16,12 +16,14 @@ info:
   version: v4
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://sheets.googleapis.com/$discovery/rest?version=v4'
       version: v1
@@ -135,18 +137,18 @@ tags:
 paths:
   /v4/spreadsheets:
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates a spreadsheet, returning the newly created spreadsheet.'
@@ -202,11 +204,12 @@ paths:
         ranges. Ranges are specified using A1 notation.
       operationId: sheets.spreadsheets.get
       parameters:
-        - description: The spreadsheet to request.
-          in: path
-          name: spreadsheetId
-          required: true
-          type: string
+        - description: |-
+            True if grid data should be returned.
+            This parameter is ignored if a field mask was set in the request.
+          in: query
+          name: includeGridData
+          type: boolean
         - collectionFormat: multi
           description: The ranges to retrieve from the spreadsheet.
           in: query
@@ -214,12 +217,11 @@ paths:
             type: string
           name: ranges
           type: array
-        - description: |-
-            True if grid data should be returned.
-            This parameter is ignored if a field mask was set in the request.
-          in: query
-          name: includeGridData
-          type: boolean
+        - description: The spreadsheet to request.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -249,33 +251,138 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}':
+    get:
+      description: |-
+        Returns the developer metadata with the specified ID.
+        The caller must specify the spreadsheet ID and the developer metadata's
+        unique metadataId.
+      operationId: sheets.spreadsheets.developerMetadata.get
+      parameters:
+        - description: The ID of the developer metadata to retrieve.
+          in: path
+          name: metadataId
+          required: true
+          type: integer
+        - description: The ID of the spreadsheet to retrieve metadata from.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeveloperMetadata'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v4/spreadsheets/{spreadsheetId}/developerMetadata:search':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns all developer metadata matching the specified DataFilter.
+        If the provided DataFilter represents a DeveloperMetadataLookup object,
+        this will return all DeveloperMetadata entries selected by it. If the
+        DataFilter represents a location in a spreadsheet, this will return all
+        developer metadata associated with locations intersecting that region.
+      operationId: sheets.spreadsheets.developerMetadata.search
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SearchDeveloperMetadataRequest'
+        - description: The ID of the spreadsheet to retrieve metadata from.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchDeveloperMetadataResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo':
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -283,20 +390,20 @@ paths:
         Returns the properties of the newly created sheet.
       operationId: sheets.spreadsheets.sheets.copyTo
       parameters:
-        - description: The ID of the spreadsheet containing the sheet to copy.
-          in: path
-          name: spreadsheetId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CopySheetToAnotherSpreadsheetRequest'
         - description: The ID of the sheet to copy.
           in: path
           name: sheetId
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CopySheetToAnotherSpreadsheetRequest'
+        - description: The ID of the spreadsheet containing the sheet to copy.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -324,15 +431,16 @@ paths:
         The caller must specify the spreadsheet ID and a range.
       operationId: sheets.spreadsheets.values.get
       parameters:
-        - description: The ID of the spreadsheet to retrieve data from.
-          in: path
-          name: spreadsheetId
-          required: true
-          type: string
-        - description: The A1 notation of the values to retrieve.
-          in: path
-          name: range
-          required: true
+        - description: |-
+            How dates, times, and durations should be represented in the output.
+            This is ignored if value_render_option is
+            FORMATTED_VALUE.
+            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+          enum:
+            - SERIAL_NUMBER
+            - FORMATTED_STRING
+          in: query
+          name: dateTimeRenderOption
           type: string
         - description: |-
             The major dimension that results should use.
@@ -349,6 +457,16 @@ paths:
           in: query
           name: majorDimension
           type: string
+        - description: The A1 notation of the values to retrieve.
+          in: path
+          name: range
+          required: true
+          type: string
+        - description: The ID of the spreadsheet to retrieve data from.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
         - description: |-
             How values should be represented in the output.
             The default render option is ValueRenderOption.FORMATTED_VALUE.
@@ -358,17 +476,6 @@ paths:
             - FORMULA
           in: query
           name: valueRenderOption
-          type: string
-        - description: |-
-            How dates, times, and durations should be represented in the output.
-            This is ignored if value_render_option is
-            FORMATTED_VALUE.
-            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-          enum:
-            - SERIAL_NUMBER
-            - FORMATTED_STRING
-          in: query
-          name: dateTimeRenderOption
           type: string
       responses:
         '200':
@@ -399,18 +506,18 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
@@ -419,33 +526,24 @@ paths:
         a valueInputOption.
       operationId: sheets.spreadsheets.values.update
       parameters:
-        - description: The ID of the spreadsheet to update.
-          in: path
-          name: spreadsheetId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ValueRange'
+        - description: |-
+            Determines if the update response should include the values
+            of the cells that were updated. By default, responses
+            do not include the updated values.
+            If the range to write was larger than than the range actually written,
+            the response will include all values in the requested range (excluding
+            trailing empty rows and columns).
+          in: query
+          name: includeValuesInResponse
+          type: boolean
         - description: The A1 notation of the values to update.
           in: path
           name: range
           required: true
-          type: string
-        - description: |-
-            Determines how values in the response should be rendered.
-            The default render option is ValueRenderOption.FORMATTED_VALUE.
-          enum:
-            - FORMATTED_VALUE
-            - UNFORMATTED_VALUE
-            - FORMULA
-          in: query
-          name: responseValueRenderOption
-          type: string
-        - description: How the input data should be interpreted.
-          enum:
-            - INPUT_VALUE_OPTION_UNSPECIFIED
-            - RAW
-            - USER_ENTERED
-          in: query
-          name: valueInputOption
           type: string
         - description: |-
             Determines how dates, times, and durations in the response should be
@@ -459,19 +557,28 @@ paths:
           name: responseDateTimeRenderOption
           type: string
         - description: |-
-            Determines if the update response should include the values
-            of the cells that were updated. By default, responses
-            do not include the updated values.
-            If the range to write was larger than than the range actually written,
-            the response will include all values in the requested range (excluding
-            trailing empty rows and columns).
+            Determines how values in the response should be rendered.
+            The default render option is ValueRenderOption.FORMATTED_VALUE.
+          enum:
+            - FORMATTED_VALUE
+            - UNFORMATTED_VALUE
+            - FORMULA
           in: query
-          name: includeValuesInResponse
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ValueRange'
+          name: responseValueRenderOption
+          type: string
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+        - description: How the input data should be interpreted.
+          enum:
+            - INPUT_VALUE_OPTION_UNSPECIFIED
+            - RAW
+            - USER_ENTERED
+          in: query
+          name: valueInputOption
+          type: string
       responses:
         '200':
           description: Successful response
@@ -494,18 +601,18 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:append':
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -525,18 +632,10 @@ paths:
         to.
       operationId: sheets.spreadsheets.values.append
       parameters:
-        - description: The ID of the spreadsheet to update.
-          in: path
-          name: spreadsheetId
-          required: true
-          type: string
-        - description: |-
-            The A1 notation of a range to search for a logical table of data.
-            Values will be appended after the last row of the table.
-          in: path
-          name: range
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ValueRange'
         - description: |-
             Determines if the update response should include the values
             of the cells that were appended. By default, responses
@@ -544,16 +643,6 @@ paths:
           in: query
           name: includeValuesInResponse
           type: boolean
-        - description: |-
-            Determines how values in the response should be rendered.
-            The default render option is ValueRenderOption.FORMATTED_VALUE.
-          enum:
-            - FORMATTED_VALUE
-            - UNFORMATTED_VALUE
-            - FORMULA
-          in: query
-          name: responseValueRenderOption
-          type: string
         - description: How the input data should be inserted.
           enum:
             - OVERWRITE
@@ -561,13 +650,12 @@ paths:
           in: query
           name: insertDataOption
           type: string
-        - description: How the input data should be interpreted.
-          enum:
-            - INPUT_VALUE_OPTION_UNSPECIFIED
-            - RAW
-            - USER_ENTERED
-          in: query
-          name: valueInputOption
+        - description: |-
+            The A1 notation of a range to search for a logical table of data.
+            Values will be appended after the last row of the table.
+          in: path
+          name: range
+          required: true
           type: string
         - description: |-
             Determines how dates, times, and durations in the response should be
@@ -580,10 +668,29 @@ paths:
           in: query
           name: responseDateTimeRenderOption
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ValueRange'
+        - description: |-
+            Determines how values in the response should be rendered.
+            The default render option is ValueRenderOption.FORMATTED_VALUE.
+          enum:
+            - FORMATTED_VALUE
+            - UNFORMATTED_VALUE
+            - FORMULA
+          in: query
+          name: responseValueRenderOption
+          type: string
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+        - description: How the input data should be interpreted.
+          enum:
+            - INPUT_VALUE_OPTION_UNSPECIFIED
+            - RAW
+            - USER_ENTERED
+          in: query
+          name: valueInputOption
+          type: string
       responses:
         '200':
           description: Successful response
@@ -606,18 +713,18 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:clear':
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -627,20 +734,20 @@ paths:
         formatting, data validation, etc..) are kept.
       operationId: sheets.spreadsheets.values.clear
       parameters:
-        - description: The ID of the spreadsheet to update.
-          in: path
-          name: spreadsheetId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ClearValuesRequest'
         - description: The A1 notation of the values to clear.
           in: path
           name: range
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ClearValuesRequest'
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -663,18 +770,18 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchClear':
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -684,20 +791,73 @@ paths:
         formatting, data validation, etc..) are kept.
       operationId: sheets.spreadsheets.values.batchClear
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchClearValuesRequest'
         - description: The ID of the spreadsheet to update.
           in: path
           name: spreadsheetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BatchClearValuesRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/BatchClearValuesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Clears one or more ranges of values from a spreadsheet.
+        The caller must specify the spreadsheet ID and one or more
+        DataFilters. Ranges matching any of the specified data
+        filters will be cleared.  Only values are cleared -- all other properties
+        of the cell (such as formatting, data validation, etc..) are kept.
+      operationId: sheets.spreadsheets.values.batchClearByDataFilter
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchClearValuesByDataFilterRequest'
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchClearValuesByDataFilterResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
@@ -720,21 +880,6 @@ paths:
         The caller must specify the spreadsheet ID and one or more ranges.
       operationId: sheets.spreadsheets.values.batchGet
       parameters:
-        - description: The ID of the spreadsheet to retrieve data from.
-          in: path
-          name: spreadsheetId
-          required: true
-          type: string
-        - description: |-
-            How values should be represented in the output.
-            The default render option is ValueRenderOption.FORMATTED_VALUE.
-          enum:
-            - FORMATTED_VALUE
-            - UNFORMATTED_VALUE
-            - FORMULA
-          in: query
-          name: valueRenderOption
-          type: string
         - description: |-
             How dates, times, and durations should be represented in the output.
             This is ignored if value_render_option is
@@ -746,13 +891,6 @@ paths:
           in: query
           name: dateTimeRenderOption
           type: string
-        - collectionFormat: multi
-          description: The A1 notation of the values to retrieve.
-          in: query
-          items:
-            type: string
-          name: ranges
-          type: array
         - description: |-
             The major dimension that results should use.
 
@@ -767,6 +905,28 @@ paths:
             - COLUMNS
           in: query
           name: majorDimension
+          type: string
+        - collectionFormat: multi
+          description: The A1 notation of the values to retrieve.
+          in: query
+          items:
+            type: string
+          name: ranges
+          type: array
+        - description: The ID of the spreadsheet to retrieve data from.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+        - description: |-
+            How values should be represented in the output.
+            The default render option is ValueRenderOption.FORMATTED_VALUE.
+          enum:
+            - FORMATTED_VALUE
+            - UNFORMATTED_VALUE
+            - FORMULA
+          in: query
+          name: valueRenderOption
           type: string
       responses:
         '200':
@@ -797,33 +957,85 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns one or more ranges of values that match the specified data filters.
+        The caller must specify the spreadsheet ID and one or more
+        DataFilters.  Ranges that match any of the data filters in
+        the request will be returned.
+      operationId: sheets.spreadsheets.values.batchGetByDataFilter
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchGetValuesByDataFilterRequest'
+        - description: The ID of the spreadsheet to retrieve data from.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchGetValuesByDataFilterResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchUpdate':
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -833,15 +1045,15 @@ paths:
         ValueRanges.
       operationId: sheets.spreadsheets.values.batchUpdate
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchUpdateValuesRequest'
         - description: The ID of the spreadsheet to update.
           in: path
           name: spreadsheetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BatchUpdateValuesRequest'
       responses:
         '200':
           description: Successful response
@@ -862,20 +1074,72 @@ paths:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Sets values in one or more ranges of a spreadsheet.
+        The caller must specify the spreadsheet ID,
+        a valueInputOption, and one or more
+        DataFilterValueRanges.
+      operationId: sheets.spreadsheets.values.batchUpdateByDataFilter
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchUpdateValuesByDataFilterRequest'
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchUpdateValuesByDataFilterResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}:batchUpdate':
     parameters:
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -900,20 +1164,90 @@ paths:
         should reflect your changes.
       operationId: sheets.spreadsheets.batchUpdate
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchUpdateSpreadsheetRequest'
         - description: The spreadsheet to apply the updates to.
           in: path
           name: spreadsheetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BatchUpdateSpreadsheetRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/BatchUpdateSpreadsheetResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}:getByDataFilter':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns the spreadsheet at the given ID.
+        The caller must specify the spreadsheet ID.
+
+        This method differs from GetSpreadsheet in that it allows selecting
+        which subsets of spreadsheet data to return by specifying a
+        dataFilters parameter.
+        Multiple DataFilters can be specified.  Specifying one or
+        more data filters will return the portions of the spreadsheet that
+        intersect ranges matched by any of the filters.
+
+        By default, data within grids will not be returned.
+        You can include grid data one of two ways:
+
+        * Specify a field mask listing your desired fields using the `fields` URL
+        parameter in HTTP
+
+        * Set the includeGridData
+        parameter to true.  If a field mask is set, the `includeGridData`
+        parameter is ignored
+
+        For large spreadsheets, it is recommended to retrieve only the specific
+        fields of the spreadsheet that you want.
+      operationId: sheets.spreadsheets.getByDataFilter
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetSpreadsheetByDataFilterRequest'
+        - description: The spreadsheet to request.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Spreadsheet'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
@@ -1141,9 +1475,7 @@ definitions:
     properties:
       dimensions:
         $ref: '#/definitions/DimensionRange'
-        description: |-
-          The dimensions to automatically resize.
-          Only COLUMNS are supported.
+        description: The dimensions to automatically resize.
     type: object
   BandedRange:
     description: A banded (alternating colors) range in a sheet.
@@ -1231,6 +1563,9 @@ definitions:
           The title of this axis. If set, this overrides any title inferred
           from headers of the data.
         type: string
+      titleTextPosition:
+        $ref: '#/definitions/TextPosition'
+        description: The axis title text position.
     type: object
   BasicChartDomain:
     description: |-
@@ -1252,6 +1587,15 @@ definitions:
       For example, if charting stock prices over time, multiple series may exist,
       one for the "Open Price", "High Price", "Low Price" and "Close Price".
     properties:
+      lineStyle:
+        $ref: '#/definitions/LineStyle'
+        description: |-
+          The line style of this series. Valid only if the
+          chartType is AREA,
+          LINE, or SCATTER.
+          COMBO charts are also supported if the
+          series chart type is
+          AREA or LINE.
       series:
         $ref: '#/definitions/ChartData'
         description: The data being visualized in this chart series.
@@ -1310,6 +1654,15 @@ definitions:
           - SCATTER
           - COMBO
           - STEPPED_AREA
+        type: string
+      compareMode:
+        description: |-
+          The behavior of tooltips and data highlighting when hovering on data and
+          chart area.
+        enum:
+          - BASIC_CHART_COMPARE_MODE_UNSPECIFIED
+          - DATUM
+          - CATEGORY
         type: string
       domains:
         description: |-
@@ -1393,6 +1746,35 @@ definitions:
           $ref: '#/definitions/SortSpec'
         type: array
     type: object
+  BatchClearValuesByDataFilterRequest:
+    description: |-
+      The request for clearing more than one range selected by a
+      DataFilter in a spreadsheet.
+    properties:
+      dataFilters:
+        description: The DataFilters used to determine which ranges to clear.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+    type: object
+  BatchClearValuesByDataFilterResponse:
+    description: |-
+      The response when clearing a range of values selected with
+      DataFilters in a spreadsheet.
+    properties:
+      clearedRanges:
+        description: |-
+          The ranges that were cleared, in A1 notation.
+          (If the requests were for an unbounded range or a ranger larger
+           than the bounds of the sheet, this will be the actual ranges
+           that were cleared, bounded to the sheet's limits.)
+        items:
+          type: string
+        type: array
+      spreadsheetId:
+        description: The spreadsheet the updates were applied to.
+        type: string
+    type: object
   BatchClearValuesRequest:
     description: The request for clearing more than one range of values in a spreadsheet.
     properties:
@@ -1417,6 +1799,67 @@ definitions:
       spreadsheetId:
         description: The spreadsheet the updates were applied to.
         type: string
+    type: object
+  BatchGetValuesByDataFilterRequest:
+    description: |-
+      The request for retrieving a range of values in a spreadsheet selected by a
+      set of DataFilters.
+    properties:
+      dataFilters:
+        description: |-
+          The data filters used to match the ranges of values to retrieve.  Ranges
+          that match any of the specified data filters will be included in the
+          response.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      dateTimeRenderOption:
+        description: |-
+          How dates, times, and durations should be represented in the output.
+          This is ignored if value_render_option is
+          FORMATTED_VALUE.
+          The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+        enum:
+          - SERIAL_NUMBER
+          - FORMATTED_STRING
+        type: string
+      majorDimension:
+        description: |-
+          The major dimension that results should use.
+
+          For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,
+          then a request that selects that range and sets `majorDimension=ROWS` will
+          return `[[1,2],[3,4]]`,
+          whereas a request that sets `majorDimension=COLUMNS` will return
+          `[[1,3],[2,4]]`.
+        enum:
+          - DIMENSION_UNSPECIFIED
+          - ROWS
+          - COLUMNS
+        type: string
+      valueRenderOption:
+        description: |-
+          How values should be represented in the output.
+          The default render option is ValueRenderOption.FORMATTED_VALUE.
+        enum:
+          - FORMATTED_VALUE
+          - UNFORMATTED_VALUE
+          - FORMULA
+        type: string
+    type: object
+  BatchGetValuesByDataFilterResponse:
+    description: |-
+      The response when retrieving more than one range of values in a spreadsheet
+      selected by DataFilters.
+    properties:
+      spreadsheetId:
+        description: The ID of the spreadsheet the data was retrieved from.
+        type: string
+      valueRanges:
+        description: The requested values with the list of data filters that matched them.
+        items:
+          $ref: '#/definitions/MatchedValueRange'
+        type: array
     type: object
   BatchGetValuesResponse:
     description: The response when retrieving more than one range of values in a spreadsheet.
@@ -1480,6 +1923,87 @@ definitions:
         description: |-
           The spreadsheet after updates were applied. This is only set if
           [BatchUpdateSpreadsheetRequest.include_spreadsheet_in_response] is `true`.
+    type: object
+  BatchUpdateValuesByDataFilterRequest:
+    description: The request for updating more than one range of values in a spreadsheet.
+    properties:
+      data:
+        description: |-
+          The new values to apply to the spreadsheet.  If more than one range is
+          matched by the specified DataFilter the specified values will be
+          applied to all of those ranges.
+        items:
+          $ref: '#/definitions/DataFilterValueRange'
+        type: array
+      includeValuesInResponse:
+        description: |-
+          Determines if the update response should include the values
+          of the cells that were updated. By default, responses
+          do not include the updated values. The `updatedData` field within
+          each of the BatchUpdateValuesResponse.responses will contain
+          the updated values. If the range to write was larger than than the range
+          actually written, the response will include all values in the requested
+          range (excluding trailing empty rows and columns).
+        type: boolean
+      responseDateTimeRenderOption:
+        description: |-
+          Determines how dates, times, and durations in the response should be
+          rendered. This is ignored if response_value_render_option is
+          FORMATTED_VALUE.
+          The default dateTime render option is
+          DateTimeRenderOption.SERIAL_NUMBER.
+        enum:
+          - SERIAL_NUMBER
+          - FORMATTED_STRING
+        type: string
+      responseValueRenderOption:
+        description: |-
+          Determines how values in the response should be rendered.
+          The default render option is ValueRenderOption.FORMATTED_VALUE.
+        enum:
+          - FORMATTED_VALUE
+          - UNFORMATTED_VALUE
+          - FORMULA
+        type: string
+      valueInputOption:
+        description: How the input data should be interpreted.
+        enum:
+          - INPUT_VALUE_OPTION_UNSPECIFIED
+          - RAW
+          - USER_ENTERED
+        type: string
+    type: object
+  BatchUpdateValuesByDataFilterResponse:
+    description: The response when updating a range of values in a spreadsheet.
+    properties:
+      responses:
+        description: The response for each range updated.
+        items:
+          $ref: '#/definitions/UpdateValuesByDataFilterResponse'
+        type: array
+      spreadsheetId:
+        description: The spreadsheet the updates were applied to.
+        type: string
+      totalUpdatedCells:
+        description: The total number of cells updated.
+        format: int32
+        type: integer
+      totalUpdatedColumns:
+        description: |-
+          The total number of columns where at least one cell in the column was
+          updated.
+        format: int32
+        type: integer
+      totalUpdatedRows:
+        description: The total number of rows where at least one cell in the row was updated.
+        format: int32
+        type: integer
+      totalUpdatedSheets:
+        description: |-
+          The total number of sheets where at least one cell in the sheet was
+          updated.
+        format: int32
+        type: integer
     type: object
   BatchUpdateValuesRequest:
     description: The request for updating more than one range of values in a spreadsheet.
@@ -2024,6 +2548,19 @@ definitions:
       pieChart:
         $ref: '#/definitions/PieChartSpec'
         description: A pie chart specification.
+      subtitle:
+        description: The subtitle of the chart.
+        type: string
+      subtitleTextFormat:
+        $ref: '#/definitions/TextFormat'
+        description: |-
+          The subtitle text format.
+          Strikethrough and underline are not supported.
+      subtitleTextPosition:
+        $ref: '#/definitions/TextPosition'
+        description: |-
+          The subtitle text position.
+          This field is optional.
       title:
         description: The title of the chart.
         type: string
@@ -2032,6 +2569,14 @@ definitions:
         description: |-
           The title text format.
           Strikethrough and underline are not supported.
+      titleTextPosition:
+        $ref: '#/definitions/TextPosition'
+        description: |-
+          The title text position.
+          This field is optional.
+      waterfallChart:
+        $ref: '#/definitions/WaterfallChartSpec'
+        description: A waterfall chart specification.
     type: object
   ClearBasicFilterRequest:
     description: 'Clears the basic filter, if any exists on the sheet.'
@@ -2291,6 +2836,20 @@ definitions:
         description: The ID of the spreadsheet to copy the sheet to.
         type: string
     type: object
+  CreateDeveloperMetadataRequest:
+    description: A request to create developer metadata.
+    properties:
+      developerMetadata:
+        $ref: '#/definitions/DeveloperMetadata'
+        description: The developer metadata to create.
+    type: object
+  CreateDeveloperMetadataResponse:
+    description: The response from creating developer metadata.
+    properties:
+      developerMetadata:
+        $ref: '#/definitions/DeveloperMetadata'
+        description: The developer metadata that was created.
+    type: object
   CutPasteRequest:
     description: Moves data from the source to the destination.
     properties:
@@ -2313,6 +2872,47 @@ definitions:
       source:
         $ref: '#/definitions/GridRange'
         description: The source data to cut.
+    type: object
+  DataFilter:
+    description: |-
+      Filter that describes what data should be selected or returned from a
+      request.
+    properties:
+      a1Range:
+        description: Selects data that matches the specified A1 range.
+        type: string
+      developerMetadataLookup:
+        $ref: '#/definitions/DeveloperMetadataLookup'
+        description: |-
+          Selects data associated with the developer metadata matching the criteria
+          described by this DeveloperMetadataLookup.
+      gridRange:
+        $ref: '#/definitions/GridRange'
+        description: Selects data that matches the range described by the GridRange.
+    type: object
+  DataFilterValueRange:
+    description: A range of values whose location is specified by a DataFilter.
+    properties:
+      dataFilter:
+        $ref: '#/definitions/DataFilter'
+        description: The data filter describing the location of the values in the spreadsheet.
+      majorDimension:
+        description: The major dimension of the values.
+        enum:
+          - DIMENSION_UNSPECIFIED
+          - ROWS
+          - COLUMNS
+        type: string
+      values:
+        description: |-
+          The data to be written.  If the provided values exceed any of the ranges
+          matched by the data filter then the request will fail.  If the provided
+          values are less than the matched ranges only the specified values will be
+          written, existing values in the matched ranges will remain unaffected.
+        items:
+          items: {}
+          type: array
+        type: array
     type: object
   DataValidationRule:
     description: A data validation rule.
@@ -2360,6 +2960,24 @@ definitions:
       rule:
         $ref: '#/definitions/ConditionalFormatRule'
         description: The rule that was deleted.
+    type: object
+  DeleteDeveloperMetadataRequest:
+    description: A request to delete developer metadata.
+    properties:
+      dataFilter:
+        $ref: '#/definitions/DataFilter'
+        description: |-
+          The data filter describing the criteria used to select which developer
+          metadata entry to delete.
+    type: object
+  DeleteDeveloperMetadataResponse:
+    description: The response from deleting developer metadata.
+    properties:
+      deletedDeveloperMetadata:
+        description: The metadata that was deleted.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
+        type: array
     type: object
   DeleteDimensionRequest:
     description: Deletes the dimensions from the sheet.
@@ -2425,9 +3043,162 @@ definitions:
         format: int32
         type: integer
     type: object
+  DeveloperMetadata:
+    description: |-
+      Developer metadata associated with a location or object in a spreadsheet.
+      Developer metadata may be used to associate arbitrary data with various
+      parts of a spreadsheet and will remain associated at those locations as they
+      move around and the spreadsheet is edited.  For example, if developer
+      metadata is associated with row 5 and another row is then subsequently
+      inserted above row 5, that original metadata will still be associated with
+      the row it was first associated with (what is now row 6). If the associated
+      object is deleted its metadata will be deleted too.
+    properties:
+      location:
+        $ref: '#/definitions/DeveloperMetadataLocation'
+        description: The location where the metadata is associated.
+      metadataId:
+        description: |-
+          The spreadsheet-scoped unique ID that identifies the metadata. IDs may be
+          specified when metadata is created, otherwise one will be randomly
+          generated and assigned. Must be positive.
+        format: int32
+        type: integer
+      metadataKey:
+        description: |-
+          The metadata key. There may be multiple metadata in a spreadsheet with the
+          same key.  Developer metadata must always have a key specified.
+        type: string
+      metadataValue:
+        description: Data associated with the metadata's key.
+        type: string
+      visibility:
+        description: |-
+          The metadata visibility.  Developer metadata must always have a visibility
+          specified.
+        enum:
+          - DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED
+          - DOCUMENT
+          - PROJECT
+        type: string
+    type: object
+  DeveloperMetadataLocation:
+    description: A location where metadata may be associated in a spreadsheet.
+    properties:
+      dimensionRange:
+        $ref: '#/definitions/DimensionRange'
+        description: |-
+          Represents the row or column when metadata is associated with
+          a dimension. The specified DimensionRange must represent a single row
+          or column; it cannot be unbounded or span multiple rows or columns.
+      locationType:
+        description: The type of location this object represents.  This field is read-only.
+        enum:
+          - DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED
+          - ROW
+          - COLUMN
+          - SHEET
+          - SPREADSHEET
+        type: string
+      sheetId:
+        description: The ID of the sheet when metadata is associated with an entire sheet.
+        format: int32
+        type: integer
+      spreadsheet:
+        description: True when metadata is associated with an entire spreadsheet.
+        type: boolean
+    type: object
+  DeveloperMetadataLookup:
+    description: |-
+      Selects DeveloperMetadata that matches all of the specified fields.  For
+      example, if only a metadata ID is specified this considers the
+      DeveloperMetadata with that particular unique ID. If a metadata key is
+      specified, this considers all developer metadata with that key.  If a
+      key, visibility, and location type are all specified, this considers all
+      developer metadata with that key and visibility that are associated with a
+      location of that type.  In general, this
+      selects all DeveloperMetadata that matches the intersection of all the
+      specified fields; any field or combination of fields may be specified.
+    properties:
+      locationMatchingStrategy:
+        description: |-
+          Determines how this lookup matches the location.  If this field is
+          specified as EXACT, only developer metadata associated on the exact
+          location specified is matched.  If this field is specified to INTERSECTING,
+          developer metadata associated on intersecting locations is also
+          matched.  If left unspecified, this field assumes a default value of
+          INTERSECTING.
+          If this field is specified, a metadataLocation
+          must also be specified.
+        enum:
+          - DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED
+          - EXACT_LOCATION
+          - INTERSECTING_LOCATION
+        type: string
+      locationType:
+        description: |-
+          Limits the selected developer metadata to those entries which are
+          associated with locations of the specified type.  For example, when this
+          field is specified as ROW this lookup
+          only considers developer metadata associated on rows.  If the field is left
+          unspecified, all location types are considered.  This field cannot be
+          specified as SPREADSHEET when
+          the locationMatchingStrategy
+          is specified as INTERSECTING or when the
+          metadataLocation is specified as a
+          non-spreadsheet location: spreadsheet metadata cannot intersect any other
+          developer metadata location.  This field also must be left unspecified when
+          the locationMatchingStrategy
+          is specified as EXACT.
+        enum:
+          - DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED
+          - ROW
+          - COLUMN
+          - SHEET
+          - SPREADSHEET
+        type: string
+      metadataId:
+        description: |-
+          Limits the selected developer metadata to that which has a matching
+          DeveloperMetadata.metadata_id.
+        format: int32
+        type: integer
+      metadataKey:
+        description: |-
+          Limits the selected developer metadata to that which has a matching
+          DeveloperMetadata.metadata_key.
+        type: string
+      metadataLocation:
+        $ref: '#/definitions/DeveloperMetadataLocation'
+        description: |-
+          Limits the selected developer metadata to those entries associated with
+          the specified location.  This field either matches exact locations or all
+          intersecting locations according the specified
+          locationMatchingStrategy.
+      metadataValue:
+        description: |-
+          Limits the selected developer metadata to that which has a matching
+          DeveloperMetadata.metadata_value.
+        type: string
+      visibility:
+        description: |-
+          Limits the selected developer metadata to that which has a matching
+          DeveloperMetadata.visibility.  If left unspecified, all developer
+          metadata visibile to the requesting project is considered.
+        enum:
+          - DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED
+          - DOCUMENT
+          - PROJECT
+        type: string
+    type: object
   DimensionProperties:
     description: Properties about a dimension.
     properties:
+      developerMetadata:
+        description: The developer metadata associated with a single row or column.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
+        type: array
       hiddenByFilter:
         description: |-
           True if this dimension is being filtered.
@@ -2742,6 +3513,22 @@ definitions:
         format: int32
         type: integer
     type: object
+  GetSpreadsheetByDataFilterRequest:
+    description: The request for retrieving a Spreadsheet.
+    properties:
+      dataFilters:
+        description: |-
+          The DataFilters used to select which ranges to retrieve from
+          the spreadsheet.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      includeGridData:
+        description: |-
+          True if grid data should be returned.
+          This parameter is ignored if a field mask was set in the request.
+        type: boolean
+    type: object
   GradientRule:
     description: |-
       A rule that applies a gradient color scale format, based on
@@ -2941,6 +3728,60 @@ definitions:
           column.
         type: boolean
     type: object
+  HistogramRule:
+    description: |-
+      Allows you to organize the numeric values in a source data column into
+      buckets of a constant size. All values from HistogramRule.start to
+      HistogramRule.end will be placed into groups of size
+      HistogramRule.interval. In addition, all values below
+      HistogramRule.start will be placed in one group, and all values above
+      HistogramRule.end will be placed in another. Only
+      HistogramRule.interval is required, though if HistogramRule.start
+      and HistogramRule.end are both provided, HistogramRule.start must
+      be less than HistogramRule.end. For example, a pivot table showing
+      average purchase amount by age that has 50+ rows:
+
+          +-----+-------------------+
+          | Age | AVERAGE of Amount |
+          +-----+-------------------+
+          | 16  |            $27.13 |
+          | 17  |             $5.24 |
+          | 18  |            $20.15 |
+          ...
+          +-----+-------------------+
+      could be turned into a pivot table that looks like the one below by
+      applying a histogram group rule with a HistogramRule.start of 25,
+      an HistogramRule.interval of 20, and an HistogramRule.end
+      of 65.
+
+          +-------------+-------------------+
+          | Grouped Age | AVERAGE of Amount |
+          +-------------+-------------------+
+          | < 25        |            $19.34 |
+          | 25-45       |            $31.43 |
+          | 45-65       |            $35.87 |
+          | > 65        |            $27.55 |
+          +-------------+-------------------+
+          | Grand Total |            $29.12 |
+          +-------------+-------------------+
+    properties:
+      end:
+        description: |-
+          Optional. The maximum value at which items will be placed into buckets
+          of constant size. Values above end will be lumped into a single bucket.
+        format: double
+        type: number
+      interval:
+        description: Required. The size of the buckets that will be created. Must be positive.
+        format: double
+        type: number
+      start:
+        description: |-
+          Optional. The minimum value at which items will be placed into buckets
+          of constant size. Values below start will be lumped into a single bucket.
+        format: double
+        type: number
+    type: object
   HistogramSeries:
     description: A histogram series containing the series color and data.
     properties:
@@ -3035,6 +3876,112 @@ definitions:
           rounds to perform.
         format: int32
         type: integer
+    type: object
+  LineStyle:
+    description: Properties that describe the style of a line.
+    properties:
+      type:
+        description: The dash type of the line.
+        enum:
+          - LINE_DASH_TYPE_UNSPECIFIED
+          - INVISIBLE
+          - CUSTOM
+          - SOLID
+          - DOTTED
+          - MEDIUM_DASHED
+          - MEDIUM_DASHED_DOTTED
+          - LONG_DASHED
+          - LONG_DASHED_DOTTED
+        type: string
+      width:
+        description: 'The thickness of the line, in px.'
+        format: int32
+        type: integer
+    type: object
+  ManualRule:
+    description: |-
+      Allows you to manually organize the values in a source data column into
+      buckets with names of your choosing. For example, a pivot table that
+      aggregates population by state:
+
+          +-------+-------------------+
+          | State | SUM of Population |
+          +-------+-------------------+
+          | AK    |               0.7 |
+          | AL    |               4.8 |
+          | AR    |               2.9 |
+          ...
+          +-------+-------------------+
+      could be turned into a pivot table that aggregates population by time zone
+      by providing a list of groups (e.g. groupName = 'Central',
+      items = ['AL', 'AR', 'IA', ...]) to a manual group rule.
+      Note that a similar effect could be achieved by adding a time zone column
+      to the source data and adjusting the pivot table.
+
+          +-----------+-------------------+
+          | Time Zone | SUM of Population |
+          +-----------+-------------------+
+          | Central   |             106.3 |
+          | Eastern   |             151.9 |
+          | Mountain  |              17.4 |
+          ...
+          +-----------+-------------------+
+    properties:
+      groups:
+        description: |-
+          The list of group names and the corresponding items from the source data
+          that map to each group name.
+        items:
+          $ref: '#/definitions/ManualRuleGroup'
+        type: array
+    type: object
+  ManualRuleGroup:
+    description: |-
+      A group name and a list of items from the source data that should be placed
+      in the group with this name.
+    properties:
+      groupName:
+        $ref: '#/definitions/ExtendedValue'
+        description: |-
+          The group name, which must be a string. Each group in a given
+          ManualRule must have a unique group name.
+      items:
+        description: |-
+          The items in the source data that should be placed into this group. Each
+          item may be a string, number, or boolean. Items may appear in at most one
+          group within a given ManualRule. Items that do not appear in any
+          group will appear on their own.
+        items:
+          $ref: '#/definitions/ExtendedValue'
+        type: array
+    type: object
+  MatchedDeveloperMetadata:
+    description: |-
+      A developer metadata entry and the data filters specified in the original
+      request that matched it.
+    properties:
+      dataFilters:
+        description: All filters matching the returned developer metadata.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      developerMetadata:
+        $ref: '#/definitions/DeveloperMetadata'
+        description: The developer metadata matching the specified filters.
+    type: object
+  MatchedValueRange:
+    description: A value range that was matched by one or more data filers.
+    properties:
+      dataFilters:
+        description: |-
+          The DataFilters from the request that matched the range of
+          values.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      valueRange:
+        $ref: '#/definitions/ValueRange'
+        description: The values matched by the DataFilter.
     type: object
   MergeCellsRequest:
     description: Merges all cells in the range.
@@ -3275,6 +4222,49 @@ definitions:
   PivotGroup:
     description: A single grouping (either row or column) in a pivot table.
     properties:
+      groupRule:
+        $ref: '#/definitions/PivotGroupRule'
+        description: The group rule to apply to this row/column group.
+      label:
+        description: |-
+          The labels to use for the row/column groups which can be customized. For
+          example, in the following pivot table, the row label is `Region` (which
+          could be renamed to `State`) and the column label is `Product` (which
+          could be renamed `Item`). Pivot tables created before December 2017 do
+          not have header labels. If you'd like to add header labels to an existing
+          pivot table, please delete the existing pivot table and then create a new
+          pivot table with same parameters.
+
+              +--------------+---------+-------+
+              | SUM of Units | Product |       |
+              | Region       | Pen     | Paper |
+              +--------------+---------+-------+
+              | New York     |     345 |    98 |
+              | Oregon       |     234 |   123 |
+              | Tennessee    |     531 |   415 |
+              +--------------+---------+-------+
+              | Grand Total  |    1110 |   636 |
+              +--------------+---------+-------+
+        type: string
+      repeatHeadings:
+        description: |-
+          True if the headings in this pivot group should be repeated.
+          This is only valid for row groupings and will be ignored by columns.
+
+          By default, we minimize repitition of headings by not showing higher
+          level headings where they are the same. For example, even though the
+          third row below corresponds to "Q1 Mar", "Q1" is not shown because
+          it is redundant with previous rows. Setting repeat_headings to true
+          would cause "Q1" to be repeated for "Feb" and "Mar".
+
+              +--------------+
+              | Q1     | Jan |
+              |        | Feb |
+              |        | Mar |
+              +--------+-----+
+              | Q1 Total     |
+              +--------------+
+        type: boolean
       showTotals:
         description: True if the pivot table should include the totals for this grouping.
         type: boolean
@@ -3304,6 +4294,21 @@ definitions:
         items:
           $ref: '#/definitions/PivotGroupValueMetadata'
         type: array
+    type: object
+  PivotGroupRule:
+    description: |-
+      An optional setting on a PivotGroup that defines buckets for the values
+      in the source data column rather than breaking out each individual value.
+      Only one PivotGroup with a group rule may be added for each column in
+      the source data, though on any given column you may add both a
+      PivotGroup that has a rule and a PivotGroup that does not.
+    properties:
+      histogramRule:
+        $ref: '#/definitions/HistogramRule'
+        description: A HistogramRule.
+      manualRule:
+        $ref: '#/definitions/ManualRule'
+        description: A ManualRule.
     type: object
   PivotGroupSortValueBucket:
     description: Information about which values in a pivot group should be used for sorting.
@@ -3388,15 +4393,27 @@ definitions:
   PivotValue:
     description: The definition of how a value in a pivot table should be calculated.
     properties:
+      calculatedDisplayType:
+        description: |-
+          If specified, indicates that pivot values should be displayed as
+          the result of a calculation with another pivot value. For example, if
+          calculated_display_type is specified as PERCENT_OF_GRAND_TOTAL, all the
+          pivot values will be displayed as the percentage of the grand total. In
+          the Sheets UI, this is referred to as "Show As" in the value section of a
+          pivot table.
+        enum:
+          - PIVOT_VALUE_CALCULATED_DISPLAY_TYPE_UNSPECIFIED
+          - PERCENT_OF_ROW_TOTAL
+          - PERCENT_OF_COLUMN_TOTAL
+          - PERCENT_OF_GRAND_TOTAL
+        type: string
       formula:
         description: |-
           A custom formula to calculate the value.  The formula must start
           with an `=` character.
         type: string
       name:
-        description: |-
-          A name to use for the value. This is only used if formula was set.
-          Otherwise, the column name is used.
+        description: A name to use for the value.
         type: string
       sourceColumnOffset:
         description: |-
@@ -3575,6 +4592,9 @@ definitions:
       copyPaste:
         $ref: '#/definitions/CopyPasteRequest'
         description: Copies data from one area and pastes it to another.
+      createDeveloperMetadata:
+        $ref: '#/definitions/CreateDeveloperMetadataRequest'
+        description: Creates new developer metadata
       cutPaste:
         $ref: '#/definitions/CutPasteRequest'
         description: Cuts data from one area and pastes it to another.
@@ -3584,6 +4604,9 @@ definitions:
       deleteConditionalFormatRule:
         $ref: '#/definitions/DeleteConditionalFormatRuleRequest'
         description: Deletes an existing conditional format rule.
+      deleteDeveloperMetadata:
+        $ref: '#/definitions/DeleteDeveloperMetadataRequest'
+        description: Deletes developer metadata
       deleteDimension:
         $ref: '#/definitions/DeleteDimensionRequest'
         description: Deletes rows or columns in a sheet.
@@ -3665,6 +4688,9 @@ definitions:
       updateConditionalFormatRule:
         $ref: '#/definitions/UpdateConditionalFormatRuleRequest'
         description: Updates an existing conditional format rule.
+      updateDeveloperMetadata:
+        $ref: '#/definitions/UpdateDeveloperMetadataRequest'
+        description: Updates an existing developer metadata entry
       updateDimensionProperties:
         $ref: '#/definitions/UpdateDimensionPropertiesRequest'
         description: Updates dimensions' properties.
@@ -3708,9 +4734,15 @@ definitions:
       addSheet:
         $ref: '#/definitions/AddSheetResponse'
         description: A reply from adding a sheet.
+      createDeveloperMetadata:
+        $ref: '#/definitions/CreateDeveloperMetadataResponse'
+        description: A reply from creating a developer metadata entry.
       deleteConditionalFormatRule:
         $ref: '#/definitions/DeleteConditionalFormatRuleResponse'
         description: A reply from deleting a conditional format rule.
+      deleteDeveloperMetadata:
+        $ref: '#/definitions/DeleteDeveloperMetadataResponse'
+        description: A reply from deleting a developer metadata entry.
       duplicateFilterView:
         $ref: '#/definitions/DuplicateFilterViewResponse'
         description: A reply from duplicating a filter view.
@@ -3723,6 +4755,9 @@ definitions:
       updateConditionalFormatRule:
         $ref: '#/definitions/UpdateConditionalFormatRuleResponse'
         description: A reply from updating a conditional format rule.
+      updateDeveloperMetadata:
+        $ref: '#/definitions/UpdateDeveloperMetadataResponse'
+        description: A reply from updating a developer metadata entry.
       updateEmbeddedObjectPosition:
         $ref: '#/definitions/UpdateEmbeddedObjectPositionResponse'
         description: A reply from updating an embedded object's position.
@@ -3734,6 +4769,29 @@ definitions:
         description: 'The values in the row, one per column.'
         items:
           $ref: '#/definitions/CellData'
+        type: array
+    type: object
+  SearchDeveloperMetadataRequest:
+    description: |-
+      A request to retrieve all developer metadata matching the set of specified
+      criteria.
+    properties:
+      dataFilters:
+        description: |-
+          The data filters describing the criteria used to determine which
+          DeveloperMetadata entries to return.  DeveloperMetadata matching any of the
+          specified filters will be included in the response.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+    type: object
+  SearchDeveloperMetadataResponse:
+    description: A reply to a developer metadata search request.
+    properties:
+      matchedDeveloperMetadata:
+        description: The metadata matching the criteria of the search request.
+        items:
+          $ref: '#/definitions/MatchedDeveloperMetadata'
         type: array
     type: object
   SetBasicFilterRequest:
@@ -3790,6 +4848,11 @@ definitions:
           and `startColumn 3` (zero-based column D).
         items:
           $ref: '#/definitions/GridData'
+        type: array
+      developerMetadata:
+        description: The developer metadata associated with a sheet.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
         type: array
       filterViews:
         description: The filter views in this sheet.
@@ -3916,6 +4979,11 @@ definitions:
   Spreadsheet:
     description: Resource that represents a spreadsheet.
     properties:
+      developerMetadata:
+        description: The developer metadata associated with a spreadsheet.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
+        type: array
       namedRanges:
         description: The named ranges defined in a spreadsheet.
         items:
@@ -4028,6 +5096,18 @@ definitions:
         format: int32
         type: integer
     type: object
+  TextPosition:
+    description: Position settings for text.
+    properties:
+      horizontalAlignment:
+        description: Horizontal alignment setting for the piece of text.
+        enum:
+          - HORIZONTAL_ALIGN_UNSPECIFIED
+          - LEFT
+          - CENTER
+          - RIGHT
+        type: string
+    type: object
   TextRotation:
     description: The rotation applied to text in a cell.
     properties:
@@ -4076,6 +5156,7 @@ definitions:
           - PERIOD
           - SPACE
           - CUSTOM
+          - AUTODETECT
         type: string
       source:
         $ref: '#/definitions/GridRange'
@@ -4232,6 +5313,40 @@ definitions:
           The old (deleted) rule. Not set if a rule was moved
           (because it is the same as new_rule).
     type: object
+  UpdateDeveloperMetadataRequest:
+    description: |-
+      A request to update properties of developer metadata.
+      Updates the properties of the developer metadata selected by the filters to
+      the values provided in the DeveloperMetadata resource.  Callers must
+      specify the properties they wish to update in the fields parameter, as well
+      as specify at least one DataFilter matching the metadata they wish to
+      update.
+    properties:
+      dataFilters:
+        description: The filters matching the developer metadata entries to update.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      developerMetadata:
+        $ref: '#/definitions/DeveloperMetadata'
+        description: The value that all metadata matched by the data filters will be updated to.
+      fields:
+        description: |-
+          The fields that should be updated.  At least one field must be specified.
+          The root `developerMetadata` is implied and should not be specified.
+          A single `"*"` can be used as short-hand for listing every field.
+        format: google-fieldmask
+        type: string
+    type: object
+  UpdateDeveloperMetadataResponse:
+    description: The response from updating developer metadata.
+    properties:
+      developerMetadata:
+        description: The updated developer metadata.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
+        type: array
+    type: object
   UpdateDimensionPropertiesRequest:
     description: Updates properties of dimensions within the specified range.
     properties:
@@ -4361,6 +5476,36 @@ definitions:
         $ref: '#/definitions/SpreadsheetProperties'
         description: The properties to update.
     type: object
+  UpdateValuesByDataFilterResponse:
+    description: |-
+      The response when updating a range of values by a data filter in a
+      spreadsheet.
+    properties:
+      dataFilter:
+        $ref: '#/definitions/DataFilter'
+        description: The data filter that selected the range that was updated.
+      updatedCells:
+        description: The number of cells updated.
+        format: int32
+        type: integer
+      updatedColumns:
+        description: The number of columns where at least one cell in the column was updated.
+        format: int32
+        type: integer
+      updatedData:
+        $ref: '#/definitions/ValueRange'
+        description: |-
+          The values of the cells in the range matched by the dataFilter after all
+          updates were applied. This is only included if the request's
+          `includeValuesInResponse` field was `true`.
+      updatedRange:
+        description: The range (in A1 notation) that updates were applied to.
+        type: string
+      updatedRows:
+        description: The number of rows where at least one cell in the row was updated.
+        format: int32
+        type: integer
+    type: object
   UpdateValuesResponse:
     description: The response when updating a range of values in a spreadsheet.
     properties:
@@ -4436,4 +5581,106 @@ definitions:
           items: {}
           type: array
         type: array
+    type: object
+  WaterfallChartColumnStyle:
+    description: Styles for a waterfall chart column.
+    properties:
+      color:
+        $ref: '#/definitions/Color'
+        description: The color of the column.
+      label:
+        description: The label of the column's legend.
+        type: string
+    type: object
+  WaterfallChartCustomSubtotal:
+    description: A custom subtotal column for a waterfall chart series.
+    properties:
+      dataIsSubtotal:
+        description: |-
+          True if the data point at subtotal_index is the subtotal. If false,
+          the subtotal will be computed and appear after the data point.
+        type: boolean
+      label:
+        description: A label for the subtotal column.
+        type: string
+      subtotalIndex:
+        description: |-
+          The 0-based index of a data point within the series. If
+          data_is_subtotal is true, the data point at this index is the
+          subtotal. Otherwise, the subtotal appears after the data point with
+          this index. A series can have multiple subtotals at arbitrary indices,
+          but subtotals do not affect the indices of the data points. For
+          example, if a series has 3 data points, their indices will always be 0,
+          1, and 2, regardless of how many subtotals exist on the series or what
+          data points they are associated with.
+        format: int32
+        type: integer
+    type: object
+  WaterfallChartDomain:
+    description: The domain of a waterfall chart.
+    properties:
+      data:
+        $ref: '#/definitions/ChartData'
+        description: The data of the WaterfallChartDomain.
+      reversed:
+        description: True to reverse the order of the domain values (horizontal axis).
+        type: boolean
+    type: object
+  WaterfallChartSeries:
+    description: A single series of data for a waterfall chart.
+    properties:
+      customSubtotals:
+        description: |-
+          Custom subtotal columns appearing in this series. The order in which
+          subtotals are defined is not significant. Only one subtotal may be
+          defined for each data point.
+        items:
+          $ref: '#/definitions/WaterfallChartCustomSubtotal'
+        type: array
+      data:
+        $ref: '#/definitions/ChartData'
+        description: The data being visualized in this series.
+      hideTrailingSubtotal:
+        description: |-
+          True to hide the subtotal column from the end of the series. By default,
+          a subtotal column will appear at the end of each series. Setting this
+          field to true will hide that subtotal column for this series.
+        type: boolean
+      negativeColumnsStyle:
+        $ref: '#/definitions/WaterfallChartColumnStyle'
+        description: Styles for all columns in this series with negative values.
+      positiveColumnsStyle:
+        $ref: '#/definitions/WaterfallChartColumnStyle'
+        description: Styles for all columns in this series with positive values.
+      subtotalColumnsStyle:
+        $ref: '#/definitions/WaterfallChartColumnStyle'
+        description: Styles for all subtotal columns in this series.
+    type: object
+  WaterfallChartSpec:
+    description: A waterfall chart.
+    properties:
+      connectorLineStyle:
+        $ref: '#/definitions/LineStyle'
+        description: The line style for the connector lines.
+      domain:
+        $ref: '#/definitions/WaterfallChartDomain'
+        description: The domain data (horizontal axis) for the waterfall chart.
+      firstValueIsTotal:
+        description: True to interpret the first value as a total.
+        type: boolean
+      hideConnectorLines:
+        description: True to hide connector lines between columns.
+        type: boolean
+      series:
+        description: The data this waterfall chart is visualizing.
+        items:
+          $ref: '#/definitions/WaterfallChartSeries'
+        type: array
+      stackedType:
+        description: The stacked type.
+        enum:
+          - WATERFALL_STACKED_TYPE_UNSPECIFIED
+          - STACKED
+          - SEQUENTIAL
+        type: string
     type: object

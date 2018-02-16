@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/deploymentmanager/v2/rest'
       version: v1
@@ -177,19 +177,19 @@ paths:
       description: Creates a deployment and all of the resources described by the deployment manifest.
       operationId: deploymentmanager.deployments.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Deployment'
+        - description: 'If set to true, creates a deployment and creates "shell" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. After previewing a deployment, you can deploy your resources by making a request with the update() method or you can use the cancelPreview() method to cancel the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.'
+          in: query
+          name: preview
+          type: boolean
         - description: The project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: 'If set to true, creates a deployment and creates "shell" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. After previewing a deployment, you can deploy your resources by making a request with the update() method or you can use the cancelPreview() method to cancel the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.'
-          in: query
-          name: preview
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Deployment'
       responses:
         '200':
           description: Successful response
@@ -211,16 +211,6 @@ paths:
       description: Deletes a deployment and all of the resources in the deployment.
       operationId: deploymentmanager.deployments.delete
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the deployment for this request.
-          in: path
-          name: deployment
-          required: true
-          type: string
         - default: DELETE
           description: Sets the policy to use for deleting resources.
           enum:
@@ -228,6 +218,16 @@ paths:
             - DELETE
           in: query
           name: deletePolicy
+          type: string
+        - description: The name of the deployment for this request.
+          in: path
+          name: deployment
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -249,14 +249,14 @@ paths:
       description: Gets information about a specific deployment.
       operationId: deploymentmanager.deployments.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the deployment for this request.
           in: path
           name: deployment
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -295,16 +295,10 @@ paths:
       description: Updates a deployment and all of the resources described by the deployment manifest. This method supports patch semantics.
       operationId: deploymentmanager.deployments.patch
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the deployment for this request.
-          in: path
-          name: deployment
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Deployment'
         - default: CREATE_OR_ACQUIRE
           description: Sets the policy to use for creating new resources.
           enum:
@@ -321,15 +315,21 @@ paths:
           in: query
           name: deletePolicy
           type: string
+        - description: The name of the deployment for this request.
+          in: path
+          name: deployment
+          required: true
+          type: string
         - default: false
           description: 'If set to true, updates the deployment and creates and updates the "shell" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a target.config with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the update() or you can cancelPreview() to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.'
           in: query
           name: preview
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Deployment'
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -350,16 +350,10 @@ paths:
       description: Updates a deployment and all of the resources described by the deployment manifest.
       operationId: deploymentmanager.deployments.update
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the deployment for this request.
-          in: path
-          name: deployment
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Deployment'
         - default: CREATE_OR_ACQUIRE
           description: Sets the policy to use for creating new resources.
           enum:
@@ -376,15 +370,21 @@ paths:
           in: query
           name: deletePolicy
           type: string
+        - description: The name of the deployment for this request.
+          in: path
+          name: deployment
+          required: true
+          type: string
         - default: false
           description: 'If set to true, updates the deployment and creates and updates the "shell" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a target.config with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the update() or you can cancelPreview() to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.'
           in: query
           name: preview
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Deployment'
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -414,20 +414,20 @@ paths:
       description: Cancels and removes the preview currently associated with the deployment.
       operationId: deploymentmanager.deployments.cancelPreview
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeploymentsCancelPreviewRequest'
         - description: The name of the deployment for this request.
           in: path
           name: deployment
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DeploymentsCancelPreviewRequest'
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -528,11 +528,6 @@ paths:
       description: Gets information about a specific manifest.
       operationId: deploymentmanager.manifests.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the deployment for this request.
           in: path
           name: deployment
@@ -541,6 +536,11 @@ paths:
         - description: The name of the manifest for this request.
           in: path
           name: manifest
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -659,14 +659,14 @@ paths:
       description: Gets information about a single resource.
       operationId: deploymentmanager.resources.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the deployment for this request.
           in: path
           name: deployment
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
         - description: The name of the resource for this request.
@@ -719,20 +719,20 @@ paths:
       description: 'Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.'
       operationId: deploymentmanager.deployments.stop
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeploymentsStopRequest'
         - description: The name of the deployment for this request.
           in: path
           name: deployment
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DeploymentsStopRequest'
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -801,6 +801,10 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: deploymentmanager.deployments.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
         - description: Project ID for this request.
           in: path
           name: project
@@ -811,10 +815,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Policy'
       responses:
         '200':
           description: Successful response
@@ -844,6 +844,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: deploymentmanager.deployments.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -854,10 +858,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -953,14 +953,14 @@ paths:
       description: Gets information about a specific operation.
       operationId: deploymentmanager.operations.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the operation for this request.
           in: path
           name: operation
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -1074,7 +1074,7 @@ definitions:
     description: |-
       Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.
 
-      If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditConfig are exempted.
+      If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.
 
       Example Policy with multiple AuditConfigs:
 
@@ -1125,7 +1125,7 @@ definitions:
     properties:
       condition:
         $ref: '#/definitions/Expr'
-        description: 'The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently. This field is GOOGLE_INTERNAL.'
+        description: 'The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently. This field is only visible as GOOGLE_INTERNAL or CONDITION_TRUSTED_TESTER.'
       members:
         description: |-
           Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:
@@ -1197,11 +1197,11 @@ definitions:
         format: byte
         type: string
       id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        description: Output only. Unique identifier for the resource; defined by the server.
         format: uint64
         type: string
       insertTime:
-        description: '[Output Only] Timestamp when the deployment was created, in RFC3339 text format .'
+        description: 'Output only. Timestamp when the deployment was created, in RFC3339 text format .'
         type: string
       labels:
         description: 'Map of labels; provided by the client when the resource is created or updated. Specifically: Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?'
@@ -1209,23 +1209,23 @@ definitions:
           $ref: '#/definitions/DeploymentLabelEntry'
         type: array
       manifest:
-        description: '[Output Only] URL of the manifest representing the last manifest that was successfully deployed.'
+        description: Output only. URL of the manifest representing the last manifest that was successfully deployed.
         type: string
       name:
         description: 'Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         type: string
       operation:
         $ref: '#/definitions/Operation'
-        description: '[Output Only] The Operation that most recently ran, or is currently running, on this deployment.'
+        description: 'Output only. The Operation that most recently ran, or is currently running, on this deployment.'
       selfLink:
-        description: '[Output Only] Self link for the deployment.'
+        description: Output only. Self link for the deployment.
         type: string
       target:
         $ref: '#/definitions/TargetConfiguration'
         description: '[Input Only] The parameters that define your deployment, including the deployment configuration and relevant templates.'
       update:
         $ref: '#/definitions/DeploymentUpdate'
-        description: '[Output Only] If Deployment Manager is currently updating or previewing an update to this deployment, the updated configuration appears here.'
+        description: 'Output only. If Deployment Manager is currently updating or previewing an update to this deployment, the updated configuration appears here.'
     type: object
   DeploymentLabelEntry:
     properties:
@@ -1238,15 +1238,15 @@ definitions:
     description: ''
     properties:
       description:
-        description: '[Output Only] An optional user-provided description of the deployment after the current update has been applied.'
+        description: Output only. An optional user-provided description of the deployment after the current update has been applied.
         type: string
       labels:
-        description: '[Output Only] Map of labels; provided by the client when the resource is created or updated. Specifically: Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?'
+        description: 'Output only. Map of labels; provided by the client when the resource is created or updated. Specifically: Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?'
         items:
           $ref: '#/definitions/DeploymentUpdateLabelEntry'
         type: array
       manifest:
-        description: '[Output Only] URL of the manifest representing the update configuration of this deployment.'
+        description: Output only. URL of the manifest representing the update configuration of this deployment.
         type: string
     type: object
   DeploymentUpdateLabelEntry:
@@ -1271,12 +1271,12 @@ definitions:
     description: A response containing a partial list of deployments and a page token used to build the next request if the request has been truncated.
     properties:
       deployments:
-        description: '[Output Only] The deployments contained in this response.'
+        description: Output only. The deployments contained in this response.
         items:
           $ref: '#/definitions/Deployment'
         type: array
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: Output only. A token used to continue a truncated list request.
         type: string
     type: object
   DeploymentsStopRequest:
@@ -1378,46 +1378,49 @@ definitions:
     properties:
       config:
         $ref: '#/definitions/ConfigFile'
-        description: '[Output Only] The YAML configuration for this manifest.'
+        description: Output only. The YAML configuration for this manifest.
       expandedConfig:
-        description: '[Output Only] The fully-expanded configuration file, including any templates and references.'
+        description: 'Output only. The fully-expanded configuration file, including any templates and references.'
         type: string
       id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        description: Output only. Unique identifier for the resource; defined by the server.
         format: uint64
         type: string
       imports:
-        description: '[Output Only] The imported files for this manifest.'
+        description: Output only. The imported files for this manifest.
         items:
           $ref: '#/definitions/ImportFile'
         type: array
       insertTime:
-        description: '[Output Only] Timestamp when the manifest was created, in RFC3339 text format.'
+        description: 'Output only. Timestamp when the manifest was created, in RFC3339 text format.'
         type: string
       layout:
-        description: '[Output Only] The YAML layout for this manifest.'
+        description: Output only. The YAML layout for this manifest.
         type: string
       name:
-        description: '[Output Only] The name of the manifest.'
+        description: |-
+          Output only.
+
+          The name of the manifest.
         type: string
       selfLink:
-        description: '[Output Only] Self link for the manifest.'
+        description: Output only. Self link for the manifest.
         type: string
     type: object
   ManifestsListResponse:
     description: A response containing a partial list of manifests and a page token used to build the next request if the request has been truncated.
     properties:
       manifests:
-        description: '[Output Only] Manifests contained in this list response.'
+        description: Output only. Manifests contained in this list response.
         items:
           $ref: '#/definitions/Manifest'
         type: array
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: Output only. A token used to continue a truncated list request.
         type: string
     type: object
   Operation:
-    description: 'An Operation resource, used to manage asynchronous API requests.'
+    description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
     properties:
       clientOperationId:
         description: '[Output Only] Reserved for future use.'
@@ -1479,7 +1482,7 @@ definitions:
         format: int32
         type: integer
       region:
-        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations.'
+        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -1530,17 +1533,17 @@ definitions:
           type: object
         type: array
       zone:
-        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations.'
+        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
     type: object
   OperationsListResponse:
     description: A response containing a partial list of operations and a page token used to build the next request if the request has been truncated.
     properties:
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: Output only. A token used to continue a truncated list request.
         type: string
       operations:
-        description: '[Output Only] Operations contained in this list response.'
+        description: Output only. Operations contained in this list response.
         items:
           $ref: '#/definitions/Operation'
         type: array
@@ -1557,7 +1560,7 @@ definitions:
 
       { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
 
-      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
+      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       auditConfigs:
         description: Specifies cloud audit logging configuration for this policy.
@@ -1585,7 +1588,7 @@ definitions:
           $ref: '#/definitions/Rule'
         type: array
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object
@@ -1596,38 +1599,38 @@ definitions:
         $ref: '#/definitions/ResourceAccessControl'
         description: The Access Control Policy set on this resource.
       finalProperties:
-        description: '[Output Only] The evaluated properties of the resource with references expanded. Returned as serialized YAML.'
+        description: Output only. The evaluated properties of the resource with references expanded. Returned as serialized YAML.
         type: string
       id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        description: Output only. Unique identifier for the resource; defined by the server.
         format: uint64
         type: string
       insertTime:
-        description: '[Output Only] Timestamp when the resource was created or acquired, in RFC3339 text format .'
+        description: 'Output only. Timestamp when the resource was created or acquired, in RFC3339 text format .'
         type: string
       manifest:
-        description: '[Output Only] URL of the manifest representing the current configuration of this resource.'
+        description: Output only. URL of the manifest representing the current configuration of this resource.
         type: string
       name:
-        description: '[Output Only] The name of the resource as it appears in the YAML config.'
+        description: Output only. The name of the resource as it appears in the YAML config.
         type: string
       properties:
-        description: '[Output Only] The current properties of the resource before any references have been filled in. Returned as serialized YAML.'
+        description: Output only. The current properties of the resource before any references have been filled in. Returned as serialized YAML.
         type: string
       type:
-        description: '[Output Only] The type of the resource, for example compute.v1.instance, or cloudfunctions.v1beta1.function.'
+        description: 'Output only. The type of the resource, for example compute.v1.instance, or cloudfunctions.v1beta1.function.'
         type: string
       update:
         $ref: '#/definitions/ResourceUpdate'
-        description: '[Output Only] If Deployment Manager is currently updating or previewing an update to this resource, the updated configuration appears here.'
+        description: 'Output only. If Deployment Manager is currently updating or previewing an update to this resource, the updated configuration appears here.'
       updateTime:
-        description: '[Output Only] Timestamp when the resource was updated, in RFC3339 text format .'
+        description: 'Output only. Timestamp when the resource was updated, in RFC3339 text format .'
         type: string
       url:
-        description: '[Output Only] The URL of the actual resource.'
+        description: Output only. The URL of the actual resource.
         type: string
       warnings:
-        description: '[Output Only] If warning messages are generated during processing of this resource, this field will be populated.'
+        description: 'Output only. If warning messages are generated during processing of this resource, this field will be populated.'
         items:
           properties:
             code:
@@ -1667,7 +1670,7 @@ definitions:
         $ref: '#/definitions/ResourceAccessControl'
         description: The Access Control Policy to set on this resource after updating the resource itself.
       error:
-        description: '[Output Only] If errors are generated during update of the resource, this field will be populated.'
+        description: 'Output only. If errors are generated during update of the resource, this field will be populated.'
         properties:
           errors:
             description: '[Output Only] The array of errors encountered while processing this operation.'
@@ -1686,22 +1689,22 @@ definitions:
             type: array
         type: object
       finalProperties:
-        description: '[Output Only] The expanded properties of the resource with reference values expanded. Returned as serialized YAML.'
+        description: Output only. The expanded properties of the resource with reference values expanded. Returned as serialized YAML.
         type: string
       intent:
-        description: '[Output Only] The intent of the resource: PREVIEW, UPDATE, or CANCEL.'
+        description: 'Output only. The intent of the resource: PREVIEW, UPDATE, or CANCEL.'
         type: string
       manifest:
-        description: '[Output Only] URL of the manifest representing the update configuration of this resource.'
+        description: Output only. URL of the manifest representing the update configuration of this resource.
         type: string
       properties:
-        description: '[Output Only] The set of updated properties for this resource, before references are expanded. Returned as serialized YAML.'
+        description: 'Output only. The set of updated properties for this resource, before references are expanded. Returned as serialized YAML.'
         type: string
       state:
-        description: '[Output Only] The state of the resource.'
+        description: Output only. The state of the resource.
         type: string
       warnings:
-        description: '[Output Only] If warning messages are generated during processing of this resource, this field will be populated.'
+        description: 'Output only. If warning messages are generated during processing of this resource, this field will be populated.'
         items:
           properties:
             code:
@@ -1746,7 +1749,7 @@ definitions:
         description: Required
         type: string
       conditions:
-        description: Additional restrictions that must be met
+        description: Additional restrictions that must be met. All conditions must pass for the rule to match.
         items:
           $ref: '#/definitions/Condition'
         type: array
@@ -1806,20 +1809,20 @@ definitions:
     description: A resource type supported by Deployment Manager.
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        description: Output only. Unique identifier for the resource; defined by the server.
         format: uint64
         type: string
       insertTime:
-        description: '[Output Only] Timestamp when the type was created, in RFC3339 text format.'
+        description: 'Output only. Timestamp when the type was created, in RFC3339 text format.'
         type: string
       name:
         description: Name of the type.
         type: string
       operation:
         $ref: '#/definitions/Operation'
-        description: '[Output Only] The Operation that most recently ran, or is currently running, on this type.'
+        description: 'Output only. The Operation that most recently ran, or is currently running, on this type.'
       selfLink:
-        description: '[Output Only] Self link for the type.'
+        description: Output only. Self link for the type.
         type: string
     type: object
   TypesListResponse:
@@ -1829,7 +1832,7 @@ definitions:
         description: A token used to continue a truncated list request.
         type: string
       types:
-        description: '[Output Only] A list of resource types supported by Deployment Manager.'
+        description: Output only. A list of resource types supported by Deployment Manager.
         items:
           $ref: '#/definitions/Type'
         type: array

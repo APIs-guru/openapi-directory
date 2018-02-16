@@ -5,13 +5,14 @@ info:
   title: Amazon Polly
   description: '<p>Amazon Polly is a web service that makes it easy to synthesize speech from text.</p> <p>The Amazon Polly service provides API operations for synthesizing high-quality speech from plain text and Speech Synthesis Markup Language (SSML), along with managing pronunciations lexicons that enable you to get the best results for your application domain.</p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: polly.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -98,6 +100,68 @@ security:
   - hmac: []
 paths:
   '/v1/lexicons/{LexiconName}':
+    delete:
+      operationId: DeleteLexicon
+      description: '<p>Deletes the specified pronunciation lexicon stored in an AWS Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the <code>GetLexicon</code> or <code>ListLexicon</code> APIs.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html">Managing Lexicons</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLexiconOutput'
+        '480':
+          description: LexiconNotFoundException
+          schema:
+            $ref: '#/definitions/LexiconNotFoundException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLexiconInput'
+        - name: LexiconName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetLexicon
+      description: 'Returns the content of the specified pronunciation lexicon stored in an AWS Region. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html">Managing Lexicons</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLexiconOutput'
+        '480':
+          description: LexiconNotFoundException
+          schema:
+            $ref: '#/definitions/LexiconNotFoundException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLexiconInput'
+        - name: LexiconName
+          in: path
+          type: string
+          required: true
     put:
       operationId: PutLexicon
       description: '<p>Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html">Managing Lexicons</a>.</p>'
@@ -144,16 +208,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /v1/voices:
     get:
       operationId: DescribeVoices
@@ -393,6 +447,7 @@ definitions:
       - fr-FR
       - is-IS
       - it-IT
+      - ko-KR
       - ja-JP
       - nb-NO
       - nl-NL
@@ -687,6 +742,7 @@ definitions:
       - Justin
       - Kendra
       - Kimberly
+      - Matthew
       - Salli
       - Conchita
       - Enrique
@@ -717,6 +773,9 @@ definitions:
       - Astrid
       - Filiz
       - Vicki
+      - Takumi
+      - Seoyeon
+      - Aditi
   VoiceList:
     type: array
     items:

@@ -7,6 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
+    x-twitter: youtube
   description: 'Supports core YouTube features, such as uploading videos, creating and managing playlists, searching for content, and much more.'
   license:
     name: Creative Commons Attribution 3.0
@@ -16,12 +17,14 @@ info:
   version: v3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - media
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/880847083980414977/v_j8c_Qa_400x400.jpg'
+    url: 'https://twitter.com/youtube/profile_image?size=original'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
       version: v1
@@ -130,14 +133,6 @@ paths:
       description: 'Returns a list of channel activity events that match the request criteria. For example, you can retrieve events associated with a particular channel, events associated with the user''s subscriptions and Google+ friends, or the YouTube home page feed, which is customized for each user.'
       operationId: youtube.activities.list
       parameters:
-        - description: |-
-            The part parameter specifies a comma-separated list of one or more activity resource properties that the API response will include.
-
-            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in an activity resource, the snippet property contains other properties that identify the type of activity, a display title for the activity, and so forth. If you set part=snippet, the API response will also contain all of those nested properties.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The channelId parameter specifies a unique YouTube channel ID. The API will then return a list of that channel's activities.
           in: query
           name: channelId
@@ -160,6 +155,14 @@ paths:
         - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more activity resource properties that the API response will include.
+
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in an activity resource, the snippet property contains other properties that identify the type of activity, a display title for the activity, and so forth. If you set part=snippet, the API response will also contain all of those nested properties.
+          in: query
+          name: part
+          required: true
           type: string
         - description: 'The publishedAfter parameter specifies the earliest date and time that an activity could have occurred for that activity to be included in the API response. If the parameter value specifies a day, but not a time, then any activities that occurred that day will be included in the result set. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
           in: query
@@ -208,15 +211,15 @@ paths:
         Note: Even though an activity resource can contain information about actions like a user rating a video or marking a video as a favorite, you need to use other API methods to generate those activity resources. For example, you would use the API's videos.rate() method to rate a video and the playlistItems.insert() method to mark a video as a favorite.
       operationId: youtube.activities.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Activity'
         - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Activity'
       responses:
         '200':
           description: Successful response
@@ -272,16 +275,6 @@ paths:
       description: Returns a list of caption tracks that are associated with a specified video. Note that the API response does not contain the actual captions and that the captions.download method provides the ability to retrieve a caption track.
       operationId: youtube.captions.list
       parameters:
-        - description: The part parameter specifies a comma-separated list of one or more caption resource parts that the API response will include. The part names that you can include in the parameter value are id and snippet.
-          in: query
-          name: part
-          required: true
-          type: string
-        - description: The videoId parameter specifies the YouTube video ID of the video for which the API should return caption tracks.
-          in: query
-          name: videoId
-          required: true
-          type: string
         - description: The id parameter specifies a comma-separated list of IDs that identify the caption resources that should be retrieved. Each ID must identify a caption track associated with the specified video.
           in: query
           name: id
@@ -296,6 +289,16 @@ paths:
             The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
+          type: string
+        - description: The part parameter specifies a comma-separated list of one or more caption resource parts that the API response will include. The part names that you can include in the parameter value are id and snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - description: The videoId parameter specifies the YouTube video ID of the video for which the API should return caption tracks.
+          in: query
+          name: videoId
+          required: true
           type: string
       responses:
         '200':
@@ -328,11 +331,10 @@ paths:
       description: Uploads a caption track.
       operationId: youtube.captions.insert
       parameters:
-        - description: The part parameter specifies the caption resource parts that the API response will include. Set the parameter value to snippet.
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Caption'
         - description: ID of the Google+ Page for the channel that the request is be on behalf of
           in: query
           name: onBehalfOf
@@ -344,6 +346,11 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
+        - description: The part parameter specifies the caption resource parts that the API response will include. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
+          type: string
         - description: |-
             The sync parameter indicates whether YouTube should automatically synchronize the caption file with the audio track of the video. If you set the value to true, YouTube will disregard any time codes that are in the uploaded caption file and generate new time codes for the captions.
 
@@ -351,10 +358,6 @@ paths:
           in: query
           name: sync
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Caption'
       responses:
         '200':
           description: Successful response
@@ -378,11 +381,10 @@ paths:
       description: 'Updates a caption track. When updating a caption track, you can change the track''s draft status, upload a new caption file for the track, or both.'
       operationId: youtube.captions.update
       parameters:
-        - description: 'The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the property value to snippet if you are updating the track''s draft status. Otherwise, set the property value to id.'
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Caption'
         - description: ID of the Google+ Page for the channel that the request is be on behalf of
           in: query
           name: onBehalfOf
@@ -394,6 +396,11 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
+        - description: 'The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the property value to snippet if you are updating the track''s draft status. Otherwise, set the property value to id.'
+          in: query
+          name: part
+          required: true
+          type: string
         - description: |-
             Note: The API server only processes the parameter value if the request contains an updated caption file.
 
@@ -401,10 +408,6 @@ paths:
           in: query
           name: sync
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Caption'
       responses:
         '200':
           description: Successful response
@@ -500,6 +503,14 @@ paths:
         - Call the channels.update method to update the channel's branding settings. Set the brandingSettings.image.bannerExternalUrl property's value to the URL obtained in step 2.
       operationId: youtube.channelBanners.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ChannelBannerResource'
+        - description: 'The channelId parameter identifies the YouTube channel to which the banner is uploaded. The channelId parameter was introduced as a required parameter in May 2017. As this was a backward-incompatible change, channelBanners.insert requests that do not specify this parameter will not return an error until six months have passed from the time that the parameter was introduced. Please see the API Terms of Service for the official policy regarding backward incompatible changes and the API revision history for the exact date that the parameter was introduced.'
+          in: query
+          name: channelId
+          type: string
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -507,10 +518,6 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ChannelBannerResource'
       responses:
         '200':
           description: Successful response
@@ -570,14 +577,6 @@ paths:
       description: Returns channelSection resources that match the API request criteria.
       operationId: youtube.channelSections.list
       parameters:
-        - description: |-
-            The part parameter specifies a comma-separated list of one or more channelSection resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.
-
-            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channelSection resource, the snippet property contains other properties, such as a display title for the channelSection. If you set part=snippet, the API response will also contain all of those nested properties.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The channelId parameter specifies a YouTube channel ID. The API will only return that channel's channelSections.
           in: query
           name: channelId
@@ -600,6 +599,14 @@ paths:
             The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
+          type: string
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more channelSection resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.
+
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channelSection resource, the snippet property contains other properties, such as a display title for the channelSection. If you set part=snippet, the API response will also contain all of those nested properties.
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -637,14 +644,10 @@ paths:
       description: Adds a channelSection for the authenticated user's channel.
       operationId: youtube.channelSections.insert
       parameters:
-        - description: |-
-            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-
-            The part names that you can include in the parameter value are snippet and contentDetails.
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ChannelSection'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -661,10 +664,14 @@ paths:
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ChannelSection'
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+
+            The part names that you can include in the parameter value are snippet and contentDetails.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -689,6 +696,17 @@ paths:
       description: Update a channelSection.
       operationId: youtube.channelSections.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ChannelSection'
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
+
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
         - description: |-
             The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
@@ -697,17 +715,6 @@ paths:
           name: part
           required: true
           type: string
-        - description: |-
-            Note: This parameter is intended exclusively for YouTube content partners.
-
-            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
-          in: query
-          name: onBehalfOfContentOwner
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ChannelSection'
       responses:
         '200':
           description: Successful response
@@ -733,14 +740,6 @@ paths:
       description: Returns a collection of zero or more channel resources that match the request criteria.
       operationId: youtube.channels.list
       parameters:
-        - description: |-
-            The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include.
-
-            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set part=contentDetails, the API response will also contain all of those nested properties.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: 'The categoryId parameter specifies a YouTube guide category, thereby requesting YouTube channels associated with that category.'
           in: query
           name: categoryId
@@ -790,6 +789,14 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include.
+
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set part=contentDetails, the API response will also contain all of those nested properties.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -830,6 +837,14 @@ paths:
       description: Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings and invideoPromotion objects and their child properties.
       operationId: youtube.channels.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Channel'
+        - description: 'The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.'
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
         - description: |-
             The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
@@ -840,14 +855,6 @@ paths:
           name: part
           required: true
           type: string
-        - description: 'The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.'
-          in: query
-          name: onBehalfOfContentOwner
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response
@@ -873,11 +880,6 @@ paths:
       description: Returns a list of comment threads that match the API request parameters.
       operationId: youtube.commentThreads.list
       parameters:
-        - description: The part parameter specifies a comma-separated list of one or more commentThread resource properties that the API response will include.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The allThreadsRelatedToChannelId parameter instructs the API to return all comment threads associated with the specified channel. The response can include comments about the channel or about the channel's videos.
           in: query
           name: allThreadsRelatedToChannelId
@@ -929,6 +931,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: The part parameter specifies a comma-separated list of one or more commentThread resource properties that the API response will include.
+          in: query
+          name: part
+          required: true
+          type: string
         - description: |-
             The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
 
@@ -972,15 +979,15 @@ paths:
       description: 'Creates a new top-level comment. To add a reply to an existing comment, use the comments.insert method instead.'
       operationId: youtube.commentThreads.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CommentThread'
         - description: The part parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CommentThread'
       responses:
         '200':
           description: Successful response
@@ -997,15 +1004,15 @@ paths:
       description: Modifies the top-level comment in a comment thread.
       operationId: youtube.commentThreads.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CommentThread'
         - description: The part parameter specifies a comma-separated list of commentThread resource properties that the API response will include. You must at least include the snippet part in the parameter value since that part contains all of the properties that the API request can update.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CommentThread'
       responses:
         '200':
           description: Successful response
@@ -1042,11 +1049,6 @@ paths:
       description: Returns a list of comments that match the API request parameters.
       operationId: youtube.comments.list
       parameters:
-        - description: The part parameter specifies a comma-separated list of one or more comment resource properties that the API response will include.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: 'The id parameter specifies a comma-separated list of comment IDs for the resources that are being retrieved. In a comment resource, the id property specifies the comment''s ID.'
           in: query
           name: id
@@ -1074,6 +1076,11 @@ paths:
             Note: YouTube currently supports replies only for top-level comments. However, replies to replies may be supported in the future.
           in: query
           name: parentId
+          type: string
+        - description: The part parameter specifies a comma-separated list of one or more comment resource properties that the API response will include.
+          in: query
+          name: part
+          required: true
           type: string
         - default: html
           description: This parameter indicates whether the API should return comments formatted as HTML or as plain text.
@@ -1107,15 +1114,15 @@ paths:
       description: 'Creates a reply to an existing comment. Note: To create a top-level comment, use the commentThreads.insert method.'
       operationId: youtube.comments.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Comment'
         - description: The part parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
       responses:
         '200':
           description: Successful response
@@ -1132,15 +1139,15 @@ paths:
       description: Modifies a comment.
       operationId: youtube.comments.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Comment'
         - description: The part parameter identifies the properties that the API response will include. You must at least include the snippet part in the parameter value since that part contains all of the properties that the API request can update.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
       responses:
         '200':
           description: Successful response
@@ -1194,6 +1201,14 @@ paths:
       description: Sets the moderation status of one or more comments. The API request must be authorized by the owner of the channel or video associated with the comments.
       operationId: youtube.comments.setModerationStatus
       parameters:
+        - default: false
+          description: |-
+            The banAuthor parameter lets you indicate that you want to automatically reject any additional comments written by the comment's author. Set the parameter value to true to ban the author.
+
+            Note: This parameter is only valid if the moderationStatus parameter is also set to rejected.
+          in: query
+          name: banAuthor
+          type: boolean
         - description: The id parameter specifies a comma-separated list of IDs that identify the comments for which you are updating the moderation status.
           in: query
           name: id
@@ -1208,14 +1223,6 @@ paths:
           name: moderationStatus
           required: true
           type: string
-        - default: false
-          description: |-
-            The banAuthor parameter lets you indicate that you want to automatically reject any additional comments written by the comment's author. Set the parameter value to true to ban the author.
-
-            Note: This parameter is only valid if the moderationStatus parameter is also set to rejected.
-          in: query
-          name: banAuthor
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -1231,11 +1238,6 @@ paths:
       description: Lists fan funding events for a channel.
       operationId: youtube.fanFundingEvents.list
       parameters:
-        - description: The part parameter specifies the fanFundingEvent resource parts that the API response will include. Supported values are id and snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: |-
             The hl parameter instructs the API to retrieve localized resource metadata for a specific application language that the YouTube website supports. The parameter value must be a language code included in the list returned by the i18nLanguages.list method.
 
@@ -1253,6 +1255,11 @@ paths:
         - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
           in: query
           name: pageToken
+          type: string
+        - description: The part parameter specifies the fanFundingEvent resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -1287,11 +1294,6 @@ paths:
       description: Returns a list of categories that can be associated with YouTube channels.
       operationId: youtube.guideCategories.list
       parameters:
-        - description: The part parameter specifies the guideCategory resource properties that the API response will include. Set the parameter value to snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - default: en-US
           description: The hl parameter specifies the language that will be used for text values in the API response.
           in: query
@@ -1300,6 +1302,11 @@ paths:
         - description: 'The id parameter specifies a comma-separated list of the YouTube channel category ID(s) for the resource(s) that are being retrieved. In a guideCategory resource, the id property specifies the YouTube channel category ID.'
           in: query
           name: id
+          type: string
+        - description: The part parameter specifies the guideCategory resource properties that the API response will include. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
           type: string
         - description: The regionCode parameter instructs the API to return the list of guide categories available in the specified country. The parameter value is an ISO 3166-1 alpha-2 country code.
           in: query
@@ -1342,15 +1349,15 @@ paths:
       description: Returns a list of application languages that the YouTube website supports.
       operationId: youtube.i18nLanguages.list
       parameters:
-        - description: The part parameter specifies the i18nLanguage resource properties that the API response will include. Set the parameter value to snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - default: en_US
           description: The hl parameter specifies the language that should be used for text values in the API response.
           in: query
           name: hl
+          type: string
+        - description: The part parameter specifies the i18nLanguage resource properties that the API response will include. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -1389,15 +1396,15 @@ paths:
       description: Returns a list of content regions that the YouTube website supports.
       operationId: youtube.i18nRegions.list
       parameters:
-        - description: The part parameter specifies the i18nRegion resource properties that the API response will include. Set the parameter value to snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - default: en_US
           description: The hl parameter specifies the language that should be used for text values in the API response.
           in: query
           name: hl
+          type: string
+        - description: The part parameter specifies the i18nRegion resource properties that the API response will include. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -1475,11 +1482,6 @@ paths:
       description: Returns a list of YouTube broadcasts that match the API request parameters.
       operationId: youtube.liveBroadcasts.list
       parameters:
-        - description: 'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.'
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The broadcastStatus parameter filters the API response to only include broadcasts with the specified status.
           enum:
             - active
@@ -1533,6 +1535,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: 'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.'
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1565,14 +1572,10 @@ paths:
       description: Creates a broadcast.
       operationId: youtube.liveBroadcasts.insert
       parameters:
-        - description: |-
-            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-
-            The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveBroadcast'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -1589,10 +1592,14 @@ paths:
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LiveBroadcast'
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+
+            The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1613,16 +1620,10 @@ paths:
       description: 'Updates a broadcast. For example, you could modify the broadcast settings defined in the liveBroadcast resource''s contentDetails object.'
       operationId: youtube.liveBroadcasts.update
       parameters:
-        - description: |-
-            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-
-            The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
-
-            Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveBroadcast'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -1639,10 +1640,16 @@ paths:
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LiveBroadcast'
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+
+            The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
+
+            Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1677,11 +1684,6 @@ paths:
           name: id
           required: true
           type: string
-        - description: 'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.'
-          in: query
-          name: part
-          required: true
-          type: string
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -1697,6 +1699,11 @@ paths:
             This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
+          type: string
+        - description: 'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.'
+          in: query
+          name: part
+          required: true
           type: string
         - description: 'The streamId parameter specifies the unique ID of the video stream that is being bound to a broadcast. If this parameter is omitted, the API will remove any existing binding between the broadcast and a video stream.'
           in: query
@@ -1731,20 +1738,15 @@ paths:
       description: Controls the settings for a slate that can be displayed in the broadcast stream.
       operationId: youtube.liveBroadcasts.control
       parameters:
+        - description: The displaySlate parameter specifies whether the slate is being enabled or disabled.
+          in: query
+          name: displaySlate
+          type: boolean
         - description: The id parameter specifies the YouTube live broadcast ID that uniquely identifies the broadcast in which the slate is being updated.
           in: query
           name: id
           required: true
           type: string
-        - description: 'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.'
-          in: query
-          name: part
-          required: true
-          type: string
-        - description: The displaySlate parameter specifies whether the slate is being enabled or disabled.
-          in: query
-          name: displaySlate
-          type: boolean
         - description: |-
             The offsetTimeMs parameter specifies a positive time offset when the specified slate change will occur. The value is measured in milliseconds from the beginning of the broadcast's monitor stream, which is the time that the testing phase for the broadcast began. Even though it is specified in milliseconds, the value is actually an approximation, and YouTube completes the requested action as closely as possible to that time.
 
@@ -1769,6 +1771,11 @@ paths:
             This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
+          type: string
+        - description: 'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.'
+          in: query
+          name: part
+          required: true
           type: string
         - description: 'The walltime parameter specifies the wall clock time at which the specified slate change will occur. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sssZ) format.'
           in: query
@@ -1817,11 +1824,6 @@ paths:
           name: id
           required: true
           type: string
-        - description: 'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.'
-          in: query
-          name: part
-          required: true
-          type: string
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -1837,6 +1839,11 @@ paths:
             This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
+          type: string
+        - description: 'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.'
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -1890,15 +1897,15 @@ paths:
       description: Adds a new ban to the chat.
       operationId: youtube.liveChatBans.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveChatBan'
         - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LiveChatBan'
       responses:
         '200':
           description: Successful response
@@ -1943,22 +1950,17 @@ paths:
       description: Lists live chat messages for a specific chat.
       operationId: youtube.liveChatMessages.list
       parameters:
-        - description: The liveChatId parameter specifies the ID of the chat whose messages will be returned.
-          in: query
-          name: liveChatId
-          required: true
-          type: string
-        - description: The part parameter specifies the liveChatComment resource parts that the API response will include. Supported values are id and snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: |-
             The hl parameter instructs the API to retrieve localized resource metadata for a specific application language that the YouTube website supports. The parameter value must be a language code included in the list returned by the i18nLanguages.list method.
 
             If localized resource details are available in that language, the resource's snippet.localized object will contain the localized values. However, if localized details are not available, the snippet.localized object will contain resource details in the resource's default language.
           in: query
           name: hl
+          type: string
+        - description: The liveChatId parameter specifies the ID of the chat whose messages will be returned.
+          in: query
+          name: liveChatId
+          required: true
           type: string
         - default: 500
           description: The maxResults parameter specifies the maximum number of messages that should be returned in the result set.
@@ -1970,6 +1972,11 @@ paths:
         - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identify other pages that could be retrieved.'
           in: query
           name: pageToken
+          type: string
+        - description: The part parameter specifies the liveChatComment resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
           type: string
         - description: 'The profileImageSize parameter specifies the size of the user profile pictures that should be returned in the result set. Default: 88.'
           in: query
@@ -2009,15 +2016,15 @@ paths:
       description: Adds a message to a live chat.
       operationId: youtube.liveChatMessages.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveChatMessage'
         - description: The part parameter serves two purposes. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the parameter value to snippet.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LiveChatMessage'
       responses:
         '200':
           description: Successful response
@@ -2067,11 +2074,6 @@ paths:
           name: liveChatId
           required: true
           type: string
-        - description: The part parameter specifies the liveChatModerator resource parts that the API response will include. Supported values are id and snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - default: 5
           description: The maxResults parameter specifies the maximum number of items that should be returned in the result set.
           in: query
@@ -2082,6 +2084,11 @@ paths:
         - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
           in: query
           name: pageToken
+          type: string
+        - description: The part parameter specifies the liveChatModerator resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -2115,15 +2122,15 @@ paths:
       description: Adds a new moderator for the chat.
       operationId: youtube.liveChatModerators.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveChatModerator'
         - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LiveChatModerator'
       responses:
         '200':
           description: Successful response
@@ -2184,11 +2191,6 @@ paths:
       description: Returns a list of video streams that match the API request parameters.
       operationId: youtube.liveStreams.list
       parameters:
-        - description: 'The part parameter specifies a comma-separated list of one or more liveStream resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, cdn, and status.'
-          in: query
-          name: part
-          required: true
-          type: string
         - description: 'The id parameter specifies a comma-separated list of YouTube stream IDs that identify the streams being retrieved. In a liveStream resource, the id property specifies the stream''s ID.'
           in: query
           name: id
@@ -2224,6 +2226,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: 'The part parameter specifies a comma-separated list of one or more liveStream resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, cdn, and status.'
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2256,14 +2263,10 @@ paths:
       description: 'Creates a video stream. The stream enables you to send your video to YouTube, which can then broadcast the video to your audience.'
       operationId: youtube.liveStreams.insert
       parameters:
-        - description: |-
-            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-
-            The part properties that you can include in the parameter value are id, snippet, cdn, and status.
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveStream'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -2280,10 +2283,14 @@ paths:
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LiveStream'
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+
+            The part properties that you can include in the parameter value are id, snippet, cdn, and status.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2304,16 +2311,10 @@ paths:
       description: 'Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.'
       operationId: youtube.liveStreams.update
       parameters:
-        - description: |-
-            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-
-            The part properties that you can include in the parameter value are id, snippet, cdn, and status.
-
-            Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed.
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveStream'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -2330,10 +2331,16 @@ paths:
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LiveStream'
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+
+            The part properties that you can include in the parameter value are id, snippet, cdn, and status.
+
+            Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2389,14 +2396,6 @@ paths:
       description: Returns a collection of playlist items that match the API request parameters. You can retrieve all of the playlist items in a specified playlist or retrieve one or more playlist items by their unique IDs.
       operationId: youtube.playlistItems.list
       parameters:
-        - description: |-
-            The part parameter specifies a comma-separated list of one or more playlistItem resource properties that the API response will include.
-
-            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlistItem resource, the snippet property contains numerous fields, including the title, description, position, and resourceId properties. As such, if you set part=snippet, the API response will contain all of those properties.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The id parameter specifies a comma-separated list of one or more unique playlist item IDs.
           in: query
           name: id
@@ -2418,6 +2417,14 @@ paths:
         - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more playlistItem resource properties that the API response will include.
+
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlistItem resource, the snippet property contains numerous fields, including the title, description, position, and resourceId properties. As such, if you set part=snippet, the API response will contain all of those properties.
+          in: query
+          name: part
+          required: true
           type: string
         - description: 'The playlistId parameter specifies the unique ID of the playlist for which you want to retrieve playlist items. Note that even though this is an optional parameter, every request to retrieve playlist items must specify a value for either the id parameter or the playlistId parameter.'
           in: query
@@ -2463,11 +2470,10 @@ paths:
       description: Adds a resource to a playlist.
       operationId: youtube.playlistItems.insert
       parameters:
-        - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlaylistItem'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -2475,10 +2481,11 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlaylistItem'
+        - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2503,6 +2510,17 @@ paths:
       description: 'Modifies a playlist item. For example, you could update the item''s position in the playlist.'
       operationId: youtube.playlistItems.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlaylistItem'
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
+
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
         - description: |-
             The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
@@ -2511,17 +2529,6 @@ paths:
           name: part
           required: true
           type: string
-        - description: |-
-            Note: This parameter is intended exclusively for YouTube content partners.
-
-            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
-          in: query
-          name: onBehalfOfContentOwner
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlaylistItem'
       responses:
         '200':
           description: Successful response
@@ -2581,14 +2588,6 @@ paths:
       description: 'Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.'
       operationId: youtube.playlists.list
       parameters:
-        - description: |-
-            The part parameter specifies a comma-separated list of one or more playlist resource properties that the API response will include.
-
-            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlist resource, the snippet property contains properties like author, title, description, tags, and timeCreated. As such, if you set part=snippet, the API response will contain all of those properties.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: This value indicates that the API should only return the specified channel's playlists.
           in: query
           name: channelId
@@ -2632,6 +2631,14 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more playlist resource properties that the API response will include.
+
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlist resource, the snippet property contains properties like author, title, description, tags, and timeCreated. As such, if you set part=snippet, the API response will contain all of those properties.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2668,11 +2675,10 @@ paths:
       description: Creates a playlist.
       operationId: youtube.playlists.insert
       parameters:
-        - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-          in: query
-          name: part
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Playlist'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -2689,10 +2695,11 @@ paths:
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Playlist'
+        - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2717,6 +2724,17 @@ paths:
       description: 'Modifies a playlist. For example, you could change a playlist''s title, description, or privacy status.'
       operationId: youtube.playlists.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Playlist'
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
+
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
         - description: |-
             The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
@@ -2725,17 +2743,6 @@ paths:
           name: part
           required: true
           type: string
-        - description: |-
-            Note: This parameter is intended exclusively for YouTube content partners.
-
-            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
-          in: query
-          name: onBehalfOfContentOwner
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Playlist'
       responses:
         '200':
           description: Successful response
@@ -2761,11 +2768,6 @@ paths:
       description: 'Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and playlist resources, but you can also configure queries to only retrieve a specific type of resource.'
       operationId: youtube.search.list
       parameters:
-        - description: The part parameter specifies a comma-separated list of one or more search resource properties that the API response will include. Set the parameter value to snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The channelId parameter indicates that the API response should only contain resources created by the channel
           in: query
           name: channelId
@@ -2847,6 +2849,11 @@ paths:
         - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
           in: query
           name: pageToken
+          type: string
+        - description: The part parameter specifies a comma-separated list of one or more search resource properties that the API response will include. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
           type: string
         - description: 'The publishedAfter parameter indicates that the API response should only contain resources created after the specified time. The value is an RFC 3339 formatted date-time value (1970-01-01T00:00:00Z).'
           in: query
@@ -2996,11 +3003,6 @@ paths:
       description: Lists sponsors for a channel.
       operationId: youtube.sponsors.list
       parameters:
-        - description: The part parameter specifies the sponsor resource parts that the API response will include. Supported values are id and snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - default: newest
           description: The filter parameter specifies which channel sponsors to return.
           enum:
@@ -3019,6 +3021,11 @@ paths:
         - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
           in: query
           name: pageToken
+          type: string
+        - description: The part parameter specifies the sponsor resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -3080,14 +3087,6 @@ paths:
       description: Returns subscription resources that match the API request criteria.
       operationId: youtube.subscriptions.list
       parameters:
-        - description: |-
-            The part parameter specifies a comma-separated list of one or more subscription resource properties that the API response will include.
-
-            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a subscription resource, the snippet property contains other properties, such as a display title for the subscription. If you set part=snippet, the API response will also contain all of those nested properties.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The channelId parameter specifies a YouTube channel ID. The API will only return that channel's subscriptions.
           in: query
           name: channelId
@@ -3148,6 +3147,14 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more subscription resource properties that the API response will include.
+
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a subscription resource, the snippet property contains other properties, such as a display title for the subscription. If you set part=snippet, the API response will also contain all of those nested properties.
+          in: query
+          name: part
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3184,15 +3191,15 @@ paths:
       description: Adds a subscription for the authenticated user's channel.
       operationId: youtube.subscriptions.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subscription'
         - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
           in: query
           name: part
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subscription'
       responses:
         '200':
           description: Successful response
@@ -3218,11 +3225,6 @@ paths:
       description: Lists Super Chat events for a channel.
       operationId: youtube.superChatEvents.list
       parameters:
-        - description: The part parameter specifies the superChatEvent resource parts that the API response will include. Supported values are id and snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: |-
             The hl parameter instructs the API to retrieve localized resource metadata for a specific application language that the YouTube website supports. The parameter value must be a language code included in the list returned by the i18nLanguages.list method.
 
@@ -3234,12 +3236,17 @@ paths:
           description: The maxResults parameter specifies the maximum number of items that should be returned in the result set.
           in: query
           maximum: 50
-          minimum: 0
+          minimum: 1
           name: maxResults
           type: integer
         - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
           in: query
           name: pageToken
+          type: string
+        - description: The part parameter specifies the superChatEvent resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -3286,17 +3293,17 @@ paths:
       description: Uploads a custom video thumbnail to YouTube and sets it for a video.
       operationId: youtube.thumbnails.set
       parameters:
-        - description: The videoId parameter specifies a YouTube video ID for which the custom video thumbnail is being provided.
-          in: query
-          name: videoId
-          required: true
-          type: string
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
             The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
+          type: string
+        - description: The videoId parameter specifies a YouTube video ID for which the custom video thumbnail is being provided.
+          in: query
+          name: videoId
+          required: true
           type: string
       responses:
         '200':
@@ -3327,15 +3334,15 @@ paths:
       description: Returns a list of abuse reasons that can be used for reporting abusive videos.
       operationId: youtube.videoAbuseReportReasons.list
       parameters:
-        - description: The part parameter specifies the videoCategory resource parts that the API response will include. Supported values are id and snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - default: en_US
           description: The hl parameter specifies the language that should be used for text values in the API response.
           in: query
           name: hl
+          type: string
+        - description: The part parameter specifies the videoCategory resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
           type: string
       responses:
         '200':
@@ -3370,11 +3377,6 @@ paths:
       description: Returns a list of categories that can be associated with YouTube videos.
       operationId: youtube.videoCategories.list
       parameters:
-        - description: The part parameter specifies the videoCategory resource properties that the API response will include. Set the parameter value to snippet.
-          in: query
-          name: part
-          required: true
-          type: string
         - default: en_US
           description: The hl parameter specifies the language that should be used for text values in the API response.
           in: query
@@ -3383,6 +3385,11 @@ paths:
         - description: The id parameter specifies a comma-separated list of video category IDs for the resources that you are retrieving.
           in: query
           name: id
+          type: string
+        - description: The part parameter specifies the videoCategory resource properties that the API response will include. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
           type: string
         - description: The regionCode parameter instructs the API to return the list of video categories available in the specified country. The parameter value is an ISO 3166-1 alpha-2 country code.
           in: query
@@ -3459,14 +3466,6 @@ paths:
       description: Returns a list of videos that match the API request parameters.
       operationId: youtube.videos.list
       parameters:
-        - description: |-
-            The part parameter specifies a comma-separated list of one or more video resource properties that the API response will include.
-
-            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a video resource, the snippet property contains the channelId, title, description, tags, and categoryId properties. As such, if you set part=snippet, the API response will contain all of those properties.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The chart parameter identifies the chart that you want to retrieve.
           enum:
             - mostPopular
@@ -3530,6 +3529,14 @@ paths:
             Note: This parameter is supported for use in conjunction with the myRating and chart parameters, but it is not supported for use in conjunction with the id parameter.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more video resource properties that the API response will include.
+
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a video resource, the snippet property contains the channelId, title, description, tags, and categoryId properties. As such, if you set part=snippet, the API response will contain all of those properties.
+          in: query
+          name: part
+          required: true
           type: string
         - description: The regionCode parameter instructs the API to select a video chart available in the specified region. This parameter can only be used in conjunction with the chart parameter. The parameter value is an ISO 3166-1 alpha-2 country code.
           in: query
@@ -3615,6 +3622,7 @@ paths:
         - video/rtp-enc-aescm128
         - video/rtploopback
         - video/rtx
+        - video/smpte291
         - video/smpte292m
         - video/ulpfec
         - video/vc1
@@ -3642,6 +3650,7 @@ paths:
         - video/vnd.mpegurl
         - video/vnd.ms-playready.media.pyv
         - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.mp4vr
         - video/vnd.nokia.videovoip
         - video/vnd.objectvideo
         - video/vnd.radgamettools.bink
@@ -3672,18 +3681,14 @@ paths:
       description: Uploads a video to YouTube and optionally sets the video's metadata.
       operationId: youtube.videos.insert
       parameters:
-        - description: |-
-            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-
-            Note that not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.
-          in: query
-          name: part
-          required: true
-          type: string
         - description: The autoLevels parameter indicates whether YouTube should automatically enhance the video's lighting and color.
           in: query
           name: autoLevels
           type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Video'
         - default: true
           description: 'The notifySubscribers parameter indicates whether YouTube should send a notification about the new video to users who subscribe to the video''s channel. A parameter value of True indicates that subscribers will be notified of newly uploaded videos. However, a channel owner who is uploading many videos might prefer to set the value to False to avoid sending a notification about each new video to the channel''s subscribers.'
           in: query
@@ -3705,14 +3710,18 @@ paths:
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+
+            Note that not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.
+          in: query
+          name: part
+          required: true
+          type: string
         - description: The stabilize parameter indicates whether YouTube should adjust the video to remove shaky camera motions.
           in: query
           name: stabilize
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Video'
       responses:
         '200':
           description: Successful response
@@ -3741,6 +3750,17 @@ paths:
       description: Updates a video's metadata.
       operationId: youtube.videos.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Video'
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
+
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
         - description: |-
             The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
@@ -3751,17 +3771,6 @@ paths:
           name: part
           required: true
           type: string
-        - description: |-
-            Note: This parameter is intended exclusively for YouTube content partners.
-
-            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
-          in: query
-          name: onBehalfOfContentOwner
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Video'
       responses:
         '200':
           description: Successful response
@@ -3885,6 +3894,10 @@ paths:
       description: Report abuse for a video.
       operationId: youtube.videos.reportAbuse
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/VideoAbuseReport'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -3892,10 +3905,6 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/VideoAbuseReport'
       responses:
         '200':
           description: Successful response
@@ -3931,6 +3940,10 @@ paths:
       description: Uploads a watermark image to YouTube and sets it for a channel.
       operationId: youtube.watermarks.set
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InvideoBranding'
         - description: The channelId parameter specifies the YouTube channel ID for which the watermark is being provided.
           in: query
           name: channelId
@@ -3943,10 +3956,6 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InvideoBranding'
       responses:
         '200':
           description: Successful response
@@ -4409,6 +4418,7 @@ definitions:
         enum:
           - 30fps
           - 60fps
+          - variable
         type: string
       ingestionInfo:
         $ref: '#/definitions/IngestionInfo'
@@ -4429,6 +4439,7 @@ definitions:
           - 360p
           - 480p
           - 720p
+          - variable
         type: string
     type: object
   Channel:
@@ -4826,7 +4837,7 @@ definitions:
         type: string
     type: object
   ChannelSnippet:
-    description: 'Basic details about a channel, including title, description and thumbnails. Next available id: 15.'
+    description: 'Basic details about a channel, including title, description and thumbnails.'
     properties:
       country:
         description: The country of the channel.
@@ -5100,7 +5111,7 @@ definitions:
         type: string
     type: object
   ContentRating:
-    description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 69'
+    description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 71'
     properties:
       acbRating:
         description: The video's Australian Classification Board (ACB) or Australian Communications and Media Authority (ACMA) rating. ACMA ratings are used to classify children's television programming.
@@ -5620,6 +5631,15 @@ definitions:
           - mekuS
           - mekuUnrated
         type: string
+      menaMpaaRating:
+        description: 'The rating system for MENA countries, a clone of MPAA. It is needed to'
+        enum:
+          - menaMpaaG
+          - menaMpaaPg
+          - menaMpaaPg13
+          - menaMpaaR
+          - menaMpaaUnrated
+        type: string
       mibacRating:
         description: The video's rating from the Ministero dei Beni e delle Attività Culturali e del Turismo (Italy).
         enum:
@@ -5663,6 +5683,12 @@ definitions:
           - mpaaPg13
           - mpaaR
           - mpaaUnrated
+        type: string
+      mpaatRating:
+        description: 'The rating system for trailer, DVD, and Ad in the US. See http://movielabs.com/md/ratings/v2.3/html/US_MPAAT_Ratings.html.'
+        enum:
+          - mpaatGb
+          - mpaatRb
         type: string
       mtrcbRating:
         description: The video's rating from the Movie and Television Review and Classification Board (Philippines).
@@ -5740,6 +5766,7 @@ definitions:
           - oflcR18
           - oflcRp13
           - oflcRp16
+          - oflcRp18
           - oflcUnrated
         type: string
       pefilmRating:
@@ -6275,8 +6302,6 @@ definitions:
       status:
         $ref: '#/definitions/LiveBroadcastStatus'
         description: The status object contains information about the event's status.
-      topicDetails:
-        $ref: '#/definitions/LiveBroadcastTopicDetails'
     type: object
   LiveBroadcastContentDetails:
     description: Detailed settings of a broadcast.
@@ -6294,6 +6319,9 @@ definitions:
           - closedCaptionsEmbedded
           - closedCaptionsHttpPost
         type: string
+      enableAutoStart:
+        description: This setting indicates whether auto start is enabled for this broadcast.
+        type: boolean
       enableClosedCaptions:
         description: 'This setting indicates whether HTTP POST closed captioning is enabled for this broadcast. The ingestion URL of the closed captions is returned through the liveStreams API. This is mutually exclusive with using the closed_captions_type property, and is equivalent to setting closed_captions_type to CLOSED_CAPTIONS_HTTP_POST.'
         type: boolean
@@ -6314,6 +6342,16 @@ definitions:
       enableLowLatency:
         description: Indicates whether this broadcast has low latency enabled.
         type: boolean
+      latencyPreference:
+        description: 'If both this and enable_low_latency are set, they must match. LATENCY_NORMAL should match enable_low_latency=false LATENCY_LOW should match enable_low_latency=true LATENCY_ULTRA_LOW should have enable_low_latency omitted.'
+        enum:
+          - low
+          - normal
+          - ultraLow
+        type: string
+      mesh:
+        format: byte
+        type: string
       monitorStream:
         $ref: '#/definitions/MonitorStreamInfo'
         description: 'The monitorStream object contains information about the monitor stream, which the broadcaster can use to review the event content before the broadcast stream is shown publicly.'
@@ -6321,6 +6359,7 @@ definitions:
         description: The projection format of this broadcast. This defaults to rectangular.
         enum:
           - '360'
+          - mesh
           - rectangular
         type: string
       recordFromStart:
@@ -6455,36 +6494,6 @@ definitions:
           - notRecording
           - recorded
           - recording
-        type: string
-    type: object
-  LiveBroadcastTopic:
-    properties:
-      snippet:
-        $ref: '#/definitions/LiveBroadcastTopicSnippet'
-        description: Information about the topic matched.
-      type:
-        description: The type of the topic.
-        enum:
-          - videoGame
-        type: string
-      unmatched:
-        description: If this flag is set it means that we have not been able to match the topic title and type provided to a known entity.
-        type: boolean
-    type: object
-  LiveBroadcastTopicDetails:
-    properties:
-      topics:
-        items:
-          $ref: '#/definitions/LiveBroadcastTopic'
-        type: array
-    type: object
-  LiveBroadcastTopicSnippet:
-    properties:
-      name:
-        description: The name of the topic.
-        type: string
-      releaseDate:
-        description: 'The date at which the topic was released. Filled for types: videoGame'
         type: string
     type: object
   LiveChatBan:
@@ -6907,6 +6916,7 @@ definitions:
           - videoBitrateMismatch
           - videoCodec
           - videoCodecMismatch
+          - videoIngestionFasterThanRealtime
           - videoIngestionStarved
           - videoInterlaceMismatch
           - videoProfileMismatch
@@ -7819,7 +7829,7 @@ definitions:
       processingDetails:
         $ref: '#/definitions/VideoProcessingDetails'
         description: |-
-          The processingProgress object encapsulates information about YouTube's progress in processing the uploaded video file. The properties in the object identify the current processing status and an estimate of the time remaining until YouTube finishes processing the video. This part also indicates whether different types of data or content, such as file details or thumbnail images, are available for the video.
+          The processingDetails object encapsulates information about YouTube's progress in processing the uploaded video file. The properties in the object identify the current processing status and an estimate of the time remaining until YouTube finishes processing the video. This part also indicates whether different types of data or content, such as file details or thumbnail images, are available for the video.
 
           The processingProgress object is designed to be polled so that the video uploaded can track the progress that YouTube has made in processing the uploaded video file. This data can only be retrieved by the video owner.
       projectDetails:
@@ -8527,6 +8537,7 @@ definitions:
         description: A list of suggestions that may improve YouTube's ability to process the video.
         items:
           enum:
+            - hdrVideo
             - nonStreamableMov
             - sendBestQualityVideo
             - spatialAudio
@@ -8541,10 +8552,13 @@ definitions:
             - hasEditlist
             - inconsistentResolution
             - problematicAudioCodec
+            - problematicHdrLookupTable
             - problematicVideoCodec
             - unknownAudioCodec
             - unknownContainer
             - unknownVideoCodec
+            - unsupportedHdrColorMetadata
+            - unsupportedHdrPixelFormat
             - unsupportedSphericalProjectionType
             - unsupportedVrStereoMode
           type: string

@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v1/rest'
       version: v1
@@ -80,11 +80,6 @@ paths:
       description: 'Runs PageSpeed analysis on the page at the specified URL, and returns a PageSpeed score, a list of suggestions to make that page faster, and other information.'
       operationId: pagespeedonline.pagespeedapi.runpagespeed
       parameters:
-        - description: The URL to fetch and analyze
-          in: query
-          name: url
-          required: true
-          type: string
         - default: false
           description: Indicates if third party resources should be filtered out before PageSpeed analysis.
           in: query
@@ -113,6 +108,11 @@ paths:
           in: query
           name: strategy
           type: string
+        - description: The URL to fetch and analyze
+          in: query
+          name: url
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -131,6 +131,9 @@ paths:
 definitions:
   Result:
     properties:
+      captchaResult:
+        description: The captcha verify result
+        type: string
       formattedResults:
         description: Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.
         properties:

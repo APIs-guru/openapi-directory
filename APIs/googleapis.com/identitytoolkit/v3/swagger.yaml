@@ -16,12 +16,14 @@ info:
   version: v3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - security
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/identitytoolkit/v3/rest'
       version: v1
@@ -180,6 +182,35 @@ paths:
             - 'https://www.googleapis.com/auth/firebase'
           Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
+      tags:
+        - relyingparty
+  /emailLinkSignin:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Reset password for a user.
+      operationId: identitytoolkit.relyingparty.emailLinkSignin
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyEmailLinkSigninRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/EmailLinkSigninResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getAccountInfo:
@@ -343,6 +374,35 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ResetPasswordResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - relyingparty
+  /sendVerificationCode:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Send SMS verification code.
+      operationId: identitytoolkit.relyingparty.sendVerificationCode
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySendVerificationCodeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySendVerificationCodeResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -586,6 +646,35 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
+  /verifyPhoneNumber:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Verifies ownership of a phone number and creates/updates the user account accordingly.
+      operationId: identitytoolkit.relyingparty.verifyPhoneNumber
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - relyingparty
 definitions:
   CreateAuthUriResponse:
     description: Response of creating the IDP authentication URL.
@@ -617,6 +706,11 @@ definitions:
       sessionId:
         description: Session ID which should be passed in the following verifyAssertion request.
         type: string
+      signinMethods:
+        description: All sign-in methods this user has used.
+        items:
+          type: string
+        type: array
     type: object
   DeleteAccountResponse:
     description: Respone of deleting account.
@@ -641,6 +735,33 @@ definitions:
         items:
           $ref: '#/definitions/UserInfo'
         type: array
+    type: object
+  EmailLinkSigninResponse:
+    description: Response of email signIn.
+    properties:
+      email:
+        description: The user's email.
+        type: string
+      expiresIn:
+        description: Expiration time of STS id token in seconds.
+        format: int64
+        type: string
+      idToken:
+        description: The STS id token to login the newly signed in user.
+        type: string
+      isNewUser:
+        description: Whether the user is new.
+        type: boolean
+      kind:
+        default: 'identitytoolkit#EmailLinkSigninResponse'
+        description: 'The fixed string "identitytoolkit#EmailLinkSigninResponse".'
+        type: string
+      localId:
+        description: The RP local ID of the user.
+        type: string
+      refreshToken:
+        description: The refresh token for the signed in user.
+        type: string
     type: object
   EmailTemplate:
     description: Template for an email template.
@@ -786,6 +907,19 @@ definitions:
         description: Specify which project (field value is actually project id) to operate. Only used when provided credential.
         type: string
     type: object
+  IdentitytoolkitRelyingpartyEmailLinkSigninRequest:
+    description: Request to sign in with email.
+    properties:
+      email:
+        description: The email address of the user.
+        type: string
+      idToken:
+        description: Token for linking flow.
+        type: string
+      oobCode:
+        description: The confirmation code.
+        type: string
+    type: object
   IdentitytoolkitRelyingpartyGetAccountInfoRequest:
     description: Request to get the account information.
     properties:
@@ -876,6 +1010,29 @@ definitions:
         description: The confirmation code.
         type: string
     type: object
+  IdentitytoolkitRelyingpartySendVerificationCodeRequest:
+    description: Request for Identitytoolkit-SendVerificationCode
+    properties:
+      iosReceipt:
+        description: Receipt of successful app token validation with APNS.
+        type: string
+      iosSecret:
+        description: Secret delivered to iOS app via APNS.
+        type: string
+      phoneNumber:
+        description: The phone number to send the verification code to in E.164 format.
+        type: string
+      recaptchaToken:
+        description: Recaptcha solution.
+        type: string
+    type: object
+  IdentitytoolkitRelyingpartySendVerificationCodeResponse:
+    description: Response for Identitytoolkit-SendVerificationCode
+    properties:
+      sessionInfo:
+        description: Encrypted session information
+        type: string
+    type: object
   IdentitytoolkitRelyingpartySetAccountInfoRequest:
     description: Request to set the account information.
     properties:
@@ -888,6 +1045,9 @@ definitions:
       createdAt:
         description: The timestamp when the account is created.
         format: int64
+        type: string
+      customAttributes:
+        description: The custom attributes to be set in the user's id token.
         type: string
       delegatedProjectNumber:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
@@ -1068,15 +1228,28 @@ definitions:
       allowOverwrite:
         description: Whether allow overwrite existing account when user local_id exists.
         type: boolean
+      blockSize:
+        format: int32
+        type: integer
+      cpuMemCost:
+        description: The following 4 fields are for standard scrypt algorithm.
+        format: int32
+        type: integer
       delegatedProjectNumber:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
         type: string
+      dkLen:
+        format: int32
+        type: integer
       hashAlgorithm:
         description: The password hash algorithm.
         type: string
       memoryCost:
         description: Memory cost for hash calculation. Used by scrypt similar algorithms.
+        format: int32
+        type: integer
+      parallelization:
         format: int32
         type: integer
       rounds:
@@ -1189,6 +1362,52 @@ definitions:
       returnSecureToken:
         description: Whether return sts id token and refresh token instead of gitkit token.
         type: boolean
+    type: object
+  IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest:
+    description: Request for Identitytoolkit-VerifyPhoneNumber
+    properties:
+      code:
+        type: string
+      idToken:
+        type: string
+      operation:
+        type: string
+      phoneNumber:
+        type: string
+      sessionInfo:
+        description: The session info previously returned by IdentityToolkit-SendVerificationCode.
+        type: string
+      temporaryProof:
+        type: string
+      verificationProof:
+        type: string
+    type: object
+  IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse:
+    description: Response for Identitytoolkit-VerifyPhoneNumber
+    properties:
+      expiresIn:
+        format: int64
+        type: string
+      idToken:
+        type: string
+      isNewUser:
+        type: boolean
+      localId:
+        type: string
+      phoneNumber:
+        type: string
+      refreshToken:
+        type: string
+      temporaryProof:
+        type: string
+      temporaryProofExpiresIn:
+        format: int64
+        type: string
+      verificationProof:
+        type: string
+      verificationProofExpiresIn:
+        format: int64
+        type: string
     type: object
   IdpConfig:
     description: Template for a single idp configuration.
@@ -1394,6 +1613,9 @@ definitions:
       createdAt:
         description: User creation timestamp.
         format: int64
+        type: string
+      customAttributes:
+        description: The custom attributes to be set in the user's id token.
         type: string
       customAuth:
         description: Whether the user is authenticated by the developer.
@@ -1616,6 +1838,9 @@ definitions:
       idToken:
         description: The GITKit token for authenticated user.
         type: string
+      isNewUser:
+        description: 'True if it''s a new user sign-in, false if it''s a returning user.'
+        type: boolean
       kind:
         default: 'identitytoolkit#VerifyCustomTokenResponse'
         description: 'The fixed string "identitytoolkit#VerifyCustomTokenResponse".'

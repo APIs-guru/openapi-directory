@@ -1,0 +1,1482 @@
+swagger: '2.0'
+schemes:
+  - https
+host: testing.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Allows developers to run automated tests for their mobile applications on Google infrastructure.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Google Cloud Testing
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.6.0
+      format: google
+      url: 'https://testing.googleapis.com/$discovery/rest?version=v1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: testing
+externalDocs:
+  url: 'https://developers.google.com/cloud-test-lab/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 implicit authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+  - name: testEnvironmentCatalog
+paths:
+  '/v1/projects/{projectId}/testMatrices':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Request to run a matrix of tests according to the given specifications.
+        Unsupported environments will be returned in the state UNSUPPORTED.
+        Matrices are limited to at most 200 supported executions.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project
+        - INVALID_ARGUMENT - if the request is malformed or if the matrix expands
+                             to more than 200 supported executions
+      operationId: testing.projects.testMatrices.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestMatrix'
+        - description: The GCE project under which this job will run.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A string id used to detect duplicated requests.
+            Ids are automatically scoped to a project, so
+            users should ensure the ID is unique per-project.
+            A UUID is recommended.
+
+            Optional, but strongly recommended.
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestMatrix'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/testMatrices/{testMatrixId}':
+    get:
+      description: |-
+        Check the status of a test matrix.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project
+        - INVALID_ARGUMENT - if the request is malformed
+        - NOT_FOUND - if the Test Matrix does not exist
+      operationId: testing.projects.testMatrices.get
+      parameters:
+        - description: Cloud project that owns the test matrix.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Unique test matrix id which was assigned by the service.
+          in: path
+          name: testMatrixId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestMatrix'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/projects/{projectId}/testMatrices/{testMatrixId}:cancel':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Cancels unfinished test executions in a test matrix.
+        This call returns immediately and cancellation proceeds asychronously.
+        If the matrix is already final, this operation will have no effect.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project
+        - INVALID_ARGUMENT - if the request is malformed
+        - NOT_FOUND - if the Test Matrix does not exist
+      operationId: testing.projects.testMatrices.cancel
+      parameters:
+        - description: Cloud project that owns the test.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Test matrix that will be canceled.
+          in: path
+          name: testMatrixId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CancelTestMatrixResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/testEnvironmentCatalog/{environmentType}':
+    get:
+      description: |-
+        Get the catalog of supported test environments.
+
+        May return any of the following canonical error codes:
+
+        - INVALID_ARGUMENT - if the request is malformed
+        - NOT_FOUND - if the environment type does not exist
+        - INTERNAL - if an internal error occurred
+      operationId: testing.testEnvironmentCatalog.get
+      parameters:
+        - description: |-
+            The type of environment that should be listed.
+            Required
+          enum:
+            - ENVIRONMENT_TYPE_UNSPECIFIED
+            - ANDROID
+            - NETWORK_CONFIGURATION
+          in: path
+          name: environmentType
+          required: true
+          type: string
+        - description: |-
+            For authorization, the cloud project requesting the TestEnvironmentCatalog.
+            Optional
+          in: query
+          name: projectId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestEnvironmentCatalog'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - testEnvironmentCatalog
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+definitions:
+  Account:
+    description: Identifies an account and how to log into it
+    properties:
+      googleAuto:
+        $ref: '#/definitions/GoogleAuto'
+        description: An automatic google login account
+    type: object
+  AndroidDevice:
+    description: A single Android device.
+    properties:
+      androidModelId:
+        description: |-
+          The id of the Android device to be used.
+          Use the EnvironmentDiscoveryService to get supported options.
+          Required
+        type: string
+      androidVersionId:
+        description: |-
+          The id of the Android OS version to be used.
+          Use the EnvironmentDiscoveryService to get supported options.
+          Required
+        type: string
+      locale:
+        description: |-
+          The locale the test device used for testing.
+          Use the EnvironmentDiscoveryService to get supported options.
+          Required
+        type: string
+      orientation:
+        description: |-
+          How the device is oriented during the test.
+          Use the EnvironmentDiscoveryService to get supported options.
+          Required
+        type: string
+    type: object
+  AndroidDeviceCatalog:
+    description: The currently supported Android devices.
+    properties:
+      models:
+        description: |-
+          The set of supported Android device models.
+          @OutputOnly
+        items:
+          $ref: '#/definitions/AndroidModel'
+        type: array
+      runtimeConfiguration:
+        $ref: '#/definitions/AndroidRuntimeConfiguration'
+        description: |-
+          The set of supported runtime configurations.
+          @OutputOnly
+      versions:
+        description: |-
+          The set of supported Android OS versions.
+          @OutputOnly
+        items:
+          $ref: '#/definitions/AndroidVersion'
+        type: array
+    type: object
+  AndroidDeviceList:
+    description: A list of Android device configurations in which the test is to be executed.
+    properties:
+      androidDevices:
+        description: |-
+          A list of Android devices
+          Required
+        items:
+          $ref: '#/definitions/AndroidDevice'
+        type: array
+    type: object
+  AndroidInstrumentationTest:
+    description: |-
+      A test of an Android application that can control an Android component
+      independently of its normal lifecycle.
+      Android instrumentation tests run an application APK and test APK inside the
+      same process on a virtual or physical AndroidDevice.  They also specify
+      a test runner class, such as com.google.GoogleTestRunner, which can vary
+      on the specific instrumentation framework chosen.
+
+      See <http://developer.android.com/tools/testing/testing_android.html> for
+      more information on types of Android tests.
+    properties:
+      appApk:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          The APK for the application under test.
+          Required
+      appPackageId:
+        description: |-
+          The java package for the application under test.
+          Optional, default is determined by examining the application's manifest.
+        type: string
+      orchestratorOption:
+        description: |-
+          The option of whether running each test within its own invocation of
+          instrumentation with Android Test Orchestrator or not.
+          ** Orchestrator is only compatible with AndroidJUnitRunner version 1.0 or
+          higher! **
+          Orchestrator offers the following benefits:
+           - No shared state
+           - Crashes are isolated
+           - Logs are scoped per test
+
+          See
+          <https://developer.android.com/training/testing/junit-runner.html#using-android-test-orchestrator>
+          for more information about Android Test Orchestrator.
+
+          Optional, if empty, test will be run without orchestrator.
+        enum:
+          - ORCHESTRATOR_OPTION_UNSPECIFIED
+          - USE_ORCHESTRATOR
+          - DO_NOT_USE_ORCHESTRATOR
+        type: string
+      testApk:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          The APK containing the test code to be executed.
+          Required
+      testPackageId:
+        description: |-
+          The java package for the test to be executed.
+          Optional, default is determined by examining the application's manifest.
+        type: string
+      testRunnerClass:
+        description: |-
+          The InstrumentationTestRunner class.
+          Optional, default is determined by examining the application's manifest.
+        type: string
+      testTargets:
+        description: |-
+          Each target must be fully qualified with the package name or class name,
+          in one of these formats:
+           - "package package_name"
+           - "class package_name.class_name"
+           - "class package_name.class_name#method_name"
+
+          Optional, if empty, all targets in the module will be run.
+        items:
+          type: string
+        type: array
+    type: object
+  AndroidMatrix:
+    description: |-
+      A set of Android device configuration permutations is defined by the
+      the cross-product of the given axes.  Internally, the given AndroidMatrix
+      will be expanded into a set of AndroidDevices.
+
+      Only supported permutations will be instantiated.  Invalid permutations
+      (e.g., incompatible models/versions) are ignored.
+    properties:
+      androidModelIds:
+        description: |-
+          The ids of the set of Android device to be used.
+          Use the EnvironmentDiscoveryService to get supported options.
+          Required
+        items:
+          type: string
+        type: array
+      androidVersionIds:
+        description: |-
+          The ids of the set of Android OS version to be used.
+          Use the EnvironmentDiscoveryService to get supported options.
+          Required
+        items:
+          type: string
+        type: array
+      locales:
+        description: |-
+          The set of locales the test device will enable for testing.
+          Use the EnvironmentDiscoveryService to get supported options.
+          Required
+        items:
+          type: string
+        type: array
+      orientations:
+        description: |-
+          The set of orientations to test with.
+          Use the EnvironmentDiscoveryService to get supported options.
+          Required
+        items:
+          type: string
+        type: array
+    type: object
+  AndroidModel:
+    description: A description of an Android device tests may be run on.
+    properties:
+      brand:
+        description: |-
+          The company that this device is branded with.
+          Example: "Google", "Samsung"
+          @OutputOnly
+        type: string
+      codename:
+        description: |-
+          The name of the industrial design.
+          This corresponds to android.os.Build.DEVICE
+          @OutputOnly
+        type: string
+      form:
+        description: |-
+          Whether this device is virtual or physical.
+          @OutputOnly
+        enum:
+          - DEVICE_FORM_UNSPECIFIED
+          - VIRTUAL
+          - PHYSICAL
+        type: string
+      id:
+        description: |-
+          The unique opaque id for this model.
+          Use this for invoking the TestExecutionService.
+          @OutputOnly
+        type: string
+      manufacturer:
+        description: |-
+          The manufacturer of this device.
+          @OutputOnly
+        type: string
+      name:
+        description: |-
+          The human-readable marketing name for this device model.
+          Examples: "Nexus 5", "Galaxy S5"
+          @OutputOnly
+        type: string
+      screenDensity:
+        description: |-
+          Screen density in DPI.
+          This corresponds to ro.sf.lcd_density
+          @OutputOnly
+        format: int32
+        type: integer
+      screenX:
+        description: |-
+          Screen size in the horizontal (X) dimension measured in pixels.
+          @OutputOnly
+        format: int32
+        type: integer
+      screenY:
+        description: |-
+          Screen size in the vertical (Y) dimension measured in pixels.
+          @OutputOnly
+        format: int32
+        type: integer
+      supportedAbis:
+        description: |-
+          The list of supported ABIs for this device.
+          This corresponds to either android.os.Build.SUPPORTED_ABIS (for API level
+          21 and above) or android.os.Build.CPU_ABI/CPU_ABI2.
+          The most preferred ABI is the first element in the list.
+
+          Elements are optionally prefixed by "version_id:" (where version_id is
+          the id of an AndroidVersion), denoting an ABI that is supported only on
+          a particular version.
+          @OutputOnly
+        items:
+          type: string
+        type: array
+      supportedVersionIds:
+        description: |-
+          The set of Android versions this device supports.
+          @OutputOnly
+        items:
+          type: string
+        type: array
+      tags:
+        description: |-
+          Tags for this dimension.
+          Examples: "default", "preview", "deprecated"
+        items:
+          type: string
+        type: array
+    type: object
+  AndroidRoboTest:
+    description: |-
+      A test of an android application that explores the application on a virtual
+      or physical Android Device, finding culprits and crashes as it goes.
+    properties:
+      appApk:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          The APK for the application under test.
+          Required
+      appInitialActivity:
+        description: |-
+          The initial activity that should be used to start the app.
+          Optional
+        type: string
+      appPackageId:
+        description: |-
+          The java package for the application under test.
+          Optional, default is determined by examining the application's manifest.
+        type: string
+      maxDepth:
+        description: |-
+          The max depth of the traversal stack Robo can explore. Needs to be at least
+          2 to make Robo explore the app beyond the first activity.
+          Default is 50.
+          Optional
+        format: int32
+        type: integer
+      maxSteps:
+        description: |-
+          The max number of steps Robo can execute.
+          Default is no limit.
+          Optional
+        format: int32
+        type: integer
+      roboDirectives:
+        description: |-
+          A set of directives Robo should apply during the crawl.
+          This allows users to customize the crawl. For example, the username and
+          password for a test account can be provided.
+          Optional
+        items:
+          $ref: '#/definitions/RoboDirective'
+        type: array
+      startingIntents:
+        description: |-
+          The intents used to launch the app for the crawl.
+          If none are provided, then the main launcher activity is launched.
+          If some are provided, then only those provided are launched (the main
+          launcher activity must be provided explicitly).
+        items:
+          $ref: '#/definitions/RoboStartingIntent'
+        type: array
+    type: object
+  AndroidRuntimeConfiguration:
+    description: Configuration that can be selected at the time a test is run.
+    properties:
+      locales:
+        description: |-
+          The set of available locales.
+          @OutputOnly
+        items:
+          $ref: '#/definitions/Locale'
+        type: array
+      orientations:
+        description: |-
+          The set of available orientations.
+          @OutputOnly
+        items:
+          $ref: '#/definitions/Orientation'
+        type: array
+    type: object
+  AndroidTestLoop:
+    description: |-
+      A test of an Android Application with a Test Loop.
+      The intent <intent-name> will be implicitly added, since Games is the only
+      user of this api, for the time being.
+    properties:
+      appApk:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          The APK for the application under test.
+          Required
+      appPackageId:
+        description: |-
+          The java package for the application under test.
+          Optional, default is determined by examining the application's manifest.
+        type: string
+      scenarioLabels:
+        description: |-
+          The list of scenario labels that should be run during the test.
+          The scenario labels should map to labels defined in the application's
+          manifest. For example, player_experience and
+          com.google.test.loops.player_experience add all of the loops labeled in the
+          manifest with the com.google.test.loops.player_experience name to the
+          execution.
+          Optional. Scenarios can also be specified in the scenarios field.
+        items:
+          type: string
+        type: array
+      scenarios:
+        description: |-
+          The list of scenarios that should be run during the test.
+          Optional, default is all test loops, derived from the application's
+          manifest.
+        items:
+          format: int32
+          type: integer
+        type: array
+    type: object
+  AndroidVersion:
+    description: A version of the Android OS
+    properties:
+      apiLevel:
+        description: |-
+          The API level for this Android version.
+          Examples: 18, 19
+          @OutputOnly
+        format: int32
+        type: integer
+      codeName:
+        description: |-
+          The code name for this Android version.
+          Examples: "JellyBean", "KitKat"
+          @OutputOnly
+        type: string
+      distribution:
+        $ref: '#/definitions/Distribution'
+        description: |-
+          Market share for this version.
+          @OutputOnly
+      id:
+        description: |-
+          An opaque id for this Android version.
+          Use this id to invoke the TestExecutionService.
+          @OutputOnly
+        type: string
+      releaseDate:
+        $ref: '#/definitions/Date'
+        description: |-
+          The date this Android version became available in the market.
+          @OutputOnly
+      tags:
+        description: |-
+          Tags for this dimension.
+          Examples: "default", "preview", "deprecated"
+        items:
+          type: string
+        type: array
+      versionString:
+        description: |-
+          A string representing this version of the Android OS.
+          Examples: "4.3", "4.4"
+          @OutputOnly
+        type: string
+    type: object
+  CancelTestMatrixResponse:
+    description: Response containing the current state of the specified test matrix.
+    properties:
+      testState:
+        description: |-
+          The current rolled-up state of the test matrix.
+          If this state is already final, then the cancelation request will
+          have no effect.
+        enum:
+          - TEST_STATE_UNSPECIFIED
+          - VALIDATING
+          - PENDING
+          - RUNNING
+          - FINISHED
+          - ERROR
+          - UNSUPPORTED_ENVIRONMENT
+          - INCOMPATIBLE_ENVIRONMENT
+          - INCOMPATIBLE_ARCHITECTURE
+          - CANCELLED
+          - INVALID
+        type: string
+    type: object
+  ClientInfo:
+    description: Information about the client which invoked the test.
+    properties:
+      clientInfoDetails:
+        description: The list of detailed information about client.
+        items:
+          $ref: '#/definitions/ClientInfoDetail'
+        type: array
+      name:
+        description: |-
+          Client name, such as gcloud.
+          Required
+        type: string
+    type: object
+  ClientInfoDetail:
+    description: |-
+      Key-value pair of detailed information about the client which invoked the
+      test. For example {'Version', '1.0'}, {'Release Track', 'BETA'}
+    properties:
+      key:
+        description: |-
+          The key of detailed client information.
+          Required
+        type: string
+      value:
+        description: |-
+          The value of detailed client information.
+          Required
+        type: string
+    type: object
+  Date:
+    description: |-
+      Represents a whole calendar date, e.g. date of birth. The time of day and
+      time zone are either specified elsewhere or are not significant. The date
+      is relative to the Proleptic Gregorian Calendar. The day may be 0 to
+      represent a year and month where the day is not significant, e.g. credit card
+      expiration date. The year may be 0 to represent a month and day independent
+      of year, e.g. anniversary date. Related types are google.type.TimeOfDay
+      and `google.protobuf.Timestamp`.
+    properties:
+      day:
+        description: |-
+          Day of month. Must be from 1 to 31 and valid for the year and month, or 0
+          if specifying a year/month where the day is not significant.
+        format: int32
+        type: integer
+      month:
+        description: Month of year. Must be from 1 to 12.
+        format: int32
+        type: integer
+      year:
+        description: |-
+          Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+          a year.
+        format: int32
+        type: integer
+    type: object
+  DeviceFile:
+    description: A single device file description.
+    properties:
+      obbFile:
+        $ref: '#/definitions/ObbFile'
+        description: A reference to an opaque binary blob file
+    type: object
+  Distribution:
+    description: |-
+      Data about the relative number of devices running a
+      given configuration of the Android platform.
+    properties:
+      marketShare:
+        description: |-
+          The estimated fraction (0-1) of the total market with this configuration.
+          @OutputOnly
+        format: double
+        type: number
+      measurementTime:
+        description: |-
+          The time this distribution was measured.
+          @OutputOnly
+        format: google-datetime
+        type: string
+    type: object
+  Environment:
+    description: The environment in which the test is run.
+    properties:
+      androidDevice:
+        $ref: '#/definitions/AndroidDevice'
+        description: An Android device which must be used with an Android test.
+    type: object
+  EnvironmentMatrix:
+    description: The matrix of environments in which the test is to be executed.
+    properties:
+      androidDeviceList:
+        $ref: '#/definitions/AndroidDeviceList'
+        description: |-
+          A list of Android devices; the test will be run only on the specified
+          devices.
+      androidMatrix:
+        $ref: '#/definitions/AndroidMatrix'
+        description: A matrix of Android devices.
+    type: object
+  EnvironmentVariable:
+    description: A key-value pair passed as an environment variable to the test
+    properties:
+      key:
+        description: Key for the environment variable
+        type: string
+      value:
+        description: Value for the environment variable
+        type: string
+    type: object
+  FileReference:
+    description: 'A reference to a file, used for user inputs.'
+    properties:
+      gcsPath:
+        description: |-
+          A path to a file in Google Cloud Storage.
+          Example: gs://build-app-1414623860166/app-debug-unaligned.apk
+        type: string
+    type: object
+  GoogleAuto:
+    description: |-
+      Enables automatic Google account login.
+      If set, the service will automatically generate a Google test account and add
+      it to the device, before executing the test. Note that test accounts might be
+      reused.
+      Many applications show their full set of functionalities when an account is
+      present on the device. Logging into the device with these generated accounts
+      allows testing more functionalities.
+    properties: {}
+    type: object
+  GoogleCloudStorage:
+    description: A storage location within Google cloud storage (GCS).
+    properties:
+      gcsPath:
+        description: |-
+          The path to a directory in GCS that will
+          eventually contain the results for this test.
+          The requesting user must have write access on the bucket in the supplied
+          path.
+          Required
+        type: string
+    type: object
+  LauncherActivityIntent:
+    description: Specifies an intent that starts the main launcher activity.
+    properties: {}
+    type: object
+  Locale:
+    description: A location/region designation for language.
+    properties:
+      id:
+        description: |-
+          The id for this locale.
+          Example: "en_US"
+          @OutputOnly
+        type: string
+      name:
+        description: |-
+          A human-friendly name for this language/locale.
+          Example: "English"
+          @OutputOnly
+        type: string
+      region:
+        description: |-
+          A human-friendly string representing the region for this locale.
+          Example: "United States"
+          Not present for every locale.
+          @OutputOnly
+        type: string
+      tags:
+        description: |-
+          Tags for this dimension.
+          Examples: "default"
+        items:
+          type: string
+        type: array
+    type: object
+  NetworkConfiguration:
+    properties:
+      downRule:
+        $ref: '#/definitions/TrafficRule'
+        description: The emulation rule applying to the download traffic
+      id:
+        description: |-
+          The unique opaque id for this network traffic configuration
+          @OutputOnly
+        type: string
+      upRule:
+        $ref: '#/definitions/TrafficRule'
+        description: The emulation rule applying to the upload traffic
+    type: object
+  NetworkConfigurationCatalog:
+    properties:
+      configurations:
+        items:
+          $ref: '#/definitions/NetworkConfiguration'
+        type: array
+    type: object
+  ObbFile:
+    description: An opaque binary blob file to install on the device before the test starts
+    properties:
+      obb:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          Opaque Binary Blob (OBB) file(s) to install on the device
+          Required
+      obbFileName:
+        description: |-
+          OBB file name which must conform to the format as specified by
+          Android
+          e.g. [main|patch].0300110.com.example.android.obb
+          which will be installed into
+            <shared-storage>/Android/obb/<package-name>/
+          on the device
+          Required
+        type: string
+    type: object
+  Orientation:
+    description: Screen orientation of the device.
+    properties:
+      id:
+        description: |-
+          The id for this orientation.
+          Example: "portrait"
+          @OutputOnly
+        type: string
+      name:
+        description: |-
+          A human-friendly name for this orientation.
+          Example: "portrait"
+          @OutputOnly
+        type: string
+      tags:
+        description: |-
+          Tags for this dimension.
+          Examples: "default"
+        items:
+          type: string
+        type: array
+    type: object
+  ResultStorage:
+    description: Locations where the results of running the test are stored.
+    properties:
+      googleCloudStorage:
+        $ref: '#/definitions/GoogleCloudStorage'
+        description: Required.
+      toolResultsExecution:
+        $ref: '#/definitions/ToolResultsExecution'
+        description: |-
+          The tool results execution that results are written to.
+          @OutputOnly
+      toolResultsHistory:
+        $ref: '#/definitions/ToolResultsHistory'
+        description: |-
+          The tool results history that contains the tool results execution that
+          results are written to.
+
+          Optional, if not provided the service will choose an appropriate value.
+    type: object
+  RoboDirective:
+    description: |-
+      Directs Robo to interact with a specific UI element if it is encountered
+      during the crawl. Currently, Robo can perform text entry or element click.
+    properties:
+      actionType:
+        description: |-
+          The type of action that Robo should perform on the specified element.
+          Required.
+        enum:
+          - ACTION_TYPE_UNSPECIFIED
+          - SINGLE_CLICK
+          - ENTER_TEXT
+        type: string
+      inputText:
+        description: |-
+          The text that Robo is directed to set. If left empty, the directive will be
+          treated as a CLICK on the element matching the resource_name.
+          Optional
+        type: string
+      resourceName:
+        description: |-
+          The android resource name of the target UI element
+          For example,
+             in Java: R.string.foo
+             in xml: @string/foo
+          Only the “foo” part is needed.
+          Reference doc:
+          https://developer.android.com/guide/topics/resources/accessing-resources.html
+          Required
+        type: string
+    type: object
+  RoboStartingIntent:
+    description: Message for specifying the start activities to crawl
+    properties:
+      launcherActivity:
+        $ref: '#/definitions/LauncherActivityIntent'
+      startActivity:
+        $ref: '#/definitions/StartActivityIntent'
+    type: object
+  StartActivityIntent:
+    description: 'A starting intent specified by an action, uri, and categories.'
+    properties:
+      action:
+        description: |-
+          Action name.
+          Required for START_ACTIVITY.
+        type: string
+      categories:
+        description: |-
+          Intent categories to set on the intent.
+          Optional.
+        items:
+          type: string
+        type: array
+      uri:
+        description: |-
+          URI for the action.
+          Optional.
+        type: string
+    type: object
+  TestDetails:
+    description: Additional details about the progress of the running test.
+    properties:
+      errorMessage:
+        description: |-
+          If the TestState is ERROR, then this string will contain human-readable
+          details about the error.
+          @OutputOnly
+        type: string
+      progressMessages:
+        description: |-
+          Human-readable, detailed descriptions of the test's progress.
+          For example: "Provisioning a device", "Starting Test".
+
+          During the course of execution new data may be appended
+          to the end of progress_messages.
+          @OutputOnly
+        items:
+          type: string
+        type: array
+    type: object
+  TestEnvironmentCatalog:
+    description: A description of a test environment.
+    properties:
+      androidDeviceCatalog:
+        $ref: '#/definitions/AndroidDeviceCatalog'
+        description: Android devices suitable for running Android Instrumentation Tests.
+      networkConfigurationCatalog:
+        $ref: '#/definitions/NetworkConfigurationCatalog'
+        description: Supported network configurations
+    type: object
+  TestExecution:
+    description: Specifies a single test to be executed in a single environment.
+    properties:
+      environment:
+        $ref: '#/definitions/Environment'
+        description: |-
+          How the host machine(s) are configured.
+          @OutputOnly
+      id:
+        description: |-
+          Unique id set by the backend.
+          @OutputOnly
+        type: string
+      matrixId:
+        description: |-
+          Id of the containing TestMatrix.
+          @OutputOnly
+        type: string
+      projectId:
+        description: |-
+          The cloud project that owns the test execution.
+          @OutputOnly
+        type: string
+      state:
+        description: |-
+          Indicates the current progress of the test execution (e.g., FINISHED).
+          @OutputOnly
+        enum:
+          - TEST_STATE_UNSPECIFIED
+          - VALIDATING
+          - PENDING
+          - RUNNING
+          - FINISHED
+          - ERROR
+          - UNSUPPORTED_ENVIRONMENT
+          - INCOMPATIBLE_ENVIRONMENT
+          - INCOMPATIBLE_ARCHITECTURE
+          - CANCELLED
+          - INVALID
+        type: string
+      testDetails:
+        $ref: '#/definitions/TestDetails'
+        description: |-
+          Additional details about the running test.
+          @OutputOnly
+      testSpecification:
+        $ref: '#/definitions/TestSpecification'
+        description: |-
+          How to run the test.
+          @OutputOnly
+      timestamp:
+        description: |-
+          The time this test execution was initially created.
+          @OutputOnly
+        format: google-datetime
+        type: string
+      toolResultsStep:
+        $ref: '#/definitions/ToolResultsStep'
+        description: |-
+          Where the results for this execution are written.
+          @OutputOnly
+    type: object
+  TestMatrix:
+    description: |-
+      A group of one or more TestExecutions, built by taking a
+      product of values over a pre-defined set of axes.
+    properties:
+      clientInfo:
+        $ref: '#/definitions/ClientInfo'
+        description: |-
+          Information about the client which invoked the test.
+          Optional
+      environmentMatrix:
+        $ref: '#/definitions/EnvironmentMatrix'
+        description: |-
+          How the host machine(s) are configured.
+          Required
+      invalidMatrixDetails:
+        description: |-
+          Describes why the matrix is considered invalid.
+          Only useful for matrices in the INVALID state.
+          @OutputOnly
+        enum:
+          - INVALID_MATRIX_DETAILS_UNSPECIFIED
+          - DETAILS_UNAVAILABLE
+          - MALFORMED_APK
+          - MALFORMED_TEST_APK
+          - NO_MANIFEST
+          - NO_PACKAGE_NAME
+          - TEST_SAME_AS_APP
+          - NO_INSTRUMENTATION
+          - NO_SIGNATURE
+          - INSTRUMENTATION_ORCHESTRATOR_INCOMPATIBLE
+          - NO_TEST_RUNNER_CLASS
+          - NO_LAUNCHER_ACTIVITY
+          - FORBIDDEN_PERMISSIONS
+          - INVALID_ROBO_DIRECTIVES
+          - TEST_LOOP_INTENT_FILTER_NOT_FOUND
+          - SCENARIO_LABEL_NOT_DECLARED
+          - SCENARIO_LABEL_MALFORMED
+          - SCENARIO_NOT_DECLARED
+          - DEVICE_ADMIN_RECEIVER
+          - TEST_ONLY_APK
+        type: string
+      projectId:
+        description: |-
+          The cloud project that owns the test matrix.
+          @OutputOnly
+        type: string
+      resultStorage:
+        $ref: '#/definitions/ResultStorage'
+        description: |-
+          Where the results for the matrix are written.
+          Required
+      state:
+        description: |-
+          Indicates the current progress of the test matrix (e.g., FINISHED)
+          @OutputOnly
+        enum:
+          - TEST_STATE_UNSPECIFIED
+          - VALIDATING
+          - PENDING
+          - RUNNING
+          - FINISHED
+          - ERROR
+          - UNSUPPORTED_ENVIRONMENT
+          - INCOMPATIBLE_ENVIRONMENT
+          - INCOMPATIBLE_ARCHITECTURE
+          - CANCELLED
+          - INVALID
+        type: string
+      testExecutions:
+        description: |-
+          The list of test executions that the service creates for this matrix.
+          @OutputOnly
+        items:
+          $ref: '#/definitions/TestExecution'
+        type: array
+      testMatrixId:
+        description: |-
+          Unique id set by the service.
+          @OutputOnly
+        type: string
+      testSpecification:
+        $ref: '#/definitions/TestSpecification'
+        description: |-
+          How to run the test.
+          Required
+      timestamp:
+        description: |-
+          The time this test matrix was initially created.
+          @OutputOnly
+        format: google-datetime
+        type: string
+    type: object
+  TestSetup:
+    description: A description of how to set up the device prior to running the test
+    properties:
+      account:
+        $ref: '#/definitions/Account'
+        description: |-
+          The device will be logged in on this account for the duration of the test.
+          Optional
+      directoriesToPull:
+        description: |-
+          List of directories on the device to upload to GCS at the end of the test;
+          they must be absolute paths under /sdcard or /data/local/tmp.
+          Path names are restricted to characters a-z A-Z 0-9 _ - . + and /
+
+          Note: The paths /sdcard and /data will be made available and treated as
+          implicit path substitutions. E.g. if /sdcard on a particular device does
+          not map to external storage, the system will replace it with the external
+          storage path prefix for that device.
+
+          Optional
+        items:
+          type: string
+        type: array
+      environmentVariables:
+        description: |-
+          Environment variables to set for the test (only applicable for
+          instrumentation tests).
+        items:
+          $ref: '#/definitions/EnvironmentVariable'
+        type: array
+      filesToPush:
+        description: |-
+          List of files to push to the device before starting the test.
+
+          Optional
+        items:
+          $ref: '#/definitions/DeviceFile'
+        type: array
+      networkProfile:
+        description: |-
+          The network traffic profile used for running the test.
+          Optional
+        type: string
+    type: object
+  TestSpecification:
+    description: A description of how to run the test.
+    properties:
+      androidInstrumentationTest:
+        $ref: '#/definitions/AndroidInstrumentationTest'
+        description: An Android instrumentation test.
+      androidRoboTest:
+        $ref: '#/definitions/AndroidRoboTest'
+        description: An Android robo test.
+      androidTestLoop:
+        $ref: '#/definitions/AndroidTestLoop'
+        description: An Android Application with a Test Loop
+      autoGoogleLogin:
+        description: |-
+          Enables automatic Google account login.
+          If set, the service will automatically generate a Google test account and
+          add it to the device, before executing the test. Note that test accounts
+          might be reused.
+          Many applications show their full set of functionalities when an account is
+          present on the device. Logging into the device with these generated
+          accounts allows testing more functionalities.
+          Default is false.
+          Optional
+        type: boolean
+      disablePerformanceMetrics:
+        description: Disables performance metrics recording; may reduce test latency.
+        type: boolean
+      disableVideoRecording:
+        description: Disables video recording; may reduce test latency.
+        type: boolean
+      testSetup:
+        $ref: '#/definitions/TestSetup'
+        description: |-
+          Test setup requirements e.g. files to install, bootstrap scripts
+          Optional
+      testTimeout:
+        description: |-
+          Max time a test execution is allowed to run before it is
+          automatically cancelled.
+          Optional, default is 5 min.
+        format: google-duration
+        type: string
+    type: object
+  ToolResultsExecution:
+    description: |-
+      Represents a tool results execution resource.
+
+      This has the results of a TestMatrix.
+    properties:
+      executionId:
+        description: |-
+          A tool results execution ID.
+          @OutputOnly
+        type: string
+      historyId:
+        description: |-
+          A tool results history ID.
+          @OutputOnly
+        type: string
+      projectId:
+        description: |-
+          The cloud project that owns the tool results execution.
+          @OutputOnly
+        type: string
+    type: object
+  ToolResultsHistory:
+    description: Represents a tool results history resource.
+    properties:
+      historyId:
+        description: |-
+          A tool results history ID.
+          Required
+        type: string
+      projectId:
+        description: |-
+          The cloud project that owns the tool results history.
+          Required
+        type: string
+    type: object
+  ToolResultsStep:
+    description: |-
+      Represents a tool results step resource.
+
+      This has the results of a TestExecution.
+    properties:
+      executionId:
+        description: |-
+          A tool results execution ID.
+          @OutputOnly
+        type: string
+      historyId:
+        description: |-
+          A tool results history ID.
+          @OutputOnly
+        type: string
+      projectId:
+        description: |-
+          The cloud project that owns the tool results step.
+          @OutputOnly
+        type: string
+      stepId:
+        description: |-
+          A tool results step ID.
+          @OutputOnly
+        type: string
+    type: object
+  TrafficRule:
+    description: Network emulation parameters
+    properties:
+      bandwidth:
+        description: Bandwidth in kbits/second
+        format: float
+        type: number
+      burst:
+        description: Burst size in kbits
+        format: float
+        type: number
+      delay:
+        description: 'Packet delay, must be >= 0'
+        format: google-duration
+        type: string
+      packetDuplicationRatio:
+        description: Packet duplication ratio (0.0 - 1.0)
+        format: float
+        type: number
+      packetLossRatio:
+        description: Packet loss ratio (0.0 - 1.0)
+        format: float
+        type: number
+    type: object

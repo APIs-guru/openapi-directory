@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://cloudkms.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -151,19 +151,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
         Update a CryptoKeyVersion's metadata.
@@ -175,6 +175,10 @@ paths:
         move between other states.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CryptoKeyVersion'
         - description: |-
             Output only. The resource name for this CryptoKeyVersion in the format
             `projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*`.
@@ -187,10 +191,6 @@ paths:
           in: query
           name: updateMask
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CryptoKeyVersion'
       responses:
         '200':
           description: Successful response
@@ -208,6 +208,10 @@ paths:
       description: Lists information about the supported locations for this service.
       operationId: cloudkms.projects.locations.list
       parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
         - description: 'The resource that owns the locations collection, if applicable.'
           in: path
           name: name
@@ -218,10 +222,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
         - description: The standard list page token.
           in: query
           name: pageToken
@@ -239,38 +239,42 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}:decrypt':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Decrypts data that was protected by Encrypt.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.decrypt
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DecryptRequest'
         - description: |-
             Required. The resource name of the CryptoKey to use for decryption.
             The server will choose the appropriate version.
@@ -279,10 +283,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DecryptRequest'
       responses:
         '200':
           description: Successful response
@@ -297,19 +297,19 @@ paths:
         - projects
   '/v1/{name}:destroy':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Schedule a CryptoKeyVersion for destruction.
@@ -326,16 +326,16 @@ paths:
         RestoreCryptoKeyVersion may be called to reverse the process.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.destroy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DestroyCryptoKeyVersionRequest'
         - description: The resource name of the CryptoKeyVersion to destroy.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DestroyCryptoKeyVersionRequest'
       responses:
         '200':
           description: Successful response
@@ -350,23 +350,27 @@ paths:
         - projects
   '/v1/{name}:encrypt':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Encrypts data, so that it can only be recovered by a call to Decrypt.'
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.encrypt
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EncryptRequest'
         - description: |-
             Required. The resource name of the CryptoKey or CryptoKeyVersion
             to use for encryption.
@@ -378,10 +382,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EncryptRequest'
       responses:
         '200':
           description: Successful response
@@ -396,19 +396,19 @@ paths:
         - projects
   '/v1/{name}:restore':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Restore a CryptoKeyVersion in the
@@ -420,16 +420,16 @@ paths:
         and destroy_time will be cleared.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.restore
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RestoreCryptoKeyVersionRequest'
         - description: The resource name of the CryptoKeyVersion to restore.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RestoreCryptoKeyVersionRequest'
       responses:
         '200':
           description: Successful response
@@ -444,33 +444,33 @@ paths:
         - projects
   '/v1/{name}:updatePrimaryVersion':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Update the version of a CryptoKey that will be used in Encrypt
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateCryptoKeyPrimaryVersionRequest'
         - description: The resource name of the CryptoKey to update.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UpdateCryptoKeyPrimaryVersionRequest'
       responses:
         '200':
           description: Successful response
@@ -489,20 +489,6 @@ paths:
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.list
       parameters:
         - description: |-
-            Required. The resource name of the CryptoKey to list, in the format
-            `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
-            Optional pagination token, returned earlier via
-            ListCryptoKeyVersionsResponse.next_page_token.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             Optional limit on the number of CryptoKeyVersions to
             include in the response. Further CryptoKeyVersions can
             subsequently be obtained by including the
@@ -511,6 +497,20 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Optional pagination token, returned earlier via
+            ListCryptoKeyVersionsResponse.next_page_token.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Required. The resource name of the CryptoKey to list, in the format
+            `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -524,19 +524,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Create a new CryptoKeyVersion in a CryptoKey.
@@ -546,6 +546,10 @@ paths:
         ENABLED.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CryptoKeyVersion'
         - description: |-
             Required. The name of the CryptoKey associated with
             the CryptoKeyVersions.
@@ -554,10 +558,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CryptoKeyVersion'
       responses:
         '200':
           description: Successful response
@@ -576,20 +576,6 @@ paths:
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.list
       parameters:
         - description: |-
-            Required. The resource name of the KeyRing to list, in the format
-            `projects/*/locations/*/keyRings/*`.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
-            Optional pagination token, returned earlier via
-            ListCryptoKeysResponse.next_page_token.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             Optional limit on the number of CryptoKeys to include in the
             response.  Further CryptoKeys can subsequently be obtained by
             including the ListCryptoKeysResponse.next_page_token in a subsequent
@@ -597,6 +583,20 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Optional pagination token, returned earlier via
+            ListCryptoKeysResponse.next_page_token.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Required. The resource name of the KeyRing to list, in the format
+            `projects/*/locations/*/keyRings/*`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -610,19 +610,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Create a new CryptoKey within a KeyRing.
@@ -630,6 +630,16 @@ paths:
         CryptoKey.purpose is required.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CryptoKey'
+        - description: |-
+            Required. It must be unique within a KeyRing and match the regular
+            expression `[a-zA-Z0-9_-]{1,63}`
+          in: query
+          name: cryptoKeyId
+          type: string
         - description: |-
             Required. The name of the KeyRing associated with the
             CryptoKeys.
@@ -638,16 +648,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            Required. It must be unique within a KeyRing and match the regular
-            expression `[a-zA-Z0-9_-]{1,63}`
-          in: query
-          name: cryptoKeyId
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CryptoKey'
       responses:
         '200':
           description: Successful response
@@ -666,20 +666,6 @@ paths:
       operationId: cloudkms.projects.locations.keyRings.list
       parameters:
         - description: |-
-            Required. The resource name of the location associated with the
-            KeyRings, in the format `projects/*/locations/*`.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
-            Optional pagination token, returned earlier via
-            ListKeyRingsResponse.next_page_token.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             Optional limit on the number of KeyRings to include in the
             response.  Further KeyRings can subsequently be obtained by
             including the ListKeyRingsResponse.next_page_token in a subsequent
@@ -687,6 +673,20 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Optional pagination token, returned earlier via
+            ListKeyRingsResponse.next_page_token.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Required. The resource name of the location associated with the
+            KeyRings, in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -700,23 +700,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Create a new KeyRing in a given Project and Location.
       operationId: cloudkms.projects.locations.keyRings.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/KeyRing'
+        - description: |-
+            Required. It must be unique within a location and match the regular
+            expression `[a-zA-Z0-9_-]{1,63}`
+          in: query
+          name: keyRingId
+          type: string
         - description: |-
             Required. The resource name of the location associated with the
             KeyRings, in the format `projects/*/locations/*`.
@@ -725,16 +735,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            Required. It must be unique within a location and match the regular
-            expression `[a-zA-Z0-9_-]{1,63}`
-          in: query
-          name: keyRingId
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/KeyRing'
       responses:
         '200':
           description: Successful response
@@ -776,40 +776,44 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
             See the operation documentation for the appropriate value for this field.
@@ -818,10 +822,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -836,19 +836,19 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
@@ -860,6 +860,10 @@ paths:
         may "fail open" without warning.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
             See the operation documentation for the appropriate value for this field.
@@ -868,10 +872,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestIamPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -946,10 +946,6 @@ definitions:
         items:
           $ref: '#/definitions/AuditLogConfig'
         type: array
-      exemptedMembers:
-        items:
-          type: string
-        type: array
       service:
         description: |-
           Specifies a service that will be enabled for audit logging.
@@ -999,14 +995,6 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
-      condition:
-        $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
-          binding. Different bindings, including their conditions, are examined
-          independently.
-          This field is GOOGLE_INTERNAL.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1042,94 +1030,6 @@ definitions:
           Required
         type: string
     type: object
-  CloudAuditOptions:
-    description: Write a Cloud Audit log
-    properties:
-      logName:
-        description: The log_name to populate in the Cloud Audit Record.
-        enum:
-          - UNSPECIFIED_LOG_NAME
-          - ADMIN_ACTIVITY
-          - DATA_ACCESS
-        type: string
-    type: object
-  Condition:
-    description: A condition to be met.
-    properties:
-      iam:
-        description: Trusted attributes supplied by the IAM system.
-        enum:
-          - NO_ATTR
-          - AUTHORITY
-          - ATTRIBUTION
-          - APPROVER
-          - JUSTIFICATION_TYPE
-        type: string
-      op:
-        description: An operator to apply the subject with.
-        enum:
-          - NO_OP
-          - EQUALS
-          - NOT_EQUALS
-          - IN
-          - NOT_IN
-          - DISCHARGED
-        type: string
-      svc:
-        description: Trusted attributes discharged by the service.
-        type: string
-      sys:
-        description: |-
-          Trusted attributes supplied by any service that owns resources and uses
-          the IAM system for access control.
-        enum:
-          - NO_ATTR
-          - REGION
-          - SERVICE
-          - NAME
-          - IP
-        type: string
-      value:
-        description: DEPRECATED. Use 'values' instead.
-        type: string
-      values:
-        description: The objects of the condition. This is mutually exclusive with 'value'.
-        items:
-          type: string
-        type: array
-    type: object
-  CounterOptions:
-    description: |-
-      Increment a streamz counter with the specified metric and field names.
-
-      Metric names should start with a '/', generally be lowercase-only,
-      and end in "_count". Field names should not contain an initial slash.
-      The actual exported metric names will have "/iam/policy" prepended.
-
-      Field names correspond to IAM request parameters and field values are
-      their respective values.
-
-      At present the only supported field names are
-         - "iam_principal", corresponding to IAMContext.principal;
-         - "" (empty string), resulting in one aggretated counter with no field.
-
-      Examples:
-        counter { metric: "/debug_access_count"  field: "iam_principal" }
-        ==> increment counter /iam/policy/backend_debug_access_count
-                              {iam_principal=[value of IAMContext.principal]}
-
-      At this time we do not support:
-      * multiple field names (though this may be supported in the future)
-      * decrementing the counter
-      * incrementing it by anything other than 1
-    properties:
-      field:
-        description: The field value to attribute.
-        type: string
-      metric:
-        description: The metric to update.
-        type: string
-    type: object
   CryptoKey:
     description: |-
       A CryptoKey represents a logical key that can be used for cryptographic
@@ -1142,6 +1042,13 @@ definitions:
         description: Output only. The time at which this CryptoKey was created.
         format: google-datetime
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Labels with user-defined metadata. For more information, see
+          [Labeling Keys](/kms/docs/labeling-keys).
+        type: object
       name:
         description: |-
           Output only. The resource name for this CryptoKey in the format
@@ -1194,6 +1101,11 @@ definitions:
       It can be used for cryptographic operations either directly, or via its
       parent CryptoKey, in which case the server will choose the appropriate
       version for the operation.
+
+      For security reasons, the raw cryptographic key material represented by a
+      CryptoKeyVersion can never be viewed or exported. It can only be used to
+      encrypt or decrypt data when an authorized user or application invokes Cloud
+      KMS.
     properties:
       createTime:
         description: Output only. The time at which this CryptoKeyVersion was created.
@@ -1226,18 +1138,6 @@ definitions:
           - DISABLED
           - DESTROYED
           - DESTROY_SCHEDULED
-        type: string
-    type: object
-  DataAccessOptions:
-    description: Write a Data Access (Gin) log
-    properties:
-      logMode:
-        description: |-
-          Whether Gin logging should happen in a fail-closed manner at the caller.
-          This is relevant only in the LocalIAM implementation, for now.
-        enum:
-          - LOG_MODE_UNSPECIFIED
-          - LOG_FAIL_CLOSED
         type: string
     type: object
   DecryptRequest:
@@ -1292,39 +1192,6 @@ definitions:
         type: string
       name:
         description: The resource name of the CryptoKeyVersion used in encryption.
-        type: string
-    type: object
-  Expr:
-    description: |-
-      Represents an expression text. Example:
-
-          title: "User account presence"
-          description: "Determines whether the request has a user account"
-          expression: "size(request.user) > 0"
-    properties:
-      description:
-        description: |-
-          An optional description of the expression. This is a longer text which
-          describes the expression, e.g. when hovered over it in a UI.
-        type: string
-      expression:
-        description: |-
-          Textual representation of an expression in
-          Common Expression Language syntax.
-
-          The application context of the containing message determines which
-          well-known feature set of CEL is supported.
-        type: string
-      location:
-        description: |-
-          An optional string indicating the location of the expression for error
-          reporting, e.g. a file name and a position in the file.
-        type: string
-      title:
-        description: |-
-          An optional title for the expression, i.e. a short string describing
-          its purpose. This can be used e.g. in UIs which allow to enter the
-          expression.
         type: string
     type: object
   KeyRing:
@@ -1436,19 +1303,6 @@ definitions:
           For example: `"projects/example-project/locations/us-east1"`
         type: string
     type: object
-  LogConfig:
-    description: Specifies what kind of log the caller must write
-    properties:
-      cloudAudit:
-        $ref: '#/definitions/CloudAuditOptions'
-        description: Cloud audit options.
-      counter:
-        $ref: '#/definitions/CounterOptions'
-        description: Counter options.
-      dataAccess:
-        $ref: '#/definitions/DataAccessOptions'
-        description: Data access options.
-    type: object
   Policy:
     description: |-
       Defines an Identity and Access Management (IAM) policy. It is used to
@@ -1481,7 +1335,7 @@ definitions:
           }
 
       For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       auditConfigs:
         description: Specifies cloud audit logging configuration for this policy.
@@ -1509,83 +1363,14 @@ definitions:
           policy is overwritten blindly.
         format: byte
         type: string
-      iamOwned:
-        type: boolean
-      rules:
-        description: |-
-          If more than one rule is specified, the rules are applied in the following
-          manner:
-          - All matching LOG rules are always applied.
-          - If any DENY/DENY_WITH_LOG rule matches, permission is denied.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is
-            granted.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if no rule applies, permission is denied.
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object
   RestoreCryptoKeyVersionRequest:
     description: Request message for KeyManagementService.RestoreCryptoKeyVersion.
     properties: {}
-    type: object
-  Rule:
-    description: A rule to be applied in a Policy.
-    properties:
-      action:
-        description: Required
-        enum:
-          - NO_ACTION
-          - ALLOW
-          - ALLOW_WITH_LOG
-          - DENY
-          - DENY_WITH_LOG
-          - LOG
-        type: string
-      conditions:
-        description: Additional restrictions that must be met
-        items:
-          $ref: '#/definitions/Condition'
-        type: array
-      description:
-        description: Human-readable description of the rule.
-        type: string
-      in:
-        description: |-
-          If one or more 'in' clauses are specified, the rule matches if
-          the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
-        items:
-          type: string
-        type: array
-      logConfig:
-        description: |-
-          The config returned to callers of tech.iam.IAM.CheckPolicy for any entries
-          that match the LOG action.
-        items:
-          $ref: '#/definitions/LogConfig'
-        type: array
-      notIn:
-        description: |-
-          If one or more 'not_in' clauses are specified, the rule matches
-          if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
-          The format for in and not_in entries is the same as for members in a
-          Binding (see google/iam/v1/policy.proto).
-        items:
-          type: string
-        type: array
-      permissions:
-        description: |-
-          A permission is a string of form '<service>.<resource type>.<verb>'
-          (e.g., 'storage.buckets.list'). A value of '*' matches all permissions,
-          and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
-        items:
-          type: string
-        type: array
     type: object
   SetIamPolicyRequest:
     description: Request message for `SetIamPolicy` method.

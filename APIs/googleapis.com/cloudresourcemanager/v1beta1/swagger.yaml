@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -137,12 +137,6 @@ paths:
       operationId: cloudresourcemanager.organizations.list
       parameters:
         - description: |-
-            The maximum number of Organizations to return in the response.
-            This field is optional.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
             An optional query string used to filter the Organizations to return in
             the response. Filter rules are case-insensitive.
 
@@ -159,6 +153,12 @@ paths:
           in: query
           name: filter
           type: string
+        - description: |-
+            The maximum number of Organizations to return in the response.
+            This field is optional.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             A pagination token returned from a previous call to `ListOrganizations`
             that indicates from where listing should continue.
@@ -183,25 +183,28 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   /v1beta1/projects:
     get:
       description: |-
         Lists Projects that are visible to the user and satisfy the
         specified filter. This method returns Projects in an unspecified order.
-        New Projects do not necessarily appear at the end of the list.
+        This method is eventually consistent with project mutations; this means
+        that a newly created project may not appear in the results or recent
+        updates to an existing project may not be reflected in the results. To
+        retrieve the latest state of a project, use the GetProjectmethod.
       operationId: cloudresourcemanager.projects.list
       parameters:
         - description: |-
@@ -271,19 +274,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a Project resource.
@@ -296,14 +299,14 @@ paths:
         Google Cloud Storage.
       operationId: cloudresourcemanager.projects.create
       parameters:
-        - description: A safety hatch to opt out of the new reliable project creation process.
-          in: query
-          name: useLegacyStack
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Project'
+        - description: A safety hatch to opt out of the new reliable project creation process.
+          in: query
+          name: useLegacyStack
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -398,19 +401,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Updates the attributes of the Project identified by the specified
@@ -419,6 +422,10 @@ paths:
         The caller must have modify permissions for this Project.
       operationId: cloudresourcemanager.projects.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Project'
         - description: |-
             The project ID (for example, `my-project-123`).
 
@@ -427,10 +434,6 @@ paths:
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Project'
       responses:
         '200':
           description: Successful response
@@ -445,19 +448,19 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}:getAncestry':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Gets a list of ancestors in the resource hierarchy for the Project
@@ -466,6 +469,10 @@ paths:
         The caller must have read permissions for this Project.
       operationId: cloudresourcemanager.projects.getAncestry
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetAncestryRequest'
         - description: |-
             The Project ID (for example, `my-project-123`).
 
@@ -474,10 +481,6 @@ paths:
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GetAncestryRequest'
       responses:
         '200':
           description: Successful response
@@ -496,19 +499,19 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}:undelete':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Restores the Project identified by the specified
@@ -520,6 +523,10 @@ paths:
         The caller must have modify permissions for this Project.
       operationId: cloudresourcemanager.projects.undelete
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UndeleteProjectRequest'
         - description: |-
             The project ID (for example, `foo-bar-123`).
 
@@ -528,10 +535,6 @@ paths:
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UndeleteProjectRequest'
       responses:
         '200':
           description: Successful response
@@ -546,25 +549,32 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns the IAM access control policy for the specified Project.
         Permission is denied if the policy or the resource does not exist.
+
+        For additional information about resource structure and identification,
+        see [Resource Names](/apis/design/resource_names).
       operationId: cloudresourcemanager.projects.getIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetIamPolicyRequest'
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
             See the operation documentation for the appropriate value for this field.
@@ -572,10 +582,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -594,22 +600,22 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Sets the IAM access control policy for the specified Project. Replaces
+        Sets the IAM access control policy for the specified Project. Overwrites
         any existing policy.
 
         The following constraints apply when using `setIamPolicy()`:
@@ -641,7 +647,8 @@ paths:
         IAM policies will be rejected until the lack of a ToS-accepting owner is
         rectified.
 
-        + Calling this method requires enabling the App Engine Admin API.
+        + This method will replace the existing policy, and cannot be used to
+        append additional IAM settings.
 
         Note: Removing service accounts from policies or changing their roles
         can render services completely inoperable. It is important to understand
@@ -649,6 +656,10 @@ paths:
         roles.
       operationId: cloudresourcemanager.projects.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
             See the operation documentation for the appropriate value for this field.
@@ -656,10 +667,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -674,23 +681,27 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Returns permissions that a caller has on the specified Project.
       operationId: cloudresourcemanager.projects.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
             See the operation documentation for the appropriate value for this field.
@@ -698,10 +709,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestIamPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -752,23 +759,27 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates an Organization resource identified by the specified resource name.
       operationId: cloudresourcemanager.organizations.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Organization'
         - description: |-
             Output Only. The resource name of the organization. This is the
             organization's relative path in the API. Its format is
@@ -778,10 +789,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Organization'
       responses:
         '200':
           description: Successful response
@@ -796,19 +803,19 @@ paths:
         - organizations
   '/v1beta1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Gets the access control policy for an Organization resource. May be empty
@@ -816,6 +823,10 @@ paths:
         organization's resource name, e.g. "organizations/123".
       operationId: cloudresourcemanager.organizations.getIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetIamPolicyRequest'
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
             See the operation documentation for the appropriate value for this field.
@@ -824,10 +835,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -846,19 +853,19 @@ paths:
         - organizations
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the access control policy on an Organization resource. Replaces any
@@ -866,6 +873,10 @@ paths:
         name, e.g. "organizations/123".
       operationId: cloudresourcemanager.organizations.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
             See the operation documentation for the appropriate value for this field.
@@ -874,10 +885,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -892,19 +899,19 @@ paths:
         - organizations
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns permissions that a caller has on the specified Organization.
@@ -912,6 +919,10 @@ paths:
         e.g. "organizations/123".
       operationId: cloudresourcemanager.organizations.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
             See the operation documentation for the appropriate value for this field.
@@ -920,10 +931,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestIamPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -958,7 +965,7 @@ definitions:
       If there are AuditConfigs for both `allServices` and a specific service,
       the union of the two AuditConfigs is used for that service: the log_types
       specified in each AuditConfig are enabled, and the exempted_members in each
-      AuditConfig are exempted.
+      AuditLogConfig are exempted.
 
       Example Policy with multiple AuditConfigs:
 
@@ -1310,7 +1317,7 @@ definitions:
           }
 
       For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       auditConfigs:
         description: Specifies cloud audit logging configuration for this policy.
@@ -1339,7 +1346,7 @@ definitions:
         format: byte
         type: string
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object
@@ -1402,8 +1409,8 @@ definitions:
         description: |-
           An optional reference to a parent Resource.
 
-          The only supported parent type is "organization". Once set, the parent
-          cannot be modified. The `parent` can be set on creation or using the
+          Supported parent types include "organization" and "folder". Once set, the
+          parent cannot be cleared. The `parent` can be set on creation or using the
           `UpdateProject` method; the end user must have the
           `resourcemanager.projects.create` permission on the parent.
 
@@ -1462,7 +1469,7 @@ definitions:
       type:
         description: |-
           Required field representing the resource type this id is for.
-          At present, the valid types are "project" and "organization".
+          At present, the valid types are "project", "folder", and "organization".
         type: string
     type: object
   SetIamPolicyRequest:

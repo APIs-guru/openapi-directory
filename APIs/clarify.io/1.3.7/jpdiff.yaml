@@ -1,0 +1,14 @@
+- op: add
+  path: /definitions/object/type
+  value: object
+- op: test
+  path: /definitions/object/$ref
+  value: '#/definitions/object'
+- op: remove
+  path: /definitions/object/$ref
+- op: test
+  path: /definitions/Tracks/properties/tracks/items/$ref
+  value: '#/definitions/Track (array item)'
+- op: replace
+  path: /definitions/Tracks/properties/tracks/items/$ref
+  value: '#/definitions/Track_(array_item)'

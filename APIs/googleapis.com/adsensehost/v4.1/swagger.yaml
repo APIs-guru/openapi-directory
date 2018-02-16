@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/adsensehost/v4.1/rest'
       version: v1
@@ -505,16 +505,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
-          in: query
-          name: endDate
-          required: true
-          type: string
         - collectionFormat: multi
           description: Dimensions to base the report on.
           in: query
@@ -522,6 +512,11 @@ paths:
             type: string
           name: dimension
           type: array
+        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+          in: query
+          name: endDate
+          required: true
+          type: string
         - collectionFormat: multi
           description: Filters to be run on the report.
           in: query
@@ -553,6 +548,11 @@ paths:
             type: string
           name: sort
           type: array
+        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+          in: query
+          name: startDate
+          required: true
+          type: string
         - description: Index of the first row of report data to return.
           in: query
           maximum: 5000
@@ -693,15 +693,15 @@ paths:
           name: adClientId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CustomChannel'
         - description: Custom channel to get.
           in: query
           name: customChannelId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CustomChannel'
       responses:
         '200':
           description: Successful response
@@ -944,11 +944,6 @@ paths:
           name: productCode
           required: true
           type: array
-        - description: The URL of the user's hosted website.
-          in: query
-          name: websiteUrl
-          required: true
-          type: string
         - description: The preferred locale of the user.
           in: query
           name: userLocale
@@ -956,6 +951,11 @@ paths:
         - description: The locale of the user's hosted website.
           in: query
           name: websiteLocale
+          type: string
+        - description: The URL of the user's hosted website.
+          in: query
+          name: websiteUrl
+          required: true
           type: string
       responses:
         '200':
@@ -1012,16 +1012,6 @@ paths:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsensehost.reports.generate
       parameters:
-        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
-          in: query
-          name: endDate
-          required: true
-          type: string
         - collectionFormat: multi
           description: Dimensions to base the report on.
           in: query
@@ -1029,6 +1019,11 @@ paths:
             type: string
           name: dimension
           type: array
+        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+          in: query
+          name: endDate
+          required: true
+          type: string
         - collectionFormat: multi
           description: Filters to be run on the report.
           in: query
@@ -1060,6 +1055,11 @@ paths:
             type: string
           name: sort
           type: array
+        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+          in: query
+          name: startDate
+          required: true
+          type: string
         - description: Index of the first row of report data to return.
           in: query
           maximum: 5000

@@ -1,0 +1,16 @@
+- op: add
+  path: '/paths/~1{source}~1exports~1xls/get/produces/0'
+  value: application/vnd.ms-excel
+- op: test
+  path: '/paths/~1{source}~1exports~1xls/get/produces/1'
+  value: xls
+- op: remove
+  path: '/paths/~1{source}~1exports~1xls/get/produces/1'
+- op: add
+  path: '/paths/~1{source}~1datasets~1{dataset_id}~1exports~1xls/get/produces/0'
+  value: application/vnd.ms-excel
+- op: test
+  path: '/paths/~1{source}~1datasets~1{dataset_id}~1exports~1xls/get/produces/1'
+  value: xls
+- op: remove
+  path: '/paths/~1{source}~1datasets~1{dataset_id}~1exports~1xls/get/produces/1'

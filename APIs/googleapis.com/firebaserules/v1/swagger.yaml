@@ -17,12 +17,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://firebaserules.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -195,61 +197,40 @@ paths:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
-    put:
+      - $ref: '#/parameters/upload_protocol'
+    patch:
       description: |-
-        Update a `Release`.
+        Update a `Release` via PATCH.
 
         Only updates to the `ruleset_name` and `test_suite_name` fields will be
         honored. `Release` rename is not supported. To create a `Release` use the
         CreateRelease method.
-      operationId: firebaserules.projects.releases.update
+      operationId: firebaserules.projects.releases.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateReleaseRequest'
         - description: |-
-            Resource name for the `Release`.
+            Resource name for the project which owns this `Release`.
 
-            `Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`
-            which affords developers a great deal of flexibility in mapping the name
-            to the style that best fits their existing development practices. For
-            example, a name could refer to an environment, an app, a version, or some
-            combination of three.
-
-            In the table below, for the project name `projects/foo`, the following
-            relative release paths show how flat and structured names might be chosen
-            to match a desired development / deployment strategy.
-
-            Use Case     | Flat Name           | Structured Name
-            -------------|---------------------|----------------
-            Environments | releases/qa         | releases/qa
-            Apps         | releases/app1_qa    | releases/app1/qa
-            Versions     | releases/app1_v2_qa | releases/app1/v2/qa
-
-            The delimiter between the release name path elements can be almost anything
-            and it should work equally well with the release name list filter, but in
-            many ways the structured paths provide a clearer picture of the
-            relationship between `Release` instances.
-
-            Format: `projects/{project_id}/releases/{release_id}`
+            Format: `projects/{project_id}`
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Release'
       responses:
         '200':
           description: Successful response
@@ -346,18 +327,18 @@ paths:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Create a `Release`.
@@ -384,6 +365,10 @@ paths:
         updated using the UpdateRelease method.
       operationId: firebaserules.projects.releases.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Release'
         - description: |-
             Resource name for the project which owns this `Release`.
 
@@ -393,10 +378,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Release'
       responses:
         '200':
           description: Successful response
@@ -477,18 +458,18 @@ paths:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Create a `Ruleset` from `Source`.
@@ -499,6 +480,10 @@ paths:
         of `Source` issues, use TestRuleset.
       operationId: firebaserules.projects.rulesets.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Ruleset'
         - description: |-
             Resource name for Project which owns this `Ruleset`.
 
@@ -508,10 +493,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Ruleset'
       responses:
         '200':
           description: Successful response
@@ -528,21 +509,79 @@ paths:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
+  '/v1/{name}:getExecutable':
+    get:
+      description: Get the `Release` executable to use when enforcing rules.
+      operationId: firebaserules.projects.releases.getExecutable
+      parameters:
+        - description: |-
+            The requested runtime executable version.
+            Defaults to FIREBASE_RULES_EXECUTABLE_V1
+          enum:
+            - RELEASE_EXECUTABLE_VERSION_UNSPECIFIED
+            - FIREBASE_RULES_EXECUTABLE_V1
+            - FIREBASE_RULES_EXECUTABLE_V2
+          in: query
+          name: executableVersion
+          type: string
+        - description: |-
+            Resource name of the `Release`.
+
+            Format: `projects/{project_id}/releases/{release_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetReleaseExecutableResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}:test':
     parameters:
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Test `Source` for syntactic and semantic correctness. Issues present, if
@@ -686,6 +725,35 @@ definitions:
       result:
         $ref: '#/definitions/Result'
         description: The mock result of the function call.
+    type: object
+  GetReleaseExecutableResponse:
+    description: The response for FirebaseRulesService.GetReleaseExecutable
+    properties:
+      executable:
+        description: Executable view of the `Ruleset` referenced by the `Release`.
+        format: byte
+        type: string
+      executableVersion:
+        description: The Rules runtime version of the executable.
+        enum:
+          - RELEASE_EXECUTABLE_VERSION_UNSPECIFIED
+          - FIREBASE_RULES_EXECUTABLE_V1
+          - FIREBASE_RULES_EXECUTABLE_V2
+        type: string
+      language:
+        description: '`Language` used to generate the executable bytes.'
+        enum:
+          - LANGUAGE_UNSPECIFIED
+          - FIREBASE_RULES
+          - EVENT_FLOW_TRIGGERS
+        type: string
+      rulesetName:
+        description: '`Ruleset` name associated with the `Release` executable.'
+        type: string
+      updateTime:
+        description: Timestamp for the most recent `Release.update_time`.
+        format: google-datetime
+        type: string
     type: object
   Issue:
     description: 'Issues include warnings, errors, and deprecation notices.'
@@ -986,4 +1054,15 @@ definitions:
         items:
           $ref: '#/definitions/TestCase'
         type: array
+    type: object
+  UpdateReleaseRequest:
+    description: The request for FirebaseRulesService.UpdateReleasePatch.
+    properties:
+      release:
+        $ref: '#/definitions/Release'
+        description: '`Release` to update.'
+      updateMask:
+        description: Specifies which fields to update.
+        format: google-fieldmask
+        type: string
     type: object

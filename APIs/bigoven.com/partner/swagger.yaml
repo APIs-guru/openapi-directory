@@ -33,6 +33,54 @@ securityDefinitions:
     description: 'Basic HTTP Authentication is used for those endpoint calls where you want to act as a BigOven user -- e.g., to get the list of favorites of a signed-in user, or add items to their grocery list.'
     type: basic
 paths:
+  '/article/{term}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Article_Get
+      parameters:
+        - description: ''
+          in: path
+          name: term
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Article successfully returned
+        '404':
+          description: Article not found
+      summary: Get a food article
+      tags:
+        - Article
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Article_Put
+      parameters:
+        - description: ''
+          in: path
+          name: term
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Controllers.WebAPI.ArticleController.PutArticleReq'
+      responses:
+        '200':
+          description: Article successfully returned
+        '404':
+          description: Article not found
+      summary: Update the article by term
+      tags:
+        - Article
   '/collection/{id}':
     get:
       consumes: []
@@ -57,11 +105,13 @@ paths:
           name: pg
           required: false
           type: integer
-        - in: query
+        - description: ''
+          in: query
           name: test
           required: false
           type: boolean
-        - in: query
+        - description: ''
+          in: query
           name: sessionForLogging
           required: false
           type: string
@@ -149,7 +199,7 @@ paths:
           description: Glossary article successfully returned
         '404':
           description: Glossary article not found
-      summary: Get food glossary article
+      summary: 'DEPRECATED. Please use "Article", which is a new format for food glossary articles, which separates out the images.'
       tags:
         - Glossary
   /grocerylist:
@@ -177,6 +227,19 @@ paths:
       summary: Get the user's grocery list.  User is determined by Basic Authentication.
       tags:
         - GroceryList
+  /grocerylist/clearcheckedlines:
+    post:
+      consumes: []
+      deprecated: false
+      operationId: GroceryList_GroceryListRemoveMarkedItems
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.API2.GroceryList'
+      summary: Clears the checked lines.
+      tags:
+        - GroceryList
   /grocerylist/department:
     post:
       consumes:
@@ -188,7 +251,8 @@ paths:
       deprecated: false
       operationId: GroceryList_Department
       parameters:
-        - in: body
+        - description: see DepartmentModel for the request payload
+          in: body
           name: model
           required: true
           schema:
@@ -212,7 +276,6 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      operationId: GroceryList_Post
       parameters:
         - description: 'name, quantity, unit, notes, department'
           in: body
@@ -275,6 +338,30 @@ paths:
       summary: Update a grocery item by GUID
       tags:
         - GroceryList
+  /grocerylist/line:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - description: 'name, quantity, unit, notes, department'
+          in: body
+          name: newItem
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Controllers.GroceryListController.PostGroceryListAddLineRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.ShoppingListLine'
+      summary: Add a single line item to the grocery list
+      tags:
+        - GroceryList
   /grocerylist/recipe:
     post:
       consumes:
@@ -310,7 +397,8 @@ paths:
       deprecated: false
       operationId: GroceryList_PostGroceryListSync
       parameters:
-        - in: body
+        - description: ''
+          in: body
           name: req
           required: true
           schema:
@@ -342,6 +430,142 @@ paths:
       summary: "POST: /image/avatar\r\n             \r\n            Testing with Postman (validated 11/20/2015):\r\n            1) Remove the Content-Type header; add authentication information\r\n            2) On the request, click Body and choose \"form-data\", then add a line item with \"key\" column set to \"file\" and on the right,\r\n            change the type of the input from Text to File.  Browse and choose a JPG."
       tags:
         - Images
+  /me:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Me_Index
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      summary: Indexes this instance.
+      tags:
+        - Me
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - description: The req.
+          in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      summary: Puts me.
+      tags:
+        - Me
+  /me/personal:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Me_PutMePersonal
+      parameters:
+        - description: The req.
+          in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Models.Personal'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      summary: Puts me personal.
+      tags:
+        - Me
+  /me/preferences:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Me_PutMePreferences
+      parameters:
+        - description: The req.
+          in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Models.Preference'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      summary: Puts me preferences.
+      tags:
+        - Me
+  /me/preferences/options:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Me_GetOptions
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Controllers.MeController.PreferenceOptions'
+      summary: Gets the options.
+      tags:
+        - Me
+  /me/profile:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - description: The req.
+          in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Models.Profile'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      summary: Puts me.
+      tags:
+        - Me
+  /me/skinny:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Me_Skinny
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      summary: Skinnies this instance.
+      tags:
+        - Me
   /recipe:
     post:
       consumes:
@@ -418,6 +642,60 @@ paths:
       summary: 'Given a query, return recipe titles starting with query. Query must be at least 3 chars in length.'
       tags:
         - Recipe
+  /recipe/autocomplete/all:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_AutoCompleteAllRecipes
+      parameters:
+        - description: The query.
+          in: query
+          name: query
+          required: true
+          type: string
+        - description: The limit.
+          format: int32
+          in: query
+          name: limit
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/BigOven.Model.RecipeInfoTiny'
+            type: array
+      summary: Automatics the complete all recipes.
+      tags:
+        - Recipe
+  /recipe/autocomplete/mine:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_AutoCompleteMyRecipes
+      parameters:
+        - description: The query.
+          in: query
+          name: query
+          required: true
+          type: string
+        - description: The limit.
+          format: int32
+          in: query
+          name: limit
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/BigOven.Model.RecipeInfoTiny'
+            type: array
+      summary: Automatics the complete my recipes.
+      tags:
+        - Recipe
   /recipe/categories:
     get:
       consumes: []
@@ -433,6 +711,19 @@ paths:
       summary: Get a list of recipe categories (the ID field can be used for include_cat in search parameters)
       tags:
         - Recipe
+  /recipe/photos/pending:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Images_GetPendingByUser
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Controllers.ImagesController.RecipePhotosResponse'
+      summary: Gets the pending by user.
+      tags:
+        - Images
   '/recipe/review/replies/{replyId}':
     delete:
       consumes: []
@@ -665,6 +956,26 @@ paths:
           schema:
             $ref: '#/definitions/BigOven.Model.API2.Recipe'
       summary: Return full Recipe detail. Returns 403 if the recipe is owned by someone else.
+      tags:
+        - Recipe
+  '/recipe/{id}/zap':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_ZapRecipe
+      parameters:
+        - description: The identifier.
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Object'
+      summary: Zaps the recipe.
       tags:
         - Recipe
   '/recipe/{recipeId}/feedback':
@@ -917,12 +1228,14 @@ paths:
           name: recipeId
           required: true
           type: integer
-        - format: int32
+        - description: ''
+          format: int32
           in: query
           name: pg
           required: false
           type: integer
-        - format: int32
+        - description: ''
+          format: int32
           in: query
           name: rpp
           required: false
@@ -941,7 +1254,8 @@ paths:
       deprecated: false
       operationId: Recipe_Related
       parameters:
-        - format: int32
+        - description: ''
+          format: int32
           in: path
           name: recipeId
           required: true
@@ -1455,92 +1769,164 @@ paths:
         - Recipe
 definitions:
   API2.Controllers.GroceryListController.DepartmentModel:
+    description: ''
     properties:
       items:
+        description: Gets or sets the items.
+        type: string
+    type: object
+  API2.Controllers.GroceryListController.PostGroceryListAddLineRequest:
+    description: ''
+    properties:
+      text:
+        description: Gets or sets the text.
         type: string
     type: object
   API2.Controllers.GroceryListController.PostGroceryListRecipeRequest:
+    description: ''
     properties:
       markAsPending:
+        description: Gets or sets the mark as pending.
         type: boolean
       recipeId:
+        description: Gets or sets the recipe identifier.
         format: int32
         type: integer
       scale:
+        description: Gets or sets the scale.
         format: double
         type: number
     type: object
   API2.Controllers.GroceryListController.PostGroceryListSyncRequest:
+    description: ''
     properties:
       list:
         $ref: '#/definitions/BigOven.Model.API.Grocery.GroceryList'
+        description: Gets or sets the list.
       since:
+        description: Gets or sets the since.
         type: string
     type: object
   API2.Controllers.GroceryListController.PostToGroceryListRecipeRequest:
+    description: ''
     properties:
       department:
+        description: Gets or sets the department.
         type: string
       name:
+        description: Gets or sets the name.
         type: string
       notes:
+        description: Gets or sets the notes.
         type: string
       quantity:
+        description: Gets or sets the quantity.
         type: string
       unit:
+        description: Gets or sets the unit.
         type: string
     type: object
   API2.Controllers.GroceryListController.UpdateItemByGuidRequest:
+    description: ''
     properties:
       department:
+        description: Gets or sets the department.
         type: string
       guid:
+        description: Gets or sets the unique identifier.
         type: string
+      ischecked:
+        description: Gets or sets the ischecked.
+        type: boolean
       name:
+        description: Gets or sets the name.
         type: string
       notes:
+        description: Gets or sets the notes.
         type: string
       quantity:
+        description: Gets or sets the quantity.
         type: string
       unit:
+        description: Gets or sets the unit.
         type: string
     type: object
   API2.Controllers.ImagesController.RecipePhotosResponse:
+    description: ''
     properties:
       ResultCount:
+        description: Gets or sets the result count.
         format: int32
         type: integer
       Results:
+        description: Gets or sets the results.
         items:
           $ref: '#/definitions/BigOven.Model.API2.Photo'
         type: array
     type: object
+  API2.Controllers.MeController.EatingStyle:
+    description: ''
+    properties:
+      Options:
+        description: Gets or sets the options.
+        items:
+          $ref: '#/definitions/API2.Controllers.MeController.Option'
+        type: array
+    type: object
+  API2.Controllers.MeController.Option:
+    description: ''
+    properties:
+      Description:
+        description: Gets or sets the description.
+        type: string
+      Key:
+        description: Gets or sets the key.
+        type: string
+    type: object
+  API2.Controllers.MeController.PreferenceOptions:
+    description: ''
+    properties:
+      EatingStyle:
+        $ref: '#/definitions/API2.Controllers.MeController.EatingStyle'
+        description: Gets or sets the eating style.
+    type: object
   API2.Controllers.NoteController.NoteRequest:
+    description: ''
     properties:
       CreationDate:
+        description: Gets or sets the creation date.
         format: date-time
         type: string
       Date:
+        description: Gets or sets the date.
         format: date-time
         type: string
       DateDT:
+        description: Gets or sets the date dt.
         type: string
       GUID:
+        description: Gets or sets the unique identifier.
         type: string
       ID:
+        description: Gets or sets the identifier.
         format: int32
         type: integer
       Notes:
+        description: Gets or sets the notes.
         type: string
       People:
+        description: Gets or sets the people.
         type: string
       RecipeID:
+        description: Gets or sets the recipe identifier.
         format: int32
         type: integer
       UserID:
+        description: Gets or sets the user identifier.
         format: int32
         type: integer
       Variations:
+        description: Gets or sets the variations.
         type: string
     type: object
   API2.Controllers.RecipeController.FeedbackDTO:
@@ -1601,11 +1987,156 @@ definitions:
         format: int32
         type: integer
     type: object
+  API2.Controllers.WebAPI.ArticleController.PutArticleReq:
+    description: Update an article
+    properties:
+      definition:
+        description: the html definition
+        type: string
+    type: object
   API2.GroceryListDepartmentResult:
+    description: ''
     properties:
       dept:
+        description: Gets or sets the dept.
         type: string
       item:
+        description: Gets or sets the item.
+        type: string
+    type: object
+  API2.Models.Accounting:
+    description: ''
+    properties:
+      CreditBalance:
+        description: ''
+        format: int32
+        type: integer
+      MemberSince:
+        description: ''
+        format: date-time
+        type: string
+      PremiumExpiryDate:
+        description: ''
+        format: date-time
+        type: string
+      UserLevel:
+        description: ''
+        type: string
+    type: object
+  API2.Models.BigOvenUser:
+    description: An API2 wrapper object for a user
+    properties:
+      Accounting:
+        $ref: '#/definitions/API2.Models.Accounting'
+        description: Accounting object
+      BOAuthToken:
+        description: The user-specific authentication token
+        type: string
+      LastChangeLogID:
+        description: Last change log
+        type: string
+      Personal:
+        $ref: '#/definitions/API2.Models.Personal'
+        description: Personal object
+      Preferences:
+        $ref: '#/definitions/API2.Models.Preference'
+        description: Preference info
+      Profile:
+        $ref: '#/definitions/API2.Models.Profile'
+        description: Profile info
+    type: object
+  API2.Models.Counts:
+    description: ''
+    properties:
+      AddedCount:
+        description: ''
+        format: int64
+        type: integer
+      FollowersCount:
+        description: ''
+        format: int64
+        type: integer
+      FollowingCount:
+        description: ''
+        format: int64
+        type: integer
+      PrivateRecipeCount:
+        description: ''
+        format: int64
+        type: integer
+      PublicRecipeCount:
+        description: ''
+        format: int64
+        type: integer
+      TotalRecipes:
+        description: ''
+        format: int64
+        type: integer
+    type: object
+  API2.Models.Location:
+    description: ''
+    properties:
+      City:
+        description: ''
+        type: string
+      Country:
+        description: ''
+        type: string
+      DMA:
+        description: ''
+        format: int32
+        type: integer
+    type: object
+  API2.Models.Personal:
+    description: 'Personal level info -- email, location, etc.'
+    properties:
+      Email:
+        description: ''
+        type: string
+      Location:
+        $ref: '#/definitions/API2.Models.Location'
+        description: ''
+    type: object
+  API2.Models.Preference:
+    description: ''
+    properties:
+      EatingStyle:
+        description: ''
+        type: string
+    type: object
+  API2.Models.Profile:
+    description: ''
+    properties:
+      AboutMe:
+        description: ''
+        type: string
+      BackgroundUrl:
+        description: ''
+        type: string
+      Counts:
+        $ref: '#/definitions/API2.Models.Counts'
+        description: ''
+      FirstName:
+        description: ''
+        type: string
+      FullName:
+        description: ''
+        type: string
+      HomeUrl:
+        description: ''
+        type: string
+      LastName:
+        description: ''
+        type: string
+      PhotoUrl:
+        description: ''
+        type: string
+      UserID:
+        description: ''
+        format: int64
+        type: integer
+      UserName:
+        description: ''
         type: string
     type: object
   BigOven.Model.API.GlossaryEntry:
@@ -2412,6 +2943,81 @@ definitions:
       UserName:
         type: string
     type: object
+  BigOven.Model.Article:
+    properties:
+      AllCategoriesText:
+        type: string
+      ApprovedForDisplay:
+        type: boolean
+      ArticleId:
+        format: int32
+        type: integer
+      AssignedToUserID:
+        format: int32
+        type: integer
+      Body:
+        type: string
+      Byline:
+        type: string
+      CaptionedImages:
+        items:
+          $ref: '#/definitions/BigOven.Model.CaptionedImage'
+        type: array
+      CategoryID:
+        format: int32
+        type: integer
+      DateApproved:
+        format: date-time
+        type: string
+      DateAssigned:
+        format: date-time
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DeadlineDate:
+        format: date-time
+        type: string
+      Id:
+        type: string
+      InternalAbstract:
+        type: string
+      IsSeasonal:
+        type: boolean
+      LineOrder:
+        format: int32
+        type: integer
+      PrimaryImage:
+        type: string
+      ReadyForReview:
+        type: boolean
+      SeasonalEndEmphasis:
+        format: date-time
+        type: string
+      SeasonalStartEmphasis:
+        format: date-time
+        type: string
+      ShortURL:
+        type: string
+      Slug:
+        type: string
+      SubcategoryID:
+        format: int32
+        type: integer
+      Subhead:
+        type: string
+      Title:
+        type: string
+      keywordUnique:
+        type: string
+    type: object
+  BigOven.Model.CaptionedImage:
+    properties:
+      Caption:
+        type: string
+      PhotoUrl:
+        type: string
+    type: object
   BigOven.Model.RecipeCategory:
     properties:
       Category:
@@ -2447,6 +3053,22 @@ definitions:
         $ref: '#/definitions/BigOven.Model.API2.RecipeInfox'
       Review:
         $ref: '#/definitions/BigOven.Model.API.Review'
+    type: object
+  BigOven.Model.RecipeInfoTiny:
+    properties:
+      ImageURL:
+        type: string
+      QualityScore:
+        format: int32
+        type: integer
+      RecipeID:
+        format: int32
+        type: integer
+      Servings:
+        format: double
+        type: number
+      Title:
+        type: string
     type: object
   BigOven.Model.ShoppingListLine:
     properties:

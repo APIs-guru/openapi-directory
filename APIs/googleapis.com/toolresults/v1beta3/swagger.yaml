@@ -16,12 +16,14 @@ info:
   version: v1beta3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - developer_tools
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/toolresults/v1beta3/rest'
       version: v1
@@ -102,14 +104,6 @@ paths:
       operationId: toolresults.projects.histories.list
       parameters:
         - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
             If set, only return histories with the given name.
 
             Optional.
@@ -131,6 +125,14 @@ paths:
             Optional.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -163,6 +165,10 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing project does not exist
       operationId: toolresults.projects.histories.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/History'
         - description: |-
             A Project id.
 
@@ -178,10 +184,6 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/History'
       responses:
         '200':
           description: Successful response
@@ -205,19 +207,19 @@ paths:
       operationId: toolresults.projects.histories.get
       parameters:
         - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
             A History id.
 
             Required.
           in: path
           name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
           required: true
           type: string
       responses:
@@ -253,14 +255,6 @@ paths:
       operationId: toolresults.projects.histories.executions.list
       parameters:
         - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
             A History id.
 
             Required.
@@ -283,6 +277,14 @@ paths:
             Optional.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -315,14 +317,10 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist
       operationId: toolresults.projects.histories.executions.create
       parameters:
-        - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Execution'
         - description: |-
             A History id.
 
@@ -332,16 +330,20 @@ paths:
           required: true
           type: string
         - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
             A unique request ID for server to detect duplicated requests. For example, a UUID.
 
             Optional, but strongly recommended.
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Execution'
       responses:
         '200':
           description: Successful response
@@ -365,11 +367,11 @@ paths:
       operationId: toolresults.projects.histories.executions.get
       parameters:
         - description: |-
-            A Project id.
+            An Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -381,11 +383,11 @@ paths:
           required: true
           type: string
         - description: |-
-            An Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
       responses:
@@ -417,9 +419,13 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal - NOT_FOUND - if the containing History does not exist
       operationId: toolresults.projects.histories.executions.patch
       parameters:
-        - description: A Project id. Required.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Execution'
+        - description: Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: Required.
@@ -427,9 +433,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: Required.
+        - description: A Project id. Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -439,10 +445,6 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Execution'
       responses:
         '200':
           description: Successful response
@@ -502,6 +504,58 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{projectId}/histories/{historyId}/executions/{executionId}/clusters/{clusterId}':
+    get:
+      description: Retrieves a single screenshot cluster by its ID
+      operationId: toolresults.projects.histories.executions.clusters.get
+      parameters:
+        - description: |-
+            A Cluster id
+
+            Required.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            An Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ScreenshotCluster'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{projectId}/histories/{historyId}/executions/{executionId}/steps':
     get:
       description: |-
@@ -515,11 +569,11 @@ paths:
       operationId: toolresults.projects.histories.executions.steps.list
       parameters:
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -528,14 +582,6 @@ paths:
             Required.
           in: path
           name: historyId
-          required: true
-          type: string
-        - description: |-
-            A Execution id.
-
-            Required.
-          in: path
-          name: executionId
           required: true
           type: string
         - description: |-
@@ -553,6 +599,14 @@ paths:
             Optional.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -585,12 +639,16 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
       operationId: toolresults.projects.histories.executions.steps.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Step'
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -602,11 +660,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -616,10 +674,6 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Step'
       responses:
         '200':
           description: Successful response
@@ -643,11 +697,11 @@ paths:
       operationId: toolresults.projects.histories.executions.steps.get
       parameters:
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -659,11 +713,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -703,12 +757,16 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal (e.g try to upload a duplicate xml file), if the updated step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
       operationId: toolresults.projects.histories.executions.steps.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Step'
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -720,19 +778,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
-          required: true
-          type: string
-        - description: |-
-            A Step id.
-
-            Required.
-          in: path
-          name: stepId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -742,10 +792,14 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Step'
+        - description: |-
+            A Step id.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -766,9 +820,9 @@ paths:
         May return any of the following error code(s): - NOT_FOUND - The specified PerfMetricsSummary does not exist
       operationId: toolresults.projects.histories.executions.steps.getPerfMetricsSummary
       parameters:
-        - description: The cloud project
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -776,9 +830,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: A tool results step ID.
@@ -808,14 +862,18 @@ paths:
       - $ref: '#/parameters/userIp'
     post:
       description: |-
-        Creates a PerfMetricsSummary resource.
+        Creates a PerfMetricsSummary resource. Returns the existing one if it has already been created.
 
-        May return any of the following error code(s): - ALREADY_EXISTS - A PerfMetricSummary already exists for the given Step - NOT_FOUND - The containing Step does not exist
+        May return any of the following error code(s): - NOT_FOUND - The containing Step does not exist
       operationId: toolresults.projects.histories.executions.steps.perfMetricsSummary.create
       parameters:
-        - description: The cloud project
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PerfMetricsSummary'
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -823,9 +881,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: A tool results step ID.
@@ -833,10 +891,6 @@ paths:
           name: stepId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PerfMetricsSummary'
       responses:
         '200':
           description: Successful response
@@ -919,9 +973,13 @@ paths:
         May return any of the following error code(s): - ALREADY_EXISTS - PerfMetricSummary already exists for the given Step - NOT_FOUND - The containing Step does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.create
       parameters:
-        - description: The cloud project
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PerfSampleSeries'
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -929,9 +987,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: A tool results step ID.
@@ -939,10 +997,6 @@ paths:
           name: stepId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PerfSampleSeries'
       responses:
         '200':
           description: Successful response
@@ -963,9 +1017,9 @@ paths:
         May return any of the following error code(s): - NOT_FOUND - The specified PerfSampleSeries does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.get
       parameters:
-        - description: The cloud project
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -973,19 +1027,19 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
-          required: true
-          type: string
-        - description: A tool results step ID.
-          in: path
-          name: stepId
+          name: projectId
           required: true
           type: string
         - description: A sample series id
           in: path
           name: sampleSeriesId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
           required: true
           type: string
       responses:
@@ -1016,29 +1070,14 @@ paths:
         May return any of the following canonical error codes: - OUT_OF_RANGE - The specified request page_token is out of valid range - NOT_FOUND - The containing PerfSampleSeries does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.samples.list
       parameters:
-        - description: The cloud project
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: A tool results history ID.
-          in: path
-          name: historyId
-          required: true
-          type: string
         - description: A tool results execution ID.
           in: path
           name: executionId
           required: true
           type: string
-        - description: A tool results step ID.
+        - description: A tool results history ID.
           in: path
-          name: stepId
-          required: true
-          type: string
-        - description: A sample series id
-          in: path
-          name: sampleSeriesId
+          name: historyId
           required: true
           type: string
         - description: 'The default page size is 500 samples, and the maximum size is 5000. If the page_size is greater than 5000, the effective page size will be 5000'
@@ -1048,6 +1087,21 @@ paths:
         - description: 'Optional, the next_page_token returned in the previous response'
           in: query
           name: pageToken
+          type: string
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A sample series id
+          in: path
+          name: sampleSeriesId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
           type: string
       responses:
         '200':
@@ -1085,9 +1139,13 @@ paths:
         May return any of the following canonical error codes: - NOT_FOUND - The containing PerfSampleSeries does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.samples.batchCreate
       parameters:
-        - description: The cloud project
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchCreatePerfSamplesRequest'
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -1095,14 +1153,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
-          required: true
-          type: string
-        - description: A tool results step ID.
-          in: path
-          name: stepId
+          name: projectId
           required: true
           type: string
         - description: A sample series id
@@ -1110,10 +1163,11 @@ paths:
           name: sampleSeriesId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BatchCreatePerfSamplesRequest'
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1135,22 +1189,6 @@ paths:
       operationId: toolresults.projects.histories.executions.steps.thumbnails.list
       parameters:
         - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
-            A History id.
-
-            Required.
-          in: path
-          name: historyId
-          required: true
-          type: string
-        - description: |-
             An Execution id.
 
             Required.
@@ -1159,11 +1197,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Step id.
+            A History id.
 
             Required.
           in: path
-          name: stepId
+          name: historyId
           required: true
           type: string
         - description: |-
@@ -1181,6 +1219,22 @@ paths:
             Optional.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A Step id.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
           type: string
       responses:
         '200':
@@ -1220,12 +1274,16 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal, e.g try to upload a duplicate xml file or a file too large. - NOT_FOUND - if the containing Execution does not exist
       operationId: toolresults.projects.histories.executions.steps.publishXunitXmlFiles
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublishXunitXmlFilesRequest'
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -1237,11 +1295,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -1252,10 +1310,6 @@ paths:
           name: stepId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PublishXunitXmlFilesRequest'
       responses:
         '200':
           description: Successful response
@@ -1388,7 +1442,7 @@ definitions:
           type: string
         type: array
       useOrchestrator:
-        description: 'The flag indicates whether Android Test Orchestrator will be used to run test or not. Test orchestrator is used if either: - orchestrator_option field is USE_ORCHESTRATOR, and test runner is compatible with orchestrator. Or - orchestrator_option field is unspecified or ORCHESTRATOR_OPTION_UNSPECIFIED, and test runner is compatible with orchestrator.'
+        description: The flag indicates whether Android Test Orchestrator will be used to run test or not.
         type: boolean
     type: object
   AndroidRoboTest:
@@ -1466,11 +1520,13 @@ definitions:
     properties:
       typeUrl:
         description: |-
-          A URL/resource name whose content describes the type of the serialized protocol buffer message.
+          A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading "." is not accepted).
 
-          For URLs which use the scheme `http`, `https`, or no scheme, the following restrictions and interpretations apply:
+          In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:
 
-          * If no scheme is provided, `https` is assumed. * The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading "." is not accepted). * An HTTP GET on the URL must yield a [google.protobuf.Type][] value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the URL, or have them precompiled into a binary to avoid any lookup. Therefore, binary compatibility needs to be preserved on changes to types. (Use versioned type names to manage breaking changes.)
+          * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][] value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the URL, or have them precompiled into a binary to avoid any lookup. Therefore, binary compatibility needs to be preserved on changes to types. (Use versioned type names to manage breaking changes.)
+
+          Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.
 
           Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
         type: string
@@ -1667,13 +1723,13 @@ definitions:
   FailureDetail:
     properties:
       crashed:
-        description: If the failure was severe because the system under test crashed.
+        description: If the failure was severe because the system (app) under test crashed.
         type: boolean
       notInstalled:
         description: If an app is not installed and thus no test can be run with the app. This might be caused by trying to run a test on an unsupported platform.
         type: boolean
       otherNativeCrash:
-        description: If a native process other than the app crashed.
+        description: If a native process (including any other than the app) crashed.
         type: boolean
       timedOut:
         description: 'If the test overran some time limit, and that is why it failed.'
@@ -1694,6 +1750,70 @@ definitions:
           An INVALID_ARGUMENT error will be returned if the URI format is not supported.
 
           - In response: always set - In create/update request: always set
+        type: string
+    type: object
+  GraphicsStats:
+    description: 'Graphics statistics for the App. The information is collected from ''adb shell dumpsys graphicsstats''. For more info see: https://developer.android.com/training/testing/performance.html Statistics will only be present for API 23+.'
+    properties:
+      buckets:
+        description: 'Histogram of frame render times. There should be 154 buckets ranging from [5ms, 6ms) to [4950ms, infinity)'
+        items:
+          $ref: '#/definitions/GraphicsStatsBucket'
+        type: array
+      highInputLatencyCount:
+        description: Total "high input latency" events.
+        format: int64
+        type: string
+      jankyFrames:
+        description: Total frames with slow render time. Should be <= total_frames.
+        format: int64
+        type: string
+      missedVsyncCount:
+        description: Total "missed vsync" events.
+        format: int64
+        type: string
+      p50Millis:
+        description: 50th percentile frame render time in milliseconds.
+        format: int64
+        type: string
+      p90Millis:
+        description: 90th percentile frame render time in milliseconds.
+        format: int64
+        type: string
+      p95Millis:
+        description: 95th percentile frame render time in milliseconds.
+        format: int64
+        type: string
+      p99Millis:
+        description: 99th percentile frame render time in milliseconds.
+        format: int64
+        type: string
+      slowBitmapUploadCount:
+        description: Total "slow bitmap upload" events.
+        format: int64
+        type: string
+      slowDrawCount:
+        description: Total "slow draw" events.
+        format: int64
+        type: string
+      slowUiThreadCount:
+        description: Total "slow UI thread" events.
+        format: int64
+        type: string
+      totalFrames:
+        description: Total frames rendered by package.
+        format: int64
+        type: string
+    type: object
+  GraphicsStatsBucket:
+    properties:
+      frameCount:
+        description: Number of frames in the bucket.
+        format: int64
+        type: string
+      renderMillis:
+        description: Lower bound of render time in milliseconds.
+        format: int64
         type: string
     type: object
   History:
@@ -1929,6 +2049,9 @@ definitions:
       executionId:
         description: A tool results execution ID.
         type: string
+      graphicsStats:
+        $ref: '#/definitions/GraphicsStats'
+        description: Graphics statistics for the entire run. Statistics are reset at the beginning of the run and collected at the end of the run.
       historyId:
         description: A tool results history ID.
         type: string
@@ -2367,13 +2490,17 @@ definitions:
         description: Type of issue. Required.
         enum:
           - anr
+          - compatibleWithOrchestrator
           - fatalException
+          - launcherActivityNotFound
           - nativeCrash
+          - startActivityNotFound
           - unspecifiedType
+          - unusedRoboDirective
         type: string
       warning:
         $ref: '#/definitions/Any'
-        description: Warning message with additional details of the issue. Should always be a message from com.google.devtools.toolresults.v1.warnings Required.
+        description: Warning message with additional details of the issue. Should always be a message from com.google.devtools.toolresults.v1.warnings
     type: object
   TestSuiteOverview:
     description: |-
@@ -2505,11 +2632,11 @@ definitions:
 
       # JSON Mapping
 
-      In JSON format, the Timestamp type is encoded as a string in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z" where {year} is always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution), are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone is required, though only UTC (as indicated by "Z") is presently supported.
+      In JSON format, the Timestamp type is encoded as a string in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z" where {year} is always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution), are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone is required, though only UTC (as indicated by "Z") is currently supported.
 
       For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past 01:30 UTC on January 15, 2017.
 
-      In JavaScript, one can convert a Date object to this format using the standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString] method. In Python, a standard `datetime.datetime` object can be converted to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use the Joda Time's [`ISODateTimeFormat.dateTime()`]( http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()) to obtain a formatter capable of generating timestamps in this format.
+      In JavaScript, one can convert a Date object to this format using the standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString] method. In Python, a standard `datetime.datetime` object can be converted to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use the Joda Time's [`ISODateTimeFormat.dateTime()`]( http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime-- ) to obtain a formatter capable of generating timestamps in this format.
     properties:
       nanos:
         description: 'Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive.'

@@ -1,0 +1,2506 @@
+swagger: '2.0'
+info:
+  version: '2017-07-24'
+  x-release: v4
+  title: Amazon SageMaker Service
+  description: Definition of the public APIs exposed by SageMaker
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: sagemaker
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/sagemaker-2017-07-24.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/sagemaker/'
+host: sagemaker.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddTags
+      description: '<p>Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, models, endpoint configurations, and endpoints. </p> <p>Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddTagsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddTagsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateEndpoint':
+    post:
+      operationId: CreateEndpoint
+      description: '<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html">CreateEndpointConfig</a> API. </p> <note> <p> Use this API only for hosting models using Amazon SageMaker hosting services. </p> </note> <p>The endpoint name must be unique within an AWS Region in your AWS account. </p> <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them. </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Creating</code>. After it creates the endpoint, it sets the status to <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API.</p> <p>For an example, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html">Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateEndpointOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateEndpointInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateEndpointConfig':
+    post:
+      operationId: CreateEndpointConfig
+      description: '<p>Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the <code>CreateModel</code> API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> API. </p> <note> <p> Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production. </p> </note> <p>In the request, you define one or more <code>ProductionVariant</code>s, each of which identifies a model. Each <code>ProductionVariant</code> parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy. </p> <p>If you are hosting multiple models, you also assign a <code>VariantWeight</code> to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateEndpointConfigOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateEndpointConfigInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateModel':
+    post:
+      operationId: CreateModel
+      description: '<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe one or more containers. For each container, you specify the docker image containing inference code, artifacts (from prior training), and custom environment map that the inference code uses when you deploy the model into production. </p> <p>Use this API to create a model only if you want to use Amazon SageMaker hosting services. To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. </p> <p>Amazon SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>In the <code>CreateModel</code> request, you must define a container with the <code>PrimaryContainer</code> parameter. </p> <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other AWS resources, you grant necessary permissions via this role.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateModelOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateModelInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateNotebookInstance':
+    post:
+      operationId: CreateNotebookInstance
+      description: '<p>Creates an Amazon SageMaker notebook instance. A notebook instance is an ML compute instance running on a Jupyter notebook. </p> <p>In a <code>CreateNotebookInstance</code> request, you specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance. </p> <p>Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific an algorithm or with a machine learning framework. </p> <p>After receiving the request, Amazon SageMaker does the following:</p> <ol> <li> <p>Creates a network interface in the Amazon SageMaker VPC.</p> </li> <li> <p>(Option) If you specified <code>SubnetId</code>, creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.</p> </li> <li> <p>Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified <code>SubnetId</code> of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.</p> </li> </ol> <p>After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN).</p> <p>After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateNotebookInstanceOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateNotebookInstanceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreatePresignedNotebookInstanceUrl':
+    post:
+      operationId: CreatePresignedNotebookInstanceUrl
+      description: 'Returns a URL that you can use to connect to the Juypter server from a notebook instance. In the Amazon SageMaker console, when you choose <code>Open</code> next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePresignedNotebookInstanceUrlOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePresignedNotebookInstanceUrlInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTrainingJob':
+    post:
+      operationId: CreateTrainingJob
+      description: '<p> Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify. </p> <p>If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a deep learning service other than Amazon SageMaker, provided that you know how to use them for inferences. </p> <p>In the request body, you provide the following: </p> <ul> <li> <p> <code>AlgorithmSpecification</code> - Identifies the training algorithm to use. </p> </li> <li> <p> <code>HyperParameters</code> - Specify these algorithm-specific parameters to influence the quality of the final model. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p> </li> <li> <p> <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>OutputDataConfig</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results of model training. </p> <p/> </li> <li> <p> <code>ResourceConfig</code> - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance. </p> </li> <li> <p> <code>RoleARN</code> - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training. </p> </li> <li> <p> <code>StoppingCondition</code> - Sets a duration for training. Use this parameter to cap model training costs. </p> </li> </ul> <p> For more information about Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTrainingJobResponse'
+        '480':
+          description: ResourceInUse
+          schema:
+            $ref: '#/definitions/ResourceInUse'
+        '481':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTrainingJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteEndpoint':
+    post:
+      operationId: DeleteEndpoint
+      description: 'Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the endpoint was created. '
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteEndpointInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteEndpointConfig':
+    post:
+      operationId: DeleteEndpointConfig
+      description: 'Deletes an endpoint configuration. The <code>DeleteEndpoingConfig</code> API deletes only the specified configuration. It does not delete endpoints created using the configuration. '
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteEndpointConfigInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteModel':
+    post:
+      operationId: DeleteModel
+      description: 'Deletes a model. The <code>DeleteModel</code> API deletes only the model entry that was created in Amazon SageMaker when you called the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html">CreateModel</a> API. It does not delete model artifacts, inference code, or the IAM role that you specified when creating the model. '
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteModelInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteNotebookInstance':
+    post:
+      operationId: DeleteNotebookInstance
+      description: '<p> Deletes an Amazon SageMaker notebook instance. Before you can delete a notebook instance, you must call the <code>StopNotebookInstance</code> API. </p> <important> <p>When you delete a notebook instance, you lose all of your data. Amazon SageMaker removes the ML compute instance, and deletes the ML storage volume and the network interface associated with the notebook instance. </p> </important>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteNotebookInstanceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTags':
+    post:
+      operationId: DeleteTags
+      description: '<p>Deletes the specified tags from an Amazon SageMaker resource.</p> <p>To list a resource''s tags, use the <code>ListTags</code> API. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTagsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTagsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEndpoint':
+    post:
+      operationId: DescribeEndpoint
+      description: Returns the description of an endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEndpointOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEndpointInput'
+      x-waiters:
+        - delay: 30
+          maxAttempts: 120
+          operation: DescribeEndpoint
+          acceptors:
+            - expected: InService
+              matcher: path
+              state: success
+              argument: EndpointStatus
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: EndpointStatus
+            - expected: ValidationException
+              matcher: error
+              state: failure
+        - delay: 30
+          maxAttempts: 60
+          operation: DescribeEndpoint
+          acceptors:
+            - expected: ValidationException
+              matcher: error
+              state: success
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: EndpointStatus
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEndpointConfig':
+    post:
+      operationId: DescribeEndpointConfig
+      description: Returns the description of an endpoint configuration created using the <code>CreateEndpointConfig</code> API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEndpointConfigOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEndpointConfigInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeModel':
+    post:
+      operationId: DescribeModel
+      description: Describes a model that you created using the <code>CreateModel</code> API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeModelOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeModelInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeNotebookInstance':
+    post:
+      operationId: DescribeNotebookInstance
+      description: Returns information about a notebook instance.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeNotebookInstanceOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeNotebookInstanceInput'
+      x-waiters:
+        - delay: 30
+          maxAttempts: 60
+          operation: DescribeNotebookInstance
+          acceptors:
+            - expected: InService
+              matcher: path
+              state: success
+              argument: NotebookInstanceStatus
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: NotebookInstanceStatus
+        - delay: 30
+          operation: DescribeNotebookInstance
+          maxAttempts: 60
+          acceptors:
+            - expected: Stopped
+              matcher: path
+              state: success
+              argument: NotebookInstanceStatus
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: NotebookInstanceStatus
+        - delay: 30
+          maxAttempts: 60
+          operation: DescribeNotebookInstance
+          acceptors:
+            - expected: ValidationException
+              matcher: error
+              state: success
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: NotebookInstanceStatus
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTrainingJob':
+    post:
+      operationId: DescribeTrainingJob
+      description: Returns information about a training job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTrainingJobResponse'
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTrainingJobRequest'
+      x-waiters:
+        - delay: 120
+          maxAttempts: 180
+          operation: DescribeTrainingJob
+          acceptors:
+            - expected: Completed
+              matcher: path
+              state: success
+              argument: TrainingJobStatus
+            - expected: Stopped
+              matcher: path
+              state: success
+              argument: TrainingJobStatus
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: TrainingJobStatus
+            - expected: ValidationException
+              matcher: error
+              state: failure
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListEndpointConfigs':
+    post:
+      operationId: ListEndpointConfigs
+      description: Lists endpoint configurations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListEndpointConfigsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListEndpointConfigsInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListEndpoints':
+    post:
+      operationId: ListEndpoints
+      description: Lists endpoints.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListEndpointsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListEndpointsInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListModels':
+    post:
+      operationId: ListModels
+      description: 'Lists models created with the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html">CreateModel</a> API.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListModelsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListModelsInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListNotebookInstances':
+    post:
+      operationId: ListNotebookInstances
+      description: 'Returns a list of the Amazon SageMaker notebook instances in the requester''s account in an AWS Region. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListNotebookInstancesOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListNotebookInstancesInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTags':
+    post:
+      operationId: ListTags
+      description: Returns the tags for the specified Amazon SageMaker resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTrainingJobs':
+    post:
+      operationId: ListTrainingJobs
+      description: Lists training jobs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTrainingJobsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTrainingJobsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartNotebookInstance':
+    post:
+      operationId: StartNotebookInstance
+      description: 'Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to <code>InService</code>. A notebook instance''s status must be <code>InService</code> before you can connect to your Jupyter notebook. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartNotebookInstanceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopNotebookInstance':
+    post:
+      operationId: StopNotebookInstance
+      description: '<p>Terminates the ML compute instance. Before terminating the instance, Amazon SageMaker disconnects the ML storage volume from it. Amazon SageMaker preserves the ML storage volume. </p> <p>To access data on the ML storage volume for a notebook instance that has been terminated, call the <code>StartNotebookInstance</code> API. <code>StartNotebookInstance</code> launches another ML compute instance, configures it, and attaches the preserved ML storage volume so you can continue your work. </p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopNotebookInstanceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopTrainingJob':
+    post:
+      operationId: StopTrainingJob
+      description: '<p>Stops a training job. To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of the training is not lost. </p> <p>Training algorithms provided by Amazon SageMaker save the intermediate results of a model training job. This intermediate data is a valid model artifact. You can use the model artifacts that are saved when Amazon SageMaker stops a training job to create a model. </p> <p>When it receives a <code>StopTrainingJob</code> request, Amazon SageMaker changes the status of the job to <code>Stopping</code>. After Amazon SageMaker stops the job, it sets the status to <code>Stopped</code>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopTrainingJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateEndpoint':
+    post:
+      operationId: UpdateEndpoint
+      description: '<p> Deploys the new <code>EndpointConfig</code> specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous <code>EndpointConfig</code> (there is no availability loss). </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateEndpointOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEndpointInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateEndpointWeightsAndCapacities':
+    post:
+      operationId: UpdateEndpointWeightsAndCapacities
+      description: 'Updates variant weight of one or more variants associated with an existing endpoint, or capacity of one variant associated with an existing endpoint. When it receives the request, Amazon SageMaker sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateEndpointWeightsAndCapacitiesOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEndpointWeightsAndCapacitiesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateNotebookInstance':
+    post:
+      operationId: UpdateNotebookInstance
+      description: Updates a notebook instance. NotebookInstance updates include upgrading or downgrading the ML compute instance used for your notebook instance to accommodate changes in your workload requirements. You can also update the VPC security groups.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateNotebookInstanceOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateNotebookInstanceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AddTagsInput:
+    type: object
+    required:
+      - ResourceArn
+      - Tags
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of <code>Tag</code> objects. Each tag is a key-value pair. Only the <code>key</code> parameter is required. If you don''t specify a value, Amazon SageMaker sets the value to an empty string. '
+  AddTagsOutput:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tags associated with the Amazon SageMaker resource.
+  AlgorithmImage:
+    type: string
+    maxLength: 255
+  AlgorithmSpecification:
+    type: object
+    required:
+      - TrainingImage
+      - TrainingInputMode
+    properties:
+      TrainingImage:
+        $ref: '#/definitions/AlgorithmImage'
+        description: 'The registry path of the Docker image that contains the training algorithm. For information about using your own algorithms, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos-docker-registry-paths.html">Docker Registry Paths for Algorithms Provided by Amazon SageMaker </a>. '
+      TrainingInputMode:
+        $ref: '#/definitions/TrainingInputMode'
+        description: '<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accomodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won''t be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>'
+    description: '<p>Specifies the training algorithm to use in a <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html">CreateTrainingJob</a> request. </p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html">Bring Your Own Algorithms </a>. </p>'
+  Channel:
+    type: object
+    required:
+      - ChannelName
+      - DataSource
+    properties:
+      ChannelName:
+        $ref: '#/definitions/ChannelName'
+        description: 'The name of the channel. '
+      DataSource:
+        $ref: '#/definitions/DataSource'
+        description: The location of the channel data.
+      ContentType:
+        $ref: '#/definitions/ContentType'
+        description: The MIME type of the data.
+      CompressionType:
+        $ref: '#/definitions/CompressionType'
+        description: 'If training data is compressed, the compression type. The default value is <code>None</code>. <code>CompressionType</code> is used only in PIPE input mode. In FILE mode, leave this field unset or set it to None.'
+      RecordWrapperType:
+        $ref: '#/definitions/RecordWrapper'
+        description: '<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which caseAmazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don''t need to set this attribute. For more information, see <a href="https://mxnet.incubator.apache.org/how_to/recordio.html?highlight=im2rec">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>'
+    description: 'A channel is a named input source that training algorithms can consume. '
+  ChannelName:
+    type: string
+    pattern: '[A-Za-z0-9\.\-_]+'
+    minLength: 1
+    maxLength: 64
+  CompressionType:
+    type: string
+    enum:
+      - None
+      - Gzip
+  ContainerDefinition:
+    type: object
+    required:
+      - Image
+    properties:
+      ContainerHostname:
+        $ref: '#/definitions/ContainerHostname'
+        description: The DNS host name for the container after Amazon SageMaker deploys it.
+      Image:
+        $ref: '#/definitions/Image'
+        description: 'The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using Your Own Algorithms with Amazon SageMaker</a> '
+      ModelDataUrl:
+        $ref: '#/definitions/Url'
+        description: 'The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). '
+      Environment:
+        $ref: '#/definitions/EnvironmentMap'
+        description: 'The environment variables to set in the Docker container. Each key and value in the <code>Environment</code> string to string map can have length of up to 1024. We support up to 16 entries in the map. '
+    description: 'Describes the container, as part of model definition.'
+  ContainerHostname:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  ContentType:
+    type: string
+    maxLength: 256
+  CreateEndpointConfigInput:
+    type: object
+    required:
+      - EndpointConfigName
+      - ProductionVariants
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: 'The name of the endpoint configuration. You specify this name in a <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> request. '
+      ProductionVariants:
+        $ref: '#/definitions/ProductionVariantList'
+        description: 'An array of <code>ProductionVariant</code> objects, one for each model that you want to host at this endpoint.'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
+  CreateEndpointConfigOutput:
+    type: object
+    required:
+      - EndpointConfigArn
+    properties:
+      EndpointConfigArn:
+        $ref: '#/definitions/EndpointConfigArn'
+        description: 'The Amazon Resource Name (ARN) of the endpoint configuration. '
+  CreateEndpointInput:
+    type: object
+    required:
+      - EndpointName
+      - EndpointConfigName
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint. The name must be unique within an AWS Region in your AWS account.
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: 'The name of an endpoint configuration. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html">CreateEndpointConfig</a>. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a>in the <i>AWS Billing and Cost Management User Guide</i>. '
+  CreateEndpointOutput:
+    type: object
+    required:
+      - EndpointArn
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/EndpointArn'
+        description: The Amazon Resource Name (ARN) of the endpoint.
+  CreateModelInput:
+    type: object
+    required:
+      - ModelName
+      - PrimaryContainer
+      - ExecutionRoleArn
+    properties:
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the new model.
+      PrimaryContainer:
+        $ref: '#/definitions/ContainerDefinition'
+        description: 'The location of the primary docker image containing inference code, associated artifacts, and custom environment map that the inference code uses when the model is deployed into production. '
+      ExecutionRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: 'The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute instances. Deploying on ML compute instances is part of model hosting. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
+  CreateModelOutput:
+    type: object
+    required:
+      - ModelArn
+    properties:
+      ModelArn:
+        $ref: '#/definitions/ModelArn'
+        description: The ARN of the model created in Amazon SageMaker.
+  CreateNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+      - InstanceType
+      - RoleArn
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the new notebook instance.
+      InstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The type of ML compute instance to launch for the notebook instance.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: 'The ID of the subnet in a VPC to which you would like to have a connectivity from your ML compute instance. '
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: 'The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet. '
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: ' When you send any requests to AWS resources from the notebook instance, Amazon SageMaker assumes this role to perform tasks on your behalf. You must grant this role necessary permissions so Amazon SageMaker can perform these tasks. The policy must allow the Amazon SageMaker service principal (sagemaker.amazonaws.com) permissions to assume this role. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. '
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: ' If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tags to associate with the notebook instance. You can add tags later by using the <code>CreateTags</code> API.
+  CreateNotebookInstanceOutput:
+    type: object
+    properties:
+      NotebookInstanceArn:
+        $ref: '#/definitions/NotebookInstanceArn'
+        description: 'The Amazon Resource Name (ARN) of the notebook instance. '
+  CreatePresignedNotebookInstanceUrlInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance.
+      SessionExpirationDurationInSeconds:
+        $ref: '#/definitions/SessionExpirationDurationInSeconds'
+        description: 'The duration of the session, in seconds. The default is 12 hours.'
+  CreatePresignedNotebookInstanceUrlOutput:
+    type: object
+    properties:
+      AuthorizedUrl:
+        $ref: '#/definitions/NotebookInstanceUrl'
+        description: 'A JSON object that contains the URL string. '
+  CreateTrainingJobRequest:
+    type: object
+    required:
+      - TrainingJobName
+      - AlgorithmSpecification
+      - RoleArn
+      - InputDataConfig
+      - OutputDataConfig
+      - ResourceConfig
+      - StoppingCondition
+    properties:
+      TrainingJobName:
+        $ref: '#/definitions/TrainingJobName'
+        description: 'The name of the training job. The name must be unique within an AWS Region in an AWS account. It appears in the Amazon SageMaker console. '
+      HyperParameters:
+        $ref: '#/definitions/HyperParameters'
+        description: '<p>Algorithm-specific parameters. You set hyperparameters before you start the learning process. Hyperparameters influence the quality of the model. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p> <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value pair. Each key and value is limited to 256 characters, as specified by the <code>Length Constraint</code>. </p>'
+      AlgorithmSpecification:
+        $ref: '#/definitions/AlgorithmSpecification'
+        description: 'The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about providing your own algorithms, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html">Bring Your Own Algorithms </a>. '
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: '<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf. </p> <p>During model training, Amazon SageMaker needs your permission to read input data from an S3 bucket, download a Docker image that contains training code, write model artifacts to an S3 bucket, write logs to Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch. You grant permissions for all of these tasks to an IAM role. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p>'
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: '<p>An array of <code>Channel</code> objects. Each channel is a named input source. <code>InputDataConfig</code> describes the input data and its location. </p> <p>Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of input data, <code>training_data</code> and <code>validation_data</code>. The configuration for each channel provides the S3 location where the input data is stored. It also provides information about the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format. </p> <p>Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files from an S3 bucket to a local directory in the Docker container, or makes it available as input streams. </p>'
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: 'Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates subfolders for the artifacts. '
+      ResourceConfig:
+        $ref: '#/definitions/ResourceConfig'
+        description: '<p>The resources, including the ML compute instances and ML storage volumes, to use for model training. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use ML storage volumes for scratch space. If you want Amazon SageMaker to use the ML storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p>'
+      StoppingCondition:
+        $ref: '#/definitions/StoppingCondition'
+        description: '<p>Sets a duration for training. Use this parameter to cap model training costs. To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts. </p> <p>When Amazon SageMaker terminates a job because the stopping condition has been met, training algorithms provided by Amazon SageMaker save the intermediate results of the job. This intermediate data is a valid model artifact. You can use it to create a model using the <code>CreateModel</code> API. </p>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
+  CreateTrainingJobResponse:
+    type: object
+    required:
+      - TrainingJobArn
+    properties:
+      TrainingJobArn:
+        $ref: '#/definitions/TrainingJobArn'
+        description: The Amazon Resource Name (ARN) of the training job.
+  CreationTime:
+    type: string
+    format: date-time
+  DataSource:
+    type: object
+    required:
+      - S3DataSource
+    properties:
+      S3DataSource:
+        $ref: '#/definitions/S3DataSource'
+        description: The S3 location of the data source that is associated with a channel.
+    description: Describes the location of the channel data.
+  DeleteEndpointConfigInput:
+    type: object
+    required:
+      - EndpointConfigName
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the endpoint configuration that you want to delete.
+  DeleteEndpointInput:
+    type: object
+    required:
+      - EndpointName
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint that you want to delete.
+  DeleteModelInput:
+    type: object
+    required:
+      - ModelName
+    properties:
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the model to delete.
+  DeleteNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the Amazon SageMaker notebook instance to delete.
+  DeleteTagsInput:
+    type: object
+    required:
+      - ResourceArn
+      - TagKeys
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource whose tags you want to delete.
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: An array or one or more tag keys to delete.
+  DeleteTagsOutput:
+    type: object
+    properties: {}
+  DescribeEndpointConfigInput:
+    type: object
+    required:
+      - EndpointConfigName
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the endpoint configuration.
+  DescribeEndpointConfigOutput:
+    type: object
+    required:
+      - EndpointConfigName
+      - EndpointConfigArn
+      - ProductionVariants
+      - CreationTime
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: Name of the Amazon SageMaker endpoint configuration.
+      EndpointConfigArn:
+        $ref: '#/definitions/EndpointConfigArn'
+        description: The Amazon Resource Name (ARN) of the endpoint configuration.
+      ProductionVariants:
+        $ref: '#/definitions/ProductionVariantList'
+        description: 'An array of <code>ProductionVariant</code> objects, one for each model that you want to host at this endpoint.'
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint configuration was created.
+  DescribeEndpointInput:
+    type: object
+    required:
+      - EndpointName
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint.
+  DescribeEndpointOutput:
+    type: object
+    required:
+      - EndpointName
+      - EndpointArn
+      - EndpointConfigName
+      - EndpointStatus
+      - CreationTime
+      - LastModifiedTime
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: Name of the endpoint.
+      EndpointArn:
+        $ref: '#/definitions/EndpointArn'
+        description: The Amazon Resource Name (ARN) of the endpoint.
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the endpoint configuration associated with this endpoint.
+      ProductionVariants:
+        $ref: '#/definitions/ProductionVariantSummaryList'
+        description: ' An array of ProductionVariant objects, one for each model hosted behind this endpoint. '
+      EndpointStatus:
+        $ref: '#/definitions/EndpointStatus'
+        description: The status of the endpoint.
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the status of the endpoint is <code>Failed</code>, the reason why it failed. '
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint was created.
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint was last modified.
+  DescribeModelInput:
+    type: object
+    required:
+      - ModelName
+    properties:
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the model.
+  DescribeModelOutput:
+    type: object
+    required:
+      - ModelName
+      - PrimaryContainer
+      - ExecutionRoleArn
+      - CreationTime
+      - ModelArn
+    properties:
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: Name of the Amazon SageMaker model.
+      PrimaryContainer:
+        $ref: '#/definitions/ContainerDefinition'
+        description: 'The location of the primary inference code, associated artifacts, and custom environment map that the inference code uses when it is deployed in production. '
+      ExecutionRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the model was created.
+      ModelArn:
+        $ref: '#/definitions/ModelArn'
+        description: The Amazon Resource Name (ARN) of the model.
+  DescribeNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance that you want information about.
+  DescribeNotebookInstanceOutput:
+    type: object
+    properties:
+      NotebookInstanceArn:
+        $ref: '#/definitions/NotebookInstanceArn'
+        description: The Amazon Resource Name (ARN) of the notebook instance.
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: ' Name of the Amazon SageMaker notebook instance. '
+      NotebookInstanceStatus:
+        $ref: '#/definitions/NotebookInstanceStatus'
+        description: The status of the notebook instance.
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If staus is failed, the reason it failed.'
+      Url:
+        $ref: '#/definitions/NotebookInstanceUrl'
+        description: 'The URL that you use to connect to the Jupyter notebook that is running in your notebook instance. '
+      InstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The type of ML compute instance running on the notebook instance.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The ID of the VPC subnet.
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: The IDs of the VPC security groups.
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: ' Amazon Resource Name (ARN) of the IAM role associated with the instance. '
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: ' AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance. '
+      NetworkInterfaceId:
+        $ref: '#/definitions/NetworkInterfaceId'
+        description: ' Network interface IDs that Amazon SageMaker created at the time of creating the instance. '
+      LastModifiedTime:
+        $ref: '#/definitions/LastModifiedTime'
+        description: 'A timestamp. Use this parameter to retrieve the time when the notebook instance was last modified. '
+      CreationTime:
+        $ref: '#/definitions/CreationTime'
+        description: A timestamp. Use this parameter to return the time when the notebook instance was created
+  DescribeTrainingJobRequest:
+    type: object
+    required:
+      - TrainingJobName
+    properties:
+      TrainingJobName:
+        $ref: '#/definitions/TrainingJobName'
+        description: The name of the training job.
+  DescribeTrainingJobResponse:
+    type: object
+    required:
+      - TrainingJobName
+      - TrainingJobArn
+      - ModelArtifacts
+      - TrainingJobStatus
+      - SecondaryStatus
+      - AlgorithmSpecification
+      - InputDataConfig
+      - ResourceConfig
+      - StoppingCondition
+      - CreationTime
+    properties:
+      TrainingJobName:
+        $ref: '#/definitions/TrainingJobName'
+        description: ' Name of the model training job. '
+      TrainingJobArn:
+        $ref: '#/definitions/TrainingJobArn'
+        description: The Amazon Resource Name (ARN) of the training job.
+      ModelArtifacts:
+        $ref: '#/definitions/ModelArtifacts'
+        description: 'Information about the Amazon S3 location that is configured for storing model artifacts. '
+      TrainingJobStatus:
+        $ref: '#/definitions/TrainingJobStatus'
+        description: '<p>The status of the training job. </p> <p>For the <code>InProgress</code> status, Amazon SageMaker can return these secondary statuses:</p> <ul> <li> <p>Starting - Preparing for training.</p> </li> <li> <p>Downloading - Optional stage for algorithms that support File training input mode. It indicates data is being downloaded to ML storage volumes.</p> </li> <li> <p>Training - Training is in progress.</p> </li> <li> <p>Uploading - Training is complete and model upload is in progress.</p> </li> </ul> <p>For the <code>Stopped</code> training status, Amazon SageMaker can return these secondary statuses:</p> <ul> <li> <p>MaxRuntimeExceeded - Job stopped as a result of maximum allowed runtime exceeded.</p> </li> </ul>'
+      SecondaryStatus:
+        $ref: '#/definitions/SecondaryStatus'
+        description: ' Provides granular information about the system state. For more information, see <code>TrainingJobStatus</code>. '
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the training job failed, the reason it failed. '
+      HyperParameters:
+        $ref: '#/definitions/HyperParameters'
+        description: 'Algorithm-specific parameters. '
+      AlgorithmSpecification:
+        $ref: '#/definitions/AlgorithmSpecification'
+        description: 'Information about the algorithm used for training, and algorithm metadata. '
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: 'The AWS Identity and Access Management (IAM) role configured for the training job. '
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: 'An array of <code>Channel</code> objects that describes each data input channel. '
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: 'The S3 path where model artifacts that you configured when creating the job are stored. Amazon SageMaker creates subfolders for model artifacts. '
+      ResourceConfig:
+        $ref: '#/definitions/ResourceConfig'
+        description: 'Resources, including ML compute instances and ML storage volumes, that are configured for model training. '
+      StoppingCondition:
+        $ref: '#/definitions/StoppingCondition'
+        description: 'The condition under which to stop the training job. '
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that indicates when the training job was created.
+      TrainingStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that indicates when training started.
+      TrainingEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that indicates when model training ended.
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that indicates when the status of the training job was last modified.
+  DesiredWeightAndCapacity:
+    type: object
+    required:
+      - VariantName
+    properties:
+      VariantName:
+        $ref: '#/definitions/VariantName'
+        description: The name of the variant to update.
+      DesiredWeight:
+        $ref: '#/definitions/VariantWeight'
+        description: The variant's weight.
+      DesiredInstanceCount:
+        $ref: '#/definitions/TaskCount'
+        description: The variant's capacity.
+    description: Specifies weight and capacity values for a production variant.
+  DesiredWeightAndCapacityList:
+    type: array
+    items:
+      $ref: '#/definitions/DesiredWeightAndCapacity'
+    minItems: 1
+  EndpointArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  EndpointConfigArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  EndpointConfigName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  EndpointConfigNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  EndpointConfigSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+  EndpointConfigSummary:
+    type: object
+    required:
+      - EndpointConfigName
+      - EndpointConfigArn
+      - CreationTime
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the endpoint configuration.
+      EndpointConfigArn:
+        $ref: '#/definitions/EndpointConfigArn'
+        description: The Amazon Resource Name (ARN) of the endpoint configuration.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint configuration was created.
+    description: Provides summary information for an endpoint configuration.
+  EndpointConfigSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointConfigSummary'
+  EndpointName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  EndpointNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  EndpointSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - Status
+  EndpointStatus:
+    type: string
+    enum:
+      - OutOfService
+      - Creating
+      - Updating
+      - RollingBack
+      - InService
+      - Deleting
+      - Failed
+  EndpointSummary:
+    type: object
+    required:
+      - EndpointName
+      - EndpointArn
+      - CreationTime
+      - LastModifiedTime
+      - EndpointStatus
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint.
+      EndpointArn:
+        $ref: '#/definitions/EndpointArn'
+        description: The Amazon Resource Name (ARN) of the endpoint.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint was created.
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint was last modified.
+      EndpointStatus:
+        $ref: '#/definitions/EndpointStatus'
+        description: The status of the endpoint.
+    description: Provides summary information for an endpoint.
+  EndpointSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointSummary'
+  EnvironmentKey:
+    type: string
+    pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
+    maxLength: 1024
+  EnvironmentMap:
+    type: array
+    maxItems: 16
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EnvironmentKey'
+        value:
+          $ref: '#/definitions/EnvironmentValue'
+  EnvironmentValue:
+    type: string
+    maxLength: 1024
+  FailureReason:
+    type: string
+    maxLength: 1024
+  HyperParameters:
+    type: array
+    minItems: 0
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ParameterKey'
+        value:
+          $ref: '#/definitions/ParameterValue'
+  Image:
+    type: string
+    pattern: '[\S]+'
+    maxLength: 255
+  InputDataConfig:
+    type: array
+    items:
+      $ref: '#/definitions/Channel'
+    minItems: 1
+    maxItems: 8
+  InstanceType:
+    type: string
+    enum:
+      - ml.t2.medium
+      - ml.m4.xlarge
+      - ml.p2.xlarge
+  KmsKeyId:
+    type: string
+    maxLength: 2048
+  LastModifiedTime:
+    type: string
+    format: date-time
+  ListEndpointConfigsInput:
+    type: object
+    properties:
+      SortBy:
+        $ref: '#/definitions/EndpointConfigSortKey'
+        description: The field to sort results by. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/OrderKey'
+        description: The sort order for results. The default is <code>Ascending</code>.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If the result of the previous <code>ListEndpointConfig</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of endpoint configurations, use the token in the next request. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of training jobs to return in the response.
+      NameContains:
+        $ref: '#/definitions/EndpointConfigNameContains'
+        description: 'A string in the endpoint configuration name. This filter returns only endpoint configurations whose name contains the specified string. '
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only endpoint configurations created before the specified time (timestamp).
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only endpoint configurations created after the specified time (timestamp).
+  ListEndpointConfigsOutput:
+    type: object
+    required:
+      - EndpointConfigs
+    properties:
+      EndpointConfigs:
+        $ref: '#/definitions/EndpointConfigSummaryList'
+        description: An array of endpoint configurations.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of endpoint configurations, use it in the subsequent request '
+  ListEndpointsInput:
+    type: object
+    properties:
+      SortBy:
+        $ref: '#/definitions/EndpointSortKey'
+        description: Sorts the list of results. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/OrderKey'
+        description: The sort order for results. The default is <code>Ascending</code>.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If the result of a <code>ListEndpoints</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of endpoints, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of endpoints to return in the response.
+      NameContains:
+        $ref: '#/definitions/EndpointNameContains'
+        description: A string in endpoint names. This filter returns only endpoints whose name contains the specified string.
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only endpoints that were created before the specified time (timestamp).
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only endpoints that were created after the specified time (timestamp).
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: ' A filter that returns only endpoints that were modified before the specified timestamp. '
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: ' A filter that returns only endpoints that were modified after the specified timestamp. '
+      StatusEquals:
+        $ref: '#/definitions/EndpointStatus'
+        description: ' A filter that returns only endpoints with the specified status. '
+  ListEndpointsOutput:
+    type: object
+    required:
+      - Endpoints
+    properties:
+      Endpoints:
+        $ref: '#/definitions/EndpointSummaryList'
+        description: ' An array or endpoint objects. '
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request. '
+  ListModelsInput:
+    type: object
+    properties:
+      SortBy:
+        $ref: '#/definitions/ModelSortKey'
+        description: Sorts the list of results. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/OrderKey'
+        description: The sort order for results. The default is <code>Ascending</code>.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If the response to a previous <code>ListModels</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of models, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of models to return in the response.
+      NameContains:
+        $ref: '#/definitions/ModelNameContains'
+        description: A string in the training job name. This filter returns only models in the training job whose name contains the specified string.
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only models created before the specified time (timestamp).
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only models created after the specified time (timestamp).
+  ListModelsOutput:
+    type: object
+    required:
+      - Models
+    properties:
+      Models:
+        $ref: '#/definitions/ModelSummaryList'
+        description: 'An array of <code>ModelSummary</code> objects, each of which lists a model.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of models, use it in the subsequent request. '
+  ListNotebookInstancesInput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '<p> If the previous call to the <code>ListNotebookInstances</code> is truncated, the response includes a <code>NextToken</code>. You can use this token in your subsequent <code>ListNotebookInstances</code> request to fetch the next set of notebook instances. </p> <note> <p> You might specify a filter or a sort order in your request. When response is truncated, you must use the same values for the filer and sort order in the next request. </p> </note>'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of notebook instances to return.
+      SortBy:
+        $ref: '#/definitions/NotebookInstanceSortKey'
+        description: The field to sort results by. The default is <code>Name</code>.
+      SortOrder:
+        $ref: '#/definitions/NotebookInstanceSortOrder'
+        description: 'The sort order for results. '
+      NameContains:
+        $ref: '#/definitions/NotebookInstanceNameContains'
+        description: 'A string in the notebook instances'' name. This filter returns only notebook instances whose name contains the specified string. '
+      CreationTimeBefore:
+        $ref: '#/definitions/CreationTime'
+        description: 'A filter that returns only notebook instances that were created before the specified time (timestamp). '
+      CreationTimeAfter:
+        $ref: '#/definitions/CreationTime'
+        description: A filter that returns only notebook instances that were created after the specified time (timestamp).
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A filter that returns only notebook instances that were modified before the specified time (timestamp).
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A filter that returns only notebook instances that were modified after the specified time (timestamp).
+      StatusEquals:
+        $ref: '#/definitions/NotebookInstanceStatus'
+        description: A filter that returns only notebook instances with the specified status.
+  ListNotebookInstancesOutput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response to the previous <code>ListNotebookInstances</code> request was truncated, Amazon SageMaker returns this token. To retrieve the next set of notebook instances, use the token in the next request.'
+      NotebookInstances:
+        $ref: '#/definitions/NotebookInstanceSummaryList'
+        description: 'An array of <code>NotebookInstanceSummary</code> objects, one for each notebook instance.'
+  ListTagsInput:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' If the response to the previous <code>ListTags</code> request is truncated, Amazon SageMaker returns this token. To retrieve the next set of tags, use it in the subsequent request. '
+      MaxResults:
+        $ref: '#/definitions/ListTagsMaxResults'
+        description: Maximum number of tags to return.
+  ListTagsMaxResults:
+    type: integer
+    minimum: 50
+  ListTagsOutput:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of <code>Tag</code> objects, each with a tag key and a value.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens. '
+  ListTrainingJobsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous <code>ListTrainingJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of training jobs to return in the response.
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that only training jobs created after the specified time (timestamp).
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only training jobs created before the specified time (timestamp).
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only training jobs modified after the specified time (timestamp).
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only training jobs modified before the specified time (timestamp).
+      NameContains:
+        $ref: '#/definitions/NameContains'
+        description: A string in the training job name. This filter returns only models whose name contains the specified string.
+      StatusEquals:
+        $ref: '#/definitions/TrainingJobStatus'
+        description: A filter that retrieves only training jobs with a specific status.
+      SortBy:
+        $ref: '#/definitions/SortBy'
+        description: The field to sort results by. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The sort order for results. The default is <code>Ascending</code>.
+  ListTrainingJobsResponse:
+    type: object
+    required:
+      - TrainingJobSummaries
+    properties:
+      TrainingJobSummaries:
+        $ref: '#/definitions/TrainingJobSummaries'
+        description: 'An array of <code>TrainingJobSummary</code> objects, each listing a training job.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request.'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  MaxRuntimeInSeconds:
+    type: integer
+    minimum: 1
+  ModelArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  ModelArtifacts:
+    type: object
+    required:
+      - S3ModelArtifacts
+    properties:
+      S3ModelArtifacts:
+        $ref: '#/definitions/S3Uri'
+        description: 'The path of the S3 object that contains the model artifacts. For example, <code>s3://bucket-name/keynameprefix/model.tar.gz</code>.'
+    description: 'Provides information about the location that is configured for storing model artifacts. '
+  ModelName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  ModelNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  ModelSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+  ModelSummary:
+    type: object
+    required:
+      - ModelName
+      - ModelArn
+      - CreationTime
+    properties:
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the model that you want a summary for.
+      ModelArn:
+        $ref: '#/definitions/ModelArn'
+        description: The Amazon Resource Name (ARN) of the model.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that indicates when the model was created.
+    description: Provides summary information about a model.
+  ModelSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ModelSummary'
+  NameContains:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    maxLength: 63
+  NetworkInterfaceId:
+    type: string
+  NextToken:
+    type: string
+    maxLength: 8192
+  NotebookInstanceArn:
+    type: string
+    maxLength: 256
+  NotebookInstanceName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  NotebookInstanceNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  NotebookInstanceSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - Status
+  NotebookInstanceSortOrder:
+    type: string
+    enum:
+      - Ascending
+      - Descending
+  NotebookInstanceStatus:
+    type: string
+    enum:
+      - Pending
+      - InService
+      - Stopping
+      - Stopped
+      - Failed
+      - Deleting
+  NotebookInstanceSummary:
+    type: object
+    required:
+      - NotebookInstanceName
+      - NotebookInstanceArn
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance that you want a summary for.
+      NotebookInstanceArn:
+        $ref: '#/definitions/NotebookInstanceArn'
+        description: The Amazon Resource Name (ARN) of the notebook instance.
+      NotebookInstanceStatus:
+        $ref: '#/definitions/NotebookInstanceStatus'
+        description: The status of the notebook instance.
+      Url:
+        $ref: '#/definitions/NotebookInstanceUrl'
+        description: 'The URL that you use to connect to the Jupyter instance running in your notebook instance. '
+      InstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The type of ML compute instance that the notebook instance is running on.
+      CreationTime:
+        $ref: '#/definitions/CreationTime'
+        description: A timestamp that shows when the notebook instance was created.
+      LastModifiedTime:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A timestamp that shows when the notebook instance was last modified.
+    description: Provides summary information for an Amazon SageMaker notebook instance.
+  NotebookInstanceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/NotebookInstanceSummary'
+  NotebookInstanceUrl:
+    type: string
+  OrderKey:
+    type: string
+    enum:
+      - Ascending
+      - Descending
+  OutputDataConfig:
+    type: object
+    required:
+      - S3OutputPath
+    properties:
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. </p> <note> <p>If the configuration of the output S3 bucket requires server-side encryption for objects, and you don''t provide the KMS key ID, Amazon SageMaker uses the default service key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in Amazon Simple Storage Service developer guide.</p> </note> <note> <p> The KMS key policy must grant permission to the IAM role you specify in your <code>CreateTrainingJob</code> request. <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the AWS Key Management Service Developer Guide. </p> </note>'
+      S3OutputPath:
+        $ref: '#/definitions/S3Uri'
+        description: 'Identifies the S3 path where you want Amazon SageMaker to store the model artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>. '
+    description: Provides information about how to store model training results (model artifacts).
+  PaginationToken:
+    type: string
+    maxLength: 8192
+  ParameterKey:
+    type: string
+    maxLength: 256
+  ParameterValue:
+    type: string
+    maxLength: 256
+  ProductionVariant:
+    type: object
+    required:
+      - VariantName
+      - ModelName
+      - InitialInstanceCount
+      - InstanceType
+    properties:
+      VariantName:
+        $ref: '#/definitions/VariantName'
+        description: The name of the production variant.
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the model that you want to host. This is the name that you specified when creating the model.
+      InitialInstanceCount:
+        $ref: '#/definitions/TaskCount'
+        description: Number of instances to launch initially.
+      InstanceType:
+        $ref: '#/definitions/ProductionVariantInstanceType'
+        description: The ML compute instance type.
+      InitialVariantWeight:
+        $ref: '#/definitions/VariantWeight'
+        description: 'Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. The traffic to a production variant is determined by the ratio of the <code>VariantWeight</code> to the sum of all <code>VariantWeight</code> values across all ProductionVariants. If unspecified, it defaults to 1.0. '
+    description: 'Identifies a model that you want to host and the resources to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. '
+  ProductionVariantInstanceType:
+    type: string
+    enum:
+      - ml.c4.2xlarge
+      - ml.c4.8xlarge
+      - ml.c4.xlarge
+      - ml.c5.2xlarge
+      - ml.c5.9xlarge
+      - ml.c5.xlarge
+      - ml.m4.xlarge
+      - ml.p2.xlarge
+      - ml.p3.2xlarge
+      - ml.t2.medium
+  ProductionVariantList:
+    type: array
+    items:
+      $ref: '#/definitions/ProductionVariant'
+    minItems: 1
+  ProductionVariantSummary:
+    type: object
+    required:
+      - VariantName
+    properties:
+      VariantName:
+        $ref: '#/definitions/VariantName'
+        description: The name of the variant.
+      CurrentWeight:
+        $ref: '#/definitions/VariantWeight'
+        description: The weight associated with the variant.
+      DesiredWeight:
+        $ref: '#/definitions/VariantWeight'
+        description: 'The requested weight, as specified in the <code>UpdateWeightAndCapacities</code> request. '
+      CurrentInstanceCount:
+        $ref: '#/definitions/TaskCount'
+        description: The number of instances associated with the variant.
+      DesiredInstanceCount:
+        $ref: '#/definitions/TaskCount'
+        description: 'The number of instances requested in the <code>UpdateWeightAndCapacities</code> request. '
+    description: 'Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateWeightAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. '
+  ProductionVariantSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ProductionVariantSummary'
+    minItems: 1
+  RecordWrapper:
+    type: string
+    enum:
+      - None
+      - RecordIO
+  ResourceArn:
+    type: string
+    maxLength: 256
+  ResourceConfig:
+    type: object
+    required:
+      - InstanceType
+      - InstanceCount
+      - VolumeSizeInGB
+    properties:
+      InstanceType:
+        $ref: '#/definitions/TrainingInstanceType'
+        description: 'The ML compute instance type. '
+      InstanceCount:
+        $ref: '#/definitions/TrainingInstanceCount'
+        description: 'The number of ML compute instances to use. For distributed training, provide a value greater than 1. '
+      VolumeSizeInGB:
+        $ref: '#/definitions/VolumeSizeInGB'
+        description: '<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>You must specify sufficient ML storage for your scenario. </p> <note> <p> Amazon SageMaker supports only the General Purpose SSD (gp2) ML storage volume type. </p> </note>'
+      VolumeKmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the training job.
+    description: 'Describes the resources, including ML compute instances and ML storage volumes, to use for model training. '
+  ResourceInUse:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/FailureReason'
+    description: Resource being accessed is in use.
+  ResourceLimitExceeded:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/FailureReason'
+    description: ' You have exceeded an Amazon SageMaker resource limit. For example, you might have too many training jobs created. '
+  ResourceNotFound:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/FailureReason'
+    description: Resource being access is not found.
+  RoleArn:
+    type: string
+    pattern: '^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$'
+    minLength: 20
+    maxLength: 2048
+  S3DataDistribution:
+    type: string
+    enum:
+      - FullyReplicated
+      - ShardedByS3Key
+  S3DataSource:
+    type: object
+    required:
+      - S3DataType
+      - S3Uri
+    properties:
+      S3DataType:
+        $ref: '#/definitions/S3DataType'
+        description: '<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for model training. </p> <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for model training. </p>'
+      S3Uri:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example: </p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {"prefix": "s3://customer_bucket/some/prefix/"},</code> </p> <p> <code> "relative/path/to/custdata-1",</code> </p> <p> <code> "relative/path/custdata-2",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>s3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-1</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>s3uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>s3uris</code> points to must readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf. </p> </li> </ul>'
+      S3DataDistributionType:
+        $ref: '#/definitions/S3DataDistribution'
+        description: '<p>If you want Amazon SageMaker to replicate the entire dataset on each ML compute instance that is launched for model training, specify <code>FullyReplicated</code>. </p> <p>If you want Amazon SageMaker to replicate a subset of data on each ML compute instance that is launched for model training, specify <code>ShardedByS3Key</code>. If there are <i>n</i> ML compute instances launched for a training job, each instance gets approximately 1/<i>n</i> of the number of S3 objects. In this case, model training on each machine uses only the subset of training data. </p> <p>Don''t choose more ML compute instances for training than available S3 objects. If you do, some nodes won''t get any data and you will pay for nodes that aren''t getting any training data. This applies in both FILE and PIPE modes. Keep this in mind when developing algorithms. </p> <p>In distributed training, where you use multiple ML compute EC2 instances, you might choose <code>ShardedByS3Key</code>. If the algorithm requires copying training data to the ML storage volume (when <code>TrainingInputMode</code> is set to <code>File</code>), this copies 1/<i>n</i> of the number of objects. </p>'
+    description: Describes the S3 data source.
+  S3DataType:
+    type: string
+    enum:
+      - ManifestFile
+      - S3Prefix
+  S3Uri:
+    type: string
+    pattern: '^(https|s3)://([^/]+)/?(.*)$'
+    maxLength: 1024
+  SecondaryStatus:
+    type: string
+    enum:
+      - Starting
+      - Downloading
+      - Training
+      - Uploading
+      - Stopping
+      - Stopped
+      - MaxRuntimeExceeded
+      - Completed
+      - Failed
+  SecurityGroupId:
+    type: string
+    maxLength: 32
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+    maxItems: 5
+  SessionExpirationDurationInSeconds:
+    type: integer
+    minimum: 1800
+    maximum: 43200
+  SortBy:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - Status
+  SortOrder:
+    type: string
+    enum:
+      - Ascending
+      - Descending
+  StartNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance to start.
+  StopNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance to terminate.
+  StopTrainingJobRequest:
+    type: object
+    required:
+      - TrainingJobName
+    properties:
+      TrainingJobName:
+        $ref: '#/definitions/TrainingJobName'
+        description: The name of the training job to stop.
+  StoppingCondition:
+    type: object
+    properties:
+      MaxRuntimeInSeconds:
+        $ref: '#/definitions/MaxRuntimeInSeconds'
+        description: 'The maximum length of time, in seconds, that the training job can run. If model training does not complete during this time, Amazon SageMaker ends the job. If value is not specified, default value is 1 day. Maximum value is 5 days.'
+    description: '<p>Specifies how long model training can run. When model training reaches the limit, Amazon SageMaker ends the training job. Use this API to cap model training cost.</p> <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of training is not lost. </p> <p>Training algorithms provided by Amazon SageMaker automatically saves the intermediate results of a model training job (it is best effort case, as model might not be ready to save as some stages, for example training just started). This intermediate data is a valid model artifact. You can use it to create a model (<code>CreateModel</code>). </p>'
+  SubnetId:
+    type: string
+    maxLength: 32
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The tag key.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The tag value.
+    description: 'Describes a tag. '
+  TagKey:
+    type: string
+    pattern: '^((?!aws:)[\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
+  TaskCount:
+    type: integer
+    minimum: 1
+  Timestamp:
+    type: string
+    format: date-time
+  TrainingInputMode:
+    type: string
+    enum:
+      - Pipe
+      - File
+  TrainingInstanceCount:
+    type: integer
+    minimum: 1
+  TrainingInstanceType:
+    type: string
+    enum:
+      - ml.m4.xlarge
+      - ml.m4.4xlarge
+      - ml.m4.10xlarge
+      - ml.c4.xlarge
+      - ml.c4.2xlarge
+      - ml.c4.8xlarge
+      - ml.p2.xlarge
+      - ml.p2.8xlarge
+      - ml.p2.16xlarge
+      - ml.p3.2xlarge
+      - ml.p3.8xlarge
+      - ml.p3.16xlarge
+      - ml.c5.xlarge
+      - ml.c5.2xlarge
+      - ml.c5.4xlarge
+      - ml.c5.9xlarge
+      - ml.c5.18xlarge
+  TrainingJobArn:
+    type: string
+    pattern: 'arn:aws:sagemaker:[\p{Alnum}\-]*:[0-9]{12}:training-job/.*'
+    maxLength: 256
+  TrainingJobName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    minLength: 1
+    maxLength: 63
+  TrainingJobStatus:
+    type: string
+    enum:
+      - InProgress
+      - Completed
+      - Failed
+      - Stopping
+      - Stopped
+  TrainingJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TrainingJobSummary'
+  TrainingJobSummary:
+    type: object
+    required:
+      - TrainingJobName
+      - TrainingJobArn
+      - CreationTime
+      - TrainingJobStatus
+    properties:
+      TrainingJobName:
+        $ref: '#/definitions/TrainingJobName'
+        description: The name of the training job that you want a summary for.
+      TrainingJobArn:
+        $ref: '#/definitions/TrainingJobArn'
+        description: The Amazon Resource Name (ARN) of the training job.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the training job was created.
+      TrainingEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'A timestamp that shows when the training job ended. This field is set only if the training job has one of the terminal statuses (<code>Completed</code>, <code>Failed</code>, or <code>Stopped</code>). '
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: ' Timestamp when the training job was last modified. '
+      TrainingJobStatus:
+        $ref: '#/definitions/TrainingJobStatus'
+        description: The status of the training job.
+    description: Provides summary information about a training job.
+  UpdateEndpointInput:
+    type: object
+    required:
+      - EndpointName
+      - EndpointConfigName
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint whose configuration you want to update.
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the new endpoint configuration.
+  UpdateEndpointOutput:
+    type: object
+    required:
+      - EndpointArn
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/EndpointArn'
+        description: The Amazon Resource Name (ARN) of the endpoint.
+  UpdateEndpointWeightsAndCapacitiesInput:
+    type: object
+    required:
+      - EndpointName
+      - DesiredWeightsAndCapacities
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of an existing Amazon SageMaker endpoint.
+      DesiredWeightsAndCapacities:
+        $ref: '#/definitions/DesiredWeightAndCapacityList'
+        description: An object that provides new capacity and weight values for a variant.
+  UpdateEndpointWeightsAndCapacitiesOutput:
+    type: object
+    required:
+      - EndpointArn
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/EndpointArn'
+        description: The Amazon Resource Name (ARN) of the updated endpoint.
+  UpdateNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance to update.
+      InstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The Amazon ML compute instance type.
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: Amazon Resource Name (ARN) of the IAM role to associate with the instance.
+  UpdateNotebookInstanceOutput:
+    type: object
+    properties: {}
+  Url:
+    type: string
+    pattern: '^(https|s3)://([^/]+)/?(.*)$'
+    maxLength: 1024
+  VariantName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  VariantWeight:
+    type: number
+    format: float
+    minimum: 0
+  VolumeSizeInGB:
+    type: integer
+    minimum: 1

@@ -1,0 +1,1383 @@
+swagger: '2.0'
+info:
+  version: '2017-10-12'
+  x-release: v4
+  title: AWS Elemental MediaPackage
+  description: AWS Elemental MediaPackage
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mediapackage
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediapackage-2017-10-12.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/mediapackage/'
+host: mediapackage.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /channels:
+    post:
+      operationId: CreateChannel
+      description: Creates a new Channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateChannelRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListChannels
+      description: Returns a collection of Channels.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListChannelsResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListChannelsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /origin_endpoints:
+    post:
+      operationId: CreateOriginEndpoint
+      description: Creates a new OriginEndpoint record.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateOriginEndpointResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOriginEndpointRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListOriginEndpoints
+      description: Returns a collection of OriginEndpoint records.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListOriginEndpointsResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListOriginEndpointsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/channels/{id}':
+    delete:
+      operationId: DeleteChannel
+      description: Deletes an existing Channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteChannelRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeChannel
+      description: Gets details about a Channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeChannelRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateChannel
+      description: Updates an existing Channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateChannelRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
+  '/origin_endpoints/{id}':
+    delete:
+      operationId: DeleteOriginEndpoint
+      description: Deletes an existing OriginEndpoint.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteOriginEndpointResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteOriginEndpointRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeOriginEndpoint
+      description: Gets details about an existing OriginEndpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeOriginEndpointResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeOriginEndpointRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateOriginEndpoint
+      description: Updates an existing OriginEndpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateOriginEndpointResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateOriginEndpointRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
+  '/channels/{id}/credentials':
+    put:
+      operationId: RotateChannelCredentials
+      description: Changes the Channel ingest username and password.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RotateChannelCredentialsResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RotateChannelCredentialsRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AdMarkers:
+    enum:
+      - NONE
+      - SCTE35_ENHANCED
+      - PASSTHROUGH
+    type: string
+  Channel:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the Channel.
+        $ref: '#/definitions/__string'
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+      HlsIngest:
+        $ref: '#/definitions/HlsIngest'
+      Id:
+        description: The ID of the Channel.
+        $ref: '#/definitions/__string'
+    description: A Channel resource configuration.
+  ChannelCreateParameters:
+    type: object
+    properties:
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+      Id:
+        description: |
+          The ID of the Channel. The ID must be unique within the region and it
+          cannot be changed after a Channel is created.
+        $ref: '#/definitions/__string'
+    description: Configuration parameters for a new Channel.
+  ChannelList:
+    type: object
+    properties:
+      Channels:
+        description: A list of Channel records.
+        $ref: '#/definitions/ListOfChannel'
+      NextToken:
+        description: A token that can be used to resume pagination from the end of the collection.
+        $ref: '#/definitions/__string'
+    description: A collection of Channel records.
+  ChannelUpdateParameters:
+    type: object
+    properties:
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+    description: Configuration parameters for updating an existing Channel.
+  CreateChannelRequest:
+    required:
+      - Id
+    type: object
+    properties:
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+      Id:
+        description: |
+          The ID of the Channel. The ID must be unique within the region and it
+          cannot be changed after a Channel is created.
+        $ref: '#/definitions/__string'
+    description: A new Channel configuration.
+  CreateChannelResponse:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the Channel.
+        $ref: '#/definitions/__string'
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+      HlsIngest:
+        $ref: '#/definitions/HlsIngest'
+      Id:
+        description: The ID of the Channel.
+        $ref: '#/definitions/__string'
+  CreateOriginEndpointRequest:
+    required:
+      - ChannelId
+      - Id
+    type: object
+    properties:
+      ChannelId:
+        description: |
+          The ID of the Channel that the OriginEndpoint will be associated with.
+          This cannot be changed after the OriginEndpoint is created.
+        $ref: '#/definitions/__string'
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      Id:
+        description: |
+          The ID of the OriginEndpoint.  The ID must be unique within the region
+          and it cannot be changed after the OriginEndpoint is created.
+        $ref: '#/definitions/__string'
+      ManifestName:
+        description: A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/ListOf__string'
+    description: Configuration parameters used to create a new OriginEndpoint.
+  CreateOriginEndpointResponse:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      ChannelId:
+        description: The ID of the Channel the OriginEndpoint is associated with.
+        $ref: '#/definitions/__string'
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      Id:
+        description: The ID of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      ManifestName:
+        description: A short string appended to the end of the OriginEndpoint URL.
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Url:
+        description: The URL of the packaged OriginEndpoint for consumption.
+        $ref: '#/definitions/__string'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/ListOf__string'
+  DashEncryption:
+    required:
+      - SpekeKeyProvider
+    type: object
+    properties:
+      KeyRotationIntervalSeconds:
+        description: Time (in seconds) between each encryption key rotation.
+        $ref: '#/definitions/__integer'
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProvider'
+    description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+  DashPackage:
+    type: object
+    properties:
+      Encryption:
+        $ref: '#/definitions/DashEncryption'
+      ManifestWindowSeconds:
+        description: Time window (in seconds) contained in each manifest.
+        $ref: '#/definitions/__integer'
+      MinBufferTimeSeconds:
+        description: Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+        $ref: '#/definitions/__integer'
+      MinUpdatePeriodSeconds:
+        description: Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).
+        $ref: '#/definitions/__integer'
+      Profile:
+        description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
+        $ref: '#/definitions/Profile'
+      SegmentDurationSeconds:
+        description: |
+          Duration (in seconds) of each segment. Actual segments will be
+          rounded to the nearest multiple of the source segment duration.
+        $ref: '#/definitions/__integer'
+      StreamSelection:
+        $ref: '#/definitions/StreamSelection'
+      SuggestedPresentationDelaySeconds:
+        description: Duration (in seconds) to delay live content before presentation.
+        $ref: '#/definitions/__integer'
+    description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+  DeleteChannelRequest:
+    type: object
+    properties: {}
+  DeleteChannelResponse:
+    type: object
+    properties: {}
+  DeleteOriginEndpointRequest:
+    type: object
+    properties: {}
+  DeleteOriginEndpointResponse:
+    type: object
+    properties: {}
+  DescribeChannelRequest:
+    type: object
+    properties: {}
+  DescribeChannelResponse:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the Channel.
+        $ref: '#/definitions/__string'
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+      HlsIngest:
+        $ref: '#/definitions/HlsIngest'
+      Id:
+        description: The ID of the Channel.
+        $ref: '#/definitions/__string'
+  DescribeOriginEndpointRequest:
+    type: object
+    properties: {}
+  DescribeOriginEndpointResponse:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      ChannelId:
+        description: The ID of the Channel the OriginEndpoint is associated with.
+        $ref: '#/definitions/__string'
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      Id:
+        description: The ID of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      ManifestName:
+        description: A short string appended to the end of the OriginEndpoint URL.
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Url:
+        description: The URL of the packaged OriginEndpoint for consumption.
+        $ref: '#/definitions/__string'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/ListOf__string'
+  EncryptionMethod:
+    enum:
+      - AES_128
+      - SAMPLE_AES
+    type: string
+  ForbiddenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: The client is not authorized to access the requested resource.
+  HlsEncryption:
+    required:
+      - SpekeKeyProvider
+    type: object
+    properties:
+      ConstantInitializationVector:
+        description: |
+          A constant initialization vector for encryption (optional).
+          When not specified the initialization vector will be periodically rotated.
+        $ref: '#/definitions/__string'
+      EncryptionMethod:
+        description: The encryption method to use.
+        $ref: '#/definitions/EncryptionMethod'
+      KeyRotationIntervalSeconds:
+        description: Interval (in seconds) between each encryption key rotation.
+        $ref: '#/definitions/__integer'
+      RepeatExtXKey:
+        description: 'When enabled, the EXT-X-KEY tag will be repeated in output manifests.'
+        $ref: '#/definitions/__boolean'
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProvider'
+    description: An HTTP Live Streaming (HLS) encryption configuration.
+  HlsIngest:
+    type: object
+    properties:
+      IngestEndpoints:
+        description: A list of endpoints to which the source stream should be sent.
+        $ref: '#/definitions/ListOfIngestEndpoint'
+    description: An HTTP Live Streaming (HLS) ingest resource configuration.
+  HlsPackage:
+    type: object
+    properties:
+      AdMarkers:
+        description: |
+          This setting controls how ad markers are included in the packaged OriginEndpoint.
+          "NONE" will omit all SCTE-35 ad markers from the output.
+          "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
+          markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
+          "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
+          messages in the input source.
+        $ref: '#/definitions/AdMarkers'
+      Encryption:
+        $ref: '#/definitions/HlsEncryption'
+      IncludeIframeOnlyStream:
+        description: 'When enabled, an I-Frame only stream will be included in the output.'
+        $ref: '#/definitions/__boolean'
+      PlaylistType:
+        description: |
+          The HTTP Live Streaming (HLS) playlist type.
+          When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
+          entry will be included in the media playlist.
+        $ref: '#/definitions/PlaylistType'
+      PlaylistWindowSeconds:
+        description: Time window (in seconds) contained in each parent manifest.
+        $ref: '#/definitions/__integer'
+      ProgramDateTimeIntervalSeconds:
+        description: |
+          The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+          inserted into manifests. Additionally, when an interval is specified
+          ID3Timed Metadata messages will be generated every 5 seconds using the 
+          ingest time of the content.
+          If the interval is not specified, or set to 0, then
+          no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
+          ID3Timed Metadata messages will be generated. Note that irrespective
+          of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
+          it will be passed through to HLS output.
+        $ref: '#/definitions/__integer'
+      SegmentDurationSeconds:
+        description: |
+          Duration (in seconds) of each fragment. Actual fragments will be
+          rounded to the nearest multiple of the source fragment duration.
+        $ref: '#/definitions/__integer'
+      StreamSelection:
+        $ref: '#/definitions/StreamSelection'
+      UseAudioRenditionGroup:
+        description: 'When enabled, audio streams will be placed in rendition groups in the output.'
+        $ref: '#/definitions/__boolean'
+    description: An HTTP Live Streaming (HLS) packaging configuration.
+  IngestEndpoint:
+    type: object
+    properties:
+      Password:
+        description: The system generated password for ingest authentication.
+        $ref: '#/definitions/__string'
+      Url:
+        description: The ingest URL to which the source stream should be sent.
+        $ref: '#/definitions/__string'
+      Username:
+        description: The system generated username for ingest authentication.
+        $ref: '#/definitions/__string'
+    description: An endpoint for ingesting source content for a Channel.
+  InternalServerErrorException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: An unexpected error occurred.
+  ListChannelsRequest:
+    type: object
+    properties: {}
+  ListChannelsResponse:
+    type: object
+    properties:
+      Channels:
+        description: A list of Channel records.
+        $ref: '#/definitions/ListOfChannel'
+      NextToken:
+        description: A token that can be used to resume pagination from the end of the collection.
+        $ref: '#/definitions/__string'
+  ListOfChannel:
+    type: array
+    items:
+      $ref: '#/definitions/Channel'
+  ListOfIngestEndpoint:
+    type: array
+    items:
+      $ref: '#/definitions/IngestEndpoint'
+  ListOfOriginEndpoint:
+    type: array
+    items:
+      $ref: '#/definitions/OriginEndpoint'
+  ListOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  ListOriginEndpointsRequest:
+    type: object
+    properties: {}
+  ListOriginEndpointsResponse:
+    type: object
+    properties:
+      NextToken:
+        description: A token that can be used to resume pagination from the end of the collection.
+        $ref: '#/definitions/__string'
+      OriginEndpoints:
+        description: A list of OriginEndpoint records.
+        $ref: '#/definitions/ListOfOriginEndpoint'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  MssEncryption:
+    required:
+      - SpekeKeyProvider
+    type: object
+    properties:
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProvider'
+    description: A Microsoft Smooth Streaming (MSS) encryption configuration.
+  MssPackage:
+    type: object
+    properties:
+      Encryption:
+        $ref: '#/definitions/MssEncryption'
+      ManifestWindowSeconds:
+        description: The time window (in seconds) contained in each manifest.
+        $ref: '#/definitions/__integer'
+      SegmentDurationSeconds:
+        description: The duration (in seconds) of each segment.
+        $ref: '#/definitions/__integer'
+      StreamSelection:
+        $ref: '#/definitions/StreamSelection'
+    description: A Microsoft Smooth Streaming (MSS) packaging configuration.
+  NotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: The requested resource does not exist.
+  OriginEndpoint:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      ChannelId:
+        description: The ID of the Channel the OriginEndpoint is associated with.
+        $ref: '#/definitions/__string'
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      Id:
+        description: The ID of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      ManifestName:
+        description: A short string appended to the end of the OriginEndpoint URL.
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Url:
+        description: The URL of the packaged OriginEndpoint for consumption.
+        $ref: '#/definitions/__string'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/ListOf__string'
+    description: An OriginEndpoint resource configuration.
+  OriginEndpointCreateParameters:
+    type: object
+    properties:
+      ChannelId:
+        description: |
+          The ID of the Channel that the OriginEndpoint will be associated with.
+          This cannot be changed after the OriginEndpoint is created.
+        $ref: '#/definitions/__string'
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      Id:
+        description: |
+          The ID of the OriginEndpoint.  The ID must be unique within the region
+          and it cannot be changed after the OriginEndpoint is created.
+        $ref: '#/definitions/__string'
+      ManifestName:
+        description: A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/ListOf__string'
+    description: Configuration parameters for a new OriginEndpoint.
+  OriginEndpointList:
+    type: object
+    properties:
+      NextToken:
+        description: A token that can be used to resume pagination from the end of the collection.
+        $ref: '#/definitions/__string'
+      OriginEndpoints:
+        description: A list of OriginEndpoint records.
+        $ref: '#/definitions/ListOfOriginEndpoint'
+    description: A collection of OriginEndpoint records.
+  OriginEndpointUpdateParameters:
+    type: object
+    properties:
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      ManifestName:
+        description: A short string that will be appended to the end of the Endpoint URL.
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (in seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (in seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/ListOf__string'
+    description: Configuration parameters for updating an existing OriginEndpoint.
+  PlaylistType:
+    enum:
+      - NONE
+      - EVENT
+      - VOD
+    type: string
+  Profile:
+    enum:
+      - NONE
+      - HBBTV_1_5
+    type: string
+  RotateChannelCredentialsRequest:
+    type: object
+    properties: {}
+  RotateChannelCredentialsResponse:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the Channel.
+        $ref: '#/definitions/__string'
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+      HlsIngest:
+        $ref: '#/definitions/HlsIngest'
+      Id:
+        description: The ID of the Channel.
+        $ref: '#/definitions/__string'
+  ServiceUnavailableException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: An unexpected error occurred.
+  SpekeKeyProvider:
+    required:
+      - Url
+      - ResourceId
+      - RoleArn
+      - SystemIds
+    type: object
+    properties:
+      ResourceId:
+        description: The resource ID to include in key requests.
+        $ref: '#/definitions/__string'
+      RoleArn:
+        description: |
+          An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
+          MediaPackage will assume when accessing the key provider service.
+        $ref: '#/definitions/__string'
+      SystemIds:
+        description: The system IDs to include in key requests.
+        $ref: '#/definitions/ListOf__string'
+      Url:
+        description: The URL of the external key provider service.
+        $ref: '#/definitions/__string'
+    description: A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+  StreamOrder:
+    enum:
+      - ORIGINAL
+      - VIDEO_BITRATE_ASCENDING
+      - VIDEO_BITRATE_DESCENDING
+    type: string
+  StreamSelection:
+    type: object
+    properties:
+      MaxVideoBitsPerSecond:
+        description: The maximum video bitrate (bps) to include in output.
+        $ref: '#/definitions/__integer'
+      MinVideoBitsPerSecond:
+        description: The minimum video bitrate (bps) to include in output.
+        $ref: '#/definitions/__integer'
+      StreamOrder:
+        description: A directive that determines the order of streams in the output.
+        $ref: '#/definitions/StreamOrder'
+    description: A StreamSelection configuration.
+  TooManyRequestsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: The client has exceeded their resource or throttling limits.
+  UnprocessableEntityException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: The parameters sent in the request are not valid.
+  UpdateChannelRequest:
+    type: object
+    properties:
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+    description: Configuration parameters used to update the Channel.
+  UpdateChannelResponse:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the Channel.
+        $ref: '#/definitions/__string'
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+      HlsIngest:
+        $ref: '#/definitions/HlsIngest'
+      Id:
+        description: The ID of the Channel.
+        $ref: '#/definitions/__string'
+  UpdateOriginEndpointRequest:
+    type: object
+    properties:
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      ManifestName:
+        description: A short string that will be appended to the end of the Endpoint URL.
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (in seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (in seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/ListOf__string'
+    description: Configuration parameters used to update an existing OriginEndpoint.
+  UpdateOriginEndpointResponse:
+    type: object
+    properties:
+      Arn:
+        description: The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      ChannelId:
+        description: The ID of the Channel the OriginEndpoint is associated with.
+        $ref: '#/definitions/__string'
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      Id:
+        description: The ID of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      ManifestName:
+        description: A short string appended to the end of the OriginEndpoint URL.
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Url:
+        description: The URL of the packaged OriginEndpoint for consumption.
+        $ref: '#/definitions/__string'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/ListOf__string'
+  __boolean:
+    type: boolean
+  __double:
+    type: number
+    format: double
+  __integer:
+    type: integer
+  __string:
+    type: string
+  __timestamp:
+    type: string
+    format: date-time

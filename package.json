@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "api-spec-converter": "git://github.com/APIs-guru/api-spec-converter",
+    "api-spec-converter": "^2.6.0",
     "bluebird": "^3.3.4",
     "commander": "^2.8.1",
     "concurrent-transform": "^1.0.0",
@@ -11,9 +11,11 @@
     "gulp": "^3.9.1",
     "gulp-awspublish": "^3.2.0",
     "gulp-rename": "^1.2.2",
+    "jiff": "^0.7.3",
     "js-yaml": "^3.4.3",
     "json-merge-patch": "^0.2.3",
     "json-pointer": "^0.6.0",
+    "json-refs": "git+https://github.com/whitlockjc/json-refs.git",
     "jsondiffpatch": "^0.1.33",
     "jsonpath": "^0.2.0",
     "lodash": "^4.6.1",
@@ -28,6 +30,7 @@
     "sanitize-filename": "^1.5.3",
     "shelljs": "^0.7.0",
     "swagger-methods": "^1.0.0",
+    "sway": "github:apigee-127/sway",
     "urijs": "^1.16.1"
   },
   "private": true,
@@ -38,5 +41,8 @@
   "scripts": {
     "test": "scripts/collection.js validate -q",
     "deploy": "scripts/deploy.js && ./scripts/deploy_badges.js && gulp publish"
+  },
+  "devDependencies": {
+    "dredd": "^4.7.0"
   }
 }

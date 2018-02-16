@@ -1,0 +1,17 @@
+- op: add
+  path: /definitions/PointInfo/properties/parks/items/required
+  value:
+    - distanceMeters
+    - areaSqm
+    - centroid
+- op: test
+  path: /definitions/PointInfo/properties/parks/required
+  value:
+    - distanceMeters
+    - areaSqm
+    - centroid
+- op: remove
+  path: /definitions/PointInfo/properties/parks/required
+- op: add
+  path: /definitions/Latlon
+  value: {}

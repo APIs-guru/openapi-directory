@@ -2076,6 +2076,184 @@ paths:
       summary: Private Account Institutions
       tags:
         - institutions
+  /account/institution/accounts:
+    get:
+      description: Returns the accounts for which the account has administrative privileges (assigned and inherited).
+      operationId: private_institution_accounts_list
+      parameters:
+        - description: Page number. Used for pagination with page_size
+          format: int64
+          in: query
+          maximum: 5000
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: The number of results included on a page. Used for pagination with page
+          format: int64
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: page_size
+          required: false
+          type: integer
+        - description: Number of results included on a page. Used for pagination with query
+          format: int64
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: limit
+          required: false
+          type: integer
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
+          format: int64
+          in: query
+          maximum: 5000
+          minimum: 1
+          name: offset
+          required: false
+          type: integer
+        - description: Filter by active status
+          format: int64
+          in: query
+          maximum: 1
+          minimum: 0
+          name: is_active
+          required: false
+          type: integer
+        - description: Filter by institution_user_id
+          in: query
+          name: institution_user_id
+          required: false
+          type: string
+        - description: Filter by email
+          in: query
+          name: email
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK. An array of Accounts
+          schema:
+            items:
+              $ref: '#/definitions/ShortAccount'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Private Account Institution Accounts
+      tags:
+        - institutions
+    post:
+      description: Create a new Account by sending account information
+      operationId: private_institution_accounts_create
+      parameters:
+        - description: Account description
+          in: body
+          name: Account
+          required: true
+          schema:
+            $ref: '#/definitions/AccountCreate'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Create new Institution Account
+      tags:
+        - institutions
+  /account/institution/accounts/search:
+    post:
+      description: Returns the accounts for which the account has administrative privileges (assigned and inherited).
+      operationId: private_institution_accounts_search
+      parameters:
+        - description: Search Parameters
+          in: body
+          name: search
+          required: true
+          schema:
+            $ref: '#/definitions/InstitutionAccountsSearch'
+      responses:
+        '200':
+          description: OK. An array of Accounts
+          schema:
+            items:
+              $ref: '#/definitions/ShortAccount'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Private Account Institution Accounts Search
+      tags:
+        - institutions
+  '/account/institution/accounts/{account_id}':
+    put:
+      description: Update Institution Account
+      operationId: private_institution_accounts_update
+      parameters:
+        - description: Account identifier the user is associated to
+          format: int64
+          in: path
+          minimum: 1
+          name: account_id
+          required: true
+          type: integer
+        - description: Account description
+          in: body
+          name: Account
+          required: true
+          schema:
+            $ref: '#/definitions/AccountUpdate'
+      responses:
+        '205':
+          description: Reset Content
+          headers:
+            Location:
+              description: Location of newly created article
+              format: link
+              type: string
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Update Institution Account
+      tags:
+        - institutions
   /account/institution/articles:
     get:
       description: Get Articles from own institution. User must be administrator of the institution
@@ -2208,6 +2386,169 @@ paths:
         - OAuth2:
             - all
       summary: Private Account Institution Groups
+      tags:
+        - institutions
+  /account/institution/roles:
+    get:
+      description: Returns the roles available for groups and the institution group.
+      operationId: private_institution_roles_list
+      responses:
+        '200':
+          description: OK. An array of Roles
+          schema:
+            items:
+              $ref: '#/definitions/Role'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Private Account Institution Roles
+      tags:
+        - institutions
+  '/account/institution/roles/{account_id}':
+    get:
+      description: List Institution Account Group Roles
+      operationId: private_institution_account_group_roles
+      responses:
+        '200':
+          description: OK. Account Group Roles
+          schema:
+            $ref: '#/definitions/AccountGroupRoles'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: List Institution Account Group Roles
+      tags:
+        - institutions
+    parameters:
+      - description: Account identifier the user is associated to
+        format: int64
+        in: path
+        minimum: 1
+        name: account_id
+        required: true
+        type: integer
+    post:
+      description: Add Institution Account Group Roles
+      operationId: private_institution_account_group_roles_create
+      parameters:
+        - description: Account description
+          in: body
+          name: Account
+          required: true
+          schema:
+            $ref: '#/definitions/AccountGroupRolesCreate'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Add Institution Account Group Roles
+      tags:
+        - institutions
+  '/account/institution/roles/{account_id}/{group_id}/{role_id}':
+    delete:
+      description: Delete Institution Account Group Role
+      operationId: private_institution_account_group_role_delete
+      parameters:
+        - description: Account identifier for which to remove the role
+          format: int64
+          in: path
+          minimum: 1
+          name: account_id
+          required: true
+          type: integer
+        - description: Group identifier for which to remove the role
+          format: int64
+          in: path
+          minimum: 1
+          name: group_id
+          required: true
+          type: integer
+        - description: Role identifier
+          format: int64
+          in: path
+          minimum: 1
+          name: role_id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Delete Institution Account Group Role
+      tags:
+        - institutions
+  '/account/institution/users/{account_id}':
+    get:
+      description: Retrieve institution user information using the account_id
+      operationId: private_account_institution_user
+      parameters:
+        - description: Account identifier the user is associated to
+          format: int64
+          in: path
+          minimum: 1
+          name: account_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK. User representation
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Private Account Institution User
       tags:
         - institutions
   /account/licenses:
@@ -4055,6 +4396,11 @@ definitions:
         description: First Name
         example: Doe
         type: string
+      group_id:
+        description: Account group id
+        example: 0
+        format: int64
+        type: integer
       id:
         description: Account id
         example: 1495682
@@ -4108,6 +4454,87 @@ definitions:
         type: integer
     type: object
     x-tag: other
+  AccountCreate:
+    properties:
+      email:
+        description: Email of account
+        example: johndoe@example.com
+        maxLength: 150
+        minLength: 3
+        type: string
+      first_name:
+        default: ''
+        description: First Name
+        example: John
+        maxLength: 30
+        type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
+      institution_user_id:
+        default: ''
+        description: Institution user id
+        example: johndoe
+        maxLength: 50
+        type: string
+      is_active:
+        description: Is account active
+        type: boolean
+      last_name:
+        default: ''
+        description: Last Name
+        example: Doe
+        maxLength: 30
+        type: string
+      quota:
+        description: Account quota
+        example: 1000
+        format: int64
+        type: integer
+      symplectic_user_id:
+        default: ''
+        description: Symplectic user id
+        example: johndoe
+        maxLength: 50
+        type: string
+    required:
+      - email
+      - first_name
+      - last_name
+    type: object
+    x-tag: institutions
+  AccountGroupRoles:
+    example:
+      '2':
+        - category: group
+          id: 7
+          name: User
+    properties: {}
+    type: object
+    x-tag: institutions
+  AccountGroupRolesCreate:
+    example:
+      '2':
+        - 2
+        - 7
+      '3':
+        - 7
+        - 9
+    properties: {}
+    type: object
+    x-tag: institutions
+  AccountUpdate:
+    properties:
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
+      is_active:
+        description: Is account active
+        type: boolean
+    type: object
+    x-tag: institutions
   Article:
     properties:
       defined_type:
@@ -4284,12 +4711,16 @@ definitions:
         type: string
       doi:
         default: ''
-        description: 'Not appliable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
         type: string
       funding:
         default: ''
         description: Grant number or funding authority
         type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -4317,11 +4748,11 @@ definitions:
         type: array
       resource_doi:
         default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI.'
+        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI. For linkback this needs to be used in combination with resource_title.'
         type: string
       resource_title:
         default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title.'
+        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title. For linkback this needs to be used in combination with resource_doi.'
         type: string
       tags:
         default: []
@@ -4475,6 +4906,10 @@ definitions:
         default: ''
         description: Grant number or funding authority
         type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -4829,6 +5264,14 @@ definitions:
         example: Test description of article
         maxLength: 10000
         type: string
+      doi:
+        default: ''
+        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -4850,7 +5293,7 @@ definitions:
         type: array
       resource_doi:
         default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI.'
+        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI. For linkback this needs to be used in combination with resource_title.'
         type: string
       resource_id:
         description: 'Not applicable to regular users. In a publisher case, this is the publisher article id'
@@ -4860,7 +5303,7 @@ definitions:
         type: string
       resource_title:
         default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title.'
+        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title. For linkback this needs to be used in combination with resource_doi.'
         type: string
       resource_version:
         description: 'Not applicable to regular users. In a publisher case, this is the publisher article version'
@@ -4951,6 +5394,14 @@ definitions:
         example: Test description of article
         maxLength: 10000
         type: string
+      doi:
+        default: ''
+        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -5175,6 +5626,57 @@ definitions:
         type: string
     type: object
     x-tag: institutions
+  InstitutionAccountsSearch:
+    properties:
+      email:
+        description: filter by email
+        example: alan@institution.com
+        type: string
+      institution_user_id:
+        description: filter by institution_user_id
+        example: alan
+        type: string
+      is_active:
+        description: Filter by active status
+        format: int64
+        maximum: 1
+        minimum: 0
+        type: integer
+      limit:
+        description: Number of results included on a page. Used for pagination with query
+        example: 10
+        format: int64
+        maximum: 1000
+        minimum: 1
+        type: integer
+      offset:
+        description: Where to start the listing(the offset of the first result). Used for pagination with limit
+        example: 1
+        format: int64
+        maximum: 5000
+        minimum: 1
+        type: integer
+      page:
+        description: Page number. Used for pagination with page_size
+        example: 1
+        format: int64
+        maximum: 5000
+        minimum: 1
+        type: integer
+      page_size:
+        default: 10
+        description: The number of results included on a page. Used for pagination with page
+        example: 10
+        format: int64
+        maximum: 1000
+        minimum: 1
+        type: integer
+      search_for:
+        description: Search term
+        example: figshare
+        type: string
+    type: object
+    x-tag: institutions
   License:
     properties:
       name:
@@ -5300,10 +5802,6 @@ definitions:
     allOf:
       - $ref: '#/definitions/PublicFile'
     properties:
-      computed_md5:
-        description: File computed md5
-        example: 043a51806d646e88cafbf19e7b82846f
-        type: string
       preview_state:
         description: File preview state
         example: preview not available
@@ -5314,10 +5812,6 @@ definitions:
         type:
           - string
           - 'null'
-      supplied_md5:
-        description: File supplied md5
-        example: 043a51806d646e88cafbf19e7b82846f
-        type: string
       upload_token:
         description: Token for file upload
         example: 9dfc5fe3-d617-4d93-ac11-8afe7e984a4b
@@ -5745,6 +6239,10 @@ definitions:
     x-tag: projects
   PublicFile:
     properties:
+      computed_md5:
+        description: File computed md5
+        example: 043a51806d646e88cafbf19e7b82846f
+        type: string
       download_url:
         description: Url for file download
         example: 'https://ndownloader.figshare.com/files/3000002'
@@ -5768,6 +6266,10 @@ definitions:
         example: 14848
         format: int64
         type: integer
+      supplied_md5:
+        description: File supplied md5
+        example: 043a51806d646e88cafbf19e7b82846f
+        type: string
     type: object
     x-tag: common
   ResponseMessage:
@@ -5778,6 +6280,61 @@ definitions:
         type: string
     type: object
     x-tag: common
+  Role:
+    properties:
+      category:
+        description: Role category
+        example: group
+        type: string
+      description:
+        description: Role description
+        type: string
+      id:
+        description: Role id
+        example: 1
+        format: int64
+        type: integer
+      name:
+        description: Role name
+        example: Curator
+        type: string
+    type: object
+    x-tag: institutions
+  ShortAccount:
+    properties:
+      active:
+        description: Account activity status
+        example: 0
+        format: int64
+        type: integer
+      email:
+        description: User email
+        example: user@domain.com
+        type: string
+      first_name:
+        description: First Name
+        example: Doe
+        type: string
+      id:
+        description: Account id
+        example: 1495682
+        format: int64
+        type: integer
+      institution_id:
+        description: Account institution
+        example: 1
+        format: int64
+        type: integer
+      institution_user_id:
+        description: Account institution user id
+        example: 1
+        type: string
+      last_name:
+        description: Last Name
+        example: John
+        type: string
+    type: object
+    x-tag: other
   UploadFilePart:
     properties:
       endOffset:
@@ -5839,6 +6396,47 @@ definitions:
         type: string
     type: object
     x-tag: upload
+  User:
+    properties:
+      first_name:
+        description: First Name
+        example: Doe
+        type: string
+      id:
+        description: User id
+        example: 1495682
+        format: int64
+        type: integer
+      is_active:
+        description: Account activity status
+        example: true
+        type: boolean
+      is_public:
+        description: Account public status
+        example: true
+        type: boolean
+      job_title:
+        description: User Job title
+        example: programmer
+        type: string
+      last_name:
+        description: Last Name
+        example: John
+        type: string
+      name:
+        description: Full Name
+        example: John Doe
+        type: string
+      orcid_id:
+        description: Orcid associated to this User
+        example: 1234-5678-9123-1234
+        type: string
+      url_name:
+        description: Name that appears in website url
+        example: John_Doe
+        type: string
+    type: object
+    x-tag: other
   Version:
     properties:
       id:
@@ -6032,5 +6630,7 @@ x-additional-descriptions:
             title: Conditional requests
           - content: description_api_cors
             title: CORS policy
+          - content: description_api_impersonation
+            title: Impersonation
         title: API description
     title: figshare Documentation

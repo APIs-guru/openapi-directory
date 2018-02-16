@@ -1,0 +1,12 @@
+- op: test
+  path: /info/title
+  value: '350,000+ Recipe and Grocery List API (v2)'
+- op: replace
+  path: /info/title
+  value: BigOven
+- op: test
+  path: /info/termsOfService
+  value: 'Please see our [terms of service](http://api2.bigoven.com/web/documentation/termsofuse'
+- op: replace
+  path: /info/termsOfService
+  value: 'http://api2.bigoven.com/web/documentation/termsofuse'

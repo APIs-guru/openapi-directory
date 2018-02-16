@@ -3,15 +3,16 @@ info:
   version: '2010-05-15'
   x-release: v4
   title: AWS CloudFormation
-  description: '<fullname>AWS CloudFormation</fullname> <p>AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use AWS CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure.</p> <p>With AWS CloudFormation, you declare all of your resources and dependencies in a template file. The template defines a collection of resources as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together and manages all dependencies between the resources for you.</p> <p>For more information about AWS CloudFormation, see the <a href="http://aws.amazon.com/cloudformation/">AWS CloudFormation Product Page</a>.</p> <p>Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the product''s technical documentation at <a href="http://docs.aws.amazon.com/">docs.aws.amazon.com</a>.</p> <p> <i>APIs for stacks </i> </p> <p>When you use AWS CloudFormation, you manage related resources as a single unit called a stack. You create, update, and delete a collection of resources by creating, updating, and deleting stacks. All the resources in a stack are defined by the stack''s AWS CloudFormation template. </p> <p>Actions</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CancelUpdateStack.html">CancelUpdateStack</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ContinueUpdateRollback.html">ContinueUpdateRollback</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html">CreateStack</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html">DeleteStack</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackEvents.html">DescribeStackEvents</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackResource.html">DescribeStackResource</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackResources.html">DescribeStackResources</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html">DescribeStacks</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_EstimateTemplateCost.html">EstimateTemplateCost</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_GetStackPolicy.html">GetStackPolicy</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_GetTemplate.html">GetTemplate</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_GetTemplateSummary.html">GetTemplateSummary</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListExports.html">ListExports</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListImports.html">ListImports</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackResources.html">ListStackResources</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStacks.html">ListStacks</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetStackPolicy.html">SetStackPolicy</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStack.html">UpdateStack</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ValidateTemplate.html">ValidateTemplate</a> </p> </li> </ul> <p>Data Types</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Export.html">Export</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html">Parameter</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ParameterConstraints.html">ParameterConstraints</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ParameterDeclaration.html">ParameterDeclaration</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Stack.html">Stack</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackEvent.html">StackEvent</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackResource.html">StackResource</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackResourceDetail.html">StackResourceDetail</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackResourceSummary.html">StackResourceSummary</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackSummary.html">StackSummary</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Tag.html">Tag</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_TemplateParameter.html">TemplateParameter</a> </p> </li> </ul> <p> <i>APIs for change sets</i> </p> <p>If you need to make changes to the running resources in a stack, you update the stack. Before making changes to your resources, you can generate a change set, which is summary of your proposed changes. Change sets allow you to see how your changes might impact your running resources, especially for critical resources, before implementing them.</p> <p>Actions</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html">CreateChangeSet</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteChangeSet.html">DeleteChangeSet</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html">DescribeChangeSet</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html">ExecuteChangeSet</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListChangeSets.html">ListChangeSets</a> </p> </li> </ul> <p>Data Types</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Change.html">Change</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ChangeSetSummary.html">ChangeSetSummary</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ResourceChange.html">ResourceChange</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ResourceChangeDetail.html">ResourceChangeDetail</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ResourceTargetDefinition.html">ResourceTargetDefinition</a> </p> </li> </ul> <p> <i>APIs for stack sets</i> </p> <p>AWS CloudFormation StackSets lets you create a collection, or stack set, of stacks that can automatically and safely provision a common set of AWS resources across multiple AWS accounts and multiple AWS regions from a single AWS CloudFormation template. When you create a stack set, AWS CloudFormation provisions a stack in each of the specified accounts and regions by using the supplied AWS CloudFormation template and parameters. Stack sets let you manage a common set of AWS resources in a selection of accounts and regions in a single operation. </p> <p>Actions</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html">CreateStackInstances</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackSet.html">CreateStackSet</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStackInstances.html">DeleteStackInstances</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStackSet.html">DeleteStackSet</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackInstance.html">DescribeStackInstance</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html">DescribeStackSet</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackSetOperation.html">DescribeStackSetOperation</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackInstances.html">ListStackInstances</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetOperationResults">ListStackSetOperationResults</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetOperations">ListStackSetOperations</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSets">ListStackSets</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StopStackSetOperation.html">StopStackSetOperation</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> </p> </li> </ul> <p>Data Types</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html">Parameter</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackInstance.html.html">StackInstance</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackInstanceSummary.html.html">StackInstanceSummary</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackSet.html">StackSet</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackSetOperation.html.html">StackSetOperation</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackSetOperationPreferences.html.html">StackSetOperationPreferences</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackSetOperationResultSummary.html.html">StackSetOperationResultSummary</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackSetOperationSummary.html.html">StackSetOperationSummary</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_StackSetSummary.html">StackSetSummary</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Tag.html">Tag</a> </p> </li> </ul>'
+  description: '<fullname>AWS CloudFormation</fullname> <p>AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use AWS CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure.</p> <p>With AWS CloudFormation, you declare all of your resources and dependencies in a template file. The template defines a collection of resources as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together and manages all dependencies between the resources for you.</p> <p>For more information about AWS CloudFormation, see the <a href="http://aws.amazon.com/cloudformation/">AWS CloudFormation Product Page</a>.</p> <p>Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the product''s technical documentation at <a href="http://docs.aws.amazon.com/">docs.aws.amazon.com</a>.</p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: cloudformation.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes: []
 produces: []
@@ -947,7 +949,7 @@ paths:
   '/#GetTemplateSummary':
     post:
       operationId: GetTemplateSummary
-      description: '<p>Returns information about a new or existing template. The <code>GetTemplateSummary</code> action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack.</p> <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or you can get template information for a running or deleted stack.</p> <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a <code>ValidationError</code> is returned.</p>'
+      description: '<p>Returns information about a new or existing template. The <code>GetTemplateSummary</code> action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack or stack set.</p> <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or you can get template information for a stack set, or a running or deleted stack.</p> <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a <code>ValidationError</code> is returned.</p>'
       responses:
         '200':
           description: Success
@@ -1350,6 +1352,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateStackInstances':
+    post:
+      operationId: UpdateStackInstances
+      description: '<p>Updates the parameter values for stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. </p> <p>You can only update stack instances in regions and accounts where they already exist; to create additional stack instances, use <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html">CreateStackInstances</a>. </p> <p>During stack set updates, any parameters overridden for a stack instance are not updated, but retain their overridden value.</p> <p>You can only update the parameter <i>values</i> that are specified in the stack set; to add or delete a parameter itself, use <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using <code>UpdateStackInstances</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateStackInstancesOutput'
+        '480':
+          description: StackSetNotFoundException
+          schema:
+            $ref: '#/definitions/StackSetNotFoundException'
+        '481':
+          description: StackInstanceNotFoundException
+          schema:
+            $ref: '#/definitions/StackInstanceNotFoundException'
+        '482':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+        '483':
+          description: OperationIdAlreadyExistsException
+          schema:
+            $ref: '#/definitions/OperationIdAlreadyExistsException'
+        '484':
+          description: StaleRequestException
+          schema:
+            $ref: '#/definitions/StaleRequestException'
+        '485':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateStackInstancesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateStackSet':
     post:
       operationId: UpdateStackSet
@@ -1395,6 +1446,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTerminationProtection':
+    post:
+      operationId: UpdateTerminationProtection
+      description: '<p>Updates termination protection for the specified stack. If a user attempts to delete a stack with termination protection enabled, the operation fails and the stack remains unchanged. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html">Protecting a Stack From Being Deleted</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p> For <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">nested stacks</a>, termination protection is set on the root stack and cannot be changed directly on the nested stack.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTerminationProtectionOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTerminationProtectionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ValidateTemplate':
     post:
       operationId: ValidateTemplate
@@ -1429,11 +1505,11 @@ definitions:
     properties:
       Status:
         $ref: '#/definitions/AccountGateStatus'
-        description: '<p>The status of the account gate function.</p> <ul> <li> <p> <code>SUCCEEDED</code>: The account gate function has determined that the account passes any requirements for stack set operations to occur. AWS CloudFormation proceeds with stack operations in the account. </p> </li> <li> <p> <code>FAILED</code>: The account gate function has determined that the account does not meet the requirements for stack set operations to occur. AWS CloudFormation cancels the stack set operations in that account, and the stack set operation status is set to FAILED.</p> </li> <li> <p> <code>SKIPPED</code>: An account gate function has not been specified for the account, or the AWSCloudFormationStackSetExecutionRole of the stack set adminstration account lacks permissions to invoke the function. AWS CloudFormation proceeds with stack set operations in the account. </p> </li> </ul>'
+        description: '<p>The status of the account gate function.</p> <ul> <li> <p> <code>SUCCEEDED</code>: The account gate function has determined that the account and region passes any requirements for a stack set operation to occur. AWS CloudFormation proceeds with the stack operation in that account and region. </p> </li> <li> <p> <code>FAILED</code>: The account gate function has determined that the account and region does not meet the requirements for a stack set operation to occur. AWS CloudFormation cancels the stack set operation in that account and region, and sets the stack set operation result status for that account and region to <code>FAILED</code>. </p> </li> <li> <p> <code>SKIPPED</code>: AWS CloudFormation has skipped calling the account gate function for this account and region, for one of the following reasons:</p> <ul> <li> <p>An account gate function has not been specified for the account and region. AWS CloudFormation proceeds with the stack set operation in this account and region.</p> </li> <li> <p>The <code>AWSCloudFormationStackSetExecutionRole</code> of the stack set adminstration account lacks permissions to invoke the function. AWS CloudFormation proceeds with the stack set operation in this account and region.</p> </li> <li> <p>Either no action is necessary, or no action is possible, on the stack. AWS CloudFormation skips the stack set operation in this account and region.</p> </li> </ul> </li> </ul>'
       StatusReason:
         $ref: '#/definitions/AccountGateStatusReason'
-        description: The reason for the account gate status assigned to this account.
-    description: '<p>Structure that contains the results of the account gate function AWS CloudFormation StackSets invokes, if present, before proceeding with stack set operations in an account.</p> <p>Account gating enables you to specify a Lamdba function for an account that encapsulates any requirements that must be met before AWS CloudFormation StackSets proceeds with stack set operations in that account. CloudFormation invokes the function each time stack set operations are initiated for that account, and only proceeds if the function returns a success code. </p>'
+        description: The reason for the account gate status assigned to this account and region for the stack set operation.
+    description: '<p>Structure that contains the results of the account gate function which AWS CloudFormation invokes, if present, before proceeding with a stack set operation in an account and region.</p> <p>For each account and region, AWS CloudFormation lets you specify a Lamdba function that encapsulates any requirements that must be met before CloudFormation can proceed with a stack set operation in that account and region. CloudFormation invokes the function each time a stack set operation is requested for that account and region; if the function returns <code>FAILED</code>, CloudFormation cancels the operation in that account and region, and sets the stack set operation result status for that account and region to <code>FAILED</code>. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html">Configuring a target account gate</a>.</p>'
   AccountGateStatus:
     type: string
     enum:
@@ -1470,6 +1546,8 @@ definitions:
     type: object
     properties: {}
     description: The resource with the name requested already exists.
+  Arn:
+    type: string
   CancelUpdateStackInput:
     type: object
     required:
@@ -1656,6 +1734,9 @@ definitions:
       RoleARN:
         $ref: '#/definitions/RoleARN'
         description: '<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes when executing the change set. AWS CloudFormation uses the role''s credentials to make calls on your behalf. AWS CloudFormation uses this role for all future operations on the stack. As long as users have permission to operate on the stack, AWS CloudFormation uses this role even if the users don''t have permission to pass it. Ensure that the role grants least privilege.</p> <p>If you don''t specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.</p>'
+      RollbackConfiguration:
+        $ref: '#/definitions/RollbackConfiguration'
+        description: 'The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.'
       NotificationARNs:
         $ref: '#/definitions/NotificationARNs'
         description: 'The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon SNS) topics that AWS CloudFormation associates with the stack. To remove all associated notification topics, specify an empty list.'
@@ -1705,6 +1786,9 @@ definitions:
       DisableRollback:
         $ref: '#/definitions/DisableRollback'
         description: '<p>Set to <code>true</code> to disable rollback of the stack if stack creation failed. You can specify either <code>DisableRollback</code> or <code>OnFailure</code>, but not both.</p> <p>Default: <code>false</code> </p>'
+      RollbackConfiguration:
+        $ref: '#/definitions/RollbackConfiguration'
+        description: 'The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.'
       TimeoutInMinutes:
         $ref: '#/definitions/TimeoutMinutes'
         description: 'The amount of time that can pass before the stack status becomes CREATE_FAILED; if <code>DisableRollback</code> is not set or is set to <code>false</code>, the stack will be rolled back.'
@@ -1735,6 +1819,9 @@ definitions:
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: '<p>A unique identifier for this <code>CreateStack</code> request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you''re not attempting to create a stack with the same name. You might retry <code>CreateStack</code> requests to ensure that AWS CloudFormation successfully received them.</p> <p>All events triggered by a given stack operation are assigned the same client request token, which you can use to track operations. For example, if you execute a <code>CreateStack</code> operation with the token <code>token1</code>, then all the <code>StackEvents</code> generated by that operation will have <code>ClientRequestToken</code> set as <code>token1</code>.</p> <p>In the console, stack operations display the client request token on the Events tab. Stack operations that are initiated from the console use the token format <i>Console-StackOperation-ID</i>, which helps you easily identify the stack operation . For example, if you create a stack using the console, each stack event would be assigned the same token in the following format: <code>Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002</code>. </p>'
+      EnableTerminationProtection:
+        $ref: '#/definitions/EnableTerminationProtection'
+        description: '<p>Whether to enable termination protection on the specified stack. If a user attempts to delete a stack with termination protection enabled, the operation fails and the stack remains unchanged. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html">Protecting a Stack From Being Deleted</a> in the <i>AWS CloudFormation User Guide</i>. Termination protection is disabled on stacks by default. </p> <p> For <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">nested stacks</a>, termination protection is set on the root stack and cannot be changed directly on the nested stack.</p>'
     description: The input for <a>CreateStack</a> action.
   CreateStackInstancesInput:
     type: object
@@ -1752,6 +1839,9 @@ definitions:
       Regions:
         $ref: '#/definitions/RegionList'
         description: 'The names of one or more regions where you want to create stack instances using the specified AWS account(s). '
+      ParameterOverrides:
+        $ref: '#/definitions/Parameters'
+        description: '<p>A list of stack set parameters whose values you want to override in the selected stack instances.</p> <p>Any overridden parameter values will be applied to all stack instances in the specified accounts and regions. When specifying parameters and their values, be aware of how AWS CloudFormation sets parameter values during stack instance operations:</p> <ul> <li> <p>To override the current value for a parameter, include the parameter and specify its value.</p> </li> <li> <p>To leave a parameter set to its present value, you can do one of the following:</p> <ul> <li> <p>Do not include the parameter in the list.</p> </li> <li> <p>Include the parameter and specify <code>UsePreviousValue</code> as <code>true</code>. (You cannot specify both a value and set <code>UsePreviousValue</code> to <code>true</code>.)</p> </li> </ul> </li> <li> <p>To set all overridden parameter back to the values specified in the stack set, specify a parameter list but do not include any parameters.</p> </li> <li> <p>To leave all parameters set to their present values, do not specify this property at all.</p> </li> </ul> <p>During stack set updates, any parameter values overridden for a stack instance are not updated, but retain their overridden value.</p> <p>You can only override the parameter <i>values</i> that are specified in the stack set; to add or delete a parameter itself, use <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update the stack set template.</p>'
       OperationPreferences:
         $ref: '#/definitions/StackSetOperationPreferences'
         description: Preferences for how AWS CloudFormation performs this stack set operation.
@@ -1869,7 +1959,7 @@ definitions:
         description: Preferences for how AWS CloudFormation performs this stack set operation.
       RetainStacks:
         $ref: '#/definitions/RetainStacks'
-        description: 'Removes the stack instances from the specified stack set, but doesn''t delete the stacks. You can''t reassociate a retained stack or add an existing, saved stack to a new stack set.'
+        description: '<p>Removes the stack instances from the specified stack set, but doesn''t delete the stacks. You can''t reassociate a retained stack or add an existing, saved stack to a new stack set.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>'
       OperationId:
         $ref: '#/definitions/ClientRequestToken'
         description: '<p>The unique identifier for this stack set operation. </p> <p>If you don''t specify an operation ID, the SDK generates one automatically. </p> <p>The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You can retry stack set operation requests to ensure that AWS CloudFormation successfully received them.</p> <p>Repeating this stack set operation with a new operation ID retries all stack instances whose status is <code>OUTDATED</code>. </p>'
@@ -1961,6 +2051,9 @@ definitions:
       NotificationARNs:
         $ref: '#/definitions/NotificationARNs'
         description: The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that will be associated with the stack if you execute the change set.
+      RollbackConfiguration:
+        $ref: '#/definitions/RollbackConfiguration'
+        description: 'The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.'
       Capabilities:
         $ref: '#/definitions/Capabilities'
         description: 'If you execute the change set, the list of capabilities that were explicitly acknowledged when the change set was created.'
@@ -2114,6 +2207,8 @@ definitions:
     maxLength: 1024
   DisableRollback:
     type: boolean
+  EnableTerminationProtection:
+    type: boolean
   EstimateTemplateCostInput:
     type: object
     properties:
@@ -2241,16 +2336,16 @@ definitions:
     properties:
       TemplateBody:
         $ref: '#/definitions/TemplateBody'
-        description: '<p>Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information about templates, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
+        description: '<p>Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information about templates, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
       TemplateURL:
         $ref: '#/definitions/TemplateURL'
-        description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information about templates, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
+        description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information about templates, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
       StackName:
         $ref: '#/definitions/StackNameOrId'
-        description: '<p>The name or the stack ID that is associated with the stack, which are not always interchangeable. For running stacks, you can specify either the stack''s name or its unique stack ID. For deleted stack, you must specify the unique stack ID.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
+        description: '<p>The name or the stack ID that is associated with the stack, which are not always interchangeable. For running stacks, you can specify either the stack''s name or its unique stack ID. For deleted stack, you must specify the unique stack ID.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
       StackSetName:
         $ref: '#/definitions/StackSetNameOrId'
-        description: The name or unique ID of the stack set from which the stack was created.
+        description: '<p>The name or unique ID of the stack set from which the stack was created.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
     description: The input for the <a>GetTemplateSummary</a> action.
   GetTemplateSummaryOutput:
     type: object
@@ -2302,7 +2397,7 @@ definitions:
   LimitExceededException:
     type: object
     properties: {}
-    description: The quota for the resource has already been reached.
+    description: '<p>The quota for the resource has already been reached.</p> <p>For information on stack set limitations, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-limitations.html">Limitations of StackSets</a>.</p>'
   LimitName:
     type: string
   LimitValue:
@@ -2521,6 +2616,10 @@ definitions:
     maximum: 100
   Metadata:
     type: string
+  MonitoringTimeInMinutes:
+    type: integer
+    minimum: 0
+    maximum: 180
   NameAlreadyExistsException:
     type: object
     properties: {}
@@ -2588,10 +2687,13 @@ definitions:
         description: 'The key associated with the parameter. If you don''t specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.'
       ParameterValue:
         $ref: '#/definitions/ParameterValue'
-        description: The value associated with the parameter.
+        description: The input value associated with the parameter.
       UsePreviousValue:
         $ref: '#/definitions/UsePreviousValue'
         description: 'During a stack update, use the existing parameter value that the stack is using for a given parameter key. If you specify <code>true</code>, do not specify a parameter value.'
+      ResolvedValue:
+        $ref: '#/definitions/ParameterValue'
+        description: 'Read-only. The value that corresponds to a Systems Manager parameter key. This field is returned only for <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types"> <code>SSM</code> parameter types</a> in the template.'
     description: The Parameter data type.
   ParameterConstraints:
     type: object
@@ -2780,6 +2882,34 @@ definitions:
     type: string
     minLength: 20
     maxLength: 2048
+  RollbackConfiguration:
+    type: object
+    properties:
+      RollbackTriggers:
+        $ref: '#/definitions/RollbackTriggers'
+        description: '<p>The triggers to monitor during stack creation or update actions. </p> <p>By default, AWS CloudFormation saves the rollback triggers specified for a stack and applies them to any subsequent update operations for the stack, unless you specify otherwise. If you do specify rollback triggers for this parameter, those triggers replace any list of triggers previously specified for the stack. This means:</p> <ul> <li> <p>If you don''t specify this parameter, AWS CloudFormation uses the rollback triggers previously specified for this stack, if any.</p> </li> <li> <p>If you specify any rollback triggers using this parameter, you must specify all the triggers that you want used for this stack, even triggers you''ve specifed before (for example, when creating the stack or during a previous stack update). Any triggers that you don''t include in the updated list of triggers are no longer applied to the stack.</p> </li> <li> <p>If you specify an empty list, AWS CloudFormation removes all currently specified triggers.</p> </li> </ul> <p>If a specified Cloudwatch alarm is missing, the entire stack operation fails and is rolled back. </p>'
+      MonitoringTimeInMinutes:
+        $ref: '#/definitions/MonitoringTimeInMinutes'
+        description: '<p>The amount of time, in minutes, during which CloudFormation should monitor all the rollback triggers after the stack creation or update operation deploys all necessary resources. If any of the alarms goes to ALERT state during the stack operation or this monitoring period, CloudFormation rolls back the entire stack operation. Then, for update operations, if the monitoring period expires without any alarms going to ALERT state CloudFormation proceeds to dispose of old resources as usual.</p> <p>If you specify a monitoring period but do not specify any rollback triggers, CloudFormation still waits the specified period of time before cleaning up old resources for update operations. You can use this monitoring period to perform any manual stack validation desired, and manually cancel the stack creation or update (using <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CancelUpdateStack.html">CancelUpdateStack</a>, for example) as necessary.</p> <p>If you specify 0 for this parameter, CloudFormation still monitors the specified rollback triggers during stack creation and update operations. Then, for update operations, it begins disposing of old resources immediately once the operation completes.</p>'
+    description: '<p>Structure containing the rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.</p> <p>Rollback triggers enable you to have AWS CloudFormation monitor the state of your application during stack creation and updating, and to roll back that operation if the application breaches the threshold of any of the alarms you''ve specified. For each rollback trigger you create, you specify the Cloudwatch alarm that CloudFormation should monitor. CloudFormation monitors the specified alarms during the stack create or update operation, and for the specified amount of time after all resources have been deployed. If any of the alarms goes to ALERT state during the stack operation or the monitoring period, CloudFormation rolls back the entire stack operation. If the monitoring period expires without any alarms going to ALERT state, CloudFormation proceeds to dispose of old resources as usual.</p> <p>By default, CloudFormation only rolls back stack operations if an alarm goes to ALERT state, not INSUFFICIENT_DATA state. To have CloudFormation roll back the stack operation if an alarm goes to INSUFFICIENT_DATA state as well, edit the CloudWatch alarm to treat missing data as <code>breaching</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>AWS CloudFormation does not monitor rollback triggers when it rolls back a stack during an update operation.</p>'
+  RollbackTrigger:
+    type: object
+    required:
+      - Arn
+      - Type
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the rollback trigger.
+      Type:
+        $ref: '#/definitions/Type'
+        description: 'The resource type of the rollback trigger. Currently, <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html">AWS::CloudWatch::Alarm</a> is the only supported resource type.'
+    description: 'A rollback trigger AWS CloudFormation monitors during creation and updating of stacks. If any of the alarms you specify goes to ALERT state during the stack operation or within the specified monitoring period afterwards, CloudFormation rolls back the entire stack operation. '
+  RollbackTriggers:
+    type: array
+    items:
+      $ref: '#/definitions/RollbackTrigger'
+    maxItems: 5
   Scope:
     type: array
     items:
@@ -2845,9 +2975,15 @@ definitions:
       CreationTime:
         $ref: '#/definitions/CreationTime'
         description: The time at which the stack was created.
+      DeletionTime:
+        $ref: '#/definitions/DeletionTime'
+        description: The time the stack was deleted.
       LastUpdatedTime:
         $ref: '#/definitions/LastUpdatedTime'
         description: The time the stack was last updated. This field will only be returned if the stack has been updated at least once.
+      RollbackConfiguration:
+        $ref: '#/definitions/RollbackConfiguration'
+        description: 'The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.'
       StackStatus:
         $ref: '#/definitions/StackStatus'
         description: Current status of the stack.
@@ -2875,6 +3011,15 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: A list of <code>Tag</code>s that specify information about the stack.
+      EnableTerminationProtection:
+        $ref: '#/definitions/EnableTerminationProtection'
+        description: '<p>Whether termination protection is enabled for the stack.</p> <p> For <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">nested stacks</a>, termination protection is set on the root stack and cannot be changed directly on the nested stack. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html">Protecting a Stack From Being Deleted</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
+      ParentId:
+        $ref: '#/definitions/StackId'
+        description: '<p>For nested stacks--stacks created as resources for another stack--the stack ID of the direct parent of this stack. For the first level of nested stacks, the root stack is also the parent stack.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">Working with Nested Stacks</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
+      RootId:
+        $ref: '#/definitions/StackId'
+        description: '<p>For nested stacks--stacks created as resources for another stack--the stack ID of the the top-level stack to which the nested stack ultimately belongs.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">Working with Nested Stacks</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
     description: The Stack data type.
   StackEvent:
     type: object
@@ -2939,9 +3084,12 @@ definitions:
       StackId:
         $ref: '#/definitions/StackId'
         description: The ID of the stack instance.
+      ParameterOverrides:
+        $ref: '#/definitions/Parameters'
+        description: A list of parameters from the stack set template whose values have been overridden in this stack instance.
       Status:
         $ref: '#/definitions/StackInstanceStatus'
-        description: '<p>The status of the stack instance, in terms of its synchronization with its associated stack set.</p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> and <code>DeleteStackInstances</code> operations. You might need to clean up the stack manually.</p> </li> <li> <p> <code>OUTDATED</code>: The stack isn''t currently up to date with the stack set because:</p> <ul> <li> <p>The associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation. </p> </li> <li> <p>The stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated. </p> </li> </ul> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>'
+        description: '<p>The status of the stack instance, in terms of its synchronization with its associated stack set.</p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to <code>true</code>, to delete the stack instance, and then delete the stack manually.</p> </li> <li> <p> <code>OUTDATED</code>: The stack isn''t currently up to date with the stack set because:</p> <ul> <li> <p>The associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation. </p> </li> <li> <p>The stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated. </p> </li> </ul> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>'
       StatusReason:
         $ref: '#/definitions/Reason'
         description: The explanation for the specific status code that is assigned to this stack instance.
@@ -2977,7 +3125,7 @@ definitions:
         description: The ID of the stack instance.
       Status:
         $ref: '#/definitions/StackInstanceStatus'
-        description: '<p>The status of the stack instance, in terms of its synchronization with its associated stack set.</p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> and <code>DeleteStackInstances</code> operations. You might need to clean up the stack manually.</p> </li> <li> <p> <code>OUTDATED</code>: The stack isn''t currently up to date with the stack set because:</p> <ul> <li> <p>The associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation. </p> </li> <li> <p>The stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated. </p> </li> </ul> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>'
+        description: '<p>The status of the stack instance, in terms of its synchronization with its associated stack set.</p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to <code>true</code>, to delete the stack instance, and then delete the stack manually.</p> </li> <li> <p> <code>OUTDATED</code>: The stack isn''t currently up to date with the stack set because:</p> <ul> <li> <p>The associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation. </p> </li> <li> <p>The stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated. </p> </li> </ul> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>'
       StatusReason:
         $ref: '#/definitions/Reason'
         description: The explanation for the specific status code assigned to this stack instance.
@@ -3148,8 +3296,7 @@ definitions:
     type: string
   StackSetNameOrId:
     type: string
-    pattern: '[a-zA-Z][-a-zA-Z0-9]*'
-    minLength: 1
+    pattern: '[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?'
   StackSetNotEmptyException:
     type: object
     properties: {}
@@ -3206,11 +3353,11 @@ definitions:
         description: '<p>The percentage of accounts, per region, for which this stack operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn''t attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds <i>down</i> to the next whole number.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code>, but not both.</p>'
       MaxConcurrentCount:
         $ref: '#/definitions/MaxConcurrentCount'
-        description: '<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>FailureToleranceCount</code>—<code>MaxConcurrentCount</code> is at most one more than the <code>FailureToleranceCount</code> .</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>'
+        description: '<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>FailureToleranceCount</code>—<code>MaxConcurrentCount</code> is at most one more than the <code>FailureToleranceCount</code> .</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>'
       MaxConcurrentPercentage:
         $ref: '#/definitions/MaxConcurrentPercentage'
-        description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>'
-    description: The user-specified preferences for how AWS CloudFormation performs a stack set operation.
+        description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>'
+    description: '<p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>'
   StackSetOperationResultStatus:
     type: string
     enum:
@@ -3359,6 +3506,12 @@ definitions:
       StackStatusReason:
         $ref: '#/definitions/StackStatusReason'
         description: Success/Failure message associated with the stack status.
+      ParentId:
+        $ref: '#/definitions/StackId'
+        description: '<p>For nested stacks--stacks created as resources for another stack--the stack ID of the direct parent of this stack. For the first level of nested stacks, the root stack is also the parent stack.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">Working with Nested Stacks</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
+      RootId:
+        $ref: '#/definitions/StackId'
+        description: '<p>For nested stacks--stacks created as resources for another stack--the stack ID of the the top-level stack to which the nested stack ultimately belongs.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">Working with Nested Stacks</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
     description: The StackSummary Data Type
   Stacks:
     type: array
@@ -3463,6 +3616,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TransformName'
+  Type:
+    type: string
   UpdateStackInput:
     type: object
     required:
@@ -3498,6 +3653,9 @@ definitions:
       RoleARN:
         $ref: '#/definitions/RoleARN'
         description: '<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes to update the stack. AWS CloudFormation uses the role''s credentials to make calls on your behalf. AWS CloudFormation always uses this role for all future operations on the stack. As long as users have permission to operate on the stack, AWS CloudFormation uses this role even if the users don''t have permission to pass it. Ensure that the role grants least privilege.</p> <p>If you don''t specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.</p>'
+      RollbackConfiguration:
+        $ref: '#/definitions/RollbackConfiguration'
+        description: 'The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.'
       StackPolicyBody:
         $ref: '#/definitions/StackPolicyBody'
         description: '<p>Structure containing a new stack policy body. You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p> <p>You might update the stack policy, for example, in order to protect a new resource that you created during a stack update. If you do not specify a stack policy, the current policy that is associated with the stack is unchanged.</p>'
@@ -3514,6 +3672,37 @@ definitions:
         $ref: '#/definitions/ClientRequestToken'
         description: '<p>A unique identifier for this <code>UpdateStack</code> request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you''re not attempting to update a stack with the same name. You might retry <code>UpdateStack</code> requests to ensure that AWS CloudFormation successfully received them.</p> <p>All events triggered by a given stack operation are assigned the same client request token, which you can use to track operations. For example, if you execute a <code>CreateStack</code> operation with the token <code>token1</code>, then all the <code>StackEvents</code> generated by that operation will have <code>ClientRequestToken</code> set as <code>token1</code>.</p> <p>In the console, stack operations display the client request token on the Events tab. Stack operations that are initiated from the console use the token format <i>Console-StackOperation-ID</i>, which helps you easily identify the stack operation . For example, if you create a stack using the console, each stack event would be assigned the same token in the following format: <code>Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002</code>. </p>'
     description: The input for an <a>UpdateStack</a> action.
+  UpdateStackInstancesInput:
+    type: object
+    required:
+      - StackSetName
+      - Accounts
+      - Regions
+    properties:
+      StackSetName:
+        $ref: '#/definitions/StackSetName'
+        description: The name or unique ID of the stack set associated with the stack instances.
+      Accounts:
+        $ref: '#/definitions/AccountList'
+        description: The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.
+      Regions:
+        $ref: '#/definitions/RegionList'
+        description: The names of one or more regions in which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.
+      ParameterOverrides:
+        $ref: '#/definitions/Parameters'
+        description: '<p> A list of input parameters whose values you want to update for the specified stack instances. </p> <p>Any overridden parameter values will be applied to all stack instances in the specified accounts and regions. When specifying parameters and their values, be aware of how AWS CloudFormation sets parameter values during stack instance update operations:</p> <ul> <li> <p>To override the current value for a parameter, include the parameter and specify its value.</p> </li> <li> <p>To leave a parameter set to its present value, you can do one of the following:</p> <ul> <li> <p>Do not include the parameter in the list.</p> </li> <li> <p>Include the parameter and specify <code>UsePreviousValue</code> as <code>true</code>. (You cannot specify both a value and set <code>UsePreviousValue</code> to <code>true</code>.)</p> </li> </ul> </li> <li> <p>To set all overridden parameter back to the values specified in the stack set, specify a parameter list but do not include any parameters.</p> </li> <li> <p>To leave all parameters set to their present values, do not specify this property at all.</p> </li> </ul> <p>During stack set updates, any parameter values overridden for a stack instance are not updated, but retain their overridden value.</p> <p>You can only override the parameter <i>values</i> that are specified in the stack set; to add or delete a parameter itself, use <code>UpdateStackSet</code> to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using <code>UpdateStackInstances</code>.</p>'
+      OperationPreferences:
+        $ref: '#/definitions/StackSetOperationPreferences'
+        description: Preferences for how AWS CloudFormation performs this stack set operation.
+      OperationId:
+        $ref: '#/definitions/ClientRequestToken'
+        description: '<p>The unique identifier for this stack set operation. </p> <p>The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You might retry stack set operation requests to ensure that AWS CloudFormation successfully received them.</p> <p>If you don''t specify an operation ID, the SDK generates one automatically. </p>'
+  UpdateStackInstancesOutput:
+    type: object
+    properties:
+      OperationId:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'The unique identifier for this stack set operation. '
   UpdateStackOutput:
     type: object
     properties:
@@ -3562,6 +3751,24 @@ definitions:
       OperationId:
         $ref: '#/definitions/ClientRequestToken'
         description: The unique ID for this stack set operation.
+  UpdateTerminationProtectionInput:
+    type: object
+    required:
+      - EnableTerminationProtection
+      - StackName
+    properties:
+      EnableTerminationProtection:
+        $ref: '#/definitions/EnableTerminationProtection'
+        description: Whether to enable termination protection on the specified stack.
+      StackName:
+        $ref: '#/definitions/StackNameOrId'
+        description: The name or unique ID of the stack for which you want to set termination protection.
+  UpdateTerminationProtectionOutput:
+    type: object
+    properties:
+      StackId:
+        $ref: '#/definitions/StackId'
+        description: The unique ID of the stack.
   Url:
     type: string
   UsePreviousTemplate:

@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://dataproc.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -165,19 +165,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a cluster in a project.
       operationId: dataproc.projects.regions.clusters.create
@@ -272,19 +272,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a cluster in a project.
       operationId: dataproc.projects.regions.clusters.patch
@@ -297,6 +297,10 @@ paths:
           in: path
           name: clusterName
           required: true
+          type: string
+        - description: 'Optional. Timeout for graceful YARN decomissioning. Graceful decommissioning allows removing nodes from the cluster without interrupting jobs in progress. Timeout specifies how long to wait for jobs in progress to finish before forcefully removing nodes (and potentially interrupting jobs). Default timeout is 0 (for forceful decommission), and the maximum allowed timeout is 1 day.Only supported on Dataproc image versions 1.2 and higher.'
+          in: query
+          name: gracefulDecommissionTimeout
           type: string
         - description: Required. The ID of the Google Cloud Platform project the cluster belongs to.
           in: path
@@ -343,19 +347,19 @@ paths:
         - projects
   '/v1/projects/{projectId}/regions/{region}/clusters/{clusterName}:diagnose':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Gets cluster diagnostic information. After the operation completes, the Operation.response field contains DiagnoseClusterOutputLocation.'
       operationId: dataproc.projects.regions.clusters.diagnose
@@ -400,11 +404,11 @@ paths:
           in: query
           name: clusterName
           type: string
-        - description: 'Optional. A filter constraining the jobs to list. Filters are case-sensitive and have the following syntax:field = value AND field = value ...where field is status.state or labels.[KEY], and [KEY] is a label key. value can be * to match all values. status.state can be either ACTIVE or INACTIVE. Only the logical AND operator is supported; space-separated items are treated as having an implicit AND operator.Example filter:status.state = ACTIVE AND labels.env = staging AND labels.starred = *'
+        - description: 'Optional. A filter constraining the jobs to list. Filters are case-sensitive and have the following syntax:field = value AND field = value ...where field is status.state or labels.[KEY], and [KEY] is a label key. value can be * to match all values. status.state can be either ACTIVE or NON_ACTIVE. Only the logical AND operator is supported; space-separated items are treated as having an implicit AND operator.Example filter:status.state = ACTIVE AND labels.env = staging AND labels.starred = *'
           in: query
           name: filter
           type: string
-        - description: Optional. Specifies enumerated categories of jobs to list (default = match ALL jobs).
+        - description: 'Optional. Specifies enumerated categories of jobs to list. (default = match ALL jobs).If filter is provided, jobStateMatcher will be ignored.'
           enum:
             - ALL
             - ACTIVE
@@ -443,19 +447,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/projects/{projectId}/regions/{region}/jobs/{jobId}':
     delete:
       description: 'Deletes the job from the project. If the job is active, the delete fails, and the response returns FAILED_PRECONDITION.'
@@ -520,19 +524,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a job in a project.
       operationId: dataproc.projects.regions.jobs.patch
@@ -574,19 +578,19 @@ paths:
         - projects
   '/v1/projects/{projectId}/regions/{region}/jobs/{jobId}:cancel':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Starts a job cancellation request. To access the job resource after cancellation, call regions/{region}/jobs.list or regions/{region}/jobs.get.'
       operationId: dataproc.projects.regions.jobs.cancel
@@ -624,19 +628,19 @@ paths:
         - projects
   '/v1/projects/{projectId}/regions/{region}/jobs:submit':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Submits a job to a cluster.
       operationId: dataproc.projects.regions.jobs.submit
@@ -691,32 +695,20 @@ paths:
       tags:
         - projects
     get:
-      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as "/v1/{name=users/*}/operations" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.'
-      operationId: dataproc.projects.regions.operations.list
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: dataproc.projects.regions.operations.get
       parameters:
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
-        - description: The name of the operation's parent resource.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -725,34 +717,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to Code.CANCELLED.'
       operationId: dataproc.projects.regions.operations.cancel
@@ -798,7 +790,7 @@ definitions:
         description: Required. The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.
         type: string
       clusterUuid:
-        description: Output-only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.
+        description: Output only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.
         type: string
       config:
         $ref: '#/definitions/ClusterConfig'
@@ -816,9 +808,9 @@ definitions:
         type: string
       status:
         $ref: '#/definitions/ClusterStatus'
-        description: Output-only. Cluster status.
+        description: Output only. Cluster status.
       statusHistory:
-        description: Output-only. The previous cluster status.
+        description: Output only. The previous cluster status.
         items:
           $ref: '#/definitions/ClusterStatus'
         type: array
@@ -877,32 +869,32 @@ definitions:
     description: Metadata describing the operation.
     properties:
       clusterName:
-        description: Output-only. Name of the cluster for the operation.
+        description: Output only. Name of the cluster for the operation.
         type: string
       clusterUuid:
-        description: Output-only. Cluster UUID for the operation.
+        description: Output only. Cluster UUID for the operation.
         type: string
       description:
-        description: Output-only. Short description of operation.
+        description: Output only. Short description of operation.
         type: string
       labels:
         additionalProperties:
           type: string
-        description: Output-only. Labels associated with the operation
+        description: Output only. Labels associated with the operation
         type: object
       operationType:
-        description: Output-only. The operation type.
+        description: Output only. The operation type.
         type: string
       status:
         $ref: '#/definitions/ClusterOperationStatus'
-        description: Output-only. Current operation status.
+        description: Output only. Current operation status.
       statusHistory:
-        description: Output-only. The previous operation status.
+        description: Output only. The previous operation status.
         items:
           $ref: '#/definitions/ClusterOperationStatus'
         type: array
       warnings:
-        description: Output-only. Errors encountered during operation execution.
+        description: Output only. Errors encountered during operation execution.
         items:
           type: string
         type: array
@@ -911,13 +903,13 @@ definitions:
     description: The status of the operation.
     properties:
       details:
-        description: Output-only.A message containing any operation metadata details.
+        description: Output only. A message containing any operation metadata details.
         type: string
       innerState:
-        description: Output-only. A message containing the detailed operation state.
+        description: Output only. A message containing the detailed operation state.
         type: string
       state:
-        description: Output-only. A message containing the operation state.
+        description: Output only. A message containing the operation state.
         enum:
           - UNKNOWN
           - PENDING
@@ -925,7 +917,7 @@ definitions:
           - DONE
         type: string
       stateStartTime:
-        description: Output-only. The time this state was entered.
+        description: Output only. The time this state was entered.
         format: google-datetime
         type: string
     type: object
@@ -933,10 +925,10 @@ definitions:
     description: The status of a cluster and its instances.
     properties:
       detail:
-        description: Output-only. Optional details of cluster's state.
+        description: Output only. Optional details of cluster's state.
         type: string
       state:
-        description: Output-only. The cluster's state.
+        description: Output only. The cluster's state.
         enum:
           - UNKNOWN
           - CREATING
@@ -946,11 +938,11 @@ definitions:
           - UPDATING
         type: string
       stateStartTime:
-        description: Output-only. Time when this state was entered.
+        description: Output only. Time when this state was entered.
         format: google-datetime
         type: string
       substate:
-        description: Output-only. Additional state information that includes status reported by the agent.
+        description: Output only. Additional state information that includes status reported by the agent.
         enum:
           - UNSPECIFIED
           - UNHEALTHY
@@ -965,7 +957,7 @@ definitions:
     description: The location of diagnostic output.
     properties:
       outputUri:
-        description: Output-only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
+        description: Output only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
         type: string
     type: object
   DiskConfig:
@@ -1124,7 +1116,7 @@ definitions:
         $ref: '#/definitions/DiskConfig'
         description: Optional. Disk option config settings.
       imageUri:
-        description: Output-only. The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
+        description: Output only. The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
         type: string
       instanceNames:
         description: 'Optional. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group if not set by user (recommended practice is to let Cloud Dataproc derive the name).'
@@ -1143,7 +1135,7 @@ definitions:
         type: string
       managedGroupConfig:
         $ref: '#/definitions/ManagedGroupConfig'
-        description: Output-only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
+        description: Output only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
       numInstances:
         description: 'Optional. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
         format: int32
@@ -1153,10 +1145,10 @@ definitions:
     description: A Cloud Dataproc job resource.
     properties:
       driverControlFilesUri:
-        description: 'Output-only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
+        description: 'Output only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
         type: string
       driverOutputResourceUri:
-        description: Output-only. A URI pointing to the location of the stdout of the job's driver program.
+        description: Output only. A URI pointing to the location of the stdout of the job's driver program.
         type: string
       hadoopJob:
         $ref: '#/definitions/HadoopJob'
@@ -1192,14 +1184,14 @@ definitions:
         description: Job is a SparkSql job.
       status:
         $ref: '#/definitions/JobStatus'
-        description: Output-only. The job status. Additional application-specific status information may be contained in the <code>type_job</code> and <code>yarn_applications</code> fields.
+        description: Output only. The job status. Additional application-specific status information may be contained in the <code>type_job</code> and <code>yarn_applications</code> fields.
       statusHistory:
-        description: Output-only. The previous job status.
+        description: Output only. The previous job status.
         items:
           $ref: '#/definitions/JobStatus'
         type: array
       yarnApplications:
-        description: 'Output-only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'
+        description: 'Output only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'
         items:
           $ref: '#/definitions/YarnApplication'
         type: array
@@ -1211,7 +1203,7 @@ definitions:
         description: Required. The name of the cluster where the job will be submitted.
         type: string
       clusterUuid:
-        description: Output-only. A cluster UUID generated by the Cloud Dataproc service when the job is submitted.
+        description: Output only. A cluster UUID generated by the Cloud Dataproc service when the job is submitted.
         type: string
     type: object
   JobReference:
@@ -1225,7 +1217,7 @@ definitions:
         type: string
     type: object
   JobScheduling:
-    description: 'Job scheduling options.Beta Feature: These options are available for testing purposes only. They may be changed before final release.'
+    description: Job scheduling options.
     properties:
       maxFailuresPerHour:
         description: Optional. Maximum number of times per hour a driver may be restarted as a result of driver terminating with non-zero code before job is reported failed.A job may be reported as thrashing if driver exits with non-zero code 4 times within 10 minute window.Maximum value is 10.
@@ -1236,10 +1228,10 @@ definitions:
     description: Cloud Dataproc job status.
     properties:
       details:
-        description: 'Output-only. Optional job state details, such as an error description if the state is <code>ERROR</code>.'
+        description: 'Output only. Optional job state details, such as an error description if the state is <code>ERROR</code>.'
         type: string
       state:
-        description: Output-only. A state message specifying the overall job state.
+        description: Output only. A state message specifying the overall job state.
         enum:
           - STATE_UNSPECIFIED
           - PENDING
@@ -1253,11 +1245,11 @@ definitions:
           - ATTEMPT_FAILURE
         type: string
       stateStartTime:
-        description: Output-only. The time when this state was entered.
+        description: Output only. The time when this state was entered.
         format: google-datetime
         type: string
       substate:
-        description: 'Output-only. Additional state information, which includes status reported by the agent.'
+        description: 'Output only. Additional state information, which includes status reported by the agent.'
         enum:
           - UNSPECIFIED
           - SUBMITTED
@@ -1269,19 +1261,19 @@ definitions:
     description: The list of all clusters in a project.
     properties:
       clusters:
-        description: Output-only. The clusters in the project.
+        description: Output only. The clusters in the project.
         items:
           $ref: '#/definitions/Cluster'
         type: array
       nextPageToken:
-        description: 'Output-only. This token is included in the response if there are more results to fetch. To fetch additional results, provide this value as the page_token in a subsequent ListClustersRequest.'
+        description: 'Output only. This token is included in the response if there are more results to fetch. To fetch additional results, provide this value as the page_token in a subsequent ListClustersRequest.'
         type: string
     type: object
   ListJobsResponse:
     description: A list of jobs in a project.
     properties:
       jobs:
-        description: Output-only. Jobs list.
+        description: Output only. Jobs list.
         items:
           $ref: '#/definitions/Job'
         type: array
@@ -1324,10 +1316,10 @@ definitions:
     description: Specifies the resources used to actively manage an instance group.
     properties:
       instanceGroupManagerName:
-        description: Output-only. The name of the Instance Group Manager for this group.
+        description: Output only. The name of the Instance Group Manager for this group.
         type: string
       instanceTemplateName:
-        description: Output-only. The name of the Instance Template used for the Managed Instance Group.
+        description: Output only. The name of the Instance Template used for the Managed Instance Group.
         type: string
     type: object
   NodeInitializationAction:
@@ -1473,7 +1465,7 @@ definitions:
           mapred: mapred-site.xml
           pig: pig.properties
           spark: spark-defaults.conf
-          yarn: yarn-site.xml
+          yarn: yarn-site.xmlFor more information, see Cluster properties.
         type: object
     type: object
   SparkJob:

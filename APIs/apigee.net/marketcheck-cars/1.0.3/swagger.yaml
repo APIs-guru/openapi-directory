@@ -1,0 +1,2061 @@
+swagger: '2.0'
+schemes:
+  - https
+host: marketcheck-prod.apigee.net
+basePath: /v1
+info:
+  description: '<b>Access the New, Used and Certified cars inventories for all Car Dealers in US.</b> <br/>The data is sourced from online listings by over 44,000 Car dealers in US. At any time, there are about 6.2M searchable listings (about 1.9M unique VINs) for Used & Certified cars and about 6.6M (about 3.9M unique VINs) New Car listings from all over US. We use this API at the back for our website <a href=''https://www.marketcheck.com'' target=''_blank''>www.marketcheck.com</a> and our Android and iOS mobile apps too.<br/><h5> Few useful links : </h5><ul><li>A quick view of the API and the use cases is depicated <a href=''https://portals.marketcheck.com/mcapi/'' target=''_blank''>here</a></li><li>The Postman collection with various usages of the API is shared here https://www.getpostman.com/collections/2752684ff636cdd7bac2</li></ul>'
+  title: Marketcheck Cars
+  version: 1.0.3
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://marketcheck-mccarsapiportal.apigee.io/files/logo.png'
+  x-origin:
+    - format: swagger
+      url: 'https://stagingapi.marketcheck.com/api-docs'
+      version: '2.0'
+  x-providerName: apigee.net
+  x-serviceName: marketcheck-cars
+externalDocs:
+  description: Find more details here
+  url: 'https://apidocs.marketcheck.com'
+produces:
+  - application/json
+parameters:
+  api_key:
+    description: The API Authentication Key. Mandatory with all API calls.
+    in: query
+    name: api_key
+    required: false
+    type: string
+paths:
+  /averages:
+    get:
+      description: '[Merged with the /search API - Please check the ''stats'' parameter to the Search API above] Get market averages for price / miles / msrp / dom (days on market) fields for active cars matching the given reference VIN''s basic specification or Year, Make, Model, Trim (Optional) criteria'
+      operationId: getAverages
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which averages data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+        - description: Year of the car
+          format: string
+          in: query
+          name: year
+          required: false
+          type: string
+        - description: Make of the car
+          format: string
+          in: query
+          name: make
+          required: false
+          type: string
+        - description: Model of the Car
+          format: string
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: Trim of the Car
+          format: string
+          in: query
+          name: trim
+          required: false
+          type: string
+        - description: 'Comma separated list of fields to generate stats for. Allowed fields in the list are - price, miles, msrp, dom (days on market)'
+          format: string
+          in: query
+          name: fields
+          type: string
+      responses:
+        '200':
+          description: Data with Market averages
+          schema:
+            $ref: '#/definitions/Averages'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: '[MOCK] Get Averages for YMM'
+      tags:
+        - Market
+      x-swagger-router-controller: Market
+  /comparison:
+    get:
+      description: '[MOCK] Get historical market trends for cars matching the given VIN''s basic specification or Year, Make, Model, Trim (Optional) criteria'
+      operationId: getComparison
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which comparison data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Data after Comparing market
+          schema:
+            $ref: '#/definitions/ComparisonPoint'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Compare market
+      tags:
+        - Market
+      x-swagger-router-controller: Market
+  /competition:
+    get:
+      description: '[MOCK] Competitor cars in market for current vin'
+      operationId: getCompetition
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which competitors data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Data after Comparing market
+          schema:
+            $ref: '#/definitions/CompetitorsPoint'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Competitors
+      tags:
+        - Market
+      x-swagger-router-controller: Market
+  '/dealer/{dealer_id}':
+    get:
+      description: Get a particular dealer's information by its id
+      operationId: getDealer
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Dealer id to get all the dealer info attributes
+          format: string
+          in: path
+          name: dealer_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Dealer for the given id
+          schema:
+            $ref: '#/definitions/Dealer'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Dealer by id
+      tags:
+        - Dealer
+      x-swagger-router-controller: Dealer
+  '/dealer/{dealer_id}/active/inventory':
+    get:
+      description: Get a dealer's currently active inventory
+      operationId: getDealerActiveInventory
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Id representing the dealer to fetch the active inventory for
+          format: string
+          in: path
+          name: dealer_id
+          required: true
+          type: string
+        - description: Number of results to return. Default is 10. Max is 50
+          in: query
+          name: rows
+          required: false
+          type: string
+        - description: Page number to fetch the results for the given criteria. Default is 1. Pagination is allowed only till first 1000 results for the search and sort criteria. The page value can be only between 1 to 1000/rows
+          in: query
+          name: start
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Inventory for the dealer
+          schema:
+            $ref: '#/definitions/BaseListing'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Dealer inventory
+      tags:
+        - Inventory
+        - Dealer
+      x-swagger-router-controller: Dealer
+  '/dealer/{dealer_id}/historical/inventory':
+    get:
+      description: '[v1 : Not Implemented Yet] - Get a dealer''s historical inventory'
+      operationId: getDealerHistoricalInventory
+      parameters:
+        - description: Id representing the dealer to fetch the active inventory for
+          format: string
+          in: path
+          name: dealer_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Historical Inventory for the dealer
+          schema:
+            $ref: '#/definitions/BaseListing'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Dealer's historical inventory
+      tags:
+        - Inventory
+        - Dealer
+      x-swagger-router-controller: Dealer
+  '/dealer/{dealer_id}/landing':
+    get:
+      description: 'Experimental: Get cached version of dealer landing page by dealer id'
+      operationId: getDealerLandingPage
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Robot id to get the landing page html for
+          format: string
+          in: path
+          name: dealer_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Cached html for dealer for the given robot id
+          schema:
+            $ref: '#/definitions/DealerLandingPage'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: 'Experimental: Get cached version of dealer landing page by dealer id'
+      tags:
+        - Dealer
+      x-swagger-router-controller: Dealer
+  '/dealer/{dealer_id}/ratings':
+    get:
+      description: '[MOCK] Get a dealer''s Rating'
+      operationId: getDealerRatings
+      parameters:
+        - description: Id representing the dealer to fetch the ratings for
+          format: string
+          in: path
+          name: dealer_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Rating for respective Dealer
+          schema:
+            $ref: '#/definitions/DealerRating'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Dealer's Rating
+      tags:
+        - Dealer
+      x-swagger-router-controller: Dealer
+  '/dealer/{dealer_id}/reviews':
+    get:
+      description: '[MOCK] Get a dealer''s Review'
+      operationId: getDealerReviews
+      parameters:
+        - description: Id representing the dealer to fetch the ratings for
+          format: string
+          in: path
+          name: dealer_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Review for respective Dealer
+          schema:
+            $ref: '#/definitions/DealerReview'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Dealer's Review
+      tags:
+        - Dealer
+      x-swagger-router-controller: Dealer
+  /dealers:
+    get:
+      description: The dealers API returns a list of dealers around a given point and radius. Max radius of only 50 miles is supported.
+      operationId: dealerSearch
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Latitude component of location
+          format: double
+          in: query
+          name: latitude
+          required: true
+          type: number
+        - description: Longitude component of location
+          format: double
+          in: query
+          name: longitude
+          required: true
+          type: number
+        - description: Radius around the search location
+          in: query
+          name: radius
+          required: true
+          type: integer
+        - description: Number of results to return. Default is 10. Max is 50
+          format: number
+          in: query
+          name: rows
+          required: false
+          type: number
+        - description: Offset for the search results. Default is 1.
+          format: number
+          in: query
+          name: start
+          required: false
+          type: number
+      responses:
+        '200':
+          description: List of dealers for the search
+          schema:
+            items:
+              $ref: '#/definitions/Dealer'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Find car dealers around
+      tags:
+        - Dealer
+    x-swagger-router-controller: Dealer
+  /depreciation:
+    get:
+      description: '[MOCK] Model resale value based on depreciation'
+      operationId: getDepreciation
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which Depreciation stats is to be returned
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Model resale value based on depreciation
+          schema:
+            $ref: '#/definitions/DepreciationPoint'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Depreciation
+      tags:
+        - Market
+      x-swagger-router-controller: Market
+  /economy:
+    get:
+      description: '[MOCK] Calculate Economy i.e. Environmental Friendliness'
+      operationId: getEconomy
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which Environmental Economy data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Calculate Environmental friendliness
+          schema:
+            $ref: '#/definitions/Economy'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get Economy based on environmental factors
+      tags:
+        - VIN Decoder
+      x-swagger-router-controller: VINDecoder
+  /facets:
+    get:
+      description: '[Merged with the /search API - Please check the ''facets'' parameter to the Search API above] Get the facets for the given simple filter criteria (by given VIN''s basic specification, Or by Year, Make, Model, Trim criteria) and facet fields'
+      operationId: getFacets
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which facets data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: false
+          type: string
+        - description: Year of the car
+          format: string
+          in: query
+          name: year
+          required: false
+          type: string
+        - description: Make of the car
+          format: string
+          in: query
+          name: make
+          required: false
+          type: string
+        - description: Model of the Car
+          format: string
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: Trim of the Car
+          format: string
+          in: query
+          name: trim
+          required: false
+          type: string
+        - description: 'Comma separated list of fields to generate facets for. Supported fields are - year, make, model, trim, exterior_color, interior_color, drivetrain, vehicle_type, car_type, body_style, body_subtype, doors'
+          format: string
+          in: query
+          name: fields
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Facet details for the requested fields
+          schema:
+            items:
+              $ref: '#/definitions/FacetItem'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Facets
+      tags:
+        - Facets
+      x-swagger-router-controller: Facets
+  /fuel_efficiency:
+    get:
+      description: '[MOCK] Calculate fuel efficiency from taxonomy db mileage values'
+      operationId: getEfficiency
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which fuel data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Fuel Efficiency
+          schema:
+            $ref: '#/definitions/FuelEfficiency'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get fuel effeciency
+      tags:
+        - VIN Decoder
+      x-swagger-router-controller: VINDecoder
+  '/history/{vin}':
+    get:
+      description: The history API returns online listing history for a car identified by its VIN. History listings are sorted in the descending order of the listing date / last seen date
+      operationId: history
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: The VIN to identify the car to fetch the listing history. Must be a valid 17 char VIN
+          format: string
+          in: path
+          name: vin
+          required: true
+          type: string
+        - description: 'List of fields to fetch, in case the default fields list in the response is to be trimmed down'
+          format: string
+          in: query
+          name: fields
+          required: false
+          type: string
+        - description: Number of results to return. Default is 10. Max is 50
+          format: number
+          in: query
+          name: rows
+          required: false
+          type: number
+        - description: Page number to fetch the results for the given criteria. Default is 1.
+          format: number
+          in: query
+          name: page
+          required: false
+          type: number
+      responses:
+        '200':
+          description: Online listing history for the given vin
+          schema:
+            items:
+              $ref: '#/definitions/HistoricalListing'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get a cars online listing history
+      tags:
+        - History
+    x-swagger-router-controller: Listing
+  '/listing/{id}':
+    get:
+      description: Get a particular listing by its id
+      operationId: getListing
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Listing id to get all the listing attributes
+          format: string
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Listing for the given id
+          schema:
+            $ref: '#/definitions/Listing'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Listing by id
+      tags:
+        - Listings
+    x-swagger-router-controller: Listing
+  '/listing/{id}/extra':
+    get:
+      description: 'Get listing options, features, seller comments'
+      operationId: getListingExtra
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Listing id to get all the long text listing attributes
+          format: string
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ListingAttributes for the given listing id
+          schema:
+            $ref: '#/definitions/ListingExtraAttributes'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Long text Listings attributes for Listing with the given id
+      tags:
+        - Listings
+    x-swagger-router-controller: Listing
+  '/listing/{id}/media':
+    get:
+      description: 'Get listing media (photo, photos) by id'
+      operationId: getListingMedia
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Listing id to get all the listing attributes
+          format: string
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ListingMedia for the given listing id
+          schema:
+            $ref: '#/definitions/ListingMedia'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Listing media by id
+      tags:
+        - Listings
+    x-swagger-router-controller: Listing
+  '/listing/{id}/vdp':
+    get:
+      description: Cached HTML of the Vehicle Details Page (VDP) for the listing. The HTML is cached only for 7 days for all listings. So this API could be used to get HTML of mostly active listings and that have recently expired
+      operationId: getListingVDP
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Listing id to get the vehicle details page (VDP) HTML
+          format: string
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ListingVDP for the given listing id
+          schema:
+            $ref: '#/definitions/ListingVDP'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get listing HTML
+      tags:
+        - Listings
+    x-swagger-router-controller: Listing
+  /mds:
+    get:
+      description: Get the basic information on specifications for a car identified by a valid VIN
+      operationId: getMDS
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN to decode
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+        - description: Exact parameter
+          format: string
+          in: query
+          name: exact
+          required: false
+          type: string
+        - description: Latitude component of location
+          format: double
+          in: query
+          name: latitude
+          required: false
+          type: number
+        - description: Longitude component of location
+          format: double
+          in: query
+          name: longitude
+          required: false
+          type: number
+        - description: Radius around the search location
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - description: Debug parameter
+          format: string
+          in: query
+          name: debug
+          required: false
+          type: string
+        - description: To fetch sold vins
+          format: string
+          in: query
+          name: include_sold
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Provides Market Days supply for year make model or trim combination
+          schema:
+            $ref: '#/definitions/Mds'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Market Days Supply
+      tags:
+        - Market
+      x-swagger-router-controller: MDS
+  /plots:
+    get:
+      description: '[DEPRECIATED Please check this in /search API using plot=true]Get price, miles plot data for active cars matching the given VIN''s basic specification or Year, Make, Model, Trim (Optional) criteria'
+      operationId: getPriceMilesPlotData
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which plot data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: false
+          type: string
+        - description: Year of the car
+          format: string
+          in: query
+          name: year
+          required: false
+          type: string
+        - description: Make of the car
+          format: string
+          in: query
+          name: make
+          required: false
+          type: string
+        - description: Model of the Car
+          format: string
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: Trim of the Car
+          format: string
+          in: query
+          name: trim
+          required: false
+          type: string
+        - description: Car type to get the scatter plot data for
+          format: string
+          in: query
+          name: car_type
+          required: true
+          type: string
+        - description: Number of results to return. Default is 1000. Max is 10000
+          in: query
+          name: rows
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Data to plot Price x Miles on a graph
+          schema:
+            items:
+              $ref: '#/definitions/PlotPoint'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: 'Price, Miles plots data for given criteria'
+      tags:
+        - Graphs
+      x-swagger-router-controller: Graph
+  /popularity:
+    get:
+      description: '[MOCK] [Merged with the /search API - Please check the ''popularity'' parameter to the Search API above] Get the Popularity for the given simple filter criteria (by given Year, Make, Model, Trim criteria)'
+      operationId: getPopularity
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Year of the car
+          format: string
+          in: query
+          name: year
+          required: true
+          type: string
+        - description: Make of the car
+          format: string
+          in: query
+          name: make
+          required: true
+          type: string
+        - description: Model of the Car
+          format: string
+          in: query
+          name: model
+          required: true
+          type: string
+        - description: Trim of the Car
+          format: string
+          in: query
+          name: trim
+          required: true
+          type: string
+        - description: Body type to filter the cars on. Valid values are the ones returned by body_type facets API call
+          format: string
+          in: query
+          name: body_type
+          required: true
+          type: string
+        - description: 'The list of fields for which stats need to be generated based on the matching listings for the search criteria. Allowed fields are - price, miles, msrp, dom The stats consists of mean, max, average and count of listings based on which the stats are calculated for the field. Stats could be requested in addition to the listings for the search. Please note - The API calls with the stats fields may take longer to respond.'
+          in: query
+          name: stats
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Popularity details for the requested fields
+          schema:
+            items:
+              $ref: '#/definitions/PopularityItem'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Popularity
+      tags:
+        - Market
+      x-swagger-router-controller: Listing
+  /safety:
+    get:
+      description: '[MOCK] Get Safety ratings from third party sources'
+      operationId: getSafetyRating
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN to fetch the safety ratings
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Safety Rating for the given vin
+          schema:
+            $ref: '#/definitions/SafetyRating'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get Safety Rating
+      tags:
+        - VIN Decoder
+    x-swagger-router-controller: VINDecoder
+  /search:
+    get:
+      description: |-
+        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 1000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search Cars around a given geo-point within a given radius 
+        2. Search cars for a specific year / make / model or combination of these 
+        3. Search cars matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most car specification attributes
+        5. Search for similar cars by VIN or Taxonomy VIN 
+        6. Filter cars within a given price / miles / days on market (dom) range
+        7. Specify a sort order for the results on price / miles / dom / listed date 
+        8. Search cars for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles/dom/msrp for your search
+      operationId: search
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Latitude component of location
+          format: double
+          in: query
+          name: latitude
+          required: false
+          type: number
+        - description: Longitude component of location
+          format: double
+          in: query
+          name: longitude
+          required: false
+          type: number
+        - description: Radius around the search location
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - description: Car type. Allowed values are - new / used / certified
+          enum:
+            - new
+            - used
+            - certified
+          in: query
+          name: car_type
+          required: false
+          type: string
+        - description: Seller type to filter cars on. Valid filter values are those that our Search facets API returns for unique seller types. You can pass in multiple seller type values comma separated.
+          format: string
+          in: query
+          name: seller_type
+          required: false
+          type: string
+        - description: Car year - 1980 onwards. Valid filter values are those that our Search facets API returns for unique years. You can pass in multiple year values comma separated.
+          in: query
+          name: year
+          required: false
+          type: string
+        - description: 'Car Make - should be a standard OEM Make name. Valid filter values are those that our Search facets API returns for unique make. You can pass in multiple make values separated by comma. e.g. ford,audi'
+          format: string
+          in: query
+          name: make
+          required: false
+          type: string
+        - description: 'Car model to search. Valid filter values are those that our Search facets API returns for unique model. You can pass in multiple model values comma separated for e.g f-150,Mustang.'
+          format: string
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: Car trim to search. Valid filter values are those that our Search facets API returns for unique trim. You can pass in multiple trim values comma separated
+          format: string
+          in: query
+          name: trim
+          required: false
+          type: string
+        - description: Dealer id to filter the cars.
+          format: string
+          in: query
+          name: dealer_id
+          required: false
+          type: string
+        - description: Car vin to search
+          format: string
+          in: query
+          name: vin
+          required: false
+          type: string
+        - description: Source to search cars. Valid filter values are those that our Search facets API returns for unique source. You can pass in multiple source values comma separated
+          format: string
+          in: query
+          name: source
+          required: false
+          type: string
+        - description: Body type to filter the cars on. Valid filter values are those that our Search facets API returns for unique body types. You can pass in multiple body types comma separated.
+          format: string
+          in: query
+          name: body_type
+          required: false
+          type: string
+        - description: Body subtype to filter the cars on. Valid filter values are those that our Search facets API returns for unique body subtypes. You can pass in multiple body subtype values comma separated
+          format: string
+          in: query
+          name: body_subtype
+          required: false
+          type: string
+        - description: Vehicle type to filter the cars on. Valid filter values are those that our Search facets API returns for unique vehicle types. You can pass in multiple vehicle type values comma separated
+          format: string
+          in: query
+          name: vehicle_type
+          required: false
+          type: string
+        - description: 'Comma separated list of 17 digit vins to search the matching cars for. Only 10 VINs allowed per request. If the request contains more than 10 VINs the first 10 VINs will be considered. Could be used as a More Like This or Similar Vehicles search for the given VINs. Ths vins parameter is an alternative to taxonomy_vins or ymmt parameters available with the search API. vins and taxonomy_vins parameters could be used to filter our cars with the exact build represented by the vins or taxonomy_vins whereas ymmt is a top level filter that does not filter cars by the build attributes like doors, drivetrain, cylinders, body type, body subtype, vehicle type etc'
+          in: query
+          name: vins
+          required: false
+          type: string
+        - description: Comma separated list of 10 letters excert from the 17 letter VIN. The 10 letters to be picked up from the 17 letter VIN are - first 8 letters and the 10th and 11th letter. E.g. For a VIN - 1FTFW1EF3EKE57182 the taxonomy vin would be - 1FTFW1EFEK  A taxonomy VIN identified a build of a car and could be used to filter our cars of a particular build. This is an alternative to the vin or ymmt parameters to the search API.
+          in: query
+          name: taxonomy_vins
+          required: false
+          type: string
+        - description: 'Comma separated list of Year, Make, Model, Trim combinations. Each combination needs to have the year,make,model, trim values separated by a pipe ''|'' character in the form year|make|model|trim. e.g. 2010|Audi|A5,2014|Nissan|Sentra|S 6MT,|Honda|City|   You could just provide strings of the form - ''year|make||'' or ''year|make|model'' or ''|make|model|'' combinations. Individual year / make / model filters provied with the API calls will take precedence over the Year, Make, Model, Trim combinations. The Make, Model, Trim values must be valid values as per the Marketcheck Vin Decoder. If you are using a separate vin decoder then look at using the ''vins'' or ''taxonomy_vins'' parameter to the search api instead the year|make|model|trim combinations.'
+          in: query
+          name: ymmt
+          required: false
+          type: string
+        - description: 'Comma separated list of Year, Make, Model, Trim fields. For example - year,make,model,trim fields for which user wants to do an exact match'
+          in: query
+          name: match
+          required: false
+          type: string
+        - description: Cylinders to filter the cars on. Valid filter values are those that our Search facets API returns for unique cylinder values. You can pass in multiple cylinder values comma separated
+          format: string
+          in: query
+          name: cylinders
+          required: false
+          type: string
+        - description: 'Transmission to filter the cars on. [a = Automatic, m = Manual]. Valid filter values are those that our Search facets API returns for unique transmission. You can pass in multiple transmission values comma separated'
+          format: string
+          in: query
+          name: transmission
+          required: false
+          type: string
+        - description: Speeds to filter the cars on. Valid filter values are those that our Search facets API returns for unique speeds. You can pass in multiple speeds values comma separated
+          format: string
+          in: query
+          name: speeds
+          required: false
+          type: string
+        - description: Doors to filter the cars on. Valid filter values are those that our Search facets API returns for unique doors. You can pass in multiple doors values comma separated
+          format: string
+          in: query
+          name: doors
+          required: false
+          type: string
+        - description: Drivetrain to filter the cars on. Valid filter values are those that our Search facets API returns for unique drivetrains. You can pass in multiple drivetrain values comma separated
+          format: string
+          in: query
+          name: drivetrain
+          required: false
+          type: string
+        - description: Exterior color to match. Valid filter values are those that our Search facets API returns for unique exterior colors. You can pass in multiple exterior color values comma separated
+          in: query
+          name: exterior_color
+          required: false
+          type: string
+        - description: Interior color to match. Valid filter values are those that our Search facets API returns for unique interior colors. You can pass in multiple interior color values comma separated
+          in: query
+          name: interior_color
+          required: false
+          type: string
+        - description: Filter listings on engine
+          in: query
+          name: engine
+          required: false
+          type: string
+        - description: Engine Type to match. Valid filter values are those that our Search facets API returns for unique engine types. You can pass in multiple engine type values comma separated
+          in: query
+          name: engine_type
+          required: false
+          type: string
+        - description: Engine Aspiration to match. Valid filter values are those that our Search facets API returns for unique Engine Aspirations. You can pass in multiple Engine aspirations values comma separated
+          in: query
+          name: engine_aspiration
+          required: false
+          type: string
+        - description: Engine Block to match. Valid filter values are those that our Search facets API returns for unique Engine Block. You can pass in multiple Engine Block values comma separated
+          in: query
+          name: engine_block
+          required: false
+          type: string
+        - description: Miles range to filter cars with miles in the given range. Range to be given in the format - min-max e.g. 1000-5000
+          format: string
+          in: query
+          name: miles_range
+          required: false
+          type: string
+        - description: Price range to filter cars with the price in the range given. Range to be given in the format - min-max e.g. 1000-5000
+          format: string
+          in: query
+          name: price_range
+          required: false
+          type: string
+        - description: Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_range
+          required: false
+          type: string
+        - description: Sort by field - allowed fields are distance|price|miles|dom|age|posted_at|year. Default sort field is distance from the given point
+          format: string
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: Sort order - asc or desc. Default sort order is distance from a point.
+          format: string
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: Number of results to return. Default is 10. Max is 50
+          in: query
+          name: rows
+          required: false
+          type: string
+        - description: Page number to fetch the results for the given criteria. Default is 1. Pagination is allowed only till first 1000 results for the search and sort criteria. The page value can be only between 1 to 1000/rows
+          in: query
+          name: start
+          required: false
+          type: string
+        - description: 'The comma separated list of fields for which facets are requested. Supported fields are - year, make, model, trim, vehicle_type, car_type, body_type, body_subtype, drivetrain, cylinders, transmission, exterior_color, interior_color, doors, engine_type, engine_aspiration, engine_block. Facets could be requested in addition to the listings for the search. Please note - The API calls with lots of facet fields may take longer to respond.'
+          in: query
+          name: facets
+          required: false
+          type: string
+        - description: 'The list of fields for which stats need to be generated based on the matching listings for the search criteria. Allowed fields are - price, miles, msrp, dom The stats consists of mean, max, average and count of listings based on which the stats are calculated for the field. Stats could be requested in addition to the listings for the search. Please note - The API calls with the stats fields may take longer to respond.'
+          in: query
+          name: stats
+          required: false
+          type: string
+        - description: 'Filter on Country, by default US. Search available on US (United States) and CA (Canada)'
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: If plot has value true results in around 25k coordinates with limited fields to plot respective graph
+          in: query
+          name: plot
+          required: false
+          type: string
+        - description: If nodedup is set to true then will give results using is_searchable
+          in: query
+          name: nodedup
+          required: false
+          type: string
+        - description: Filter listsings on State
+          in: query
+          name: state
+          required: false
+          type: string
+        - description: Filter listings on city
+          in: query
+          name: city
+          required: false
+          type: string
+        - description: Filter listings on dealer_name
+          in: query
+          name: dealer_name
+          required: false
+          type: string
+        - description: Filter listings on web scraped trim
+          in: query
+          name: trim_o
+          required: false
+          type: string
+        - description: Filter trim on custom possible matches
+          in: query
+          name: trim_r
+          required: false
+          type: string
+        - description: Active Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_active_range
+          required: false
+          type: string
+        - description: Last 180 Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_180_range
+          required: false
+          type: string
+      responses:
+        '200':
+          description: List of all cars listings matching the search & filter criteria
+          schema:
+            $ref: '#/definitions/SearchResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Gets active car listings for the given search criteria
+      tags:
+        - Listings
+    x-swagger-router-controller: Listing
+  /trends:
+    get:
+      description: 'Get historical market trends for cars matching the given VIN''s basic specification or Year, Make, Model, Trim (Optional) criteria'
+      operationId: getTrends
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which trend data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+        - description: Car type. Allowed values are - new / used / certified
+          format: string
+          in: query
+          name: car_type
+          required: true
+          type: string
+        - description: Year of the car
+          format: string
+          in: query
+          name: year
+          required: false
+          type: string
+        - description: Make of the car
+          format: string
+          in: query
+          name: make
+          required: false
+          type: string
+        - description: Model of the Car
+          format: string
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: Trim of the Car
+          format: string
+          in: query
+          name: trim
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Data with Market Trend values
+          schema:
+            items:
+              $ref: '#/definitions/TrendPoint'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get Trends for criteria
+      tags:
+        - Market
+      x-swagger-router-controller: Trends
+  '/vin/{vin}/specs':
+    get:
+      description: Get the basic information on specifications for a car identified by a valid VIN
+      operationId: decode
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN to decode
+          format: string
+          in: path
+          name: vin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Basic sepcifications details about the car
+          schema:
+            $ref: '#/definitions/Build'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: VIN Decoder
+      tags:
+        - VIN Decoder
+      x-swagger-router-controller: VINDecoder
+  /vin_report_summary:
+    get:
+      description: '[MOCK] Generate Summary report'
+      operationId: getSummaryReport
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: VIN as a reference to the type of car for which Summary data is to be returned
+          format: string
+          in: query
+          name: vin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Summary Report
+          schema:
+            items:
+              $ref: '#/definitions/VinReport'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get Summary Report
+      tags:
+        - Listings
+      x-swagger-router-controller: Listing
+definitions:
+  Averages:
+    properties:
+      age:
+        description: Average age of the car
+        type: number
+      dom:
+        description: Average Days on Market value for the car based on all listings found in the Marketcheck database for this car
+        type: number
+      miles:
+        description: Mean miles value for the car
+        type: number
+      msrp:
+        description: Mean msrp value for the car
+        type: number
+      price:
+        description: Mean price value for the car
+        type: number
+      units:
+        description: No of units for this car on the market
+        type: number
+    type: object
+  BaseListing:
+    description: Minimal set of attributes describing a listing
+    properties:
+      build:
+        $ref: '#/definitions/Build'
+      dealer:
+        $ref: '#/definitions/Dealer'
+      distance:
+        description: Distance of the car's location from the specified user lcoation
+        type: number
+      dom:
+        description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
+        type: number
+      dom_180:
+        description: Days on Market value for the car based on current and last 6 month listings found in the Marketcheck database for this car
+        type: number
+      dom_active:
+        description: Days on Market value for the car based on current and last 30 days listings found in the Marketcheck database for this car
+        type: number
+      exterior_color:
+        description: Exterior color of the car
+        type: string
+      first_seen_at:
+        description: Listing first seen at first scraped timestamp
+        type: number
+      first_seen_at_date:
+        description: Listing first seen at first scraped date
+        type: string
+      heading:
+        description: Listing title as displayed on the source website
+        type: string
+      id:
+        description: Unique identifier representing a specific listing from the Marketcheck database
+        type: string
+      interior_color:
+        description: Interior color of the car
+        type: string
+      inventory_type:
+        description: Inventory type of car
+        type: string
+      is_certified:
+        description: Certified car
+        type: integer
+      last_seen_at:
+        description: Listing last seen at (most recent) timestamp
+        type: number
+      last_seen_at_date:
+        description: Listing last seen at (most recent) date
+        type: string
+      media:
+        $ref: '#/definitions/ListingMedia'
+        description: Car Media Attributes - main photo link/url and photo links
+        type: object
+      miles:
+        description: Odometer reading / reported miles usage for the car
+        type: string
+      price:
+        description: Asking price for the car
+        type: string
+      ref_miles:
+        description: Last Odometer reading / reported miles usage for the car. If the asking miles value is not or is available then the last_miles could perhaps be used. last_miles is the miles for the car listed on the source website as of last_miles_dt date
+        type: string
+      ref_miles_dt:
+        description: The date at which the last miles was reported online. This is earlier to last_seen_date
+        type: integer
+      ref_price:
+        description: Last reported price for the car. If the asking price value is not or is available then the last_price could perhaps be used. last_price is the price for the car listed on the source website as of last_price_dt date
+        type: string
+      ref_price_dt:
+        description: The date at which the last price was reported online. This is earlier to last_seen_date
+        type: integer
+      scraped_at_date:
+        description: Listing first seen at first scraped date
+        type: number
+      seller_type:
+        description: Seller type for the car
+        type: string
+      source:
+        description: Source domain of the listing
+        type: string
+      stock_no:
+        description: Stock no of the car
+        type: string
+      vdp_url:
+        description: Vehicle Details Page url of the specific car
+        type: string
+      vin:
+        description: VIN for the car
+        type: string
+    type: object
+  Build:
+    description: Describes the Car specification
+    properties:
+      antibrake_sys:
+        description: Antibrake system of the car
+        type: string
+      body_type:
+        description: Body type of the car
+        type: string
+      city_miles:
+        description: City miles of the car
+        type: string
+      cylinders:
+        description: No of cylinders of the car
+        type: number
+      doors:
+        description: No of doors of the car
+        type: number
+      drivetrain:
+        description: Drivetrain of the car
+        type: string
+      engine:
+        description: Engine of the car
+        type: string
+      engine_aspiration:
+        description: Engine aspiration of the car
+        type: string
+      engine_block:
+        description: Engine block of the car
+        type: string
+      engine_measure:
+        description: Engine block of the car
+        type: string
+      engine_size:
+        description: Engine size of the car
+        type: string
+      fuel_type:
+        description: Fuel type of the car
+        type: string
+      highway_miles:
+        description: Highway miles of the car
+        type: string
+      made_in:
+        description: Made in of the car
+        type: string
+      make:
+        description: Car Make
+        type: string
+      model:
+        description: Car model
+        type: string
+      overall_height:
+        description: Overall height of the car
+        type: string
+      overall_length:
+        description: Overall length of the car
+        type: string
+      overall_width:
+        description: Overall width of the car
+        type: string
+      std_seating:
+        description: Std seating of the car
+        type: string
+      steering_type:
+        description: Steering type of the car
+        type: string
+      tank_size:
+        description: Tank size of the car
+        type: string
+      transmission:
+        description: Transmission of the car
+        type: string
+      trim:
+        description: Trim of the car
+        type: string
+      vehicle_type:
+        description: Vehicle type of the car
+        type: string
+      year:
+        description: Year of the Car
+        type: number
+    type: object
+  ComparisonPoint:
+    properties:
+      dealer_indicator:
+        description: Deal Indicator
+        type: string
+      fair_deal_price:
+        description: Fair Deal Price
+        type: number
+      similar_vehicles_count:
+        description: Similar Vehicles Count
+        type: number
+      vin_price:
+        description: Price for Vin
+        type: number
+    type: object
+  CompetitorsCarDetails:
+    properties:
+      avg_market_value:
+        description: Estimated market value
+        type: string
+      miles:
+        description: mileage of car
+        type: string
+      name:
+        description: Current car name
+        type: string
+      price:
+        description: price of car
+        type: string
+    type: object
+  CompetitorsPoint:
+    properties:
+      current_car:
+        $ref: '#/definitions/CompetitorsCarDetails'
+        description: Details of current car
+        type: object
+      same_car_models:
+        items:
+          $ref: '#/definitions/CompetitorsSameCars'
+          description: List same car models
+          type: object
+        type: array
+      similar_car_models:
+        items:
+          $ref: '#/definitions/CompetitorsSimilarCars'
+          description: List similar car models
+          type: object
+        type: array
+    type: object
+  CompetitorsSameCars:
+    properties:
+      avg_market_value:
+        description: Estimated market value of year make model combination
+        type: number
+      avg_miles:
+        description: Mileage of year make model combination
+        type: number
+      avg_price:
+        description: Price of year make model combination
+        type: number
+      name:
+        description: ymm_comb_name
+        type: string
+    type: object
+  CompetitorsSimilarCars:
+    properties:
+      avg_market_value:
+        description: Average market value of year make model combination
+        type: number
+      avg_miles:
+        description: Average mileage of year make model combination
+        type: number
+      avg_price:
+        description: Average price of year make model combination
+        type: number
+      name:
+        description: ymm_comb_name
+        type: string
+    type: object
+  Dealer:
+    properties:
+      car_type:
+        description: Car type new|used|certified
+        type: string
+      city:
+        description: City of the dealer
+        type: string
+      dealer_type:
+        default: independent
+        description: 'Dealer type - independent, franchise, multi-brand, authorized'
+        type: string
+      franchise_id:
+        description: Dealer franchise id
+        type: string
+      id:
+        description: The unique id associated with the dealer in the Marketcheck database
+        type: string
+      latitude:
+        description: Latutide for the dealer location
+        type: string
+      longitude:
+        description: Longitude for the dealer location
+        type: string
+      name:
+        description: Name of the dealer
+        type: string
+      phone:
+        description: Contact no of the dealer
+        type: string
+      rating:
+        description: Overall rating of the dealership on scale 1-5
+        type: number
+      state:
+        description: State of the dealer
+        type: string
+      street:
+        description: Street of the dealer
+        type: string
+      target_url_certified:
+        description: Target url for the certified cars listing
+        type: string
+      target_url_new:
+        description: Target url for the new cars listing
+        type: string
+      target_url_used:
+        description: Target url for the used cars listing
+        type: string
+      zip:
+        description: Zip of the dealer
+        type: string
+    type: object
+  DealerLandingPage:
+    description: Describes the dealer landing page (SRP) HTML object
+    properties:
+      crawled_at:
+        description: The timestamp indicating the time when the SRP was cached
+        type: number
+      html:
+        description: The HTML string for the listing web page
+        type: string
+      srp_url:
+        description: The URL of the SRP
+        type: string
+    type: object
+  DealerRating:
+    properties:
+      city:
+        description: City of the dealer
+        type: string
+      latitude:
+        description: Latutide for the dealer location
+        type: string
+      longitude:
+        description: Longitude for the dealer location
+        type: string
+      name:
+        description: Name of the dealer
+        type: string
+      overall_rating:
+        description: Overall rating of the dealership on scale 1-5
+        type: number
+      rating_components:
+        items:
+          $ref: '#/definitions/RatingComponents'
+        type: array
+      state:
+        description: State of the dealer
+        type: string
+      street:
+        description: Street of the dealer
+        type: string
+      zip:
+        description: Zip of the dealer
+        type: string
+    type: object
+  DealerReview:
+    properties:
+      city:
+        description: City of the dealer
+        type: string
+      latitude:
+        description: Latutide for the dealer location
+        type: string
+      longitude:
+        description: Longitude for the dealer location
+        type: string
+      name:
+        description: Name of the dealer
+        type: string
+      overall_reviews:
+        description: Overall reviews of the dealership
+        type: number
+      review_components:
+        items:
+          $ref: '#/definitions/ReviewComponents'
+        type: array
+      state:
+        description: State of the dealer
+        type: string
+      street:
+        description: Street of the dealer
+        type: string
+      zip:
+        description: Zip of the dealer
+        type: string
+    type: object
+  DepreciationPoint:
+    properties:
+      similar_models:
+        items:
+          $ref: '#/definitions/DepreciationStats'
+          description: Depreciation Stats for simailar models
+          type: object
+        type: array
+    type: object
+  DepreciationStats:
+    properties:
+      current_value:
+        description: Price of year make model combination
+        type: number
+      five_year_from_now:
+        description: price after five year from now
+        type: number
+      five_year_from_now_percent:
+        description: price depreciation percent after five year from now
+        type: number
+      name:
+        description: ymm_comb_name
+        type: string
+      one_year_from_now:
+        description: price after one year from now
+        type: number
+      one_year_from_now_percent:
+        description: price depreciation percent after one year from now
+        type: number
+      two_year_from_now:
+        description: price after two year from now
+        type: number
+      two_year_from_now_percent:
+        description: price depreciation percent after two year from now
+        type: number
+    type: object
+  Economy:
+    properties:
+      ghg_emissions_indicator:
+        description: Contains text like bad|Good|Very Good| Excellent
+        type: string
+      ghg_emissions_rating:
+        description: Show vehicle impact on climate change in terms of greeenhouse gases. This rating will be in the range of 1 - 10
+        type: number
+      smog_indicator:
+        description: Contains text like bad|Good|Very Good| Excellent
+        type: string
+      smog_rating:
+        description: Shows vehicle's emissions of pollutants known to cause smog and other forms of air pollution. This rating will be in the range of 1 - 10
+        type: number
+    type: object
+  Error:
+    properties:
+      message:
+        description: Error message
+        type: string
+      status:
+        description: Error code
+        type: number
+    type: object
+  FacetItem:
+    properties:
+      count:
+        description: Facet item count
+        type: number
+      item:
+        description: Facet item
+        type: string
+    type: object
+  FuelEfficiency:
+    properties:
+      annual_miles:
+        description: Annual Miles of Car
+        type: number
+      city_mileage:
+        description: City Mileage in MPG
+        type: string
+      combined_mileage:
+        description: Combined Mileage
+        type: string
+      highway_mileage:
+        description: Highway Mileage in MPG
+        type: string
+      monthly_fuel_expense:
+        description: Monthly fuel expense
+        type: number
+    type: object
+  HistoricalListing:
+    description: Represents a car history entry
+    properties:
+      city:
+        description: City of the listing
+        type: string
+      id:
+        description: Unique identifier representing a specific listing from the Marketcheck database
+        type: string
+      last_seen_at:
+        description: Listing last seen at (most recent) timestamp
+        type: number
+      miles:
+        description: Odometer reading / reported miles usage for the car
+        type: string
+      msrp:
+        description: MSRP for the car
+        type: string
+      price:
+        description: Asking price for the car
+        type: string
+      scraped_at:
+        description: Listing scraped at timestamp
+        type: number
+      seller_name:
+        description: Seller name of the listing from the Marketcheck database
+        type: string
+      source:
+        description: Source website for the listing
+        type: string
+      state:
+        description: State of the listing
+        type: string
+      vdp_url:
+        description: Vehicle Details Page url of the specific car
+        type: string
+      zip:
+        description: Zip of the listing
+        type: string
+    type: object
+  Listing:
+    description: Represents a full list of attributes available with Marketcheck for a car
+    properties:
+      build:
+        $ref: '#/definitions/Build'
+        description: Build / Specifications attributes
+        type: object
+      car_location:
+        $ref: '#/definitions/Location'
+        description: Car location data. Included only if its a different location to the dealers location
+        type: object
+      dealer:
+        $ref: '#/definitions/Dealer'
+      dom:
+        description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
+        type: number
+      dom_180:
+        description: Days on Market value for the car based on current and last 6 month listings found in the Marketcheck database for this car
+        type: number
+      dom_active:
+        description: Days on Market value for the car based on current and last 30 days listings found in the Marketcheck database for this car
+        type: number
+      extra:
+        $ref: '#/definitions/ListingExtraAttributes'
+        description: 'Extra attributes for the listing - options, features, seller comments etc'
+        type: object
+      first_seen_at:
+        description: Listing first seen at first scraped timestamp
+        type: number
+      first_seen_at_date:
+        description: Listing first seen at first scraped date
+        type: string
+      heading:
+        description: Listing heading
+        type: string
+      id:
+        description: Unique identifier representing a specific listing from the Marketcheck database
+        type: string
+      inventory_type:
+        description: Inventory type of car
+        type: string
+      is_certified:
+        description: Flag indicating whether the car is Certified
+        type: integer
+      last_seen_at:
+        description: Listing last seen at (most recent) timestamp
+        type: number
+      last_seen_at_date:
+        description: Listing last seen at (most recent) date
+        type: string
+      media:
+        $ref: '#/definitions/ListingMedia'
+        description: Car Media Attributes - main photo link/url and photo links
+        type: object
+      miles:
+        description: Odometer reading / reported miles usage for the car
+        type: string
+      msrp:
+        description: MSRP for the car
+        type: string
+      price:
+        description: Asking price for the car
+        type: string
+      scraped_at_date:
+        description: Listing first seen at first scraped date
+        type: number
+      seller_type:
+        description: Seller type for the car
+        type: string
+      source:
+        description: Source domain of the listing
+        type: string
+      stock_no:
+        description: Stock no of the car
+        type: string
+      vdp_url:
+        description: Vehicle Details Page url of the specific car
+        type: string
+      vin:
+        description: VIN for the car
+        type: string
+    type: object
+  ListingDebugAttributes:
+    properties:
+      cycle_id:
+        description: Cycle id
+        type: number
+      robot_id:
+        description: Robot id
+        type: number
+      scraped_at:
+        description: Scraped date and time
+        type: string
+      taxonomy_vin:
+        description: Taxonomy vin
+        type: string
+      template_id:
+        description: Template id
+        type: number
+      user_id:
+        description: User id
+        type: number
+    type: object
+  ListingExtraAttributes:
+    properties:
+      features:
+        description: List of Features available with the car
+        items:
+          type: string
+        type: array
+      options:
+        description: Installed Options of the car
+        items:
+          type: string
+        type: array
+      seller_comment:
+        description: Seller comment for the car
+        type: string
+    type: object
+  ListingMedia:
+    properties:
+      photo_link:
+        description: Single photo url of the car
+        type: string
+      photo_links:
+        description: A list of photo urls for the car
+        items:
+          type: string
+        type: array
+    type: object
+  ListingVDP:
+    description: Describes the VDP (Vehicle Details Page) HTML object
+    properties:
+      crawled_at:
+        description: The timestamp indicating the time when the VDP was cached
+        type: number
+      html:
+        description: The HTML string for the listing web page
+        type: string
+      vdp_url:
+        description: The URL of the VDP
+        type: string
+    type: object
+  Location:
+    description: Represents a location
+    properties:
+      city:
+        description: City of the listing
+        type: string
+      latitude:
+        description: Latitude component of the location
+        format: double
+        type: number
+      longitude:
+        description: Longitude component of the location
+        format: double
+        type: number
+      state:
+        description: State of the listing
+        type: string
+      zip:
+        description: Zip of the listing
+        type: string
+    type: object
+  MakeModel:
+    properties:
+      make:
+        type: string
+      model:
+        type: string
+    type: object
+  Mds:
+    description: Describes Market days supply results for year make model trim combination
+    properties:
+      mds:
+        description: Provides Market days supply count
+        type: number
+      total_active_cars_for_ymmt:
+        description: Active cars for ymmt combination
+        type: number
+      total_cars_sold_in_last_45_days:
+        description: Cars sold in last 45 days
+        type: number
+    type: object
+  PlotPoint:
+    properties:
+      dom:
+        description: DOM
+        type: number
+      id:
+        description: Listing id
+        type: string
+      miles:
+        description: Miles
+        type: number
+      msrp:
+        description: Msrp
+        type: number
+      price:
+        description: Price
+        type: number
+      seller_name:
+        description: Seller name
+        type: string
+      vin:
+        description: Vin
+        type: string
+    type: object
+  PopularityItem:
+    properties:
+      count:
+        description: Popularity item count
+        type: number
+      item:
+        description: Popularity item
+        type: string
+    type: object
+  RatingComponents:
+    properties:
+      actual_rating:
+        description: rating of car on that condition
+        type: number
+      rating_condition:
+        description: Specifices rating condition parameter
+        type: string
+    type: object
+  ReviewComponents:
+    properties:
+      actual_review:
+        description: review of car given by current user
+        type: string
+      user_name:
+        description: Name of user who has given review
+        type: string
+      user_rating:
+        description: rating for dealer given by user ranging from 1-5
+        type: number
+    type: object
+  SafetyRating:
+    description: Describes the Safety Ratings of current listing
+    properties:
+      driver_front_rating:
+        description: Driver front rating of the Listing on scale 1-5
+        type: number
+      driver_side_rating:
+        description: Driver Side rating of the Listing on scale 1-5
+        type: number
+      overall_rating:
+        description: Overall rating of the Listing on scale 1-5
+        type: number
+      passenger_front_rating:
+        description: Passenger front rating of the Listing on scale 1-5
+        type: number
+      roll_over_rating:
+        description: Roll Over rating of the Listing on scale 1-5
+        type: number
+    type: object
+  SearchResponse:
+    description: Search query response
+    properties:
+      listings:
+        items:
+          $ref: '#/definitions/BaseListing'
+        type: array
+      num_found:
+        description: The number of listings found
+        type: number
+    type: object
+  TrendPoint:
+    properties:
+      dom:
+        description: Days on Market
+        type: number
+      miles:
+        description: Miles
+        type: number
+      msrp:
+        description: MSRP
+        type: number
+      price:
+        description: Price
+        type: number
+      units:
+        description: Units
+        type: number
+    type: object
+  VinReport:
+    properties:
+      icon:
+        description: icon url
+        type: string
+      some_text:
+        description: Some descriptional text
+        type: string
+    type: object

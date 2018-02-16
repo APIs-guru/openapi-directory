@@ -1,0 +1,47 @@
+- op: add
+  path: /paths/~1users/get/parameters/1
+  value:
+    default: 0
+    description: The offset to start listing users from
+    format: integer
+    in: query
+    name: offset
+    required: false
+    type: integer
+- op: test
+  path: /paths/~1users/get/parameters/2
+  value:
+    default: 0
+    description: The offset to start listing users from
+    format: integer
+    in: query
+    name: limit
+    required: false
+    type: integer
+- op: remove
+  path: /paths/~1users/get/parameters/2
+- op: add
+  path: '/paths/~1orgunits~1{orgid}~1usergroups~1{groupid}~1members~1{uuid}/delete/responses/200/description'
+  value: OK
+- op: test
+  path: '/paths/~1orgunits~1{orgid}~1usergroups/post/parameters/2'
+  value:
+    description: ID of group
+    format: int64
+    in: path
+    name: groupid
+    required: true
+    type: integer
+- op: remove
+  path: '/paths/~1orgunits~1{orgid}~1usergroups/post/parameters/2'
+- op: test
+  path: '/paths/~1orgunits~1{orgid}~1usergroups/get/parameters/1'
+  value:
+    description: ID of group
+    format: int64
+    in: path
+    name: groupid
+    required: true
+    type: integer
+- op: remove
+  path: '/paths/~1orgunits~1{orgid}~1usergroups/get/parameters/1'

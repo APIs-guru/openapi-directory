@@ -1,0 +1,2706 @@
+swagger: '2.0'
+info:
+  version: '2017-11-28'
+  x-release: v4
+  title: Amazon GuardDuty
+  description: 'Assess, monitor, manage, and remediate security issues across your AWS infrastructure, applications, and data.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: guardduty
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/guardduty-2017-11-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/guardduty/'
+host: guardduty.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/detector/{detectorId}/master':
+    post:
+      operationId: AcceptInvitation
+      description: Accepts the invitation to be monitored by a master GuardDuty account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AcceptInvitationResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AcceptInvitationRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMasterAccount
+      description: Provides the details for the GuardDuty master account to the current GuardDuty member account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMasterAccountResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMasterAccountRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+  '/detector/{detectorId}/findings/archive':
+    post:
+      operationId: ArchiveFindings
+      description: Archives Amazon GuardDuty findings specified by the list of finding IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ArchiveFindingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ArchiveFindingsRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /detector:
+    post:
+      operationId: CreateDetector
+      description: Creates a single Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector must be created in order for GuardDuty to become operational.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDetectorResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDetectorRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDetectors
+      description: Lists detectorIds of all the existing Amazon GuardDuty detector resources.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDetectorsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDetectorsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/detector/{detectorId}/ipset':
+    post:
+      operationId: CreateIPSet
+      description: Creates a new IPSet - a list of trusted IP addresses that have been whitelisted for secure communication with AWS infrastructure and applications.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateIPSetResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateIPSetRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListIPSets
+      description: Lists the IPSets of the GuardDuty service specified by the detector ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListIPSetsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListIPSetsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+  '/detector/{detectorId}/member':
+    post:
+      operationId: CreateMembers
+      description: Creates member accounts of the current AWS account by specifying a list of AWS account IDs. The current AWS account can then invite these members to manage GuardDuty in their accounts.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMembersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateMembersRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMembers
+      description: Lists details about all member accounts for the current GuardDuty master account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMembersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListMembersRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+  '/detector/{detectorId}/findings/create':
+    post:
+      operationId: CreateSampleFindings
+      description: 'Generates example findings of types specified by the list of finding types. If ''NULL'' is specified for findingTypes, the API generates example findings of all supported finding types.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSampleFindingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSampleFindingsRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/threatintelset':
+    post:
+      operationId: CreateThreatIntelSet
+      description: Create a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateThreatIntelSetResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateThreatIntelSetRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListThreatIntelSets
+      description: Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListThreatIntelSetsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListThreatIntelSetsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+  /invitation/decline:
+    post:
+      operationId: DeclineInvitations
+      description: Declines invitations sent to the current member account by AWS account specified by their account IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeclineInvitationsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeclineInvitationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}':
+    delete:
+      operationId: DeleteDetector
+      description: Deletes a Amazon GuardDuty detector specified by the detector ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDetectorResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDetectorRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetDetector
+      description: Retrieves an Amazon GuardDuty detector specified by the detectorId.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDetectorResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDetectorRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: UpdateDetector
+      description: Updates an Amazon GuardDuty detector specified by the detectorId.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDetectorResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDetectorRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+  '/detector/{detectorId}/ipset/{ipSetId}':
+    delete:
+      operationId: DeleteIPSet
+      description: Deletes the IPSet specified by the IPSet ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteIPSetResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteIPSetRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: ipSetId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetIPSet
+      description: Retrieves the IPSet specified by the IPSet ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetIPSetResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetIPSetRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: ipSetId
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: UpdateIPSet
+      description: Updates the IPSet specified by the IPSet ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateIPSetResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateIPSetRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: ipSetId
+          in: path
+          type: string
+          required: true
+  /invitation/delete:
+    post:
+      operationId: DeleteInvitations
+      description: Deletes invitations sent to the current member account by AWS accounts specified by their account IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteInvitationsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteInvitationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/member/delete':
+    post:
+      operationId: DeleteMembers
+      description: Deletes GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteMembersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteMembersRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/threatintelset/{threatIntelSetId}':
+    delete:
+      operationId: DeleteThreatIntelSet
+      description: Deletes ThreatIntelSet specified by the ThreatIntelSet ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteThreatIntelSetResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteThreatIntelSetRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: threatIntelSetId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetThreatIntelSet
+      description: Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetThreatIntelSetResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetThreatIntelSetRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: threatIntelSetId
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: UpdateThreatIntelSet
+      description: Updates the ThreatIntelSet specified by ThreatIntelSet ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateThreatIntelSetResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateThreatIntelSetRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: threatIntelSetId
+          in: path
+          type: string
+          required: true
+  '/detector/{detectorId}/master/disassociate':
+    post:
+      operationId: DisassociateFromMasterAccount
+      description: Disassociates the current GuardDuty member account from its master account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateFromMasterAccountResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateFromMasterAccountRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/member/disassociate':
+    post:
+      operationId: DisassociateMembers
+      description: Disassociates GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateMembersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateMembersRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/findings/get':
+    post:
+      operationId: GetFindings
+      description: Describes Amazon GuardDuty findings specified by finding IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFindingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFindingsRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/findings/statistics':
+    post:
+      operationId: GetFindingsStatistics
+      description: Lists Amazon GuardDuty findings' statistics for the specified detector ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFindingsStatisticsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFindingsStatisticsRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /invitation/count:
+    get:
+      operationId: GetInvitationsCount
+      description: Returns the count of all GuardDuty membership invitations that were sent to the current member account except the currently accepted invitation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInvitationsCountResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInvitationsCountRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/member/get':
+    post:
+      operationId: GetMembers
+      description: Retrieves GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMembersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMembersRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/member/invite':
+    post:
+      operationId: InviteMembers
+      description: Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty and allow the current AWS account to view and manage these accounts' GuardDuty findings on their behalf as the master account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InviteMembersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InviteMembersRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/findings':
+    post:
+      operationId: ListFindings
+      description: Lists Amazon GuardDuty findings for the specified detector ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFindingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFindingsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /invitation:
+    get:
+      operationId: ListInvitations
+      description: Lists all GuardDuty membership invitations that were sent to the current AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListInvitationsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListInvitationsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/member/start':
+    post:
+      operationId: StartMonitoringMembers
+      description: Re-enables GuardDuty to monitor findings of the member accounts specified by the account IDs. A master GuardDuty account can run this command after disabling GuardDuty from monitoring these members' findings by running StopMonitoringMembers.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartMonitoringMembersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartMonitoringMembersRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/member/stop':
+    post:
+      operationId: StopMonitoringMembers
+      description: 'Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members'' findings.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopMonitoringMembersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopMonitoringMembersRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/findings/unarchive':
+    post:
+      operationId: UnarchiveFindings
+      description: Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UnarchiveFindingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UnarchiveFindingsRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/findings/feedback':
+    post:
+      operationId: UpdateFindingsFeedback
+      description: Marks specified Amazon GuardDuty findings as useful or not useful.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFindingsFeedbackResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFindingsFeedbackRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AcceptInvitationRequest:
+    type: object
+    properties:
+      InvitationId:
+        $ref: '#/definitions/InvitationId'
+        description: This value is used to validate the master account to the member account.
+      MasterId:
+        $ref: '#/definitions/MasterId'
+        description: The account ID of the master GuardDuty account whose invitation you're accepting.
+    description: AcceptInvitation request body.
+  AcceptInvitationResponse:
+    type: object
+    properties: {}
+  AccessKeyDetails:
+    type: object
+    properties:
+      AccessKeyId:
+        $ref: '#/definitions/__string'
+        description: Access key ID of the user.
+      PrincipalId:
+        $ref: '#/definitions/__string'
+        description: The principal ID of the user.
+      UserName:
+        $ref: '#/definitions/__string'
+        description: The name of the user.
+      UserType:
+        $ref: '#/definitions/__string'
+        description: The type of the user.
+    description: The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.
+  AccountDetail:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: Member account ID.
+      Email:
+        $ref: '#/definitions/Email'
+        description: Member account's email address.
+    description: An object containing the member's accountId and email address.
+  AccountDetails:
+    type: array
+    description: A list of account/email pairs.
+    items:
+      $ref: '#/definitions/AccountDetail'
+  AccountId:
+    type: string
+    description: AWS account ID.
+  AccountIds:
+    type: array
+    description: A list of account IDs.
+    items:
+      $ref: '#/definitions/__string'
+  Action:
+    type: object
+    properties:
+      ActionType:
+        $ref: '#/definitions/__string'
+        description: GuardDuty Finding activity type.
+      AwsApiCallAction:
+        $ref: '#/definitions/AwsApiCallAction'
+        description: Information about the AWS_API_CALL action described in this finding.
+      DnsRequestAction:
+        $ref: '#/definitions/DnsRequestAction'
+        description: Information about the DNS_REQUEST action described in this finding.
+      NetworkConnectionAction:
+        $ref: '#/definitions/NetworkConnectionAction'
+        description: Information about the NETWORK_CONNECTION action described in this finding.
+      PortProbeAction:
+        $ref: '#/definitions/PortProbeAction'
+        description: Information about the PORT_PROBE action described in this finding.
+    description: Information about the activity described in a finding.
+  Activate:
+    type: boolean
+    description: Whether we should start processing the list immediately or not.
+  ArchiveFindingsRequest:
+    type: object
+    properties:
+      FindingIds:
+        $ref: '#/definitions/FindingIds'
+        description: IDs of the findings that you want to archive.
+    description: ArchiveFindings request body.
+  ArchiveFindingsResponse:
+    type: object
+    properties: {}
+  AwsApiCallAction:
+    type: object
+    properties:
+      Api:
+        $ref: '#/definitions/__string'
+        description: AWS API name.
+      CallerType:
+        $ref: '#/definitions/__string'
+        description: AWS API caller type.
+      DomainDetails:
+        $ref: '#/definitions/DomainDetails'
+        description: Domain information for the AWS API call.
+      RemoteIpDetails:
+        $ref: '#/definitions/RemoteIpDetails'
+        description: Remote IP information of the connection.
+      ServiceName:
+        $ref: '#/definitions/__string'
+        description: AWS service name whose API was invoked.
+    description: Information about the AWS_API_CALL action described in this finding.
+  BadRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The error type.
+    description: Error response object.
+  City:
+    type: object
+    properties:
+      CityName:
+        $ref: '#/definitions/__string'
+        description: City name of the remote IP address.
+    description: City information of the remote IP address.
+  Comments:
+    type: string
+    description: Additional feedback about the GuardDuty findings.
+  Condition:
+    type: object
+    properties:
+      Eq:
+        $ref: '#/definitions/Eq'
+        description: Represents the equal condition to be applied to a single field when querying for findings.
+      Gt:
+        $ref: '#/definitions/__integer'
+        description: Represents the greater than condition to be applied to a single field when querying for findings.
+      Gte:
+        $ref: '#/definitions/__integer'
+        description: Represents the greater than equal condition to be applied to a single field when querying for findings.
+      Lt:
+        $ref: '#/definitions/__integer'
+        description: Represents the less than condition to be applied to a single field when querying for findings.
+      Lte:
+        $ref: '#/definitions/__integer'
+        description: Represents the less than equal condition to be applied to a single field when querying for findings.
+      Neq:
+        $ref: '#/definitions/Neq'
+        description: Represents the not equal condition to be applied to a single field when querying for findings.
+    description: 'Finding attribute (for example, accountId) for which conditions and values must be specified when querying findings.'
+  CountBySeverityFindingStatistic:
+    type: integer
+    description: The count of findings for the given severity.
+  Country:
+    type: object
+    properties:
+      CountryCode:
+        $ref: '#/definitions/__string'
+        description: Country code of the remote IP address.
+      CountryName:
+        $ref: '#/definitions/__string'
+        description: Country name of the remote IP address.
+    description: Country information of the remote IP address.
+  CreateDetectorRequest:
+    type: object
+    properties:
+      Enable:
+        $ref: '#/definitions/Enable'
+        description: A boolean value that specifies whether the detector is to be enabled.
+    description: CreateDetector request body.
+  CreateDetectorResponse:
+    type: object
+    properties:
+      DetectorId:
+        $ref: '#/definitions/DetectorId'
+        description: The unique ID of the created detector.
+  CreateIPSetRequest:
+    type: object
+    properties:
+      Activate:
+        $ref: '#/definitions/Activate'
+        description: A boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
+      Format:
+        $ref: '#/definitions/IpSetFormat'
+        description: The format of the file that contains the IPSet.
+      Location:
+        $ref: '#/definitions/Location'
+        description: 'The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+      Name:
+        $ref: '#/definitions/Name'
+        description: The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
+    description: CreateIPSet request body.
+  CreateIPSetResponse:
+    type: object
+    properties:
+      IpSetId:
+        $ref: '#/definitions/IpSetId'
+  CreateMembersRequest:
+    type: object
+    properties:
+      AccountDetails:
+        $ref: '#/definitions/AccountDetails'
+        description: A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
+    description: CreateMembers request body.
+  CreateMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  CreateSampleFindingsRequest:
+    type: object
+    properties:
+      FindingTypes:
+        $ref: '#/definitions/FindingTypes'
+        description: Types of sample findings that you want to generate.
+    description: CreateSampleFindings request body.
+  CreateSampleFindingsResponse:
+    type: object
+    properties: {}
+  CreateThreatIntelSetRequest:
+    type: object
+    properties:
+      Activate:
+        $ref: '#/definitions/Activate'
+        description: A boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
+      Format:
+        $ref: '#/definitions/ThreatIntelSetFormat'
+        description: The format of the file that contains the ThreatIntelSet.
+      Location:
+        $ref: '#/definitions/Location'
+        description: 'The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
+      Name:
+        $ref: '#/definitions/Name'
+        description: A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
+    description: CreateThreatIntelSet request body.
+  CreateThreatIntelSetResponse:
+    type: object
+    properties:
+      ThreatIntelSetId:
+        $ref: '#/definitions/ThreatIntelSetId'
+  CreatedAt:
+    type: string
+    description: The first time a resource was created. The format will be ISO-8601.
+  DeclineInvitationsRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
+    description: DeclineInvitations request body.
+  DeclineInvitationsResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  DeleteDetectorRequest:
+    type: object
+    properties: {}
+  DeleteDetectorResponse:
+    type: object
+    properties: {}
+  DeleteIPSetRequest:
+    type: object
+    properties: {}
+  DeleteIPSetResponse:
+    type: object
+    properties: {}
+  DeleteInvitationsRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to delete invitations from.
+    description: DeleteInvitations request body.
+  DeleteInvitationsResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  DeleteMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: A list of account IDs of the GuardDuty member accounts that you want to delete.
+    description: DeleteMembers request body.
+  DeleteMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  DeleteThreatIntelSetRequest:
+    type: object
+    properties: {}
+  DeleteThreatIntelSetResponse:
+    type: object
+    properties: {}
+  DetectorId:
+    type: string
+    description: The unique identifier for a detector.
+  DetectorIds:
+    type: array
+    description: A list of detector Ids.
+    items:
+      $ref: '#/definitions/DetectorId'
+  DetectorStatus:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+    description: The status of detector.
+  DisassociateFromMasterAccountRequest:
+    type: object
+    properties: {}
+  DisassociateFromMasterAccountResponse:
+    type: object
+    properties: {}
+  DisassociateMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from master.
+    description: DisassociateMembers request body.
+  DisassociateMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  DnsRequestAction:
+    type: object
+    properties:
+      Domain:
+        $ref: '#/definitions/Domain'
+        description: Domain information for the DNS request.
+    description: Information about the DNS_REQUEST action described in this finding.
+  Domain:
+    type: string
+    description: A domain name.
+  DomainDetails:
+    type: object
+    properties: {}
+    description: Domain information for the AWS API call.
+  Email:
+    type: string
+    description: Member account's email address.
+  Enable:
+    type: boolean
+    description: A boolean value that specifies whether the detector is to be enabled.
+  Eq:
+    type: array
+    description: Represents the equal condition to be applied to a single field when querying for findings.
+    items:
+      $ref: '#/definitions/__string'
+  ErrorResponse:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The error type.
+    description: Error response object.
+  Feedback:
+    type: string
+    enum:
+      - USEFUL
+      - NOT_USEFUL
+    description: Finding Feedback Value
+  Finding:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/__string'
+        description: AWS account ID where the activity occurred that prompted GuardDuty to generate a finding.
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of a finding described by the action.
+      Confidence:
+        $ref: '#/definitions/__double'
+        description: The confidence level of a finding.
+      CreatedAt:
+        $ref: '#/definitions/CreatedAt'
+        description: The time stamp at which a finding was generated.
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of a finding.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The identifier that corresponds to a finding described by the action.
+      Partition:
+        $ref: '#/definitions/__string'
+        description: The AWS resource partition.
+      Region:
+        $ref: '#/definitions/__string'
+        description: The AWS region where the activity occurred that prompted GuardDuty to generate a finding.
+      Resource:
+        $ref: '#/definitions/Resource'
+        description: The AWS resource associated with the activity that prompted GuardDuty to generate a finding.
+      SchemaVersion:
+        $ref: '#/definitions/__string'
+        description: Findings' schema version.
+      Service:
+        $ref: '#/definitions/Service'
+        description: Additional information assigned to the generated finding by GuardDuty.
+      Severity:
+        $ref: '#/definitions/__double'
+        description: The severity of a finding.
+      Title:
+        $ref: '#/definitions/__string'
+        description: The title of a finding.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The type of a finding described by the action.
+      UpdatedAt:
+        $ref: '#/definitions/UpdatedAt'
+        description: The time stamp at which a finding was last updated.
+    description: Representation of a abnormal or suspicious activity.
+  FindingCriteria:
+    type: object
+    properties:
+      Criterion:
+        $ref: '#/definitions/MapOfCondition'
+        description: Represents a map of finding properties that match specified conditions and values when querying findings.
+    description: Represents the criteria used for querying findings.
+  FindingId:
+    type: string
+    description: The unique identifier for the Finding
+  FindingIds:
+    type: array
+    description: The list of the Findings.
+    items:
+      $ref: '#/definitions/FindingId'
+  FindingStatisticType:
+    type: string
+    enum:
+      - COUNT_BY_SEVERITY
+    description: The types of finding statistics.
+  FindingStatisticTypes:
+    type: array
+    description: The list of the finding statistics.
+    items:
+      $ref: '#/definitions/FindingStatisticType'
+  FindingStatistics:
+    type: object
+    properties:
+      CountBySeverity:
+        $ref: '#/definitions/MapOfCountBySeverityFindingStatistic'
+        description: Represents a map of severity to count statistic for a set of findings
+    description: Finding statistics object.
+  FindingType:
+    type: string
+    description: The finding type for the finding
+  FindingTypes:
+    type: array
+    description: The list of the finding types.
+    items:
+      $ref: '#/definitions/FindingType'
+  Findings:
+    type: array
+    description: A list of findings.
+    items:
+      $ref: '#/definitions/Finding'
+  GeoLocation:
+    type: object
+    properties:
+      Lat:
+        $ref: '#/definitions/__double'
+        description: Latitude information of remote IP address.
+      Lon:
+        $ref: '#/definitions/__double'
+        description: Longitude information of remote IP address.
+    description: Location information of the remote IP address.
+  GetDetectorRequest:
+    type: object
+    properties: {}
+  GetDetectorResponse:
+    type: object
+    properties:
+      CreatedAt:
+        $ref: '#/definitions/CreatedAt'
+      ServiceRole:
+        $ref: '#/definitions/ServiceRole'
+      Status:
+        $ref: '#/definitions/DetectorStatus'
+      UpdatedAt:
+        $ref: '#/definitions/UpdatedAt'
+  GetFindingsRequest:
+    type: object
+    properties:
+      FindingIds:
+        $ref: '#/definitions/FindingIds'
+        description: IDs of the findings that you want to retrieve.
+      SortCriteria:
+        $ref: '#/definitions/SortCriteria'
+        description: Represents the criteria used for sorting findings.
+    description: GetFindings request body.
+  GetFindingsResponse:
+    type: object
+    properties:
+      Findings:
+        $ref: '#/definitions/Findings'
+  GetFindingsStatisticsRequest:
+    type: object
+    properties:
+      FindingCriteria:
+        $ref: '#/definitions/FindingCriteria'
+        description: Represents the criteria used for querying findings.
+      FindingStatisticTypes:
+        $ref: '#/definitions/FindingStatisticTypes'
+        description: Types of finding statistics to retrieve.
+    description: GetFindingsStatistics request body.
+  GetFindingsStatisticsResponse:
+    type: object
+    properties:
+      FindingStatistics:
+        $ref: '#/definitions/FindingStatistics'
+        description: Finding statistics object.
+  GetIPSetRequest:
+    type: object
+    properties: {}
+  GetIPSetResponse:
+    type: object
+    properties:
+      Format:
+        $ref: '#/definitions/IpSetFormat'
+        description: The format of the file that contains the IPSet.
+      Location:
+        $ref: '#/definitions/Location'
+        description: 'The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+      Name:
+        $ref: '#/definitions/Name'
+        description: The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
+      Status:
+        $ref: '#/definitions/IpSetStatus'
+        description: The status of ipSet file uploaded.
+  GetInvitationsCountRequest:
+    type: object
+    properties: {}
+  GetInvitationsCountResponse:
+    type: object
+    properties:
+      InvitationsCount:
+        $ref: '#/definitions/__integer'
+        description: The number of received invitations.
+  GetMasterAccountRequest:
+    type: object
+    properties: {}
+  GetMasterAccountResponse:
+    type: object
+    properties:
+      Master:
+        $ref: '#/definitions/Master'
+  GetMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: A list of account IDs of the GuardDuty member accounts that you want to describe.
+    description: GetMembers request body.
+  GetMembersResponse:
+    type: object
+    properties:
+      Members:
+        $ref: '#/definitions/Members'
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  GetThreatIntelSetRequest:
+    type: object
+    properties: {}
+  GetThreatIntelSetResponse:
+    type: object
+    properties:
+      Format:
+        $ref: '#/definitions/ThreatIntelSetFormat'
+        description: The format of the threatIntelSet.
+      Location:
+        $ref: '#/definitions/Location'
+        description: 'The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
+      Name:
+        $ref: '#/definitions/Name'
+        description: A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
+      Status:
+        $ref: '#/definitions/ThreatIntelSetStatus'
+        description: The status of threatIntelSet file uploaded.
+  IamInstanceProfile:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: AWS EC2 instance profile ARN.
+      Id:
+        $ref: '#/definitions/__string'
+        description: AWS EC2 instance profile ID.
+    description: The profile information of the EC2 instance.
+  InstanceDetails:
+    type: object
+    properties:
+      AvailabilityZone:
+        $ref: '#/definitions/__string'
+        description: The availability zone of the EC2 instance.
+      IamInstanceProfile:
+        $ref: '#/definitions/IamInstanceProfile'
+      ImageId:
+        $ref: '#/definitions/__string'
+        description: The image ID of the EC2 instance.
+      InstanceId:
+        $ref: '#/definitions/__string'
+        description: The ID of the EC2 instance.
+      InstanceState:
+        $ref: '#/definitions/__string'
+        description: The state of the EC2 instance.
+      InstanceType:
+        $ref: '#/definitions/__string'
+        description: The type of the EC2 instance.
+      LaunchTime:
+        $ref: '#/definitions/__string'
+        description: The launch time of the EC2 instance.
+      NetworkInterfaces:
+        $ref: '#/definitions/NetworkInterfaces'
+        description: The network interface information of the EC2 instance.
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform of the EC2 instance.
+      ProductCodes:
+        $ref: '#/definitions/ProductCodes'
+        description: The product code of the EC2 instance.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The tags of the EC2 instance.
+    description: The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.
+  InternalServerErrorException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The error type.
+    description: Error response object.
+  Invitation:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/__string'
+        description: Inviter account ID
+      InvitationId:
+        $ref: '#/definitions/InvitationId'
+        description: This value is used to validate the inviter account to the member account.
+      InvitedAt:
+        $ref: '#/definitions/InvitedAt'
+        description: Timestamp at which the invitation was sent
+      RelationshipStatus:
+        $ref: '#/definitions/__string'
+        description: The status of the relationship between the inviter and invitee accounts.
+    description: Invitation from an AWS account to become the current account's master.
+  InvitationId:
+    type: string
+    description: This value is used to validate the master account to the member account.
+  Invitations:
+    type: array
+    description: A list of invitation descriptions.
+    items:
+      $ref: '#/definitions/Invitation'
+  InviteMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
+      Message:
+        $ref: '#/definitions/Message'
+        description: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
+    description: InviteMembers request body.
+  InviteMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  InvitedAt:
+    type: string
+    description: Timestamp at which a member has been invited. The format will be ISO-8601.
+  IpSetFormat:
+    type: string
+    enum:
+      - TXT
+      - STIX
+      - OTX_CSV
+      - ALIEN_VAULT
+      - PROOF_POINT
+      - FIRE_EYE
+    description: The format of the ipSet.
+  IpSetId:
+    type: string
+    description: The unique identifier for an IP Set
+  IpSetIds:
+    type: array
+    description: A list of the IP set IDs
+    items:
+      $ref: '#/definitions/IpSetId'
+  IpSetStatus:
+    type: string
+    enum:
+      - INACTIVE
+      - ACTIVATING
+      - ACTIVE
+      - DEACTIVATING
+      - ERROR
+      - DELETE_PENDING
+      - DELETED
+    description: The status of ipSet file uploaded.
+  Ipv6Address:
+    type: string
+    description: IpV6 address of the EC2 instance.
+  Ipv6Addresses:
+    type: array
+    description: A list of EC2 instance IPv6 address information.
+    items:
+      $ref: '#/definitions/Ipv6Address'
+  ListDetectorsRequest:
+    type: object
+    properties: {}
+  ListDetectorsResponse:
+    type: object
+    properties:
+      DetectorIds:
+        $ref: '#/definitions/DetectorIds'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  ListFindingsRequest:
+    type: object
+    properties:
+      FindingCriteria:
+        $ref: '#/definitions/FindingCriteria'
+        description: Represents the criteria used for querying findings.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListFindings action. For subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+      SortCriteria:
+        $ref: '#/definitions/SortCriteria'
+        description: Represents the criteria used for sorting findings.
+    description: ListFindings request body.
+  ListFindingsResponse:
+    type: object
+    properties:
+      FindingIds:
+        $ref: '#/definitions/FindingIds'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  ListIPSetsRequest:
+    type: object
+    properties: {}
+  ListIPSetsResponse:
+    type: object
+    properties:
+      IpSetIds:
+        $ref: '#/definitions/IpSetIds'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  ListInvitationsRequest:
+    type: object
+    properties: {}
+  ListInvitationsResponse:
+    type: object
+    properties:
+      Invitations:
+        $ref: '#/definitions/Invitations'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  ListMembersRequest:
+    type: object
+    properties: {}
+  ListMembersResponse:
+    type: object
+    properties:
+      Members:
+        $ref: '#/definitions/Members'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  ListOfPortProbeDetail:
+    type: array
+    items:
+      $ref: '#/definitions/PortProbeDetail'
+  ListThreatIntelSetsRequest:
+    type: object
+    properties: {}
+  ListThreatIntelSetsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+      ThreatIntelSetIds:
+        $ref: '#/definitions/ThreatIntelSetIds'
+  LocalPortDetails:
+    type: object
+    properties:
+      Port:
+        $ref: '#/definitions/__integer'
+        description: Port number of the local connection.
+      PortName:
+        $ref: '#/definitions/__string'
+        description: Port name of the local connection.
+    description: Local port information of the connection.
+  Location:
+    type: string
+    description: 'The location of the S3 bucket where the list resides. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+  MapOfCondition:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/Condition'
+  MapOfCountBySeverityFindingStatistic:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/CountBySeverityFindingStatistic'
+  Master:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/__string'
+        description: Master account ID
+      InvitationId:
+        $ref: '#/definitions/InvitationId'
+        description: This value is used to validate the master account to the member account.
+      InvitedAt:
+        $ref: '#/definitions/InvitedAt'
+        description: Timestamp at which the invitation was sent
+      RelationshipStatus:
+        $ref: '#/definitions/__string'
+        description: The status of the relationship between the master and member accounts.
+    description: Contains details about the master account.
+  MasterId:
+    type: string
+    description: The master account ID.
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  Member:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+      DetectorId:
+        $ref: '#/definitions/DetectorId'
+      Email:
+        $ref: '#/definitions/Email'
+        description: Member account's email address.
+      InvitedAt:
+        $ref: '#/definitions/InvitedAt'
+        description: Timestamp at which the invitation was sent
+      MasterId:
+        $ref: '#/definitions/MasterId'
+      RelationshipStatus:
+        $ref: '#/definitions/__string'
+        description: The status of the relationship between the member and the master.
+      UpdatedAt:
+        $ref: '#/definitions/UpdatedAt'
+    description: Contains details about the member account.
+  Members:
+    type: array
+    description: A list of member descriptions.
+    items:
+      $ref: '#/definitions/Member'
+  Message:
+    type: string
+    description: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
+  Name:
+    type: string
+    description: The user-friendly name to identify the list.
+  Neq:
+    type: array
+    description: Represents the not equal condition to be applied to a single field when querying for findings.
+    items:
+      $ref: '#/definitions/__string'
+  NetworkConnectionAction:
+    type: object
+    properties:
+      Blocked:
+        $ref: '#/definitions/__boolean'
+        description: Network connection blocked information.
+      ConnectionDirection:
+        $ref: '#/definitions/__string'
+        description: Network connection direction.
+      LocalPortDetails:
+        $ref: '#/definitions/LocalPortDetails'
+        description: Local port information of the connection.
+      Protocol:
+        $ref: '#/definitions/__string'
+        description: Network connection protocol.
+      RemoteIpDetails:
+        $ref: '#/definitions/RemoteIpDetails'
+        description: Remote IP information of the connection.
+      RemotePortDetails:
+        $ref: '#/definitions/RemotePortDetails'
+        description: Remote port information of the connection.
+    description: Information about the NETWORK_CONNECTION action described in this finding.
+  NetworkInterface:
+    type: object
+    properties:
+      Ipv6Addresses:
+        $ref: '#/definitions/Ipv6Addresses'
+        description: A list of EC2 instance IPv6 address information.
+      PrivateDnsName:
+        $ref: '#/definitions/PrivateDnsName'
+        description: Private DNS name of the EC2 instance.
+      PrivateIpAddress:
+        $ref: '#/definitions/PrivateIpAddress'
+        description: Private IP address of the EC2 instance.
+      PrivateIpAddresses:
+        $ref: '#/definitions/PrivateIpAddresses'
+        description: Other private IP address information of the EC2 instance.
+      PublicDnsName:
+        $ref: '#/definitions/__string'
+        description: Public DNS name of the EC2 instance.
+      PublicIp:
+        $ref: '#/definitions/__string'
+        description: Public IP address of the EC2 instance.
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: Security groups associated with the EC2 instance.
+      SubnetId:
+        $ref: '#/definitions/__string'
+        description: The subnet ID of the EC2 instance.
+      VpcId:
+        $ref: '#/definitions/__string'
+        description: The VPC ID of the EC2 instance.
+    description: The network interface information of the EC2 instance.
+  NetworkInterfaces:
+    type: array
+    description: The network interface information of the EC2 instance.
+    items:
+      $ref: '#/definitions/NetworkInterface'
+  NextToken:
+    type: string
+    description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+  OrderBy:
+    type: string
+    enum:
+      - ASC
+      - DESC
+  Organization:
+    type: object
+    properties:
+      Asn:
+        $ref: '#/definitions/__string'
+        description: Autonomous system number of the internet provider of the remote IP address.
+      AsnOrg:
+        $ref: '#/definitions/__string'
+        description: Organization that registered this ASN.
+      Isp:
+        $ref: '#/definitions/__string'
+        description: ISP information for the internet provider.
+      Org:
+        $ref: '#/definitions/__string'
+        description: Name of the internet provider.
+    description: ISP Organization information of the remote IP address.
+  PortProbeAction:
+    type: object
+    properties:
+      Blocked:
+        $ref: '#/definitions/__boolean'
+        description: Port probe blocked information.
+      PortProbeDetails:
+        $ref: '#/definitions/ListOfPortProbeDetail'
+        description: A list of port probe details objects.
+    description: Information about the PORT_PROBE action described in this finding.
+  PortProbeDetail:
+    type: object
+    properties:
+      LocalPortDetails:
+        $ref: '#/definitions/LocalPortDetails'
+        description: Local port information of the connection.
+      RemoteIpDetails:
+        $ref: '#/definitions/RemoteIpDetails'
+        description: Remote IP information of the connection.
+    description: Details about the port probe finding.
+  PrivateDnsName:
+    type: string
+    description: Private DNS name of the EC2 instance.
+  PrivateIpAddress:
+    type: string
+    description: Private IP address of the EC2 instance.
+  PrivateIpAddressDetails:
+    type: object
+    properties:
+      PrivateDnsName:
+        $ref: '#/definitions/PrivateDnsName'
+        description: Private DNS name of the EC2 instance.
+      PrivateIpAddress:
+        $ref: '#/definitions/PrivateIpAddress'
+        description: Private IP address of the EC2 instance.
+    description: Other private IP address information of the EC2 instance.
+  PrivateIpAddresses:
+    type: array
+    description: Other private IP address information of the EC2 instance.
+    items:
+      $ref: '#/definitions/PrivateIpAddressDetails'
+  ProductCode:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+        description: Product code information.
+      ProductType:
+        $ref: '#/definitions/__string'
+        description: Product code type.
+    description: The product code of the EC2 instance.
+  ProductCodes:
+    type: array
+    description: The product code of the EC2 instance.
+    items:
+      $ref: '#/definitions/ProductCode'
+  RemoteIpDetails:
+    type: object
+    properties:
+      City:
+        $ref: '#/definitions/City'
+        description: City information of the remote IP address.
+      Country:
+        $ref: '#/definitions/Country'
+        description: Country code of the remote IP address.
+      GeoLocation:
+        $ref: '#/definitions/GeoLocation'
+        description: Location information of the remote IP address.
+      IpAddressV4:
+        $ref: '#/definitions/__string'
+        description: IPV4 remote address of the connection.
+      Organization:
+        $ref: '#/definitions/Organization'
+        description: ISP Organization information of the remote IP address.
+    description: Remote IP information of the connection.
+  RemotePortDetails:
+    type: object
+    properties:
+      Port:
+        $ref: '#/definitions/__integer'
+        description: Port number of the remote connection.
+      PortName:
+        $ref: '#/definitions/__string'
+        description: Port name of the remote connection.
+    description: Remote port information of the connection.
+  Resource:
+    type: object
+    properties:
+      AccessKeyDetails:
+        $ref: '#/definitions/AccessKeyDetails'
+      InstanceDetails:
+        $ref: '#/definitions/InstanceDetails'
+      ResourceType:
+        $ref: '#/definitions/__string'
+        description: The type of the AWS resource.
+    description: The AWS resource associated with the activity that prompted GuardDuty to generate a finding.
+  SecurityGroup:
+    type: object
+    properties:
+      GroupId:
+        $ref: '#/definitions/__string'
+        description: EC2 instance's security group ID.
+      GroupName:
+        $ref: '#/definitions/__string'
+        description: EC2 instance's security group name.
+    description: Security groups associated with the EC2 instance.
+  SecurityGroups:
+    type: array
+    description: Security groups associated with the EC2 instance.
+    items:
+      $ref: '#/definitions/SecurityGroup'
+  Service:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: Information about the activity described in a finding.
+      Archived:
+        $ref: '#/definitions/__boolean'
+        description: Indicates whether this finding is archived.
+      Count:
+        $ref: '#/definitions/__integer'
+        description: Total count of the occurrences of this finding type.
+      DetectorId:
+        $ref: '#/definitions/DetectorId'
+        description: Detector ID for the GuardDuty service.
+      EventFirstSeen:
+        $ref: '#/definitions/__string'
+        description: First seen timestamp of the activity that prompted GuardDuty to generate this finding.
+      EventLastSeen:
+        $ref: '#/definitions/__string'
+        description: Last seen timestamp of the activity that prompted GuardDuty to generate this finding.
+      ResourceRole:
+        $ref: '#/definitions/__string'
+        description: Resource role information for this finding.
+      ServiceName:
+        $ref: '#/definitions/__string'
+        description: The name of the AWS service (GuardDuty) that generated a finding.
+      UserFeedback:
+        $ref: '#/definitions/__string'
+        description: Feedback left about the finding.
+    description: Additional information assigned to the generated finding by GuardDuty.
+  ServiceRole:
+    type: string
+    description: Customer serviceRole name or ARN for accessing customer resources
+  SortCriteria:
+    type: object
+    properties:
+      AttributeName:
+        $ref: '#/definitions/__string'
+        description: 'Represents the finding attribute (for example, accountId) by which to sort findings.'
+      OrderBy:
+        $ref: '#/definitions/OrderBy'
+        description: Order by which the sorted findings are to be displayed.
+    description: Represents the criteria used for sorting findings.
+  StartMonitoringMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: A list of account IDs of the GuardDuty member accounts whose findings you want the master account to monitor.
+    description: StartMonitoringMembers request body.
+  StartMonitoringMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  StopMonitoringMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
+    description: StopMonitoringMembers request body.
+  StopMonitoringMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/UnprocessedAccounts'
+        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/__string'
+        description: EC2 instance tag key.
+      Value:
+        $ref: '#/definitions/__string'
+        description: EC2 instance tag value.
+    description: A tag of the EC2 instance.
+  Tags:
+    type: array
+    description: The tags of the EC2 instance.
+    items:
+      $ref: '#/definitions/Tag'
+  ThreatIntelSetFormat:
+    type: string
+    enum:
+      - TXT
+      - STIX
+      - OTX_CSV
+      - ALIEN_VAULT
+      - PROOF_POINT
+      - FIRE_EYE
+    description: The format of the threatIntelSet.
+  ThreatIntelSetId:
+    type: string
+    description: The unique identifier for an threat intel set
+  ThreatIntelSetIds:
+    type: array
+    description: The list of the threat intel set IDs
+    items:
+      $ref: '#/definitions/ThreatIntelSetId'
+  ThreatIntelSetStatus:
+    type: string
+    enum:
+      - INACTIVE
+      - ACTIVATING
+      - ACTIVE
+      - DEACTIVATING
+      - ERROR
+      - DELETE_PENDING
+      - DELETED
+    description: The status of threatIntelSet file uploaded.
+  UnarchiveFindingsRequest:
+    type: object
+    properties:
+      FindingIds:
+        $ref: '#/definitions/FindingIds'
+        description: IDs of the findings that you want to unarchive.
+    description: UnarchiveFindings request body.
+  UnarchiveFindingsResponse:
+    type: object
+    properties: {}
+  UnprocessedAccount:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/__string'
+        description: AWS Account ID.
+      Result:
+        $ref: '#/definitions/__string'
+        description: A reason why the account hasn't been processed.
+    description: An object containing the unprocessed account and a result string explaining why it was unprocessed.
+  UnprocessedAccounts:
+    type: array
+    description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+    items:
+      $ref: '#/definitions/UnprocessedAccount'
+  UpdateDetectorRequest:
+    type: object
+    properties:
+      Enable:
+        $ref: '#/definitions/Enable'
+        description: Updated boolean value for the detector that specifies whether the detector is enabled.
+    description: UpdateDetector request body.
+  UpdateDetectorResponse:
+    type: object
+    properties: {}
+  UpdateFindingsFeedbackRequest:
+    type: object
+    properties:
+      Comments:
+        $ref: '#/definitions/Comments'
+        description: Additional feedback about the GuardDuty findings.
+      Feedback:
+        $ref: '#/definitions/Feedback'
+        description: 'Valid values: USEFUL | NOT_USEFUL'
+      FindingIds:
+        $ref: '#/definitions/FindingIds'
+        description: IDs of the findings that you want to mark as useful or not useful.
+    description: UpdateFindingsFeedback request body.
+  UpdateFindingsFeedbackResponse:
+    type: object
+    properties: {}
+  UpdateIPSetRequest:
+    type: object
+    properties:
+      Activate:
+        $ref: '#/definitions/Activate'
+        description: The updated boolean value that specifies whether the IPSet is active or not.
+      Location:
+        $ref: '#/definitions/Location'
+        description: 'The updated URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
+      Name:
+        $ref: '#/definitions/Name'
+        description: The unique ID that specifies the IPSet that you want to update.
+    description: UpdateIPSet request body.
+  UpdateIPSetResponse:
+    type: object
+    properties: {}
+  UpdateThreatIntelSetRequest:
+    type: object
+    properties:
+      Activate:
+        $ref: '#/definitions/Activate'
+        description: The updated boolean value that specifies whether the ThreateIntelSet is active or not.
+      Location:
+        $ref: '#/definitions/Location'
+        description: 'The updated URI of the file that contains the ThreateIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+      Name:
+        $ref: '#/definitions/Name'
+        description: The unique ID that specifies the ThreatIntelSet that you want to update.
+    description: UpdateThreatIntelSet request body.
+  UpdateThreatIntelSetResponse:
+    type: object
+    properties: {}
+  UpdatedAt:
+    type: string
+    description: The first time a resource was created. The format will be ISO-8601.
+  __boolean:
+    type: boolean
+  __double:
+    type: number
+    format: double
+  __integer:
+    type: integer
+  __string:
+    type: string
+  __timestamp:
+    type: string
+    format: date-time

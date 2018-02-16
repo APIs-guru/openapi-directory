@@ -7,12 +7,12 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'The Google Container Engine API is used for building and managing container based applications, powered by the open source Kubernetes technology.'
+  description: 'The Google Kubernetes Engine API is used for building and managing container based applications, powered by the open source Kubernetes technology.'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Google Container Engine
+  title: Google Kubernetes Engine
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://container.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1287,6 +1287,61 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMaintenancePolicy':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the maintenance policy for a cluster.
+      operationId: container.projects.zones.clusters.setMaintenancePolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetMaintenancePolicyRequest'
+        - description: The name of the cluster to update.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMasterAuth':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1607,7 +1662,7 @@ paths:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/serverconfig':
     get:
-      description: Returns configuration info about the Container Engine service.
+      description: Returns configuration info about the Kubernetes Engine service.
       operationId: container.projects.zones.getServerconfig
       parameters:
         - description: |-
@@ -1683,6 +1738,12 @@ definitions:
       kubernetesDashboard:
         $ref: '#/definitions/KubernetesDashboard'
         description: Configuration for the Kubernetes Dashboard.
+      networkPolicyConfig:
+        $ref: '#/definitions/NetworkPolicyConfig'
+        description: |-
+          Configuration for NetworkPolicy. This only tracks whether the addon
+          is enabled or not on the Master, it does not track whether network policy
+          is enabled for the nodes.
     type: object
   AutoUpgradeOptions:
     description: |-
@@ -1723,7 +1784,7 @@ definitions:
         type: boolean
     type: object
   Cluster:
-    description: A Google Container Engine cluster.
+    description: A Google Kubernetes Engine cluster.
     properties:
       addonsConfig:
         $ref: '#/definitions/AddonsConfig'
@@ -1799,10 +1860,7 @@ definitions:
         format: int32
         type: integer
       instanceGroupUrls:
-        description: |-
-          [Output only] The resource URLs of [instance
-          groups](/compute/docs/instance-groups/) associated with this
-          cluster.
+        description: Deprecated. Use node_pools.instance_group_urls.
         items:
           type: string
         type: array
@@ -1832,6 +1890,9 @@ definitions:
           * `none` - no logs will be exported from the cluster.
           * if left as an empty string,`logging.googleapis.com` will be used.
         type: string
+      maintenancePolicy:
+        $ref: '#/definitions/MaintenancePolicy'
+        description: Configure the maintenance policy for this cluster.
       masterAuth:
         $ref: '#/definitions/MasterAuth'
         description: The authentication information for accessing the master endpoint.
@@ -2028,6 +2089,23 @@ definitions:
         $ref: '#/definitions/NodePool'
         description: The node pool to create.
     type: object
+  DailyMaintenanceWindow:
+    description: Time window specified for daily maintenance operations.
+    properties:
+      duration:
+        description: |-
+          [Output only] Duration of the time window, automatically chosen to be
+          smallest possible in the given scenario.
+          Duration will be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
+          format "PTnHnMnS".
+        type: string
+      startTime:
+        description: |-
+          Time within the maintenance window to start the maintenance operations.
+          Time format should be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
+          format "HH:MM”, where HH : [00-23] and MM : [00-59] GMT.
+        type: string
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -2070,21 +2148,35 @@ definitions:
     description: Configuration for controlling how IPs are allocated in the cluster.
     properties:
       clusterIpv4Cidr:
+        description: 'This field is deprecated, use cluster_ipv4_cidr_block.'
+        type: string
+      clusterIpv4CidrBlock:
         description: |-
           The IP address range for the cluster pod IPs. If this field is set, then
           `cluster.cluster_ipv4_cidr` must be left blank.
 
           This field is only applicable when `use_ip_aliases` is true.
 
-          Set to blank to have a range will be chosen with the default size.
+          Set to blank to have a range chosen with the default size.
 
-          Set to /netmask (e.g. `/14`) to have a range be chosen with a specific
+          Set to /netmask (e.g. `/14`) to have a range chosen with a specific
           netmask.
 
-          Set to a [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+          Set to a
+          [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
           notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
           `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
           to use.
+        type: string
+      clusterSecondaryRangeName:
+        description: |-
+          The name of the secondary range to be used for the cluster CIDR
+          block.  The secondary range will be used for pod IP
+          addresses. This must be an existing secondary range associated
+          with the cluster subnetwork.
+
+          This field is only applicable with use_ip_aliases is true and
+          create_subnetwork is false.
         type: string
       createSubnetwork:
         description: |-
@@ -2093,37 +2185,55 @@ definitions:
           This field is only applicable when `use_ip_aliases` is true.
         type: boolean
       nodeIpv4Cidr:
+        description: 'This field is deprecated, use node_ipv4_cidr_block.'
+        type: string
+      nodeIpv4CidrBlock:
         description: |-
           The IP address range of the instance IPs in this cluster.
 
           This is applicable only if `create_subnetwork` is true.
 
-          Set to blank to have a range will be chosen with the default size.
+          Set to blank to have a range chosen with the default size.
 
-          Set to /netmask (e.g. `/14`) to have a range be chosen with a specific
+          Set to /netmask (e.g. `/14`) to have a range chosen with a specific
           netmask.
 
-          Set to a [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+          Set to a
+          [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
           notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
           `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
           to use.
         type: string
       servicesIpv4Cidr:
+        description: 'This field is deprecated, use services_ipv4_cidr_block.'
+        type: string
+      servicesIpv4CidrBlock:
         description: |-
           The IP address range of the services IPs in this cluster. If blank, a range
           will be automatically chosen with the default size.
 
           This field is only applicable when `use_ip_aliases` is true.
 
-          Set to blank to have a range will be chosen with the default size.
+          Set to blank to have a range chosen with the default size.
 
-          Set to /netmask (e.g. `/14`) to have a range be chosen with a specific
+          Set to /netmask (e.g. `/14`) to have a range chosen with a specific
           netmask.
 
-          Set to a [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+          Set to a
+          [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
           notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
           `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
           to use.
+        type: string
+      servicesSecondaryRangeName:
+        description: |-
+          The name of the secondary range to be used as for the services
+          CIDR block.  The secondary range will be used for service
+          ClusterIPs. This must be an existing secondary range associated
+          with the cluster subnetwork.
+
+          This field is only applicable with use_ip_aliases is true and
+          create_subnetwork is false.
         type: string
       subnetworkName:
         description: |-
@@ -2197,6 +2307,20 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+    type: object
+  MaintenancePolicy:
+    description: MaintenancePolicy defines the maintenance policy to be used for the cluster.
+    properties:
+      window:
+        $ref: '#/definitions/MaintenanceWindow'
+        description: Specifies the maintenance window in which maintenance may be performed.
+    type: object
+  MaintenanceWindow:
+    description: MaintenanceWindow defines the maintenance window to be used for the cluster.
+    properties:
+      dailyMaintenanceWindow:
+        $ref: '#/definitions/DailyMaintenanceWindow'
+        description: DailyMaintenanceWindow specifies a daily maintenance operation window.
     type: object
   MasterAuth:
     description: |-
@@ -2272,6 +2396,16 @@ definitions:
           - CALICO
         type: string
     type: object
+  NetworkPolicyConfig:
+    description: |-
+      Configuration for NetworkPolicy. This only tracks whether the addon
+      is enabled or not on the Master, it does not track whether network policy
+      is enabled for the nodes.
+    properties:
+      disabled:
+        description: Whether NetworkPolicy is enabled for this cluster.
+        type: boolean
+    type: object
   NodeConfig:
     description: Parameters that describe the nodes in a cluster.
     properties:
@@ -2307,7 +2441,7 @@ definitions:
           the Kubernetes version -- it's best to assume the behavior is undefined
           and conflicts should be avoided.
           For more information, including usage and the valid values, see:
-          http://kubernetes.io/v1.1/docs/user-guide/labels.html
+          https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
         type: object
       localSsdCount:
         description: |-
@@ -2337,8 +2471,16 @@ definitions:
           Keys must conform to the regexp [a-zA-Z0-9-_]+ and be less than 128 bytes
           in length. These are reflected as part of a URL in the metadata server.
           Additionally, to avoid ambiguity, keys must not conflict with any other
-          metadata keys for the project or be one of the four reserved keys:
-          "instance-template", "kube-env", "startup-script", and "user-data"
+          metadata keys for the project or be one of the reserved keys:
+           "cluster-name"
+           "cluster-uid"
+           "configure-sh"
+           "gci-update-strategy"
+           "gci-ensure-gke-docker"
+           "instance-template"
+           "kube-env"
+           "startup-script"
+           "user-data"
 
           Values are free-form strings, and only have meaning as interpreted by
           the image running in the instance. The only restriction placed on them is
@@ -2346,6 +2488,15 @@ definitions:
 
           The total size of all keys and values must be less than 512 KB.
         type: object
+      minCpuPlatform:
+        description: |-
+          Minimum CPU platform to be used by this instance. The instance may be
+          scheduled on the specified or newer CPU platform. Applicable values are the
+          friendly names of CPU platforms, such as
+          <code>minCpuPlatform: &quot;Intel Haswell&quot;</code> or
+          <code>minCpuPlatform: &quot;Intel Sandy Bridge&quot;</code>. For more
+          information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
+        type: string
       oauthScopes:
         description: |-
           The set of Google API scopes to be made available on all of the
@@ -2435,9 +2586,9 @@ definitions:
         type: integer
       instanceGroupUrls:
         description: |-
-          [Output only] The resource URLs of [instance
-          groups](/compute/docs/instance-groups/) associated with this
-          node pool.
+          [Output only] The resource URLs of the [managed instance
+          groups](/compute/docs/instance-groups/creating-groups-of-managed-instances)
+          associated with this node pool.
         items:
           type: string
         type: array
@@ -2467,7 +2618,7 @@ definitions:
           node pool instance, if available.
         type: string
       version:
-        description: '[Output only] The version of the Kubernetes of this node.'
+        description: The version of the Kubernetes of this node.
         type: string
     type: object
   NodePoolAutoscaling:
@@ -2499,6 +2650,11 @@ definitions:
       detail:
         description: 'Detailed operation progress, if available.'
         type: string
+      endTime:
+        description: |-
+          [Output only] The time the operation completed, in
+          [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+        type: string
       name:
         description: The server-assigned ID for the operation.
         type: string
@@ -2521,9 +2677,15 @@ definitions:
           - SET_MASTER_AUTH
           - SET_NODE_POOL_SIZE
           - SET_NETWORK_POLICY
+          - SET_MAINTENANCE_POLICY
         type: string
       selfLink:
         description: Server-defined URL for the resource.
+        type: string
+      startTime:
+        description: |-
+          [Output only] The time the operation started, in
+          [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
         type: string
       status:
         description: The current status of the operation.
@@ -2555,7 +2717,7 @@ definitions:
     properties: {}
     type: object
   ServerConfig:
-    description: Container Engine service configuration.
+    description: Kubernetes Engine service configuration.
     properties:
       defaultClusterVersion:
         description: Version of Kubernetes the service deploys by default.
@@ -2598,7 +2760,7 @@ definitions:
         description: |-
           The fingerprint of the previous set of labels for this resource,
           used to detect conflicts. The fingerprint is initially generated by
-          Container Engine and changes after every request to modify or update
+          Kubernetes Engine and changes after every request to modify or update
           labels. You must always provide an up-to-date fingerprint hash when
           updating or changing labels. Make a <code>get()</code> request to the
           resource to get the latest fingerprint.
@@ -2646,15 +2808,25 @@ definitions:
           * "none" - no metrics will be exported from the cluster
         type: string
     type: object
+  SetMaintenancePolicyRequest:
+    description: SetMaintenancePolicyRequest sets the maintenance policy for a cluster.
+    properties:
+      maintenancePolicy:
+        $ref: '#/definitions/MaintenancePolicy'
+        description: |-
+          The maintenance policy to be set for the cluster. An empty field
+          clears the existing maintenance policy.
+    type: object
   SetMasterAuthRequest:
     description: SetMasterAuthRequest updates the admin password of a cluster.
     properties:
       action:
-        description: The exact form of action to be taken on the master auth
+        description: The exact form of action to be taken on the master auth.
         enum:
           - UNKNOWN
           - SET_PASSWORD
           - GENERATE_PASSWORD
+          - SET_USERNAME
         type: string
       update:
         $ref: '#/definitions/MasterAuth'
@@ -2723,9 +2895,8 @@ definitions:
     properties:
       masterVersion:
         description: |-
-          The Kubernetes version to change the master to. The only valid value is the
-          latest supported version. Use "-" to have the server automatically select
-          the latest version.
+          The Kubernetes version to change the master to. Use "-" to have the server
+          automatically select the default version.
         type: string
     type: object
   UpdateNodePoolRequest:

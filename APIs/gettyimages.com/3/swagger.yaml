@@ -25,10 +25,150 @@ securityDefinitions:
 security:
   - Api-Key: []
 paths:
+  '/jaguar/{uri}': {}
+  /v3/artists/images:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Artists_GetImagesByArtist
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - description: Name of artist for desired images
+          in: query
+          name: artist_name
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
+          in: query
+          items:
+            enum:
+              - id
+              - alternative_ids
+              - asset_family
+              - asset_type
+              - caption
+              - collection_code
+              - collection_name
+              - comp
+              - date_submitted
+              - keywords
+              - license_model
+              - title
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Identifies page to return. Default page is 1.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies page size. Default page_size is 10, maximum page_size is 100.'
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GettyImages.Models.Artists.ImageSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: Search for images by a photographer
+      tags:
+        - Artists
+  /v3/artists/videos:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Artists_GetVideosByArtist
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - description: Name of artist for desired images
+          in: query
+          name: artist_name
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
+          in: query
+          items:
+            enum:
+              - id
+              - alternative_ids
+              - asset_family
+              - asset_type
+              - caption
+              - collection_code
+              - collection_name
+              - comp
+              - date_submitted
+              - keywords
+              - license_model
+              - title
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Identifies page to return. Default page is 1.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies page size. Default page_size is 10, maximum page_size is 100.'
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: Search for videos by a photographer
+      tags:
+        - Artists
   /v3/asset-changes/change-sets:
     put:
       consumes: []
       deprecated: false
+      description: "# Asset Changes\r\n\r\nGet notifications about new, updated or deleted assets.\r\n\r\n##  Quickstart\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.\r\nPlease see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\n    \r\nPartner channels that have not been checked within the last 120 days will be removed and that partner will no longer be able \r\nto get change notifications from that channel.\r\nPartners who would like to start using the Asset Changes API again after a period of dormancy should contact their sales\r\nrepresentative to be set up again.\r\n"
       operationId: AssetChanges_PutAssetChanges
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -60,13 +200,14 @@ paths:
           description: Your access token does not authorize access to this resource
         '404':
           description: The channel you specified does not exist
-      summary: Generates asset changes.
+      summary: Get asset change notifications.
       tags:
         - AssetChanges
   '/v3/asset-changes/change-sets/{change-set-id}':
     delete:
       consumes: []
       deprecated: false
+      description: "# Delete Asset Changes\r\n\r\nConfirm asset changes acknowledges receipt of asset changes (from the PUT asset changes endpoint).\r\n\r\n##  Quickstart\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.\r\nPlease see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n"
       operationId: AssetChanges_DeleteAssetChanges
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -89,13 +230,14 @@ paths:
           description: Your access token does not authorize access to this resource
         '404':
           description: Transaction was not found
-      summary: Confirm asset changes acknowledges receipt of asset changes.
+      summary: Confirm asset change notifications.
       tags:
         - AssetChanges
   /v3/asset-changes/channels:
     get:
       consumes: []
       deprecated: false
+      description: "# Get Partner Channels\r\n\r\nRetrieves the channel data for the partner. This data can be used to populate the channel_id parameter in the Put Asset Changes query.\r\n\r\n##  Quickstart\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.\r\nPlease see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\nOnly channels that have been queried in the last 120 days will be included in the list of channels.\r\nPartners who have a channel that has been removed should contact their sales representative to be set up again.\r\n\r\n"
       operationId: AssetChanges_GetPartnerChannel
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -111,13 +253,44 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PartnerChannelList'
-      summary: Retrieves the channel data for the partner. This data can be used to populate the channel_id parameter in the Put Asset Changes query.
+      summary: Get a list of asset change notification channels.
       tags:
         - AssetChanges
+  /v3/asset-registrations:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: "# Register Assets\r\n\r\nRegisters a list of assets that a customer has stored in their system.\r\n\r\n##  Quickstart\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.\r\nPlease see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\n_Note_: In the event of a successful query (response code 200) there will be nothing in the response body.\r\n\r\n\r\n\r\n"
+      operationId: AssetRegistration_Register
+      parameters:
+        - description: Specify JSON containing an array of asset ids to register.  Limited to 500 asset ids per call.
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterAssetsRequest'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success - The assets were successfully registered.
+          schema:
+            $ref: '#/definitions/Object'
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '500':
+          description: AssetRegistrationFailed - There was a failure when registering assets.
+      summary: Register a list of customer assets.
+      tags:
+        - AssetRegistration
   /v3/boards:
     get:
       consumes: []
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq). Use this endpoint to retrieve all Boards available for a user.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n"
       operationId: Boards_GetAllBoards
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -172,7 +345,7 @@ paths:
           description: InvalidParameterValue
         '401':
           description: Unauthorized
-      summary: '***BETA*** Get all boards that the user participates in'
+      summary: Get all boards that the user participates in
       tags:
         - Boards
     post:
@@ -180,6 +353,7 @@ paths:
         - application/json
         - text/json
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq). Use this endpoint to create a Board by a specific id.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\n**NOTE:** *The input to this endpoint is not sanitized in any way, so it is the responsibility of the client to ensure that it is properly formatted and guards against malicious data (for example cross-site scripting attacks or HTML injection) when accessing the data.*\r\n"
       operationId: Boards_CreateBoard
       parameters:
         - description: Specify a name and description of the board to create (name is required).
@@ -210,13 +384,14 @@ paths:
           description: InvalidParameterValue
         '401':
           description: Unauthorized
-      summary: '***BETA*** Create a new board'
+      summary: Create a new board
       tags:
         - Boards
   '/v3/boards/{board_id}':
     delete:
       consumes: []
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq). Use this endpoint to delete a Board by a specific id.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\n"
       operationId: Boards_DeleteBoard
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -245,12 +420,13 @@ paths:
           description: InsufficientAccess
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Delete a board'
+      summary: Delete a board
       tags:
         - Boards
     get:
       consumes: []
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq). Use this endpoint to retrieve a Board by a specific id.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n"
       operationId: Boards_GetBoard
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -281,7 +457,7 @@ paths:
           description: Unauthorized
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Get assets and metadata for a specific board'
+      summary: Get assets and metadata for a specific board
       tags:
         - Boards
     put:
@@ -289,6 +465,7 @@ paths:
         - application/json
         - text/json
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq). Use this endpoint to update a Board by a specific id.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\n**NOTE:** *The input to this endpoint is not sanitized in any way, so it is the responsibility of the client to ensure that it is properly formatted and guards against malicious data (for example cross-site scripting attacks or HTML injection) when accessing the data.*\r\n"
       operationId: Boards_UpdateBoard
       parameters:
         - description: Specify a new name and description for the board (name is required).
@@ -323,13 +500,14 @@ paths:
           description: InsufficientAccess
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Update a board'
+      summary: Update a board
       tags:
         - Boards
   '/v3/boards/{board_id}/assets':
     delete:
       consumes: []
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq).\r\nUse this endpoint to remove a set of assets from a board.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n"
       operationId: Boards_RemoveAssets
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -366,7 +544,7 @@ paths:
           description: InsufficientAccess
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Remove assets from a board'
+      summary: Remove assets from a board
       tags:
         - Boards
     put:
@@ -374,6 +552,7 @@ paths:
         - application/json
         - text/json
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq).\r\nUse this endpoint to add a set of assets to a board.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\t\r\n\t\r\n"
       operationId: Boards_AddAssets
       parameters:
         - description: List assets to add to the board.
@@ -414,13 +593,14 @@ paths:
           description: InsufficientAccess
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Add assets to a board'
+      summary: Add assets to a board
       tags:
         - Boards
   '/v3/boards/{board_id}/assets/{asset_id}':
     delete:
       consumes: []
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq). Use this endpoint to remove an asset from a board.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n"
       operationId: Boards_RemoveAsset
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -453,12 +633,13 @@ paths:
           description: InsufficientAccess
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Remove an asset from a board'
+      summary: Remove an asset from a board
       tags:
         - Boards
     put:
       consumes: []
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place.\r\nMore information on the [Boards FAQ](http://www.gettyimages.com/boards/faq). Use this endpoint to add an asset to a board.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.\r\nPlease see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\n\r\n"
       operationId: Boards_AddAsset
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -495,13 +676,14 @@ paths:
           description: AssetNotFound
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Add an asset to a board'
+      summary: Add an asset to a board
       tags:
         - Boards
   '/v3/boards/{board_id}/comments':
     get:
       consumes: []
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq). Use this endpoint to retrieve all comments for a specific board.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n"
       operationId: Boards_GetComments
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -532,7 +714,7 @@ paths:
           description: Unauthorized
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Get comments from a board'
+      summary: Get comments from a board
       tags:
         - Boards
     post:
@@ -540,6 +722,7 @@ paths:
         - application/json
         - text/json
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq).\r\nUse this endpoint to add a comment to a board.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n"
       operationId: Boards_AddComment
       parameters:
         - description: Comment to be added to the board.
@@ -578,13 +761,14 @@ paths:
           description: InsufficientAccess
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Add a comment to a board'
+      summary: Add a comment to a board
       tags:
         - Boards
   '/v3/boards/{board_id}/comments/{comment_id}':
     delete:
       consumes: []
       deprecated: false
+      description: "Boards are where you collect, curate, collaborate on and manage photo and video assets in one place. More information on the [Boards FAQ](http://www.gettyimages.com/boards/faq).\r\nUse this endpoint to delete a comment from a board.\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n"
       operationId: Boards_DeleteComment
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -621,13 +805,14 @@ paths:
           description: InsufficientAccess
         '404':
           description: BoardNotFound
-      summary: '***BETA*** Delete a comment from a board'
+      summary: Delete a comment from a board
       tags:
         - Boards
   /v3/collections:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to retrieve collections associated with your Getty Images account. To browse available collections see our [Image collections page]( http://www.gettyimages.com/creative-images/collections).\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n"
       operationId: Collections_GetCollections
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -657,6 +842,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Returns a list of country objects that contains country name, two letter ISO abbreviation and three letter ISO abbreviation.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n"
       operationId: Countries_GetCountries
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -686,6 +872,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Returns information about a customer's previously downloaded assets.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n \r\n\t\r\nThis endpoint requires being a Getty Images customer to limit your results to only assets that you have a license to use, \r\nyou need to also include an authorization token in the header of your request. \r\nPlease consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.\r\n"
       operationId: Downloads_GetDownloads
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -723,11 +910,11 @@ paths:
           type: integer
         - description: 'Specifies product type to be included in the previous download results. To get previous iStockPhoto credit downloads, credit_pack must be selected.'
           enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
+            - easyaccess
+            - editorialsubscription
+            - imagepack
+            - premiumaccess
+            - royaltyfreesubscription
             - credit_pack
           in: query
           name: product_type
@@ -762,7 +949,7 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200."
+      description: "Use this endpoint to generate download URLs and related data for images you are authorized to download.\r\n\r\nMost product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.\r\n\r\nThe download limit for a given download period is covered in your product agreement established with Getty Images.\r\n\r\nYou'll need an API key and a [Resource Owner Grant or Implicit Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\n## Auto Downloads\r\nThe `auto_download` request query parameter specifies whether to automatically download the image.\r\n\r\nIf the `auto_download` request query parameter is set to _true_, the API will return an HTTP status code 303 *See Other*. Your client code will need to process this response and redirect to the URI specified in the *Location* header to enable you to automatically download the file. The redirection workflow follows the [HTTP 1.1 protocol](https://tools.ietf.org/html/rfc7231#section-6.4.4).\r\n\r\nClient Request:\r\n\r\n```\r\nhttps://api.gettyimages.com/v3/downloads/images/[asset_id]?auto_download=true\r\n```\r\n\r\nServer Response:\r\n\r\n```\r\nHTTP/1.1 303 See Other\r\nLocation: https://delivery.gettyimages.com/...\r\n```\r\n\r\nIf the `auto_download` request query parameter is set to false, the API will return a HTTP status code 200, along with the URI in the response body which can be used to download the image. \r\n\r\nClient Request:\r\n\r\n```\r\nhttps://api.gettyimages.com/v3/downloads/images/[asset_id]?auto_download=false\r\n```\r\n\r\nServer Response:\r\n\r\n```\r\nHTTP/1.1 200 OK\r\n{\r\n\t\"uri\": \"https://delivery.gettyimages.com/...\"\r\n}\r\n```"
       operationId: Downloads_PostDownloads
       parameters:
         - description: "<remarks>\r\n                    Additional information required from specific customers when downloading. \r\n                    Only users who have been set up with a project code by Getty Images Sales need to use this field.\r\n                </remarks>"
@@ -812,11 +999,11 @@ paths:
           type: integer
         - description: "<remarks>\r\n                    Product type.\r\n                </remarks>"
           enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
+            - easyaccess
+            - editorialsubscription
+            - imagepack
+            - premiumaccess
+            - royaltyfreesubscription
             - credit_pack
           in: query
           name: product_type
@@ -843,11 +1030,19 @@ paths:
         - Downloads
   '/v3/downloads/videos/{id}':
     post:
-      consumes: []
+      consumes:
+        - application/json
+        - text/json
       deprecated: false
-      description: "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                video available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200."
+      description: "Use this endpoint to generate download URLs and related data for videos you are authorized to download.\r\n\r\nMost product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.\r\n\r\nThe download limit for a given download period is covered in your product agreement established with Getty Images.\r\n\r\nYou'll need an API key and a [Resource Owner Grant or Implicit Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\n## Auto Downloads\r\nThe `auto_download` request query parameter specifies whether to automatically download the video.\r\n\r\nIf the `auto_download` request query parameter is set to _true_, the API will return an HTTP status code 303 *See Other*. Your client code will need to process this response and redirect to the URI specified in the *Location* header to enable you to automatically download the file. The redirection workflow follows the [HTTP 1.1 protocol](https://tools.ietf.org/html/rfc7231#section-6.4.4).\r\n\r\nClient Request:\r\n\r\n```\r\nhttps://api.gettyimages.com/v3/downloads/videos/[asset_id]?auto_download=true\r\n```\r\n\r\nServer Response:\r\n\r\n```\r\nHTTP/1.1 303 See Other\r\nLocation: https://delivery.gettyimages.com/...\r\n```\r\n\r\nIf the `auto_download` request query parameter is set to false, the API will return a HTTP status code 200, along with the URI in the response body which can be used to download the video. \r\n\r\nClient Request:\r\n\r\n```\r\nhttps://api.gettyimages.com/v3/downloads/videos/[asset_id]?auto_download=false\r\n```\r\n\r\nServer Response:\r\n\r\n```\r\nHTTP/1.1 200 OK\r\n{\r\n\t\"uri\": \"https://delivery.gettyimages.com/...\"\r\n}\r\n```"
       operationId: Downloads_PostVideoDownloads
       parameters:
+        - description: "<remarks>\r\n                    Additional information required from specific customers when downloading. \r\n                    Only users who have been set up with a project code by Getty Images Sales need to use this field.\r\n                </remarks>"
+          in: body
+          name: download_details
+          required: false
+          schema:
+            $ref: '#/definitions/GettyImages.Models.Downloads.PremiumAccessDownloadData'
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
@@ -903,7 +1098,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: Returns an array of event metadata
+      description: "This endpoint returns the detailed event metadata for all specified events. Getty Images news, sports and entertainment photographers and\r\nvideographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with \r\nan event, are assigned the same EventID. EventIDs are part of the meta-data returned in SearchForImages Results. Only content \r\nproduced under a Getty Images brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) \r\nwill be consistently assigned an EventID. The Event framework may also be used to group similar content, such as \r\n\"Hats from the Royal Wedding\" or \"Odd-ballOffbeat images of the week\". \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n"
       operationId: Events_GetBatch
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -918,16 +1113,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: A comma separated list of fields to return in the response.
-          enum:
-            - id
-            - child_event_count
-            - editorial_segments
-            - hero_image
-            - image_count
-            - location
-            - name
-            - start_date
-            - type
           in: query
           items:
             enum:
@@ -974,7 +1159,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: Returns an array of event metadata
+      description: "This endpoint returns the detailed event metadata for a specified event. Getty Images news, sports and entertainment \r\nphotographers and videographers cover editorially relevant events occurring around the world.  \r\nAll images or video clips produced in association with an event, are assigned the same EventID. \r\nEventIDs are part of the meta-data returned in SearchForImages Results. Only content produced under a Getty Images \r\nbrand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) will be \r\nconsistently assigned an EventID. The Event framework may also be used to group similar content, such as \r\n\"Hats from the Royal Wedding\" or \"Odd-ballOffbeat images of the week\". \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html)\r\npage for more information on how to sign up for an API key. \r\n"
       operationId: Events_Get
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -995,16 +1180,6 @@ paths:
           type: integer
         - collectionFormat: multi
           description: A comma separated list of fields to return in the response.
-          enum:
-            - id
-            - child_event_count
-            - editorial_segments
-            - hero_image
-            - image_count
-            - location
-            - name
-            - start_date
-            - type
           in: query
           items:
             enum:
@@ -1042,7 +1217,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: ''
+      description: "This endpoint returns the detailed image metadata for all specified images. Due to a wide variety of available image resolutions,\r\nthe images are grouped into a handful of size categories for simplicity. \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key. \r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build \r\nsearch response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a \r\ndetailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\", \r\n        \"artist_title\", \r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\", \r\n        \"city\",\r\n        \"collection_code\",\r\n        \"collection_id\", \r\n        \"collection_name\",\r\n        \"color_type\", \r\n        \"copyright\", \r\n        \"country\", \r\n        \"credit_line\", \r\n        \"date_created\", \r\n        \"date_submitted\",\r\n        \"download_sizes\", \r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"prestige\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"state_province\", \r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution\r\nfiles that are most frequently used to build a UI displaying search results. The following fields are provided for every image \r\nin your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Images_GetBatch
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -1065,54 +1240,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - alternative_ids
-            - artist
-            - artist_title
-            - asset_family
-            - call_for_image
-            - caption
-            - city
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - country
-            - credit_line
-            - date_camera_shot
-            - date_created
-            - date_submitted
-            - detail_set
-            - display_set
-            - download_sizes
-            - downloads
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - istock_licenses
-            - keywords
-            - largest_downloads
-            - license_model
-            - links
-            - max_dimensions
-            - orientation
-            - people
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - state_province
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -1151,6 +1278,7 @@ paths:
               - license_model
               - links
               - max_dimensions
+              - object_name
               - orientation
               - people
               - prestige
@@ -1190,7 +1318,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: ''
+      description: "This endpoint returns the detailed image metadata for a specified image. Due to a wide variety of available image resolutions, \r\nthe images are grouped into a handful of size categories for simplicity. \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key. \r\n \r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that\r\nare often used to build search response results. The following fields are provided for every image in your\r\nresult set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are \r\noften used to build a detailed view of images. The following fields are provided for every image in your \r\nresult set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\", \r\n        \"artist_title\", \r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\", \r\n        \"city\",\r\n        \"collection_code\",\r\n        \"collection_id\", \r\n        \"collection_name\",\r\n        \"color_type\", \r\n        \"copyright\", \r\n        \"country\", \r\n        \"credit_line\", \r\n        \"date_created\", \r\n        \"date_submitted\",\r\n        \"download_sizes\", \r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"prestige\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"state_province\", \r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low\r\nresolution files that are most frequently used to build a UI displaying search results. The following fields are provided \r\nfor every image in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Images_Get
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -1210,54 +1338,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - alternative_ids
-            - artist
-            - artist_title
-            - asset_family
-            - call_for_image
-            - caption
-            - city
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - country
-            - credit_line
-            - date_camera_shot
-            - date_created
-            - date_submitted
-            - detail_set
-            - display_set
-            - download_sizes
-            - downloads
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - istock_licenses
-            - keywords
-            - largest_downloads
-            - license_model
-            - links
-            - max_dimensions
-            - orientation
-            - people
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - state_province
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -1296,6 +1376,7 @@ paths:
               - license_model
               - links
               - max_dimensions
+              - object_name
               - orientation
               - people
               - prestige
@@ -1335,6 +1416,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "This endpoint will search our asset database for images similar to the specified asset id. Due to a wide variety of available \r\nimage resolutions, the images are grouped into a handful of size categories for simplicity. \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key. \r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build\r\nsearch response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a \r\ndetailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files \r\nthat are most frequently used to build a UI displaying search results. The following fields are provided for every image in your result\r\nset when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```"
       operationId: Images_GetSimilarImages
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -1354,45 +1436,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - accessrestriction
-            - allowed_use
-            - alternative_ids
-            - artist
-            - asset_family
-            - call_for_image
-            - caption
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_camera_shot
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - max_dimensions
-            - orientation
-            - people
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -1411,6 +1454,7 @@ paths:
               - copyright
               - date_camera_shot
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - editorial_segments
@@ -1457,7 +1501,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/System.Object'
+            $ref: '#/definitions/GettyImages.Models.Search.SearchResults[GettyImages.Models.Search.ImageSearchItem]'
         '400':
           description: InvalidParameterValue
         '401':
@@ -1473,6 +1517,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "This endpoint returns all products available to the username used during authentication. As such, this endpoint requires the use of\r\na fully authorized access_token. The product data can then be used as search filters, restricting results to images from a specific product.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html)\r\npage for more information on how to sign up for an API key.\r\n"
       operationId: Products_GetProducts
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -1487,8 +1532,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Comma separated list of fields. Allows product download requirements to be returned.
-          enum:
-            - download_requirements
           in: query
           items:
             enum:
@@ -1516,6 +1559,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "This endpoint returns a list of all assets purchased on gettyimages.com by the username used for authentication. \r\nUse of this endpoint requires configuration changes to your API key. \r\nPlease contact [developersupport@gettyimages.com](mailto:developersupport@gettyimages.com) to learn more.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html)\r\npage for more information on how to sign up for an API key.\r\n"
       operationId: Purchases_GetPreviousAssetPurchases
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -1571,6 +1615,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "This endpoint returns a list of all images purchased on gettyimages.com by the username used for authentication.\r\nUse of this endpoint requires configuration changes to your API key. Please contact [developersupport@gettyimages.com](mailto:developersupport@gettyimages.com)\r\nto learn more.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html)\r\npage for more information on how to sign up for an API key.\r\n"
       operationId: Purchases_GetPreviousPurchases
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
@@ -1626,6 +1671,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to search Getty Images news, sports and entertainment events. Getty Images photographers and videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with an event, are assigned the same EventID. EventIDs are part of the meta-data returned in Search Results. Only content produced under a Getty Images brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) will be consistently assigned an EventID. The Event framework may also be used to group similar content, such as \"Hats from the Royal Wedding\" or \"Odd-ballOffbeat images of the week\".   \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n"
       operationId: Search_GetEvents
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -1664,17 +1710,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: 'Specifies fields to return. Default set is ''id'',''name'',''start_date''.'
-          enum:
-            - id
-            - child_event_count
-            - editorial_segments
-            - hero_image
-            - image_count
-            - keywords
-            - location
-            - name
-            - start_date
-            - type
           in: query
           items:
             enum:
@@ -1692,7 +1727,7 @@ paths:
           name: fields
           required: false
           type: array
-        - description: Request results starting at a page number (default is 1).
+        - description: 'Request results starting at a page number (default is 1, maximum is 50).'
           format: int32
           in: query
           name: page
@@ -1730,6 +1765,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to search over a blend of our contemporary stock photos, illustrations, archival images, editorial photos, illustrations and archival images.  \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\nTo include your API token in the search request, add it to the headers as a Bearer token (example in curl):\r\n\r\n\t-H \"Authorization: Bearer <your-token>\"\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\": \r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of images. \r\nThe following fields are provided for every image in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"title\"\r\n    ]\r\n]\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most \r\nfrequently used to build a UI displaying search results. The following fields are provided for every image in your result set when you include **display_set**\r\nin your request.\r\n\r\n```\r\n{\r\n    \"images\": \r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Search_GetImagesByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -1744,49 +1780,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the age of individuals in an image.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -1799,39 +1792,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -1864,22 +1857,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on image composition.
-          enum:
-            - abstract
-            - candid
-            - close_up
-            - copy_space
-            - cut_out
-            - full_frame
-            - full_length
-            - headshot
-            - looking_at_camera
-            - macro
-            - portrait
-            - sparse
-            - still_life
-            - three_quarter_length
-            - waist_up
           in: query
           items:
             enum:
@@ -1909,19 +1886,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Filter search results based on the ethnicity of individuals in an image.
-          enum:
-            - black
-            - caucasian
-            - east_asian
-            - hispanic_latino
-            - japanese
-            - middle_eastern
-            - mixed_race_person
-            - multiethnic_group
-            - native_american_first_nations
-            - pacific_islander
-            - south_asian
-            - southeast_asian
           in: query
           items:
             enum:
@@ -1957,45 +1921,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - accessrestriction
-            - allowed_use
-            - alternative_ids
-            - artist
-            - asset_family
-            - call_for_image
-            - caption
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_camera_shot
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - max_dimensions
-            - orientation
-            - people
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -2014,6 +1939,7 @@ paths:
               - copyright
               - date_camera_shot
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - editorial_segments
@@ -2043,9 +1969,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images having a specific file type.
-          enum:
-            - eps
-            - jpg
           in: query
           items:
             enum:
@@ -2057,10 +1980,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Filter based on graphical style of the image.
-          enum:
-            - fine_art
-            - illustration
-            - photography
           in: query
           items:
             enum:
@@ -2082,14 +2001,11 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies the image licensing model(s).
-          enum:
-            - rights_managed
-            - royalty_free
           in: query
           items:
             enum:
-              - rights_managed
-              - royalty_free
+              - rightsmanaged
+              - royaltyfree
             type: string
           name: license_models
           required: false
@@ -2108,11 +2024,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the number of people in the image.
-          enum:
-            - none
-            - one
-            - two
-            - group
           in: query
           items:
             enum:
@@ -2126,20 +2037,14 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images with selected aspect ratios.
-          enum:
-            - horizontal
-            - vertical
-            - square
-            - panoramic_horizontal
-            - panoramic_vertical
           in: query
           items:
             enum:
-              - horizontal
-              - vertical
-              - square
-              - panoramic_horizontal
-              - panoramic_vertical
+              - Horizontal
+              - Vertical
+              - Square
+              - PanoramicHorizontal
+              - PanoramicVertical
             type: string
           name: orientations
           required: false
@@ -2167,23 +2072,9 @@ paths:
           required: false
           type: boolean
         - collectionFormat: multi
-          description: Filter images to those having product types from the selected list.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
             type: string
           name: product_types
           required: false
@@ -2222,86 +2113,11 @@ paths:
       summary: Search for both creative and editorial images
       tags:
         - Search
-  /v3/search/images/artists:
-    get:
-      consumes: []
-      deprecated: false
-      operationId: Artists_GetArtistImages
-      parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
-          name: Accept-Language
-          required: false
-          type: string
-        - description: 'Provide access token in the format of ''Bearer {token}''.'
-          in: header
-          name: Authorization
-          required: false
-          type: string
-        - description: Name of artist for desired images
-          in: query
-          name: name
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
-          enum:
-            - id
-            - alternative_ids
-            - asset_family
-            - asset_type
-            - collection_code
-            - collection_name
-            - comp
-            - date_submitted
-            - keywords
-          in: query
-          items:
-            enum:
-              - id
-              - alternative_ids
-              - asset_family
-              - asset_type
-              - collection_code
-              - collection_name
-              - comp
-              - date_submitted
-              - keywords
-            type: string
-          name: fields
-          required: false
-          type: array
-        - description: Identifies page to return. Default page is 1.
-          format: int32
-          in: query
-          name: page
-          required: false
-          type: integer
-        - description: 'Specifies page size. Default page_size is 3, maximum page_size is 100.'
-          format: int32
-          in: query
-          name: page_size
-          required: false
-          type: integer
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/GettyImages.Models.Artists.ImageSearchResults'
-        '400':
-          description: InvalidParameterValue
-        '401':
-          description: Unauthorized
-      summary: '***BETA*** Search for images by a photographer'
-      tags:
-        - Artists
   /v3/search/images/creative:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to search our contemporary stock photos, illustrations and archival images.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key. \r\n \r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to \r\nbuild search response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\": \r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to \r\nbuild a detailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"title\"\r\n    ]\r\n]\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution\r\nfiles that are most frequently used to build a UI displaying search results. The following fields are provided for every image \r\nin your result set when you include **display_set** in your request.\r\n\r\n```Go\r\n{\r\n    \"images\": \r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n"
       operationId: Search_GetCreativeImagesByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -2316,49 +2132,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the age of individuals in an image.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -2371,39 +2144,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -2436,22 +2209,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on image composition.
-          enum:
-            - abstract
-            - candid
-            - close_up
-            - copy_space
-            - cut_out
-            - full_frame
-            - full_length
-            - headshot
-            - looking_at_camera
-            - macro
-            - portrait
-            - sparse
-            - still_life
-            - three_quarter_length
-            - waist_up
           in: query
           items:
             enum:
@@ -2481,19 +2238,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Filter search results based on the ethnicity of individuals in an image.
-          enum:
-            - black
-            - caucasian
-            - east_asian
-            - hispanic_latino
-            - japanese
-            - middle_eastern
-            - mixed_race_person
-            - multiethnic_group
-            - native_american_first_nations
-            - pacific_islander
-            - south_asian
-            - southeast_asian
           in: query
           items:
             enum:
@@ -2520,39 +2264,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - alternative_ids
-            - artist
-            - asset_family
-            - call_for_image
-            - caption
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_camera_shot
-            - date_created
-            - detail_set
-            - display_set
-            - graphical_style
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - max_dimensions
-            - orientation
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -2570,6 +2281,7 @@ paths:
               - copyright
               - date_camera_shot
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - graphical_style
@@ -2594,9 +2306,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images having a specific file type.
-          enum:
-            - eps
-            - jpg
           in: query
           items:
             enum:
@@ -2608,10 +2317,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Filter based on graphical style of the image.
-          enum:
-            - fine_art
-            - illustration
-            - photography
           in: query
           items:
             enum:
@@ -2633,14 +2338,11 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies the image licensing model(s).
-          enum:
-            - rights_managed
-            - royalty_free
           in: query
           items:
             enum:
-              - rights_managed
-              - royalty_free
+              - rightsmanaged
+              - royaltyfree
             type: string
           name: license_models
           required: false
@@ -2659,11 +2361,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the number of people in the image.
-          enum:
-            - none
-            - one
-            - two
-            - group
           in: query
           items:
             enum:
@@ -2677,20 +2374,14 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images with selected aspect ratios.
-          enum:
-            - horizontal
-            - vertical
-            - square
-            - panoramic_horizontal
-            - panoramic_vertical
           in: query
           items:
             enum:
-              - horizontal
-              - vertical
-              - square
-              - panoramic_horizontal
-              - panoramic_vertical
+              - Horizontal
+              - Vertical
+              - Square
+              - PanoramicHorizontal
+              - PanoramicVertical
             type: string
           name: orientations
           required: false
@@ -2718,23 +2409,9 @@ paths:
           required: false
           type: boolean
         - collectionFormat: multi
-          description: Filter images to those having product types from the selected list.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
             type: string
           name: product_types
           required: false
@@ -2765,10 +2442,117 @@ paths:
       summary: Search for creative images only
       tags:
         - Search
+  /v3/search/images/creative/by-image:
+    get:
+      consumes: []
+      deprecated: false
+      description: "Allows searching for similar creative images by passing the URL to an existing image.\r\n\r\nBefore calling the search by image endpoint, an image must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.\r\nFor example, using cURL:\r\n```sh\r\ncurl -i -X PUT https://search-by-image.s3.amazonaws.com/my-test-image.jpg -H \"Content-Type: image/jpeg\" --data-binary \"@testimage.jpg\"\r\n```\r\n\r\nUploads can be overwritten if the names are the same, so using a prefix like the API Key, application name or company name would help keep that\r\nfrom happening.\r\n\r\nOnce the image has been uploaded, use the full URL in the `image_url` parameter, e.g. `image_url=https://search-by-image.s3.amazonaws.com/my-test-image.jpg`.\r\n\r\nSubsequent searches for the same image can be executed using the `image_fingerprint` that is returned by the inital search.\r\n"
+      operationId: Search_GetCreativeImagesByUrl
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          items:
+            enum:
+              - allowed_use
+              - alternative_ids
+              - artist
+              - asset_family
+              - call_for_image
+              - caption
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_camera_shot
+              - date_created
+              - date_submitted
+              - detail_set
+              - display_set
+              - graphical_style
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - max_dimensions
+              - orientation
+              - prestige
+              - preview
+              - product_types
+              - quality_rank
+              - referral_destinations
+              - summary_set
+              - thumb
+              - title
+              - uri_oembed
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Specifies the fingerprint of the image to use in the search.
+          in: query
+          name: image_fingerprint
+          required: false
+          type: string
+        - description: Specifies the location of the image to use in the search.
+          in: query
+          name: image_url
+          required: false
+          type: string
+        - description: Request results starting at a page number (default is 1).
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Request number of images to return in each page.
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
+          in: query
+          items:
+            type: string
+          name: product_types
+          required: false
+          type: array
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Object'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for creative images based on url
+      tags:
+        - Search
   /v3/search/images/editorial:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to search our editorial stock photos, illustrations and archival images.  Editorial images represent newsworthy events or illustrate matters of general interest, such as news, sport and entertainment and are generally intended for editorial use.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\nTo include your API token in the search request, add it to the headers as a Bearer token (example in curl):\r\n\r\n\t-H \"Authorization: Bearer <your-token>\"\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\": \r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"title\"\r\n    ]\r\n]\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every image in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\": \r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Search_GetEditorialImagesByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -2783,49 +2567,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the age of individuals in an image.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -2838,39 +2579,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -2898,22 +2639,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on image composition.
-          enum:
-            - abstract
-            - candid
-            - close_up
-            - copy_space
-            - cut_out
-            - full_frame
-            - full_length
-            - headshot
-            - looking_at_camera
-            - macro
-            - portrait
-            - sparse
-            - still_life
-            - three_quarter_length
-            - waist_up
           in: query
           items:
             enum:
@@ -2938,13 +2663,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only events with a matching editorial segment.
-          enum:
-            - archival
-            - entertainment
-            - news
-            - publicity
-            - royalty
-            - sport
           in: query
           items:
             enum:
@@ -2979,19 +2697,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Filter search results based on the ethnicity of individuals in an image.
-          enum:
-            - black
-            - caucasian
-            - east_asian
-            - hispanic_latino
-            - japanese
-            - middle_eastern
-            - mixed_race_person
-            - multiethnic_group
-            - native_american_first_nations
-            - pacific_islander
-            - south_asian
-            - southeast_asian
           in: query
           items:
             enum:
@@ -3027,43 +2732,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - alternative_ids
-            - artist
-            - asset_family
-            - call_for_image
-            - caption
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_camera_shot
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - max_dimensions
-            - orientation
-            - people
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -3081,6 +2749,7 @@ paths:
               - copyright
               - date_camera_shot
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - editorial_segments
@@ -3109,9 +2778,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images having a specific file type.
-          enum:
-            - eps
-            - jpg
           in: query
           items:
             enum:
@@ -3123,9 +2789,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Filter based on graphical style of the image.
-          enum:
-            - photography
-            - illustration
           in: query
           items:
             enum:
@@ -3164,11 +2827,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the number of people in the image.
-          enum:
-            - none
-            - one
-            - two
-            - group
           in: query
           items:
             enum:
@@ -3182,20 +2840,14 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images with selected aspect ratios.
-          enum:
-            - horizontal
-            - vertical
-            - square
-            - panoramic_horizontal
-            - panoramic_vertical
           in: query
           items:
             enum:
-              - horizontal
-              - vertical
-              - square
-              - panoramic_horizontal
-              - panoramic_vertical
+              - Horizontal
+              - Vertical
+              - Square
+              - PanoramicHorizontal
+              - PanoramicVertical
             type: string
           name: orientations
           required: false
@@ -3218,23 +2870,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Filter images to those having product types from the selected list.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
             type: string
           name: product_types
           required: false
@@ -3284,6 +2922,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to search over a blend of our premium stock, contemporary 4K and HD footage, celebrities, news, newsmakers, entertainment, events and archival videos.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Search_GetVideosByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -3298,49 +2937,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Provides filtering according to the age of individuals in a video.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -3353,39 +2949,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -3406,6 +3002,17 @@ paths:
           name: collections_filter_type
           required: false
           type: string
+        - collectionFormat: multi
+          description: Allows filtering by types of video.
+          in: query
+          items:
+            enum:
+              - raw
+              - produced
+            type: string
+          name: editorial_video_types
+          required: false
+          type: array
         - description: Excludes images containing nudity. The default is false.
           in: query
           name: exclude_nudity
@@ -3413,39 +3020,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - entity_details
-            - era
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - thumb
-            - title
-            - istock_licenses
           in: query
           items:
             enum:
@@ -3461,6 +3035,7 @@ paths:
               - comp
               - copyright
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - editorial_segments
@@ -3472,6 +3047,7 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
+              - object_name
               - preview
               - product_types
               - referral_destinations
@@ -3489,11 +3065,28 @@ paths:
           enum:
             - sd
             - hd
-            - fourK
+            - 4k
           in: query
           name: format_available
           required: false
           type: string
+        - collectionFormat: multi
+          description: Provides filtering by video frame rate (frames/second).
+          in: query
+          items:
+            enum:
+              - '23.98'
+              - '24'
+              - '25'
+              - '29.97'
+              - '30'
+              - '50'
+              - '59.94'
+              - '60'
+            type: string
+          name: frame_rates
+          required: false
+          type: array
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -3505,14 +3098,11 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies the video licensing model(s).
-          enum:
-            - rights_ready
-            - royalty_free
           in: query
           items:
             enum:
-              - rights_ready
-              - royalty_free
+              - rightsready
+              - royaltyfree
             type: string
           name: license_models
           required: false
@@ -3535,23 +3125,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Provides filtering by a list of product types.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
             type: string
           name: product_types
           required: false
@@ -3581,7 +3157,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Search.VideoSearchItem]'
+            $ref: '#/definitions/GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Artists.VideoSearchItem]'
         '400':
           description: InvalidParameterValue
         '401':
@@ -3595,6 +3171,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to search premium stock video, from archival film to contemporary 4K and HD footage.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html)\r\npage for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without\r\nbeing logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only \r\nassets that you have a license to use, you need to also include an authorization token in the header of your request.\r\nPlease consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search\r\nresponse results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\", \r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a \r\ndetailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\", \r\n        \"caption\", \r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\", \r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files \r\nthat are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result \r\nset when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```"
       operationId: Search_GetCreativeVideosByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -3609,49 +3186,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Provides filtering according to the age of individuals in a video.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -3664,39 +3198,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -3724,36 +3258,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_created
-            - detail_set
-            - display_set
-            - era
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - thumb
-            - title
           in: query
           items:
             enum:
@@ -3769,6 +3273,7 @@ paths:
               - comp
               - copyright
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - era
@@ -3778,6 +3283,7 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
+              - object_name
               - preview
               - product_types
               - referral_destinations
@@ -3794,11 +3300,28 @@ paths:
           enum:
             - sd
             - hd
-            - fourK
+            - 4k
           in: query
           name: format_available
           required: false
           type: string
+        - collectionFormat: multi
+          description: Provides filtering by video frame rate (frames/second).
+          in: query
+          items:
+            enum:
+              - '23.98'
+              - '24'
+              - '25'
+              - '29.97'
+              - '30'
+              - '50'
+              - '59.94'
+              - '60'
+            type: string
+          name: frame_rates
+          required: false
+          type: array
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -3810,14 +3333,11 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies the video licensing model(s).
-          enum:
-            - rights_ready
-            - royalty_free
           in: query
           items:
             enum:
-              - rights_ready
-              - royalty_free
+              - rightsready
+              - royaltyfree
             type: string
           name: license_models
           required: false
@@ -3840,23 +3360,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Allows filtering by a list of product types.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
             type: string
           name: product_types
           required: false
@@ -3864,6 +3370,7 @@ paths:
         - description: Allows sorting of results.
           enum:
             - best_match
+            - most_popular
             - newest
           in: query
           name: sort_order
@@ -3890,6 +3397,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to search current and archival video clips of celebrities, newsmakers, and events.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\", \r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\", \r\n        \"caption\", \r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\", \r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Search_GetEditorialVideosByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -3904,49 +3412,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Provides filtering according to the age of individuals in a video.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -3959,39 +3424,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -4013,6 +3478,17 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
+          description: Allows filtering by types of video.
+          in: query
+          items:
+            enum:
+              - raw
+              - produced
+            type: string
+          name: editorial_video_types
+          required: false
+          type: array
+        - collectionFormat: multi
           description: specify link data entity uri.
           in: query
           items:
@@ -4027,39 +3503,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - entity_details
-            - era
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - thumb
-            - title
-            - istock_licenses
           in: query
           items:
             enum:
@@ -4075,6 +3518,7 @@ paths:
               - comp
               - copyright
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - editorial_segments
@@ -4086,6 +3530,7 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
+              - object_name
               - preview
               - product_types
               - referral_destinations
@@ -4103,11 +3548,28 @@ paths:
           enum:
             - sd
             - hd
-            - fourK
+            - 4k
           in: query
           name: format_available
           required: false
           type: string
+        - collectionFormat: multi
+          description: Provides filtering by video frame rate (frames/second).
+          in: query
+          items:
+            enum:
+              - '23.98'
+              - '24'
+              - '25'
+              - '29.97'
+              - '30'
+              - '50'
+              - '59.94'
+              - '60'
+            type: string
+          name: frame_rates
+          required: false
+          type: array
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -4135,23 +3597,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Allows filtering by a list of product types.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
             type: string
           name: product_types
           required: false
@@ -4191,11 +3639,53 @@ paths:
       summary: Search for editorial videos
       tags:
         - Search
+  '/v3/usage-batches/{id}':
+    put:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: "# Report Usage\r\n\r\nUse this endpoint to report the usages of a set of assets. The count of assets submitted in a single batch to this endpoint is limited to 1000. Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. In this case, you will need to remove the invalid asset Ids from the query request and re-submit the query.\r\n\r\n##  Quickstart\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.\r\nPlease see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\n\r\n_Note_: Date of use can be in any unambiguous date format.\r\n"
+      operationId: Usage_Put
+      parameters:
+        - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/report_usage_batch_request'
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Specifies a unique batch transaction id to identify the report.
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success - All usages reported were successfully recorded.
+          schema:
+            $ref: '#/definitions/report_usage_batch_response'
+        '400':
+          description: 'InvalidRequest - The content of the request was invalid. Most commonly this is due to either too many assets specified, no assets or invalid JSON.'
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '409':
+          description: TransactionIdDuplicated - The id parameter supplied was already used in a previous usage report.
+      summary: Report usage of assets via a batch format.
+      tags:
+        - Usage
   /v3/videos:
     get:
       consumes: []
       deprecated: false
-      description: ''
+      description: "Use this endpoint to return detailed video metadata for all the specified video ids.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"download_sizes\",\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Videos_GetBatch
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -4218,40 +3708,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - id
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - copyright
-            - video_comp
-            - date_created
-            - detail_set
-            - display_set
-            - download_sizes
-            - downloads
-            - era
-            - editorial_segments
-            - entity_details
-            - keywords
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - video_preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - video_thumb
-            - title
-            - istock_licenses
           in: query
           items:
             enum:
@@ -4266,7 +3722,7 @@ paths:
               - collection_name
               - color_type
               - copyright
-              - video_comp
+              - comp
               - date_created
               - detail_set
               - display_set
@@ -4279,13 +3735,14 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
-              - video_preview
+              - object_name
+              - preview
               - product_types
               - referral_destinations
               - shot_speed
               - source
               - summary_set
-              - video_thumb
+              - thumb
               - title
               - istock_licenses
             type: string
@@ -4315,6 +3772,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Use this endpoint to return detailed video metadata for the specified video id.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"download_sizes\",\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Videos_Get
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -4334,40 +3792,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: comma delimited list of fields to retrive for the video
-          enum:
-            - id
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - copyright
-            - video_comp
-            - date_created
-            - detail_set
-            - display_set
-            - download_sizes
-            - downloads
-            - era
-            - editorial_segments
-            - entity_details
-            - keywords
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - video_preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - video_thumb
-            - title
-            - istock_licenses
           in: query
           items:
             enum:
@@ -4382,7 +3806,7 @@ paths:
               - collection_name
               - color_type
               - copyright
-              - video_comp
+              - comp
               - date_created
               - detail_set
               - display_set
@@ -4395,13 +3819,14 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
-              - video_preview
+              - object_name
+              - preview
               - product_types
               - referral_destinations
               - shot_speed
               - source
               - summary_set
-              - video_thumb
+              - thumb
               - title
               - istock_licenses
             type: string
@@ -4425,6 +3850,101 @@ paths:
         '404':
           description: VideosNotFound
       summary: Get metadata for a single video by supplying one video id
+      tags:
+        - Videos
+  '/v3/videos/{id}/similar':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Videos_GetSimilarVideos
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - description: A video id.
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: comma delimited list of fields to retrive for the videos
+          in: query
+          items:
+            enum:
+              - allowed_use
+              - artist
+              - asset_family
+              - caption
+              - clip_length
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_created
+              - date_submitted
+              - detail_set
+              - display_set
+              - editorial_segments
+              - entity_details
+              - era
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - mastered_to
+              - originally_shot_on
+              - object_name
+              - preview
+              - product_types
+              - referral_destinations
+              - shot_speed
+              - source
+              - summary_set
+              - thumb
+              - title
+              - istock_licenses
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Identifies page to return. Default is 1.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies page size. Default is 30, maximum page_size is 100.'
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+        '404':
+          description: VideosNotFound
+      summary: Get videos similar to a video by supplying one video id
       tags:
         - Videos
 definitions:
@@ -4653,6 +4173,8 @@ definitions:
     type: object
   GettyImages.Models.Artists.DisplaySize:
     properties:
+      aspect_ratio:
+        type: string
       is_watermarked:
         type: boolean
       name:
@@ -4673,6 +4195,8 @@ definitions:
           - Image
           - Film
         type: string
+      caption:
+        type: string
       collection_code:
         type: string
       collection_name:
@@ -4690,6 +4214,10 @@ definitions:
         items:
           $ref: '#/definitions/GettyImages.Models.Artists.Keyword'
         type: array
+      license_model:
+        type: string
+      title:
+        type: string
     type: object
   GettyImages.Models.Artists.ImageSearchResults:
     properties:
@@ -4709,6 +4237,53 @@ definitions:
         type: string
       type:
         type: string
+    type: object
+  GettyImages.Models.Artists.VideoSearchItem:
+    properties:
+      alternative_ids:
+        additionalProperties:
+          type: string
+        type: object
+      asset_family:
+        type: string
+      asset_type:
+        enum:
+          - Image
+          - Film
+        type: string
+      caption:
+        type: string
+      collection_code:
+        type: string
+      collection_name:
+        type: string
+      date_submitted:
+        format: date-time
+        type: string
+      display_sizes:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Artists.DisplaySize'
+        type: array
+      id:
+        type: string
+      keywords:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Artists.Keyword'
+        type: array
+      license_model:
+        type: string
+      title:
+        type: string
+    type: object
+  GettyImages.Models.Artists.VideoSearchResults:
+    properties:
+      result_count:
+        format: int32
+        type: integer
+      videos:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchItem'
+        type: array
     type: object
   GettyImages.Models.Collections.Collection:
     properties:
@@ -4810,6 +4385,8 @@ definitions:
     properties:
       agreement_name:
         type: string
+      asset_type:
+        type: string
       date_downloaded:
         format: date-time
         type: string
@@ -4818,6 +4395,8 @@ definitions:
       id:
         type: string
       product_type:
+        type: string
+      size_name:
         type: string
       thumb_uri:
         type: string
@@ -5243,9 +4822,15 @@ definitions:
       date_purchased:
         format: date-time
         type: string
+      download_uri:
+        type: string
+      file_size_in_bytes:
+        type: string
       license_model:
         type: string
       order_id:
+        type: string
+      size_name:
         type: string
       thumb_uri:
         type: string
@@ -5290,6 +4875,16 @@ definitions:
         type: string
       uri:
         type: string
+    type: object
+  GettyImages.Models.Search.CreativeImageSearchLightResults:
+    properties:
+      images:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Search.ImageSearchLightItemCreative'
+        type: array
+      result_count:
+        format: int32
+        type: integer
     type: object
   GettyImages.Models.Search.CreativeImageSearchResults:
     properties:
@@ -5605,6 +5200,17 @@ definitions:
       uri_oembed:
         type: string
     type: object
+  GettyImages.Models.Search.ImageSearchLightItemCreative:
+    properties:
+      display_sizes:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+        type: array
+      id:
+        type: string
+      title:
+        type: string
+    type: object
   'GettyImages.Models.Search.SearchResults[GettyImages.Models.Search.ImageSearchItem]':
     properties:
       images:
@@ -5643,7 +5249,7 @@ definitions:
         type: string
       display_sizes:
         items:
-          $ref: '#/definitions/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          $ref: '#/definitions/GettyImages.Models.Search.VideoSearchItemDisplaySize'
         type: array
       era:
         type: string
@@ -5682,14 +5288,25 @@ definitions:
       title:
         type: string
     type: object
-  'GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Search.VideoSearchItem]':
+  GettyImages.Models.Search.VideoSearchItemDisplaySize:
+    properties:
+      aspect_ratio:
+        type: string
+      is_watermarked:
+        type: boolean
+      name:
+        type: string
+      uri:
+        type: string
+    type: object
+  'GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Artists.VideoSearchItem]':
     properties:
       result_count:
         format: int32
         type: integer
       videos:
         items:
-          $ref: '#/definitions/GettyImages.Models.Search.VideoSearchItem'
+          $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchItem'
         type: array
     type: object
   GettyImages.Models.Videos.VideoDetail:
@@ -5720,7 +5337,7 @@ definitions:
         type: string
       display_sizes:
         items:
-          $ref: '#/definitions/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          $ref: '#/definitions/GettyImages.Models.Videos.VideoDetailDisplaySize'
         type: array
       download_sizes:
         items:
@@ -5761,6 +5378,21 @@ definitions:
       source:
         type: string
       title:
+        type: string
+    type: object
+  GettyImages.Models.Videos.VideoDetailDisplaySize:
+    properties:
+      aspect_ratio:
+        description: Identifies the URI for the image
+        type: string
+      is_watermarked:
+        description: Indicates whether the image is watermarked.
+        type: boolean
+      name:
+        description: Identifies the name of the display size
+        type: string
+      uri:
+        description: Identifies the URI for the image
         type: string
     type: object
   GettyImages.Models.Videos.VideoDownloadAuthorization:
@@ -5896,6 +5528,52 @@ definitions:
           $ref: '#/definitions/PartnerChannel'
         type: array
     type: object
+  RegisterAssetsRequest:
+    description: Specify request containing the list of asset ids you want to register.
+    properties:
+      asset_ids:
+        description: Specifies the list of asset ids you want to register.
+        items:
+          type: string
+        type: array
+    type: object
   System.Object:
     properties: {}
+    type: object
+  asset_usage:
+    description: 'Specifies the id, usage quantity, and date of when an asset was used.'
+    properties:
+      asset_id:
+        description: Specifies the Id of the asset that was used.
+        type: string
+      quantity:
+        description: Specifies the number of times the asset was used.
+        format: int32
+        type: integer
+      usage_date:
+        description: 'Identifies the date the asset was used, in ISO 8601 format (e.g., YYYY-MM-DD), time is not needed.'
+        format: date-time
+        type: string
+    type: object
+  report_usage_batch_request:
+    description: Specifies the request information for the Batch Usages endpoint.
+    properties:
+      asset_usages:
+        description: 'Identifies the list of asset id, usage count and date of usage combinations to record.'
+        items:
+          $ref: '#/definitions/asset_usage'
+        type: array
+    type: object
+  report_usage_batch_response:
+    description: Specifies the response from the Batch Usages endpoint.
+    properties:
+      invalid_assets:
+        description: Identifies a list of asset ids submitted that did not match known Getty asset ids.
+        items:
+          type: string
+        type: array
+      total_asset_usages_processed:
+        description: Specifies the number of asset usage records that were successfully recorded.
+        format: int32
+        type: integer
     type: object

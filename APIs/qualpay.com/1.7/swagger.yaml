@@ -1,0 +1,1602 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api-test.qualpay.com
+basePath: /pg
+info:
+  contact:
+    x-twitter: qualpay
+  description: This document describes the Qualpay Payment Gateway API.
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  title: Qualpay Payment Gateway
+  version: '1.7'
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: 'https://twitter.com/qualpay/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://api-test.qualpay.com/pg/doc'
+      version: '2.0'
+  x-providerName: qualpay.com
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  basicAuth:
+    type: basic
+tags:
+  - description: Payment Gateway
+    name: payment-gateway
+paths:
+  /auth:
+    post:
+      description: 'An approved transaction will continue to be open until it expires or a capture message is received. Authorizations are automatically voided if they are not captured within 28 days, although most issuing banks will release the hold after 24 hours in retail environments or 7 days in card not present environments.'
+      operationId: Authorization
+      parameters:
+        - description: Payment Gateway Authorization Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiTransactionRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiTransactionResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Authorize transaction
+      tags:
+        - payment-gateway
+  /batchClose:
+    post:
+      description: This message is used when the timing of the batch close needs to be controlled by the merchant rather than relying on the daily automatic batch close.
+      operationId: Batch Close
+      parameters:
+        - description: Payment Gateway Batch Close Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiBatchCloseRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiBatchCloseResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Close batch
+      tags:
+        - payment-gateway
+  '/capture/{pgIdOrig}':
+    post:
+      description: A capture message may be completed for any amount up to the originally authorized amount.
+      operationId: Capture
+      parameters:
+        - description: pgIdOrig
+          in: path
+          name: pgIdOrig
+          required: true
+          type: string
+        - description: Payment Gateway Capture Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiCaptureRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiCaptureResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Capture authorized transaction
+      tags:
+        - payment-gateway
+  /credit:
+    post:
+      description: A non-referenced credit requires that the cardholder data be provided in the message. This message is only available during the first 30 days of account production activity - the refund message should generally be used to return money to the cardholder.
+      operationId: Credit
+      parameters:
+        - description: Payment Gateway Credit Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiTransactionRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiTransactionResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Issue credit to cardholder
+      tags:
+        - payment-gateway
+  /force:
+    post:
+      description: 'Can be used when an online authorization request received a ''declined'' reason code and the merchant received an authorization from a voice or automated response (ARU) system. The required fields are the same as a sale or authorization request, except that the expiration date (exp_date) is not required, and the 6-character authorization code (auth_code) IS required.'
+      operationId: Force
+      parameters:
+        - description: Payment Gateway Force Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiTransactionRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiTransactionResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Force transaction approval
+      tags:
+        - payment-gateway
+  '/refund/{pgIdOrig}':
+    post:
+      description: 'Returns money to the cardholder from a previously captured transaction. Multiple refunds are allowed per captured transaction, provided that the sum of all refunds does not exceed the original captured transaction amount. Authorizations that have not been captured are not eligible for refund.'
+      operationId: Refund
+      parameters:
+        - description: pgIdOrig
+          in: path
+          name: pgIdOrig
+          required: true
+          type: string
+        - description: Payment Gateway Refund Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiRefundRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiRefundResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Refund previously captured transaction
+      tags:
+        - payment-gateway
+  /sale:
+    post:
+      description: 'This message will perform an authorization of the transaction, and if approved will immediately capture the transaction to be included in the next batch close. It is used in card present environments, and also card not present environments where no physical goods are being shipped.'
+      operationId: Sale
+      parameters:
+        - description: Payment Gateway Sale Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiTransactionRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiTransactionResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Sale (Auth + Capture)
+      tags:
+        - payment-gateway
+  /tokenize:
+    post:
+      description: 'Once stored, a unique card identifier is returned for use in future transactions. Optionally, tokenization can be requested in an auth, verify, force, credit, or sale message by sending the tokenize field set to true.'
+      operationId: Tokenize
+      parameters:
+        - description: Payment Gateway Tokenize Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiTokenizeRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiTokenizeResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Tokenize card
+      tags:
+        - payment-gateway
+  /verify:
+    post:
+      description: 'A verify message will return success if the cardholder information was verified by the issuer. If AVS or CVV data is included in the message, then the AVS or CVV result code will be returned in the response message.'
+      operationId: Verify
+      parameters:
+        - description: Payment Gateway Card Verify Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiVerifyRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiVerifyResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Verify Card
+      tags:
+        - payment-gateway
+  '/void/{pgIdOrig}':
+    post:
+      description: Authorizations can be voided at any time. Captured transactions can be voided until the batch is closed.
+      operationId: Void
+      parameters:
+        - description: pgIdOrig
+          in: path
+          name: pgIdOrig
+          required: true
+          type: string
+        - description: Payment Gateway Void Request
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PGApiVoidRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PGApiVoidResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '402':
+          description: Declined
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+        '509':
+          description: Timeout
+          schema:
+            $ref: '#/definitions/PGApiResponse'
+      security:
+        - basicAuth: []
+      summary: Void previously authorized transaction
+      tags:
+        - payment-gateway
+definitions:
+  Customer:
+    properties:
+      billing_addr1:
+        description: Customer billing address street.
+        example: 123 Main Street
+        type: string
+      billing_addr2:
+        description: 'Customer billing address, line 2.'
+        example: 'Suite #1234'
+        type: string
+      billing_city:
+        description: Customer billing city.
+        example: San Mateo
+        type: string
+      billing_country:
+        description: Customer billing country.
+        example: USA
+        type: string
+      billing_country_code:
+        description: 'ISO numeric country code for the billing address. Refer to <a href="/developer/api/reference#currency-codes"target="_blank">Currency Codes</a> for a list of country codes.'
+        example: '840'
+        type: string
+      billing_state:
+        description: Customer billing state (abbreviated).
+        example: CA
+        type: string
+      billing_zip:
+        description: Customer billing zip code.
+        example: '94402'
+        type: string
+      billing_zip4:
+        description: Customer billing zip+4 code if applicable.
+        example: '1234'
+        type: string
+      customer_email:
+        description: Customer e-mail address.
+        example: jsmith@somewhere.com
+        type: string
+      customer_firm_name:
+        description: 'Customer Business name if applicable. '
+        example: Qualpay
+        type: string
+      customer_first_name:
+        description: Customer first name.
+        example: Joe
+        type: string
+      customer_last_name:
+        description: Customer last name.
+        example: Smith
+        type: string
+      customer_phone:
+        description: Customer phone number.
+        example: '6503885200'
+        type: string
+      shipping_addresses:
+        description: List of shipping addresses for customer.
+        items:
+          $ref: '#/definitions/ShippingAddress'
+        type: array
+    required:
+      - customer_first_name
+      - customer_last_name
+    type: object
+  PGApiBatchCloseRequest:
+    properties:
+      developer_id:
+        description: Used to indicate which company developed the integration to the Qualpay Payment Gateway. This may also be used to provide the payment solution name that is connected to the Qualpay Payment Gateway.
+        example: MyIntegration
+        type: string
+      loc_id:
+        description: 'When a merchant has more than one location using the same currency, this value is used to specify the specific location for this request.'
+        example: '0001'
+        type: string
+      merchant_id:
+        description: Unique identifier on the Qualpay system.
+        example: <Provide merchant id that links to API Key>
+        format: int64
+        type: integer
+      profile_id:
+        description: Explicitly identifies which Payment Gateway profile should be used for the request.
+        example: '21200001000300000978'
+        type: string
+      report_data:
+        description: This field contains a JSON array of field data that will be included with the transaction data reported in Qualpay Manager.
+        example: '[ {"shipping address" : "123 Main St."},{"shipping city, state zip" : "San Mateo, CA 94402"} ]'
+        type: string
+      session_id:
+        description: INTERNAL USE ONLY.
+        example: 0d2abbc363ee11e7ac4b06f74d819d21
+        type: string
+      tran_currency:
+        description: 'ISO numeric currency code for the transaction. Default is 840 - USD. Refer to <a href="/developer/api/reference#currency-codes"target="_blank">Currency Codes</a> for a list of currency codes.'
+        example: 840
+        format: int32
+        type: integer
+      user_id:
+        description: INTERNAL USE ONLY.
+        example: 94651868
+        format: int64
+        type: integer
+    required:
+      - merchant_id
+    type: object
+  PGApiBatchCloseResponse:
+    properties:
+      amt_tran:
+        description: 'Transaction amount, returned only on partial approvals.'
+        example: 62.87
+        format: double
+        readOnly: true
+        type: number
+      auth_avs_result:
+        description: AVS result from card issuer (if avs_zip and optionally avs_address were provided in the request).
+        example: X
+        readOnly: true
+        type: string
+      auth_code:
+        description: Card issuer authorization code returned on successful authorization request.
+        example: T37500
+        readOnly: true
+        type: string
+      auth_cvv2_result:
+        description: CVV2 result from card issuer (if CVV2 data was sent in the request).
+        example: M
+        readOnly: true
+        type: string
+      batch_info:
+        description: JSON array of JSON objects containing the batch close results by currency and location.
+        example: '[{"profile_id":"97100001000300000978","comm ent":"batch close failure; please try again"},{"profile_id":"97100001000300000124","batch _number":11, "cnt_total":12,"amt_total":- 588.15, "tran_currency":"124"}]'
+        readOnly: true
+        type: string
+      card_id:
+        description: 32-byte value returned after successful tokenize request or when an authorization or sale transaction includes requests tokenization of the carcholder data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        readOnly: true
+        type: string
+      echo_fields:
+        description: Data that was provided in echo_fields in the request.
+        example: '1234'
+        readOnly: true
+        type: string
+      pg_id:
+        description: '32-byte unique identifier generated by the payment gateway, returned in all valid responses. It provides a reference to the transaction and is required for some post-auth operations (e.g. capture, refund, or void).'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        readOnly: true
+        type: string
+      rcode:
+        description: 'Repsonse code from the payment gateway. "000" indicates success. Refer to <a href="/developer/api/reference#api-response-codes"target="_blank">Platform API Response Codes</a> for entire list of Payment Gateway Response Codes.'
+        example: '000'
+        readOnly: true
+        type: string
+      rmsg:
+        description: Response text from the payment gateway.
+        example: Approved T37500
+        readOnly: true
+        type: string
+    required:
+      - pg_id
+      - rcode
+      - rmsg
+    type: object
+  PGApiCaptureRequest:
+    properties:
+      amt_tran:
+        description: Total amount of transaction to capture (if different than original authorization amount). Partial captures are allowed here if the capture amount is less than the authorized amount.
+        example: 1193.5
+        format: double
+        maximum: 9999999999.99
+        type: number
+      developer_id:
+        description: Used to indicate which company developed the integration to the Qualpay Payment Gateway. This may also be used to provide the payment solution name that is connected to the Qualpay Payment Gateway.
+        example: MyIntegration
+        type: string
+      loc_id:
+        description: 'When a merchant has more than one location using the same currency, this value is used to specify the specific location for this request.'
+        example: '0001'
+        type: string
+      merchant_id:
+        description: Unique identifier on the Qualpay system.
+        example: <Provide merchant id that links to API Key>
+        format: int64
+        type: integer
+      profile_id:
+        description: Explicitly identifies which Payment Gateway profile should be used for the request.
+        example: '21200001000300000978'
+        type: string
+      report_data:
+        description: This field contains a JSON array of field data that will be included with the transaction data reported in Qualpay Manager.
+        example: '[ {"shipping address" : "123 Main St."},{"shipping city, state zip" : "San Mateo, CA 94402"} ]'
+        type: string
+      session_id:
+        description: INTERNAL USE ONLY.
+        example: 0d2abbc363ee11e7ac4b06f74d819d21
+        type: string
+      user_id:
+        description: INTERNAL USE ONLY.
+        example: 94651868
+        format: int64
+        type: integer
+      vendor_id:
+        description: Identifies the vendor to which this capture request applies.
+        example: 212100026512
+        format: int64
+        type: integer
+    required:
+      - amt_tran
+      - merchant_id
+    type: object
+  PGApiCaptureResponse:
+    properties:
+      amt_tran:
+        description: 'Transaction amount, returned only on partial approvals.'
+        example: 62.87
+        format: double
+        readOnly: true
+        type: number
+      auth_avs_result:
+        description: AVS result from card issuer (if avs_zip and optionally avs_address were provided in the request).
+        example: X
+        readOnly: true
+        type: string
+      auth_code:
+        description: Card issuer authorization code returned on successful authorization request.
+        example: T37500
+        readOnly: true
+        type: string
+      auth_cvv2_result:
+        description: CVV2 result from card issuer (if CVV2 data was sent in the request).
+        example: M
+        readOnly: true
+        type: string
+      batch_info:
+        description: JSON array of JSON objects containing the batch close results by currency and location.
+        example: '[{"profile_id":"97100001000300000978","comm ent":"batch close failure; please try again"},{"profile_id":"97100001000300000124","batch _number":11, "cnt_total":12,"amt_total":- 588.15, "tran_currency":"124"}]'
+        readOnly: true
+        type: string
+      card_id:
+        description: 32-byte value returned after successful tokenize request or when an authorization or sale transaction includes requests tokenization of the carcholder data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        readOnly: true
+        type: string
+      echo_fields:
+        description: Data that was provided in echo_fields in the request.
+        example: '1234'
+        readOnly: true
+        type: string
+      pg_id:
+        description: '32-byte unique identifier generated by the payment gateway, returned in all valid responses. It provides a reference to the transaction and is required for some post-auth operations (e.g. capture, refund, or void).'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        readOnly: true
+        type: string
+      rcode:
+        description: 'Repsonse code from the payment gateway. "000" indicates success. Refer to <a href="/developer/api/reference#api-response-codes"target="_blank">Platform API Response Codes</a> for entire list of Payment Gateway Response Codes.'
+        example: '000'
+        readOnly: true
+        type: string
+      rmsg:
+        description: Response text from the payment gateway.
+        example: Approved T37500
+        readOnly: true
+        type: string
+    required:
+      - pg_id
+      - rcode
+      - rmsg
+    type: object
+  PGApiRefundRequest:
+    properties:
+      amt_tran:
+        description: Total amount to refund. Partial refunds are allowed by providing an amount in this field that is less than the total original transaction amount.
+        example: 1193.5
+        format: double
+        maximum: 9999999999.99
+        type: number
+      developer_id:
+        description: Used to indicate which company developed the integration to the Qualpay Payment Gateway. This may also be used to provide the payment solution name that is connected to the Qualpay Payment Gateway.
+        example: MyIntegration
+        type: string
+      loc_id:
+        description: 'When a merchant has more than one location using the same currency, this value is used to specify the specific location for this request.'
+        example: '0001'
+        type: string
+      merchant_id:
+        description: Unique identifier on the Qualpay system.
+        example: <Provide merchant id that links to API Key>
+        format: int64
+        type: integer
+      profile_id:
+        description: Explicitly identifies which Payment Gateway profile should be used for the request.
+        example: '21200001000300000978'
+        type: string
+      report_data:
+        description: This field contains a JSON array of field data that will be included with the transaction data reported in Qualpay Manager.
+        example: '[ {"shipping address" : "123 Main St."},{"shipping city, state zip" : "San Mateo, CA 94402"} ]'
+        type: string
+      session_id:
+        description: INTERNAL USE ONLY.
+        example: 0d2abbc363ee11e7ac4b06f74d819d21
+        type: string
+      user_id:
+        description: INTERNAL USE ONLY.
+        example: 94651868
+        format: int64
+        type: integer
+      vendor_id:
+        description: Identifies the vendor to which this refund request applies.
+        example: 212100026512
+        format: int64
+        type: integer
+    required:
+      - amt_tran
+      - merchant_id
+    type: object
+  PGApiRefundResponse:
+    properties:
+      amt_tran:
+        description: 'Transaction amount, returned only on partial approvals.'
+        example: 62.87
+        format: double
+        readOnly: true
+        type: number
+      auth_avs_result:
+        description: AVS result from card issuer (if avs_zip and optionally avs_address were provided in the request).
+        example: X
+        readOnly: true
+        type: string
+      auth_code:
+        description: Card issuer authorization code returned on successful authorization request.
+        example: T37500
+        readOnly: true
+        type: string
+      auth_cvv2_result:
+        description: CVV2 result from card issuer (if CVV2 data was sent in the request).
+        example: M
+        readOnly: true
+        type: string
+      batch_info:
+        description: JSON array of JSON objects containing the batch close results by currency and location.
+        example: '[{"profile_id":"97100001000300000978","comm ent":"batch close failure; please try again"},{"profile_id":"97100001000300000124","batch _number":11, "cnt_total":12,"amt_total":- 588.15, "tran_currency":"124"}]'
+        readOnly: true
+        type: string
+      card_id:
+        description: 32-byte value returned after successful tokenize request or when an authorization or sale transaction includes requests tokenization of the carcholder data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        readOnly: true
+        type: string
+      echo_fields:
+        description: Data that was provided in echo_fields in the request.
+        example: '1234'
+        readOnly: true
+        type: string
+      pg_id:
+        description: '32-byte unique identifier generated by the payment gateway, returned in all valid responses. It provides a reference to the transaction and is required for some post-auth operations (e.g. capture, refund, or void).'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        readOnly: true
+        type: string
+      rcode:
+        description: 'Repsonse code from the payment gateway. "000" indicates success. Refer to <a href="/developer/api/reference#api-response-codes"target="_blank">Platform API Response Codes</a> for entire list of Payment Gateway Response Codes.'
+        example: '000'
+        readOnly: true
+        type: string
+      rmsg:
+        description: Response text from the payment gateway.
+        example: Approved T37500
+        readOnly: true
+        type: string
+    required:
+      - pg_id
+      - rcode
+      - rmsg
+    type: object
+  PGApiResponse:
+    properties:
+      amt_tran:
+        description: 'Transaction amount, returned only on partial approvals.'
+        example: 62.87
+        format: double
+        readOnly: true
+        type: number
+      auth_avs_result:
+        description: AVS result from card issuer (if avs_zip and optionally avs_address were provided in the request).
+        example: X
+        readOnly: true
+        type: string
+      auth_code:
+        description: Card issuer authorization code returned on successful authorization request.
+        example: T37500
+        readOnly: true
+        type: string
+      auth_cvv2_result:
+        description: CVV2 result from card issuer (if CVV2 data was sent in the request).
+        example: M
+        readOnly: true
+        type: string
+      batch_info:
+        description: JSON array of JSON objects containing the batch close results by currency and location.
+        example: '[{"profile_id":"97100001000300000978","comm ent":"batch close failure; please try again"},{"profile_id":"97100001000300000124","batch _number":11, "cnt_total":12,"amt_total":- 588.15, "tran_currency":"124"}]'
+        readOnly: true
+        type: string
+      card_id:
+        description: 32-byte value returned after successful tokenize request or when an authorization or sale transaction includes requests tokenization of the carcholder data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        readOnly: true
+        type: string
+      echo_fields:
+        description: Data that was provided in echo_fields in the request.
+        example: '1234'
+        readOnly: true
+        type: string
+      pg_id:
+        description: '32-byte unique identifier generated by the payment gateway, returned in all valid responses. It provides a reference to the transaction and is required for some post-auth operations (e.g. capture, refund, or void).'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        readOnly: true
+        type: string
+      rcode:
+        description: 'Repsonse code from the payment gateway. "000" indicates success. Refer to <a href="/developer/api/reference#api-response-codes"target="_blank">Platform API Response Codes</a> for entire list of Payment Gateway Response Codes.'
+        example: '000'
+        readOnly: true
+        type: string
+      rmsg:
+        description: Response text from the payment gateway.
+        example: Approved T37500
+        readOnly: true
+        type: string
+    required:
+      - pg_id
+      - rcode
+      - rmsg
+    type: object
+  PGApiTokenizeRequest:
+    properties:
+      avs_address:
+        description: 'Street address of the cardholder. If present, it will be included in the authorization request sent to the issuing bank.'
+        example: 123 Main St
+        type: string
+      avs_zip:
+        description: 'Zip code of the cardholder. If present, it will be included in the authorization request sent to the issuing bank.'
+        example: '94402'
+        type: string
+      card_id:
+        description: Card ID received from a tokenization request. The card_id may be used in place of a card number in requests requiring cardholder account data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        type: string
+      card_number:
+        description: 'Cardholder''s card number. If this field is present in the request, the field card_swipe must NOT be present, the field exp_date must USUALLY be present, and the fields card_id and customer_id should NOT be present.'
+        example: '4111111111111111'
+        type: string
+      card_swipe:
+        description: 'Contains either track 1 or track 2 data magnetic stripe data. If the magnetic stripe reader provides both track 1 and track 2 data in a single read, it is the responsibility of the imeplementer to send data for only one of the two tracks.'
+        example: ;4111111111111111=08051010912345678901?8
+        type: string
+      cvv2:
+        description: 'CVV2 or CID value from the signature panel on the back of the cardholder''s card. If present during a request that requires authorization, the value will be sent to the issuer for validation.'
+        example: '152'
+        type: string
+      developer_id:
+        description: Used to indicate which company developed the integration to the Qualpay Payment Gateway. This may also be used to provide the payment solution name that is connected to the Qualpay Payment Gateway.
+        example: MyIntegration
+        type: string
+      exp_date:
+        description: 'Expiration date of cardholder card number. Required when the field card_number is present. If card_swipe is present in the request, this field must NOT be present. When card_id or customer_id is present in the request this field may also be present; if it is not, then the expiration date from the Card Vault will be used.'
+        example: 0921
+        type: string
+      loc_id:
+        description: 'When a merchant has more than one location using the same currency, this value is used to specify the specific location for this request.'
+        example: '0001'
+        type: string
+      merchant_id:
+        description: Unique identifier on the Qualpay system.
+        example: <Provide merchant id that links to API Key>
+        format: int64
+        type: integer
+      profile_id:
+        description: Explicitly identifies which Payment Gateway profile should be used for the request.
+        example: '21200001000300000978'
+        type: string
+      report_data:
+        description: This field contains a JSON array of field data that will be included with the transaction data reported in Qualpay Manager.
+        example: '[ {"shipping address" : "123 Main St."},{"shipping city, state zip" : "San Mateo, CA 94402"} ]'
+        type: string
+      session_id:
+        description: INTERNAL USE ONLY.
+        example: 0d2abbc363ee11e7ac4b06f74d819d21
+        type: string
+      single_use:
+        description: 'In a tokenize request, setting the single_use field to "true" will cause a single-use token to be generated. This token will expire in 10 minutes or when first used. This field defaults to "false".'
+        example: true
+        type: boolean
+      user_id:
+        description: INTERNAL USE ONLY.
+        example: 94651868
+        format: int64
+        type: integer
+    required:
+      - exp_date
+      - merchant_id
+    type: object
+  PGApiTokenizeResponse:
+    properties:
+      amt_tran:
+        description: 'Transaction amount, returned only on partial approvals.'
+        example: 62.87
+        format: double
+        readOnly: true
+        type: number
+      auth_avs_result:
+        description: AVS result from card issuer (if avs_zip and optionally avs_address were provided in the request).
+        example: X
+        readOnly: true
+        type: string
+      auth_code:
+        description: Card issuer authorization code returned on successful authorization request.
+        example: T37500
+        readOnly: true
+        type: string
+      auth_cvv2_result:
+        description: CVV2 result from card issuer (if CVV2 data was sent in the request).
+        example: M
+        readOnly: true
+        type: string
+      batch_info:
+        description: JSON array of JSON objects containing the batch close results by currency and location.
+        example: '[{"profile_id":"97100001000300000978","comm ent":"batch close failure; please try again"},{"profile_id":"97100001000300000124","batch _number":11, "cnt_total":12,"amt_total":- 588.15, "tran_currency":"124"}]'
+        readOnly: true
+        type: string
+      card_id:
+        description: 32-byte value returned after successful tokenize request or when an authorization or sale transaction includes requests tokenization of the carcholder data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        readOnly: true
+        type: string
+      card_number:
+        description: Cardholder's card number (truncated).
+        example: 4111xxxxxx111111
+        type: string
+      echo_fields:
+        description: Data that was provided in echo_fields in the request.
+        example: '1234'
+        readOnly: true
+        type: string
+      pg_id:
+        description: '32-byte unique identifier generated by the payment gateway, returned in all valid responses. It provides a reference to the transaction and is required for some post-auth operations (e.g. capture, refund, or void).'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        readOnly: true
+        type: string
+      rcode:
+        description: 'Repsonse code from the payment gateway. "000" indicates success. Refer to <a href="/developer/api/reference#api-response-codes"target="_blank">Platform API Response Codes</a> for entire list of Payment Gateway Response Codes.'
+        example: '000'
+        readOnly: true
+        type: string
+      rmsg:
+        description: Response text from the payment gateway.
+        example: Approved T37500
+        readOnly: true
+        type: string
+    required:
+      - pg_id
+      - rcode
+      - rmsg
+    type: object
+  PGApiTransactionRequest:
+    properties:
+      amt_convenience_fee:
+        description: 'Amount of convenience fee. A convenience fee is a fee charged for the "convenience" of being able to pay using an alternative payment channel outside the merchant''s customary payment channel and must be a flat/fixed fee amount per transaction. This field tracks the convenience fee amount for display purposes, but the amount of the fee must be included in amt_tran.'
+        example: 2
+        format: double
+        maximum: 99999999.99
+        type: number
+      amt_fbo:
+        description: Total amount of transaction transferred to the FBO account.
+        example: 1.5
+        format: double
+        maximum: 9999999999.99
+        type: number
+      amt_tax:
+        description: Amount of sales tax included in the total transaction amount. Required for Level 2 and Level 3 interchange qualification.
+        example: 93.5
+        format: double
+        type: number
+      amt_tran:
+        description: Total amount of transaction including sales tax (if applicable).
+        example: 1193.5
+        format: double
+        maximum: 9999999999.99
+        type: number
+      amt_tran_fee:
+        description: 'Amount of transaction surcharge fee. A surcharge is a fee added to the cost of a purchase for the "privilege" of using a credit card, and can be a percentage of the transaction amount. This field tracks the surcharge amount of the transaction for display purposes, but the amount of the fee must be included in amt_tran.'
+        example: 2.35
+        format: double
+        maximum: 99999999.99
+        type: number
+      auth_code:
+        description: 'Auth code is required for a force request, and should contain the 6-character authorization code that was received during a voice or ARU authoirzation.'
+        example: '620376'
+        type: string
+      avs_address:
+        description: 'Street address of the cardholder. If present, it will be included in the authorization request sent to the issuing bank.'
+        example: 123 Main St
+        type: string
+      avs_zip:
+        description: 'Zip code of the cardholder. If present, it will be included in the authorization request sent to the issuing bank.'
+        example: '94402'
+        type: string
+      card_id:
+        description: Card ID received from a tokenization request. The card_id may be used in place of a card number or card swipe.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        type: string
+      card_number:
+        description: 'Cardholder''s card number. If this field is present in the request, the field card_swipe must NOT be present, the field exp_date must USUALLY be present, and the fields card_id and customer_id should NOT be present.'
+        example: '4111111111111111'
+        type: string
+      card_swipe:
+        description: 'Contains either track 1 or track 2 data magnetic stripe data. If the magnetic stripe reader provides both track 1 and track 2 data in a single read, it is the responsibility of the imeplementer to send data for only one of the two tracks.'
+        example: ;4111111111111111=08051010912345678901?8
+        type: string
+      cardholder_name:
+        description: 'When provided in a tokenize request, the cardholder name will be stored in the Card Vault along with the cardholder card number and expiration date.'
+        example: JOHN CUSTOMER
+        type: string
+      cavv_3ds:
+        description: CAVV returned from the merchants 3DS MPI (Base64 encoded).
+        example: ASNFZ4kBI0VniQEjRWeJASNFZ4k=
+        type: string
+      customer:
+        $ref: '#/definitions/Customer'
+        description: 'In an authorization, credit, force, sale or verify message the merchant can send tokenize (set to true), either card_number or card_swipe, the desired customer_id, and the customer field and the payment gateway will create the customer data in the vault. Cannot be used to update an existing customer_id'
+      customer_code:
+        description: Reference code supplied by the cardholder to the merchant.
+        example: 'PO # abc123'
+        type: string
+      customer_email:
+        description: Must contain comma-separated list of e-mail addresses to which a receipt should be sent.
+        example: testme@qualpay.com
+        type: string
+      customer_id:
+        description: Customer ID value established by the merchant. The customer_id may be used in place of a card number in requests requiring cardholder account data.
+        example: JOECUSTOMER_12
+        type: string
+      cvv2:
+        description: 'CVV2 or CID value from the signature panel on the back of the cardholder''s card. If present during a request that requires authorization, the value will be sent to the issuer for validation.'
+        example: '152'
+        type: string
+      dba_name:
+        description: 'When the merchant has been authorized to send dynamic DBA information, this field should contain the DBA name used in the authorization and clearing messages.<br>Note: the payment gateway will automatically add a prefix plus an asterisk (*) to the dba_name value. For example, if the prefix is ABC and the dba_name value is SHOE CO, the DBA name will show as "ABC*SHOE CO" on the cardholder''s credit card statement.'
+        example: SHOE CO
+        type: string
+      developer_id:
+        description: Used to indicate which company developed the integration to the Qualpay Payment Gateway. This may also be used to provide the payment solution name that is connected to the Qualpay Payment Gateway.
+        example: MyIntegration
+        type: string
+      email_receipt:
+        description: 'When this field is provided and set to true, a customer_email must also be provided. When these two fields are provided, a transaction receipt will be sent via e-mail to the address(es) provided in the customer_email field.'
+        example: true
+        type: boolean
+      exp_date:
+        description: 'Expiration date of cardholder card number. Required when the field card_number is present. If card_swipe is present in the request, this field must NOT be present. When card_id or customer_id is present in the request this field may also be present; if it is not, then the expiration date from the Card Vault will be used.'
+        example: 0921
+        type: string
+      fbo_id:
+        description: For Benefit Of (FBO) account identifier on the Qualpay system.
+        example: 999000000001
+        format: int64
+        type: integer
+      line_items:
+        description: 'JSON array of JSON objects. Each object represents a single line item detail element related to the transaction. Each detail element has required subfields: quantity (7N), description (26AN), unit_of_measure (12AN), product_code (12AN), debit_credit_ind (1 AN), unit_cost (12,2N). Optional subfields: type_of_supply (2AN), commodity code (12AN)'
+        example: '[{"quantity": "1","description": "Traffic Cones", "unit_of_measure": "each", "product_code": "SKU-123", "debit_credit_ind": "D", "unit_cost": "14.99"},{"quantity": "3", "description": "Spray Paint", "unit_of_measure": "EA", "product_code": "SKU-456", "debit_credit_ind": "D", "unit_cost": "5.00"}]'
+        type: string
+      loc_id:
+        description: 'When a merchant has more than one location using the same currency, this value is used to specify the specific location for this request.'
+        example: '0001'
+        type: string
+      mc_ucaf_data:
+        description: MasterCard UCAF Field Data returned from the merchants 3DS MPI (Base64 encoded).
+        example: ASNFZ4nwEjRWeI8BI0VnifASNFZ4jwHyL0U=
+        type: string
+      mc_ucaf_ind:
+        description: MasterCard UCAF Collection Indicator returned from the merchants 3DS MPI.
+        example: '2'
+        type: string
+      merch_ref_num:
+        description: Merchant provided reference value that will be stored with the transaction data and included with transaction data in reports within Qualpay Manager. This value will also be attached to any lifecycle transactions (e.g. retrieval requests and chargebacks) that may occur.
+        example: ITEM 16126 Purchased 12-15-2016
+        type: string
+      merchant_id:
+        description: Unique identifier on the Qualpay system.
+        example: <Provide merchant id that links to API Key>
+        format: int64
+        type: integer
+      moto_ecomm_ind:
+        description: 'Indicates type of MOTO transaction: 0 = Card Present (not MOTO/e-Commerce), 1 = One Time MOTO transaction, 2 = Recurring, 3 = Installment, 5 = Full 3D-Secure transaction, 6 = Merchant 3D-Secure transaction, 7 = e-Commerce Channel Encrypted (SSL).'
+        example: '1'
+        type: string
+      pg_id:
+        description: 'PG ID of previously authorized transaction. This field is required when sending a capture, refund, or void request.'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        type: string
+      profile_id:
+        description: Explicitly identifies which Payment Gateway profile should be used for the request.
+        example: '21200001000300000978'
+        type: string
+      purchase_id:
+        description: Purchase Identifier (also referred to as the invoice number generated by the merchant.
+        example: 55-1212
+        type: string
+      report_data:
+        description: This field contains a JSON array of field data that will be included with the transaction data reported in Qualpay Manager.
+        example: '[ {"shipping address" : "123 Main St."},{"shipping city, state zip" : "San Mateo, CA 94402"} ]'
+        type: string
+      session_id:
+        description: INTERNAL USE ONLY.
+        example: 0d2abbc363ee11e7ac4b06f74d819d21
+        type: string
+      subscription_id:
+        description: Identifies the recurring subscription that applies to this transaction.
+        example: 1234
+        format: int64
+        type: integer
+      tokenize:
+        description: 'In an authorization, credit, force, sale, or verify request the merchant can set tokenize to "true" and the payment gateway will store the cardholder data in the Card Vault and provide a card_id in the repsonse. If the card_number or card_id in the request is already in the Card Vault, this flag instructs the payment gateway to update the associated data (e.g. avs_address, avs_zip, exp_date) if present.'
+        example: true
+        type: boolean
+      tran_currency:
+        description: 'ISO numeric currency code for the transaction. Default is 840 - USD. Refer to <a href="/developer/api/reference#currency-codes"target="_blank">Currency Codes</a> for a list of currency codes.'
+        example: 840
+        format: int32
+        type: integer
+      user_id:
+        description: INTERNAL USE ONLY.
+        example: 94651868
+        format: int64
+        type: integer
+      xid_3ds:
+        description: Transaction ID (XID) returned from the merchants 3DS MPI (Base64 encoded).
+        example: ASNFZ4kBI0VniQEjRWeJASNFZ4k=
+        type: string
+    required:
+      - merchant_id
+    type: object
+  PGApiTransactionResponse:
+    properties:
+      amt_tran:
+        description: 'Transaction amount, returned only on partial approvals.'
+        example: 62.87
+        format: double
+        readOnly: true
+        type: number
+      auth_avs_result:
+        description: AVS result from card issuer (if avs_zip and optionally avs_address were provided in the request).
+        example: X
+        readOnly: true
+        type: string
+      auth_code:
+        description: Card issuer authorization code returned on successful authorization request.
+        example: T37500
+        readOnly: true
+        type: string
+      auth_cvv2_result:
+        description: CVV2 result from card issuer (if CVV2 data was sent in the request).
+        example: M
+        readOnly: true
+        type: string
+      batch_info:
+        description: JSON array of JSON objects containing the batch close results by currency and location.
+        example: '[{"profile_id":"97100001000300000978","comm ent":"batch close failure; please try again"},{"profile_id":"97100001000300000124","batch _number":11, "cnt_total":12,"amt_total":- 588.15, "tran_currency":"124"}]'
+        readOnly: true
+        type: string
+      card_id:
+        description: 32-byte value returned after successful tokenize request or when an authorization or sale transaction includes requests tokenization of the carcholder data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        readOnly: true
+        type: string
+      echo_fields:
+        description: Data that was provided in echo_fields in the request.
+        example: '1234'
+        readOnly: true
+        type: string
+      merchant_advice_code:
+        description: Recurring transaction advice for MasterCard authorizations.<ul><li>M001 = New account information available</li><li>M002 = Try again later</li><li>M003 = Do not try again for recurring payments transaction</li><li>M004 = Token requirements not fulfilled for this token type</li><li>M021 = Recurring payment cancellation</li></ul>
+        example: M001
+        readOnly: true
+        type: string
+      pg_id:
+        description: '32-byte unique identifier generated by the payment gateway, returned in all valid responses. It provides a reference to the transaction and is required for some post-auth operations (e.g. capture, refund, or void).'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        readOnly: true
+        type: string
+      rcode:
+        description: 'Repsonse code from the payment gateway. "000" indicates success. Refer to <a href="/developer/api/reference#api-response-codes"target="_blank">Platform API Response Codes</a> for entire list of Payment Gateway Response Codes.'
+        example: '000'
+        readOnly: true
+        type: string
+      rmsg:
+        description: Response text from the payment gateway.
+        example: Approved T37500
+        readOnly: true
+        type: string
+    required:
+      - pg_id
+      - rcode
+      - rmsg
+    type: object
+  PGApiVerifyRequest:
+    properties:
+      avs_address:
+        description: 'Street address of the cardholder. If present, it will be included in the authorization request sent to the issuing bank.'
+        example: 123 Main St
+        type: string
+      avs_zip:
+        description: 'Zip code of the cardholder. If present, it will be included in the authorization request sent to the issuing bank.'
+        example: '94402'
+        type: string
+      card_id:
+        description: Card ID received from a tokenization request. The card_id may be used in place of a card number or card swipe.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        type: string
+      card_number:
+        description: 'Cardholder''s card number. If this field is present in the request, the field card_swipe must NOT be present, the field exp_date must USUALLY be present, and the fields card_id and customer_id should NOT be present.'
+        example: '4111111111111111'
+        type: string
+      card_swipe:
+        description: 'Contains either track 1 or track 2 data magnetic stripe data. If the magnetic stripe reader provides both track 1 and track 2 data in a single read, it is the responsibility of the imeplementer to send data for only one of the two tracks.'
+        example: ;4111111111111111=08051010912345678901?8
+        type: string
+      cardholder_name:
+        description: 'When provided in a tokenize request, the cardholder name will be stored in the Card Vault along with the cardholder card number and expiration date.'
+        example: JOHN CUSTOMER
+        type: string
+      customer:
+        $ref: '#/definitions/Customer'
+        description: 'In an authorization, credit, force, sale or verify message the merchant can send tokenize (set to true), either card_number or card_swipe, the desired customer_id, and the customer field and the payment gateway will create the customer data in the vault. Cannot be used to update an existing customer_id'
+      customer_code:
+        description: Reference code supplied by the cardholder to the merchant.
+        example: 'PO # abc123'
+        type: string
+      cvv2:
+        description: 'CVV2 or CID value from the signature panel on the back of the cardholder''s card. If present during a request that requires authorization, the value will be sent to the issuer for validation.'
+        example: '152'
+        type: string
+      developer_id:
+        description: Used to indicate which company developed the integration to the Qualpay Payment Gateway. This may also be used to provide the payment solution name that is connected to the Qualpay Payment Gateway.
+        example: MyIntegration
+        type: string
+      exp_date:
+        description: 'Expiration date of cardholder card number. Required when the field card_number is present. If card_swipe is present in the request, this field must NOT be present. When card_id or customer_id is present in the request this field may also be present; if it is not, then the expiration date from the Card Vault will be used.'
+        example: 0921
+        type: string
+      loc_id:
+        description: 'When a merchant has more than one location using the same currency, this value is used to specify the specific location for this request.'
+        example: '0001'
+        type: string
+      merch_ref_num:
+        description: Merchant provided reference value that will be stored with the transaction data and included with transaction data in reports within Qualpay Manager. This value will also be attached to any lifecycle transactions (e.g. retrieval requests and chargebacks) that may occur.
+        example: ITEM 16126 Purchased 12-15-2016
+        type: string
+      merchant_id:
+        description: Unique identifier on the Qualpay system.
+        example: <Provide merchant id that links to API Key>
+        format: int64
+        type: integer
+      moto_ecomm_ind:
+        description: 'Indicates type of MOTO transaction: 0 = Card Present (not MOTO/e-Commerce), 1 = One Time MOTO transaction, 2 = Recurring, 3 = Installment, 5 = Full 3D-Secure transaction, 6 = Merchant 3D-Secure transaction, 7 = e-Commerce Channel Encrypted (SSL).'
+        example: '1'
+        type: string
+      profile_id:
+        description: Explicitly identifies which Payment Gateway profile should be used for the request.
+        example: '21200001000300000978'
+        type: string
+      report_data:
+        description: This field contains a JSON array of field data that will be included with the transaction data reported in Qualpay Manager.
+        example: '[ {"shipping address" : "123 Main St."},{"shipping city, state zip" : "San Mateo, CA 94402"} ]'
+        type: string
+      session_id:
+        description: INTERNAL USE ONLY.
+        example: 0d2abbc363ee11e7ac4b06f74d819d21
+        type: string
+      tokenize:
+        description: 'In an authorization, credit, force, sale, or verify request the merchant can set tokenize to "true" and the payment gateway will store the cardholder data in the Card Vault and provide a card_id in the repsonse. If the card_number or card_id in the request is already in the Card Vault, this flag instructs the payment gateway to update the associated data (e.g. avs_address, avs_zip, exp_date) if present.'
+        example: true
+        type: boolean
+      user_id:
+        description: INTERNAL USE ONLY.
+        example: 94651868
+        format: int64
+        type: integer
+    required:
+      - card_number
+      - exp_date
+      - merchant_id
+    type: object
+  PGApiVerifyResponse:
+    properties:
+      amt_tran:
+        description: 'Transaction amount, returned only on partial approvals.'
+        example: 62.87
+        format: double
+        readOnly: true
+        type: number
+      auth_avs_result:
+        description: AVS result from card issuer (if avs_zip and optionally avs_address were provided in the request).
+        example: X
+        readOnly: true
+        type: string
+      auth_code:
+        description: Card issuer authorization code returned on successful authorization request.
+        example: T37500
+        readOnly: true
+        type: string
+      auth_cvv2_result:
+        description: CVV2 result from card issuer (if CVV2 data was sent in the request).
+        example: M
+        readOnly: true
+        type: string
+      batch_info:
+        description: JSON array of JSON objects containing the batch close results by currency and location.
+        example: '[{"profile_id":"97100001000300000978","comm ent":"batch close failure; please try again"},{"profile_id":"97100001000300000124","batch _number":11, "cnt_total":12,"amt_total":- 588.15, "tran_currency":"124"}]'
+        readOnly: true
+        type: string
+      card_id:
+        description: 32-byte value returned after successful tokenize request or when an authorization or sale transaction includes requests tokenization of the carcholder data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        readOnly: true
+        type: string
+      echo_fields:
+        description: Data that was provided in echo_fields in the request.
+        example: '1234'
+        readOnly: true
+        type: string
+      pg_id:
+        description: '32-byte unique identifier generated by the payment gateway, returned in all valid responses. It provides a reference to the transaction and is required for some post-auth operations (e.g. capture, refund, or void).'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        readOnly: true
+        type: string
+      rcode:
+        description: 'Repsonse code from the payment gateway. "000" indicates success. Refer to <a href="/developer/api/reference#api-response-codes"target="_blank">Platform API Response Codes</a> for entire list of Payment Gateway Response Codes.'
+        example: '000'
+        readOnly: true
+        type: string
+      rmsg:
+        description: Response text from the payment gateway.
+        example: Approved T37500
+        readOnly: true
+        type: string
+    required:
+      - pg_id
+      - rcode
+      - rmsg
+    type: object
+  PGApiVoidRequest:
+    properties:
+      developer_id:
+        description: Used to indicate which company developed the integration to the Qualpay Payment Gateway. This may also be used to provide the payment solution name that is connected to the Qualpay Payment Gateway.
+        example: MyIntegration
+        type: string
+      loc_id:
+        description: 'When a merchant has more than one location using the same currency, this value is used to specify the specific location for this request.'
+        example: '0001'
+        type: string
+      merchant_id:
+        description: Unique identifier on the Qualpay system.
+        example: <Provide merchant id that links to API Key>
+        format: int64
+        type: integer
+      profile_id:
+        description: Explicitly identifies which Payment Gateway profile should be used for the request.
+        example: '21200001000300000978'
+        type: string
+      report_data:
+        description: This field contains a JSON array of field data that will be included with the transaction data reported in Qualpay Manager.
+        example: '[ {"shipping address" : "123 Main St."},{"shipping city, state zip" : "San Mateo, CA 94402"} ]'
+        type: string
+      session_id:
+        description: INTERNAL USE ONLY.
+        example: 0d2abbc363ee11e7ac4b06f74d819d21
+        type: string
+      user_id:
+        description: INTERNAL USE ONLY.
+        example: 94651868
+        format: int64
+        type: integer
+      vendor_id:
+        description: Identifies the vendor to which this void request applies.
+        example: 212100026512
+        format: int64
+        type: integer
+    required:
+      - merchant_id
+    type: object
+  PGApiVoidResponse:
+    properties:
+      amt_tran:
+        description: 'Transaction amount, returned only on partial approvals.'
+        example: 62.87
+        format: double
+        readOnly: true
+        type: number
+      auth_avs_result:
+        description: AVS result from card issuer (if avs_zip and optionally avs_address were provided in the request).
+        example: X
+        readOnly: true
+        type: string
+      auth_code:
+        description: Card issuer authorization code returned on successful authorization request.
+        example: T37500
+        readOnly: true
+        type: string
+      auth_cvv2_result:
+        description: CVV2 result from card issuer (if CVV2 data was sent in the request).
+        example: M
+        readOnly: true
+        type: string
+      batch_info:
+        description: JSON array of JSON objects containing the batch close results by currency and location.
+        example: '[{"profile_id":"97100001000300000978","comm ent":"batch close failure; please try again"},{"profile_id":"97100001000300000124","batch _number":11, "cnt_total":12,"amt_total":- 588.15, "tran_currency":"124"}]'
+        readOnly: true
+        type: string
+      card_id:
+        description: 32-byte value returned after successful tokenize request or when an authorization or sale transaction includes requests tokenization of the carcholder data.
+        example: 86e1b00d9b0811e68df3069d8f743581
+        readOnly: true
+        type: string
+      echo_fields:
+        description: Data that was provided in echo_fields in the request.
+        example: '1234'
+        readOnly: true
+        type: string
+      pg_id:
+        description: '32-byte unique identifier generated by the payment gateway, returned in all valid responses. It provides a reference to the transaction and is required for some post-auth operations (e.g. capture, refund, or void).'
+        example: d24ac6189b0b11e6966ca68d5edbef41
+        readOnly: true
+        type: string
+      rcode:
+        description: 'Repsonse code from the payment gateway. "000" indicates success. Refer to <a href="/developer/api/reference#api-response-codes"target="_blank">Platform API Response Codes</a> for entire list of Payment Gateway Response Codes.'
+        example: '000'
+        readOnly: true
+        type: string
+      rmsg:
+        description: Response text from the payment gateway.
+        example: Approved T37500
+        readOnly: true
+        type: string
+    required:
+      - pg_id
+      - rcode
+      - rmsg
+    type: object
+  ShippingAddress:
+    properties:
+      primary:
+        description: Identifies the primary shipping address where there are multiple shipping addresses.
+        example: true
+        type: boolean
+      shipping_addr1:
+        description: 'Customer street and number, P.O. box, c/o.'
+        example: 1234 Main Street
+        type: string
+      shipping_addr2:
+        description: 'Customer apartment, suite, unit, building, floor, etc.'
+        example: Ste 123
+        type: string
+      shipping_city:
+        description: Customer shipping city.
+        example: San Mateo
+        type: string
+      shipping_country:
+        description: Customer shipping country.
+        example: USA
+        type: string
+      shipping_country_code:
+        description: 'ISO numeric country code for the shipping address. Refer to <a href="/developer/api/reference#currency-codes"target="_blank">Currency Codes</a> for a list of country codes. If the country code is provided, the shipping_country will be updated to match the country code. '
+        example: '840'
+        type: string
+      shipping_firm_name:
+        description: 'Business name if applicable. '
+        example: Qualpay
+        type: string
+      shipping_first_name:
+        description: Customer shipping first name.
+        example: Joe
+        type: string
+      shipping_last_name:
+        description: Customer shipping last name.
+        example: Smith
+        type: string
+      shipping_state:
+        description: Customer shipping state (abbreviated).
+        example: CA
+        type: string
+      shipping_zip:
+        description: Customer shipping zip code.
+        example: '94402'
+        type: string
+      shipping_zip4:
+        description: Customer shipping zip+4 code if applicable.
+        example: '1234'
+        type: string
+    required:
+      - shipping_addr1
+      - shipping_city
+      - shipping_first_name
+      - shipping_last_name
+      - shipping_state
+      - shipping_zip
+    type: object

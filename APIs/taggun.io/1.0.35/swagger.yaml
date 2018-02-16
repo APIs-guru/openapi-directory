@@ -1,0 +1,807 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.taggun.io
+basePath: /
+info:
+  contact:
+    email: ck-lee@taggun.io
+    name: CK Lee
+    x-twitter: taggun_io
+  description: 'Expects only running software, real reactions, and beautifully crafted APIs to serve your every desire to transcript a piece of paper to digital form.'
+  title: taggun.io
+  version: 1.0.35
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: 'https://twitter.com/taggun_io/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://api.taggun.io/docs/swagger.json'
+      version: '2.0'
+  x-providerName: taggun.io
+securityDefinitions:
+  apikey:
+    in: header
+    name: apikey
+    type: apiKey
+tags:
+  - name: api
+paths:
+  /api/article/v1/verbose/file:
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postApiArticleV1VerboseFile
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - description: 'file less than 20MB. Accepted file types: PDF, JPG, PNG, GIF'
+          in: formData
+          name: file
+          type: file
+          x-meta:
+            swaggerType: file
+        - default: false
+          description: Set true to force re-process image transcription if the receipt is already in storage
+          in: formData
+          name: refresh
+          required: false
+          type: boolean
+        - default: false
+          description: Set true to avoid saving the receipt in storage
+          in: formData
+          name: incognito
+          required: false
+          type: boolean
+        - description: IP Address of the end user
+          in: formData
+          name: ipAddress
+          required: false
+          type: string
+        - description: 'Set language as a hint. Leave empty for auto detect. Supported languages: , en, es, fr, jp, he, iw, et, lv, lt, fi, el '
+          enum:
+            - en
+            - es
+            - fr
+            - jp
+            - he
+            - iw
+            - et
+            - lv
+            - lt
+            - fi
+            - el
+          in: formData
+          name: language
+          required: false
+          type: string
+          x-constraint:
+            length: 2
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Result'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe an article by uploading an image file and return detailed result
+      tags:
+        - api/article
+  /api/receipt/v1/match/file:
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postApiReceiptV1MatchFile
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - description: 'file less than 20MB. Accepted file types: PDF, JPG, PNG, GIF'
+          in: formData
+          name: file
+          type: file
+          x-meta:
+            swaggerType: file
+        - default: false
+          description: Set true to force re-process image transcription if the receipt is already in storage
+          in: formData
+          name: refresh
+          required: false
+          type: boolean
+        - default: false
+          description: Set true to avoid saving the receipt in storage
+          in: formData
+          name: incognito
+          required: false
+          type: boolean
+        - description: IP Address of the end user
+          in: formData
+          name: ipAddress
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: An array of primary keywords to match
+          in: formData
+          items:
+            type: string
+          name: primaryKeywords
+          type: array
+        - collectionFormat: multi
+          description: An array of secondary keywords to match (lower confidence level than primaryKeywords)
+          in: formData
+          items:
+            type: string
+          name: secondaryKeywords
+          type: array
+        - collectionFormat: multi
+          description: An array of stop words that negate the result to be UNLIKELY
+          in: formData
+          items:
+            type: string
+          name: stopWords
+          type: array
+        - description: 'Set language as a hint. Leave empty for auto detect. Supported languages: , en, es, fr, jp, he, iw, et, lv, lt, fi, el '
+          enum:
+            - en
+            - es
+            - fr
+            - jp
+            - he
+            - iw
+            - et
+            - lv
+            - lt
+            - fi
+            - el
+          in: formData
+          name: language
+          required: false
+          type: string
+          x-constraint:
+            length: 2
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_2'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: detect and match a receipt against keywords and metadata by uploading an image file
+      tags:
+        - api/receipt
+  /api/receipt/v1/simple/encoded:
+    post:
+      operationId: postApiReceiptV1SimpleEncoded
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Model_3'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_5'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe a receipt using base64 encoded image in json payload
+      tags:
+        - api/receipt
+  /api/receipt/v1/simple/file:
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postApiReceiptV1SimpleFile
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - description: 'file less than 20MB. Accepted file types: PDF, JPG, PNG, GIF'
+          in: formData
+          name: file
+          type: file
+          x-meta:
+            swaggerType: file
+        - default: false
+          description: Set true to force re-process image transcription if the receipt is already in storage
+          in: formData
+          name: refresh
+          required: false
+          type: boolean
+        - default: false
+          description: Set true to avoid saving the receipt in storage
+          in: formData
+          name: incognito
+          required: false
+          type: boolean
+        - description: IP Address of the end user
+          in: formData
+          name: ipAddress
+          required: false
+          type: string
+        - description: 'Set language as a hint. Leave empty for auto detect. Supported languages: , en, es, fr, jp, he, iw, et, lv, lt, fi, el '
+          enum:
+            - en
+            - es
+            - fr
+            - jp
+            - he
+            - iw
+            - et
+            - lv
+            - lt
+            - fi
+            - el
+          in: formData
+          name: language
+          required: false
+          type: string
+          x-constraint:
+            length: 2
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_5'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe a receipt by uploading an image file
+      tags:
+        - api/receipt
+  /api/receipt/v1/simple/storage:
+    post:
+      operationId: postApiReceiptV1SimpleStorage
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Model_6'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_5'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe a receipt in storage
+      tags:
+        - api/receipt
+  /api/receipt/v1/simple/url:
+    post:
+      operationId: postApiReceiptV1SimpleUrl
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Model_7'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_5'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe a receipt from URL
+      tags:
+        - api/receipt
+  /api/receipt/v1/verbose/encoded:
+    post:
+      operationId: postApiReceiptV1VerboseEncoded
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Model_3'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_14'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe a receipt using base64 encoded image in json payload and return detailed result
+      tags:
+        - api/receipt
+  /api/receipt/v1/verbose/file:
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postApiReceiptV1VerboseFile
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - description: 'file less than 20MB. Accepted file types: PDF, JPG, PNG, GIF'
+          in: formData
+          name: file
+          type: file
+          x-meta:
+            swaggerType: file
+        - default: false
+          description: Set true to force re-process image transcription if the receipt is already in storage
+          in: formData
+          name: refresh
+          required: false
+          type: boolean
+        - default: false
+          description: Set true to avoid saving the receipt in storage
+          in: formData
+          name: incognito
+          required: false
+          type: boolean
+        - description: IP Address of the end user
+          in: formData
+          name: ipAddress
+          required: false
+          type: string
+        - description: 'Set language as a hint. Leave empty for auto detect. Supported languages: , en, es, fr, jp, he, iw, et, lv, lt, fi, el '
+          enum:
+            - en
+            - es
+            - fr
+            - jp
+            - he
+            - iw
+            - et
+            - lv
+            - lt
+            - fi
+            - el
+          in: formData
+          name: language
+          required: false
+          type: string
+          x-constraint:
+            length: 2
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_14'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe a receipt by uploading an image file and return detailed result
+      tags:
+        - api/receipt
+  /api/receipt/v1/verbose/storage:
+    post:
+      operationId: postApiReceiptV1VerboseStorage
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Model_6'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_14'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe a receipt in storage and return detailed result
+      tags:
+        - api/receipt
+  /api/receipt/v1/verbose/url:
+    post:
+      operationId: postApiReceiptV1VerboseUrl
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Model_7'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model_14'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+      summary: transcribe a receipt from URL and return detailed result
+      tags:
+        - api/receipt
+definitions:
+  Error:
+    properties:
+      error:
+        $ref: '#/definitions/error'
+    type: object
+  IBAN:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: '123456'
+        type: string
+      keyword:
+        example: IBAN
+        type: string
+    type: object
+  Model_1: {}
+  Model_10:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: NZD
+        type: string
+      index:
+        example: 10
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: NZD
+        type: string
+    type: object
+  Model_11:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: Adina Apartment Hotel Auckland Britomart
+        type: string
+      index:
+        example: 2
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: 22DEC'16
+        type: string
+    type: object
+  Model_12:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: '2 Tapora St, Auckland, 1010, New Zealand'
+        type: string
+      index:
+        example: 2
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: 22DEC'16
+        type: string
+    type: object
+  Model_13:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        $ref: '#/definitions/data'
+        type: array
+      index:
+        example: 2
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: 22DEC'16
+        type: string
+    type: object
+  Model_14: {}
+  Model_2: {}
+  Model_3: {}
+  Model_4:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: '2016-12-22T12:00:00.000Z'
+        format: date
+        type: string
+    type: object
+  Model_5: {}
+  Model_6: {}
+  Model_7: {}
+  Model_8:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: 23.3
+        type: number
+      index:
+        example: 11
+        type: number
+      keyword:
+        example: TOTAL
+        type: string
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: '23.30'
+        type: string
+    type: object
+  Model_9:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: 3.04
+        type: number
+      index:
+        example: 7
+        type: number
+      keyword:
+        example: GST
+        type: string
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: '3.04'
+        type: string
+    type: object
+  Result:
+    properties:
+      amounts:
+        $ref: '#/definitions/amounts'
+        type: array
+      dates:
+        $ref: '#/definitions/amounts'
+        type: array
+      elapsed:
+        example: '24200'
+        type: number
+      error:
+        type: string
+      lines:
+        $ref: '#/definitions/amounts'
+        type: array
+      location:
+        $ref: '#/definitions/Model_1'
+      numbers:
+        $ref: '#/definitions/amounts'
+        type: array
+      text:
+        $ref: '#/definitions/text'
+    type: object
+  amounts:
+    items:
+      type: string
+    type: array
+  currency:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: NZD
+        type: string
+    type: object
+  data:
+    example:
+      - restaurant
+      - food
+    items:
+      type: string
+    type: array
+  date:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: '2016-12-22T12:00:00.000Z'
+        format: date
+        type: string
+      index:
+        example: 2
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: 22DEC'16
+        type: string
+    type: object
+  entities:
+    properties:
+      IBAN:
+        $ref: '#/definitions/IBAN'
+      invoiceNumber:
+        $ref: '#/definitions/invoiceNumber'
+    type: object
+  error:
+    properties:
+      msg:
+        default: An error has occurred.
+        description: Human readable error
+        minLength: 3
+        type: string
+      type:
+        default: GENERIC_ERR
+        description: Type of error
+        minLength: 3
+        type: string
+    type: object
+  headers:
+    description: Custom http headers can be set to forward to the target URL.
+    properties:
+      x-custom-key:
+        type: string
+    type: object
+  invoiceNumber:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: '123456'
+        type: string
+      keyword:
+        example: Invoice number
+        type: string
+    type: object
+  location:
+    type: object
+  match:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        description: LIKELY or UNLIKELY
+        enum:
+          - LIKELY
+          - UNLIKELY
+        example: LIKELY
+        type: string
+      index:
+        example: 10
+        type: number
+      keyword:
+        example: WRIGLEY
+        type: string
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: WRIGLEY
+        type: string
+    type: object
+  merchantAddress:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: '2 Tapora St, Auckland, 1010, New Zealand'
+        type: string
+    type: object
+  merchantName:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: Adina Apartment Hotel Auckland Britomart
+        type: string
+    type: object
+  merchantTypes:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        $ref: '#/definitions/data'
+        type: array
+    type: object
+  regions:
+    example:
+      - - x: 437
+          'y': 787
+        - x: 499
+          'y': 788
+        - x: 499
+          'y': 808
+        - x: 437
+          'y': 807
+    items:
+      type: string
+    type: array
+  taxAmount:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: 3.04
+        type: number
+    type: object
+  text:
+    properties:
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: |-
+          Lorem ipsum
+          beer isyum
+        type: string
+    type: object
+  totalAmount:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: 23.3
+        type: number
+    type: object

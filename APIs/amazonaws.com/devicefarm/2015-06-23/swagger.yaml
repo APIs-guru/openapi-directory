@@ -5,13 +5,14 @@ info:
   title: AWS Device Farm
   description: 'AWS Device Farm is a service that enables mobile app developers to test Android, iOS, and Fire OS apps on physical phones, tablets, and other devices in the cloud.'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: devicefarm.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -1272,7 +1274,7 @@ paths:
   '/#ListJobs':
     post:
       operationId: ListJobs
-      description: Gets information about jobs.
+      description: Gets information about jobs for a given test run.
       responses:
         '200':
           description: Success
@@ -1683,7 +1685,7 @@ paths:
   '/#ListSuites':
     post:
       operationId: ListSuites
-      description: Gets information about suites.
+      description: Gets information about test suites for a given job.
       responses:
         '200':
           description: Success
@@ -1729,7 +1731,7 @@ paths:
   '/#ListTests':
     post:
       operationId: ListTests
-      description: Gets information about tests.
+      description: Gets information about tests in a given test suite.
       responses:
         '200':
           description: Success
@@ -2243,6 +2245,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AmazonResourceName'
+  AndroidPaths:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   AppPackagesCleanup:
     type: boolean
   ArgumentException:
@@ -2305,6 +2311,8 @@ definitions:
       - APPLICATION_CRASH_REPORT
       - XCTEST_LOG
       - VIDEO
+      - CUSTOMER_ARTIFACT
+      - CUSTOMER_ARTIFACT_LOG
   Artifacts:
     type: array
     items:
@@ -2329,6 +2337,10 @@ definitions:
         $ref: '#/definitions/Double'
         description: 'The clock speed of the device''s CPU, expressed in hertz (Hz). For example, a 1.2 GHz CPU is expressed as 1200000000.'
     description: <p>Represents the amount of CPU that an app is using on a physical device.</p> <p>Note that this does not represent system-wide CPU usage.</p>
+  ClientId:
+    type: string
+    minLength: 0
+    maxLength: 64
   ContentType:
     type: string
     minLength: 0
@@ -2491,12 +2503,30 @@ definitions:
       deviceArn:
         $ref: '#/definitions/AmazonResourceName'
         description: The Amazon Resource Name (ARN) of the device for which you want to create a remote access session.
+      sshPublicKey:
+        $ref: '#/definitions/SshPublicKey'
+        description: The public key of the <code>ssh</code> key pair you want to use for connecting to remote devices in your remote debugging session. This is only required if <code>remoteDebugEnabled</code> is set to <code>true</code>.
+      remoteDebugEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Set to <code>true</code> if you want to access devices remotely for debugging in your remote access session.
+      remoteRecordEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Set to <code>true</code> to enable remote recording for the remote access session.
+      remoteRecordAppArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) for the app to be recorded in the remote access session.
       name:
         $ref: '#/definitions/Name'
         description: The name of the remote access session that you wish to create.
+      clientId:
+        $ref: '#/definitions/ClientId'
+        description: 'Unique identifier for the client. If you want access to multiple devices on the same client, you should pass the same <code>clientId</code> value in each call to <code>CreateRemoteAccessSession</code>. This is required only if <code>remoteDebugEnabled</code> is set to <code>true</code>.'
       configuration:
         $ref: '#/definitions/CreateRemoteAccessSessionConfiguration'
         description: The configuration information for the remote access session request.
+      interactionMode:
+        $ref: '#/definitions/InteractionMode'
+        description: '<p>The interaction mode of the remote access session. Valid values are:</p> <ul> <li> <p>INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You <b>cannot</b> run XCUITest framework-based tests in this mode.</p> </li> <li> <p>NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You <b>can</b> run XCUITest framework-based tests in this mode.</p> </li> <li> <p>VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You <b>can</b> run XCUITest framework-based tests and watch the screen in this mode.</p> </li> </ul>'
     description: Creates and submits a request to start a remote access session.
   CreateRemoteAccessSessionResult:
     type: object
@@ -2550,6 +2580,19 @@ definitions:
     type: string
     enum:
       - USD
+  CustomerArtifactPaths:
+    type: object
+    properties:
+      iosPaths:
+        $ref: '#/definitions/IosPaths'
+        description: Comma-separated list of paths on the iOS device where the artifacts generated by the customer's tests will be pulled from.
+      androidPaths:
+        $ref: '#/definitions/AndroidPaths'
+        description: Comma-separated list of paths on the Android device where the artifacts generated by the customer's tests will be pulled from.
+      deviceHostPaths:
+        $ref: '#/definitions/DeviceHostPaths'
+        description: Comma-separated list of paths in the test execution environment where the artifacts generated by the customer's tests will be pulled from.
+    description: '<p>A JSON object specifying the paths where the artifacts generated by the customer''s tests, on the device or in the test environment, will be pulled from.</p> <p>Specify <code>deviceHostPaths</code> and optionally specify either <code>iosPaths</code> or <code>androidPaths</code>.</p> <p>For web app tests, you can specify both <code>iosPaths</code> and <code>androidPaths</code>.</p>'
   DateTime:
     type: string
     format: date-time
@@ -2659,6 +2702,9 @@ definitions:
       model:
         $ref: '#/definitions/String'
         description: The device's model name.
+      modelId:
+        $ref: '#/definitions/String'
+        description: The device's model ID.
       formFactor:
         $ref: '#/definitions/DeviceFormFactor'
         description: '<p>The device''s form factor.</p> <p>Allowed values include:</p> <ul> <li> <p>PHONE: The phone form factor.</p> </li> <li> <p>TABLET: The tablet form factor.</p> </li> </ul>'
@@ -2692,6 +2738,9 @@ definitions:
       remoteAccessEnabled:
         $ref: '#/definitions/Boolean'
         description: Specifies whether remote access has been enabled for the specified device.
+      remoteDebugEnabled:
+        $ref: '#/definitions/Boolean'
+        description: This flag is set to <code>true</code> if remote debugging is enabled for the device.
       fleetType:
         $ref: '#/definitions/String'
         description: The type of fleet to which this device belongs. Possible values for fleet type are PRIVATE and PUBLIC.
@@ -2707,12 +2756,17 @@ definitions:
       - FORM_FACTOR
       - MANUFACTURER
       - REMOTE_ACCESS_ENABLED
+      - REMOTE_DEBUG_ENABLED
       - APPIUM_VERSION
   DeviceFormFactor:
     type: string
     enum:
       - PHONE
       - TABLET
+  DeviceHostPaths:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   DeviceMinutes:
     type: object
     properties:
@@ -2806,6 +2860,10 @@ definitions:
       - SKIPPED
       - ERRORED
       - STOPPED
+  ExecutionResultCode:
+    type: string
+    enum:
+      - PARSING_FAILED
   ExecutionStatus:
     type: string
     enum:
@@ -3151,6 +3209,9 @@ definitions:
         $ref: '#/definitions/Upload'
         description: An app or a set of one or more tests to upload or that have been uploaded.
     description: Represents the result of a get upload request.
+  HostAddress:
+    type: string
+    maxLength: 1024
   IdempotencyException:
     type: object
     properties:
@@ -3199,6 +3260,18 @@ definitions:
     description: Represents the response from the server after AWS Device Farm makes a request to install to a remote access session.
   Integer:
     type: integer
+  InteractionMode:
+    type: string
+    enum:
+      - INTERACTIVE
+      - NO_VIDEO
+      - VIDEO_ONLY
+    minLength: 0
+    maxLength: 64
+  IosPaths:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Job:
     type: object
     properties:
@@ -3357,7 +3430,7 @@ definitions:
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
-        description: The jobs' ARNs.
+        description: The run's Amazon Resource Name (ARN).
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
@@ -3688,7 +3761,7 @@ definitions:
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
-        description: The suites' ARNs.
+        description: The job's Amazon Resource Name (ARN).
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
@@ -3715,7 +3788,7 @@ definitions:
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
-        description: The tests' ARNs.
+        description: The test suite's Amazon Resource Name (ARN).
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
@@ -4175,6 +4248,21 @@ definitions:
       device:
         $ref: '#/definitions/Device'
         description: The device (phone or tablet) used in the remote access session.
+      remoteDebugEnabled:
+        $ref: '#/definitions/Boolean'
+        description: This flag is set to <code>true</code> if remote debugging is enabled for the remote access session.
+      remoteRecordEnabled:
+        $ref: '#/definitions/Boolean'
+        description: This flag is set to <code>true</code> if remote recording is enabled for the remote access session.
+      remoteRecordAppArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) for the app to be recorded in the remote access session.
+      hostAddress:
+        $ref: '#/definitions/HostAddress'
+        description: IP address of the EC2 host where you need to connect to remotely debug devices. Only returned if remote debugging is enabled for the remote access session.
+      clientId:
+        $ref: '#/definitions/ClientId'
+        description: Unique identifier of your client for the remote access session. Only returned if remote debugging is enabled for the remote access session.
       billingMethod:
         $ref: '#/definitions/BillingMethod'
         description: 'The billing method of the remote access session. Possible values include <code>METERED</code> or <code>UNMETERED</code>. For more information about metered devices, see <a href="http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology">AWS Device Farm terminology</a>."'
@@ -4184,6 +4272,12 @@ definitions:
       endpoint:
         $ref: '#/definitions/String'
         description: The endpoint for the remote access sesssion.
+      deviceUdid:
+        $ref: '#/definitions/String'
+        description: Unique device identifier for the remote device. Only returned if remote debugging is enabled for the remote access session.
+      interactionMode:
+        $ref: '#/definitions/InteractionMode'
+        description: '<p>The interaction mode of the remote access session. Valid values are:</p> <ul> <li> <p>INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You <b>cannot</b> run XCUITest framework-based tests in this mode.</p> </li> <li> <p>NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You <b>can</b> run XCUITest framework-based tests in this mode.</p> </li> <li> <p>VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You <b>can</b> run XCUITest framework-based tests and watch the screen in this mode.</p> </li> </ul>'
     description: Represents information about the remote access session.
   RemoteAccessSessions:
     type: array
@@ -4312,7 +4406,43 @@ definitions:
       networkProfile:
         $ref: '#/definitions/NetworkProfile'
         description: The network profile being used for a test run.
-    description: Represents an app on a set of devices with a specific test and configuration.
+      parsingResultUrl:
+        $ref: '#/definitions/String'
+        description: 'Read-only URL for an object in S3 bucket where you can get the parsing results of the test package. If the test package doesn''t parse, the reason why it doesn''t parse appears in the file that this URL points to.'
+      resultCode:
+        $ref: '#/definitions/ExecutionResultCode'
+        description: Supporting field for the result field. Set only if <code>result</code> is <code>SKIPPED</code>. <code>PARSING_FAILED</code> if the result is skipped because of test package parsing failure.
+      seed:
+        $ref: '#/definitions/Integer'
+        description: 'For fuzz tests, this is a seed to use for randomizing the UI fuzz test. Using the same seed value between tests ensures identical event sequences.'
+      appUpload:
+        $ref: '#/definitions/AmazonResourceName'
+        description: An app to upload or that has been uploaded.
+      eventCount:
+        $ref: '#/definitions/Integer'
+        description: 'For fuzz tests, this is the number of events, between 1 and 10000, that the UI fuzz test should perform.'
+      jobTimeoutMinutes:
+        $ref: '#/definitions/JobTimeoutMinutes'
+        description: The number of minutes the job will execute before it times out.
+      devicePoolArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The ARN of the device pool for the run.
+      locale:
+        $ref: '#/definitions/String'
+        description: Information about the locale that is used for the run.
+      radios:
+        $ref: '#/definitions/Radios'
+        description: Information about the radio states for the run.
+      location:
+        $ref: '#/definitions/Location'
+        description: Information about the location that is used for the run.
+      customerArtifactPaths:
+        $ref: '#/definitions/CustomerArtifactPaths'
+        description: Output <code>CustomerArtifactPaths</code> object for the test run.
+      webUrl:
+        $ref: '#/definitions/String'
+        description: A pre-signed Amazon S3 URL that can be used with a corresponding GET request to download the symbol file for the run.
+    description: 'Represents a test run on a set of devices with a given app package, test parameters, etc.'
   Runs:
     type: array
     items:
@@ -4369,6 +4499,9 @@ definitions:
       location:
         $ref: '#/definitions/Location'
         description: Information about the location that is used for the run.
+      customerArtifactPaths:
+        $ref: '#/definitions/CustomerArtifactPaths'
+        description: Input <code>CustomerArtifactPaths</code> object for the scheduled run configuration.
       radios:
         $ref: '#/definitions/Radios'
         description: Information about the radio states for the run.
@@ -4449,6 +4582,10 @@ definitions:
         $ref: '#/definitions/Message'
         description: Any additional information about the exception.
     description: There was a problem with the service account.
+  SshPublicKey:
+    type: string
+    minLength: 0
+    maxLength: 8192
   StopRemoteAccessSessionRequest:
     type: object
     required:
@@ -4579,6 +4716,7 @@ definitions:
     enum:
       - BUILTIN_FUZZ
       - BUILTIN_EXPLORER
+      - WEB_PERFORMANCE_PROFILE
       - APPIUM_JAVA_JUNIT
       - APPIUM_JAVA_TESTNG
       - APPIUM_PYTHON
@@ -4591,6 +4729,8 @@ definitions:
       - UIAUTOMATOR
       - XCTEST
       - XCTEST_UI
+      - REMOTE_ACCESS_RECORD
+      - REMOTE_ACCESS_REPLAY
   Tests:
     type: array
     items:
@@ -4677,7 +4817,7 @@ definitions:
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
-        description: The Amazon Resource Name (ARN) of the project that you wish to update network profile settings.
+        description: The Amazon Resource Name (ARN) of the project for which you want to update network profile settings.
       name:
         $ref: '#/definitions/Name'
         description: The name of the network profile about which you are returning information.

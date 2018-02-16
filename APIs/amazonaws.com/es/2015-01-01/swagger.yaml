@@ -5,13 +5,14 @@ info:
   title: Amazon Elasticsearch Service
   description: '<fullname>Amazon Elasticsearch Configuration Service</fullname> <p>Use the Amazon Elasticsearch configuration API to create, configure, and manage Elasticsearch domains.</p> <p>The endpoint for configuration service requests is region-specific: es.<i>region</i>.amazonaws.com. For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticsearch-service-regions" target="_blank">Regions and Endpoints</a>.</p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -35,6 +36,7 @@ externalDocs:
 host: es.amazonaws.com
 basePath: /
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -189,6 +191,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2015-01-01/es/domain/{DomainName}':
+    delete:
+      operationId: DeleteElasticsearchDomain
+      description: 'Permanently deletes the specified Elasticsearch domain and all of its data. Once a domain is deleted, it cannot be recovered.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteElasticsearchDomainResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteElasticsearchDomainRequest'
+        - name: DomainName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeElasticsearchDomain
       description: 'Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.'
@@ -223,6 +269,25 @@ paths:
           in: path
           type: string
           required: true
+  /2015-01-01/es/role:
+    delete:
+      operationId: DeleteElasticsearchServiceRole
+      description: 'Deletes the service-linked role that Elasticsearch Service uses to manage and maintain VPC domains. Role deletion will fail if any existing VPC domains use the role. You must delete any such Elasticsearch domains before deleting the role. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-enabling-slr" target="_blank">Deleting Elasticsearch Service Role</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -234,6 +299,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2015-01-01/es/domain/{DomainName}/config':
+    get:
+      operationId: DescribeElasticsearchDomainConfig
+      description: 'Provides cluster configuration information about the specified Elasticsearch domain, such as the state, creation date, update version, and update date for cluster options.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeElasticsearchDomainConfigResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeElasticsearchDomainConfigRequest'
+        - name: DomainName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateElasticsearchDomainConfig
       description: 'Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. '
@@ -276,16 +385,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2015-01-01/es/domain-info:
     post:
       operationId: DescribeElasticsearchDomains
@@ -665,6 +764,9 @@ definitions:
     description: An error occurred while processing the request.
   Boolean:
     type: boolean
+  CloudWatchLogsLogGroupArn:
+    type: string
+    description: ARN of the Cloudwatch log group to which log needs to be published.
   CreateElasticsearchDomainRequest:
     type: object
     required:
@@ -688,9 +790,18 @@ definitions:
       SnapshotOptions:
         $ref: '#/definitions/SnapshotOptions'
         description: 'Option to set time, in UTC format, of the daily automated snapshot. Default value is 0 hours. '
+      VPCOptions:
+        $ref: '#/definitions/VPCOptions'
+        description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
+      EncryptionAtRestOptions:
+        $ref: '#/definitions/EncryptionAtRestOptions'
+        description: Specifies the Encryption At Rest Options.
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptions'
         description: ' Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
+      LogPublishingOptions:
+        $ref: '#/definitions/LogPublishingOptions'
+        description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
   CreateElasticsearchDomainResponse:
     type: object
     properties:
@@ -860,6 +971,12 @@ definitions:
       - r4.4xlarge.elasticsearch
       - r4.8xlarge.elasticsearch
       - r4.16xlarge.elasticsearch
+      - i3.large.elasticsearch
+      - i3.xlarge.elasticsearch
+      - i3.2xlarge.elasticsearch
+      - i3.4xlarge.elasticsearch
+      - i3.8xlarge.elasticsearch
+      - i3.16xlarge.elasticsearch
   ElasticsearchClusterConfig:
     type: object
     properties:
@@ -913,9 +1030,18 @@ definitions:
       SnapshotOptions:
         $ref: '#/definitions/SnapshotOptionsStatus'
         description: Specifies the <code>SnapshotOptions</code> for the Elasticsearch domain.
+      VPCOptions:
+        $ref: '#/definitions/VPCDerivedInfoStatus'
+        description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+      EncryptionAtRestOptions:
+        $ref: '#/definitions/EncryptionAtRestOptionsStatus'
+        description: Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptionsStatus'
         description: 'Specifies the <code>AdvancedOptions</code> for the domain. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuring Advanced Options</a> for more information.'
+      LogPublishingOptions:
+        $ref: '#/definitions/LogPublishingOptionsStatus'
+        description: Log publishing options for the given domain.
     description: The configuration of an Elasticsearch domain.
   ElasticsearchDomainStatus:
     type: object
@@ -943,6 +1069,9 @@ definitions:
       Endpoint:
         $ref: '#/definitions/ServiceUrl'
         description: The Elasticsearch domain endpoint that you use to submit index and search requests.
+      Endpoints:
+        $ref: '#/definitions/EndpointsMap'
+        description: 'Map containing the Elasticsearch domain endpoints used to submit index and search requests. Example <code>key, value</code>: <code>''vpc'',''vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com''</code>.'
       Processing:
         $ref: '#/definitions/Boolean'
         description: The status of the Elasticsearch domain configuration. <code>True</code> if Amazon Elasticsearch Service is processing configuration changes. <code>False</code> if the configuration is active.
@@ -960,9 +1089,18 @@ definitions:
       SnapshotOptions:
         $ref: '#/definitions/SnapshotOptions'
         description: Specifies the status of the <code>SnapshotOptions</code>
+      VPCOptions:
+        $ref: '#/definitions/VPCDerivedInfo'
+        description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+      EncryptionAtRestOptions:
+        $ref: '#/definitions/EncryptionAtRestOptions'
+        description: ' Specifies the status of the <code>EncryptionAtRestOptions</code>.'
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptions'
         description: Specifies the status of the <code>AdvancedOptions</code>
+      LogPublishingOptions:
+        $ref: '#/definitions/LogPublishingOptions'
+        description: Log publishing options for the given domain.
     description: The current status of an Elasticsearch domain.
   ElasticsearchDomainStatusList:
     type: array
@@ -994,6 +1132,38 @@ definitions:
     description: ' Status of the Elasticsearch version options for the specified Elasticsearch domain.'
   ElasticsearchVersionString:
     type: string
+  EncryptionAtRestOptions:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Specifies the option to enable Encryption At Rest.
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: ' Specifies the KMS Key ID for Encryption At Rest options.'
+    description: Specifies the Encryption At Rest Options.
+  EncryptionAtRestOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/EncryptionAtRestOptions'
+        description: ' Specifies the Encryption At Rest options for the specified Elasticsearch domain.'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: ' Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.'
+    description: ' Status of the Encryption At Rest options for the specified Elasticsearch domain.'
+  EndpointsMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/ServiceUrl'
   ErrorMessage:
     type: string
   InstanceCountLimits:
@@ -1022,6 +1192,10 @@ definitions:
     type: object
     properties: {}
     description: An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.
+  KmsKeyId:
+    type: string
+    minLength: 1
+    maxLength: 500
   LimitExceededException:
     type: object
     properties: {}
@@ -1100,6 +1274,40 @@ definitions:
         $ref: '#/definitions/TagList'
         description: ' List of <code>Tag</code> for the requested Elasticsearch domain.'
     description: The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.
+  LogPublishingOption:
+    type: object
+    properties:
+      CloudWatchLogsLogGroupArn:
+        $ref: '#/definitions/CloudWatchLogsLogGroupArn'
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: ' Specifies whether given log publishing option is enabled or not.'
+    description: 'Log Publishing option that is set for given domain. <br/>Attributes and their details: <ul> <li>CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which log needs to be published.</li> <li>Enabled: Whether the log publishing for given log type is enabled or not</li> </ul> '
+  LogPublishingOptions:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/LogType'
+        value:
+          $ref: '#/definitions/LogPublishingOption'
+  LogPublishingOptionsStatus:
+    type: object
+    properties:
+      Options:
+        $ref: '#/definitions/LogPublishingOptions'
+        description: The log publishing options configured for the Elasticsearch domain.
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: 'The status of the log publishing options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that''s included. '
+    description: The configured log publishing options for the domain and their current status.
+  LogType:
+    type: string
+    enum:
+      - INDEX_SLOW_LOGS
+      - SEARCH_SLOW_LOGS
+    description: 'Type of Log File, it can be one of the following: <ul> <li>INDEX_SLOW_LOGS: Index slow logs contains insert requests that took more time than configured index query log threshold to execute.</li> <li>SEARCH_SLOW_LOGS: Search slow logs contains search queries that took more time than configured search query log threshold to execute.</li> </ul> '
   MaxResults:
     type: integer
     description: ' Set this value to limit the number of results returned. '
@@ -1274,12 +1482,18 @@ definitions:
       SnapshotOptions:
         $ref: '#/definitions/SnapshotOptions'
         description: 'Option to set the time, in UTC format, for the daily automated snapshot. Default value is <code>0</code> hours. '
+      VPCOptions:
+        $ref: '#/definitions/VPCOptions'
+        description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptions'
         description: 'Modifies the advanced option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
       AccessPolicies:
         $ref: '#/definitions/PolicyDocument'
         description: IAM access policy as a JSON-formatted string.
+      LogPublishingOptions:
+        $ref: '#/definitions/LogPublishingOptions'
+        description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
     description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
   UpdateElasticsearchDomainConfigResponse:
     type: object
@@ -1293,6 +1507,45 @@ definitions:
   UpdateTimestamp:
     type: string
     format: date-time
+  VPCDerivedInfo:
+    type: object
+    properties:
+      VPCId:
+        $ref: '#/definitions/String'
+        description: The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
+      SubnetIds:
+        $ref: '#/definitions/StringList'
+        description: Specifies the subnets for VPC endpoint.
+      AvailabilityZones:
+        $ref: '#/definitions/StringList'
+        description: The availability zones for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
+      SecurityGroupIds:
+        $ref: '#/definitions/StringList'
+        description: Specifies the security groups for VPC endpoint.
+    description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+  VPCDerivedInfoStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/VPCDerivedInfo'
+        description: ' Specifies the VPC options for the specified Elasticsearch domain.'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: ' Specifies the status of the VPC options for the specified Elasticsearch domain.'
+    description: ' Status of the VPC options for the specified Elasticsearch domain.'
+  VPCOptions:
+    type: object
+    properties:
+      SubnetIds:
+        $ref: '#/definitions/StringList'
+        description: Specifies the subnets for VPC endpoint.
+      SecurityGroupIds:
+        $ref: '#/definitions/StringList'
+        description: Specifies the security groups for VPC endpoint.
+    description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
   ValidationException:
     type: object
     properties: {}

@@ -401,6 +401,39 @@ paths:
         name: analysis_slug
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/search_console/stats':
+    get:
+      description: List clicks and impressions per day
+      operationId: getKeywordsStats
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/KeywordsStats'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: List clicks and impressions per day
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/report':
     get:
       description: 'Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc.)'
@@ -780,11 +813,11 @@ paths:
       description: Executes a query and returns a paginated response
       operationId: getUrls
       parameters:
-        - description: Urls query
+        - description: Query
           in: body
-          name: UrlsQuery
+          name: Query
           schema:
-            $ref: '#/definitions/UrlsQuery'
+            $ref: '#/definitions/Query'
         - default: current
           description: Analysis context
           enum:
@@ -854,14 +887,14 @@ paths:
         required: true
         type: string
     post:
-      description: Query aggregator. It accepts multiple queries
+      description: Query aggregator. It accepts multiple queries and dispatches them on ES or BQ.
       operationId: getUrlsAggs
       parameters:
-        - description: UrlsAggs queries
+        - description: AggsQueries
           in: body
-          name: UrlsAggsQueries
+          name: AggsQueries
           schema:
-            $ref: '#/definitions/UrlsAggsQueries'
+            $ref: '#/definitions/AggsQueries'
         - default: current
           description: Analysis context
           enum:
@@ -915,6 +948,57 @@ paths:
           schema:
             $ref: '#/definitions/DefaultPayload'
       summary: Gets an Analysis datamodel
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/datasets':
+    get:
+      description: Gets Analysis Datasets
+      operationId: getUrlsDatasets
+      parameters:
+        - default: current
+          description: Analysis context
+          enum:
+            - current
+            - disappeared
+            - new
+            - search_engines_orphans
+            - gsc_keywords
+          in: query
+          name: area
+          required: false
+          type: string
+        - default: true
+          description: Include deprecated fields
+          in: query
+          name: deprecated_fields
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Datasets'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Gets Analysis Datasets
       tags:
         - Analysis
     parameters:
@@ -996,11 +1080,11 @@ paths:
       description: Creates a new UrlExport object and starts a task that will export the results into a csv. Returns the model id that manages the task
       operationId: createUrlsExport
       parameters:
-        - description: Urls query
+        - description: Query
           in: body
-          name: UrlsQuery
+          name: Query
           schema:
-            $ref: '#/definitions/UrlsQuery'
+            $ref: '#/definitions/Query'
         - default: current
           description: Analysis context
           enum:
@@ -1063,6 +1147,44 @@ paths:
         name: url_export_id
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/html/{url}':
+    get:
+      description: Gets the HTML of an URL for an analysis
+      operationId: getUrlHTML
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/UrlHTML'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Gets the HTML of an URL for an analysis
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - description: (Urlencoded) Searched URL
+        in: path
+        name: url
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls/suggested_filters':
     parameters:
       - description: User's identifier
@@ -1084,11 +1206,11 @@ paths:
       description: Return most frequent segments (= suggested patterns in the previous version) for a Botify Query.
       operationId: getUrlsSuggestedFilters
       parameters:
-        - description: UrlsAggs query
+        - description: AggsQuery
           in: body
-          name: UrlsAggsQuery
+          name: AggsQuery
           schema:
-            $ref: '#/definitions/UrlsAggsQuery'
+            $ref: '#/definitions/AggsQuery'
         - default: current
           description: Analysis context
           enum:
@@ -1102,7 +1224,7 @@ paths:
         '201':
           description: Successful operation
           schema:
-            $ref: '#/definitions/UrlsAggsQuery'
+            $ref: '#/definitions/AggsQuery'
         default:
           description: error payload
           schema:
@@ -1311,11 +1433,11 @@ paths:
       description: Project Query aggregator. It accepts multiple queries that will be executed on all completed analyses in the project
       operationId: getProjectUrlsAggs
       parameters:
-        - description: UrlsAggs queries
+        - description: AggsQueries
           in: body
-          name: UrlsAggsQueries
+          name: AggsQueries
           schema:
-            $ref: '#/definitions/UrlsAggsQueries'
+            $ref: '#/definitions/AggsQueries'
         - default: current
           description: Analyses context
           enum:
@@ -1425,12 +1547,44 @@ definitions:
     required:
       - status
     type: object
+  AggsQueries:
+    items:
+      $ref: '#/definitions/AggsQuery'
+    type: array
+  AggsQuery:
+    description: AggsQuery
+    properties:
+      aggs:
+        items:
+          type: object
+        type: array
+      filters:
+        type: object
+    type: object
+  AnalysesUpdateLaunch:
+    description: Launch Analyses Updates
+    properties:
+      analyses:
+        items:
+          type: string
+        type: array
+      refresh_features:
+        items:
+          type: string
+        type: array
+    required:
+      - analyses
+      - refresh_features
+    type: object
   Analysis:
     properties:
       computing_revision:
         readOnly: true
         type: string
       config:
+        readOnly: true
+        type: string
+      crawl_launch_type:
         readOnly: true
         type: string
       date_created:
@@ -1446,18 +1600,25 @@ definitions:
       date_launched:
         format: date-time
         type: string
+      failures:
+        readOnly: true
+        type: string
       features:
         readOnly: true
         type: string
       friendly_name:
         readOnly: true
         type: string
-      id:
-        format: int64
+      import_keywords_data:
         readOnly: true
-        type: integer
+        type: string
       name:
         readOnly: true
+        type: string
+      owner:
+        readOnly: true
+        type: string
+      red_button_domain:
         type: string
       slug:
         readOnly: true
@@ -1487,6 +1648,12 @@ definitions:
       config:
         readOnly: true
         type: string
+      crawl_launch_type:
+        readOnly: true
+        type: string
+      date_created:
+        format: date-time
+        type: string
       date_finished:
         format: date-time
         type: string
@@ -1506,11 +1673,13 @@ definitions:
       friendly_name:
         readOnly: true
         type: string
-      id:
-        format: int64
+      import_keywords_data:
         readOnly: true
-        type: integer
+        type: string
       name:
+        readOnly: true
+        type: string
+      owner:
         readOnly: true
         type: string
       red_button_domain:
@@ -1559,6 +1728,15 @@ definitions:
       - add_on_features
       - features_to_update
     type: object
+  BqlDryRun:
+    properties:
+      error:
+        type: object
+      query:
+        type: string
+    required:
+      - query
+    type: object
   CheckExternalStorageAccess:
     properties:
       access_ok:
@@ -1578,6 +1756,8 @@ definitions:
     type: object
   CrawlStatistics:
     properties:
+      crawler_ip:
+        type: string
       depth_current:
         format: int64
         type: integer
@@ -1740,7 +1920,7 @@ definitions:
         minimum: 0
         type: integer
       query:
-        $ref: '#/definitions/UrlsQuery'
+        $ref: '#/definitions/Query'
       results:
         readOnly: true
         type: string
@@ -1780,6 +1960,8 @@ definitions:
         type: boolean
       name:
         type: string
+      optional:
+        type: boolean
       permissions:
         items:
           type: string
@@ -1796,6 +1978,7 @@ definitions:
       - type
       - id
       - permissions
+      - optional
     type: object
   DatamodelGroup:
     properties:
@@ -1806,6 +1989,90 @@ definitions:
     required:
       - id
       - name
+    type: object
+  Dataset:
+    properties:
+      fields:
+        items:
+          $ref: '#/definitions/DatasetField'
+        type: array
+      groups:
+        items:
+          $ref: '#/definitions/DatasetGroup'
+        type: array
+      id:
+        type: string
+      multiple:
+        type: boolean
+      name:
+        type: string
+    required:
+      - id
+      - name
+      - groups
+      - fields
+    type: object
+  DatasetField:
+    properties:
+      aliases:
+        items:
+          type: string
+        type: array
+      deprecated:
+        type: boolean
+      group:
+        type: string
+      id:
+        type: string
+      meta:
+        type: object
+      multiple:
+        type: boolean
+      name:
+        type: string
+      optional:
+        type: boolean
+      permissions:
+        items:
+          type: string
+        type: array
+      settings:
+        type: object
+      subtype:
+        type: string
+      type:
+        type: string
+    required:
+      - multiple
+      - name
+      - subtype
+      - type
+      - id
+      - permissions
+      - optional
+    type: object
+  DatasetGroup:
+    properties:
+      id:
+        type: string
+      multiple:
+        type: boolean
+      name:
+        type: string
+      parent:
+        type: string
+    required:
+      - id
+      - name
+    type: object
+  Datasets:
+    properties:
+      datasets:
+        items:
+          $ref: '#/definitions/Dataset'
+        type: array
+    required:
+      - datasets
     type: object
   Default:
     properties: {}
@@ -1859,6 +2126,69 @@ definitions:
     required:
       - value
       - nb_urls
+    type: object
+  KeywordsStat:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/KeywordsStatData'
+        type: array
+      type:
+        type: string
+      url:
+        type: string
+    required:
+      - type
+      - data
+    type: object
+  KeywordsStatData:
+    properties:
+      all:
+        $ref: '#/definitions/KeywordsStatDetail'
+      date:
+        format: int64
+        type: integer
+      desktop:
+        $ref: '#/definitions/KeywordsStatDetail'
+      mobile:
+        $ref: '#/definitions/KeywordsStatDetail'
+      tablet:
+        $ref: '#/definitions/KeywordsStatDetail'
+    required:
+      - date
+      - all
+      - desktop
+      - mobile
+      - tablet
+    type: object
+  KeywordsStatDetail:
+    properties:
+      clicks:
+        format: int64
+        type: integer
+      impressions:
+        format: int64
+        type: integer
+      sampled_clicks:
+        format: int64
+        type: integer
+      sampled_impressions:
+        format: int64
+        type: integer
+    required:
+      - clicks
+      - impressions
+      - sampled_clicks
+      - sampled_impressions
+    type: object
+  KeywordsStats:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/KeywordsStat'
+        type: array
+    required:
+      - stats
     type: object
   LinksPercentiles:
     properties:
@@ -2085,6 +2415,30 @@ definitions:
       - sitemaps
       - header_settings
     type: object
+  ProjectsPaths:
+    description: Projects paths
+    properties:
+      projects:
+        items:
+          type: string
+        type: array
+    required:
+      - projects
+    type: object
+  Query:
+    description: Query
+    properties:
+      fields:
+        items:
+          type: string
+        type: array
+      filters:
+        type: object
+      sort:
+        items:
+          type: string
+        type: array
+    type: object
   RewritingRule:
     properties:
       ignore_case:
@@ -2207,33 +2561,8 @@ definitions:
   UrlDetail:
     properties: {}
     type: object
-  UrlsAggsQueries:
-    items:
-      $ref: '#/definitions/UrlsAggsQuery'
-    type: array
-  UrlsAggsQuery:
-    description: UrlsAggs query
-    properties:
-      aggs:
-        items:
-          type: object
-        type: array
-      filters:
-        type: object
-    type: object
-  UrlsQuery:
-    description: Urls query
-    properties:
-      fields:
-        items:
-          type: string
-        type: array
-      filters:
-        type: object
-      sort:
-        items:
-          type: object
-        type: array
+  UrlHTML:
+    properties: {}
     type: object
   User:
     properties:

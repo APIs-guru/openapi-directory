@@ -455,6 +455,33 @@ paths:
           name: type
           required: false
           type: array
+        - collectionFormat: multi
+          description: |
+            Request listings by a specific property sub type.
+
+            *NOTE* not all sub type filters are available for all vendors.
+          enum:
+            - apartment
+            - boatslip
+            - singlefamilyresidence
+            - deededparking
+            - cabin
+            - condominium
+            - duplex
+            - manufacturedhome
+            - ownyourown
+            - quadruplex
+            - stockcooperative
+            - townhouse
+            - timeshare
+            - triplex
+            - manufacturedonland
+          in: query
+          items:
+            type: string
+          name: subtype
+          required: false
+          type: array
         - description: |
             Filter the listings returned by an agent ID.  Note, the
             Agent ID is provided by your MLS.
@@ -1088,7 +1115,10 @@ definitions:
     description: RETS MLS Vendor Data
     properties:
       area:
-        description: MLS Area. Generally a subdivision or community name.
+        description: 'MLS Area major. The major marketing area name, as defined by the MLS or other non-governmental organization.'
+        type: string
+      areaMinor:
+        description: 'MLS Area minor. The minor/sub marketing area name, as defined by the MLS or other non-governmental organization.'
         type: string
       daysOnMarket:
         description: Amount of days the property has been Active
@@ -1244,6 +1274,10 @@ definitions:
         description: Number of half bathrooms
         format: int64
         type: integer
+      bathsThreeQuarter:
+        description: Number of 3/4 bathrooms
+        format: int64
+        type: integer
       bedrooms:
         description: Number of bedrooms
         format: int64
@@ -1319,6 +1353,8 @@ definitions:
       occupantName:
         type: string
       occupantType:
+        type: string
+      ownerName:
         type: string
       parking:
         $ref: '#/definitions/Parking'

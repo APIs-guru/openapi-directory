@@ -3,15 +3,16 @@ info:
   version: '2016-10-06'
   x-release: v4
   title: AWS CodeBuild
-  description: '<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apach Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests, and you pay only for the build time you consume. For more information about AWS CodeBuild, see the <i>AWS CodeBuild User Guide</i>.</p> <p>AWS CodeBuild supports these operations:</p> <ul> <li> <p> <code>BatchGetProjects</code>: Gets information about one or more build projects. A <i>build project</i> defines how AWS CodeBuild will run a build. This includes information such as where to get the source code to build, the build environment to use, the build commands to run, and where to store the build output. A <i>build environment</i> represents a combination of operating system, programming language runtime, and tools that AWS CodeBuild will use to run a build. Also, you can add tags to build projects to help manage your resources and costs.</p> </li> <li> <p> <code>CreateProject</code>: Creates a build project.</p> </li> <li> <p> <code>DeleteProject</code>: Deletes a build project.</p> </li> <li> <p> <code>ListProjects</code>: Gets a list of build project names, with each build project name representing a single build project.</p> </li> <li> <p> <code>UpdateProject</code>: Changes the settings of an existing build project.</p> </li> <li> <p> <code>BatchGetBuilds</code>: Gets information about one or more builds.</p> </li> <li> <p> <code>ListBuilds</code>: Gets a list of build IDs, with each build ID representing a single build.</p> </li> <li> <p> <code>ListBuildsForProject</code>: Gets a list of build IDs for the specified build project, with each build ID representing a single build.</p> </li> <li> <p> <code>StartBuild</code>: Starts running a build.</p> </li> <li> <p> <code>StopBuild</code>: Attempts to stop running a build.</p> </li> <li> <p> <code>ListCuratedEnvironmentImages</code>: Gets information about Docker images that are managed by AWS CodeBuild.</p> </li> </ul>'
+  description: '<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests, and you pay only for the build time you consume. For more information about AWS CodeBuild, see the <i>AWS CodeBuild User Guide</i>.</p> <p>AWS CodeBuild supports these operations:</p> <ul> <li> <p> <code>BatchDeleteBuilds</code>: Deletes one or more builds.</p> </li> <li> <p> <code>BatchGetProjects</code>: Gets information about one or more build projects. A <i>build project</i> defines how AWS CodeBuild will run a build. This includes information such as where to get the source code to build, the build environment to use, the build commands to run, and where to store the build output. A <i>build environment</i> represents a combination of operating system, programming language runtime, and tools that AWS CodeBuild will use to run a build. Also, you can add tags to build projects to help manage your resources and costs.</p> </li> <li> <p> <code>CreateProject</code>: Creates a build project.</p> </li> <li> <p> <code>CreateWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>DeleteProject</code>: Deletes a build project.</p> </li> <li> <p> <code>DeleteWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, stops AWS CodeBuild from automatically rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>ListProjects</code>: Gets a list of build project names, with each build project name representing a single build project.</p> </li> <li> <p> <code>UpdateProject</code>: Changes the settings of an existing build project.</p> </li> <li> <p> <code>BatchGetBuilds</code>: Gets information about one or more builds.</p> </li> <li> <p> <code>ListBuilds</code>: Gets a list of build IDs, with each build ID representing a single build.</p> </li> <li> <p> <code>ListBuildsForProject</code>: Gets a list of build IDs for the specified build project, with each build ID representing a single build.</p> </li> <li> <p> <code>StartBuild</code>: Starts running a build.</p> </li> <li> <p> <code>StopBuild</code>: Attempts to stop running a build.</p> </li> <li> <p> <code>ListCuratedEnvironmentImages</code>: Gets information about Docker images that are managed by AWS CodeBuild.</p> </li> </ul>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: codebuild.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -98,6 +100,35 @@ security:
   - hmac: []
 paths:
   /:
+    post:
+      operationId: BatchDeleteBuilds
+      description: Deletes one or more builds.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDeleteBuildsOutput'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDeleteBuildsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetBuilds':
     post:
       operationId: BatchGetBuilds
       description: Gets information about builds.
@@ -192,6 +223,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateWebhook':
+    post:
+      operationId: CreateWebhook
+      description: '<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in <a href="http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console">Change a Build Project''s Settings</a>.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateWebhookOutput'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: OAuthProviderException
+          schema:
+            $ref: '#/definitions/OAuthProviderException'
+        '482':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateWebhookInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteProject':
     post:
       operationId: DeleteProject
@@ -211,6 +283,76 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProjectInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteWebhook':
+    post:
+      operationId: DeleteWebhook
+      description: 'For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, stops AWS CodeBuild from automatically rebuilding the source code every time a code change is pushed to the repository.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteWebhookOutput'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OAuthProviderException
+          schema:
+            $ref: '#/definitions/OAuthProviderException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteWebhookInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#InvalidateProjectCache':
+    post:
+      operationId: InvalidateProjectCache
+      description: Resets the cache for a project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InvalidateProjectCacheOutput'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InvalidateProjectCacheInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -461,16 +603,202 @@ definitions:
       - CODEPIPELINE
       - S3
       - NO_ARTIFACTS
-  BatchGetBuildsInput:
+  BatchDeleteBuildsInput:
     type: object
     required:
       - ids
     properties:
       ids:
         $ref: '#/definitions/BuildIds'
+        description: The IDs of the builds to delete.
+  BatchDeleteBuildsOutput:
+    type: object
+    properties:
+      buildsDeleted:
+        $ref: '#/definitions/BuildIds'
+        description: The IDs of the builds that were successfully deleted.
+      buildsNotDeleted:
+        $ref: '#/definitions/BuildsNotDeleted'
+        description: Information about any builds that could not be successfully deleted.
+  BatchGetBuildsInput:
+    type: object
+    required:
+      - ids
+    example:
+      ids:
+        - 'codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX'
+        - 'codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX'
+    properties:
+      ids:
+        $ref: '#/definitions/BuildIds'
         description: The IDs of the builds.
   BatchGetBuildsOutput:
     type: object
+    example:
+      builds:
+        - arn: 'arn:aws:codebuild:us-east-1:123456789012:build/codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX'
+          artifacts:
+            location: 'arn:aws:s3:::codebuild-123456789012-output-bucket/codebuild-demo-project'
+          buildComplete: true
+          buildStatus: SUCCEEDED
+          currentPhase: COMPLETED
+          endTime: 1479832474.764
+          environment:
+            type: LINUX_CONTAINER
+            computeType: BUILD_GENERAL1_SMALL
+            environmentVariables: []
+            image: 'aws/codebuild/java:openjdk-8'
+            privilegedMode: false
+          id: 'codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX'
+          initiator: MyDemoUser
+          logs:
+            deepLink: 'https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEvent:group=/aws/codebuild/codebuild-demo-project;stream=9b0ac37f-d19e-4254-9079-f47e9a389eEX'
+            groupName: /aws/codebuild/codebuild-demo-project
+            streamName: 9b0ac37f-d19e-4254-9079-f47e9a389eEX
+          phases:
+            - durationInSeconds: 0
+              endTime: 1479832342.23
+              phaseStatus: SUCCEEDED
+              phaseType: SUBMITTED
+              startTime: 1479832341.854
+            - contexts: []
+              durationInSeconds: 72
+              endTime: 1479832415.064
+              phaseStatus: SUCCEEDED
+              phaseType: PROVISIONING
+              startTime: 1479832342.23
+            - contexts: []
+              durationInSeconds: 46
+              endTime: 1479832461.261
+              phaseStatus: SUCCEEDED
+              phaseType: DOWNLOAD_SOURCE
+              startTime: 1479832415.064
+            - contexts: []
+              durationInSeconds: 0
+              endTime: 1479832461.354
+              phaseStatus: SUCCEEDED
+              phaseType: INSTALL
+              startTime: 1479832461.261
+            - contexts: []
+              durationInSeconds: 0
+              endTime: 1479832461.448
+              phaseStatus: SUCCEEDED
+              phaseType: PRE_BUILD
+              startTime: 1479832461.354
+            - contexts: []
+              durationInSeconds: 9
+              endTime: 1479832471.115
+              phaseStatus: SUCCEEDED
+              phaseType: BUILD
+              startTime: 1479832461.448
+            - contexts: []
+              durationInSeconds: 0
+              endTime: 1479832471.224
+              phaseStatus: SUCCEEDED
+              phaseType: POST_BUILD
+              startTime: 1479832471.115
+            - contexts: []
+              durationInSeconds: 0
+              endTime: 1479832471.791
+              phaseStatus: SUCCEEDED
+              phaseType: UPLOAD_ARTIFACTS
+              startTime: 1479832471.224
+            - contexts: []
+              durationInSeconds: 2
+              endTime: 1479832474.764
+              phaseStatus: SUCCEEDED
+              phaseType: FINALIZING
+              startTime: 1479832471.791
+            - phaseType: COMPLETED
+              startTime: 1479832474.764
+          projectName: codebuild-demo-project
+          source:
+            type: S3
+            buildspec: ''
+            location: 'arn:aws:s3:::codebuild-123456789012-input-bucket/MessageUtil.zip'
+          startTime: 1479832341.854
+          timeoutInMinutes: 60
+        - arn: 'arn:aws:codebuild:us-east-1:123456789012:build/codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX'
+          artifacts:
+            location: 'arn:aws:s3:::codebuild-123456789012-output-bucket/codebuild-demo-project'
+          buildComplete: true
+          buildStatus: SUCCEEDED
+          currentPhase: COMPLETED
+          endTime: 1479401214.239
+          environment:
+            type: LINUX_CONTAINER
+            computeType: BUILD_GENERAL1_SMALL
+            environmentVariables: []
+            image: 'aws/codebuild/java:openjdk-8'
+            privilegedMode: false
+          id: 'codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX'
+          initiator: MyDemoUser
+          logs:
+            deepLink: 'https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEvent:group=/aws/codebuild/codebuild-demo-project;stream=b79a46f7-1473-4636-a23f-da9c45c208EX'
+            groupName: /aws/codebuild/codebuild-demo-project
+            streamName: b79a46f7-1473-4636-a23f-da9c45c208EX
+          phases:
+            - durationInSeconds: 0
+              endTime: 1479401082.342
+              phaseStatus: SUCCEEDED
+              phaseType: SUBMITTED
+              startTime: 1479401081.869
+            - contexts: []
+              durationInSeconds: 71
+              endTime: 1479401154.129
+              phaseStatus: SUCCEEDED
+              phaseType: PROVISIONING
+              startTime: 1479401082.342
+            - contexts: []
+              durationInSeconds: 45
+              endTime: 1479401199.136
+              phaseStatus: SUCCEEDED
+              phaseType: DOWNLOAD_SOURCE
+              startTime: 1479401154.129
+            - contexts: []
+              durationInSeconds: 0
+              endTime: 1479401199.236
+              phaseStatus: SUCCEEDED
+              phaseType: INSTALL
+              startTime: 1479401199.136
+            - contexts: []
+              durationInSeconds: 0
+              endTime: 1479401199.345
+              phaseStatus: SUCCEEDED
+              phaseType: PRE_BUILD
+              startTime: 1479401199.236
+            - contexts: []
+              durationInSeconds: 9
+              endTime: 1479401208.68
+              phaseStatus: SUCCEEDED
+              phaseType: BUILD
+              startTime: 1479401199.345
+            - contexts: []
+              durationInSeconds: 0
+              endTime: 1479401208.783
+              phaseStatus: SUCCEEDED
+              phaseType: POST_BUILD
+              startTime: 1479401208.68
+            - contexts: []
+              durationInSeconds: 0
+              endTime: 1479401209.463
+              phaseStatus: SUCCEEDED
+              phaseType: UPLOAD_ARTIFACTS
+              startTime: 1479401208.783
+            - contexts: []
+              durationInSeconds: 4
+              endTime: 1479401214.239
+              phaseStatus: SUCCEEDED
+              phaseType: FINALIZING
+              startTime: 1479401209.463
+            - phaseType: COMPLETED
+              startTime: 1479401214.239
+          projectName: codebuild-demo-project
+          source:
+            type: S3
+            location: 'arn:aws:s3:::codebuild-123456789012-input-bucket/MessageUtil.zip'
+          startTime: 1479401081.869
+          timeoutInMinutes: 60
     properties:
       builds:
         $ref: '#/definitions/Builds'
@@ -533,6 +861,9 @@ definitions:
       artifacts:
         $ref: '#/definitions/BuildArtifacts'
         description: Information about the output artifacts for the build.
+      cache:
+        $ref: '#/definitions/ProjectCache'
+        description: Information about the cache for the build.
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information about the build environment for this build.
@@ -548,6 +879,12 @@ definitions:
       initiator:
         $ref: '#/definitions/String'
         description: '<p>The entity that started the build. Valid values include:</p> <ul> <li> <p>If AWS CodePipeline started the build, the pipeline''s name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an AWS Identity and Access Management (IAM) user started the build, the user''s name (for example <code>MyUserName</code>).</p> </li> <li> <p>If the Jenkins plugin for AWS CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>'
+      vpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+      networkInterface:
+        $ref: '#/definitions/NetworkInterface'
+        description: Describes a network interface.
     description: Information about a build.
   BuildArtifacts:
     type: object
@@ -568,6 +905,16 @@ definitions:
       $ref: '#/definitions/NonEmptyString'
     minItems: 1
     maxItems: 100
+  BuildNotDeleted:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the build that could not be successfully deleted.
+      statusCode:
+        $ref: '#/definitions/String'
+        description: Additional information about the build that could not be successfully deleted.
+    description: Information about a build that could not be successfully deleted.
   BuildPhase:
     type: object
     properties:
@@ -611,6 +958,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Build'
+  BuildsNotDeleted:
+    type: array
+    items:
+      $ref: '#/definitions/BuildNotDeleted'
+  CacheType:
+    type: string
+    enum:
+      - NO_CACHE
+      - S3
   ComputeType:
     type: string
     enum:
@@ -637,6 +993,9 @@ definitions:
       artifacts:
         $ref: '#/definitions/ProjectArtifacts'
         description: Information about the build output artifacts for the build project.
+      cache:
+        $ref: '#/definitions/ProjectCache'
+        description: Stores recently used information so that it can be quickly accessed at a later time.
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information about the build environment for the build project.
@@ -652,12 +1011,32 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: <p>A set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
+      vpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+      badgeEnabled:
+        $ref: '#/definitions/WrapperBoolean'
+        description: Set this to true to generate a publicly-accessible URL for your project's build badge.
   CreateProjectOutput:
     type: object
     properties:
       project:
         $ref: '#/definitions/Project'
         description: Information about the build project that was created.
+  CreateWebhookInput:
+    type: object
+    required:
+      - projectName
+    properties:
+      projectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the build project.
+  CreateWebhookOutput:
+    type: object
+    properties:
+      webhook:
+        $ref: '#/definitions/Webhook'
+        description: Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.
   DeleteProjectInput:
     type: object
     required:
@@ -669,6 +1048,17 @@ definitions:
   DeleteProjectOutput:
     type: object
     properties: {}
+  DeleteWebhookInput:
+    type: object
+    required:
+      - projectName
+    properties:
+      projectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the build project.
+  DeleteWebhookOutput:
+    type: object
+    properties: {}
   EnvironmentImage:
     type: object
     properties:
@@ -678,6 +1068,9 @@ definitions:
       description:
         $ref: '#/definitions/String'
         description: The description of the Docker image.
+      versions:
+        $ref: '#/definitions/ImageVersions'
+        description: A list of environment image versions.
     description: Information about a Docker image that is managed by AWS CodeBuild.
   EnvironmentImages:
     type: array
@@ -727,15 +1120,41 @@ definitions:
       value:
         $ref: '#/definitions/String'
         description: '<p>The value of the environment variable.</p> <important> <p>We strongly discourage using environment variables to store sensitive values, especially AWS secret key IDs and secret access keys. Environment variables can be displayed in plain text using tools such as the AWS CodeBuild console and the AWS Command Line Interface (AWS CLI).</p> </important>'
+      type:
+        $ref: '#/definitions/EnvironmentVariableType'
+        description: '<p>The type of environment variable. Valid values include:</p> <ul> <li> <p> <code>PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.</p> </li> <li> <p> <code>PLAINTEXT</code>: An environment variable in plaintext format.</p> </li> </ul>'
     description: Information about an environment variable for a build project or a build.
+  EnvironmentVariableType:
+    type: string
+    enum:
+      - PLAINTEXT
+      - PARAMETER_STORE
   EnvironmentVariables:
     type: array
     items:
       $ref: '#/definitions/EnvironmentVariable'
+  GitCloneDepth:
+    type: integer
+    minimum: 0
+  ImageVersions:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   InvalidInputException:
     type: object
     properties: {}
     description: The input value that was provided is not valid.
+  InvalidateProjectCacheInput:
+    type: object
+    required:
+      - projectName
+    properties:
+      projectName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the build project that the cache will be reset for.
+  InvalidateProjectCacheOutput:
+    type: object
+    properties: {}
   KeyInput:
     type: string
     pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
@@ -837,9 +1256,23 @@ definitions:
         $ref: '#/definitions/String'
         description: The URL to an individual build log in Amazon CloudWatch Logs.
     description: Information about build logs in Amazon CloudWatch Logs.
+  NetworkInterface:
+    type: object
+    properties:
+      subnetId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the subnet.
+      networkInterfaceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the network interface.
+    description: Describes a network interface.
   NonEmptyString:
     type: string
     minLength: 1
+  OAuthProviderException:
+    type: object
+    properties: {}
+    description: There was a problem with the underlying OAuth provider.
   PhaseContext:
     type: object
     properties:
@@ -878,6 +1311,9 @@ definitions:
       artifacts:
         $ref: '#/definitions/ProjectArtifacts'
         description: Information about the build output artifacts for the build project.
+      cache:
+        $ref: '#/definitions/ProjectCache'
+        description: Information about the cache for the build project.
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information about the build environment for this build project.
@@ -899,6 +1335,15 @@ definitions:
       lastModified:
         $ref: '#/definitions/Timestamp'
         description: 'When the build project''s settings were last modified, expressed in Unix time format.'
+      webhook:
+        $ref: '#/definitions/Webhook'
+        description: Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.
+      vpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: Information about the VPC configuration that AWS CodeBuild will access.
+      badge:
+        $ref: '#/definitions/ProjectBadge'
+        description: Information about the build badge for the build project.
     description: Information about a build project.
   ProjectArtifacts:
     type: object
@@ -924,6 +1369,28 @@ definitions:
         $ref: '#/definitions/ArtifactPackaging'
         description: '<p>The type of build output artifact to create, as follows:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, then this value will be ignored if specified, because no build output will be produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild will create in the output bucket a folder containing the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild will create in the output bucket a ZIP file containing the build output.</p> </li> </ul> </li> </ul>'
     description: Information about the build output artifacts for the build project.
+  ProjectBadge:
+    type: object
+    properties:
+      badgeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Set this to true to generate a publicly-accessible URL for your project's build badge.
+      badgeRequestUrl:
+        $ref: '#/definitions/String'
+        description: 'The publicly-accessible URL through which you can access the build badge for your project. '
+    description: Information about the build badge for the build project.
+  ProjectCache:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        $ref: '#/definitions/CacheType'
+        description: '<p>The type of cache used by the build project. Valid values include:</p> <ul> <li> <p> <code>NO_CACHE</code>: The build project will not use any cache.</p> </li> <li> <p> <code>S3</code>: The build project will read and write from/to S3.</p> </li> </ul>'
+      location:
+        $ref: '#/definitions/String'
+        description: '<p>Information about the cache location, as follows: </p> <ul> <li> <p> <code>NO_CACHE</code>: This value will be ignored.</p> </li> <li> <p> <code>S3</code>: This is the S3 bucket name/prefix.</p> </li> </ul>'
+    description: Information about the cache for the build project.
   ProjectDescription:
     type: string
     minLength: 0
@@ -949,7 +1416,10 @@ definitions:
         description: A set of environment variables to make available to builds for this build project.
       privilegedMode:
         $ref: '#/definitions/WrapperBoolean'
-        description: '<p>If set to true, enables running the Docker daemon inside a Docker container; otherwise, false or not specified (the default). This value must be set to true only if this build project will be used to build Docker images, and the specified build environment image is not one provided by AWS CodeBuild with Docker support. Otherwise, all associated builds that attempt to interact with the Docker daemon will fail. Note that you must also start the Docker daemon so that your builds can interact with it as needed. One way to do this is to initialize the Docker daemon in the install phase of your build spec by running the following build commands. (Do not run the following build commands if the specified build environment image is provided by AWS CodeBuild with Docker support.)</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=vfs&amp; - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done"</code> </p>'
+        description: '<p>If set to true, enables running the Docker daemon inside a Docker container; otherwise, false or not specified (the default). This value must be set to true only if this build project will be used to build Docker images, and the specified build environment image is not one provided by AWS CodeBuild with Docker support. Otherwise, all associated builds that attempt to interact with the Docker daemon will fail. Note that you must also start the Docker daemon so that your builds can interact with it as needed. One way to do this is to initialize the Docker daemon in the install phase of your build spec by running the following build commands. (Do not run the following build commands if the specified build environment image is provided by AWS CodeBuild with Docker support.)</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp; - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done"</code> </p>'
+      certificate:
+        $ref: '#/definitions/String'
+        description: The certificate to use with this build project.
     description: Information about the build environment of the build project.
   ProjectName:
     type: string
@@ -975,16 +1445,22 @@ definitions:
     properties:
       type:
         $ref: '#/definitions/SourceType'
-        description: '<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub repository.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.</p> </li> </ul>'
+        description: '<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub repository.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.</p> </li> </ul>'
       location:
         $ref: '#/definitions/String'
-        description: '<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, <code>location</code> should not be specified. If it is specified, AWS CodePipeline will ignore it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec (for example, <code>https://git-codecommit.<i>region-ID</i>.amazonaws.com/v1/repos/<i>repo-name</i> </code>).</p> </li> <li> <p>For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, the path to the ZIP file that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>object-name</i>.zip</code>)</p> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec. Also, you must connect your AWS account to your GitHub account. To do this, use the AWS CodeBuild console to begin creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page that displays, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow AWS CodeBuild to have access to. Then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project, and you may then leave the AWS CodeBuild console.) To instruct AWS CodeBuild to then use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul>'
+        description: '<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, <code>location</code> should not be specified. If it is specified, AWS CodePipeline will ignore it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec (for example, <code>https://git-codecommit.<i>region-ID</i>.amazonaws.com/v1/repos/<i>repo-name</i> </code>).</p> </li> <li> <p>For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, the path to the ZIP file that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>object-name</i>.zip</code>)</p> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec. Also, you must connect your AWS account to your GitHub account. To do this, use the AWS CodeBuild console to begin creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page that displays, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow AWS CodeBuild to have access to. Then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project, and you may then leave the AWS CodeBuild console.) To instruct AWS CodeBuild to then use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec. Also, you must connect your AWS account to your Bitbucket account. To do this, use the AWS CodeBuild console to begin creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page that displays, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project, and you may then leave the AWS CodeBuild console.) To instruct AWS CodeBuild to then use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul>'
+      gitCloneDepth:
+        $ref: '#/definitions/GitCloneDepth'
+        description: Information about the git clone depth for the build project.
       buildspec:
         $ref: '#/definitions/String'
         description: '<p>The build spec declaration to use for the builds in this build project.</p> <p>If this value is not specified, a build spec must be included along with the source code to be built.</p>'
       auth:
         $ref: '#/definitions/SourceAuth'
-        description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly (unless the build project's source <code>type</code> value is <code>GITHUB</code>).</p>
+        description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly (unless the build project's source <code>type</code> value is <code>BITBUCKET</code> or <code>GITHUB</code>).</p>
+      insecureSsl:
+        $ref: '#/definitions/WrapperBoolean'
+        description: Enable this flag to ignore SSL warnings while connecting to the project source code.
     description: Information about the build input source code for the build project.
   Projects:
     type: array
@@ -998,6 +1474,11 @@ definitions:
     type: object
     properties: {}
     description: The specified AWS resource cannot be found.
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+    maxItems: 5
   SortOrderType:
     type: string
     enum:
@@ -1014,7 +1495,7 @@ definitions:
       resource:
         $ref: '#/definitions/String'
         description: The resource value that applies to the specified authorization type.
-    description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly (unless the build project's source <code>type</code> value is <code>GITHUB</code>).</p>
+    description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly (unless the build project's source <code>type</code> value is <code>BITBUCKET</code> or <code>GITHUB</code>).</p>
   SourceAuthType:
     type: string
     enum:
@@ -1027,6 +1508,7 @@ definitions:
       - GITHUB
       - S3
       - BITBUCKET
+      - GITHUB_ENTERPRISE
   StartBuildInput:
     type: object
     required:
@@ -1037,13 +1519,16 @@ definitions:
         description: The name of the build project to start running a build.
       sourceVersion:
         $ref: '#/definitions/String'
-        description: '<p>A version of the build input to be built, for this build only. If not specified, the latest version will be used. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit or GitHub: the commit ID to use.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object representing the build input ZIP file to use.</p> </li> </ul>'
+        description: '<p>A version of the build input to be built, for this build only. If not specified, the latest version will be used. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID will be used. If not specified, the default branch''s HEAD commit ID will be used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID will be used. If not specified, the default branch''s HEAD commit ID will be used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object representing the build input ZIP file to use.</p> </li> </ul>'
       artifactsOverride:
         $ref: '#/definitions/ProjectArtifacts'
         description: 'Build output artifact settings that override, for this build only, the latest ones already defined in the build project.'
       environmentVariablesOverride:
         $ref: '#/definitions/EnvironmentVariables'
         description: 'A set of environment variables that overrides, for this build only, the latest ones already defined in the build project.'
+      gitCloneDepthOverride:
+        $ref: '#/definitions/GitCloneDepth'
+        description: 'The user-defined depth of history, with a minimum value of 0, that overrides, for this build only, any previous depth of history defined in the build project.'
       buildspecOverride:
         $ref: '#/definitions/String'
         description: 'A build spec declaration that overrides, for this build only, the latest one already defined in the build project.'
@@ -1081,6 +1566,11 @@ definitions:
         description: Information about the build.
   String:
     type: string
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+    maxItems: 16
   Tag:
     type: object
     properties:
@@ -1121,6 +1611,9 @@ definitions:
       artifacts:
         $ref: '#/definitions/ProjectArtifacts'
         description: Information to be changed about the build output artifacts for the build project.
+      cache:
+        $ref: '#/definitions/ProjectCache'
+        description: Stores recently used information so that it can be quickly accessed at a later time.
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information to be changed about the build environment for the build project.
@@ -1136,6 +1629,12 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: <p>The replacement set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
+      vpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+      badgeEnabled:
+        $ref: '#/definitions/WrapperBoolean'
+        description: Set this to true to generate a publicly-accessible URL for your project's build badge.
   UpdateProjectOutput:
     type: object
     properties:
@@ -1147,6 +1646,32 @@ definitions:
     pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
     minLength: 1
     maxLength: 255
+  VpcConfig:
+    type: object
+    properties:
+      vpcId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the Amazon VPC.
+      subnets:
+        $ref: '#/definitions/Subnets'
+        description: A list of one or more subnet IDs in your Amazon VPC.
+      securityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: A list of one or more security groups IDs in your Amazon VPC.
+    description: Information about the VPC configuration that AWS CodeBuild will access.
+  Webhook:
+    type: object
+    properties:
+      url:
+        $ref: '#/definitions/NonEmptyString'
+        description: The URL to the webhook.
+      payloadUrl:
+        $ref: '#/definitions/NonEmptyString'
+        description: This is the server endpoint that will receive the webhook payload.
+      secret:
+        $ref: '#/definitions/NonEmptyString'
+        description: Use this secret while creating a webhook in GitHub for Enterprise. The secret allows webhook requests sent by GitHub for Enterprise to be authenticated by AWS CodeBuild.
+    description: Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.
   WrapperBoolean:
     type: boolean
   WrapperInt:

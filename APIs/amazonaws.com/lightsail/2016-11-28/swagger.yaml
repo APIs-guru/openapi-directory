@@ -5,13 +5,14 @@ info:
   title: Amazon Lightsail
   description: '<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href="https://lightsail.aws.amazon.com/ls/docs/all">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: lightsail.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -150,6 +152,165 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AttachDisk':
+    post:
+      operationId: AttachDisk
+      description: Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AttachInstancesToLoadBalancer':
+    post:
+      operationId: AttachInstancesToLoadBalancer
+      description: Attaches one or more Lightsail instances to a load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachInstancesToLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachInstancesToLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AttachLoadBalancerTlsCertificate':
+    post:
+      operationId: AttachLoadBalancerTlsCertificate
+      description: '<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachLoadBalancerTlsCertificateResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachLoadBalancerTlsCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AttachStaticIp':
     post:
       operationId: AttachStaticIp
@@ -246,6 +407,165 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CloseInstancePublicPortsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDisk':
+    post:
+      operationId: CreateDisk
+      description: 'Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDiskFromSnapshot':
+    post:
+      operationId: CreateDiskFromSnapshot
+      description: 'Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDiskFromSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDiskFromSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDiskSnapshot':
+    post:
+      operationId: CreateDiskSnapshot
+      description: '<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDiskSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDiskSnapshotRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -574,6 +894,218 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateLoadBalancer':
+    post:
+      operationId: CreateLoadBalancer
+      description: '<p>Creates a Lightsail load balancer.</p> <p>When you create a load balancer, you can specify certificates and port settings. You can create up to 5 load balancers per AWS Region in your account.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateLoadBalancerTlsCertificate':
+    post:
+      operationId: CreateLoadBalancerTlsCertificate
+      description: '<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerTlsCertificateResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerTlsCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDisk':
+    post:
+      operationId: DeleteDisk
+      description: <p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDiskSnapshot':
+    post:
+      operationId: DeleteDiskSnapshot
+      description: '<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDiskSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDiskSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteDomain':
     post:
       operationId: DeleteDomain
@@ -839,6 +1371,218 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLoadBalancer':
+    post:
+      operationId: DeleteLoadBalancer
+      description: Deletes a Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLoadBalancerTlsCertificate':
+    post:
+      operationId: DeleteLoadBalancerTlsCertificate
+      description: Deletes a TLS/SSL certificate associated with a Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerTlsCertificateResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerTlsCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DetachDisk':
+    post:
+      operationId: DetachDisk
+      description: Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetachDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DetachInstancesFromLoadBalancer':
+    post:
+      operationId: DetachInstancesFromLoadBalancer
+      description: Detaches the specified instances from a Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachInstancesFromLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetachInstancesFromLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DetachStaticIp':
     post:
       operationId: DetachStaticIp
@@ -1094,6 +1838,218 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBundlesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDisk':
+    post:
+      operationId: GetDisk
+      description: Returns information about a specific block storage disk.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDiskSnapshot':
+    post:
+      operationId: GetDiskSnapshot
+      description: Returns information about a specific block storage disk snapshot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDiskSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDiskSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDiskSnapshots':
+    post:
+      operationId: GetDiskSnapshots
+      description: '<p>Returns information about all block storage disk snapshots in your AWS account and region.</p> <p>If you are describing a long list of disk snapshots, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDiskSnapshotsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDiskSnapshotsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDisks':
+    post:
+      operationId: GetDisks
+      description: '<p>Returns information about all block storage disks in your AWS account and region.</p> <p>If you are describing a long list of disks, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDisksResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDisksRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1730,6 +2686,218 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetKeyPairsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLoadBalancer':
+    post:
+      operationId: GetLoadBalancer
+      description: Returns information about the specified Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLoadBalancerMetricData':
+    post:
+      operationId: GetLoadBalancerMetricData
+      description: Returns information about health metrics for your Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoadBalancerMetricDataResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoadBalancerMetricDataRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLoadBalancerTlsCertificates':
+    post:
+      operationId: GetLoadBalancerTlsCertificates
+      description: '<p>Returns information about the TLS certificates that are associated with the specified Lightsail load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoadBalancerTlsCertificatesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoadBalancerTlsCertificatesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLoadBalancers':
+    post:
+      operationId: GetLoadBalancers
+      description: '<p>Returns information about all load balancers in an account.</p> <p>If you are describing a long list of load balancers, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoadBalancersResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoadBalancersRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2641,6 +3809,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateLoadBalancerAttribute':
+    post:
+      operationId: UpdateLoadBalancerAttribute
+      description: Updates the specified attribute for a load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateLoadBalancerAttributeResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateLoadBalancerAttributeRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AccessDeniedException:
     type: object
@@ -2685,6 +3906,64 @@ definitions:
       operations:
         $ref: '#/definitions/OperationList'
         description: An array of key-value pairs containing information about the static IP address you allocated.
+  AttachDiskRequest:
+    type: object
+    required:
+      - diskName
+      - instanceName
+      - diskPath
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique Lightsail disk name (e.g., <code>my-disk</code>).'
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the Lightsail instance where you want to utilize the storage disk.
+      diskPath:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The disk path to expose to the instance (e.g., <code>/dev/xvdf</code>).'
+  AttachDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  AttachInstancesToLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - instanceNames
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer.
+      instanceNames:
+        $ref: '#/definitions/ResourceNameList'
+        description: An array of strings representing the instance name(s) you want to attach to your load balancer.
+  AttachInstancesToLoadBalancerResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object representing the API operations.
+  AttachLoadBalancerTlsCertificateRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - certificateName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer to which you want to associate the TLS/SSL certificate.
+      certificateName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your TLS/SSL certificate.
+  AttachLoadBalancerTlsCertificateResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object representing the API operations.
   AttachStaticIpRequest:
     type: object
     required:
@@ -2703,12 +3982,21 @@ definitions:
       operations:
         $ref: '#/definitions/OperationList'
         description: An array of key-value pairs containing information about your API operations.
+  AttachedDiskMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ResourceName'
+        value:
+          $ref: '#/definitions/DiskMapList'
   AvailabilityZone:
     type: object
     properties:
       zoneName:
         $ref: '#/definitions/NonEmptyString'
-        description: The name of the Availability Zone. The format is <code>us-east-1a</code> (case-sensitive).
+        description: The name of the Availability Zone. The format is <code>us-east-2a</code> (case-sensitive).
       state:
         $ref: '#/definitions/NonEmptyString'
         description: The state of the Availability Zone.
@@ -2742,7 +4030,7 @@ definitions:
         description: 'A Boolean value indicating whether the blueprint is active. When you update your blueprints, you will inactivate old blueprints and keep the most recent versions active.'
       minPower:
         $ref: '#/definitions/integer'
-        description: The minimum machine size required to run this blueprint. <code>0</code> indicates that the blueprint runs on all instances.
+        description: 'The minimum bundle power required to run this blueprint. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500. <code>0</code> indicates that the blueprint runs on all instance sizes. '
       version:
         $ref: '#/definitions/string'
         description: 'The version number of the operating system, application, or stack (e.g., <code>2016.03.0</code>).'
@@ -2755,6 +4043,9 @@ definitions:
       licenseUrl:
         $ref: '#/definitions/string'
         description: The end-user license agreement URL for the image or blueprint.
+      platform:
+        $ref: '#/definitions/InstancePlatform'
+        description: The operating system platform (either Linux/Unix-based or Windows Server-based) of the blueprint.
     description: Describes a blueprint (a virtual private server image).
   BlueprintList:
     type: array
@@ -2791,13 +4082,16 @@ definitions:
         description: 'A friendly name for the bundle (e.g., <code>Micro</code>).'
       power:
         $ref: '#/definitions/integer'
-        description: 'The power of the bundle (e.g., <code>500</code>).'
+        description: 'A numeric value that represents the power of the bundle (e.g., <code>500</code>). You can use the bundle''s power value in conjunction with a blueprint''s minimum power value to determine whether the blueprint will run on the bundle. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500.'
       ramSizeInGb:
         $ref: '#/definitions/float'
         description: 'The amount of RAM in GB (e.g., <code>2.0</code>).'
       transferPerMonthInGb:
         $ref: '#/definitions/integer'
         description: 'The data transfer rate per month in GB (e.g., <code>2000</code>).'
+      supportedPlatforms:
+        $ref: '#/definitions/InstancePlatformList'
+        description: The operating system platform (Linux/Unix-based or Windows Server-based) that the bundle supports. You can only launch a <code>WINDOWS</code> bundle on a blueprint that supports the <code>WINDOWS</code> platform. <code>LINUX_UNIX</code> blueprints require a <code>LINUX_UNIX</code> bundle.
     description: 'Describes a bundle, which is a set of specs describing your virtual private server (or <i>instance</i>).'
   BundleList:
     type: array
@@ -2821,6 +4115,72 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: An array of key-value pairs that contains information about the operation.
+  CreateDiskFromSnapshotRequest:
+    type: object
+    required:
+      - diskName
+      - diskSnapshotName
+      - availabilityZone
+      - sizeInGb
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique Lightsail disk name (e.g., <code>my-disk</code>).'
+      diskSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk snapshot (e.g., <code>my-snapshot</code>) from which to create the new storage disk.'
+      availabilityZone:
+        $ref: '#/definitions/NonEmptyString'
+        description: '<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Choose the same Availability Zone as the Lightsail instance where you want to create the disk.</p> <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.</p>'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the disk in GB (e.g., <code>32</code>).'
+  CreateDiskFromSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  CreateDiskRequest:
+    type: object
+    required:
+      - diskName
+      - availabilityZone
+      - sizeInGb
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique Lightsail disk name (e.g., <code>my-disk</code>).'
+      availabilityZone:
+        $ref: '#/definitions/NonEmptyString'
+        description: '<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Choose the same Availability Zone as the Lightsail instance where you want to create the disk.</p> <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.</p>'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the disk in GB (e.g., <code>32</code>).'
+  CreateDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  CreateDiskSnapshotRequest:
+    type: object
+    required:
+      - diskName
+      - diskSnapshotName
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique name of the source disk (e.g., <code>my-source-disk</code>).'
+      diskSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the destination disk snapshot (e.g., <code>my-disk-snapshot</code>) based on the source disk.'
+  CreateDiskSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   CreateDomainEntryRequest:
     type: object
     required:
@@ -2882,9 +4242,12 @@ definitions:
       instanceNames:
         $ref: '#/definitions/StringList'
         description: The names for your new instances.
+      attachedDiskMapping:
+        $ref: '#/definitions/AttachedDiskMap'
+        description: An object containing information about one or more disk mappings.
       availabilityZone:
         $ref: '#/definitions/string'
-        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-1a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
+        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-2a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
       instanceSnapshotName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots.
@@ -2893,7 +4256,7 @@ definitions:
         description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
       userData:
         $ref: '#/definitions/string'
-        description: '<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps">Dev Guide</a>.</p> </note>'
+        description: '<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps">Dev Guide</a>.</p> </note>'
       keyPairName:
         $ref: '#/definitions/ResourceName'
         description: The name for your key pair.
@@ -2916,7 +4279,7 @@ definitions:
         description: 'The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: <code>["MyFirstInstance","MySecondInstance"]</code> '
       availabilityZone:
         $ref: '#/definitions/string'
-        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-1a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
+        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-2a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
       customImageName:
         $ref: '#/definitions/ResourceName'
         description: '<p>(Deprecated) The name for your custom image.</p> <note> <p>In releases prior to June 12, 2017, this parameter was ignored by the API. It is now deprecated.</p> </note>'
@@ -2928,7 +4291,7 @@ definitions:
         description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
       userData:
         $ref: '#/definitions/string'
-        description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps">Dev Guide</a>.</p> </note>'
+        description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image">Dev Guide</a>.</p> </note>'
       keyPairName:
         $ref: '#/definitions/ResourceName'
         description: The name of your key pair.
@@ -2961,6 +4324,89 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: An array of key-value pairs containing information about the results of your create key pair request.
+  CreateLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - instancePort
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your load balancer.
+      instancePort:
+        $ref: '#/definitions/Port'
+        description: The instance port where you're creating your load balancer.
+      healthCheckPath:
+        $ref: '#/definitions/string'
+        description: 'The path you provided to perform the load balancer health check. If you didn''t specify a health check path, Lightsail uses the root path of your website (e.g., <code>"/"</code>).'
+      certificateName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name of the TLS/SSL certificate.</p> <p>If you specify <code>certificateName</code>, then <code>certificateDomainName</code> is required (and vice-versa).</p>'
+      certificateDomainName:
+        $ref: '#/definitions/DomainName'
+        description: '<p>The domain name with which your certificate is associated (e.g., <code>example.com</code>).</p> <p>If you specify <code>certificateDomainName</code>, then <code>certificateName</code> is required (and vice-versa).</p>'
+      certificateAlternativeNames:
+        $ref: '#/definitions/DomainNameList'
+        description: 'The alternative domain names to use with your TLS/SSL certificate (e.g., <code>www.example.com</code>, <code>www.ejemplo.com</code>, <code>ejemplo.com</code>).'
+  CreateLoadBalancerResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object containing information about the API operations.
+  CreateLoadBalancerTlsCertificateRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - certificateName
+      - certificateDomainName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The load balancer name where you want to create the TLS/SSL certificate.
+      certificateName:
+        $ref: '#/definitions/ResourceName'
+        description: The TLS/SSL certificate name.
+      certificateDomainName:
+        $ref: '#/definitions/DomainName'
+        description: 'The domain name (e.g., <code>example.com</code>) for your TLS/SSL certificate.'
+      certificateAlternativeNames:
+        $ref: '#/definitions/DomainNameList'
+        description: An array of strings listing alternative domain names for your TLS/SSL certificate.
+  CreateLoadBalancerTlsCertificateResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object containing information about the API operations.
+  DeleteDiskRequest:
+    type: object
+    required:
+      - diskName
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique name of the disk you want to delete (e.g., <code>my-disk</code>).'
+  DeleteDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  DeleteDiskSnapshotRequest:
+    type: object
+    required:
+      - diskSnapshotName
+    properties:
+      diskSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk snapshot you want to delete (e.g., <code>my-disk-snapshot</code>).'
+  DeleteDiskSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   DeleteDomainEntryRequest:
     type: object
     required:
@@ -3035,6 +4481,73 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: An array of key-value pairs containing information about the results of your delete key pair request.
+  DeleteLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer you want to delete.
+  DeleteLoadBalancerResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  DeleteLoadBalancerTlsCertificateRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - certificateName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The load balancer name.
+      certificateName:
+        $ref: '#/definitions/ResourceName'
+        description: The TLS/SSL certificate name.
+      force:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, forces the deletion of a TLS/SSL certificate.'
+  DeleteLoadBalancerTlsCertificateResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  DetachDiskRequest:
+    type: object
+    required:
+      - diskName
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique name of the disk you want to detach from your instance (e.g., <code>my-disk</code>).'
+  DetachDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  DetachInstancesFromLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - instanceNames
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the Lightsail load balancer.
+      instanceNames:
+        $ref: '#/definitions/ResourceNameList'
+        description: An array of strings containing the names of the instances you want to detach from the load balancer.
+  DetachInstancesFromLoadBalancerResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   DetachStaticIpRequest:
     type: object
     required:
@@ -3054,7 +4567,7 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ResourceName'
-        description: The name of the disk.
+        description: The unique name of the disk.
       arn:
         $ref: '#/definitions/NonEmptyString'
         description: The Amazon Resource Name (ARN) of the disk.
@@ -3066,16 +4579,13 @@ definitions:
         description: The date when the disk was created.
       location:
         $ref: '#/definitions/ResourceLocation'
-        description: The region and Availability Zone where the disk is located.
+        description: The AWS Region and Availability Zone where the disk is located.
       resourceType:
         $ref: '#/definitions/ResourceType'
-        description: 'The resource type of the disk. '
+        description: 'The Lightsail resource type (e.g., <code>Disk</code>).'
       sizeInGb:
         $ref: '#/definitions/integer'
         description: The size of the disk in GB.
-      gbInUse:
-        $ref: '#/definitions/integer'
-        description: The number of GB in use by the disk.
       isSystemDisk:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether this disk is a system disk (has an operating system loaded on it).
@@ -3085,20 +4595,96 @@ definitions:
       path:
         $ref: '#/definitions/string'
         description: The disk path.
+      state:
+        $ref: '#/definitions/DiskState'
+        description: Describes the status of the disk.
       attachedTo:
-        $ref: '#/definitions/string'
+        $ref: '#/definitions/ResourceName'
         description: The resources to which the disk is attached.
       isAttached:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether the disk is attached.
       attachmentState:
         $ref: '#/definitions/string'
-        description: The attachment state of the disk.
-    description: Describes the hard disk (an SSD).
+        description: '<p>(Deprecated) The attachment state of the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter returned <code>attached</code> for system disks in the API response. It is now deprecated, but still included in the response. Use <code>isAttached</code> instead.</p> </note>'
+      gbInUse:
+        $ref: '#/definitions/integer'
+        description: '<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
+    description: Describes a system disk or an block storage disk.
   DiskList:
     type: array
     items:
       $ref: '#/definitions/Disk'
+  DiskMap:
+    type: object
+    properties:
+      originalDiskPath:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The original disk path exposed to the instance (for example, <code>/dev/sdh</code>).'
+      newDiskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The new disk name (e.g., <code>my-new-disk</code>).'
+    description: Describes a block storage disk mapping.
+  DiskMapList:
+    type: array
+    items:
+      $ref: '#/definitions/DiskMap'
+  DiskSnapshot:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the disk snapshot.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when the disk snapshot was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The AWS Region and Availability Zone where the disk snapshot was created.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The Lightsail resource type (e.g., <code>DiskSnapshot</code>).'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: The size of the disk in GB.
+      state:
+        $ref: '#/definitions/DiskSnapshotState'
+        description: The status of the disk snapshot operation.
+      progress:
+        $ref: '#/definitions/string'
+        description: The progress of the disk snapshot operation.
+      fromDiskName:
+        $ref: '#/definitions/ResourceName'
+        description: The unique name of the source disk from which you are creating the disk snapshot.
+      fromDiskArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the source disk from which you are creating the disk snapshot.
+    description: Describes a block storage disk snapshot.
+  DiskSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/DiskSnapshot'
+  DiskSnapshotState:
+    type: string
+    enum:
+      - pending
+      - completed
+      - error
+      - unknown
+  DiskState:
+    type: string
+    enum:
+      - pending
+      - error
+      - available
+      - in-use
+      - unknown
   Domain:
     type: object
     properties:
@@ -3136,12 +4722,15 @@ definitions:
       target:
         $ref: '#/definitions/string'
         description: 'The target AWS name server (e.g., <code>ns-111.awsdns-22.com.</code>).'
+      isAlias:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer.'
       type:
         $ref: '#/definitions/DomainEntryType'
         description: 'The type of domain entry (e.g., <code>SOA</code> or <code>NS</code>).'
       options:
         $ref: '#/definitions/DomainEntryOptions'
-        description: The options for the domain entry.
+        description: '<p>(Deprecated) The options for the domain entry.</p> <note> <p>In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
     description: Describes a domain recordset entry.
   DomainEntryList:
     type: array
@@ -3166,6 +4755,10 @@ definitions:
       $ref: '#/definitions/Domain'
   DomainName:
     type: string
+  DomainNameList:
+    type: array
+    items:
+      $ref: '#/definitions/DomainName'
   DownloadDefaultKeyPairRequest:
     type: object
     properties: {}
@@ -3229,6 +4822,64 @@ definitions:
       nextPageToken:
         $ref: '#/definitions/string'
         description: A token used for advancing to the next page of results from your get active names request.
+  GetDiskRequest:
+    type: object
+    required:
+      - diskName
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk (e.g., <code>my-disk</code>).'
+  GetDiskResult:
+    type: object
+    properties:
+      disk:
+        $ref: '#/definitions/Disk'
+        description: An object containing information about the disk.
+  GetDiskSnapshotRequest:
+    type: object
+    required:
+      - diskSnapshotName
+    properties:
+      diskSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).'
+  GetDiskSnapshotResult:
+    type: object
+    properties:
+      diskSnapshot:
+        $ref: '#/definitions/DiskSnapshot'
+        description: An object containing information about the disk snapshot.
+  GetDiskSnapshotsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetDiskSnapshots request.
+  GetDiskSnapshotsResult:
+    type: object
+    properties:
+      diskSnapshots:
+        $ref: '#/definitions/DiskSnapshotList'
+        description: An array of objects containing information about all block storage disk snapshots.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetDiskSnapshots request.
+  GetDisksRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetDisks request.
+  GetDisksResult:
+    type: object
+    properties:
+      disks:
+        $ref: '#/definitions/DiskList'
+        description: An array of objects containing information about all block storage disks.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetDisks request.
   GetDomainRequest:
     type: object
     required:
@@ -3312,7 +4963,7 @@ definitions:
     properties:
       metricName:
         $ref: '#/definitions/InstanceMetricName'
-        description: 'The metric name to return data for. '
+        description: The metric name to return data for.
       metricData:
         $ref: '#/definitions/MetricDatapointList'
         description: An array of key-value pairs containing information about the results of your get instance metric data request.
@@ -3431,6 +5082,90 @@ definitions:
       nextPageToken:
         $ref: '#/definitions/string'
         description: A token used for advancing to the next page of results from your get key pairs request.
+  GetLoadBalancerMetricDataRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - metricName
+      - period
+      - startTime
+      - endTime
+      - unit
+      - statistics
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer.
+      metricName:
+        $ref: '#/definitions/LoadBalancerMetricName'
+        description: '<p>The metric about which you want to return information. Valid values are listed below, along with the most useful <code>statistics</code> to include in your request.</p> <ul> <li> <p> <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number of TLS connections initiated by the client that did not establish a session with the load balancer. Possible causes include a mismatch of ciphers or protocols.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> </li> <li> <p> <b> <code>HealthyHostCount</code> </b> - The number of target instances that are considered healthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> </li> <li> <p> <b> <code>UnhealthyHostCount</code> </b> - The number of target instances that are considered unhealthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP 4XX client error codes that originate from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests have not been received by the target instance. This count does not include any response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP 5XX server error codes that originate from the load balancer. This count does not include any response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer. </p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> </li> <li> <p> <b> <code>RejectedConnectionCount</code> </b> - The number of connections that were rejected because the load balancer had reached its maximum number of connections.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> </li> <li> <p> <b> <code>RequestCount</code> </b> - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> </ul>'
+      period:
+        $ref: '#/definitions/MetricPeriod'
+        description: The time period duration for your health data request.
+      startTime:
+        $ref: '#/definitions/timestamp'
+        description: The start time of the period.
+      endTime:
+        $ref: '#/definitions/timestamp'
+        description: The end time of the period.
+      unit:
+        $ref: '#/definitions/MetricUnit'
+        description: The unit for the time period request. Valid values are listed below.
+      statistics:
+        $ref: '#/definitions/MetricStatisticList'
+        description: An array of statistics that you want to request metrics for. Valid values are listed below.
+  GetLoadBalancerMetricDataResult:
+    type: object
+    properties:
+      metricName:
+        $ref: '#/definitions/LoadBalancerMetricName'
+        description: The metric about which you are receiving information. Valid values are listed below.
+      metricData:
+        $ref: '#/definitions/MetricDatapointList'
+        description: An array of metric datapoint objects.
+  GetLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer.
+  GetLoadBalancerResult:
+    type: object
+    properties:
+      loadBalancer:
+        $ref: '#/definitions/LoadBalancer'
+        description: An object containing information about your load balancer.
+  GetLoadBalancerTlsCertificatesRequest:
+    type: object
+    required:
+      - loadBalancerName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer where you stored your TLS/SSL certificate.
+  GetLoadBalancerTlsCertificatesResult:
+    type: object
+    properties:
+      tlsCertificates:
+        $ref: '#/definitions/LoadBalancerTlsCertificateList'
+        description: An array of LoadBalancerTlsCertificate objects describing your TLS/SSL certificates.
+  GetLoadBalancersRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for paginating the results from your GetLoadBalancers request.
+  GetLoadBalancersResult:
+    type: object
+    properties:
+      loadBalancers:
+        $ref: '#/definitions/LoadBalancerList'
+        description: An array of LoadBalancer objects describing your load balancers.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetLoadBalancers request.
   GetOperationRequest:
     type: object
     required:
@@ -3488,7 +5223,7 @@ definitions:
     properties:
       includeAvailabilityZones:
         $ref: '#/definitions/boolean'
-        description: 'A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., <code>us-east-1a</code>.'
+        description: 'A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., <code>us-east-2a</code>.'
   GetRegionsResult:
     type: object
     properties:
@@ -3547,10 +5282,10 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ResourceName'
-        description: 'The name the user gave the instance (e.g., <code>Amazon_Linux-1GB-Virginia-1</code>).'
+        description: 'The name the user gave the instance (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).'
       arn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the instance (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the instance (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).'
       supportCode:
         $ref: '#/definitions/string'
         description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -3614,7 +5349,10 @@ definitions:
         description: The public IP address of the Amazon Lightsail instance.
       password:
         $ref: '#/definitions/string'
-        description: 'For RDP access, the temporary password of the Amazon EC2 instance.'
+        description: '<p>For RDP access, the password for your Amazon Lightsail instance. Password will be an empty string if the password for your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.</p> <note> <p>If you create an instance using any key pair other than the default (<code>LightsailDefaultKeyPair</code>), <code>password</code> will always be an empty string.</p> <p>If you change the Administrator password on the instance, Lightsail will continue to return the original password value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default.</p> </note>'
+      passwordData:
+        $ref: '#/definitions/PasswordData'
+        description: 'For a Windows Server-based instance, an object with the data you can use to retrieve your password. This is only needed if <code>password</code> is empty and the instance is not new (and therefore the password is not ready yet). When you create an instance, it can take up to 15 minutes for the instance to be ready.'
       privateKey:
         $ref: '#/definitions/string'
         description: 'For SSH access, the temporary private key. For OpenSSH clients (e.g., command line SSH), you should save this value to <code>tempkey</code>).'
@@ -3646,6 +5384,46 @@ definitions:
         $ref: '#/definitions/float'
         description: 'The amount of RAM in GB on the instance (e.g., <code>1.0</code>).'
     description: Describes the hardware for the instance.
+  InstanceHealthReason:
+    type: string
+    enum:
+      - Lb.RegistrationInProgress
+      - Lb.InitialHealthChecking
+      - Lb.InternalError
+      - Instance.ResponseCodeMismatch
+      - Instance.Timeout
+      - Instance.FailedHealthChecks
+      - Instance.NotRegistered
+      - Instance.NotInUse
+      - Instance.DeregistrationInProgress
+      - Instance.InvalidState
+      - Instance.IpUnusable
+  InstanceHealthState:
+    type: string
+    enum:
+      - initial
+      - healthy
+      - unhealthy
+      - unused
+      - draining
+      - unavailable
+  InstanceHealthSummary:
+    type: object
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the Lightsail instance for which you are requesting health check data.
+      instanceHealth:
+        $ref: '#/definitions/InstanceHealthState'
+        description: Describes the overall instance health. Valid values are below.
+      instanceHealthReason:
+        $ref: '#/definitions/InstanceHealthReason'
+        description: More information about the instance health. Valid values are below.
+    description: Describes information about the health of the instance.
+  InstanceHealthSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceHealthSummary'
   InstanceList:
     type: array
     items:
@@ -3669,6 +5447,15 @@ definitions:
         $ref: '#/definitions/InstancePortInfoList'
         description: An array of key-value pairs containing information about the ports on the instance.
     description: Describes monthly data transfer rates and port information for an instance.
+  InstancePlatform:
+    type: string
+    enum:
+      - LINUX_UNIX
+      - WINDOWS
+  InstancePlatformList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePlatform'
   InstancePortInfo:
     type: object
     properties:
@@ -3726,7 +5513,7 @@ definitions:
         description: The name of the snapshot.
       arn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the snapshot (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the snapshot (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).'
       supportCode:
         $ref: '#/definitions/string'
         description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -3745,12 +5532,15 @@ definitions:
       progress:
         $ref: '#/definitions/string'
         description: The progress of the snapshot.
+      fromAttachedDisks:
+        $ref: '#/definitions/DiskList'
+        description: An array of disk objects containing information about all block storage disks.
       fromInstanceName:
         $ref: '#/definitions/ResourceName'
         description: The instance from which the snapshot was created.
       fromInstanceArn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).'
       fromBlueprintId:
         $ref: '#/definitions/string'
         description: 'The blueprint ID from which you created the snapshot (e.g., <code>os_debian_8_3</code>). A blueprint is a virtual private server (or <i>instance</i>) image used to create instances quickly.'
@@ -3819,7 +5609,7 @@ definitions:
         description: The friendly name of the SSH key pair.
       arn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).'
       supportCode:
         $ref: '#/definitions/string'
         description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -3840,6 +5630,288 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/KeyPair'
+  LoadBalancer:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the load balancer (e.g., <code>my-load-balancer</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the load balancer.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about your Lightsail load balancer. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when your load balancer was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: 'The AWS Region and Availability Zone where your load balancer was created (e.g., <code>us-east-2a</code>).'
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type (e.g., <code>LoadBalancer</code>.'
+      dnsName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The DNS name of your Lightsail load balancer.
+      state:
+        $ref: '#/definitions/LoadBalancerState'
+        description: The status of your load balancer. Valid values are below.
+      protocol:
+        $ref: '#/definitions/LoadBalancerProtocol'
+        description: The protocol you have enabled for your load balancer. Valid values are below.
+      publicPorts:
+        $ref: '#/definitions/PortList'
+        description: An array of public port settings for your load balancer.
+      healthCheckPath:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The path you specified to perform your health checks. If no path is specified, the load balancer tries to make a request to the default (root) page.'
+      instancePort:
+        $ref: '#/definitions/integer'
+        description: The instance port where the load balancer is listening.
+      instanceHealthSummary:
+        $ref: '#/definitions/InstanceHealthSummaryList'
+        description: An array of InstanceHealthSummary objects describing the health of the load balancer.
+      tlsCertificateSummaries:
+        $ref: '#/definitions/LoadBalancerTlsCertificateSummaryList'
+        description: An array of LoadBalancerTlsCertificateSummary objects that provide additional information about the TLS/SSL certificates.
+      configurationOptions:
+        $ref: '#/definitions/LoadBalancerConfigurationOptions'
+        description: A string to string map of the configuration options for your load balancer. Valid values are listed below.
+    description: Describes the Lightsail load balancer.
+  LoadBalancerAttributeName:
+    type: string
+    enum:
+      - HealthCheckPath
+      - SessionStickinessEnabled
+      - SessionStickiness_LB_CookieDurationSeconds
+  LoadBalancerConfigurationOptions:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/LoadBalancerAttributeName'
+        value:
+          $ref: '#/definitions/string'
+  LoadBalancerList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancer'
+  LoadBalancerMetricName:
+    type: string
+    enum:
+      - ClientTLSNegotiationErrorCount
+      - HealthyHostCount
+      - UnhealthyHostCount
+      - HTTPCode_LB_4XX_Count
+      - HTTPCode_LB_5XX_Count
+      - HTTPCode_Instance_2XX_Count
+      - HTTPCode_Instance_3XX_Count
+      - HTTPCode_Instance_4XX_Count
+      - HTTPCode_Instance_5XX_Count
+      - InstanceResponseTime
+      - RejectedConnectionCount
+      - RequestCount
+  LoadBalancerProtocol:
+    type: string
+    enum:
+      - HTTP_HTTPS
+      - HTTP
+  LoadBalancerState:
+    type: string
+    enum:
+      - active
+      - provisioning
+      - active_impaired
+      - failed
+      - unknown
+  LoadBalancerTlsCertificate:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the TLS/SSL certificate (e.g., <code>my-certificate</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the TLS/SSL certificate.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about your Lightsail load balancer or TLS/SSL certificate. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The time when you created your TLS/SSL certificate.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The AWS Region and Availability Zone where you created your certificate.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type (e.g., <code>LoadBalancerTlsCertificate</code>.'
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The load balancer name where your TLS/SSL certificate is attached.
+      isAttached:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, the TLS/SSL certificate is attached to the Lightsail load balancer.'
+      status:
+        $ref: '#/definitions/LoadBalancerTlsCertificateStatus'
+        description: The status of the TLS/SSL certificate. Valid values are below.
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name for your TLS/SSL certificate.
+      domainValidationRecords:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationRecordList'
+        description: An array of LoadBalancerTlsCertificateDomainValidationRecord objects describing the records.
+      failureReason:
+        $ref: '#/definitions/LoadBalancerTlsCertificateFailureReason'
+        description: The reason for the TLS/SSL certificate validation failure.
+      issuedAt:
+        $ref: '#/definitions/IsoDate'
+        description: The time when the TLS/SSL certificate was issued.
+      issuer:
+        $ref: '#/definitions/NonEmptyString'
+        description: The issuer of the certificate.
+      keyAlgorithm:
+        $ref: '#/definitions/NonEmptyString'
+        description: The algorithm that was used to generate the key pair (the public and private key).
+      notAfter:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the TLS/SSL certificate expires.
+      notBefore:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the TLS/SSL certificate is first valid.
+      renewalSummary:
+        $ref: '#/definitions/LoadBalancerTlsCertificateRenewalSummary'
+        description: An object containing information about the status of Lightsail's managed renewal for the certificate.
+      revocationReason:
+        $ref: '#/definitions/LoadBalancerTlsCertificateRevocationReason'
+        description: The reason the certificate was revoked. Valid values are below.
+      revokedAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the TLS/SSL certificate was revoked.
+      serial:
+        $ref: '#/definitions/NonEmptyString'
+        description: The serial number of the certificate.
+      signatureAlgorithm:
+        $ref: '#/definitions/NonEmptyString'
+        description: The algorithm that was used to sign the certificate.
+      subject:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the entity that is associated with the public key contained in the certificate.
+      subjectAlternativeNames:
+        $ref: '#/definitions/StringList'
+        description: One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website.
+    description: '<p>Describes a load balancer TLS/SSL certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+  LoadBalancerTlsCertificateDomainStatus:
+    type: string
+    enum:
+      - PENDING_VALIDATION
+      - FAILED
+      - SUCCESS
+  LoadBalancerTlsCertificateDomainValidationOption:
+    type: object
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: A fully qualified domain name in the certificate request.
+      validationStatus:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainStatus'
+        description: The status of the domain validation. Valid values are listed below.
+    description: Contains information about the domain names on a TLS/SSL certificate that you will use to validate domain ownership.
+  LoadBalancerTlsCertificateDomainValidationOptionList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationOption'
+  LoadBalancerTlsCertificateDomainValidationRecord:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'A fully qualified domain name in the certificate. For example, <code>example.com</code>.'
+      type:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The type of validation record. For example, <code>CNAME</code> for domain validation.'
+      value:
+        $ref: '#/definitions/NonEmptyString'
+        description: The value for that type.
+      validationStatus:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainStatus'
+        description: The validation status. Valid values are listed below.
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name against which your TLS/SSL certificate was validated.
+    description: Describes the validation record of each domain name in the TLS/SSL certificate.
+  LoadBalancerTlsCertificateDomainValidationRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationRecord'
+  LoadBalancerTlsCertificateFailureReason:
+    type: string
+    enum:
+      - NO_AVAILABLE_CONTACTS
+      - ADDITIONAL_VERIFICATION_REQUIRED
+      - DOMAIN_NOT_ALLOWED
+      - INVALID_PUBLIC_DOMAIN
+      - OTHER
+  LoadBalancerTlsCertificateList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificate'
+  LoadBalancerTlsCertificateRenewalStatus:
+    type: string
+    enum:
+      - PENDING_AUTO_RENEWAL
+      - PENDING_VALIDATION
+      - SUCCESS
+      - FAILED
+  LoadBalancerTlsCertificateRenewalSummary:
+    type: object
+    properties:
+      renewalStatus:
+        $ref: '#/definitions/LoadBalancerTlsCertificateRenewalStatus'
+        description: The status of Lightsail's managed renewal of the certificate. Valid values are listed below.
+      domainValidationOptions:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationOptionList'
+        description: 'Contains information about the validation of each domain name in the certificate, as it pertains to Lightsail''s managed renewal. This is different from the initial validation that occurs as a result of the RequestCertificate request.'
+    description: Contains information about the status of Lightsail's managed renewal for the certificate.
+  LoadBalancerTlsCertificateRevocationReason:
+    type: string
+    enum:
+      - UNSPECIFIED
+      - KEY_COMPROMISE
+      - CA_COMPROMISE
+      - AFFILIATION_CHANGED
+      - SUPERCEDED
+      - CESSATION_OF_OPERATION
+      - CERTIFICATE_HOLD
+      - REMOVE_FROM_CRL
+      - PRIVILEGE_WITHDRAWN
+      - A_A_COMPROMISE
+  LoadBalancerTlsCertificateStatus:
+    type: string
+    enum:
+      - PENDING_VALIDATION
+      - ISSUED
+      - INACTIVE
+      - EXPIRED
+      - VALIDATION_TIMED_OUT
+      - REVOKED
+      - FAILED
+      - UNKNOWN
+  LoadBalancerTlsCertificateSummary:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the TLS/SSL certificate.
+      isAttached:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, the TLS/SSL certificate is attached to the Lightsail load balancer.'
+    description: Provides a summary of TLS/SSL certificate metadata.
+  LoadBalancerTlsCertificateSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificateSummary'
   MetricDatapoint:
     type: object
     properties:
@@ -3984,7 +6056,7 @@ definitions:
         description: A Boolean value indicating whether the operation is terminal.
       operationDetails:
         $ref: '#/definitions/string'
-        description: 'Details about the operation (e.g., <code>Debian-1GB-Virginia-1</code>).'
+        description: 'Details about the operation (e.g., <code>Debian-1GB-Ohio-1</code>).'
       operationType:
         $ref: '#/definitions/OperationType'
         description: 'The type of operation. '
@@ -4046,6 +6118,31 @@ definitions:
       - CreateInstanceSnapshot
       - DeleteInstanceSnapshot
       - CreateInstancesFromSnapshot
+      - CreateLoadBalancer
+      - DeleteLoadBalancer
+      - AttachInstancesToLoadBalancer
+      - DetachInstancesFromLoadBalancer
+      - UpdateLoadBalancerAttribute
+      - CreateLoadBalancerTlsCertificate
+      - DeleteLoadBalancerTlsCertificate
+      - AttachLoadBalancerTlsCertificate
+      - CreateDisk
+      - DeleteDisk
+      - AttachDisk
+      - DetachDisk
+      - CreateDiskSnapshot
+      - DeleteDiskSnapshot
+      - CreateDiskFromSnapshot
+  PasswordData:
+    type: object
+    properties:
+      ciphertext:
+        $ref: '#/definitions/string'
+        description: '<p>The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.</p> <note> <p>If you use the default key pair (<code>LightsailDefaultKeyPair</code>), the decrypted password will be available in the password field.</p> <p>If you are using a custom key pair, you need to use your own means of decryption.</p> <p>If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default.</p> </note>'
+      keyPairName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name of the key pair that you used when creating your instance. If no key pair name was specified when creating the instance, Lightsail uses the default key pair (<code>LightsailDefaultKeyPair</code>).</p> <p>If you are using a custom key pair, you need to use your own means of decrypting your password using the <code>ciphertext</code>. Lightsail creates the ciphertext by encrypting your password with the public key part of this key pair.</p>'
+    description: 'The password data for the Windows Server-based instance, including the ciphertext and the key pair name.'
   PeerVpcRequest:
     type: object
     properties: {}
@@ -4081,6 +6178,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PortInfo'
+  PortList:
+    type: array
+    items:
+      $ref: '#/definitions/Port'
   PortState:
     type: string
     enum:
@@ -4129,13 +6230,13 @@ definitions:
         description: 'The description of the AWS Region (e.g., <code>This region is recommended to serve users in the eastern United States and eastern Canada</code>).'
       displayName:
         $ref: '#/definitions/string'
-        description: 'The display name (e.g., <code>Virginia</code>).'
+        description: 'The display name (e.g., <code>Ohio</code>).'
       name:
         $ref: '#/definitions/RegionName'
-        description: 'The region name (e.g., <code>us-east-1</code>).'
+        description: 'The region name (e.g., <code>us-east-2</code>).'
       availabilityZones:
         $ref: '#/definitions/AvailabilityZoneList'
-        description: The Availability Zones. Follows the format <code>us-east-1a</code> (case-sensitive).
+        description: The Availability Zones. Follows the format <code>us-east-2a</code> (case-sensitive).
     description: Describes the AWS Region.
   RegionList:
     type: array
@@ -4174,7 +6275,7 @@ definitions:
     properties:
       availabilityZone:
         $ref: '#/definitions/string'
-        description: The Availability Zone. Follows the format <code>us-east-1a</code> (case-sensitive).
+        description: The Availability Zone. Follows the format <code>us-east-2a</code> (case-sensitive).
       regionName:
         $ref: '#/definitions/RegionName'
         description: The AWS Region name.
@@ -4182,6 +6283,10 @@ definitions:
   ResourceName:
     type: string
     pattern: '\w[\w\-]*\w'
+  ResourceNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceName'
   ResourceType:
     type: string
     enum:
@@ -4191,6 +6296,10 @@ definitions:
       - InstanceSnapshot
       - Domain
       - PeeredVpc
+      - LoadBalancer
+      - LoadBalancerTlsCertificate
+      - Disk
+      - DiskSnapshot
   ServiceException:
     type: object
     properties:
@@ -4222,10 +6331,10 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ResourceName'
-        description: 'The name of the static IP (e.g., <code>StaticIP-Virginia-EXAMPLE</code>).'
+        description: 'The name of the static IP (e.g., <code>StaticIP-Ohio-EXAMPLE</code>).'
       arn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).'
       supportCode:
         $ref: '#/definitions/string'
         description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -4243,7 +6352,7 @@ definitions:
         description: The static IP address.
       attachedTo:
         $ref: '#/definitions/ResourceName'
-        description: 'The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Virginia-1</code>).'
+        description: 'The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).'
       isAttached:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether the static IP is attached.
@@ -4260,6 +6369,9 @@ definitions:
       instanceName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance (a virtual private server) to stop.
+      force:
+        $ref: '#/definitions/boolean'
+        description: '<p>When set to <code>True</code>, forces a Lightsail instance that is stuck in a <code>stopping</code> state to stop.</p> <important> <p>Only use the <code>force</code> parameter if your instance is stuck in the <code>stopping</code> state. In any other state, your instance should stop normally without adding this parameter to your API request.</p> </important>'
   StopInstanceResult:
     type: object
     properties:
@@ -4270,6 +6382,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/string'
+  StringMax256:
+    type: string
+    minLength: 1
+    maxLength: 256
   UnauthenticatedException:
     type: object
     properties:
@@ -4309,6 +6425,28 @@ definitions:
       operations:
         $ref: '#/definitions/OperationList'
         description: An array of key-value pairs containing information about the request operation.
+  UpdateLoadBalancerAttributeRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - attributeName
+      - attributeValue
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer that you want to modify.
+      attributeName:
+        $ref: '#/definitions/LoadBalancerAttributeName'
+        description: The name of the attribute you want to update. Valid values are below.
+      attributeValue:
+        $ref: '#/definitions/StringMax256'
+        description: The value that you want to specify for the attribute name.
+  UpdateLoadBalancerAttributeResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   boolean:
     type: boolean
   double:

@@ -1,0 +1,56 @@
+- op: add
+  path: /definitions/Get_Update_a_ProductModel
+  value: {}
+- op: add
+  path: /definitions/Get_Update_a_Product
+  value: {}
+- op: add
+  path: /definitions/Get_Update_WarehouseModel
+  value: {}
+- op: add
+  path: /definitions/Get_Update_Warehouse
+  value: {}
+- op: add
+  path: /definitions/Get_Update_StoreModel
+  value: {}
+- op: add
+  path: /definitions/Get_Update_Store
+  value: {}
+- op: add
+  path: /definitions/Get_Delete_OrderModel
+  value: {}
+- op: add
+  path: /definitions/Get_Delete_Order
+  value: {}
+- op: add
+  path: '/paths/~1warehouses~1{warehouseId}/put/parameters/1'
+  value:
+    in: body
+    name: body
+    schema:
+      $ref: '#/definitions/Get_Update_WarehouseModel'
+- op: test
+  path: '/paths/~1warehouses~1{warehouseId}/put/parameters/2'
+  value:
+    in: body
+    name: body
+    schema:
+      $ref: '#/definitions/Get~1Update_WarehouseModel'
+- op: remove
+  path: '/paths/~1warehouses~1{warehouseId}/put/parameters/2'
+- op: add
+  path: '/paths/~1stores~1{storeId}/put/parameters/1'
+  value:
+    in: body
+    name: body
+    schema:
+      $ref: '#/definitions/Get_Update_StoreModel'
+- op: test
+  path: '/paths/~1stores~1{storeId}/put/parameters/2'
+  value:
+    in: body
+    name: body
+    schema:
+      $ref: '#/definitions/Get~1Update_StoreModel'
+- op: remove
+  path: '/paths/~1stores~1{storeId}/put/parameters/2'

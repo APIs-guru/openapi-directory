@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/mirror/v1/rest'
       version: v1
@@ -109,9 +109,9 @@ paths:
       description: Inserts a new account for a user
       operationId: mirror.accounts.insert
       parameters:
-        - description: The ID for the user.
+        - description: The name of the account to be passed to the Android Account Manager.
           in: path
-          name: userToken
+          name: accountName
           required: true
           type: string
         - description: Account type to be passed to Android Account Manager.
@@ -119,15 +119,15 @@ paths:
           name: accountType
           required: true
           type: string
-        - description: The name of the account to be passed to the Android Account Manager.
-          in: path
-          name: accountName
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Account'
+        - description: The ID for the user.
+          in: path
+          name: userToken
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -232,15 +232,15 @@ paths:
       description: Updates a contact in place. This method supports patch semantics.
       operationId: mirror.contacts.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Contact'
         - description: The ID of the contact.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Contact'
       responses:
         '200':
           description: Successful response
@@ -257,15 +257,15 @@ paths:
       description: Updates a contact in place.
       operationId: mirror.contacts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Contact'
         - description: The ID of the contact.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Contact'
       responses:
         '200':
           description: Successful response
@@ -449,15 +449,15 @@ paths:
       description: Updates an existing subscription in place.
       operationId: mirror.subscriptions.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subscription'
         - description: The ID of the subscription.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subscription'
       responses:
         '200':
           description: Successful response
@@ -678,6 +678,7 @@ paths:
         - audio/vnd.nuera.ecelp7470
         - audio/vnd.nuera.ecelp9600
         - audio/vnd.octel.sbc
+        - audio/vnd.presonus.multitrack
         - audio/vnd.qcelp
         - audio/vnd.rhetorex.32kadpcm
         - audio/vnd.rip
@@ -823,6 +824,7 @@ paths:
         - video/rtp-enc-aescm128
         - video/rtploopback
         - video/rtx
+        - video/smpte291
         - video/smpte292m
         - video/ulpfec
         - video/vc1
@@ -850,6 +852,7 @@ paths:
         - video/vnd.mpegurl
         - video/vnd.ms-playready.media.pyv
         - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.mp4vr
         - video/vnd.nokia.videovoip
         - video/vnd.objectvideo
         - video/vnd.radgamettools.bink
@@ -961,15 +964,15 @@ paths:
       description: Updates a timeline item in place. This method supports patch semantics.
       operationId: mirror.timeline.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TimelineItem'
         - description: The ID of the timeline item.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TimelineItem'
       responses:
         '200':
           description: Successful response
@@ -1134,6 +1137,7 @@ paths:
         - audio/vnd.nuera.ecelp7470
         - audio/vnd.nuera.ecelp9600
         - audio/vnd.octel.sbc
+        - audio/vnd.presonus.multitrack
         - audio/vnd.qcelp
         - audio/vnd.rhetorex.32kadpcm
         - audio/vnd.rip
@@ -1279,6 +1283,7 @@ paths:
         - video/rtp-enc-aescm128
         - video/rtploopback
         - video/rtx
+        - video/smpte291
         - video/smpte292m
         - video/ulpfec
         - video/vc1
@@ -1306,6 +1311,7 @@ paths:
         - video/vnd.mpegurl
         - video/vnd.ms-playready.media.pyv
         - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.mp4vr
         - video/vnd.nokia.videovoip
         - video/vnd.objectvideo
         - video/vnd.radgamettools.bink
@@ -1336,15 +1342,15 @@ paths:
       description: Updates a timeline item in place.
       operationId: mirror.timeline.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TimelineItem'
         - description: The ID of the timeline item.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TimelineItem'
       responses:
         '200':
           description: Successful response
@@ -1539,6 +1545,7 @@ paths:
         - audio/vnd.nuera.ecelp7470
         - audio/vnd.nuera.ecelp9600
         - audio/vnd.octel.sbc
+        - audio/vnd.presonus.multitrack
         - audio/vnd.qcelp
         - audio/vnd.rhetorex.32kadpcm
         - audio/vnd.rip
@@ -1684,6 +1691,7 @@ paths:
         - video/rtp-enc-aescm128
         - video/rtploopback
         - video/rtx
+        - video/smpte291
         - video/smpte292m
         - video/ulpfec
         - video/vc1
@@ -1711,6 +1719,7 @@ paths:
         - video/vnd.mpegurl
         - video/vnd.ms-playready.media.pyv
         - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.mp4vr
         - video/vnd.nokia.videovoip
         - video/vnd.objectvideo
         - video/vnd.radgamettools.bink
@@ -1763,14 +1772,14 @@ paths:
       description: Deletes an attachment from a timeline item.
       operationId: mirror.timeline.attachments.delete
       parameters:
-        - description: The ID of the timeline item the attachment belongs to.
-          in: path
-          name: itemId
-          required: true
-          type: string
         - description: The ID of the attachment.
           in: path
           name: attachmentId
+          required: true
+          type: string
+        - description: The ID of the timeline item the attachment belongs to.
+          in: path
+          name: itemId
           required: true
           type: string
       responses:
@@ -1787,14 +1796,14 @@ paths:
       description: Retrieves an attachment on a timeline item by item ID and attachment ID.
       operationId: mirror.timeline.attachments.get
       parameters:
-        - description: The ID of the timeline item the attachment belongs to.
-          in: path
-          name: itemId
-          required: true
-          type: string
         - description: The ID of the attachment.
           in: path
           name: attachmentId
+          required: true
+          type: string
+        - description: The ID of the timeline item the attachment belongs to.
+          in: path
+          name: itemId
           required: true
           type: string
       responses:

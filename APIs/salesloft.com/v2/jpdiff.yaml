@@ -1,0 +1,11 @@
+- op: add
+  path: /securityDefinitions/OAuth2/x-authorizationUrl
+  value: 'https://accounts.salesloft.com/oauth/authorize'
+- op: add
+  path: /securityDefinitions/OAuth2/scopes
+  value: {}
+- op: test
+  path: /securityDefinitions/OAuth2/authorizationUrl
+  value: 'https://accounts.salesloft.com/oauth/authorize'
+- op: remove
+  path: /securityDefinitions/OAuth2/authorizationUrl

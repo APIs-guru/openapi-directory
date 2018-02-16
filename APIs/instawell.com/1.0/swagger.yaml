@@ -1,0 +1,1044 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api-sandbox.instawell.com
+basePath: /v3
+info:
+  contact:
+    x-twitter: instawellness
+  description: "The Instawell API gives you access to  helpers all over the world. Integrate Instawell with your app using our API to get help wherever you are. Follow the instructions below to get started.\r\n\r\nBase URL\r\n----\r\nThe Instawell API supports a sandbox mode by making API calls to our sandbox server. Using the Sandbox server, you can make sure your integrations are working before deploying them to production. \r\n\r\nSandbox mode is accessed by using the following base URL\r\n\r\n~~~~\r\nhttps://api-sandbox.instawell.com/\r\n~~~~\r\n\r\nProduction mode is acccessed by using the following base URL\r\n\r\n~~~~\r\nhttps://api.instawell.com/\r\n~~~~\r\n\r\n\r\nGet your Access Token\r\n-----\r\n\r\nThe token to access the Campaign API is available when you create your first Campaign or when you request your first Plan. Have a look at the Create Campaign method to find out how to do this.\r\n\r\nMost requests made to the Instawell API require the auth token to be sent as part of the header. Exceptions will be noted in the docs. The name of the header to be used is X-instawell-token\r\n\r\n~~~~\r\nX-instawell-token: TEST_TOKEN\r\n~~~~\r\n\r\nOnce you have your token, you're ready to go.\r\n\r\n\r\n\r\n"
+  license:
+    name: MIT
+    url: 'http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT'
+  title: Instawell
+  version: '1.0'
+  x-apisguru-categories:
+    - social
+  x-logo:
+    url: 'https://twitter.com/instawellness/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/instawell/Instawell/master/APIDocs/Instawell_API_Docs.json'
+      version: '2.0'
+  x-providerName: instawell.com
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /campaigns/create:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'TODO: Add Description'
+      operationId: Create Campaign
+      parameters:
+        - description: Email is a required field if you do not have an auth token. An account will automatically be created for your use.
+          in: formData
+          name: email
+          required: true
+          type: string
+        - description: Optional. The name of the Campaign
+          in: formData
+          name: name
+          required: true
+          type: string
+        - description: Optional. Short introduction to your Campaign. This is what visitors to your Campaign page will see.
+          in: formData
+          name: description
+          required: true
+          type: string
+        - description: Optional. A URL pointing to an image to be used as the background of your Campaign.
+          in: formData
+          name: image
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples: {}
+          schema:
+            $ref: '#/definitions/CreateCampaignresponse'
+      security: []
+      summary: Create Campaign
+      tags:
+        - Misc
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  /campaigns/get:
+    get:
+      description: 'TODO: Add Description'
+      operationId: Get Campaign
+      parameters:
+        - description: ''
+          in: query
+          name: campaign_id
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: X-instawell-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples: {}
+          schema:
+            $ref: '#/definitions/GetCampaignresponse'
+      security: []
+      summary: Get Campaign
+      tags:
+        - Misc
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  /campaigns/get_stats:
+    get:
+      description: 'TODO: Add Description'
+      operationId: Get Campaign Stats
+      parameters:
+        - description: ''
+          in: query
+          name: campaign_id
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: X-instawell-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              stats:
+                feed: []
+                money_spent: 0
+                plans_sold: 0
+                users_joined: 1
+                view_count: 1
+          schema:
+            $ref: '#/definitions/GetCampaignStatsresponse'
+      security: []
+      summary: Get Campaign Stats
+      tags:
+        - Misc
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+        - expectedResponse:
+            body: '{"stats":{"users_joined":1,"money_spent":0,"plans_sold":0,"view_count":1,"feed":[]}}'
+            headers:
+              Access-Control-Allow-Credentials: 'true'
+              Access-Control-Allow-Headers: 'Content-Type, X-instawell-token, instawell-token'
+              Access-Control-Allow-Methods: 'GET, POST, OPTIONS'
+              Access-Control-Allow-Origin: '*'
+              Connection: Keep-Alive
+              Content-Encoding: gzip
+              Content-Length: '95'
+              Content-Type: application/json; charset=UTF-8
+              Date: 'Mon, 10 Jul 2017 22:22:36 GMT'
+              Keep-Alive: 'timeout=5, max=500'
+              Server: Apache/2.4.12 (Ubuntu)
+              Set-Cookie: 'ol_sess_cookie_live=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22974de7ee82869ff8ac5778e5ae87a7f1%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A15%3A%22112.134.100.188%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A20%3A%22PostmanRuntime%2F6.1.6%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1499722661%3B%7Dcbd374dd8907799c43bfb82ddfa01de0; expires=Tue, 11-Jul-2017 22:22:36 GMT; Max-Age=86400; path=/'
+              Status: '200'
+              Vary: Accept-Encoding
+              X-Clacks-Overhead: GNU Terry Pratchett
+              X-execution-duration: '0.049762964248657'
+            x-allowExtraHeaders: true
+            x-arrayCheckCount: false
+            x-arrayOrderedMatching: false
+            x-bodyMatchMode: RAW
+            x-matchResponseSchema: true
+          request:
+            headers:
+              Content-Type: application/json
+              X-instawell-token: 589caa2d7eb42fb1630d69e2636a4673853c26757f38621b58a195f44c27c0584194da64e15259849009a5cfc161210d76db9e81d81747c6a1a7be195e353d17
+            method: GET
+            uri: '/campaigns/get_stats?campaign_id={{campaign_id}}'
+          x-testDescription: 'TODO: Add Description'
+          x-testEnabled: true
+          x-testName: Get Campaign Stats
+          x-testShouldPass: true
+  /campaigns/get_widget:
+    get:
+      description: 'TODO: Add Description'
+      operationId: Get Campaign Widget
+      parameters:
+        - description: ''
+          in: query
+          name: campaign_id
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: X-instawell-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              embed_html: '<script data-iw-script=''1'' type=''text/javascript'' src=''https://static-1.instawell.com/assets/widget/widget-main.js?campaign=1QayZ''></script>'
+          schema:
+            $ref: '#/definitions/GetCampaignWidgetresponse'
+      security: []
+      summary: Get Campaign Widget
+      tags:
+        - Misc
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+        - expectedResponse:
+            body: '{"embed_html":"<script data-iw-script=''1'' type=''text\/javascript'' src=''https:\/\/static-1.instawell.com\/assets\/widget\/widget-main.js?campaign=1QayZ''><\/script>"}'
+            headers:
+              Access-Control-Allow-Credentials: 'true'
+              Access-Control-Allow-Headers: 'Content-Type, X-instawell-token, instawell-token'
+              Access-Control-Allow-Methods: 'GET, POST, OPTIONS'
+              Access-Control-Allow-Origin: '*'
+              Connection: Keep-Alive
+              Content-Encoding: gzip
+              Content-Length: '152'
+              Content-Type: application/json; charset=UTF-8
+              Date: 'Mon, 10 Jul 2017 22:23:02 GMT'
+              Keep-Alive: 'timeout=5, max=500'
+              Server: Apache/2.4.12 (Ubuntu)
+              Set-Cookie: 'ol_sess_cookie_live=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22974de7ee82869ff8ac5778e5ae87a7f1%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A15%3A%22112.134.100.188%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A20%3A%22PostmanRuntime%2F6.1.6%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1499722661%3B%7Dcbd374dd8907799c43bfb82ddfa01de0; expires=Tue, 11-Jul-2017 22:23:02 GMT; Max-Age=86400; path=/'
+              Status: '200'
+              Vary: Accept-Encoding
+              X-Clacks-Overhead: GNU Terry Pratchett
+              X-execution-duration: '0.041615962982178'
+            x-allowExtraHeaders: true
+            x-arrayCheckCount: false
+            x-arrayOrderedMatching: false
+            x-bodyMatchMode: RAW
+            x-matchResponseSchema: true
+          request:
+            headers:
+              Content-Type: application/json
+              X-instawell-token: 589caa2d7eb42fb1630d69e2636a4673853c26757f38621b58a195f44c27c0584194da64e15259849009a5cfc161210d76db9e81d81747c6a1a7be195e353d17
+            method: GET
+            uri: '/campaigns/get_widget?campaign_id={{campaign_id}}'
+          x-testDescription: 'TODO: Add Description'
+          x-testEnabled: true
+          x-testName: Get Campaign Widget
+          x-testShouldPass: true
+  /campaigns/update:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'TODO: Add Description'
+      operationId: Update a Campaign
+      parameters:
+        - description: The new name to be used for your C
+          in: formData
+          name: name
+          required: true
+          type: string
+        - description: A URL pointing to an image to be used as the background of your Campaign.
+          in: formData
+          name: image
+          required: true
+          type: string
+        - description: Welcome message seen by visitors
+          in: formData
+          name: description
+          required: true
+          type: string
+        - description: The ID of the Campaign you are updating
+          in: formData
+          name: campaign_id
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: X-instawell-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples: {}
+          schema:
+            $ref: '#/definitions/UpdateACampaignresponse'
+      security: []
+      summary: Update a Campaign
+      tags:
+        - Misc
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  /plans/find:
+    get:
+      description: 'TODO: Add Description'
+      operationId: Find Plans
+      parameters:
+        - description: ''
+          in: query
+          name: category
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              plans:
+                - description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed tempus purus. Maecenas ultrices laoreet quam. Nunc dapibus dolor purus, vel congue felis volutpat nec. Pellentesque auctor commodo mattis. Proin ac molestie elit, id efficitur metus. Nunc vitae dignissim urna.'
+                  helper:
+                    avatar_url: 'https://static-1.instawell.com/assets/img/defaults/photos/j.png'
+                    id: '5'
+                    username: john
+                  id: '1'
+                  image: 'https://static-1.instawell.com/assets/img/landing/main2.jpg?v=0.1.2588'
+                  name: Example Plan 1
+                  price: '40.00'
+                  url: 'https://sandbox.instawell.com/john/plan/1/example-plan-1'
+          schema:
+            $ref: '#/definitions/FindPlansresponse'
+      security: []
+      summary: Find Plans
+      tags:
+        - Misc
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+        - expectedResponse:
+            body: '{"plans":[{"id":"1","name":"Example Plan 1","description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed tempus purus. Maecenas ultrices laoreet quam. Nunc dapibus dolor purus, vel congue felis volutpat nec. Pellentesque auctor commodo mattis. Proin ac molestie elit, id efficitur metus. Nunc vitae dignissim urna.","image":"https:\/\/static-1.instawell.com\/assets\/img\/landing\/main2.jpg?v=0.1.2588","price":"40.00","helper":{"id":"5","username":"john","avatar_url":"https:\/\/static-1.instawell.com\/assets\/img\/defaults\/photos\/j.png"},"url":"https:\/\/sandbox.instawell.com\/john\/plan\/1\/example-plan-1"}]}'
+            headers:
+              Access-Control-Allow-Credentials: 'true'
+              Access-Control-Allow-Headers: 'Content-Type, X-instawell-token, instawell-token'
+              Access-Control-Allow-Methods: 'GET, POST, OPTIONS'
+              Access-Control-Allow-Origin: '*'
+              Connection: Keep-Alive
+              Content-Encoding: gzip
+              Content-Length: '403'
+              Content-Type: application/json; charset=UTF-8
+              Date: 'Fri, 13 Oct 2017 06:58:42 GMT'
+              Keep-Alive: 'timeout=5, max=500'
+              Server: Apache/2.4.12 (Ubuntu)
+              Status: '200'
+              Vary: Accept-Encoding
+              X-execution-duration: '0.096148014068604'
+            x-allowExtraHeaders: true
+            x-arrayCheckCount: false
+            x-arrayOrderedMatching: false
+            x-bodyMatchMode: RAW
+            x-matchResponseSchema: true
+          request:
+            headers:
+              Content-Type: application/json
+            method: GET
+            uri: /plans/find?category=realtalk
+          x-testDescription: 'TODO: Add Description'
+          x-testEnabled: true
+          x-testName: Find Plans
+          x-testShouldPass: true
+  /plans/request:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'TODO: Add Description'
+      operationId: Request Plan
+      parameters:
+        - description: Required. The ID of the Plan that you want to chat about.
+          in: formData
+          name: plan_id
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              chat_url: 'https://sandbox.instawell.com/cl/7d6f62101201a72f4'
+              message: Your request has been created and John Pereira has been notified of your request.
+          schema:
+            $ref: '#/definitions/RequestPlanresponse'
+      security: []
+      summary: Request Plan
+      tags:
+        - Misc
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+        - expectedResponse:
+            body: |-
+              {
+                  "message": "Your request has been created and John Pereira has been notified of your request.",
+                  "chat_url": "https://sandbox.instawell.com/cl/7d6f62101201a72f4"
+              }
+            headers:
+              Access-Control-Allow-Credentials: 'true'
+              Access-Control-Allow-Headers: 'Content-Type, X-instawell-token, instawell-token'
+              Access-Control-Allow-Methods: 'GET, POST, OPTIONS'
+              Access-Control-Allow-Origin: '*'
+              Connection: Keep-Alive
+              Content-Encoding: gzip
+              Content-Length: '150'
+              Content-Type: application/json; charset=UTF-8
+              Date: 'Fri, 13 Oct 2017 06:59:39 GMT'
+              Keep-Alive: 'timeout=5, max=500'
+              Server: Apache/2.4.12 (Ubuntu)
+              Status: '200'
+              Vary: Accept-Encoding
+              X-execution-duration: '3.5281460285187'
+            x-allowExtraHeaders: true
+            x-arrayCheckCount: false
+            x-arrayOrderedMatching: false
+            x-bodyMatchMode: RAW
+            x-matchResponseSchema: true
+          request:
+            body: 'plan_id={{plan_id}}'
+            headers:
+              Content-Type: application/x-www-form-urlencoded
+            method: POST
+            uri: /plans/request
+          x-testDescription: 'TODO: Add Description'
+          x-testEnabled: true
+          x-testName: Request Plan
+          x-testShouldPass: true
+  /users/notifications:
+    get:
+      description: 'TODO: Add Description'
+      operationId: Get Notifications
+      parameters:
+        - description: ''
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - description: ''
+          in: header
+          name: X-instawell-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              notifications:
+                - chat_url: 'https://instawell.com/chats/john/anon-1581'
+                  created: '2017-11-09 18:07:20'
+                  is_read: 1
+                  text: anon_1987 silenced the chat
+                - chat_url: 'https://instawell.com/chats/john/anon-1581'
+                  created: '2017-11-09 17:28:33'
+                  is_read: 1
+                  text: John Pereira sent you a message
+          schema:
+            $ref: '#/definitions/GetNotificationsresponse'
+      security: []
+      summary: Get Notifications
+      tags:
+        - Misc
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+        - expectedResponse:
+            body: |-
+              {
+                  "notifications": [
+                      {
+                          "text": "anon_1987 silenced the chat",
+                          "chat_url": "https://instawell.com/chats/john/anon-1581",
+                          "is_read": 1,
+                          "created": "2017-11-09 18:07:20"
+                      },
+                      {
+                          "text": "John Pereira sent you a message",
+                          "chat_url": "https://instawell.com/chats/john/anon-1581",
+                          "is_read": 1,
+                          "created": "2017-11-09 17:28:33"
+                      }
+                  ]
+              }
+            headers:
+              Access-Control-Allow-Credentials: 'true'
+              Access-Control-Allow-Headers: 'Content-Type, X-instawell-token, instawell-token'
+              Access-Control-Allow-Methods: 'GET, POST, OPTIONS'
+              Access-Control-Allow-Origin: '*'
+              Connection: Keep-Alive
+              Content-Length: '20'
+              Content-Type: application/json; charset=UTF-8
+              Date: 'Fri, 10 Nov 2017 07:54:48 GMT'
+              Keep-Alive: 'timeout=5, max=500'
+              Server: Apache/2.4.12 (Ubuntu)
+              Set-Cookie: 'ol_sess_cookie_live=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22efaf309fcbee5d8c8a0330e9d70a8cb2%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A12%3A%22111.92.54.26%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A20%3A%22PostmanRuntime%2F6.4.1%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1510300261%3B%7D18ea7134775318ce3f4df685ecbfa822; expires=Sat, 11-Nov-2017 07:54:48 GMT; Max-Age=86400; path=/'
+              Status: '200'
+              X-execution-duration: '0.037554025650024'
+            x-allowExtraHeaders: true
+            x-arrayCheckCount: false
+            x-arrayOrderedMatching: false
+            x-bodyMatchMode: RAW
+            x-matchResponseSchema: true
+          request:
+            headers:
+              Content-Type: application/json
+              X-instawell-token: 589caa2d7eb42fb1630d69e2636a4673853c26757f38621b58a195f44c27c0584194da64e15259849009a5cfc161210d76db9e81d81747c6a1a7be195e353d17
+            method: GET
+            uri: /users/notifications
+          x-testDescription: 'TODO: Add Description'
+          x-testEnabled: true
+          x-testName: Get Notifications
+          x-testShouldPass: true
+definitions:
+  AuthData:
+    properties:
+      mode:
+        description: ''
+        type: string
+    required:
+      - mode
+    title: AuthData
+    type: object
+  Campaign:
+    properties:
+      auth_type:
+        description: ''
+        type: string
+      campaign_plans:
+        description: ''
+        items:
+          type: string
+        type: array
+      code:
+        description: ''
+        type: string
+      created:
+        description: ''
+        type: string
+      data:
+        description: ''
+        items:
+          type: string
+        type: array
+      description:
+        description: ''
+        type: string
+      enabled:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      image:
+        description: ''
+        type: string
+      join_mode_text:
+        description: ''
+        type: string
+      meta:
+        $ref: '#/definitions/Meta'
+      name:
+        description: ''
+        type: string
+      published:
+        description: ''
+        format: int32
+        type: integer
+      purpose_code:
+        description: ''
+        type: string
+      used_plans_count:
+        description: ''
+        format: int32
+        type: integer
+      user_count:
+        description: ''
+        format: int32
+        type: integer
+      user_id:
+        description: ''
+        type: string
+    required:
+      - id
+      - user_id
+      - code
+      - name
+      - image
+      - description
+      - auth_type
+      - data
+      - enabled
+      - published
+      - created
+      - used_plans_count
+      - user_count
+      - campaign_plans
+      - join_mode_text
+      - meta
+      - purpose_code
+    title: Campaign
+    type: object
+  Campaign13:
+    properties:
+      auth_type:
+        description: ''
+        type: string
+      campaign_plans:
+        description: ''
+        items:
+          type: string
+        type: array
+      code:
+        description: ''
+        type: string
+      created:
+        description: ''
+        type: string
+      data:
+        $ref: '#/definitions/Data'
+      description:
+        description: ''
+        type: string
+      enabled:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      image:
+        description: ''
+        type: string
+      join_mode_text:
+        description: ''
+        type: string
+      meta:
+        $ref: '#/definitions/Meta'
+      name:
+        description: ''
+        type: string
+      published:
+        description: ''
+        format: int32
+        type: integer
+      purpose_code:
+        description: ''
+        type: string
+      used_plans_count:
+        description: ''
+        format: int32
+        type: integer
+      user_count:
+        description: ''
+        format: int32
+        type: integer
+      user_id:
+        description: ''
+        type: string
+    required:
+      - id
+      - user_id
+      - code
+      - name
+      - image
+      - description
+      - auth_type
+      - data
+      - enabled
+      - published
+      - created
+      - used_plans_count
+      - user_count
+      - campaign_plans
+      - join_mode_text
+      - meta
+      - purpose_code
+    title: Campaign13
+    type: object
+  Campaign8:
+    properties:
+      auth_data:
+        $ref: '#/definitions/AuthData'
+      auth_type:
+        description: ''
+        type: string
+      campaign_helpers:
+        description: ''
+        items:
+          type: string
+        type: array
+      campaign_plans:
+        description: ''
+        items:
+          type: string
+        type: array
+      code:
+        description: ''
+        type: string
+      created:
+        description: ''
+        type: string
+      data:
+        $ref: '#/definitions/Data'
+      description:
+        description: ''
+        type: string
+      enabled:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      image:
+        description: ''
+        type: string
+      join_mode_text:
+        description: ''
+        type: string
+      meta:
+        $ref: '#/definitions/Meta'
+      name:
+        description: ''
+        type: string
+      published:
+        description: ''
+        format: int32
+        type: integer
+      purpose_code:
+        description: ''
+        type: string
+      used_plans_count:
+        description: ''
+        format: int32
+        type: integer
+      user_count:
+        description: ''
+        format: int32
+        type: integer
+      user_id:
+        description: ''
+        type: string
+    required:
+      - id
+      - user_id
+      - code
+      - name
+      - image
+      - description
+      - auth_type
+      - data
+      - enabled
+      - published
+      - created
+      - used_plans_count
+      - user_count
+      - campaign_helpers
+      - campaign_plans
+      - join_mode_text
+      - meta
+      - purpose_code
+      - auth_data
+    title: Campaign8
+    type: object
+  CreateCampaignresponse:
+    properties:
+      admin_url:
+        description: ''
+        type: string
+      auth_token:
+        description: ''
+        type: string
+      campaign:
+        $ref: '#/definitions/Campaign'
+    required:
+      - campaign
+      - auth_token
+      - admin_url
+    title: Create CampaignResponse
+    type: object
+  Data:
+    properties:
+      purpose_code:
+        description: ''
+        type: string
+    required:
+      - purpose_code
+    title: Data
+    type: object
+  FindPlansresponse:
+    example:
+      plans:
+        - description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed tempus purus. Maecenas ultrices laoreet quam. Nunc dapibus dolor purus, vel congue felis volutpat nec. Pellentesque auctor commodo mattis. Proin ac molestie elit, id efficitur metus. Nunc vitae dignissim urna.'
+          helper:
+            avatar_url: 'https://static-1.instawell.com/assets/img/defaults/photos/j.png'
+            id: '5'
+            username: john
+          id: '1'
+          image: 'https://static-1.instawell.com/assets/img/landing/main2.jpg?v=0.1.2588'
+          name: Example Plan 1
+          price: '40.00'
+          url: 'https://sandbox.instawell.com/john/plan/1/example-plan-1'
+    properties:
+      plans:
+        description: ''
+        items:
+          $ref: '#/definitions/Plan'
+        type: array
+    required:
+      - plans
+    title: Find PlansResponse
+    type: object
+  GetCampaignStatsresponse:
+    example:
+      stats:
+        feed: []
+        money_spent: 0
+        plans_sold: 0
+        users_joined: 1
+        view_count: 1
+    properties:
+      stats:
+        $ref: '#/definitions/Stats'
+    required:
+      - stats
+    title: Get Campaign StatsResponse
+    type: object
+  GetCampaignWidgetresponse:
+    example:
+      embed_html: '<script data-iw-script=''1'' type=''text/javascript'' src=''https://static-1.instawell.com/assets/widget/widget-main.js?campaign=1QayZ''></script>'
+    properties:
+      embed_html:
+        description: ''
+        type: string
+    required:
+      - embed_html
+    title: Get Campaign WidgetResponse
+    type: object
+  GetCampaignresponse:
+    properties:
+      campaign:
+        $ref: '#/definitions/Campaign13'
+    required:
+      - campaign
+    title: Get CampaignResponse
+    type: object
+  GetNotificationsresponse:
+    example:
+      notifications:
+        - chat_url: 'https://instawell.com/chats/john/anon-1581'
+          created: '2017-11-09 18:07:20'
+          is_read: 1
+          text: anon_1987 silenced the chat
+        - chat_url: 'https://instawell.com/chats/john/anon-1581'
+          created: '2017-11-09 17:28:33'
+          is_read: 1
+          text: John Pereira sent you a message
+    properties:
+      notifications:
+        description: ''
+        items:
+          $ref: '#/definitions/Notification'
+        type: array
+    required:
+      - notifications
+    title: Get NotificationsResponse
+    type: object
+  Helper:
+    properties:
+      avatar_url:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      username:
+        description: ''
+        type: string
+    required:
+      - id
+      - username
+      - avatar_url
+    title: Helper
+    type: object
+  Meta:
+    properties:
+      CAMPAIGN_HOSTED_SITE_URL:
+        description: ''
+        type: string
+      CAMPAIGN_RESTRICT_TO_SELECTED_HELPERS:
+        description: ''
+        type: string
+      CAMPAIGN_RESTRICT_TO_SELECTED_PLANS:
+        description: ''
+        type: string
+    required:
+      - CAMPAIGN_HOSTED_SITE_URL
+      - CAMPAIGN_RESTRICT_TO_SELECTED_HELPERS
+      - CAMPAIGN_RESTRICT_TO_SELECTED_PLANS
+    title: Meta
+    type: object
+  Notification:
+    properties:
+      chat_url:
+        description: ''
+        type: string
+      created:
+        description: ''
+        type: string
+      is_read:
+        description: ''
+        format: int32
+        type: integer
+      text:
+        description: ''
+        type: string
+    required:
+      - text
+      - chat_url
+      - is_read
+      - created
+    title: Notification
+    type: object
+  Plan:
+    properties:
+      description:
+        description: ''
+        type: string
+      helper:
+        $ref: '#/definitions/Helper'
+      id:
+        description: ''
+        type: string
+      image:
+        description: ''
+        type: string
+      name:
+        description: ''
+        type: string
+      price:
+        description: ''
+        type: string
+      url:
+        description: ''
+        type: string
+    required:
+      - id
+      - name
+      - description
+      - image
+      - price
+      - helper
+      - url
+    title: Plan
+    type: object
+  RequestPlanresponse:
+    example:
+      chat_url: 'https://sandbox.instawell.com/cl/7d6f62101201a72f4'
+      message: Your request has been created and John Pereira has been notified of your request.
+    properties:
+      chat_url:
+        description: ''
+        type: string
+      message:
+        description: ''
+        type: string
+    required:
+      - message
+      - chat_url
+    title: Request PlanResponse
+    type: object
+  Stats:
+    properties:
+      feed:
+        description: ''
+        items:
+          type: string
+        type: array
+      money_spent:
+        description: ''
+        format: int32
+        type: integer
+      plans_sold:
+        description: ''
+        format: int32
+        type: integer
+      users_joined:
+        description: ''
+        format: int32
+        type: integer
+      view_count:
+        description: ''
+        format: int32
+        type: integer
+    required:
+      - users_joined
+      - money_spent
+      - plans_sold
+      - view_count
+      - feed
+    title: Stats
+    type: object
+  UpdateACampaignresponse:
+    properties:
+      campaign:
+        $ref: '#/definitions/Campaign8'
+    required:
+      - campaign
+    title: Update a CampaignResponse
+    type: object

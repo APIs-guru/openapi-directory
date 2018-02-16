@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - search
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://kgsearch.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -117,6 +119,29 @@ paths:
         JSON-LD format and compatible with http://schema.org
       operationId: kgsearch.entities.search
       parameters:
+        - collectionFormat: multi
+          description: |-
+            The list of entity id to be used for search instead of query string.
+            To specify multiple ids in the HTTP request, repeat the parameter in the
+            URL as in ...?ids=A&ids=B
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Enables indenting of json results.
+          in: query
+          name: indent
+          type: boolean
+        - collectionFormat: multi
+          description: |-
+            The list of language codes (defined in ISO 693) to run the query with,
+            e.g. 'en'.
+          in: query
+          items:
+            type: string
+          name: languages
+          type: array
         - description: Limits the number of entities to be returned.
           in: query
           name: limit
@@ -139,29 +164,6 @@ paths:
             type: string
           name: types
           type: array
-        - description: Enables indenting of json results.
-          in: query
-          name: indent
-          type: boolean
-        - collectionFormat: multi
-          description: |-
-            The list of language codes (defined in ISO 693) to run the query with,
-            e.g. 'en'.
-          in: query
-          items:
-            type: string
-          name: languages
-          type: array
-        - collectionFormat: multi
-          description: |-
-            The list of entity id to be used for search instead of query string.
-            To specify multiple ids in the HTTP request, repeat the parameter in the
-            URL as in ...?ids=A&ids=B
-          in: query
-          items:
-            type: string
-          name: ids
-          type: array
       responses:
         '200':
           description: Successful response
@@ -170,19 +172,19 @@ paths:
       tags:
         - entities
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   SearchResponse:
     description: |-

@@ -9,6 +9,8 @@ info:
   version: alpha-0.1.0
   x-apiClientRegistration:
     url: 'https://www.motaword.com/developer/register'
+  x-apisguru-categories:
+    - text
   x-logo:
     url: 'https://dentycj2qhk72.cloudfront.net/new/images/new_logo_horizontal.png'
   x-origin:
@@ -354,6 +356,40 @@ paths:
       security:
         - client_credentials: []
       summary: Update project language pairs
+      tags:
+        - Project
+  '/projects/{id}/callback/{actionType}':
+    get:
+      description: Trigger a call to your callback URL related to this project.
+      operationId: triggerCallback
+      parameters:
+        - description: Project ID
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Callback type
+          enum:
+            - translated
+            - proofread
+            - completed
+          in: path
+          name: actionType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Callback result
+          schema:
+            $ref: '#/definitions/CallbackResult'
+        '404':
+          description: ProjectNotFound
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Trigger a call to your callback URL related to this project.
       tags:
         - Project
   '/projects/{id}/cancel':
@@ -1459,7 +1495,7 @@ paths:
         - multipart/form-data
         - application/json
       description: Update the style guide. File name and contents will replaced with the new one.
-      operationId: updteStyleGuide
+      operationId: updateStyleGuide
       parameters:
         - description: Project ID
           format: int64
@@ -1713,6 +1749,23 @@ definitions:
         type: array
       meta:
         $ref: '#/definitions/PagingMeta'
+    type: object
+  CallbackResult:
+    properties:
+      data:
+        $ref: '#/definitions/Project'
+      result:
+        description: Callback response returned from `url`.
+        type: string
+      type:
+        enum:
+          - translated
+          - proofread
+          - completed
+        type: string
+      url:
+        description: The URL that received the callback.
+        type: string
     type: object
   Comment:
     properties:

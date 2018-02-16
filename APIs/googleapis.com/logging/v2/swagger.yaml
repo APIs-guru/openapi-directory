@@ -17,12 +17,14 @@ info:
   version: v2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://logging.googleapis.com/$discovery/rest?version=v2'
       version: v1
@@ -134,26 +136,29 @@ parameters:
 tags:
   - name: billingAccounts
   - name: entries
+  - name: exclusions
   - name: folders
+  - name: logs
   - name: monitoredResourceDescriptors
   - name: organizations
   - name: projects
+  - name: sinks
 paths:
   '/v2/entries:list':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Lists log entries. Use this method to retrieve log entries from Stackdriver Logging. For ways to export log entries, see Exporting Logs.'
       operationId: logging.entries.list
@@ -188,21 +193,21 @@ paths:
         - entries
   '/v2/entries:write':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
-      description: Writes log entries to Stackdriver Logging.
+      description: 'Log entry resourcesWrites log entries to Stackdriver Logging. This API method is the only way to send log entries to Stackdriver Logging. This method is used, directly or indirectly, by the Stackdriver Logging agent (fluentd) and all logging libraries configured to use Stackdriver Logging.'
       operationId: logging.entries.write
       parameters:
         - in: body
@@ -234,14 +239,14 @@ paths:
       description: Lists the descriptors for monitored resource types used by Stackdriver Logging.
       operationId: logging.monitoredResourceDescriptors.list
       parameters:
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
           name: pageSize
           type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -267,19 +272,19 @@ paths:
       tags:
         - monitoredResourceDescriptors
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
@@ -314,19 +319,19 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/{metricName}':
     delete:
       description: Deletes a logs-based metric.
@@ -397,23 +402,27 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: Creates or updates a logs-based metric.
       operationId: logging.projects.metrics.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogMetric'
         - description: |-
             The resource name of the metric to update:
             "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
@@ -423,10 +432,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogMetric'
       responses:
         '200':
           description: Successful response
@@ -447,11 +452,244 @@ paths:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
+  '/v2/{name}':
+    delete:
+      description: Deletes an exclusion.
+      operationId: logging.billingAccounts.exclusions.delete
+      parameters:
+        - description: |-
+            Required. The resource name of an existing exclusion to delete:
+            "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+            "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+            "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+            Example: "projects/my-project-id/exclusions/my-exclusion-id".
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - billingAccounts
+    get:
+      description: Gets the description of an exclusion.
+      operationId: logging.billingAccounts.exclusions.get
+      parameters:
+        - description: |-
+            Required. The resource name of an existing exclusion:
+            "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+            "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+            "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+            Example: "projects/my-project-id/exclusions/my-exclusion-id".
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogExclusion'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - billingAccounts
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: Changes one or more properties of an existing exclusion.
+      operationId: logging.billingAccounts.exclusions.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogExclusion'
+        - description: |-
+            Required. The resource name of the exclusion to update:
+            "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+            "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+            "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+            Example: "projects/my-project-id/exclusions/my-exclusion-id".
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: 'Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".'
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogExclusion'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - billingAccounts
+  '/v2/{parent}/exclusions':
+    get:
+      description: Lists all the exclusions in a parent resource.
+      operationId: logging.billingAccounts.exclusions.list
+      parameters:
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
+        - description: |
+            Required. The parent resource whose exclusions are to be listed.
+            "projects/[PROJECT_ID]"
+            "organizations/[ORGANIZATION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]"
+            "folders/[FOLDER_ID]"
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListExclusionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - billingAccounts
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a new exclusion in a specified parent resource. Only log entries belonging to that resource can be excluded. You can have up to 10 exclusions in a resource.
+      operationId: logging.billingAccounts.exclusions.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogExclusion'
+        - description: |-
+            Required. The parent resource in which to create the exclusion:
+            "projects/[PROJECT_ID]"
+            "organizations/[ORGANIZATION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]"
+            "folders/[FOLDER_ID]"
+            Examples: "projects/my-logging-project", "organizations/123456789".
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogExclusion'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - billingAccounts
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
       operationId: logging.billingAccounts.logs.list
       parameters:
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
         - description: |
             Required. The resource name that owns the logs:
             "projects/[PROJECT_ID]"
@@ -463,14 +701,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -496,24 +726,32 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/{parent}/metrics':
     get:
       description: Lists logs-based metrics.
       operationId: logging.projects.metrics.list
       parameters:
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
         - description: |
             Required. The name of the project containing the metrics:
             "projects/[PROJECT_ID]"
@@ -522,14 +760,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -555,23 +785,27 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a logs-based metric.
       operationId: logging.projects.metrics.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogMetric'
         - description: |-
             The resource name of the project in which to create the metric:
             "projects/[PROJECT_ID]"
@@ -581,10 +815,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogMetric'
       responses:
         '200':
           description: Successful response
@@ -610,6 +840,14 @@ paths:
       description: Lists sinks.
       operationId: logging.billingAccounts.sinks.list
       parameters:
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
         - description: |
             Required. The parent resource whose sinks are to be listed:
             "projects/[PROJECT_ID]"
@@ -621,14 +859,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -654,23 +884,27 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
-      description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the current time is outside the sink''s start and end times or the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
+      description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
       operationId: logging.billingAccounts.sinks.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogSink'
         - description: |-
             Required. The resource in which to create the sink:
             "projects/[PROJECT_ID]"
@@ -687,10 +921,6 @@ paths:
           in: query
           name: uniqueWriterIdentity
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogSink'
       responses:
         '200':
           description: Successful response
@@ -781,21 +1011,21 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
-      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
+      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
       operationId: logging.billingAccounts.sinks.patch
       parameters:
         - in: body
@@ -822,6 +1052,10 @@ paths:
           in: query
           name: uniqueWriterIdentity
           type: boolean
+        - description: 'Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmaskExample: updateMask=filter.'
+          in: query
+          name: updateMask
+          type: string
       responses:
         '200':
           description: Successful response
@@ -839,7 +1073,7 @@ paths:
       tags:
         - billingAccounts
     put:
-      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
+      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
       operationId: logging.billingAccounts.sinks.update
       parameters:
         - in: body
@@ -866,6 +1100,10 @@ paths:
           in: query
           name: uniqueWriterIdentity
           type: boolean
+        - description: 'Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmaskExample: updateMask=filter.'
+          in: query
+          name: updateMask
+          type: string
       responses:
         '200':
           description: Successful response
@@ -883,6 +1121,19 @@ paths:
       tags:
         - billingAccounts
 definitions:
+  BucketOptions:
+    description: 'BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.'
+    properties:
+      explicitBuckets:
+        $ref: '#/definitions/Explicit'
+        description: The explicit buckets.
+      exponentialBuckets:
+        $ref: '#/definitions/Exponential'
+        description: The exponential buckets.
+      linearBuckets:
+        $ref: '#/definitions/Linear'
+        description: The linear bucket.
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
@@ -891,6 +1142,32 @@ definitions:
       }
       The JSON representation for Empty is empty JSON object {}.
     properties: {}
+    type: object
+  Explicit:
+    description: 'Specifies a set of buckets with arbitrary widths.There are size(bounds) + 1 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 <= i < N-1): boundsi  Lower bound (1 <= i < N); boundsi - 1The bounds field must contain at least one element. If bounds has only one element, then there are no finite buckets, and that single element is the common boundary of the overflow and underflow buckets.'
+    properties:
+      bounds:
+        description: The values must be monotonically increasing.
+        items:
+          format: double
+          type: number
+        type: array
+    type: object
+  Exponential:
+    description: 'Specifies an exponential sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.There are num_finite_buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 <= i < N-1): scale * (growth_factor ^ i).  Lower bound (1 <= i < N): scale * (growth_factor ^ (i - 1)).'
+    properties:
+      growthFactor:
+        description: Must be greater than 1.
+        format: double
+        type: number
+      numFiniteBuckets:
+        description: Must be greater than 0.
+        format: int32
+        type: integer
+      scale:
+        description: Must be greater than 0.
+        format: double
+        type: number
     type: object
   HttpRequest:
     description: A common proto for logging HTTP requests. Only contains semantics defined by the HTTP specification. Product-specific logging information MUST be defined in a separate message.
@@ -963,6 +1240,34 @@ definitions:
           - INT64
         type: string
     type: object
+  Linear:
+    description: 'Specifies a linear sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.There are num_finite_buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 <= i < N-1): offset + (width * i).  Lower bound (1 <= i < N): offset + (width * (i - 1)).'
+    properties:
+      numFiniteBuckets:
+        description: Must be greater than 0.
+        format: int32
+        type: integer
+      offset:
+        description: Lower bound of the first bucket.
+        format: double
+        type: number
+      width:
+        description: Must be greater than 0.
+        format: double
+        type: number
+    type: object
+  ListExclusionsResponse:
+    description: Result returned from ListExclusions.
+    properties:
+      exclusions:
+        description: A list of exclusions.
+        items:
+          $ref: '#/definitions/LogExclusion'
+        type: array
+      nextPageToken:
+        description: 'If there might be more results than appear in this response, then nextPageToken is included. To get the next set of results, call the same method again using the value of nextPageToken as pageToken.'
+        type: string
+    type: object
   ListLogEntriesRequest:
     description: The parameters to ListLogEntries.
     properties:
@@ -1000,7 +1305,7 @@ definitions:
     description: Result returned from ListLogEntries.
     properties:
       entries:
-        description: A list of log entries.
+        description: 'A list of log entries. If entries is empty, nextPageToken may still be returned, indicating that more entries may exist. See nextPageToken for more information.'
         items:
           $ref: '#/definitions/LogEntry'
         type: array
@@ -1063,7 +1368,7 @@ definitions:
         $ref: '#/definitions/HttpRequest'
         description: 'Optional. Information about the HTTP request associated with this log entry, if applicable.'
       insertId:
-        description: 'Optional. A unique identifier for the log entry. If you provide a value, then Stackdriver Logging considers other log entries in the same project, with the same timestamp, and with the same insert_id to be duplicates which can be removed. If omitted in new log entries, then Stackdriver Logging will insert its own unique identifier. The insert_id is used to order log entries that have the same timestamp value.'
+        description: 'Optional. A unique identifier for the log entry. If you provide a value, then Stackdriver Logging considers other log entries in the same project, with the same timestamp, and with the same insert_id to be duplicates which can be removed. If omitted in new log entries, then Stackdriver Logging assigns its own unique identifier. The insert_id is also used to order log entries that have the same timestamp value.'
         type: string
       jsonPayload:
         additionalProperties:
@@ -1082,7 +1387,7 @@ definitions:
           "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
           "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
           "folders/[FOLDER_ID]/logs/[LOG_ID]"
-          [LOG_ID] must be URL-encoded within log_name. Example: "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". [LOG_ID] must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters, forward-slash, underscore, hyphen, and period.For backward compatibility, if log_name begins with a forward-slash, such as /projects/..., then the log entry is ingested as usual but the forward-slash is removed. Listing the log entry will not show the leading slash and filtering for a log name with a leading slash will never return any results.
+          A project number may optionally be used in place of PROJECT_ID. The  project number is translated to its corresponding PROJECT_ID internally  and the log_name field will contain PROJECT_ID in queries and exports.[LOG_ID] must be URL-encoded within log_name. Example: "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". [LOG_ID] must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters, forward-slash, underscore, hyphen, and period.For backward compatibility, if log_name begins with a forward-slash, such as /projects/..., then the log entry is ingested as usual but the forward-slash is removed. Listing the log entry will not show the leading slash and filtering for a log name with a leading slash will never return any results.
         type: string
       operation:
         $ref: '#/definitions/LogEntryOperation'
@@ -1115,11 +1420,14 @@ definitions:
       sourceLocation:
         $ref: '#/definitions/LogEntrySourceLocation'
         description: 'Optional. Source code location information associated with the log entry, if any.'
+      spanId:
+        description: 'Optional. The span ID within the trace associated with the log entry. For Stackdriver Trace spans, this is the same format that the Stackdriver Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as <code>"000000000000004a"</code>.'
+        type: string
       textPayload:
         description: 'The log entry payload, represented as a Unicode string (UTF-8).'
         type: string
       timestamp:
-        description: 'Optional. The time the event described by the log entry occurred. If omitted in a new log entry, Stackdriver Logging will insert the time the log entry is received. Stackdriver Logging might reject log entries whose time stamps are more than a couple of hours in the future. Log entries with time stamps in the past are accepted.'
+        description: 'Optional. The time the event described by the log entry occurred. This time is used to compute the log entry''s age and to enforce the logs retention period. If this field is omitted in a new log entry, then Stackdriver Logging assigns it the current time.Incoming log entries should have timestamps that are no more than the logs retention period in the past, and no more than 24 hours in the future. Log entries outside those time boundaries will not be available when calling entries.list, but those log entries can still be exported with LogSinks.'
         format: google-datetime
         type: string
       trace:
@@ -1156,6 +1464,24 @@ definitions:
         format: int64
         type: string
     type: object
+  LogExclusion:
+    description: 'Specifies a set of log entries that are not to be stored in Stackdriver Logging. If your project receives a large volume of logs, you might be able to use exclusions to reduce your chargeable logs. Exclusions are processed after log sinks, so you can export log entries before they are excluded. Audit log entries and log entries from Amazon Web Services are never excluded.'
+    properties:
+      description:
+        description: Optional. A description of this exclusion.
+        type: string
+      disabled:
+        description: 'Optional. If set to True, then this exclusion is disabled and it does not exclude any log entries. You can use exclusions.patch to change the value of this field.'
+        type: boolean
+      filter:
+        description: |
+          Required. An advanced logs filter that matches the log entries to be excluded. By using the sample function, you can exclude less than 100% of the matching log entries. For example, the following filter matches 99% of low-severity log entries from load balancers:
+          "resource.type=http_load_balancer severity<ERROR sample(insertId, 0.99)"
+        type: string
+      name:
+        description: 'Required. A client-assigned identifier, such as "load-balancer-exclusion". Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods.'
+        type: string
+    type: object
   LogLine:
     description: Application log line emitted while processing a request.
     properties:
@@ -1184,8 +1510,11 @@ definitions:
         type: string
     type: object
   LogMetric:
-    description: Describes a logs-based metric. The value of the metric is the number of log entries that match a logs filter in a given time interval.
+    description: Describes a logs-based metric. The value of the metric is the number of log entries that match a logs filter in a given time interval.Logs-based metric can also be used to extract values from logs and create a a distribution of the values. The distribution records the statistics of the extracted values along with an optional histogram of the values as specified by the bucket options.
     properties:
+      bucketOptions:
+        $ref: '#/definitions/BucketOptions'
+        description: Optional. The bucket_options are required when the logs-based metric is using a DISTRIBUTION value type and it describes the bucket boundaries used to create a histogram of the extracted values.
       description:
         description: 'Optional. A description of this metric, which is used in documentation.'
         type: string
@@ -1195,11 +1524,22 @@ definitions:
           "resource.type=gae_app AND severity>=ERROR"
           The maximum length of the filter is 20000 characters.
         type: string
+      labelExtractors:
+        additionalProperties:
+          type: string
+        description: 'Optional. A map from a label key string to an extractor expression which is used to extract data from a log entry field and assign as the label value. Each label key specified in the LabelDescriptor must have an associated extractor expression in this map. The syntax of the extractor expression is the same as for the value_extractor field.The extracted value is converted to the type defined in the label descriptor. If the either the extraction or the type conversion fails, the label will have a default value. The default value for a string label is an empty string, for an integer label its 0, and for a boolean label its false.Note that there are upper bounds on the maximum number of labels and the number of active time series that are allowed in a project.'
+        type: object
+      metricDescriptor:
+        $ref: '#/definitions/MetricDescriptor'
+        description: 'Optional. The metric descriptor associated with the logs-based metric. If unspecified, it uses a default metric descriptor with a DELTA metric kind, INT64 value type, with no labels and a unit of "1". Such a metric counts the number of log entries matching the filter expression.The name, type, and description fields in the metric_descriptor are output only, and is constructed using the name and description field in the LogMetric.To create a logs-based metric that records a distribution of log values, a DELTA metric kind with a DISTRIBUTION value type must be used along with a value_extractor expression in the LogMetric.Each label in the metric descriptor must have a matching label name as the key and an extractor expression as the value in the label_extractors map.The metric_kind and value_type fields in the metric_descriptor cannot be updated once initially configured. New labels can be added in the metric_descriptor, but existing labels cannot be modified except for their description.'
       name:
         description: 'Required. The client-assigned metric identifier. Examples: "error_count", "nginx/requests".Metric identifiers are limited to 100 characters and can include only the following characters: A-Z, a-z, 0-9, and the special characters _-.,+!*'',()%/. The forward-slash character (/) denotes a hierarchy of name pieces, and it cannot be the first character of the name.The metric identifier in this field must not be URL-encoded (https://en.wikipedia.org/wiki/Percent-encoding). However, when the metric identifier appears as the [METRIC_ID] part of a metric_name API parameter, then the metric identifier must be URL-encoded. Example: "projects/my-project/metrics/nginx%2Frequests".'
         type: string
+      valueExtractor:
+        description: 'Optional. A value_extractor is required when using a distribution logs-based metric to extract the values to record from a log entry. Two functions are supported for value extraction: EXTRACT(field) or REGEXP_EXTRACT(field, regex). The argument are:  1. field: The name of the log entry field from which the value is to be  extracted.  2. regex: A regular expression using the Google RE2 syntax  (https://github.com/google/re2/wiki/Syntax) with a single capture  group to extract data from the specified log entry field. The value  of the field is converted to a string before applying the regex.  It is an error to specify a regex that does not include exactly one  capture group.The result of the extraction must be convertible to a double type, as the distribution always records double values. If either the extraction or the conversion to double fails, then those values are not recorded in the distribution.Example: REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")'
+        type: string
       version:
-        description: Output only. The API version that created or updated this metric. This value is currently always set to V2.
+        description: Deprecated. The API version that created or updated this metric. The v2 format is used by default and cannot be changed.
         enum:
           - V2
           - V1
@@ -1217,12 +1557,12 @@ definitions:
           The sink's writer_identity, set when the sink is created, must have permission to write to the destination or else the log entries are not exported. For more information, see Exporting Logs With Sinks.
         type: string
       endTime:
-        description: 'Optional. The time at which this sink will stop exporting log entries. Log entries are exported only if their timestamp is earlier than the end time. If this field is not supplied, there is no end time. If both a start time and an end time are provided, then the end time must be later than the start time.'
+        description: Deprecated. This field is ignored when creating or updating sinks.
         format: google-datetime
         type: string
       filter:
         description: |
-          Optional. An advanced logs filter. The only exported log entries are those that are in the resource owning the sink and that match the filter. The filter must use the log entry format specified by the output_version_format parameter. For example, in the v2 format:
+          Optional. An advanced logs filter. The only exported log entries are those that are in the resource owning the sink and that match the filter. For example:
           logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR
         type: string
       includeChildren:
@@ -1242,11 +1582,97 @@ definitions:
           - V1
         type: string
       startTime:
-        description: Optional. The time at which this sink will begin exporting log entries. Log entries are exported only if their timestamp is not earlier than the start time. The default value of this field is the time the sink is created or updated.
+        description: Deprecated. This field is ignored when creating or updating sinks.
         format: google-datetime
         type: string
       writerIdentity:
         description: 'Output only. An IAM identity&mdash;a service account or group&mdash;under which Stackdriver Logging writes the exported log entries to the sink''s destination. This field is set by sinks.create and sinks.update, based on the setting of unique_writer_identity in those methods.Until you grant this identity write-access to the destination, log entry exports from this sink will fail. For more information, see Granting access for a resource. Consult the destination service''s documentation to determine the appropriate IAM roles to assign to the identity.'
+        type: string
+    type: object
+  MetricDescriptor:
+    description: 'Defines a metric type and its schema. Once a metric descriptor is created, deleting or altering it stops data collection and makes the metric type''s existing data unusable.'
+    properties:
+      description:
+        description: 'A detailed description of the metric, which can be used in documentation.'
+        type: string
+      displayName:
+        description: 'A concise name for the metric, which can be displayed in user interfaces. Use sentence case without an ending period, for example "Request count". This field is optional but it is recommended to be set for any metrics associated with user-visible concepts, such as Quota.'
+        type: string
+      labels:
+        description: 'The set of labels that can be used to describe a specific instance of this metric type. For example, the appengine.googleapis.com/http/server/response_latencies metric type has a label for the HTTP response code, response_code, so you can look at latencies for successful responses or just for responses that failed.'
+        items:
+          $ref: '#/definitions/LabelDescriptor'
+        type: array
+      metricKind:
+        description: 'Whether the metric records instantaneous values, changes to a value, etc. Some combinations of metric_kind and value_type might not be supported.'
+        enum:
+          - METRIC_KIND_UNSPECIFIED
+          - GAUGE
+          - DELTA
+          - CUMULATIVE
+        type: string
+      name:
+        description: The resource name of the metric descriptor.
+        type: string
+      type:
+        description: |
+          The metric type, including its DNS name prefix. The type is not URL-encoded. All user-defined custom metric types have the DNS name custom.googleapis.com. Metric types should use a natural hierarchical grouping. For example:
+          "custom.googleapis.com/invoice/paid/amount"
+          "appengine.googleapis.com/http/server/response_latencies"
+        type: string
+      unit:
+        description: |-
+          The unit in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The supported units are a subset of The Unified Code for Units of Measure (http://unitsofmeasure.org/ucum.html) standard:Basic units (UNIT)
+          bit bit
+          By byte
+          s second
+          min minute
+          h hour
+          d dayPrefixes (PREFIX)
+          k kilo (10**3)
+          M mega (10**6)
+          G giga (10**9)
+          T tera (10**12)
+          P peta (10**15)
+          E exa (10**18)
+          Z zetta (10**21)
+          Y yotta (10**24)
+          m milli (10**-3)
+          u micro (10**-6)
+          n nano (10**-9)
+          p pico (10**-12)
+          f femto (10**-15)
+          a atto (10**-18)
+          z zepto (10**-21)
+          y yocto (10**-24)
+          Ki kibi (2**10)
+          Mi mebi (2**20)
+          Gi gibi (2**30)
+          Ti tebi (2**40)GrammarThe grammar includes the dimensionless unit 1, such as 1/s.The grammar also includes these connectors:
+          / division (as an infix operator, e.g. 1/s).
+          . multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit is as follows:
+          Expression = Component { "." Component } { "/" Component } ;
+
+          Component = [ PREFIX ] UNIT [ Annotation ]
+                    | Annotation
+                    | "1"
+                    ;
+
+          Annotation = "{" NAME "}" ;
+          Notes:
+          Annotation is just a comment if it follows a UNIT and is  equivalent to 1 if it is used alone. For examples,  {requests}/s == 1/s, By{transmitted}/s == By/s.
+          NAME is a sequence of non-blank printable ASCII characters not  containing '{' or '}'.
+        type: string
+      valueType:
+        description: 'Whether the measurement is an integer, a floating-point number, etc. Some combinations of metric_kind and value_type might not be supported.'
+        enum:
+          - VALUE_TYPE_UNSPECIFIED
+          - BOOL
+          - INT64
+          - DOUBLE
+          - STRING
+          - DISTRIBUTION
+          - MONEY
         type: string
     type: object
   MonitoredResource:
@@ -1426,8 +1852,11 @@ definitions:
   WriteLogEntriesRequest:
     description: The parameters to WriteLogEntries.
     properties:
+      dryRun:
+        description: 'Optional. If true, the request should expect normal response, but the entries won''t be persisted nor exported. Useful for checking whether the logging API endpoints are working properly before sending valuable data.'
+        type: boolean
       entries:
-        description: 'Required. The log entries to write. Values supplied for the fields log_name, resource, and labels in this entries.write request are inserted into those log entries in this list that do not provide their own values.Stackdriver Logging also creates and inserts values for timestamp and insert_id if the entries do not provide them. The created insert_id for the N''th entry in this list will be greater than earlier entries and less than later entries. Otherwise, the order of log entries in this list does not matter.To improve throughput and to avoid exceeding the quota limit for calls to entries.write, you should write multiple log entries at once rather than calling this method for each individual log entry.'
+        description: 'Required. The log entries to send to Stackdriver Logging. The order of log entries in this list does not matter. Values supplied in this method''s log_name, resource, and labels fields are copied into those log entries in this list that do not include values for their corresponding fields. For more information, see the LogEntry type.If the timestamp or insert_id fields are missing in log entries, then this method supplies the current time or a unique identifier, respectively. The supplied values are chosen so that, among the log entries that did not supply their own values, the entries earlier in the list will sort before the entries later in the list. See the entries.list method.Log entries with timestamps that are more than the logs retention period in the past or more than 24 hours in the future will not be available when calling entries.list. However, those log entries can still be exported with LogSinks.To improve throughput and to avoid exceeding the quota limit for calls to entries.write, you should try to include several log entries in this list, rather than calling this method for each individual log entry.'
         items:
           $ref: '#/definitions/LogEntry'
         type: array

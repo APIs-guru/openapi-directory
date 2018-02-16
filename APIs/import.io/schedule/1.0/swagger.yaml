@@ -41,12 +41,15 @@ tags:
     name: store
   - description: APIs that exist on the schedule.import.io endpoint
     name: schedule
+  - description: APIs that exist on the api.import.io endpoint
+    name: api
   - name: run.import.io
   - name: data.import.io
-  - name: rss.import.io
   - name: extraction.import.io
-  - name: schedule.import.io
+  - name: rss.import.io
   - name: store.import.io
+  - name: schedule.import.io
+  - name: api.import.io
 paths:
   /extractor:
     get:
@@ -192,6 +195,15 @@ definitions:
       urlListId:
         type: string
     type: object
+  Inputs:
+    properties:
+      Example Input:
+        type: string
+      _url:
+        type: string
+    required:
+      - _url
+    type: object
   ObjectStoreSearchResult:
     properties:
       hits:
@@ -236,6 +248,38 @@ definitions:
         format: int64
         type: integer
       url:
+        type: string
+    type: object
+  Report:
+    properties:
+      configId:
+        type: string
+      guid:
+        type: string
+      name:
+        type: string
+      published:
+        type: boolean
+      reportId:
+        type: string
+      status:
+        type: string
+      summary:
+        type: object
+      type:
+        type: string
+    type: object
+  ReportRun:
+    properties:
+      autoPublish:
+        type: boolean
+      guid:
+        type: string
+      latestConfigId:
+        type: string
+      name:
+        type: string
+      type:
         type: string
     type: object
   Schedule:

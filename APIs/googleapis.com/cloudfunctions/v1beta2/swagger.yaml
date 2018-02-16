@@ -21,11 +21,11 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1beta2'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: cloudfunctions
 externalDocs:
@@ -198,6 +198,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: Maximum number of functions to return per call.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             The value returned by the last
             `ListFunctionsResponse`; indicates that
@@ -206,10 +210,6 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Maximum number of functions to return per call.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -223,19 +223,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a new function. If a function with the given name already exists in
@@ -243,6 +243,10 @@ paths:
         `ALREADY_EXISTS` error.
       operationId: cloudfunctions.projects.locations.functions.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CloudFunction'
         - description: |-
             The project and location in which the function should be created, specified
             in the format `projects/*/locations/*`
@@ -251,10 +255,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CloudFunction'
       responses:
         '200':
           description: Successful response
@@ -319,33 +319,33 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates existing function.
       operationId: cloudfunctions.projects.locations.functions.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CloudFunction'
         - description: The name of the function to be updated.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CloudFunction'
       responses:
         '200':
           description: Successful response
@@ -363,23 +363,23 @@ paths:
       description: Lists information about the supported locations for this service.
       operationId: cloudfunctions.projects.locations.list
       parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
         - description: 'The resource that owns the locations collection, if applicable.'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
         - description: The standard list page size.
           in: query
           name: pageSize
           type: integer
-        - description: The standard list filter.
+        - description: The standard list page token.
           in: query
-          name: filter
+          name: pageToken
           type: string
       responses:
         '200':
@@ -394,55 +394,163 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1beta2/{name}:call':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Invokes synchronously deployed function. To be used for testing, very
         limited traffic allowed.
       operationId: cloudfunctions.projects.locations.functions.call
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CallFunctionRequest'
         - description: The name of the function to be called.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CallFunctionRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/CallFunctionResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta2/{name}:generateDownloadUrl':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns a signed URL for downloading deployed function source code.
+        The URL is only valid for a limited period and should be used within
+        minutes after generation.
+        For more information about the signed URL usage see:
+        https://cloud.google.com/storage/docs/access-control/signed-urls
+      operationId: cloudfunctions.projects.locations.functions.generateDownloadUrl
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GenerateDownloadUrlRequest'
+        - description: |-
+            The name of function for which source code Google Cloud Storage signed
+            URL should be generated.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GenerateDownloadUrlResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta2/{parent}/functions:generateUploadUrl':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns a signed URL for uploading a function source code.
+        For more information about the signed URL usage see:
+        https://cloud.google.com/storage/docs/access-control/signed-urls
+        Once the function source code upload is complete, the used signed
+        URL should be provided in CreateFunction or UpdateFunction request
+        as a reference to the function source code.
+
+        When uploading source code to the generated signed URL, please follow
+        these restrictions:
+
+        * Source file type should be a zip file.
+        * Source file size should not exceed 100MB limit.
+
+        When making a HTTP PUT request, these two headers need to be specified:
+
+        * `content-type: application/zip`
+        * `x-google-content-length-range: 0,104857600`
+      operationId: cloudfunctions.projects.locations.functions.generateUploadUrl
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GenerateUploadUrlRequest'
+        - description: |-
+            The project and location in which the Google Cloud Storage signed URL
+            should be generated, specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GenerateUploadUrlResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -501,6 +609,11 @@ definitions:
       httpsTrigger:
         $ref: '#/definitions/HTTPSTrigger'
         description: An HTTPS endpoint type of source that can be triggered via URL.
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels associated with this Cloud Function.
+        type: object
       latestOperation:
         description: |-
           Output only. Name of the most recent operation modifying the function. If
@@ -532,12 +645,17 @@ definitions:
           To refer to a specific commit:
           `https://source.developers.google.com/projects/*/repos/*/revisions/*/paths/*`
           To refer to a moveable alias (branch):
-          `https://source.developers.google.com/projects/*/repos/*/aliases/movable/*/paths/*`
+          `https://source.developers.google.com/projects/*/repos/*/moveable-aliases/*/paths/*`
           In particular, to refer to HEAD use `master` moveable alias.
           To refer to a specific fixed alias (tag):
-          `https://source.developers.google.com/projects/*/repos/*/aliases/fixed/*/paths/*`
+          `https://source.developers.google.com/projects/*/repos/*/fixed-aliases/*/paths/*`
 
           You may omit `paths/*` if you want to use the main directory.
+        type: string
+      sourceUploadUrl:
+        description: |-
+          The Google Cloud Storage signed URL used for source uploading, generated
+          by google.cloud.functions.v1beta2.GenerateUploadUrl
         type: string
       status:
         description: Output only. Status of the function deployment.
@@ -559,6 +677,13 @@ definitions:
         description: Output only. The last update timestamp of a Cloud Function.
         format: google-datetime
         type: string
+      versionId:
+        description: |-
+          Output only.
+          The version identifier of the Cloud Function. Each deployment attempt
+          results in a new version of a function being created.
+        format: int64
+        type: string
     type: object
   EventTrigger:
     description: |-
@@ -570,14 +695,17 @@ definitions:
           `event_type` names contain the service that is sending an event and the
           kind of event that was fired. Must be of the form
           `providers/*/eventTypes/*` e.g. Directly handle a Message published to
-          Google Cloud Pub/Sub `providers/cloud.pubsub/eventTypes/topic.publish`
+          Google Cloud Pub/Sub `providers/cloud.pubsub/eventTypes/topic.publish`.
 
-               Handle an object changing in Google Cloud Storage
-               `providers/cloud.storage/eventTypes/object.change`
+          Handle an object changing in Google Cloud Storage:
+          `providers/cloud.storage/eventTypes/object.change`
 
-               Handle a write to the Firebase Realtime Database
-               `providers/firebase.database/eventTypes/data.write`
+          Handle a write to the Firebase Realtime Database:
+          `providers/google.firebase.database/eventTypes/ref.write`
         type: string
+      failurePolicy:
+        $ref: '#/definitions/FailurePolicy'
+        description: Specifies policy for failed executions.
       resource:
         description: |-
           Which instance of the source's service should send events. E.g. for Pub/Sub
@@ -585,6 +713,54 @@ definitions:
           Storage this would be a bucket at `projects/*/buckets/*`. For any source
           that only supports one instance per-project, this should be the name of the
           project (`projects/*`)
+        type: string
+      service:
+        description: |-
+          The hostname of the service that should be observed.
+
+          If no string is provided, the default service implementing the API will
+          be used. For example, `storage.googleapis.com` is the default for all
+          event types in the `google.storage` namespace.
+        type: string
+    type: object
+  FailurePolicy:
+    description: |-
+      Describes the policy in case of function's execution failure.
+      If empty, then defaults to ignoring failures (i.e. not retrying them).
+    properties:
+      retry:
+        $ref: '#/definitions/Retry'
+        description: 'If specified, then the function will be retried in case of a failure.'
+    type: object
+  GenerateDownloadUrlRequest:
+    description: Request of `GenerateDownloadUrl` method.
+    properties:
+      versionId:
+        description: The optional version of function.
+        format: uint64
+        type: string
+    type: object
+  GenerateDownloadUrlResponse:
+    description: Response of `GenerateDownloadUrl` method.
+    properties:
+      downloadUrl:
+        description: |-
+          The generated Google Cloud Storage signed URL that should be used for
+          function source code download.
+        type: string
+    type: object
+  GenerateUploadUrlRequest:
+    description: Request of `GenerateUploadUrl` method.
+    properties: {}
+    type: object
+  GenerateUploadUrlResponse:
+    description: Response of `GenerateUploadUrl` method.
+    properties:
+      uploadUrl:
+        description: |-
+          The generated Google Cloud Storage signed URL that should be used for a
+          function source code upload. The uploaded file should be a zip archive
+          which contains a function.
         type: string
     type: object
   HTTPSTrigger:
@@ -669,7 +845,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:
@@ -704,6 +880,38 @@ definitions:
           `TakeSnapshotResponse`.
         type: object
     type: object
+  OperationMetadataV1:
+    description: Metadata describing an Operation
+    properties:
+      request:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: The original request that started the operation.
+        type: object
+      target:
+        description: |-
+          Target of the operation - for example
+          projects/project-1/locations/region-1/functions/function-1
+        type: string
+      type:
+        description: Type of operation.
+        enum:
+          - OPERATION_UNSPECIFIED
+          - CREATE_FUNCTION
+          - UPDATE_FUNCTION
+          - DELETE_FUNCTION
+        type: string
+      updateTime:
+        description: The last update timestamp of the operation.
+        format: google-datetime
+        type: string
+      versionId:
+        description: |-
+          Version id of the function created or updated by an API call.
+          This field is only pupulated for Create and Update operations.
+        format: int64
+        type: string
+    type: object
   OperationMetadataV1Beta2:
     description: Metadata describing an Operation
     properties:
@@ -725,6 +933,25 @@ definitions:
           - UPDATE_FUNCTION
           - DELETE_FUNCTION
         type: string
+      updateTime:
+        description: The last update timestamp of the operation.
+        format: google-datetime
+        type: string
+      versionId:
+        description: |-
+          Version id of the function created or updated by an API call.
+          This field is only pupulated for Create and Update operations.
+        format: int64
+        type: string
+    type: object
+  Retry:
+    description: |-
+      Describes the retry policy in case of function's execution failure.
+      A function execution will be retried on any failure.
+      A failed execution will be retried up to 7 days with an exponential backoff
+      (capped at 10 seconds).
+      Retried execution is charged as any other execution.
+    properties: {}
     type: object
   SourceRepository:
     description: Describes the location of the function source in a remote repository.

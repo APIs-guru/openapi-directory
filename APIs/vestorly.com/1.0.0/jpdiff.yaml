@@ -1,0 +1,20 @@
+- op: add
+  path: /tags/0
+  value:
+    description: Vestorly API docs
+    name: api docs
+- op: test
+  path: /tags/1
+  value:
+    description: Vestorly API docs
+    externalDocs:
+      description: Find more info here
+      url: 'https://developers.vestorly.com'
+    name: api docs
+- op: remove
+  path: /tags/1
+- op: add
+  path: /externalDocs
+  value:
+    description: Find more info here
+    url: 'https://developers.vestorly.com'

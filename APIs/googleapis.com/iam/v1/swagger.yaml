@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - security
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://iam.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -123,11 +125,49 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: iamPolicies
   - name: organizations
   - name: permissions
   - name: projects
   - name: roles
 paths:
+  '/v1/iamPolicies:queryAuditableServices':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns a list of services that support service level audit logging
+        configuration for the given resource.
+      operationId: iam.iamPolicies.queryAuditableServices
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/QueryAuditableServicesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/QueryAuditableServicesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - iamPolicies
   '/v1/permissions:queryTestablePermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -225,19 +265,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1/roles:queryGrantableRoles':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Queries roles that can be granted on a particular resource.
@@ -263,19 +303,24 @@ paths:
         - roles
   '/v1/{name}':
     delete:
-      description: Deletes a ServiceAccountKey.
-      operationId: iam.projects.serviceAccounts.keys.delete
+      description: |-
+        Soft deletes a role. The role is suspended and cannot be used to create new
+        IAM Policy Bindings.
+        The Role will not be included in `ListRoles()` unless `show_deleted` is set
+        in the `ListRolesRequest`. The Role contains the deleted boolean set.
+        Existing Bindings remains, but are inactive. The Role can be undeleted
+        within 7 days. After 7 days the Role is deleted and all Bindings associated
+        with the role are removed.
+      operationId: iam.organizations.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
           name: etag
           type: string
         - description: |-
-            The resource name of the service account key in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}/keys/{key}`.
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
-            `unique_id` of the service account.
+            The resource name of the role in one of the following formats:
+            `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
+            `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
           in: path
           name: name
           required: true
@@ -285,17 +330,17 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/Role'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     get:
       description: Gets a Role definition.
-      operationId: iam.roles.get
+      operationId: iam.organizations.roles.get
       parameters:
         - description: |-
             The resource name of the role in one of the following formats:
@@ -328,24 +373,24 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - roles
+        - organizations
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a Role definition.
-      operationId: iam.projects.roles.patch
+      operationId: iam.organizations.roles.patch
       parameters:
         - in: body
           name: body
@@ -376,7 +421,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     put:
       description: |-
         Updates a ServiceAccount.
@@ -386,25 +431,25 @@ paths:
         The `etag` is mandatory.
       operationId: iam.projects.serviceAccounts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ServiceAccount'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
 
-            Requests using `-` as a wildcard for the project will infer the project
-            from the `account` and the `account` value can be the `email` address or
-            the `unique_id` of the service account.
+            Requests using `-` as a wildcard for the `PROJECT_ID` will infer the
+            project from the `account` and the `ACCOUNT` value can be the `email`
+            address or the `unique_id` of the service account.
 
             In responses the resource name will always be in the format
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ServiceAccount'
       responses:
         '200':
           description: Successful response
@@ -422,18 +467,6 @@ paths:
       description: Lists ServiceAccountKeys.
       operationId: iam.projects.serviceAccounts.keys.list
       parameters:
-        - description: |-
-            The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-
-            Using `-` as a wildcard for the project, will infer the project from
-            the account. The `account` value can be the `email` address or the
-            `unique_id` of the service account.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
         - collectionFormat: multi
           description: |-
             Filters the types of keys the user wants to include in the list
@@ -448,6 +481,18 @@ paths:
             type: string
           name: keyTypes
           type: array
+        - description: |-
+            The resource name of the service account in the following format:
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+
+            Using `-` as a wildcard for the `PROJECT_ID`, will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
+            `unique_id` of the service account.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -461,40 +506,40 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a ServiceAccountKey
         and returns it.
       operationId: iam.projects.serviceAccounts.keys.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateServiceAccountKeyRequest'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateServiceAccountKeyRequest'
       responses:
         '200':
           description: Successful response
@@ -521,12 +566,6 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            Optional pagination token returned in an earlier
-            ListServiceAccountsResponse.next_page_token.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             Optional limit on the number of service accounts to include in the
             response. Further accounts can subsequently be obtained by including the
             ListServiceAccountsResponse.next_page_token
@@ -534,6 +573,12 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Optional pagination token returned in an earlier
+            ListServiceAccountsResponse.next_page_token.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -547,25 +592,29 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a ServiceAccount
         and returns it.
       operationId: iam.projects.serviceAccounts.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateServiceAccountRequest'
         - description: |-
             Required. The resource name of the project associated with the service
             accounts, such as `projects/my-project-123`.
@@ -574,10 +623,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateServiceAccountRequest'
       responses:
         '200':
           description: Successful response
@@ -592,38 +637,38 @@ paths:
         - projects
   '/v1/{name}:signBlob':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Signs a blob using a service account's system-managed private key.
       operationId: iam.projects.serviceAccounts.signBlob
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SignBlobRequest'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SignBlobRequest'
       responses:
         '200':
           description: Successful response
@@ -638,19 +683,19 @@ paths:
         - projects
   '/v1/{name}:signJwt':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Signs a JWT using a service account's system-managed private key.
@@ -660,21 +705,21 @@ paths:
         more than one hour, the request will fail.
       operationId: iam.projects.serviceAccounts.signJwt
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SignJwtRequest'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SignJwtRequest'
       responses:
         '200':
           description: Successful response
@@ -704,7 +749,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.projects.roles.undelete
+      operationId: iam.organizations.roles.undelete
       parameters:
         - in: body
           name: body
@@ -730,20 +775,17 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.projects.roles.list
+      operationId: iam.organizations.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
           in: query
           name: pageSize
           type: integer
         - description: Optional pagination token returned in an earlier ListRolesResponse.
-          enum:
-            - BASIC
-            - FULL
           in: query
           name: pageToken
           type: string
@@ -779,7 +821,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -796,7 +838,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.projects.roles.create
+      operationId: iam.organizations.roles.create
       parameters:
         - in: body
           name: body
@@ -822,22 +864,22 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns the IAM access control policy for a
@@ -866,19 +908,19 @@ paths:
         - projects
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the IAM access control policy for a
@@ -911,19 +953,19 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Tests the specified permissions against the IAM access control policy
@@ -964,6 +1006,15 @@ definitions:
       policyDelta:
         $ref: '#/definitions/PolicyDelta'
         description: Policy delta between the original policy and the newly set policy.
+    type: object
+  AuditableService:
+    description: Contains information about an auditable service.
+    properties:
+      name:
+        description: |-
+          Public name of the service.
+          For example, the service name for Cloud IAM is 'iam.googleapis.com'.
+        type: string
     type: object
   Binding:
     description: Associates `members` with a `role`.
@@ -1017,13 +1068,6 @@ definitions:
           - ADD
           - REMOVE
         type: string
-      condition:
-        $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding.
-          This field is GOOGLE_INTERNAL.
-          This field is not logged in IAM side because it's only for audit logging.
-          Optional
       member:
         description: |-
           A single identity requesting access for a Cloud Platform resource.
@@ -1062,8 +1106,9 @@ definitions:
         type: string
       privateKeyType:
         description: |-
-          The output format of the private key. `GOOGLE_CREDENTIALS_FILE` is the
-          default output format.
+          The output format of the private key. The default value is
+          `TYPE_GOOGLE_CREDENTIALS_FILE`, which is the Google Credentials File
+          format.
         enum:
           - TYPE_UNSPECIFIED
           - TYPE_PKCS12_FILE
@@ -1099,39 +1144,6 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
-    type: object
-  Expr:
-    description: |-
-      Represents an expression text. Example:
-
-          title: "User account presence"
-          description: "Determines whether the request has a user account"
-          expression: "size(request.user) > 0"
-    properties:
-      description:
-        description: |-
-          An optional description of the expression. This is a longer text which
-          describes the expression, e.g. when hovered over it in a UI.
-        type: string
-      expression:
-        description: |-
-          Textual representation of an expression in
-          Common Expression Language syntax.
-
-          The application context of the containing message determines which
-          well-known feature set of CEL is supported.
-        type: string
-      location:
-        description: |-
-          An optional string indicating the location of the expression for error
-          reporting, e.g. a file name and a position in the file.
-        type: string
-      title:
-        description: |-
-          An optional title for the expression, i.e. a short string describing
-          its purpose. This can be used e.g. in UIs which allow to enter the
-          expression.
-        type: string
     type: object
   ListRolesResponse:
     description: The response containing the roles defined under a resource.
@@ -1174,6 +1186,9 @@ definitions:
   Permission:
     description: A permission which can be included by a role.
     properties:
+      apiDisabled:
+        description: The service API associated with the permission is not enabled.
+        type: boolean
       customRolesSupportLevel:
         description: The current custom role support level.
         enum:
@@ -1234,7 +1249,7 @@ definitions:
           }
 
       For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       bindings:
         description: |-
@@ -1258,7 +1273,7 @@ definitions:
         format: byte
         type: string
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object
@@ -1269,6 +1284,28 @@ definitions:
         description: The delta for Bindings between two policies.
         items:
           $ref: '#/definitions/BindingDelta'
+        type: array
+    type: object
+  QueryAuditableServicesRequest:
+    description: A request to get the list of auditable services for a resource.
+    properties:
+      fullResourceName:
+        description: |-
+          Required. The full resource name to query from the list of auditable
+          services.
+
+          The name follows the Google Cloud Platform resource format.
+          For example, a Cloud Platform project with id `my-project` will be named
+          `//cloudresourcemanager.googleapis.com/projects/my-project`.
+        type: string
+    type: object
+  QueryAuditableServicesResponse:
+    description: A response containing a list of auditable services for a resource.
+    properties:
+      services:
+        description: The auditable services for a resource.
+        items:
+          $ref: '#/definitions/AuditableService'
         type: array
     type: object
   QueryGrantableRolesRequest:
@@ -1403,14 +1440,13 @@ definitions:
       `unique_id`.
 
       If the account already exists, the account's resource name is returned
-      in util::Status's ResourceInfo.resource_name in the format of
-      projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}. The caller can
-      use the name in other methods to access the account.
+      in the format of projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}. The caller
+      can use the name in other methods to access the account.
 
       All other methods can identify the service account using the format
-      `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-      Using `-` as a wildcard for the project will infer the project from
-      the account. The `account` value can be the `email` address or the
+      `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+      Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+      the account. The `ACCOUNT` value can be the `email` address or the
       `unique_id` of the service account.
     properties:
       displayName:
@@ -1428,18 +1464,18 @@ definitions:
       name:
         description: |-
           The resource name of the service account in the following format:
-          `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
+          `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
 
-          Requests using `-` as a wildcard for the project will infer the project
-          from the `account` and the `account` value can be the `email` address or
-          the `unique_id` of the service account.
+          Requests using `-` as a wildcard for the `PROJECT_ID` will infer the
+          project from the `account` and the `ACCOUNT` value can be the `email`
+          address or the `unique_id` of the service account.
 
           In responses the resource name will always be in the format
-          `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
+          `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
         type: string
       oauth2ClientId:
         description: |-
-          @OutputOnly. The OAuth2 client id for the service account.
+          @OutputOnly The OAuth2 client id for the service account.
           This is used in conjunction with the OAuth2 clientconfig API to make
           three legged OAuth2 (3LO) flows to access the data of Google users.
         type: string
@@ -1479,7 +1515,7 @@ definitions:
       name:
         description: |-
           The resource name of the service account key in the following format
-          `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}/keys/{key}`.
+          `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`.
         type: string
       privateKeyData:
         description: |-

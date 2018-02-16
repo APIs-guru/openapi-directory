@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://slides.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -37,6 +39,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
       'https://www.googleapis.com/auth/presentations': View and manage your Google Slides presentations
       'https://www.googleapis.com/auth/presentations.readonly': View your Google Slides presentations
@@ -49,6 +52,7 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
       'https://www.googleapis.com/auth/presentations': View and manage your Google Slides presentations
       'https://www.googleapis.com/auth/presentations.readonly': View your Google Slides presentations
@@ -137,19 +141,19 @@ tags:
 paths:
   /v1/presentations:
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a new presentation using the title given in the request. Other
@@ -171,6 +175,10 @@ paths:
             - 'https://www.googleapis.com/auth/drive'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/presentations'
           Oauth2c:
@@ -199,6 +207,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
@@ -213,32 +225,32 @@ paths:
       tags:
         - presentations
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/presentations/{presentationId}/pages/{pageObjectId}':
     get:
       description: Gets the latest version of the specified page in the presentation.
       operationId: slides.presentations.pages.get
       parameters:
-        - description: The ID of the presentation to retrieve.
-          in: path
-          name: presentationId
-          required: true
-          type: string
         - description: The object ID of the page to retrieve.
           in: path
           name: pageObjectId
+          required: true
+          type: string
+        - description: The ID of the presentation to retrieve.
+          in: path
+          name: presentationId
           required: true
           type: string
       responses:
@@ -252,6 +264,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
@@ -266,24 +282,26 @@ paths:
       tags:
         - presentations
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/presentations/{presentationId}/pages/{pageObjectId}/thumbnail':
     get:
       description: |-
         Generates a thumbnail of the latest version of the specified page in the
         presentation and returns a URL to the thumbnail image.
+
+        This request counts as an expensive read request for quota purposes.
       operationId: slides.presentations.pages.getThumbnail
       parameters:
         - description: The object ID of the page whose thumbnail to retrieve.
@@ -327,6 +345,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
@@ -356,19 +378,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1/presentations/{presentationId}:batchUpdate':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Applies one or more updates to the presentation.
@@ -394,15 +416,15 @@ paths:
         atomically.
       operationId: slides.presentations.batchUpdate
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchUpdatePresentationRequest'
         - description: The presentation to apply the updates to.
           in: path
           name: presentationId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BatchUpdatePresentationRequest'
       responses:
         '200':
           description: Successful response
@@ -413,6 +435,10 @@ paths:
             - 'https://www.googleapis.com/auth/drive'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
           Oauth2c:
@@ -579,6 +605,14 @@ definitions:
           ratio, the image is scaled and centered with respect to the size in order
           to maintain aspect ratio. The provided transform is applied after this
           operation.
+
+          The PageElementProperties.size property is
+          optional. If you don't specify the size, the default size of the image is
+          used.
+
+          The PageElementProperties.transform property is
+          optional. If you don't specify a transform, the image will be placed at the
+          top left corner of the page.
       objectId:
         description: |-
           A user-supplied object ID.
@@ -600,6 +634,8 @@ definitions:
           display inside the presentation. Images must be less than 50MB in size,
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
+
+          The provided URL can be at most 2 kB in length.
         type: string
     type: object
   CreateImageResponse:
@@ -1013,7 +1049,17 @@ definitions:
     properties:
       elementProperties:
         $ref: '#/definitions/PageElementProperties'
-        description: The element properties for the video.
+        description: |-
+          The element properties for the video.
+
+          The PageElementProperties.size property is
+          optional. If you don't specify a size, a default size is chosen by the
+          server.
+
+          The PageElementProperties.transform property is
+          optional. The transform must not have shear components.
+          If you don't specify a transform, the video will be placed at the top left
+          corner of the page.
       id:
         description: |-
           The video source's unique identifier for this video.
@@ -1272,6 +1318,40 @@ definitions:
           $ref: '#/definitions/PageElement'
         type: array
     type: object
+  GroupObjectsRequest:
+    description: 'Groups objects to create an object group. For example, groups PageElements to create a Group on the same page as all the children.'
+    properties:
+      childrenObjectIds:
+        description: |-
+          The object IDs of the objects to group.
+
+          Only page elements can be grouped. There should be at least two page
+          elements on the same page that are not already in another group. Some page
+          elements, such as videos, tables and placeholder shapes cannot be grouped.
+        items:
+          type: string
+        type: array
+      groupObjectId:
+        description: |-
+          A user-supplied object ID for the group to be created.
+
+          If you specify an ID, it must be unique among all pages and page elements
+          in the presentation. The ID must start with an alphanumeric character or an
+          underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+          may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`).
+          The length of the ID must not be less than 5 or greater than 50.
+
+          If you don't specify an ID, a unique one is generated.
+        type: string
+    type: object
+  GroupObjectsResponse:
+    description: The result of grouping objects.
+    properties:
+      objectId:
+        description: The object ID of the created group.
+        type: string
+    type: object
   Image:
     description: |-
       A PageElement kind representing an
@@ -1313,7 +1393,7 @@ definitions:
         description: 'The hyperlink destination of the image. If unset, there is no link.'
       outline:
         $ref: '#/definitions/Outline'
-        description: 'The outline of the image. If not set, the the image has no outline.'
+        description: 'The outline of the image. If not set, the image has no outline.'
       recolor:
         $ref: '#/definitions/Recolor'
         description: |-
@@ -1647,6 +1727,22 @@ definitions:
         description: The human-readable name of the master.
         type: string
     type: object
+  MergeTableCellsRequest:
+    description: Merges cells in a Table.
+    properties:
+      objectId:
+        description: The object ID of the table.
+        type: string
+      tableRange:
+        $ref: '#/definitions/TableRange'
+        description: |-
+          The table range specifying which cells of the table to merge.
+
+          Any text in the cells being merged will be concatenated and stored in the
+          upper-left ("head") cell of the range. If the range is non-rectangular
+          (which can occur in some cases where the range covers cells that are
+          already merged), a 400 bad request error is returned.
+    type: object
   NestingLevel:
     description: |-
       Contains properties describing the look and feel of a list bullet at a given
@@ -1735,9 +1831,9 @@ definitions:
         description: |-
           The outline property state.
 
-          Updating the the outline on a page element will implicitly update this
-          field to`RENDERED`, unless another value is specified in the same request.
-          To have no outline on a page element, set this field to `NOT_RENDERED`. In
+          Updating the outline on a page element will implicitly update this field
+          to `RENDERED`, unless another value is specified in the same request. To
+          have no outline on a page element, set this field to `NOT_RENDERED`. In
           this case, any other outline fields set in the same request will be
           ignored.
         enum:
@@ -1817,7 +1913,7 @@ definitions:
         description: |-
           The background fill property state.
 
-          Updating the the fill on a page will implicitly update this field to
+          Updating the fill on a page will implicitly update this field to
           `RENDERED`, unless another value is specified in the same request. To
           have no fill on a page, set this field to `NOT_RENDERED`. In this case,
           any other fill fields set in the same request will be ignored.
@@ -1877,7 +1973,16 @@ definitions:
         type: string
       transform:
         $ref: '#/definitions/AffineTransform'
-        description: The transform of the page element.
+        description: |-
+          The transform of the page element.
+
+          The visual appearance of the page element is determined by its absolute
+          transform. To compute the absolute transform, preconcatenate a page
+          element's transform with the transforms of all of its parent groups. If the
+          page element is not in a group, its absolute transform is the same as the
+          value in this field.
+
+          The initial transform for the newly created Group is always the identity transform.
       video:
         $ref: '#/definitions/Video'
         description: A video page element.
@@ -2221,6 +2326,23 @@ definitions:
         description: |-
           If set, this request will replace all of the shapes that contain the
           given text.
+      imageReplaceMethod:
+        description: |-
+          The image replace method.
+
+          If you specify both a `replace_method` and an `image_replace_method`, the
+          `image_replace_method` takes precedence.
+
+          If you do not specify a value for `image_replace_method`, but specify a
+          value for `replace_method`, then the specified `replace_method` value is
+          used.
+
+          If you do not specify either, then CENTER_INSIDE is used.
+        enum:
+          - IMAGE_REPLACE_METHOD_UNSPECIFIED
+          - CENTER_INSIDE
+          - CENTER_CROP
+        type: string
       imageUrl:
         description: |-
           The image URL.
@@ -2229,6 +2351,8 @@ definitions:
           display inside the presentation. Images must be less than 50MB in size,
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
+
+          The provided URL can be at most 2 kB in length.
         type: string
       pageObjectIds:
         description: |-
@@ -2242,7 +2366,12 @@ definitions:
           type: string
         type: array
       replaceMethod:
-        description: The replace method.
+        description: |-
+          The replace method.
+          Deprecated: use `image_replace_method` instead.
+
+          If you specify both a `replace_method` and an `image_replace_method`, the
+          `image_replace_method` takes precedence.
         enum:
           - CENTER_INSIDE
           - CENTER_CROP
@@ -2378,6 +2507,9 @@ definitions:
       duplicateObject:
         $ref: '#/definitions/DuplicateObjectRequest'
         description: Duplicates a slide or page element.
+      groupObjects:
+        $ref: '#/definitions/GroupObjectsRequest'
+        description: 'Groups objects, such as page elements.'
       insertTableColumns:
         $ref: '#/definitions/InsertTableColumnsRequest'
         description: Inserts columns into a table.
@@ -2387,6 +2519,9 @@ definitions:
       insertText:
         $ref: '#/definitions/InsertTextRequest'
         description: Inserts text into a shape or table cell.
+      mergeTableCells:
+        $ref: '#/definitions/MergeTableCellsRequest'
+        description: Merges cells in a Table.
       refreshSheetsChart:
         $ref: '#/definitions/RefreshSheetsChartRequest'
         description: Refreshes a Google Sheets chart.
@@ -2399,12 +2534,23 @@ definitions:
       replaceAllText:
         $ref: '#/definitions/ReplaceAllTextRequest'
         description: Replaces all instances of specified text.
+      ungroupObjects:
+        $ref: '#/definitions/UngroupObjectsRequest'
+        description: 'Ungroups objects, such as groups.'
+      unmergeTableCells:
+        $ref: '#/definitions/UnmergeTableCellsRequest'
+        description: Unmerges cells in a Table.
       updateImageProperties:
         $ref: '#/definitions/UpdateImagePropertiesRequest'
         description: Updates the properties of an Image.
       updateLineProperties:
         $ref: '#/definitions/UpdateLinePropertiesRequest'
         description: Updates the properties of a Line.
+      updatePageElementAltText:
+        $ref: '#/definitions/UpdatePageElementAltTextRequest'
+        description: |-
+          Updates the alt text title and/or description of a
+          page element.
       updatePageElementTransform:
         $ref: '#/definitions/UpdatePageElementTransformRequest'
         description: Updates the transform of a page element.
@@ -2420,9 +2566,20 @@ definitions:
       updateSlidesPosition:
         $ref: '#/definitions/UpdateSlidesPositionRequest'
         description: Updates the position of a set of slides in the presentation.
+      updateTableBorderProperties:
+        $ref: '#/definitions/UpdateTableBorderPropertiesRequest'
+        description: Updates the properties of the table borders in a Table.
       updateTableCellProperties:
         $ref: '#/definitions/UpdateTableCellPropertiesRequest'
         description: Updates the properties of a TableCell.
+      updateTableColumnProperties:
+        $ref: '#/definitions/UpdateTableColumnPropertiesRequest'
+        description: |-
+          Updates the properties of a Table
+          column.
+      updateTableRowProperties:
+        $ref: '#/definitions/UpdateTableRowPropertiesRequest'
+        description: Updates the properties of a Table row.
       updateTextStyle:
         $ref: '#/definitions/UpdateTextStyleRequest'
         description: Updates the styling of text within a Shape or Table.
@@ -2457,6 +2614,9 @@ definitions:
       duplicateObject:
         $ref: '#/definitions/DuplicateObjectResponse'
         description: The result of duplicating an object.
+      groupObjects:
+        $ref: '#/definitions/GroupObjectsResponse'
+        description: The result of grouping objects.
       replaceAllShapesWithImage:
         $ref: '#/definitions/ReplaceAllShapesWithImageResponse'
         description: |-
@@ -2528,9 +2688,9 @@ definitions:
         description: |-
           The shadow property state.
 
-          Updating the the shadow on a page element will implicitly update this field
-          to `RENDERED`, unless another value is specified in the same request. To
-          have no shadow on a page element, set this field to `NOT_RENDERED`. In this
+          Updating the shadow on a page element will implicitly update this field to
+          `RENDERED`, unless another value is specified in the same request. To have
+          no shadow on a page element, set this field to `NOT_RENDERED`. In this
           case, any other shadow fields set in the same request will be ignored.
         enum:
           - RENDERED
@@ -2727,7 +2887,7 @@ definitions:
         description: |-
           The background fill property state.
 
-          Updating the the fill on a shape will implicitly update this field to
+          Updating the fill on a shape will implicitly update this field to
           `RENDERED`, unless another value is specified in the same request. To
           have no fill on a shape, set this field to `NOT_RENDERED`. In this case,
           any other fill fields set in the same request will be ignored.
@@ -2750,6 +2910,19 @@ definitions:
       Determining the rendered value of the property depends on the corresponding
       property_state field value.
     properties:
+      contentAlignment:
+        description: |-
+          The alignment of the content in the shape. If unspecified,
+          the alignment is inherited from a parent placeholder if it exists. If the
+          shape has no parent, the default alignment matches the alignment for new
+          shapes created in the Slides editor.
+        enum:
+          - CONTENT_ALIGNMENT_UNSPECIFIED
+          - CONTENT_ALIGNMENT_UNSUPPORTED
+          - TOP
+          - MIDDLE
+          - BOTTOM
+        type: string
       link:
         $ref: '#/definitions/Link'
         description: |-
@@ -2886,6 +3059,8 @@ definitions:
           display inside the presentation. Pictures must be less than 50MB in size,
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
+
+          The provided URL can be at most 2 kB in length.
         type: string
       size:
         $ref: '#/definitions/Size'
@@ -2914,6 +3089,17 @@ definitions:
         description: Number of columns in the table.
         format: int32
         type: integer
+      horizontalBorderRows:
+        description: |-
+          Properties of horizontal cell borders.
+
+          A table's horizontal cell borders are represented as a grid. The grid has
+          one more row than the number of rows in the table and the same number of
+          columns as the table. For example, if the table is 3 x 3, its horizontal
+          borders will be represented as a grid with 4 rows and 3 columns.
+        items:
+          $ref: '#/definitions/TableBorderRow'
+        type: array
       rows:
         description: Number of rows in the table.
         format: int32
@@ -2932,6 +3118,68 @@ definitions:
           than 1.
         items:
           $ref: '#/definitions/TableRow'
+        type: array
+      verticalBorderRows:
+        description: |-
+          Properties of vertical cell borders.
+
+          A table's vertical cell borders are represented as a grid. The grid has the
+          same number of rows as the table and one more column than the number of
+          columns in the table. For example, if the table is 3 x 3, its vertical
+          borders will be represented as a grid with 3 rows and 4 columns.
+        items:
+          $ref: '#/definitions/TableBorderRow'
+        type: array
+    type: object
+  TableBorderCell:
+    description: The properties of each border cell.
+    properties:
+      location:
+        $ref: '#/definitions/TableCellLocation'
+        description: The location of the border within the border table.
+      tableBorderProperties:
+        $ref: '#/definitions/TableBorderProperties'
+        description: The border properties.
+    type: object
+  TableBorderFill:
+    description: The fill of the border.
+    properties:
+      solidFill:
+        $ref: '#/definitions/SolidFill'
+        description: Solid fill.
+    type: object
+  TableBorderProperties:
+    description: |-
+      The border styling properties of the
+      TableBorderCell.
+    properties:
+      dashStyle:
+        description: The dash style of the border.
+        enum:
+          - DASH_STYLE_UNSPECIFIED
+          - SOLID
+          - DOT
+          - DASH
+          - DASH_DOT
+          - LONG_DASH
+          - LONG_DASH_DOT
+        type: string
+      tableBorderFill:
+        $ref: '#/definitions/TableBorderFill'
+        description: The fill of the table border.
+      weight:
+        $ref: '#/definitions/Dimension'
+        description: The thickness of the border.
+    type: object
+  TableBorderRow:
+    description: Contents of each border row in a table.
+    properties:
+      tableBorderCells:
+        description: |-
+          Properties of each border cell. When a border's adjacent table cells are
+          merged, it is not included in the response.
+        items:
+          $ref: '#/definitions/TableBorderCell'
         type: array
     type: object
   TableCell:
@@ -2962,7 +3210,7 @@ definitions:
         description: |-
           The background fill property state.
 
-          Updating the the fill on a table cell will implicitly update this field
+          Updating the fill on a table cell will implicitly update this field
           to `RENDERED`, unless another value is specified in the same request. To
           have no fill on a table cell, set this field to `NOT_RENDERED`. In this
           case, any other fill fields set in the same request will be ignored.
@@ -2990,6 +3238,17 @@ definitions:
   TableCellProperties:
     description: The properties of the TableCell.
     properties:
+      contentAlignment:
+        description: |-
+          The alignment of the content in the table cell. The default alignment
+          matches the alignment for newly created table cells in the Slides editor.
+        enum:
+          - CONTENT_ALIGNMENT_UNSPECIFIED
+          - CONTENT_ALIGNMENT_UNSUPPORTED
+          - TOP
+          - MIDDLE
+          - BOTTOM
+        type: string
       tableCellBackgroundFill:
         $ref: '#/definitions/TableCellBackgroundFill'
         description: |-
@@ -3050,6 +3309,19 @@ definitions:
         items:
           $ref: '#/definitions/TableCell'
         type: array
+      tableRowProperties:
+        $ref: '#/definitions/TableRowProperties'
+        description: Properties of the row.
+    type: object
+  TableRowProperties:
+    description: Properties of each row in a table.
+    properties:
+      minRowHeight:
+        $ref: '#/definitions/Dimension'
+        description: |-
+          Minimum height of the row. The row will be rendered in the Slides editor at
+          a height equal to or greater than this value in order to show all the text
+          in the row's cell(s).
     type: object
   TextContent:
     description: |-
@@ -3303,6 +3575,38 @@ definitions:
         format: int32
         type: integer
     type: object
+  UngroupObjectsRequest:
+    description: 'Ungroups objects, such as groups.'
+    properties:
+      objectIds:
+        description: |-
+          The object IDs of the objects to ungroup.
+
+          Only groups that are not inside other
+          groups can be ungrouped. All the groups
+          should be on the same page. The group itself is deleted. The visual sizes
+          and positions of all the children are preserved.
+        items:
+          type: string
+        type: array
+    type: object
+  UnmergeTableCellsRequest:
+    description: Unmerges cells in a Table.
+    properties:
+      objectId:
+        description: The object ID of the table.
+        type: string
+      tableRange:
+        $ref: '#/definitions/TableRange'
+        description: |-
+          The table range specifying which cells of the table to unmerge.
+
+          All merged cells in this range will be unmerged, and cells that are already
+          unmerged will not be affected. If the range has no merged cells, the
+          request will do nothing. If there is text in any of the merged cells, the
+          text will remain in the upper-left ("head") cell of the resulting block of
+          unmerged cells.
+    type: object
   UpdateImagePropertiesRequest:
     description: Update the properties of an Image.
     properties:
@@ -3353,8 +3657,36 @@ definitions:
         description: The object ID of the line the update is applied to.
         type: string
     type: object
+  UpdatePageElementAltTextRequest:
+    description: |-
+      Updates the alt text title and/or description of a
+      page element.
+    properties:
+      description:
+        description: |-
+          The updated alt text description of the page element. If unset the existing
+          value will be maintained. The description is exposed to screen readers
+          and other accessibility interfaces. Only use human readable values related
+          to the content of the page element.
+        type: string
+      objectId:
+        description: The object ID of the page element the updates are applied to.
+        type: string
+      title:
+        description: |-
+          The updated alt text title of the page element. If unset the
+          existing value will be maintained. The title is exposed to screen readers
+          and other accessibility interfaces. Only use human readable values related
+          to the content of the page element.
+        type: string
+    type: object
   UpdatePageElementTransformRequest:
-    description: Updates the transform of a page element.
+    description: |-
+      Updates the transform of a page element.
+
+      Updating the transform of a group will change the absolute transform of the
+      page elements in that group, which can change their visual appearance. See
+      the documentation for PageElement.transform for more details.
     properties:
       applyMode:
         description: The apply mode of the transform update.
@@ -3475,6 +3807,53 @@ definitions:
           type: string
         type: array
     type: object
+  UpdateTableBorderPropertiesRequest:
+    description: Updates the properties of the table borders in a Table.
+    properties:
+      borderPosition:
+        description: |-
+          The border position in the table range the updates should apply to. If a
+          border position is not specified, the updates will apply to all borders in
+          the table range.
+        enum:
+          - ALL
+          - BOTTOM
+          - INNER
+          - INNER_HORIZONTAL
+          - INNER_VERTICAL
+          - LEFT
+          - OUTER
+          - RIGHT
+          - TOP
+        type: string
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `tableBorderProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the table border solid fill color, set
+          `fields` to `"tableBorderFill.solidFill.color"`.
+
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the table.
+        type: string
+      tableBorderProperties:
+        $ref: '#/definitions/TableBorderProperties'
+        description: The table border properties to update.
+      tableRange:
+        $ref: '#/definitions/TableRange'
+        description: |-
+          The table range representing the subset of the table to which the updates
+          are applied. If a table range is not specified, the updates will apply to
+          the entire table.
+    type: object
   UpdateTableCellPropertiesRequest:
     description: Update the properties of a TableCell.
     properties:
@@ -3505,6 +3884,75 @@ definitions:
           The table range representing the subset of the table to which the updates
           are applied. If a table range is not specified, the updates will apply to
           the entire table.
+    type: object
+  UpdateTableColumnPropertiesRequest:
+    description: Updates the properties of a Table column.
+    properties:
+      columnIndices:
+        description: |-
+          The list of zero-based indices specifying which columns to update. If no
+          indices are provided, all columns in the table will be updated.
+        items:
+          format: int32
+          type: integer
+        type: array
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `tableColumnProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the column width, set `fields` to `"column_width"`.
+
+          If '"column_width"' is included in the field mask but the property is left
+          unset, the column width will default to 406,400 EMU (32 points).
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the table.
+        type: string
+      tableColumnProperties:
+        $ref: '#/definitions/TableColumnProperties'
+        description: |-
+          The table column properties to update.
+
+          If the value of `table_column_properties#column_width` in the request is
+          less than 406,400 EMU (32 points), a 400 bad request error is returned.
+    type: object
+  UpdateTableRowPropertiesRequest:
+    description: Updates the properties of a Table row.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `tableRowProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the minimum row height, set `fields` to
+          `"min_row_height"`.
+
+          If '"min_row_height"' is included in the field mask but the property is
+          left unset, the minimum row height will default to 0.
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the table.
+        type: string
+      rowIndices:
+        description: |-
+          The list of zero-based indices specifying which rows to update. If no
+          indices are provided, all rows in the table will be updated.
+        items:
+          format: int32
+          type: integer
+        type: array
+      tableRowProperties:
+        $ref: '#/definitions/TableRowProperties'
+        description: The table row properties to update.
     type: object
   UpdateTextStyleRequest:
     description: |-

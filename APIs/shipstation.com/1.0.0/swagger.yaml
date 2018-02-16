@@ -1,0 +1,4507 @@
+swagger: '2.0'
+schemes:
+  - https
+host: ssapi.shipstation.com
+basePath: /
+info:
+  description: |-
+    # Integrating with ShipStation
+
+    ShipStation strives to streamline shipping for online sellers, no matter where they sell their products online. We are continuously adding new marketplaces, shopping carts, and integration tools, because we know the e-commerce space is growing. 
+    As a result, we’ve worked hard to provide developer resources to build custom integrations with ShipStation.  If you’re interested in becoming a partner of ours, drop us a line by [filling out this form](http://www.shipstation.com/partners/shipstation-api-custom-store/) and we’ll get in touch.
+
+    There are two methods to integrate with ShipStation:
+
+    * Custom Store Integration
+
+    * ShipStation API
+
+    ## Custom Store Integration
+
+    Looking for a more 1-to-1 relationship between ShipStation and your chosen selling platform? The Custom Store Integration is the ticket. Our custom store integration is just like any of our other selling channel integration, and could be eligible (based on internal review) as a branded option within the ShipStation admin. It also allows the user to sync orders within ShipStation in a single click, in addition to ShipStation automatically sending shipment status and tracking information 
+    updates back to your cart or marketplace once a label is created. It’s the best way to sync up orders with ShipStation and have the most seamless experience.
+
+    The Custom Store allows you to perform two major functions:
+
+    * Provide order information to ShipStation, including recipient address, products, customers, etc.
+
+    * Receive tracking information when an order is shipped, including shipping method, shipping status, tracking number, and more
+
+    To integrate with the Custom Store, you must expose a web page that renders XML that adheres to the specification defined in the Custom Store Integration Guide. 
+    We refer to this page as your “XML Endpoint”. If you can provide us an XML Endpoint, we can *pull* data from your endpoint just like we do with other marketplaces like eBay and Amazon.
+
+    **To find out more about our Custom Store Integration, click here: [Custom Store Integration Guide](https://help.shipstation.com/hc/en-us/articles/205928478)**
+
+    ## ShipStation API
+
+    Our API is available for any plan, and allows for read access to almost all data in your account, and write access to create specific objects, like Orders, Customers, and Products. 
+    The API is a great way to get data directly to and from ShipStation, like creating products, customers, and querying order & shipping data. Please note that an API integration will not allow you to use your own MarketplaceID that could eventually be branded with your company's logo (see the Custom Store Integration above for that functionality).
+
+    **This API allows developers to build applications that interface with the ShipStation platform. The API can be used to automate many tasks including:**
+
+    + Managing Orders
+
+    + Managing Shipments
+
+    + Creating Shipping Labels
+
+    + Retrieving Shipping Rates
+
+    + and more!!!
+
+    **To learn more about our API, please review our API documentation below.**
+
+    ## Which one should I pick?
+
+    The method that's right for your integration very much depends on the type of integration you're planning on implementing. A Custom Store allows ShipStation to *pull* order information from your platform the very same way we *pull* data from marketplaces such as eBay, Amazon, and Shopify. Once an order has been shipped in ShipStation, ShipStation automatically *pushes* tracking information back to your custom store. Though the functionality afforded by this approach is limited to these 2 main functions, much of the *heavy lifting* is performed by ShipStation. Importing orders 
+    and sending tracking information is performed automatically by ShipStation, as long as your XML endpoint is available to receive our data.
+
+    An API integration, on the other hand, exposes much more functionality, but requires that the developer do much of the heavy lifting. Orders must be *pushed* to ShipStation by using our "/orders/CreateOrder" endpoint.  The API allows developers to perform functions such as tagging an order, 
+    shipping an order, creating a shipping label (without an order), retrieving shipping rates, adding funds to a carrier account, creating a warehouse, listing products, and much more.  The functionality the API affords are typical actions that a user would perform if using the web app.
+
+    ### Considerations
+
+    * **Will your integration be the main order management tool for the online seller?**  If so, the API's broader range of functionality may be the best option.
+
+    * **Would you like your store integration to be a branded marketplace within the ShipStation admin?** When you integrate using the Custom Store Integration, you could be eligible to have your company branded within the ShipStation admin. A branded store could have the plugin's logo in the app,
+    as well as an easier store setup, order sync, and reporting. Please note, ShipStation makes the final decision, based on integration and partner requirements, on which custom stores are branded within our application.
+
+    # ShipStation API Requirements
+
+    ## End Point
+
+    Endpoints are located at the following domain https://ssapi.shipstation.com/ and will need to have a specific reference added to return data. PLEASE NOTE: You cannot access this URL directly and must reference one of the specific endpoints below.
+
+    ## Authentication
+
+    The ShipStation API uses [Basic HTTP authentication](http://en.wikipedia.org/wiki/Basic_access_authentication). Use your ShipStation ``API Key`` as the username and ``API Secret`` as the password.  You can find your ``API Key`` as the username and ``API Secret`` under Settings at https://ss.shipstation.com/#/settings/api .
+
+    The Authorization header is constructed as follows:
+
+    + Username (``API KEY``) and password (``API Secret``) are combined into a string "username:password"
+
+    + The resulting string is then encoded using the RFC2045-MIME variant of Base64, except not limited to 76 char/line
+
+    + The authorization method and a space i.e. "Basic " is then put before the encoded string.
+
+    For example, if the ``API KEY`` given is 'ShipStation' and the ``API Secret`` is 'Rocks' then the header is formed as follows:
+
+    + Authorization: Basic U2hpcFN0YXRpb246Um9ja3M=
+
+    ## API Rate Limits
+
+    In an effort to ensure consistent application performance and increased scalability, we have implemented rate limiting on the ShipStation API.  Your integration will need to be able to handle HTTP rate limiting status messages as defined below:
+
+    **Response Headers**
+
+    All responses will include headers with status information about rate limiting.
+
+    1. X-Rate-Limit-Limit: the maximum number of requests per minute to the endpoint
+
+    2. X-Rate-Limit-Remaining: the available requests remaining in the current window
+
+    3. X-Rate-Limit-Reset: the number of seconds remaining until the next window begins
+
+    **Hitting the Limit**
+
+    If your application hits the rate limit, an HTTP 429 will be returned with this body:
+
+    ```
+    {
+        "message": "Too Many Requests"
+    }
+    ```
+
+    And these headers, assuming it is 40 seconds into the current window:
+
+    ```
+    {
+        "X-Rate-Limit-Limit": 60,
+        "X-Rate-Limit-Remaining": 0,
+        "X-Rate-Limit-Reset": 20
+    }
+    ```
+
+    When the limit is reached, your application should stop making requests until X-Rate-Limit-Reset seconds have elapsed. The current Rate limit for each set of the API Key and Secret is 40 requests per minute.
+
+    If you have any issues with the API, please email us at <apisupport@shipstation.com>
+
+    ## Server Responses
+
+    Status Code | Description
+    ------------|-------------
+    ``200`` | OK - The request was successful (some API calls may return 201 instead).
+    ``201`` | Created - The request was successful and a resource was created.
+    ``204`` | No Content - The request was successful but there is no representation to return (that is, the response is empty).
+    ``400`` | Bad Request -  The request could not be understood or was missing required parameters.
+    ``401`` | Unauthorized -  Authentication failed or user does not have permissions for the requested operation.
+    ``403`` | Forbidden - Access denied.
+    ``404`` | Not Found -  Resource was not found.
+    ``405`` | Method Not Allowed -  Requested method is not supported for the specified resource.
+    ``429`` | Too Many Requests - Exceeded ShipStation API limits. When the limit is reached, your application should stop making requests until X-Rate-Limit-Reset seconds have elapsed.
+    ``500`` | Internal Server Error - ShipStation has encountered an error.
+
+    ## DateTime Format and Time Zone
+
+    ShipStation uses the ISO 8601 combined format for dateTime stamps being submitted to and returned from the API. Please be sure to submit all dateTime values as follows:
+
+    yyyy-mm-dd hh:mm:ss (24 hour notation). Example - ``2016-11-29 23:59:59``
+
+    The time zone represented in all API responses is PST/PDT. Similarly, ShipStation asks that you make all time zone convertions and submit any dateTime requests in PST/PDT.
+  title: ShipStation Developer Portal
+  version: 1.0.0
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/879470232292663296/Kp70vg1p_400x400.jpg'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.6.0
+      format: apiBlueprint
+      url: 'https://shipstation.docs.apiary.io/api-description-document'
+      version: 1A
+  x-providerName: shipstation.com
+paths:
+  /accounts/listtags:
+    get:
+      description: Lists all tags defined for this account.
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              - color: '#800080'
+                name: Backorder
+                tagId: 8362
+              - color: '#ff0000'
+                name: Canada
+                tagId: 8324
+              - color: '#33CCCC'
+                name: Fragile
+                tagId: 8336
+              - color: '#CC99FF'
+                name: Repeat Buyer
+                tagId: 8221
+          headers: {}
+      summary: List Tags
+      tags:
+        - Accounts
+  /accounts/registeraccount:
+    post:
+      description: |-
+        Creates a new ShipStation account and generates an apiKey and apiSecret to be used by the newly created account. PLEASE NOTE: This endpoint does not require API key and API Secret credentials.  The Authorization header can be left off. Use of this specific endpoint requires approval, and is meant only for direct partners of ShipStation. This is the only endpoint to require approval. All other endpoints listed in this document can be accessed by submitting proper authorization credentials in the header of the request. To become a direct partner of ShipStation, or to request more information on becoming a direct partner, we recommend reaching out to our Partners and Integrations team here: https://info.shipstation.com/become-a-partner-api-and-custom-store-integrations
+
+        The body of this request has the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``firstName``  | string, required | First Name
+        ``lastName`` | string, required | Last Name
+        ``email`` | string, required | Email address. This will also be the username of the account.
+        ``password`` | string, required | Password to set for account access.
+        ``companyName`` | string, optional | Name of Company.
+        ``addr1`` | string, optional | Company Address - Street 1
+        ``addr2`` | string, optional | Company Address - Street 2
+        ``city`` | string, optional | Company Address - City
+        ``state`` | string, optional | Company Address - State 
+        ``zip`` | string, optional | Company Address - Zip Code
+        ``countryCode`` |string, optional | Company Address - Country.  Please use a 2-character country code.
+        ``phone`` | string, optional | Company Phone number.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              addr1:
+                type: string
+              addr2:
+                type: string
+              city:
+                type: string
+              companyName:
+                type: string
+              countryCode:
+                type: string
+              email:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              password:
+                type: string
+              phone:
+                type: string
+              shippingOriginCountryCode:
+                type: string
+              state:
+                type: string
+              zip:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              apiKey: abcdt9845hjmgfklj3498gkljdkuyekl
+              apiSecret: 1234iou983lkj8mnxgfwu509hkhdy7u3
+              message: ShipStation account created.
+              sellerId: 123456
+              success: true
+          headers: {}
+      summary: Register Account
+      tags:
+        - Accounts
+  /carriers:
+    get:
+      description: Lists all shipping providers connected to this account.
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              - accountNumber: fe71c33f
+                balance: 0.27
+                code: express_1
+                name: Express 1
+                requiresFundedAccount: true
+              - accountNumber: SS123
+                balance: 24.14
+                code: stamps_com
+                name: Stamps.com
+                requiresFundedAccount: true
+              - accountNumber: ABCR80
+                balance: 0
+                code: ups
+                name: UPS
+                requiresFundedAccount: false
+              - accountNumber: '297929999'
+                balance: 0
+                code: fedex
+                name: FedEx
+                requiresFundedAccount: false
+              - accountNumber: '913999'
+                balance: 84.86
+                code: endicia
+                name: Endicia
+                requiresFundedAccount: true
+          headers: {}
+      summary: List Carriers
+      tags:
+        - Carriers
+  /carriers/addfunds:
+    post:
+      description: |-
+        Adds funds to a carrier account using the payment information on file. The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+         ``carrierCode`` | string, required |  The carrier to add funds to.
+         ``amount`` | number, required | The dollar amount to add to the account.  The minimum value that can be added is $10.00.  The maximum value is $10,000.00.
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              accountNumber: SS123
+              balance: 24.14
+              code: stamps_com
+              name: Stamps.com
+              requiresFundedAccount: true
+          headers: {}
+      summary: Add Funds
+      tags:
+        - Carriers
+  '/carriers/getcarrier?carrierCode={carrierCode}':
+    get:
+      description: Retrieves the shipping carrier account details for the specified carrierCode. Use this method to determine a carrier's account balance.
+      parameters:
+        - description: The code for the carrier account to retrieve.
+          in: path
+          name: carrierCode
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              accountNumber: SS123
+              balance: 24.14
+              code: stamps_com
+              name: Stamps.com
+              requiresFundedAccount: true
+          headers: {}
+      summary: Get Carrier
+      tags:
+        - Carriers
+  '/carriers/listpackages?carrierCode={carrierCode}':
+    get:
+      description: Retrieves a list of packages for the specified carrier
+      parameters:
+        - description: The carrier's code
+          in: path
+          name: carrierCode
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              - carrierCode: express_1
+                code: cubic
+                domestic: true
+                international: false
+                name: Cubic
+              - carrierCode: express_1
+                code: dvd_flat_rate_box
+                domestic: false
+                international: true
+                name: DVD Flat Rate Box
+              - carrierCode: express_1
+                code: flat_rate_envelope
+                domestic: true
+                international: true
+                name: Flat Rate Envelope
+              - carrierCode: express_1
+                code: flat_rate_legal_envelope
+                domestic: true
+                international: true
+                name: Flat Rate Legal Envelope
+              - carrierCode: express_1
+                code: flat_rate_padded_envelope
+                domestic: true
+                international: true
+                name: Flat Rate Padded Envelope
+              - carrierCode: express_1
+                code: large_envelope_or_flat
+                domestic: true
+                international: true
+                name: Large Envelope or Flat
+              - carrierCode: express_1
+                code: large_flat_rate_box
+                domestic: true
+                international: true
+                name: Large Flat Rate Box
+              - carrierCode: express_1
+                code: large_package
+                domestic: true
+                international: true
+                name: Large Package (any side > 12")
+              - carrierCode: express_1
+                code: large_video_flat_rate_box
+                domestic: false
+                international: true
+                name: Large Video Flat Rate Box
+              - carrierCode: express_1
+                code: letter
+                domestic: true
+                international: true
+                name: Letter
+              - carrierCode: express_1
+                code: medium_flat_rate_box
+                domestic: true
+                international: true
+                name: Medium Flat Rate Box
+              - carrierCode: express_1
+                code: package
+                domestic: true
+                international: true
+                name: Package
+              - carrierCode: express_1
+                code: regional_rate_box_a
+                domestic: true
+                international: false
+                name: Regional Rate Box A
+              - carrierCode: express_1
+                code: regional_rate_box_b
+                domestic: true
+                international: false
+                name: Regional Rate Box B
+              - carrierCode: express_1
+                code: regional_rate_box_c
+                domestic: true
+                international: false
+                name: Regional Rate Box C
+              - carrierCode: express_1
+                code: small_flat_rate_box
+                domestic: true
+                international: true
+                name: Small Flat Rate Box
+              - carrierCode: express_1
+                code: thick_envelope
+                domestic: true
+                international: true
+                name: Thick Envelope
+          headers: {}
+      summary: List Packages
+      tags:
+        - Carriers
+  '/carriers/listservices?carrierCode={carrierCode}':
+    get:
+      description: Retrieves the list of available shipping services provided by the specified carrier
+      parameters:
+        - description: The carrier's code
+          in: path
+          name: carrierCode
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              - carrierCode: fedex
+                code: fedex_ground
+                domestic: true
+                international: false
+                name: FedEx Ground®
+              - carrierCode: fedex
+                code: fedex_home_delivery
+                domestic: true
+                international: false
+                name: FedEx Home Delivery®
+              - carrierCode: fedex
+                code: fedex_2day
+                domestic: true
+                international: false
+                name: FedEx 2Day®
+              - carrierCode: fedex
+                code: fedex_2day_am
+                domestic: true
+                international: false
+                name: FedEx 2Day® A.M.
+              - carrierCode: fedex
+                code: fedex_express_saver
+                domestic: true
+                international: false
+                name: FedEx Express Saver®
+              - carrierCode: fedex
+                code: fedex_standard_overnight
+                domestic: true
+                international: false
+                name: FedEx Standard Overnight®
+              - carrierCode: fedex
+                code: fedex_priority_overnight
+                domestic: true
+                international: false
+                name: FedEx Priority Overnight®
+              - carrierCode: fedex
+                code: fedex_first_overnight
+                domestic: true
+                international: false
+                name: FedEx First Overnight®
+              - carrierCode: fedex
+                code: fedex_1_day_freight
+                domestic: true
+                international: false
+                name: FedEx 1 Day® Freight
+              - carrierCode: fedex
+                code: fedex_2_day_freight
+                domestic: true
+                international: false
+                name: FedEx 2 Day® Freight
+              - carrierCode: fedex
+                code: fedex_3_day_freight
+                domestic: true
+                international: false
+                name: FedEx 3 Day® Freight
+              - carrierCode: fedex
+                code: fedex_first_overnight_freight
+                domestic: true
+                international: false
+                name: FedEx First Overnight® Freight
+              - carrierCode: fedex
+                code: fedex_ground_international
+                domestic: false
+                international: true
+                name: FedEx Ground® International
+              - carrierCode: fedex
+                code: fedex_international_economy
+                domestic: false
+                international: true
+                name: FedEx International Economy®
+              - carrierCode: fedex
+                code: fedex_international_priority
+                domestic: false
+                international: true
+                name: FedEx International Priority®
+              - carrierCode: fedex
+                code: fedex_international_first
+                domestic: false
+                international: true
+                name: FedEx International First®
+              - carrierCode: fedex
+                code: fedex_europe_first
+                domestic: false
+                international: true
+                name: FedEx Europe First®
+              - carrierCode: fedex
+                code: fedex_international_economy_freight
+                domestic: false
+                international: true
+                name: FedEx International Economy® Freight
+              - carrierCode: fedex
+                code: fedex_international_priority_freight
+                domestic: false
+                international: true
+                name: FedEx International Priority® Freight
+          headers: {}
+      summary: List Services
+      tags:
+        - Carriers
+  '/customers/{customerId}':
+    get:
+      description: ''
+      parameters:
+        - description: The system generated identifier for the Customer.
+          in: path
+          name: customerId
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              addressVerified: Verified
+              city: Auburn
+              company: Test Company
+              countryCode: US
+              createDate: '2014-11-18T10:33:01.1900000'
+              customerId: 12345678
+              email: supermancam@example.com
+              marketplaceUsernames:
+                - createDate: '2015-04-27T12:35:03.8300000'
+                  customerId: 12345678
+                  customerUserId: 67195020
+                  marketplace: ShipStation
+                  marketplaceId: 0
+                  modifyDate: '2015-05-14T08:16:15.2700000'
+                  username: camtheman@gmail.com
+                - createDate: '2014-11-18T10:33:01.1970000'
+                  customerId: 12345678
+                  customerUserId: 37568588
+                  marketplace: WooCommerce
+                  marketplaceId: 36
+                  modifyDate: '2014-11-18T10:33:01.1970000'
+                  username: supercam@example.com
+                - customerId: 12345678
+                  customerUserId: 46038940
+                  marketplace: TradeGecko
+                  marketplaceId: 67
+                  username: camtheman@gmail.com
+              modifyDate: '2014-11-18T10:33:01.1900000'
+              name: Cam Newton
+              phone: 555-555-5555
+              postalCode: '36830'
+              state: AL
+              street1: 123 War Eagle Lane
+              street2: ''
+              tags:
+                - name: Expedited
+                  tagId: 1234
+                - name: 00 BULK ORDERED
+                  tagId: 9725
+          headers: {}
+      summary: Get Customer
+      tags:
+        - Customers
+  '/customers?stateCode={stateCode}&countryCode={countryCode}&tagId={tagId}&marketplaceId={marketplaceId}&sortBy={sortBy}&sortDir={sortDir}&page={page}&pageSize={pageSize}':
+    get:
+      description: Obtains a list of customers that match the specified criteria.
+      parameters:
+        - description: Returns customers that reside in the specified stateCode.
+          in: path
+          name: stateCode
+          required: true
+          type: string
+        - description: Returns customers that reside in the specified countryCode.
+          in: path
+          name: countryCode
+          required: true
+          type: string
+        - description: Returns customers that purchased items from the specified marketplaceId.
+          in: path
+          name: marketplaceId
+          required: true
+          type: number
+        - description: Returns customers that have been tagged with the specified tagId.
+          in: path
+          name: tagId
+          required: true
+          type: number
+        - description: Sorts the order of the response based off the specified value.
+          enum:
+            - Name
+            - ModifyDate
+            - CreateDate
+          in: path
+          name: sortBy
+          required: true
+          type: string
+        - description: Sets the direction of the sort order.
+          enum:
+            - ASC
+            - DESC
+          in: path
+          name: sortDir
+          required: true
+          type: string
+        - default: 1
+          description: Page number.
+          in: path
+          name: page
+          required: true
+          type: number
+        - default: 100
+          description: Requested page size. Max value is 500.
+          in: path
+          name: pageSize
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              customers:
+                - addressVerified: Verified
+                  city: Auburn
+                  company: Test Company
+                  countryCode: US
+                  createDate: '2014-11-18T10:33:01.1900000'
+                  customerId: 12345678
+                  email: supermancam@example.com
+                  marketplaceUsernames:
+                    - createDate: '2015-04-27T12:35:03.8300000'
+                      customerId: 12345678
+                      customerUserId: 67195020
+                      marketplace: ShipStation
+                      marketplaceId: 0
+                      modifyDate: '2015-05-14T08:16:15.2700000'
+                      username: camtheman@gmail.com
+                    - createDate: '2014-11-18T10:33:01.1970000'
+                      customerId: 12345678
+                      customerUserId: 37568588
+                      marketplace: WooCommerce
+                      marketplaceId: 36
+                      modifyDate: '2014-11-18T10:33:01.1970000'
+                      username: supercam@example.com
+                    - customerId: 12345678
+                      customerUserId: 46038940
+                      marketplace: TradeGecko
+                      marketplaceId: 67
+                      username: camtheman@gmail.com
+                  modifyDate: '2014-11-18T10:33:01.1900000'
+                  name: Cam Newton
+                  phone: 555-555-5555
+                  postalCode: '36830'
+                  state: AL
+                  street1: 123 War Eagle Lane
+                  street2: ''
+                  tags:
+                    - name: Expedited
+                      tagId: 1234
+                    - name: 00 BULK ORDERED
+                      tagId: 9725
+                - addressVerified: Verified
+                  city: Auburn
+                  company: Test Company
+                  countryCode: US
+                  createDate: '2015-06-21T12:48:07.5400000'
+                  customerId: 87654321
+                  email: boknows@example.com
+                  marketplaceUsernames:
+                    - createDate: '2015-08-27T14:36:05.7500000'
+                      customerId: 87654321
+                      customerUserId: 77215410
+                      marketplace: ShipStation
+                      marketplaceId: 0
+                      modifyDate: '2015-09-01T09:18:25.3100000'
+                      username: boknows@gmail.com
+                    - createDate: '2015-07-05T11:38:01.1970000'
+                      customerId: 87654321
+                      customerUserId: 43759100
+                      marketplace: WooCommerce
+                      marketplaceId: 36
+                      modifyDate: '2015-07-05T11:38:01.1970000'
+                      username: boknows@example.com
+                    - customerId: 87654321
+                      customerUserId: 81565241
+                      marketplace: TradeGecko
+                      marketplaceId: 67
+                      username: bo@gmail.com
+                  name: Bo Jackson
+                  phone: 555-555-5555
+                  postalCode: '36830'
+                  state: AL
+                  street1: 456 Heisman Ave
+                  street2: ''
+                  tags:
+                    - name: Expedited
+                      tagId: 1234
+                    - name: 00 BULK ORDERED
+                      tagId: 9725
+              page: 1
+              pages: 1
+              total: 2
+          headers: {}
+      summary: List Customers
+      tags:
+        - Customers
+  /fulfillments:
+    get:
+      description: ''
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              fulfillments:
+                - carrierCode: USPS
+                  createDate: '2016-06-07T08:50:50.0670000'
+                  customerEmail: apisupport@shipstation.com
+                  fulfillmentFee: 0
+                  fulfillmentId: 33974374
+                  marketplaceNotified: true
+                  orderId: 191759016
+                  orderNumber: '101'
+                  shipDate: '2016-06-07T00:00:00.0000000'
+                  shipTo:
+                    city: AUSTIN
+                    country: US
+                    name: Yoda
+                    phone: 512-485-4282
+                    postalCode: '78756'
+                    state: TX
+                    street1: '3800 N Lamar Blvd # 220'
+                  trackingNumber: '783408231234'
+                  userId: c9f06d74-95de-4263-9b04-e87095cababf
+                  voidRequested: false
+                  voided: false
+                - carrierCode: FedEx
+                  createDate: '2016-06-08T12:54:53.3470000'
+                  customerEmail: apisupport@shipstation.com
+                  fulfillmentFee: 0
+                  fulfillmentId: 246310
+                  marketplaceNotified: true
+                  orderId: 193699927
+                  orderNumber: '101'
+                  shipDate: '2016-06-08T00:00:00.0000000'
+                  shipTo:
+                    city: AUSTIN
+                    country: US
+                    name: Yoda
+                    phone: 512-485-4282
+                    postalCode: '78756'
+                    state: TX
+                    street1: '3800 N Lamar Blvd # 220'
+                  trackingNumber: '664756278745'
+                  userId: c9f06d74-95de-4263-9b04-e87095cababf
+                  voidRequested: false
+                  voided: false
+              page: 1
+              pages: 0
+              total: 2
+          headers: {}
+      summary: List Fulfillments w/o parameters
+      tags:
+        - Fulfillments
+  '/fulfillments?fulfillmentId={fulfillmentId}&orderId={orderId}&orderNumber={orderNumber}&trackingNumber={trackingNumber}&recipientName={recipientName}&createDateStart={createDateStart}&createDateEnd={createDateEnd}&shipDateStart={shipDateStart}&shipDateEnd={shipDateEnd}&sortBy={sortBy}&sortDir={sortDir}&page={page}&pageSize={pageSize}':
+    get:
+      description: |-
+        Obtains a list of fulfillments that match the specified criteria.  Please note the following:
+
+        - Orders that have been marked as shipped either through the UI or the API will appear in the response as they are considered fulfillments.
+
+        All of the available filters are optional.  They do not need to be included in the URL.  If you do include them, here's what the URL may look like:
+
+        Url format with filters:
+
+        ```
+        fulfillments?fulfillmentId={fulfillmentId}
+        &orderId={orderId}
+        &orderNumber={orderNumber}
+        &trackingNumber={trackingNumber}
+        &recipientName={recipientName}
+        &createDateStart={createDateStart}
+        &createDateEnd={createDateEnd}
+        &shipDateStart={shipDateStart}
+        &shipDateEnd={shipDateEnd}
+        &sortBy={sortBy}
+        &sortDir={sortDir}
+        &page={page}
+        &pageSize={pageSize}
+        ```
+      parameters:
+        - description: Returns the fulfillment with the specified fulfillment ID.
+          in: path
+          name: fulfillmentId
+          required: true
+          type: number
+        - description: Returns fulfillments whose orders have the specified order ID.
+          in: path
+          name: orderId
+          required: true
+          type: number
+        - description: Returns fulfillments whose orders have the specified order number.
+          in: path
+          name: orderNumber
+          required: true
+          type: string
+        - description: Returns fulfillments with the specified tracking number.
+          in: path
+          name: trackingNumber
+          required: true
+          type: string
+        - description: Returns fulfillments shipped to the specified recipient name.
+          in: path
+          name: recipientName
+          required: true
+          type: string
+        - description: Returns fulfillments created on or after the specified ``createDate``
+          in: path
+          name: createDateStart
+          required: true
+          type: string
+        - description: Returns fulfillments created on or before the specified ``createDate``
+          in: path
+          name: createDateEnd
+          required: true
+          type: string
+        - description: Returns fulfillments with the ``shipDate`` on or after the specified date
+          in: path
+          name: shipDateStart
+          required: true
+          type: string
+        - description: Returns fulfillments with the ``shipDate`` on or before the specified date
+          in: path
+          name: shipDateEnd
+          required: true
+          type: string
+        - description: 'Sort the responses by a set value.  The response will be sorted based off the ascending dates (oldest to most current.)  If left empty, the response will be sorted by ascending ``createDate``.'
+          enum:
+            - ShipDate
+            - CreateDate
+          in: path
+          name: sortBy
+          required: true
+          type: string
+        - description: Sets the direction of the sort order.
+          enum:
+            - ASC
+            - DESC
+          in: path
+          name: sortDir
+          required: true
+          type: string
+        - default: 1
+          description: page number.
+          in: path
+          name: page
+          required: true
+          type: number
+        - default: 100
+          description: page size.
+          in: path
+          name: pageSize
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              fulfillments:
+                - carrierCode: USPS
+                  createDate: '2016-06-07T08:50:50.0670000'
+                  customerEmail: apisupport@shipstation.com
+                  fulfillmentFee: 0
+                  fulfillmentId: 33974374
+                  marketplaceNotified: true
+                  orderId: 191759016
+                  orderNumber: '101'
+                  shipDate: '2016-06-07T00:00:00.0000000'
+                  shipTo:
+                    city: AUSTIN
+                    country: US
+                    name: Yoda
+                    phone: 512-485-4282
+                    postalCode: '78756'
+                    state: TX
+                    street1: '3800 N Lamar Blvd # 220'
+                  trackingNumber: '783408231234'
+                  userId: c9f06d74-95de-4263-9b04-e87095cababf
+                  voidRequested: false
+                  voided: false
+                - carrierCode: FedEx
+                  createDate: '2016-06-08T12:54:53.3470000'
+                  customerEmail: apisupport@shipstation.com
+                  fulfillmentFee: 0
+                  fulfillmentId: 246310
+                  marketplaceNotified: true
+                  orderId: 193699927
+                  orderNumber: '101'
+                  shipDate: '2016-06-08T00:00:00.0000000'
+                  shipTo:
+                    city: AUSTIN
+                    country: US
+                    name: Yoda
+                    phone: 512-485-4282
+                    postalCode: '78756'
+                    state: TX
+                    street1: '3800 N Lamar Blvd # 220'
+                  trackingNumber: '664756278745'
+                  userId: c9f06d74-95de-4263-9b04-e87095cababf
+                  voidRequested: false
+                  voided: false
+              page: 1
+              pages: 0
+              total: 2
+          headers: {}
+      summary: List Fulfillments with parameters
+      tags:
+        - Fulfillments
+  /orders:
+    get:
+      description: ''
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              orders:
+                - advancedOptions:
+                    containsAlcohol: false
+                    customField1: 'SKU: CN-9876 x 1'
+                    customField2: 'SKU: Ele-123 x 2'
+                    mergedIds: []
+                    mergedOrSplit: false
+                    nonMachinable: false
+                    saturdayDelivery: false
+                    storeId: 12345
+                    warehouseId: 98765
+                  amountPaid: 412.97
+                  billTo:
+                    name: Sherlock Holmes
+                  carrierCode: stamps_com
+                  confirmation: delivery
+                  createDate: '2015-08-17T09:24:14.7800000'
+                  customerEmail: sholmes1854@methodsofdetection.com
+                  customerId: 63310475
+                  customerNotes: Please be careful when packing the disguise kits in with the cane.
+                  customerUsername: sholmes1854@methodsofdetection.com
+                  dimensions:
+                    height: 5
+                    length: 40
+                    units: inches
+                    width: 7
+                  externallyFulfilled: false
+                  gift: false
+                  insuranceOptions:
+                    insureShipment: false
+                    insuredValue: 0
+                  internalNotes: Mr. Holmes called to upgrade his shipping to expedited
+                  internationalOptions:
+                    contents: merchandise
+                    customsItems:
+                      - countryOfOrigin: US
+                        customsItemId: 11558268
+                        description: Fine White Oak Cane
+                        quantity: 1
+                        value: 225
+                      - countryOfOrigin: US
+                        customsItemId: 11558267
+                        description: Elementary Disguise Kit
+                        quantity: 2
+                        value: 49.99
+                    nonDelivery: return_to_sender
+                  items:
+                    - adjustment: false
+                      createDate: '2015-08-17T09:24:14.78'
+                      fulfillmentSku: Ele-1234
+                      modifyDate: '2015-08-17T09:24:14.78'
+                      name: Elementary Disguise Kit
+                      options: []
+                      orderItemId: 136282568
+                      productId: 11780610
+                      quantity: 2
+                      sku: Ele-1234
+                      unitPrice: 49.99
+                      warehouseLocation: 'Aisle 1, Bin 7'
+                      weight:
+                        units: ounces
+                        value: 12
+                    - adjustment: false
+                      createDate: '2015-08-17T09:24:14.78'
+                      modifyDate: '2015-08-17T09:24:14.78'
+                      name: Fine White Oak Cane
+                      options: []
+                      orderItemId: 136282569
+                      productId: 11780609
+                      quantity: 1
+                      sku: CN-9876
+                      unitPrice: 225
+                      warehouseLocation: 'Aisle 7, Bin 34'
+                      weight:
+                        units: ounces
+                        value: 80
+                  modifyDate: '2015-08-17T09:24:16.4800000'
+                  orderDate: '2015-06-28T17:46:27.0000000'
+                  orderId: 987654321
+                  orderKey: Test-International-API-DOCS
+                  orderNumber: Test-International-API-DOCS
+                  orderStatus: awaiting_shipment
+                  orderTotal: 387.97
+                  packageCode: package
+                  paymentDate: '2015-06-28T17:46:27.0000000'
+                  requestedShippingService: Priority Mail Int
+                  serviceCode: usps_priority_mail_international
+                  shipByDate: '2015-07-05T00:00:00.0000000'
+                  shipDate: '2015-04-25'
+                  shipTo:
+                    addressVerified: Address not yet validated
+                    city: London
+                    company: ''
+                    country: GB
+                    name: Sherlock Holmes
+                    postalCode: NW1 6XE
+                    residential: true
+                    state: ''
+                    street1: 221 B Baker St
+                    street2: ''
+                  shippingAmount: 35
+                  taxAmount: 27.99
+                  weight:
+                    units: ounces
+                    value: 104
+                - advancedOptions:
+                    containsAlcohol: false
+                    customField1: 'Custom data that you can add to an order. See Custom Field #2 & #3 for more info!'
+                    customField2: 'Per UI settings, this information can appear on some carrier''s shipping labels. See link below'
+                    customField3: 'https://help.shipstation.com/hc/en-us/articles/206639957'
+                    mergedIds: []
+                    mergedOrSplit: false
+                    nonMachinable: false
+                    saturdayDelivery: false
+                    source: Webstore
+                    storeId: 12345
+                    warehouseId: 98765
+                  amountPaid: 218.73
+                  billTo:
+                    name: The President
+                  carrierCode: fedex
+                  confirmation: delivery
+                  createDate: '2015-07-16T14:00:34.8230000'
+                  customerEmail: headhoncho@whitehouse.gov
+                  customerId: 37701499
+                  customerNotes: Thanks for ordering!
+                  customerUsername: headhoncho@whitehouse.gov
+                  dimensions:
+                    height: 6
+                    length: 7
+                    units: inches
+                    width: 5
+                  externallyFulfilled: false
+                  gift: true
+                  giftMessage: Thank you!
+                  insuranceOptions:
+                    insureShipment: true
+                    insuredValue: 200
+                    provider: carrier
+                  internalNotes: Customer called and would like to upgrade shipping
+                  internationalOptions: {}
+                  items:
+                    - adjustment: false
+                      createDate: '2015-07-16T14:00:34.823'
+                      lineItemKey: vd08-MSLbtx
+                      modifyDate: '2015-07-16T14:00:34.823'
+                      name: 'Test item #1'
+                      options:
+                        - name: Size
+                          value: Large
+                      orderItemId: 128836912
+                      productId: 7239919
+                      quantity: 2
+                      sku: ABC123
+                      unitPrice: 99.99
+                      warehouseLocation: 'Aisle 1, Bin 7'
+                      weight:
+                        units: ounces
+                        value: 24
+                    - adjustment: true
+                      createDate: '2015-07-16T14:00:34.823'
+                      modifyDate: '2015-07-16T14:00:34.823'
+                      name: 10% OFF
+                      options: []
+                      orderItemId: 128836913
+                      quantity: 1
+                      sku: DISCOUNT CODE
+                      unitPrice: -20.55
+                      weight:
+                        units: ounces
+                        value: 0
+                  modifyDate: '2015-08-17T09:21:59.4430000'
+                  orderDate: '2015-06-29T08:46:27.0000000'
+                  orderId: 123456789
+                  orderKey: 0f6bec18-9-4771-83aa-f392d84f4c74
+                  orderNumber: TEST-ORDER-API-DOCS
+                  orderStatus: awaiting_shipment
+                  orderTotal: 194.43
+                  packageCode: package
+                  paymentDate: '2015-06-29T08:46:27.0000000'
+                  paymentMethod: Credit Card
+                  requestedShippingService: Priority Mail
+                  serviceCode: fedex_home_delivery
+                  shipByDate: '2015-07-05T00:00:00.0000000'
+                  shipDate: '2015-07-02'
+                  shipTo:
+                    addressVerified: Address validation warning
+                    city: Washington
+                    company: US Govt
+                    country: US
+                    name: The President
+                    phone: 555-555-5555
+                    postalCode: '20500'
+                    residential: false
+                    state: DC
+                    street1: 1600 Pennsylvania Ave
+                    street2: Oval Office
+                  shippingAmount: 10
+                  taxAmount: 5
+                  weight:
+                    units: ounces
+                    value: 48
+              page: 1
+              pages: 0
+              total: 2
+          headers: {}
+      summary: List Orders w/o parameters
+      tags:
+        - Orders
+  /orders/addtag:
+    post:
+      description: |-
+        Adds a tag to an order.  The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``orderId`` | number, required | Identifies the order that will be tagged.
+        ``tagId`` | number, required | Identifies the tag that will be applied to the order.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              orderId:
+                type: number
+              tagId:
+                type: number
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: Tag added successfully.
+              success: true
+          headers: {}
+      summary: Add Tag to Order
+      tags:
+        - Orders
+  /orders/assignuser:
+    post:
+      description: |-
+        Assigns a user to an order.  The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``orderIds`` | number, required | Identifies set of orders that will be assigned the user.  Please note that if ANY of the orders within the array are not found, no orders will have a user assigned to them.
+        ``userId`` | number, required | Identifies the user that will be applied to the orders.  It should contain a GUID of the user to be assigned to the array of orders.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              orderIds:
+                items:
+                  type: number
+                type: array
+              userId:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: User assigned successfully.
+              success: true
+          headers: {}
+      summary: Assign User to Order
+      tags:
+        - Orders
+  /orders/createlabelfororder:
+    post:
+      description: |-
+        Creates a shipping label for a given order.  The ``labelData`` field returned in the response is a base64 encoded PDF value. Simply decode and save the output as a PDF file to retrieve a printable label.  The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``orderId`` | number, required | Identifies the order that will be shipped.
+        ``carrierCode`` | string, required | The code for the carrier that is to be used for the label.
+        ``serviceCode`` | string, required | The code for the shipping service that is to be used for the label.
+        ``confirmation`` | string, required | The type of delivery confirmation that is to be used once the shipment is created.  Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.
+        ``shipDate`` | string, required | The date the order should be shipped.
+        ``weight`` | Weight, optional | Weight of the order.  Use the [**Weight**](http://www.shipstation.com/developer-api/#/reference/model-weight) model.
+        ``dimensions`` | Dimensions, optional | Dimensions of the order.  Use [**Dimensions**](http://www.shipstation.com/developer-api/#/reference/model-dimensions) model.
+        ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this label.  Use the [**InsuranceOptions**](http://www.shipstation.com/developer-api/#/reference/model-insuranceoptions) model.
+        ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](http://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
+        ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order. Use the Customs information that can be used to generate customs documents for international orders.  Use the [**AdvancedOptions**](http://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model.
+        ``testLabel`` | boolean, required | Specifies whether a test label should be created.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              advancedOptions:
+                type: 'null'
+              carrierCode:
+                type: string
+              confirmation:
+                type: 'null'
+              dimensions:
+                type: 'null'
+              insuranceOptions:
+                type: 'null'
+              internationalOptions:
+                type: 'null'
+              orderId:
+                type: number
+              packageCode:
+                type: string
+              serviceCode:
+                type: string
+              shipDate:
+                type: string
+              testLabel:
+                type: boolean
+              weight:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              insuranceCost: 0
+              labelData: JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9MZW5ndGggNjIvRmlsdGVyL0ZsYXRlRGVjb2RlPj5zdHJlYW0KeJwr5HIK4TI2UzC2NFMISeFyDeEK5CpUMFQwAEJDBV0jCz0LBV1jY0M9I4XkXAX9iDRDBZd8hUAuAEdGC7cKZW5kc3RyZWFtCmVuZG9iago0IDAgb2JqCjw8L1R5cGUvUGFnZS9NZWRpYUJveFswIDAgMjg4IDQzMl0vUmVzb3VyY2VzPDwvUHJvY1NldCBbL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSV0vWE9iamVjdDw8L1hmMSAxIDAgUj4+Pj4vQ29udGVudHMgMiAwIFIvUGFyZW50....
+              shipmentCost: 7.3
+              shipmentId: 72513480
+              trackingNumber: '248201115029520'
+          headers: {}
+      summary: Create Label for Order
+      tags:
+        - Orders
+  /orders/createorder:
+    post:
+      description: |-
+        If the ``orderKey`` is specified, the method becomes idempotent and the existing order with that key will be updated. Note: Only orders in an open status in ShipStation (``awaiting_payment``,``awaiting_shipment``, and ``on_hold``) can be updated through this method. ``cancelled`` and ``shipped`` are locked from modification through the API.  The body of this request should specify an [**Order**](https://www.shipstation.com/developer-api/#/reference/model-order) object:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``orderNumber`` | string, required | A user-defined order number used to identify an order.
+        ``orderKey`` | string, optional | A user-provided key that should be unique to each order.  If an orderKey is not provided, ShipStation will create a new order and generate a unique orderKey for that order.  If the orderKey *is* provided, the **createorder** method will either: create a new order if the provided orderKey is not found, or, update the existing order if the orderKey is found.
+        ``orderDate`` | string, required | The date the order was placed.
+        ``paymentDate`` | string, optional | The date the order was paid for.
+        ``shipByDate`` | string, optional | The date the order is to be shipped before or on. This field is a suggested value generated by the order source/platform/cart and passed to ShipStation.
+        ``orderStatus`` | string, required | The order's status. Possible values: ``awaiting_payment``, ``awaiting_shipment``, ``shipped``, ``on_hold``, ``cancelled``
+        ``customerUsername`` | string, optional | The customer's username.
+        ``customerEmail`` | string, optional | The customer's email address.
+        ``billTo`` | Address, required | The recipients billing address. Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
+        ``shipTo`` | Address, required | The recipient's shipping address. Use the [**Address**](http://www.shipstation.com/developer-api/#/reference/model-address) model.
+        ``items`` | OrderItem, optional | An array of item objects.  Use an array of [**OrderItem**](http://www.shipstation.com/developer-api/#/reference/model-orderitem) models.
+        ``amountPaid`` | number, optional | The total amount paid for the Order.
+        ``taxAmount`` | number, optional | The total tax amount for the Order.
+        ``shippingAmount`` | number, optional | Shipping amount paid by the customer, if any.
+        ``customerNotes`` | string, optional | Notes left by the customer when placing the order.
+        ``internalNotes`` | string, optional | Private notes that are only visible to the seller.
+        ``gift`` | boolean, optional | Specifies whether or not this Order is a gift
+        ``giftMessage`` | string, optional | Gift message left by the customer when placing the order.
+        ``paymentMethod`` | string, optional | Identifies the shipping service selected by the customer when placing this order.
+        ``requestedShippingService`` | string, optional |Identifies the shipping service selected by the customer when placing this order. This value is given to ShipStation by the marketplace/cart and helps identify what shipping service the customer selected upon checkout.
+        ``carrierCode`` | string, optional | The code for the carrier that is to be used(or was used) when this order is shipped(was shipped).
+        ``serviceCode`` | string, optional | The code for the shipping service that is to be used(or was used) when this order is shipped(was shipped).
+        ``packageCode`` | string, optional | The code for the package type that is to be used(or was used) when this order is shipped(was shipped).
+        ``confirmation`` | string, optional | The type of delivery confirmation that is to be used(or was used) when this order is shipped(was shipped). Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.  
+        ``shipDate`` | string, optional | The date the order was shipped.
+        ``weight`` | Weight, optional | Weight of the order.  Use the [**Weight**](http://www.shipstation.com/developer-api/#/reference/model-weight) model.
+        ``dimensions`` | Dimensions, optional | Dimensions of the order.  Use the [**Dimensions**](http://www.shipstation.com/developer-api/#/reference/model-dimensions) model.
+        ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.  Use the [**InsuranceOptions**](http://www.shipstation.com/developer-api/#/reference/model-insuranceoptions) model.
+        ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](http://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
+        ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order. Use the [**AdvancedOptions**](http://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              advancedOptions:
+                properties:
+                  billToAccount:
+                    type: 'null'
+                  billToCountryCode:
+                    type: 'null'
+                  billToParty:
+                    type: 'null'
+                  billToPostalCode:
+                    type: 'null'
+                  containsAlcohol:
+                    type: boolean
+                  customField1:
+                    type: string
+                  customField2:
+                    type: string
+                  customField3:
+                    type: string
+                  mergedIds:
+                    items: {}
+                    type: array
+                  mergedOrSplit:
+                    type: boolean
+                  nonMachinable:
+                    type: boolean
+                  parentId:
+                    type: 'null'
+                  saturdayDelivery:
+                    type: boolean
+                  source:
+                    type: string
+                  storeId:
+                    type: number
+                  warehouseId:
+                    type: number
+                type: object
+              amountPaid:
+                type: number
+              billTo:
+                properties:
+                  city:
+                    type: 'null'
+                  company:
+                    type: 'null'
+                  country:
+                    type: 'null'
+                  name:
+                    type: string
+                  phone:
+                    type: 'null'
+                  postalCode:
+                    type: 'null'
+                  residential:
+                    type: 'null'
+                  state:
+                    type: 'null'
+                  street1:
+                    type: 'null'
+                  street2:
+                    type: 'null'
+                  street3:
+                    type: 'null'
+                type: object
+              carrierCode:
+                type: string
+              confirmation:
+                type: string
+              customerEmail:
+                type: string
+              customerId:
+                type: number
+              customerNotes:
+                type: string
+              customerUsername:
+                type: string
+              dimensions:
+                properties:
+                  height:
+                    type: number
+                  length:
+                    type: number
+                  units:
+                    type: string
+                  width:
+                    type: number
+                type: object
+              gift:
+                type: boolean
+              giftMessage:
+                type: string
+              insuranceOptions:
+                properties:
+                  insureShipment:
+                    type: boolean
+                  insuredValue:
+                    type: number
+                  provider:
+                    type: string
+                type: object
+              internalNotes:
+                type: string
+              internationalOptions:
+                properties:
+                  contents:
+                    type: 'null'
+                  customsItems:
+                    type: 'null'
+                type: object
+              items:
+                items:
+                  properties:
+                    adjustment:
+                      type: boolean
+                    fulfillmentSku:
+                      type:
+                        - 'null'
+                        - string
+                    imageUrl:
+                      type: 'null'
+                    lineItemKey:
+                      type:
+                        - string
+                        - 'null'
+                    name:
+                      type: string
+                    options:
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        type: object
+                      type: array
+                    productId:
+                      type: number
+                    quantity:
+                      type: number
+                    shippingAmount:
+                      type:
+                        - number
+                        - 'null'
+                    sku:
+                      type: string
+                    taxAmount:
+                      type:
+                        - number
+                        - 'null'
+                    unitPrice:
+                      type: number
+                    upc:
+                      type:
+                        - string
+                        - 'null'
+                    warehouseLocation:
+                      type:
+                        - string
+                        - 'null'
+                    weight:
+                      properties:
+                        units:
+                          type: string
+                        value:
+                          type: number
+                      type: object
+                  required:
+                    - lineItemKey
+                    - sku
+                    - name
+                    - imageUrl
+                    - weight
+                    - quantity
+                    - unitPrice
+                    - taxAmount
+                    - shippingAmount
+                    - warehouseLocation
+                    - options
+                    - productId
+                    - fulfillmentSku
+                    - adjustment
+                    - upc
+                  type: object
+                type: array
+              orderDate:
+                type: string
+              orderKey:
+                type: string
+              orderNumber:
+                type: string
+              orderStatus:
+                type: string
+              packageCode:
+                type: string
+              paymentDate:
+                type: string
+              paymentMethod:
+                type: string
+              requestedShippingService:
+                type: string
+              serviceCode:
+                type: string
+              shipByDate:
+                type: string
+              shipDate:
+                type: string
+              shipTo:
+                properties:
+                  city:
+                    type: string
+                  company:
+                    type: string
+                  country:
+                    type: string
+                  name:
+                    type: string
+                  phone:
+                    type: string
+                  postalCode:
+                    type: string
+                  residential:
+                    type: boolean
+                  state:
+                    type: string
+                  street1:
+                    type: string
+                  street2:
+                    type: string
+                  street3:
+                    type: 'null'
+                type: object
+              shippingAmount:
+                type: number
+              taxAmount:
+                type: number
+              weight:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              advancedOptions:
+                containsAlcohol: false
+                customField1: 'Custom data that you can add to an order. See Custom Field #2 & #3 for more info!'
+                customField2: 'Per UI settings, this information can appear on some carrier''s shipping labels. See link below'
+                customField3: 'https://help.shipstation.com/hc/en-us/articles/206639957'
+                mergedIds: []
+                mergedOrSplit: false
+                nonMachinable: false
+                saturdayDelivery: false
+                source: Webstore
+                storeId: 12345
+                warehouseId: 9876
+              amountPaid: 218.73
+              billTo:
+                name: The President
+              carrierCode: fedex
+              confirmation: delivery
+              createDate: '2016-02-16T15:16:53.7070000'
+              customerEmail: headhoncho@whitehouse.gov
+              customerNotes: Thanks for ordering!
+              customerUsername: headhoncho@whitehouse.gov
+              dimensions:
+                height: 6
+                length: 7
+                units: inches
+                width: 5
+              externallyFulfilled: false
+              gift: true
+              giftMessage: Thank you!
+              insuranceOptions:
+                insureShipment: true
+                insuredValue: 200
+                provider: carrier
+              internalNotes: Customer called and would like to upgrade shipping
+              internationalOptions: {}
+              items:
+                - adjustment: false
+                  createDate: '2016-02-16T15:16:53.707'
+                  lineItemKey: vd08-MSLbtx
+                  modifyDate: '2016-02-16T15:16:53.707'
+                  name: 'Test item #1'
+                  options:
+                    - name: Size
+                      value: Large
+                  orderItemId: 192210956
+                  quantity: 2
+                  shippingAmount: 5
+                  sku: ABC123
+                  taxAmount: 2.5
+                  unitPrice: 99.99
+                  upc: 32-65-98
+                  warehouseLocation: 'Aisle 1, Bin 7'
+                  weight:
+                    units: ounces
+                    value: 24
+                - adjustment: true
+                  createDate: '2016-02-16T15:16:53.707'
+                  fulfillmentSku: SKU-Discount
+                  modifyDate: '2016-02-16T15:16:53.707'
+                  name: 10% OFF
+                  options: []
+                  orderItemId: 192210957
+                  quantity: 1
+                  sku: DISCOUNT CODE
+                  unitPrice: -20.55
+                  weight:
+                    units: ounces
+                    value: 0
+              modifyDate: '2016-02-16T15:16:53.7070000'
+              orderDate: '2015-06-29T08:46:27.0000000'
+              orderId: 140335319
+              orderKey: 0f6bec18-3e89-4881-83aa-f392d84f4c74
+              orderNumber: TEST-ORDER-API-DOCS
+              orderStatus: awaiting_shipment
+              orderTotal: 194.43
+              packageCode: package
+              paymentDate: '2015-06-29T08:46:27.0000000'
+              paymentMethod: Credit Card
+              requestedShippingService: Priority Mail
+              serviceCode: fedex_2day
+              shipByDate: '2015-07-05T00:00:00.0000000'
+              shipDate: '2015-07-02'
+              shipTo:
+                addressVerified: Address validation warning
+                city: Washington
+                company: US Govt
+                country: US
+                name: The President
+                phone: 555-555-5555
+                postalCode: '20500'
+                residential: false
+                state: DC
+                street1: 1600 Pennsylvania Ave
+                street2: Oval Office
+              shippingAmount: 10
+              taxAmount: 5
+              weight:
+                units: ounces
+                value: 25
+          headers: {}
+      summary: Create/Update Order
+      tags:
+        - Orders
+  /orders/createorders:
+    post:
+      description: |-
+        This endpoint can be used to create or update multiple orders in one request. If the ``orderKey`` is specified in an order, the existing order with that key will be updated. Note: Only orders in an open status in ShipStation (``awaiting_payment``,``awaiting_shipment``, and ``on_hold``) can be updated through this method. ``cancelled`` and ``shipped`` are locked from modification through the API.
+
+        Data Type          |Description
+        -------------------|-------------------
+        Order, required | An array of [**Order**](http://www.shipstation.com/developer-api/#/reference/model-order) objects (maximum of 100 per request)
+      parameters:
+        - in: body
+          name: body
+          schema:
+            items:
+              properties:
+                advancedOptions:
+                  properties:
+                    billToAccount:
+                      type: 'null'
+                    billToCountryCode:
+                      type: 'null'
+                    billToParty:
+                      type: 'null'
+                    billToPostalCode:
+                      type: 'null'
+                    containsAlcohol:
+                      type: boolean
+                    customField1:
+                      type: string
+                    customField2:
+                      type: string
+                    customField3:
+                      type: string
+                    mergedIds:
+                      items: {}
+                      type: array
+                    mergedOrSplit:
+                      type: boolean
+                    nonMachinable:
+                      type: boolean
+                    parentId:
+                      type: 'null'
+                    saturdayDelivery:
+                      type: boolean
+                    source:
+                      type: string
+                    storeId:
+                      type: number
+                    warehouseId:
+                      type: number
+                  type: object
+                amountPaid:
+                  type: number
+                billTo:
+                  properties:
+                    city:
+                      type: 'null'
+                    company:
+                      type: 'null'
+                    country:
+                      type: 'null'
+                    name:
+                      type: string
+                    phone:
+                      type: 'null'
+                    postalCode:
+                      type: 'null'
+                    residential:
+                      type: 'null'
+                    state:
+                      type: 'null'
+                    street1:
+                      type: 'null'
+                    street2:
+                      type: 'null'
+                    street3:
+                      type: 'null'
+                  type: object
+                carrierCode:
+                  type: string
+                confirmation:
+                  type: string
+                customerEmail:
+                  type: string
+                customerId:
+                  type: number
+                customerNotes:
+                  type: string
+                customerUsername:
+                  type: string
+                dimensions:
+                  properties:
+                    height:
+                      type: number
+                    length:
+                      type: number
+                    units:
+                      type: string
+                    width:
+                      type: number
+                  type: object
+                gift:
+                  type: boolean
+                giftMessage:
+                  type: string
+                insuranceOptions:
+                  properties:
+                    insureShipment:
+                      type: boolean
+                    insuredValue:
+                      type: number
+                    provider:
+                      type: string
+                  type: object
+                internalNotes:
+                  type: string
+                internationalOptions:
+                  properties:
+                    contents:
+                      type: 'null'
+                    customsItems:
+                      type: 'null'
+                  type: object
+                items:
+                  items:
+                    properties:
+                      adjustment:
+                        type: boolean
+                      fulfillmentSku:
+                        type:
+                          - 'null'
+                          - string
+                      imageUrl:
+                        type: 'null'
+                      lineItemKey:
+                        type:
+                          - string
+                          - 'null'
+                      name:
+                        type: string
+                      options:
+                        items:
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                          type: object
+                        type: array
+                      productId:
+                        type: number
+                      quantity:
+                        type: number
+                      shippingAmount:
+                        type:
+                          - number
+                          - 'null'
+                      sku:
+                        type: string
+                      taxAmount:
+                        type:
+                          - number
+                          - 'null'
+                      unitPrice:
+                        type: number
+                      upc:
+                        type:
+                          - string
+                          - 'null'
+                      warehouseLocation:
+                        type:
+                          - string
+                          - 'null'
+                      weight:
+                        properties:
+                          units:
+                            type: string
+                          value:
+                            type: number
+                        type: object
+                    required:
+                      - lineItemKey
+                      - sku
+                      - name
+                      - imageUrl
+                      - weight
+                      - quantity
+                      - unitPrice
+                      - taxAmount
+                      - shippingAmount
+                      - warehouseLocation
+                      - options
+                      - productId
+                      - fulfillmentSku
+                      - adjustment
+                      - upc
+                    type: object
+                  type: array
+                orderDate:
+                  type: string
+                orderKey:
+                  type: string
+                orderNumber:
+                  type: string
+                orderStatus:
+                  type: string
+                packageCode:
+                  type: string
+                paymentDate:
+                  type: string
+                paymentMethod:
+                  type: string
+                requestedShippingService:
+                  type: string
+                serviceCode:
+                  type: string
+                shipByDate:
+                  type: string
+                shipDate:
+                  type: string
+                shipTo:
+                  properties:
+                    city:
+                      type: string
+                    company:
+                      type: string
+                    country:
+                      type: string
+                    name:
+                      type: string
+                    phone:
+                      type: string
+                    postalCode:
+                      type: string
+                    residential:
+                      type: boolean
+                    state:
+                      type: string
+                    street1:
+                      type: string
+                    street2:
+                      type: string
+                    street3:
+                      type: 'null'
+                  type: object
+                shippingAmount:
+                  type: number
+                taxAmount:
+                  type: number
+                weight:
+                  properties:
+                    units:
+                      type: string
+                    value:
+                      type: number
+                  type: object
+              type: object
+            type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              hasErrors: false
+              results:
+                - orderId: 58345234
+                  orderKey: 0f6bec18-3e89-4881-83aa-f392d84f4c74
+                  orderNumber: TEST-ORDER-API-DOCS
+                  success: true
+          headers: {}
+      summary: Create/Update Multiple Orders
+      tags:
+        - Orders
+  /orders/holduntil:
+    post:
+      description: |-
+        This method will change the status of the given order to On Hold until the date specified, when the status will automatically change to Awaiting Shipment.
+
+        The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``orderId`` | number, required | Identifies the order that will be held.
+        ``holdUntilDate`` | string, required | Date when order is moved from ``on_hold`` status to ``awaiting_shipment``.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              holdUntilDate:
+                type: string
+              orderId:
+                type: number
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: Order held successfully.
+              success: true
+          headers: {}
+      summary: Hold Order Until
+      tags:
+        - Orders
+  '/orders/listbytag?orderStatus={orderStatus}&tagId={tagId}&page={page}&pageSize={pageSize}':
+    get:
+      description: |-
+        Lists all orders that match the specified status and tag ID.
+
+        Url format with filters:
+
+        ```
+        /listbytag?orderStatus={orderStatus}
+        &tagId={tagId}
+        &page={page}
+        &pageSize={pageSize}
+        ```
+      parameters:
+        - description: The order's status.
+          enum:
+            - awaiting_payment
+            - awaiting_shipment
+            - pending_fulfillment
+            - shipped
+            - on_hold
+            - cancelled
+          in: path
+          name: orderStatus
+          required: true
+          type: string
+        - description: ID of the tag. Call Accounts/ListTags to obtain a list of tags for this account.
+          in: path
+          name: tagId
+          required: true
+          type: number
+        - default: '1'
+          description: Page number
+          in: path
+          name: page
+          required: true
+          type: string
+        - default: '100'
+          description: Requested page size. Max value is 500.
+          in: path
+          name: pageSize
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              orders:
+                - advancedOptions:
+                    containsAlcohol: false
+                    customField1: 'Custom data that you can add to an order. See Custom Field #2 & #3 for more info!'
+                    customField2: 'Per UI settings, this information can appear on some carrier''s shipping labels. See link below'
+                    customField3: 'https://help.shipstation.com/hc/en-us/articles/206639957'
+                    mergedIds: []
+                    mergedOrSplit: false
+                    nonMachinable: false
+                    saturdayDelivery: false
+                    source: Webstore
+                    storeId: 12345
+                    warehouseId: 98765
+                  amountPaid: 218.73
+                  billTo:
+                    name: The President
+                  carrierCode: fedex
+                  confirmation: delivery
+                  createDate: '2015-08-17T09:43:03.0500000'
+                  customerEmail: headhoncho@whitehouse.gov
+                  customerId: 37701499
+                  customerNotes: Thanks for ordering!
+                  customerUsername: headhoncho@whitehouse.gov
+                  dimensions:
+                    height: 6
+                    length: 7
+                    units: inches
+                    width: 5
+                  externallyFulfilled: false
+                  gift: true
+                  giftMessage: Thank you!
+                  insuranceOptions:
+                    insureShipment: true
+                    insuredValue: 200
+                    provider: carrier
+                  internalNotes: Customer called and would like to upgrade shipping
+                  internationalOptions: {}
+                  items:
+                    - adjustment: false
+                      createDate: '2015-08-17T09:43:03.05'
+                      lineItemKey: vd08-MSLbtx
+                      modifyDate: '2015-08-17T09:43:03.05'
+                      name: 'Test item #1'
+                      options:
+                        - name: Size
+                          value: Large
+                      orderItemId: 136289188
+                      productId: 7239919
+                      quantity: 2
+                      shippingAmount: 5
+                      sku: ABC123
+                      taxAmount: 2.5
+                      unitPrice: 99.99
+                      upc: 32-65-98
+                      warehouseLocation: 'Aisle 1, Bin 7'
+                      weight:
+                        units: ounces
+                        value: 24
+                    - adjustment: true
+                      createDate: '2015-08-17T09:43:03.05'
+                      fulfillmentSku: SKU-Discount
+                      modifyDate: '2015-08-17T09:43:03.05'
+                      name: 10% OFF
+                      options: []
+                      orderItemId: 136289189
+                      quantity: 1
+                      sku: DISCOUNT CODE
+                      unitPrice: -20.55
+                      weight:
+                        units: ounces
+                        value: 0
+                  modifyDate: '2015-08-17T09:43:12.5500000'
+                  orderDate: '2015-06-29T08:46:27.0000000'
+                  orderId: 123456789
+                  orderKey: 0f6bec18-3e89-4881-83aa-f392d84f4c74
+                  orderNumber: TEST-ORDER-API-DOCS
+                  orderStatus: awaiting_shipment
+                  orderTotal: 194.43
+                  packageCode: package
+                  paymentDate: '2015-06-29T08:46:27.0000000'
+                  paymentMethod: Credit Card
+                  requestedShippingService: Priority Mail
+                  serviceCode: fedex_2day
+                  shipByDate: '2015-07-05T00:00:00.0000000'
+                  shipDate: '2015-07-02'
+                  shipTo:
+                    addressVerified: Address validation warning
+                    city: Washington
+                    company: US Govt
+                    country: US
+                    name: The President
+                    phone: 555-555-5555
+                    postalCode: '20500'
+                    residential: false
+                    state: DC
+                    street1: 1600 Pennsylvania Ave
+                    street2: Oval Office
+                  shippingAmount: 10
+                  tagIds:
+                    - 831
+                  taxAmount: 5
+                  userId: b854f701-e0c2-4156-90fe-19c77cdef27c
+                  weight:
+                    units: ounces
+                    value: 48
+              page: 1
+              pages: 1
+              total: 1
+          headers: {}
+      summary: List Orders by Tag
+      tags:
+        - Orders
+  /orders/markasshipped:
+    post:
+      description: |-
+        Marks an order as shipped without creating a label in ShipStation. The body of this request has the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+         ``orderId`` | number, required | Identifies the order that will be marked as shipped.
+         ``carrierCode`` | string, required | Code of the carrier that is marked as having shipped the order.
+         ``shipDate`` | string, optional | Date order was shipped.
+         ``trackingNumber`` | string, optional | Tracking number of shipment.
+         ``notifyCustomer``  | boolean, optional | Specifies whether the customer should be notified of the shipment. Default value: false
+         ``notifySalesChannel`` | boolean, optional | Specifies whether the sales channel should be notified of the shipment. Default value: false
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              carrierCode:
+                type: string
+              notifyCustomer:
+                type: boolean
+              notifySalesChannel:
+                type: boolean
+              orderId:
+                type: number
+              shipDate:
+                type: string
+              trackingNumber:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              orderId: 123456789
+              orderNumber: ABC123
+          headers: {}
+      summary: Mark an Order as Shipped
+      tags:
+        - Orders
+  /orders/removetag:
+    post:
+      description: |-
+        Removes a tag from the specified order.  The body of this request has the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``orderId`` | number, required | Identifies the order whose tag will be removed.
+        ``tagId`` | number, required | Identifies the tag to remove.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              orderId:
+                type: number
+              tagId:
+                type: number
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: Tag removed successfully.
+              success: true
+          headers: {}
+      summary: Remove Tag from Order
+      tags:
+        - Orders
+  /orders/restorefromhold:
+    post:
+      description: |-
+        This method will change the status of the given order from On Hold to Awaiting Shipment. This endpoint is used when a holdUntil Date is attached to an order.
+
+        The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``orderId`` | number, required | Identifies the order that will be restored to ``awaiting_shipment`` from ``on_hold``.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              orderId:
+                type: number
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: The requested order has been restored
+              success: true
+          headers: {}
+      summary: Restore Order from On Hold
+      tags:
+        - Orders
+  /orders/unassignuser:
+    post:
+      description: |-
+        Unassigns a user from an order.  The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``orderIds`` | number, required | Identifies set of orders that will have the user unassigned.  Please note that if ANY of the orders within the array are not found, then no orders will have their users unassigned.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              orderIds:
+                items:
+                  type: number
+                type: array
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: User unassigned successfully.
+              success: true
+          headers: {}
+      summary: Unassign User from Order
+      tags:
+        - Orders
+  '/orders/{orderId}':
+    delete:
+      description: 'Removes order from ShipStation''s UI. Note this is a "soft" delete action so the order will still exist in the database, but will be set to ``inactive``'
+      parameters:
+        - description: The system generated identifier for the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples: {}
+          headers: {}
+      summary: Delete Order
+      tags:
+        - Orders
+    get:
+      description: Retrieves a single order from the database.
+      parameters:
+        - description: The system generated identifier for the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              advancedOptions:
+                containsAlcohol: false
+                customField1: 'Custom data that you can add to an order. See Custom Field #2 & #3 for more info!'
+                customField2: 'Per UI settings, this information can appear on some carrier''s shipping labels. See link below'
+                customField3: 'https://help.shipstation.com/hc/en-us/articles/206639957'
+                mergedIds: []
+                mergedOrSplit: false
+                nonMachinable: false
+                saturdayDelivery: false
+                source: Webstore
+                storeId: 26815
+                warehouseId: 24079
+              amountPaid: 218.73
+              billTo:
+                name: The President
+              carrierCode: fedex
+              confirmation: delivery
+              createDate: '2015-07-16T14:00:34.8230000'
+              customerEmail: headhoncho@whitehouse.gov
+              customerId: 37701499
+              customerNotes: Thanks for ordering!
+              customerUsername: headhoncho@whitehouse.gov
+              dimensions:
+                height: 6
+                length: 7
+                units: inches
+                width: 5
+              externallyFulfilled: false
+              gift: true
+              giftMessage: Thank you!
+              insuranceOptions:
+                insureShipment: true
+                insuredValue: 200
+                provider: carrier
+              internalNotes: Customer called and would like to upgrade shipping
+              internationalOptions: {}
+              items:
+                - adjustment: false
+                  createDate: '2015-07-16T14:00:34.823'
+                  lineItemKey: vd08-MSLbtx
+                  modifyDate: '2015-07-16T14:00:34.823'
+                  name: 'Test item #1'
+                  options:
+                    - name: Size
+                      value: Large
+                  orderItemId: 128836912
+                  productId: 7239919
+                  quantity: 2
+                  sku: ABC123
+                  unitPrice: 99.99
+                  warehouseLocation: 'Aisle 1, Bin 7'
+                  weight:
+                    units: ounces
+                    value: 24
+                - adjustment: true
+                  createDate: '2015-07-16T14:00:34.823'
+                  modifyDate: '2015-07-16T14:00:34.823'
+                  name: 10% OFF
+                  options: []
+                  orderItemId: 128836913
+                  quantity: 1
+                  sku: DISCOUNT CODE
+                  unitPrice: -20.55
+                  weight:
+                    units: ounces
+                    value: 0
+              modifyDate: '2015-09-08T11:03:12.3800000'
+              orderDate: '2015-06-29T08:46:27.0000000'
+              orderId: 94113592
+              orderKey: 0f6bec18-9-4771-83aa-f392d84f4c74
+              orderNumber: TEST-ORDER-API-DOCS
+              orderStatus: awaiting_shipment
+              orderTotal: 194.43
+              packageCode: package
+              paymentDate: '2015-06-29T08:46:27.0000000'
+              paymentMethod: Credit Card
+              requestedShippingService: Priority Mail
+              serviceCode: fedex_home_delivery
+              shipByDate: '2015-07-05T00:00:00.0000000'
+              shipDate: '2015-07-02'
+              shipTo:
+                addressVerified: Address validation warning
+                city: Washington
+                company: US Govt
+                country: US
+                name: The President
+                phone: 555-555-5555
+                postalCode: '20500'
+                residential: false
+                state: DC
+                street1: 1600 Pennsylvania Ave
+                street2: Oval Office
+              shippingAmount: 10
+              taxAmount: 5
+              weight:
+                units: ounces
+                value: 48
+          headers: {}
+      summary: Get Order
+      tags:
+        - Orders
+  '/orders?customerName={customerName}&itemKeyword={itemKeyword}&createDateStart={createDateStart}&createDateEnd={createDateEnd}&modifyDateStart={modifyDateStart}&modifyDateEnd={modifyDateEnd}&orderDateStart={orderDateStart}&orderDateEnd={orderDateEnd}&orderNumber={orderNumber}&orderStatus={orderStatus}&paymentDateStart={paymentDateStart}&paymentDateEnd={paymentDateEnd}&storeId={storeId}&sortBy={sortBy}&sortDir={sortDir}&page={page}&pageSize={pageSize}':
+    get:
+      description: |-
+        Obtains a list of orders that match the specified criteria.  All of the available filters are optional.  They do not need to be included in the URL.  If you do include them, here's what the URL may look like:
+
+        Url format with filters:
+
+        ```
+        /orders?customerName={customerName}
+        &itemKeyword={itemKeyword}
+        &createDateStart={createDateStart}
+        &createDateEnd={createDateEnd}
+        &modifyDateStart={modifyDateStart}
+        &modifyDateEnd={modifyDateEnd}
+        &orderDateStart={orderDateStart}
+        &orderDateEnd={orderDateEnd}
+        &orderNumber={orderNumber}
+        &orderStatus={orderStatus}
+        &paymentDateStart={paymentDateStart}
+        &paymentDateEnd={paymentDateEnd}
+        &storeId={storeId}
+        &sortBy={sortBy}
+        &sortDir={sortDir}
+        &page={page}
+        &pageSize={pageSize}
+        ```
+      parameters:
+        - description: Returns orders that match the specified name.
+          in: path
+          name: customerName
+          required: true
+          type: string
+        - description: 'Returns orders that contain items that match the specified keyword. Fields searched are Sku, Description, and Options'
+          in: path
+          name: itemKeyword
+          required: true
+          type: string
+        - description: Returns orders that were created in ShipStation after the specified date
+          in: path
+          name: createDateStart
+          required: true
+          type: string
+        - description: Returns orders that were created in ShipStation before the specified date
+          in: path
+          name: createDateEnd
+          required: true
+          type: string
+        - description: Returns orders that were modified after the specified date
+          in: path
+          name: modifyDateStart
+          required: true
+          type: string
+        - description: Returns orders that were modified before the specified date
+          in: path
+          name: modifyDateEnd
+          required: true
+          type: string
+        - description: Returns orders greater than the specified date
+          in: path
+          name: orderDateStart
+          required: true
+          type: string
+        - description: Returns orders less than or equal to the specified date
+          in: path
+          name: orderDateEnd
+          required: true
+          type: string
+        - description: 'Filter by order number, performs a "starts with" search.'
+          in: path
+          name: orderNumber
+          required: true
+          type: string
+        - description: 'Filter by order status.  If left empty, orders of all statuses are returned.'
+          enum:
+            - awaiting_payment
+            - awaiting_shipment
+            - pending_fulfillment
+            - shipped
+            - on_hold
+            - cancelled
+          in: path
+          name: orderStatus
+          required: true
+          type: string
+        - description: Returns orders that were paid after the specified date
+          in: path
+          name: paymentDateStart
+          required: true
+          type: string
+        - description: Returns orders that were paid before the specified date
+          in: path
+          name: paymentDateEnd
+          required: true
+          type: string
+        - description: Filters orders to a single store. Call List Stores to obtain a list of store Ids.
+          in: path
+          name: storeId
+          required: true
+          type: number
+        - description: 'Sort the responses by a set value.  The response will be sorted based off the ascending dates (oldest to most current.)  If left empty, the response will be sorted by ascending ``orderId``.'
+          enum:
+            - OrderDate
+            - ModifyDate
+            - CreateDate
+          in: path
+          name: sortBy
+          required: true
+          type: string
+        - description: Sets the direction of the sort order.
+          enum:
+            - ASC
+            - DESC
+          in: path
+          name: sortDir
+          required: true
+          type: string
+        - default: '1'
+          description: Page number
+          in: path
+          name: page
+          required: true
+          type: string
+        - default: '100'
+          description: Requested page size. Max value is 500.
+          in: path
+          name: pageSize
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              orders:
+                - advancedOptions:
+                    containsAlcohol: false
+                    customField1: 'SKU: CN-9876 x 1'
+                    customField2: 'SKU: Ele-123 x 2'
+                    mergedIds: []
+                    mergedOrSplit: false
+                    nonMachinable: false
+                    saturdayDelivery: false
+                    storeId: 12345
+                    warehouseId: 98765
+                  amountPaid: 412.97
+                  billTo:
+                    name: Sherlock Holmes
+                  carrierCode: stamps_com
+                  confirmation: delivery
+                  createDate: '2015-08-17T09:24:14.7800000'
+                  customerEmail: sholmes1854@methodsofdetection.com
+                  customerId: 63310475
+                  customerNotes: Please be careful when packing the disguise kits in with the cane.
+                  customerUsername: sholmes1854@methodsofdetection.com
+                  dimensions:
+                    height: 5
+                    length: 40
+                    units: inches
+                    width: 7
+                  externallyFulfilled: false
+                  gift: false
+                  insuranceOptions:
+                    insureShipment: false
+                    insuredValue: 0
+                  internalNotes: Mr. Holmes called to upgrade his shipping to expedited
+                  internationalOptions:
+                    contents: merchandise
+                    customsItems:
+                      - countryOfOrigin: US
+                        customsItemId: 11558268
+                        description: Fine White Oak Cane
+                        quantity: 1
+                        value: 225
+                      - countryOfOrigin: US
+                        customsItemId: 11558267
+                        description: Elementary Disguise Kit
+                        quantity: 2
+                        value: 49.99
+                    nonDelivery: return_to_sender
+                  items:
+                    - adjustment: false
+                      createDate: '2015-08-17T09:24:14.78'
+                      fulfillmentSku: Ele-1234
+                      modifyDate: '2015-08-17T09:24:14.78'
+                      name: Elementary Disguise Kit
+                      options: []
+                      orderItemId: 136282568
+                      productId: 11780610
+                      quantity: 2
+                      sku: Ele-1234
+                      unitPrice: 49.99
+                      warehouseLocation: 'Aisle 1, Bin 7'
+                      weight:
+                        units: ounces
+                        value: 12
+                    - adjustment: false
+                      createDate: '2015-08-17T09:24:14.78'
+                      modifyDate: '2015-08-17T09:24:14.78'
+                      name: Fine White Oak Cane
+                      options: []
+                      orderItemId: 136282569
+                      productId: 11780609
+                      quantity: 1
+                      sku: CN-9876
+                      unitPrice: 225
+                      warehouseLocation: 'Aisle 7, Bin 34'
+                      weight:
+                        units: ounces
+                        value: 80
+                  modifyDate: '2015-08-17T09:24:16.4800000'
+                  orderDate: '2015-06-28T17:46:27.0000000'
+                  orderId: 987654321
+                  orderKey: Test-International-API-DOCS
+                  orderNumber: Test-International-API-DOCS
+                  orderStatus: awaiting_shipment
+                  orderTotal: 387.97
+                  packageCode: package
+                  paymentDate: '2015-06-28T17:46:27.0000000'
+                  requestedShippingService: Priority Mail Int
+                  serviceCode: usps_priority_mail_international
+                  shipByDate: '2015-07-05T00:00:00.0000000'
+                  shipDate: '2015-04-25'
+                  shipTo:
+                    addressVerified: Address not yet validated
+                    city: London
+                    company: ''
+                    country: GB
+                    name: Sherlock Holmes
+                    postalCode: NW1 6XE
+                    residential: true
+                    state: ''
+                    street1: 221 B Baker St
+                    street2: ''
+                  shippingAmount: 35
+                  taxAmount: 27.99
+                  weight:
+                    units: ounces
+                    value: 104
+                - advancedOptions:
+                    containsAlcohol: false
+                    customField1: 'Custom data that you can add to an order. See Custom Field #2 & #3 for more info!'
+                    customField2: 'Per UI settings, this information can appear on some carrier''s shipping labels. See link below'
+                    customField3: 'https://help.shipstation.com/hc/en-us/articles/206639957'
+                    mergedIds: []
+                    mergedOrSplit: false
+                    nonMachinable: false
+                    saturdayDelivery: false
+                    source: Webstore
+                    storeId: 12345
+                    warehouseId: 98765
+                  amountPaid: 218.73
+                  billTo:
+                    name: The President
+                  carrierCode: fedex
+                  confirmation: delivery
+                  createDate: '2015-07-16T14:00:34.8230000'
+                  customerEmail: headhoncho@whitehouse.gov
+                  customerId: 37701499
+                  customerNotes: Thanks for ordering!
+                  customerUsername: headhoncho@whitehouse.gov
+                  dimensions:
+                    height: 6
+                    length: 7
+                    units: inches
+                    width: 5
+                  externallyFulfilled: false
+                  gift: true
+                  giftMessage: Thank you!
+                  insuranceOptions:
+                    insureShipment: true
+                    insuredValue: 200
+                    provider: carrier
+                  internalNotes: Customer called and would like to upgrade shipping
+                  internationalOptions: {}
+                  items:
+                    - adjustment: false
+                      createDate: '2015-07-16T14:00:34.823'
+                      lineItemKey: vd08-MSLbtx
+                      modifyDate: '2015-07-16T14:00:34.823'
+                      name: 'Test item #1'
+                      options:
+                        - name: Size
+                          value: Large
+                      orderItemId: 128836912
+                      productId: 7239919
+                      quantity: 2
+                      sku: ABC123
+                      unitPrice: 99.99
+                      warehouseLocation: 'Aisle 1, Bin 7'
+                      weight:
+                        units: ounces
+                        value: 24
+                    - adjustment: true
+                      createDate: '2015-07-16T14:00:34.823'
+                      modifyDate: '2015-07-16T14:00:34.823'
+                      name: 10% OFF
+                      options: []
+                      orderItemId: 128836913
+                      quantity: 1
+                      sku: DISCOUNT CODE
+                      unitPrice: -20.55
+                      weight:
+                        units: ounces
+                        value: 0
+                  modifyDate: '2015-08-17T09:21:59.4430000'
+                  orderDate: '2015-06-29T08:46:27.0000000'
+                  orderId: 123456789
+                  orderKey: 0f6bec18-9-4771-83aa-f392d84f4c74
+                  orderNumber: TEST-ORDER-API-DOCS
+                  orderStatus: awaiting_shipment
+                  orderTotal: 194.43
+                  packageCode: package
+                  paymentDate: '2015-06-29T08:46:27.0000000'
+                  paymentMethod: Credit Card
+                  requestedShippingService: Priority Mail
+                  serviceCode: fedex_home_delivery
+                  shipByDate: '2015-07-05T00:00:00.0000000'
+                  shipDate: '2015-07-02'
+                  shipTo:
+                    addressVerified: Address validation warning
+                    city: Washington
+                    company: US Govt
+                    country: US
+                    name: The President
+                    phone: 555-555-5555
+                    postalCode: '20500'
+                    residential: false
+                    state: DC
+                    street1: 1600 Pennsylvania Ave
+                    street2: Oval Office
+                  shippingAmount: 10
+                  taxAmount: 5
+                  weight:
+                    units: ounces
+                    value: 48
+              page: 1
+              pages: 0
+              total: 2
+          headers: {}
+      summary: List Orders with parameters
+      tags:
+        - Orders
+  /products:
+    get:
+      description: ''
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              page: 1
+              pages: 0
+              products:
+                - active: true
+                  createDate: '2014-09-04T09:18:01.293'
+                  defaultCarrierCode: fedex
+                  defaultConfirmation: direct_signature
+                  defaultCost: 0
+                  defaultIntlCarrierCode: ups
+                  defaultIntlConfirmation: adult_signature
+                  defaultIntlPackageCode: package
+                  defaultIntlServiceCode: ups_worldwide_saver
+                  defaultPackageCode: package
+                  defaultServiceCode: fedex_home_delivery
+                  fulfillmentSku: F1004
+                  height: 3
+                  length: 3
+                  modifyDate: '2014-09-18T12:38:43.893'
+                  name: Coffee Mug
+                  price: 26
+                  productCategory:
+                    categoryId: 9999
+                    name: Door Closers
+                  productId: 7854008
+                  sku: '1004'
+                  tags:
+                    - name: APItest
+                      tagId: 9180
+                  warehouseLocation: Bin 22
+                  weightOz: 26
+                  width: 3
+                - active: true
+                  createDate: '2014-09-18T08:17:28.647'
+                  customsCountryCode: US
+                  customsDescription: customs declaration
+                  customsTariffNo: '1234567'
+                  customsValue: 100
+                  defaultCarrierCode: ups
+                  defaultConfirmation: delivery
+                  defaultIntlPackageCode: package
+                  defaultPackageCode: package
+                  defaultServiceCode: ups_ground
+                  fulfillmentSku: fSkuFill
+                  height: 4
+                  length: 2
+                  modifyDate: '2014-09-18T12:32:40.257'
+                  name: Product Name 123
+                  price: 10
+                  productCategory:
+                    categoryId: 9690
+                    name: Floor Matting
+                  productId: 7984482
+                  sku: FirstSKU
+                  tags:
+                    - name: APItest
+                      tagId: 9180
+                  warehouseLocation: Bin 100
+                  weightOz: 96
+                  width: 3
+              total: 2
+          headers: {}
+      summary: List Products w/o parameters
+      tags:
+        - Products
+  '/products/{productId}':
+    get:
+      description: ''
+      parameters:
+        - description: The system generated identifier for the Product.
+          in: path
+          name: productId
+          required: true
+          type: number
+      responses:
+        '200':
+          description: OK
+          examples: {}
+          headers: {}
+      summary: Get Product
+      tags:
+        - Products
+    put:
+      description: Updates an existing product. This call does not currently support partial updates. The entire resource must be provided in the body of the request.
+      parameters:
+        - description: The system generated identifier for the Product.
+          in: path
+          name: productId
+          required: true
+          type: number
+        - in: body
+          name: body
+          schema:
+            properties:
+              active:
+                type: boolean
+              aliases:
+                type: 'null'
+              customsCountryCode:
+                type: 'null'
+              customsDescription:
+                type: 'null'
+              customsTariffNo:
+                type: 'null'
+              customsValue:
+                type: 'null'
+              defaultCarrierCode:
+                type: 'null'
+              defaultConfirmation:
+                type: 'null'
+              defaultCost:
+                type: 'null'
+              defaultIntlCarrierCode:
+                type: 'null'
+              defaultIntlConfirmation:
+                type: 'null'
+              defaultIntlPackageCode:
+                type: 'null'
+              defaultIntlServiceCode:
+                type: 'null'
+              defaultPackageCode:
+                type: 'null'
+              defaultServiceCode:
+                type: 'null'
+              fulfillmentSku:
+                type: 'null'
+              height:
+                type: 'null'
+              internalNotes:
+                type: 'null'
+              length:
+                type: 'null'
+              name:
+                type: string
+              noCustoms:
+                type: 'null'
+              price:
+                type: number
+              productCategory:
+                type: 'null'
+              productId:
+                type: number
+              productType:
+                type: 'null'
+              sku:
+                type: string
+              tags:
+                type: 'null'
+              warehouseLocation:
+                type: 'null'
+              weightOz:
+                type: 'null'
+              width:
+                type: 'null'
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: The requested product has been updated
+              success: true
+          headers: {}
+      summary: Update Product
+      tags:
+        - Products
+  '/products?sku={sku}&name={name}&productCategoryId={productCategoryId}&productTypeId={productTypeId}&tagId={tagId}&startDate={startDate}&endDate={endDate}&showInactive={showInactive}&sortBy={sortBy}&sortDir={sortDir}&page={page}&pageSize={pageSize}':
+    get:
+      description: |-
+        Obtains a list of products that match the specified criteria.  All of the available filters are optional.  They do not need to be included in the URL.  If you do include them, here's what the URL may look like:
+
+        Url format with filters:
+
+        ```
+        /products?sku={sku}
+        &name={name}
+        &productCategoryId={productCategoryId}
+        &productTypeId={productTypeId}
+        &tagId={tagId}
+        &startDate={startDate}
+        &endDate={endDate}
+        &showInactive={showInactive}
+        &sortBy={sortBy}
+        &sortDir={sortDir}
+        &page={page}
+        &pageSize={pageSize}
+        ```
+      parameters:
+        - description: Returns products that match the specified SKU.
+          in: path
+          name: sku
+          required: true
+          type: string
+        - description: Returns products that match the specified product name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Returns products that match the specified productCategoryId.
+          in: path
+          name: productCategoryId
+          required: true
+          type: string
+        - description: Returns products that match the specified productTypeId.
+          in: path
+          name: productTypeId
+          required: true
+          type: string
+        - description: Returns products that match the specified tagId.
+          in: path
+          name: tagId
+          required: true
+          type: string
+        - description: Returns products that were created after the specified date.
+          in: path
+          name: startDate
+          required: true
+          type: string
+        - description: Returns products that were created before the specified date.
+          in: path
+          name: endDate
+          required: true
+          type: string
+        - description: Sorts the order of the response based off the specified value.
+          enum:
+            - SKU
+            - ModifyDate
+            - CreateDate
+          in: path
+          name: sortBy
+          required: true
+          type: string
+        - description: Sets the direction of the sort order.
+          enum:
+            - ASC
+            - DESC
+          in: path
+          name: sortDir
+          required: true
+          type: string
+        - default: '1'
+          description: Page number.
+          in: path
+          name: page
+          required: true
+          type: string
+        - default: '100'
+          description: Requested page size. Max value is 500.
+          in: path
+          name: pageSize
+          required: true
+          type: string
+        - default: 'false'
+          description: Specifies whether the list should include inactive products.
+          in: path
+          name: showInactive
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              page: 1
+              pages: 0
+              products:
+                - active: true
+                  createDate: '2014-09-04T09:18:01.293'
+                  defaultCarrierCode: fedex
+                  defaultConfirmation: direct_signature
+                  defaultCost: 0
+                  defaultIntlCarrierCode: ups
+                  defaultIntlConfirmation: adult_signature
+                  defaultIntlPackageCode: package
+                  defaultIntlServiceCode: ups_worldwide_saver
+                  defaultPackageCode: package
+                  defaultServiceCode: fedex_home_delivery
+                  fulfillmentSku: F1004
+                  height: 3
+                  length: 3
+                  modifyDate: '2014-09-18T12:38:43.893'
+                  name: Coffee Mug
+                  price: 26
+                  productCategory:
+                    categoryId: 9999
+                    name: Door Closers
+                  productId: 7854008
+                  sku: '1004'
+                  tags:
+                    - name: APItest
+                      tagId: 9180
+                  warehouseLocation: Bin 22
+                  weightOz: 26
+                  width: 3
+                - active: true
+                  createDate: '2014-09-18T08:17:28.647'
+                  customsCountryCode: US
+                  customsDescription: customs declaration
+                  customsTariffNo: '1234567'
+                  customsValue: 100
+                  defaultCarrierCode: ups
+                  defaultConfirmation: delivery
+                  defaultIntlPackageCode: package
+                  defaultPackageCode: package
+                  defaultServiceCode: ups_ground
+                  fulfillmentSku: fSkuFill
+                  height: 4
+                  length: 2
+                  modifyDate: '2014-09-18T12:32:40.257'
+                  name: Product Name 123
+                  price: 10
+                  productCategory:
+                    categoryId: 9690
+                    name: Floor Matting
+                  productId: 7984482
+                  sku: FirstSKU
+                  tags:
+                    - name: APItest
+                      tagId: 9180
+                  warehouseLocation: Bin 100
+                  weightOz: 96
+                  width: 3
+              total: 2
+          headers: {}
+      summary: List Products with parameters
+      tags:
+        - Products
+  /shipments:
+    get:
+      description: ''
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              page: 1
+              pages: 0
+              shipments:
+                - batchNumber: '100301'
+                  carrierCode: stamps_com
+                  confirmation: delivery
+                  createDate: '2014-10-03T06:51:33.6270000'
+                  insuranceCost: 0
+                  insuranceOptions:
+                    insureShipment: false
+                    insuredValue: 0
+                  isReturnLabel: false
+                  marketplaceNotified: true
+                  orderId: 43945660
+                  orderNumber: 100038-1
+                  packageCode: package
+                  serviceCode: usps_first_class_mail
+                  shipDate: '2014-10-03'
+                  shipTo:
+                    city: MANCHACA
+                    company: ''
+                    country: US
+                    name: Yoda
+                    phone: '2101235544'
+                    postalCode: 78652-3602
+                    state: TX
+                    street1: 12223 LOWDEN LN
+                    street2: ''
+                  shipmentCost: 1.93
+                  shipmentId: 33974374
+                  shipmentItems:
+                    - name: Potato Kitten -
+                      orderItemId: 56568665
+                      productId: 7565777
+                      quantity: 1
+                      sku: SQ3785739
+                      unitPrice: 1
+                  trackingNumber: '9400111899561704681189'
+                  userId: 123456AB-ab12-3c4d-5e67-89f1abc1defa
+                  voided: false
+                  warehouseId: 16079
+                  weight:
+                    units: ounces
+                    value: 1
+                - batchNumber: '100300'
+                  carrierCode: stamps_com
+                  confirmation: delivery
+                  createDate: '2014-10-03T06:51:59.9430000'
+                  insuranceCost: 0
+                  insuranceOptions:
+                    insureShipment: false
+                    insuredValue: 0
+                  isReturnLabel: false
+                  marketplaceNotified: true
+                  orderId: 43337328
+                  orderNumber: '100028'
+                  packageCode: package
+                  serviceCode: usps_first_class_mail
+                  shipDate: '2014-10-03'
+                  shipTo:
+                    city: AUSTIN
+                    company: SS
+                    country: US
+                    name: Luke Skywalker
+                    phone: ''
+                    postalCode: 78703-1221
+                    state: TX
+                    street1: 2815 EXPOSITION BLVD
+                    street2: ''
+                  shipmentCost: 1.93
+                  shipmentId: 33974373
+                  shipmentItems:
+                    - name: test
+                      orderItemId: 55827278
+                      productId: 7541107
+                      quantity: 1
+                      sku: test
+                      unitPrice: 1
+                  trackingNumber: '9400111899561704681196'
+                  userId: 123456AB-ab12-3c4d-5e67-89f1abc1defa
+                  voided: false
+                  warehouseId: 14265
+                  weight:
+                    units: ounces
+                    value: 1
+              total: 2
+          headers: {}
+      summary: List Shipments w/o parameters
+      tags:
+        - Shipments
+  /shipments/createlabel:
+    post:
+      description: |-
+        Creates a shipping label.  The ``labelData`` field returned in the response is a base64 encoded PDF value. Simply decode and save the output as a PDF file to retrieve a printable label.  The body of this request has the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+         ``carrierCode`` | string, required | Identifies the carrier to be used for this label.
+         ``serviceCode`` | string, required | Identifies the shipping service to be used for this label.
+         ``packageCode`` | string, required | Identifies the packing type that should be used for this label.
+         ``confirmation`` | string, optional | Identifies the delivery confirmation type to be used for this label.
+         ``shipDate`` | string, required | The date the shipment will be shipped.
+         ``weight`` | Weight, required | Shipment's weight.  Use the [**Weight**](https://www.shipstation.com/developer-api/#/reference/model-weight) model.
+         ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use the [**Dimensions**](https://www.shipstation.com/developer-api/#/reference/model-dimensions) model.
+         ``shipFrom`` | Address, required | Address indicating shipment's origin.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
+         ``shipTo`` | Address, required | Address indicating shipment's destination.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
+         ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.  
+         ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](https://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
+         ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order.  Use the [**AdvancedOptions**](https://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model. 
+         ``testLabel`` | boolean, optional | Specifies whether a test label should be created. Default value: false.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              advancedOptions:
+                type: 'null'
+              carrierCode:
+                type: string
+              confirmation:
+                type: string
+              dimensions:
+                properties:
+                  height:
+                    type: number
+                  length:
+                    type: number
+                  units:
+                    type: string
+                  width:
+                    type: number
+                type: object
+              insuranceOptions:
+                type: 'null'
+              internationalOptions:
+                type: 'null'
+              packageCode:
+                type: string
+              serviceCode:
+                type: string
+              shipDate:
+                type: string
+              shipFrom:
+                properties:
+                  city:
+                    type: string
+                  company:
+                    type: string
+                  country:
+                    type: string
+                  name:
+                    type: string
+                  phone:
+                    type: 'null'
+                  postalCode:
+                    type: string
+                  residential:
+                    type: boolean
+                  state:
+                    type: string
+                  street1:
+                    type: string
+                  street2:
+                    type: string
+                  street3:
+                    type: 'null'
+                type: object
+              shipTo:
+                properties:
+                  city:
+                    type: string
+                  company:
+                    type: string
+                  country:
+                    type: string
+                  name:
+                    type: string
+                  phone:
+                    type: 'null'
+                  postalCode:
+                    type: string
+                  residential:
+                    type: boolean
+                  state:
+                    type: string
+                  street1:
+                    type: string
+                  street2:
+                    type: string
+                  street3:
+                    type: 'null'
+                type: object
+              testLabel:
+                type: boolean
+              weight:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              carrierCode: fedex
+              confirmation: delivery
+              createDate: '2016-04-03T12:11:36.8630000'
+              insuranceCost: 0
+              isReturnLabel: false
+              labelData: JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9MZW5ndGggNjIvRmlsdGVyL0ZsYXRlRGVjb2RlPj5zdHJlYW0KeJwr5HIK4TI2U...
+              marketplaceNotified: false
+              packageCode: package
+              serviceCode: fedex_ground
+              shipDate: '2016-04-03'
+              shipmentCost: 9.06
+              shipmentId: 123456789
+              trackingNumber: '782390443992'
+              voided: false
+          headers: {}
+      summary: Create Shipment Label
+      tags:
+        - Shipments
+  /shipments/getrates:
+    post:
+      description: |-
+        Retrieves shipping rates for the specified shipping details.  The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+         ``carrierCode`` | string, required | Returns rates for the specified carrier.
+         ``serviceCode`` | string, optional | Returns rates for the specified shipping service.
+         ``packageCode`` | string, optional | Returns rates for the specified package type.
+         ``fromPostalCode`` | string, required | Originating postal code.
+         ``toState`` | string, optional | Destination State/Province. Please use two-character state/province abbreviation. Note this field is required for the following carriers: UPS
+         ``toCountry`` | string, required | Destination Country.  Please use the two-character ISO country code.
+         ``toPostalCode`` | string, required | Destination Postal Code.
+         ``toCity`` | string, optional | Destination City.
+         ``weight`` | Weight, required | Shipment's weight.  Use ``Weight`` object.
+         ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use ``Dimensions`` object. 
+         ``confirmation`` | string, optional | Returns rates that account for the specified delivery confirmation type.
+         ``residential`` | boolean, optional | Returns rates that account for the specified delivery confirmation type. Default value: false
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              carrierCode:
+                type: string
+              confirmation:
+                type: string
+              dimensions:
+                properties:
+                  height:
+                    type: number
+                  length:
+                    type: number
+                  units:
+                    type: string
+                  width:
+                    type: number
+                type: object
+              fromPostalCode:
+                type: string
+              packageCode:
+                type: 'null'
+              residential:
+                type: boolean
+              serviceCode:
+                type: 'null'
+              toCity:
+                type: string
+              toCountry:
+                type: string
+              toPostalCode:
+                type: string
+              toState:
+                type: string
+              weight:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              - otherCost: 2.63
+                serviceCode: fedex_first_overnight
+                serviceName: FedEx First Overnight®
+                shipmentCost: 87.8
+              - otherCost: 1.51
+                serviceCode: fedex_priority_overnight
+                serviceName: FedEx Priority Overnight®
+                shipmentCost: 50.23
+              - otherCost: 1.41
+                serviceCode: fedex_standard_overnight
+                serviceName: FedEx Standard Overnight®
+                shipmentCost: 46.96
+              - otherCost: 0.69
+                serviceCode: fedex_2day_am
+                serviceName: FedEx 2Day® A.M.
+                shipmentCost: 23.04
+              - otherCost: 0.6
+                serviceCode: fedex_2day
+                serviceName: FedEx 2Day®
+                shipmentCost: 20.03
+              - otherCost: 0.43
+                serviceCode: fedex_express_saver
+                serviceName: FedEx Express Saver®
+                shipmentCost: 14.28
+              - otherCost: 0.33
+                serviceCode: fedex_ground
+                serviceName: FedEx Ground®
+                shipmentCost: 8.25
+          headers: {}
+      summary: Get Rates
+      tags:
+        - Shipments
+  /shipments/voidlabel:
+    post:
+      description: |-
+        Voids the specified label by shipmentId.  The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+         ``shipmentId`` | number, required | ID of the shipment to void.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              shipmentId:
+                type: number
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              approved: true
+              message: Label voided successfully
+          headers: {}
+      summary: Void Label
+      tags:
+        - Shipments
+  '/shipments?recipientName={recipientName}&recipientCountryCode={recipientCountryCode}&orderNumber={orderNumber}&orderId={orderId}&carrierCode={carrierCode}&serviceCode={serviceCode}&trackingNumber={trackingNumber}&createDateStart={createDateStart}&createDateEnd={createDateEnd}&shipDateStart={shipDateStart}&shipDateEnd={shipDateEnd}&voidDateStart={voidDateStart}&voidDateEnd={voidDateEnd}&includeShipmentItems={includeShipmentItems}&sortBy={sortBy}&sortDir={sortDir}&page={page}&pageSize={pageSize}':
+    get:
+      description: |-
+        Obtains a list of shipments that match the specified criteria.  Please note the following:
+
+        - Only valid shipments with labels generated in ShipStation will be returned in the response. Orders that have been marked as shipped either through the UI or the API will not appear as they are considered external shipments.
+
+        - To include every shipment's associated shipmentItems in the response, be sure to set the `includeShipmentItems` parameter to `true`.
+
+        All of the available filters are optional.  They do not need to be included in the URL.  If you do include them, here's what the URL may look like:
+
+        Url format with filters:
+
+        ```
+        shipments?recipientName={recipientName}
+        &recipientCountryCode={recipientCountryCode}
+        &orderNumber={orderNumber}
+        &orderId={orderId}
+        &carrierCode={carrierCode}
+        &serviceCode={serviceCode}
+        &trackingNumber={trackingNumber}
+        &createDateStart={createDateStart}
+        &createDateEnd={createDateEnd}
+        &shipDateStart={shipDateStart}
+        &shipDateEnd={shipDateEnd}
+        &voidDateStart={voidDateStart}
+        &voidDateEnd={voidDateEnd}
+        &includeShipmentItems={includeShipmentItems}
+        &sortBy={sortBy}
+        &sortDir={sortDir}
+        &page={page}
+        &pageSize={pageSize}
+        ```
+      parameters:
+        - description: Returns shipments shipped to the specified recipient name.
+          in: path
+          name: recipientName
+          required: true
+          type: string
+        - description: Returns shipments shipped to the specified country code.
+          in: path
+          name: recipientCountryCode
+          required: true
+          type: string
+        - description: Returns shipments whose orders have the specified order number.
+          in: path
+          name: orderNumber
+          required: true
+          type: string
+        - description: Returns shipments whose orders have the specified order ID.
+          in: path
+          name: orderId
+          required: true
+          type: number
+        - description: Returns shipments shipped with the specified carrier.
+          in: path
+          name: carrierCode
+          required: true
+          type: string
+        - description: Returns shipments shipped with the specified shipping service.
+          in: path
+          name: serviceCode
+          required: true
+          type: string
+        - description: Returns shipments with the specified tracking number.
+          in: path
+          name: trackingNumber
+          required: true
+          type: string
+        - description: Returns shipments created on or after the specified ``createDate``
+          in: path
+          name: createDateStart
+          required: true
+          type: string
+        - description: Returns shipments created on or before the specified ``createDate``
+          in: path
+          name: createDateEnd
+          required: true
+          type: string
+        - description: Returns shipments with the ``shipDate`` on or after the specified date
+          in: path
+          name: shipDateStart
+          required: true
+          type: string
+        - description: Returns shipments with the ``shipDate`` on or before the specified date
+          in: path
+          name: shipDateEnd
+          required: true
+          type: string
+        - description: Returns shipments voided on or after the specified date
+          in: path
+          name: voidDateStart
+          required: true
+          type: string
+        - description: Returns shipments voided on or before the specified date
+          in: path
+          name: voidDateEnd
+          required: true
+          type: string
+        - description: 'Specifies whether to include shipment items with results Default value: false.'
+          in: path
+          name: includeShipmentItems
+          required: true
+          type: boolean
+        - description: 'Sort the responses by a set value.  The response will be sorted based off the ascending dates (oldest to most current.)  If left empty, the response will be sorted by ascending ``createDate``.'
+          enum:
+            - ShipDate
+            - CreateDate
+          in: path
+          name: sortBy
+          required: true
+          type: string
+        - description: Sets the direction of the sort order.
+          enum:
+            - ASC
+            - DESC
+          in: path
+          name: sortDir
+          required: true
+          type: string
+        - default: 1
+          description: page number.
+          in: path
+          name: page
+          required: true
+          type: number
+        - default: 100
+          description: page size.
+          in: path
+          name: pageSize
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              page: 1
+              pages: 0
+              shipments:
+                - batchNumber: '100301'
+                  carrierCode: stamps_com
+                  confirmation: delivery
+                  createDate: '2014-10-03T06:51:33.6270000'
+                  insuranceCost: 0
+                  insuranceOptions:
+                    insureShipment: false
+                    insuredValue: 0
+                  isReturnLabel: false
+                  marketplaceNotified: true
+                  orderId: 43945660
+                  orderNumber: 100038-1
+                  packageCode: package
+                  serviceCode: usps_first_class_mail
+                  shipDate: '2014-10-03'
+                  shipTo:
+                    city: MANCHACA
+                    company: ''
+                    country: US
+                    name: Yoda
+                    phone: '2101235544'
+                    postalCode: 78652-3602
+                    state: TX
+                    street1: 12223 LOWDEN LN
+                    street2: ''
+                  shipmentCost: 1.93
+                  shipmentId: 33974374
+                  shipmentItems:
+                    - name: Potato Kitten -
+                      orderItemId: 56568665
+                      productId: 7565777
+                      quantity: 1
+                      sku: SQ3785739
+                      unitPrice: 1
+                  trackingNumber: '9400111899561704681189'
+                  userId: 123456AB-ab12-3c4d-5e67-89f1abc1defa
+                  voided: false
+                  warehouseId: 16079
+                  weight:
+                    units: ounces
+                    value: 1
+                - batchNumber: '100300'
+                  carrierCode: stamps_com
+                  confirmation: delivery
+                  createDate: '2014-10-03T06:51:59.9430000'
+                  insuranceCost: 0
+                  insuranceOptions:
+                    insureShipment: false
+                    insuredValue: 0
+                  isReturnLabel: false
+                  marketplaceNotified: true
+                  orderId: 43337328
+                  orderNumber: '100028'
+                  packageCode: package
+                  serviceCode: usps_first_class_mail
+                  shipDate: '2014-10-03'
+                  shipTo:
+                    city: AUSTIN
+                    company: SS
+                    country: US
+                    name: Luke Skywalker
+                    phone: ''
+                    postalCode: 78703-1221
+                    state: TX
+                    street1: 2815 EXPOSITION BLVD
+                    street2: ''
+                  shipmentCost: 1.93
+                  shipmentId: 33974373
+                  shipmentItems:
+                    - name: test
+                      orderItemId: 55827278
+                      productId: 7541107
+                      quantity: 1
+                      sku: test
+                      unitPrice: 1
+                  trackingNumber: '9400111899561704681196'
+                  userId: 123456AB-ab12-3c4d-5e67-89f1abc1defa
+                  voided: false
+                  warehouseId: 14265
+                  weight:
+                    units: ounces
+                    value: 1
+              total: 2
+          headers: {}
+      summary: List Shipments with parameters
+      tags:
+        - Shipments
+  /stores/deactivate:
+    post:
+      description: |-
+        Deactivates the specified store.
+
+        The body of this request has the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``storeId``  | number, required | ID of the store to deactivate.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              storeId:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: The requested store has been reactivated.
+              success: 'true'
+          headers: {}
+      summary: Deactivate Store
+      tags:
+        - Stores
+  '/stores/getrefreshstatus?storeId={storeId}':
+    get:
+      description: Retrieves the refresh status of a given store.
+      parameters:
+        - description: Specifies the store whose status will be retrieved.
+          in: path
+          name: storeId
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              lastRefreshAttempt: 8-13-2014
+              refreshDate: 8-13-2014
+              refreshStatus: Updating orders
+              refreshStatusId: 2
+              storeId: 12345
+          headers: {}
+      summary: Get Store Refresh Status
+      tags:
+        - Stores
+  /stores/marketplaces:
+    get:
+      description: Lists the marketplaces that can be integrated with ShipStation.
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              - canConfirmShipments: true
+                canRefresh: true
+                marketplaceId: 23
+                name: 3DCart
+                supportsCustomMappings: true
+                supportsCustomStatuses: false
+              - canConfirmShipments: true
+                canRefresh: true
+                marketplaceId: 2
+                name: Amazon
+                supportsCustomMappings: true
+                supportsCustomStatuses: false
+              - canConfirmShipments: true
+                canRefresh: true
+                marketplaceId: 32
+                name: Amazon CA
+                supportsCustomMappings: true
+                supportsCustomStatuses: false
+          headers: {}
+      summary: List Marketplaces
+      tags:
+        - Stores
+  /stores/reactivate:
+    post:
+      description: |-
+        Reactivates the specified store. Note: stores are active by default
+
+        The body of this request has the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``storeId``  | number, required | ID of the store to reactivate.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              storeId:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: The requested store has been reactivated.
+              success: 'true'
+          headers: {}
+      summary: Reactivate Store
+      tags:
+        - Stores
+  '/stores/refreshstore?storeId={storeId}&refreshDate={refreshDate}':
+    post:
+      description: Initiates a store refresh.
+      parameters:
+        - description: 'Specifies the store which will get refreshed.  If the storeId is not specified, a store refresh will be initiated for all refreshable stores on that account.'
+          in: path
+          name: storeId
+          required: true
+          type: number
+        - description: 'Specifies the starting date for new order imports.  If the refreshDate is not specified, ShipStation will use the last recorded refreshDate for that store.'
+          in: path
+          name: refreshDate
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            properties:
+              refreshDate:
+                type: string
+              storeId:
+                type: number
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              message: A store refresh has been initiated for Store ID 12345
+              success: true
+          headers: {}
+      summary: Refresh Store
+      tags:
+        - Stores
+  '/stores/{storeId}':
+    get:
+      description: ''
+      parameters:
+        - description: A unique ID generated by ShipStation and assigned to each store.
+          in: path
+          name: storeId
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              active: true
+              autoRefresh: true
+              companyName: ''
+              createDate: '2014-11-06T15:21:13.223'
+              integrationUrl: 'http://shipstation-test.wpengine.com'
+              lastRefreshAttempt: '2014-12-16T09:47:05.457'
+              marketplaceId: 36
+              marketplaceName: WooCommerce
+              modifyDate: '2014-11-10T08:02:19.117'
+              phone: ''
+              publicEmail: ''
+              refreshDate: '2014-12-16T17:47:05.457'
+              statusMappings:
+                - orderStatus: awaiting_payment
+                  statusKey: Pending
+                - orderStatus: awaiting_shipment
+                  statusKey: Processing
+                - orderStatus: shipped
+                  statusKey: Completed
+                - orderStatus: cancelled
+                  statusKey: Cancelled
+                - orderStatus: on_hold
+                  statusKey: On-hold
+              storeId: 12345
+              storeName: WooCommerce Store
+              website: ''
+          headers: {}
+      summary: Get Store
+      tags:
+        - Stores
+    put:
+      description: Updates an existing store. This call does not currently support partial updates. The entire resource must be provided in the body of the request.
+      parameters:
+        - description: A unique ID generated by ShipStation and assigned to each store.
+          in: path
+          name: storeId
+          required: true
+          type: number
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Get_Update_StoreModel'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              active: true
+              autoRefresh: true
+              companyName: ''
+              createDate: '2014-11-06T15:21:13.223'
+              integrationUrl: 'http://shipstation-test.wpengine.com'
+              lastRefreshAttempt: '2014-12-16T09:47:05.457'
+              marketplaceId: 36
+              marketplaceName: WooCommerce
+              modifyDate: '2014-11-10T08:02:19.117'
+              phone: ''
+              publicEmail: ''
+              refreshDate: '2014-12-16T17:47:05.457'
+              statusMappings:
+                - orderStatus: awaiting_payment
+                  statusKey: Pending
+                - orderStatus: awaiting_shipment
+                  statusKey: Processing
+                - orderStatus: shipped
+                  statusKey: Completed
+                - orderStatus: cancelled
+                  statusKey: Cancelled
+                - orderStatus: on_hold
+                  statusKey: On-hold
+              storeId: 12345
+              storeName: WooCommerce Store
+              website: ''
+          headers: {}
+      summary: Update Store
+      tags:
+        - Stores
+  '/stores?showInactive={showInactive}&marketplaceId={marketplaceId}':
+    get:
+      description: Retrieve the list of installed stores on the account.
+      parameters:
+        - default: false
+          description: Determines whether inactive stores will be returned in the list of stores.
+          in: path
+          name: showInactive
+          required: true
+          type: boolean
+        - description: Returns stores of this marketplace type.
+          in: path
+          name: marketplaceId
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              - active: true
+                autoRefresh: false
+                companyName: ''
+                createDate: '2014-07-25T11:05:55.307'
+                lastRefreshAttempt: '2014-12-03T11:46:53.433'
+                marketplaceId: 0
+                marketplaceName: ShipStation
+                modifyDate: '2014-11-12T08:45:20.55'
+                phone: ''
+                publicEmail: testemail@email.com
+                refreshDate: '2014-12-03T11:46:11.283'
+                storeId: 22766
+                storeName: ShipStation Manual Store
+                website: ''
+              - active: true
+                autoRefresh: true
+                companyName: ''
+                createDate: '2014-11-10T08:53:48.077'
+                integrationUrl: 'http://shipstation.wpengine.com/'
+                lastRefreshAttempt: '2014-11-26T14:28:14.07'
+                marketplaceId: 36
+                marketplaceName: WooCommerce
+                modifyDate: '2014-12-03T14:53:50.557'
+                phone: ''
+                publicEmail: ''
+                refreshDate: '2014-11-26T22:28:14.07'
+                storeId: 25748
+                storeName: Ashley's Test WooCommerce
+                website: ''
+          headers: {}
+      summary: List Stores
+      tags:
+        - Stores
+  '/users?showInactive={showInactive}':
+    get:
+      description: ''
+      parameters:
+        - default: false
+          description: Determines whether inactive users will be returned in the response.
+          in: path
+          name: showInactive
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              name: Shipping Employee 1
+              userId: 123456AB-ab12-3c4d-5e67-89f1abc1defa
+              userName: SS-user1
+          headers: {}
+      summary: List Users
+      tags:
+        - Users
+  /warehouses:
+    get:
+      description: Retrieves a list of your Ship From Locations (formerly known as warehouses).
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              - createDate: '2014-10-21T08:11:43.8800000'
+                isDefault: true
+                originAddress:
+                  city: Elmurst
+                  company: ''
+                  country: US
+                  name: Spring warehouse
+                  phone: '5121112222'
+                  postalCode: '60126'
+                  residential: false
+                  state: IL
+                  street1: '123 S SPRING RD  '
+                  street2: ''
+                  street3: ''
+                returnAddress:
+                  city: Elmurst
+                  company: ''
+                  country: US
+                  name: Chicago House
+                  phone: '5121112222'
+                  postalCode: '60126'
+                  state: IL
+                  street1: '123 S SPRING RD  '
+                  street2: ''
+                  street3: ''
+                warehouseId: 17977
+                warehouseName: Main warehouse
+              - createDate: '2014-05-27T09:54:29.9600000'
+                isDefault: false
+                originAddress:
+                  city: Austin
+                  company: ShipStation
+                  country: US
+                  name: Austin
+                  phone: '5124445555'
+                  postalCode: '78703'
+                  residential: false
+                  state: TX
+                  street1: 2815 Exposition Blvd
+                  street2: ''
+                  street3: ''
+                returnAddress:
+                  city: Austin
+                  company: ShipStation
+                  country: US
+                  name: ShipStation
+                  phone: '5124445555'
+                  postalCode: '78703'
+                  state: TX
+                  street1: 2815 Exposition Blvd
+                  street2: ''
+                  street3: ''
+                warehouseId: 14265
+                warehouseName: Austin
+          headers: {}
+      summary: List Warehouses
+      tags:
+        - Warehouses
+  /warehouses/createwarehouse:
+    post:
+      description: |-
+        Adds a Ship From Location (formerly known as warehouse) to your account.  The body of this request should specify the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+         ``warehouseName`` | string, optional | Name of Ship From Location.
+         ``originAddress`` | Address, required | The origin address.  Shipping rates will be calculated from this address.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
+         ``returnAddress`` | Address, optional | The return address.  If a "returnAddress" is not specified, your "originAddress" will be used as your "returnAddress". Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
+         ``isDefault`` | boolean, optional | Specifies whether or not this will be your default Ship From Location.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              isDefault:
+                type: boolean
+              originAddress:
+                properties:
+                  city:
+                    type: string
+                  company:
+                    type: string
+                  country:
+                    type: string
+                  name:
+                    type: string
+                  phone:
+                    type: string
+                  postalCode:
+                    type: string
+                  residential:
+                    type: boolean
+                  state:
+                    type: string
+                  street1:
+                    type: string
+                  street2:
+                    type: 'null'
+                  street3:
+                    type: 'null'
+                type: object
+              returnAddress:
+                type: 'null'
+              warehouseName:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              createDate: '2014-10-21T08:11:43.8800000'
+              isDefault: false
+              originAddress:
+                city: Las Cruces
+                company: White Sands Co
+                country: US
+                name: NM Warehouse
+                phone: 512-111-2222
+                postalCode: '88012'
+                residential: true
+                state: NM
+                street1: 4704 Arabela Dr.
+                street2: ''
+                street3: ''
+              returnAddress:
+                city: Las Cruces
+                company: White Sands Co
+                country: US
+                name: NM Warehouse
+                phone: 512-111-2222
+                postalCode: '88012'
+                state: NM
+                street1: 4704 Arabela Dr.
+                street2: ''
+                street3: ''
+              warehouseId: 17977
+              warehouseName: New Ship From Location
+          headers: {}
+      summary: Create Warehouse
+      tags:
+        - Warehouses
+  '/warehouses/{warehouseId}':
+    get:
+      description: Returns a list of active Ship From Locations (formerly known as warehouses) on the ShipStation account. Warehouses are now called "Ship From Locations" in the UI.
+      parameters:
+        - description: A unique ID generated by ShipStation and assigned to each Ship From Location (formerly known as warehouse).
+          in: path
+          name: warehouseId
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              createDate: '2015-07-02T08:38:31.4870000'
+              isDefault: true
+              originAddress:
+                city: Austin
+                company: ShipStation
+                country: US
+                name: API Warehouse
+                phone: 512-555-5555
+                postalCode: '78703'
+                residential: true
+                state: TX
+                street1: 2815 Exposition Blvd
+              returnAddress:
+                city: Austin
+                company: ShipStation
+                country: US
+                name: API Ship From Location
+                phone: 512-555-5555
+                postalCode: '78703'
+                state: TX
+                street1: 2815 Exposition Blvd
+              warehouseId: 12345
+              warehouseName: API Ship From Location
+          headers: {}
+      summary: Get Warehouse
+      tags:
+        - Warehouses
+    put:
+      description: 'Updates an existing Ship From Location (formerly known as warehouse). This call does not currently support partial updates. The entire resource must be provided in the body of the request. If a "returnAddress" object is not specified, your "originAddress" will be used as your "returnAddress".'
+      parameters:
+        - description: A unique ID generated by ShipStation and assigned to each Ship From Location (formerly known as warehouse).
+          in: path
+          name: warehouseId
+          required: true
+          type: number
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Get_Update_WarehouseModel'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              createDate: '2015-07-02T08:38:31.4870000'
+              isDefault: true
+              originAddress:
+                city: Austin
+                company: ShipStation
+                country: US
+                name: API Warehouse
+                phone: 512-555-5555
+                postalCode: '78703'
+                residential: true
+                state: TX
+                street1: 2815 Exposition Blvd
+              returnAddress:
+                city: Austin
+                company: ShipStation
+                country: US
+                name: API Ship From Location
+                phone: 512-555-5555
+                postalCode: '78703'
+                state: TX
+                street1: 2815 Exposition Blvd
+              warehouseId: 12345
+              warehouseName: API Ship From Location
+          headers: {}
+      summary: Update Warehouse
+      tags:
+        - Warehouses
+  /webhooks:
+    get:
+      description: Retrieves a list of registered webhooks for the account
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              webhooks:
+                - Active: true
+                  HookType: ITEM_ORDER_NOTIFY
+                  IsLabelAPIHook: false
+                  MessageFormat: Json
+                  Name: My Order Webhook
+                  SellerID: 100000
+                  StoreID: 12345
+                  Url: 'http://example.endpoint/orders'
+                  WebHookID: 123
+                  WebhookLogs: []
+                - Active: true
+                  HookType: SHIP_NOTIFY
+                  IsLabelAPIHook: false
+                  MessageFormat: Json
+                  Name: My Shipment Webhook
+                  SellerID: 100000
+                  StoreID: 98765
+                  Url: 'https://example.endpoint/shipment'
+                  WebHookID: 456
+                  WebhookLogs: []
+          headers: {}
+      summary: List Webhooks
+      tags:
+        - Webhooks
+  /webhooks/subscribe:
+    post:
+      description: |-
+        Subscribes to a specific type of webhook. If a ``store_id`` is passed in, the webhooks will only be triggered for that specific ``store_id``.
+        The ``event`` type that is passed in will determine what type of webhooks will be sent.
+
+        NOTE: Webhooks will be sent to the URL specified in the ``target_url``. The HTTP request will be sent via POST and will contain a [**webhook JSON object**](https://www.shipstation.com/developer-api/#/reference/model-webhook) in the body.
+
+        The body of this request to subscribe has the following attributes:
+
+        Name               |Data Type          |Description
+        -------------------|-------------------|-------------------
+        ``target_url``  | string, required | The URL to send the webhooks to
+        ``event`` | string, required | The type of webhook to subscribe to. Must contain one of the following values: ORDER_NOTIFY, ITEM_ORDER_NOTIFY, SHIP_NOTIFY, ITEM_SHIP_NOTIFY
+        ``store_id`` | int, optional | If passed in, the webhooks will only be triggered for this ``store_id``
+        ``friendly_name`` | string, optional | Display name for the webhook
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              event:
+                type: string
+              friendly_name:
+                type: string
+              store_id:
+                type: 'null'
+              target_url:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              id: 123456
+          headers: {}
+      summary: Subscribe to Webhook
+      tags:
+        - Webhooks
+  '/webhooks/{webhookId}':
+    delete:
+      description: Unsubscribes from a certain webhook.
+      parameters:
+        - description: A unique ID generated by ShipStation and assigned to each webhook.
+          in: path
+          name: webhookId
+          required: true
+          type: number
+      responses:
+        '200':
+          description: OK
+          examples: {}
+          headers: {}
+      summary: Unsubscribe to Webhook
+      tags:
+        - Webhooks
+definitions:
+  Add_Funds: {}
+  Add_FundsModel: {}
+  Add_Tag_to_Order: {}
+  Assign_User_to_Order: {}
+  Create/Update_Multiple_Orders: {}
+  Create/Update_Order: {}
+  Create_Label_for_Order: {}
+  Create_Shipment_Label: {}
+  Create_Warehouse: {}
+  Customer: {}
+  CustomerModel: {}
+  Deactivate_Store: {}
+  Get/Delete_Order: {}
+  Get/Delete_OrderModel: {}
+  Get/Update_Store: {}
+  Get/Update_StoreModel: {}
+  Get/Update_Warehouse: {}
+  Get/Update_WarehouseModel: {}
+  Get/Update_a_Product: {}
+  Get/Update_a_ProductModel: {}
+  Get_Carrier: {}
+  Get_CarrierModel: {}
+  Get_Delete_Order: {}
+  Get_Delete_OrderModel: {}
+  Get_Rates: {}
+  Get_Store_Refresh_Status: {}
+  Get_Update_Store: {}
+  Get_Update_StoreModel: {}
+  Get_Update_Warehouse: {}
+  Get_Update_WarehouseModel: {}
+  Get_Update_a_Product: {}
+  Get_Update_a_ProductModel: {}
+  Hold_Order_Until: {}
+  List_Carriers: {}
+  List_CarriersModel: {}
+  List_Customers: {}
+  List_CustomersModel: {}
+  List_Fulfillments: {}
+  List_FulfillmentsModel: {}
+  List_Marketplaces: {}
+  List_Orders: {}
+  List_OrdersModel: {}
+  List_Orders_by_Tag: {}
+  List_Packages: {}
+  List_PackagesModel: {}
+  List_Products: {}
+  List_ProductsModel: {}
+  List_Services: {}
+  List_ServicesModel: {}
+  List_Shipments: {}
+  List_ShipmentsModel: {}
+  List_Stores: {}
+  List_Tags: {}
+  List_TagsModel: {}
+  List_Users: {}
+  List_UsersModel: {}
+  List_Warehouses: {}
+  List_Webhooks: {}
+  Mark_an_Order_as_Shipped: {}
+  Reactivate_Store: {}
+  Refresh_Store: {}
+  Register_Account: {}
+  Register_AccountModel: {}
+  Remove_Tag_from_Order: {}
+  Restore_Order_from_On_Hold: {}
+  Subscribe_to_Webhook: {}
+  Subscribe_to_WebhookModel: {}
+  Unassign_User_from_Order: {}
+  Unsubscribe_to_Webhook: {}
+  Void_Label: {}

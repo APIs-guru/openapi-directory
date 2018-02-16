@@ -17,13 +17,13 @@ info:
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-apisguru-categories:
-    - prediction
+    - machine_learning
   x-logo:
     url: 'https://www.google.com/images/icons/feature/predictionapi-64.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/prediction/v1.6/rest'
       version: v1
@@ -113,20 +113,20 @@ paths:
       description: Submit input and request an output against a hosted model.
       operationId: prediction.hostedmodels.predict
       parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Input'
         - description: The name of a hosted model.
           in: path
           name: hostedModelName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Input'
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -156,15 +156,15 @@ paths:
       description: Train a Prediction API model.
       operationId: prediction.trainedmodels.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Insert'
         - description: The project associated with the model.
           in: path
           name: project
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Insert'
       responses:
         '200':
           description: Successful response
@@ -198,11 +198,6 @@ paths:
       description: List available models.
       operationId: prediction.trainedmodels.list
       parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Maximum number of results to return.
           in: query
           minimum: 0
@@ -211,6 +206,11 @@ paths:
         - description: Pagination token.
           in: query
           name: pageToken
+          type: string
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -241,14 +241,14 @@ paths:
       description: Delete a trained model.
       operationId: prediction.trainedmodels.delete
       parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The unique name for the predictive model.
           in: path
           name: id
+          required: true
+          type: string
+        - description: The project associated with the model.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -269,14 +269,14 @@ paths:
       description: Check training status of your model.
       operationId: prediction.trainedmodels.get
       parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The unique name for the predictive model.
           in: path
           name: id
+          required: true
+          type: string
+        - description: The project associated with the model.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -307,20 +307,20 @@ paths:
       description: Add new data to a trained model.
       operationId: prediction.trainedmodels.update
       parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Update'
         - description: The unique name for the predictive model.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Update'
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -342,14 +342,14 @@ paths:
       description: Get analysis of the model and the data the model was trained on.
       operationId: prediction.trainedmodels.analyze
       parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The unique name for the predictive model.
           in: path
           name: id
+          required: true
+          type: string
+        - description: The project associated with the model.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -389,20 +389,20 @@ paths:
       description: Submit model id and request a prediction.
       operationId: prediction.trainedmodels.predict
       parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Input'
         - description: The unique name for the predictive model.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Input'
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response

@@ -16,12 +16,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - social
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://people.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -377,19 +379,19 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/people:createContact':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -460,46 +462,14 @@ paths:
         - contactGroups
     get:
       description: |-
-        Provides information about a person by specifying a resource name. Use
-        `people/me` to indicate the authenticated user.
-        <br>
-        The request throws a 400 error if 'personFields' is not specified.
-      operationId: people.people.get
+        Get a specific contact group owned by the authenticated user by specifying
+        a contact group resource name.
+      operationId: people.contactGroups.get
       parameters:
-        - description: |-
-            **Required.** A field mask to restrict which fields on the person are
-            returned. Valid values are:
-
-            * addresses
-            * ageRanges
-            * biographies
-            * birthdays
-            * braggingRights
-            * coverPhotos
-            * emailAddresses
-            * events
-            * genders
-            * imClients
-            * interests
-            * locales
-            * memberships
-            * metadata
-            * names
-            * nicknames
-            * occupations
-            * organizations
-            * phoneNumbers
-            * photos
-            * relations
-            * relationshipInterests
-            * relationshipStatuses
-            * residences
-            * skills
-            * taglines
-            * urls
+        - description: Specifies the maximum number of members to return.
           in: query
-          name: personFields
-          type: string
+          name: maxMembers
+          type: integer
         - description: |-
             **Required.** Comma-separated list of person fields to be included in the
             response. Each path should start with `person.`: for example,
@@ -507,15 +477,7 @@ paths:
           in: query
           name: requestMask.includeField
           type: string
-        - description: |-
-            The resource name of the person to provide information about.
-
-            - To get information about the authenticated user, specify `people/me`.
-            - To get information about a google account, specify
-             `people/`<var>account_id</var>.
-            - To get information about a contact, specify the resource name that
-              identifies the contact as returned by
-            [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+        - description: The resource name of the contact group to get.
           in: path
           name: resourceName
           required: true
@@ -525,7 +487,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Person'
+            $ref: '#/definitions/ContactGroup'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
@@ -564,21 +526,21 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
-        - people
+        - contactGroups
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Update the name of an existing contact group owned by the authenticated
@@ -671,7 +633,9 @@ paths:
           type: string
         - description: |-
             Whether the response should include a sync token, which can be used to get
-            all changes since the last request.
+            all changes since the last request. For subsequent sync requests use the
+            `sync_token` param instead. Initial sync requests that specify
+            `request_sync_token` have an additional rate limit.
           in: query
           name: requestSyncToken
           type: boolean
@@ -692,8 +656,9 @@ paths:
           name: sortOrder
           type: string
         - description: |-
-            A sync token, returned by a previous call to `people.connections.list`.
+            A sync token returned by a previous call to `people.connections.list`.
             Only resources changed since the sync token was created will be returned.
+            Sync requests that specify `sync_token` have an additional rate limit.
           in: query
           name: syncToken
           type: string
@@ -714,19 +679,19 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{resourceName}/members:modify':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1724,6 +1689,11 @@ definitions:
         items:
           $ref: '#/definitions/Url'
         type: array
+      userDefined:
+        description: The person's user defined data.
+        items:
+          $ref: '#/definitions/UserDefined'
+        type: array
     type: object
   PersonMetadata:
     description: The read-only metadata about a person.
@@ -1838,6 +1808,11 @@ definitions:
       A person's read-only photo. A picture shown next to the person's name to
       help others recognize the person.
     properties:
+      default:
+        description: |-
+          True if the photo is a default photo;
+          false if the photo is a user-provided photo.
+        type: boolean
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the photo.
@@ -2136,5 +2111,18 @@ definitions:
         type: string
       value:
         description: The URL.
+        type: string
+    type: object
+  UserDefined:
+    description: Arbitrary user data that is populated by the end users.
+    properties:
+      key:
+        description: The end user specified key of the user defined data.
+        type: string
+      metadata:
+        $ref: '#/definitions/FieldMetadata'
+        description: Metadata about the user defined data.
+      value:
+        description: The end user specified value of the user defined data.
         type: string
     type: object

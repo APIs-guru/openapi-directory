@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://dataflow.googleapis.com/$discovery/rest?version=v1b3'
       version: v1
@@ -133,32 +133,32 @@ tags:
 paths:
   '/v1b3/projects/{projectId}/WorkerMessages':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Send a worker_message to the service.
       operationId: dataflow.projects.workerMessages
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendWorkerMessagesRequest'
         - description: The project to send the WorkerMessages to.
           in: path
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SendWorkerMessagesRequest'
       responses:
         '200':
           description: Successful response
@@ -188,11 +188,6 @@ paths:
       description: List the jobs of a project in a given region.
       operationId: dataflow.projects.jobs.list
       parameters:
-        - description: The project which owns the jobs.
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: The kind of filter to use.
           enum:
             - UNKNOWN
@@ -207,18 +202,23 @@ paths:
           name: location
           type: string
         - description: |-
-            Set this to the 'next_page_token' field of a previous response
-            to request additional results in a long list.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             If there are many jobs, limit response to at most this many.
             The actual number of jobs returned will be the lesser of max_responses
             and an unspecified server-defined limit.
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Set this to the 'next_page_token' field of a previous response
+            to request additional results in a long list.
+          in: query
+          name: pageToken
+          type: string
+        - description: The project which owns the jobs.
+          in: path
+          name: projectId
+          required: true
+          type: string
         - description: Level of information requested in response. Default is `JOB_VIEW_SUMMARY`.
           enum:
             - JOB_VIEW_UNKNOWN
@@ -253,23 +253,31 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a Cloud Dataflow job.
       operationId: dataflow.projects.jobs.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
+        - description: The location that contains this job.
+          in: query
+          name: location
+          type: string
         - description: The ID of the Cloud Platform project that the job belongs to.
           in: path
           name: projectId
@@ -288,14 +296,6 @@ paths:
           in: query
           name: view
           type: string
-        - description: The location that contains this job.
-          in: query
-          name: location
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
       responses:
         '200':
           description: Successful response
@@ -325,14 +325,18 @@ paths:
       description: Gets the state of the specified Cloud Dataflow job.
       operationId: dataflow.projects.jobs.get
       parameters:
-        - description: The ID of the Cloud Platform project that the job belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: The job ID.
           in: path
           name: jobId
+          required: true
+          type: string
+        - description: The location that contains this job.
+          in: query
+          name: location
+          type: string
+        - description: The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
           required: true
           type: string
         - description: The level of information requested in response.
@@ -343,10 +347,6 @@ paths:
             - JOB_VIEW_DESCRIPTION
           in: query
           name: view
-          type: string
-        - description: The location that contains this job.
-          in: query
-          name: location
           type: string
       responses:
         '200':
@@ -373,28 +373,27 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates the state of an existing Cloud Dataflow job.
       operationId: dataflow.projects.jobs.update
       parameters:
-        - description: The ID of the Cloud Platform project that the job belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
         - description: The job ID.
           in: path
           name: jobId
@@ -404,10 +403,11 @@ paths:
           in: query
           name: location
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
+        - description: The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -434,37 +434,37 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}/debug/getConfig':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Get encoded debug configuration for component. Not cacheable.
       operationId: dataflow.projects.jobs.debug.getConfig
       parameters:
-        - description: The project id.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetDebugConfigRequest'
         - description: The job id.
           in: path
           name: jobId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GetDebugConfigRequest'
+        - description: The project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -491,37 +491,37 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}/debug/sendCapture':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Send encoded debug capture data for component.
       operationId: dataflow.projects.jobs.debug.sendCapture
       parameters:
-        - description: The project id.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendDebugCaptureRequest'
         - description: The job id.
           in: path
           name: jobId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SendDebugCaptureRequest'
+        - description: The project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -551,10 +551,11 @@ paths:
       description: Request the job status.
       operationId: dataflow.projects.jobs.messages.list
       parameters:
-        - description: A project id.
-          in: path
-          name: projectId
-          required: true
+        - description: |-
+            Return only messages with timestamps < end_time. The default is now
+            (i.e. return up to the latest messages available).
+          in: query
+          name: endTime
           type: string
         - description: The job to get messages about.
           in: path
@@ -565,32 +566,6 @@ paths:
           in: query
           name: location
           type: string
-        - description: |-
-            Return only messages with timestamps < end_time. The default is now
-            (i.e. return up to the latest messages available).
-          in: query
-          name: endTime
-          type: string
-        - description: |-
-            If supplied, this should be the value of next_page_token returned
-            by an earlier call. This will cause the next page of results to
-            be returned.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            If specified, return only messages with timestamps >= start_time.
-            The default is the job creation time (i.e. beginning of messages).
-          in: query
-          name: startTime
-          type: string
-        - description: |-
-            If specified, determines the maximum number of messages to
-            return.  If unspecified, the service may choose an appropriate
-            default, or may return an arbitrarily large number of results.
-          in: query
-          name: pageSize
-          type: integer
         - description: Filter to only get messages with importance >= level
           enum:
             - JOB_MESSAGE_IMPORTANCE_UNKNOWN
@@ -601,6 +576,31 @@ paths:
             - JOB_MESSAGE_ERROR
           in: query
           name: minimumImportance
+          type: string
+        - description: |-
+            If specified, determines the maximum number of messages to
+            return.  If unspecified, the service may choose an appropriate
+            default, or may return an arbitrarily large number of results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            If supplied, this should be the value of next_page_token returned
+            by an earlier call. This will cause the next page of results to
+            be returned.
+          in: query
+          name: pageToken
+          type: string
+        - description: A project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            If specified, return only messages with timestamps >= start_time.
+            The default is the job creation time (i.e. beginning of messages).
+          in: query
+          name: startTime
           type: string
       responses:
         '200':
@@ -627,29 +627,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/jobs/{jobId}/metrics':
     get:
       description: Request the job status.
       operationId: dataflow.projects.jobs.getMetrics
       parameters:
-        - description: A project id.
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: The job to get messages for.
           in: path
           name: jobId
@@ -658,6 +653,11 @@ paths:
         - description: The location which contains the job specified by job_id.
           in: query
           name: location
+          type: string
+        - description: A project id.
+          in: path
+          name: projectId
+          required: true
           type: string
         - description: |-
             Return only metric data that has changed since this time.
@@ -690,52 +690,52 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:lease':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Leases a dataflow WorkItem to run.
       operationId: dataflow.projects.jobs.workItems.lease
       parameters:
-        - description: Identifies the project this worker belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LeaseWorkItemRequest'
         - description: Identifies the workflow job this worker belongs to.
           in: path
           name: jobId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LeaseWorkItemRequest'
+        - description: Identifies the project this worker belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -762,37 +762,37 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:reportStatus':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Reports the status of dataflow WorkItems leased by a worker.
       operationId: dataflow.projects.jobs.workItems.reportStatus
       parameters:
-        - description: The project which owns the WorkItem's job.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReportWorkItemStatusRequest'
         - description: The job which the WorkItem is part of.
           in: path
           name: jobId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReportWorkItemStatusRequest'
+        - description: The project which owns the WorkItem's job.
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -962,16 +962,6 @@ paths:
       description: List the jobs of a project in a given region.
       operationId: dataflow.projects.locations.jobs.list
       parameters:
-        - description: The project which owns the jobs.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The location that contains this job.
-          in: path
-          name: location
-          required: true
-          type: string
         - description: The kind of filter to use.
           enum:
             - UNKNOWN
@@ -981,11 +971,10 @@ paths:
           in: query
           name: filter
           type: string
-        - description: |-
-            Set this to the 'next_page_token' field of a previous response
-            to request additional results in a long list.
-          in: query
-          name: pageToken
+        - description: The location that contains this job.
+          in: path
+          name: location
+          required: true
           type: string
         - description: |-
             If there are many jobs, limit response to at most this many.
@@ -994,6 +983,17 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Set this to the 'next_page_token' field of a previous response
+            to request additional results in a long list.
+          in: query
+          name: pageToken
+          type: string
+        - description: The project which owns the jobs.
+          in: path
+          name: projectId
+          required: true
+          type: string
         - description: Level of information requested in response. Default is `JOB_VIEW_SUMMARY`.
           enum:
             - JOB_VIEW_UNKNOWN
@@ -1028,31 +1028,35 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a Cloud Dataflow job.
       operationId: dataflow.projects.locations.jobs.create
       parameters:
-        - description: The ID of the Cloud Platform project that the job belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
         - description: The location that contains this job.
           in: path
           name: location
+          required: true
+          type: string
+        - description: The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Deprecated. This field is now in the Job message.
@@ -1068,10 +1072,6 @@ paths:
           in: query
           name: view
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
       responses:
         '200':
           description: Successful response
@@ -1101,9 +1101,9 @@ paths:
       description: Gets the state of the specified Cloud Dataflow job.
       operationId: dataflow.projects.locations.jobs.get
       parameters:
-        - description: The ID of the Cloud Platform project that the job belongs to.
+        - description: The job ID.
           in: path
-          name: projectId
+          name: jobId
           required: true
           type: string
         - description: The location that contains this job.
@@ -1111,9 +1111,9 @@ paths:
           name: location
           required: true
           type: string
-        - description: The job ID.
+        - description: The ID of the Cloud Platform project that the job belongs to.
           in: path
-          name: jobId
+          name: projectId
           required: true
           type: string
         - description: The level of information requested in response.
@@ -1150,26 +1150,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates the state of an existing Cloud Dataflow job.
       operationId: dataflow.projects.locations.jobs.update
       parameters:
-        - description: The ID of the Cloud Platform project that the job belongs to.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
+        - description: The job ID.
           in: path
-          name: projectId
+          name: jobId
           required: true
           type: string
         - description: The location that contains this job.
@@ -1177,15 +1181,11 @@ paths:
           name: location
           required: true
           type: string
-        - description: The job ID.
+        - description: The ID of the Cloud Platform project that the job belongs to.
           in: path
-          name: jobId
+          name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
       responses:
         '200':
           description: Successful response
@@ -1339,9 +1339,15 @@ paths:
       description: Request the job status.
       operationId: dataflow.projects.locations.jobs.messages.list
       parameters:
-        - description: A project id.
+        - description: |-
+            Return only messages with timestamps < end_time. The default is now
+            (i.e. return up to the latest messages available).
+          in: query
+          name: endTime
+          type: string
+        - description: The job to get messages about.
           in: path
-          name: projectId
+          name: jobId
           required: true
           type: string
         - description: The location which contains the job specified by job_id.
@@ -1349,37 +1355,6 @@ paths:
           name: location
           required: true
           type: string
-        - description: The job to get messages about.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - description: |-
-            Return only messages with timestamps < end_time. The default is now
-            (i.e. return up to the latest messages available).
-          in: query
-          name: endTime
-          type: string
-        - description: |-
-            If specified, return only messages with timestamps >= start_time.
-            The default is the job creation time (i.e. beginning of messages).
-          in: query
-          name: startTime
-          type: string
-        - description: |-
-            If supplied, this should be the value of next_page_token returned
-            by an earlier call. This will cause the next page of results to
-            be returned.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            If specified, determines the maximum number of messages to
-            return.  If unspecified, the service may choose an appropriate
-            default, or may return an arbitrarily large number of results.
-          in: query
-          name: pageSize
-          type: integer
         - description: Filter to only get messages with importance >= level
           enum:
             - JOB_MESSAGE_IMPORTANCE_UNKNOWN
@@ -1390,6 +1365,31 @@ paths:
             - JOB_MESSAGE_ERROR
           in: query
           name: minimumImportance
+          type: string
+        - description: |-
+            If specified, determines the maximum number of messages to
+            return.  If unspecified, the service may choose an appropriate
+            default, or may return an arbitrarily large number of results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            If supplied, this should be the value of next_page_token returned
+            by an earlier call. This will cause the next page of results to
+            be returned.
+          in: query
+          name: pageToken
+          type: string
+        - description: A project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            If specified, return only messages with timestamps >= start_time.
+            The default is the job creation time (i.e. beginning of messages).
+          in: query
+          name: startTime
           type: string
       responses:
         '200':
@@ -1416,27 +1416,27 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/metrics':
     get:
       description: Request the job status.
       operationId: dataflow.projects.locations.jobs.getMetrics
       parameters:
-        - description: A project id.
+        - description: The job to get messages for.
           in: path
-          name: projectId
+          name: jobId
           required: true
           type: string
         - description: The location which contains the job specified by job_id.
@@ -1444,9 +1444,9 @@ paths:
           name: location
           required: true
           type: string
-        - description: The job to get messages for.
+        - description: A project id.
           in: path
-          name: jobId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -1480,41 +1480,45 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:lease':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Leases a dataflow WorkItem to run.
       operationId: dataflow.projects.locations.jobs.workItems.lease
       parameters:
-        - description: Identifies the project this worker belongs to.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LeaseWorkItemRequest'
+        - description: Identifies the workflow job this worker belongs to.
           in: path
-          name: projectId
+          name: jobId
           required: true
           type: string
         - description: The location which contains the WorkItem's job.
@@ -1522,15 +1526,11 @@ paths:
           name: location
           required: true
           type: string
-        - description: Identifies the workflow job this worker belongs to.
+        - description: Identifies the project this worker belongs to.
           in: path
-          name: jobId
+          name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LeaseWorkItemRequest'
       responses:
         '200':
           description: Successful response
@@ -1557,26 +1557,30 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:reportStatus':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Reports the status of dataflow WorkItems leased by a worker.
       operationId: dataflow.projects.locations.jobs.workItems.reportStatus
       parameters:
-        - description: The project which owns the WorkItem's job.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReportWorkItemStatusRequest'
+        - description: The job which the WorkItem is part of.
           in: path
-          name: projectId
+          name: jobId
           required: true
           type: string
         - description: The location which contains the WorkItem's job.
@@ -1584,15 +1588,11 @@ paths:
           name: location
           required: true
           type: string
-        - description: The job which the WorkItem is part of.
+        - description: The project which owns the WorkItem's job.
           in: path
-          name: jobId
+          name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReportWorkItemStatusRequest'
       responses:
         '200':
           description: Successful response
@@ -1812,32 +1812,32 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/templates':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a Cloud Dataflow job from a template.
       operationId: dataflow.projects.templates.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateJobFromTemplateRequest'
         - description: Required. The ID of the Cloud Platform project that the job belongs to.
           in: path
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateJobFromTemplateRequest'
       responses:
         '200':
           description: Successful response
@@ -1914,34 +1914,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/templates:launch':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Launch a template.
       operationId: dataflow.projects.templates.launch
@@ -2267,6 +2267,16 @@ definitions:
       executionStepName:
         description: Name of the stage. An execution step contains multiple component steps.
         type: string
+      inputIndex:
+        description: |-
+          Index of an input collection that's being read from/written to as a side
+          input.
+          The index identifies a step's side inputs starting by 1 (e.g. the first
+          side input has input_index 1, the third has input_index 3).
+          Side inputs are identified by a pair of (original_step_name, input_index).
+          This field helps uniquely identify them.
+        format: int32
+        type: integer
       name:
         description: |-
           Counter name. Not necessarily globally-unique, but unique within the
@@ -2281,6 +2291,12 @@ definitions:
         type: string
       originNamespace:
         description: A string containing a more specific namespace of the counter's origin.
+        type: string
+      originalRequestingStepName:
+        description: |-
+          The step name requesting an operation, such as GBK.
+          I.e. the ParDo causing a read/write from shuffle to occur, or a
+          read from side inputs.
         type: string
       originalStepName:
         description: |-
@@ -2529,13 +2545,9 @@ definitions:
       count:
         $ref: '#/definitions/SplitInt64'
         description: The count of the number of elements present in the distribution.
-      logBuckets:
-        description: |-
-          (Optional) Logarithmic histogram of values.
-          Each log may be in no more than one bucket. Order does not matter.
-        items:
-          $ref: '#/definitions/LogBucket'
-        type: array
+      histogram:
+        $ref: '#/definitions/Histogram'
+        description: (Optional) Histogram of value counts for the distribution.
       max:
         $ref: '#/definitions/SplitInt64'
         description: The maximum value present in the distribution.
@@ -2792,6 +2804,34 @@ definitions:
         description: |-
           The status of the get template request. Any problems with the
           request will be indicated in the error_details.
+    type: object
+  Histogram:
+    description: |-
+      Histogram of value counts for a distribution.
+
+      Buckets have an inclusive lower bound and exclusive upper bound and use
+      "1,2,5 bucketing": The first bucket range is from [0,1) and all subsequent
+      bucket boundaries are powers of ten multiplied by 1, 2, or 5. Thus, bucket
+      boundaries are 0, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, ...
+      Negative values are not supported.
+    properties:
+      bucketCounts:
+        description: |-
+          Counts of values in each bucket. For efficiency, prefix and trailing
+          buckets with count = 0 are elided. Buckets can store the full range of
+          values of an unsigned long, with ULLONG_MAX falling into the 59th bucket
+          with range [1e19, 2e19).
+        items:
+          format: int64
+          type: string
+        type: array
+      firstBucketOffset:
+        description: |-
+          Starting index of first stored bucket. The non-inclusive upper-bound of
+          the ith bucket is given by:
+            pow(10,(i-first_bucket_offset)/3) * (1,2,5)[(i-first_bucket_offset)%3]
+        format: int32
+        type: integer
     type: object
   InstructionInput:
     description: |-
@@ -3263,26 +3303,6 @@ definitions:
       nextPageToken:
         description: Set if there may be more results than fit in this response.
         type: string
-    type: object
-  LogBucket:
-    description: Bucket of values for Distribution's logarithmic histogram.
-    properties:
-      count:
-        description: Number of values in this bucket.
-        format: int64
-        type: string
-      log:
-        description: |-
-          floor(log2(value)); defined to be zero for nonpositive values.
-            log(-1) = 0
-            log(0) = 0
-            log(1) = 0
-            log(2) = 1
-            log(3) = 1
-            log(4) = 2
-            log(5) = 2
-        format: int32
-        type: integer
     type: object
   MapTask:
     description: |-
@@ -3778,6 +3798,11 @@ definitions:
   RuntimeEnvironment:
     description: The environment values to set at runtime.
     properties:
+      additionalExperiments:
+        description: Additional experiment flags for the job.
+        items:
+          type: string
+        type: array
       bypassTempDirValidation:
         description: |-
           Whether to bypass the safety checks for the job's temporary directory.
@@ -4062,9 +4087,27 @@ definitions:
       getMetadata:
         $ref: '#/definitions/SourceGetMetadataRequest'
         description: Information about a request to get metadata about a source.
+      name:
+        description: User-provided name of the Read instruction for this source.
+        type: string
+      originalName:
+        description: |-
+          System-defined name for the Read instruction for this source
+          in the original workflow graph.
+        type: string
       split:
         $ref: '#/definitions/SourceSplitRequest'
         description: Information about a request to split a source.
+      stageName:
+        description: |-
+          System-defined name of the stage containing the source operation.
+          Unique across the workflow.
+        type: string
+      systemName:
+        description: |-
+          System-defined name of the Read instruction for this source.
+          Unique across the workflow.
+        type: string
     type: object
   SourceOperationResponse:
     description: |-
@@ -4881,6 +4924,10 @@ definitions:
           progress and proposed_stop_position should be interpreted relative
           to P, and in a potential subsequent dynamic_source_split into {P', R'},
           P' and R' must be together equivalent to P, etc.
+      totalThrottlerWaitTimeSeconds:
+        description: Total time the worker spent being throttled by external systems.
+        format: double
+        type: number
       workItemId:
         description: Identifies the WorkItem.
         type: string
@@ -4965,6 +5012,9 @@ definitions:
       workerMetrics:
         $ref: '#/definitions/ResourceUtilizationReport'
         description: Resource metrics reported by workers.
+      workerShutdownNotice:
+        $ref: '#/definitions/WorkerShutdownNotice'
+        description: Shutdown notice by workers.
     type: object
   WorkerMessageCode:
     description: |-
@@ -5028,6 +5078,9 @@ definitions:
       workerMetricsResponse:
         $ref: '#/definitions/ResourceUtilizationReportResponse'
         description: Service's response to reporting worker metrics (currently empty).
+      workerShutdownNoticeResponse:
+        $ref: '#/definitions/WorkerShutdownNoticeResponse'
+        description: Service's response to shutdown notice (currently empty).
     type: object
   WorkerPool:
     description: |-
@@ -5215,6 +5268,25 @@ definitions:
       workerId:
         description: The ID of the worker running this pipeline.
         type: string
+    type: object
+  WorkerShutdownNotice:
+    description: |-
+      Shutdown notification from workers. This is to be sent by the shutdown
+      script of the worker VM so that the backend knows that the VM is being
+      shut down.
+    properties:
+      reason:
+        description: |-
+          The reason for the worker shutdown.
+          Current possible values are:
+            "UNKNOWN": shutdown reason is unknown.
+            "PREEMPTION": shutdown reason is preemption.
+          Other possible reasons may be added in the future.
+        type: string
+    type: object
+  WorkerShutdownNoticeResponse:
+    description: Service-side response to WorkerMessage issuing shutdown notice.
+    properties: {}
     type: object
   WriteInstruction:
     description: |-

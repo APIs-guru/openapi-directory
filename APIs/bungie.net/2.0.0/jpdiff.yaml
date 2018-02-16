@@ -1,0 +1,128 @@
+- op: test
+  path: /definitions/Forum.ForumTopicsSortEnum/format
+  value: byte
+- op: replace
+  path: /definitions/Forum.ForumTopicsSortEnum/format
+  value: uint8
+- op: test
+  path: /definitions/Forum.ForumRecruitmentToneLabel/format
+  value: byte
+- op: replace
+  path: /definitions/Forum.ForumRecruitmentToneLabel/format
+  value: uint8
+- op: test
+  path: /definitions/Forum.ForumRecruitmentIntensityLabel/format
+  value: byte
+- op: replace
+  path: /definitions/Forum.ForumRecruitmentIntensityLabel/format
+  value: uint8
+- op: test
+  path: /definitions/Forum.CommunityContentSortMode/format
+  value: byte
+- op: replace
+  path: /definitions/Forum.CommunityContentSortMode/format
+  value: uint8
+- op: add
+  path: '/paths/~1Forum~1GetTopicsPaged~1{page}~1{pageSize}~1{group}~1{sort}~1{quickDate}~1{categoryFilter}~1/get/parameters/6'
+  value:
+    description: The sort mode.
+    enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+    format: uint8
+    in: path
+    name: sort
+    required: true
+    type: integer
+- op: test
+  path: '/paths/~1Forum~1GetTopicsPaged~1{page}~1{pageSize}~1{group}~1{sort}~1{quickDate}~1{categoryFilter}~1/get/parameters/7'
+  value:
+    description: The sort mode.
+    enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+    format: byte
+    in: path
+    name: sort
+    required: true
+    type: integer
+- op: remove
+  path: '/paths/~1Forum~1GetTopicsPaged~1{page}~1{pageSize}~1{group}~1{sort}~1{quickDate}~1{categoryFilter}~1/get/parameters/7'
+- op: add
+  path: '/paths/~1Forum~1GetCoreTopicsPaged~1{page}~1{sort}~1{quickDate}~1{categoryFilter}~1/get/parameters/4'
+  value:
+    description: The sort mode.
+    enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+    format: uint8
+    in: path
+    name: sort
+    required: true
+    type: integer
+- op: test
+  path: '/paths/~1Forum~1GetCoreTopicsPaged~1{page}~1{sort}~1{quickDate}~1{categoryFilter}~1/get/parameters/5'
+  value:
+    description: The sort mode.
+    enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+    format: byte
+    in: path
+    name: sort
+    required: true
+    type: integer
+- op: remove
+  path: '/paths/~1Forum~1GetCoreTopicsPaged~1{page}~1{sort}~1{quickDate}~1{categoryFilter}~1/get/parameters/5'
+- op: add
+  path: '/paths/~1CommunityContent~1Get~1{sort}~1{mediaFilter}~1{page}~1/get/parameters/2'
+  value:
+    description: The sort mode.
+    enum:
+      - '0'
+      - '1'
+      - '2'
+    format: uint8
+    in: path
+    name: sort
+    required: true
+    type: integer
+- op: test
+  path: '/paths/~1CommunityContent~1Get~1{sort}~1{mediaFilter}~1{page}~1/get/parameters/3'
+  value:
+    description: The sort mode.
+    enum:
+      - '0'
+      - '1'
+      - '2'
+    format: byte
+    in: path
+    name: sort
+    required: true
+    type: integer
+- op: remove
+  path: '/paths/~1CommunityContent~1Get~1{sort}~1{mediaFilter}~1{page}~1/get/parameters/3'

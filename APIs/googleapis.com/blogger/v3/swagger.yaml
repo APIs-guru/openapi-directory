@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/blogger/v3/rest'
       version: v1
@@ -325,14 +325,14 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: 'Whether to create the page as a draft (default: false).'
-          in: query
-          name: isDraft
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Page'
+        - description: 'Whether to create the page as a draft (default: false).'
+          in: query
+          name: isDraft
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -424,6 +424,10 @@ paths:
           name: blogId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Page'
         - description: The ID of the Page.
           in: path
           name: pageId
@@ -437,10 +441,6 @@ paths:
           in: query
           name: revert
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Page'
       responses:
         '200':
           description: Successful response
@@ -462,6 +462,10 @@ paths:
           name: blogId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Page'
         - description: The ID of the Page.
           in: path
           name: pageId
@@ -475,10 +479,6 @@ paths:
           in: query
           name: revert
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Page'
       responses:
         '200':
           description: Successful response
@@ -700,6 +700,10 @@ paths:
           name: blogId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Post'
         - default: true
           description: 'Whether the body content of the post is included with the result (default: true).'
           in: query
@@ -713,10 +717,6 @@ paths:
           in: query
           name: isDraft
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Post'
       responses:
         '200':
           description: Successful response
@@ -739,15 +739,15 @@ paths:
           name: blogId
           required: true
           type: string
+        - description: Maximum number of comments to pull back on a post.
+          in: query
+          name: maxComments
+          type: integer
         - description: Path of the Post to retrieve.
           in: query
           name: path
           required: true
           type: string
-        - description: Maximum number of comments to pull back on a post.
-          in: query
-          name: maxComments
-          type: integer
         - description: Access level with which to view the returned result. Note that some fields require elevated access.
           enum:
             - ADMIN
@@ -790,11 +790,6 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: Query terms to search this blog for matching posts.
-          in: query
-          name: q
-          required: true
-          type: string
         - default: true
           description: 'Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.'
           in: query
@@ -807,6 +802,11 @@ paths:
             - updated
           in: query
           name: orderBy
+          type: string
+        - description: Query terms to search this blog for matching posts.
+          in: query
+          name: q
+          required: true
           type: string
       responses:
         '200':
@@ -866,11 +866,6 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: The ID of the post
-          in: path
-          name: postId
-          required: true
-          type: string
         - default: true
           description: 'Whether the body content of the post is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.'
           in: query
@@ -884,6 +879,11 @@ paths:
           in: query
           name: maxComments
           type: integer
+        - description: The ID of the post
+          in: path
+          name: postId
+          required: true
+          type: string
         - description: Access level with which to view the returned result. Note that some fields require elevated access.
           enum:
             - ADMIN
@@ -925,11 +925,10 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: The ID of the Post.
-          in: path
-          name: postId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Post'
         - default: true
           description: 'Whether the body content of the post is included with the result (default: true).'
           in: query
@@ -943,6 +942,11 @@ paths:
           in: query
           name: maxComments
           type: integer
+        - description: The ID of the Post.
+          in: path
+          name: postId
+          required: true
+          type: string
         - description: 'Whether a publish action should be performed when the post is updated (default: false).'
           in: query
           name: publish
@@ -951,10 +955,6 @@ paths:
           in: query
           name: revert
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Post'
       responses:
         '200':
           description: Successful response
@@ -976,11 +976,10 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: The ID of the Post.
-          in: path
-          name: postId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Post'
         - default: true
           description: 'Whether the body content of the post is included with the result (default: true).'
           in: query
@@ -994,6 +993,11 @@ paths:
           in: query
           name: maxComments
           type: integer
+        - description: The ID of the Post.
+          in: path
+          name: postId
+          required: true
+          type: string
         - description: 'Whether a publish action should be performed when the post is updated (default: false).'
           in: query
           name: publish
@@ -1002,10 +1006,6 @@ paths:
           in: query
           name: revert
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Post'
       responses:
         '200':
           description: Successful response
@@ -1028,11 +1028,6 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: ID of the post to fetch posts from.
-          in: path
-          name: postId
-          required: true
-          type: string
         - description: 'Latest date of comment to fetch, a date-time with RFC 3339 formatting.'
           in: query
           name: endDate
@@ -1048,6 +1043,11 @@ paths:
         - description: Continuation token if request is paged.
           in: query
           name: pageToken
+          type: string
+        - description: ID of the post to fetch posts from.
+          in: path
+          name: postId
+          required: true
           type: string
         - description: 'Earliest date of comment to fetch, a date-time with RFC 3339 formatting.'
           in: query
@@ -1106,14 +1106,14 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: The ID of the Post.
-          in: path
-          name: postId
-          required: true
-          type: string
         - description: The ID of the comment to delete.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the Post.
+          in: path
+          name: postId
           required: true
           type: string
       responses:
@@ -1135,14 +1135,14 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: ID of the post to fetch posts from.
-          in: path
-          name: postId
-          required: true
-          type: string
         - description: The ID of the comment to get.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: ID of the post to fetch posts from.
+          in: path
+          name: postId
           required: true
           type: string
         - description: 'Access level for the requested comment (default: READER). Note that some comments will require elevated permissions, for example comments where the parent posts which is in a draft state, or comments that are pending moderation.'
@@ -1195,14 +1195,14 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: The ID of the Post.
-          in: path
-          name: postId
-          required: true
-          type: string
         - description: The ID of the comment to mark as not spam.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the Post.
+          in: path
+          name: postId
           required: true
           type: string
       responses:
@@ -1235,14 +1235,14 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: The ID of the Post.
-          in: path
-          name: postId
-          required: true
-          type: string
         - description: The ID of the comment to delete content from.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the Post.
+          in: path
+          name: postId
           required: true
           type: string
       responses:
@@ -1275,14 +1275,14 @@ paths:
           name: blogId
           required: true
           type: string
-        - description: The ID of the Post.
-          in: path
-          name: postId
-          required: true
-          type: string
         - description: The ID of the comment to mark as spam.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the Post.
+          in: path
+          name: postId
           required: true
           type: string
       responses:
@@ -1410,11 +1410,6 @@ paths:
       description: 'Retrieves a list of blogs, possibly filtered.'
       operationId: blogger.blogs.listByUser
       parameters:
-        - description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: Whether the response is a list of blogs with per-user information instead of just blogs.
           in: query
           name: fetchUserInfo
@@ -1440,6 +1435,11 @@ paths:
             type: string
           name: status
           type: array
+        - description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+          in: path
+          name: userId
+          required: true
+          type: string
         - description: Access level with which to view the blogs. Note that some fields require elevated access.
           enum:
             - ADMIN
@@ -1477,11 +1477,6 @@ paths:
       description: Gets one blog and user info pair by blogId and userId.
       operationId: blogger.blogUserInfos.get
       parameters:
-        - description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The ID of the blog to get.
           in: path
           name: blogId
@@ -1491,6 +1486,11 @@ paths:
           in: query
           name: maxPosts
           type: integer
+        - description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1520,11 +1520,6 @@ paths:
       description: 'Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.'
       operationId: blogger.postUserInfos.list
       parameters:
-        - description: ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: ID of the blog to fetch posts from.
           in: path
           name: blogId
@@ -1573,6 +1568,11 @@ paths:
             type: string
           name: status
           type: array
+        - description: ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+          in: path
+          name: userId
+          required: true
+          type: string
         - description: Access level with which to view the returned result. Note that some fields require elevated access.
           enum:
             - ADMIN
@@ -1610,25 +1610,25 @@ paths:
       description: 'Gets one post and user info pair, by post ID and user ID. The post user info contains per-user information about the post, such as access rights, specific to the user.'
       operationId: blogger.postUserInfos.get
       parameters:
-        - description: ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The ID of the blog.
           in: path
           name: blogId
-          required: true
-          type: string
-        - description: The ID of the post to get.
-          in: path
-          name: postId
           required: true
           type: string
         - description: Maximum number of comments to pull back on a post.
           in: query
           name: maxComments
           type: integer
+        - description: The ID of the post to get.
+          in: path
+          name: postId
+          required: true
+          type: string
+        - description: ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response

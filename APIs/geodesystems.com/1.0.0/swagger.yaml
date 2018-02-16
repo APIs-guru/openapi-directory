@@ -12,7 +12,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: swagger
       url: 'http://geodesystems.com/repository/swagger/api-docs'
       version: '1.2'
@@ -142,6 +142,8 @@ tags:
     name: type/blogentry
   - description: Search API for 'Bookmarks' entry type
     name: type/bookmarks
+  - description: Search API for 'Boulder Consulting' entry type
+    name: type/boulder_consulting
   - description: Search API for 'Boulder County Voter Details' entry type
     name: type/boulder_county_voter_details
   - description: Search API for 'Calendar' entry type
@@ -152,20 +154,16 @@ tags:
     name: type/cdm_grid
   - description: Search API for 'Development Review Case' entry type
     name: type/community_case
-  - description: Search API for 'Data Hub' entry type
-    name: type/community_datahub
   - description: Search API for 'Facility' entry type
     name: type/community_resource
+  - description: Search API for 'Construction Permits' entry type
+    name: type/construction_permits
   - description: Search API for 'Contact List' entry type
     name: type/contact
   - description: Search API for 'Colorado Health Indicators' entry type
     name: type/db_co_indicators
-  - description: Search API for 'MERRA Data' entry type
-    name: type/earth_merra
   - description: Search API for 'Landsat Satellite Data' entry type
     name: type/earth_satellite_landsat
-  - description: Search API for 'Aqua Modis Satellite Data' entry type
-    name: type/earth_satellite_modis_aqua
   - description: Search API for 'WRF Namelist File' entry type
     name: type/earth_wrf_namelist
   - description: Search API for 'Exercise' entry type
@@ -344,6 +342,8 @@ tags:
     name: type/statusboard
   - description: Search API for 'Tasks' entry type
     name: type/tasks
+  - description: Search API for 'Tmdb Movies' entry type
+    name: type/tmdbmovies
   - description: Search API for 'Todo' entry type
     name: type/todo
   - description: Search API for 'Event' entry type
@@ -550,6 +550,8 @@ tags:
     name: type/type_wms_capabilities
   - description: Search API for 'WMS Layer' entry type
     name: type/type_wms_layer
+  - description: Search API for 'Ufo Sightings' entry type
+    name: type/ufo_sightings
   - description: Search API for 'Simple Yes-No Vote' entry type
     name: type/vote_yesno
   - description: Search API for 'Weblog' entry type
@@ -3001,6 +3003,168 @@ paths:
       summary: Search API for 'Bookmarks' entry type
       tags:
         - type/bookmarks
+  /repository/search/type/boulder_consulting:
+    get:
+      description: API to search for entries of type Boulder Consulting
+      operationId: search_boulder_consulting
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Fund
+          in: query
+          name: search.db_boulder_consulting.fund
+          required: false
+          type: string
+        - description: Department
+          in: query
+          name: search.db_boulder_consulting.department
+          required: false
+          type: string
+        - description: Organization
+          in: query
+          name: search.db_boulder_consulting.organization
+          required: false
+          type: string
+        - description: Object
+          in: query
+          name: search.db_boulder_consulting.object
+          required: false
+          type: string
+        - description: Project
+          in: query
+          name: search.db_boulder_consulting.project
+          required: false
+          type: string
+        - description: Account Description
+          in: query
+          name: search.db_boulder_consulting.account_description
+          required: false
+          type: string
+        - description: Date
+          in: query
+          name: search.db_boulder_consulting.date
+          required: false
+          type: string
+        - description: Amount
+          format: double
+          in: query
+          name: search.db_boulder_consulting.amount
+          required: false
+          type: number
+        - description: Vendor Name
+          in: query
+          name: search.db_boulder_consulting.vendor_name
+          required: false
+          type: string
+        - description: Comment
+          in: query
+          name: search.db_boulder_consulting.comment
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Boulder Consulting' entry type
+      tags:
+        - type/boulder_consulting
   /repository/search/type/boulder_county_voter_details:
     get:
       description: API to search for entries of type Boulder County Voter Details
@@ -3666,117 +3830,6 @@ paths:
       summary: Search API for 'Development Review Case' entry type
       tags:
         - type/community_case
-  /repository/search/type/community_datahub:
-    get:
-      description: API to search for entries of type Data Hub
-      operationId: search_community_datahub
-      parameters:
-        - description: Search text
-          in: query
-          name: text
-          required: false
-          type: string
-        - description: Search name
-          in: query
-          name: name
-          required: false
-          type: string
-        - description: Search description
-          in: query
-          name: description
-          required: false
-          type: string
-        - description: From date
-          format: date-time
-          in: query
-          name: fromdate
-          required: false
-          type: string
-        - description: To date
-          format: date-time
-          in: query
-          name: todate
-          required: false
-          type: string
-        - description: Archive create date from
-          format: date-time
-          in: query
-          name: createdate.from
-          required: false
-          type: string
-        - description: Archive create date to
-          format: date-time
-          in: query
-          name: createdate.to
-          required: false
-          type: string
-        - description: Archive change date from
-          format: date-time
-          in: query
-          name: changedate.from
-          required: false
-          type: string
-        - description: Archive change date to
-          format: date-time
-          in: query
-          name: changedate.to
-          required: false
-          type: string
-        - description: Parent entry
-          in: query
-          name: group
-          required: false
-          type: string
-        - description: File suffix
-          in: query
-          name: filesuffix
-          required: false
-          type: string
-        - description: Northern bounds of search
-          format: float
-          in: query
-          name: maxlatitude
-          required: false
-          type: number
-        - description: Western bounds of search
-          format: float
-          in: query
-          name: minlongitude
-          required: false
-          type: number
-        - description: Southern bounds of search
-          format: float
-          in: query
-          name: minlatitude
-          required: false
-          type: number
-        - description: Eastern bounds of search
-          format: float
-          in: query
-          name: maxlongitude
-          required: false
-          type: number
-        - description: Max number of results
-          in: query
-          name: max
-          required: false
-          type: integer
-        - description: Number to skip
-          in: query
-          name: skip
-          required: false
-          type: integer
-      produces:
-        - application/json
-        - application/xml
-        - text/plain
-        - text/html
-      responses:
-        '200':
-          description: No response was specified
-      summary: Search API for 'Data Hub' entry type
-      tags:
-        - type/community_datahub
   /repository/search/type/community_resource:
     get:
       description: API to search for entries of type Facility
@@ -3913,6 +3966,269 @@ paths:
       summary: Search API for 'Facility' entry type
       tags:
         - type/community_resource
+  /repository/search/type/construction_permits:
+    get:
+      description: API to search for entries of type Construction Permits
+      operationId: search_construction_permits
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Address
+          in: query
+          name: search.db_construction_permits.address
+          required: false
+          type: string
+        - description: Case Status
+          in: query
+          name: search.db_construction_permits.case_status
+          required: false
+          type: string
+        - description: Category
+          in: query
+          name: search.db_construction_permits.category
+          required: false
+          type: string
+        - description: Building Uses And Work Scopes
+          in: query
+          name: search.db_construction_permits.building_uses_and_work_scopes
+          required: false
+          type: string
+        - description: Permit Types
+          in: query
+          name: search.db_construction_permits.permit_types
+          required: false
+          type: string
+        - description: Total Project Value
+          format: double
+          in: query
+          name: search.db_construction_permits.total_project_value
+          required: false
+          type: number
+        - description: Total Subpermit Value
+          format: double
+          in: query
+          name: search.db_construction_permits.total_subpermit_value
+          required: false
+          type: number
+        - description: Applied
+          in: query
+          name: search.db_construction_permits.applied
+          required: false
+          type: string
+        - description: Approved
+          in: query
+          name: search.db_construction_permits.approved
+          required: false
+          type: string
+        - description: Issued
+          in: query
+          name: search.db_construction_permits.issued
+          required: false
+          type: string
+        - description: Co Date
+          in: query
+          name: search.db_construction_permits.co_date
+          required: false
+          type: string
+        - description: Completion Date
+          in: query
+          name: search.db_construction_permits.completion_date
+          required: false
+          type: string
+        - description: New Res Unit
+          in: query
+          name: search.db_construction_permits.new_res_unit
+          required: false
+          type: integer
+        - description: Existing Res Unit
+          in: query
+          name: search.db_construction_permits.existing_res_unit
+          required: false
+          type: integer
+        - description: Affordable Hsg Unit
+          in: query
+          name: search.db_construction_permits.affordable_hsg_unit
+          required: false
+          type: integer
+        - description: New Sf
+          in: query
+          name: search.db_construction_permits.new_sf
+          required: false
+          type: integer
+        - description: Remodel Sf
+          in: query
+          name: search.db_construction_permits.remodel_sf
+          required: false
+          type: integer
+        - description: Narrative Description
+          in: query
+          name: search.db_construction_permits.narrative_description
+          required: false
+          type: string
+        - description: Primary First Name
+          in: query
+          name: search.db_construction_permits.primary_first_name
+          required: false
+          type: string
+        - description: Primary Last Name
+          in: query
+          name: search.db_construction_permits.primary_last_name
+          required: false
+          type: string
+        - description: Primary Company
+          in: query
+          name: search.db_construction_permits.primary_company
+          required: false
+          type: string
+        - description: Contractor First Name
+          in: query
+          name: search.db_construction_permits.contractor_first_name
+          required: false
+          type: string
+        - description: Contractor Last Name
+          in: query
+          name: search.db_construction_permits.contractor_last_name
+          required: false
+          type: string
+        - description: Contractor Company
+          in: query
+          name: search.db_construction_permits.contractor_company
+          required: false
+          type: string
+        - description: Owner1 First Name
+          in: query
+          name: search.db_construction_permits.owner1_first_name
+          required: false
+          type: string
+        - description: Owner1 Last Name
+          in: query
+          name: search.db_construction_permits.owner1_last_name
+          required: false
+          type: string
+        - description: Owner1 Company
+          in: query
+          name: search.db_construction_permits.owner1_company
+          required: false
+          type: string
+        - description: Owner2 First Name
+          in: query
+          name: search.db_construction_permits.owner2_first_name
+          required: false
+          type: string
+        - description: Owner2 Last Name
+          in: query
+          name: search.db_construction_permits.owner2_last_name
+          required: false
+          type: string
+        - description: Owner2 Company
+          in: query
+          name: search.db_construction_permits.owner2_company
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Construction Permits' entry type
+      tags:
+        - type/construction_permits
   /repository/search/type/contact:
     get:
       description: API to search for entries of type Contact List
@@ -4186,147 +4502,6 @@ paths:
       summary: Search API for 'Colorado Health Indicators' entry type
       tags:
         - type/db_co_indicators
-  /repository/search/type/earth_merra:
-    get:
-      description: API to search for entries of type MERRA Data
-      operationId: search_earth_merra
-      parameters:
-        - description: Search text
-          in: query
-          name: text
-          required: false
-          type: string
-        - description: Search name
-          in: query
-          name: name
-          required: false
-          type: string
-        - description: Search description
-          in: query
-          name: description
-          required: false
-          type: string
-        - description: From date
-          format: date-time
-          in: query
-          name: fromdate
-          required: false
-          type: string
-        - description: To date
-          format: date-time
-          in: query
-          name: todate
-          required: false
-          type: string
-        - description: Archive create date from
-          format: date-time
-          in: query
-          name: createdate.from
-          required: false
-          type: string
-        - description: Archive create date to
-          format: date-time
-          in: query
-          name: createdate.to
-          required: false
-          type: string
-        - description: Archive change date from
-          format: date-time
-          in: query
-          name: changedate.from
-          required: false
-          type: string
-        - description: Archive change date to
-          format: date-time
-          in: query
-          name: changedate.to
-          required: false
-          type: string
-        - description: Parent entry
-          in: query
-          name: group
-          required: false
-          type: string
-        - description: File suffix
-          in: query
-          name: filesuffix
-          required: false
-          type: string
-        - description: Northern bounds of search
-          format: float
-          in: query
-          name: maxlatitude
-          required: false
-          type: number
-        - description: Western bounds of search
-          format: float
-          in: query
-          name: minlongitude
-          required: false
-          type: number
-        - description: Southern bounds of search
-          format: float
-          in: query
-          name: minlatitude
-          required: false
-          type: number
-        - description: Eastern bounds of search
-          format: float
-          in: query
-          name: maxlongitude
-          required: false
-          type: number
-        - description: Max number of results
-          in: query
-          name: max
-          required: false
-          type: integer
-        - description: Number to skip
-          in: query
-          name: skip
-          required: false
-          type: integer
-        - description: Frequency Type
-          in: query
-          name: search.earth_merra.frequency_type
-          required: false
-          type: string
-        - description: Frequency
-          in: query
-          name: search.earth_merra.frequency
-          required: false
-          type: string
-        - description: Dimensions
-          in: query
-          name: search.earth_merra.dimensions
-          required: false
-          type: string
-        - description: Group
-          in: query
-          name: search.earth_merra.data_group
-          required: false
-          type: string
-        - description: Horizontal Resolution
-          in: query
-          name: search.earth_merra.horizontal_resolution
-          required: false
-          type: string
-        - description: Vertical Location
-          in: query
-          name: search.earth_merra.vertical_location
-          required: false
-          type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/plain
-        - text/html
-      responses:
-        '200':
-          description: No response was specified
-      summary: Search API for 'MERRA Data' entry type
-      tags:
-        - type/earth_merra
   /repository/search/type/earth_satellite_landsat:
     get:
       description: API to search for entries of type Landsat Satellite Data
@@ -4468,122 +4643,6 @@ paths:
       summary: Search API for 'Landsat Satellite Data' entry type
       tags:
         - type/earth_satellite_landsat
-  /repository/search/type/earth_satellite_modis_aqua:
-    get:
-      description: API to search for entries of type Aqua Modis Satellite Data
-      operationId: search_earth_satellite_modis_aqua
-      parameters:
-        - description: Search text
-          in: query
-          name: text
-          required: false
-          type: string
-        - description: Search name
-          in: query
-          name: name
-          required: false
-          type: string
-        - description: Search description
-          in: query
-          name: description
-          required: false
-          type: string
-        - description: From date
-          format: date-time
-          in: query
-          name: fromdate
-          required: false
-          type: string
-        - description: To date
-          format: date-time
-          in: query
-          name: todate
-          required: false
-          type: string
-        - description: Archive create date from
-          format: date-time
-          in: query
-          name: createdate.from
-          required: false
-          type: string
-        - description: Archive create date to
-          format: date-time
-          in: query
-          name: createdate.to
-          required: false
-          type: string
-        - description: Archive change date from
-          format: date-time
-          in: query
-          name: changedate.from
-          required: false
-          type: string
-        - description: Archive change date to
-          format: date-time
-          in: query
-          name: changedate.to
-          required: false
-          type: string
-        - description: Parent entry
-          in: query
-          name: group
-          required: false
-          type: string
-        - description: File suffix
-          in: query
-          name: filesuffix
-          required: false
-          type: string
-        - description: Northern bounds of search
-          format: float
-          in: query
-          name: maxlatitude
-          required: false
-          type: number
-        - description: Western bounds of search
-          format: float
-          in: query
-          name: minlongitude
-          required: false
-          type: number
-        - description: Southern bounds of search
-          format: float
-          in: query
-          name: minlatitude
-          required: false
-          type: number
-        - description: Eastern bounds of search
-          format: float
-          in: query
-          name: maxlongitude
-          required: false
-          type: number
-        - description: Max number of results
-          in: query
-          name: max
-          required: false
-          type: integer
-        - description: Number to skip
-          in: query
-          name: skip
-          required: false
-          type: integer
-        - description: Earth Science Data Type
-          in: query
-          name: search.earth_satellite_modis.data_type
-          required: false
-          type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/plain
-        - text/html
-      responses:
-        '200':
-          description: No response was specified
-      summary: Search API for 'Aqua Modis Satellite Data' entry type
-      tags:
-        - type/earth_satellite_modis_aqua
   /repository/search/type/earth_wrf_namelist:
     get:
       description: API to search for entries of type WRF Namelist File
@@ -15073,6 +15132,223 @@ paths:
       summary: Search API for 'Tasks' entry type
       tags:
         - type/tasks
+  /repository/search/type/tmdbmovies:
+    get:
+      description: API to search for entries of type Tmdb Movies
+      operationId: search_tmdbmovies
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Original Title
+          in: query
+          name: search.db_tmdbmovies.original_title
+          required: false
+          type: string
+        - description: Overview
+          in: query
+          name: search.db_tmdbmovies.overview
+          required: false
+          type: string
+        - description: Budget
+          format: double
+          in: query
+          name: search.db_tmdbmovies.budget
+          required: false
+          type: number
+        - description: Genres
+          in: query
+          name: search.db_tmdbmovies.genres
+          required: false
+          type: string
+        - description: Homepage
+          in: query
+          name: search.db_tmdbmovies.homepage
+          required: false
+          type: string
+        - description: Id
+          in: query
+          name: search.db_tmdbmovies.movie_id
+          required: false
+          type: string
+        - description: Keywords
+          in: query
+          name: search.db_tmdbmovies.keywords
+          required: false
+          type: string
+        - description: Original Language
+          in: query
+          name: search.db_tmdbmovies.original_language
+          required: false
+          type: string
+        - description: Popularity
+          format: double
+          in: query
+          name: search.db_tmdbmovies.popularity
+          required: false
+          type: number
+        - description: Production Companies
+          in: query
+          name: search.db_tmdbmovies.production_companies
+          required: false
+          type: string
+        - description: Production Countries
+          in: query
+          name: search.db_tmdbmovies.production_countries
+          required: false
+          type: string
+        - description: Release Date
+          in: query
+          name: search.db_tmdbmovies.release_date
+          required: false
+          type: string
+        - description: Revenue
+          format: double
+          in: query
+          name: search.db_tmdbmovies.revenue
+          required: false
+          type: number
+        - description: Runtime
+          format: double
+          in: query
+          name: search.db_tmdbmovies.runtime
+          required: false
+          type: number
+        - description: Spoken Languages
+          in: query
+          name: search.db_tmdbmovies.spoken_languages
+          required: false
+          type: string
+        - description: Status
+          in: query
+          name: search.db_tmdbmovies.status
+          required: false
+          type: string
+        - description: Tagline
+          in: query
+          name: search.db_tmdbmovies.tagline
+          required: false
+          type: string
+        - description: Title
+          in: query
+          name: search.db_tmdbmovies.title
+          required: false
+          type: string
+        - description: Vote Average
+          format: double
+          in: query
+          name: search.db_tmdbmovies.vote_average
+          required: false
+          type: number
+        - description: Vote Count
+          format: double
+          in: query
+          name: search.db_tmdbmovies.vote_count
+          required: false
+          type: number
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Tmdb Movies' entry type
+      tags:
+        - type/tmdbmovies
   /repository/search/type/todo:
     get:
       description: API to search for entries of type Todo
@@ -27116,6 +27392,175 @@ paths:
       summary: Search API for 'WMS Layer' entry type
       tags:
         - type/type_wms_layer
+  /repository/search/type/ufo_sightings:
+    get:
+      description: API to search for entries of type Ufo Sightings
+      operationId: search_ufo_sightings
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Datetime
+          in: query
+          name: search.db_ufo_sightings.datetime
+          required: false
+          type: string
+        - description: City
+          in: query
+          name: search.db_ufo_sightings.city
+          required: false
+          type: string
+        - description: State
+          in: query
+          name: search.db_ufo_sightings.state
+          required: false
+          type: string
+        - description: Country
+          in: query
+          name: search.db_ufo_sightings.country
+          required: false
+          type: string
+        - description: Shape
+          in: query
+          name: search.db_ufo_sightings.shape
+          required: false
+          type: string
+        - description: Duration (seconds)
+          format: double
+          in: query
+          name: search.db_ufo_sightings.duration_seconds
+          required: false
+          type: number
+        - description: Duration (hours/min)
+          in: query
+          name: search.db_ufo_sightings.duration_hours_min
+          required: false
+          type: string
+        - description: Comments
+          in: query
+          name: search.db_ufo_sightings.comments
+          required: false
+          type: string
+        - description: Date Posted
+          in: query
+          name: search.db_ufo_sightings.date_posted
+          required: false
+          type: string
+        - description: Latitude
+          format: double
+          in: query
+          name: search.db_ufo_sightings.latitude
+          required: false
+          type: number
+        - description: Longitude
+          format: double
+          in: query
+          name: search.db_ufo_sightings.longitude
+          required: false
+          type: number
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Ufo Sightings' entry type
+      tags:
+        - type/ufo_sightings
   /repository/search/type/vote_yesno:
     get:
       description: API to search for entries of type Simple Yes-No Vote

@@ -1,0 +1,265 @@
+swagger: '2.0'
+info:
+  version: '2017-09-30'
+  x-release: v4
+  title: Amazon Kinesis Video Streams Media
+  description: <p/>
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: kinesis-video-media
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/kinesis-video-media-2017-09-30.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/kinesisvideo/'
+host: kinesisvideo.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /getMedia:
+    post:
+      operationId: GetMedia
+      description: '<p> Use this API to retrieve media content from a Kinesis video stream. In the request, you identify stream name or stream Amazon Resource Name (ARN), and the starting chunk. Kinesis Video Streams then returns a stream of chunks in order by fragment number.</p> <note> <p> You must first call the <code>GetDataEndpoint</code> API to get an endpoint to which you can then send the <code>GetMedia</code> requests. </p> </note> <p>When you put media data (fragments) on a stream, Kinesis Video Streams stores each incoming fragment and related metadata in what is called a "chunk." For more information, see . The <code>GetMedia</code> API returns a stream of these chunks starting from the chunk that you specify in the request. </p> <p>The following limits apply when using the <code>GetMedia</code> API:</p> <ul> <li> <p>A client can call <code>GetMedia</code> up to five times per second per stream. </p> </li> <li> <p>Kinesis Video Streams sends media data at a rate of up to 25 megabytes per second (or 200 megabits per second) during a <code>GetMedia</code> session. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMediaOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '482':
+          description: InvalidEndpointException
+          schema:
+            $ref: '#/definitions/InvalidEndpointException'
+        '483':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '484':
+          description: ConnectionLimitExceededException
+          schema:
+            $ref: '#/definitions/ConnectionLimitExceededException'
+        '485':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMediaInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  ClientLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Kinesis Video Streams has throttled the request because you have exceeded the limit of allowed client calls. Try making the call later.
+  ConnectionLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Kinesis Video Streams has throttled the request because you have exceeded the limit of allowed client connections.
+  ContentType:
+    type: string
+    pattern: '^[a-zA-Z0-9_\.\-]+$'
+    minLength: 1
+    maxLength: 128
+  ContinuationToken:
+    type: string
+    pattern: '^[a-zA-Z0-9_\.\-]+$'
+    minLength: 1
+    maxLength: 128
+  ErrorMessage:
+    type: string
+  FragmentNumberString:
+    type: string
+    pattern: '^[0-9]+$'
+    minLength: 1
+    maxLength: 128
+  GetMediaInput:
+    type: object
+    required:
+      - StartSelector
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: 'The Kinesis video stream name from where you want to get the media content. If you don''t specify the <code>streamName</code>, you must specify the <code>streamARN</code>.'
+      StreamARN:
+        $ref: '#/definitions/ResourceARN'
+        description: 'The ARN of the stream from where you want to get the media content. If you don''t specify the <code>streamARN</code>, you must specify the <code>streamName</code>.'
+      StartSelector:
+        $ref: '#/definitions/StartSelector'
+        description: 'Identifies the starting chunk to get from the specified stream. '
+  GetMediaOutput:
+    type: object
+    properties:
+      Payload:
+        $ref: '#/definitions/Payload'
+        description: '<p> The payload Kinesis Video Streams returns is a sequence of chunks from the specified stream. For information about the chunks, see . The chunks that Kinesis Video Streams returns in the <code>GetMedia</code> call also include the following additional Matroska (MKV) tags: </p> <ul> <li> <p>AWS_KINESISVIDEO_CONTINUATION_TOKEN (UTF-8 string) - In the event your <code>GetMedia</code> call terminates, you can use this continuation token in your next request to get the next chunk where the last request terminated.</p> </li> <li> <p>AWS_KINESISVIDEO_MILLIS_BEHIND_NOW (UTF-8 string) - Client applications can use this tag value to determine how far behind the chunk returned in the response is from the latest chunk on the stream. </p> </li> <li> <p>AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.</p> </li> <li> <p>AWS_KINESISVIDEO_SERVER_TIMESTAMP - Server time stamp of the fragment.</p> </li> <li> <p>AWS_KINESISVIDEO_PRODUCER_TIMESTAMP - Producer time stamp of the fragment.</p> </li> </ul> <p>The following tags will be present if an error occurs:</p> <ul> <li> <p>AWS_KINESISVIDEO_ERROR_CODE - String description of an error that caused GetMedia to stop.</p> </li> <li> <p>AWS_KINESISVIDEO_ERROR_ID: Integer code of the error.</p> </li> </ul> <p>The error codes are as follows:</p> <ul> <li> <p>3002 - Error writing to the stream</p> </li> <li> <p>4000 - Requested fragment is not found</p> </li> <li> <p>4500 - Access denied for the stream''s KMS key</p> </li> <li> <p>4501 - Stream''s KMS key is disabled</p> </li> <li> <p>4502 - Validation error on the Stream''s KMS key</p> </li> <li> <p>4503 - KMS key specified in the stream is unavailable</p> </li> <li> <p>4504 - Invalid usage of the KMS key specified in the stream</p> </li> <li> <p>4505 - Invalid state of the KMS key specified in the stream</p> </li> <li> <p>4506 - Unable to find the KMS key specified in the stream</p> </li> <li> <p>5000 - Internal error</p> </li> </ul>'
+  InvalidArgumentException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The value for this input parameter is invalid.
+  InvalidEndpointException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' Status Code: 400, Caller used wrong endpoint to write data to a stream. On receiving such an exception, the user must call <code>GetDataEndpoint</code> with <code>AccessMode</code> set to "READ" and use the endpoint Kinesis Video returns in the next <code>GetMedia</code> call. '
+  NotAuthorizedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Status Code: 403, The caller is not authorized to perform an operation on the given stream, or the token has expired.'
+  Payload:
+    type: string
+  ResourceARN:
+    type: string
+    pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+    minLength: 1
+    maxLength: 1024
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Status Code: 404, The stream with the given name does not exist.'
+  StartSelector:
+    type: object
+    required:
+      - StartSelectorType
+    properties:
+      StartSelectorType:
+        $ref: '#/definitions/StartSelectorType'
+        description: '<p>Identifies the fragment on the Kinesis video stream where you want to start getting the data from.</p> <ul> <li> <p>NOW - Start with the latest chunk on the stream.</p> </li> <li> <p>EARLIEST - Start with earliest available chunk on the stream.</p> </li> <li> <p>FRAGMENT_NUMBER - Start with the chunk containing the specific fragment. You must also specify the <code>StartFragmentNumber</code>.</p> </li> <li> <p>PRODUCER_TIMESTAMP or SERVER_TIMESTAMP - Start with the chunk containing a fragment with the specified producer or server time stamp. You specify the time stamp by adding <code>StartTimestamp</code>.</p> </li> <li> <p> CONTINUATION_TOKEN - Read using the specified continuation token. </p> </li> </ul> <note> <p>If you choose the NOW, EARLIEST, or CONTINUATION_TOKEN as the <code>startSelectorType</code>, you don''t provide any additional information in the <code>startSelector</code>.</p> </note>'
+      AfterFragmentNumber:
+        $ref: '#/definitions/FragmentNumberString'
+        description: 'Specifies the fragment number from where you want the <code>GetMedia</code> API to start returning the fragments. '
+      StartTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: A time stamp value. This value is required if you choose the PRODUCER_TIMESTAMP or the SERVER_TIMESTAMP as the <code>startSelectorType</code>. The <code>GetMedia</code> API then starts with the chunk containing the fragment that has the specified time stamp.
+      ContinuationToken:
+        $ref: '#/definitions/ContinuationToken'
+        description: Continuation token that Kinesis Video Streams returned in the previous <code>GetMedia</code> response. The <code>GetMedia</code> API then starts with the chunk identified by the continuation token.
+    description: '<p>Identifies the chunk on the Kinesis video stream where you want the <code>GetMedia</code> API to start returning media data. You have the following options to identify the starting chunk: </p> <ul> <li> <p>Choose the latest (or oldest) chunk.</p> </li> <li> <p>Identify a specific chunk. You can identify a specific chunk either by providing a fragment number or time stamp (server or producer). </p> </li> <li> <p>Each chunk''s metadata includes a continuation token as a Matroska (MKV) tag (<code>AWS_KINESISVIDEO_CONTINUATION_TOKEN</code>). If your previous <code>GetMedia</code> request terminated, you can use this tag value in your next <code>GetMedia</code> request. The API then starts returning chunks starting where the last API ended.</p> </li> </ul>'
+  StartSelectorType:
+    type: string
+    enum:
+      - FRAGMENT_NUMBER
+      - SERVER_TIMESTAMP
+      - PRODUCER_TIMESTAMP
+      - NOW
+      - EARLIEST
+      - CONTINUATION_TOKEN
+  StreamName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 256
+  Timestamp:
+    type: string
+    format: date-time

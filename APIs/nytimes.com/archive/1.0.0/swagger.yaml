@@ -1,0 +1,170 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.nytimes.com
+basePath: /svc/archive/v1
+info:
+  description: The Archive API provides lists of NYT articles by month going back to 1851.  You can use it to build your own local database of NYT article metadata.
+  termsOfService: 'http://developer.nytimes.com/tou'
+  title: Archive
+  version: 1.0.0
+  x-apiClientRegistration:
+    url: 'http://developer.nytimes.com/signup'
+  x-apisguru-categories:
+    - media
+    - open_data
+  x-logo:
+    url: 'https://static01.nyt.com/images/icons/t_logo_291_black.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/archive_api/archive_api.json'
+      version: '2.0'
+  x-providerName: nytimes.com
+  x-serviceName: archive
+externalDocs:
+  url: 'http://developer.nytimes.com/'
+produces:
+  - application/json
+securityDefinitions:
+  apikey:
+    in: query
+    name: api-key
+    type: apiKey
+security:
+  - apikey: []
+paths:
+  '/{year}/{month}.json':
+    get:
+      description: |
+        The Archive API provides lists of NYT articles by month going back to 1851.  Simply pass in the year and month you want and it returns a JSON object with all articles for that month.
+      parameters:
+        - default: 2016
+          description: The year (e.g. 2016).
+          format: int32
+          in: path
+          maximum: 2030
+          minimum: 1851
+          name: year
+          required: true
+          type: integer
+          x-consoleDefault: '2016'
+        - default: 1
+          description: The month number (e.g. 1 for January).
+          format: int32
+          in: path
+          maximum: 12
+          minimum: 1
+          name: month
+          required: true
+          type: integer
+          x-consoleDefault: '1'
+      responses:
+        '200':
+          description: The docs requested.
+          schema:
+            properties:
+              response:
+                properties:
+                  docs:
+                    items:
+                      $ref: '#/definitions/Doc'
+                    type: array
+                  meta:
+                    properties:
+                      hits:
+                        type: integer
+                      offset:
+                        type: integer
+                      time:
+                        type: integer
+                    type: object
+                type: object
+            type: object
+      summary: Archive API
+      tags:
+        - Archive
+definitions:
+  Doc:
+    properties:
+      _id:
+        type: string
+      abstract:
+        type: string
+      blog:
+        items: {}
+        type: array
+      byline:
+        properties:
+          organization:
+            type: string
+          original:
+            type: string
+          person:
+            items: {}
+            type: array
+        type: object
+      document_type:
+        type: string
+      headline:
+        properties:
+          kicker:
+            type: string
+          main:
+            type: string
+        type: object
+      keywords:
+        properties:
+          name:
+            type: string
+          rank:
+            type: string
+          value:
+            type: string
+        type: object
+      lead_paragraph:
+        type: string
+      multimedia:
+        items:
+          properties:
+            caption:
+              type: string
+            copyright:
+              type: string
+            format:
+              type: string
+            height:
+              type: integer
+            subtype:
+              type: string
+            type:
+              type: string
+            url:
+              type: string
+            width:
+              type: integer
+          type: object
+        type: array
+      news_desK:
+        type: string
+      print_page:
+        type: string
+      pub_date:
+        type: string
+      section_name:
+        type: string
+      slideshow_credits:
+        type: string
+      snippet:
+        type: string
+      source:
+        type: string
+      subsection_name:
+        type: string
+      type_of_material:
+        type: string
+      web_url:
+        type: string
+      word_count:
+        type: string
+    type: object

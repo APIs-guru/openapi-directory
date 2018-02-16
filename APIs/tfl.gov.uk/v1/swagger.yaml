@@ -736,15 +736,11 @@ paths:
       summary: Gets lines that match the specified line ids.
       tags:
         - Line
-  '/Line/{ids}/Arrivals':
+  '/Line/{ids}/Arrivals/{stopPointId}':
     get:
       deprecated: false
+      operationId: Line_Arrivals
       parameters:
-        - description: 'Id of stop to get arrival predictions for (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
-          in: query
-          name: stopPointId
-          required: true
-          type: string
         - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
           in: path
           items:
@@ -752,6 +748,25 @@ paths:
           name: ids
           required: true
           type: array
+        - description: 'Optional. Id of stop to get arrival predictions for (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: stopPointId
+          required: true
+          type: string
+        - description: 'Optional. The direction of travel. Can be inbound or outbound or all. If left blank, and destinationStopId is set, will default to all'
+          enum:
+            - inbound
+            - outbound
+            - all
+          in: query
+          name: direction
+          required: false
+          type: string
+        - description: Optional. Id of destination stop
+          in: query
+          name: destinationStationId
+          required: false
+          type: string
       produces:
         - application/json
         - text/json
@@ -765,46 +780,6 @@ paths:
               $ref: '#/definitions/Prediction'
             type: array
       summary: Get the list of arrival predictions for given line ids based at the given stop
-      tags:
-        - Line
-  '/Line/{ids}/Arrivals/{stopPointId}':
-    get:
-      deprecated: false
-      parameters:
-        - description: 'Id of stop to get arrival predictions for (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
-          in: path
-          name: stopPointId
-          required: true
-          type: string
-        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
-          in: path
-          items:
-            type: string
-          name: ids
-          required: true
-          type: array
-        - description: The direction of travel. Can be inbound or outbound
-          enum:
-            - inbound
-            - outbound
-            - all
-          in: query
-          name: direction
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Prediction'
-            type: array
-      summary: Get the list of arrival predictions for given line ids based at the given stop going in the procided direction
       tags:
         - Line
   '/Line/{ids}/Disruption':
@@ -1020,6 +995,11 @@ paths:
           name: id
           required: true
           type: string
+        - description: 'If the national-rail line is requested, this flag will filter the national rail stations so that only those operated by TfL are returned'
+          in: query
+          name: tflOperatedNationalRailStationsOnly
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json
@@ -1211,6 +1191,51 @@ paths:
           schema:
             $ref: '#/definitions/CarParkOccupancy'
       summary: Gets the occupancy for a car park with a given id
+      tags:
+        - Occupancy
+  /Occupancy/ChargeConnector:
+    get:
+      deprecated: false
+      operationId: Occupancy_GetAllChargeConnectorStatus
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ChargeConnectorOccupancy'
+            type: array
+      summary: Gets the occupancy for all charge connectors
+      tags:
+        - Occupancy
+  '/Occupancy/ChargeConnector/{ids}':
+    get:
+      deprecated: false
+      operationId: Occupancy_GetChargeConnectorStatus
+      parameters:
+        - in: path
+          items:
+            type: string
+          name: ids
+          required: true
+          type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ChargeConnectorOccupancy'
+            type: array
+      summary: Gets the occupancy for a charge connectors with a given id (sourceSystemPlaceId)
       tags:
         - Occupancy
   /Place:
@@ -2129,6 +2154,11 @@ paths:
           name: includeHubs
           required: false
           type: boolean
+        - description: 'If the national-rail mode is included, this flag will filter the national rail stations so that only those operated by TfL are returned'
+          in: query
+          name: tflOperatedNationalRailStationsOnly
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json
@@ -2181,6 +2211,11 @@ paths:
         - description: 'If true, returns results including HUBs.'
           in: query
           name: includeHubs
+          required: false
+          type: boolean
+        - description: 'If the national-rail mode is included, this flag will filter the national rail stations so that only those operated by TfL are returned'
+          in: query
+          name: tflOperatedNationalRailStationsOnly
           required: false
           type: boolean
       produces:
@@ -2812,7 +2847,7 @@ paths:
   /Vehicle/EmissionSurcharge:
     get:
       deprecated: false
-      operationId: Vehicle_GetVehicle
+      operationId: Vehicle_GetEmissionsSurchargeCompliance
       parameters:
         - description: The Vehicle Registration Mark
           in: query
@@ -2828,8 +2863,31 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/EmissionsSurchargeVehicle'
+            $ref: '#/definitions/VehicleMatch'
       summary: Gets the Emissions Surcharge compliance for the Vehicle
+      tags:
+        - Vehicle
+  /Vehicle/UlezCompliance:
+    get:
+      deprecated: false
+      operationId: Vehicle_GetUlezCompliance
+      parameters:
+        - description: The Vehicle Registration Mark
+          in: query
+          name: vrm
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VehicleMatch'
+      summary: Gets the Ulez Surcharge compliance for the Vehicle
       tags:
         - Vehicle
   '/Vehicle/{ids}/Arrivals':
@@ -2998,6 +3056,20 @@ definitions:
       severity:
         type: string
     type: object
+  ChargeConnectorOccupancy:
+    description: ''
+    properties:
+      id:
+        description: ''
+        format: int32
+        type: integer
+      sourceSystemPlaceId:
+        description: ''
+        type: string
+      status:
+        description: ''
+        type: string
+    type: object
   Coordinate:
     properties:
       easting:
@@ -3158,6 +3230,7 @@ definitions:
         description: Gets or sets the description of the category.
         type: string
       closureText:
+        description: Text describing the closure type
         type: string
       created:
         description: Gets or sets the date/time when this disruption was created.
@@ -3166,36 +3239,15 @@ definitions:
       description:
         description: Gets or sets the description of this disruption.
         type: string
-      isBlocking:
-        type: boolean
-      isWholeLine:
-        type: boolean
       lastUpdate:
         description: Gets or sets the date/time when this disruption was last updated.
         format: date-time
         type: string
+      summary:
+        description: Gets or sets the summary of this disruption.
+        type: string
       type:
         description: Gets or sets the disruption type of this dispruption.
-        type: string
-    type: object
-  EmissionsSurchargeVehicle:
-    description: ''
-    properties:
-      colour:
-        type: string
-      compliance:
-        enum:
-          - NotCompliant
-          - Compliant
-          - Exempt
-        type: string
-      make:
-        type: string
-      model:
-        type: string
-      type:
-        type: string
-      vrm:
         type: string
     type: object
   Fare:
@@ -3485,6 +3537,7 @@ definitions:
           - BusyRoads
           - None
           - PushBike
+          - Quietway
         type: string
       turnDirection:
         type: string
@@ -3775,30 +3828,39 @@ definitions:
         type: array
     type: object
   MatchedRoute:
+    description: Description of a Route used in Route search results.
     properties:
       destination:
-        description: 'eg: Destination'
+        description: The Id (NaPTAN code) or the Destination StopPoint
         type: string
       destinationName:
-        description: 'eg: Destination Name'
+        description: The name of the Destination StopPoint
         type: string
       direction:
-        description: 'eg: N or S or I or O'
+        description: Inbound or Outbound
         type: string
       name:
         description: Name such as "72"
         type: string
       originationName:
-        description: 'eg: Origination Name'
+        description: The name of the Origin StopPoint
         type: string
       originator:
-        description: 'eg: Origination'
+        description: The Id (NaPTAN code) of the Origin StopPoint
         type: string
       routeCode:
         description: The route code
         type: string
       serviceType:
-        description: 'eg: Regular, Night'
+        description: Regular or Night
+        type: string
+      validFrom:
+        description: The DateTime that the Service containing this Route is valid from.
+        format: date-time
+        type: string
+      validTo:
+        description: The DateTime that the Service containing this Route is valid until.
+        format: date-time
         type: string
     type: object
   MatchedRouteSections:
@@ -4514,10 +4576,10 @@ definitions:
   RouteSection:
     properties:
       destinationName:
-        description: 'eg: Destination Name'
+        description: The name of the Destination StopPoint
         type: string
       direction:
-        description: 'eg: N or S or I or O'
+        description: Inbound or Outbound
         type: string
       id:
         description: The Id of the route
@@ -4526,13 +4588,13 @@ definitions:
         description: The Id of the Line
         type: string
       lineString:
-        description: 'eg: Path coordindates'
+        description: The co-ordinates of the route's path as a geoJSON lineString
         type: string
       name:
         description: Name such as "72"
         type: string
       originationName:
-        description: 'eg: Origination Name'
+        description: The name of the Origin StopPoint
         type: string
       routeCode:
         description: The route code
@@ -4541,6 +4603,14 @@ definitions:
         items:
           $ref: '#/definitions/RouteSectionNaptanEntrySequence'
         type: array
+      validFrom:
+        description: The DateTime that the Service containing this Route is valid from.
+        format: date-time
+        type: string
+      validTo:
+        description: The DateTime that the Service containing this Route is valid until.
+        format: date-time
+        type: string
     type: object
   RouteSectionNaptanEntrySequence:
     properties:
@@ -5054,5 +5124,26 @@ definitions:
   Vehicle:
     properties:
       type:
+        type: string
+    type: object
+  VehicleMatch:
+    description: ''
+    properties:
+      colour:
+        type: string
+      compliance:
+        enum:
+          - NotAvailable
+          - NotCompliant
+          - Compliant
+          - Exempt
+        type: string
+      make:
+        type: string
+      model:
+        type: string
+      type:
+        type: string
+      vrm:
         type: string
     type: object

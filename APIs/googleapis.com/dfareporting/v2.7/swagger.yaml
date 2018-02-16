@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages your DoubleClick Campaign Manager ad campaigns and reports.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: DCM/DFA Reporting And Trafficking
   version: v2.7
   x-apiClientRegistration:
@@ -21,11 +17,11 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.7/rest'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: dfareporting
 externalDocs:
@@ -33,22 +29,12 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/ddmconversions': Manage DoubleClick Digital Marketing conversions
       'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
       'https://www.googleapis.com/auth/dfatrafficking': View and manage your DoubleClick Campaign Manager's (DCM) display ad campaigns
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/ddmconversions': Manage DoubleClick Digital Marketing conversions
-      'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
-      'https://www.googleapis.com/auth/dfatrafficking': View and manage your DoubleClick Campaign Manager's (DCM) display ad campaigns
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -157,14 +143,14 @@ paths:
       description: Retrieves a report file by its report ID and file ID. This method supports media download.
       operationId: dfareporting.files.get
       parameters:
-        - description: The ID of the report.
-          in: path
-          name: reportId
-          required: true
-          type: string
         - description: The ID of the report file.
           in: path
           name: fileId
+          required: true
+          type: string
+        - description: The ID of the report.
+          in: path
+          name: reportId
           required: true
           type: string
       responses:
@@ -174,8 +160,6 @@ paths:
             $ref: '#/definitions/File'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - files
@@ -199,11 +183,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfareporting'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userProfiles
@@ -233,11 +213,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfareporting'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userProfiles
@@ -272,8 +248,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountActiveAdSummaries
     parameters:
@@ -302,8 +276,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountPermissionGroups
     parameters:
@@ -319,14 +291,14 @@ paths:
       description: Gets one account permission group by ID.
       operationId: dfareporting.accountPermissionGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Account permission group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -336,8 +308,6 @@ paths:
             $ref: '#/definitions/AccountPermissionGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountPermissionGroups
@@ -367,8 +337,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountPermissions
     parameters:
@@ -384,14 +352,14 @@ paths:
       description: Gets one account permission by ID.
       operationId: dfareporting.accountPermissions.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Account permission ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -401,8 +369,6 @@ paths:
             $ref: '#/definitions/AccountPermission'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountPermissions
@@ -482,8 +448,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
     parameters:
@@ -498,20 +462,20 @@ paths:
       description: Updates an existing account user profile. This method supports patch semantics.
       operationId: dfareporting.accountUserProfiles.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountUserProfile'
         - description: User profile ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountUserProfile'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -519,8 +483,6 @@ paths:
             $ref: '#/definitions/AccountUserProfile'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
@@ -528,15 +490,15 @@ paths:
       description: Inserts a new account user profile.
       operationId: dfareporting.accountUserProfiles.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountUserProfile'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountUserProfile'
       responses:
         '200':
           description: Successful response
@@ -544,8 +506,6 @@ paths:
             $ref: '#/definitions/AccountUserProfile'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
@@ -553,15 +513,15 @@ paths:
       description: Updates an existing account user profile.
       operationId: dfareporting.accountUserProfiles.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountUserProfile'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountUserProfile'
       responses:
         '200':
           description: Successful response
@@ -569,8 +529,6 @@ paths:
             $ref: '#/definitions/AccountUserProfile'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
@@ -579,14 +537,14 @@ paths:
       description: Gets one account user profile by ID.
       operationId: dfareporting.accountUserProfiles.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User profile ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -596,8 +554,6 @@ paths:
             $ref: '#/definitions/AccountUserProfile'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
@@ -669,8 +625,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accounts
     parameters:
@@ -685,20 +639,20 @@ paths:
       description: Updates an existing account. This method supports patch semantics.
       operationId: dfareporting.accounts.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
         - description: Account ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -706,8 +660,6 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accounts
@@ -715,15 +667,15 @@ paths:
       description: Updates an existing account.
       operationId: dfareporting.accounts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
       responses:
         '200':
           description: Successful response
@@ -731,8 +683,6 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accounts
@@ -741,14 +691,14 @@ paths:
       description: Gets one account by ID.
       operationId: dfareporting.accounts.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Account ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -758,8 +708,6 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accounts
@@ -933,8 +881,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
     parameters:
@@ -949,20 +895,20 @@ paths:
       description: Updates an existing ad. This method supports patch semantics.
       operationId: dfareporting.ads.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Ad'
         - description: Ad ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Ad'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -970,8 +916,6 @@ paths:
             $ref: '#/definitions/Ad'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
@@ -979,15 +923,15 @@ paths:
       description: Inserts a new ad.
       operationId: dfareporting.ads.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Ad'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Ad'
       responses:
         '200':
           description: Successful response
@@ -995,8 +939,6 @@ paths:
             $ref: '#/definitions/Ad'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
@@ -1004,15 +946,15 @@ paths:
       description: Updates an existing ad.
       operationId: dfareporting.ads.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Ad'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Ad'
       responses:
         '200':
           description: Successful response
@@ -1020,8 +962,6 @@ paths:
             $ref: '#/definitions/Ad'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
@@ -1030,14 +970,14 @@ paths:
       description: Gets one ad by ID.
       operationId: dfareporting.ads.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Ad ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1047,8 +987,6 @@ paths:
             $ref: '#/definitions/Ad'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
@@ -1116,8 +1054,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
     parameters:
@@ -1132,20 +1068,20 @@ paths:
       description: Updates an existing advertiser group. This method supports patch semantics.
       operationId: dfareporting.advertiserGroups.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AdvertiserGroup'
         - description: Advertiser group ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AdvertiserGroup'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1153,8 +1089,6 @@ paths:
             $ref: '#/definitions/AdvertiserGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
@@ -1162,15 +1096,15 @@ paths:
       description: Inserts a new advertiser group.
       operationId: dfareporting.advertiserGroups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AdvertiserGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AdvertiserGroup'
       responses:
         '200':
           description: Successful response
@@ -1178,8 +1112,6 @@ paths:
             $ref: '#/definitions/AdvertiserGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
@@ -1187,15 +1119,15 @@ paths:
       description: Updates an existing advertiser group.
       operationId: dfareporting.advertiserGroups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AdvertiserGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AdvertiserGroup'
       responses:
         '200':
           description: Successful response
@@ -1203,8 +1135,6 @@ paths:
             $ref: '#/definitions/AdvertiserGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
@@ -1213,14 +1143,14 @@ paths:
       description: Deletes an existing advertiser group.
       operationId: dfareporting.advertiserGroups.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Advertiser group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1229,22 +1159,20 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
     get:
       description: Gets one advertiser group by ID.
       operationId: dfareporting.advertiserGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Advertiser group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1254,8 +1182,6 @@ paths:
             $ref: '#/definitions/AdvertiserGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
@@ -1356,8 +1282,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
     parameters:
@@ -1372,20 +1296,20 @@ paths:
       description: Updates an existing advertiser. This method supports patch semantics.
       operationId: dfareporting.advertisers.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Advertiser'
         - description: Advertiser ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Advertiser'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1393,8 +1317,6 @@ paths:
             $ref: '#/definitions/Advertiser'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
@@ -1402,15 +1324,15 @@ paths:
       description: Inserts a new advertiser.
       operationId: dfareporting.advertisers.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Advertiser'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Advertiser'
       responses:
         '200':
           description: Successful response
@@ -1418,8 +1340,6 @@ paths:
             $ref: '#/definitions/Advertiser'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
@@ -1427,15 +1347,15 @@ paths:
       description: Updates an existing advertiser.
       operationId: dfareporting.advertisers.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Advertiser'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Advertiser'
       responses:
         '200':
           description: Successful response
@@ -1443,8 +1363,6 @@ paths:
             $ref: '#/definitions/Advertiser'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
@@ -1453,14 +1371,14 @@ paths:
       description: Gets one advertiser by ID.
       operationId: dfareporting.advertisers.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Advertiser ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1470,8 +1388,6 @@ paths:
             $ref: '#/definitions/Advertiser'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
@@ -1500,8 +1416,6 @@ paths:
             $ref: '#/definitions/BrowsersListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - browsers
@@ -1606,8 +1520,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
     parameters:
@@ -1622,20 +1534,20 @@ paths:
       description: Updates an existing campaign. This method supports patch semantics.
       operationId: dfareporting.campaigns.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Campaign'
         - description: Campaign ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Campaign'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1644,19 +1556,16 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
     post:
       description: Inserts a new campaign.
       operationId: dfareporting.campaigns.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Campaign'
         - description: Default landing page name for this new campaign. Must be less than 256 characters long.
           in: query
           name: defaultLandingPageName
@@ -1667,10 +1576,11 @@ paths:
           name: defaultLandingPageUrl
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Campaign'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1678,8 +1588,6 @@ paths:
             $ref: '#/definitions/Campaign'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
@@ -1687,15 +1595,15 @@ paths:
       description: Updates an existing campaign.
       operationId: dfareporting.campaigns.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Campaign'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Campaign'
       responses:
         '200':
           description: Successful response
@@ -1703,8 +1611,6 @@ paths:
             $ref: '#/definitions/Campaign'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
@@ -1750,8 +1656,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaignCreativeAssociations
     parameters:
@@ -1766,20 +1670,20 @@ paths:
       description: Associates a creative with the specified campaign. This method creates a default ad with dimensions matching the creative in the campaign if such a default ad does not exist already.
       operationId: dfareporting.campaignCreativeAssociations.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CampaignCreativeAssociation'
         - description: Campaign ID in this association.
           in: path
           name: campaignId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CampaignCreativeAssociation'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1788,8 +1692,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaignCreativeAssociations
   '/userprofiles/{profileId}/campaigns/{campaignId}/landingPages':
@@ -1797,14 +1699,14 @@ paths:
       description: Retrieves the list of landing pages for the specified campaign.
       operationId: dfareporting.landingPages.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Landing page campaign ID.
           in: path
           name: campaignId
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1814,8 +1716,6 @@ paths:
             $ref: '#/definitions/LandingPagesListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - landingPages
@@ -1831,11 +1731,10 @@ paths:
       description: Updates an existing campaign landing page. This method supports patch semantics.
       operationId: dfareporting.landingPages.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LandingPage'
         - description: Landing page campaign ID.
           in: path
           name: campaignId
@@ -1846,10 +1745,11 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LandingPage'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1857,8 +1757,6 @@ paths:
             $ref: '#/definitions/LandingPage'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - landingPages
@@ -1866,20 +1764,20 @@ paths:
       description: Inserts a new landing page for the specified campaign.
       operationId: dfareporting.landingPages.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LandingPage'
         - description: Landing page campaign ID.
           in: path
           name: campaignId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LandingPage'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1887,8 +1785,6 @@ paths:
             $ref: '#/definitions/LandingPage'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - landingPages
@@ -1896,20 +1792,20 @@ paths:
       description: Updates an existing campaign landing page.
       operationId: dfareporting.landingPages.update
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LandingPage'
         - description: Landing page campaign ID.
           in: path
           name: campaignId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LandingPage'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1917,8 +1813,6 @@ paths:
             $ref: '#/definitions/LandingPage'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - landingPages
@@ -1927,11 +1821,6 @@ paths:
       description: Deletes an existing campaign landing page.
       operationId: dfareporting.landingPages.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Landing page campaign ID.
           in: path
           name: campaignId
@@ -1940,6 +1829,11 @@ paths:
         - description: Landing page ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1948,19 +1842,12 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - landingPages
     get:
       description: Gets one campaign landing page by ID.
       operationId: dfareporting.landingPages.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Landing page campaign ID.
           in: path
           name: campaignId
@@ -1969,6 +1856,11 @@ paths:
         - description: Landing page ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1978,8 +1870,6 @@ paths:
             $ref: '#/definitions/LandingPage'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - landingPages
@@ -1996,14 +1886,14 @@ paths:
       description: Gets one campaign by ID.
       operationId: dfareporting.campaigns.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Campaign ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2013,8 +1903,6 @@ paths:
             $ref: '#/definitions/Campaign'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
@@ -2154,8 +2042,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - changeLogs
     parameters:
@@ -2171,14 +2057,14 @@ paths:
       description: Gets one change log by ID.
       operationId: dfareporting.changeLogs.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Change log ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2188,8 +2074,6 @@ paths:
             $ref: '#/definitions/ChangeLog'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - changeLogs
@@ -2206,11 +2090,6 @@ paths:
       description: 'Retrieves a list of cities, possibly filtered.'
       operationId: dfareporting.cities.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only cities from these countries.
           in: query
@@ -2229,6 +2108,11 @@ paths:
           in: query
           name: namePrefix
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - collectionFormat: multi
           description: Select only cities from these regions.
           in: query
@@ -2243,8 +2127,6 @@ paths:
             $ref: '#/definitions/CitiesListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - cities
@@ -2274,8 +2156,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - connectionTypes
     parameters:
@@ -2291,14 +2171,14 @@ paths:
       description: Gets one connection type by ID.
       operationId: dfareporting.connectionTypes.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Connection type ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2308,8 +2188,6 @@ paths:
             $ref: '#/definitions/ConnectionType'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - connectionTypes
@@ -2377,8 +2255,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
     parameters:
@@ -2393,20 +2269,20 @@ paths:
       description: Updates an existing content category. This method supports patch semantics.
       operationId: dfareporting.contentCategories.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ContentCategory'
         - description: Content category ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ContentCategory'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2414,8 +2290,6 @@ paths:
             $ref: '#/definitions/ContentCategory'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
@@ -2423,15 +2297,15 @@ paths:
       description: Inserts a new content category.
       operationId: dfareporting.contentCategories.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ContentCategory'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ContentCategory'
       responses:
         '200':
           description: Successful response
@@ -2439,8 +2313,6 @@ paths:
             $ref: '#/definitions/ContentCategory'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
@@ -2448,15 +2320,15 @@ paths:
       description: Updates an existing content category.
       operationId: dfareporting.contentCategories.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ContentCategory'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ContentCategory'
       responses:
         '200':
           description: Successful response
@@ -2464,8 +2336,6 @@ paths:
             $ref: '#/definitions/ContentCategory'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
@@ -2474,14 +2344,14 @@ paths:
       description: Deletes an existing content category.
       operationId: dfareporting.contentCategories.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Content category ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2490,22 +2360,20 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
     get:
       description: Gets one content category by ID.
       operationId: dfareporting.contentCategories.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Content category ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2515,8 +2383,6 @@ paths:
             $ref: '#/definitions/ContentCategory'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
@@ -2541,15 +2407,15 @@ paths:
       description: Inserts conversions.
       operationId: dfareporting.conversions.batchinsert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionsBatchInsertRequest'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ConversionsBatchInsertRequest'
       responses:
         '200':
           description: Successful response
@@ -2557,8 +2423,6 @@ paths:
             $ref: '#/definitions/ConversionsBatchInsertResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ddmconversions'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ddmconversions'
       tags:
         - conversions
@@ -2580,8 +2444,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - countries
     parameters:
@@ -2597,14 +2459,14 @@ paths:
       description: Gets one country by ID.
       operationId: dfareporting.countries.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Country DART ID.
           in: path
           name: dartId
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2614,8 +2476,6 @@ paths:
             $ref: '#/definitions/Country'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - countries
@@ -2642,11 +2502,6 @@ paths:
       description: Inserts a new creative asset.
       operationId: dfareporting.creativeAssets.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Advertiser ID of this creative. This is a required field.
           in: path
           name: advertiserId
@@ -2656,6 +2511,11 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/CreativeAssetMetadata'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2663,8 +2523,6 @@ paths:
             $ref: '#/definitions/CreativeAssetMetadata'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeAssets
@@ -2731,8 +2589,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
     parameters:
@@ -2747,20 +2603,20 @@ paths:
       description: Updates an existing creative field. This method supports patch semantics.
       operationId: dfareporting.creativeFields.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeField'
         - description: Creative Field ID
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeField'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2768,8 +2624,6 @@ paths:
             $ref: '#/definitions/CreativeField'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
@@ -2777,15 +2631,15 @@ paths:
       description: Inserts a new creative field.
       operationId: dfareporting.creativeFields.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeField'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeField'
       responses:
         '200':
           description: Successful response
@@ -2793,8 +2647,6 @@ paths:
             $ref: '#/definitions/CreativeField'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
@@ -2802,15 +2654,15 @@ paths:
       description: Updates an existing creative field.
       operationId: dfareporting.creativeFields.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeField'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeField'
       responses:
         '200':
           description: Successful response
@@ -2818,8 +2670,6 @@ paths:
             $ref: '#/definitions/CreativeField'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
@@ -2884,8 +2734,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
     parameters:
@@ -2900,11 +2748,10 @@ paths:
       description: Updates an existing creative field value. This method supports patch semantics.
       operationId: dfareporting.creativeFieldValues.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeFieldValue'
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
@@ -2915,10 +2762,11 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeFieldValue'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2926,8 +2774,6 @@ paths:
             $ref: '#/definitions/CreativeFieldValue'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
@@ -2935,20 +2781,20 @@ paths:
       description: Inserts a new creative field value.
       operationId: dfareporting.creativeFieldValues.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeFieldValue'
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeFieldValue'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2956,8 +2802,6 @@ paths:
             $ref: '#/definitions/CreativeFieldValue'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
@@ -2965,20 +2809,20 @@ paths:
       description: Updates an existing creative field value.
       operationId: dfareporting.creativeFieldValues.update
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeFieldValue'
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeFieldValue'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2986,8 +2830,6 @@ paths:
             $ref: '#/definitions/CreativeFieldValue'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
@@ -2996,11 +2838,6 @@ paths:
       description: Deletes an existing creative field value.
       operationId: dfareporting.creativeFieldValues.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
@@ -3009,6 +2846,11 @@ paths:
         - description: Creative Field Value ID
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3017,19 +2859,12 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
     get:
       description: Gets one creative field value by ID.
       operationId: dfareporting.creativeFieldValues.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
@@ -3038,6 +2873,11 @@ paths:
         - description: Creative Field Value ID
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3047,8 +2887,6 @@ paths:
             $ref: '#/definitions/CreativeFieldValue'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
@@ -3065,14 +2903,14 @@ paths:
       description: Deletes an existing creative field.
       operationId: dfareporting.creativeFields.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative Field ID
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3081,22 +2919,20 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
     get:
       description: Gets one creative field by ID.
       operationId: dfareporting.creativeFields.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative Field ID
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3106,8 +2942,6 @@ paths:
             $ref: '#/definitions/CreativeField'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
@@ -3188,8 +3022,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
     parameters:
@@ -3204,20 +3036,20 @@ paths:
       description: Updates an existing creative group. This method supports patch semantics.
       operationId: dfareporting.creativeGroups.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeGroup'
         - description: Creative group ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeGroup'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3225,8 +3057,6 @@ paths:
             $ref: '#/definitions/CreativeGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
@@ -3234,15 +3064,15 @@ paths:
       description: Inserts a new creative group.
       operationId: dfareporting.creativeGroups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeGroup'
       responses:
         '200':
           description: Successful response
@@ -3250,8 +3080,6 @@ paths:
             $ref: '#/definitions/CreativeGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
@@ -3259,15 +3087,15 @@ paths:
       description: Updates an existing creative group.
       operationId: dfareporting.creativeGroups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeGroup'
       responses:
         '200':
           description: Successful response
@@ -3275,8 +3103,6 @@ paths:
             $ref: '#/definitions/CreativeGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
@@ -3285,14 +3111,14 @@ paths:
       description: Gets one creative group by ID.
       operationId: dfareporting.creativeGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3302,8 +3128,6 @@ paths:
             $ref: '#/definitions/CreativeGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
@@ -3451,8 +3275,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
     parameters:
@@ -3467,20 +3289,20 @@ paths:
       description: Updates an existing creative. This method supports patch semantics.
       operationId: dfareporting.creatives.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
         - description: Creative ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3488,8 +3310,6 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
@@ -3497,15 +3317,15 @@ paths:
       description: Inserts a new creative.
       operationId: dfareporting.creatives.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
       responses:
         '200':
           description: Successful response
@@ -3513,8 +3333,6 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
@@ -3522,15 +3340,15 @@ paths:
       description: Updates an existing creative.
       operationId: dfareporting.creatives.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
       responses:
         '200':
           description: Successful response
@@ -3538,8 +3356,6 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
@@ -3548,14 +3364,14 @@ paths:
       description: Gets one creative by ID.
       operationId: dfareporting.creatives.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3565,8 +3381,6 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
@@ -3618,8 +3432,6 @@ paths:
             $ref: '#/definitions/DimensionValueList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - dimensionValues
@@ -3686,8 +3498,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySiteContacts
     parameters:
@@ -3703,14 +3513,14 @@ paths:
       description: Gets one directory site contact by ID.
       operationId: dfareporting.directorySiteContacts.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Directory site contact ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3720,8 +3530,6 @@ paths:
             $ref: '#/definitions/DirectorySiteContact'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySiteContacts
@@ -3817,8 +3625,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
     parameters:
@@ -3833,15 +3639,15 @@ paths:
       description: Inserts a new directory site.
       operationId: dfareporting.directorySites.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DirectorySite'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DirectorySite'
       responses:
         '200':
           description: Successful response
@@ -3849,8 +3655,6 @@ paths:
             $ref: '#/definitions/DirectorySite'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
@@ -3859,14 +3663,14 @@ paths:
       description: Gets one directory site by ID.
       operationId: dfareporting.directorySites.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Directory site ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3876,8 +3680,6 @@ paths:
             $ref: '#/definitions/DirectorySite'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
@@ -3894,11 +3696,6 @@ paths:
       description: Retrieves a list of dynamic targeting keys.
       operationId: dfareporting.dynamicTargetingKeys.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only dynamic targeting keys whose object has this advertiser ID.
           in: query
           name: advertiserId
@@ -3923,6 +3720,11 @@ paths:
           in: query
           name: objectType
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3930,8 +3732,6 @@ paths:
             $ref: '#/definitions/DynamicTargetingKeysListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - dynamicTargetingKeys
@@ -3947,15 +3747,15 @@ paths:
       description: 'Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser''s ads, creatives, or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative, or placement.'
       operationId: dfareporting.dynamicTargetingKeys.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DynamicTargetingKey'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DynamicTargetingKey'
       responses:
         '200':
           description: Successful response
@@ -3964,8 +3764,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - dynamicTargetingKeys
   '/userprofiles/{profileId}/dynamicTargetingKeys/{objectId}':
@@ -3973,19 +3771,14 @@ paths:
       description: Deletes an existing dynamic targeting key.
       operationId: dfareporting.dynamicTargetingKeys.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
+        - description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+          in: query
+          name: name
           required: true
           type: string
         - description: ID of the object of this dynamic targeting key. This is a required field.
           in: path
           name: objectId
-          required: true
-          type: string
-        - description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
-          in: query
-          name: name
           required: true
           type: string
         - description: Type of the object of this dynamic targeting key. This is a required field.
@@ -3998,13 +3791,16 @@ paths:
           name: objectType
           required: true
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - dynamicTargetingKeys
@@ -4092,8 +3888,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
     parameters:
@@ -4108,20 +3902,20 @@ paths:
       description: Updates an existing event tag. This method supports patch semantics.
       operationId: dfareporting.eventTags.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EventTag'
         - description: Event tag ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EventTag'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4129,8 +3923,6 @@ paths:
             $ref: '#/definitions/EventTag'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
@@ -4138,15 +3930,15 @@ paths:
       description: Inserts a new event tag.
       operationId: dfareporting.eventTags.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EventTag'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EventTag'
       responses:
         '200':
           description: Successful response
@@ -4154,8 +3946,6 @@ paths:
             $ref: '#/definitions/EventTag'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
@@ -4163,15 +3953,15 @@ paths:
       description: Updates an existing event tag.
       operationId: dfareporting.eventTags.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EventTag'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EventTag'
       responses:
         '200':
           description: Successful response
@@ -4179,8 +3969,6 @@ paths:
             $ref: '#/definitions/EventTag'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
@@ -4189,14 +3977,14 @@ paths:
       description: Deletes an existing event tag.
       operationId: dfareporting.eventTags.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Event tag ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4205,22 +3993,20 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
     get:
       description: Gets one event tag by ID.
       operationId: dfareporting.eventTags.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Event tag ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4230,8 +4016,6 @@ paths:
             $ref: '#/definitions/EventTag'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
@@ -4296,8 +4080,6 @@ paths:
             $ref: '#/definitions/FileList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - files
@@ -4399,8 +4181,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
     parameters:
@@ -4415,20 +4195,20 @@ paths:
       description: Updates an existing floodlight activity. This method supports patch semantics.
       operationId: dfareporting.floodlightActivities.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivity'
         - description: Floodlight activity ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivity'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4436,8 +4216,6 @@ paths:
             $ref: '#/definitions/FloodlightActivity'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
@@ -4445,15 +4223,15 @@ paths:
       description: Inserts a new floodlight activity.
       operationId: dfareporting.floodlightActivities.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivity'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivity'
       responses:
         '200':
           description: Successful response
@@ -4461,8 +4239,6 @@ paths:
             $ref: '#/definitions/FloodlightActivity'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
@@ -4470,15 +4246,15 @@ paths:
       description: Updates an existing floodlight activity.
       operationId: dfareporting.floodlightActivities.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivity'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivity'
       responses:
         '200':
           description: Successful response
@@ -4486,8 +4262,6 @@ paths:
             $ref: '#/definitions/FloodlightActivity'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
@@ -4504,14 +4278,14 @@ paths:
       description: Generates a tag for a floodlight activity.
       operationId: dfareporting.floodlightActivities.generatetag
       parameters:
+        - description: Floodlight activity ID for which we want to generate a tag.
+          in: query
+          name: floodlightActivityId
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
-          type: string
-        - description: Floodlight activity ID for which we want to generate a tag.
-          in: query
-          name: floodlightActivityId
           type: string
       responses:
         '200':
@@ -4521,8 +4295,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
   '/userprofiles/{profileId}/floodlightActivities/{id}':
@@ -4530,14 +4302,14 @@ paths:
       description: Deletes an existing floodlight activity.
       operationId: dfareporting.floodlightActivities.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Floodlight activity ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4546,22 +4318,20 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
     get:
       description: Gets one floodlight activity by ID.
       operationId: dfareporting.floodlightActivities.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Floodlight activity ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4571,8 +4341,6 @@ paths:
             $ref: '#/definitions/FloodlightActivity'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
@@ -4655,8 +4423,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
     parameters:
@@ -4671,20 +4437,20 @@ paths:
       description: Updates an existing floodlight activity group. This method supports patch semantics.
       operationId: dfareporting.floodlightActivityGroups.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivityGroup'
         - description: Floodlight activity Group ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivityGroup'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4692,8 +4458,6 @@ paths:
             $ref: '#/definitions/FloodlightActivityGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
@@ -4701,15 +4465,15 @@ paths:
       description: Inserts a new floodlight activity group.
       operationId: dfareporting.floodlightActivityGroups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivityGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivityGroup'
       responses:
         '200':
           description: Successful response
@@ -4717,8 +4481,6 @@ paths:
             $ref: '#/definitions/FloodlightActivityGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
@@ -4726,15 +4488,15 @@ paths:
       description: Updates an existing floodlight activity group.
       operationId: dfareporting.floodlightActivityGroups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivityGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivityGroup'
       responses:
         '200':
           description: Successful response
@@ -4742,8 +4504,6 @@ paths:
             $ref: '#/definitions/FloodlightActivityGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
@@ -4752,14 +4512,14 @@ paths:
       description: Gets one floodlight activity group by ID.
       operationId: dfareporting.floodlightActivityGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Floodlight activity Group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4769,8 +4529,6 @@ paths:
             $ref: '#/definitions/FloodlightActivityGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
@@ -4787,11 +4545,6 @@ paths:
       description: 'Retrieves a list of floodlight configurations, possibly filtered.'
       operationId: dfareporting.floodlightConfigurations.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Set of IDs of floodlight configurations to retrieve. Required field; otherwise an empty list will be returned.
           in: query
@@ -4799,6 +4552,11 @@ paths:
             type: string
           name: ids
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4806,8 +4564,6 @@ paths:
             $ref: '#/definitions/FloodlightConfigurationsListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
@@ -4823,20 +4579,20 @@ paths:
       description: Updates an existing floodlight configuration. This method supports patch semantics.
       operationId: dfareporting.floodlightConfigurations.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightConfiguration'
         - description: Floodlight configuration ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightConfiguration'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4844,8 +4600,6 @@ paths:
             $ref: '#/definitions/FloodlightConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
@@ -4853,15 +4607,15 @@ paths:
       description: Updates an existing floodlight configuration.
       operationId: dfareporting.floodlightConfigurations.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightConfiguration'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightConfiguration'
       responses:
         '200':
           description: Successful response
@@ -4869,8 +4623,6 @@ paths:
             $ref: '#/definitions/FloodlightConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
@@ -4879,14 +4631,14 @@ paths:
       description: Gets one floodlight configuration by ID.
       operationId: dfareporting.floodlightConfigurations.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Floodlight configuration ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4896,8 +4648,6 @@ paths:
             $ref: '#/definitions/FloodlightConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
@@ -4927,8 +4677,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - languages
     parameters:
@@ -4956,8 +4704,6 @@ paths:
             $ref: '#/definitions/MetrosListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - metros
@@ -4987,8 +4733,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - mobileCarriers
     parameters:
@@ -5004,14 +4748,14 @@ paths:
       description: Gets one mobile carrier by ID.
       operationId: dfareporting.mobileCarriers.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Mobile carrier ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5021,8 +4765,6 @@ paths:
             $ref: '#/definitions/MobileCarrier'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - mobileCarriers
@@ -5052,8 +4794,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - operatingSystemVersions
     parameters:
@@ -5069,14 +4809,14 @@ paths:
       description: Gets one operating system version by ID.
       operationId: dfareporting.operatingSystemVersions.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Operating system version ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5086,8 +4826,6 @@ paths:
             $ref: '#/definitions/OperatingSystemVersion'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - operatingSystemVersions
@@ -5117,8 +4855,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - operatingSystems
     parameters:
@@ -5134,14 +4870,14 @@ paths:
       description: Gets one operating system by DART ID.
       operationId: dfareporting.operatingSystems.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Operating system DART ID.
           in: path
           name: dartId
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5151,8 +4887,6 @@ paths:
             $ref: '#/definitions/OperatingSystem'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - operatingSystems
@@ -5303,8 +5037,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
     parameters:
@@ -5319,20 +5051,20 @@ paths:
       description: Updates an existing placement group. This method supports patch semantics.
       operationId: dfareporting.placementGroups.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementGroup'
         - description: Placement group ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementGroup'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5340,8 +5072,6 @@ paths:
             $ref: '#/definitions/PlacementGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
@@ -5349,15 +5079,15 @@ paths:
       description: Inserts a new placement group.
       operationId: dfareporting.placementGroups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementGroup'
       responses:
         '200':
           description: Successful response
@@ -5365,8 +5095,6 @@ paths:
             $ref: '#/definitions/PlacementGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
@@ -5374,15 +5102,15 @@ paths:
       description: Updates an existing placement group.
       operationId: dfareporting.placementGroups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementGroup'
       responses:
         '200':
           description: Successful response
@@ -5390,8 +5118,6 @@ paths:
             $ref: '#/definitions/PlacementGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
@@ -5400,14 +5126,14 @@ paths:
       description: Gets one placement group by ID.
       operationId: dfareporting.placementGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Placement group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5417,8 +5143,6 @@ paths:
             $ref: '#/definitions/PlacementGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
@@ -5486,8 +5210,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
     parameters:
@@ -5502,20 +5224,20 @@ paths:
       description: Updates an existing placement strategy. This method supports patch semantics.
       operationId: dfareporting.placementStrategies.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementStrategy'
         - description: Placement strategy ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementStrategy'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5523,8 +5245,6 @@ paths:
             $ref: '#/definitions/PlacementStrategy'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
@@ -5532,15 +5252,15 @@ paths:
       description: Inserts a new placement strategy.
       operationId: dfareporting.placementStrategies.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementStrategy'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementStrategy'
       responses:
         '200':
           description: Successful response
@@ -5548,8 +5268,6 @@ paths:
             $ref: '#/definitions/PlacementStrategy'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
@@ -5557,15 +5275,15 @@ paths:
       description: Updates an existing placement strategy.
       operationId: dfareporting.placementStrategies.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementStrategy'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementStrategy'
       responses:
         '200':
           description: Successful response
@@ -5573,8 +5291,6 @@ paths:
             $ref: '#/definitions/PlacementStrategy'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
@@ -5583,14 +5299,14 @@ paths:
       description: Deletes an existing placement strategy.
       operationId: dfareporting.placementStrategies.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Placement strategy ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5599,22 +5315,20 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
     get:
       description: Gets one placement strategy by ID.
       operationId: dfareporting.placementStrategies.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Placement strategy ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5624,8 +5338,6 @@ paths:
             $ref: '#/definitions/PlacementStrategy'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
@@ -5803,8 +5515,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
     parameters:
@@ -5819,20 +5529,20 @@ paths:
       description: Updates an existing placement. This method supports patch semantics.
       operationId: dfareporting.placements.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Placement'
         - description: Placement ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Placement'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5840,8 +5550,6 @@ paths:
             $ref: '#/definitions/Placement'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
@@ -5849,15 +5557,15 @@ paths:
       description: Inserts a new placement.
       operationId: dfareporting.placements.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Placement'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Placement'
       responses:
         '200':
           description: Successful response
@@ -5865,8 +5573,6 @@ paths:
             $ref: '#/definitions/Placement'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
@@ -5874,15 +5580,15 @@ paths:
       description: Updates an existing placement.
       operationId: dfareporting.placements.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Placement'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Placement'
       responses:
         '200':
           description: Successful response
@@ -5890,8 +5596,6 @@ paths:
             $ref: '#/definitions/Placement'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
@@ -5925,7 +5629,10 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: Tag formats to generate for these placements.
+          description: |-
+            Tag formats to generate for these placements.
+
+            Note: PLACEMENT_TAG_STANDARD can only be generated for 1x1 placements.
           in: query
           items:
             enum:
@@ -5959,8 +5666,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
   '/userprofiles/{profileId}/placements/{id}':
@@ -5968,14 +5673,14 @@ paths:
       description: Gets one placement by ID.
       operationId: dfareporting.placements.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Placement ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5985,8 +5690,6 @@ paths:
             $ref: '#/definitions/Placement'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
@@ -6016,8 +5719,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - platformTypes
     parameters:
@@ -6033,14 +5734,14 @@ paths:
       description: Gets one platform type by ID.
       operationId: dfareporting.platformTypes.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Platform type ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -6050,8 +5751,6 @@ paths:
             $ref: '#/definitions/PlatformType'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - platformTypes
@@ -6081,8 +5780,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - postalCodes
     parameters:
@@ -6098,14 +5795,14 @@ paths:
       description: Gets one postal code by ID.
       operationId: dfareporting.postalCodes.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Postal code ID.
           in: path
           name: code
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -6115,8 +5812,6 @@ paths:
             $ref: '#/definitions/PostalCode'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - postalCodes
@@ -6191,8 +5886,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - projects
     parameters:
@@ -6208,14 +5901,14 @@ paths:
       description: Gets one project by ID.
       operationId: dfareporting.projects.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Project ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -6225,8 +5918,6 @@ paths:
             $ref: '#/definitions/Project'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - projects
@@ -6320,8 +6011,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - inventoryItems
     parameters:
@@ -6337,6 +6026,11 @@ paths:
       description: Gets one inventory item by ID.
       operationId: dfareporting.inventoryItems.get
       parameters:
+        - description: Inventory item ID.
+          in: path
+          name: id
+          required: true
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6347,11 +6041,6 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: Inventory item ID.
-          in: path
-          name: id
-          required: true
-          type: string
       responses:
         '200':
           description: Successful response
@@ -6359,8 +6048,6 @@ paths:
             $ref: '#/definitions/InventoryItem'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - inventoryItems
@@ -6451,8 +6138,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - orderDocuments
     parameters:
@@ -6468,6 +6153,11 @@ paths:
       description: Gets one order document by ID.
       operationId: dfareporting.orderDocuments.get
       parameters:
+        - description: Order document ID.
+          in: path
+          name: id
+          required: true
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6478,11 +6168,6 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: Order document ID.
-          in: path
-          name: id
-          required: true
-          type: string
       responses:
         '200':
           description: Successful response
@@ -6490,8 +6175,6 @@ paths:
             $ref: '#/definitions/OrderDocument'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - orderDocuments
@@ -6571,8 +6254,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - orders
     parameters:
@@ -6588,6 +6269,11 @@ paths:
       description: Gets one order by ID.
       operationId: dfareporting.orders.get
       parameters:
+        - description: Order ID.
+          in: path
+          name: id
+          required: true
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6598,11 +6284,6 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: Order ID.
-          in: path
-          name: id
-          required: true
-          type: string
       responses:
         '200':
           description: Successful response
@@ -6610,8 +6291,6 @@ paths:
             $ref: '#/definitions/Order'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - orders
@@ -6641,8 +6320,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - regions
     parameters:
@@ -6666,6 +6343,10 @@ paths:
       description: Updates an existing remarketing list share. This method supports patch semantics.
       operationId: dfareporting.remarketingListShares.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6676,10 +6357,6 @@ paths:
           name: remarketingListId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingListShare'
       responses:
         '200':
           description: Successful response
@@ -6687,8 +6364,6 @@ paths:
             $ref: '#/definitions/RemarketingListShare'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingListShares
@@ -6696,15 +6371,15 @@ paths:
       description: Updates an existing remarketing list share.
       operationId: dfareporting.remarketingListShares.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingListShare'
       responses:
         '200':
           description: Successful response
@@ -6712,8 +6387,6 @@ paths:
             $ref: '#/definitions/RemarketingListShare'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingListShares
@@ -6739,8 +6412,6 @@ paths:
             $ref: '#/definitions/RemarketingListShare'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingListShares
@@ -6814,8 +6485,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
     parameters:
@@ -6830,20 +6499,20 @@ paths:
       description: Updates an existing remarketing list. This method supports patch semantics.
       operationId: dfareporting.remarketingLists.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
         - description: Remarketing list ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingList'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -6851,8 +6520,6 @@ paths:
             $ref: '#/definitions/RemarketingList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
@@ -6860,15 +6527,15 @@ paths:
       description: Inserts a new remarketing list.
       operationId: dfareporting.remarketingLists.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingList'
       responses:
         '200':
           description: Successful response
@@ -6876,8 +6543,6 @@ paths:
             $ref: '#/definitions/RemarketingList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
@@ -6885,15 +6550,15 @@ paths:
       description: Updates an existing remarketing list.
       operationId: dfareporting.remarketingLists.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingList'
       responses:
         '200':
           description: Successful response
@@ -6901,8 +6566,6 @@ paths:
             $ref: '#/definitions/RemarketingList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
@@ -6911,14 +6574,14 @@ paths:
       description: Gets one remarketing list by ID.
       operationId: dfareporting.remarketingLists.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Remarketing list ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -6928,8 +6591,6 @@ paths:
             $ref: '#/definitions/RemarketingList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
@@ -6995,8 +6656,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
     parameters:
@@ -7011,15 +6670,15 @@ paths:
       description: Creates a report.
       operationId: dfareporting.reports.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Report'
         - description: The DFA user profile ID.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Report'
       responses:
         '200':
           description: Successful response
@@ -7027,8 +6686,6 @@ paths:
             $ref: '#/definitions/Report'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7045,15 +6702,15 @@ paths:
       description: 'Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.'
       operationId: dfareporting.reports.compatibleFields.query
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Report'
         - description: The DFA user profile ID.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Report'
       responses:
         '200':
           description: Successful response
@@ -7061,8 +6718,6 @@ paths:
             $ref: '#/definitions/CompatibleFields'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7086,8 +6741,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7113,8 +6766,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
     parameters:
@@ -7129,6 +6780,10 @@ paths:
       description: Updates a report. This method supports patch semantics.
       operationId: dfareporting.reports.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Report'
         - description: The DFA user profile ID.
           in: path
           name: profileId
@@ -7139,10 +6794,6 @@ paths:
           name: reportId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Report'
       responses:
         '200':
           description: Successful response
@@ -7150,8 +6801,6 @@ paths:
             $ref: '#/definitions/Report'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7159,6 +6808,10 @@ paths:
       description: Updates a report.
       operationId: dfareporting.reports.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Report'
         - description: The DFA user profile ID.
           in: path
           name: profileId
@@ -7169,10 +6822,6 @@ paths:
           name: reportId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Report'
       responses:
         '200':
           description: Successful response
@@ -7180,8 +6829,6 @@ paths:
             $ref: '#/definitions/Report'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7235,8 +6882,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
     parameters:
@@ -7252,6 +6897,11 @@ paths:
       description: Retrieves a report file. This method supports media download.
       operationId: dfareporting.reports.files.get
       parameters:
+        - description: The ID of the report file.
+          in: path
+          name: fileId
+          required: true
+          type: string
         - description: The DFA profile ID.
           in: path
           name: profileId
@@ -7262,11 +6912,6 @@ paths:
           name: reportId
           required: true
           type: string
-        - description: The ID of the report file.
-          in: path
-          name: fileId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful response
@@ -7274,8 +6919,6 @@ paths:
             $ref: '#/definitions/File'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7322,8 +6965,6 @@ paths:
             $ref: '#/definitions/File'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfareporting'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7425,8 +7066,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
     parameters:
@@ -7441,20 +7080,20 @@ paths:
       description: Updates an existing site. This method supports patch semantics.
       operationId: dfareporting.sites.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Site'
         - description: Site ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Site'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -7462,8 +7101,6 @@ paths:
             $ref: '#/definitions/Site'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
@@ -7471,15 +7108,15 @@ paths:
       description: Inserts a new site.
       operationId: dfareporting.sites.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Site'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Site'
       responses:
         '200':
           description: Successful response
@@ -7487,8 +7124,6 @@ paths:
             $ref: '#/definitions/Site'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
@@ -7496,15 +7131,15 @@ paths:
       description: Updates an existing site.
       operationId: dfareporting.sites.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Site'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Site'
       responses:
         '200':
           description: Successful response
@@ -7512,8 +7147,6 @@ paths:
             $ref: '#/definitions/Site'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
@@ -7522,14 +7155,14 @@ paths:
       description: Gets one site by ID.
       operationId: dfareporting.sites.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Site ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7539,8 +7172,6 @@ paths:
             $ref: '#/definitions/Site'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
@@ -7593,8 +7224,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sizes
     parameters:
@@ -7609,15 +7238,15 @@ paths:
       description: Inserts a new size.
       operationId: dfareporting.sizes.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Size'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Size'
       responses:
         '200':
           description: Successful response
@@ -7625,8 +7254,6 @@ paths:
             $ref: '#/definitions/Size'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sizes
@@ -7635,14 +7262,14 @@ paths:
       description: Gets one size by ID.
       operationId: dfareporting.sizes.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Size ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7652,8 +7279,6 @@ paths:
             $ref: '#/definitions/Size'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sizes
@@ -7721,8 +7346,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
     parameters:
@@ -7737,20 +7360,20 @@ paths:
       description: Updates an existing subaccount. This method supports patch semantics.
       operationId: dfareporting.subaccounts.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subaccount'
         - description: Subaccount ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subaccount'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -7758,8 +7381,6 @@ paths:
             $ref: '#/definitions/Subaccount'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
@@ -7767,15 +7388,15 @@ paths:
       description: Inserts a new subaccount.
       operationId: dfareporting.subaccounts.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subaccount'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subaccount'
       responses:
         '200':
           description: Successful response
@@ -7783,8 +7404,6 @@ paths:
             $ref: '#/definitions/Subaccount'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
@@ -7792,15 +7411,15 @@ paths:
       description: Updates an existing subaccount.
       operationId: dfareporting.subaccounts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subaccount'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subaccount'
       responses:
         '200':
           description: Successful response
@@ -7808,8 +7427,6 @@ paths:
             $ref: '#/definitions/Subaccount'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
@@ -7818,14 +7435,14 @@ paths:
       description: Gets one subaccount by ID.
       operationId: dfareporting.subaccounts.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Subaccount ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7835,8 +7452,6 @@ paths:
             $ref: '#/definitions/Subaccount'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
@@ -7906,8 +7521,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetableRemarketingLists
     parameters:
@@ -7923,14 +7536,14 @@ paths:
       description: Gets one remarketing list by ID.
       operationId: dfareporting.targetableRemarketingLists.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Remarketing list ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7940,8 +7553,6 @@ paths:
             $ref: '#/definitions/TargetableRemarketingList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetableRemarketingLists
@@ -8013,8 +7624,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
     parameters:
@@ -8029,20 +7638,20 @@ paths:
       description: Updates an existing targeting template. This method supports patch semantics.
       operationId: dfareporting.targetingTemplates.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
         - description: Targeting template ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TargetingTemplate'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -8050,8 +7659,6 @@ paths:
             $ref: '#/definitions/TargetingTemplate'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
@@ -8059,15 +7666,15 @@ paths:
       description: Inserts a new targeting template.
       operationId: dfareporting.targetingTemplates.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TargetingTemplate'
       responses:
         '200':
           description: Successful response
@@ -8075,8 +7682,6 @@ paths:
             $ref: '#/definitions/TargetingTemplate'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
@@ -8084,15 +7689,15 @@ paths:
       description: Updates an existing targeting template.
       operationId: dfareporting.targetingTemplates.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TargetingTemplate'
       responses:
         '200':
           description: Successful response
@@ -8100,8 +7705,6 @@ paths:
             $ref: '#/definitions/TargetingTemplate'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
@@ -8110,14 +7713,14 @@ paths:
       description: Gets one targeting template by ID.
       operationId: dfareporting.targetingTemplates.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Targeting template ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -8127,8 +7730,6 @@ paths:
             $ref: '#/definitions/TargetingTemplate'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
@@ -8158,8 +7759,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRolePermissionGroups
     parameters:
@@ -8175,14 +7774,14 @@ paths:
       description: Gets one user role permission group by ID.
       operationId: dfareporting.userRolePermissionGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User role permission group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -8192,8 +7791,6 @@ paths:
             $ref: '#/definitions/UserRolePermissionGroup'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRolePermissionGroups
@@ -8210,11 +7807,6 @@ paths:
       description: 'Gets a list of user role permissions, possibly filtered.'
       operationId: dfareporting.userRolePermissions.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only user role permissions with these IDs.
           in: query
@@ -8222,6 +7814,11 @@ paths:
             type: string
           name: ids
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -8229,8 +7826,6 @@ paths:
             $ref: '#/definitions/UserRolePermissionsListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRolePermissions
@@ -8247,14 +7842,14 @@ paths:
       description: Gets one user role permission by ID.
       operationId: dfareporting.userRolePermissions.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User role permission ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -8264,8 +7859,6 @@ paths:
             $ref: '#/definitions/UserRolePermission'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRolePermissions
@@ -8341,8 +7934,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
     parameters:
@@ -8357,20 +7948,20 @@ paths:
       description: Updates an existing user role. This method supports patch semantics.
       operationId: dfareporting.userRoles.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserRole'
         - description: User role ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserRole'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -8378,8 +7969,6 @@ paths:
             $ref: '#/definitions/UserRole'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
@@ -8387,15 +7976,15 @@ paths:
       description: Inserts a new user role.
       operationId: dfareporting.userRoles.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserRole'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserRole'
       responses:
         '200':
           description: Successful response
@@ -8403,8 +7992,6 @@ paths:
             $ref: '#/definitions/UserRole'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
@@ -8412,15 +7999,15 @@ paths:
       description: Updates an existing user role.
       operationId: dfareporting.userRoles.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserRole'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserRole'
       responses:
         '200':
           description: Successful response
@@ -8428,8 +8015,6 @@ paths:
             $ref: '#/definitions/UserRole'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
@@ -8438,14 +8023,14 @@ paths:
       description: Deletes an existing user role.
       operationId: dfareporting.userRoles.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User role ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -8454,22 +8039,20 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
     get:
       description: Gets one user role by ID.
       operationId: dfareporting.userRoles.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User role ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -8479,8 +8062,6 @@ paths:
             $ref: '#/definitions/UserRole'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
@@ -8510,8 +8091,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - videoFormats
     parameters:
@@ -8527,16 +8106,16 @@ paths:
       description: Gets one video format by ID.
       operationId: dfareporting.videoFormats.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Video format ID.
           in: path
           name: id
           required: true
           type: integer
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -8544,8 +8123,6 @@ paths:
             $ref: '#/definitions/VideoFormat'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - videoFormats
@@ -8652,7 +8229,8 @@ definitions:
           - "46" for AED 
           - "47" for BGN 
           - "48" for HRK 
-          - "49" for MXN
+          - "49" for MXN 
+          - "50" for NGN
         format: int64
         type: string
       defaultCreativeSizeId:
@@ -9981,7 +9559,7 @@ definitions:
         description: 'The 6-character HTML color code, beginning with #, for the background of the window area where the Flash file is displayed. Default is white. Applicable to the following creative types: FLASH_INPAGE.'
         type: string
       backupImageClickThroughUrl:
-        description: 'Click-through URL for backup image. Applicable to the following creative types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
+        description: 'Click-through URL for backup image. Applicable to the following creative types: FLASH_INPAGE, and HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: string
       backupImageFeatures:
         description: 'List of feature dependencies that will cause a backup image to be served if the browser that serves the ad does not support them. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative asset correctly. This field is initially auto-generated to contain all features detected by DCM for all the assets of this creative and can then be modified by the client. To reset this field, copy over all the creativeAssets'' detected features. Applicable to the following creative types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
@@ -10132,7 +9710,7 @@ definitions:
         $ref: '#/definitions/FsCommand'
         description: 'OpenWindow FSCommand of this creative. This lets the SWF file communicate with either Flash Player or the program hosting Flash Player, such as a web browser. This is only triggered if allowScriptAccess field is true. Applicable to the following creative types: FLASH_INPAGE.'
       htmlCode:
-        description: 'HTML code for the creative. This is a required field when applicable. This field is ignored if htmlCodeLocked is false. Applicable to the following creative types: all CUSTOM, FLASH_INPAGE, and HTML5_BANNER, and all RICH_MEDIA.'
+        description: 'HTML code for the creative. This is a required field when applicable. This field is ignored if htmlCodeLocked is true. Applicable to the following creative types: all CUSTOM, FLASH_INPAGE, and HTML5_BANNER, and all RICH_MEDIA.'
         type: string
       htmlCodeLocked:
         description: 'Whether HTML code is DCM-generated or manually entered. Set to true to ignore changes to htmlCode. Applicable to the following creative types: FLASH_INPAGE and HTML5_BANNER.'
@@ -11538,7 +11116,8 @@ definitions:
           - "46" for AED 
           - "47" for BGN 
           - "48" for HRK 
-          - "49" for MXN
+          - "49" for MXN 
+          - "50" for NGN
         format: int64
         type: string
       description:
@@ -11698,7 +11277,7 @@ definitions:
         description: Whether this directory site has disabled generation of Verification ins tags.
         type: boolean
       videoActiveViewOptOut:
-        description: Whether this directory site has disabled active view for in-stream video creatives.
+        description: Whether this directory site has disabled active view for in-stream video creatives. This is a read-only field.
         type: boolean
     type: object
   DirectorySitesListResponse:
@@ -11980,7 +11559,7 @@ definitions:
     description: Floodlight Activity GenerateTag Response
     properties:
       floodlightActivityTag:
-        description: Generated tag for this floodlight activity.
+        description: 'Generated tag for this Floodlight activity. For global site tags, this is the event snippet.'
         type: string
       kind:
         default: 'dfareporting#floodlightActivitiesGenerateTagResponse'
@@ -12114,32 +11693,12 @@ definitions:
           - XHTML
         type: string
       tagString:
-        description: 'Value of the cat= paramter in the floodlight tag, which the ad servers use to identify the activity. This is optional: if empty, a new tag string will be generated for you. This string must be 1 to 8 characters long, with valid characters being [a-z][A-Z][0-9][-][ _ ]. This tag string must also be unique among activities of the same activity group. This field is read-only after insertion.'
+        description: 'Value of the cat= parameter in the floodlight tag, which the ad servers use to identify the activity. This is optional: if empty, a new tag string will be generated for you. This string must be 1 to 8 characters long, with valid characters being [a-z][A-Z][0-9][-][ _ ]. This tag string must also be unique among activities of the same activity group. This field is read-only after insertion.'
         type: string
       userDefinedVariableTypes:
         description: |-
-          List of the user-defined variables used by this conversion tag. These map to the "u[1-20]=" in the tags. Each of these can have a user defined type.
-          Acceptable values are:
-          - "U1"
-          - "U2"
-          - "U3"
-          - "U4"
-          - "U5"
-          - "U6"
-          - "U7"
-          - "U8"
-          - "U9"
-          - "U10"
-          - "U11"
-          - "U12"
-          - "U13"
-          - "U14"
-          - "U15"
-          - "U16"
-          - "U17"
-          - "U18"
-          - "U19"
-          - "U20"
+          List of the user-defined variables used by this conversion tag. These map to the "u[1-100]=" in the tags. Each of these can have a user defined type.
+          Acceptable values are U1 to U100, inclusive.
         items:
           enum:
             - U1
@@ -13452,7 +13011,10 @@ definitions:
         $ref: '#/definitions/VideoSettings'
         description: A collection of settings which affect video creatives served through this placement. Applicable to placements with IN_STREAM_VIDEO compatibility.
       vpaidAdapterChoice:
-        description: VPAID adapter setting for this placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to this placement.
+        description: |-
+          VPAID adapter setting for this placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to this placement.
+
+          Note: Flash is no longer supported. This field now defaults to HTML5 when the following values are provided: FLASH, BOTH.
         enum:
           - BOTH
           - DEFAULT
@@ -14737,7 +14299,10 @@ definitions:
         description: 'Whether Verification and ActiveView for in-stream video creatives are disabled by default for new placements created under this site. This value will be used to populate the placement.videoActiveViewOptOut field, when no value is specified for the new placement.'
         type: boolean
       vpaidAdapterChoiceTemplate:
-        description: 'Default VPAID adapter setting for new placements created under this site. This value will be used to populate the placements.vpaidAdapterChoice field, when no value is specified for the new placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to the placement. The publisher''s specifications will typically determine this setting. For VPAID creatives, the adapter format will match the VPAID format (HTML5 VPAID creatives use the HTML5 adapter, and Flash VPAID creatives use the Flash adapter).'
+        description: |-
+          Default VPAID adapter setting for new placements created under this site. This value will be used to populate the placements.vpaidAdapterChoice field, when no value is specified for the new placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to the placement. The publisher's specifications will typically determine this setting. For VPAID creatives, the adapter format will match the VPAID format (HTML5 VPAID creatives use the HTML5 adapter).
+
+          Note: Flash is no longer supported. This field now defaults to HTML5 when the following values are provided: FLASH, BOTH.
         enum:
           - BOTH
           - DEFAULT

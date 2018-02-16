@@ -1,0 +1,516 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Provides read functionality for Azure SQL Database Backups
+  title: Azure SQL Database Backup
+  version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/backups.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: sql-backups
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for the request.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  DatabaseExpandParameter:
+    description: 'A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.'
+    in: query
+    name: $expand
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupParameter:
+    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ServerNameParameter:
+    description: The name of the server.
+    in: path
+    name: serverName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The subscription ID that identifies an Azure subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints':
+    get:
+      description: Gets a list of database restore points.
+      operationId: RestorePoints_ListByDatabase
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the database to get available restore points.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestorePointListResult'
+      tags:
+        - DatabaseBackup
+      x-ms-examples:
+        Get a data warehouse's restore points:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: '3481'
+            resourceGroupName: sqlcrudtest-6730
+            serverName: sqlcrudtest-9007
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6730/providers/Microsoft.Sql/servers/9007/databases/3481/restorepoints/131448209670000000
+                    location: West US
+                    name: '131448209670000000'
+                    properties:
+                      restorePointCreationDate: '2017-07-18T03:09:27Z'
+                      restorePointType: DISCRETE
+                    type: Microsoft.Sql/servers/databases/restorePoints
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6730/providers/Microsoft.Sql/servers/9007/databases/3481/restorepoints/131448353660000000
+                    location: West US
+                    name: '131448353660000000'
+                    properties:
+                      restorePointCreationDate: '2017-07-18T07:09:26Z'
+                      restorePointType: DISCRETE
+                    type: Microsoft.Sql/servers/databases/restorePoints
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6730/providers/Microsoft.Sql/servers/9007/databases/3481/restorepoints/131448497660000000
+                    location: West US
+                    name: '131448497660000000'
+                    properties:
+                      restorePointCreationDate: '2017-07-18T11:09:26Z'
+                      restorePointType: DISCRETE
+                    type: Microsoft.Sql/servers/databases/restorePoints
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6730/providers/Microsoft.Sql/servers/9007/databases/3481/restorepoints/131448641650000000
+                    location: West US
+                    name: '131448641650000000'
+                    properties:
+                      restorePointCreationDate: '2017-07-18T15:09:25Z'
+                      restorePointType: DISCRETE
+                    type: Microsoft.Sql/servers/databases/restorePoints
+        Get a database's restore points:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: '3481'
+            resourceGroupName: sqlcrudtest-6730
+            serverName: sqlcrudtest-9007
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6730/providers/Microsoft.Sql/servers/sqlcrudtest-9007/databases/3481/restorepoints/ContinuousRestorePoint
+                    location: West US
+                    name: ContinuousRestorePoint
+                    properties:
+                      earliestRestoreDate: '2017-06-12T00:00:00Z'
+                      restorePointType: CONTINUOUS
+                    type: Microsoft.Sql/servers/databases/restorePoints
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases':
+    get:
+      description: Gets a list of recoverable databases
+      operationId: RecoverableDatabases_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecoverableDatabaseListResult'
+      tags:
+        - RecoverableDatabases
+      x-ms-examples:
+        Get list of restorable dropped databases:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: recoverabledatabasetest-1234
+            serverName: recoverabledatabasetest-7177
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-1234/providers/Microsoft.Sql/servers/recoverabledatabasetest-7177/recoverabledatabases/recoverabledatabasetest-1235
+                    name: recoverabledatabasetest-1235
+                    properties:
+                      edition: Standard
+                      lastAvailableBackupDate: '2017-05-26T01:06:29.78Z'
+                      serviceLevelObjective: S0
+                    type: Microsoft.Sql/servers/recoverabledatabases
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-1234/providers/Microsoft.Sql/servers/recoverabledatabasetest-7177/recoverabledatabases/recoverabledatabasetest-9231
+                    name: recoverabledatabasetest-9231
+                    properties:
+                      edition: Premium
+                      lastAvailableBackupDate: '2017-05-26T03:20:31.78Z'
+                      serviceLevelObjective: P1
+                    type: Microsoft.Sql/servers/recoverabledatabases
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-1234/providers/Microsoft.Sql/servers/recoverabledatabasetest-7177/recoverabledatabases/recoverabledatabasetest-0342
+                    name: recoverabledatabasetest-0342
+                    properties:
+                      edition: Basic
+                      lastAvailableBackupDate: '2017-05-24T02:06:18.78Z'
+                      serviceLevelObjective: Basic
+                    type: Microsoft.Sql/servers/recoverabledatabases
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}':
+    get:
+      description: 'Gets a recoverable database, which is a resource representing a database''s geo backup'
+      operationId: RecoverableDatabases_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the database
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecoverableDatabase'
+      tags:
+        - RecoverableDatabases
+      x-ms-examples:
+        Get a recoverable database:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: recoverabledatabasetest-9187
+            resourceGroupName: recoverabledatabasetest-6852
+            serverName: recoverabledatabasetest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-6852/providers/Microsoft.Sql/servers/recoverabledatabasetest-2080/recoverabledatabases/recoverabledatabasetest-9187
+                name: recoverabledatabasetest-9187
+                properties:
+                  edition: Basic
+                  lastAvailableBackupDate: '2017-05-26T01:06:29.78Z'
+                  serviceLevelObjective: Basic
+                type: Microsoft.Sql/servers/recoverabledatabases
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases':
+    get:
+      description: Gets a list of deleted databases that can be restored
+      operationId: RestorableDroppedDatabases_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestorableDroppedDatabaseListResult'
+      tags:
+        - RestorableDroppedDatabases
+      x-ms-examples:
+        Get list of restorable dropped databases:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: restorabledroppeddatabasetest-1349
+            serverName: restorabledroppeddatabasetest-1840
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/restorabledroppeddatabasetest-1349/providers/Microsoft.Sql/servers/restorabledroppeddatabasetest-1840/restorableDroppedDatabases/restorabledroppeddatabasetest-1345,131403269876900000'
+                    location: Japan East
+                    name: 'restorabledroppeddatabasetest-1345,131403269876900000'
+                    properties:
+                      creationDate: '2017-02-10T00:56:19.2Z'
+                      databaseName: restorabledroppeddatabasetest-1345
+                      deletionDate: '2017-05-27T02:49:47.69Z'
+                      earliestRestoreDate: '2017-05-20T02:49:47.69Z'
+                      edition: Basic
+                      maxSizeBytes: '2147483648'
+                      serviceLevelObjective: Basic
+                    type: Microsoft.Sql/servers/restorableDroppedDatabases
+                  - id: '/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/restorabledroppeddatabasetest-1349/providers/Microsoft.Sql/servers/restorabledroppeddatabasetest-1840/restorableDroppedDatabases/restorabledroppeddatabasetest-2764,131403249684030000'
+                    location: Japan East
+                    name: 'restorabledroppeddatabasetest-2764,131403249684030000'
+                    properties:
+                      creationDate: '2016-05-10T00:56:19.2Z'
+                      databaseName: restorabledroppeddatabasetest-2764
+                      deletionDate: '2017-05-27T02:16:08.403Z'
+                      earliestRestoreDate: '2017-04-21T02:49:47.69Z'
+                      edition: Standard
+                      maxSizeBytes: '268435456000'
+                      serviceLevelObjective: S0
+                    type: Microsoft.Sql/servers/restorableDroppedDatabases
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppededDatabaseId}':
+    get:
+      description: Gets a deleted database that can be restored
+      operationId: RestorableDroppedDatabases_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: 'The id of the deleted database in the form of databaseName,deletionTimeInFileTimeFormat'
+          in: path
+          name: restorableDroppededDatabaseId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestorableDroppedDatabase'
+      tags:
+        - RestorableDroppedDatabases
+      x-ms-examples:
+        Get a restorable dropped database:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: restorabledroppeddatabasetest-1257
+            restorableDroppededDatabaseId: 'restorabledroppeddatabasetest-7654,131403269876900000'
+            serverName: restorabledroppeddatabasetest-2389
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/restorabledroppeddatabasetest-1257/providers/Microsoft.Sql/servers/restorabledroppeddatabasetest-2389/restorableDroppedDatabases/restorabledroppeddatabasetest-7654,131403269876900000'
+                location: Japan East
+                name: 'restorabledroppeddatabasetest-7654,131403269876900000'
+                properties:
+                  creationDate: '2017-02-10T00:56:19.2Z'
+                  databaseName: restorabledroppeddatabasetest-7654
+                  deletionDate: '2017-05-27T02:49:47.69Z'
+                  earliestRestoreDate: '2017-05-20T02:49:47.69Z'
+                  edition: Basic
+                  maxSizeBytes: '2147483648'
+                  serviceLevelObjective: Basic
+                type: Microsoft.Sql/servers/restorableDroppedDatabases
+definitions:
+  ProxyResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM proxy resource.
+  RecoverableDatabase:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: A recoverable database
+    properties:
+      properties:
+        $ref: '#/definitions/RecoverableDatabaseProperties'
+        description: The properties of a recoverable database
+        x-ms-client-flatten: true
+  RecoverableDatabaseListResult:
+    description: The response to a list recoverable databases request
+    properties:
+      value:
+        description: A list of recoverable databases
+        items:
+          $ref: '#/definitions/RecoverableDatabase'
+        type: array
+    required:
+      - value
+  RecoverableDatabaseProperties:
+    description: The properties of a recoverable database
+    properties:
+      edition:
+        description: The edition of the database
+        readOnly: true
+        type: string
+      elasticPoolName:
+        description: The elastic pool name of the database
+        readOnly: true
+        type: string
+      lastAvailableBackupDate:
+        description: The last available backup date of the database (ISO8601 format)
+        format: date-time
+        readOnly: true
+        type: string
+      serviceLevelObjective:
+        description: The service level objective name of the database
+        readOnly: true
+        type: string
+  Resource:
+    description: ARM resource.
+    properties:
+      id:
+        description: Resource ID.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  RestorableDroppedDatabase:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: A restorable dropped database
+    properties:
+      location:
+        description: The geo-location where the resource lives
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/RestorableDroppedDatabaseProperties'
+        description: The properties of a restorable dropped database
+        x-ms-client-flatten: true
+  RestorableDroppedDatabaseListResult:
+    description: The response to a list restorable dropped databases request
+    properties:
+      value:
+        description: A list of restorable dropped databases
+        items:
+          $ref: '#/definitions/RestorableDroppedDatabase'
+        type: array
+    required:
+      - value
+  RestorableDroppedDatabaseProperties:
+    description: The properties of a restorable dropped database
+    properties:
+      creationDate:
+        description: The creation date of the database (ISO8601 format)
+        format: date-time
+        readOnly: true
+        type: string
+      databaseName:
+        description: The name of the database
+        readOnly: true
+        type: string
+      deletionDate:
+        description: The deletion date of the database (ISO8601 format)
+        format: date-time
+        readOnly: true
+        type: string
+      earliestRestoreDate:
+        description: The earliest restore date of the database (ISO8601 format)
+        format: date-time
+        readOnly: true
+        type: string
+      edition:
+        description: The edition of the database
+        readOnly: true
+        type: string
+      elasticPoolName:
+        description: The elastic pool name of the database
+        readOnly: true
+        type: string
+      maxSizeBytes:
+        description: The max size in bytes of the database
+        readOnly: true
+        type: string
+      serviceLevelObjective:
+        description: The service level objective name of the database
+        readOnly: true
+        type: string
+  RestorePoint:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: A database restore point.
+    properties:
+      properties:
+        $ref: '#/definitions/RestorePointProperties'
+        description: The properties of the restore point.
+        x-ms-client-flatten: true
+  RestorePointListResult:
+    description: The response to a list database restore points request.
+    properties:
+      value:
+        description: The list of database restore points.
+        items:
+          $ref: '#/definitions/RestorePoint'
+        type: array
+    required:
+      - value
+  RestorePointProperties:
+    description: Represents the properties of a database restore point.
+    properties:
+      earliestRestoreDate:
+        description: Earliest restore time (ISO8601 format). Populated when restorePointType = DISCRETE. Null otherwise.
+        format: date-time
+        readOnly: true
+        type: string
+      restorePointCreationDate:
+        description: Restore point creation time (ISO8601 format). Populated when restorePointType = CONTINUOUS. Null otherwise.
+        format: date-time
+        readOnly: true
+        type: string
+      restorePointType:
+        description: The restore point type of the database restore point.
+        enum:
+          - DISCRETE
+          - CONTINUOUS
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: RestorePointType
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM tracked top level resource.
+    properties:
+      location:
+        description: Resource location.
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    required:
+      - location

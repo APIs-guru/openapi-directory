@@ -73,9 +73,15 @@ info:
             extracted characters from each such resource is <em>100,000</em>.
         </p>
 
+        <h2>Terms of Service</h2>
+        <p>
+            By using the API, you agree to our
+            <a href="https://www.geneea.com/terms.html" target="_blank">Terms of Service Agreement</a>.
+        </p>
+
         <h2>More information</h2>
         <p>
-            <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation" target="_blank">
+            <a href="https://help.geneea.com/index.html" target="_blank">
             The Interpretor Public Documentation
             </a>
         </p>
@@ -89,7 +95,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: swagger
       url: 'https://api.geneea.com/api-docs?group=s1'
       version: '1.2'
@@ -553,16 +559,7 @@ definitions:
       key:
         format: int64
         type: integer
-  Information_about_a_user_account.:
-    properties:
-      remainingQuotas:
-        description: Remaining quotas for the user account.
-        items:
-          $ref: '#/definitions/Entry«string,long»'
-        type: array
-      type:
-        description: Type (plan) of the user account.
-        type: string
+  Information_about_a_user_account.: {}
   Label:
     description: The topic label
     properties:
@@ -616,24 +613,7 @@ definitions:
       url:
         description: 'URL of a document to be analysed, mutually exclusive with the ''text'' parameter'
         type: string
-  Response_for_the_text_correction:
-    properties:
-      corrected:
-        type: boolean
-      correctedText:
-        description: Corrected text of the document
-        type: string
-      diacritized:
-        type: boolean
-      language:
-        description: The used language of the document
-        type: string
-      text:
-        description: The raw text of the document which has been analysed
-        type: string
-    required:
-      - correctedText
-      - language
+  Response_for_the_text_correction: {}
   SentimentResponse:
     description: Response for the sentiment analysis
     properties:

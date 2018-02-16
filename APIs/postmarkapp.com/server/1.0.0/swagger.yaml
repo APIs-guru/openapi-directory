@@ -531,6 +531,138 @@ paths:
       summary: Outbound message search
       tags:
         - Messages API
+  /messages/outbound/clicks:
+    get:
+      operationId: searchClicksForOutboundMessages
+      parameters:
+        - description: The token associated with the Server on which this request will operate.
+          in: header
+          name: X-Postmark-Server-Token
+          required: true
+          type: string
+        - description: Number of message clicks to return per request. Max 500.
+          in: query
+          name: count
+          required: true
+          type: integer
+        - description: Number of messages to skip
+          in: query
+          name: offset
+          required: true
+          type: integer
+        - description: 'Filter by To, Cc, Bcc'
+          in: query
+          name: recipient
+          required: false
+          type: string
+        - description: Filter by tag
+          in: query
+          name: tag
+          required: false
+          type: string
+        - description: 'Filter by client name, i.e. Outlook, Gmail'
+          in: query
+          name: client_name
+          required: false
+          type: string
+        - description: 'Filter by company, i.e. Microsoft, Apple, Google'
+          in: query
+          name: client_company
+          required: false
+          type: string
+        - description: 'Filter by client family, i.e. OS X, Chrome'
+          in: query
+          name: client_family
+          required: false
+          type: string
+        - description: 'Filter by full OS name and specific version, i.e. OS X 10.9 Mavericks, Windows 7'
+          in: query
+          name: os_name
+          required: false
+          type: string
+        - description: 'Filter by kind of OS used without specific version, i.e. OS X, Windows'
+          in: query
+          name: os_family
+          required: false
+          type: string
+        - description: 'Filter by company which produced the OS, i.e. Apple Computer, Inc., Microsoft Corporation'
+          in: query
+          name: os_company
+          required: false
+          type: string
+        - description: 'Filter by platform, i.e. webmail, desktop, mobile'
+          in: query
+          name: platform
+          required: false
+          type: string
+        - description: 'Filter by country messages were opened in, i.e. Denmark, Russia'
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: 'Filter by full name of region messages were opened in, i.e. Moscow, New York'
+          in: query
+          name: region
+          required: false
+          type: string
+        - description: 'Filter by full name of region messages were opened in, i.e. Moscow, New York'
+          in: query
+          name: city
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageClickSearchResponse'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+      summary: Clicks for a all messages
+      tags:
+        - Messages API
+  '/messages/outbound/clicks/{messageid}':
+    get:
+      operationId: getClicksForSingleOutboundMessage
+      parameters:
+        - description: The token associated with the Server on which this request will operate.
+          in: header
+          name: X-Postmark-Server-Token
+          required: true
+          type: string
+        - description: The ID of the Outbound Message for which click statistics should be retrieved.
+          in: path
+          name: messageid
+          required: true
+          type: string
+        - default: 1
+          description: Number of message clicks to return per request. Max 500.
+          in: query
+          maximum: 500
+          minimum: 1
+          name: count
+          required: true
+          type: integer
+        - default: 0
+          description: Number of messages to skip.
+          in: query
+          minimum: 0
+          name: offset
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageClickSearchResponse'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+      summary: Retrieve Message Clicks
+      tags:
+        - Messages API
   /messages/outbound/opens:
     get:
       operationId: searchOpensForOutboundMessages
@@ -619,7 +751,7 @@ paths:
           $ref: '#/responses/422'
         '500':
           $ref: '#/responses/500'
-      summary: Opens for a single message
+      summary: Opens for all messages
       tags:
         - Messages API
   '/messages/outbound/opens/{messageid}':
@@ -1851,6 +1983,9 @@ definitions:
     properties:
       BounceHookUrl:
         type: string
+      ClickHookUrl:
+        description: Webhook url allowing real-time notification when tracked links are clicked.
+        type: string
       Color:
         enum:
           - purple
@@ -1926,6 +2061,9 @@ definitions:
     properties:
       Bcc:
         type: string
+      ClickHookUrl:
+        description: Webhook url allowing real-time notification when tracked links are clicked.
+        type: string
       From:
         type: string
       InlineCss:
@@ -1950,6 +2088,62 @@ definitions:
       TrackOpens:
         description: Activate open tracking for this email.
         type: boolean
+  ExtendedMessageClickEventInformation:
+    description: ''
+    properties:
+      ClickLocation:
+        type: string
+      Client:
+        description: ''
+        properties:
+          Company:
+            type: string
+          Family:
+            type: string
+          Name:
+            type: string
+      Geo:
+        properties:
+          City:
+            type: string
+          Coords:
+            type: string
+          Country:
+            type: string
+          CountryISOCode:
+            type: string
+          IP:
+            type: string
+          Region:
+            type: string
+          RegionISOCode:
+            type: string
+          Zip:
+            type: string
+      MessageID:
+        type: string
+      OS:
+        properties:
+          Company:
+            type: string
+          Family:
+            type: string
+          Name:
+            type: string
+      OriginalLink:
+        type: string
+      Platform:
+        type: string
+      ReceivedAt:
+        format: date-time
+        type: string
+      Recipient:
+        format: email
+        type: string
+      Tag:
+        type: string
+      UserAgent:
+        type: string
   ExtendedMessageOpenEventInformation:
     description: ''
     properties:
@@ -2114,6 +2308,14 @@ definitions:
         type: array
       TotalCount:
         type: integer
+  MessageClickSearchResponse:
+    properties:
+      Clicks:
+        items:
+          $ref: '#/definitions/ExtendedMessageClickEventInformation'
+        type: array
+      TotalCount:
+        type: integer
   MessageEventDetails:
     description: ''
     properties:
@@ -2166,6 +2368,8 @@ definitions:
         items:
           $ref: '#/definitions/EmailNameAddressPair'
         type: array
+      ClickHookUrl:
+        type: string
       From:
         type: string
       MessageID:
@@ -2210,6 +2414,8 @@ definitions:
         items:
           $ref: '#/definitions/EmailNameAddressPair'
         type: array
+      ClickHookUrl:
+        type: string
       From:
         type: string
       HtmlBody:
@@ -2317,6 +2523,9 @@ definitions:
       Cc:
         description: Recipient email address. Multiple addresses are comma seperated. Max 50.
         type: string
+      ClickHookUrl:
+        description: Webhook url allowing real-time notification when tracked links are clicked.
+        type: string
       From:
         description: The sender email address. Must have a registered and confirmed Sender Signature.
         type: string
@@ -2385,6 +2594,8 @@ definitions:
           type: string
         type: array
       BounceHookUrl:
+        type: string
+      ClickHookUrl:
         type: string
       Color:
         enum:

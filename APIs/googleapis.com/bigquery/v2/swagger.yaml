@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/bigquery/v2/rest'
       version: v1
@@ -153,11 +153,6 @@ paths:
       description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
       operationId: bigquery.datasets.list
       parameters:
-        - description: Project ID of the datasets to be listed
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: 'Whether to list all datasets, including hidden ones'
           in: query
           name: all
@@ -173,6 +168,11 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the datasets to be listed
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -206,15 +206,15 @@ paths:
       description: Creates a new empty dataset.
       operationId: bigquery.datasets.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
         - description: Project ID of the new dataset
           in: path
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
       responses:
         '200':
           description: Successful response
@@ -236,11 +236,6 @@ paths:
       description: 'Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.'
       operationId: bigquery.datasets.delete
       parameters:
-        - description: Project ID of the dataset being deleted
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of dataset being deleted
           in: path
           name: datasetId
@@ -250,6 +245,11 @@ paths:
           in: query
           name: deleteContents
           type: boolean
+        - description: Project ID of the dataset being deleted
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -268,14 +268,14 @@ paths:
       description: Returns the dataset specified by datasetID.
       operationId: bigquery.datasets.get
       parameters:
-        - description: Project ID of the requested dataset
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the requested dataset
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the requested dataset
+          in: path
+          name: projectId
           required: true
           type: string
       responses:
@@ -310,20 +310,20 @@ paths:
       description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.'
       operationId: bigquery.datasets.patch
       parameters:
-        - description: Project ID of the dataset being updated
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
         - description: Dataset ID of the dataset being updated
           in: path
           name: datasetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
+        - description: Project ID of the dataset being updated
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -344,20 +344,20 @@ paths:
       description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.'
       operationId: bigquery.datasets.update
       parameters:
-        - description: Project ID of the dataset being updated
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
         - description: Dataset ID of the dataset being updated
           in: path
           name: datasetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
+        - description: Project ID of the dataset being updated
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -379,11 +379,6 @@ paths:
       description: Lists all tables in the specified dataset. Requires the READER dataset role.
       operationId: bigquery.tables.list
       parameters:
-        - description: Project ID of the tables to list
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the tables to list
           in: path
           name: datasetId
@@ -396,6 +391,11 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the tables to list
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -429,20 +429,20 @@ paths:
       description: 'Creates a new, empty table in the dataset.'
       operationId: bigquery.tables.insert
       parameters:
-        - description: Project ID of the new table
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
         - description: Dataset ID of the new table
           in: path
           name: datasetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
+        - description: Project ID of the new table
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -464,14 +464,14 @@ paths:
       description: 'Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.'
       operationId: bigquery.tables.delete
       parameters:
-        - description: Project ID of the table to delete
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the table to delete
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the table to delete
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Table ID of the table to delete
@@ -497,24 +497,24 @@ paths:
       description: 'Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.'
       operationId: bigquery.tables.get
       parameters:
-        - description: Project ID of the requested table
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the requested table
           in: path
           name: datasetId
           required: true
           type: string
-        - description: Table ID of the requested table
+        - description: Project ID of the requested table
           in: path
-          name: tableId
+          name: projectId
           required: true
           type: string
         - description: 'List of fields to return (comma-separated). If unspecified, all fields are returned'
           in: query
           name: selectedFields
+          type: string
+        - description: Table ID of the requested table
+          in: path
+          name: tableId
+          required: true
           type: string
       responses:
         '200':
@@ -548,14 +548,18 @@ paths:
       description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.'
       operationId: bigquery.tables.patch
       parameters:
-        - description: Project ID of the table to update
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
         - description: Dataset ID of the table to update
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the table to update
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Table ID of the table to update
@@ -563,10 +567,6 @@ paths:
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
       responses:
         '200':
           description: Successful response
@@ -587,14 +587,18 @@ paths:
       description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource.'
       operationId: bigquery.tables.update
       parameters:
-        - description: Project ID of the table to update
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
         - description: Dataset ID of the table to update
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the table to update
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Table ID of the table to update
@@ -602,10 +606,6 @@ paths:
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
       responses:
         '200':
           description: Successful response
@@ -627,19 +627,9 @@ paths:
       description: Retrieves table data from a specified set of rows. Requires the READER dataset role.
       operationId: bigquery.tabledata.list
       parameters:
-        - description: Project ID of the table to read
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the table to read
           in: path
           name: datasetId
-          required: true
-          type: string
-        - description: Table ID of the table to read
-          in: path
-          name: tableId
           required: true
           type: string
         - description: Maximum number of results to return
@@ -650,6 +640,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Project ID of the table to read
+          in: path
+          name: projectId
+          required: true
+          type: string
         - description: 'List of fields to return (comma-separated). If unspecified, all fields are returned'
           in: query
           name: selectedFields
@@ -657,6 +652,11 @@ paths:
         - description: Zero-based index of the starting row to read
           in: query
           name: startIndex
+          type: string
+        - description: Table ID of the table to read
+          in: path
+          name: tableId
+          required: true
           type: string
       responses:
         '200':
@@ -699,14 +699,18 @@ paths:
       description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
       operationId: bigquery.tabledata.insertAll
       parameters:
-        - description: Project ID of the destination table.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TableDataInsertAllRequest'
         - description: Dataset ID of the destination table.
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the destination table.
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Table ID of the destination table.
@@ -714,10 +718,6 @@ paths:
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TableDataInsertAllRequest'
       responses:
         '200':
           description: Successful response
@@ -743,11 +743,6 @@ paths:
       description: 'Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.'
       operationId: bigquery.jobs.list
       parameters:
-        - description: Project ID of the jobs to list
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Whether to display jobs owned by all users in the project. Default false
           in: query
           name: allUsers
@@ -759,6 +754,11 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the jobs to list
+          in: path
+          name: projectId
+          required: true
           type: string
         - description: Restrict information returned to a set of selected fields
           enum:
@@ -812,15 +812,15 @@ paths:
       description: Starts a new asynchronous job. Requires the Can View project role.
       operationId: bigquery.jobs.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
         - description: Project ID of the project that will be billed for the job
           in: path
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
       responses:
         '200':
           description: Successful response
@@ -854,14 +854,18 @@ paths:
       description: 'Returns information about a specific job. Job information is available for a six month period after creation. Requires that you''re the person who ran the job, or have the Is Owner project role.'
       operationId: bigquery.jobs.get
       parameters:
-        - description: '[Required] Project ID of the requested job'
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: '[Required] Job ID of the requested job'
           in: path
           name: jobId
+          required: true
+          type: string
+        - description: '[Experimental] The geographic location of the job. Required except for US and EU.'
+          in: query
+          name: location
+          type: string
+        - description: '[Required] Project ID of the requested job'
+          in: path
+          name: projectId
           required: true
           type: string
       responses:
@@ -905,14 +909,18 @@ paths:
       description: 'Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.'
       operationId: bigquery.jobs.cancel
       parameters:
-        - description: '[Required] Project ID of the job to cancel'
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: '[Required] Job ID of the job to cancel'
           in: path
           name: jobId
+          required: true
+          type: string
+        - description: '[Experimental] The geographic location of the job. Required except for US and EU.'
+          in: query
+          name: location
+          type: string
+        - description: '[Required] Project ID of the job to cancel'
+          in: path
+          name: projectId
           required: true
           type: string
       responses:
@@ -944,15 +952,15 @@ paths:
       description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
       operationId: bigquery.jobs.query
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/QueryRequest'
         - description: Project ID of the project billed for the query
           in: path
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/QueryRequest'
       responses:
         '200':
           description: Successful response
@@ -978,15 +986,14 @@ paths:
       description: Retrieves the results of a query job.
       operationId: bigquery.jobs.getQueryResults
       parameters:
-        - description: '[Required] Project ID of the query job'
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: '[Required] Job ID of the query job'
           in: path
           name: jobId
           required: true
+          type: string
+        - description: '[Experimental] The geographic location where the job should run. Required except for US and EU.'
+          in: query
+          name: location
           type: string
         - description: Maximum number of results to read
           in: query
@@ -995,6 +1002,11 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: '[Required] Project ID of the query job'
+          in: path
+          name: projectId
+          required: true
           type: string
         - description: Zero-based index of the starting row
           in: query
@@ -1024,6 +1036,44 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/projects/{projectId}/serviceAccount':
+    get:
+      description: Returns the email address of the service account for your project used for interactions with Google Cloud KMS.
+      operationId: bigquery.projects.getServiceAccount
+      parameters:
+        - description: Project ID for which the service account is requested.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetServiceAccountResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - projects
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -1205,6 +1255,9 @@ definitions:
                 type: string
               description: The labels associated with this dataset. You can use these to organize and group your datasets.
               type: object
+            location:
+              description: '[Experimental] The geographic location where the data resides.'
+              type: string
           type: object
         type: array
       etag:
@@ -1227,6 +1280,12 @@ definitions:
         description: '[Optional] The ID of the project containing this dataset.'
         type: string
     type: object
+  EncryptionConfiguration:
+    properties:
+      kmsKeyName:
+        description: '[Optional] Describes the Cloud KMS encryption key that will be used to protect destination BigQuery table. The BigQuery Service Account associated with your project requires access to this encryption key.'
+        type: string
+    type: object
   ErrorProto:
     properties:
       debugInfo:
@@ -1244,6 +1303,10 @@ definitions:
     type: object
   ExplainQueryStage:
     properties:
+      completedParallelInputs:
+        description: Number of parallel input segments completed.
+        format: int64
+        type: string
       computeMsAvg:
         description: Milliseconds the average shard spent on CPU-bound tasks.
         format: int64
@@ -1266,6 +1329,10 @@ definitions:
         type: string
       name:
         description: Human-readable name for stage.
+        type: string
+      parallelInputs:
+        description: Number of parallel input segments to be processed.
+        format: int64
         type: string
       readMsAvg:
         description: Milliseconds the average shard spent reading input.
@@ -1434,6 +1501,16 @@ definitions:
         format: uint64
         type: string
     type: object
+  GetServiceAccountResponse:
+    properties:
+      email:
+        description: The service account email address.
+        type: string
+      kind:
+        default: 'bigquery#getServiceAccountResponse'
+        description: The resource type of the response.
+        type: string
+    type: object
   GoogleSheetsOptions:
     properties:
       skipLeadingRows:
@@ -1493,10 +1570,14 @@ definitions:
       extract:
         $ref: '#/definitions/JobConfigurationExtract'
         description: '[Pick one] Configures an extract job.'
+      jobTimeoutMs:
+        description: '[Optional] Job timeout in milliseconds. If this time limit is exceeded, BigQuery may attempt to terminate the job.'
+        format: int64
+        type: string
       labels:
         additionalProperties:
           type: string
-        description: '[Experimental] The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
+        description: 'The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
         type: object
       load:
         $ref: '#/definitions/JobConfigurationLoad'
@@ -1546,6 +1627,9 @@ definitions:
       createDisposition:
         description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
         type: string
+      destinationEncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: '[Experimental] Custom encryption configuration (e.g., Cloud KMS keys).'
       destinationTable:
         $ref: '#/definitions/TableReference'
         description: '[Required] The destination table to load the data into.'
@@ -1585,7 +1669,7 @@ definitions:
         description: '[Deprecated] The format of the schemaInline property.'
         type: string
       schemaUpdateOptions:
-        description: '[Experimental] Allows the schema of the desitination table to be updated as a side effect of the load job if a schema is autodetected or supplied in the job configuration. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
+        description: 'Allows the schema of the destination table to be updated as a side effect of the load job if a schema is autodetected or supplied in the job configuration. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
         items:
           type: string
         type: array
@@ -1603,7 +1687,7 @@ definitions:
         type: array
       timePartitioning:
         $ref: '#/definitions/TimePartitioning'
-        description: '[Experimental] If specified, configures time-based partitioning for the destination table.'
+        description: 'If specified, configures time-based partitioning for the destination table.'
       writeDisposition:
         description: '[Optional] Specifies the action that occurs if the destination table already exists. The following values are supported: WRITE_TRUNCATE: If the table already exists, BigQuery overwrites the table data. WRITE_APPEND: If the table already exists, BigQuery appends the data to the table. WRITE_EMPTY: If the table already exists and contains data, a ''duplicate'' error is returned in the job result. The default value is WRITE_APPEND. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.'
         type: string
@@ -1620,6 +1704,9 @@ definitions:
       defaultDataset:
         $ref: '#/definitions/DatasetReference'
         description: '[Optional] Specifies the default dataset to use for unqualified table names in the query.'
+      destinationEncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: '[Experimental] Custom encryption configuration (e.g., Cloud KMS keys).'
       destinationTable:
         $ref: '#/definitions/TableReference'
         description: '[Optional] Describes the table where the query results should be stored. If not present, a new table will be created to store the results. This property must be set for large results that exceed the maximum response size.'
@@ -1654,7 +1741,7 @@ definitions:
           $ref: '#/definitions/QueryParameter'
         type: array
       schemaUpdateOptions:
-        description: '[Experimental] Allows the schema of the destination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
+        description: 'Allows the schema of the destination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
         items:
           type: string
         type: array
@@ -1665,7 +1752,7 @@ definitions:
         type: object
       timePartitioning:
         $ref: '#/definitions/TimePartitioning'
-        description: '[Experimental] If specified, configures time-based partitioning for the destination table.'
+        description: 'If specified, configures time-based partitioning for the destination table.'
       useLegacySql:
         description: 'Specifies whether to use BigQuery''s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/ When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false.'
         type: boolean
@@ -1687,6 +1774,9 @@ definitions:
       createDisposition:
         description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
         type: string
+      destinationEncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: '[Experimental] Custom encryption configuration (e.g., Cloud KMS keys).'
       destinationTable:
         $ref: '#/definitions/TableReference'
         description: '[Required] The destination table'
@@ -1754,12 +1844,19 @@ definitions:
       jobId:
         description: '[Required] The ID of the job. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length is 1,024 characters.'
         type: string
+      location:
+        $ref: '#/definitions/Location'
+        description: '[Experimental] The geographic location of the job. Required except for US and EU.'
       projectId:
         description: '[Required] The ID of the project containing this job.'
         type: string
     type: object
   JobStatistics:
     properties:
+      completionRatio:
+        description: '[Experimental] [Output-only] Job progress (0.0 -> 1.0) for LOAD and EXTRACT jobs.'
+        format: double
+        type: number
       creationTime:
         description: '[Output-only] Creation time of this job, in milliseconds since the epoch. This field will be present on all jobs.'
         format: int64
@@ -1795,6 +1892,16 @@ definitions:
       cacheHit:
         description: '[Output-only] Whether the query result was fetched from the query cache.'
         type: boolean
+      ddlOperationPerformed:
+        description: '[Output-only, Experimental] The DDL operation performed, possibly dependent on the pre-existence of the DDL target. Possible values (new values might be added in the future): "CREATE": The query created the DDL target. "SKIP": No-op. Example cases: the query is CREATE TABLE IF NOT EXISTS while the table already exists, or the query is DROP TABLE IF EXISTS while the table does not exist. "REPLACE": The query replaced the DDL target. Example case: the query is CREATE OR REPLACE TABLE, and the table already exists. "DROP": The query deleted the DDL target.'
+        type: string
+      ddlTargetTable:
+        $ref: '#/definitions/TableReference'
+        description: '[Output-only, Experimental] The DDL target table. Present only for CREATE/DROP TABLE/VIEW queries.'
+      estimatedBytesProcessed:
+        description: '[Output-only] The original estimate of bytes processed for the job.'
+        format: int64
+        type: string
       numDmlAffectedRows:
         description: '[Output-only] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
         format: int64
@@ -1805,22 +1912,31 @@ definitions:
           $ref: '#/definitions/ExplainQueryStage'
         type: array
       referencedTables:
-        description: '[Output-only, Experimental] Referenced tables for the job. Queries that reference more than 50 tables will not have a complete list.'
+        description: '[Output-only] Referenced tables for the job. Queries that reference more than 50 tables will not have a complete list.'
         items:
           $ref: '#/definitions/TableReference'
         type: array
       schema:
         $ref: '#/definitions/TableSchema'
-        description: '[Output-only, Experimental] The schema of the results. Present only for successful dry run of non-legacy SQL queries.'
+        description: '[Output-only] The schema of the results. Present only for successful dry run of non-legacy SQL queries.'
       statementType:
-        description: '[Output-only, Experimental] The type of query statement, if valid.'
+        description: '[Output-only, Experimental] The type of query statement, if valid. Possible values (new values might be added in the future): "SELECT": SELECT query. "INSERT": INSERT query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "UPDATE": UPDATE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "DELETE": DELETE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "CREATE_TABLE": CREATE [OR REPLACE] TABLE without AS SELECT. "CREATE_TABLE_AS_SELECT": CREATE [OR REPLACE] TABLE ... AS SELECT ... "DROP_TABLE": DROP TABLE query. "CREATE_VIEW": CREATE [OR REPLACE] VIEW ... AS SELECT ... "DROP_VIEW": DROP VIEW query.'
         type: string
+      timeline:
+        description: '[Output-only] Describes a timeline of job execution.'
+        items:
+          $ref: '#/definitions/QueryTimelineSample'
+        type: array
       totalBytesBilled:
         description: '[Output-only] Total bytes billed for the job.'
         format: int64
         type: string
       totalBytesProcessed:
         description: '[Output-only] Total bytes processed for the job.'
+        format: int64
+        type: string
+      totalSlotMs:
+        description: '[Output-only] Slot-milliseconds for the job.'
         format: int64
         type: string
       undeclaredQueryParameters:
@@ -1881,6 +1997,8 @@ definitions:
     description: Represents a single JSON object.
     type: object
   JsonValue: {}
+  Location:
+    type: string
   ProjectList:
     properties:
       etag:
@@ -1991,6 +2109,9 @@ definitions:
         default: 'bigquery#queryRequest'
         description: The resource type of the request.
         type: string
+      location:
+        $ref: '#/definitions/Location'
+        description: '[Experimental] The geographic location where the job should run. Required except for US and EU.'
       maxResults:
         description: '[Optional] The maximum number of rows of data to return per page of results. Setting this flag to a small value such as 1000 and then paging through results might improve reliability when the query result set is large. In addition to this limit, responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies.'
         format: uint32
@@ -2066,6 +2187,29 @@ definitions:
         format: uint64
         type: string
     type: object
+  QueryTimelineSample:
+    properties:
+      activeInputs:
+        description: Total number of active workers. This does not correspond directly to slot usage. This is the largest value observed since the last sample.
+        format: int32
+        type: integer
+      completedInputs:
+        description: Total parallel units of work completed by this query.
+        format: int32
+        type: integer
+      elapsedMs:
+        description: Milliseconds elapsed since the start of query execution.
+        format: int64
+        type: string
+      pendingInputs:
+        description: Total parallel units of work remaining for the active stages.
+        format: int64
+        type: string
+      totalSlotMs:
+        description: Cumulative slot-ms consumed by the query.
+        format: int64
+        type: string
+    type: object
   Streamingbuffer:
     properties:
       estimatedBytes:
@@ -2090,11 +2234,14 @@ definitions:
       description:
         description: '[Optional] A user-friendly description of this table.'
         type: string
+      encryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: '[Experimental] Custom encryption configuration (e.g., Cloud KMS keys).'
       etag:
         description: '[Output-only] A hash of this resource.'
         type: string
       expirationTime:
-        description: '[Optional] The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed.'
+        description: '[Optional] The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed. The defaultTableExpirationMs property of the encapsulating dataset can be used to set a default expirationTime on newly created tables.'
         format: int64
         type: string
       externalDataConfiguration:
@@ -2113,7 +2260,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: '[Experimental] The labels associated with this table. You can use these to organize and group your tables. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
+        description: 'The labels associated with this table. You can use these to organize and group your tables. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
         type: object
       lastModifiedTime:
         description: '[Output-only] The time when this table was last modified, in milliseconds since the epoch.'
@@ -2148,7 +2295,7 @@ definitions:
         description: '[Required] Reference describing the ID of this table.'
       timePartitioning:
         $ref: '#/definitions/TimePartitioning'
-        description: '[Experimental] If specified, configures time-based partitioning for this table.'
+        description: 'If specified, configures time-based partitioning for this table.'
       type:
         description: '[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE.'
         type: string
@@ -2268,6 +2415,14 @@ definitions:
         description: Tables in the requested dataset.
         items:
           properties:
+            creationTime:
+              description: 'The time when this table was created, in milliseconds since the epoch.'
+              format: int64
+              type: string
+            expirationTime:
+              description: '[Optional] The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed.'
+              format: int64
+              type: string
             friendlyName:
               description: The user-friendly name for this table.
               type: string
@@ -2281,14 +2436,14 @@ definitions:
             labels:
               additionalProperties:
                 type: string
-              description: '[Experimental] The labels associated with this table. You can use these to organize and group your tables.'
+              description: The labels associated with this table. You can use these to organize and group your tables.
               type: object
             tableReference:
               $ref: '#/definitions/TableReference'
               description: A reference uniquely identifying the table.
             timePartitioning:
               $ref: '#/definitions/TimePartitioning'
-              description: '[Experimental] The time-based partitioning for this table.'
+              description: The time-based partitioning for this table.
             type:
               description: 'The type of table. Possible values are: TABLE, VIEW.'
               type: string
@@ -2340,8 +2495,11 @@ definitions:
         description: '[Optional] Number of milliseconds for which to keep the storage for a partition.'
         format: int64
         type: string
+      field:
+        description: '[Experimental] [Optional] If not set, the table is partitioned by pseudo column ''_PARTITIONTIME''; if set, the table is partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or REQUIRED.'
+        type: string
       type:
-        description: '[Required] The only type supported is DAY, which will generate one partition per day based on data loading time.'
+        description: '[Required] The only type supported is DAY, which will generate one partition per day.'
         type: string
     type: object
   UserDefinedFunctionResource:

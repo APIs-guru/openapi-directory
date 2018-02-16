@@ -17,12 +17,14 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://spanner.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -158,19 +160,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{database}/ddl':
     get:
       description: |-
@@ -202,19 +204,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
         Updates the schema of a Cloud Spanner database by
@@ -226,16 +228,16 @@ paths:
         UpdateDatabaseDdlMetadata.  The operation has no response.
       operationId: spanner.projects.instances.databases.updateDdl
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateDatabaseDdlRequest'
         - description: Required. The database to update.
           in: path
           name: database
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UpdateDatabaseDdlRequest'
       responses:
         '200':
           description: Successful response
@@ -253,20 +255,73 @@ paths:
       tags:
         - projects
   '/v1/{database}/sessions':
+    get:
+      description: Lists all sessions in a given database.
+      operationId: spanner.projects.instances.databases.sessions.list
+      parameters:
+        - description: Required. The database in which to list sessions.
+          in: path
+          name: database
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            An expression for filtering the results of the request. Filter rules are
+            case insensitive. The fields eligible for filtering are:
+
+              * `labels.key` where key is the name of a label
+
+            Some examples of using filters are:
+
+              * `labels.env:*` --> The session has the label "env".
+              * `labels.env:dev` --> The session has the label "env" and the value of
+                                   the label contains the string "dev".
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            Number of sessions to be returned in the response. If 0 or less, defaults
+            to the server's maximum allowed page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            If non-empty, `page_token` should contain a
+            next_page_token from a previous
+            ListSessionsResponse.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListSessionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
+      tags:
+        - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a new session. A session can be used to perform
@@ -290,6 +345,10 @@ paths:
         periodically, e.g., `"SELECT 1"`.
       operationId: spanner.projects.instances.databases.sessions.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateSessionRequest'
         - description: Required. The database in which the new session is created.
           in: path
           name: database
@@ -314,14 +373,10 @@ paths:
         - projects
   '/v1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: spanner.projects.instances.operations.delete
+      description: 'Ends a session, releasing server resources associated with it.'
+      operationId: spanner.projects.instances.databases.sessions.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. The name of the session to delete.
           in: path
           name: name
           required: true
@@ -338,48 +393,28 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.admin'
+            - 'https://www.googleapis.com/auth/spanner.data'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/spanner.admin'
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
     get:
-      description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`. To
-        override the binding, API services can add a binding such as
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-        For backwards compatibility, the default name includes the operations
-        collection id, however overriding users must ensure the name binding
-        is the parent resource, without the operations collection id.
-      operationId: spanner.projects.instances.operations.list
+      description: Gets information about a particular instance configuration.
+      operationId: spanner.projects.instanceConfigs.get
       parameters:
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
-        - description: The name of the operation's parent resource.
+        - description: |-
+            Required. The name of the requested instance configuration. Values are of
+            the form `projects/<project>/instanceConfigs/<config>`.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/InstanceConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -392,19 +427,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
         Updates an instance, and begins allocating or releasing resources
@@ -449,6 +484,10 @@ paths:
         resource name.
       operationId: spanner.projects.instances.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateInstanceRequest'
         - description: |-
             Required. A unique identifier for the instance, which cannot be changed
             after the instance is created. Values are of the form
@@ -459,10 +498,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UpdateInstanceRequest'
       responses:
         '200':
           description: Successful response
@@ -481,19 +516,19 @@ paths:
         - projects
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -506,7 +541,7 @@ paths:
         the operation is not deleted; instead, it becomes an operation with
         an Operation.error value with a google.rpc.Status.code of 1,
         corresponding to `Code.CANCELLED`.
-      operationId: spanner.projects.instances.operations.cancel
+      operationId: spanner.projects.instances.databases.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -536,13 +571,11 @@ paths:
       operationId: spanner.projects.instances.databases.list
       parameters:
         - description: |-
-            Required. The instance whose databases should be listed.
-            Values are of the form `projects/<project>/instances/<instance>`.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
+            Number of databases to be returned in the response. If 0 or less,
+            defaults to the server's maximum allowed page size.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             If non-empty, `page_token` should contain a
             next_page_token from a
@@ -551,11 +584,13 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Number of databases to be returned in the response. If 0 or less,
-            defaults to the server's maximum allowed page size.
-          in: query
-          name: pageSize
-          type: integer
+            Required. The instance whose databases should be listed.
+            Values are of the form `projects/<project>/instances/<instance>`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -573,19 +608,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a new Cloud Spanner database and starts to prepare it for serving.
@@ -598,6 +633,10 @@ paths:
         Database, if successful.
       operationId: spanner.projects.instances.databases.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateDatabaseRequest'
         - description: |-
             Required. The name of the instance that will serve the new database.
             Values are of the form `projects/<project>/instances/<instance>`.
@@ -606,10 +645,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateDatabaseRequest'
       responses:
         '200':
           description: Successful response
@@ -632,14 +667,11 @@ paths:
       operationId: spanner.projects.instanceConfigs.list
       parameters:
         - description: |-
-            Required. The name of the project for which a list of supported instance
-            configurations is requested. Values are of the form
-            `projects/<project>`.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
+            Number of instance configurations to be returned in the response. If 0 or
+            less, defaults to the server's maximum allowed page size.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             If non-empty, `page_token` should contain a
             next_page_token
@@ -648,11 +680,14 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Number of instance configurations to be returned in the response. If 0 or
-            less, defaults to the server's maximum allowed page size.
-          in: query
-          name: pageSize
-          type: integer
+            Required. The name of the project for which a list of supported instance
+            configurations is requested. Values are of the form
+            `projects/<project>`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -670,38 +705,46 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{parent}/instances':
     get:
       description: Lists all instances in the given project.
       operationId: spanner.projects.instances.list
       parameters:
         - description: |-
-            Required. The name of the project for which a list of instances is
-            requested. Values are of the form `projects/<project>`.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
-            If non-empty, `page_token` should contain a
-            next_page_token from a
-            previous ListInstancesResponse.
+            An expression for filtering the results of the request. Filter rules are
+            case insensitive. The fields eligible for filtering are:
+
+              * `name`
+              * `display_name`
+              * `labels.key` where key is the name of a label
+
+            Some examples of using filters are:
+
+              * `name:*` --> The instance has a name.
+              * `name:Howl` --> The instance's name contains the string "howl".
+              * `name:HOWL` --> Equivalent to above.
+              * `NAME:howl` --> Equivalent to above.
+              * `labels.env:*` --> The instance has the label "env".
+              * `labels.env:dev` --> The instance has the label "env" and the value of
+                                   the label contains the string "dev".
+              * `name:howl labels.env:dev` --> The instance's name contains "howl" and
+                                             it has the label "env" with its value
+                                             containing "dev".
           in: query
-          name: pageToken
+          name: filter
           type: string
         - description: |-
             Number of instances to be returned in the response. If 0 or less, defaults
@@ -710,28 +753,20 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            An expression for filtering the results of the request. Filter rules are
-            case insensitive. The fields eligible for filtering are:
-
-              * name
-              * display_name
-              * labels.key where key is the name of a label
-
-            Some examples of using filters are:
-
-              * name:* --> The instance has a name.
-              * name:Howl --> The instance's name contains the string "howl".
-              * name:HOWL --> Equivalent to above.
-              * NAME:howl --> Equivalent to above.
-              * labels.env:* --> The instance has the label "env".
-              * labels.env:dev --> The instance has the label "env" and the value of
-                                   the label contains the string "dev".
-              * name:howl labels.env:dev --> The instance's name contains "howl" and
-                                             it has the label "env" with its value
-                                             containing "dev".
+            If non-empty, `page_token` should contain a
+            next_page_token from a
+            previous ListInstancesResponse.
           in: query
-          name: filter
+          name: pageToken
           type: string
+        - description: |-
+            Required. The name of the project for which a list of instances is
+            requested. Values are of the form `projects/<project>`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -749,19 +784,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates an instance and begins preparing it to begin serving. The
@@ -800,6 +835,10 @@ paths:
         Instance, if successful.
       operationId: spanner.projects.instances.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateInstanceRequest'
         - description: |-
             Required. The name of the project in which to create the instance. Values
             are of the form `projects/<project>`.
@@ -808,10 +847,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateInstanceRequest'
       responses:
         '200':
           description: Successful response
@@ -830,19 +865,19 @@ paths:
         - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Gets the access control policy for a database resource. Returns an empty
@@ -852,16 +887,16 @@ paths:
         resource.
       operationId: spanner.projects.instances.databases.getIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetIamPolicyRequest'
         - description: 'REQUIRED: The Cloud Spanner resource for which the policy is being retrieved. The format is `projects/<project ID>/instances/<instance ID>` for instance resources and `projects/<project ID>/instances/<instance ID>/databases/<database ID>` for database resources.'
           in: path
           name: resource
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -880,19 +915,19 @@ paths:
         - projects
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the access control policy on a database resource. Replaces any
@@ -902,16 +937,16 @@ paths:
         resource.
       operationId: spanner.projects.instances.databases.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
         - description: 'REQUIRED: The Cloud Spanner resource for which the policy is being set. The format is `projects/<project ID>/instances/<instance ID>` for instance resources and `projects/<project ID>/instances/<instance ID>/databases/<database ID>` for databases resources.'
           in: path
           name: resource
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetIamPolicyRequest'
       responses:
         '200':
           description: Successful response
@@ -930,19 +965,19 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns permissions that the caller has on the specified database resource.
@@ -953,16 +988,16 @@ paths:
         permissions.
       operationId: spanner.projects.instances.databases.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
         - description: 'REQUIRED: The Cloud Spanner resource for which permissions are being tested. The format is `projects/<project ID>/instances/<instance ID>` for instance resources and `projects/<project ID>/instances/<instance ID>/databases/<database ID>` for database resources.'
           in: path
           name: resource
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestIamPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -981,19 +1016,19 @@ paths:
         - projects
   '/v1/{session}:beginTransaction':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Begins a new transaction. This step can often be skipped:
@@ -1002,16 +1037,16 @@ paths:
         side-effect.
       operationId: spanner.projects.instances.databases.sessions.beginTransaction
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BeginTransactionRequest'
         - description: Required. The session in which the transaction runs.
           in: path
           name: session
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BeginTransactionRequest'
       responses:
         '200':
           description: Successful response
@@ -1030,19 +1065,19 @@ paths:
         - projects
   '/v1/{session}:commit':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Commits a transaction. The request includes the mutations to be
@@ -1055,16 +1090,16 @@ paths:
         the transaction from the beginning, re-using the same session.
       operationId: spanner.projects.instances.databases.sessions.commit
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CommitRequest'
         - description: Required. The session in which the transaction to be committed is running.
           in: path
           name: session
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CommitRequest'
       responses:
         '200':
           description: Successful response
@@ -1083,19 +1118,19 @@ paths:
         - projects
   '/v1/{session}:executeSql':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Executes an SQL query, returning all rows in a single reply. This
@@ -1111,16 +1146,16 @@ paths:
         ExecuteStreamingSql instead.
       operationId: spanner.projects.instances.databases.sessions.executeSql
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ExecuteSqlRequest'
         - description: Required. The session in which the SQL query should be performed.
           in: path
           name: session
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ExecuteSqlRequest'
       responses:
         '200':
           description: Successful response
@@ -1139,19 +1174,19 @@ paths:
         - projects
   '/v1/{session}:executeStreamingSql':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Like ExecuteSql, except returns the result
@@ -1161,16 +1196,16 @@ paths:
         column value can exceed 10 MiB.
       operationId: spanner.projects.instances.databases.sessions.executeStreamingSql
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ExecuteSqlRequest'
         - description: Required. The session in which the SQL query should be performed.
           in: path
           name: session
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ExecuteSqlRequest'
       responses:
         '200':
           description: Successful response
@@ -1189,19 +1224,19 @@ paths:
         - projects
   '/v1/{session}:read':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Reads rows from the database using key lookups and scans, as a
@@ -1219,16 +1254,16 @@ paths:
         StreamingRead instead.
       operationId: spanner.projects.instances.databases.sessions.read
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReadRequest'
         - description: Required. The session in which the read should be performed.
           in: path
           name: session
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReadRequest'
       responses:
         '200':
           description: Successful response
@@ -1247,19 +1282,19 @@ paths:
         - projects
   '/v1/{session}:rollback':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Rolls back a transaction, releasing any locks it holds. It is a good
@@ -1272,16 +1307,16 @@ paths:
         found. `Rollback` never returns `ABORTED`.
       operationId: spanner.projects.instances.databases.sessions.rollback
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RollbackRequest'
         - description: Required. The session in which the transaction to roll back is running.
           in: path
           name: session
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RollbackRequest'
       responses:
         '200':
           description: Successful response
@@ -1300,19 +1335,19 @@ paths:
         - projects
   '/v1/{session}:streamingRead':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Like Read, except returns the result set as a
@@ -1322,16 +1357,16 @@ paths:
         10 MiB.
       operationId: spanner.projects.instances.databases.sessions.streamingRead
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReadRequest'
         - description: Required. The session in which the read should be performed.
           in: path
           name: session
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReadRequest'
       responses:
         '200':
           description: Successful response
@@ -1349,130 +1384,6 @@ paths:
       tags:
         - projects
 definitions:
-  AuditConfig:
-    description: |-
-      Specifies the audit configuration for a service.
-      The configuration determines which permission types are logged, and what
-      identities, if any, are exempted from logging.
-      An AuditConfig must have one or more AuditLogConfigs.
-
-      If there are AuditConfigs for both `allServices` and a specific service,
-      the union of the two AuditConfigs is used for that service: the log_types
-      specified in each AuditConfig are enabled, and the exempted_members in each
-      AuditConfig are exempted.
-
-      Example Policy with multiple AuditConfigs:
-
-          {
-            "audit_configs": [
-              {
-                "service": "allServices"
-                "audit_log_configs": [
-                  {
-                    "log_type": "DATA_READ",
-                    "exempted_members": [
-                      "user:foo@gmail.com"
-                    ]
-                  },
-                  {
-                    "log_type": "DATA_WRITE",
-                  },
-                  {
-                    "log_type": "ADMIN_READ",
-                  }
-                ]
-              },
-              {
-                "service": "fooservice.googleapis.com"
-                "audit_log_configs": [
-                  {
-                    "log_type": "DATA_READ",
-                  },
-                  {
-                    "log_type": "DATA_WRITE",
-                    "exempted_members": [
-                      "user:bar@gmail.com"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
-      logging. It also exempts foo@gmail.com from DATA_READ logging, and
-      bar@gmail.com from DATA_WRITE logging.
-    properties:
-      auditLogConfigs:
-        description: |-
-          The configuration for logging of each type of permission.
-          Next ID: 4
-        items:
-          $ref: '#/definitions/AuditLogConfig'
-        type: array
-      exemptedMembers:
-        items:
-          type: string
-        type: array
-      service:
-        description: |-
-          Specifies a service that will be enabled for audit logging.
-          For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
-          `allServices` is a special value that covers all services.
-        type: string
-    type: object
-  AuditLogConfig:
-    description: |-
-      Provides the configuration for logging a type of permissions.
-      Example:
-
-          {
-            "audit_log_configs": [
-              {
-                "log_type": "DATA_READ",
-                "exempted_members": [
-                  "user:foo@gmail.com"
-                ]
-              },
-              {
-                "log_type": "DATA_WRITE",
-              }
-            ]
-          }
-
-      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
-      foo@gmail.com from DATA_READ logging.
-    properties:
-      exemptedMembers:
-        description: |-
-          Specifies the identities that do not cause logging for this type of
-          permission.
-          Follows the same format of Binding.members.
-        items:
-          type: string
-        type: array
-      logType:
-        description: The log type that this config enables.
-        enum:
-          - LOG_TYPE_UNSPECIFIED
-          - ADMIN_READ
-          - DATA_WRITE
-          - DATA_READ
-        type: string
-    type: object
-  AuthorizationLoggingOptions:
-    description: Authorization-related information used by Cloud Audit Logging.
-    properties:
-      permissionType:
-        description: The type of the permission that was checked.
-        enum:
-          - PERMISSION_TYPE_UNSPECIFIED
-          - ADMIN_READ
-          - ADMIN_WRITE
-          - DATA_READ
-          - DATA_WRITE
-        type: string
-    type: object
   BeginTransactionRequest:
     description: The request for BeginTransaction.
     properties:
@@ -1483,14 +1394,6 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
-      condition:
-        $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
-          binding. Different bindings, including their conditions, are examined
-          independently.
-          This field is GOOGLE_INTERNAL.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1554,20 +1457,6 @@ definitions:
           columns.
         type: string
     type: object
-  CloudAuditOptions:
-    description: Write a Cloud Audit log
-    properties:
-      authorizationLoggingOptions:
-        $ref: '#/definitions/AuthorizationLoggingOptions'
-        description: Information used by the Cloud Audit Logging pipeline.
-      logName:
-        description: The log_name to populate in the Cloud Audit Record.
-        enum:
-          - UNSPECIFIED_LOG_NAME
-          - ADMIN_ACTIVITY
-          - DATA_ACCESS
-        type: string
-    type: object
   CommitRequest:
     description: The request for Commit.
     properties:
@@ -1602,62 +1491,6 @@ definitions:
       commitTimestamp:
         description: The Cloud Spanner timestamp at which the transaction committed.
         format: google-datetime
-        type: string
-    type: object
-  Condition:
-    description: A condition to be met.
-    properties:
-      iam:
-        description: Trusted attributes supplied by the IAM system.
-        enum:
-          - NO_ATTR
-          - AUTHORITY
-          - ATTRIBUTION
-          - SECURITY_REALM
-          - APPROVER
-          - JUSTIFICATION_TYPE
-        type: string
-      op:
-        description: An operator to apply the subject with.
-        enum:
-          - NO_OP
-          - EQUALS
-          - NOT_EQUALS
-          - IN
-          - NOT_IN
-          - DISCHARGED
-        type: string
-      svc:
-        description: Trusted attributes discharged by the service.
-        type: string
-      sys:
-        description: |-
-          Trusted attributes supplied by any service that owns resources and uses
-          the IAM system for access control.
-        enum:
-          - NO_ATTR
-          - REGION
-          - SERVICE
-          - NAME
-          - IP
-        type: string
-      value:
-        description: DEPRECATED. Use 'values' instead.
-        type: string
-      values:
-        description: The objects of the condition. This is mutually exclusive with 'value'.
-        items:
-          type: string
-        type: array
-    type: object
-  CounterOptions:
-    description: Options for counters
-    properties:
-      field:
-        description: The field value to attribute.
-        type: string
-      metric:
-        description: The metric to update.
         type: string
     type: object
   CreateDatabaseMetadata:
@@ -1732,9 +1565,12 @@ definitions:
           length.
         type: string
     type: object
-  DataAccessOptions:
-    description: Write a Data Access (Gin) log
-    properties: {}
+  CreateSessionRequest:
+    description: The request for CreateSession.
+    properties:
+      session:
+        $ref: '#/definitions/Session'
+        description: The session to create.
     type: object
   Database:
     description: A Cloud Spanner database.
@@ -1843,39 +1679,6 @@ definitions:
           The transaction to use. If none is provided, the default is a
           temporary read-only transaction with strong concurrency.
     type: object
-  Expr:
-    description: |-
-      Represents an expression text. Example:
-
-          title: "User account presence"
-          description: "Determines whether the request has a user account"
-          expression: "size(request.user) > 0"
-    properties:
-      description:
-        description: |-
-          An optional description of the expression. This is a longer text which
-          describes the expression, e.g. when hovered over it in a UI.
-        type: string
-      expression:
-        description: |-
-          Textual representation of an expression in
-          Common Expression Language syntax.
-
-          The application context of the containing message determines which
-          well-known feature set of CEL is supported.
-        type: string
-      location:
-        description: |-
-          An optional string indicating the location of the expression for error
-          reporting, e.g. a file name and a position in the file.
-        type: string
-      title:
-        description: |-
-          An optional title for the expression, i.e. a short string describing
-          its purpose. This can be used e.g. in UIs which allow to enter the
-          expression.
-        type: string
-    type: object
   Field:
     description: Message representing a single field of a struct.
     properties:
@@ -1961,19 +1764,8 @@ definitions:
           Required. The number of nodes allocated to this instance. This may be zero
           in API responses for instances that are not yet in state `READY`.
 
-          Each Spanner node can provide up to 10,000 QPS of reads or 2000 QPS of
-          writes (writing single rows at 1KB data per row), and 2 TiB storage.
-
-          For optimal performance, we recommend provisioning enough nodes to keep
-          overall CPU utilization under 75%.
-
-          A minimum of 3 nodes is recommended for production environments.  This
-          minimum is required for SLAs to apply to your instance.
-
-          Note that Cloud Spanner performance is highly dependent on workload, schema
-          design, and dataset characteristics. The performance numbers above are
-          estimates, and assume [best practices](https://cloud.google.com/spanner/docs/bulk-loading)
-          are followed.
+          See [the documentation](https://cloud.google.com/spanner/docs/instances#node_count)
+          for more information about nodes.
         format: int32
         type: integer
       state:
@@ -2209,41 +2001,20 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
     type: object
-  LogConfig:
-    description: |-
-      Specifies what kind of log the caller must write
-      Increment a streamz counter with the specified metric and field names.
-
-      Metric names should start with a '/', generally be lowercase-only,
-      and end in "_count". Field names should not contain an initial slash.
-      The actual exported metric names will have "/iam/policy" prepended.
-
-      Field names correspond to IAM request parameters and field values are
-      their respective values.
-
-      At present the only supported field names are
-         - "iam_principal", corresponding to IAMContext.principal;
-         - "" (empty string), resulting in one aggretated counter with no field.
-
-      Examples:
-        counter { metric: "/debug_access_count"  field: "iam_principal" }
-        ==> increment counter /iam/policy/backend_debug_access_count
-                              {iam_principal=[value of IAMContext.principal]}
-
-      At this time we do not support:
-      * multiple field names (though this may be supported in the future)
-      * decrementing the counter
-      * incrementing it by anything other than 1
+  ListSessionsResponse:
+    description: The response for ListSessions.
     properties:
-      cloudAudit:
-        $ref: '#/definitions/CloudAuditOptions'
-        description: Cloud audit options.
-      counter:
-        $ref: '#/definitions/CounterOptions'
-        description: Counter options.
-      dataAccess:
-        $ref: '#/definitions/DataAccessOptions'
-        description: Data access options.
+      nextPageToken:
+        description: |-
+          `next_page_token` can be sent in a subsequent
+          ListSessions call to fetch more of the matching
+          sessions.
+        type: string
+      sessions:
+        description: The list of requested sessions.
+        items:
+          $ref: '#/definitions/Session'
+        type: array
     type: object
   Mutation:
     description: |-
@@ -2288,7 +2059,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:
@@ -2521,11 +2292,6 @@ definitions:
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam).
     properties:
-      auditConfigs:
-        description: Specifies cloud audit logging configuration for this policy.
-        items:
-          $ref: '#/definitions/AuditConfig'
-        type: array
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
@@ -2547,22 +2313,6 @@ definitions:
           policy is overwritten blindly.
         format: byte
         type: string
-      iamOwned:
-        type: boolean
-      rules:
-        description: |-
-          If more than one rule is specified, the rules are applied in the following
-          manner:
-          - All matching LOG rules are always applied.
-          - If any DENY/DENY_WITH_LOG rule matches, permission is denied.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is
-            granted.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if no rule applies, permission is denied.
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
       version:
         description: Version of the `Policy`. The default version is 0.
         format: int32
@@ -2624,6 +2374,9 @@ definitions:
           previously committed transaction whose timestamp is known.
 
           Note that this option can only be used in single-use transactions.
+
+          A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds.
+          Example: `"2014-10-02T15:01:23.045123456Z"`.
         format: google-datetime
         type: string
       readTimestamp:
@@ -2637,6 +2390,9 @@ definitions:
           Useful for large scale consistent reads such as mapreduces, or
           for coordinating many reads against a consistent snapshot of the
           data.
+
+          A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds.
+          Example: `"2014-10-02T15:01:23.045123456Z"`.
         format: google-datetime
         type: string
       returnReadTimestamp:
@@ -2788,64 +2544,37 @@ definitions:
         format: byte
         type: string
     type: object
-  Rule:
-    description: A rule to be applied in a Policy.
-    properties:
-      action:
-        description: Required
-        enum:
-          - NO_ACTION
-          - ALLOW
-          - ALLOW_WITH_LOG
-          - DENY
-          - DENY_WITH_LOG
-          - LOG
-        type: string
-      conditions:
-        description: Additional restrictions that must be met
-        items:
-          $ref: '#/definitions/Condition'
-        type: array
-      description:
-        description: Human-readable description of the rule.
-        type: string
-      in:
-        description: |-
-          If one or more 'in' clauses are specified, the rule matches if
-          the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
-        items:
-          type: string
-        type: array
-      logConfig:
-        description: |-
-          The config returned to callers of tech.iam.IAM.CheckPolicy for any entries
-          that match the LOG action.
-        items:
-          $ref: '#/definitions/LogConfig'
-        type: array
-      notIn:
-        description: |-
-          If one or more 'not_in' clauses are specified, the rule matches
-          if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
-          The format for in and not_in entries is the same as for members in a
-          Binding (see google/iam/v1/policy.proto).
-        items:
-          type: string
-        type: array
-      permissions:
-        description: |-
-          A permission is a string of form '<service>.<resource type>.<verb>'
-          (e.g., 'storage.buckets.list'). A value of '*' matches all permissions,
-          and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
-        items:
-          type: string
-        type: array
-    type: object
   Session:
     description: A session in the Cloud Spanner API.
     properties:
+      approximateLastUseTime:
+        description: |-
+          Output only. The approximate timestamp when the session is last used. It is
+          typically earlier than the actual last use time.
+        format: google-datetime
+        type: string
+      createTime:
+        description: Output only. The timestamp when the session is created.
+        format: google-datetime
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          The labels for the session.
+
+           * Label keys must be between 1 and 63 characters long and must conform to
+             the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
+           * Label values must be between 0 and 63 characters long and must conform
+             to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
+           * No more than 64 labels can be associated with a given session.
+
+          See https://goo.gl/xmQnxf for more information on and examples of labels.
+        type: object
       name:
-        description: Required. The name of the session.
+        description: |-
+          The name of the session. This is always system-assigned; values provided
+          when creating a session are ignored.
         type: string
     type: object
   SetIamPolicyRequest:
@@ -2858,15 +2587,6 @@ definitions:
           the policy is limited to a few 10s of KB. An empty policy is a
           valid policy but certain Cloud Platform services (such as Projects)
           might reject them.
-      updateMask:
-        description: |-
-          OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-          the fields in the mask will be modified. If no mask is provided, the
-          following default mask is used:
-          paths: "bindings, etag"
-          This field is only used by Cloud IAM.
-        format: google-fieldmask
-        type: string
     type: object
   ShortRepresentation:
     description: |-
@@ -3020,6 +2740,9 @@ definitions:
           For snapshot read-only transactions, the read timestamp chosen
           for the transaction. Not returned by default: see
           TransactionOptions.ReadOnly.return_read_timestamp.
+
+          A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds.
+          Example: `"2014-10-02T15:01:23.045123456Z"`.
         format: google-datetime
         type: string
     type: object

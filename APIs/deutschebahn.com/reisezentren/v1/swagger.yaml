@@ -10,7 +10,7 @@ info:
     name: DB Systel GmbH
   description: This REST-API enables you to query information about travel centers in Germany.
   termsOfService: 'https://developer.deutschebahn.com/store/'
-  title: Reisezentren
+  title: Reisezentren-API
   version: v1
   x-apisguru-categories:
     - transport
@@ -58,7 +58,6 @@ paths:
   '/reisezentren/loc/{lat}/{lon}':
     get:
       description: Get information about a station near a location
-      operationId: ''
       parameters:
         - description: Latitude
           format: float
@@ -80,6 +79,38 @@ paths:
           schema:
             $ref: '#/definitions/TravelCenter'
       summary: Get information about a station near a location
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/reisezentren/loc/{lat}/{lon}/{dist}':
+    get:
+      description: Get stations in a given radius
+      parameters:
+        - description: Latitude
+          format: float
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: Longitude
+          format: float
+          in: path
+          name: lon
+          required: true
+          type: number
+        - description: Radius
+          format: float
+          in: path
+          name: dist
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A station was found
+          schema:
+            $ref: '#/definitions/TravelCenter'
+      summary: Get stations in a given radius
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
   '/reisezentren/{id}':

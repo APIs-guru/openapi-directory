@@ -23,7 +23,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://clouderrorreporting.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -159,40 +159,44 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{name}':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Replace the data for the specified group.
         Fails if the group does not exist.
       operationId: clouderrorreporting.projects.groups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ErrorGroup'
         - description: |-
             The group resource name.
             Example: <code>projects/my-project-123/groups/my-groupid</code>
@@ -201,10 +205,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ErrorGroup'
       responses:
         '200':
           description: Successful response
@@ -249,6 +249,18 @@ paths:
       description: Lists the specified events.
       operationId: clouderrorreporting.projects.events.list
       parameters:
+        - description: '[Required] The group for which events shall be returned.'
+          in: query
+          name: groupId
+          type: string
+        - description: '[Optional] The maximum number of results to return per response.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: '[Optional] A `next_page_token` provided by a previous response.'
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             [Required] The resource name of the Google Cloud Platform project. Written
             as `projects/` plus the
@@ -260,13 +272,11 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: '[Required] The group for which events shall be returned.'
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
           in: query
-          name: groupId
-          type: string
-        - description: '[Optional] A `next_page_token` provided by a previous response.'
-          in: query
-          name: pageToken
+          name: serviceFilter.resourceType
           type: string
         - description: |-
             [Optional] The exact value to match against
@@ -274,21 +284,11 @@ paths:
           in: query
           name: serviceFilter.service
           type: string
-        - description: '[Optional] The maximum number of results to return per response.'
-          in: query
-          name: pageSize
-          type: integer
         - description: |-
             [Optional] The exact value to match against
             [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
           in: query
           name: serviceFilter.version
-          type: string
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
-          in: query
-          name: serviceFilter.resourceType
           type: string
         - description: Restricts the query to the specified time range.
           enum:
@@ -314,34 +314,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{projectName}/events:report':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Report an individual error event.
@@ -354,6 +354,10 @@ paths:
         <pre>POST https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</pre>
       operationId: clouderrorreporting.projects.events.report
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReportedErrorEvent'
         - description: |-
             [Required] The resource name of the Google Cloud Platform project. Written
             as `projects/` plus the
@@ -364,10 +368,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReportedErrorEvent'
       responses:
         '200':
           description: Successful response
@@ -386,35 +386,28 @@ paths:
       operationId: clouderrorreporting.projects.groupStats.list
       parameters:
         - description: |-
-            [Required] The resource name of the Google Cloud Platform project. Written
-            as <code>projects/</code> plus the
-            <a href="https://support.google.com/cloud/answer/6158840">Google Cloud
-            Platform project ID</a>.
-
-            Example: <code>projects/my-project-123</code>.
-          in: path
-          name: projectName
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+            [Optional] The alignment of the timed counts to be returned.
+            Default is `ALIGNMENT_EQUAL_AT_END`.
+          enum:
+            - ERROR_COUNT_ALIGNMENT_UNSPECIFIED
+            - ALIGNMENT_EQUAL_ROUNDED
+            - ALIGNMENT_EQUAL_AT_END
           in: query
-          name: serviceFilter.service
+          name: alignment
           type: string
         - description: |-
-            [Optional] The maximum number of results to return per response.
-            Default is 20.
+            [Optional] Time where the timed counts shall be aligned if rounded
+            alignment is chosen. Default is 00:00 UTC.
           in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
-          in: query
-          name: serviceFilter.version
+          name: alignmentTime
           type: string
+        - collectionFormat: multi
+          description: '[Optional] List all <code>ErrorGroupStats</code> with these IDs.'
+          in: query
+          items:
+            type: string
+          name: groupId
+          type: array
         - description: |-
             [Optional] The sort order in which the results are returned.
             Default is `COUNT_DESC`.
@@ -428,29 +421,47 @@ paths:
           name: order
           type: string
         - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+            [Optional] The maximum number of results to return per response.
+            Default is 20.
           in: query
-          name: serviceFilter.resourceType
-          type: string
-        - description: |-
-            [Optional] Time where the timed counts shall be aligned if rounded
-            alignment is chosen. Default is 00:00 UTC.
-          in: query
-          name: alignmentTime
-          type: string
-        - description: |-
-            [Optional] The preferred duration for a single returned `TimedCount`.
-            If not set, no timed counts are returned.
-          in: query
-          name: timedCountDuration
-          type: string
+          name: pageSize
+          type: integer
         - description: |-
             [Optional] A `next_page_token` provided by a previous response. To view
             additional results, pass this token along with the identical query
             parameters as the first request.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            [Required] The resource name of the Google Cloud Platform project. Written
+            as <code>projects/</code> plus the
+            <a href="https://support.google.com/cloud/answer/6158840">Google Cloud
+            Platform project ID</a>.
+
+            Example: <code>projects/my-project-123</code>.
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+          in: query
+          name: serviceFilter.resourceType
+          type: string
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+          in: query
+          name: serviceFilter.service
+          type: string
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+          in: query
+          name: serviceFilter.version
           type: string
         - description: Restricts the query to the specified time range.
           enum:
@@ -464,22 +475,11 @@ paths:
           name: timeRange.period
           type: string
         - description: |-
-            [Optional] The alignment of the timed counts to be returned.
-            Default is `ALIGNMENT_EQUAL_AT_END`.
-          enum:
-            - ERROR_COUNT_ALIGNMENT_UNSPECIFIED
-            - ALIGNMENT_EQUAL_ROUNDED
-            - ALIGNMENT_EQUAL_AT_END
+            [Optional] The preferred duration for a single returned `TimedCount`.
+            If not set, no timed counts are returned.
           in: query
-          name: alignment
+          name: timedCountDuration
           type: string
-        - collectionFormat: multi
-          description: '[Optional] List all <code>ErrorGroupStats</code> with these IDs.'
-          in: query
-          items:
-            type: string
-          name: groupId
-          type: array
       responses:
         '200':
           description: Successful response
@@ -493,19 +493,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   DeleteEventsResponse:
     description: Response message for deleting error events.

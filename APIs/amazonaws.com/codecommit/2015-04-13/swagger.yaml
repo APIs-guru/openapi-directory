@@ -3,15 +3,16 @@ info:
   version: '2015-04-13'
   x-release: v4
   title: AWS CodeCommit
-  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference)</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
+  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference).</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Information about comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
   x-logo:
-    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
   termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
@@ -36,6 +37,7 @@ host: codecommit.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
 schemes:
+  - https
   - http
 consumes:
   - application/json
@@ -233,6 +235,131 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreatePullRequest':
+    post:
+      operationId: CreatePullRequest
+      description: Creates a pull request in the specified repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePullRequestOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+        '488':
+          description: ClientRequestTokenRequiredException
+          schema:
+            $ref: '#/definitions/ClientRequestTokenRequiredException'
+        '489':
+          description: InvalidClientRequestTokenException
+          schema:
+            $ref: '#/definitions/InvalidClientRequestTokenException'
+        '490':
+          description: IdempotencyParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotencyParameterMismatchException'
+        '491':
+          description: ReferenceNameRequiredException
+          schema:
+            $ref: '#/definitions/ReferenceNameRequiredException'
+        '492':
+          description: InvalidReferenceNameException
+          schema:
+            $ref: '#/definitions/InvalidReferenceNameException'
+        '493':
+          description: ReferenceDoesNotExistException
+          schema:
+            $ref: '#/definitions/ReferenceDoesNotExistException'
+        '494':
+          description: ReferenceTypeNotSupportedException
+          schema:
+            $ref: '#/definitions/ReferenceTypeNotSupportedException'
+        '495':
+          description: TitleRequiredException
+          schema:
+            $ref: '#/definitions/TitleRequiredException'
+        '496':
+          description: InvalidTitleException
+          schema:
+            $ref: '#/definitions/InvalidTitleException'
+        '497':
+          description: InvalidDescriptionException
+          schema:
+            $ref: '#/definitions/InvalidDescriptionException'
+        '498':
+          description: TargetsRequiredException
+          schema:
+            $ref: '#/definitions/TargetsRequiredException'
+        '499':
+          description: InvalidTargetsException
+          schema:
+            $ref: '#/definitions/InvalidTargetsException'
+        '500':
+          description: TargetRequiredException
+          schema:
+            $ref: '#/definitions/TargetRequiredException'
+        '501':
+          description: InvalidTargetException
+          schema:
+            $ref: '#/definitions/InvalidTargetException'
+        '502':
+          description: MultipleRepositoriesInPullRequestException
+          schema:
+            $ref: '#/definitions/MultipleRepositoriesInPullRequestException'
+        '503':
+          description: MaximumOpenPullRequestsExceededException
+          schema:
+            $ref: '#/definitions/MaximumOpenPullRequestsExceededException'
+        '504':
+          description: SourceAndDestinationAreSameException
+          schema:
+            $ref: '#/definitions/SourceAndDestinationAreSameException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePullRequestInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateRepository':
     post:
       operationId: CreateRepository
@@ -298,10 +425,120 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBranch':
+    post:
+      operationId: DeleteBranch
+      description: 'Deletes a branch from a repository, unless that branch is the default branch for the repository. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteBranchOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '484':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '485':
+          description: DefaultBranchCannotBeDeletedException
+          schema:
+            $ref: '#/definitions/DefaultBranchCannotBeDeletedException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBranchInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCommentContent':
+    post:
+      operationId: DeleteCommentContent
+      description: 'Deletes the content of a comment made on a change, file, or commit in a repository.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCommentContentOutput'
+        '480':
+          description: CommentDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommentDoesNotExistException'
+        '481':
+          description: CommentIdRequiredException
+          schema:
+            $ref: '#/definitions/CommentIdRequiredException'
+        '482':
+          description: InvalidCommentIdException
+          schema:
+            $ref: '#/definitions/InvalidCommentIdException'
+        '483':
+          description: CommentDeletedException
+          schema:
+            $ref: '#/definitions/CommentDeletedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteCommentContentInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteRepository':
     post:
       operationId: DeleteRepository
-      description: '<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important><p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</p> </important>'
+      description: '<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important> <p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</p> </important>'
       responses:
         '200':
           description: Success
@@ -341,6 +578,93 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRepositoryInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribePullRequestEvents':
+    post:
+      operationId: DescribePullRequestEvents
+      description: Returns information about one or more pull request events.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribePullRequestEventsOutput'
+        '480':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '481':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '482':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '483':
+          description: InvalidPullRequestEventTypeException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestEventTypeException'
+        '484':
+          description: InvalidActorArnException
+          schema:
+            $ref: '#/definitions/InvalidActorArnException'
+        '485':
+          description: ActorDoesNotExistException
+          schema:
+            $ref: '#/definitions/ActorDoesNotExistException'
+        '486':
+          description: InvalidMaxResultsException
+          schema:
+            $ref: '#/definitions/InvalidMaxResultsException'
+        '487':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+        '488':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '489':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '490':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '491':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '492':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribePullRequestEventsInput'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -483,6 +807,237 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBranchInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetComment':
+    post:
+      operationId: GetComment
+      description: 'Returns the content of a comment made on a change, file, or commit in a repository.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCommentOutput'
+        '480':
+          description: CommentDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommentDoesNotExistException'
+        '481':
+          description: CommentIdRequiredException
+          schema:
+            $ref: '#/definitions/CommentIdRequiredException'
+        '482':
+          description: InvalidCommentIdException
+          schema:
+            $ref: '#/definitions/InvalidCommentIdException'
+        '483':
+          description: CommentDeletedException
+          schema:
+            $ref: '#/definitions/CommentDeletedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCommentInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetCommentsForComparedCommit':
+    post:
+      operationId: GetCommentsForComparedCommit
+      description: Returns information about comments made on the comparison between two commits.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCommentsForComparedCommitOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: CommitIdRequiredException
+          schema:
+            $ref: '#/definitions/CommitIdRequiredException'
+        '484':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '485':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '486':
+          description: InvalidMaxResultsException
+          schema:
+            $ref: '#/definitions/InvalidMaxResultsException'
+        '487':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+        '488':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '489':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '490':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '491':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '492':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCommentsForComparedCommitInput'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetCommentsForPullRequest':
+    post:
+      operationId: GetCommentsForPullRequest
+      description: Returns comments made on a pull request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCommentsForPullRequestOutput'
+        '480':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '481':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '482':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '483':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '484':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '485':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '486':
+          description: CommitIdRequiredException
+          schema:
+            $ref: '#/definitions/CommitIdRequiredException'
+        '487':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '488':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '489':
+          description: InvalidMaxResultsException
+          schema:
+            $ref: '#/definitions/InvalidMaxResultsException'
+        '490':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+        '491':
+          description: RepositoryNotAssociatedWithPullRequestException
+          schema:
+            $ref: '#/definitions/RepositoryNotAssociatedWithPullRequestException'
+        '492':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '493':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '494':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '495':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '496':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCommentsForPullRequestInput'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -651,6 +1206,152 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetMergeConflicts':
+    post:
+      operationId: GetMergeConflicts
+      description: Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMergeConflictsOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: MergeOptionRequiredException
+          schema:
+            $ref: '#/definitions/MergeOptionRequiredException'
+        '484':
+          description: InvalidMergeOptionException
+          schema:
+            $ref: '#/definitions/InvalidMergeOptionException'
+        '485':
+          description: InvalidDestinationCommitSpecifierException
+          schema:
+            $ref: '#/definitions/InvalidDestinationCommitSpecifierException'
+        '486':
+          description: InvalidSourceCommitSpecifierException
+          schema:
+            $ref: '#/definitions/InvalidSourceCommitSpecifierException'
+        '487':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '488':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '489':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '490':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '491':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '492':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '493':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '494':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '495':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMergeConflictsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetPullRequest':
+    post:
+      operationId: GetPullRequest
+      description: Gets information about a pull request in a specified repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPullRequestOutput'
+        '480':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '481':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '482':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetPullRequestInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -841,6 +1542,93 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListPullRequests':
+    post:
+      operationId: ListPullRequests
+      description: Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPullRequestsOutput'
+        '480':
+          description: InvalidPullRequestStatusException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestStatusException'
+        '481':
+          description: InvalidAuthorArnException
+          schema:
+            $ref: '#/definitions/InvalidAuthorArnException'
+        '482':
+          description: AuthorDoesNotExistException
+          schema:
+            $ref: '#/definitions/AuthorDoesNotExistException'
+        '483':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '484':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '485':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '486':
+          description: InvalidMaxResultsException
+          schema:
+            $ref: '#/definitions/InvalidMaxResultsException'
+        '487':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+        '488':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '489':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '490':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '491':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '492':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPullRequestsInput'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListRepositories':
     post:
       operationId: ListRepositories
@@ -873,6 +1661,406 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#MergePullRequestByFastForward':
+    post:
+      operationId: MergePullRequestByFastForward
+      description: Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MergePullRequestByFastForwardOutput'
+        '480':
+          description: ManualMergeRequiredException
+          schema:
+            $ref: '#/definitions/ManualMergeRequiredException'
+        '481':
+          description: PullRequestAlreadyClosedException
+          schema:
+            $ref: '#/definitions/PullRequestAlreadyClosedException'
+        '482':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '483':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '484':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '485':
+          description: TipOfSourceReferenceIsDifferentException
+          schema:
+            $ref: '#/definitions/TipOfSourceReferenceIsDifferentException'
+        '486':
+          description: ReferenceDoesNotExistException
+          schema:
+            $ref: '#/definitions/ReferenceDoesNotExistException'
+        '487':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '488':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '489':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '490':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '491':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '492':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '493':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '494':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '495':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MergePullRequestByFastForwardInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PostCommentForComparedCommit':
+    post:
+      operationId: PostCommentForComparedCommit
+      description: Posts a comment on the comparison between two commits.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PostCommentForComparedCommitOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: ClientRequestTokenRequiredException
+          schema:
+            $ref: '#/definitions/ClientRequestTokenRequiredException'
+        '484':
+          description: InvalidClientRequestTokenException
+          schema:
+            $ref: '#/definitions/InvalidClientRequestTokenException'
+        '485':
+          description: IdempotencyParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotencyParameterMismatchException'
+        '486':
+          description: CommentContentRequiredException
+          schema:
+            $ref: '#/definitions/CommentContentRequiredException'
+        '487':
+          description: CommentContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/CommentContentSizeLimitExceededException'
+        '488':
+          description: InvalidFileLocationException
+          schema:
+            $ref: '#/definitions/InvalidFileLocationException'
+        '489':
+          description: InvalidRelativeFileVersionEnumException
+          schema:
+            $ref: '#/definitions/InvalidRelativeFileVersionEnumException'
+        '490':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '491':
+          description: InvalidFilePositionException
+          schema:
+            $ref: '#/definitions/InvalidFilePositionException'
+        '492':
+          description: CommitIdRequiredException
+          schema:
+            $ref: '#/definitions/CommitIdRequiredException'
+        '493':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '494':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '495':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '496':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '497':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '498':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+        '499':
+          description: BeforeCommitIdAndAfterCommitIdAreSameException
+          schema:
+            $ref: '#/definitions/BeforeCommitIdAndAfterCommitIdAreSameException'
+        '500':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '501':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '502':
+          description: PathDoesNotExistException
+          schema:
+            $ref: '#/definitions/PathDoesNotExistException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PostCommentForComparedCommitInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PostCommentForPullRequest':
+    post:
+      operationId: PostCommentForPullRequest
+      description: Posts a comment on a pull request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PostCommentForPullRequestOutput'
+        '480':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '481':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '482':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '483':
+          description: RepositoryNotAssociatedWithPullRequestException
+          schema:
+            $ref: '#/definitions/RepositoryNotAssociatedWithPullRequestException'
+        '484':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '485':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '486':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '487':
+          description: ClientRequestTokenRequiredException
+          schema:
+            $ref: '#/definitions/ClientRequestTokenRequiredException'
+        '488':
+          description: InvalidClientRequestTokenException
+          schema:
+            $ref: '#/definitions/InvalidClientRequestTokenException'
+        '489':
+          description: IdempotencyParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotencyParameterMismatchException'
+        '490':
+          description: CommentContentRequiredException
+          schema:
+            $ref: '#/definitions/CommentContentRequiredException'
+        '491':
+          description: CommentContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/CommentContentSizeLimitExceededException'
+        '492':
+          description: InvalidFileLocationException
+          schema:
+            $ref: '#/definitions/InvalidFileLocationException'
+        '493':
+          description: InvalidRelativeFileVersionEnumException
+          schema:
+            $ref: '#/definitions/InvalidRelativeFileVersionEnumException'
+        '494':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '495':
+          description: InvalidFilePositionException
+          schema:
+            $ref: '#/definitions/InvalidFilePositionException'
+        '496':
+          description: CommitIdRequiredException
+          schema:
+            $ref: '#/definitions/CommitIdRequiredException'
+        '497':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '498':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '499':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '500':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '501':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '502':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+        '503':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '504':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '505':
+          description: PathDoesNotExistException
+          schema:
+            $ref: '#/definitions/PathDoesNotExistException'
+        '506':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '507':
+          description: BeforeCommitIdAndAfterCommitIdAreSameException
+          schema:
+            $ref: '#/definitions/BeforeCommitIdAndAfterCommitIdAreSameException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PostCommentForPullRequestInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PostCommentReply':
+    post:
+      operationId: PostCommentReply
+      description: Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PostCommentReplyOutput'
+        '480':
+          description: ClientRequestTokenRequiredException
+          schema:
+            $ref: '#/definitions/ClientRequestTokenRequiredException'
+        '481':
+          description: InvalidClientRequestTokenException
+          schema:
+            $ref: '#/definitions/InvalidClientRequestTokenException'
+        '482':
+          description: IdempotencyParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotencyParameterMismatchException'
+        '483':
+          description: CommentContentRequiredException
+          schema:
+            $ref: '#/definitions/CommentContentRequiredException'
+        '484':
+          description: CommentContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/CommentContentSizeLimitExceededException'
+        '485':
+          description: CommentDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommentDoesNotExistException'
+        '486':
+          description: CommentIdRequiredException
+          schema:
+            $ref: '#/definitions/CommentIdRequiredException'
+        '487':
+          description: InvalidCommentIdException
+          schema:
+            $ref: '#/definitions/InvalidCommentIdException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PostCommentReplyInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1101,6 +2289,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateComment':
+    post:
+      operationId: UpdateComment
+      description: Replaces the contents of a comment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateCommentOutput'
+        '480':
+          description: CommentContentRequiredException
+          schema:
+            $ref: '#/definitions/CommentContentRequiredException'
+        '481':
+          description: CommentContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/CommentContentSizeLimitExceededException'
+        '482':
+          description: CommentDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommentDoesNotExistException'
+        '483':
+          description: CommentIdRequiredException
+          schema:
+            $ref: '#/definitions/CommentIdRequiredException'
+        '484':
+          description: InvalidCommentIdException
+          schema:
+            $ref: '#/definitions/InvalidCommentIdException'
+        '485':
+          description: CommentNotCreatedByCallerException
+          schema:
+            $ref: '#/definitions/CommentNotCreatedByCallerException'
+        '486':
+          description: CommentDeletedException
+          schema:
+            $ref: '#/definitions/CommentDeletedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCommentInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateDefaultBranch':
     post:
       operationId: UpdateDefaultBranch
@@ -1158,6 +2399,169 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDefaultBranchInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdatePullRequestDescription':
+    post:
+      operationId: UpdatePullRequestDescription
+      description: Replaces the contents of the description of a pull request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdatePullRequestDescriptionOutput'
+        '480':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '481':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '482':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '483':
+          description: InvalidDescriptionException
+          schema:
+            $ref: '#/definitions/InvalidDescriptionException'
+        '484':
+          description: PullRequestAlreadyClosedException
+          schema:
+            $ref: '#/definitions/PullRequestAlreadyClosedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePullRequestDescriptionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdatePullRequestStatus':
+    post:
+      operationId: UpdatePullRequestStatus
+      description: 'Updates the status of a pull request. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdatePullRequestStatusOutput'
+        '480':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '481':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '482':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '483':
+          description: InvalidPullRequestStatusUpdateException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestStatusUpdateException'
+        '484':
+          description: InvalidPullRequestStatusException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestStatusException'
+        '485':
+          description: PullRequestStatusRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestStatusRequiredException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePullRequestStatusInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdatePullRequestTitle':
+    post:
+      operationId: UpdatePullRequestTitle
+      description: Replaces the title of a pull request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdatePullRequestTitleOutput'
+        '480':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '481':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '482':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '483':
+          description: TitleRequiredException
+          schema:
+            $ref: '#/definitions/TitleRequiredException'
+        '484':
+          description: InvalidTitleException
+          schema:
+            $ref: '#/definitions/InvalidTitleException'
+        '485':
+          description: PullRequestAlreadyClosedException
+          schema:
+            $ref: '#/definitions/PullRequestAlreadyClosedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePullRequestTitleInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1269,10 +2673,18 @@ paths:
 definitions:
   AccountId:
     type: string
+  ActorDoesNotExistException:
+    type: object
+    properties: {}
+    description: The specified Amazon Resource Name (ARN) does not exist in the AWS account.
   AdditionalData:
     type: string
   Arn:
     type: string
+  AuthorDoesNotExistException:
+    type: object
+    properties: {}
+    description: The specified Amazon Resource Name (ARN) does not exist in the AWS account.
   BatchGetRepositoriesInput:
     type: object
     required:
@@ -1292,6 +2704,10 @@ definitions:
         $ref: '#/definitions/RepositoryNotFoundList'
         description: Returns a list of repository names for which information could not be found.
     description: Represents the output of a batch get repositories operation.
+  BeforeCommitIdAndAfterCommitIdAreSameException:
+    type: object
+    properties: {}
+    description: 'The before commit ID and the after commit ID are the same, which is not valid. The before commit ID and the after commit ID must be different commit IDs.'
   BlobIdDoesNotExistException:
     type: object
     properties: {}
@@ -1330,7 +2746,7 @@ definitions:
   BranchName:
     type: string
     minLength: 1
-    maxLength: 100
+    maxLength: 256
   BranchNameExistsException:
     type: object
     properties: {}
@@ -1349,13 +2765,141 @@ definitions:
       - A
       - M
       - D
+  ClientRequestToken:
+    type: string
+  ClientRequestTokenRequiredException:
+    type: object
+    properties: {}
+    description: 'A client request token is required. A client request token is an unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
   CloneUrlHttp:
     type: string
   CloneUrlSsh:
     type: string
+  Comment:
+    type: object
+    properties:
+      commentId:
+        $ref: '#/definitions/CommentId'
+        description: The system-generated comment ID.
+      content:
+        $ref: '#/definitions/Content'
+        description: The content of the comment.
+      inReplyTo:
+        $ref: '#/definitions/CommentId'
+        description: 'The ID of the comment for which this comment is a reply, if any.'
+      creationDate:
+        $ref: '#/definitions/CreationDate'
+        description: 'The date and time the comment was created, in timestamp format.'
+      lastModifiedDate:
+        $ref: '#/definitions/LastModifiedDate'
+        description: 'The date and time the comment was most recently modified, in timestamp format.'
+      authorArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the person who posted the comment.
+      deleted:
+        $ref: '#/definitions/IsCommentDeleted'
+        description: A Boolean value indicating whether the comment has been deleted.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
+    description: Returns information about a specific comment.
+  CommentContentRequiredException:
+    type: object
+    properties: {}
+    description: The comment is empty. You must provide some content for a comment. The content cannot be null.
+  CommentContentSizeLimitExceededException:
+    type: object
+    properties: {}
+    description: 'The comment is too large. Comments are limited to 1,000 characters.'
+  CommentDeletedException:
+    type: object
+    properties: {}
+    description: This comment has already been deleted. You cannot edit or delete a deleted comment.
+  CommentDoesNotExistException:
+    type: object
+    properties: {}
+    description: 'No comment exists with the provided ID. Verify that you have provided the correct ID, and then try again.'
+  CommentId:
+    type: string
+  CommentIdRequiredException:
+    type: object
+    properties: {}
+    description: The comment ID is missing or null. A comment ID is required.
+  CommentNotCreatedByCallerException:
+    type: object
+    properties: {}
+    description: You cannot modify or delete this comment. Only comment authors can modify or delete their comments.
+  Comments:
+    type: array
+    items:
+      $ref: '#/definitions/Comment'
+  CommentsForComparedCommit:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the compared commits.
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit used to establish the 'before' of the comparison.
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit used to establish the 'after' of the comparison.
+      beforeBlobId:
+        $ref: '#/definitions/ObjectId'
+        description: The full blob ID of the commit used to establish the 'before' of the comparison.
+      afterBlobId:
+        $ref: '#/definitions/ObjectId'
+        description: The full blob ID of the commit used to establish the 'after' of the comparison.
+      location:
+        $ref: '#/definitions/Location'
+        description: 'Location information about the comment on the comparison, including the file name, line number, and whether the version of the file where the comment was made is ''BEFORE'' or ''AFTER''.'
+      comments:
+        $ref: '#/definitions/Comments'
+        description: An array of comment objects. Each comment object contains information about a comment on the comparison between commits.
+    description: Returns information about comments on the comparison between two commits.
+  CommentsForComparedCommitData:
+    type: array
+    items:
+      $ref: '#/definitions/CommentsForComparedCommit'
+  CommentsForPullRequest:
+    type: object
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: The system-generated ID of the pull request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the pull request.
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit that was the tip of the destination branch when the pull request was created. This commit will be superceded by the after commit in the source branch when and if you merge the source branch into the destination branch.
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'he full commit ID of the commit that was the tip of the source branch at the time the comment was made. '
+      beforeBlobId:
+        $ref: '#/definitions/ObjectId'
+        description: The full blob ID of the file on which you want to comment on the destination commit.
+      afterBlobId:
+        $ref: '#/definitions/ObjectId'
+        description: The full blob ID of the file on which you want to comment on the source commit.
+      location:
+        $ref: '#/definitions/Location'
+        description: 'Location information about the comment on the pull request, including the file name, line number, and whether the version of the file where the comment was made is ''BEFORE'' (destination branch) or ''AFTER'' (source branch).'
+      comments:
+        $ref: '#/definitions/Comments'
+        description: An array of comment objects. Each comment object contains information about a comment on the pull request.
+    description: Returns information about comments on a pull request.
+  CommentsForPullRequestData:
+    type: array
+    items:
+      $ref: '#/definitions/CommentsForPullRequest'
   Commit:
     type: object
     properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: 'The full SHA of the specified commit. '
       treeId:
         $ref: '#/definitions/ObjectId'
         description: Tree information for the specified commit.
@@ -1395,6 +2939,8 @@ definitions:
     type: object
     properties: {}
     description: A commit was not specified.
+  Content:
+    type: string
   CreateBranchInput:
     type: object
     required:
@@ -1412,6 +2958,32 @@ definitions:
         $ref: '#/definitions/CommitId'
         description: The ID of the commit to point the new branch to.
     description: Represents the input of a create branch operation.
+  CreatePullRequestInput:
+    type: object
+    required:
+      - title
+      - targets
+    properties:
+      title:
+        $ref: '#/definitions/Title'
+        description: The title of the pull request. This title will be used to identify the pull request to other users in the repository.
+      description:
+        $ref: '#/definitions/Description'
+        description: A description of the pull request.
+      targets:
+        $ref: '#/definitions/TargetList'
+        description: 'The targets for the pull request, including the source of the code to be reviewed (the source branch), and the destination where the creator of the pull request intends the code to be merged after the pull request is closed (the destination branch).'
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: '<p>A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.</p> <note> <p>The AWS SDKs prepopulate client request tokens. If using an AWS SDK, you do not have to generate an idempotency token, as this will be done for you.</p> </note>'
+  CreatePullRequestOutput:
+    type: object
+    required:
+      - pullRequest
+    properties:
+      pullRequest:
+        $ref: '#/definitions/PullRequest'
+        description: Information about the newly created pull request.
   CreateRepositoryInput:
     type: object
     required:
@@ -1436,6 +3008,44 @@ definitions:
     format: date-time
   Date:
     type: string
+  DefaultBranchCannotBeDeletedException:
+    type: object
+    properties: {}
+    description: 'The specified branch is the default branch for the repository, and cannot be deleted. To delete this branch, you must first set another branch as the default branch.'
+  DeleteBranchInput:
+    type: object
+    required:
+      - repositoryName
+      - branchName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the branch to be deleted.
+      branchName:
+        $ref: '#/definitions/BranchName'
+        description: The name of the branch to delete.
+    description: Represents the input of a delete branch operation.
+  DeleteBranchOutput:
+    type: object
+    properties:
+      deletedBranch:
+        $ref: '#/definitions/BranchInfo'
+        description: 'Information about the branch deleted by the operation, including the branch name and the commit ID that was the tip of the branch.'
+    description: Represents the output of a delete branch operation.
+  DeleteCommentContentInput:
+    type: object
+    required:
+      - commentId
+    properties:
+      commentId:
+        $ref: '#/definitions/CommentId'
+        description: 'The unique, system-generated ID of the comment. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
+  DeleteCommentContentOutput:
+    type: object
+    properties:
+      comment:
+        $ref: '#/definitions/Comment'
+        description: Information about the comment you just deleted.
   DeleteRepositoryInput:
     type: object
     required:
@@ -1452,6 +3062,40 @@ definitions:
         $ref: '#/definitions/RepositoryId'
         description: The ID of the repository that was deleted.
     description: Represents the output of a delete repository operation.
+  DescribePullRequestEventsInput:
+    type: object
+    required:
+      - pullRequestId
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      pullRequestEventType:
+        $ref: '#/definitions/PullRequestEventType'
+        description: Optional. The pull request event type about which you want to return information.
+      actorArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'A non-negative integer used to limit the number of returned results. The default is 100 events, which is also the maximum number of events that can be returned in a result.'
+  DescribePullRequestEventsOutput:
+    type: object
+    required:
+      - pullRequestEvents
+    properties:
+      pullRequestEvents:
+        $ref: '#/definitions/PullRequestEventList'
+        description: Information about the pull request events.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that can be used in a request to return the next batch of the results.
+  Description:
+    type: string
+    maxLength: 10240
   Difference:
     type: object
     properties:
@@ -1491,6 +3135,9 @@ definitions:
     type: object
     properties: {}
     description: The encryption key is not available.
+  EventDate:
+    type: string
+    format: date-time
   FileTooLargeException:
     type: object
     properties: {}
@@ -1534,6 +3181,82 @@ definitions:
         $ref: '#/definitions/BranchInfo'
         description: The name of the branch.
     description: Represents the output of a get branch operation.
+  GetCommentInput:
+    type: object
+    required:
+      - commentId
+    properties:
+      commentId:
+        $ref: '#/definitions/CommentId'
+        description: 'The unique, system-generated ID of the comment. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
+  GetCommentOutput:
+    type: object
+    properties:
+      comment:
+        $ref: '#/definitions/Comment'
+        description: The contents of the comment.
+  GetCommentsForComparedCommitInput:
+    type: object
+    required:
+      - repositoryName
+      - afterCommitId
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to compare commits.
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'To establish the directionality of the comparison, the full commit ID of the ''before'' commit.'
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'To establish the directionality of the comparison, the full commit ID of the ''after'' commit.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results. '
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'A non-negative integer used to limit the number of returned results. The default is 100 comments, and is configurable up to 500.'
+  GetCommentsForComparedCommitOutput:
+    type: object
+    properties:
+      commentsForComparedCommitData:
+        $ref: '#/definitions/CommentsForComparedCommitData'
+        description: A list of comment objects on the compared commit.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that can be used in a request to return the next batch of the results.
+  GetCommentsForPullRequestInput:
+    type: object
+    required:
+      - pullRequestId
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the pull request.
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: A non-negative integer used to limit the number of returned results. The default is 100 comments. You can return up to 500 comments with a single request.
+  GetCommentsForPullRequestOutput:
+    type: object
+    properties:
+      commentsForPullRequestData:
+        $ref: '#/definitions/CommentsForPullRequestData'
+        description: An array of comment objects on the pull request.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that can be used in a request to return the next batch of the results.
   GetCommitInput:
     type: object
     required:
@@ -1545,7 +3268,7 @@ definitions:
         description: The name of the repository to which the commit was made.
       commitId:
         $ref: '#/definitions/ObjectId'
-        description: The commit ID.
+        description: The commit ID. Commit IDs are the full SHA of the commit.
     description: Represents the input of a get commit operation.
   GetCommitOutput:
     type: object
@@ -1592,6 +3315,58 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: An enumeration token that can be used in a request to return the next batch of the results.
+  GetMergeConflictsInput:
+    type: object
+    required:
+      - repositoryName
+      - destinationCommitSpecifier
+      - sourceCommitSpecifier
+      - mergeOption
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where the pull request was created.
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      mergeOption:
+        $ref: '#/definitions/MergeOptionTypeEnum'
+        description: The merge option or strategy you want to use to merge the code. The only valid value is FAST_FORWARD_MERGE.
+  GetMergeConflictsOutput:
+    type: object
+    required:
+      - mergeable
+      - destinationCommitId
+      - sourceCommitId
+    properties:
+      mergeable:
+        $ref: '#/definitions/IsMergeable'
+        description: A Boolean value that indicates whether the code is mergable by the specified merge option.
+      destinationCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The commit ID of the destination commit specifier that was used in the merge evaluation.
+      sourceCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The commit ID of the source commit specifier that was used in the merge evaluation.
+  GetPullRequestInput:
+    type: object
+    required:
+      - pullRequestId
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+  GetPullRequestOutput:
+    type: object
+    required:
+      - pullRequest
+    properties:
+      pullRequest:
+        $ref: '#/definitions/PullRequest'
+        description: Information about the specified pull request.
   GetRepositoryInput:
     type: object
     required:
@@ -1627,6 +3402,18 @@ definitions:
         $ref: '#/definitions/RepositoryTriggersList'
         description: The JSON block of configuration information for each trigger.
     description: Represents the output of a get repository triggers operation.
+  IdempotencyParameterMismatchException:
+    type: object
+    properties: {}
+    description: 'The client request token is not valid. Either the token is not in a valid format, or the token has been used in a previous request and cannot be re-used.'
+  InvalidActorArnException:
+    type: object
+    properties: {}
+    description: 'The Amazon Resource Name (ARN) is not valid. Make sure that you have provided the full ARN for the user who initiated the change for the pull request, and then try again.'
+  InvalidAuthorArnException:
+    type: object
+    properties: {}
+    description: 'The Amazon Resource Name (ARN) is not valid. Make sure that you have provided the full ARN for the author of the pull request, and then try again.'
   InvalidBlobIdException:
     type: object
     properties: {}
@@ -1634,7 +3421,15 @@ definitions:
   InvalidBranchNameException:
     type: object
     properties: {}
-    description: The specified branch name is not valid.
+    description: The specified reference name is not valid.
+  InvalidClientRequestTokenException:
+    type: object
+    properties: {}
+    description: The client request token is not valid.
+  InvalidCommentIdException:
+    type: object
+    properties: {}
+    description: The comment ID is not in a valid format. Make sure that you have provided the full comment ID.
   InvalidCommitException:
     type: object
     properties: {}
@@ -1647,10 +3442,30 @@ definitions:
     type: object
     properties: {}
     description: The specified continuation token is not valid.
+  InvalidDescriptionException:
+    type: object
+    properties: {}
+    description: 'The pull request description is not valid. Descriptions are limited to 1,000 characters in length.'
+  InvalidDestinationCommitSpecifierException:
+    type: object
+    properties: {}
+    description: 'The destination commit specifier is not valid. You must provide a valid branch name, tag, or full commit ID. '
+  InvalidFileLocationException:
+    type: object
+    properties: {}
+    description: The location of the file is not valid. Make sure that you include the extension of the file as well as the file name.
+  InvalidFilePositionException:
+    type: object
+    properties: {}
+    description: The position is not valid. Make sure that the line number exists in the version of the file you want to comment on.
   InvalidMaxResultsException:
     type: object
     properties: {}
     description: The specified number of maximum results is not valid.
+  InvalidMergeOptionException:
+    type: object
+    properties: {}
+    description: The specified merge option is not valid. The only valid value is FAST_FORWARD_MERGE.
   InvalidOrderException:
     type: object
     properties: {}
@@ -1659,6 +3474,30 @@ definitions:
     type: object
     properties: {}
     description: The specified path is not valid.
+  InvalidPullRequestEventTypeException:
+    type: object
+    properties: {}
+    description: 'The pull request event type is not valid. '
+  InvalidPullRequestIdException:
+    type: object
+    properties: {}
+    description: 'The pull request ID is not valid. Make sure that you have provided the full ID and that the pull request is in the specified repository, and then try again.'
+  InvalidPullRequestStatusException:
+    type: object
+    properties: {}
+    description: The pull request status is not valid. The only valid values are <code>OPEN</code> and <code>CLOSED</code>.
+  InvalidPullRequestStatusUpdateException:
+    type: object
+    properties: {}
+    description: The pull request status update is not valid. The only valid update is from <code>OPEN</code> to <code>CLOSED</code>.
+  InvalidReferenceNameException:
+    type: object
+    properties: {}
+    description: 'The specified reference name format is not valid. Reference names must conform to the Git references format, for example refs/heads/master. For more information, see <a href="https://git-scm.com/book/en/v2/Git-Internals-Git-References">Git Internals - Git References</a> or consult your Git documentation.'
+  InvalidRelativeFileVersionEnumException:
+    type: object
+    properties: {}
+    description: 'Either the enum is not in a valid format, or the specified file version enum is not valid in respect to the current file version.'
   InvalidRepositoryDescriptionException:
     type: object
     properties: {}
@@ -1695,6 +3534,28 @@ definitions:
     type: object
     properties: {}
     description: The specified sort by value is not valid.
+  InvalidSourceCommitSpecifierException:
+    type: object
+    properties: {}
+    description: 'The source commit specifier is not valid. You must provide a valid branch name, tag, or full commit ID.'
+  InvalidTargetException:
+    type: object
+    properties: {}
+    description: 'The target for the pull request is not valid. A target must contain the full values for the repository name, source branch, and destination branch for the pull request.'
+  InvalidTargetsException:
+    type: object
+    properties: {}
+    description: 'The targets for the pull request is not valid or not in a valid format. Targets are a list of target objects. Each target object must contain the full values for the repository name, source branch, and destination branch for a pull request.'
+  InvalidTitleException:
+    type: object
+    properties: {}
+    description: The title of the pull request is not valid. Pull request titles cannot exceed 100 characters in length.
+  IsCommentDeleted:
+    type: boolean
+  IsMergeable:
+    type: boolean
+  IsMerged:
+    type: boolean
   LastModifiedDate:
     type: string
     format: date-time
@@ -1722,6 +3583,37 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: An enumeration token that returns the batch of the results.
     description: Represents the output of a list branches operation.
+  ListPullRequestsInput:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository for which you want to list pull requests.
+      authorArn:
+        $ref: '#/definitions/Arn'
+        description: 'Optional. The Amazon Resource Name (ARN) of the user who created the pull request. If used, this filters the results to pull requests created by that user.'
+      pullRequestStatus:
+        $ref: '#/definitions/PullRequestStatusEnum'
+        description: 'Optional. The status of the pull request. If used, this refines the results to the pull requests that match the specified status.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: A non-negative integer used to limit the number of returned results.
+  ListPullRequestsOutput:
+    type: object
+    required:
+      - pullRequestIds
+    properties:
+      pullRequestIds:
+        $ref: '#/definitions/PullRequestIdList'
+        description: The system-generated IDs of the pull requests.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
   ListRepositoriesInput:
     type: object
     properties:
@@ -1745,10 +3637,33 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.'
     description: Represents the output of a list repositories operation.
+  Location:
+    type: object
+    properties:
+      filePath:
+        $ref: '#/definitions/Path'
+        description: 'The name of the file being compared, including its extension and subdirectory, if any.'
+      filePosition:
+        $ref: '#/definitions/Position'
+        description: 'The position of a change within a compared file, in line number format.'
+      relativeFileVersion:
+        $ref: '#/definitions/RelativeFileVersionEnum'
+        description: 'In a comparison of commits or a pull request, whether the change is in the ''before'' or ''after'' of that comparison.'
+    description: Returns information about the location of a change or comment in the comparison between two commits or a pull request.
+  ManualMergeRequiredException:
+    type: object
+    properties: {}
+    description: The pull request cannot be merged automatically into the destination branch. You must manually merge the branches and resolve any conflicts.
+  MaxResults:
+    type: integer
   MaximumBranchesExceededException:
     type: object
     properties: {}
     description: The number of branches for the trigger was exceeded.
+  MaximumOpenPullRequestsExceededException:
+    type: object
+    properties: {}
+    description: 'You cannot create the pull request because the repository has too many open pull requests. The maximum number of open pull requests for a repository is 1,000. Close one or more open pull requests, and then try again.'
   MaximumRepositoryNamesExceededException:
     type: object
     properties: {}
@@ -1757,10 +3672,53 @@ definitions:
     type: object
     properties: {}
     description: The number of triggers allowed for the repository was exceeded.
+  MergeMetadata:
+    type: object
+    properties:
+      isMerged:
+        $ref: '#/definitions/IsMerged'
+        description: A Boolean value indicating whether the merge has been made.
+      mergedBy:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the user who merged the branches.
+    description: Returns information about a merge or potential merge between a source reference and a destination reference in a pull request.
+  MergeOptionRequiredException:
+    type: object
+    properties: {}
+    description: 'A merge option or stategy is required, and none was provided.'
+  MergeOptionTypeEnum:
+    type: string
+    enum:
+      - FAST_FORWARD_MERGE
+  MergePullRequestByFastForwardInput:
+    type: object
+    required:
+      - pullRequestId
+      - repositoryName
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where the pull request was created.
+      sourceCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.
+  MergePullRequestByFastForwardOutput:
+    type: object
+    properties:
+      pullRequest:
+        $ref: '#/definitions/PullRequest'
+        description: 'Information about the specified pull request, including information about the merge.'
   Message:
     type: string
   Mode:
     type: string
+  MultipleRepositoriesInPullRequestException:
+    type: object
+    properties: {}
+    description: 'You cannot include more than one repository in a pull request. Make sure you have specified only one repository name in your request, and then try again.'
   Name:
     type: string
   NextToken:
@@ -1782,6 +3740,292 @@ definitions:
     type: object
     properties: {}
     description: The specified path does not exist.
+  PathRequiredException:
+    type: object
+    properties: {}
+    description: The filePath for a location cannot be empty or null.
+  Position:
+    type: integer
+  PostCommentForComparedCommitInput:
+    type: object
+    required:
+      - repositoryName
+      - afterCommitId
+      - content
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to post a comment on the comparison between commits.
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'To establish the directionality of the comparison, the full commit ID of the ''before'' commit.'
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'To establish the directionality of the comparison, the full commit ID of the ''after'' commit.'
+      location:
+        $ref: '#/definitions/Location'
+        description: The location of the comparison where you want to comment.
+      content:
+        $ref: '#/definitions/Content'
+        description: The content of the comment you want to make.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
+  PostCommentForComparedCommitOutput:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you posted a comment on the comparison between commits.
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'In the directionality you established, the full commit ID of the ''before'' commit.'
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'In the directionality you established, the full commit ID of the ''after'' commit.'
+      beforeBlobId:
+        $ref: '#/definitions/ObjectId'
+        description: 'In the directionality you established, the blob ID of the ''before'' blob.'
+      afterBlobId:
+        $ref: '#/definitions/ObjectId'
+        description: 'In the directionality you established, the blob ID of the ''after'' blob.'
+      location:
+        $ref: '#/definitions/Location'
+        description: The location of the comment in the comparison between the two commits.
+      comment:
+        $ref: '#/definitions/Comment'
+        description: The content of the comment you posted.
+  PostCommentForPullRequestInput:
+    type: object
+    required:
+      - pullRequestId
+      - repositoryName
+      - beforeCommitId
+      - afterCommitId
+      - content
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to post a comment on a pull request.
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit in the source branch that is the current tip of the branch for the pull request when you post the comment.
+      location:
+        $ref: '#/definitions/Location'
+        description: 'The location of the change where you want to post your comment. If no location is provided, the comment will be posted as a general comment on the pull request difference between the before commit ID and the after commit ID.'
+      content:
+        $ref: '#/definitions/Content'
+        description: The content of your comment on the change.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
+  PostCommentForPullRequestOutput:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you posted a comment on a pull request.
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. '
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'The full commit ID of the commit in the source branch used to create the pull request, or in the case of an updated pull request, the full commit ID of the commit used to update the pull request.'
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit in the destination branch where the pull request will be merged.
+      beforeBlobId:
+        $ref: '#/definitions/ObjectId'
+        description: 'In the directionality of the pull request, the blob ID of the ''before'' blob.'
+      afterBlobId:
+        $ref: '#/definitions/ObjectId'
+        description: 'In the directionality of the pull request, the blob ID of the ''after'' blob.'
+      location:
+        $ref: '#/definitions/Location'
+        description: The location of the change where you posted your comment.
+      comment:
+        $ref: '#/definitions/Comment'
+        description: The content of the comment you posted.
+  PostCommentReplyInput:
+    type: object
+    required:
+      - inReplyTo
+      - content
+    properties:
+      inReplyTo:
+        $ref: '#/definitions/CommentId'
+        description: 'The system-generated ID of the comment to which you want to reply. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
+      content:
+        $ref: '#/definitions/Content'
+        description: The contents of your reply to a comment.
+  PostCommentReplyOutput:
+    type: object
+    properties:
+      comment:
+        $ref: '#/definitions/Comment'
+        description: Information about the reply to a comment.
+  PullRequest:
+    type: object
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. '
+      title:
+        $ref: '#/definitions/Title'
+        description: The user-defined title of the pull request. This title is displayed in the list of pull requests to other users of the repository.
+      description:
+        $ref: '#/definitions/Description'
+        description: The user-defined description of the pull request. This description can be used to clarify what should be reviewed and other details of the request.
+      lastActivityDate:
+        $ref: '#/definitions/LastModifiedDate'
+        description: 'The day and time of the last user or system activity on the pull request, in timestamp format.'
+      creationDate:
+        $ref: '#/definitions/CreationDate'
+        description: 'The date and time the pull request was originally created, in timestamp format.'
+      pullRequestStatus:
+        $ref: '#/definitions/PullRequestStatusEnum'
+        description: The status of the pull request. Pull request status can only change from <code>OPEN</code> to <code>CLOSED</code>.
+      authorArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the user who created the pull request.
+      pullRequestTargets:
+        $ref: '#/definitions/PullRequestTargetList'
+        description: 'The targets of the pull request, including the source branch and destination branch for the pull request.'
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
+    description: Returns information about a pull request.
+  PullRequestAlreadyClosedException:
+    type: object
+    properties: {}
+    description: The pull request status cannot be updated because it is already closed.
+  PullRequestDoesNotExistException:
+    type: object
+    properties: {}
+    description: 'The pull request ID could not be found. Make sure that you have specified the correct repository name and pull request ID, and then try again.'
+  PullRequestEvent:
+    type: object
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: The system-generated ID of the pull request.
+      eventDate:
+        $ref: '#/definitions/EventDate'
+        description: 'The day and time of the pull request event, in timestamp format.'
+      pullRequestEventType:
+        $ref: '#/definitions/PullRequestEventType'
+        description: 'The type of the pull request event, for example a status change event (PULL_REQUEST_STATUS_CHANGED) or update event (PULL_REQUEST_SOURCE_REFERENCE_UPDATED).'
+      actorArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
+      pullRequestStatusChangedEventMetadata:
+        $ref: '#/definitions/PullRequestStatusChangedEventMetadata'
+        description: Information about the change in status for the pull request event.
+      pullRequestSourceReferenceUpdatedEventMetadata:
+        $ref: '#/definitions/PullRequestSourceReferenceUpdatedEventMetadata'
+        description: 'Information about the updated source branch for the pull request event. '
+      pullRequestMergedStateChangedEventMetadata:
+        $ref: '#/definitions/PullRequestMergedStateChangedEventMetadata'
+        description: Information about the change in mergability state for the pull request event.
+    description: Returns information about a pull request event.
+  PullRequestEventList:
+    type: array
+    items:
+      $ref: '#/definitions/PullRequestEvent'
+  PullRequestEventType:
+    type: string
+    enum:
+      - PULL_REQUEST_CREATED
+      - PULL_REQUEST_STATUS_CHANGED
+      - PULL_REQUEST_SOURCE_REFERENCE_UPDATED
+      - PULL_REQUEST_MERGE_STATE_CHANGED
+  PullRequestId:
+    type: string
+  PullRequestIdList:
+    type: array
+    items:
+      $ref: '#/definitions/PullRequestId'
+  PullRequestIdRequiredException:
+    type: object
+    properties: {}
+    description: 'A pull request ID is required, but none was provided.'
+  PullRequestMergedStateChangedEventMetadata:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where the pull request was created.
+      destinationReference:
+        $ref: '#/definitions/ReferenceName'
+        description: The name of the branch that the pull request will be merged into.
+      mergeMetadata:
+        $ref: '#/definitions/MergeMetadata'
+        description: Information about the merge state change event.
+    description: 'Returns information about the change in the merge state for a pull request event. '
+  PullRequestSourceReferenceUpdatedEventMetadata:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where the pull request was updated.
+      beforeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was updated.
+      afterCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID of the commit in the source branch that was the tip of the branch at the time the pull request was updated.
+    description: Information about an update to the source branch of a pull request.
+  PullRequestStatusChangedEventMetadata:
+    type: object
+    properties:
+      pullRequestStatus:
+        $ref: '#/definitions/PullRequestStatusEnum'
+        description: The changed status of the pull request.
+    description: Information about a change to the status of a pull request.
+  PullRequestStatusEnum:
+    type: string
+    enum:
+      - OPEN
+      - CLOSED
+  PullRequestStatusRequiredException:
+    type: object
+    properties: {}
+    description: 'A pull request status is required, but none was provided.'
+  PullRequestTarget:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the pull request source and destination branches.
+      sourceReference:
+        $ref: '#/definitions/ReferenceName'
+        description: The branch of the repository that contains the changes for the pull request. Also known as the source branch.
+      destinationReference:
+        $ref: '#/definitions/ReferenceName'
+        description: 'The branch of the repository where the pull request changes will be merged into. Also known as the destination branch. '
+      destinationCommit:
+        $ref: '#/definitions/CommitId'
+        description: The full commit ID that is the tip of the destination branch. This is the commit where the pull request was or will be merged.
+      sourceCommit:
+        $ref: '#/definitions/CommitId'
+        description: 'The full commit ID of the tip of the source branch used to create the pull request. If the pull request branch is updated by a push while the pull request is open, the commit ID will change to reflect the new tip of the branch.'
+      mergeMetadata:
+        $ref: '#/definitions/MergeMetadata'
+        description: 'Returns metadata about the state of the merge, including whether the merge has been made.'
+    description: Returns information about a pull request target.
+  PullRequestTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/PullRequestTarget'
   PutRepositoryTriggersInput:
     type: object
     required:
@@ -1802,6 +4046,25 @@ definitions:
         $ref: '#/definitions/RepositoryTriggersConfigurationId'
         description: The system-generated unique ID for the create or update operation.
     description: Represents the output of a put repository triggers operation.
+  ReferenceDoesNotExistException:
+    type: object
+    properties: {}
+    description: The specified reference does not exist. You must provide a full commit ID.
+  ReferenceName:
+    type: string
+  ReferenceNameRequiredException:
+    type: object
+    properties: {}
+    description: 'A reference name is required, but none was provided.'
+  ReferenceTypeNotSupportedException:
+    type: object
+    properties: {}
+    description: 'The specified reference is not a supported type. '
+  RelativeFileVersionEnum:
+    type: string
+    enum:
+      - BEFORE
+      - AFTER
   RepositoryDescription:
     type: string
     maxLength: 1000
@@ -1888,6 +4151,10 @@ definitions:
     type: object
     properties: {}
     description: A repository names object is required but was not specified.
+  RepositoryNotAssociatedWithPullRequestException:
+    type: object
+    properties: {}
+    description: The repository does not contain any pull requests with that pull request ID. Check to make sure you have provided the correct repository name for the pull request.
   RepositoryNotFoundList:
     type: array
     items:
@@ -1910,7 +4177,7 @@ definitions:
         description: Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
       branches:
         $ref: '#/definitions/BranchNameList'
-        description: 'The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.'
+        description: '<p>The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.</p> <note> <p>While no content is required in the array, you must include the array itself.</p> </note>'
       events:
         $ref: '#/definitions/RepositoryTriggerEventList'
         description: '<p>The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). </p> <note> <p>The valid value "all" cannot be used with any other values.</p> </note>'
@@ -1981,6 +4248,38 @@ definitions:
     enum:
       - repositoryName
       - lastModifiedDate
+  SourceAndDestinationAreSameException:
+    type: object
+    properties: {}
+    description: The source branch and the destination branch for the pull request are the same. You must specify different branches for the source and destination.
+  Target:
+    type: object
+    required:
+      - repositoryName
+      - sourceReference
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the pull request.
+      sourceReference:
+        $ref: '#/definitions/ReferenceName'
+        description: The branch of the repository that contains the changes for the pull request. Also known as the source branch.
+      destinationReference:
+        $ref: '#/definitions/ReferenceName'
+        description: The branch of the repository where the pull request changes will be merged into. Also known as the destination branch.
+    description: Returns information about a target for a pull request.
+  TargetList:
+    type: array
+    items:
+      $ref: '#/definitions/Target'
+  TargetRequiredException:
+    type: object
+    properties: {}
+    description: 'A pull request target is required. It cannot be empty or null. A pull request target must contain the full values for the repository name, source branch, and destination branch for the pull request.'
+  TargetsRequiredException:
+    type: object
+    properties: {}
+    description: An array of target objects is required. It cannot be empty or null.
   TestRepositoryTriggersInput:
     type: object
     required:
@@ -2004,6 +4303,39 @@ definitions:
         $ref: '#/definitions/RepositoryTriggerExecutionFailureList'
         description: 'The list of triggers that were not able to be tested. This list provides the names of the triggers that could not be tested, separated by commas.'
     description: Represents the output of a test repository triggers operation.
+  TipOfSourceReferenceIsDifferentException:
+    type: object
+    properties: {}
+    description: The tip of the source branch in the destination repository does not match the tip of the source branch specified in your request. The pull request might have been updated. Make sure that you have the latest changes.
+  TipsDivergenceExceededException:
+    type: object
+    properties: {}
+    description: The divergence between the tips of the provided commit specifiers is too great to determine whether there might be any merge conflicts. Locally compare the specifiers using <code>git diff</code> or a diff tool.
+  Title:
+    type: string
+    maxLength: 150
+  TitleRequiredException:
+    type: object
+    properties: {}
+    description: A pull request title is required. It cannot be empty or null.
+  UpdateCommentInput:
+    type: object
+    required:
+      - commentId
+      - content
+    properties:
+      commentId:
+        $ref: '#/definitions/CommentId'
+        description: 'The system-generated ID of the comment you want to update. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
+      content:
+        $ref: '#/definitions/Content'
+        description: The updated content with which you want to replace the existing content of the comment.
+  UpdateCommentOutput:
+    type: object
+    properties:
+      comment:
+        $ref: '#/definitions/Comment'
+        description: Information about the updated comment.
   UpdateDefaultBranchInput:
     type: object
     required:
@@ -2017,6 +4349,66 @@ definitions:
         $ref: '#/definitions/BranchName'
         description: The name of the branch to set as the default.
     description: Represents the input of an update default branch operation.
+  UpdatePullRequestDescriptionInput:
+    type: object
+    required:
+      - pullRequestId
+      - description
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      description:
+        $ref: '#/definitions/Description'
+        description: The updated content of the description for the pull request. This content will replace the existing description.
+  UpdatePullRequestDescriptionOutput:
+    type: object
+    required:
+      - pullRequest
+    properties:
+      pullRequest:
+        $ref: '#/definitions/PullRequest'
+        description: Information about the updated pull request.
+  UpdatePullRequestStatusInput:
+    type: object
+    required:
+      - pullRequestId
+      - pullRequestStatus
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      pullRequestStatus:
+        $ref: '#/definitions/PullRequestStatusEnum'
+        description: 'The status of the pull request. The only valid operations are to update the status from <code>OPEN</code> to <code>OPEN</code>, <code>OPEN</code> to <code>CLOSED</code> or from from <code>CLOSED</code> to <code>CLOSED</code>.'
+  UpdatePullRequestStatusOutput:
+    type: object
+    required:
+      - pullRequest
+    properties:
+      pullRequest:
+        $ref: '#/definitions/PullRequest'
+        description: Information about the pull request.
+  UpdatePullRequestTitleInput:
+    type: object
+    required:
+      - pullRequestId
+      - title
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      title:
+        $ref: '#/definitions/Title'
+        description: The updated title of the pull request. This will replace the existing title.
+  UpdatePullRequestTitleOutput:
+    type: object
+    required:
+      - pullRequest
+    properties:
+      pullRequest:
+        $ref: '#/definitions/PullRequest'
+        description: Information about the updated pull request.
   UpdateRepositoryDescriptionInput:
     type: object
     required:

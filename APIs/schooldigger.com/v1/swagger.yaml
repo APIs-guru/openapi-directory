@@ -19,6 +19,8 @@ info:
       version: '2.0'
   x-providerName: schooldigger.com
 consumes: []
+produces:
+  - application/json
 paths:
   /v1/districts:
     get:
@@ -126,11 +128,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -161,15 +158,12 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/APIDistrict'
-      summary: Returns a detailed record for one district district
+      summary: Returns a detailed record for one district
       tags:
         - Districts
   '/v1/rankings/districts/{st}':
@@ -210,11 +204,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -266,9 +255,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -418,11 +404,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -453,9 +434,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -472,7 +450,7 @@ definitions:
         readOnly: false
         type: boolean
       polylineCollection:
-        description: Collection of one or more polylines that can be used to create the boundary on a map
+        description: 'Collection of one or more polylines that can be used to create the boundary on a map. NOTE: this value is JSON encoded. Specifically, backslashes will be returned escaped (two backslashes). Make sure to decode the polyline before you use it'
         items:
           $ref: '#/definitions/APIPolyline'
         readOnly: false
@@ -664,9 +642,6 @@ definitions:
         items:
           $ref: '#/definitions/APIDistrict1'
         type: array
-      districtListSelected:
-        $ref: '#/definitions/clsSD2District'
-        description: Returns the district that might be featured (?findschool or the first school in the list)
       numberOfDistricts:
         description: The total count of districts that match your query
         format: int32
@@ -684,9 +659,6 @@ definitions:
         items:
           $ref: '#/definitions/APIDistrict1'
         type: array
-      districtListSelected:
-        $ref: '#/definitions/clsSD2District'
-        description: Returns the district that might be featured (?findschool or the first school in the list)
       numberOfDistricts:
         description: The total count of districts in the entire rank list
         format: int32
@@ -701,11 +673,11 @@ definitions:
         format: int32
         type: integer
       rankYear:
-        description: Year this ranking list represents (2017 = 2016-17)
+        description: Year this ranking list represents (2018 = 2017-18)
         format: int32
         type: integer
       rankYearCompare:
-        description: Year rankings returned for comparison (2017 = 2016-17)
+        description: Year rankings returned for comparison (2018 = 2017-18)
         format: int32
         type: integer
       rankYearsAvailable:
@@ -853,7 +825,7 @@ definitions:
         format: double
         type: number
       year:
-        description: School year (2017 = 2016-17)
+        description: School year (2018 = 2017-18)
         format: int32
         type: integer
     type: object
@@ -906,7 +878,7 @@ definitions:
         format: int32
         type: integer
       polylineOverlayEncodedPoints:
-        description: Polyline for use with Google Maps or other mapping software
+        description: 'Polyline for use with Google Maps or other mapping software. NOTE: this value is JSON encoded. Specifically, backslashes will be returned escaped (two backslashes). Make sure to decode the polyline before you use it'
         type: string
     type: object
   APIRankHistory:
@@ -1211,11 +1183,11 @@ definitions:
         readOnly: false
         type: integer
       rankYear:
-        description: Year this ranking list represents (2017 = 2016-17)
+        description: Year this ranking list represents (2018 = 2017-18)
         format: int32
         type: integer
       rankYearCompare:
-        description: Year rankings returned for comparison (2017 = 2016-17)
+        description: Year rankings returned for comparison (2018 = 2017-18)
         format: int32
         type: integer
       rankYearsAvailable:
@@ -1230,9 +1202,6 @@ definitions:
           $ref: '#/definitions/APISchool1'
         readOnly: false
         type: array
-      schoolListSelected:
-        $ref: '#/definitions/clsSD2School'
-        description: Returns the school that might be featured (?findschool or the first school in the list)
     type: object
   APITestScore:
     properties:
@@ -1358,7 +1327,7 @@ definitions:
         readOnly: false
         type: string
       year:
-        description: Year test was administered (2017 = 2016-17)
+        description: Year test was administered (2018 = 2017-18)
         format: int32
         readOnly: false
         type: integer
@@ -1447,960 +1416,8 @@ definitions:
         format: double
         type: number
       year:
-        description: School year (2017 = 2016-17)
+        description: School year (2018 = 2017-18)
         format: int32
         readOnly: false
-        type: integer
-    type: object
-  clsBoundary:
-    properties:
-      hasBoundary:
-        description: States whether there is a boundary available
-        readOnly: false
-        type: boolean
-      polylineCollection:
-        items:
-          $ref: '#/definitions/clsPolyline'
-        type: array
-    type: object
-  clsLatLong:
-    properties:
-      hasLocation:
-        readOnly: false
-        type: boolean
-      latitude:
-        format: double
-        type: number
-      longitude:
-        format: double
-        type: number
-    type: object
-  clsPolyline:
-    properties:
-      id:
-        type: string
-      numberEncodedPoints:
-        description: Number of encoded points in polyline
-        format: int32
-        type: integer
-      polylineName:
-        type: string
-      polylineOverlayEncodedPoints:
-        description: Polyline for use with Google Maps or other mapping software
-        type: string
-    type: object
-  clsRankHistory:
-    properties:
-      averageStandardScore:
-        description: 'The Average Standard score calculated by SchoolDigger (see: https://www.schooldigger.com/aboutrankingmethodology.aspx)'
-        format: double
-        type: number
-      fRankOf:
-        readOnly: false
-        type: string
-      level:
-        enum:
-          - Primary
-          - Middle
-          - High
-          - Other
-          - Private
-          - All
-          - NotSelected
-        type: string
-      percentMetStandard:
-        description: Supplied for rank calls where one test/grade is chosen (AverageStandardScore will be nothing)
-        format: double
-        type: number
-      rank:
-        description: Statewide rank of this School
-        format: int32
-        type: integer
-      rankNTile:
-        format: int32
-        type: integer
-      rankNumStars:
-        format: int32
-        readOnly: false
-        type: integer
-      rankNumTests:
-        format: int32
-        type: integer
-      rankOf:
-        description: Count of schools ranked at this state/level
-        format: int32
-        type: integer
-      rankPercentage:
-        format: double
-        readOnly: false
-        type: number
-      year:
-        description: School year (2017 = 2016-17)
-        format: int32
-        type: integer
-    type: object
-  clsSD2County:
-    properties:
-      countyID:
-        type: string
-      countyName:
-        description: County in which the school or district is located
-        type: string
-      countyURL:
-        description: SchoolDigger URL for all schools in this county
-        readOnly: false
-        type: string
-      fips:
-        type: string
-    type: object
-  clsSD2District:
-    description: The ultimate site-wide object for District data
-    properties:
-      address:
-        $ref: '#/definitions/clsSD2Location'
-      addressTypedInThisBoundary:
-        type: boolean
-      boundary:
-        $ref: '#/definitions/clsBoundary'
-      county:
-        $ref: '#/definitions/clsSD2County'
-      distance:
-        description: Distance from nearLatitude/nearLongitude (if supplied)
-        format: double
-        type: number
-      districtName:
-        type: string
-      fGrades:
-        readOnly: false
-        type: string
-      fRankStarImage:
-        readOnly: false
-        type: string
-      fips:
-        type: string
-      gsh:
-        enum:
-          - PK
-          - KG
-          - G1
-          - G2
-          - G3
-          - G4
-          - G5
-          - G6
-          - G7
-          - G8
-          - G9
-          - G10
-          - G11
-          - G12
-          - G13
-          - 'N'
-          - UG
-          - AE
-        type: string
-      gsl:
-        enum:
-          - PK
-          - KG
-          - G1
-          - G2
-          - G3
-          - G4
-          - G5
-          - G6
-          - G7
-          - G8
-          - G9
-          - G10
-          - G11
-          - G12
-          - G13
-          - 'N'
-          - UG
-          - AE
-        type: string
-      hasBoundary:
-        description: 'Indicates that an attendance boundary is available for this district. (To retrieve, look up district with /districts/{id})'
-        type: boolean
-      leaAggregate:
-        items:
-          $ref: '#/definitions/clsSD2LEAAggregate'
-        type: array
-      leaid:
-        type: string
-      movement:
-        format: int32
-        type: integer
-      numAlt:
-        format: int32
-        type: integer
-      numHigh:
-        format: int32
-        type: integer
-      numMiddle:
-        format: int32
-        type: integer
-      numPrimary:
-        format: int32
-        type: integer
-      numRankedElementarySchools:
-        format: int32
-        type: integer
-      numRankedHighSchools:
-        format: int32
-        type: integer
-      numRankedMiddleSchools:
-        format: int32
-        type: integer
-      numSchools:
-        format: int32
-        type: integer
-      numStudents:
-        format: int32
-        type: integer
-      phone:
-        type: string
-      prevScore:
-        format: double
-        type: number
-      rank:
-        format: int32
-        type: integer
-      rankCompare:
-        format: int32
-        type: integer
-      rankHistory:
-        items:
-          $ref: '#/definitions/clsRankHistory'
-        type: array
-      rankHistoryLY:
-        $ref: '#/definitions/clsRankHistory'
-        readOnly: false
-      rankHistoryTY:
-        $ref: '#/definitions/clsRankHistory'
-        readOnly: false
-      rankNTile:
-        format: int32
-        type: integer
-      rankNumStars:
-        format: int32
-        readOnly: false
-        type: integer
-      rankOf:
-        format: int32
-        type: integer
-      rankURL:
-        description: The URL to see the district in the SchoolDigger ranking list
-        readOnly: false
-        type: string
-      score:
-        format: double
-        type: number
-      testScores:
-        description: List of all Test scores (district and state)
-        items:
-          $ref: '#/definitions/clsSD2TestScoreWrapper'
-        type: array
-      url:
-        description: The URL to see the district details on SchoolDigger
-        readOnly: false
-        type: string
-    type: object
-  clsSD2Immunization:
-    properties:
-      entity:
-        format: int32
-        type: integer
-      entityCategory:
-        format: int32
-        type: integer
-      entitySub:
-        format: int32
-        type: integer
-      grade:
-        type: string
-      numApprovedDelay:
-        format: int32
-        type: integer
-      numExemptMedical:
-        format: int32
-        type: integer
-      numExemptReligious:
-        format: int32
-        type: integer
-      numExemptTotal:
-        format: int32
-        type: integer
-      numNotProtected:
-        format: int32
-        type: integer
-      numProtected:
-        format: int32
-        type: integer
-      numStudents:
-        format: int32
-        type: integer
-      percentApprovedDelay:
-        format: float
-        type: number
-      percentExemptMedical:
-        format: float
-        type: number
-      percentExemptReligious:
-        format: float
-        type: number
-      percentExemptTotal:
-        format: float
-        type: number
-      percentNotProtected:
-        format: float
-        type: number
-      percentProtected:
-        format: float
-        type: number
-      year:
-        format: int32
-        type: integer
-    type: object
-  clsSD2LEAAggregate:
-    description: Ultimate class for storing LEA Aggregate information
-    properties:
-      numberOfAids:
-        description: Number of full-time equivalent instructional aids employed by the district
-        format: double
-        type: number
-      numberOfCoordsSupervisors:
-        description: Number of full-time equivalent instructional coordinators/supervisors employed by the district
-        format: double
-        type: number
-      numberOfEnglishLanguageLearnerStudents:
-        description: The number of English language learner (ELL) students served in appropriate programs
-        format: int32
-        type: integer
-      numberOfGuidanceElem:
-        description: Number of full-time equivalent elementary guidance counselors employed by the district
-        format: double
-        type: number
-      numberOfGuidanceSecondary:
-        description: Number of full-time equivalent secondary guidance counselors employed by the district
-        format: double
-        type: number
-      numberOfGuidanceTotal:
-        description: Total number of full-time equivalent guidance counselors employed by the district
-        format: double
-        type: number
-      numberOfLEAAdministrators:
-        description: Number of full-time equivalent LEA administrators employed by the district (LEA)
-        format: double
-        type: number
-      numberOfLEASupportStaff:
-        description: Number of full-time equivalent LEA administrative support staff employed by the district (LEA)
-        format: double
-        type: number
-      numberOfLibrarians:
-        description: Number of full-time equivalent librarians/media specialists employed by the district
-        format: double
-        type: number
-      numberOfLibraryStaff:
-        description: Number of full-time equivalent librarians/media support staff employed by the district
-        format: double
-        type: number
-      numberOfOtherSupportStaff:
-        description: Number of full-time equivalent all other support staff employed by the district (LEA)
-        format: double
-        type: number
-      numberOfSchoolAdminSupportStaff:
-        description: Number of full-time equivalent school administrative support staff employed by the district (LEA)
-        format: double
-        type: number
-      numberOfSchoolAdministrators:
-        description: Number of full-time equivalent school administrators employed by the district (LEA)
-        format: double
-        type: number
-      numberOfSpecialEdStudents:
-        description: The number of students having a written Individualized Education Program (IEP) under the Individuals With Disabilities Education Act (IDEA)
-        format: int32
-        type: integer
-      numberOfStudentSupportStaff:
-        description: Number of full-time equivalent student support services staff employed by the district (LEA)
-        format: double
-        type: number
-      numberOfStudents:
-        description: Number of students enrolled in the district
-        format: int32
-        type: integer
-      numberOfTeachers:
-        description: Number of full-time equivalent teachers employed by the district
-        format: double
-        type: number
-      numberOfTeachersElementary:
-        description: Number of full-time equivalent elementary teachers employed by the district
-        format: double
-        type: number
-      numberOfTeachersK:
-        description: Number of full-time equivalent kindergarten teachers employed by the district
-        format: double
-        type: number
-      numberOfTeachersPK:
-        description: Number of full-time equivalent pre-kindergarten teachers employed by the district
-        format: double
-        type: number
-      numberOfTeachersSecondary:
-        description: Number of full-time equivalent secondary teachers employed by the district
-        format: double
-        type: number
-      year:
-        description: School year (2017 = 2016-17)
-        format: int32
-        type: integer
-    type: object
-  clsSD2Location:
-    properties:
-      city:
-        type: string
-      cityURL:
-        description: SchoolDigger URL for schools in this city
-        readOnly: false
-        type: string
-      html:
-        description: HTML formatted address
-        readOnly: false
-        type: string
-      latLong:
-        $ref: '#/definitions/clsLatLong'
-      placeNameID:
-        format: int64
-        type: integer
-      state:
-        type: string
-      stateFull:
-        description: Full state name (WA = Washington)
-        readOnly: false
-        type: string
-      street:
-        type: string
-      zip:
-        type: string
-      zip4:
-        type: string
-      zipURL:
-        description: SchoolDigger URL for schools in this zip code
-        readOnly: false
-        type: string
-    type: object
-  clsSD2School:
-    description: The ultimate (one and only) class to hold an entire school record for SchoolDigger 2
-    properties:
-      address:
-        $ref: '#/definitions/clsSD2Location'
-        description: The physical address of the school
-      addressTypedInThisBoundary:
-        type: boolean
-      aggregate:
-        items:
-          $ref: '#/definitions/clsSD2SchoolAggregate'
-        type: array
-      aggregateLY:
-        $ref: '#/definitions/clsSD2SchoolAggregate'
-        readOnly: false
-      aggregateMY:
-        $ref: '#/definitions/clsSD2SchoolAggregate'
-        description: 'This is a helper to get the most recent of each aggregate. For example, if the TY aggregate for TEACHERSFULLTIME is null, then try LY'
-        readOnly: false
-      aggregateTY:
-        $ref: '#/definitions/clsSD2SchoolAggregate'
-        readOnly: false
-      boundary:
-        $ref: '#/definitions/clsBoundary'
-      county:
-        $ref: '#/definitions/clsSD2County'
-      distance:
-        description: Distance from nearLatitude/nearLongitude (if supplied)
-        format: double
-        type: number
-      district:
-        $ref: '#/definitions/clsSD2District'
-      fGrades:
-        readOnly: false
-        type: string
-      fSchoolType:
-        readOnly: false
-        type: string
-      fips:
-        type: string
-      googleGeocodeAccuracy:
-        format: int32
-        type: integer
-      gsh:
-        enum:
-          - PK
-          - KG
-          - G1
-          - G2
-          - G3
-          - G4
-          - G5
-          - G6
-          - G7
-          - G8
-          - G9
-          - G10
-          - G11
-          - G12
-          - G13
-          - 'N'
-          - UG
-          - AE
-        type: string
-      gsl:
-        enum:
-          - PK
-          - KG
-          - G1
-          - G2
-          - G3
-          - G4
-          - G5
-          - G6
-          - G7
-          - G8
-          - G9
-          - G10
-          - G11
-          - G12
-          - G13
-          - 'N'
-          - UG
-          - AE
-        type: string
-      hasBoundary:
-        description: 'Indicates that an attendance boundary is available for this school. (To retrieve, look up school with /schools/{id})'
-        type: boolean
-      immunePercent:
-        format: double
-        type: number
-      immunePercentLY:
-        format: double
-        type: number
-      immunizations:
-        items:
-          $ref: '#/definitions/clsSD2Immunization'
-        type: array
-      isCharter:
-        enum:
-          - 'True'
-          - 'False'
-          - M
-          - 'N'
-        type: string
-      isMagnet:
-        enum:
-          - 'True'
-          - 'False'
-          - M
-          - 'N'
-        type: string
-      isPrivate:
-        description: Indicates if school is a private school (Yes/No)
-        type: boolean
-      isTitleI:
-        enum:
-          - 'True'
-          - 'False'
-          - M
-          - 'N'
-        type: string
-      isTitleISchoolWide:
-        enum:
-          - 'True'
-          - 'False'
-          - M
-          - 'N'
-        type: string
-      isVirtual:
-        enum:
-          - 'True'
-          - 'False'
-          - M
-          - 'N'
-        type: string
-      leaid:
-        type: string
-      level:
-        enum:
-          - Primary
-          - Middle
-          - High
-          - Other
-          - Private
-          - All
-          - NotSelected
-        type: string
-      locale:
-        description: 'NCES Locale of school (https://nces.ed.gov/ccd/rural_locales.asp)'
-        type: string
-      phone:
-        description: School Phone Number
-        type: string
-      privateCoed:
-        description: Coed/Boys/Girls (private schools only)
-        type: string
-      privateDays:
-        description: Days in the school year (private schools only)
-        format: int32
-        type: integer
-      privateHasLibrary:
-        description: Indicates if the school has a library (private schools only)
-        type: boolean
-      privateHours:
-        description: Hours in the school day (private schools only)
-        format: double
-        type: number
-      privateOrientation:
-        description: Affiliation of the school (private schools only)
-        type: string
-      rankCompare:
-        $ref: '#/definitions/clsSD2SchoolDistrictRankCompare'
-      rankHistory:
-        items:
-          $ref: '#/definitions/clsRankHistory'
-        type: array
-      rankHistoryLY:
-        $ref: '#/definitions/clsRankHistory'
-        readOnly: false
-      rankHistoryTY:
-        $ref: '#/definitions/clsRankHistory'
-        readOnly: false
-      rankMovement:
-        description: Returns the movement of rank for this school between current and last year
-        format: int32
-        readOnly: false
-        type: integer
-      reviewSummary:
-        items:
-          $ref: '#/definitions/clsSD2SchoolReviewSummary'
-        type: array
-      reviews:
-        items:
-          $ref: '#/definitions/clsSD2SchoolReview'
-        type: array
-      schoolName:
-        description: School Name
-        type: string
-      schoolnum:
-        type: string
-      testScores:
-        description: List of all Test scores (including district and state)
-        items:
-          $ref: '#/definitions/clsSD2TestScoreWrapper'
-        type: array
-      url:
-        description: SchoolDigger URL for this school
-        readOnly: false
-        type: string
-      urlCompare:
-        description: SchoolDigger URL for comparing this school to others
-        readOnly: false
-        type: string
-    type: object
-  clsSD2SchoolAggregate:
-    description: Ultimate class for storing School Aggregate information
-    properties:
-      numberofAfricanAmericanStudents:
-        description: 'NCES definition: A person having origins in any of the black racial groups of Africa.  (https://nces.ed.gov/statprog/2002/std1_5.asp)'
-        format: int32
-        type: integer
-      numberofAsianStudents:
-        description: 'NCES definition: A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including, for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam.  (https://nces.ed.gov/statprog/2002/std1_5.asp)'
-        format: int32
-        type: integer
-      numberofHispanicStudents:
-        description: 'NCES definition: A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. (https://nces.ed.gov/statprog/2002/std1_5.asp)'
-        format: int32
-        type: integer
-      numberofIndianStudents:
-        description: 'NCES definition: A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including, for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (https://nces.ed.gov/statprog/2002/std1_5.asp)'
-        format: int32
-        type: integer
-      numberofPacificIslanderStudents:
-        description: 'NCES definition: A person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. (https://nces.ed.gov/statprog/2002/std1_5.asp)'
-        format: int32
-        type: integer
-      numberofTwoOrMoreRaceStudents:
-        description: 'NCES definition: Includes any combination of two or more races and not Hispanic/Latino ethnicity. (https://nces.ed.gov/statprog/2002/std1_5.asp)'
-        format: int32
-        type: integer
-      numberofUnspecifiedRaceStudents:
-        format: int32
-        type: integer
-      numberofWhiteStudents:
-        description: 'NCES definition: A person having origins in any of the original peoples of Europe, the Middle East, or North Africa. (https://nces.ed.gov/statprog/2002/std1_5.asp)'
-        format: int32
-        type: integer
-      percentAGAsian:
-        format: double
-        readOnly: false
-        type: number
-      percentAGBlack:
-        format: double
-        readOnly: false
-        type: number
-      percentAGHispanic:
-        format: double
-        readOnly: false
-        type: number
-      percentAGIndian:
-        format: double
-        readOnly: false
-        type: number
-      percentAGPacific:
-        format: double
-        readOnly: false
-        type: number
-      percentAGTwoRaces:
-        format: double
-        readOnly: false
-        type: number
-      percentAGUnspecified:
-        format: double
-        readOnly: false
-        type: number
-      percentAGWhite:
-        format: double
-        readOnly: false
-        type: number
-      percentFreeDisc:
-        format: double
-        type: number
-      pupilTeacherRatio:
-        description: Number of students / number of full-time equivalent teachers
-        format: double
-        type: number
-      studentsMigrant:
-        format: int32
-        type: integer
-      studentsTotalMembership:
-        format: int32
-        type: integer
-      teachersFulltime:
-        description: Number of full-time equvalent teachers employed at the school
-        format: double
-        type: number
-      year:
-        format: int32
-        type: integer
-    type: object
-  clsSD2SchoolDistrictRankCompare:
-    description: Class that contains how a school ranks with its peers in the same district
-    properties:
-      agAsianRank:
-        format: int32
-        type: integer
-      agBlackRank:
-        format: int32
-        type: integer
-      agHispanicRank:
-        format: int32
-        type: integer
-      agIndianRank:
-        format: int32
-        type: integer
-      agPacificRank:
-        format: int32
-        type: integer
-      agTwoRacesRank:
-        format: int32
-        type: integer
-      agWhiteRank:
-        format: int32
-        type: integer
-      freeReducedLunchTotalRank:
-        format: int32
-        type: integer
-      numSchools:
-        description: The number of schools in the ranking sample
-        format: int32
-        type: integer
-      numSchoolsRank:
-        description: Number of *ranked* schools in the ranking sample
-        format: int32
-        type: integer
-      pupilTeacherRatioRank:
-        format: int32
-        type: integer
-      rankRank:
-        format: int32
-        type: integer
-      studentsTotalMembershipRank:
-        format: int32
-        type: integer
-      teachersFulltimeRank:
-        format: int32
-        type: integer
-    type: object
-  clsSD2SchoolReview:
-    description: A single school review submitted by a site user
-    properties:
-      comment:
-        type: string
-      commentsEnabled:
-        type: boolean
-      createDateTime:
-        description: The date the review was submitted
-        format: date-time
-        type: string
-      fips:
-        type: string
-      helpfulNo:
-        format: int32
-        type: integer
-      helpfulYes:
-        format: int32
-        type: integer
-      iP4:
-        type: string
-      id:
-        format: int32
-        type: integer
-      inappropriate:
-        type: boolean
-      leaid:
-        type: string
-      numStars:
-        format: int32
-        type: integer
-      schoolnum:
-        type: string
-      showUserName:
-        type: boolean
-      status:
-        enum:
-          - NeedsAdministratorVerification
-          - AvailableForViewing
-          - Rejected
-          - NeedsUserEmailVerification
-          - NeedsUserEmailVerificationNeedsAdministratorVerification
-          - NeedsUserEmailVerificationFirstWarning
-          - Timeout
-        type: string
-      submitterType:
-        enum:
-          - Parent
-          - Student
-          - Teacher
-          - Principal
-          - Citizen
-          - All
-        type: string
-      userID:
-        format: int32
-        type: integer
-    type: object
-  clsSD2SchoolReviewSummary:
-    properties:
-      count:
-        format: int32
-        type: integer
-      numStars:
-        format: int32
-        type: integer
-      submitterType:
-        format: int32
-        type: integer
-    type: object
-  clsSD2TestScoreWrapper:
-    properties:
-      districtTestScore:
-        $ref: '#/definitions/clsSD2testScore'
-      entity:
-        format: int32
-        type: integer
-      entityCategory:
-        format: int32
-        type: integer
-      entitySub:
-        format: int32
-        type: integer
-      grade:
-        type: string
-      key:
-        readOnly: false
-        type: string
-      schoolTestScore:
-        $ref: '#/definitions/clsSD2testScore'
-      stateTestScore:
-        $ref: '#/definitions/clsSD2testScore'
-      year:
-        format: int32
-        type: integer
-    type: object
-  clsSD2testScore:
-    properties:
-      meanScaledScore:
-        description: Mean scale score
-        format: float
-        type: number
-      meanScaledScoreNormalized:
-        format: float
-        type: number
-      numTier1:
-        description: Count of students performing at tier 1
-        format: int32
-        type: integer
-      numTier2:
-        description: Count of students performing at tier 2
-        format: int32
-        type: integer
-      numTier3:
-        description: Count of students performing at tier 3
-        format: int32
-        type: integer
-      numTier4:
-        description: Count of students performing at tier 4
-        format: int32
-        type: integer
-      numTier5:
-        description: Count of students performing at tier 5
-        format: int32
-        type: integer
-      numberMetStandard:
-        description: Count of students meeting state standard
-        format: float
-        type: number
-      percentMetStandard:
-        description: Percent of students meeting state standard
-        format: float
-        type: number
-      percentMetStandardNormalized:
-        format: float
-        type: number
-      percentTier1:
-        description: Percent of students performing at tier 1
-        format: float
-        type: number
-      percentTier2:
-        description: Percent of students performing at tier 2
-        format: float
-        type: number
-      percentTier3:
-        description: Percent of students performing at tier 3
-        format: float
-        type: number
-      percentTier4:
-        description: Percent of students performing at tier 4
-        format: float
-        type: number
-      percentTier5:
-        description: Percent of students performing at tier 5
-        format: float
-        type: number
-      studentsEligible:
-        description: Count of students eligible to take test
-        format: int32
-        type: integer
-      studentsTested:
-        description: Count of students tested
-        format: int32
         type: integer
     type: object

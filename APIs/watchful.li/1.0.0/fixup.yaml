@@ -12,6 +12,35 @@ definitions:
   Version:
     - {}
 paths:
+  /feedbacks:
+    get:
+      produces:
+        '2':
+          - text/plain
+        _2:
+          - /plain
+          - 0
+          - 0
+        _t: a
+    post:
+      produces:
+        '2':
+          - text/plain
+        _2:
+          - /plain
+          - 0
+          - 0
+        _t: a
+  /feedbacks/metadata:
+    get:
+      produces:
+        '2':
+          - text/plain
+        _2:
+          - /plain
+          - 0
+          - 0
+        _t: a
   /sites:
     get:
       parameters:
@@ -23,7 +52,7 @@ paths:
             in: query
             name: canUpdate
             type: integer
-        '_6':
+        _6:
           - description: canUpdate
             enum:
               - 1

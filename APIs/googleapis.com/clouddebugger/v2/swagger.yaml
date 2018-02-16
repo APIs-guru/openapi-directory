@@ -22,7 +22,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://clouddebugger.googleapis.com/$discovery/rest?version=v2'
       version: v1
@@ -38,7 +38,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud_debugger': Manage cloud debugger
+      'https://www.googleapis.com/auth/cloud_debugger': Use Stackdriver Debugger
     type: oauth2
   Oauth2c:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -46,7 +46,7 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud_debugger': Manage cloud debugger
+      'https://www.googleapis.com/auth/cloud_debugger': Use Stackdriver Debugger
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
@@ -131,19 +131,19 @@ tags:
 paths:
   /v2/controller/debuggees/register:
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Registers the debuggee with the controller service.
@@ -236,34 +236,34 @@ paths:
       tags:
         - controller
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/controller/debuggees/{debuggeeId}/breakpoints/{id}':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Updates the breakpoint state or mutable fields.
@@ -276,6 +276,10 @@ paths:
         or snapping the location to the correct line of code.
       operationId: clouddebugger.controller.debuggees.breakpoints.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateActiveBreakpointRequest'
         - description: Identifies the debuggee being debugged.
           in: path
           name: debuggeeId
@@ -286,10 +290,6 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UpdateActiveBreakpointRequest'
       responses:
         '200':
           description: Successful response
@@ -344,19 +344,19 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints':
     get:
       description: Lists all breakpoints for the debuggee.
@@ -424,34 +424,34 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints/set':
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Sets the breakpoint to the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.set
@@ -561,19 +561,19 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   AliasContext:
     description: An alias to a repo revision.
@@ -787,8 +787,6 @@ definitions:
         description: |-
           References to the locations and revisions of the source code used in the
           deployed application.
-
-          NOTE: this field is experimental and can be ignored.
         items:
           $ref: '#/definitions/ExtendedSourceContext'
         type: array

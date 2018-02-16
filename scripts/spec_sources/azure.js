@@ -7,18 +7,17 @@ var _ = require('lodash');
 var util = require('../util');
 
 module.exports = function () {
-  var files = util.listGitHubFiles('Azure', 'azure-rest-api-specs', '*/swagger/*.json');
+  var files = util.listGitHubFiles('Azure', 'azure-rest-api-specs', 'current', 'specification/**/*.json');
 
-  //Workaround
-  files = _.filter(files, x => (x.split('/').length == 4));
+  files = _.filter(files, x => ((x.indexOf('examples')<0) && (x.indexOf('settings')<0)));
 
   return _.map(files, filename => {
 
-    //Workaround for https://github.com/Azure/azure-rest-api-specs/issues/229
-    var service = filename.split('/')[0];
+    var service = filename.split('/')[1];
+    if (service.endsWith('_API'))
+      service = service.replace('_API','');
     var basename = Path.basename(filename, '.json');
-    if (['arm-compute', 'arm-machinelearning'].indexOf(service) !== -1
-      && !service.endsWith(basename)) {
+    if (!service.endsWith(basename)) {
       service += '-' + basename;
     }
 
@@ -27,7 +26,7 @@ module.exports = function () {
         'x-providerName': 'azure.com',
         'x-serviceName': service,
         'x-origin': [{
-          url: util.rawGitHubUrl('Azure', 'azure-rest-api-specs', filename),
+          url: util.rawGitHubUrl('Azure', 'azure-rest-api-specs', 'current', filename),
           format: 'swagger',
           version: '2.0'
         }]
