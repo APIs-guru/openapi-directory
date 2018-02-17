@@ -4715,7 +4715,7 @@ definitions:
         description: '<p>The port number that the DB instance uses for connections.</p> <p>Default: Inherits from the source DB instance</p> <p>Valid Values: <code>1150-65535</code> </p>'
       MultiAZ:
         $ref: '#/definitions/BooleanOptional'
-        description: '<p>Specifies whether the Read Replica is in a Multi-AZ deployment. </p> <p>You can create a Read Replica as a Multi-AZ DB instance. RDS creates a standby of your replica in another Availability Zone for failover support for the replica. Creating your Read Replica as a Multi-AZ DB instance is independent of whether the source database is a Multi-AZ DB instance. </p> <note> <p>Currently, you can''t create PostgreSQL Read Replicas as Multi-AZ DB instances.</p> </note>'
+        description: <p>Specifies whether the Read Replica is in a Multi-AZ deployment. </p> <p>You can create a Read Replica as a Multi-AZ DB instance. RDS creates a standby of your replica in another Availability Zone for failover support for the replica. Creating your Read Replica as a Multi-AZ DB instance is independent of whether the source database is a Multi-AZ DB instance. </p>
       AutoMinorVersionUpgrade:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>Indicates that minor engine upgrades are applied automatically to the Read Replica during the maintenance window.</p> <p>Default: Inherits from the source DB instance</p>'
@@ -5316,6 +5316,9 @@ definitions:
       SupportsLogExportsToCloudwatchLogs:
         $ref: '#/definitions/Boolean'
         description: A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.
+      SupportsReadReplica:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the database engine version supports read replicas.
     description: ' This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. '
   DBEngineVersionList:
     type: array
