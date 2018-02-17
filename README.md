@@ -10,6 +10,9 @@
 
 [![Share on Twitter][twitter-image]][twitter-link]
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
+<img src="https://opencollective.com/openapi-directory/tiers/backer/badge.svg?label=backer&color=brightgreen" />
+<img src="https://opencollective.com/openapi-directory/tiers/sponsor/badge.svg?label=sponsor&color=brightgreen" />
+<img src="https://opencollective.com/openapi-directory/tiers/partner/badge.svg?label=partner&color=brightgreen" />
 
 Directory of API definitions in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format.<BR>
 API access to collection: [Go!][apiDoc-link]
@@ -29,6 +32,8 @@ Although the project is still under the auspices of APIs.guru, it is now maintai
 APIs.guru provide services and consultancy around GraphQL, OpenAPI/Swagger spec and APIs in general.
 You can contact us at founders@apis.guru.
 
+[![Become a backer](https://opencollective.com/openapi-directory/tiers/backer.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
+
 What does APIs.guru do?
 --------------------------
 * Filter out private and non-reliable APIs.
@@ -36,6 +41,12 @@ What does APIs.guru do?
 * Fix mistakes, ~80% of definitions have some
 * Add additional data, like: logo, categories, …
 * Update definitions on at least a weekly basis
+
+API definition acceptance criteria
+----------------------------------
+* Public - anyone can access it as long as they follow some clearly defined steps (email owner, pay money, etc.).
+* Persistant - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
+* Useful - API should provide useful functionality not only for its owner.
 
 Update procedure
 --------------------------
@@ -47,7 +58,7 @@ If you see some APIs are not updated for more than 2 weeks please open [an issue
 Existing integrations
 --------------------------
 
-![Sponsored by](branding/sponsor1.gif)
+[![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
  - https://any-api.com - Documentation and Test Consoles for Public APIs
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
@@ -66,13 +77,6 @@ Also used as test suite in following projects:
  - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for Swagger(OpenApi) Request parameters and Response objects
  - [swagger-search](https://github.com/IG-Group/swagger-search) - An application that collects and indexes swagger docs from your microservices architecture
 
-
-
-API definition acceptance criteria
-----------------------------------
-* Public - anyone can access it as long as they follow some clearly defined steps (email owner, pay money, etc.).
-* Persistant - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
-* Useful - API should provide useful functionality not only for its owner.
 
 Integration with 3rd-party services
 --------------------------
