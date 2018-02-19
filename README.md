@@ -27,10 +27,10 @@ Our goal is to create a machine-readable Wikipedia for REST APIs with the follow
 
 If you want to reference this project and you need an icon or even a banner, check our [branding guide](https://github.com/APIs-guru/branding).
 
-Although the project is still under the auspices of APIs.guru, it is now maintained by [Mike Ralphson](https://github.com/MikeRalphson) of [Mermade Software](https://github.com/mermade). Check out our other [OpenAPI-related projects](https://github.com/search?q=org%3AMermade+openapi).
+The project was started by Ivan Goncharov of APIs.guru, it is now maintained by [Mike Ralphson](https://github.com/MikeRalphson) of [Mermade Software](https://github.com/mermade). Check out our other [OpenAPI-related projects](https://github.com/search?q=org%3AMermade+openapi).
 
 APIs.guru provide services and consultancy around GraphQL, OpenAPI/Swagger spec and APIs in general.
-You can contact us at founders@apis.guru.
+You can contact us at founders@apis.guru / mike.ralphson@gmail.com
 
 [![Become a backer](https://opencollective.com/openapi-directory/tiers/backer.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
