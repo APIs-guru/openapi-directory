@@ -30,33 +30,33 @@ consumes:
 produces:
   - '*/*'
 tags:
-  - name: Pathway
-  - description: Strain Web Service
-    name: strain-web-service
-  - description: Phenotype Web Service
-    name: phenotype-web-service
-  - description: Pathway Web Service
-    name: pathway-web-service
-  - name: QTL
-  - name: Phenotype
-  - description: NIH Data Commons
-    name: NIHdatacommons
-  - description: Alliance of Genome Resources
-    name: AGR
-  - description: Stats Web Service
-    name: stats-web-service
   - name: Annotation
-  - name: Gene
-  - name: Lookup
-  - description: QTL Web Service
-    name: qtl-web-service
-  - description: Annotation Web Service
-    name: annotation-web-service
-  - description: Lookup Web Service
-    name: lookup-web-service
-  - name: Rat Strain
   - description: Gene Web Service
     name: gene-web-service
+  - name: Pathway
+  - description: Lookup Web Service
+    name: lookup-web-service
+  - description: Alliance of Genome Resources
+    name: AGR
+  - name: Phenotype
+  - description: Stats Web Service
+    name: stats-web-service
+  - description: NIH Data Commons
+    name: NIHdatacommons
+  - description: Annotation Web Service
+    name: annotation-web-service
+  - name: Gene
+  - name: Lookup
+  - description: Phenotype Web Service
+    name: phenotype-web-service
+  - name: Rat Strain
+  - description: Pathway Web Service
+    name: pathway-web-service
+  - description: Strain Web Service
+    name: strain-web-service
+  - name: QTL
+  - description: QTL Web Service
+    name: qtl-web-service
 paths:
   '/annotations/accId/{rgdId}':
     get:

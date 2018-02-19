@@ -397,15 +397,10 @@ definitions:
       - status
   ErrorModel:
     properties:
-      code:
-        maximum: 600
-        minimum: 100
-        type: integer
       message:
         type: string
     required:
       - message
-      - code
     type: object
   ExtendedErrorModel:
     allOf:
@@ -413,8 +408,11 @@ definitions:
       - properties:
           errorCode:
             type: number
+          status:
+            type: string
         required:
           - errorCode
+          - status
         type: object
   Login:
     description: authorisation object
@@ -473,6 +471,18 @@ definitions:
       destination:
         example: 447777777777
         type: number
+      failureReason:
+        properties:
+          code:
+            example: 34
+            type: number
+          details:
+            example: Handset error
+            type: string
+          permanent:
+            example: false
+            type: boolean
+        type: object
       id:
         example: 123456789
         type: string

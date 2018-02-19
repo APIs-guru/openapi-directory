@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Provides natural language understanding technologies to developers. Examples include sentiment analysis, entity recognition, entity sentiment analysis, and text annotations.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Natural Language
   version: v1
   x-apiClientRegistration:
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-language': Apply machine learning models to reveal the structure and meaning of text
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-language': Apply machine learning models to reveal the structure and meaning of text
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -163,11 +150,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -204,11 +187,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -243,11 +222,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -285,11 +260,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -326,11 +297,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -365,11 +332,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents

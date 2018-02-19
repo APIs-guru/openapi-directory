@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Kubernetes Engine API is used for building and managing container based applications, powered by the open source Kubernetes technology.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Kubernetes Engine
   version: v1
   x-apiClientRegistration:
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -155,8 +143,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -217,8 +203,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}':
@@ -263,8 +247,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -298,8 +280,6 @@ paths:
             $ref: '#/definitions/Cluster'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -352,8 +332,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -408,8 +386,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/legacyAbac':
@@ -462,8 +438,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -518,8 +492,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/logging':
@@ -572,8 +544,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -628,8 +598,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/monitoring':
@@ -683,8 +651,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools':
@@ -719,8 +685,6 @@ paths:
             $ref: '#/definitions/ListNodePoolsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -774,8 +738,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}':
@@ -816,8 +778,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -856,8 +816,6 @@ paths:
             $ref: '#/definitions/NodePool'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -931,8 +889,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setManagement':
@@ -990,8 +946,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1051,8 +1005,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/update':
@@ -1110,8 +1062,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1173,8 +1123,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/resourceLabels':
@@ -1227,8 +1175,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1283,8 +1229,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMaintenancePolicy':
@@ -1337,8 +1281,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1396,8 +1338,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setNetworkPolicy':
@@ -1450,8 +1390,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1506,8 +1444,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/operations':
@@ -1536,8 +1472,6 @@ paths:
             $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1587,8 +1521,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1656,8 +1588,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/serverconfig':
@@ -1686,8 +1616,6 @@ paths:
             $ref: '#/definitions/ServerConfig'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects

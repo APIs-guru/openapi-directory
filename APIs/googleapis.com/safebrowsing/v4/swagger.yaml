@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Safe Browsing
   version: v4
   x-apiClientRegistration:
@@ -719,7 +715,8 @@ definitions:
       firstValue:
         description: |-
           The offset of the first entry in the encoded data, or, if only a single
-          integer was encoded, that single integer's value.
+          integer was encoded, that single integer's value. If the field is empty or
+          missing, assume zero.
         format: int64
         type: string
       numEntries:

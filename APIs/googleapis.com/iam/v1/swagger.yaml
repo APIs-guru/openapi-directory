@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Identity and Access Management (IAM)
   version: v1
   x-apiClientRegistration:
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -164,8 +152,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - iamPolicies
   '/v1/permissions:queryTestablePermissions':
@@ -200,8 +186,6 @@ paths:
             $ref: '#/definitions/QueryTestablePermissionsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - permissions
@@ -244,8 +228,6 @@ paths:
             $ref: '#/definitions/ListRolesResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - roles
@@ -297,8 +279,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - roles
   '/v1/{name}':
@@ -311,7 +291,7 @@ paths:
         Existing Bindings remains, but are inactive. The Role can be undeleted
         within 7 days. After 7 days the Role is deleted and all Bindings associated
         with the role are removed.
-      operationId: iam.organizations.roles.delete
+      operationId: iam.projects.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
@@ -334,13 +314,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: Gets a Role definition.
-      operationId: iam.organizations.roles.get
+      operationId: iam.roles.get
       parameters:
         - description: |-
             The resource name of the role in one of the following formats:
@@ -370,10 +348,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - roles
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -390,7 +366,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a Role definition.
-      operationId: iam.organizations.roles.patch
+      operationId: iam.projects.roles.patch
       parameters:
         - in: body
           name: body
@@ -418,10 +394,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     put:
       description: |-
         Updates a ServiceAccount.
@@ -457,8 +431,6 @@ paths:
             $ref: '#/definitions/ServiceAccount'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -500,8 +472,6 @@ paths:
             $ref: '#/definitions/ListServiceAccountKeysResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -548,8 +518,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}/serviceAccounts':
@@ -586,8 +554,6 @@ paths:
             $ref: '#/definitions/ListServiceAccountsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -630,8 +596,6 @@ paths:
             $ref: '#/definitions/ServiceAccount'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -676,8 +640,6 @@ paths:
             $ref: '#/definitions/SignBlobResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -728,8 +690,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:undelete':
@@ -749,7 +709,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.organizations.roles.undelete
+      operationId: iam.projects.roles.undelete
       parameters:
         - in: body
           name: body
@@ -772,16 +732,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.organizations.roles.list
+      operationId: iam.projects.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
+          enum:
+            - BASIC
+            - FULL
           in: query
           name: pageSize
           type: integer
@@ -818,10 +779,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -838,7 +797,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.organizations.roles.create
+      operationId: iam.projects.roles.create
       parameters:
         - in: body
           name: body
@@ -861,10 +820,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -901,8 +858,6 @@ paths:
             $ref: '#/definitions/Policy'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -947,8 +902,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:testIamPermissions':
@@ -992,11 +945,77 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
 definitions:
+  AuditConfig:
+    description: |-
+      Specifies the audit configuration for a service.
+      The configuration determines which permission types are logged, and what
+      identities, if any, are exempted from logging.
+      An AuditConfig must have one or more AuditLogConfigs.
+
+      If there are AuditConfigs for both `allServices` and a specific service,
+      the union of the two AuditConfigs is used for that service: the log_types
+      specified in each AuditConfig are enabled, and the exempted_members in each
+      AuditLogConfig are exempted.
+
+      Example Policy with multiple AuditConfigs:
+
+          {
+            "audit_configs": [
+              {
+                "service": "allServices"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                    "exempted_members": [
+                      "user:foo@gmail.com"
+                    ]
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                  },
+                  {
+                    "log_type": "ADMIN_READ",
+                  }
+                ]
+              },
+              {
+                "service": "fooservice.googleapis.com"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                    "exempted_members": [
+                      "user:bar@gmail.com"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts foo@gmail.com from DATA_READ logging, and
+      bar@gmail.com from DATA_WRITE logging.
+    properties:
+      auditLogConfigs:
+        description: |-
+          The configuration for logging of each type of permission.
+          Next ID: 4
+        items:
+          $ref: '#/definitions/AuditLogConfig'
+        type: array
+      service:
+        description: |-
+          Specifies a service that will be enabled for audit logging.
+          For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+          `allServices` is a special value that covers all services.
+        type: string
+    type: object
   AuditData:
     description: |-
       Audit log information specific to Cloud IAM. This message is serialized
@@ -1006,6 +1025,45 @@ definitions:
       policyDelta:
         $ref: '#/definitions/PolicyDelta'
         description: Policy delta between the original policy and the newly set policy.
+    type: object
+  AuditLogConfig:
+    description: |-
+      Provides the configuration for logging a type of permissions.
+      Example:
+
+          {
+            "audit_log_configs": [
+              {
+                "log_type": "DATA_READ",
+                "exempted_members": [
+                  "user:foo@gmail.com"
+                ]
+              },
+              {
+                "log_type": "DATA_WRITE",
+              }
+            ]
+          }
+
+      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+      foo@gmail.com from DATA_READ logging.
+    properties:
+      exemptedMembers:
+        description: |-
+          Specifies the identities that do not cause logging for this type of
+          permission.
+          Follows the same format of Binding.members.
+        items:
+          type: string
+        type: array
+      logType:
+        description: The log type that this config enables.
+        enum:
+          - LOG_TYPE_UNSPECIFIED
+          - ADMIN_READ
+          - DATA_WRITE
+          - DATA_READ
+        type: string
     type: object
   AuditableService:
     description: Contains information about an auditable service.
@@ -1251,6 +1309,11 @@ definitions:
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
+      auditConfigs:
+        description: Specifies cloud audit logging configuration for this policy.
+        items:
+          $ref: '#/definitions/AuditConfig'
+        type: array
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
@@ -1564,6 +1627,15 @@ definitions:
           the policy is limited to a few 10s of KB. An empty policy is a
           valid policy but certain Cloud Platform services (such as Projects)
           might reject them.
+      updateMask:
+        description: |-
+          OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+          the fields in the mask will be modified. If no mask is provided, the
+          following default mask is used:
+          paths: "bindings, etag"
+          This field is only used by Cloud IAM.
+        format: google-fieldmask
+        type: string
     type: object
   SignBlobRequest:
     description: The service account sign blob request.

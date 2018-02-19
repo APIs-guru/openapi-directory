@@ -35,7 +35,7 @@ securityDefinitions:
 paths:
   /item/get_item_by_legacy_id:
     get:
-      description: 'This call is a bridge between the eBay legacy APIs, such as Trading, Shopping, and Finding and the eBay Buy APIs. There are differences between how legacy APIs and RESTful APIs return the identifier of an &quot;item&quot;. There is also a difference in what the item Id represents and in the format of the item Id value returned. This call lets you use the legacy item Ids retrieve the details of a specific item, such as description, price, and other information the buyer needs to make a purchasing decision. It also returns the RESTful item Id, which you can use with all the Buy API calls. For more information about how to use legacy Ids with the Buy APIs, see Legacy API compatibility in the Buying Integration guide. This call returns the item details and requires you to pass in either the item Id of a non-variation item or the item Ids of both the parent and child of a item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the &quot;parent&quot;. All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc. The fieldgroups URI parameter lets you control what is returned in the response. Setting fieldgroups to PRODUCT, adds additional fields to the default response that return information about the product of the item. For more information, see fieldgroups. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this call. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site and it is strongly recommended you use contextualLocation to improved the estimated delivery window information. For details see, Request headers in the Buy APIs Overview. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      description: 'This call is a bridge between the eBay legacy APIs, such as Trading, Shopping, and Finding and the eBay Buy APIs. There are differences between how legacy APIs and RESTful APIs return the identifier of an &quot;item&quot;. There is also a difference in what the item ID represents and in the format of the item ID value returned. This call lets you use the legacy item IDs retrieve the details of a specific item, such as description, price, and other information the buyer needs to make a purchasing decision. It also returns the RESTful item ID, which you can use with all the Buy API calls. For more information about how to use legacy IDs with the Buy APIs, see Legacy API compatibility in the Buying Integration guide. This call returns the item details and requires you to pass in either the item ID of a non-variation item or the item IDs of both the parent and child of an item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the &quot;parent&quot;. All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc. The fieldgroups URI parameter lets you control what is returned in the response. Setting fieldgroups to PRODUCT, adds additional fields to the default response that return information about the product of the item. For more information, see fieldgroups. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this call. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site and it is strongly recommended you use contextualLocation to improved the estimated delivery window information. For details see, Request headers in the Buy APIs Overview. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
       operationId: getItemByLegacyId
       parameters:
         - description: 'This field lets you control what is returned in the response. If you do not set this field, the call returns all the details of the item. Note: In this call, the only value supported is PRODUCT. Valid values: PRODUCT - This adds the additionalImages, additionalProductIdentities, aspectGroups, description, gtins, image, and title fields to the response, which describe the item''s product. See Product for more information about these fields.'
@@ -43,17 +43,17 @@ paths:
           name: fieldgroups
           required: false
           type: string
-        - description: 'Specifies either: The legacy item Id of an item that is not part of a group. The legacy item Id of a group, which is the Id of the &quot;parent&quot; of the group of items. Note: If you pass in a group Id, you must also use the legacy_variation_id field and pass in the legacy Id of the specific item variation (child Id). Legacy Ids are returned by eBay traditional APIs, such as the Trading API or Finding API. The following is an example of using the value of the ItemID field for a specific item from Trading to get the RESTful itemId value. &nbsp;&nbsp;&nbsp; browse/v1/item/get_item_by_legacy_id?legacy_item_id=110039490209 Maximum: 1'
+        - description: 'Specifies either: The legacy item ID of an item that is not part of a group. The legacy item ID of a group, which is the ID of the &quot;parent&quot; of the group of items. Note: If you pass in a group ID, you must also use the legacy_variation_id field and pass in the legacy ID of the specific item variation (child ID). Legacy IDs are returned by eBay traditional APIs, such as the Trading API or Finding API. The following is an example of using the value of the ItemID field for a specific item from Trading to get the RESTful itemId value. &nbsp;&nbsp;&nbsp; browse/v1/item/get_item_by_legacy_id?legacy_item_id=110039490209 Maximum: 1'
           in: query
           name: legacy_item_id
           required: true
           type: string
-        - description: 'Specifies the legacy item Id of a specific item in an item group, such as the red shirt size L. Legacy Ids are returned by eBay traditional APIs, such as the Trading API or Finding API. Maximum: 1 Requirement: You must always pass in the legacy_item_id with the legacy_variation_id'
+        - description: 'Specifies the legacy item ID of a specific item in an item group, such as the red shirt size L. Legacy IDs are returned by eBay traditional APIs, such as the Trading API or Finding API. Maximum: 1 Requirement: You must always pass in the legacy_item_id with the legacy_variation_id'
           in: query
           name: legacy_variation_id
           required: false
           type: string
-        - description: 'Specifics the legacy SKU of the item. SKU are item Ids created by the seller. Legacy SKUs are returned by eBay traditional APIs, such as the Trading API or Finding API. The following is an example of using the value of the ItemID and SKU fields, which were returned by the Trading API, to get the RESTful itemId value. &nbsp;&nbsp;&nbsp; browse/v1/item/get_item_by_legacy_id?legacy_item_id=110039490209&amp;legacy_variation_sku=V-00031-WHM Maximum: 1 Requirement: You must always pass in the legacy_item_id with the legacy_variation_sku'
+        - description: 'Specifics the legacy SKU of the item. SKU are item IDs created by the seller. Legacy SKUs are returned by eBay traditional APIs, such as the Trading API or Finding API. The following is an example of using the value of the ItemID and SKU fields, which were returned by the Trading API, to get the RESTful itemId value. &nbsp;&nbsp;&nbsp; browse/v1/item/get_item_by_legacy_id?legacy_item_id=110039490209&amp;legacy_variation_sku=V-00031-WHM Maximum: 1 Requirement: You must always pass in the legacy_item_id with the legacy_variation_sku'
           in: query
           name: legacy_variation_sku
           required: false
@@ -78,10 +78,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: 'This call retrieves the details of the individual items in an item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. You pass in the item group Id as a URI parameter. You use this call to show the item details of items with multiple aspects, such as color, size, storage capacity, etc. This call returns two main containers; items and commonDescriptions. The items container has an array of containers with the details of each item in the group. The commonDescriptions container has an array of containers for a description and the item Ids of all the items that have this exact description. Because items within an item group often have the same description, this decreases the size of the response. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this call. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site and it is strongly recommended you use contextualLocation to improved the estimated delivery window information. For details see, Request headers in the Buy APIs Overview. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      description: 'This call retrieves the details of the individual items in an item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. You pass in the item group ID as a URI parameter. You use this call to show the item details of items with multiple aspects, such as color, size, storage capacity, etc. This call returns two main containers; items and commonDescriptions. The items container has an array of containers with the details of each item in the group. The commonDescriptions container has an array of containers for a description and the item IDs of all the items that have this exact description. Because items within an item group often have the same description, this decreases the size of the response. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this call. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site and it is strongly recommended you use contextualLocation to improved the estimated delivery window information. For details see, Request headers in the Buy APIs Overview. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
       operationId: getItemsByItemGroup
       parameters:
-        - description: 'Identifier of the item group to return. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. This Id is returned in the itemGroupHref field of the search and getItem calls. For Example: https://api.ebay.com/buy/browse/v1/item/get_items_by_item_group?item_group_id=351825690866'
+        - description: 'Identifier of the item group to return. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. This ID is returned in the itemGroupHref field of the search and getItem calls. For Example: https://api.ebay.com/buy/browse/v1/item/get_items_by_item_group?item_group_id=351825690866'
           in: query
           name: item_group_id
           required: true
@@ -106,15 +106,15 @@ paths:
         - item
   '/item/{item_id}':
     get:
-      description: 'This call retrieves the details of a specific item, such as description, price, category, all item aspects, condition, return policies, seller feedback and score, shipping options, shipping costs, estimated delivery, and other information the buyer needs to make a purchasing decision. The Buy APIs are designed to let you create an eBay shopping experience in your app or website. This means you will need to know when something, such as the availability, quantity, etc., has changed in any eBay item you are offering. You can do this easily by setting the fieldgroups URI parameter. This parameter lets you control what is returned in the response. Setting fieldgroups to COMPACT reduces the response to only the five fields that you need in order to check if any item detail has changed. Setting fieldgroups to PRODUCT, adds additional fields to the default response that return information about the product of the item. You can use either COMPACT or PRODUCT but not both. For more information, see fieldgroups. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this call. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site and it is strongly recommended you use contextualLocation to improved the estimated delivery window information. For details see, Request headers in the Buy APIs Overview. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      description: 'This call retrieves the details of a specific item, such as description, price, category, all item aspects, condition, return policies, seller feedback and score, shipping options, shipping costs, estimated delivery, and other information the buyer needs to make a purchasing decision. The Buy APIs are designed to let you create an eBay shopping experience in your app or website. This means you will need to know when something, such as the availability, quantity, etc., has changed in any eBay item you are offering. You can do this easily by setting the fieldgroups URI parameter. This parameter lets you control what is returned in the response. Setting fieldgroups to COMPACT reduces the response to only the five fields that you need in order to check if any item detail has changed. Setting fieldgroups to PRODUCT, adds additional fields to the default response that return information about the product of the item. You can use either COMPACT or PRODUCT but not both. For more information, see fieldgroups. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this call. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site and it is strongly recommended you use contextualLocation to improve the estimated delivery window information. For details see, Request headers in the Buy APIs Overview. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
       operationId: getItem
       parameters:
-        - description: 'This parameter lets you control what is returned in the response. If you do not set this field, the call returns all the details of the item. Valid values: PRODUCT - This adds the additionalImages, additionalProductIdentities, aspectGroups, description, gtins, image, and title product fields to the response, which describe the product associated with the item. See Product for more information about these fields. COMPACT - This returns only the following fields, which let you quickly check if the availability or price of the item has changed, if the item has been revised by the seller, or if an item''s top-rated plus status has changed for items you have stored. itemId - The identifier of the item. sellerItemRevision - An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title, and eBay system changes, such as changing the quantity when an item is purchased. This Id is changed only when the seller makes a change to the item. This means you cannot use this value to determine if the quantity has changed. topRatedBuyingExperience - A boolean value indicating if this item is a top-rated plus item. A change in the item''s top rated plus standing is not tracked by the revision Id. See topRatedBuyingExperience for more information. price - This is tracked by the revision Id but is returned here to enable you to quickly verify the price of the item. estimatedAvailabilities - Returns the item availability information, which is based on the item''s quantity. Changes in quantity are not tracked by the revision Id. For Example To check if a stored item''s information is current, do following. Pass in the item Id and set fieldgroups to COMPACT. item/v1|46566502948|0?fieldgroups=COMPACT Do one of the following: If the sellerItemRevision field is returned and you haven''t stored a revision number for this item, record the number and pass in the item Id in the getItem call to get the latest information. If the revision number is different from the value you have stored, update the value and pass in the item Id in the getItem call to get the latest information. If the sellerItemRevision field is not returned or has not changed, where needed, update the item information with the information returned in the response. Maximum value: 1 If more than one values is specified, the first value will be used.'
+        - description: 'This parameter lets you control what is returned in the response. If you do not set this field, the call returns all the details of the item. Valid values: PRODUCT - This adds the additionalImages, additionalProductIdentities, aspectGroups, description, gtins, image, and title product fields to the response, which describe the product associated with the item. See Product for more information about these fields. COMPACT - This returns only the following fields, which let you quickly check if the availability or price of the item has changed, if the item has been revised by the seller, or if an item''s top-rated plus status has changed for items you have stored. itemId - The identifier of the item. sellerItemRevision - An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title, and eBay system changes, such as changing the quantity when an item is purchased. This ID is changed only when the seller makes a change to the item. This means you cannot use this value to determine if the quantity has changed. topRatedBuyingExperience - A boolean value indicating if this item is a top-rated plus item. A change in the item''s top rated plus standing is not tracked by the revision ID. See topRatedBuyingExperience for more information. price - This is tracked by the revision ID but is returned here to enable you to quickly verify the price of the item. estimatedAvailabilities - Returns the item availability information, which is based on the item''s quantity. Changes in quantity are not tracked by the revision ID. For Example To check if a stored item''s information is current, do following. Pass in the item ID and set fieldgroups to COMPACT. item/v1|46566502948|0?fieldgroups=COMPACT Do one of the following: If the sellerItemRevision field is returned and you haven''t stored a revision number for this item, record the number and pass in the item ID in the getItem call to get the latest information. If the revision number is different from the value you have stored, update the value and pass in the item ID in the getItem call to get the latest information. If the sellerItemRevision field is not returned or has not changed, where needed, update the item information with the information returned in the response. Maximum value: 1 If more than one values is specified, the first value will be used.'
           in: query
           name: fieldgroups
           required: false
           type: string
-        - description: 'The eBay identifier of an item. This Id is returned by the Browse and Feed API calls. The Id must be in RESTful item Id format. For example: v1|262446562346|561248611424 or v1|112330214619|0. For more information about item Id for RESTful APIs, see the Legacy API compatibility section of the Buy APIs Overview.'
+        - description: 'The eBay identifier of an item. This ID is returned by the Browse and Feed API calls. The ID must be in RESTful item ID format. For example: v1|262446562346|561248611424 or v1|112330214619|0. For more information about item ID for RESTful APIs, see the Legacy API compatibility section of the Buy APIs Overview.'
           in: path
           name: item_id
           required: true
@@ -137,20 +137,20 @@ paths:
         - item
   /item_summary/search:
     get:
-      description: 'This call performs an advanced search for items. You can search by keyword, category, eBay product Id (EPID), or gtin. Or a combination of these. Encoding Parameters and Headers As with all query parameter values, the fields parameter value and request header values must be URL encoded. For better readability, the examples in this document omit the encoding. Example: &nbsp;&nbsp;search?q=world cup soccer ball&amp;aspect_filter=categoryId:20863,Brand:{Nike|Wilson} Encoded Example: &nbsp;&nbsp; search?q=world cup soccer ball&amp;aspect_filter=categoryId%3A20863%2CBrand%3A%7BNike%7CWilson%7D For more information about encoding, see HTML URL Encoding Reference The following are examples of using filters: The following call returns 4,330,774 items. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?q=phone This call, which limits the results to the category &quot;Cell Phones &amp; Smartphones&quot;, returns 142,098 items. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?q=phone&amp;category_ids=9355 These calls, which limit results to a Samsung Galaxy S5, returns 97 items. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?q=phone&amp;category_ids=220&amp;epid=182527490 &nbsp;&nbsp;&nbsp;or &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?epid=182527490 Controlling what is returned You can also control what is returned by using the fieldgroups field. In addition to returning items, which is the default, you can return refinements (metadata) about an item that enables you to create aspect histograms. A histogram enables users to drill down in each refinement narrowing the search results. You can return: ASPECT_REFINEMENTS - Lets shoppers refine the result set by variation aspects, such as Brand, Color, etc. BUYING_OPTION_REFINEMENT - Lets shoppers refine the result set by either FIXED_PRICE or AUCTION CATEGORY_REFINEMENTS - Lets shoppers refine the result set by items in a category CONDITION_REFINEMENT - Lets shoppers refine the result set by item condition, such as NEW, USED, etc. MATCHING_ITEMS - The default, which returns the items. When used with one or more of the refinement values above the specified refinements and all the matching items are returned. FULL - This returns all the refinement containers and all the matching items. Filtering by aspects You can use the aspect refinements returned to filter the result set using the aspect_filter field. For example: This call gets a list of the aspects pairs for the item and the dominant category (category most of the items are in). /buy/browse/v1/item_summary/search?q=world cup soccer ball&amp;fieldgroups=ASPECT_REFINEMENTS This call filters the items by one of the aspect pairs returned and the dominant category ( categoryId is required when using aspect_filter) /buy/browse/v1/item_summary/search?q=world cup soccer ball&amp;aspect_filter=categoryId:20863,Brand:{adidas} This call filters the items by multiple aspects /buy/browse/v1/item_summary/search?q=world cup soccer ball&amp;aspect_filter=categoryId:20863,Brand:{adidas},Featured Refinements:{Adidas Match Ball} This call filters the items by multiple aspect values /buy/browse/v1/item_summary/search?q=world cup soccer ball&amp;aspect_filter=categoryId:20863,Brand:{Nike|Wilson} Additional filters There are also multiple filters you can use to refine the result set, such as listing format, item condition, price range, listing end date, location, and more. You can use multiple filters in a single call. For a list and details of the supported filters, see search Call Field Filters. Pagination and sort controls There are pagination controls ( limit and offset fields) and sort query parameter that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about Best Match, see the eBay help page Best Match. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this call. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site and it is strongly recommended you use contextualLocation to improved the estimated delivery window information. For details see, Request headers in the Buy APIs Overview. Restrictions For a list of supported sites and other restrictions, see API Restrictions. Limitation: This call can return a maximum of 10,000 items.'
+      description: 'This call searches for eBay items by various URI query parameters and retrieves summaries of the items. You can search by keyword, category, eBay product ID (EPID), or gtin. Or a combination of these. The following are examples of using these parameters to limit the results: The following call returns 4,330,774 items. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?q=phone This call, which limits the results to the category &quot;Cell Phones &amp; Smartphones&quot;, returns 142,098 items. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?q=phone&amp;category_ids=9355 These calls, which limit results to a Samsung Galaxy S5, returns 97 items. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?q=phone&amp;category_ids=220&amp;epid=182527490 &nbsp;&nbsp;&nbsp;or &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?epid=182527490 Controlling what is returned You can also control what is returned by using the fieldgroups field. In addition to returning items, which is the default, you can return refinements (metadata) about an item that enables you to create aspect histograms. A histogram enables users to drill down in each refinement narrowing the search results. You can return: ASPECT_REFINEMENTS - Lets shoppers refine the result set by variation aspects, such as Brand, Color, etc. BUYING_OPTION_REFINEMENT - Lets shoppers refine the result set by either FIXED_PRICE or AUCTION CATEGORY_REFINEMENTS - Lets shoppers refine the result set by items in a category CONDITION_REFINEMENT - Lets shoppers refine the result set by item condition, such as NEW, USED, etc. MATCHING_ITEMS - The default, which returns the items. When used with one or more of the refinement values above the specified refinements and all the matching items are returned. FULL - This returns all the refinement containers and all the matching items. Filtering by aspects You can use the aspect refinements returned to filter the result set using the aspect_filter field. For example: This call gets a list of the aspects pairs for the item and the dominant category (category most of the items are in). /buy/browse/v1/item_summary/search?q=world cup soccer ball&amp;fieldgroups=ASPECT_REFINEMENTS This call filters the items by one of the aspect pairs returned and the dominant category ( categoryId is required when using aspect_filter) /buy/browse/v1/item_summary/search?q=world cup soccer ball&amp;aspect_filter=categoryId:20863,Brand:{adidas} This call filters the items by multiple aspects /buy/browse/v1/item_summary/search?q=world cup soccer ball&amp;aspect_filter=categoryId:20863,Brand:{adidas},Featured Refinements:{Adidas Match Ball} This call filters the items by multiple aspect values /buy/browse/v1/item_summary/search?q=world cup soccer ball&amp;aspect_filter=categoryId:20863,Brand:{Nike|Wilson} Fields filters There are also field filters you can use to refine the result set, such as listing format, item condition, price range, listing end date, location, and more. You can use multiple field filters in a single call. For a list and details of the supported filters, see search Call Field Filters. Pagination and sort controls There are pagination controls ( limit and offset fields) and sort query parameter that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about Best Match, see the eBay help page Best Match. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this call. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site and it is strongly recommended you use contextualLocation to improve the estimated delivery window information. For details see, Request headers in the Buy APIs Overview. Restrictions This call can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see API Restrictions. URL Encoding Parameters and Headers As with all query parameter values, the fields parameter value and request header values must be URL encoded. For better readability, the examples in this document omit the encoding. Example: &nbsp;&nbsp;search?q=world cup soccer ball&amp;aspect_filter=categoryId:20863,Brand:{Nike|Wilson} Encoded Example: &nbsp;&nbsp; search?q=world cup soccer ball&amp;aspect_filter=categoryId%3A20863%2CBrand%3A%7BNike%7CWilson%7D For more information about encoding, see HTML URL Encoding Reference.'
       operationId: search
       parameters:
-        - description: 'The aspect name/value pairs and category, which is required, to use to limit the results. For example, in a clothing category one aspect pair would be Color/Red. For example, the call below uses the category Id for Women''s Clothing. This will return only items for a woman''s red shirt. /buy/browse/v1/item_summary/search?q=shirt&amp;aspect_filter=categoryId:15724,Color:{Red} To get a list of the aspects pairs and the category, which is returned in the dominantCategoryId field, set fieldgroups to ASPECT_REFINEMENTS. /buy/browse/v1/item_summary/search?q=shirt&amp;fieldgroups=ASPECT_REFINEMENTS Required: categoryId:categoryId-value For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/browse/types/AspectFilter.html'
+        - description: 'The aspect name/value pairs and category, which is required, to use to limit the results. For example, in a clothing category one aspect pair would be Color/Red. For example, the call below uses the category ID for Women''s Clothing. This will return only items for a woman''s red shirt. /buy/browse/v1/item_summary/search?q=shirt&amp;aspect_filter=categoryId:15724,Color:{Red} To get a list of the aspects pairs and the category, which is returned in the dominantCategoryId field, set fieldgroups to ASPECT_REFINEMENTS. /buy/browse/v1/item_summary/search?q=shirt&amp;fieldgroups=ASPECT_REFINEMENTS Required: categoryId:categoryId-value For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/browse/types/AspectFilter.html'
           in: query
           name: aspect_filter
           required: false
           type: string
-        - description: 'The category Ids to use to limit the results. This field can have one category Id or a comma separated list of Ids. For example: &nbsp;&nbsp;&nbsp;GET https://api.ebay.com/buy/browse/v1/item_summary/search?category_ids=29792 Note: Currently, you can pass in only one category Id. You can also use any combination of the category_Ids, epid, and q fields. This gives you additional control over the result set. For example, let''s say you are looking of a toy phone. If you search for &quot;phone&quot;, the result set will be mobile phones because this is the &quot;Best Match&quot; for this search. But if you also include the toy category Id, the results will be what you wanted. For example: &nbsp;&nbsp;&nbsp;GET https://api.ebay.com/buy/browse/v1/item_summary/search?q=phone&amp;category_ids=220 The list of eBay category Ids is not published and category Ids are not the same across all the eBay marketplaces. You can use the following techniques to find a category by site. Use the Category Changes page. Use the Taxonomy API. For details see Categories for Buy API Calls. Submit the following call to get the dominantCategoryId for an item. /buy/browse/v1/item_summary/search?q=keyword&amp;fieldgroups=ASPECT_REFINEMENTS Note: If a top-level (L1) category is specified, you must also include the q query parameter. Required: The call must have category_ids, epid, gtin, or q (or any combination of these)'
+        - description: 'The category IDs to use to limit the results. This field can have one category ID or a comma separated list of IDs. For example: &nbsp;&nbsp;&nbsp;GET https://api.ebay.com/buy/browse/v1/item_summary/search?category_ids=29792 Note: Currently, you can pass in only one category ID. You can also use any combination of the category_Ids, epid, and q fields. This gives you additional control over the result set. For example, let''s say you are looking of a toy phone. If you search for &quot;phone&quot;, the result set will be mobile phones because this is the &quot;Best Match&quot; for this search. But if you also include the toy category ID, the results will be what you wanted. For example: &nbsp;&nbsp;&nbsp;GET https://api.ebay.com/buy/browse/v1/item_summary/search?q=phone&amp;category_ids=220 The list of eBay category IDs is not published and category IDs are not the same across all the eBay marketplaces. You can use the following techniques to find a category by site: Use the Category Changes page. Use the Taxonomy API. For details see Get Categories for Buy APIs. Submit the following call to get the dominantCategoryId for an item. /buy/browse/v1/item_summary/search?q=keyword&amp;fieldgroups=ASPECT_REFINEMENTS Note: If a top-level (L1) category is specified, you must also include the q query parameter. Required: The call must have category_ids, epid, gtin, or q (or any combination of these)'
           in: query
           name: category_ids
           required: false
           type: string
-        - description: 'The EPID is the eBay product identifier of a product from the eBay product catalog. Only items in the specified EPID are returned. The Marketing API getMerchandisedProducts call and the getItem, getItemByLegacyId, and getItemsByItemGroup calls return the EPID of the product. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?epid:{15032} Maximum: 1 Required: The call must have category_ids, epid, gtin, or q (or any combination of these)'
+        - description: 'The EPID is the eBay product identifier of a product from the eBay product catalog. Only items in the specified EPID are returned. The Marketing API getMerchandisedProducts call and the getItem, getItemByLegacyId, and getItemsByItemGroup calls return the EPID of the product. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?epid=15032 Maximum: 1 Required: The call must have category_ids, epid, gtin, or q (or any combination of these)'
           in: query
           name: epid
           required: false
@@ -165,7 +165,7 @@ paths:
           name: filter
           required: false
           type: string
-        - description: 'This field lets you search by the Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?gtin:{099482432621} Maximum: 1 Required: The call must have category_ids, epid, gtin, or q (or any combination of these)'
+        - description: 'This field lets you search by the Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value. &nbsp;&nbsp;&nbsp;/buy/browse/v1/item_summary/search?gtin=099482432621 Maximum: 1 Required: The call must have category_ids, epid, gtin, or q (or any combination of these)'
           in: query
           name: gtin
           required: false
@@ -180,7 +180,7 @@ paths:
           name: offset
           required: false
           type: string
-        - description: 'A string consisting of one or more words that are used for a search of items on eBay. For example: &quot;iphone&quot; or &quot;Harry Potter&quot;. When keywords are separated by a comma, the comma is ignored. So a keyword of &quot;iphone, ipad&quot; is the same as using &quot;iphone ipad&quot;. Both queries return items that have iphone or ipad. Restriction: The * wildcard character is not allowed in this field. Required: The call must have category_ids, epid, gtin, or q (or any combination of these)'
+        - description: 'A string consisting of one or more keywords that are used to search for items on eBay. The keywords are handled as follows: If the keywords are separated by a comma (iphone,ipad), the query returns items that have iphone AND ipad. If the keywords are separated by a space (iphone&nbsp;ipad or iphone,&nbsp;ipad), the query returns items that have iphone OR ipad. Restriction: The * wildcard character is not allowed in this field. Required: The call must have category_ids, epid, gtin, or q (or any combination of these)'
           in: query
           name: q
           required: false
@@ -206,10 +206,10 @@ paths:
         - item_summary
 definitions:
   AdditionalProductIdentity:
-    description: 'The type that defines the array of additional product type/value pairs for the same product associated with an item. A product can have more than one identifier value for a product type, such as UPC or EAN. For example, the same product UPC can have an identifier that is 12, 13, or 14 digits. This container returns all the identifiers for each product Id type. These are in addition to the identifiers returned in the <b> mpn</b> and <b> gitn</b> fields. '
+    description: The type that defines the array of product identifiers associated with the item. This container is returned if the seller has associated the eBay Product Identifier (ePID) with the item and in the request <b> fieldgroups</b> is set to <code>PRODUCT</code>.
     properties:
       productIdentity:
-        description: 'An array of additional type/value pairs for the same product associated with the item. For example: &nbsp;&nbsp;&nbsp;&quot;identifierType&quot;: &quot;UPC&quot;&nbsp;&nbsp;&nbsp;&nbsp; and &nbsp;&quot;identifierValue&quot;: &quot;0718908620489&quot; &nbsp;&nbsp;&nbsp;&quot;identifierType&quot;: &quot;UPC_12&quot;&nbsp; and &nbsp;&quot;identifierValue&quot;: &quot;718908620489&quot; &nbsp;&nbsp;&nbsp;&quot;identifierType&quot;: &quot;UPC_13&quot;&nbsp; and &nbsp;&quot;identifierValue&quot;: &quot;0718908620489&quot;'
+        description: 'An array of the product identifier/value pairs for the product associated with the item. This is returned if the seller has associated the eBay Product Identifier (ePID) with the item and the request has fieldgroups set to PRODUCT. The following table shows what is returned, based on the item information provided by the seller, when the fieldgroups set to PRODUCT. ePID Provided Product&nbsp;ID(s) Provided Response No No The AdditionalProductIdentity container is not returned. No Yes The AdditionalProductIdentity container is not returned but the product identifiers specified by the seller are returned in the localizedAspects container. Yes No The AdditionalProductIdentity container is returned listing the product identifiers of the product. Yes Yes The AdditionalProductIdentity container is returned listing all the product identifiers of the product and the product identifiers specified by the seller are returned in the localizedAspects container.'
         items:
           $ref: '#/definitions/ProductIdentity'
         type: array
@@ -291,7 +291,7 @@ definitions:
     description: The container that defines the fields for the buying options refinements. This container is returned when <b> fieldgroups</b> is set to <code>BUYING_OPTION_REFINEMENTS</code> or <code>FULL</code> in the request.
     properties:
       buyingOption:
-        description: Buying option type. This will be either AUCTION or FIXED_PRICE.
+        description: Buying option type. This will be AUCTION or FIXED_PRICE or both.
         type: string
       matchCount:
         description: The number of items having this buying option.
@@ -301,10 +301,10 @@ definitions:
         type: string
     type: object
   Category:
-    description: 'This type is used by the <b> categories</b>  container in the response of the <b> search</b>  call, and consists of the primary listing category Id of the item (as well as secondary listing category if item was listed in two categories).'
+    description: 'This type is used by the <b> categories</b>  container in the response of the <b> search</b>  call, and contains the primary item category ID of the item (as well as the secondary item category if the item was listed in two categories).'
     properties:
       categoryId:
-        description: The unique identifier of the primary listing category of the item (as well as secondary listing category if item was listed in two categories).
+        description: The unique identifier of the primary item category of the item (as well as secondary item category if item was listed in two categories).
         type: string
     type: object
   CategoryDistribution:
@@ -324,13 +324,13 @@ definitions:
         type: string
     type: object
   CommonDescriptions:
-    description: 'The type that defines the fields for the item Ids that all use a common description.  Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, a description that is shared by at least one other item is returned in this container. If the description is unique, it is returned in the <b> items.description</b> field.'
+    description: 'The type that defines the fields for the item IDs that all use a common description.  Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, a description that is shared by at least one other item is returned in this container. If the description is unique, it is returned in the <b> items.description</b> field.'
     properties:
       description:
         description: The item description that is used by more than one of the item variations.
         type: string
       itemIds:
-        description: A list of item Ids that have this description.
+        description: A list of item IDs that have this description.
         items:
           type: string
         type: array
@@ -380,7 +380,7 @@ definitions:
         description: A unique code that identifies the particular error or warning that occurred. Your application can use error codes as identifiers in your customized error-handling algorithms.
         type: integer
       inputRefIds:
-        description: 'An array of reference Ids that identify the specific request elements most closely associated to the error or warning, if any.'
+        description: 'An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any.'
         items:
           type: string
         type: array
@@ -391,7 +391,7 @@ definitions:
         description: A description of the condition that caused the error or warning.
         type: string
       outputRefIds:
-        description: 'An array of reference Ids that identify the specific response elements most closely associated to the error or warning, if any.'
+        description: 'An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any.'
         items:
           type: string
         type: array
@@ -421,7 +421,7 @@ definitions:
         description: The 'display item quantity' threshold value the seller has set.
         type: integer
       availabilityThresholdType:
-        description: 'Only returns MORE_THAN, which indicates that the seller has more that the ''quantity display preference'' value in stock for this item. This field depends on how the seller has set their item quantity display preference. Let''s say the following are the quantity display preferences the seller can choose between. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this field is returned as long as there are more than 10 in inventory of this item. If the quantity is equal to 10 or drops below 10, this field is not returned and the actual quantity of the item is returned in the estimatedAvailableQuantity field. Display the exact quantity in your listings If the seller enables this preference, the availabilityThresholdType field is not returned and the actual quantity of the item is returned in the estimatedAvailableQuantity field. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/AvailabilityThresholdEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates the availability of an item. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, this returns the estimated availability of the item based on the threshold the seller has set. This field only returns MORE_THAN, which indicates that the seller has more that the ''quantity display preference'' value in stock for this item. This field depends on how the seller has set their item quantity display preference. Let''s say the following are the quantity display preferences the seller can choose between. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this field is returned as long as there are more than 10 in inventory of this item. If the quantity is equal to 10 or drops below 10, this field is not returned and the actual quantity of the item is returned in the estimatedAvailableQuantity field. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType field is not returned and the actual quantity of the item is returned in the estimatedAvailableQuantity field. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/AvailabilityThresholdEnum.html''>eBay API documentation</a>'
         type: string
       deliveryOptions:
         description: An array of available delivery options.
@@ -430,7 +430,7 @@ definitions:
           type: string
         type: array
       estimatedAvailabilityStatus:
-        description: 'Indicates the estimated availability of this item. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/AvailabilityStatusEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates the estimated availability of this item. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/AvailabilityStatusEnum.html''>eBay API documentation</a>'
         type: string
       estimatedAvailableQuantity:
         description: The estimated number of a specific item that are available for purchase.
@@ -467,7 +467,7 @@ definitions:
         description: '(Primary Item Aspect) The age group for which the product is recommended. For example, newborn, infant, toddler, kids, adult, etc. All the item aspects, including this aspect, are returned in the localizedAspects container.'
         type: string
       bidCount:
-        description: This integer value indicates the total number of bids that have been placed against an auction item. This field is returned only for auction listings.
+        description: This integer value indicates the total number of bids that have been placed against an auction item. This field is returned only for auction items.
         type: integer
       brand:
         description: '(Primary Item Aspect) The name brand of the item, such as Nike, Apple, etc. All the item aspects, including this aspect, are returned in the localizedAspects container.'
@@ -478,7 +478,7 @@ definitions:
           type: string
         type: array
       categoryId:
-        description: The Id of the leaf category for this item. A left category is the lowest level in the category tree. This category has no children.
+        description: The ID of the leaf category for this item. A left category is the lowest level in the category tree. This category has no children.
         type: string
       categoryPath:
         description: 'Text that shows the category hierarchy of the item. For example: Computers/Tablets &amp; Networking, Laptops &amp; Netbooks, PC Laptops &amp; Netbooks'
@@ -517,7 +517,7 @@ definitions:
       image:
         $ref: '#/definitions/Image'
       itemAffiliateWebUrl:
-        description: 'The URL of the View Item page of the item, which includes the affiliate tracking Id. This field is only returned if the seller enables affiliate tracking for the listing by including the X-EBAY-C-ENDUSERCTX request header in the call.'
+        description: 'The URL of the View Item page of the item, which includes the affiliate tracking ID. This field is only returned if the seller enables affiliate tracking for the item by including the X-EBAY-C-ENDUSERCTX request header in the call.'
         type: string
       itemEndDate:
         description: 'The date and time up to which the items can be purchased. This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer.'
@@ -528,7 +528,7 @@ definitions:
       itemLocation:
         $ref: '#/definitions/Address'
       itemWebUrl:
-        description: The URL of the View Item page of the item.
+        description: The URL of the View Item page of the item. This enables you to include a &quot;Report Item on eBay&quot; hyperlink that takes the buyer to the View Item page on eBay. From there they can report any issues regarding this item to eBay.
         type: string
       localizedAspects:
         description: An array of containers for the complete list of the name/value pairs that describe the variation of the item.
@@ -549,7 +549,7 @@ definitions:
       price:
         $ref: '#/definitions/ConvertedAmount'
       priceDisplayCondition:
-        description: 'This enumeration value indicates how item price is displayed. For some items, the prices are so low that they can only be shown to the buyer after they add the item to the cart. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/PriceDisplayConditionEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates how item price is displayed. For some items, the prices are so low that they can only be shown to the buyer after they add the item to the cart. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/PriceDisplayConditionEnum.html''>eBay API documentation</a>'
         type: string
       primaryItemGroup:
         $ref: '#/definitions/ItemGroupSummary'
@@ -568,7 +568,7 @@ definitions:
       seller:
         $ref: '#/definitions/Seller'
       sellerItemRevision:
-        description: 'An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title, and eBay system changes, such as changing the quantity when an item is purchased. This Id is changed only when the seller makes a change to the item. This means you cannot use this value to determine if the quantity has changed.'
+        description: 'An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title, and eBay system changes, such as changing the quantity when an item is purchased. This ID is changed only when the seller makes a change to the item. This means you cannot use this value to determine if the quantity has changed.'
         type: string
       shipToLocations:
         $ref: '#/definitions/ShipToLocations'
@@ -604,7 +604,7 @@ definitions:
         description: 'Indicates if the item a top-rated plus item. There are three benefits of a top-rated plus item; a minimum 30-day money-back return policy, shipping the items in 1 business day with tracking provided, and the added comfort of knowing this item is from experienced sellers with the highest buyer ratings. See the Top Rated Plus Items and Becoming a Top Rated Seller and qualifying for Top Rated Plus help topics for more information.'
         type: boolean
       uniqueBidderCount:
-        description: This integer value indicates the number of different eBay users who have placed one or more bids on an auction item. This field is only applicable to auction listings.
+        description: This integer value indicates the number of different eBay users who have placed one or more bids on an auction item. This field is only applicable to auction items.
         type: integer
       unitPrice:
         $ref: '#/definitions/ConvertedAmount'
@@ -618,7 +618,7 @@ definitions:
         type: array
     type: object
   ItemGroupSummary:
-    description: 'The type that defines the fields for the details of each item in an item group. An item group is  an item that has various aspect differences, such as color, size, storage capacity, etc. When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the "parent". All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc. <br /><br /><span class="tablenote"><b> Note: </b> This container is returned only if the <b> item_id</b> in the request is an item group (parent Id of an item with variations).</span>'
+    description: 'The type that defines the fields for the details of each item in an item group. An item group is  an item that has various aspect differences, such as color, size, storage capacity, etc. When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the "parent". All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc. <br /><br /><span class="tablenote"><b> Note: </b> This container is returned only if the <b> item_id</b> in the request is an item group (parent ID of an item with variations).</span>'
     properties:
       itemGroupAdditionalImages:
         description: An array of containers with the URLs for images that are in addition to the primary image of the item group. The primary image is returned in the itemGroupImage field.
@@ -637,7 +637,7 @@ definitions:
         description: 'The title of the item that appears on the item group page. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc.'
         type: string
       itemGroupType:
-        description: 'Indicates the type of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/ItemGroupTypeEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates the type of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/ItemGroupTypeEnum.html''>eBay API documentation</a>'
         type: string
     type: object
   ItemLocationImpl:
@@ -653,7 +653,7 @@ definitions:
         description: The city in which the item is located.
         type: string
       country:
-        description: 'The country in which the item is located. These values are two-digit codes defined by the ISO 3166-1 alpha-2 standard, and also shown in the CountryCodeEnum type. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/CountryCodeEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates the country in which the item is located. These values are two-digit codes defined by the ISO 3166-1 alpha-2 standard, and also shown in the CountryCodeEnum type. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/CountryCodeEnum.html''>eBay API documentation</a>'
         type: string
       county:
         description: The county in which the item is located.
@@ -672,16 +672,16 @@ definitions:
         description: 'Indicates if the seller has enabled the Extended Holiday Returns feature on the item. Extended Holiday Returns are only applicable during the US holiday season, and gives buyers extra time to return an item. This ''extra time'' will typically extend beyond what is set through the returnPeriod value.'
         type: boolean
       refundMethod:
-        description: 'This enumeration value indicates how a buyer is refunded when an item is returned. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/RefundMethodEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates how a buyer is refunded when an item is returned. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/RefundMethodEnum.html''>eBay API documentation</a>'
         type: string
       restockingFeePercentage:
-        description: 'This string field indicates the restocking fee percentage that the seller has set on the item. Sellers have the option of setting no restocking fee for an item, or they can set the percentage to 10, 15, or 20 percent. So, if the cost of the item was $100, and the restocking percentage was 20 percent, the buyer would be charged $20 to return that item, so instead of receiving a $100 refund, they would received $80 due to the restocking fee.'
+        description: 'This string field indicates the restocking fee percentage that the seller has set on the item. Sellers have the option of setting no restocking fee for an item, or they can set the percentage to 10, 15, or 20 percent. So, if the cost of the item was $100, and the restocking percentage was 20 percent, the buyer would be charged $20 to return that item, so instead of receiving a $100 refund, they would receive $80 due to the restocking fee.'
         type: string
       returnInstructions:
-        description: Text written by the seller describing what the buyer should to do in order to return the item.
+        description: Text written by the seller describing what the buyer needs to do in order to return the item.
         type: string
       returnMethod:
-        description: 'This field is returned if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/ReturnMethodEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates the alternative methods for a full refund when an item is returned. This field is returned if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/ReturnMethodEnum.html''>eBay API documentation</a>'
         type: string
       returnPeriod:
         $ref: '#/definitions/TimeDuration'
@@ -689,14 +689,14 @@ definitions:
         description: 'This enumeration value indicates whether the buyer or seller is responsible for return shipping costs when an item is returned. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/ReturnShippingCostPayerEnum.html''>eBay API documentation</a>'
         type: string
       returnsAccepted:
-        description: Indicates whether or not the seller accepts returns for the item.
+        description: Indicates whether the seller accepts returns for the item.
         type: boolean
     type: object
   ItemSummary:
     description: The type that defines the item details for a specific item.
     properties:
       additionalImages:
-        description: This container is an array of URLs for Gallery Plus images of the item listing.
+        description: An array of containers with the URLs for the images that are in addition to the primary image. The primary image is returned in the image.imageUrl field.
         items:
           $ref: '#/definitions/Image'
         type: array
@@ -704,15 +704,15 @@ definitions:
         description: 'This indicates if the item is for adults only. For more information about adult-only items on eBay, see Adult items policy for sellers and Searching for adult only items for buyers.'
         type: boolean
       bidCount:
-        description: This integer value indicates the total number of bids that have been placed for an auction item. This field is only returned for auction listings.
+        description: This integer value indicates the total number of bids that have been placed for an auction item. This field is only returned for auction items.
         type: integer
       buyingOptions:
-        description: 'The value returned in this field indicates the buying option for the item. FIXED_PRICE is returned for basic fixed-price listings, AUCTION is returned for auction listings without Buy It Now feature, and both FIXED_PRICE and AUCTION are returned for auction listings enabled with the Buy It Now feature.'
+        description: The value returned in this field indicates the buying option for the item. FIXED_PRICE - Returned for fixed-price items (non-auction) AUCTION - Returned for auction items without Buy It Now feature FIXED_PRICE and AUCTION - Returned for auction items enabled with the Buy It Now feature
         items:
           type: string
         type: array
       categories:
-        description: This container consists of the primary listing category Id of the item (as well as secondary listing category if item was listed in two categories).
+        description: This container contains the primary category ID of the item (as well as the secondary category if the item was listed in two categories).
         items:
           $ref: '#/definitions/Category'
         type: array
@@ -727,7 +727,7 @@ definitions:
       distanceFromPickupLocation:
         $ref: '#/definitions/TargetLocation'
       energyEfficiencyClass:
-        description: 'The value returned in this field indicates the energy efficiency rating of the item. Energy efficiency ratings apply to products listed by commercial vendors in electronics categories only. Currently, this field is only applicable for the Germany site, and this field is only returned if the seller specified the energy efficiency rating through item specifics at listing time. Rating values include A+++, A++, A+, A, B, C, D, E, F, and G.'
+        description: 'The value returned in this field indicates the energy efficiency rating of the item. Energy efficiency ratings apply to products listed by commercial vendors in electronics categories only. Currently, this field is only applicable for the Germany site, and is only returned if the seller specified the energy efficiency rating through item specifics at listing time. Rating values include A+++, A++, A+, A, B, C, D, E, F, and G.'
         type: string
       epid:
         description: An EPID is the eBay product identifier of a product from the eBay product catalog. This indicates the product in which the item belongs.
@@ -735,7 +735,7 @@ definitions:
       image:
         $ref: '#/definitions/Image'
       itemAffiliateWebUrl:
-        description: 'The URL to the View Item page of the item, which includes the affiliate tracking Id. This field is only returned if the seller enables affiliate tracking for the listing by including the X-EBAY-C-ENDUSERCTX request header in the call.'
+        description: 'The URL to the View Item page of the item, which includes the affiliate tracking ID. This field is only returned if the seller enables affiliate tracking for the item by including the X-EBAY-C-ENDUSERCTX request header in the call.'
         type: string
       itemGroupHref:
         description: 'The HATEOAS reference of the parent page of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. Note: This field is returned only for item groups.'
@@ -752,7 +752,7 @@ definitions:
       itemLocation:
         $ref: '#/definitions/ItemLocationImpl'
       itemWebUrl:
-        description: The URL to the View Item page of the item.
+        description: The URL to the View Item page of the item. This enables you to include a &quot;Report Item on eBay&quot; hyperlink that takes the buyer to the View Item page on eBay. From there they can report any issues regarding this item to eBay.
         type: string
       marketingPrice:
         $ref: '#/definitions/MarketingPrice'
@@ -771,7 +771,7 @@ definitions:
           $ref: '#/definitions/ShippingOptionSummary'
         type: array
       thumbnailImages:
-        description: 'This container is an array of thumbnail images for the item. For each image, the URL to the image is given.'
+        description: 'An array of thumbnail images for the item. For each image, the URL to the image is given.'
         items:
           $ref: '#/definitions/Image'
         type: array
@@ -788,7 +788,7 @@ definitions:
     description: The type that defines the fields for the item details.
     properties:
       commonDescriptions:
-        description: 'An array of containers for a description and the item Ids of all the items that have this exact description. Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, an description that is shared by at one other item is returned in this container. If the description is unique, it is returned in the items.description field.'
+        description: 'An array of containers for a description and the item IDs of all the items that have this exact description. Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, an description that is shared by at one other item is returned in this container. If the description is unique, it is returned in the items.description field.'
         items:
           $ref: '#/definitions/CommonDescriptions'
         type: array
@@ -853,7 +853,7 @@ definitions:
           $ref: '#/definitions/Image'
         type: array
       additionalProductIdentities:
-        description: 'A product can have more than one identifier value for a product type, such as UPC, EAN, etc. For example, the same product UPC can have an identifier that is 12, 13, or 14 digits. This container returns an array of all the product identifiers (type/value pairs) associated with the product. These are in addition to the identifiers returned in the mpn and gitn fields.'
+        description: An array of product identifiers associated with the item. This container is returned if the seller has associated the eBay Product Identifier (ePID) with the item and in the request fieldgroups is set to PRODUCT.
         items:
           $ref: '#/definitions/AdditionalProductIdentity'
         type: array
@@ -885,13 +885,13 @@ definitions:
         type: string
     type: object
   ProductIdentity:
-    description: 'The type that defines the fields for the type/value pairs of product associated with an item. <br /><br />For example: <br />&nbsp;&nbsp;&nbsp;<code>"identifierType": "BRAND"</code> and  <code>"identifierValue": "Apple"</code><br />&nbsp;&nbsp;&nbsp;<code>"identifierType": "MPN"</code>, and <code>"identifierValue": "MC978LLA"<br />&nbsp;&nbsp;&nbsp;<code>"identifierType": "UPC" and "identifierValue": "0885909470105"</code>.'
+    description: The type that defines the fields for the product identifier type/value pairs of product associated with an item.
     properties:
       identifierType:
-        description: 'The type of the product identifier, such as UPC, ISBN, EAN, Brand, MPN, etc.'
+        description: 'The type of product identifier, such as UPC and EAN.'
         type: string
       identifierValue:
-        description: The product identifier for the product associated with the item.
+        description: The product identifier value.
         type: string
     type: object
   RatingHistogram:
@@ -938,7 +938,7 @@ definitions:
         description: 'A free-form text string that indicates the name of the region. This value can be the name of a world region (such as the &quot;Middle East&quot; or &quot;Southeast Asia&quot;), a country, or a domestic region within a country (such as &quot;Alaska/Hawaii&quot; or &quot;US Protectorates&quot;) depending on the value of regionType. This value should be WORLDWIDE if the regionType value is WORLDWIDE.'
         type: string
       regionType:
-        description: 'Indicates the type of region. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/RegionTypeEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates the type of global region. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/RegionTypeEnum.html''>eBay API documentation</a>'
         type: string
     type: object
   ReviewRating:
@@ -1041,7 +1041,7 @@ definitions:
         description: 'This is a free-form string created by the seller. This is the seller''s terms or condition, which is in addition to the seller''s return policies.'
         type: string
       vatDetails:
-        description: An array of the seller's VAT (value added tax) Ids and the issuing country. VAT is a tax added by some European countries.
+        description: An array of the seller's VAT (value added tax) IDs and the issuing country. VAT is a tax added by some European countries.
         items:
           $ref: '#/definitions/VatDetail'
         type: array
@@ -1179,7 +1179,7 @@ definitions:
     description: The type that defines the fields for a period of time in the time-measurement units supplied.
     properties:
       unit:
-        description: 'Retrieves the units (such as hours) of the time span.The enumeration value in this field defines the period of time being used to measure the duration, such as business days, months, or years. See the TimeDurationUnitEnum type for a list of possible time-measuring units. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/TimeDurationUnitEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates the units (such as hours) of the time span. The enumeration value in this field defines the period of time being used to measure the duration, such as business days, months, or years. See the TimeDurationUnitEnum type for a list of possible time-measuring units. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/TimeDurationUnitEnum.html''>eBay API documentation</a>'
         type: string
       value:
         description: 'Retrieves the duration of the time span (no units).The value in this field indicates the number of years, months, days, hours, or minutes in the defined period.'
@@ -1202,9 +1202,9 @@ definitions:
     description: The type the defines the fields for the VAT (value add tax) information.
     properties:
       issuingCountry:
-        description: 'The three-letter ISO 3166-1 standard of the country issuing the seller''s VAT (value added tax) Id. VAT is a tax added by some European countries. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/CountryCodeEnum.html''>eBay API documentation</a>'
+        description: 'The three-letter ISO 3166-1 standard of the country issuing the seller''s VAT (value added tax) ID. VAT is a tax added by some European countries. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/browse/types/CountryCodeEnum.html''>eBay API documentation</a>'
         type: string
       vatId:
-        description: The seller's VAT (value added tax) Id. VAT is a tax added by some European countries.
+        description: The seller's VAT (value added tax) ID. VAT is a tax added by some European countries.
         type: string
     type: object

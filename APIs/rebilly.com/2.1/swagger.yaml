@@ -12543,9 +12543,15 @@ definitions:
             description: The AVS gateway's response
             properties:
               code:
-                description: The raw response code
+                description: The response code
                 type: string
               message:
+                description: The response message
+                type: string
+              originalCode:
+                description: The raw response code
+                type: string
+              originalMessage:
                 description: The raw response message
                 type: string
             type: object
@@ -12553,9 +12559,15 @@ definitions:
             description: The CVV gateway's response
             properties:
               code:
-                description: The raw response code
+                description: The response code
                 type: string
               message:
+                description: The response message
+                type: string
+              originalCode:
+                description: The raw response code
+                type: string
+              originalMessage:
                 description: The raw response message
                 type: string
             type: object
@@ -12905,6 +12917,7 @@ definitions:
         type: object
       reportingCurrency:
         description: The user's ISO Alpha-3 code used for reports
+        readOnly: true
         type: string
       status:
         description: The user status

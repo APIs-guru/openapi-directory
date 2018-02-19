@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: The App Engine Admin API enables developers to provision and manage their App Engine applications.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google App Engine Admin
   version: v1alpha
   x-apiClientRegistration:
@@ -33,22 +29,12 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/appengine.admin': View and manage your applications deployed on Google App Engine
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/appengine.admin': View and manage your applications deployed on Google App Engine
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -162,15 +148,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -209,8 +189,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - apps
   '/v1alpha/apps/{appsId}/authorizedCertificates/{authorizedCertificatesId}':
@@ -235,8 +213,6 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - apps
@@ -269,15 +245,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -325,8 +295,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - apps
   '/v1alpha/apps/{appsId}/authorizedDomains':
@@ -355,15 +323,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -407,15 +369,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -466,8 +422,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - apps
   '/v1alpha/apps/{appsId}/domainMappings/{domainMappingsId}':
@@ -493,8 +447,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - apps
     get:
@@ -519,15 +471,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -579,8 +525,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - apps
   '/v1alpha/apps/{appsId}/locations':
@@ -613,15 +557,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -662,15 +600,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -718,15 +650,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -767,15 +693,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appengine.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
@@ -978,10 +898,10 @@ definitions:
     description: Metadata for the given google.cloud.location.Location.
     properties:
       flexibleEnvironmentAvailable:
-        description: App Engine Flexible Environment is available in the given location.@OutputOnly
+        description: App Engine flexible environment is available in the given location.@OutputOnly
         type: boolean
       standardEnvironmentAvailable:
-        description: App Engine Standard Environment is available in the given location.@OutputOnly
+        description: App Engine standard environment is available in the given location.@OutputOnly
         type: boolean
     type: object
   ManagedCertificate:

@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: API for viewing and managing your reports in DoubleClick Bid Manager.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: DoubleClick Bid Manager
   version: v1
   x-apiClientRegistration:
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/doubleclickbidmanager': View and manage your reports in DoubleClick Bid Manager
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/doubleclickbidmanager': View and manage your reports in DoubleClick Bid Manager
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -104,7 +92,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Retrieves line items in CSV format.
+      description: Retrieves line items in CSV format. TrueView line items are not supported.
       operationId: doubleclickbidmanager.lineitems.downloadlineitems
       parameters:
         - in: body
@@ -119,8 +107,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - lineitems
   /lineitems/uploadlineitems:
@@ -133,7 +119,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Uploads line items in CSV format.
+      description: Uploads line items in CSV format. TrueView line items are not supported.
       operationId: doubleclickbidmanager.lineitems.uploadlineitems
       parameters:
         - in: body
@@ -148,8 +134,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - lineitems
   /queries:
@@ -163,8 +147,6 @@ paths:
             $ref: '#/definitions/ListQueriesResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
@@ -193,8 +175,6 @@ paths:
             $ref: '#/definitions/ListReportsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - reports
@@ -231,8 +211,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
   '/query/{queryId}':
@@ -250,8 +228,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
@@ -271,8 +247,6 @@ paths:
             $ref: '#/definitions/Query'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
@@ -303,8 +277,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
   /sdf/download:
@@ -331,8 +303,6 @@ paths:
             $ref: '#/definitions/DownloadResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - sdf
@@ -380,6 +350,7 @@ definitions:
           enum:
             - AD
             - AD_GROUP
+            - CAMPAIGN
             - INSERTION_ORDER
             - LINE_ITEM
           type: string
@@ -394,6 +365,7 @@ definitions:
         description: Filter type used to filter line items to fetch.
         enum:
           - ADVERTISER_ID
+          - CAMPAIGN_ID
           - INSERTION_ORDER_ID
           - LINE_ITEM_ID
         type: string
@@ -409,6 +381,9 @@ definitions:
         type: string
       ads:
         description: Retrieved ads in SDF format.
+        type: string
+      campaigns:
+        description: Retrieved campaigns in SDF format.
         type: string
       insertionOrders:
         description: Retrieved insertion orders in SDF format.
@@ -750,6 +725,8 @@ definitions:
             - METRIC_COMSCORE_VCE_POPULATION
             - METRIC_COMSCORE_VCE_UNIQUE_AUDIENCE
             - METRIC_CONVERSIONS_PER_MILLE
+            - METRIC_COOKIE_REACH_AVERAGE_IMPRESSION_FREQUENCY
+            - METRIC_COOKIE_REACH_IMPRESSION_REACH
             - METRIC_CPM_FEE1_ADVERTISER
             - METRIC_CPM_FEE1_PARTNER
             - METRIC_CPM_FEE1_USD
@@ -1015,6 +992,7 @@ definitions:
             - METRIC_VIDEO_COMPANION_CLICKS
             - METRIC_VIDEO_COMPANION_IMPRESSIONS
             - METRIC_VIDEO_COMPLETION_RATE
+            - METRIC_VIEWABLE_BID_REQUESTS
           type: string
         type: array
       type:
@@ -1033,6 +1011,7 @@ definitions:
           - TYPE_GENERAL
           - TYPE_INVENTORY_AVAILABILITY
           - TYPE_KEYWORD
+          - TYPE_LINEAR_TV_SEARCH_LIFT
           - TYPE_NIELSEN_AUDIENCE_PROFILE
           - TYPE_NIELSEN_DAILY_REACH_BUILD
           - TYPE_NIELSEN_ONLINE_GLOBAL_MARKET

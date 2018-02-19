@@ -244,7 +244,7 @@ tags:
 
       &nbsp;&nbsp;&nbsp;&nbsp;`/nodes/?embed=contributors&embed=comments`
 
-      Some endpoints are automatically embedded, such as the [node contributors](#Nodes_nodes_contributors_list) endpoint, which automatically embeds user information.
+      Some endpoints are automatically embedded, such as the [node contributors](#operation/nodes_contributors_list) endpoint, which automatically embeds user information.
     name: Embedding
     x-traitTag: true
   - description: |-
@@ -307,7 +307,7 @@ tags:
     x-traitTag: true
   - description: |-
       ## Errors
-      When a request fails for any reason, the OSF API will return an appropriate [HTTP response code](#Introduction_error_codes) and include a descriptive error in the body of the response.
+      When a request fails for any reason, the OSF API will return an appropriate HTTP response code and include a descriptive error in the body of the response.
 
       The response body will be a JSON object with a key, `errors`, pointing to an array of error objects.
 
@@ -392,7 +392,7 @@ tags:
 
       Wait at least the amount of time specified in the `Retry-After` header of the response before sending another request.
 
-      [Authenticated](#Introduction_authentication) requests have a rate limit of 10,000/day.
+      Authenticated requests have a rate limit of 10,000/day.
 
       Unauthenticated requests have a rate limit of 100/hour.
 
@@ -430,7 +430,7 @@ tags:
 
       If there are no related entities, `href` will be null.
       #### Embeds
-      Please see the [embedding](#Introduction_embedding) documentation.
+      Please see the [embedding](#tag/Embedding) documentation.
       #### Links
       Links are urls to alternative representations of the entity or actions that may be performed on the entity.
 
@@ -464,7 +464,7 @@ paths:
 
         The `meta` key contains information such as a welcome message from the API, the specified version of the request, and the full representation of the current user, if authentication credentials were provided in the request.
 
-        The `links` key contains links to the following entity collections: [addons](), [collections](), [institutions](#Institutions_institutions_list), [licenses](#Licenses_license_list), [metaschemas](), [nodes](#Nodes_nodes_list), [registrations](), [users](#Users_users_list)
+        The `links` key contains links to the following entity collections: [addons](#tag/Addons), [collections](), [institutions](#tag/Institutions), [licenses](#tag/Licenses), [metaschemas](#tag/Metaschemas), [nodes](#tag/Nodes), [registrations](#tag/Registrations), [users](#tag/Users)
       operationId: base_read
       responses:
         '200':
@@ -555,7 +555,7 @@ paths:
 
         The `data` key contains an array of up to 10 addons. Each resource in the array is a separate addon object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
       operationId: addons_list
@@ -717,7 +717,7 @@ paths:
 
         The `data` key contains an array of 10 citation styles. Each resource in the array is a separate citation syle and contains the full representation of the citation style object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -804,7 +804,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested citation style, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: citations_styles_read
       parameters:
         - description: The unique identifier of the citation style.
@@ -883,7 +883,7 @@ paths:
         #### Returns
         If the request is successful, no content is returned.
 
-        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: comments_delete
       parameters:
         - description: The unique identifier of the comment you wish to delete.
@@ -903,7 +903,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested comment, if the request was successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: comments_read
       parameters:
         - description: The unique identifier of the comment you wish to retrieve.
@@ -1088,7 +1088,7 @@ paths:
         #### Returns
         Returns JSON with a `data` key containing the new representation of the updated comment, if the request is successful.
 
-        If the request is unsuccessful, JSON with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, JSON with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: comments_put
       parameters:
         - description: The unique identifier of the comment you wish to update.
@@ -1120,7 +1120,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested file, if the request was successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
         ###Waterbutler API actions
 
         Files can be modified through the Waterbutler API routes found in `links` (`new_folder`, `move`, `upload`, `download`, and `delete`).
@@ -1380,7 +1380,7 @@ paths:
         #### Returns
         Returns JSON with a `data` key containing the new representation of the updated file, if the request is successful.
 
-        If the request is unsuccessful, JSON with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, JSON with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: files_patch
       parameters:
         - description: The unique identifier of the file you wish to update.
@@ -1415,9 +1415,9 @@ paths:
 
         The `data` key contains an array of 10 file versions. Each resource in the array is a separate file version object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: files_versions
       parameters:
         - description: The unique identifier of the file from which you want to retrieve versions.
@@ -1503,7 +1503,7 @@ paths:
 
         Returns a JSON object with a `data` key containing the representation of the requested file, if the request was successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: files_version_detail
       parameters:
         - description: The unique identifier of the file from which you want to retrieve versions.
@@ -1592,7 +1592,7 @@ paths:
 
         The `data` key contains an array of 10 institutions. Each resource in the array is a separate institution object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -1715,7 +1715,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested institution, if the request was successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: institutions_detail
       parameters:
         - description: The unique identifier of the institution you wish to retrieve.
@@ -1836,9 +1836,9 @@ paths:
 
         The `data` key contains an array of 10 nodes. Each resource in the array is a separate nodes object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
         #### Filtering
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/institutions/cos/nodes?filter[title]=science.
 
@@ -2216,9 +2216,9 @@ paths:
 
         The `data` key contains an array of 10 registrations. Each resource in the array is a separate users object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
         #### Filtering
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/institutions/cos/registrations?filter[title]=science.
 
@@ -2365,9 +2365,9 @@ paths:
 
         The `data` key contains an array of 10 users. Each resource in the array is a separate users object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
         #### Filtering
         You can optionally request that the response only include users that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/institutions/cos/users?filter[family_name]=Nosek.
 
@@ -2536,7 +2536,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested license, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: licenses_read
       parameters:
         - description: The unique identifier of the license.
@@ -2621,7 +2621,7 @@ paths:
         Returns a JSON object containing `data` and `links` keys.
         The `data` key contains an array of 10 licenses. Each resource in the array is a separate license object and contains the full representation of the license, meaning additional requests to a license's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -2716,7 +2716,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested log, if the request was successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: logs_read
       parameters:
         - description: The unique identifier of the log you wish to retrieve.
@@ -3025,7 +3025,7 @@ paths:
 
         The `data` key contains an array of 10 metaschemas. Each resource in the array is a separate metaschema object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
       operationId: metaschemas_list
@@ -3143,7 +3143,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested metaschema, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: metaschemas_read
       parameters:
         - description: The unique identifier of the metaschema.
@@ -3260,13 +3260,13 @@ paths:
 
         The returned nodes are sorted by their `date_modified`, with the most recently updated nodes appearing first.
 
-        Registrations cannot be accessed through this endpoint (use the [registrations](#Registrations_registrations_list) endpoints instead).
+        Registrations cannot be accessed through this endpoint (use the [registrations](#tag/Registrations) endpoints instead).
         #### Returns
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 nodes. Each resource in the array is a separate node object and contains the full representation of the node, meaning additional requests to a node's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -3644,15 +3644,15 @@ paths:
         #### Required
         Required fields for creating a node include:
 
-        &nbsp;&nbsp;&nbsp;&nbsp`title`
+        &nbsp;&nbsp;&nbsp;&nbsp;`title`
 
-        &nbsp;&nbsp;&nbsp;&nbsp`category`
+        &nbsp;&nbsp;&nbsp;&nbsp;`category`
 
         Note: Nodes default to **private** unless the `public` field is explicitly set to **true** in the request payload.
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the created node, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_create
       parameters:
         - in: body
@@ -3893,7 +3893,7 @@ paths:
         #### Returns
         If the request is successful, no content is returned.
 
-        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_delete
       parameters:
         - description: The unique identifier of the node.
@@ -3917,7 +3917,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested node, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_read
       parameters:
         - description: The unique identifier of the node.
@@ -4281,7 +4281,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the new representation of the updated node, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_partial_update
       parameters:
         - description: The unique identifier of the node.
@@ -4321,7 +4321,7 @@ paths:
 
         The `data` key contains an array of at most 10 addon objects. Each resource in the array is a separate addon object and contains the full representation of the addon, meaning additional requests to a addon's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: nodes_addons_list
       parameters:
         - description: The unique identifier of the node.
@@ -4412,7 +4412,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the details of the requested addon, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_addon_read
       parameters:
         - description: The unique identifier of the node.
@@ -4525,7 +4525,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the new representation of the updated node addon, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_node_addon_update
       parameters:
         - description: The unique identifier of the node.
@@ -4571,7 +4571,7 @@ paths:
 
         The `data` key contains an array of addon folder objects. Each resource in the array is a separate addon folder object and contains the full representation of the addon folder, meaning additional requests to a addon folder's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: nodes_addons_folders_list
       parameters:
         - description: The unique identifier of the node.
@@ -4666,7 +4666,7 @@ paths:
 
         The `data` key contains an array of up to 10 child nodes. If the given node has zero child nodes, the `data` key will contain an empty array. Each resource in the array is a separate node object and contains the full representation of the child node, meaning additional requests to the child node's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -5050,15 +5050,15 @@ paths:
         #### Required
         Required fields for creating a node include:
 
-        &nbsp;&nbsp;&nbsp;&nbsp`title`
+        &nbsp;&nbsp;&nbsp;&nbsp;`title`
 
-        &nbsp;&nbsp;&nbsp;&nbsp`category`
+        &nbsp;&nbsp;&nbsp;&nbsp;`category`
 
         Note: nodes default to **private** unless the `public` field is explicitly set to **true** in the request payload.
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the created node, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_children_create
       parameters:
         - description: The unique identifier of the node.
@@ -5452,7 +5452,7 @@ paths:
 
         The `data` key contains an array of comment objects. Each resource in the array is a separate comment object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         #### Filtering
         You can optionally request that the response only include comments that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/comments/?filter[target_id]=jg7sezmdnt93
 
@@ -5705,7 +5705,7 @@ paths:
         ####Returns
         Returns a JSON object with a data key containing the representation of the new comment, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_comment_create
       parameters:
         - description: The unique identifier of the node you want to comment on.
@@ -5857,7 +5857,7 @@ paths:
 
         The `data` key contains an array of 10 contributors. Each resource in the array contains the full representation of the contributor, meaning additional requests to a contributor's detail view are not necessary. Additionally, the full representation of the user this contributor represents is automatically embedded within the `data` key of the response.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         #### Filtering
         You can optionally request that the response only include contributors that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/y9jdt/contributors/?filter[bibliographic]=true.
 
@@ -6034,7 +6034,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the new contributor, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_contributors_create
       parameters:
         - description: The unique identifier of the node.
@@ -6141,7 +6141,7 @@ paths:
         #### Returns
         If the request is successful, no content is returned.
 
-        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_contributors_delete
       parameters:
         - description: The unique identifier of the node.
@@ -6170,7 +6170,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested contributor, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_contributors_read
       parameters:
         - description: The unique identifier of the node.
@@ -6337,7 +6337,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the new representation of the updated contributor, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
 
         If the given user is not already in the contributor list, a 404 Not Found error will be returned. A node must always have at least one admin, and any attempt to downgrade the permissions of a sole admin will result in a 400 Bad Request error.
       operationId: nodes_contributors_partial_update
@@ -6455,7 +6455,7 @@ paths:
 
         The `data` key contains an array of 10 draft registrations. Each resource in the array is a separate draft registration object and contains the full representation of the draft registration, meaning additional requests to a draft registration's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: nodes_draft_registrations_list
       parameters:
         - description: The unique identifier of the node.
@@ -6599,19 +6599,23 @@ paths:
         - application/json
       description: |-
         Initiate a draft registration of the current node.
-        Draft registrations contain the supplemental registration questions that accompany a registration. A registration is a frozen version of the project that can never be edited or deleted, but can be withdrawn.
+        Draft registrations contain the supplemental registration questions that accompany a registration. A registration is a frozen version of the project that can never be edited or deleted, but can be withdrawn. It is the first step in creating a registration.
+
+        Refer to step 2: [How to complete the supplemental registration questions of a draft registration](#operation/nodes_draft_registrations_partial_update)
+
+        Refer to step 3: [How to create a registration from a completed draft registration](#operation/nodes_registrations_create)
 
         Your original project remains editable but will now have the draft registration linked to it.
         #### Permissions
-        Only project administrators may view create registrations.
+        Only project administrators may create draft registrations.
         #### Required
         Required fields for creating a draft registration include:
 
-        &nbsp;&nbsp;&nbsp;&nbsp`registration_supplement`
+        &nbsp;&nbsp;&nbsp;&nbsp;`registration_supplement`
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the created draft registration, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_draft_registrations_create
       parameters:
         - description: The unique identifier of the node.
@@ -6754,7 +6758,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested draft registration, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_draft_registrations_read
       parameters:
         - description: The unique identifier of the node.
@@ -6900,21 +6904,24 @@ paths:
       consumes:
         - application/json
       description: |-
-        Updates a draft registration by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
+        Update a draft registration by answering the supplemental registration questions. This is the second step in creating a registration. The answers will go under registration_metadata. Registration_metadata must be a dictionary with keys as question ids in the registration form, and values as nested dictionaries matching the specific format in the registration metaschema.
 
-        Draft registrations contain the supplemental registration questions that accompany a registration. Answer the questions in the draft registration supplement by sending update requests until you are ready to submit the draft.
+        [To view all active registration schemas](#operation/metaschemas_list)
 
-        The registration supplement of a draft registration cannot be updated after the draft has been created.
-
-        When updating a draft registration, `registration_metadata` is required. It must be a dictionary with keys as question ids in the registration form, and values as nested dictionaries matching the specific format in the [registration schema](TODO: link me pls).
+        [To retrieve the format of a certain registration schema](#operation/metaschemas_read)
 
         If a question is multiple-choice, the question response must exactly match one of the possible choices.
+
+        Refer to step 1: [How to create a draft registration](#operation/nodes_draft_registrations_create)
+
+        Refer to step 3: [How to create a registration from a completed draft registration](#operation/nodes_registrations_create)
+
         #### Permissions
         Only project administrators may update draft registrations.
         #### Returns
         Returns a JSON object with a `data` key containing the new representation of the updated draft registration, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_draft_registrations_partial_update
       parameters:
         - description: The unique identifier of the node.
@@ -6934,22 +6941,19 @@ paths:
             example:
               data:
                 attributes:
-                  registration_supplement: '{schema_id}'
+                  registration_metadata:
+                    comments:
+                      value: This is my first registration.
+                    datacompletion:
+                      value: 'No, data collection has not begun'
+                    looked:
+                      value: 'No'
+                id: '{registration_supplement_id}'
                 type: draft_registrations
             properties:
               attributes:
                 description: The properties of the draft registration entity.
                 properties:
-                  datetime_initiated:
-                    description: 'The time at which the draft registration was first initiated, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  datetime_updated:
-                    description: 'The time at which the draft registration was last updated, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
                   registration_metadata:
                     description: A dictionary of question IDs and responses from the registration schema.
                     readOnly: false
@@ -6960,8 +6964,6 @@ paths:
                     type: string
                 readOnly: false
                 required:
-                  - datetime_initiated
-                  - datetime_updated
                   - registration_supplement
                 title: Attributes
                 type: object
@@ -6969,41 +6971,6 @@ paths:
                 description: The unique identifier of the draft registration entity.
                 readOnly: true
                 type: string
-              links:
-                description: URLs to alternative representations of the draft registration entity.
-                properties:
-                  html:
-                    description: A link to the draft registration's page on the OSF.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                required:
-                  - html
-                title: Links
-                type: object
-              relationships:
-                description: URLs to other entities or entity collections that have a relationship to the draft registration entity.
-                properties:
-                  branched_from:
-                    description: A link to the node that this draft registration was created from.
-                    readOnly: true
-                    type: string
-                  initiator:
-                    description: A link to the user who initiated the draft registration.
-                    readOnly: true
-                    type: string
-                  registration_schema:
-                    description: A link to the detailed registration schema that this draft conforms to.
-                    readOnly: true
-                    type: string
-                readOnly: true
-                required:
-                  - branched_from
-                  - initiator
-                  - registration_schema
-                title: Relationships
-                type: object
               type:
                 description: The type identifier of the draft registration entity (`draft_registrations`).
                 readOnly: true
@@ -7012,9 +6979,7 @@ paths:
               - id
               - type
               - attributes
-              - relationships
-              - links
-            title: Draft Registration
+            title: Draft Registration Detail
             type: object
       responses:
         '200':
@@ -7036,7 +7001,7 @@ paths:
 
         The `data` key contains an array of files. Each resource in the array is a separate file object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         Note: In the OSF filesystem model, providers are treated as folders, but with special properties that distinguish them from regular folders. Every provider folder is considered a root folder, and may not be deleted through the regular file API.
       operationId: nodes_providers_list
@@ -7241,7 +7206,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested file object, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_providers_read
       parameters:
         - description: The unique identifier of the node.
@@ -7445,7 +7410,7 @@ paths:
 
         The `data` key contains an array of files. Each resource in the array is a separate file object and contains the full representation of the file.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         ####Filtering
 
@@ -7720,7 +7685,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested file object, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_files_read
       parameters:
         - description: The unique identifier of the node.
@@ -7959,7 +7924,7 @@ paths:
 
         The `data` key contains an array of up to 10 forked nodes. If the current node has zero forked nodes, the `data` key will contain an empty array. Each resource in the array is a separate node object and contains the full representation of the forked node, meaning additional requests to the forked node's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
       operationId: nodes_forks_list
@@ -8348,7 +8313,7 @@ paths:
         The `title` field is optional, with the default title being "Fork of " prepended to the current node's title.
         #### Returns
         Returns a JSON object with a `data` key containing the complete srepresentation of the forked node, if the request is successful.
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_forks_create
       parameters:
         - description: The unique identifier of the node.
@@ -8593,7 +8558,7 @@ paths:
 
         The `data` key contains an array of identifiers. Each resource in the array is a separate identifier object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         ####Filtering
 
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/identifiers/?filter[category]=ark
@@ -8708,7 +8673,7 @@ paths:
 
         The `data` key contains an array of up to 10 affilited institutions. Each resource in the array is a separate institution object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: nodes_institutions_list
       parameters:
         - description: The unique identifier of the node.
@@ -8856,7 +8821,7 @@ paths:
 
         The `data` key contains an array of up to 10 nodes. Each resource in the array is a separate node object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         ####Filtering
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/?filter[title]=reproducibility.
 
@@ -9358,7 +9323,7 @@ paths:
 
         The `data` key contains an array of up to 10 logs. Each resource in the array is a separate logs object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         ####Filtering
         You can optionally request that the response only include logs that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/logs/?filter[action]=made_private.
 
@@ -9740,7 +9705,7 @@ paths:
 
         The `data` key contains an array of up to 10 preprints. Each resource in the array is a separate preprint object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: nodes_preprints_list
       parameters:
         - description: The unique identifier of the node.
@@ -9959,7 +9924,7 @@ paths:
 
         The `data` key contains an array of up to 10 registrations. Each resource in the array is a separate registrations object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         ####Filtering
 
         You can optionally request that the response only include registrations that match your filters by utilizing the filter query parameter, e.g. https://api.osf.io/v2/registrations/?filter[title]=open.
@@ -10172,6 +10137,10 @@ paths:
                       description: The description of the registered node.
                       readOnly: true
                       type: string
+                    draft_registration:
+                      description: The ID of the draft registration from which the registration will be created.
+                      readOnly: false
+                      type: string
                     embargo_end_date:
                       description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
                       format: date-time
@@ -10181,6 +10150,11 @@ paths:
                       description: Whether or not this registration represents a fork of another node.
                       readOnly: true
                       type: boolean
+                    lift_embargo:
+                      description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                      format: date-time
+                      readOnly: false
+                      type: string
                     node_license:
                       description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
                       readOnly: true
@@ -10203,7 +10177,7 @@ paths:
                       type: boolean
                     public:
                       description: Whether or not the registration is publicly visible.
-                      readOnly: false
+                      readOnly: true
                       type: boolean
                     registered_meta:
                       description: A dictionary with supplemental registration questions and responses.
@@ -10213,6 +10187,10 @@ paths:
                       description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
                       readOnly: true
                       type: boolean
+                    registration_choice:
+                      description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                      readOnly: false
+                      type: string
                     registration_supplement:
                       description: The title of the registration schema this registration conforms to.
                       readOnly: true
@@ -10239,7 +10217,10 @@ paths:
                       description: Whether or not this registration has been withdrawn.
                       readOnly: true
                       type: boolean
-                  readOnly: true
+                  readOnly: false
+                  required:
+                    - draft_registration
+                    - registration_choice
                   title: Attributes
                   type: object
                 id:
@@ -10357,6 +10338,310 @@ paths:
       tags:
         - Nodes
       x-response-schema: Registration
+    post:
+      consumes:
+        - application/json
+      description: |-
+        Finalize the registration process of the current draft registration. A registration is created from a completed draft registration (containing the supplemental registration questions). It also needs information about whether the registration will become public immediately or be embargoed, and conditionally, the datetime at which the registration will become public.
+
+        Refer to step 1: [How to create a draft registration](#operation/nodes_draft_registrations_create)
+
+        Refer to step 2: [How to complete the supplemental registration questions of a draft registration](#operation/nodes_draft_registrations_partial_update)
+
+        A registration is a frozen version of the project that can never be edited or deleted, but can be withdrawn. Your original project remains editable but will now have the registration linked to it.
+        #### Permissions
+        Only project administrators may create registrations.
+        #### Required
+        Required fields for creating a registration include:
+
+        &nbsp;&nbsp;&nbsp;&nbsp;`draft_registration`
+
+        &nbsp;&nbsp;&nbsp;&nbsp;`registration_choice`
+
+        &nbsp;&nbsp;&nbsp;&nbsp;`lift_embargo` (Only required when `registration_choice` is "embargo")
+
+        #### Returns
+        Returns a JSON object with a `data` key containing the representation of the created registration, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: nodes_registrations_create
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  draft_registration: '{draft_registration_id}'
+                  lift_embargo: '2017-05-10T20:44:03.185000'
+                  registration_choice: embargo
+                type: registrations
+            properties:
+              attributes:
+                description: The properties of the registration entity.
+                properties:
+                  category:
+                    description: The category of the registered node.
+                    enum:
+                      - analysis
+                      - communication
+                      - data
+                      - hypothesis
+                      - instrumentation
+                      - methods and measures
+                      - procedure
+                      - project
+                      - software
+                      - other
+                    readOnly: true
+                    type: string
+                  collection:
+                    description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
+                    readOnly: true
+                    type: boolean
+                  current_user_can_comment:
+                    description: Whether or not the current user has permission to post comments on this registration. Comments on registrations can be set to allow all users to comment or restricted to only contributors.
+                    readOnly: true
+                    type: boolean
+                  current_user_permissions:
+                    description: 'A list of strings representing the permissions for the current user on this registration. Valid permissions are "admin", "read", and "write".'
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
+                  date_created:
+                    description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The time at which the registered node was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_registered:
+                    description: 'The time at which this registration was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_withdrawn:
+                    description: 'The time at which this registration was withdrawn, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: The description of the registered node.
+                    readOnly: true
+                    type: string
+                  draft_registration:
+                    description: The ID of the draft registration from which the registration will be created.
+                    readOnly: false
+                    type: string
+                  embargo_end_date:
+                    description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  fork:
+                    description: Whether or not this registration represents a fork of another node.
+                    readOnly: true
+                    type: boolean
+                  lift_embargo:
+                    description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                    format: date-time
+                    readOnly: false
+                    type: string
+                  node_license:
+                    description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
+                    readOnly: true
+                    type: string
+                  pending_embargo_approval:
+                    description: Whether or not the embargo associated with this registration is pending approval from project administrators.
+                    readOnly: true
+                    type: boolean
+                  pending_registration_approval:
+                    description: Whether or not the registration is pending approval from project administrators.
+                    readOnly: true
+                    type: boolean
+                  pending_withdrawal:
+                    description: Whether or not the registration is pending approval for withdrawal from project administrators.
+                    readOnly: true
+                    type: boolean
+                  preprint:
+                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                    readOnly: true
+                    type: boolean
+                  public:
+                    description: Whether or not the registration is publicly visible.
+                    readOnly: true
+                    type: boolean
+                  registered_meta:
+                    description: A dictionary with supplemental registration questions and responses.
+                    readOnly: true
+                    type: string
+                  registration:
+                    description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
+                    readOnly: true
+                    type: boolean
+                  registration_choice:
+                    description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                    readOnly: false
+                    type: string
+                  registration_supplement:
+                    description: The title of the registration schema this registration conforms to.
+                    readOnly: true
+                    type: string
+                  tags:
+                    description: A list of strings that describe the registered node.
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
+                  template_from:
+                    description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
+                    readOnly: true
+                    type: string
+                  title:
+                    description: The title of the registered node.
+                    readOnly: true
+                    type: string
+                  withdrawal_justification:
+                    description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
+                    readOnly: true
+                    type: string
+                  withdrawn:
+                    description: Whether or not this registration has been withdrawn.
+                    readOnly: true
+                    type: boolean
+                readOnly: false
+                required:
+                  - draft_registration
+                  - registration_choice
+                title: Attributes
+                type: object
+              id:
+                description: The unique identifier of the registration.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the registrations entity.
+                properties:
+                  html:
+                    description: A link to the registration's page on the OSF.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the canonical API endpoint of this registration.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the registration entity.
+                properties:
+                  affiliated_institutions:
+                    description: A link to the list of institutions this registration is affiliated with.
+                    readOnly: true
+                    type: string
+                  children:
+                    description: A link to the list of the registered node's children (components).
+                    readOnly: true
+                    type: string
+                  citation:
+                    description: A link to the citation details of this registration.
+                    readOnly: true
+                    type: string
+                  comments:
+                    description: A link to the list of comments on this registration.
+                    readOnly: true
+                    type: string
+                  contributors:
+                    description: A link to the list of contributors on this registration.
+                    readOnly: true
+                    type: string
+                  files:
+                    description: A link to the list of storage providers that have been enabled on this registration.
+                    readOnly: true
+                    type: string
+                  forks:
+                    description: A link to the list of nodes that are forks of this registration.
+                    readOnly: true
+                    type: string
+                  identifiers:
+                    description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                    readOnly: true
+                    type: string
+                  linked_nodes:
+                    description: A link to the list of nodes that are linked to this registration.
+                    readOnly: true
+                    type: string
+                  logs:
+                    description: A link to the list of log actions pertaining to this registration.
+                    readOnly: true
+                    type: string
+                  node_links:
+                    description: A link to the list of nodes that are linked to this registration. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                    readOnly: true
+                    type: string
+                  parent:
+                    description: 'A link to the node that is the direct parent of the current registration, if the current registration is a child registration.'
+                    readOnly: true
+                    type: string
+                  registered_by:
+                    description: A link to the user that initiated this registration.
+                    readOnly: true
+                    type: string
+                  registered_from:
+                    description: A link to the node that this registration was registered from.
+                    readOnly: true
+                    type: string
+                  registration_schema:
+                    description: A link to the metaschema that this registration conforms to.
+                    readOnly: true
+                    type: string
+                  root:
+                    description: 'A link to the node that is the top-level parent of the current registration. If the current registration is the top-level node, the root is the current registration.'
+                    readOnly: true
+                    type: string
+                  view_only_links:
+                    description: A link to the list of view only links that have been created for this registration.
+                    readOnly: true
+                    type: string
+                  wikis:
+                    description: A link to the list of wiki pages for this registration.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the registration entity (`registrations`).
+                readOnly: true
+                type: string
+            required:
+              - id
+              - type
+              - attributes
+              - relationships
+              - links
+            title: Registration
+            type: object
+      responses:
+        '201':
+          description: Created
+      summary: Create a registration
+      tags:
+        - Nodes
+      x-response-schema: Registration
   '/nodes/{node_id}/view_only_links/':
     get:
       description: |-
@@ -10366,7 +10651,7 @@ paths:
 
         The `data` key contains an array of up to 10 view only links. Each resource in the array is a view only link object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         ####Permissions
 
@@ -10512,7 +10797,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
         ####Permissions
 
         View only links on a node, public or private, are readable and writeable only by users that are administrators on the node.
@@ -10605,7 +10890,7 @@ paths:
 
         Note that if an anonymous view_only key is being used, the user relationship will not be exposed.
 
-        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
         #### Filtering
         Wiki pages can be filtered based on their `name` and `date_modified` fields.
         + `filter[name]=<Str>` -- filter wiki pages by name
@@ -10793,7 +11078,7 @@ paths:
 
         The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -10966,7 +11251,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested preprint provider, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
 
         #### Acceptable Subjects Structure
         Each preprint provider specifies acceptable subjects.
@@ -11187,9 +11472,9 @@ paths:
 
         The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: preprint_provider_licenses_list
       parameters:
         - description: The unique identifier of the preprint provider.
@@ -11276,9 +11561,9 @@ paths:
 
         The `data` key contains an array of 10 preprints. Each resource in the array is a separate preprint object.
 
-        The `links` key contains a dictionary with keys that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary with keys that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
 
         #### Filtering
         You can optionally request that the response only include preprints that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/preprint_providers/osf/preprints/?filter[is_published]=true.
@@ -11494,9 +11779,9 @@ paths:
 
         The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: preprint_provider_taxonomies_list
       parameters:
         - description: The unique identifier of the preprint provider.
@@ -11591,7 +11876,7 @@ paths:
 
         The `data` key contains an array of 10 preprints. Each resource in the array is a separate preprint object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -11956,7 +12241,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested preprint, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: preprints_read
       parameters:
         - description: The unique identifier of the preprint.
@@ -12382,7 +12667,7 @@ paths:
 
         The `data` key contains an array of 10 registrations. Each resource in the array is a separate registration object and contains the full representation of the registration, meaning additional requests to a registration's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -12591,6 +12876,10 @@ paths:
                       description: The description of the registered node.
                       readOnly: true
                       type: string
+                    draft_registration:
+                      description: The ID of the draft registration from which the registration will be created.
+                      readOnly: false
+                      type: string
                     embargo_end_date:
                       description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
                       format: date-time
@@ -12600,6 +12889,11 @@ paths:
                       description: Whether or not this registration represents a fork of another node.
                       readOnly: true
                       type: boolean
+                    lift_embargo:
+                      description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                      format: date-time
+                      readOnly: false
+                      type: string
                     node_license:
                       description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
                       readOnly: true
@@ -12622,7 +12916,7 @@ paths:
                       type: boolean
                     public:
                       description: Whether or not the registration is publicly visible.
-                      readOnly: false
+                      readOnly: true
                       type: boolean
                     registered_meta:
                       description: A dictionary with supplemental registration questions and responses.
@@ -12632,6 +12926,10 @@ paths:
                       description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
                       readOnly: true
                       type: boolean
+                    registration_choice:
+                      description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                      readOnly: false
+                      type: string
                     registration_supplement:
                       description: The title of the registration schema this registration conforms to.
                       readOnly: true
@@ -12658,7 +12956,10 @@ paths:
                       description: Whether or not this registration has been withdrawn.
                       readOnly: true
                       type: boolean
-                  readOnly: true
+                  readOnly: false
+                  required:
+                    - draft_registration
+                    - registration_choice
                   title: Attributes
                   type: object
                 id:
@@ -12794,7 +13095,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested registration, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: registrations_read
       parameters:
         - description: The unique identifier of the registration.
@@ -12870,6 +13171,10 @@ paths:
                     description: The description of the registered node.
                     readOnly: true
                     type: string
+                  draft_registration:
+                    description: The ID of the draft registration from which the registration will be created.
+                    readOnly: false
+                    type: string
                   embargo_end_date:
                     description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
                     format: date-time
@@ -12879,6 +13184,11 @@ paths:
                     description: Whether or not this registration represents a fork of another node.
                     readOnly: true
                     type: boolean
+                  lift_embargo:
+                    description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                    format: date-time
+                    readOnly: false
+                    type: string
                   node_license:
                     description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
                     readOnly: true
@@ -12901,7 +13211,7 @@ paths:
                     type: boolean
                   public:
                     description: Whether or not the registration is publicly visible.
-                    readOnly: false
+                    readOnly: true
                     type: boolean
                   registered_meta:
                     description: A dictionary with supplemental registration questions and responses.
@@ -12911,6 +13221,10 @@ paths:
                     description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
                     readOnly: true
                     type: boolean
+                  registration_choice:
+                    description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                    readOnly: false
+                    type: string
                   registration_supplement:
                     description: The title of the registration schema this registration conforms to.
                     readOnly: true
@@ -12937,7 +13251,10 @@ paths:
                     description: Whether or not this registration has been withdrawn.
                     readOnly: true
                     type: boolean
-                readOnly: true
+                readOnly: false
+                required:
+                  - draft_registration
+                  - registration_choice
                 title: Attributes
                 type: object
               id:
@@ -13068,7 +13385,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the new representation of the updated registration, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: registrations_partial_update
       parameters:
         - description: The unique identifier of the registration.
@@ -13144,6 +13461,10 @@ paths:
                     description: The description of the registered node.
                     readOnly: true
                     type: string
+                  draft_registration:
+                    description: The ID of the draft registration from which the registration will be created.
+                    readOnly: false
+                    type: string
                   embargo_end_date:
                     description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
                     format: date-time
@@ -13153,6 +13474,11 @@ paths:
                     description: Whether or not this registration represents a fork of another node.
                     readOnly: true
                     type: boolean
+                  lift_embargo:
+                    description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                    format: date-time
+                    readOnly: false
+                    type: string
                   node_license:
                     description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
                     readOnly: true
@@ -13175,7 +13501,7 @@ paths:
                     type: boolean
                   public:
                     description: Whether or not the registration is publicly visible.
-                    readOnly: false
+                    readOnly: true
                     type: boolean
                   registered_meta:
                     description: A dictionary with supplemental registration questions and responses.
@@ -13185,6 +13511,10 @@ paths:
                     description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
                     readOnly: true
                     type: boolean
+                  registration_choice:
+                    description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                    readOnly: false
+                    type: string
                   registration_supplement:
                     description: The title of the registration schema this registration conforms to.
                     readOnly: true
@@ -13211,7 +13541,10 @@ paths:
                     description: Whether or not this registration has been withdrawn.
                     readOnly: true
                     type: boolean
-                readOnly: true
+                readOnly: false
+                required:
+                  - draft_registration
+                  - registration_choice
                 title: Attributes
                 type: object
               id:
@@ -13344,7 +13677,7 @@ paths:
 
         The `data` key contains an array of up to 10 child registrations. If the given registration has zero child registrations, the `data` key will contain an empty array. Each resource in the array is a separate registration object and contains the full representation of the child registration.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         #### Filtering
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/children/?filter[title]=reproducibility.
@@ -13568,6 +13901,10 @@ paths:
                       description: The description of the registered node.
                       readOnly: true
                       type: string
+                    draft_registration:
+                      description: The ID of the draft registration from which the registration will be created.
+                      readOnly: false
+                      type: string
                     embargo_end_date:
                       description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
                       format: date-time
@@ -13577,6 +13914,11 @@ paths:
                       description: Whether or not this registration represents a fork of another node.
                       readOnly: true
                       type: boolean
+                    lift_embargo:
+                      description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                      format: date-time
+                      readOnly: false
+                      type: string
                     node_license:
                       description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
                       readOnly: true
@@ -13599,7 +13941,7 @@ paths:
                       type: boolean
                     public:
                       description: Whether or not the registration is publicly visible.
-                      readOnly: false
+                      readOnly: true
                       type: boolean
                     registered_meta:
                       description: A dictionary with supplemental registration questions and responses.
@@ -13609,6 +13951,10 @@ paths:
                       description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
                       readOnly: true
                       type: boolean
+                    registration_choice:
+                      description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                      readOnly: false
+                      type: string
                     registration_supplement:
                       description: The title of the registration schema this registration conforms to.
                       readOnly: true
@@ -13635,7 +13981,10 @@ paths:
                       description: Whether or not this registration has been withdrawn.
                       readOnly: true
                       type: boolean
-                  readOnly: true
+                  readOnly: false
+                  required:
+                    - draft_registration
+                    - registration_choice
                   title: Attributes
                   type: object
                 id:
@@ -13764,7 +14113,7 @@ paths:
 
         The `data` key contains an array of up to 10 citation styles. Each resource in the array is a separate citation styles object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         #### Filtering
         You can optionally request that the response only include citation styles that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/citations/?filter[title]=open.
 
@@ -13954,7 +14303,7 @@ paths:
 
         The `data` key contains an array of comment objects. Each resource in the array is a separate comment object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         #### Filtering
         You can optionally request that the response only include comments that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wuerf/comments/?filter[target]=wuerf
 
@@ -14209,7 +14558,7 @@ paths:
 
         The `data` key contains an array of up to 10 contributors. Each resource in the array contains the full representation of the contributor. Additionally, the full representation of the user this contributor represents is automatically embedded within the `data` key of the response.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         #### Filtering
         You can optionally request that the response only include contributors that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wu3a4/contributors/?filter[bibliographic]=true.
 
@@ -14374,7 +14723,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested contributor, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: registrations_contributors_read
       parameters:
         - description: The unique identifier of the registration.
@@ -14541,7 +14890,7 @@ paths:
 
         The `data` key contains an array of up to 10 files. Each resource in the array is a separate file object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         Note: In the OSF filesystem model, providers are treated as folders, but with special properties that distinguish them from regular folders. Every provider folder is considered a root folder, and may not be deleted through the regular file API.
       operationId: registrations_providers_list
@@ -14750,7 +15099,7 @@ paths:
 
         The `data` key contains an array of files. Each resource in the array is a separate file object and contains the full representation of the file.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         ####Filtering
 
@@ -14991,7 +15340,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested registration file object, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: registrations_files_read
       parameters:
         - description: The unique identifier of the registration.
@@ -15232,7 +15581,7 @@ paths:
 
         The `data` key contains an array of up to 10 forks. If the current registration has no fork, the `data` key will contain an empty array. Each resource in the array is a separate registration object and contains the full representation of the registration's fork.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: registrations_forks_list
       parameters:
         - description: The unique identifier of the registration.
@@ -15449,6 +15798,10 @@ paths:
                       description: The description of the registered node.
                       readOnly: true
                       type: string
+                    draft_registration:
+                      description: The ID of the draft registration from which the registration will be created.
+                      readOnly: false
+                      type: string
                     embargo_end_date:
                       description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
                       format: date-time
@@ -15458,6 +15811,11 @@ paths:
                       description: Whether or not this registration represents a fork of another node.
                       readOnly: true
                       type: boolean
+                    lift_embargo:
+                      description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                      format: date-time
+                      readOnly: false
+                      type: string
                     node_license:
                       description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
                       readOnly: true
@@ -15480,7 +15838,7 @@ paths:
                       type: boolean
                     public:
                       description: Whether or not the registration is publicly visible.
-                      readOnly: false
+                      readOnly: true
                       type: boolean
                     registered_meta:
                       description: A dictionary with supplemental registration questions and responses.
@@ -15490,6 +15848,10 @@ paths:
                       description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
                       readOnly: true
                       type: boolean
+                    registration_choice:
+                      description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                      readOnly: false
+                      type: string
                     registration_supplement:
                       description: The title of the registration schema this registration conforms to.
                       readOnly: true
@@ -15516,7 +15878,10 @@ paths:
                       description: Whether or not this registration has been withdrawn.
                       readOnly: true
                       type: boolean
-                  readOnly: true
+                  readOnly: false
+                  required:
+                    - draft_registration
+                    - registration_choice
                   title: Attributes
                   type: object
                 id:
@@ -15651,7 +16016,7 @@ paths:
         The `title` field is optional, with the default title being "Fork of " prepended to the current registration's title.
         #### Returns
         Returns a JSON object with a `data` key containing the complete representation of the forked registration, if the request is successful.
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: registrations_forks_create
       parameters:
         - description: The unique identifier of the registration.
@@ -15727,6 +16092,10 @@ paths:
                     description: The description of the registered node.
                     readOnly: true
                     type: string
+                  draft_registration:
+                    description: The ID of the draft registration from which the registration will be created.
+                    readOnly: false
+                    type: string
                   embargo_end_date:
                     description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
                     format: date-time
@@ -15736,6 +16105,11 @@ paths:
                     description: Whether or not this registration represents a fork of another node.
                     readOnly: true
                     type: boolean
+                  lift_embargo:
+                    description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                    format: date-time
+                    readOnly: false
+                    type: string
                   node_license:
                     description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
                     readOnly: true
@@ -15758,7 +16132,7 @@ paths:
                     type: boolean
                   public:
                     description: Whether or not the registration is publicly visible.
-                    readOnly: false
+                    readOnly: true
                     type: boolean
                   registered_meta:
                     description: A dictionary with supplemental registration questions and responses.
@@ -15768,6 +16142,10 @@ paths:
                     description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
                     readOnly: true
                     type: boolean
+                  registration_choice:
+                    description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                    readOnly: false
+                    type: string
                   registration_supplement:
                     description: The title of the registration schema this registration conforms to.
                     readOnly: true
@@ -15794,7 +16172,10 @@ paths:
                     description: Whether or not this registration has been withdrawn.
                     readOnly: true
                     type: boolean
-                readOnly: true
+                readOnly: false
+                required:
+                  - draft_registration
+                  - registration_choice
                 title: Attributes
                 type: object
               id:
@@ -15923,7 +16304,7 @@ paths:
 
         The `data` key contains an array of identifiers. Each resource in the array is a separate identifier object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         ####Filtering
 
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/identifiers/?filter[category]=ark
@@ -16038,7 +16419,7 @@ paths:
 
         The `data` key contains an array of up to 10 affiliated institutions. Each resource in the array is a separate institution object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: registrations_institutions_list
       parameters:
         - description: The unique identifier of the registration.
@@ -16186,7 +16567,7 @@ paths:
 
         The `data` key contains an array of up to 10 nodes. Each resource in the array is a separate node object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         ####Filtering
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/linked_nodes/?filter[title]=reproducibility/?filter[title]=reproducibility.
 
@@ -16686,7 +17067,7 @@ paths:
 
         The `data` key contains an array of up to 10 logs. Each resource in the array is a separate logs object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         ####Filtering
         You can optionally request that the response only include logs that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/logs/?filter[action]=made_private.
 
@@ -17125,7 +17506,7 @@ paths:
 
         The `data` key contains an array of up to 10 view only links. Each resource in the array is a view only link object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         ####Permissions
 
@@ -17272,7 +17653,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
         ####Permissions
 
         View only links on a registration, public or private, are readable and writeable only by users that are administrators on the registration.
@@ -17386,7 +17767,7 @@ paths:
         ####Returns
         A list of all registration's current wiki page versions ordered by their date_modified. Each resource contains the full representation of the wiki, meaning additional requests to an individual wiki's detail view are not necessary.
 
-        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
         #### Filtering
         Wiki pages can be filtered based on their `name` and `date_modified` fields.
         + `filter[name]=<Str>` -- filter wiki pages by name
@@ -17571,7 +17952,7 @@ paths:
 
         The `data` key contains an array of up to 10 taxonomies. Each resource in the array is a separate taxonomy object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -17711,7 +18092,7 @@ paths:
 
         Returns a JSON object with a `data` key containing the representation of the requested taxonomy, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: taxonomies_read
       parameters:
         - description: The unique identifier of the taxonomy.
@@ -17804,7 +18185,7 @@ paths:
 
         The `data` key contains an array of 10 users. Each resource in the array is a separate users object and contains the full representation of the user, meaning additional requests to a user's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
         #### Filtering
@@ -17975,7 +18356,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested user, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: users_read
       parameters:
         - description: The unique identifier of the user.
@@ -18137,7 +18518,7 @@ paths:
         #### Returns
         Returns a JSON object with a `data` key containing the new representation of the updated node, if the request is successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: users_partial_update
       parameters:
         - description: The unique identifier of the user.
@@ -18272,9 +18653,9 @@ paths:
 
         The `data` key contains an array of up to 10 addons. Each resource in the array is a separate addon object.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
 
         Attempting to request the accounts for an addon that is not enabled will result in a **404 Not Found** response.
       operationId: users_addons_list
@@ -18404,7 +18785,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested user addon, if the request was successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
 
         Attempting to request the accounts for an addon that is not enabled will result in a **404 Not Found** response.
       operationId: users_addons_read
@@ -18499,7 +18880,7 @@ paths:
 
         The `data` key contains an array of at most 10 addon account objects. Each resource in the array is a separate  addon account object and contains the full representation of the addon account.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: Users_addon_accounts_list
       parameters:
         - description: The unique identifier of the user.
@@ -18596,7 +18977,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested addon account, if the request was successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: Users_addon_accounts_read
       parameters:
         - description: The unique identifier of the user.
@@ -18690,7 +19071,7 @@ paths:
 
         The `data` key contains an array of 10 institutions. Each resource in the array is a complete institution object and contains the full representation of the institution, meaning additional requests to a institution's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
       operationId: users_institutions_list
       parameters:
         - description: The unique identifier of the user.
@@ -18818,7 +19199,7 @@ paths:
 
         The `data` key contains an array of 10 nodes. Each resource in the array is a separate node object and contains the full representation of the node, meaning additional requests to a node's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         #### Filtering
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/users/cdi38/nodes/?filter[title]=open.
 
@@ -19191,7 +19572,7 @@ paths:
 
         The `data` key contains an array of 10 preprints. Each resource in the array is a complete preprint object and contains the full representation of the preprint, meaning additional requests to a preprint's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         #### Filtering
         You can optionally request that the response only include preprints that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/users/cdi38/preprints/?filter[provider]=psyarxiv.
 
@@ -19417,7 +19798,7 @@ paths:
 
         The `data` key contains an array of 10 registrations. Each resource in the array is a separate registration object and contains the full representation of the registration, meaning additional requests to a registration's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
         #### Filtering
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/users/cdi38/registrations/?filter[title]=replication.
 
@@ -19586,7 +19967,7 @@ paths:
         Only project administrators may retrieve the details of a view only link. Attempting to retrieve a view only link without appropriate permissions will result in a 403 Forbidden response.
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: view_only_links_read
       parameters:
         - description: The unique identifier of the view only link.
@@ -19696,9 +20077,9 @@ paths:
         Returns a JSON object containing `data` and `links` keys.
         The `data` key contains an array of up to 10 nodes. Each resource in the array is a separate node object and contains the full representation of the node, meaning additional requests to a node's detail view are not necessary.
 
-        The `links` key contains a dictionary of links that can be used for [pagination](#Introduction_pagination).
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: view_only_links_node_list
       parameters:
         - description: The unique identifier of the view only link.
@@ -20305,7 +20686,7 @@ paths:
         ####Returns
         Returns a JSON object with a `data` key containing the representation of the requested wiki, if the request was successful.
 
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: wiki_read
       parameters:
         - description: The unique identifier of the wiki.

@@ -211,38 +211,7 @@ paths:
         ``zip`` | string, optional | Company Address - Zip Code
         ``countryCode`` |string, optional | Company Address - Country.  Please use a 2-character country code.
         ``phone`` | string, optional | Company Phone number.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              addr1:
-                type: string
-              addr2:
-                type: string
-              city:
-                type: string
-              companyName:
-                type: string
-              countryCode:
-                type: string
-              email:
-                type: string
-              firstName:
-                type: string
-              lastName:
-                type: string
-              password:
-                type: string
-              phone:
-                type: string
-              shippingOriginCountryCode:
-                type: string
-              state:
-                type: string
-              zip:
-                type: string
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -1221,16 +1190,7 @@ paths:
         -------------------|-------------------|-------------------
         ``orderId`` | number, required | Identifies the order that will be tagged.
         ``tagId`` | number, required | Identifies the tag that will be applied to the order.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              orderId:
-                type: number
-              tagId:
-                type: number
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -1253,18 +1213,7 @@ paths:
         -------------------|-------------------|-------------------
         ``orderIds`` | number, required | Identifies set of orders that will be assigned the user.  Please note that if ANY of the orders within the array are not found, no orders will have a user assigned to them.
         ``userId`` | number, required | Identifies the user that will be applied to the orders.  It should contain a GUID of the user to be assigned to the array of orders.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              orderIds:
-                items:
-                  type: number
-                type: array
-              userId:
-                type: string
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -1296,41 +1245,7 @@ paths:
         ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](http://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
         ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order. Use the Customs information that can be used to generate customs documents for international orders.  Use the [**AdvancedOptions**](http://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model.
         ``testLabel`` | boolean, required | Specifies whether a test label should be created.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              advancedOptions:
-                type: 'null'
-              carrierCode:
-                type: string
-              confirmation:
-                type: 'null'
-              dimensions:
-                type: 'null'
-              insuranceOptions:
-                type: 'null'
-              internationalOptions:
-                type: 'null'
-              orderId:
-                type: number
-              packageCode:
-                type: string
-              serviceCode:
-                type: string
-              shipDate:
-                type: string
-              testLabel:
-                type: boolean
-              weight:
-                properties:
-                  units:
-                    type: string
-                  value:
-                    type: number
-                type: object
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -1372,7 +1287,7 @@ paths:
         ``internalNotes`` | string, optional | Private notes that are only visible to the seller.
         ``gift`` | boolean, optional | Specifies whether or not this Order is a gift
         ``giftMessage`` | string, optional | Gift message left by the customer when placing the order.
-        ``paymentMethod`` | string, optional | Identifies the shipping service selected by the customer when placing this order.
+        ``paymentMethod`` | string, optional | Method of payment used by the customer.
         ``requestedShippingService`` | string, optional |Identifies the shipping service selected by the customer when placing this order. This value is given to ShipStation by the marketplace/cart and helps identify what shipping service the customer selected upon checkout.
         ``carrierCode`` | string, optional | The code for the carrier that is to be used(or was used) when this order is shipped(was shipped).
         ``serviceCode`` | string, optional | The code for the shipping service that is to be used(or was used) when this order is shipped(was shipped).
@@ -1384,253 +1299,7 @@ paths:
         ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.  Use the [**InsuranceOptions**](http://www.shipstation.com/developer-api/#/reference/model-insuranceoptions) model.
         ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](http://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
         ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order. Use the [**AdvancedOptions**](http://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              advancedOptions:
-                properties:
-                  billToAccount:
-                    type: 'null'
-                  billToCountryCode:
-                    type: 'null'
-                  billToParty:
-                    type: 'null'
-                  billToPostalCode:
-                    type: 'null'
-                  containsAlcohol:
-                    type: boolean
-                  customField1:
-                    type: string
-                  customField2:
-                    type: string
-                  customField3:
-                    type: string
-                  mergedIds:
-                    items: {}
-                    type: array
-                  mergedOrSplit:
-                    type: boolean
-                  nonMachinable:
-                    type: boolean
-                  parentId:
-                    type: 'null'
-                  saturdayDelivery:
-                    type: boolean
-                  source:
-                    type: string
-                  storeId:
-                    type: number
-                  warehouseId:
-                    type: number
-                type: object
-              amountPaid:
-                type: number
-              billTo:
-                properties:
-                  city:
-                    type: 'null'
-                  company:
-                    type: 'null'
-                  country:
-                    type: 'null'
-                  name:
-                    type: string
-                  phone:
-                    type: 'null'
-                  postalCode:
-                    type: 'null'
-                  residential:
-                    type: 'null'
-                  state:
-                    type: 'null'
-                  street1:
-                    type: 'null'
-                  street2:
-                    type: 'null'
-                  street3:
-                    type: 'null'
-                type: object
-              carrierCode:
-                type: string
-              confirmation:
-                type: string
-              customerEmail:
-                type: string
-              customerId:
-                type: number
-              customerNotes:
-                type: string
-              customerUsername:
-                type: string
-              dimensions:
-                properties:
-                  height:
-                    type: number
-                  length:
-                    type: number
-                  units:
-                    type: string
-                  width:
-                    type: number
-                type: object
-              gift:
-                type: boolean
-              giftMessage:
-                type: string
-              insuranceOptions:
-                properties:
-                  insureShipment:
-                    type: boolean
-                  insuredValue:
-                    type: number
-                  provider:
-                    type: string
-                type: object
-              internalNotes:
-                type: string
-              internationalOptions:
-                properties:
-                  contents:
-                    type: 'null'
-                  customsItems:
-                    type: 'null'
-                type: object
-              items:
-                items:
-                  properties:
-                    adjustment:
-                      type: boolean
-                    fulfillmentSku:
-                      type:
-                        - 'null'
-                        - string
-                    imageUrl:
-                      type: 'null'
-                    lineItemKey:
-                      type:
-                        - string
-                        - 'null'
-                    name:
-                      type: string
-                    options:
-                      items:
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                        type: object
-                      type: array
-                    productId:
-                      type: number
-                    quantity:
-                      type: number
-                    shippingAmount:
-                      type:
-                        - number
-                        - 'null'
-                    sku:
-                      type: string
-                    taxAmount:
-                      type:
-                        - number
-                        - 'null'
-                    unitPrice:
-                      type: number
-                    upc:
-                      type:
-                        - string
-                        - 'null'
-                    warehouseLocation:
-                      type:
-                        - string
-                        - 'null'
-                    weight:
-                      properties:
-                        units:
-                          type: string
-                        value:
-                          type: number
-                      type: object
-                  required:
-                    - lineItemKey
-                    - sku
-                    - name
-                    - imageUrl
-                    - weight
-                    - quantity
-                    - unitPrice
-                    - taxAmount
-                    - shippingAmount
-                    - warehouseLocation
-                    - options
-                    - productId
-                    - fulfillmentSku
-                    - adjustment
-                    - upc
-                  type: object
-                type: array
-              orderDate:
-                type: string
-              orderKey:
-                type: string
-              orderNumber:
-                type: string
-              orderStatus:
-                type: string
-              packageCode:
-                type: string
-              paymentDate:
-                type: string
-              paymentMethod:
-                type: string
-              requestedShippingService:
-                type: string
-              serviceCode:
-                type: string
-              shipByDate:
-                type: string
-              shipDate:
-                type: string
-              shipTo:
-                properties:
-                  city:
-                    type: string
-                  company:
-                    type: string
-                  country:
-                    type: string
-                  name:
-                    type: string
-                  phone:
-                    type: string
-                  postalCode:
-                    type: string
-                  residential:
-                    type: boolean
-                  state:
-                    type: string
-                  street1:
-                    type: string
-                  street2:
-                    type: string
-                  street3:
-                    type: 'null'
-                type: object
-              shippingAmount:
-                type: number
-              taxAmount:
-                type: number
-              weight:
-                properties:
-                  units:
-                    type: string
-                  value:
-                    type: number
-                type: object
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -1749,255 +1418,7 @@ paths:
         Data Type          |Description
         -------------------|-------------------
         Order, required | An array of [**Order**](http://www.shipstation.com/developer-api/#/reference/model-order) objects (maximum of 100 per request)
-      parameters:
-        - in: body
-          name: body
-          schema:
-            items:
-              properties:
-                advancedOptions:
-                  properties:
-                    billToAccount:
-                      type: 'null'
-                    billToCountryCode:
-                      type: 'null'
-                    billToParty:
-                      type: 'null'
-                    billToPostalCode:
-                      type: 'null'
-                    containsAlcohol:
-                      type: boolean
-                    customField1:
-                      type: string
-                    customField2:
-                      type: string
-                    customField3:
-                      type: string
-                    mergedIds:
-                      items: {}
-                      type: array
-                    mergedOrSplit:
-                      type: boolean
-                    nonMachinable:
-                      type: boolean
-                    parentId:
-                      type: 'null'
-                    saturdayDelivery:
-                      type: boolean
-                    source:
-                      type: string
-                    storeId:
-                      type: number
-                    warehouseId:
-                      type: number
-                  type: object
-                amountPaid:
-                  type: number
-                billTo:
-                  properties:
-                    city:
-                      type: 'null'
-                    company:
-                      type: 'null'
-                    country:
-                      type: 'null'
-                    name:
-                      type: string
-                    phone:
-                      type: 'null'
-                    postalCode:
-                      type: 'null'
-                    residential:
-                      type: 'null'
-                    state:
-                      type: 'null'
-                    street1:
-                      type: 'null'
-                    street2:
-                      type: 'null'
-                    street3:
-                      type: 'null'
-                  type: object
-                carrierCode:
-                  type: string
-                confirmation:
-                  type: string
-                customerEmail:
-                  type: string
-                customerId:
-                  type: number
-                customerNotes:
-                  type: string
-                customerUsername:
-                  type: string
-                dimensions:
-                  properties:
-                    height:
-                      type: number
-                    length:
-                      type: number
-                    units:
-                      type: string
-                    width:
-                      type: number
-                  type: object
-                gift:
-                  type: boolean
-                giftMessage:
-                  type: string
-                insuranceOptions:
-                  properties:
-                    insureShipment:
-                      type: boolean
-                    insuredValue:
-                      type: number
-                    provider:
-                      type: string
-                  type: object
-                internalNotes:
-                  type: string
-                internationalOptions:
-                  properties:
-                    contents:
-                      type: 'null'
-                    customsItems:
-                      type: 'null'
-                  type: object
-                items:
-                  items:
-                    properties:
-                      adjustment:
-                        type: boolean
-                      fulfillmentSku:
-                        type:
-                          - 'null'
-                          - string
-                      imageUrl:
-                        type: 'null'
-                      lineItemKey:
-                        type:
-                          - string
-                          - 'null'
-                      name:
-                        type: string
-                      options:
-                        items:
-                          properties:
-                            name:
-                              type: string
-                            value:
-                              type: string
-                          type: object
-                        type: array
-                      productId:
-                        type: number
-                      quantity:
-                        type: number
-                      shippingAmount:
-                        type:
-                          - number
-                          - 'null'
-                      sku:
-                        type: string
-                      taxAmount:
-                        type:
-                          - number
-                          - 'null'
-                      unitPrice:
-                        type: number
-                      upc:
-                        type:
-                          - string
-                          - 'null'
-                      warehouseLocation:
-                        type:
-                          - string
-                          - 'null'
-                      weight:
-                        properties:
-                          units:
-                            type: string
-                          value:
-                            type: number
-                        type: object
-                    required:
-                      - lineItemKey
-                      - sku
-                      - name
-                      - imageUrl
-                      - weight
-                      - quantity
-                      - unitPrice
-                      - taxAmount
-                      - shippingAmount
-                      - warehouseLocation
-                      - options
-                      - productId
-                      - fulfillmentSku
-                      - adjustment
-                      - upc
-                    type: object
-                  type: array
-                orderDate:
-                  type: string
-                orderKey:
-                  type: string
-                orderNumber:
-                  type: string
-                orderStatus:
-                  type: string
-                packageCode:
-                  type: string
-                paymentDate:
-                  type: string
-                paymentMethod:
-                  type: string
-                requestedShippingService:
-                  type: string
-                serviceCode:
-                  type: string
-                shipByDate:
-                  type: string
-                shipDate:
-                  type: string
-                shipTo:
-                  properties:
-                    city:
-                      type: string
-                    company:
-                      type: string
-                    country:
-                      type: string
-                    name:
-                      type: string
-                    phone:
-                      type: string
-                    postalCode:
-                      type: string
-                    residential:
-                      type: boolean
-                    state:
-                      type: string
-                    street1:
-                      type: string
-                    street2:
-                      type: string
-                    street3:
-                      type: 'null'
-                  type: object
-                shippingAmount:
-                  type: number
-                taxAmount:
-                  type: number
-                weight:
-                  properties:
-                    units:
-                      type: string
-                    value:
-                      type: number
-                  type: object
-              type: object
-            type: array
+      parameters: []
       produces:
         - application/json
       responses:
@@ -2026,16 +1447,7 @@ paths:
         -------------------|-------------------|-------------------
         ``orderId`` | number, required | Identifies the order that will be held.
         ``holdUntilDate`` | string, required | Date when order is moved from ``on_hold`` status to ``awaiting_shipment``.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              holdUntilDate:
-                type: string
-              orderId:
-                type: number
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -2224,24 +1636,7 @@ paths:
          ``trackingNumber`` | string, optional | Tracking number of shipment.
          ``notifyCustomer``  | boolean, optional | Specifies whether the customer should be notified of the shipment. Default value: false
          ``notifySalesChannel`` | boolean, optional | Specifies whether the sales channel should be notified of the shipment. Default value: false
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              carrierCode:
-                type: string
-              notifyCustomer:
-                type: boolean
-              notifySalesChannel:
-                type: boolean
-              orderId:
-                type: number
-              shipDate:
-                type: string
-              trackingNumber:
-                type: string
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -2264,16 +1659,7 @@ paths:
         -------------------|-------------------|-------------------
         ``orderId`` | number, required | Identifies the order whose tag will be removed.
         ``tagId`` | number, required | Identifies the tag to remove.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              orderId:
-                type: number
-              tagId:
-                type: number
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -2297,14 +1683,7 @@ paths:
         Name               |Data Type          |Description
         -------------------|-------------------|-------------------
         ``orderId`` | number, required | Identifies the order that will be restored to ``awaiting_shipment`` from ``on_hold``.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              orderId:
-                type: number
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -2326,16 +1705,7 @@ paths:
         Name               |Data Type          |Description
         -------------------|-------------------|-------------------
         ``orderIds`` | number, required | Identifies set of orders that will have the user unassigned.  Please note that if ANY of the orders within the array are not found, then no orders will have their users unassigned.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              orderIds:
-                items:
-                  type: number
-                type: array
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -2926,71 +2296,6 @@ paths:
           name: productId
           required: true
           type: number
-        - in: body
-          name: body
-          schema:
-            properties:
-              active:
-                type: boolean
-              aliases:
-                type: 'null'
-              customsCountryCode:
-                type: 'null'
-              customsDescription:
-                type: 'null'
-              customsTariffNo:
-                type: 'null'
-              customsValue:
-                type: 'null'
-              defaultCarrierCode:
-                type: 'null'
-              defaultConfirmation:
-                type: 'null'
-              defaultCost:
-                type: 'null'
-              defaultIntlCarrierCode:
-                type: 'null'
-              defaultIntlConfirmation:
-                type: 'null'
-              defaultIntlPackageCode:
-                type: 'null'
-              defaultIntlServiceCode:
-                type: 'null'
-              defaultPackageCode:
-                type: 'null'
-              defaultServiceCode:
-                type: 'null'
-              fulfillmentSku:
-                type: 'null'
-              height:
-                type: 'null'
-              internalNotes:
-                type: 'null'
-              length:
-                type: 'null'
-              name:
-                type: string
-              noCustoms:
-                type: 'null'
-              price:
-                type: number
-              productCategory:
-                type: 'null'
-              productId:
-                type: number
-              productType:
-                type: 'null'
-              sku:
-                type: string
-              tags:
-                type: 'null'
-              warehouseLocation:
-                type: 'null'
-              weightOz:
-                type: 'null'
-              width:
-                type: 'null'
-            type: object
       produces:
         - application/json
       responses:
@@ -3288,98 +2593,7 @@ paths:
          ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](https://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
          ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order.  Use the [**AdvancedOptions**](https://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model. 
          ``testLabel`` | boolean, optional | Specifies whether a test label should be created. Default value: false.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              advancedOptions:
-                type: 'null'
-              carrierCode:
-                type: string
-              confirmation:
-                type: string
-              dimensions:
-                properties:
-                  height:
-                    type: number
-                  length:
-                    type: number
-                  units:
-                    type: string
-                  width:
-                    type: number
-                type: object
-              insuranceOptions:
-                type: 'null'
-              internationalOptions:
-                type: 'null'
-              packageCode:
-                type: string
-              serviceCode:
-                type: string
-              shipDate:
-                type: string
-              shipFrom:
-                properties:
-                  city:
-                    type: string
-                  company:
-                    type: string
-                  country:
-                    type: string
-                  name:
-                    type: string
-                  phone:
-                    type: 'null'
-                  postalCode:
-                    type: string
-                  residential:
-                    type: boolean
-                  state:
-                    type: string
-                  street1:
-                    type: string
-                  street2:
-                    type: string
-                  street3:
-                    type: 'null'
-                type: object
-              shipTo:
-                properties:
-                  city:
-                    type: string
-                  company:
-                    type: string
-                  country:
-                    type: string
-                  name:
-                    type: string
-                  phone:
-                    type: 'null'
-                  postalCode:
-                    type: string
-                  residential:
-                    type: boolean
-                  state:
-                    type: string
-                  street1:
-                    type: string
-                  street2:
-                    type: string
-                  street3:
-                    type: 'null'
-                type: object
-              testLabel:
-                type: boolean
-              weight:
-                properties:
-                  units:
-                    type: string
-                  value:
-                    type: number
-                type: object
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -3424,50 +2638,7 @@ paths:
          ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use ``Dimensions`` object. 
          ``confirmation`` | string, optional | Returns rates that account for the specified delivery confirmation type.
          ``residential`` | boolean, optional | Returns rates that account for the specified delivery confirmation type. Default value: false
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              carrierCode:
-                type: string
-              confirmation:
-                type: string
-              dimensions:
-                properties:
-                  height:
-                    type: number
-                  length:
-                    type: number
-                  units:
-                    type: string
-                  width:
-                    type: number
-                type: object
-              fromPostalCode:
-                type: string
-              packageCode:
-                type: 'null'
-              residential:
-                type: boolean
-              serviceCode:
-                type: 'null'
-              toCity:
-                type: string
-              toCountry:
-                type: string
-              toPostalCode:
-                type: string
-              toState:
-                type: string
-              weight:
-                properties:
-                  units:
-                    type: string
-                  value:
-                    type: number
-                type: object
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -3515,14 +2686,7 @@ paths:
         Name               |Data Type          |Description
         -------------------|-------------------|-------------------
          ``shipmentId`` | number, required | ID of the shipment to void.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              shipmentId:
-                type: number
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -3775,14 +2939,7 @@ paths:
         Name               |Data Type          |Description
         -------------------|-------------------|-------------------
         ``storeId``  | number, required | ID of the store to deactivate.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              storeId:
-                type: string
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -3864,14 +3021,7 @@ paths:
         Name               |Data Type          |Description
         -------------------|-------------------|-------------------
         ``storeId``  | number, required | ID of the store to reactivate.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              storeId:
-                type: string
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -3899,15 +3049,6 @@ paths:
           name: refreshDate
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            properties:
-              refreshDate:
-                type: string
-              storeId:
-                type: number
-            type: object
       produces:
         - application/json
       responses:
@@ -4175,43 +3316,7 @@ paths:
          ``originAddress`` | Address, required | The origin address.  Shipping rates will be calculated from this address.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
          ``returnAddress`` | Address, optional | The return address.  If a "returnAddress" is not specified, your "originAddress" will be used as your "returnAddress". Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
          ``isDefault`` | boolean, optional | Specifies whether or not this will be your default Ship From Location.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              isDefault:
-                type: boolean
-              originAddress:
-                properties:
-                  city:
-                    type: string
-                  company:
-                    type: string
-                  country:
-                    type: string
-                  name:
-                    type: string
-                  phone:
-                    type: string
-                  postalCode:
-                    type: string
-                  residential:
-                    type: boolean
-                  state:
-                    type: string
-                  street1:
-                    type: string
-                  street2:
-                    type: 'null'
-                  street3:
-                    type: 'null'
-                type: object
-              returnAddress:
-                type: 'null'
-              warehouseName:
-                type: string
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:
@@ -4391,20 +3496,7 @@ paths:
         ``event`` | string, required | The type of webhook to subscribe to. Must contain one of the following values: ORDER_NOTIFY, ITEM_ORDER_NOTIFY, SHIP_NOTIFY, ITEM_SHIP_NOTIFY
         ``store_id`` | int, optional | If passed in, the webhooks will only be triggered for this ``store_id``
         ``friendly_name`` | string, optional | Display name for the webhook
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              event:
-                type: string
-              friendly_name:
-                type: string
-              store_id:
-                type: 'null'
-              target_url:
-                type: string
-            type: object
+      parameters: []
       produces:
         - application/json
       responses:

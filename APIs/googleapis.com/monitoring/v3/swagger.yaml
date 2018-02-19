@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Stackdriver Monitoring
   version: v3
   x-apiClientRegistration:
@@ -35,24 +31,13 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
       'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
       'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
-      'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
-      'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -155,15 +140,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - uptimeCheckIps
@@ -186,7 +165,7 @@ paths:
       description: Deletes an uptime check configuration. Note that this method will fail if the uptime check configuration is referenced by an alert policy or other dependent configs that would be rendered invalid by the deletion.
       operationId: monitoring.projects.uptimeCheckConfigs.delete
       parameters:
-        - description: 'The uptime check configuration to delete. The formatis projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
+        - description: 'The uptime check configuration to delete. The format  is projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
           in: path
           name: name
           required: true
@@ -200,19 +179,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
     get:
-      description: Gets a single uptime check configuration.
-      operationId: monitoring.projects.uptimeCheckConfigs.get
+      description: Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.monitoredResourceDescriptors.get
       parameters:
-        - description: 'The uptime check configuration to retrieve. The formatis projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
+        - description: 'The monitored resource descriptor to get. The format is "projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}". The {resource_type} is a predefined type, such as cloudsql_database.'
           in: path
           name: name
           required: true
@@ -222,23 +197,15 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/UptimeCheckConfig'
+            $ref: '#/definitions/MonitoredResourceDescriptor'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -282,11 +249,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -316,11 +279,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -361,15 +320,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -412,15 +365,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -464,11 +411,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -513,15 +456,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -572,19 +509,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -624,15 +553,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -669,19 +592,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -806,15 +721,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -854,15 +763,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -879,7 +782,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'The project whose uptime check configurations are listed. The formatis projects/[PROJECT_ID].'
+        - description: 'The project whose uptime check configurations are listed. The format  is projects/[PROJECT_ID].'
           in: path
           name: parent
           required: true
@@ -893,15 +796,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -927,7 +824,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/UptimeCheckConfig'
-        - description: 'The project in which to create the uptime check. The formatis projects/[PROJECT_ID].'
+        - description: 'The project in which to create the uptime check. The format  is projects/[PROJECT_ID].'
           in: path
           name: parent
           required: true
@@ -941,11 +838,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -1737,12 +1630,12 @@ definitions:
         type: boolean
       monitoredResource:
         $ref: '#/definitions/MonitoredResource'
-        description: The monitored resource associated with the configuration.
+        description: 'The monitored resource (https://cloud.google.com/monitoring/api/resources) associated with the configuration. The following monitored resource types are supported for uptime checks:  uptime_url  gce_instance  gae_app  aws_ec2_instance  aws_elb_load_balancer'
       name:
         description: 'A unique resource name for this UptimeCheckConfig. The format is:projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].This field should be omitted when creating the uptime check configuration; on create, the resource name is assigned by the server and included in the response.'
         type: string
       period:
-        description: 'How often the uptime check is performed. Currently, only 1, 5, 10, and 15 minutes are supported. Required.'
+        description: 'How often, in seconds, the uptime check is performed. Currently, the only supported values are 60s (1 minute), 300s (5 minutes), 600s (10 minutes), and 900s (15 minutes). Required.'
         format: google-duration
         type: string
       resourceGroup:

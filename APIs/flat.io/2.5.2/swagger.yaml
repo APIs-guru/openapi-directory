@@ -30,7 +30,7 @@ info:
     * [Changelog](https://flat.io/developers/docs/api/changelog.html)
   termsOfService: 'https://flat.io/legal'
   title: Flat
-  version: 2.5.1
+  version: 2.5.2
   x-apisguru-categories:
     - media
     - collaboration
@@ -3667,8 +3667,10 @@ definitions:
           changing the document permissions and deleting the document
         type: boolean
       aclRead:
+        default: true
         description: |
           `True` if the current user can read the current document
+        type: boolean
       aclWrite:
         default: false
         description: |

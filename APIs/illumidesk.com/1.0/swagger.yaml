@@ -5,6 +5,11 @@ host: api.illumidesk.com
 info:
   title: IllumiDesk
   version: '1.0'
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://avatars3.githubusercontent.com/u/12212444?v=4&s=200'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/3Blades/openapi/master/tbs_swagger.yml'
@@ -2506,6 +2511,228 @@ paths:
       summary: Mark a specific notification as either read or unread.
       tags:
         - notifications
+  '/v1/{namespace}/oauth/applications/':
+    get:
+      operationId: oauth_applications_list
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Set limit when retrieving items.
+          in: query
+          name: limit
+          required: false
+          type: string
+        - description: Offset when retrieving items.
+          in: query
+          name: offset
+          required: false
+          type: string
+        - description: Set order when retrieving items.
+          in: query
+          name: ordering
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OAuth2 application list
+          examples:
+            application/json:
+              - authorization_grant_type: client-credentials
+                client_id: CsJiQuhq66C6QP7ZKYzclOwrSVKctdYAbAXu7iHm
+                client_secret: iIzh1cidklpF6eoCin986j0YTDS3hjgH1JDs4Wv4jriG7yXpJu8TfoKmtMC4QTRBbF2IzJnfRLBGdZvKm1koyS9xfGfdTDSi5JAVJAwTrxw0VAkZZr0u80afSQ9OVKvJ
+                client_type: confidential
+                id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
+                name: Test
+                redirect_uris: ''
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      summary: Retrieve oauth applications
+      tags:
+        - oauth
+    post:
+      description: ''
+      operationId: oauth_application_create
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - in: body
+          name: application_data
+          schema:
+            $ref: '#/definitions/ApplicationData'
+      responses:
+        '201':
+          description: Application created.
+          examples:
+            application/json:
+              authorization_grant_type: client-credentials
+              client_id: CsJiQuhq66C6QP7ZKYzclOwrSVKctdYAbAXu7iHm
+              client_secret: iIzh1cidklpF6eoCin986j0YTDS3hjgH1JDs4Wv4jriG7yXpJu8TfoKmtMC4QTRBbF2IzJnfRLBGdZvKm1koyS9xfGfdTDSi5JAVJAwTrxw0VAkZZr0u80afSQ9OVKvJ
+              client_type: confidential
+              id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
+              name: Test
+              redirect_uris: ''
+          schema:
+            $ref: '#/definitions/Application'
+        '400':
+          description: Invalid data supplied
+          schema:
+            $ref: '#/definitions/ApplicationError'
+      summary: Create a new OAuth2 application
+      tags:
+        - oauth
+  '/v1/{namespace}/oauth/applications/{application}/':
+    delete:
+      description: ''
+      operationId: oauth_application_delete
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Application unique identifier expressed as UUID or name.
+          in: path
+          name: application
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Application deleted.
+        '404':
+          description: Application not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an application by id
+      tags:
+        - oauth
+    get:
+      operationId: oauth_application_read
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Application unique identifier expressed as UUID or name.
+          in: path
+          name: application
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Application retrieved.
+          examples:
+            application/json:
+              authorization_grant_type: client-credentials
+              client_id: CsJiQuhq66C6QP7ZKYzclOwrSVKctdYAbAXu7iHm
+              client_secret: iIzh1cidklpF6eoCin986j0YTDS3hjgH1JDs4Wv4jriG7yXpJu8TfoKmtMC4QTRBbF2IzJnfRLBGdZvKm1koyS9xfGfdTDSi5JAVJAwTrxw0VAkZZr0u80afSQ9OVKvJ
+              client_type: confidential
+              id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
+              name: Test
+              redirect_uris: ''
+          schema:
+            $ref: '#/definitions/Application'
+        '404':
+          description: Application not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Get an application by id
+      tags:
+        - oauth
+    patch:
+      description: ''
+      operationId: oauth_application_update
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Application unique identifier expressed as UUID or name.
+          in: path
+          name: application
+          required: true
+          type: string
+        - in: body
+          name: application_data
+          schema:
+            $ref: '#/definitions/ApplicationData'
+      responses:
+        '200':
+          description: Application updated.
+          examples:
+            application/json:
+              authorization_grant_type: client-credentials
+              client_id: CsJiQuhq66C6QP7ZKYzclOwrSVKctdYAbAXu7iHm
+              client_secret: iIzh1cidklpF6eoCin986j0YTDS3hjgH1JDs4Wv4jriG7yXpJu8TfoKmtMC4QTRBbF2IzJnfRLBGdZvKm1koyS9xfGfdTDSi5JAVJAwTrxw0VAkZZr0u80afSQ9OVKvJ
+              client_type: confidential
+              id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
+              name: Test
+              redirect_uris: ''
+          schema:
+            $ref: '#/definitions/Application'
+        '400':
+          description: Invalid data supplied.
+          schema:
+            $ref: '#/definitions/ApplicationError'
+        '404':
+          description: Application not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Update an application by id
+      tags:
+        - oauth
+    put:
+      description: ''
+      operationId: oauth_application_replace
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Application unique identifier expressed as UUID or name.
+          in: path
+          name: application
+          required: true
+          type: string
+        - in: body
+          name: oauth_application_data
+          schema:
+            $ref: '#/definitions/ApplicationData'
+      responses:
+        '200':
+          description: Application replaced.
+          examples:
+            application/json:
+              authorization_grant_type: client-credentials
+              client_id: CsJiQuhq66C6QP7ZKYzclOwrSVKctdYAbAXu7iHm
+              client_secret: iIzh1cidklpF6eoCin986j0YTDS3hjgH1JDs4Wv4jriG7yXpJu8TfoKmtMC4QTRBbF2IzJnfRLBGdZvKm1koyS9xfGfdTDSi5JAVJAwTrxw0VAkZZr0u80afSQ9OVKvJ
+              client_type: confidential
+              id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
+              name: Test
+              redirect_uris: ''
+          schema:
+            $ref: '#/definitions/Application'
+        '400':
+          description: Invalid data supplied.
+          schema:
+            $ref: '#/definitions/ApplicationError'
+        '404':
+          description: Application not found
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Replace an application by id
+      tags:
+        - oauth
   '/v1/{namespace}/projects/':
     get:
       operationId: projects_list
@@ -4880,6 +5107,93 @@ definitions:
       - method
       - user_agent
       - state
+    type: object
+  Application:
+    properties:
+      authorization_grant_type:
+        description: OAuth2 authorization grant type
+        enum:
+          - authorization-code
+          - implicit
+          - password
+          - client-credentials
+        type: string
+      client_id:
+        description: OAuth2 client id
+        type: string
+      client_secret:
+        description: OAuth2 client secret
+        type: string
+      client_type:
+        description: OAuth2 client type
+        enum:
+          - confidential
+          - public
+        type: string
+      id:
+        description: 'Application unique identifier, expressed as UUID.'
+        type: string
+      name:
+        description: Application name
+        type: string
+      redirect_uris:
+        description: Uris to redirect auth request
+        type: string
+    type: object
+  ApplicationData:
+    properties:
+      authorization_grant_type:
+        description: OAuth2 authorization grant type
+        enum:
+          - authorization-code
+          - implicit
+          - password
+          - client-credentials
+        type: string
+      client_type:
+        description: OAuth2 client type
+        enum:
+          - confidential
+          - public
+        type: string
+      name:
+        description: Application name
+        type: string
+      redirect_uris:
+        description: Uris to redirect auth request
+        type: string
+    required:
+      - client_type
+      - authorization_grant_type
+      - name
+    type: object
+  ApplicationError:
+    properties:
+      authorization_grant_type:
+        description: Authorization grant type field errors.
+        items:
+          type: string
+        type: array
+      client_type:
+        description: Client type field errors.
+        items:
+          type: string
+        type: array
+      name:
+        description: Name field errors.
+        items:
+          type: string
+        type: array
+      non_field_errors:
+        description: Errors not connected to any field.
+        items:
+          type: string
+        type: array
+      redirect_uris:
+        description: Redirect uris field errors.
+        items:
+          type: string
+        type: array
     type: object
   AuthToken:
     properties:

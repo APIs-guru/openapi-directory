@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: An API for managing and executing Google Apps Script projects.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Apps Script
   version: v1
   x-apiClientRegistration:
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://mail.google.com/': 'Read, send, delete, and manage your email'
@@ -49,24 +45,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/groups': View and manage your Google Groups
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/userinfo.email': View your email address
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://mail.google.com/': 'Read, send, delete, and manage your email'
-      'https://www.google.com/calendar/feeds': Manage your calendars
-      'https://www.google.com/m8/feeds': Manage your contacts
-      'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
-      'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
-      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
-      'https://www.googleapis.com/auth/forms': View and manage your forms in Google Drive
-      'https://www.googleapis.com/auth/forms.currentonly': View and manage forms that this application has been installed in
-      'https://www.googleapis.com/auth/groups': View and manage your Google Groups
-      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -854,47 +832,25 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.google.com/calendar/feeds'
-          Oauth2c:
             - 'https://www.google.com/calendar/feeds'
         - Oauth2:
             - 'https://www.google.com/m8/feeds'
-          Oauth2c:
-            - 'https://www.google.com/m8/feeds'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/forms'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/forms'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/forms.currentonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/forms.currentonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/groups'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/groups'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - scripts

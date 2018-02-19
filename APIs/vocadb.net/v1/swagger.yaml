@@ -5072,6 +5072,7 @@ paths:
             - OtherIndividual
             - Utaite
             - Band
+            - Vocalist
           in: query
           name: artistType
           required: false
@@ -5997,6 +5998,7 @@ definitions:
           - OtherIndividual
           - Utaite
           - Band
+          - Vocalist
         type: string
       deleted:
         type: boolean
@@ -6112,6 +6114,7 @@ definitions:
           - OtherIndividual
           - Utaite
           - Band
+          - Vocalist
         type: string
       baseVoicebank:
         $ref: '#/definitions/ArtistContract'
@@ -6259,6 +6262,8 @@ definitions:
       id:
         format: int32
         type: integer
+      isCustomName:
+        type: boolean
       isSupport:
         type: boolean
       name:
@@ -6410,6 +6415,7 @@ definitions:
           - OtherIndividual
           - Utaite
           - Band
+          - Vocalist
         type: string
       createDate:
         format: date-time
@@ -6497,6 +6503,7 @@ definitions:
           - Remaster
           - Remix
           - Cover
+          - Arrangement
           - Instrumental
           - Mashup
           - MusicPV
@@ -7164,6 +7171,7 @@ definitions:
           - Remaster
           - Remix
           - Cover
+          - Arrangement
           - Instrumental
           - Mashup
           - MusicPV
@@ -7270,6 +7278,7 @@ definitions:
           - Remaster
           - Remix
           - Cover
+          - Arrangement
           - Instrumental
           - Mashup
           - MusicPV

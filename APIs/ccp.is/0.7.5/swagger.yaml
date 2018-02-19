@@ -64,7 +64,6 @@ securityDefinitions:
       esi-corporations.read_structures.v1: EVE SSO scope esi-corporations.read_structures.v1
       esi-corporations.read_titles.v1: EVE SSO scope esi-corporations.read_titles.v1
       esi-corporations.track_members.v1: EVE SSO scope esi-corporations.track_members.v1
-      esi-corporations.write_structures.v1: EVE SSO scope esi-corporations.write_structures.v1
       esi-fittings.read_fittings.v1: EVE SSO scope esi-fittings.read_fittings.v1
       esi-fittings.write_fittings.v1: EVE SSO scope esi-fittings.write_fittings.v1
       esi-fleets.read_fleet.v1: EVE SSO scope esi-fleets.read_fleet.v1
@@ -4178,6 +4177,7 @@ paths:
         - description: Details about the new fitting
           in: body
           name: fitting
+          required: true
           schema:
             description: fitting object
             properties:
@@ -5595,6 +5595,7 @@ paths:
         - description: Label to create
           in: body
           name: label
+          required: true
           schema:
             description: label object
             properties:
@@ -17417,14 +17418,12 @@ paths:
   '/corporations/{corporation_id}/structures/':
     get:
       description: |
-        Get a list of corporation structures
+        Get a list of corporation structures. This route's version includes the changes to structures detailed in this blog: https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th
 
         ---
         Alternate route: `/dev/corporations/{corporation_id}/structures/`
 
-        Alternate route: `/legacy/corporations/{corporation_id}/structures/`
-
-        Alternate route: `/v1/corporations/{corporation_id}/structures/`
+        Alternate route: `/v2/corporations/{corporation_id}/structures/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -17446,13 +17445,10 @@ paths:
           examples:
             application/json:
               - corporation_id: 667531913
-                current_vul:
-                  - day: 1
-                    hour: 2
-                next_vul:
-                  - day: 3
-                    hour: 4
                 profile_id: 11237
+                reinforce_hour: 22
+                reinforce_weekday: 2
+                state: shield_vulnerable
                 structure_id: 1021975535893
                 system_id: 30004763
                 type_id: 35833
@@ -17491,61 +17487,48 @@ paths:
                   format: int32
                   title: get_corporations_corporation_id_structures_corporation_id
                   type: integer
-                current_vul:
-                  description: 'This week''s vulnerability windows, Monday is day 0'
-                  items:
-                    description: current_vul object
-                    properties:
-                      day:
-                        description: day integer
-                        format: int32
-                        title: get_corporations_corporation_id_structures_day
-                        type: integer
-                      hour:
-                        description: hour integer
-                        format: int32
-                        title: get_corporations_corporation_id_structures_hour
-                        type: integer
-                    required:
-                      - day
-                      - hour
-                    title: get_corporations_corporation_id_structures_current_vul
-                    type: object
-                  maxItems: 168
-                  title: get_corporations_corporation_id_structures_current_vul
-                  type: array
                 fuel_expires:
                   description: Date on which the structure will run out of fuel
                   format: date-time
                   title: get_corporations_corporation_id_structures_fuel_expires
                   type: string
-                next_vul:
-                  description: 'Next week''s vulnerability windows, Monday is day 0'
-                  items:
-                    description: next_vul object
-                    properties:
-                      day:
-                        description: day integer
-                        format: int32
-                        title: get_corporations_corporation_id_structures_day
-                        type: integer
-                      hour:
-                        description: hour integer
-                        format: int32
-                        title: get_corporations_corporation_id_structures_hour
-                        type: integer
-                    required:
-                      - day
-                      - hour
-                    title: get_corporations_corporation_id_structures_next_vul
-                    type: object
-                  maxItems: 168
-                  title: get_corporations_corporation_id_structures_next_vul
-                  type: array
+                next_reinforce_apply:
+                  description: The date and time when the structure's newly requested reinforcement times (e.g. next_reinforce_hour and next_reinforce_day) will take effect.
+                  format: date-time
+                  title: get_corporations_corporation_id_structures_next_reinforce_apply
+                  type: string
+                next_reinforce_hour:
+                  description: The requested change to reinforce_hour that will take effect at the time shown by next_reinforce_apply.
+                  format: int32
+                  maximum: 23
+                  minimum: 0
+                  title: get_corporations_corporation_id_structures_next_reinforce_hour
+                  type: integer
+                next_reinforce_weekday:
+                  description: The requested change to reinforce_weekday that will take effect at the time shown by next_reinforce_apply.
+                  format: int32
+                  maximum: 6
+                  minimum: 0
+                  title: get_corporations_corporation_id_structures_next_reinforce_weekday
+                  type: integer
                 profile_id:
                   description: The id of the ACL profile for this citadel
                   format: int32
                   title: get_corporations_corporation_id_structures_profile_id
+                  type: integer
+                reinforce_hour:
+                  description: The hour of day that determines the four hour window when the structure will randomly exit its reinforcement periods and become vulnerable to attack against its armor and/or hull. The structure will become vulnerable at a random time that is +/- 2 hours centered on the value of this property.
+                  format: int32
+                  maximum: 23
+                  minimum: 0
+                  title: get_corporations_corporation_id_structures_reinforce_hour
+                  type: integer
+                reinforce_weekday:
+                  description: The day of the week when the structure exits its final reinforcement period and becomes vulnerable to attack against its hull. Monday is 0 and Sunday is 6.
+                  format: int32
+                  maximum: 6
+                  minimum: 0
+                  title: get_corporations_corporation_id_structures_reinforce_weekday
                   type: integer
                 services:
                   description: 'Contains a list of service upgrades, and their state'
@@ -17572,6 +17555,23 @@ paths:
                   maxItems: 10
                   title: get_corporations_corporation_id_structures_services
                   type: array
+                state:
+                  description: state string
+                  enum:
+                    - anchor_vulnerable
+                    - anchoring
+                    - armor_reinforce
+                    - armor_vulnerable
+                    - fitting_invulnerable
+                    - hull_reinforce
+                    - hull_vulnerable
+                    - online_deprecated
+                    - onlining_vulnerable
+                    - shield_vulnerable
+                    - unanchored
+                    - unknown
+                  title: get_corporations_corporation_id_structures_state
+                  type: string
                 state_timer_end:
                   description: Date at which the structure will move to it's next state
                   format: date-time
@@ -17608,11 +17608,12 @@ paths:
                 - corporation_id
                 - system_id
                 - profile_id
-                - current_vul
-                - next_vul
+                - reinforce_weekday
+                - reinforce_hour
+                - state
               title: get_corporations_corporation_id_structures_200_ok
               type: object
-            maxItems: 250
+            maxItems: 1000
             title: get_corporations_corporation_id_structures_ok
             type: array
         '403':
@@ -17637,94 +17638,10 @@ paths:
         - Corporation
       x-alternate-versions:
         - dev
-        - legacy
-        - v1
+        - v2
       x-cached-seconds: 3600
       x-required-roles:
         - StationManager
-  '/corporations/{corporation_id}/structures/{structure_id}/':
-    put:
-      description: |
-        Update the vulnerability window schedule of a corporation structure
-
-        ---
-        Alternate route: `/dev/corporations/{corporation_id}/structures/{structure_id}/`
-
-        Alternate route: `/legacy/corporations/{corporation_id}/structures/{structure_id}/`
-
-        Alternate route: `/v1/corporations/{corporation_id}/structures/{structure_id}/`
-      operationId: put_corporations_corporation_id_structures_structure_id
-      parameters:
-        - $ref: '#/parameters/corporation_id'
-        - $ref: '#/parameters/datasource'
-        - description: New vulnerability window schedule for the structure
-          in: body
-          name: new_schedule
-          required: true
-          schema:
-            description: new_schedule array
-            items:
-              description: new_schedule object
-              properties:
-                day:
-                  description: 'Day of the week, zero-indexed to Monday'
-                  format: int32
-                  maximum: 6
-                  minimum: 0
-                  title: put_corporations_corporation_id_structures_structure_id_day
-                  type: integer
-                hour:
-                  description: 'Hour of the day evetime, zero-indexed to midnight'
-                  format: int32
-                  maximum: 23
-                  minimum: 0
-                  title: put_corporations_corporation_id_structures_structure_id_hour
-                  type: integer
-              required:
-                - day
-                - hour
-              title: put_corporations_corporation_id_structures_structure_id_new_schedule
-              type: object
-            maxItems: 168
-            minItems: 1
-            title: put_corporations_corporation_id_structures_structure_id_new_schedule
-            type: array
-        - description: A structure ID
-          format: int64
-          in: path
-          name: structure_id
-          required: true
-          type: integer
-        - $ref: '#/parameters/token'
-        - $ref: '#/parameters/user_agent'
-        - $ref: '#/parameters/X-User-Agent'
-      responses:
-        '204':
-          description: Structure vulnerability window updated
-        '403':
-          description: Forbidden
-          examples:
-            application/json:
-              error: Forbidden message
-          schema:
-            $ref: '#/definitions/forbidden'
-        '500':
-          description: Internal server error
-          examples:
-            application/json:
-              error: Internal server error message
-          schema:
-            $ref: '#/definitions/internal_server_error'
-      security:
-        - evesso:
-            - esi-corporations.write_structures.v1
-      summary: Update structure vulnerability schedule
-      tags:
-        - Corporation
-      x-alternate-versions:
-        - dev
-        - legacy
-        - v1
   '/corporations/{corporation_id}/titles/':
     get:
       description: |
@@ -24811,6 +24728,112 @@ paths:
       summary: Open New Mail Window
       tags:
         - User Interface
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+  /universe/ancestries/:
+    get:
+      description: |-
+        Get all character ancestries
+
+        ---
+        Alternate route: `/dev/universe/ancestries/`
+
+        Alternate route: `/legacy/universe/ancestries/`
+
+        Alternate route: `/v1/universe/ancestries/`
+
+        ---
+        This route expires daily at 11:05
+      operationId: get_universe_ancestries
+      parameters:
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/language'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of ancestries
+          examples:
+            application/json:
+              - bloodline_id: 1
+                description: Acutely aware of the small population...
+                id: 12
+                name: Tube Child
+                short_description: Manufactured citizens of the State.
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Content-Language:
+              description: The language used in the response
+              enum:
+                - de
+                - en-us
+                - fr
+                - ja
+                - ru
+                - zh
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                bloodline_id:
+                  description: The bloodline associated with this ancestry
+                  format: int32
+                  title: get_universe_ancestries_bloodline_id
+                  type: integer
+                description:
+                  description: description string
+                  title: get_universe_ancestries_description
+                  type: string
+                icon_id:
+                  description: icon_id integer
+                  format: int32
+                  title: get_universe_ancestries_icon_id
+                  type: integer
+                id:
+                  description: id integer
+                  format: int32
+                  title: get_universe_ancestries_id
+                  type: integer
+                name:
+                  description: name string
+                  title: get_universe_ancestries_name
+                  type: string
+                short_description:
+                  description: short_description string
+                  title: get_universe_ancestries_short_description
+                  type: string
+              required:
+                - id
+                - name
+                - bloodline_id
+                - description
+              title: get_universe_ancestries_200_ok
+              type: object
+            maxItems: 42
+            title: get_universe_ancestries_ok
+            type: array
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      summary: Get ancestries
+      tags:
+        - Universe
       x-alternate-versions:
         - dev
         - legacy

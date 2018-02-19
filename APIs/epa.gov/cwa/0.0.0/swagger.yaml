@@ -941,21 +941,7 @@ parameters:
     required: false
     type: string
   p_pccs:
-    description: |-
-      Current Compliance Status:
-      - E�= EffViol
-      - S�= CSchVio
-      - X = EffNMth
-      - T = CSchRpt
-      - D�= DMR NR
-      - N�= RptViol
-      - P�= ResPend
-      - R�= Resolvd
-      - M�= Manual
-      - V�= NonRNCV
-      - U = N/A
-      - W = N/A
-      May contain multiple comma-separated values.
+    description: "Current Compliance Status:\n- E\_= EffViol\n- S\_= CSchVio\n- X = EffNMth\n- T = CSchRpt\n- D\_= DMR NR\n- N\_= RptViol\n- P\_= ResPend\n- R\_= Resolvd\n- M\_= Manual\n- V\_= NonRNCV\n- U = N/A\n- W = N/A\nMay contain multiple comma-separated values."
     in: query
     name: p_pccs
     required: false

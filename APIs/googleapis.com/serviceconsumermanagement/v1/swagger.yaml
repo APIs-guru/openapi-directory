@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides management methods for configuring service producer resources on Google Cloud.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Service Consumer Management
   version: v1
   x-apiClientRegistration:
@@ -33,20 +29,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -151,11 +138,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -180,11 +163,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -249,11 +228,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -301,8 +276,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
   '/v1/{parent}/tenancyUnits':
@@ -349,8 +322,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
     parameters:
@@ -394,8 +365,6 @@ paths:
             $ref: '#/definitions/TenancyUnit'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
@@ -441,8 +410,6 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
@@ -505,8 +472,6 @@ paths:
             $ref: '#/definitions/SearchTenancyUnitsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
@@ -941,6 +906,25 @@ definitions:
 
       Available context types are defined in package
       `google.rpc.context`.
+
+      This also provides mechanism to whitelist any protobuf message extension that
+      can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
+      “x-goog-ext-<extension_id>-jspb” format. For example, list any service
+      specific protobuf types that can appear in grpc metadata as follows in your
+      yaml file:
+
+      Example:
+
+          context:
+            rules:
+             - selector: "google.example.library.v1.LibraryService.CreateBook"
+               allowed_request_extensions:
+               - google.foo.v1.NewExtension
+               allowed_response_extensions:
+               - google.foo.v1.NewExtension
+
+      You can also specify extension ID instead of fully qualified extension name
+      here.
     properties:
       rules:
         description: |-
@@ -956,6 +940,20 @@ definitions:
       A context rule provides information about the context for an individual API
       element.
     properties:
+      allowedRequestExtensions:
+        description: |-
+          A list of full type names or extension IDs of extensions allowed in grpc
+          side channel from client to backend.
+        items:
+          type: string
+        type: array
+      allowedResponseExtensions:
+        description: |-
+          A list of full type names or extension IDs of extensions allowed in grpc
+          side channel from backend to client.
+        items:
+          type: string
+        type: array
       provided:
         description: A list of full type names of provided contexts.
         items:
@@ -3135,10 +3133,12 @@ definitions:
     properties:
       policyBindings:
         description: |-
-          Additional policy bindings to be applied on the tenant
-          project.
-          At least one owner must be set in the bindings. Among the list of members
-          as owners, at least one of them must be either `user` or `group` based.
+          Policy bindings to be applied to the tenant project, in addition to the
+          'roles/owner' role granted to the Service Consumer Management service
+          account.
+          At least one binding must have the role `roles/owner`. Among the list of
+          members for `roles/owner`, at least one of them must be either `user` or
+          `group` type.
         items:
           $ref: '#/definitions/PolicyBinding'
         type: array

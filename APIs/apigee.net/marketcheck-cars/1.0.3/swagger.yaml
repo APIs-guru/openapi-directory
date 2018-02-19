@@ -1115,6 +1115,18 @@ paths:
           name: dom_180_range
           required: false
           type: string
+        - description: Tokenizer search on options for multiple options use | as seperator
+          format: string
+          in: query
+          name: options
+          required: false
+          type: string
+        - description: Tokenizer search on features for multiple options use | as seperator
+          format: string
+          in: query
+          name: features
+          required: false
+          type: string
       responses:
         '200':
           description: List of all cars listings matching the search & filter criteria

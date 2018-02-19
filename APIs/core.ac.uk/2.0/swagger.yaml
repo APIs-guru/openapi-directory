@@ -7,21 +7,21 @@ info:
   contact:
     x-twitter: oacore
   description: |-
-    <p style="text-align: justify;">You can use the CORE API to access the
+    <p style="text-align: justify;">You can use the CORE API to access the 
         resources harvested and enriched by CORE. If you encounter any problems with the API, please <a href="/contact">report them to us</a>.</p>
 
     <h2>Overview</h2>
-    <p style="text-align: justify;">The API is organised by resource type. The resources are <b>articles</b>,
-        <b>journals</b> and <b>repositories</b> and are represented using JSON data format. Furthermore,
+    <p style="text-align: justify;">The API is organised by resource type. The resources are <b>articles</b>, 
+        <b>journals</b> and <b>repositories</b> and are represented using JSON data format. Furthermore, 
         each resource has a list of methods. The API also provides two global methods for accessing all resources at once.</p>
 
     <h2>Response format</h2>
     <p style="text-align: justify;">Response for each query contains two fields: <b>status</b> and <b>data</b>.
         In case of an error status, the data field is empty. The data field contains a single object
-        in case the request is for a specific identifier (e.g. CORE ID, CORE repository ID, etc.), or
+        in case the request is for a specific identifier (e.g. CORE ID, CORE repository ID, etc.), or  
         contains a list of objects, for example for search queries. In case of batch requests, the response
         is an array of objects, each of which contains its own <b>status</b> and <b>data</b> fields.
-        For search queries the response contains an additional field <b>totalHits</b>, which is the
+        For search queries the response contains an additional field <b>totalHits</b>, which is the 
         total number of items which match the search criteria.</p>
 
     <h2>Search query syntax</h2>
@@ -29,9 +29,9 @@ info:
     <p style="text-align: justify">Complex search queries can be used in all of the API search methods.
         The query can be a simple string or it can be built using terms and operators described in Elasticsearch
         <a href="http://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-query-string-query.html#query-string-syntax">documentation</a>.
-        The usable field names are <strong>title</strong>, <strong>description</strong>, <strong>fullText</strong>,
-        <strong>authorsString</strong>, <strong>publisher</strong>, <strong>repositories.id</strong>, <strong>repositories.name</strong>,
-        <strong>doi</strong>, <strong>oai</strong>, <strong>identifiers</strong> (which is a list of article identifiers including OAI, URL, etc.), <strong>language.name</strong>
+        The usable field names are <strong>title</strong>, <strong>description</strong>, <strong>fullText</strong>, 
+        <strong>authorsString</strong>, <strong>publisher</strong>, <strong>repositories.id</strong>, <strong>repositories.name</strong>, 
+        <strong>doi</strong>, <strong>oai</strong>, <strong>identifiers</strong> (which is a list of article identifiers including OAI, URL, etc.), <strong>language.name</strong> 
         and <strong>year</strong>. Some example queries:
     </p>
 
@@ -42,14 +42,24 @@ info:
         <li><p>doi:"10.1186/1471-2458-6-309"</p></li>
     </ul>
 
+    <h3>Retrieving the latest Articles</h3>
+    <p style="text-align: justify">
+        You can retrieve the harvested items since specific dates using the following queries:
+    </p>
+
+    <ul style="margin-left: 30px;">
+        <li><p>repositoryDocument.metadataUpdated:>2017-02-10</p></li>
+        <li><p>repositoryDocument.metadataUpdated:>2017-03-01 AND repositoryDocument.metadataUpdated:<2017-03-31</p></li>    
+    </ul>
+
     <h2>Sort order</h2>
 
-    <p style="text-align: justify;">For search queries, the results are ordered by relevance score. For batch
+    <p style="text-align: justify;">For search queries, the results are ordered by relevance score. For batch 
         requests, the results are retrieved in the order of the requests.</p>
 
     <h2>Parameters</h2>
-    <p style="text-align: justify;">The API methods allow different parameters to be passed. Additionally, there is an API key parameter which is common to all API methods. For all API methods
-        the API key can be provided either as a query parameter or in the request header. If the API key
+    <p style="text-align: justify;">The API methods allow different parameters to be passed. Additionally, there is an API key parameter which is common to all API methods. For all API methods 
+        the API key can be provided either as a query parameter or in the request header. If the API key 
         is not provided, the API will return HTTP 401 error. You can register for an API key <a href="/services#api">here</a>.</p>
 
     <h2>API methods</h2>
@@ -62,7 +72,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: swagger
       url: 'http://core.ac.uk/api-v2/doc'
       version: '1.2'
@@ -675,6 +685,12 @@ paths:
             items:
               type: integer
             type: array
+        - default: false
+          description: Whether to retrieve statistics about the repository. The default value is false
+          in: query
+          name: stats
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -705,6 +721,12 @@ paths:
           name: repositoryId
           required: true
           type: integer
+        - default: false
+          description: Whether to retrieve statistics about the repository. The default value is false
+          in: query
+          name: stats
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -733,6 +755,12 @@ paths:
             items:
               $ref: '#/definitions/SearchRequest'
             type: array
+        - default: false
+          description: Whether to retrieve statistics about the repository. The default value is false
+          in: query
+          name: stats
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -778,6 +806,12 @@ paths:
           name: pageSize
           required: false
           type: integer
+        - default: false
+          description: Whether to retrieve statistics about the repository. The default value is false
+          in: query
+          name: stats
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -895,6 +929,9 @@ definitions:
         type: string
       doi:
         description: The DOI of the article
+        type: string
+      downloadUrl:
+        description: 'The download PDF URL which is displayed on our /display/[ArticleID] page'
         type: string
       fulltext:
         description: Article full text
@@ -1174,8 +1211,17 @@ definitions:
       repositoryLocation:
         $ref: '#/definitions/RepositoryLocation'
         description: Location of the repository
+      repositoryStats:
+        $ref: '#/definitions/RepositoryStats'
+        description: Statistics about the repository
       uri:
         description: Repository URI
+        type: string
+      urlHomepage:
+        description: Repository homepage
+        type: string
+      urlOaipmh:
+        description: Repository OAI-PMH endpoint
         type: string
   RepositoryDocument: {}
   RepositoryLocation:
@@ -1236,6 +1282,23 @@ definitions:
     required:
       - status
       - totalHits
+  RepositoryStats:
+    properties:
+      countFulltext:
+        description: Repository fulltext count
+        type: integer
+      countMetadata:
+        description: Repository metadata count
+        type: integer
+      dateLastProcessed:
+        description: Last repository processing date
+        type: string
+      historyFulltext:
+        description: Fulltext count over time
+        type: object
+      historyMetadata:
+        description: Metadata count over time
+        type: object
   Resource:
     properties:
       id:

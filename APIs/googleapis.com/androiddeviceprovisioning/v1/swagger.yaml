@@ -7,11 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Automates reseller integration into zero-touch enrollment by assigning devices to customers and creating device reports.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+  description: 'Automates Android zero-touch enrollment for device resellers, customers, and EMMs.'
   title: Android Device Provisioning Partner
   version: v1
   x-apiClientRegistration:
@@ -118,7 +114,7 @@ paths:
       parameters:
         - description: |-
             The maximum number of customers to show in a page of results.
-            A number between 1 and 1000 (inclusive).
+            A number between 1 and 100 (inclusive).
           in: query
           name: pageSize
           type: integer
@@ -500,10 +496,12 @@ paths:
       tags:
         - customers
     get:
-      description: Get a device.
-      operationId: androiddeviceprovisioning.partners.devices.get
+      description: Gets the details of a configuration.
+      operationId: androiddeviceprovisioning.customers.configurations.get
       parameters:
-        - description: 'Resource name in `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.'
+        - description: |-
+            Required. The configuration to get. An API resource name in the format
+            `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`.
           in: path
           name: name
           required: true
@@ -513,9 +511,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Configuration'
       tags:
-        - partners
+        - customers
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

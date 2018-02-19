@@ -27,7 +27,7 @@ info:
 
     You can directly connect to our API using your **client ID** by sending it as a GET query parameter. This option is simple (no need for oAuth) but it should be used only in case the Client ID is not exposed publicly.
 
-    GET  https://api.ritekit.com/v1/stats/basic/php?client_id=292c6912e7710c838347ae178b4a
+    GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php?client_id=292c6912e7710c838347ae178b4a
 
     #### B) Using Access token (oAuth 2.0)
 
@@ -37,7 +37,7 @@ info:
 
     Or
 
-    GET  https://api.ritekit.com/v1/stats/basic/php?access_token=292c6912e7710c838347ae178b4a
+    GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php?access_token=292c6912e7710c838347ae178b4a
 
     ## oAuth 2.0
 

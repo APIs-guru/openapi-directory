@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: An API for creating and editing Google Slides presentations.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Slides
   version: v1
   x-apiClientRegistration:
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
@@ -45,20 +41,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/presentations.readonly': View your Google Slides presentations
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
-      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
-      'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
-      'https://www.googleapis.com/auth/presentations': View and manage your Google Slides presentations
-      'https://www.googleapis.com/auth/presentations.readonly': View your Google Slides presentations
-      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
-      'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -173,15 +155,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/presentations'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations'
       tags:
         - presentations
@@ -204,23 +180,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/presentations'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/presentations'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/presentations.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations.readonly'
       tags:
         - presentations
@@ -261,23 +227,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/presentations'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/presentations'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/presentations.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations.readonly'
       tags:
         - presentations
@@ -301,7 +257,8 @@ paths:
         Generates a thumbnail of the latest version of the specified page in the
         presentation and returns a URL to the thumbnail image.
 
-        This request counts as an expensive read request for quota purposes.
+        This request counts as an [expensive read request](/slides/limits) for
+        quota purposes.
       operationId: slides.presentations.pages.getThumbnail
       parameters:
         - description: The object ID of the page whose thumbnail to retrieve.
@@ -342,23 +299,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/presentations'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/presentations'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/presentations.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations.readonly'
       tags:
         - presentations
@@ -433,27 +380,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/presentations'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - presentations
@@ -547,6 +482,9 @@ definitions:
         items:
           $ref: '#/definitions/Response'
         type: array
+      writeControl:
+        $ref: '#/definitions/WriteControl'
+        description: The updated write control after applying the request.
     type: object
   Bullet:
     description: Describes the bullet of a paragraph.
@@ -1367,6 +1305,11 @@ definitions:
       imageProperties:
         $ref: '#/definitions/ImageProperties'
         description: The properties of the image.
+      sourceUrl:
+        description: |-
+          The source URL is the URL used to insert the image. The source URL can be
+          empty.
+        type: string
     type: object
   ImageProperties:
     description: The properties of the Image.

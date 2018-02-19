@@ -11,7 +11,7 @@ info:
   description: 'The Stripe REST API. Please see https://stripe.com/docs/api for more details.'
   termsOfService: 'https://stripe.com/us/terms/'
   title: Stripe
-  version: '2018-01-23'
+  version: '2018-02-06'
   x-apisguru-categories:
     - financial
   x-logo:
@@ -145,7 +145,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      description: '<p>Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. To update your own account, use the <a href="%= Opus::DaemonCommon.stripe_link(''dashboard.stripe.com'', ''/account'') %">Dashboard</a>.</p><p>Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>'
+      description: '<p>Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can only be changed for Custom accounts. Parameters marked <b>Custom and Express</b> are supported by both. To update your own account, use the <a href="%= Opus::DaemonCommon.stripe_link(''dashboard.stripe.com'', ''/account'') %">Dashboard</a>.</p><p>Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>'
       parameters:
         - description: Body parameters for the request.
           in: body
@@ -158,6 +158,7 @@ paths:
               account_token:
                 type: string
               business_logo:
+                description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px)'
                 type: string
               business_name:
                 description: The publicly sharable name for this account.
@@ -2401,6 +2402,7 @@ paths:
               account_token:
                 type: string
               business_logo:
+                description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px)'
                 type: string
               business_name:
                 description: The publicly sharable name for this account.
@@ -4233,7 +4235,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      description: '<p>Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. To update your own account, use the <a href="%= Opus::DaemonCommon.stripe_link(''dashboard.stripe.com'', ''/account'') %">Dashboard</a>.</p><p>Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>'
+      description: '<p>Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can only be changed for Custom accounts. Parameters marked <b>Custom and Express</b> are supported by both. To update your own account, use the <a href="%= Opus::DaemonCommon.stripe_link(''dashboard.stripe.com'', ''/account'') %">Dashboard</a>.</p><p>Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>'
       parameters:
         - in: path
           name: account
@@ -4248,6 +4250,7 @@ paths:
               account_token:
                 type: string
               business_logo:
+                description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px)'
                 type: string
               business_name:
                 description: The publicly sharable name for this account.
@@ -7043,7 +7046,7 @@ paths:
           name: expand
           required: false
           type: array
-        - description: 'The ID of the desired balance transaction (as found on any API object that affects the balance, e.g., a charge or transfer).'
+        - description: 'The ID of the desired balance transaction, as found on any API object that affects the balance (e.g., a charge or transfer).'
           in: path
           name: id
           required: true
@@ -7061,7 +7064,7 @@ paths:
     get:
       deprecated: true
       description: '<p>Returns a list of your receivers. Receivers are returned sorted by creation date, with the most recently created receivers appearing first.</p>'
-      operationId: AllReceivers
+      operationId: BitcoinAllReceivers
       parameters:
         - description: Specifies which fields in the response should be expanded.
           in: query
@@ -7137,7 +7140,7 @@ paths:
     get:
       deprecated: true
       description: <p>Retrieves the Bitcoin receiver with the given ID.</p>
-      operationId: RetrieveReceiver
+      operationId: BitcoinRetrieveReceiver
       parameters:
         - description: Specifies which fields in the response should be expanded.
           in: query
@@ -7400,6 +7403,8 @@ paths:
                 type: integer
               capture:
                 type: boolean
+              card_program:
+                type: string
               currency:
                 type: string
               customer:
@@ -7544,17 +7549,6 @@ paths:
                 type: object
               statement_descriptor:
                 type: string
-              three_d_secure:
-                properties:
-                  apple_pay:
-                    type: boolean
-                  cryptogram:
-                    type: string
-                required:
-                  - apple_pay
-                  - cryptogram
-                title: three_d_secure_params
-                type: object
               transfer_group:
                 type: string
               trust:
@@ -7771,7 +7765,7 @@ paths:
           schema:
             properties:
               evidence:
-                description: Evidence to upload to respond to a dispute. Updating any field in the hash will submit all fields in the hash for review.
+                description: 'Evidence to upload to respond to a dispute. Updating any field in the hash will submit all fields in the hash for review. The combined character count of all fields is limited to 150,000.'
                 properties:
                   access_activity_log:
                     type: string
@@ -9651,6 +9645,8 @@ paths:
                   - charge_automatically
                   - send_invoice
                 type: string
+              billing_cycle_anchor:
+                description: 'A future timestamp to anchor the subscription''s [billing cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.'
               coupon:
                 description: The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
                 type: string
@@ -9678,6 +9674,9 @@ paths:
               metadata:
                 description: A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.
                 type: object
+              prorate:
+                description: 'Boolean (default `true`). Use with a `billing_cycle_anchor` timestamp to determine whether the customer will be invoiced a prorated amount until the anchor date. If `false`, the anchor period will be free (similar to a trial).'
+                type: boolean
               source:
                 description: 'The source can either be a [Token](/docs/api#tokens) or a [Source](/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements), or a dictionary containing a user''s credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free. Passing `source` will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source, instead use the [card creation API](https://stripe.com/docs/api#create_card) to add the card and then the [customer update API](https://stripe.com/docs/api#update_customer) to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card.'
               tax_percent:
@@ -9787,6 +9786,8 @@ paths:
                   - charge_automatically
                   - send_invoice
                 type: string
+              billing_cycle_anchor:
+                description: 'String, `unchanged` (default) or `now`. This allows you to reset the [billing cycle](/docs/subscriptions/billing-cycle#prorations) of a subscription.'
               coupon:
                 description: The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
                 type: string
@@ -9821,7 +9822,7 @@ paths:
                 description: A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.
                 type: object
               prorate:
-                description: Flag telling us whether to prorate switching plans during a billing cycle.
+                description: 'Boolean (default `true`) telling us whether to [credit for unused time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes, for example when switching plans, when resetting `billing_cycle_anchor=now`, or when starting a trial.'
                 type: boolean
               proration_date:
                 description: 'If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.'
@@ -10005,7 +10006,7 @@ paths:
           schema:
             properties:
               evidence:
-                description: Evidence to upload to respond to a dispute. Updating any field in the hash will submit all fields in the hash for review.
+                description: 'Evidence to upload to respond to a dispute. Updating any field in the hash will submit all fields in the hash for review. The combined character count of all fields is limited to 150,000.'
                 properties:
                   access_activity_log:
                     type: string
@@ -11575,6 +11576,8 @@ paths:
                 type: integer
               capture:
                 type: boolean
+              card_program:
+                type: string
               currency:
                 type: string
               customer:
@@ -11720,17 +11723,6 @@ paths:
                 type: object
               statement_descriptor:
                 type: string
-              three_d_secure:
-                properties:
-                  apple_pay:
-                    type: boolean
-                  cryptogram:
-                    type: string
-                required:
-                  - apple_pay
-                  - cryptogram
-                title: three_d_secure_params
-                type: object
               transfer_group:
                 type: string
               trust:
@@ -12035,6 +12027,11 @@ paths:
           name: limit
           required: false
           type: integer
+        - description: Only return plans for the given product.
+          in: query
+          name: product
+          required: false
+          type: string
         - description: 'A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.'
           in: query
           name: starting_after
@@ -12118,9 +12115,7 @@ paths:
               nickname:
                 description: 'A brief description of the plan, hidden from customers.'
                 type: string
-              product:
-                description: The product whose pricing the created plan will represent.
-                type: string
+              product: {}
               statement_descriptor:
                 description: 'Displayed on customer statements when their card is charged. See the [Creating charges](https://stripe.com/docs/charges#dynamic-statement-descriptor) page for an example.'
                 type: string
@@ -12194,7 +12189,7 @@ paths:
       description: '<p>Updates the specified plan by setting the values of the parameters passed. Any parameters not provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or billing cycle.</p>'
       operationId: UpdatePlan
       parameters:
-        - description: The identifier of the plan to be updated.
+        - description: The identifier of the plan to be updated. May only be set if type=`service`.
           in: path
           name: plan
           required: true
@@ -12211,10 +12206,10 @@ paths:
                   type: string
                 type: array
               metadata:
-                description: A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format.
+                description: A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. Applicable to both `service` and `good` types.
                 type: object
               name:
-                description: The plan name. Customers may see this value on Stripe-generated invoices and receipts.
+                description: The plan name. Customers may see this value on Stripe-generated invoices and receipts. Applicable to both `service` and `good` types.
                 type: string
               nickname:
                 description: 'A brief description of the plan, hidden from customers.'
@@ -12223,7 +12218,7 @@ paths:
                 description: 'The product the plan belongs to. Note that after updating, statement descriptors and line items of the plan in active subscriptions will be affected.'
                 type: string
               statement_descriptor:
-                description: 'Displayed on customer statements when their card is charged. See the [Creating charges](https://stripe.com/docs/charges#dynamic-statement-descriptor) page for an example.'
+                description: 'An arbitrary string to be displayed on your customer''s credit card statement. This may be up to 22 characters. The statement description may not include <>"'' characters, and will appear on your customer''s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all. May only be set if type=`service`.'
                 type: string
       responses:
         '200':
@@ -12250,6 +12245,11 @@ paths:
           name: active
           required: false
           type: boolean
+        - description: Only return products that were created during the given date interval.
+          in: query
+          name: created
+          required: false
+          type: string
         - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
           in: query
           name: ending_before
@@ -12274,6 +12274,11 @@ paths:
         - description: 'A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.'
           in: query
           name: starting_after
+          required: false
+          type: string
+        - description: Only return products of this type.
+          in: query
+          name: type
           required: false
           type: string
         - description: Only return products with the given url.
@@ -12326,23 +12331,23 @@ paths:
           schema:
             properties:
               active:
-                description: Whether the product is currently available for purchase. Defaults to `true`.
+                description: Whether the product is currently available for purchase. Defaults to `true`. May only be set if type=`good`.
                 type: boolean
               attributes:
-                description: 'A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g., `["color", "size"]`).'
+                description: A list of up to 5 alphanumeric attributes. Applicable to both `service` and `good` types.
                 items:
                   type: string
                 type: array
               caption:
-                description: 'A short one-line description of the product, meant to be displayable to the customer.'
+                description: 'A short one-line description of the product, meant to be displayable to the customer. May only be set if type=`good`.'
                 type: string
               deactivate_on:
-                description: An array of Connect application names or identifiers that should not be able to order the SKUs for this product.
+                description: An array of Connect application names or identifiers that should not be able to order the SKUs for this product. May only be set if type=`good`.
                 items:
                   type: string
                 type: array
               description:
-                description: 'The product''s description, meant to be displayable to the customer.'
+                description: 'The product''s description, meant to be displayable to the customer. May only be set if type=`good`.'
                 type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
@@ -12350,21 +12355,21 @@ paths:
                   type: string
                 type: array
               id:
-                description: 'The identifier for the product. Must be unique. If not provided, an identifier will be randomly generated.'
+                description: 'An identifier will be randomly generated by Stripe. You can optionally override this ID, but the ID must be unique across all products in your Stripe account. Applicable to both `service` and `good` types.'
                 type: string
               images:
-                description: 'A list of up to 8 URLs of images for this product, meant to be displayable to the customer.'
+                description: 'A list of up to 8 URLs of images for this product, meant to be displayable to the customer. May only be set if type=`good`.'
                 items:
                   type: string
                 type: array
               metadata:
-                description: A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.
+                description: A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format. Applicable to both `service` and `good` types.
                 type: object
               name:
-                description: 'The product''s name, meant to be displayable to the customer.'
+                description: 'The product''s name, meant to be displayable to the customer. Applicable to both `service` and `good` types.'
                 type: string
               package_dimensions:
-                description: The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own `package_dimensions`.
+                description: The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own `package_dimensions`. May only be set if type=`good`.
                 properties:
                   height:
                     type: number
@@ -12382,13 +12387,23 @@ paths:
                 title: package_dimensions_specs
                 type: object
               shippable:
-                description: 'Whether this product is shipped (i.e., physical goods). Defaults to `true`.'
+                description: 'Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set if type=`good`.'
                 type: boolean
+              statement_descriptor:
+                description: 'An arbitrary string to be displayed on your customer''s credit card statement. This may be up to 22 characters. The statement description may not include <>"'' characters, and will appear on your customer''s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all. May only be set if type=`service`.'
+                type: string
+              type:
+                description: 'The type of the product. The product is either of type `service`, which is eligible for use with Subscriptions and Plans or `good`, which is eligible for use with Orders and SKUs.'
+                enum:
+                  - good
+                  - service
+                type: string
               url:
-                description: A URL of a publicly-accessible webpage for this product.
+                description: A URL of a publicly-accessible webpage for this product. May only be set if type=`good`.
                 type: string
             required:
               - name
+              - type
       responses:
         '200':
           description: Successful response.
@@ -12513,6 +12528,9 @@ paths:
               shippable:
                 description: 'Whether this product is shipped (i.e., physical goods). Defaults to `true`.'
                 type: boolean
+              statement_descriptor:
+                description: 'An arbitrary string to be displayed on your customer''s credit card statement. This may be up to 22 characters. The statement description may not include <>"'' characters, and will appear on your customer''s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all. May only be set if type=`service`.'
+                type: string
               url:
                 description: A URL of a publicly-accessible webpage for this product.
                 type: string
@@ -12950,7 +12968,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: The ID of the product whose SKUs will be retrieved.
+        - description: The ID of the product whose SKUs will be retrieved. Must be a product with type `good`.
           in: query
           name: product
           required: false
@@ -13069,7 +13087,7 @@ paths:
                 description: 'The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).'
                 type: integer
               product:
-                description: The ID of the product this SKU is associated with.
+                description: The ID of the product this SKU is associated with. Must be a product with type `good`.
                 type: string
             required:
               - currency
@@ -13215,7 +13233,7 @@ paths:
                 description: 'The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).'
                 type: integer
               product:
-                description: The ID of the product that this SKU should belong to. The product must exist and have the same set of attribute names as the SKU's current product.
+                description: 'The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU''s current product, and be of type `good`.'
                 type: string
       responses:
         '200':
@@ -13966,6 +13984,8 @@ paths:
                   - charge_automatically
                   - send_invoice
                 type: string
+              billing_cycle_anchor:
+                description: 'A future timestamp to anchor the subscription''s [billing cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.'
               coupon:
                 description: The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
                 type: string
@@ -13996,6 +14016,9 @@ paths:
               metadata:
                 description: A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.
                 type: object
+              prorate:
+                description: 'Boolean (default `true`). Use with a `billing_cycle_anchor` timestamp to determine whether the customer will be invoiced a prorated amount until the anchor date. If `false`, the anchor period will be free (similar to a trial).'
+                type: boolean
               source:
                 description: 'The source can either be a [Token](/docs/api#tokens) or a [Source](/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements), or a dictionary containing a user''s credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free. Passing `source` will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source, instead use the [card creation API](https://stripe.com/docs/api#create_card) to add the card and then the [customer update API](https://stripe.com/docs/api#update_customer) to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card.'
               tax_percent:
@@ -14095,6 +14118,8 @@ paths:
                   - charge_automatically
                   - send_invoice
                 type: string
+              billing_cycle_anchor:
+                description: 'String, `unchanged` (default) or `now`. This allows you to reset the [billing cycle](/docs/subscriptions/billing-cycle#prorations) of a subscription.'
               coupon:
                 description: The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
                 type: string
@@ -14129,7 +14154,7 @@ paths:
                 description: A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.
                 type: object
               prorate:
-                description: Flag telling us whether to prorate switching plans during a billing cycle.
+                description: 'Boolean (default `true`) telling us whether to [credit for unused time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes, for example when switching plans, when resetting `billing_cycle_anchor=now`, or when starting a trial.'
                 type: boolean
               proration_date:
                 description: 'If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.'
@@ -15929,6 +15954,179 @@ paths:
           description: Error response.
           schema:
             $ref: '#/definitions/error'
+  /v1/topups:
+    get:
+      description: <p>Returns a list of Top-ups.</p>
+      operationId: TopupAll
+      parameters:
+        - description: Specifies which fields in the response should be expanded.
+          in: query
+          items: {}
+          name: expand
+          required: false
+          type: array
+        - in: query
+          name: amount
+          required: false
+          type: string
+        - in: query
+          name: created
+          required: false
+          type: string
+        - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
+          in: query
+          name: ending_before
+          required: false
+          type: string
+        - description: 'A limit on the number of objects to be returned. Limit can range between 1 and 100 items, and the default is 10 items.'
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: 'A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.'
+          in: query
+          name: starting_after
+          required: false
+          type: string
+        - in: query
+          name: status
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/topup'
+                type: array
+              has_more:
+                description: True if this list has another page of items after this one that can be fetched.
+                type: boolean
+              object:
+                description: String representing the object's type. Objects of the same type share the same value. Always has the value "list".
+                enum:
+                  - list
+                type: string
+              url:
+                description: The URL where this list can be accessed.
+                enum:
+                  - /v1/topups
+                type: string
+            required:
+              - data
+              - has_more
+              - object
+              - url
+            title: TopupList
+            type: object
+            x-expandableFields:
+              - data
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/error'
+    post:
+      description: <p>Top up the balance of an account</p>
+      operationId: TopupCreate
+      parameters:
+        - description: Body parameters for the request.
+          in: body
+          name: payload
+          required: true
+          schema:
+            properties:
+              amount:
+                type: integer
+              bank_account:
+                type: string
+              currency:
+                type: string
+              description:
+                type: string
+              expand:
+                description: Specifies which fields in the response should be expanded.
+                items:
+                  type: string
+                type: array
+              metadata:
+                type: object
+              source:
+                type: string
+              statement_descriptor:
+                type: string
+            required:
+              - amount
+              - currency
+              - description
+              - statement_descriptor
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/topup'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/error'
+  '/v1/topups/{topup}':
+    get:
+      description: '<p>Retrieves the details of a Top-up that has previously been created. Supply the unique Top-up ID that was returned from your previous request, and Stripe will return the corresponding Top-up information.</p>'
+      operationId: TopupRetrieve
+      parameters:
+        - description: Specifies which fields in the response should be expanded.
+          in: query
+          items: {}
+          name: expand
+          required: false
+          type: array
+        - description: The ID of the topup to retrieve.
+          in: path
+          name: topup
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/topup'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/error'
+    post:
+      description: <p>Updates the metadata of a Top-up. Other Top-up details are not editable by design.</p>
+      operationId: TopupUpdate
+      parameters:
+        - description: The ID of the topup to retrieve.
+          in: path
+          name: topup
+          required: true
+          type: string
+        - description: Body parameters for the request.
+          in: body
+          name: payload
+          required: false
+          schema:
+            properties:
+              expand:
+                description: Specifies which fields in the response should be expanded.
+                items:
+                  type: string
+                type: array
+              metadata:
+                description: A set of key/value pairs that you can attach to a topup object. It can be useful for storing additional information about the topup in a structured format.
+                type: object
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/topup'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/error'
   /v1/transfers:
     get:
       description: '<p>Returns a list of existing transfers sent to connected accounts. The transfers are returned in sorted order, with the most recently created transfers appearing first.</p>'
@@ -16278,6 +16476,12 @@ paths:
 definitions:
   account:
     properties:
+      business_logo:
+        description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px)'
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/file_upload'
       business_name:
         description: The publicly visible name of the business
         type: string
@@ -16393,6 +16597,7 @@ definitions:
     title: Account
     type: object
     x-expandableFields:
+      - business_logo
       - decline_charge_on
       - external_accounts
       - legal_entity
@@ -16464,6 +16669,12 @@ definitions:
     x-expandableFields: []
   account_with_keys:
     properties:
+      business_logo:
+        description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px)'
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/file_upload'
       business_name:
         description: The publicly visible name of the business
         type: string
@@ -16582,6 +16793,7 @@ definitions:
     title: AccountWithKeys
     type: object
     x-expandableFields:
+      - business_logo
       - decline_charge_on
       - external_accounts
       - legal_entity
@@ -16827,7 +17039,7 @@ definitions:
   balance:
     properties:
       available:
-        description: 'Funds that are available to be paid out automatically by Stripe or explicitly via the [transfers API](#transfers). The available balance for each currency and payment type can be found in the `source_types` property.'
+        description: 'Funds that are available to be paid out, whether automatically by Stripe or explicitly via the [transfers API](#transfers). The available balance for each currency and payment type can be found in the `source_types` property.'
         items: {}
         type: array
       connect_reserved:
@@ -16843,7 +17055,7 @@ definitions:
           - balance
         type: string
       pending:
-        description: 'Funds that are not available in the balance yet, due to the 7-day rolling pay cycle. The pending balance for each currency and payment type can be found in the `source_types` property.'
+        description: 'Funds that are not yet available in the balance, due to the 7-day rolling pay cycle. The pending balance for each currency, and for each payment type, can be found in the `source_types` property.'
         items: {}
         type: array
     required:
@@ -16894,7 +17106,7 @@ definitions:
           - balance_transaction
         type: string
       source:
-        description: The Stripe object this transaction is related to.
+        description: The Stripe object to which this transaction is related.
         type: string
         x-expansionResources:
           oneOf:
@@ -17673,6 +17885,9 @@ definitions:
       id:
         description: Unique identifier for the object.
         type: string
+      invoice_prefix:
+        description: The prefix for the customer used to generate unique invoice numbers.
+        type: string
       livemode:
         description: Flag indicating whether the object exists in live mode or test mode.
         type: boolean
@@ -18432,13 +18647,13 @@ definitions:
           - file_upload
         type: string
       purpose:
-        description: 'The purpose of the uploaded file. Possible values are `customer_signature`, `dispute_evidence`, `identity_document`, or `tax_document_user_upload`.'
+        description: 'The purpose of the uploaded file. Possible values are `business_logo`, `customer_signature`, `dispute_evidence`, `identity_document`, `pci_document`, or `tax_document_user_upload`.'
         type: string
       size:
         description: The size in bytes of the file upload object.
         type: integer
       type:
-        description: 'The type of the file returned. Returns one of the following: `jpg`, `png`, `pdf`, `csv`, `xls`, `xlsx`, or `docx`.'
+        description: 'The type of the file returned. Returns one of the following: `jpg`, `png`, ``, `pdf`, `csv`, `xls`, `xlsx`, or `docx`.'
         type: string
       url:
         description: A read-only URL where the uploaded file can be accessed. Will be nil if the purpose of the uploaded file is `identity_document`. Also nil if retrieved with the publishable API key.
@@ -18511,7 +18726,7 @@ definitions:
       discount:
         $ref: '#/definitions/discount'
       due_date:
-        description: The date on which payment for this invoice is due. This value will be `null` for invoices where `billing=charge_automatically`.
+        description: The date on which payment for this invoice is due. This value will be `null` for invoices where `billing=charå†ge_automatically`.
         type: integer
       ending_balance:
         description: 'Ending customer balance after the invoice is frozen. Invoices are frozen approximately an hour after successful webhook delivery or when payment collection is attempted for the invoice. If the invoice has not been frozen yet, this will be null.'
@@ -18559,7 +18774,7 @@ definitions:
         description: The time at which payment will next be attempted. This value will be `null` for invoices where `billing=send_invoice`.
         type: integer
       number:
-        description: 'A unique, identifying string that appears on emails sent to the customer for this invoice.'
+        description: 'A unique, identifying string that appears on emails sent to the customer for this invoice. This starts with the customer''s unique invoice_prefix if it is specified.'
         type: string
       object:
         description: String representing the object's type. Objects of the same type share the same value.
@@ -19440,17 +19655,20 @@ definitions:
       metadata:
         description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format.
         type: object
-      name:
-        description: Display name of the plan.
+      nickname:
+        description: 'A brief description of the plan, hidden from customers.'
         type: string
       object:
         description: String representing the object's type. Objects of the same type share the same value.
         enum:
           - plan
         type: string
-      statement_descriptor:
-        description: Displayed on customer statements when their card is charged.
+      product:
+        description: The product whose pricing this plan determines.
         type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/product'
     required:
       - created
       - currency
@@ -19459,11 +19677,11 @@ definitions:
       - interval_count
       - livemode
       - metadata
-      - name
       - object
     title: Plan
     type: object
-    x-expandableFields: []
+    x-expandableFields:
+      - product
     x-resourceId: plan
   platform_earning:
     properties:
@@ -19760,6 +19978,12 @@ definitions:
         type: object
         x-expandableFields:
           - data
+      statement_descriptor:
+        description: 'Extra information about a product which will appear on your customer''s credit card statement. In the case that multiple products are billed at once, the first statement descriptor will be used. Only available on products of type=`service`.'
+        type: string
+      type:
+        description: 'The type of the product. The product is either of type `good`, which is eligible for use with Orders and SKUs, or `service`, which is eligible for use with Subscriptions and Plans.'
+        type: string
       updated:
         type: integer
       url:
@@ -20146,6 +20370,13 @@ definitions:
       currency:
         description: 'Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready. Required for `single_use` sources.'
         type: string
+      eps:
+        properties:
+          reference:
+            type: string
+          statement_descriptor:
+            type: string
+        type: object
       flow:
         description: 'The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`.'
         type: string
@@ -20179,6 +20410,29 @@ definitions:
         type: boolean
       metadata:
         description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format.
+        type: object
+      multibanco:
+        properties:
+          entity:
+            type: string
+          reference:
+            type: string
+          refund_account_holder_address_city:
+            type: string
+          refund_account_holder_address_country:
+            type: string
+          refund_account_holder_address_line1:
+            type: string
+          refund_account_holder_address_line2:
+            type: string
+          refund_account_holder_address_postal_code:
+            type: string
+          refund_account_holder_address_state:
+            type: string
+          refund_account_holder_name:
+            type: string
+          refund_iban:
+            type: string
         type: object
       object:
         description: String representing the object's type. Objects of the same type share the same value.
@@ -20236,8 +20490,10 @@ definitions:
           - bancontact
           - bitcoin
           - card
+          - eps
           - giropay
           - ideal
+          - multibanco
           - p24
           - sofort
           - three_d_secure
@@ -20487,6 +20743,13 @@ definitions:
       currency:
         description: 'Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).'
         type: string
+      eps:
+        properties:
+          reference:
+            type: string
+          statement_descriptor:
+            type: string
+        type: object
       giropay:
         properties:
           bank_code:
@@ -20515,6 +20778,29 @@ definitions:
       livemode:
         description: Flag indicating whether the object exists in live mode or test mode.
         type: boolean
+      multibanco:
+        properties:
+          entity:
+            type: string
+          reference:
+            type: string
+          refund_account_holder_address_city:
+            type: string
+          refund_account_holder_address_country:
+            type: string
+          refund_account_holder_address_line1:
+            type: string
+          refund_account_holder_address_line2:
+            type: string
+          refund_account_holder_address_postal_code:
+            type: string
+          refund_account_holder_address_state:
+            type: string
+          refund_account_holder_name:
+            type: string
+          refund_iban:
+            type: string
+        type: object
       object:
         description: String representing the object's type. Objects of the same type share the same value.
         enum:
@@ -20562,8 +20848,10 @@ definitions:
           - bancontact
           - bitcoin
           - card
+          - eps
           - giropay
           - ideal
+          - multibanco
           - p24
           - sofort
           - three_d_secure
@@ -20602,6 +20890,9 @@ definitions:
       billing:
         description: 'Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.'
         type: string
+      billing_cycle_anchor:
+        description: 'Determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.'
+        type: integer
       cancel_at_period_end:
         description: 'If the subscription has been canceled with the `at_period_end` flag set to `true`, `cancel_at_period_end` on the subscription will be true. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.'
         type: boolean
@@ -20681,6 +20972,12 @@ definitions:
         type: integer
       status:
         description: 'Possible values are `trialing`, `active`, `past_due`, `canceled`, or `unpaid`. A subscription still in its trial period is `trialing` and moves to `active` when the trial period is over. If subscription `billing=charge_automatically` it becomes `past_due` when payment to renew it fails and `canceled` or `unpaid` (depending on your subscriptions settings) when Stripe has exhausted all payment retry attempts. If subscription `billing=send_invoice` it becomes `past_due` when its invoice is not paid by the due date, and `canceled` or `unpaid` if it is still not paid by an additional deadline after that. Note that when a subscription has a status of `unpaid`, no subsequent invoices will be attempted (invoices will be created, but then immediately automatically closed.) After receiving updated payment information from a customer, you may choose to reopen and pay their closed invoices.'
+        enum:
+          - active
+          - canceled
+          - past_due
+          - trialing
+          - unpaid
         type: string
       tax_percent:
         description: 'If provided, each invoice created by this subscription will apply the tax rate, increasing the amount billed to the customer.'
@@ -20815,7 +21112,7 @@ definitions:
           - token
         type: string
       type:
-        description: 'Type of the token: `card` or `bank_account`.'
+        description: 'Type of the token: `account`, `bank_account`, `card`, or `pii`.'
         type: string
       used:
         description: Whether this token has already been used (tokens can be used only once).
@@ -20969,11 +21266,25 @@ definitions:
       amount:
         description: 'Amount transferred, in %s.'
         type: integer
+      balance_transaction:
+        description: ID of the balance transaction that describes the impact of this topup on your account balance.
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/balance_transaction'
       created:
         description: Time at which the object was created. Measured in seconds since the Unix epoch.
         type: integer
       currency:
         description: 'Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).'
+        type: string
+      expected_availability_date:
+        type: integer
+      failure_code:
+        description: 'Error code explaining reason for topup failure if available (see [the errors section](/docs/api#errors) for a list of codes).'
+        type: string
+      failure_message:
+        description: Message to user further explaining reason for topup failure if available.
         type: string
       id:
         description: Unique identifier for the object.
@@ -20981,10 +21292,19 @@ definitions:
       livemode:
         description: Flag indicating whether the object exists in live mode or test mode.
         type: boolean
+      metadata:
+        description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format.
+        type: object
       object:
         description: String representing the object's type. Objects of the same type share the same value.
         enum:
           - topup
+        type: string
+      source:
+        $ref: '#/definitions/source'
+      statement_descriptor:
+        type: string
+      status:
         type: string
     required:
       - amount
@@ -20992,10 +21312,16 @@ definitions:
       - currency
       - id
       - livemode
+      - metadata
       - object
+      - source
+      - status
     title: Topup
     type: object
-    x-expandableFields: []
+    x-expandableFields:
+      - balance_transaction
+      - source
+    x-resourceId: topup
   transfer:
     properties:
       amount:
@@ -21457,7 +21783,7 @@ definitions:
       discount:
         $ref: '#/definitions/discount'
       due_date:
-        description: The date on which payment for this invoice is due. This value will be `null` for invoices where `billing=charge_automatically`.
+        description: The date on which payment for this invoice is due. This value will be `null` for invoices where `billing=charå†ge_automatically`.
         type: integer
       ending_balance:
         description: 'Ending customer balance after the invoice is frozen. Invoices are frozen approximately an hour after successful webhook delivery or when payment collection is attempted for the invoice. If the invoice has not been frozen yet, this will be null.'
@@ -21502,7 +21828,7 @@ definitions:
         description: The time at which payment will next be attempted. This value will be `null` for invoices where `billing=send_invoice`.
         type: integer
       number:
-        description: 'A unique, identifying string that appears on emails sent to the customer for this invoice.'
+        description: 'A unique, identifying string that appears on emails sent to the customer for this invoice. This starts with the customer''s unique invoice_prefix if it is specified.'
         type: string
       object:
         description: String representing the object's type. Objects of the same type share the same value.

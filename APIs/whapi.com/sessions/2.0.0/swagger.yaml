@@ -255,6 +255,9 @@ paths:
       responses:
         '200':
           description: The validity status of the tgt
+          examples:
+            application/json:
+              valid: true
           schema:
             $ref: '#/definitions/ticketvalidityresponse'
         '404':
@@ -439,7 +442,7 @@ definitions:
     type: object
   ticketvalidityresponse:
     properties:
-      success:
+      valid:
         type: boolean
     type: object
 x-customerrors:
@@ -471,7 +474,7 @@ x-customerrors:
     message: Timeout applied.
     status: 403
   - code: 20510
-    message: Target service not established. (DUPE?)
+    message: Target service not established.
     status: 403
   - code: 20511
     message: TGT ticket could not be found.
@@ -480,11 +483,9 @@ x-customerrors:
     message: Account Suspended
     status: 403
   - code: 20513
-    description: 'It appears that you already hold an account with William Hill. As per our T and Cs only one account per person is allowed. Please login to your existing account or, if you have lost your details, you can recover them or contact our Customer Services team'
     message: Max Linked Accounts
     status: 403
   - code: 20514
-    description: 'Sorry, your account is closed. Please click here to re-open your account or contact Customer Services.'
     message: Account Closed By Player
     status: 403
 x-docchapters:

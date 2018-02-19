@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Generates performance reports, generates ad codes, and provides publisher management capabilities for AdSense Hosts.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: AdSense Host
   version: v4.1
   x-apiClientRegistration:
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/adsensehost': View and manage your AdSense host data and associated accounts
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/adsensehost': View and manage your AdSense host data and associated accounts
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -116,8 +104,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
     parameters:
@@ -145,8 +131,6 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
@@ -186,8 +170,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
     parameters:
@@ -220,8 +202,6 @@ paths:
             $ref: '#/definitions/AdClient'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
@@ -270,8 +250,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
     parameters:
@@ -313,8 +291,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
     post:
@@ -343,8 +319,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
     put:
@@ -372,8 +346,6 @@ paths:
             $ref: '#/definitions/AdUnit'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
@@ -405,8 +377,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
     get:
@@ -435,8 +405,6 @@ paths:
             $ref: '#/definitions/AdUnit'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
@@ -482,8 +450,6 @@ paths:
             $ref: '#/definitions/AdCode'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
@@ -567,8 +533,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - accounts
     parameters:
@@ -602,8 +566,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - adclients
     parameters:
@@ -631,8 +593,6 @@ paths:
             $ref: '#/definitions/AdClient'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - adclients
@@ -672,8 +632,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - customchannels
     parameters:
@@ -710,8 +668,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - customchannels
     post:
@@ -735,8 +691,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - customchannels
     put:
@@ -759,8 +713,6 @@ paths:
             $ref: '#/definitions/CustomChannel'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - customchannels
@@ -787,8 +739,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - customchannels
     get:
@@ -812,8 +762,6 @@ paths:
             $ref: '#/definitions/CustomChannel'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - customchannels
@@ -853,8 +801,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - urlchannels
     parameters:
@@ -886,8 +832,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - urlchannels
   '/adclients/{adClientId}/urlchannels/{urlChannelId}':
@@ -912,8 +856,6 @@ paths:
             $ref: '#/definitions/UrlChannel'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - urlchannels
@@ -965,8 +907,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - associationsessions
     parameters:
@@ -994,8 +934,6 @@ paths:
             $ref: '#/definitions/AssociationSession'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - associationsessions
@@ -1073,8 +1011,6 @@ paths:
             $ref: '#/definitions/Report'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adsensehost'
       tags:
         - reports

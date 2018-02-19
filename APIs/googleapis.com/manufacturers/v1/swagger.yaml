@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Public API for managing Manufacturer Center related data.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Manufacturer Center
   version: v1
   x-apiClientRegistration:
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/manufacturercenter': Manage your product listings for Google Manufacturer Center
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/manufacturercenter': Manage your product listings for Google Manufacturer Center
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -159,8 +147,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/manufacturercenter'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/manufacturercenter'
       tags:
         - accounts
     parameters:
@@ -215,8 +201,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/manufacturercenter'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/manufacturercenter'
       tags:
         - accounts
     get:
@@ -263,8 +247,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/manufacturercenter'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/manufacturercenter'
       tags:
         - accounts
     parameters:
@@ -283,24 +265,24 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
-        Inserts or updates the product in a Manufacturer Center account.
+        Uploads the product in a Manufacturer Center account.
 
         The checks at upload time are minimal. All required attributes need to be
         present for a product to be valid. Issues may show up later
-        after the API has accepted an update for a product and it is possible to
+        after the API has accepted a new upload for a product and it is possible to
         overwrite an existing valid product with an invalid product. To detect
         this, you should retrieve the product and check it for issues once the
-        updated version is available.
+        new version is available.
 
-        Inserted or updated products first need to be processed before they can be
+        Uploaded products first need to be processed before they can be
         retrieved. Until then, new products will be unavailable, and retrieval
-        of updated products will return the original state of the product.
-      operationId: manufacturers.accounts.products.update
+        of uploaded products will return the original state of the product.
+      operationId: manufacturers.accounts.products.uploadProduct
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Product'
+            $ref: '#/definitions/Attributes'
         - description: |-
             Name in the format `{target_country}:{content_language}:{product_id}`.
 
@@ -330,11 +312,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Product'
+            $ref: '#/definitions/Empty'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/manufacturercenter'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/manufacturercenter'
       tags:
         - accounts
@@ -625,7 +605,7 @@ definitions:
           https://support.google.com/manufacturers/answer/6124116.
         type: string
       description:
-        description: Description of the issue.
+        description: Longer description of the issue focused on how to resolve it.
         type: string
       severity:
         description: The severity of the issue.

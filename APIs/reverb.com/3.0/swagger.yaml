@@ -87,6 +87,15 @@ paths:
           description: Unexpected error
       tags:
         - articles
+  /articles/categories:
+    get:
+      description: List of all article categories
+      responses:
+        default:
+          description: Unexpected error
+      summary: List of all article categories
+      tags:
+        - articles
   /categories:
     get:
       description: List of supported product categories
@@ -4300,6 +4309,11 @@ paths:
               return_policy:
                 type: string
               shipping_policy:
+                type: string
+              shop_type:
+                enum:
+                  - individual
+                  - business
                 type: string
               website:
                 type: string

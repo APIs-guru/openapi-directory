@@ -1126,6 +1126,25 @@ paths:
       summary: Gets the next arrival predictions for all stops of a given mode
       tags:
         - Mode
+  /NetworkStatus:
+    get:
+      deprecated: false
+      operationId: NetworkStatus_Get
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/NetworkStatus'
+            type: array
+      summary: Get travel network status
+      tags:
+        - NetworkStatus
   '/Occupancy/BikePoints/{ids}':
     get:
       deprecated: false
@@ -3943,6 +3962,19 @@ definitions:
         type: boolean
       modeName:
         type: string
+    type: object
+  NetworkStatus:
+    description: Represent travel network status
+    properties:
+      message:
+        type: string
+      operator:
+        type: string
+      status:
+        type: string
+      statusLevel:
+        format: int32
+        type: integer
     type: object
   Object:
     properties: {}

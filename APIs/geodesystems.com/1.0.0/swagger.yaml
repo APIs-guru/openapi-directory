@@ -82,10 +82,6 @@ tags:
     name: service/gps.teqc.qc
   - description: ' API for Convert to RINEX'
     name: service/gps.teqc.torinex
-  - description: ' API for Gristle Determinator'
-    name: service/gristle_determinator
-  - description: ' API for Gristle Slicer'
-    name: service/gristle_slicer
   - description: ' API for Make animated GIF'
     name: service/imagemagick_animate
   - description: ' API for Convert Image'
@@ -140,12 +136,16 @@ tags:
     name: type/bio_taxonomy
   - description: Search API for 'Weblog Entry' entry type
     name: type/blogentry
+  - description: Search API for 'Boulder Rental Housing' entry type
+    name: type/bolder_rental_housing
   - description: Search API for 'Bookmarks' entry type
     name: type/bookmarks
-  - description: Search API for 'Boulder Consulting' entry type
-    name: type/boulder_consulting
+  - description: Search API for 'Boulder Consulting Services Database' entry type
+    name: type/boulder_consulting_services
   - description: Search API for 'Boulder County Voter Details' entry type
     name: type/boulder_county_voter_details
+  - description: Search API for 'Boulder Crime Reports' entry type
+    name: type/boulder_crimes
   - description: Search API for 'Calendar' entry type
     name: type/calendar
   - description: Search API for 'Catalog Link' entry type
@@ -518,8 +518,6 @@ tags:
     name: type/type_point_snotel
   - description: Search API for 'Global Geodynamics GGP Format' entry type
     name: type/type_point_wsbb_ggp
-  - description: Search API for 'MISO Foreacast XML' entry type
-    name: type/type_power_miso_forecast
   - description: Search API for 'NOAA-ESRL-PSD Monthly Climate Index' entry type
     name: type/type_psd_monthly_climate_index
   - description: Search API for 'QUANDL Series' entry type
@@ -2872,6 +2870,223 @@ paths:
       summary: Search API for 'Weblog Entry' entry type
       tags:
         - type/blogentry
+  /repository/search/type/bolder_rental_housing:
+    get:
+      description: API to search for entries of type Boulder Rental Housing
+      operationId: search_bolder_rental_housing
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Property Address
+          in: query
+          name: search.db_bolder_rental_housing.propaddr1
+          required: false
+          type: string
+        - description: Name
+          in: query
+          name: search.db_bolder_rental_housing.name
+          required: false
+          type: string
+        - description: Company
+          in: query
+          name: search.db_bolder_rental_housing.company
+          required: false
+          type: string
+        - description: Person Type
+          in: query
+          name: search.db_bolder_rental_housing.persontype
+          required: false
+          type: string
+        - description: Expiration Date
+          in: query
+          name: search.db_bolder_rental_housing.licenseexp
+          required: false
+          type: string
+        - description: Asrid
+          format: double
+          in: query
+          name: search.db_bolder_rental_housing.asrid
+          required: false
+          type: number
+        - description: Licensenum
+          in: query
+          name: search.db_bolder_rental_housing.licensenum
+          required: false
+          type: string
+        - description: Neighborhood
+          in: query
+          name: search.db_bolder_rental_housing.neighbrhd
+          required: false
+          type: string
+        - description: Rental Type
+          in: query
+          name: search.db_bolder_rental_housing.rentaltype
+          required: false
+          type: string
+        - description: Complex Name
+          in: query
+          name: search.db_bolder_rental_housing.complexnm
+          required: false
+          type: string
+        - description: Building Type
+          in: query
+          name: search.db_bolder_rental_housing.bldgtype
+          required: false
+          type: string
+        - description: Dwelling Units
+          in: query
+          name: search.db_bolder_rental_housing.dwellunits
+          required: false
+          type: integer
+        - description: Room Units
+          in: query
+          name: search.db_bolder_rental_housing.roomunits
+          required: false
+          type: integer
+        - description: Engcompl
+          in: query
+          name: search.db_bolder_rental_housing.engcompl
+          required: false
+          type: string
+        - description: Person 1
+          in: query
+          name: search.db_bolder_rental_housing.person_1
+          required: false
+          type: string
+        - description: Ppl1 Coname
+          in: query
+          name: search.db_bolder_rental_housing.ppl1_coname
+          required: false
+          type: string
+        - description: Ppl1 Role
+          in: query
+          name: search.db_bolder_rental_housing.ppl1_role
+          required: false
+          type: string
+        - description: Person 2
+          in: query
+          name: search.db_bolder_rental_housing.person_2
+          required: false
+          type: string
+        - description: Ppl2 Coname
+          in: query
+          name: search.db_bolder_rental_housing.ppl2_coname
+          required: false
+          type: string
+        - description: Ppl2 Role
+          in: query
+          name: search.db_bolder_rental_housing.ppl2_role
+          required: false
+          type: string
+        - description: Location
+          in: query
+          name: search.db_bolder_rental_housing.location
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Boulder Rental Housing' entry type
+      tags:
+        - type/bolder_rental_housing
   /repository/search/type/bookmarks:
     get:
       description: API to search for entries of type Bookmarks
@@ -3003,10 +3218,10 @@ paths:
       summary: Search API for 'Bookmarks' entry type
       tags:
         - type/bookmarks
-  /repository/search/type/boulder_consulting:
+  /repository/search/type/boulder_consulting_services:
     get:
-      description: API to search for entries of type Boulder Consulting
-      operationId: search_boulder_consulting
+      description: API to search for entries of type Boulder Consulting Services Database
+      operationId: search_boulder_consulting_services
       parameters:
         - description: Search text
           in: query
@@ -3105,53 +3320,58 @@ paths:
           type: integer
         - description: Fund
           in: query
-          name: search.db_boulder_consulting.fund
+          name: search.db_boulder_consulting_services.fund
           required: false
           type: string
         - description: Department
           in: query
-          name: search.db_boulder_consulting.department
+          name: search.db_boulder_consulting_services.department
           required: false
           type: string
         - description: Organization
           in: query
-          name: search.db_boulder_consulting.organization
+          name: search.db_boulder_consulting_services.organization
           required: false
           type: string
         - description: Object
           in: query
-          name: search.db_boulder_consulting.object
+          name: search.db_boulder_consulting_services.object
           required: false
           type: string
         - description: Project
           in: query
-          name: search.db_boulder_consulting.project
+          name: search.db_boulder_consulting_services.project
           required: false
           type: string
         - description: Account Description
           in: query
-          name: search.db_boulder_consulting.account_description
+          name: search.db_boulder_consulting_services.account_description
           required: false
           type: string
         - description: Date
           in: query
-          name: search.db_boulder_consulting.date
+          name: search.db_boulder_consulting_services.date
           required: false
           type: string
         - description: Amount
           format: double
           in: query
-          name: search.db_boulder_consulting.amount
+          name: search.db_boulder_consulting_services.amount
           required: false
           type: number
+        - description: Purchase Order
+          in: query
+          name: search.db_boulder_consulting_services.purchase_order
+          required: false
+          type: string
         - description: Vendor Name
           in: query
-          name: search.db_boulder_consulting.vendor_name
+          name: search.db_boulder_consulting_services.vendor_name
           required: false
           type: string
         - description: Comment
           in: query
-          name: search.db_boulder_consulting.comment
+          name: search.db_boulder_consulting_services.comment
           required: false
           type: string
       produces:
@@ -3162,9 +3382,9 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: Search API for 'Boulder Consulting' entry type
+      summary: Search API for 'Boulder Consulting Services Database' entry type
       tags:
-        - type/boulder_consulting
+        - type/boulder_consulting_services
   /repository/search/type/boulder_county_voter_details:
     get:
       description: API to search for entries of type Boulder County Voter Details
@@ -3355,6 +3575,11 @@ paths:
           name: search.db_boulder_county_voter_details.school_district
           required: false
           type: string
+        - description: Location
+          in: query
+          name: search.db_boulder_county_voter_details.location
+          required: false
+          type: string
       produces:
         - application/json
         - application/xml
@@ -3366,6 +3591,137 @@ paths:
       summary: Search API for 'Boulder County Voter Details' entry type
       tags:
         - type/boulder_county_voter_details
+  /repository/search/type/boulder_crimes:
+    get:
+      description: API to search for entries of type Boulder Crime Reports
+      operationId: search_boulder_crimes
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Offense
+          in: query
+          name: search.db_boulder_crimes.offense
+          required: false
+          type: string
+        - description: Report Date
+          in: query
+          name: search.db_boulder_crimes.reportdate
+          required: false
+          type: string
+        - description: Address
+          in: query
+          name: search.db_boulder_crimes.blockadd
+          required: false
+          type: string
+        - description: Location
+          in: query
+          name: search.db_boulder_crimes.location
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Boulder Crime Reports' entry type
+      tags:
+        - type/boulder_crimes
   /repository/search/type/calendar:
     get:
       description: API to search for entries of type Calendar
@@ -19908,6 +20264,11 @@ paths:
           name: skip
           required: false
           type: integer
+        - description: Trip ID
+          in: query
+          name: search.type_gtfs_trip.trip_id
+          required: false
+          type: string
         - description: Stop IDS
           in: query
           name: search.type_gtfs_trip.stop_ids
@@ -25511,117 +25872,6 @@ paths:
       summary: Search API for 'Global Geodynamics GGP Format' entry type
       tags:
         - type/type_point_wsbb_ggp
-  /repository/search/type/type_power_miso_forecast:
-    get:
-      description: API to search for entries of type MISO Foreacast XML
-      operationId: search_type_power_miso_forecast
-      parameters:
-        - description: Search text
-          in: query
-          name: text
-          required: false
-          type: string
-        - description: Search name
-          in: query
-          name: name
-          required: false
-          type: string
-        - description: Search description
-          in: query
-          name: description
-          required: false
-          type: string
-        - description: From date
-          format: date-time
-          in: query
-          name: fromdate
-          required: false
-          type: string
-        - description: To date
-          format: date-time
-          in: query
-          name: todate
-          required: false
-          type: string
-        - description: Archive create date from
-          format: date-time
-          in: query
-          name: createdate.from
-          required: false
-          type: string
-        - description: Archive create date to
-          format: date-time
-          in: query
-          name: createdate.to
-          required: false
-          type: string
-        - description: Archive change date from
-          format: date-time
-          in: query
-          name: changedate.from
-          required: false
-          type: string
-        - description: Archive change date to
-          format: date-time
-          in: query
-          name: changedate.to
-          required: false
-          type: string
-        - description: Parent entry
-          in: query
-          name: group
-          required: false
-          type: string
-        - description: File suffix
-          in: query
-          name: filesuffix
-          required: false
-          type: string
-        - description: Northern bounds of search
-          format: float
-          in: query
-          name: maxlatitude
-          required: false
-          type: number
-        - description: Western bounds of search
-          format: float
-          in: query
-          name: minlongitude
-          required: false
-          type: number
-        - description: Southern bounds of search
-          format: float
-          in: query
-          name: minlatitude
-          required: false
-          type: number
-        - description: Eastern bounds of search
-          format: float
-          in: query
-          name: maxlongitude
-          required: false
-          type: number
-        - description: Max number of results
-          in: query
-          name: max
-          required: false
-          type: integer
-        - description: Number to skip
-          in: query
-          name: skip
-          required: false
-          type: integer
-      produces:
-        - application/json
-        - application/xml
-        - text/plain
-        - text/html
-      responses:
-        '200':
-          description: No response was specified
-      summary: Search API for 'MISO Foreacast XML' entry type
-      tags:
-        - type/type_power_miso_forecast
   /repository/search/type/type_psd_monthly_climate_index:
     get:
       description: API to search for entries of type NOAA-ESRL-PSD Monthly Climate Index

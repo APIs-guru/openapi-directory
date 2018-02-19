@@ -147,6 +147,8 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+        '404':
+          description: Not Found
       summary: Delete LegalEntity
       tags:
         - LegalEntities
@@ -169,6 +171,8 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+        '404':
+          description: Not Found
       summary: Get LegalEntity
       tags:
         - LegalEntities
@@ -189,7 +193,7 @@ paths:
           schema:
             $ref: '#/definitions/LegalEntityUpdate'
       responses:
-        '204':
+        '200':
           description: Success
           schema:
             $ref: '#/definitions/LegalEntity'
@@ -197,6 +201,8 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+        '404':
+          description: Not Found
         '422':
           description: Unprocessable Entity
           schema:
@@ -239,9 +245,9 @@ paths:
       summary: Create a new PeppolIdentifier
       tags:
         - PeppolIdentifiers
-  '/legal_entities/{legal_entity_id}/peppol_identifiers/iso6523-actorid-upis/{scheme}/{identifier}':
+  '/legal_entities/{legal_entity_id}/peppol_identifiers/{superscheme}/{scheme}/{identifier}':
     delete:
-      description: Delete a specific PeppolIdentifier.
+      description: Delete a PeppolIdentifier.
       operationId: delete_peppol_identifier
       parameters:
         - description: The id of the LegalEntity this PeppolIdentifier belongs to
@@ -250,6 +256,11 @@ paths:
           name: legal_entity_id
           required: true
           type: integer
+        - description: The superscheme of the identifier. Should always be "iso6523-actorid-upis".
+          in: path
+          name: superscheme
+          required: true
+          type: string
         - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<_company>>.'
           in: path
           name: scheme
@@ -267,51 +278,9 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+        '404':
+          description: Not Found
       summary: Delete PeppolIdentifier
-      tags:
-        - PeppolIdentifiers
-    patch:
-      description: Update a specific PeppolIdentifier.
-      operationId: update_peppol_identifier
-      parameters:
-        - description: The id of the LegalEntity this PeppolIdentifier belongs to
-          format: int64
-          in: path
-          name: legal_entity_id
-          required: true
-          type: integer
-        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<_company>>.'
-          in: path
-          name: scheme
-          required: true
-          type: string
-        - description: PEPPOL identifier
-          in: path
-          name: identifier
-          required: true
-          type: string
-        - description: PeppolIdentifier updates
-          in: body
-          name: peppol_identifier
-          required: true
-          schema:
-            $ref: '#/definitions/PeppolIdentifierUpdate'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/PeppolIdentifier'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '422':
-          description: Unprocessable Entity
-          schema:
-            items:
-              $ref: '#/definitions/ErrorModel'
-            type: array
-      summary: Update PeppolIdentifier
       tags:
         - PeppolIdentifiers
   /shop_account_requests:
@@ -1116,8 +1085,12 @@ definitions:
     properties:
       accountingCostCode:
         $ref: '#/definitions/AccountingCostCode'
+      allowanceCharge:
+        description: The discount or surcharge on this item. Should be negative for discounts
+        title: allowanceCharge
+        type: number
       amountExcludingVat:
-        description: The amount excluding VAT. Should equal quantity x itemPrice (if these are both present). A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
+        description: The amount excluding VAT. Should equal quantity x itemPrice + allowanceCharge. A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
         title: amountExcludingVat
         type: number
       description:
@@ -1599,8 +1572,25 @@ definitions:
     title: Party
     type: object
   PeppolIdentifier:
-    allOf:
-      - $ref: '#/definitions/PeppolIdentifierUpdate'
+    properties:
+      identifier:
+        description: The identifier.
+        maxLength: 64
+        minLength: 2
+        title: Identifier
+        type: string
+      scheme:
+        description: The scheme of the identifier. See <<_company>> for a list.
+        maxLength: 64
+        minLength: 2
+        title: Type
+        type: string
+      superscheme:
+        description: The superscheme of the identifier. Should always be "iso6523-actorid-upis".
+        maxLength: 64
+        minLength: 2
+        title: Type
+        type: string
   PeppolIdentifierCreate:
     properties:
       identifier:
@@ -1615,23 +1605,16 @@ definitions:
         minLength: 2
         title: Type
         type: string
-    required:
-      - identifier
-      - scheme
-  PeppolIdentifierUpdate:
-    properties:
-      identifier:
-        description: The identifier.
-        maxLength: 64
-        minLength: 2
-        title: Identifier
-        type: string
-      scheme:
-        description: The scheme of the identifier. See <<_company>> for a list.
+      superscheme:
+        description: The superscheme of the identifier. Should always be "iso6523-actorid-upis".
         maxLength: 64
         minLength: 2
         title: Type
         type: string
+    required:
+      - identifier
+      - scheme
+      - superscheme
   PreflightInvoiceRecipientResult:
     description: The result of preflighting an invoice recipient
     properties:

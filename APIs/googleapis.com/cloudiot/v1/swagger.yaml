@@ -9,10 +9,6 @@ info:
     url: 'https://google.com'
   description: |
     Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud IoT
   version: v1
   x-apiClientRegistration:
@@ -34,20 +30,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloudiot': Register and manage devices in the Google Cloud IoT service
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloudiot': Register and manage devices in the Google Cloud IoT service
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -150,11 +137,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -185,11 +168,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -242,11 +221,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -281,11 +256,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -334,11 +305,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -399,11 +366,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -469,11 +432,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -516,11 +475,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -560,11 +515,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -606,11 +557,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -656,11 +603,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -705,11 +648,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -755,26 +694,121 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudiot'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
 definitions:
+  AuditConfig:
+    description: |-
+      Specifies the audit configuration for a service.
+      The configuration determines which permission types are logged, and what
+      identities, if any, are exempted from logging.
+      An AuditConfig must have one or more AuditLogConfigs.
+
+      If there are AuditConfigs for both `allServices` and a specific service,
+      the union of the two AuditConfigs is used for that service: the log_types
+      specified in each AuditConfig are enabled, and the exempted_members in each
+      AuditLogConfig are exempted.
+
+      Example Policy with multiple AuditConfigs:
+
+          {
+            "audit_configs": [
+              {
+                "service": "allServices"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                    "exempted_members": [
+                      "user:foo@gmail.com"
+                    ]
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                  },
+                  {
+                    "log_type": "ADMIN_READ",
+                  }
+                ]
+              },
+              {
+                "service": "fooservice.googleapis.com"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                    "exempted_members": [
+                      "user:bar@gmail.com"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts foo@gmail.com from DATA_READ logging, and
+      bar@gmail.com from DATA_WRITE logging.
+    properties:
+      auditLogConfigs:
+        description: |-
+          The configuration for logging of each type of permission.
+          Next ID: 4
+        items:
+          $ref: '#/definitions/AuditLogConfig'
+        type: array
+      service:
+        description: |-
+          Specifies a service that will be enabled for audit logging.
+          For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+          `allServices` is a special value that covers all services.
+        type: string
+    type: object
+  AuditLogConfig:
+    description: |-
+      Provides the configuration for logging a type of permissions.
+      Example:
+
+          {
+            "audit_log_configs": [
+              {
+                "log_type": "DATA_READ",
+                "exempted_members": [
+                  "user:foo@gmail.com"
+                ]
+              },
+              {
+                "log_type": "DATA_WRITE",
+              }
+            ]
+          }
+
+      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+      foo@gmail.com from DATA_READ logging.
+    properties:
+      exemptedMembers:
+        description: |-
+          Specifies the identities that do not cause logging for this type of
+          permission.
+          Follows the same format of Binding.members.
+        items:
+          type: string
+        type: array
+      logType:
+        description: The log type that this config enables.
+        enum:
+          - LOG_TYPE_UNSPECIFIED
+          - ADMIN_READ
+          - DATA_WRITE
+          - DATA_READ
+        type: string
+    type: object
   Binding:
     description: Associates `members` with a `role`.
     properties:
-      condition:
-        $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
-          binding. Different bindings, including their conditions, are examined
-          independently.
-          This field is only visible as GOOGLE_INTERNAL or CONDITION_TRUSTED_TESTER.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -880,9 +914,11 @@ definitions:
         type: string
       lastHeartbeatTime:
         description: |-
-          [Output only] The last time a heartbeat was received. Timestamps are
-          periodically collected and written to storage; they may be stale by a few
-          minutes. This field is only for devices connecting through MQTT.
+          [Output only] The last time an MQTT `PINGREQ` was received. This field
+          applies only to devices connecting through MQTT. MQTT clients usually only
+          send `PINGREQ` messages if the connection is idle, and no other messages
+          have been sent. Timestamps are periodically collected and written to
+          storage; they may be stale by a few minutes.
         format: google-datetime
         type: string
       lastStateTime:
@@ -1080,38 +1116,7 @@ definitions:
           A Cloud Pub/Sub topic name. For example,
           `projects/myProject/topics/deviceEvents`.
         type: string
-    type: object
-  Expr:
-    description: |-
-      Represents an expression text. Example:
-
-          title: "User account presence"
-          description: "Determines whether the request has a user account"
-          expression: "size(request.user) > 0"
-    properties:
-      description:
-        description: |-
-          An optional description of the expression. This is a longer text which
-          describes the expression, e.g. when hovered over it in a UI.
-        type: string
-      expression:
-        description: |-
-          Textual representation of an expression in
-          Common Expression Language syntax.
-
-          The application context of the containing message determines which
-          well-known feature set of CEL is supported.
-        type: string
-      location:
-        description: |-
-          An optional string indicating the location of the expression for error
-          reporting, e.g. a file name and a position in the file.
-        type: string
-      title:
-        description: |-
-          An optional title for the expression, i.e. a short string describing
-          its purpose. This can be used e.g. in UIs which allow to enter the
-          expression.
+      subfolderMatches:
         type: string
     type: object
   GetIamPolicyRequest:
@@ -1246,6 +1251,11 @@ definitions:
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
+      auditConfigs:
+        description: Specifies cloud audit logging configuration for this policy.
+        items:
+          $ref: '#/definitions/AuditConfig'
+        type: array
       bindings:
         description: |-
           Associates a list of `members` to a `role`.

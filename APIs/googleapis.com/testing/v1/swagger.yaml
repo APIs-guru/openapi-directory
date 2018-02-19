@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Allows developers to run automated tests for their mobile applications on Google infrastructure.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Testing
   version: v1
   x-apiClientRegistration:
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -127,9 +114,43 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: applicationDetailService
   - name: projects
   - name: testEnvironmentCatalog
 paths:
+  /v1/applicationDetailService/getApkDetails:
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Request the details of an Android application APK.
+      operationId: testing.applicationDetailService.getApkDetails
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FileReference'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetApkDetailsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - applicationDetailService
   '/v1/projects/{projectId}/testMatrices':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -185,8 +206,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/testMatrices/{testMatrixId}':
@@ -219,11 +238,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -287,8 +302,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/testEnvironmentCatalog/{environmentType}':
@@ -328,11 +341,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - testEnvironmentCatalog
@@ -778,6 +787,40 @@ definitions:
           @OutputOnly
         type: string
     type: object
+  ApkDetail:
+    description: |-
+      Android application details based on application manifest and apk archive
+      contents
+    properties:
+      apkManifest:
+        $ref: '#/definitions/ApkManifest'
+    type: object
+  ApkManifest:
+    description: |-
+      An Android app manifest. See
+      http://developer.android.com/guide/topics/manifest/manifest-intro.html
+    properties:
+      applicationLabel:
+        description: User-readable name for the application.
+        type: string
+      intentFilters:
+        items:
+          $ref: '#/definitions/IntentFilter'
+        type: array
+      maxSdkVersion:
+        description: Maximum API level on which the application is designed to run.
+        format: int32
+        type: integer
+      minSdkVersion:
+        description: Minimum API level required for the application to run.
+        format: int32
+        type: integer
+      packageName:
+        description: |-
+          Full Java-style package name for this application, e.g.
+          "com.example.foo".
+        type: string
+    type: object
   CancelTestMatrixResponse:
     description: Response containing the current state of the specified test matrix.
     properties:
@@ -920,6 +963,13 @@ definitions:
           Example: gs://build-app-1414623860166/app-debug-unaligned.apk
         type: string
     type: object
+  GetApkDetailsResponse:
+    description: Response containing the details of the specified Android application APK.
+    properties:
+      apkDetail:
+        $ref: '#/definitions/ApkDetail'
+        description: Details of the Android APK.
+    type: object
   GoogleAuto:
     description: |-
       Enables automatic Google account login.
@@ -941,6 +991,25 @@ definitions:
           The requesting user must have write access on the bucket in the supplied
           path.
           Required
+        type: string
+    type: object
+  IntentFilter:
+    description: |-
+      The <intent-filter> section of an <activity> tag.
+      https://developer.android.com/guide/topics/manifest/intent-filter-element.html
+    properties:
+      actionNames:
+        description: 'The android:name value of the <action> tag'
+        items:
+          type: string
+        type: array
+      categoryNames:
+        description: 'The android:name value of the <category> tag'
+        items:
+          type: string
+        type: array
+      mimeType:
+        description: 'The android:mimeType value of the <data> tag'
         type: string
     type: object
   LauncherActivityIntent:
@@ -1254,6 +1323,7 @@ definitions:
           - SCENARIO_NOT_DECLARED
           - DEVICE_ADMIN_RECEIVER
           - TEST_ONLY_APK
+          - NO_CODE_APK
         type: string
       projectId:
         description: |-

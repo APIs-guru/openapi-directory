@@ -8,7 +8,7 @@ info:
     x-twitter: PayRun_io
   description: 'Open, scableable, transparent payroll API.'
   title: PayRun.IO
-  version: 17.18.6.206
+  version: 17.18.6.230
   x-apisguru-categories:
     - financial
   x-logo:
@@ -3744,6 +3744,64 @@ paths:
       summary: Get the auto enrolment assessments
       tags:
         - AEAssessment
+        - PayRun
+  '/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Commentaries':
+    get:
+      description: Get links to all commentaries for the specified pay run.
+      operationId: GetCommentariesFromPayRun
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The pay schedule's unique identifier. E.g SCH001
+          in: path
+          name: PayScheduleId
+          required: true
+          type: string
+        - description: The pay run's unique identifier. E.g. PR001
+          in: path
+          name: PayRunId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get links to all commentaries for the specified pay run
+      tags:
         - PayRun
   '/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Employee/{EmployeeId}':
     delete:
@@ -13400,6 +13458,7 @@ definitions:
               - YtdInstructionRule
               - TaxCodeRegionChangeRule
               - AutoEnrolmentStatusChangeRule
+              - EmployeeDeceasedRule
             title: RuleExclusions
             type: string
           Seconded:
@@ -13714,6 +13773,7 @@ definitions:
               - YtdInstructionRule
               - TaxCodeRegionChangeRule
               - AutoEnrolmentStatusChangeRule
+              - EmployeeDeceasedRule
             title: RuleExclusions
             type: string
           Territory:

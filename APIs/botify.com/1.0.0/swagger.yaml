@@ -1968,6 +1968,8 @@ definitions:
         type: array
       subtype:
         type: string
+      suggestion:
+        type: boolean
       type:
         type: string
     required:
@@ -2040,6 +2042,8 @@ definitions:
         type: object
       subtype:
         type: string
+      suggestion:
+        type: boolean
       type:
         type: string
     required:
@@ -2126,6 +2130,17 @@ definitions:
     required:
       - value
       - nb_urls
+    type: object
+  HtmlExtract:
+    description: Html Extract
+    properties:
+      config:
+        type: object
+      extract_type:
+        type: string
+      id:
+        readOnly: true
+        type: string
     type: object
   KeywordsStat:
     properties:
@@ -2439,6 +2454,35 @@ definitions:
           type: string
         type: array
     type: object
+  RegexConfig:
+    description: Regex config
+    properties:
+      aggregation:
+        type: string
+      cast:
+        type: string
+      date_format:
+        type: string
+      float_format:
+        type: string
+      ignore_case:
+        type: boolean
+      match:
+        type: string
+      name:
+        type: string
+      regex:
+        type: string
+      slug:
+        type: string
+    required:
+      - name
+      - aggregation
+      - cast
+      - match
+      - regex
+      - ignore_case
+    type: object
   RewritingRule:
     properties:
       ignore_case:
@@ -2543,6 +2587,21 @@ definitions:
       - name
       - previous_options
       - new_options
+    type: object
+  TestRegexExtractRule:
+    description: Test regex extract rule
+    properties:
+      content:
+        type: string
+      extract_type:
+        type: string
+      rule:
+        $ref: '#/definitions/RegexConfig'
+      url:
+        type: string
+    required:
+      - extract_type
+      - rule
     type: object
   URLRewritingRules:
     properties:

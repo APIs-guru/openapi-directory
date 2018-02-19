@@ -348,15 +348,18 @@ paths:
 
         For the `client_credentials` grant type, you do not need to pass in any additional parameters beyond the basic requirements. `code`, `redirect_uri`, `service`, `username` and `password` parameters will be ignored.
 
-        For the `device_code` grant type, you are **required** to pass in the `code` parameter. `redirect_uri`, `service`, `username` and `password` parameters will be ignored.
+        For the `device_code` grant type, you are **required** to pass in the `code` parameter. If you are a third-party developer, you are also required to provide the `scope` parameter; see the documentation for `GET /authorization/v2/authorize` for possible values. `redirect_uri`, `service`, `username` and `password` parameters will be ignored.
 
-        For the `password` grant type, you are **required** to pass in the `username` and `password` parameters. If you are logging in via a social service, you should also pass in the `service` parameter. (In this case, the access token you receive from the social service will serve as both your username and password.) The `code` and `redirect_uri` parameters are ignored.
+        For the `password` grant type, you are **required** to pass in the `username` and `password` parameters. The `code` and `redirect_uri` parameters are ignored.
         Third-party developers do not have access to this grant type.
 
         For the `refresh_token` grant type, you are **required** to pass in the `refresh_token` parameter. The `scope` parameter can optionally be used to request a different set of scopes than were used in the original request, but it **cannot** contain any scopes that were not previously requested. If not specified, then `scope` will be set to whichever scopes were used for the original access token request. If trading in an old non-expiring access token for a refresh-enabled token, set the value of `refresh_token` to the access token value and `token_type_hint` must be set to `access_token`. `code`, `redirect_uri`, `service`, `username` and `password` parameters will be ignored.
 
         The `temporary_user` and `anonymous_user` grant types are custom grant types created by NPR to suit our needs for functionality such as our &quot;try-before-you-buy&quot; experience. If you are a third-party developer, you will not have access to these grant types unless we have explicitly given you permission within our system.
-        For these grant types, you do not need to pass in any additional parameters beyond the basic requirements. `code`, `redirect_uri`, `service`, `username` and `password` parameters will be ignored.
+        For these grant types, if you are a third-party developer, you are required to provide the `scope` parameter; see the documentation for `GET /authorization/v2/authorize` for possible values. `code`, `redirect_uri`, `service`, `username` and `password` parameters will be ignored.
+
+        The `third_party` grant type is another custom grant type created by NPR to handle login via third-party providers such as Facebook and Google. If you are a third-party developer, you will not have access to this grant types unless we have explicitly given you permission within our system.
+        For this grant type, you are **required** to pass in the `service` and `token` parameters. If you are a third-party developer, you are also required to provide the `scope` parameter; see the documentation for `GET /authorization/v2/authorize` for possible values. The `code` and `redirect_uri` parameters are ignored.
 
         If you are unsure of which grant type to select, assume that `authorization_code` is the one you want.
 
@@ -372,6 +375,7 @@ paths:
             - refresh_token
             - temporary_user
             - anonymous_user
+            - third_party
           in: formData
           name: grant_type
           required: true
@@ -408,7 +412,7 @@ paths:
           name: password
           required: false
           type: string
-        - description: 'If logging in via a social service, this parameter should be set. Only used for the `password` grant type.'
+        - description: Required for `third_party` grant type. The name of the third-party login provider.
           enum:
             - facebook
             - google
@@ -423,7 +427,7 @@ paths:
           name: refresh_token
           required: false
           type: string
-        - description: Optionally used by the `refresh_token` grant type only. A space-separated list of scope(s) requested by the application.
+        - description: 'Required for third-party developers using the `device_code`, `temporary_user`, and `third_party` grant types. Optionally used by the `refresh_token` grant type. A space-separated list of scope(s) requested by the application.'
           in: formData
           name: scope
           required: false
