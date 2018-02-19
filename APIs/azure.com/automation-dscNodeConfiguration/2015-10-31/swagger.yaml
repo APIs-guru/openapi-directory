@@ -80,6 +80,22 @@ paths:
               value:
                 description: Gets or sets a list of Dsc node configurations.
                 items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource Id
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
                   description: Definition of the dsc node configuration.
                   properties:
                     configuration:
@@ -92,15 +108,9 @@ paths:
                       description: Gets or sets creation time.
                       format: date-time
                       type: string
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
                     lastModifiedTime:
                       description: Gets or sets the last modified time.
                       format: date-time
-                      type: string
-                    name:
-                      description: Gets or sets the node configuration name.
                       type: string
                 type: array
         default:
@@ -193,6 +203,7 @@ paths:
             api-version: '2015-10-31'
             automationAccountName: myAutomationAccount20
             credentialName: myCredential
+            nodeConfigurationName: configName.nodeConfigName
             resourceGroupName: rg
             subscriptionId: subid
           responses:
@@ -233,6 +244,22 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
             description: Definition of the dsc node configuration.
             properties:
               configuration:
@@ -245,15 +272,9 @@ paths:
                 description: Gets or sets creation time.
                 format: date-time
                 type: string
-              id:
-                description: Gets or sets the id of the resource.
-                type: string
               lastModifiedTime:
                 description: Gets or sets the last modified time.
                 format: date-time
-                type: string
-              name:
-                description: Gets or sets the node configuration name.
                 type: string
         default:
           description: Automation error response describing why the operation failed.
@@ -376,6 +397,22 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
             description: Definition of the dsc node configuration.
             properties:
               configuration:
@@ -388,40 +425,9 @@ paths:
                 description: Gets or sets creation time.
                 format: date-time
                 type: string
-              id:
-                description: Gets or sets the id of the resource.
-                type: string
               lastModifiedTime:
                 description: Gets or sets the last modified time.
                 format: date-time
-                type: string
-              name:
-                description: Gets or sets the node configuration name.
-                type: string
-        '201':
-          description: Created
-          schema:
-            description: Definition of the dsc node configuration.
-            properties:
-              configuration:
-                description: The Dsc configuration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the Dsc configuration.
-                    type: string
-              creationTime:
-                description: Gets or sets creation time.
-                format: date-time
-                type: string
-              id:
-                description: Gets or sets the id of the resource.
-                type: string
-              lastModifiedTime:
-                description: Gets or sets the last modified time.
-                format: date-time
-                type: string
-              name:
-                description: Gets or sets the node configuration name.
                 type: string
         default:
           description: Automation error response describing why the operation failed.
@@ -437,4 +443,35 @@ paths:
             type: object
       tags:
         - DscNodeConfiguration
+      x-ms-examples:
+        Get a DSC node configuration:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount20
+            credentialName: myCredential
+            nodeConfigurationName: configName.nodeConfigName
+            parameters:
+              configuration:
+                name: configName
+              name: configName.nodeConfigName
+              newNodeConfigurationBuildVersionRequired: true
+              source:
+                hash:
+                  algorithm: sha256
+                  value: 6DE256A57F01BFA29B88696D5E77A383D6E61484C7686E8DB955FA10ACE9FFE5
+                type: embeddedContent
+                value: "\r\ninstance of MSFT_RoleResource as $MSFT_RoleResource1ref\r\n{\r\nResourceID = \"[WindowsFeature]IIS\";\r\n Ensure = \"Present\";\r\n SourceInfo = \"::3::32::WindowsFeature\";\r\n Name = \"Web-Server\";\r\n ModuleName = \"PsDesiredStateConfiguration\";\r\n\r\nModuleVersion = \"1.0\";\r\r\n ConfigurationName = \"configName\";\r\r\n};\r\ninstance of OMI_ConfigurationDocument\r\n\r\r\n                    {\r\n Version=\"2.0.0\";\r\n \r\r\n                        MinimumCompatibleVersion = \"1.0.0\";\r\n \r\r\n                        CompatibleVersionAdditionalProperties= {\"Omi_BaseResource:ConfigurationName\"};\r\n \r\r\n                        Author=\"weijiel\";\r\n \r\r\n                        GenerationDate=\"03/30/2017 13:40:25\";\r\n \r\r\n                        GenerationHost=\"TEST-BACKEND\";\r\n \r\r\n                        Name=\"configName\";\r\n\r\r\n                    };\r\n"
+                version: '1.0'
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                configuration:
+                  name: configName
+                creationTime: '2017-06-16T01:18:39.010771+00:00'
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount20/nodeConfigurations/nodeConfigName
+                lastModifiedTime: '2017-06-16T01:18:39.010771+00:00'
+                name: nodeConfigName
+              headers: {}
 definitions: {}

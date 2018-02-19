@@ -3250,6 +3250,10 @@ paths:
                                     type: string
                                 type: object
                               type: array
+                            http20Enabled:
+                              default: true
+                              description: 'Http20Enabled: configures a web site to allow clients to connect over http2.0'
+                              type: boolean
                             httpLoggingEnabled:
                               description: '<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.'
                               type: boolean
@@ -3341,6 +3345,16 @@ paths:
                               x-ms-enum:
                                 modelAsString: false
                                 name: ManagedPipelineMode
+                            minTlsVersion:
+                              description: 'MinTlsVersion: configures the minimum version of TLS required for SSL requests'
+                              enum:
+                                - '1.0'
+                                - '1.1'
+                                - '1.2'
+                              type: string
+                              x-ms-enum:
+                                modelAsString: true
+                                name: SupportedTlsVersions
                             netFrameworkVersion:
                               default: v4.6
                               description: .NET Framework version.

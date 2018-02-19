@@ -101,6 +101,23 @@ paths:
             type: object
       tags:
         - AgentRegistrationInformation
+      x-ms-examples:
+        Get Agent Registration Information:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                dscMetaConfiguration: "\r\n\tinstance of MSFT_WebDownloadManager as $MSFT_WebDownloadManager1ref\r\n\t{\r\n\tResourceID = \"[ConfigurationRepositoryWeb]AzureAutomationDSC\";\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::20::9::ConfigurationRepositoryWeb\";\r\n\t RegistrationKey = \"MDt********************************************************wEMg==\"; \r\n\t ServerURL = \"https://wcus-agentservice-prod-1.azure-automation.net/accounts/ea8cd428-7887-4020-883d-ec6c5f2c06c2\";\r\n\t};\r\n\r\n\tinstance of MSFT_WebResourceManager as $MSFT_WebResourceManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::27::9::ResourceRepositoryWeb\";\r\n\t ServerURL = \"https://wcus-agentservice-prod-1.azure-automation.net/accounts/ea8cd428-7887-4020-883d-ec6c5f2c06c2\";\r\n\t ResourceID = \"[ResourceRepositoryWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"MDt********************************************************wEMg==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_WebReportManager as $MSFT_WebReportManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::34::9::ReportServerWeb\";\r\n\t ServerURL = \"https://wcus-agentservice-prod-1.azure-automation.net/accounts/ea8cd428-7887-4020-883d-ec6c5f2c06c2\";\r\n\t ResourceID = \"[ReportServerWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"MDt********************************************************wEMg==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_DSCMetaConfiguration as $MSFT_DSCMetaConfiguration1ref\r\n\t{\r\n\t RefreshMode = \"Pull\";\r\n\t AllowModuleOverwrite = False;\r\n\t ActionAfterReboot = \"ContinueConfiguration\";\r\n\t RefreshFrequencyMins = 30;\r\n\t RebootNodeIfNeeded = False;\r\n\t ConfigurationModeFrequencyMins = 15;\r\n\t ConfigurationMode = \"ApplyAndMonitor\";\r\n\r\n\t  ResourceModuleManagers = {\r\n\t  $MSFT_WebResourceManager1ref  \r\n\t};\r\n\t  ReportManagers = {\r\n\t  $MSFT_WebReportManager1ref  \r\n\t };\r\n\t  ConfigurationDownloadManagers = {\r\n\t  $MSFT_WebDownloadManager1ref  \r\n\t };\r\n\t};\r\n\r\n\tinstance of OMI_ConfigurationDocument\r\n\t{\r\n\t Version=\"2.0.0\";\r\n\t MinimumCompatibleVersion = \"2.0.0\";\r\n\t CompatibleVersionAdditionalProperties= { \"MSFT_DSCMetaConfiguration:StatusRetentionTimeInDays\" };\r\n\t Author=\"azureautomation\";\r\n\t GenerationDate=\"04/17/2015 11:41:09\";\r\n\t GenerationHost=\"azureautomation-01\";\r\n\t Name=\"RegistrationMetaConfig\";\r\n\t};\r\n\t"
+                endpoint: 'https://wcus-agentservice-prod-1.azure-automation.net/accounts/ea8cd428-7887-4020-883d-ec6c5f2c06c2'
+                id: '/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/agentRegistrationInformation/https://wcus-agentservice-prod-1.azure-automation.net/accounts/ea8cd428-7887-4020-883d-ec6c5f2c06c2'
+                keys:
+                  primary: MDt********************************************************wEMg==
+                  secondary: UM4A********************************************************66pg==
+              headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/agentRegistrationInformation/regenerateKey':
     post:
       description: Regenerate a primary or secondary agent registration key
@@ -127,10 +144,10 @@ paths:
             description: The parameters supplied to the regenerate keys operation.
             properties:
               keyName:
-                description: Gets or sets the agent registration key name - Primary or Secondary.
+                description: Gets or sets the agent registration key name - primary or secondary.
                 enum:
-                  - Primary
-                  - Secondary
+                  - primary
+                  - secondary
                 type: string
                 x-ms-enum:
                   modelAsString: true
@@ -196,6 +213,23 @@ paths:
             type: object
       tags:
         - AgentRegistrationInformation
+      x-ms-examples:
+        Regenerate the Primary Agent Registration Key:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            parameters:
+              keyName: primary
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                endpoint: 'https://wcus-agentservice-prod-1.azure-automation.net/accounts/ea8cd428-7887-4020-883d-ec6c5f2c06c2'
+                keys:
+                  primary: DXW********************************************************ZqnQ==
+                  secondary: UM4A********************************************************66pg==
+              headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes':
     get:
       description: Retrieve a list of dsc nodes.
@@ -248,24 +282,14 @@ paths:
                           description: Resource Id
                           readOnly: true
                           type: string
-                        location:
-                          description: Resource location
-                          type: string
                         name:
                           description: Resource name
                           readOnly: true
                           type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          description: Resource tags
-                          type: object
                         type:
                           description: Resource type
                           readOnly: true
                           type: string
-                      required:
-                        - location
                       x-ms-azure-resource: true
                   description: Definition of the dsc node type.
                   properties:
@@ -392,24 +416,14 @@ paths:
                     description: Resource Id
                     readOnly: true
                     type: string
-                  location:
-                    description: Resource location
-                    type: string
                   name:
                     description: Resource name
                     readOnly: true
                     type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
                   type:
                     description: Resource type
                     readOnly: true
                     type: string
-                required:
-                  - location
                 x-ms-azure-resource: true
             description: Definition of the dsc node type.
             properties:
@@ -468,6 +482,16 @@ paths:
             type: object
       tags:
         - DscNode
+      x-ms-examples:
+        Delete a DSC Node:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount9
+            nodeId: e1243a76-a9bd-432f-bde3-ad8f317ee786
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200': {}
     get:
       description: Retrieve the dsc node identified by node id.
       externalDocs:
@@ -511,24 +535,14 @@ paths:
                     description: Resource Id
                     readOnly: true
                     type: string
-                  location:
-                    description: Resource location
-                    type: string
                   name:
                     description: Resource name
                     readOnly: true
                     type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
                   type:
                     description: Resource type
                     readOnly: true
                     type: string
-                required:
-                  - location
                 x-ms-azure-resource: true
             description: Definition of the dsc node type.
             properties:
@@ -667,24 +681,14 @@ paths:
                     description: Resource Id
                     readOnly: true
                     type: string
-                  location:
-                    description: Resource location
-                    type: string
                   name:
                     description: Resource name
                     readOnly: true
                     type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
                   type:
                     description: Resource type
                     readOnly: true
                     type: string
-                required:
-                  - location
                 x-ms-azure-resource: true
             description: Definition of the dsc node type.
             properties:
@@ -1503,7 +1507,7 @@ paths:
         '200':
           description: OK
           schema:
-            type: file
+            type: object
         default:
           description: Automation error response describing why the operation failed.
           schema:

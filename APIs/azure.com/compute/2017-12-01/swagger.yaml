@@ -6894,6 +6894,10 @@ definitions:
       overprovision:
         description: Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         type: boolean
+      platformFaultDomainCount:
+        description: Fault Domain count for each placement group.
+        format: int32
+        type: integer
       provisioningState:
         description: 'The provisioning state, which only appears in the response.'
         readOnly: true
@@ -6911,6 +6915,9 @@ definitions:
       virtualMachineProfile:
         $ref: '#/definitions/VirtualMachineScaleSetVMProfile'
         description: The virtual machine profile.
+      zoneBalance:
+        description: Whether to force stictly even Virtual Machine distribution cross x-zones in case there is zone outage.
+        type: boolean
   VirtualMachineScaleSetPublicIPAddressConfiguration:
     description: Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
     properties:

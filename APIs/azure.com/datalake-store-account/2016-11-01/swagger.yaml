@@ -42,6 +42,7 @@ parameters:
     name: accountName
     required: true
     type: string
+    x-ms-parameter-location: method
   ApiVersionParameter:
     description: Client Api Version.
     in: query
@@ -54,6 +55,7 @@ parameters:
     name: resourceGroupName
     required: true
     type: string
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path

@@ -20,8 +20,10 @@ info:
     - Microsoft
 consumes:
   - application/json
+  - text/plain; charset=utf-8
 produces:
   - application/json
+  - text/plain; charset=utf-8
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
@@ -194,6 +196,7 @@ paths:
                           x-ms-enum:
                             modelAsString: true
                             name: DscConfigurationState
+                  type: object
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -449,6 +452,7 @@ paths:
                     x-ms-enum:
                       modelAsString: true
                       name: DscConfigurationState
+            type: object
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -727,6 +731,7 @@ paths:
                     x-ms-enum:
                       modelAsString: true
                       name: DscConfigurationState
+            type: object
         '201':
           description: Created
           schema:
@@ -849,6 +854,7 @@ paths:
                     x-ms-enum:
                       modelAsString: true
                       name: DscConfigurationState
+            type: object
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -954,7 +960,7 @@ paths:
         '200':
           description: OK
           schema:
-            type: file
+            type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:

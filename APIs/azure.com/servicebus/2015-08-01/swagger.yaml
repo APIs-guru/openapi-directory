@@ -1269,6 +1269,44 @@ paths:
                     - Listen
                     - Send
                 type: Microsoft.ServiceBus/AuthorizationRules
+    post:
+      description: Gets an authorization rule for a queue by rule name.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx'
+      operationId: Queues_PostAuthorizationRule
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/queueNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Authorization rule successfully returned.
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Queues
+      x-ms-examples:
+        QueueAutorizationRuleGet:
+          parameters:
+            api-version: '2015-08-01'
+            authorizationRuleName: sdk-Authrules7319
+            namespaceName: sdk-Namespace6556
+            queueName: sdk-Queues3136
+            resourceGroupName: Default-ServiceBus-WestUS
+            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
+          responses:
+            '200':
+              body:
+                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace6556/queues/sdk-Queues3136/authorizationRules/sdk-Authrules7319
+                name: sdk-Authrules7319
+                properties:
+                  rights:
+                    - Listen
+                    - Send
+                type: Microsoft.ServiceBus/AuthorizationRules
     put:
       description: Creates an authorization rule for a queue.
       operationId: Queues_CreateOrUpdateAuthorizationRule
@@ -1669,6 +1707,44 @@ paths:
       externalDocs:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx'
       operationId: Topics_GetAuthorizationRule
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/topicNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Topic authorization rule returned successfully.
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Topics
+      x-ms-examples:
+        TopicAutorizationRuleGet:
+          parameters:
+            api-version: '2015-08-01'
+            authorizationRuleName: sdk-Authrules5067
+            namespaceName: sdk-Namespace8408
+            resourceGroupName: Default-ServiceBus-WestUS
+            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
+            topicName: sdk-Topics2075
+          responses:
+            '200':
+              body:
+                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace8408/topics/sdk-Topics2075/authorizationRules/sdk-Authrules5067
+                name: sdk-Authrules5067
+                properties:
+                  rights:
+                    - Listen
+                    - Send
+                type: Microsoft.ServiceBus/AuthorizationRules
+    post:
+      description: Returns the specified authorization rule.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx'
+      operationId: Topics_PostAuthorizationRule
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/namespaceNameParameter'

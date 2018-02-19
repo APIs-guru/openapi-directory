@@ -78,10 +78,12 @@ paths:
                   description: Definition of the schedule.
                   properties:
                     id:
-                      description: Gets or sets the id of the resource.
+                      description: Gets the id of the resource.
+                      readOnly: true
                       type: string
                     name:
-                      description: Gets or sets the name of the schedule.
+                      description: Gets name of the schedule.
+                      readOnly: true
                       type: string
                     properties:
                       description: Definition of schedule parameters.
@@ -181,6 +183,10 @@ paths:
                         timeZone:
                           description: Gets or sets the time zone of the schedule.
                           type: string
+                    type:
+                      description: Resource type
+                      readOnly: true
+                      type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -3156,10 +3162,12 @@ paths:
             description: Definition of the schedule.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the schedule.
+                description: Gets name of the schedule.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of schedule parameters.
@@ -3259,6 +3267,10 @@ paths:
                   timeZone:
                     description: Gets or sets the time zone of the schedule.
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3342,8 +3354,6 @@ paths:
                   isEnabled:
                     description: Gets or sets a value indicating whether this schedule is enabled.
                     type: boolean
-            required:
-              - name
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -3361,10 +3371,12 @@ paths:
             description: Definition of the schedule.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the schedule.
+                description: Gets name of the schedule.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of schedule parameters.
@@ -3464,6 +3476,10 @@ paths:
                   timeZone:
                     description: Gets or sets the time zone of the schedule.
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3635,10 +3651,12 @@ paths:
             description: Definition of the schedule.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the schedule.
+                description: Gets name of the schedule.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of schedule parameters.
@@ -3738,6 +3756,10 @@ paths:
                   timeZone:
                     description: Gets or sets the time zone of the schedule.
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
         '409':
           description: Conflict
         default:

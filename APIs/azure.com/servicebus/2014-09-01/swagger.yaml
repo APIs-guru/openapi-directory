@@ -138,6 +138,26 @@ paths:
             $ref: '#/definitions/CheckNameAvailabilityResult'
       tags:
         - Namespaces
+  '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/CheckNameSpaceAvailability':
+    post:
+      description: Check the give namespace name availability.
+      operationId: Namespaces_CheckNameSpaceAvailability
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: Parameters to check availability of the given namespace name
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckNameAvailability'
+      responses:
+        '200':
+          description: check availability returned successfully.
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityResult'
+      tags:
+        - Namespaces
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces':
     get:
       description: 'Gets all the available namespaces within the subscription, irrespective of the resource groups.'
@@ -294,6 +314,25 @@ paths:
         - Namespaces
       x-ms-pageable:
         nextLinkName: nextLink
+    post:
+      description: Gets the authorization rules for a namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx'
+      operationId: Namespaces_ListPostAuthorizationRules
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace authorization rules returned successfully.
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
     delete:
       description: Deletes a namespace authorization rule.
@@ -328,29 +367,23 @@ paths:
         '200':
           description: Namespace authorization rule returned successfully.
           schema:
-            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+            $ref: '#/definitions/SharedAccessAuthorizationRuleGetResource'
       tags:
         - Namespaces
     post:
-      description: Creates or updates an authorization rule for a namespace.
+      description: Gets an authorization rule for a namespace by rule name.
       externalDocs:
-        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx'
-      operationId: Namespaces_UpdateAuthorizationRule
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx'
+      operationId: Namespaces_PostAuthorizationRule
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/namespaceNameParameter'
         - $ref: '#/parameters/authorizationRuleNameParameter'
-        - description: The shared access authorization rule.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace authorization rule updated.
+          description: Namespace authorization rule returned successfully.
           schema:
             $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
       tags:
@@ -605,28 +638,24 @@ paths:
         '200':
           description: Authorization rule successfully returned.
           schema:
-            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+            $ref: '#/definitions/SharedAccessAuthorizationRuleGetResource'
       tags:
         - Queues
     post:
-      description: Creates an authorization rule for a queue.
-      operationId: Queues_UpdateAuthorizationRule
+      description: Gets an authorization rule for a queue by rule name.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx'
+      operationId: Queues_PostAuthorizationRule
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/namespaceNameParameter'
         - $ref: '#/parameters/queueNameParameter'
         - $ref: '#/parameters/authorizationRuleNameParameter'
-        - description: The shared access authorization rule.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Authorization rule successfully created.
+          description: Authorization rule successfully returned.
           schema:
             $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
       tags:
@@ -792,30 +821,24 @@ paths:
         '200':
           description: Topic authorization rule returned successfully.
           schema:
-            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+            $ref: '#/definitions/SharedAccessAuthorizationRuleGetResource'
       tags:
         - Topics
     post:
-      description: Creates an authorizatio rule for the specified topic.
+      description: Returns the specified authorization rule.
       externalDocs:
-        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx'
-      operationId: Topics_UpdateAuthorizationRule
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx'
+      operationId: Topics_PostAuthorizationRule
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/namespaceNameParameter'
         - $ref: '#/parameters/topicNameParameter'
         - $ref: '#/parameters/authorizationRuleNameParameter'
-        - description: The shared access authorization rule.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Topic authorization rule successfully created.
+          description: Topic authorization rule returned successfully.
           schema:
             $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
       tags:
@@ -1315,6 +1338,31 @@ definitions:
         type: string
       properties:
         $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
+        x-ms-client-flatten: true
+  SharedAccessAuthorizationRuleGetProperties:
+    description: SharedAccessAuthorizationRule properties.
+    properties:
+      rights:
+        description: The rights associated with the rule.
+        items:
+          enum:
+            - Manage
+            - Send
+            - Listen
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: AccessRights
+        type: array
+    required:
+      - rights
+  SharedAccessAuthorizationRuleGetResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of a namespace authorization rule.
+    properties:
+      properties:
+        $ref: '#/definitions/SharedAccessAuthorizationRuleGetProperties'
         x-ms-client-flatten: true
   SharedAccessAuthorizationRuleListResult:
     description: The response to the List Namespace operation.

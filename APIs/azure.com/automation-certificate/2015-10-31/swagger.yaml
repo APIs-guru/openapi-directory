@@ -114,6 +114,11 @@ paths:
                           description: Gets the thumbprint of the certificate.
                           readOnly: true
                           type: string
+                    type:
+                      description: Resource type
+                      readOnly: true
+                      type: string
+                  x-ms-azure-resource: true
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -287,6 +292,11 @@ paths:
                     description: Gets the thumbprint of the certificate.
                     readOnly: true
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -360,8 +370,6 @@ paths:
                   description:
                     description: Gets or sets the description of the certificate.
                     type: string
-            required:
-              - name
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -415,6 +423,11 @@ paths:
                     description: Gets the thumbprint of the certificate.
                     readOnly: true
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -559,6 +572,11 @@ paths:
                     description: Gets the thumbprint of the certificate.
                     readOnly: true
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         '201':
           description: Created
           schema:
@@ -601,6 +619,11 @@ paths:
                     description: Gets the thumbprint of the certificate.
                     readOnly: true
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

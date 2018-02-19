@@ -78,10 +78,12 @@ paths:
                   description: Definition of the varible.
                   properties:
                     id:
-                      description: Gets or sets the id of the resource.
+                      description: Gets the id of the resource.
+                      readOnly: true
                       type: string
                     name:
-                      description: Gets or sets the name of the variable.
+                      description: Gets the name of the variable.
+                      readOnly: true
                       type: string
                     properties:
                       description: Definition of the varible properties
@@ -103,6 +105,11 @@ paths:
                         value:
                           description: Gets or sets the value of the variable.
                           type: string
+                    type:
+                      description: Resource type
+                      readOnly: true
+                      type: string
+                  x-ms-azure-resource: true
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -1017,10 +1024,12 @@ paths:
             description: Definition of the varible.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the variable.
+                description: Gets the name of the variable.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the varible properties
@@ -1042,6 +1051,11 @@ paths:
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1115,8 +1129,6 @@ paths:
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
-            required:
-              - name
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -1134,10 +1146,12 @@ paths:
             description: Definition of the varible.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the variable.
+                description: Gets the name of the variable.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the varible properties
@@ -1159,6 +1173,11 @@ paths:
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1261,10 +1280,12 @@ paths:
             description: Definition of the varible.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the variable.
+                description: Gets the name of the variable.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the varible properties
@@ -1286,16 +1307,23 @@ paths:
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         '201':
           description: Created
           schema:
             description: Definition of the varible.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the variable.
+                description: Gets the name of the variable.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the varible properties
@@ -1317,6 +1345,11 @@ paths:
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

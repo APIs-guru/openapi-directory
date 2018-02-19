@@ -786,7 +786,7 @@ paths:
                             description: Contract details.
                             properties:
                               properties:
-                                description: Developer group.
+                                description: Group contract Properties.
                                 properties:
                                   builtIn:
                                     description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -967,6 +967,87 @@ paths:
             uid: 59307d350af58404d8a26300
           responses:
             '204': {}
+    head:
+      description: Checks that user entity specified by identifier is associated with the group entity.
+      operationId: GroupUser_CheckEntityExists
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/GroupIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: uid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Entity exists
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - GroupUsers
+      x-ms-examples:
+        ApiManagementHeadGroupUser:
+          parameters:
+            api-version: '2017-03-01'
+            groupId: 59306a29e4bbd510dc24e5f9
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+            uid: 5931a75ae4bbd512a88c680b
+          responses:
+            '204': {}
     put:
       description: Adds a user to the specified group.
       operationId: GroupUser_Create
@@ -1099,7 +1180,7 @@ paths:
                       description: Contract details.
                       properties:
                         properties:
-                          description: Developer group.
+                          description: Group contract Properties.
                           properties:
                             builtIn:
                               description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -1231,7 +1312,7 @@ paths:
                       description: Contract details.
                       properties:
                         properties:
-                          description: Developer group.
+                          description: Group contract Properties.
                           properties:
                             builtIn:
                               description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -1367,7 +1448,7 @@ definitions:
     description: Contract details.
     properties:
       properties:
-        description: Developer group.
+        description: Group contract Properties.
         properties:
           builtIn:
             description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -1398,7 +1479,7 @@ definitions:
         required:
           - displayName
   GroupContractProperties:
-    description: Developer group.
+    description: Group contract Properties.
     properties:
       builtIn:
         description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'

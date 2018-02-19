@@ -98,6 +98,8 @@ paths:
                       exclude: false
                       low_cpu_threshold: '5'
                     type: Microsoft.Advisor/configurations
+      x-ms-pageable:
+        nextLinkName: nextLink
     put:
       deprecated: false
       description: Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.
@@ -340,6 +342,7 @@ paths:
                       exclude: false
                       low_cpu_threshold: '5'
                     type: Microsoft.Advisor/configurations
+      x-ms-pageable: {}
     put:
       deprecated: false
       operationId: Configurations_CreateInResourceGroup

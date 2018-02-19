@@ -24,6 +24,14 @@ consumes:
   - application/json
 produces:
   - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
 parameters:
   APIVersionParameter:
     description: The version of the Microsoft.MachineLearning resource provider API to use.
@@ -52,6 +60,18 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  /providers/Microsoft.MachineLearning/operations:
+    get:
+      description: Lists all the available REST API operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/APIVersionParameter'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/OperationEntityListResult'
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/webServices':
     get:
       description: Gets the web services in the specified subscription.
@@ -1074,17 +1094,21 @@ definitions:
     properties:
       code:
         description: The error code.
+        readOnly: true
         type: string
       details:
         description: An array containing error information.
         items:
           $ref: '#/definitions/AsyncOperationErrorInfo'
+        readOnly: true
         type: array
       message:
         description: The error message.
+        readOnly: true
         type: string
       target:
         description: The error target.
+        readOnly: true
         type: string
     type: object
   AsyncOperationStatus:
@@ -1098,14 +1122,18 @@ definitions:
       errorInfo:
         $ref: '#/definitions/AsyncOperationErrorInfo'
         description: 'If the async operation fails, this structure contains the error details.'
+        readOnly: true
       id:
         description: Async operation id.
+        readOnly: true
         type: string
       name:
         description: Async operation name.
+        readOnly: true
         type: string
       percentComplete:
         description: Async operation progress.
+        readOnly: true
         type: number
       provisioningState:
         description: 'Read Only: The provisioning state of the web service. Valid values are Unknown, Provisioning, Succeeded, and Failed.'
@@ -1384,6 +1412,47 @@ definitions:
       parameterType:
         description: Parameter type.
         type: string
+    type: object
+  OperationDisplayInfo:
+    description: The API operation info.
+    properties:
+      description:
+        description: The description of the operation.
+        readOnly: true
+        type: string
+      operation:
+        description: 'The action that users can perform, based on their permission level.'
+        readOnly: true
+        type: string
+      provider:
+        description: The service provider.
+        readOnly: true
+        type: string
+      resource:
+        description: The resource on which the operation is performed.
+        readOnly: true
+        type: string
+    type: object
+  OperationEntity:
+    description: An API operation.
+    properties:
+      display:
+        $ref: '#/definitions/OperationDisplayInfo'
+        description: The API operation info.
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}.'
+        readOnly: true
+        type: string
+    type: object
+  OperationEntityListResult:
+    description: The list of REST API operations.
+    properties:
+      value:
+        description: The list of operations.
+        items:
+          $ref: '#/definitions/OperationEntity'
+        readOnly: true
+        type: array
     type: object
   OutputPort:
     description: Asset output port

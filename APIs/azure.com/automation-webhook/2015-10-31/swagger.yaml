@@ -83,10 +83,12 @@ paths:
                   description: Definition of the webhook type.
                   properties:
                     id:
-                      description: Gets or sets the id of the resource.
+                      description: Gets the id of the resource.
+                      readOnly: true
                       type: string
                     name:
-                      description: Gets or sets the name of the webhook.
+                      description: Gets the name of the webhook.
+                      readOnly: true
                       type: string
                     properties:
                       description: Definition of the webhook properties
@@ -131,6 +133,11 @@ paths:
                         uri:
                           description: Gets or sets the webhook uri.
                           type: string
+                    type:
+                      description: Gets the type of the resource.
+                      readOnly: true
+                      type: string
+                  x-ms-azure-resource: true
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -217,6 +224,17 @@ paths:
             type: object
       tags:
         - Webhook
+      x-ms-examples:
+        Generate webhook uri:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body: 'https://s13events.azure-automation.net/webhooks?token=O6n03K%2b1%2bSLPH50m4x9%2fcbcqtAu2tJDTvr8QHnbJ1kw%3d'
+              headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks/{webhookName}':
     delete:
       description: Delete the webhook by name.
@@ -316,10 +334,12 @@ paths:
             description: Definition of the webhook type.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the webhook.
+                description: Gets the name of the webhook.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the webhook properties
@@ -364,6 +384,11 @@ paths:
                   uri:
                     description: Gets or sets the webhook uri.
                     type: string
+              type:
+                description: Gets the type of the resource.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -450,8 +475,6 @@ paths:
                   runOn:
                     description: Gets or sets the name of the hybrid worker group the webhook job will run on.
                     type: string
-            required:
-              - name
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -469,10 +492,12 @@ paths:
             description: Definition of the webhook type.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the webhook.
+                description: Gets the name of the webhook.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the webhook properties
@@ -517,6 +542,11 @@ paths:
                   uri:
                     description: Gets or sets the webhook uri.
                     type: string
+              type:
+                description: Gets the type of the resource.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -638,10 +668,12 @@ paths:
             description: Definition of the webhook type.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the webhook.
+                description: Gets the name of the webhook.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the webhook properties
@@ -686,16 +718,23 @@ paths:
                   uri:
                     description: Gets or sets the webhook uri.
                     type: string
+              type:
+                description: Gets the type of the resource.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         '201':
           description: Created
           schema:
             description: Definition of the webhook type.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
                 type: string
               name:
-                description: Gets or sets the name of the webhook.
+                description: Gets the name of the webhook.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the webhook properties
@@ -740,6 +779,11 @@ paths:
                   uri:
                     description: Gets or sets the webhook uri.
                     type: string
+              type:
+                description: Gets the type of the resource.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -784,6 +828,7 @@ paths:
                   runbook:
                     name: TestRunbook
                   uri: ''
+                type: Microsoft.Automation/AutomationAccounts/Webhooks
               headers: {}
             '201':
               body:
@@ -798,5 +843,6 @@ paths:
                   runbook:
                     name: TestRunbook
                   uri: ''
+                type: Microsoft.Automation/AutomationAccounts/Webhooks
               headers: {}
 definitions: {}

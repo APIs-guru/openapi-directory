@@ -23,6 +23,14 @@ consumes:
   - application/json
 produces:
   - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
 parameters:
   APIVersionParameter:
     description: The version of the Microsoft.MachineLearning resource provider API to use.
@@ -86,6 +94,21 @@ paths:
         - CommitmentPlans
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/skus':
+    get:
+      description: Lists the available commitment plan SKUs.
+      operationId: Skus_List
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/APIVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SkuListResult'
+      tags:
+        - Skus
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans':
     get:
       description: Retrieve all Azure ML commitment plans in a resource group.
@@ -245,6 +268,50 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:
+  CatalogSku:
+    description: Details of a commitment plan SKU.
+    properties:
+      capabilities:
+        description: The capability information for the specified SKU.
+        items:
+          $ref: '#/definitions/SkuCapability'
+        readOnly: true
+        type: array
+      capacity:
+        $ref: '#/definitions/SkuCapacity'
+        description: SKU scaling information
+        readOnly: true
+      costs:
+        description: The cost information for the specified SKU.
+        items:
+          $ref: '#/definitions/SkuCost'
+        readOnly: true
+        type: array
+      locations:
+        description: Regions where the SKU is available.
+        items:
+          type: string
+        readOnly: true
+        type: array
+      name:
+        description: SKU name
+        readOnly: true
+        type: string
+      resourceType:
+        description: Resource type name
+        readOnly: true
+        type: string
+      restrictions:
+        description: Restrictions which would prevent a SKU from being used. This is empty if there are no restrictions.
+        items:
+          $ref: '#/definitions/SkuRestrictions'
+        readOnly: true
+        type: array
+      tier:
+        description: SKU tier
+        readOnly: true
+        type: string
+    type: object
   CommitmentAssociation:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -498,6 +565,103 @@ definitions:
         description: 'The SKU tier. Along with name, uniquely identifies the SKU.'
         type: string
     type: object
+  SkuCapability:
+    description: Describes The SKU capabilites object.
+    properties:
+      name:
+        description: The capability name.
+        readOnly: true
+        type: string
+      value:
+        description: The capability value.
+        readOnly: true
+        type: string
+    type: object
+  SkuCapacity:
+    description: Describes scaling information of a SKU.
+    properties:
+      default:
+        description: The default capacity.
+        format: int64
+        readOnly: true
+        type: integer
+      maximum:
+        description: The maximum capacity that can be set.
+        format: int64
+        readOnly: true
+        type: integer
+      minimum:
+        description: The minimum capacity.
+        format: int64
+        readOnly: true
+        type: integer
+      scaleType:
+        description: The scale type applicable to the sku.
+        enum:
+          - Automatic
+          - Manual
+          - None
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuCapacityScaleType
+    type: object
+  SkuCost:
+    description: Describes metadata for SKU cost info.
+    properties:
+      extendedUnit:
+        description: The overall duration represented by the quantity.
+        readOnly: true
+        type: string
+      meterID:
+        description: The meter used for this part of a SKU's cost.
+        readOnly: true
+        type: string
+      quantity:
+        description: The multiplier for the meter ID.
+        format: int64
+        readOnly: true
+        type: integer
+    type: object
+  SkuListResult:
+    description: The list of commitment plan SKUs.
+    properties:
+      value:
+        items:
+          $ref: '#/definitions/CatalogSku'
+        readOnly: true
+        type: array
+    type: object
+  SkuRestrictions:
+    description: Describes restrictions which would prevent a SKU from being used.
+    properties:
+      reasonCode:
+        description: The reason for restriction.
+        enum:
+          - QuotaId
+          - NotAvailableForSubscription
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ResourceSkuRestrictionsReasonCode
+      type:
+        description: The type of restrictions.
+        enum:
+          - location
+          - zone
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ResourceSkuRestrictionsType
+      values:
+        description: The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.
+        items:
+          type: string
+        readOnly: true
+        type: array
   Tags:
     additionalProperties:
       type: string

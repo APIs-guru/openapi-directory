@@ -121,6 +121,10 @@ paths:
                           description: Gets or sets the last modified time.
                           format: date-time
                           type: string
+                    type:
+                      description: Resource type
+                      readOnly: true
+                      type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -3727,6 +3731,10 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3892,6 +3900,10 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
         '409':
           description: Conflict
           schema:
@@ -3941,6 +3953,10 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:

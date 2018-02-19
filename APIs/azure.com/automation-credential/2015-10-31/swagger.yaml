@@ -83,6 +83,7 @@ paths:
                       type: string
                     name:
                       description: Gets the name of the credential.
+                      readOnly: true
                       type: string
                     properties:
                       description: Definition of the credential properties
@@ -104,6 +105,11 @@ paths:
                           description: Gets the user name of the credential.
                           readOnly: true
                           type: string
+                    type:
+                      description: Resource type
+                      readOnly: true
+                      type: string
+                  x-ms-azure-resource: true
                 type: array
       tags:
         - Credential
@@ -1638,6 +1644,7 @@ paths:
                 type: string
               name:
                 description: Gets the name of the credential.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the credential properties
@@ -1659,6 +1666,11 @@ paths:
                     description: Gets the user name of the credential.
                     readOnly: true
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1736,8 +1748,6 @@ paths:
                   userName:
                     description: Gets or sets the user name of the credential.
                     type: string
-            required:
-              - name
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -1760,6 +1770,7 @@ paths:
                 type: string
               name:
                 description: Gets the name of the credential.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the credential properties
@@ -1781,6 +1792,11 @@ paths:
                     description: Gets the user name of the credential.
                     readOnly: true
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1892,6 +1908,7 @@ paths:
                 type: string
               name:
                 description: Gets the name of the credential.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the credential properties
@@ -1913,6 +1930,11 @@ paths:
                     description: Gets the user name of the credential.
                     readOnly: true
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         '201':
           description: Created
           schema:
@@ -1924,6 +1946,7 @@ paths:
                 type: string
               name:
                 description: Gets the name of the credential.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of the credential properties
@@ -1945,6 +1968,11 @@ paths:
                     description: Gets the user name of the credential.
                     readOnly: true
                     type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

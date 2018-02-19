@@ -78,7 +78,12 @@ paths:
                   description: Definition of the job schedule.
                   properties:
                     id:
-                      description: Gets or sets the id of the resource.
+                      description: Gets the id of the resource.
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Gets the name of the variable.
+                      readOnly: true
                       type: string
                     properties:
                       description: Definition of job schedule parameters.
@@ -106,6 +111,10 @@ paths:
                             name:
                               description: Gets or sets the name of the schedule.
                               type: string
+                    type:
+                      description: Resource type
+                      readOnly: true
+                      type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -257,7 +266,12 @@ paths:
             description: Definition of the job schedule.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
+                type: string
+              name:
+                description: Gets the name of the variable.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of job schedule parameters.
@@ -285,6 +299,10 @@ paths:
                       name:
                         description: Gets or sets the name of the schedule.
                         type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -396,7 +414,12 @@ paths:
             description: Definition of the job schedule.
             properties:
               id:
-                description: Gets or sets the id of the resource.
+                description: Gets the id of the resource.
+                readOnly: true
+                type: string
+              name:
+                description: Gets the name of the variable.
+                readOnly: true
                 type: string
               properties:
                 description: Definition of job schedule parameters.
@@ -424,6 +447,10 @@ paths:
                       name:
                         description: Gets or sets the name of the schedule.
                         type: string
+              type:
+                description: Resource type
+                readOnly: true
+                type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:

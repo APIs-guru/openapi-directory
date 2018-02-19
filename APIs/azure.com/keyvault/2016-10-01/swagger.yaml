@@ -1273,6 +1273,10 @@ definitions:
             - set
             - update
             - regeneratekey
+            - recover
+            - purge
+            - backup
+            - restore
             - setsas
             - listsas
             - getsas
@@ -1519,7 +1523,6 @@ definitions:
         type: string
       vaultUri:
         description: The URI of the vault for performing operations on keys and secrets.
-        readOnly: true
         type: string
     required:
       - tenantId

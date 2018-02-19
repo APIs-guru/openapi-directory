@@ -80,12 +80,24 @@ paths:
               value:
                 description: Gets or sets a list of Dsc Compilation jobs.
                 items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource Id
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
                   description: Definition of the Dsc Compilation job.
                   properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
                     properties:
                       description: Definition of Dsc Compilation job properties.
                       properties:
@@ -129,6 +141,16 @@ paths:
                             type: string
                           description: Gets or sets the parameters of the job.
                           type: object
+                        provisioningState:
+                          description: The provisioning state property.
+                          properties:
+                            provisioningState:
+                              description: The provisioning state of the resource.
+                              readOnly: true
+                              type: string
+                        runOn:
+                          description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+                          type: string
                         startTime:
                           description: Gets the start time of the job.
                           format: date-time
@@ -176,6 +198,37 @@ paths:
             type: object
       tags:
         - DscCompilationJob
+      x-ms-examples:
+        List DSC Compilation job in Automation Account:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/e6e7fbab-183c-405a-afe6-9eb5db97921a
+                    properties:
+                      configuration:
+                        name: TestDscConfiguration
+                      creationTime: '2017-11-17T19:45:24.59+00:00'
+                      jobId: e6e7fbab-183c-405a-afe6-9eb5db97921a
+                      lastModifiedTime: '2017-11-17T19:45:58.5933333+00:00'
+                      startTime: '2017-11-17T19:45:52.9833333+00:00'
+                      status: Suspended
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/111d4e06-2d88-46b4-8500-7febd4906838
+                    properties:
+                      configuration:
+                        name: NewDscConfiguration
+                      creationTime: '2017-12-05T21:29:07.74+00:00'
+                      endTime: '2017-12-05T21:30:42.6+00:00'
+                      jobId: 111d4e06-2d88-46b4-8500-7febd4906838
+                      lastModifiedTime: '2017-12-05T21:30:42.6+00:00'
+                      startTime: '2017-12-05T21:30:26.48+00:00'
+                      status: Completed
+              headers: {}
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{compilationJobId}':
@@ -216,12 +269,24 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
             description: Definition of the Dsc Compilation job.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of Dsc Compilation job properties.
                 properties:
@@ -265,6 +330,16 @@ paths:
                       type: string
                     description: Gets or sets the parameters of the job.
                     type: object
+                  provisioningState:
+                    description: The provisioning state property.
+                    properties:
+                      provisioningState:
+                        description: The provisioning state of the resource.
+                        readOnly: true
+                        type: string
+                  runOn:
+                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+                    type: string
                   startTime:
                     description: Gets the start time of the job.
                     format: date-time
@@ -311,6 +386,29 @@ paths:
             type: object
       tags:
         - DscCompilationJob
+      x-ms-examples:
+        Get a DSC Compilation job:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            compilationJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                properties:
+                  configuration:
+                    name: SetupServer
+                  creationTime: '2017-03-28T23:14:26.903+00:00'
+                  jobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                  lastModifiedTime: '2017-03-28T23:14:26.903+00:00'
+                  lastStatusModifiedTime: '2017-03-28T23:14:26.903+00:00'
+                  provisioningState: Processing
+                  status: New
+                  statusDetails: None
+              headers: {}
     put:
       description: Creates the Dsc compilation job of the configuration.
       externalDocs:
@@ -387,12 +485,24 @@ paths:
         '201':
           description: Created
           schema:
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
             description: Definition of the Dsc Compilation job.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of Dsc Compilation job properties.
                 properties:
@@ -436,6 +546,16 @@ paths:
                       type: string
                     description: Gets or sets the parameters of the job.
                     type: object
+                  provisioningState:
+                    description: The provisioning state property.
+                    properties:
+                      provisioningState:
+                        description: The provisioning state of the resource.
+                        readOnly: true
+                        type: string
+                  runOn:
+                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+                    type: string
                   startTime:
                     description: Gets the start time of the job.
                     format: date-time
@@ -509,6 +629,169 @@ paths:
                   provisioningState: Processing
                   status: New
                   statusDetails: None
+              headers: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/':
+    get:
+      description: Retrieve all the job streams for the compilation Job.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/jobstreamoperations'
+      operationId: DscCompilationJobStream_ListByJob
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The job id.
+          format: uuid
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: The response model for the list job stream operation.
+            properties:
+              nextLink:
+                description: Gets or sets the next link.
+                type: string
+              value:
+                description: A list of job streams.
+                items:
+                  description: Definition of the job stream.
+                  properties:
+                    id:
+                      description: Gets or sets the id of the resource.
+                      type: string
+                    properties:
+                      description: Definition of the job stream.
+                      properties:
+                        jobStreamId:
+                          description: Gets or sets the id of the job stream.
+                          type: string
+                        streamText:
+                          description: Gets or sets the stream text.
+                          type: string
+                        streamType:
+                          description: Gets or sets the stream type.
+                          enum:
+                            - Progress
+                            - Output
+                            - Warning
+                            - Error
+                            - Debug
+                            - Verbose
+                            - Any
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: JobStreamType
+                        summary:
+                          description: Gets or sets the summary.
+                          type: string
+                        time:
+                          description: Gets or sets the creation time of the job.
+                          format: date-time
+                          type: string
+                        value:
+                          additionalProperties:
+                            type: object
+                          description: Gets or sets the values of the job stream.
+                          type: object
+                      x-ms-client-flatten: true
+                type: array
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - DscCompilationJob
+      x-ms-examples:
+        List DSC Compilation job streams:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            jobId: 836d4e06-2d88-46b4-8500-7febd4906838
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062355996678_00000000000000000001
+                    properties:
+                      jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062355996678_00000000000000000001
+                      streamType: Warning
+                      summary: '836d4e06-2d88-46b4-8500-7febd4906838:[localhost]:The ''Microsoft.PowerShell.Management'' module was not imported because the ''Microsoft.PowerShell.Management'' snap-in was already imported.'
+                      time: '2017-12-05T21:30:35.5996678+00:00'
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062380840740_00000000000000000002
+                    properties:
+                      jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062380840740_00000000000000000002
+                      streamType: Warning
+                      summary: '836d4e06-2d88-46b4-8500-7febd4906838:[localhost]:The configuration ''NewDscConfiguration'' is loading one or more built-in resources without explicitly importing associated modules. Add Import-DscResource –ModuleName ''PSDesiredStateConfiguration'' to your configuration to avoid this message.'
+                      time: '2017-12-05T21:30:38.084074+00:00'
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062384590127_00000000000000000003
+                    properties:
+                      jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062384590127_00000000000000000003
+                      streamType: Warning
+                      summary: '836d4e06-2d88-46b4-8500-7febd4906838:[localhost]:The ''Microsoft.PowerShell.Management'' module was not imported because the ''Microsoft.PowerShell.Management'' snap-in was already imported.'
+                      time: '2017-12-05T21:30:38.4590127+00:00'
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062387245395_00000000000000000004
+                    properties:
+                      jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062387245395_00000000000000000004
+                      streamType: Warning
+                      summary: '836d4e06-2d88-46b4-8500-7febd4906838:[localhost]:The configuration ''NewDscConfiguration'' is loading one or more built-in resources without explicitly importing associated modules. Add Import-DscResource –ModuleName ''PSDesiredStateConfiguration'' to your configuration to avoid this message.'
+                      time: '2017-12-05T21:30:38.7245395+00:00'
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062417091181_00000000000000000005
+                    properties:
+                      jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062417091181_00000000000000000005
+                      streamType: Output
+                      summary: ''
+                      time: '2017-12-05T21:30:41.7091181+00:00'
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062418809632_00000000000000000006
+                    properties:
+                      jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062418809632_00000000000000000006
+                      streamType: Output
+                      summary: ''
+                      time: '2017-12-05T21:30:41.8809632+00:00'
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062420371712_00000000000000000007
+                    properties:
+                      jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062420371712_00000000000000000007
+                      streamType: Output
+                      summary: ''
+                      time: '2017-12-05T21:30:42.0371712+00:00'
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062421684835_00000000000000000008
+                    properties:
+                      jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062421684835_00000000000000000008
+                      streamType: Output
+                      summary: ''
+                      time: '2017-12-05T21:30:42.1684835+00:00'
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/{jobStreamId}':
     get:
@@ -608,4 +891,29 @@ paths:
             type: object
       tags:
         - DscCompilationJob
+      x-ms-examples:
+        Get a DSC Compilation job stream by job stream id:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            jobId: 836d4e06-2d88-46b4-8500-7febd4906838
+            jobStreamId: 836d4e06-2d88-46b4-8500-7febd4906838_00636481062421684835_00000000000000000008
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/836d4e06-2d88-46b4-8500-7febd4906838/streams/836d4e06-2d88-46b4-8500-7febd4906838_00636481062421684835_00000000000000000008
+                properties:
+                  jobStreamId: '836d4e06-2d88-46b4-8500-7febd4906838:00636481062421684835:00000000000000000001'
+                  streamText: ''
+                  streamType: Output
+                  summary: ''
+                  time: '2017-12-05T21:30:42.1684835+00:00'
+                  value:
+                    PSComputerName: localhost
+                    PSShowComputerName: true
+                    PSSourceJobInstanceId: 836d4e06-2d88-46b4-8500-7febd4906838
+                    value: ''
+              headers: {}
 definitions: {}

@@ -62,6 +62,7 @@ parameters:
     name: If-Match
     required: true
     type: string
+    x-ms-parameter-location: method
   OperationIdParameter:
     description: Operation identifier within an API. Must be unique in the current API Management service instance.
     in: path
@@ -194,30 +195,53 @@ paths:
               body:
                 nextLink: ''
                 value:
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1
+                    name: a1
+                    properties:
+                      apiRevision: '1'
+                      apiVersionSetId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/api-version-sets/c48f96c9-1385-4e2d-b410-5ab591ce0fc4
+                      displayName: api1
+                      isCurrent: true
+                      path: api1
+                      protocols:
+                        - https
+                      serviceUrl: 'http://echoapi.cloudapp.net/api'
+                    type: Microsoft.ApiManagement/service/apis
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a73933b8f27f7cc82a2d533
+                    name: 5a73933b8f27f7cc82a2d533
+                    properties:
+                      apiRevision: '1'
+                      apiVersion: v1
+                      apiVersionSetId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/api-version-sets/c48f96c9-1385-4e2d-b410-5ab591ce0fc4
+                      displayName: api1
+                      isCurrent: true
+                      path: api1
+                      protocols:
+                        - https
+                      serviceUrl: 'http://echoapi.cloudapp.net/api'
+                    type: Microsoft.ApiManagement/service/apis
                   - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api
                     name: echo-api
                     properties:
                       apiRevision: '1'
                       displayName: Echo API
                       isCurrent: true
-                      isOnline: true
                       path: echo
                       protocols:
                         - https
                       serviceUrl: 'http://echoapi.cloudapp.net/api'
                     type: Microsoft.ApiManagement/service/apis
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/PetStoreTemplate2
-                    name: PetStoreTemplate2
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a7390baa5816a110435aee0
+                    name: 5a7390baa5816a110435aee0
                     properties:
                       apiRevision: '1'
-                      description: 'This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.'
-                      displayName: Swagger Petstore
+                      description: A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification
+                      displayName: Swagger Petstore Extensive
                       isCurrent: true
-                      isOnline: true
-                      path: petstore2
+                      path: vvv
                       protocols:
-                        - http
-                      serviceUrl: 'http://petstore.swagger.io/v2'
+                        - https
+                      serviceUrl: 'http://petstore.swagger.wordnik.com/api'
                     type: Microsoft.ApiManagement/service/apis
       x-ms-odata: '#/definitions/ApiContract'
       x-ms-pageable:
@@ -330,6 +354,11 @@ paths:
           name: subscriptionId
           required: true
           type: string
+      produces:
+        - application/json
+        - application/vnd.sun.wadl+xml
+        - application/vnd.swagger.doc+json
+        - application/wsdl+xml
       responses:
         '200':
           description: The response body contains the specified API entity.
@@ -560,6 +589,11 @@ paths:
           responses:
             '204': {}
     put:
+      consumes:
+        - application/json
+        - application/vnd.sun.wadl+xml
+        - application/vnd.swagger.doc+json
+        - application/wsdl+xml
       description: Creates new or updates existing specified API of the API Management service instance.
       operationId: Api_CreateOrUpdate
       parameters:
@@ -1786,6 +1820,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
+      produces:
+        - application/json
+        - application/vnd.ms-azure-apim.policy+xml
+        - application/vnd.ms-azure-apim.policy.raw+xml
       responses:
         '200':
           description: Api Operation Policy information.
@@ -1958,6 +1996,10 @@ paths:
               headers:
                 etag: AAAAAAAAAAa=
     put:
+      consumes:
+        - application/json
+        - application/vnd.ms-azure-apim.policy+xml
+        - application/vnd.ms-azure-apim.policy.raw+xml
       description: Creates or updates policy configuration for the API Operation level.
       operationId: ApiOperationPolicy_CreateOrUpdate
       parameters:
@@ -2402,6 +2444,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
+      produces:
+        - application/json
+        - application/vnd.ms-azure-apim.policy+xml
+        - application/vnd.ms-azure-apim.policy.raw+xml
       responses:
         '200':
           description: Api Policy information.
@@ -2571,6 +2617,10 @@ paths:
               headers:
                 etag: AAAAAAAAAAa=
     put:
+      consumes:
+        - application/json
+        - application/vnd.ms-azure-apim.policy+xml
+        - application/vnd.ms-azure-apim.policy.raw+xml
       description: Creates or updates policy configuration for the API.
       operationId: ApiPolicy_CreateOrUpdate
       parameters:
@@ -3009,20 +3059,22 @@ paths:
         ApiManagementListApiReleases:
           parameters:
             api-version: '2017-03-01'
-            apiId: 57d2ef278aa04f0888cba3f3
+            apiId: a1
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
           responses:
             '200':
               body:
-                count: 1
+                nextLink: ''
                 value:
-                  - createdDateTime: '2018-01-18T16:01:38.83Z'
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a5fcc09124a7fa9b89f2f1d/releases/5a610b3175c67153d14c6489
-                    notes: This is the latest release
-                    updatedDateTime: '2018-01-18T16:01:38.83Z'
-              description: ''
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/releases/5a7cb545298324c53224a799
+                    name: 5a7cb545298324c53224a799
+                    properties:
+                      createdDateTime: '2018-02-08T20:38:29.173Z'
+                      notes: yahoo
+                      updatedDateTime: '2018-02-08T20:38:29.173Z'
+                    type: Microsoft.ApiManagement/service/apis/releases
       x-ms-odata: '#/definitions/ApiReleaseContract'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -3093,8 +3145,10 @@ paths:
       x-ms-examples:
         ApiManagementDeleteApiRelease:
           parameters:
+            If-Match: '*'
             api-version: '2017-03-01'
             apiId: 5a5fcc09124a7fa9b89f2f1d
+            releaseId: testrev
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -3140,16 +3194,22 @@ paths:
         ApiManagementGetApiRelease:
           parameters:
             api-version: '2017-03-01'
-            apiId: 5a5fcc09124a7fa9b89f2f1d
+            apiId: a1
+            releaseId: 5a7cb545298324c53224a799
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
           responses:
             '200':
               body:
-                apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a5fcc09124a7fa9b89f2f1d
-                notes: This is the latest release
-      x-ms-odata: '#/definitions/ApiReleaseContract'
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/releases/5a7cb545298324c53224a799
+                name: 5a7cb545298324c53224a799
+                properties:
+                  apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1
+                  createdDateTime: '2018-02-08T20:38:29.173Z'
+                  notes: yahoo
+                  updatedDateTime: '2018-02-08T20:38:29.173Z'
+                type: Microsoft.ApiManagement/service/apis/releases
     parameters:
       - description: The name of the resource group.
         in: path
@@ -3230,15 +3290,19 @@ paths:
       x-ms-examples:
         ApiManagementUpdateApiRelease:
           parameters:
+            If-Match: '*'
             api-version: '2017-03-01'
-            apiId: 5a5fcc09124a7fa9b89f2f1d
+            apiId: a1
+            parameters:
+              properties:
+                apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1
+                notes: yahooagain
+            releaseId: testrev
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
           responses:
-            '200':
-              body:
-                notes: Here is an updated revision description
+            '204': {}
     put:
       description: Creates a new Release for the API.
       operationId: ApiRelease_Create
@@ -3290,15 +3354,36 @@ paths:
         ApiManagementCreateApiRelease:
           parameters:
             api-version: '2017-03-01'
-            apiId: 5a5fcc09124a7fa9b89f2f1d
+            apiId: a1
+            parameters:
+              properties:
+                apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1
+                notes: yahooagain
+            releaseId: testrev
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
           responses:
             '200':
               body:
-                apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a5fcc09124a7fa9b89f2f1d
-                notes: This is the latest revision
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/releases/testrev
+                name: testrev
+                properties:
+                  apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1
+                  createdDateTime: '2018-02-08T20:52:00.65Z'
+                  notes: yahooagain
+                  updatedDateTime: '2018-02-08T20:52:00.65Z'
+                type: Microsoft.ApiManagement/service/apis/releases
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/releases/testrev
+                name: testrev
+                properties:
+                  apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1
+                  createdDateTime: '2018-02-08T20:52:00.65Z'
+                  notes: yahooagain
+                  updatedDateTime: '2018-02-08T20:52:00.65Z'
+                type: Microsoft.ApiManagement/service/apis/releases
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions':
     get:
       description: Lists all revisions of an API.
@@ -3364,24 +3449,18 @@ paths:
           responses:
             '200':
               body:
-                count: 2
+                nextLink: ''
                 value:
-                  - apiId: /apis/5a5fcc09124a7fa9b89f2f1d;rev=2
-                    apiRevision: '2'
-                    createdDateTime: '2018-01-18T20:20:20.447Z'
-                    description: Test
-                    isCurrent: false
-                    isOnline: true
-                    privateUrl: /echo/v2;rev=2
-                    updatedDateTime: '2018-01-18T20:20:20.447Z'
-                  - apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a5fcc09124a7fa9b89f2f1d;rev=1
-                    apiRevision: '1'
-                    createdDateTime: '2018-01-17T22:20:02.313Z'
-                    isCurrent: true
-                    isOnline: true
-                    privateUrl: /echo/v2
-                    updatedDateTime: '2018-01-17T23:32:10.32Z'
-              description: ''
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/revisions/5a7cb545298324c53224a799
+                    name: 5a7cb545298324c53224a799
+                    properties:
+                      apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1;rev=1
+                      apiRevision: '1'
+                      createdDateTime: '2018-02-01T22:21:20.467Z'
+                      isCurrent: true
+                      isOnline: true
+                      updatedDateTime: '2018-02-01T22:21:20.467Z'
+                    type: Microsoft.ApiManagement/service/apis/revisions
       x-ms-odata: '#/definitions/ApiRevisionContract'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -3858,6 +3937,452 @@ paths:
                   document:
                     value: "<s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://ws.cdyne.com/WeatherWS/\" xmlns:tns=\"http://ws.cdyne.com/WeatherWS/\" xmlns:s=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://schemas.xmlsoap.org/wsdl/soap12/\" xmlns:mime=\"http://schemas.xmlsoap.org/wsdl/mime/\" xmlns:soap=\"http://schemas.xmlsoap.org/wsdl/soap/\" xmlns:tm=\"http://microsoft.com/wsdl/mime/textMatching/\" xmlns:http=\"http://schemas.xmlsoap.org/wsdl/http/\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\" xmlns:apim-wsdltns=\"http://ws.cdyne.com/WeatherWS/\">\r\n  <s:element name=\"GetWeatherInformation\">\r\n    <s:complexType />\r\n  </s:element>\r\n  <s:element name=\"GetWeatherInformationResponse\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"GetWeatherInformationResult\" type=\"tns:ArrayOfWeatherDescription\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:complexType name=\"ArrayOfWeatherDescription\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"WeatherDescription\" type=\"tns:WeatherDescription\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"WeatherDescription\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"WeatherID\" type=\"s:short\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Description\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"PictureURL\" type=\"s:string\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:element name=\"GetCityForecastByZIP\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ZIP\" type=\"s:string\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:element name=\"GetCityForecastByZIPResponse\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"GetCityForecastByZIPResult\" type=\"tns:ForecastReturn\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:complexType name=\"ForecastReturn\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"Success\" type=\"s:boolean\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ResponseText\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"State\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"City\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"WeatherStationCity\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ForecastResult\" type=\"tns:ArrayOfForecast\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"ArrayOfForecast\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"Forecast\" nillable=\"true\" type=\"tns:Forecast\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"Forecast\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"Date\" type=\"s:dateTime\" />\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"WeatherID\" type=\"s:short\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Desciption\" type=\"s:string\" />\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"Temperatures\" type=\"tns:temp\" />\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"ProbabilityOfPrecipiation\" type=\"tns:POP\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"temp\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"MorningLow\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"DaytimeHigh\" type=\"s:string\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"POP\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Nighttime\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Daytime\" type=\"s:string\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:element name=\"GetCityWeatherByZIP\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ZIP\" type=\"s:string\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:element name=\"GetCityWeatherByZIPResponse\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"GetCityWeatherByZIPResult\" type=\"tns:WeatherReturn\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:complexType name=\"WeatherReturn\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"Success\" type=\"s:boolean\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ResponseText\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"State\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"City\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"WeatherStationCity\" type=\"s:string\" />\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"WeatherID\" type=\"s:short\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Description\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Temperature\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"RelativeHumidity\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Wind\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Pressure\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Visibility\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"WindChill\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Remarks\" type=\"s:string\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:element name=\"ArrayOfWeatherDescription\" nillable=\"true\" type=\"tns:ArrayOfWeatherDescription\" />\r\n  <s:element name=\"ForecastReturn\" nillable=\"true\" type=\"tns:ForecastReturn\" />\r\n  <s:element name=\"WeatherReturn\" type=\"tns:WeatherReturn\" />\r\n</s:schema>"
                 type: Microsoft.ApiManagement/service/apis/schemas
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apisByTags':
+    get:
+      description: Lists a collection of apis associated with tags.
+      operationId: Api_ListByTags
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: |-
+            | Field       | Supported operators    | Supported functions                         |
+            |-------------|------------------------|---------------------------------------------|
+            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | aid         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | apiRevision | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | path        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | serviceUrl  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | isCurrent   | eq                     | substringof, contains, startswith, endswith |
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: Number of records to return.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Number of records to skip.
+          format: int32
+          in: query
+          minimum: 0
+          name: $skip
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Lists a collection of TagResource entities.
+          schema:
+            description: Paged Tag list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Contract details.
+                  properties:
+                    properties:
+                      description: TagResource contract properties.
+                      properties:
+                        api:
+                          allOf:
+                            - description: The Resource definition.
+                              properties:
+                                id:
+                                  description: Resource ID.
+                                  readOnly: true
+                                  type: string
+                                name:
+                                  description: Resource name.
+                                  readOnly: true
+                                  type: string
+                                type:
+                                  description: Resource type for API Management resource.
+                                  readOnly: true
+                                  type: string
+                              x-ms-azure-resource: true
+                          description: API details.
+                          properties:
+                            properties:
+                              allOf:
+                                - description: API base contract details.
+                                  properties:
+                                    apiRevision:
+                                      description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
+                                      maxLength: 100
+                                      minLength: 1
+                                      type: string
+                                    apiVersion:
+                                      description: Indicates the Version identifier of the API if the API is versioned
+                                      maxLength: 100
+                                      type: string
+                                    apiVersionSetId:
+                                      description: A resource identifier for the related ApiVersionSet.
+                                      type: string
+                                    authenticationSettings:
+                                      description: API Authentication Settings.
+                                      properties:
+                                        oAuth2:
+                                          description: API OAuth2 Authentication settings details.
+                                          properties:
+                                            authorizationServerId:
+                                              description: OAuth authorization server identifier.
+                                              type: string
+                                            scope:
+                                              description: operations scope.
+                                              type: string
+                                    description:
+                                      description: Description of the API. May include HTML formatting tags.
+                                      type: string
+                                    isCurrent:
+                                      description: Indicates if API revision is current api revision.
+                                      readOnly: true
+                                      type: boolean
+                                    isOnline:
+                                      description: Indicates if API revision is accessible via the gateway.
+                                      readOnly: true
+                                      type: boolean
+                                    subscriptionKeyParameterNames:
+                                      description: Subscription key parameter names details.
+                                      example:
+                                        subscriptionKeyParameterNames:
+                                          header: customHeaderParameterName
+                                          query: customQueryParameterName
+                                      properties:
+                                        header:
+                                          description: Subscription key header name.
+                                          type: string
+                                        query:
+                                          description: Subscription key query string parameter name.
+                                          type: string
+                                    type:
+                                      description: Type of API.
+                                      enum:
+                                        - http
+                                        - soap
+                                      type: string
+                                      x-ms-client-name: ApiType
+                                      x-ms-enum:
+                                        modelAsString: true
+                                        name: ApiType
+                              description: Api Entity Properties
+                              properties:
+                                apiVersionSet:
+                                  description: 'An API Version Set contains the common configuration for a set of API Versions relating '
+                                  properties:
+                                    description:
+                                      description: Description of API Version Set.
+                                      type: string
+                                    id:
+                                      description: Identifier for existing API Version Set. Omit this value to create a new Version Set.
+                                      type: string
+                                    versionHeaderName:
+                                      description: Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.
+                                      type: string
+                                    versionQueryName:
+                                      description: Name of query parameter that indicates the API Version if versioningScheme is set to `query`.
+                                      type: string
+                                    versioningScheme:
+                                      description: An value that determines where the API Version identifer will be located in a HTTP request.
+                                      enum:
+                                        - Segment
+                                        - Query
+                                        - Header
+                                      type: string
+                                displayName:
+                                  description: API name.
+                                  maxLength: 300
+                                  minLength: 1
+                                  type: string
+                                path:
+                                  description: Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
+                                  maxLength: 400
+                                  minLength: 0
+                                  type: string
+                                protocols:
+                                  description: Describes on which protocols the operations in this API can be invoked.
+                                  items:
+                                    enum:
+                                      - http
+                                      - https
+                                    type: string
+                                    x-ms-enum:
+                                      modelAsString: false
+                                      name: Protocol
+                                  type: array
+                                serviceUrl:
+                                  description: Absolute URL of the backend service implementing this API.
+                                  maxLength: 2000
+                                  minLength: 1
+                                  type: string
+                              required:
+                                - path
+                        operation:
+                          allOf:
+                            - description: The Resource definition.
+                              properties:
+                                id:
+                                  description: Resource ID.
+                                  readOnly: true
+                                  type: string
+                                name:
+                                  description: Resource name.
+                                  readOnly: true
+                                  type: string
+                                type:
+                                  description: Resource type for API Management resource.
+                                  readOnly: true
+                                  type: string
+                              x-ms-azure-resource: true
+                          description: Operation Entity Contract Properties.
+                          properties:
+                            properties:
+                              description: Operation Entity contract Properties.
+                              properties:
+                                apiName:
+                                  description: Api Name.
+                                  readOnly: true
+                                  type: string
+                                apiRevision:
+                                  description: Api Revision.
+                                  readOnly: true
+                                  type: string
+                                apiVersion:
+                                  description: Api Version.
+                                  readOnly: true
+                                  type: string
+                                description:
+                                  description: Operation Description.
+                                  readOnly: true
+                                  type: string
+                                displayName:
+                                  description: Operation name.
+                                  readOnly: true
+                                  type: string
+                                method:
+                                  description: 'A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.'
+                                  externalDocs:
+                                    description: As defined by RFC.
+                                    url: 'http://www.rfc-editor.org/rfc/rfc7230.txt'
+                                  readOnly: true
+                                  type: string
+                                urlTemplate:
+                                  description: 'Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}'
+                                  readOnly: true
+                                  type: string
+                        product:
+                          allOf:
+                            - description: The Resource definition.
+                              properties:
+                                id:
+                                  description: Resource ID.
+                                  readOnly: true
+                                  type: string
+                                name:
+                                  description: Resource name.
+                                  readOnly: true
+                                  type: string
+                                type:
+                                  description: Resource type for API Management resource.
+                                  readOnly: true
+                                  type: string
+                              x-ms-azure-resource: true
+                          description: Product details.
+                          properties:
+                            properties:
+                              allOf:
+                                - description: Product Entity Base Parameters
+                                  properties:
+                                    approvalRequired:
+                                      description: "whether subscription approval is required. If\_false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If\_true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
+                                      type: boolean
+                                    description:
+                                      description: Product description. May include HTML formatting tags.
+                                      maxLength: 1000
+                                      minLength: 1
+                                      type: string
+                                    state:
+                                      description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
+                                      enum:
+                                        - notPublished
+                                        - published
+                                      type: string
+                                      x-ms-enum:
+                                        modelAsString: false
+                                        name: ProductState
+                                    subscriptionRequired:
+                                      description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
+                                      type: boolean
+                                    subscriptionsLimit:
+                                      description: "Whether the number of subscriptions a user can have to this product at the same time. Set to\_null\_or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+                                      format: int32
+                                      type: integer
+                                    terms:
+                                      description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
+                                      type: string
+                              description: Product profile.
+                              properties:
+                                displayName:
+                                  description: Product name.
+                                  maxLength: 300
+                                  minLength: 1
+                                  type: string
+                              required:
+                                - displayName
+                        tag:
+                          allOf:
+                            - description: The Resource definition.
+                              properties:
+                                id:
+                                  description: Resource ID.
+                                  readOnly: true
+                                  type: string
+                                name:
+                                  description: Resource name.
+                                  readOnly: true
+                                  type: string
+                                type:
+                                  description: Resource type for API Management resource.
+                                  readOnly: true
+                                  type: string
+                              x-ms-azure-resource: true
+                          description: Tag Contract details.
+                          properties:
+                            properties:
+                              description: Tag contract Properties.
+                              properties:
+                                displayName:
+                                  description: Tag name.
+                                  maxLength: 160
+                                  minLength: 1
+                                  type: string
+                              required:
+                                - displayName
+                type: array
+      tags:
+        - ApisByTags
+      x-ms-examples:
+        ApiManagementListApisByTags:
+          parameters:
+            api-version: '2017-03-01'
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                nextLink: ''
+                value:
+                  - properties:
+                      api:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api
+                        name: echo-api
+                        properties:
+                          apiRevision: '1'
+                          displayName: Echo API
+                          isCurrent: true
+                          isOnline: true
+                          path: echo
+                          protocols:
+                            - https
+                          serviceUrl: 'http://echoapi.cloudapp.net/api'
+                        type: Microsoft.ApiManagement/service/apis
+                      tag:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/5600b59375ff190048020002
+                        name: 5600b59375ff190048020002
+                        properties:
+                          displayName: tag2
+                        type: Microsoft.ApiManagement/service/tags
+                  - properties:
+                      api:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api2
+                        name: echo-api2
+                        properties:
+                          apiRevision: '1'
+                          displayName: Echo API2
+                          isCurrent: true
+                          isOnline: true
+                          path: echo2
+                          protocols:
+                            - https
+                          serviceUrl: 'http://echoapi.cloudapp.net/api'
+                        type: Microsoft.ApiManagement/service/apis
+                      tag:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/5600b59375ff190048020002
+                        name: 5600b59375ff190048020002
+                        properties:
+                          displayName: tag2
+                        type: Microsoft.ApiManagement/service/tags
+                  - properties:
+                      api:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api
+                        name: echo-api
+                        properties:
+                          apiRevision: '1'
+                          displayName: Echo API
+                          isCurrent: true
+                          isOnline: true
+                          path: echo
+                          protocols:
+                            - https
+                          serviceUrl: 'http://echoapi.cloudapp.net/api'
+                        type: Microsoft.ApiManagement/service/apis
+                      tag:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/5600b59375ff190048020001
+                        name: 5600b59375ff190048020001
+                        properties:
+                          displayName: tag1
+                        type: Microsoft.ApiManagement/service/tags
+      x-ms-odata: './apimtagresources.json#/definitions/TagResourceContract'
+      x-ms-pageable:
+        nextLinkName: nextLink
 definitions:
   ApiCollection:
     description: Paged Api list representation.
@@ -3890,16 +4415,205 @@ definitions:
     description: API details.
     properties:
       properties:
-        $ref: '#/definitions/ApiContractProperties'
-        description: Api entity contract properties.
-        x-ms-client-flatten: true
+        allOf:
+          - description: API base contract details.
+            properties:
+              apiRevision:
+                description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
+                maxLength: 100
+                minLength: 1
+                type: string
+              apiVersion:
+                description: Indicates the Version identifier of the API if the API is versioned
+                maxLength: 100
+                type: string
+              apiVersionSetId:
+                description: A resource identifier for the related ApiVersionSet.
+                type: string
+              authenticationSettings:
+                description: API Authentication Settings.
+                properties:
+                  oAuth2:
+                    description: API OAuth2 Authentication settings details.
+                    properties:
+                      authorizationServerId:
+                        description: OAuth authorization server identifier.
+                        type: string
+                      scope:
+                        description: operations scope.
+                        type: string
+              description:
+                description: Description of the API. May include HTML formatting tags.
+                type: string
+              isCurrent:
+                description: Indicates if API revision is current api revision.
+                readOnly: true
+                type: boolean
+              isOnline:
+                description: Indicates if API revision is accessible via the gateway.
+                readOnly: true
+                type: boolean
+              subscriptionKeyParameterNames:
+                description: Subscription key parameter names details.
+                example:
+                  subscriptionKeyParameterNames:
+                    header: customHeaderParameterName
+                    query: customQueryParameterName
+                properties:
+                  header:
+                    description: Subscription key header name.
+                    type: string
+                  query:
+                    description: Subscription key query string parameter name.
+                    type: string
+              type:
+                description: Type of API.
+                enum:
+                  - http
+                  - soap
+                type: string
+                x-ms-client-name: ApiType
+                x-ms-enum:
+                  modelAsString: true
+                  name: ApiType
+        description: Api Entity Properties
+        properties:
+          apiVersionSet:
+            description: 'An API Version Set contains the common configuration for a set of API Versions relating '
+            properties:
+              description:
+                description: Description of API Version Set.
+                type: string
+              id:
+                description: Identifier for existing API Version Set. Omit this value to create a new Version Set.
+                type: string
+              versionHeaderName:
+                description: Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.
+                type: string
+              versionQueryName:
+                description: Name of query parameter that indicates the API Version if versioningScheme is set to `query`.
+                type: string
+              versioningScheme:
+                description: An value that determines where the API Version identifer will be located in a HTTP request.
+                enum:
+                  - Segment
+                  - Query
+                  - Header
+                type: string
+          displayName:
+            description: API name.
+            maxLength: 300
+            minLength: 1
+            type: string
+          path:
+            description: Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
+            maxLength: 400
+            minLength: 0
+            type: string
+          protocols:
+            description: Describes on which protocols the operations in this API can be invoked.
+            items:
+              enum:
+                - http
+                - https
+              type: string
+              x-ms-enum:
+                modelAsString: false
+                name: Protocol
+            type: array
+          serviceUrl:
+            description: Absolute URL of the backend service implementing this API.
+            maxLength: 2000
+            minLength: 1
+            type: string
+        required:
+          - path
   ApiContractProperties:
     allOf:
-      - $ref: '#/definitions/ApiEntityBaseContract'
+      - description: API base contract details.
+        properties:
+          apiRevision:
+            description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
+            maxLength: 100
+            minLength: 1
+            type: string
+          apiVersion:
+            description: Indicates the Version identifier of the API if the API is versioned
+            maxLength: 100
+            type: string
+          apiVersionSetId:
+            description: A resource identifier for the related ApiVersionSet.
+            type: string
+          authenticationSettings:
+            description: API Authentication Settings.
+            properties:
+              oAuth2:
+                description: API OAuth2 Authentication settings details.
+                properties:
+                  authorizationServerId:
+                    description: OAuth authorization server identifier.
+                    type: string
+                  scope:
+                    description: operations scope.
+                    type: string
+          description:
+            description: Description of the API. May include HTML formatting tags.
+            type: string
+          isCurrent:
+            description: Indicates if API revision is current api revision.
+            readOnly: true
+            type: boolean
+          isOnline:
+            description: Indicates if API revision is accessible via the gateway.
+            readOnly: true
+            type: boolean
+          subscriptionKeyParameterNames:
+            description: Subscription key parameter names details.
+            example:
+              subscriptionKeyParameterNames:
+                header: customHeaderParameterName
+                query: customQueryParameterName
+            properties:
+              header:
+                description: Subscription key header name.
+                type: string
+              query:
+                description: Subscription key query string parameter name.
+                type: string
+          type:
+            description: Type of API.
+            enum:
+              - http
+              - soap
+            type: string
+            x-ms-client-name: ApiType
+            x-ms-enum:
+              modelAsString: true
+              name: ApiType
     description: Api Entity Properties
     properties:
       apiVersionSet:
-        $ref: '#/definitions/ApiVersionSetContract'
+        description: 'An API Version Set contains the common configuration for a set of API Versions relating '
+        properties:
+          description:
+            description: Description of API Version Set.
+            type: string
+          id:
+            description: Identifier for existing API Version Set. Omit this value to create a new Version Set.
+            type: string
+          versionHeaderName:
+            description: Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.
+            type: string
+          versionQueryName:
+            description: Name of query parameter that indicates the API Version if versioningScheme is set to `query`.
+            type: string
+          versioningScheme:
+            description: An value that determines where the API Version identifer will be located in a HTTP request.
+            enum:
+              - Segment
+              - Query
+              - Header
+            type: string
       displayName:
         description: API name.
         maxLength: 300
@@ -4025,8 +4739,17 @@ definitions:
         description: A resource identifier for the related ApiVersionSet.
         type: string
       authenticationSettings:
-        $ref: '#/definitions/AuthenticationSettingsContract'
-        description: Collection of authentication settings included into this API.
+        description: API Authentication Settings.
+        properties:
+          oAuth2:
+            description: API OAuth2 Authentication settings details.
+            properties:
+              authorizationServerId:
+                description: OAuth authorization server identifier.
+                type: string
+              scope:
+                description: operations scope.
+                type: string
       description:
         description: Description of the API. May include HTML formatting tags.
         type: string
@@ -4039,8 +4762,18 @@ definitions:
         readOnly: true
         type: boolean
       subscriptionKeyParameterNames:
-        $ref: '#/definitions/SubscriptionKeyParameterNamesContract'
-        description: Protocols over which API is made available.
+        description: Subscription key parameter names details.
+        example:
+          subscriptionKeyParameterNames:
+            header: customHeaderParameterName
+            query: customQueryParameterName
+        properties:
+          header:
+            description: Subscription key header name.
+            type: string
+          query:
+            description: Subscription key query string parameter name.
+            type: string
       type:
         description: Type of API.
         enum:
@@ -4097,7 +4830,7 @@ definitions:
       apiId:
         description: Identifier of the API the release belongs to.
         type: string
-      createdDate:
+      createdDateTime:
         description: 'The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.'
         format: date-time
         readOnly: true
@@ -4105,7 +4838,7 @@ definitions:
       notes:
         description: Release Notes
         type: string
-      updatedDate:
+      updatedDateTime:
         description: The time the API release was updated.
         format: date-time
         readOnly: true
@@ -4122,6 +4855,29 @@ definitions:
           $ref: '#/definitions/ApiRevisionContract'
         type: array
   ApiRevisionContract:
+    allOf:
+      - description: The Resource definition.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type for API Management resource.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Api Revision details.
+    properties:
+      properties:
+        $ref: '#/definitions/ApiRevisionContractProperties'
+        description: Properties of the Api Revision Contract.
+        x-ms-client-flatten: true
+  ApiRevisionContractProperties:
     description: Summary of revision metadata.
     properties:
       apiId:
@@ -4174,6 +4930,7 @@ definitions:
         type: string
       apiVersionSet:
         $ref: '#/definitions/ApiVersionSetContract'
+        description: Version set details
       sourceApiId:
         description: Resource identifier of API to be used to create the revision from.
         type: string
@@ -4210,8 +4967,14 @@ definitions:
     description: API Authentication Settings.
     properties:
       oAuth2:
-        $ref: '#/definitions/OAuth2AuthenticationSettingsContract'
-        description: OAuth2 Authentication settings
+        description: API OAuth2 Authentication settings details.
+        properties:
+          authorizationServerId:
+            description: OAuth authorization server identifier.
+            type: string
+          scope:
+            description: operations scope.
+            type: string
   OAuth2AuthenticationSettingsContract:
     description: API OAuth2 Authentication settings details.
     properties:

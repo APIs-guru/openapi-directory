@@ -362,6 +362,8 @@ definitions:
         type: string
       quantity:
         description: The amount of the resource consumption that occurred in this time frame.
+        format: float
+        type: number
       subscriptionId:
         description: The subscription identifier for the Azure user.
         format: uuid
