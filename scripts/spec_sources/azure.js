@@ -7,7 +7,7 @@ var _ = require('lodash');
 var util = require('../util');
 
 module.exports = function () {
-  var files = util.listGitHubFiles('Azure', 'azure-rest-api-specs', 'current', 'specification/**/*.json');
+  var files = util.listGitHubFiles('Azure', 'azure-rest-api-specs', 'master', 'specification/**/*.json');
 
   files = _.filter(files, x => ((x.indexOf('examples')<0) && (x.indexOf('settings')<0)));
 
@@ -26,7 +26,7 @@ module.exports = function () {
         'x-providerName': 'azure.com',
         'x-serviceName': service,
         'x-origin': [{
-          url: util.rawGitHubUrl('Azure', 'azure-rest-api-specs', 'current', filename),
+          url: util.rawGitHubUrl('Azure', 'azure-rest-api-specs', 'master', filename),
           format: 'swagger',
           version: '2.0'
         }]
