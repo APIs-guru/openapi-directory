@@ -16,7 +16,7 @@ info:
   x-apisguru-categories:
     - media
   x-logo:
-    url: 'https://twitter.com/youtube/profile_image?size=original'
+    url: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
@@ -820,7 +820,7 @@ paths:
           name: moderationStatus
           type: string
         - description: |-
-            The order parameter specifies the order in which the API response should list comment threads. Valid values are: 
+            The order parameter specifies the order in which the API response should list comment threads. Valid values are:
             - time - Comment threads are ordered by time. This is the default behavior.
             - relevance - Comment threads are ordered by relevance.Note: This parameter is not supported for use in conjunction with the id parameter.
           enum:
@@ -6531,9 +6531,9 @@ definitions:
         description: |-
           Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.
 
-          If you set this value to false, then the stream will not be reusable, which means that it can only be bound to one broadcast. Non-reusable streams differ from reusable streams in the following ways:  
-          - A non-reusable stream can only be bound to one broadcast. 
-          - A non-reusable stream might be deleted by an automated process after the broadcast ends. 
+          If you set this value to false, then the stream will not be reusable, which means that it can only be bound to one broadcast. Non-reusable streams differ from reusable streams in the following ways:
+          - A non-reusable stream can only be bound to one broadcast.
+          - A non-reusable stream might be deleted by an automated process after the broadcast ends.
           - The  liveStreams.list method does not list non-reusable streams if you call the method and set the mine parameter to true. The only way to use that method to retrieve the resource for a non-reusable stream is to use the id parameter to identify the stream.
         type: boolean
     type: object
@@ -6691,11 +6691,11 @@ definitions:
     description: |-
       A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. A playlist can contain up to 200 videos, and YouTube does not limit the number of playlists that each user creates. By default, playlists are publicly visible to other users, but playlists can be public or private.
 
-      YouTube also uses playlists to identify special collections of videos for a channel, such as:  
-      - uploaded videos 
-      - favorite videos 
-      - positively rated (liked) videos 
-      - watch history 
+      YouTube also uses playlists to identify special collections of videos for a channel, such as:
+      - uploaded videos
+      - favorite videos
+      - positively rated (liked) videos
+      - watch history
       - watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the  channel resource for a given channel.
 
       You can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods.
@@ -6740,11 +6740,11 @@ definitions:
     description: |-
       A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem  resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.
 
-      YouTube uses playlists to identify special collections of videos for a channel, such as:  
-      - uploaded videos 
-      - favorite videos 
-      - positively rated (liked) videos 
-      - watch history 
+      YouTube uses playlists to identify special collections of videos for a channel, such as:
+      - uploaded videos
+      - favorite videos
+      - positively rated (liked) videos
+      - watch history
       - watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information.
 
       You can retrieve the playlist IDs for each of these lists from the  channel resource  for a given channel. You can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods. For example, if a user gives a positive rating to a video, you would insert that video into the liked videos playlist for that user's channel.
@@ -7701,9 +7701,9 @@ definitions:
         type: string
       creationTime:
         description: |-
-          The date and time when the uploaded video file was created. The value is specified in ISO 8601 format. Currently, the following ISO 8601 formats are supported:  
-          - Date only: YYYY-MM-DD 
-          - Naive time: YYYY-MM-DDTHH:MM:SS 
+          The date and time when the uploaded video file was created. The value is specified in ISO 8601 format. Currently, the following ISO 8601 formats are supported:
+          - Date only: YYYY-MM-DD
+          - Naive time: YYYY-MM-DDTHH:MM:SS
           - Time with timezone: YYYY-MM-DDTHH:MM:SS+HH:MM
         type: string
       durationMs:
