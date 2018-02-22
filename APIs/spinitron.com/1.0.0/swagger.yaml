@@ -1,0 +1,633 @@
+swagger: '2.0'
+schemes:
+  - https
+  - http
+host: spinitron.com
+basePath: /v2/api
+info:
+  contact:
+    x-twitter: Spinitron
+  description: Maximum limit is 200. Default limit is 20.
+  title: Spinitron v2
+  version: 1.0.0
+  x-apisguru-categories:
+    - media
+  x-logo:
+    url: 'https://twitter.com/Spinitron/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/spinitron/v2api/master/spinitron.yaml'
+      version: '2.0'
+  x-providerName: spinitron.com
+produces:
+  - application/json
+  - application/xml
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+parameters:
+  expand:
+    description: Allows to select extra fields
+    in: query
+    items:
+      type: string
+    name: expand
+    type: array
+  fields:
+    description: Allows to select only needed fields
+    in: query
+    items:
+      type: string
+    name: fields
+    type: array
+  limit:
+    default: 20
+    description: Amount of items to return
+    in: query
+    minimum: 1
+    name: count
+    type: integer
+  page:
+    description: 'Offset, used together with count'
+    in: query
+    minimum: 1
+    name: page
+    type: integer
+tags:
+  - name: Persona
+  - name: Show
+  - name: Playlist
+  - name: Spin
+paths:
+  /personas:
+    get:
+      parameters:
+        - description: Filter by Persona name
+          in: query
+          name: name
+          type: string
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/expand'
+      responses:
+        '200':
+          description: The personas
+          schema:
+            allOf:
+              - $ref: '#/definitions/BaseIndexResponse'
+              - properties:
+                  items:
+                    items:
+                      $ref: '#/definitions/Persona'
+                    type: array
+                type: object
+      security:
+        - Bearer: []
+      summary: Get Personas
+      tags:
+        - Persona
+  '/personas/{id}':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/expand'
+      responses:
+        '200':
+          description: The Persona
+          schema:
+            $ref: '#/definitions/Persona'
+        '404':
+          description: Persona not found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+      summary: Get Persona by id
+      tags:
+        - Persona
+  /playlists:
+    get:
+      description: |
+        Get Playlists optionally filtered by a datetime range.
+        Only past Playlists will be returned (with allowed tolerance equals 1 hour in future).
+
+        Ordered chronologically from newest to oldest.
+      parameters:
+        - description: |
+            The datetime starting from items must be returned. Maximum 1 hour in future.
+          format: date-time
+          in: query
+          name: start
+          type: string
+        - description: |
+            The ending datetime. Maximum 1 hour in future.
+          format: date-time
+          in: query
+          name: end
+          type: string
+        - description: Filter by show
+          in: query
+          name: show_id
+          type: integer
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/expand'
+      responses:
+        '200':
+          description: The playlists
+          schema:
+            allOf:
+              - $ref: '#/definitions/BaseIndexResponse'
+              - properties:
+                  items:
+                    items:
+                      $ref: '#/definitions/Playlist'
+                    type: array
+                type: object
+      security:
+        - Bearer: []
+      summary: 'Returns playlists optionally filtered by {start} and/or {end} datetimes'
+      tags:
+        - Playlist
+  '/playlists/{id}':
+    get:
+      description: |
+        The response object represents the playlist specified by {id}.
+
+        Status 404 is returned if a playlist with {id} does not exist or if it does but starts in the future (with allowed tolerance equals 1 hour in future).
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/expand'
+      responses:
+        '200':
+          description: The playlist
+          schema:
+            $ref: '#/definitions/Playlist'
+        '404':
+          description: Playlist not found or is in the future
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+      summary: Get a Playlist by id
+      tags:
+        - Playlist
+  /shows:
+    get:
+      description: |
+        **Terminology**: Spinitron defines a *show* as a radio program. A show can have one or more *schedules*,
+        each of which may specify either an *occurence* or a *repetition*, which represents a set of occurences.
+        Thus scheduled shows have occurences that, for example, may be displayed in a calendar.
+
+        In the response, `items` is an array of objects representing occurences of scheduled shows.
+
+        You may optionally filter `items` to a datetime *range* by including in the request {start} and/or {end}
+        parameters, both of which must be no more than one hour in the past. An occurence starting at {end} is
+        included in the reponse.
+
+        `itmes` can include occurences that begin *or* end within the filter range. A show that goes on air before
+        {start} appears in `items` if it ends *after* but not *at* {start}. An occurence starting at or before {end}
+        is included.
+
+        If the request omits the {start} parameter, the server sets its value to the current time so that the filter
+        range's start is always defined. If the request specifies {end} then the requested range is *bounded*,
+        otherwise it is *unbounded*.
+
+        For a bounded request, `items` includes *every* occurence of all shows occuring in the range. The only
+        difference between objects in `items` representing a given show will be the `start` field value.
+
+        For an unbounded request, `items` includes *only one* occurence per show, specifically, the
+        next occurrence after {start} of all shows occuring after {start}.
+
+        Use an unbounded request to get a straight list all shows. Use a bounded request to get a calendar/agenda
+        of shows expanded into occurrences by thir shedules and repetitions.
+
+        Objects in `items` are ordered first by `datetime` and then by `id`.
+      parameters:
+        - description: |
+            The datetime starting from items must be returned. Maximum 1 hour in past.
+          format: date-time
+          in: query
+          name: start
+          type: string
+        - description: |
+            The ending datetime. Maximum 1 hour in past.
+          format: date-time
+          in: query
+          name: end
+          type: string
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/expand'
+      responses:
+        '200':
+          description: The shows
+          schema:
+            allOf:
+              - $ref: '#/definitions/BaseIndexResponse'
+              - properties:
+                  items:
+                    items:
+                      $ref: '#/definitions/Show'
+                    type: array
+                type: object
+        '422':
+          description: |
+            Invalid datetimes in filter: either too old or {end} is less than {start}.
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+      summary: 'Returns scheduled shows optionally filtered by {start} and/or {end} datetimes'
+      tags:
+        - Show
+  '/shows/{id}':
+    get:
+      description: |
+        The response object represents the next occurence of the show specified by {id}.
+
+        Status 404 is returned if a show with {id} does not exist or if it does but all its scheduled occurences elapsed in the past.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/expand'
+      responses:
+        '200':
+          description: The Show
+          schema:
+            $ref: '#/definitions/Show'
+        '404':
+          description: Show not found or too old
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+      summary: Get a Show by id
+      tags:
+        - Show
+  /spins:
+    get:
+      description: |
+        Get Spins optionally filtered by a datetime range. Only past Spins will be returned.
+      parameters:
+        - description: |
+            The datetime starting from items must be returned.
+          format: date-time
+          in: query
+          name: start
+          type: string
+        - description: |
+            The ending datetime.
+          format: date-time
+          in: query
+          name: end
+          type: string
+        - description: Filter by playlist
+          in: query
+          name: playlist_id
+          type: integer
+        - description: Filter by show
+          in: query
+          name: show_id
+          type: integer
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/expand'
+      responses:
+        '200':
+          description: The spins
+          schema:
+            allOf:
+              - $ref: '#/definitions/BaseIndexResponse'
+              - properties:
+                  items:
+                    items:
+                      $ref: '#/definitions/Spin'
+                    type: array
+                type: object
+      security:
+        - Bearer: []
+      summary: 'Returns spins optionally filtered by {start} and/or {end} datetimes'
+      tags:
+        - Spin
+    post:
+      description: An endpoint for automation systems to log spins into the spin table.
+      parameters:
+        - description: |
+            Only when automation params are configured with the "Pass through" mode.
+            Enables "live assist" mode. Default mode is "full automation".
+          in: formData
+          name: live
+          type: boolean
+        - format: date-time
+          in: formData
+          name: start
+          type: string
+        - in: formData
+          name: duration
+          type: integer
+        - in: formData
+          name: artist
+          required: true
+          type: string
+        - in: formData
+          name: release
+          type: string
+        - in: formData
+          name: label
+          type: string
+        - in: formData
+          name: genre
+          type: string
+        - in: formData
+          name: song
+          required: true
+          type: string
+        - in: formData
+          name: composer
+          type: string
+        - in: formData
+          name: isrc
+          type: string
+      responses:
+        '201':
+          description: The new created Spin.
+          schema:
+            $ref: '#/definitions/Spin'
+        '422':
+          description: Validation failed.
+          schema:
+            items:
+              $ref: '#/definitions/ValidationError'
+            type: array
+        default:
+          description: Failed to create the object for unknown reason.
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+      summary: Log a Spin
+      tags:
+        - Spin
+  '/spins/{id}':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/expand'
+      responses:
+        '200':
+          description: The spin
+          schema:
+            $ref: '#/definitions/Spin'
+        '404':
+          description: Spin not found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+      summary: Get a Spin by id
+      tags:
+        - Spin
+definitions:
+  BaseIndexResponse:
+    properties:
+      _links:
+        properties:
+          self:
+            $ref: '#/definitions/Link'
+        type: object
+      _meta:
+        $ref: '#/definitions/Pagination'
+    type: object
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      name:
+        type: string
+      status:
+        type: integer
+      type:
+        type: string
+    type: object
+  Link:
+    properties:
+      href:
+        type: string
+    type: object
+  Pagination:
+    properties:
+      currentPage:
+        type: integer
+      pageCount:
+        type: integer
+      perPage:
+        type: integer
+      totalCount:
+        type: integer
+    type: object
+  Persona:
+    properties:
+      _links:
+        properties:
+          self:
+            $ref: '#/definitions/Link'
+          shows:
+            items:
+              $ref: '#/definitions/Link'
+            type: array
+        type: object
+      bio:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      name:
+        type: string
+      since:
+        description: Year
+        format: integer
+        type: string
+      website:
+        type: string
+    type: object
+  Playlist:
+    properties:
+      _links:
+        properties:
+          persona:
+            $ref: '#/definitions/Link'
+          self:
+            $ref: '#/definitions/Link'
+          show:
+            $ref: '#/definitions/Link'
+          spins:
+            $ref: '#/definitions/Link'
+        type: object
+      automation:
+        type: boolean
+      category:
+        type: string
+      description:
+        type: string
+      duration:
+        description: Duration in seconds
+        type: integer
+      end:
+        description: 'UTC datetime, ISO-8601.'
+        format: date-time
+        type: string
+      episode_description:
+        type: string
+      episode_name:
+        type: string
+      hide_dj:
+        type: boolean
+      id:
+        type: integer
+      image:
+        type: string
+      persona_id:
+        type: integer
+      show_id:
+        type: integer
+      since:
+        format: date
+        type: string
+      start:
+        description: 'UTC datetime, ISO-8601.'
+        format: date-time
+        type: string
+      timezone:
+        example: America/Chicago
+        type: string
+      title:
+        type: string
+      url:
+        type: string
+    type: object
+  Show:
+    properties:
+      _links:
+        properties:
+          personas:
+            items:
+              $ref: '#/definitions/Link'
+            type: array
+          playlists:
+            $ref: '#/definitions/Link'
+          self:
+            $ref: '#/definitions/Link'
+        type: object
+      category:
+        type: string
+      description:
+        type: string
+      duration:
+        description: Duration in seconds
+        type: integer
+      end:
+        description: 'UTC datetime, ISO-8601.'
+        format: date-time
+        type: string
+      hide_dj:
+        type: boolean
+      id:
+        type: integer
+      image:
+        type: string
+      one_off:
+        type: boolean
+      since:
+        description: Year
+        format: integer
+        type: string
+      start:
+        description: 'UTC datetime, ISO-8601.'
+        format: date-time
+        type: string
+      timezone:
+        example: America/Chicago
+        type: string
+      title:
+        type: string
+      url:
+        type: string
+    type: object
+  Spin:
+    properties:
+      _links:
+        properties:
+          playlist:
+            $ref: '#/definitions/Link'
+          self:
+            $ref: '#/definitions/Link'
+        type: object
+      artist:
+        type: string
+      composer:
+        type: string
+      duration:
+        description: Duration in seconds
+        type: integer
+      end:
+        description: 'UTC datetime, ISO-8601.'
+        format: date-time
+        type: string
+      genre:
+        type: string
+      id:
+        type: integer
+      isrc:
+        type: string
+      label:
+        type: string
+      note:
+        type: string
+      playlist_id:
+        type: integer
+      release:
+        type: string
+      song:
+        type: string
+      start:
+        description: 'UTC datetime, ISO-8601.'
+        format: date-time
+        type: string
+      timezone:
+        example: America/Chicago
+        type: string
+    type: object
+  ValidationError:
+    properties:
+      field:
+        type: string
+      message:
+        type: string
+    type: object
