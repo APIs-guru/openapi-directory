@@ -1,0 +1,2018 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.turbinelabs.io
+basePath: /v1.0
+info:
+  contact:
+    x-twitter: GoTurbine
+  description: Turbine Labs Public REST API
+  title: Turbine Labs
+  version: '1.0'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://twitter.com/GoTurbine/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/turbinelabs/api/master/swagger.yml'
+      version: '2.0'
+  x-providerName: turbinelabs.io
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    in: header
+    name: X-Turbine-API-Key
+    type: apiKey
+security:
+  - api_key: []
+tags:
+  - description: 'A logical deployment of services, which typically maps to a datacenter, availability zone, or compute cluster.'
+    name: Zone
+  - description: A configuration that can be applied to one or more running Proxies serving one or more Domains.
+    name: Proxy
+  - description: A served hostname and port.
+    name: Domain
+  - description: A served path within a Domain.
+    name: Route
+  - description: A collection of rules specifying how a request should be mapped to an instance within a cluster. These may be shared between multiple Routes.
+    name: Shared Rules
+  - description: 'A collection of Instances, homogeneous in their purpose, heterogeneous in their metadata.'
+    name: Cluster
+  - description: A collection of events that have occurred in your infrastructure. This includes changes detected by the deployed collectors (new Clusters or Cluster instances) as well as routing changes through the UI or API.
+    name: Audit Log
+paths:
+  /admin/user/self:
+    get:
+      description: Request the user object for an authorized requesting account.
+      responses:
+        '200':
+          description: The authorized user.
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns the user object for the account authorized and making this request.
+      tags:
+        - User Management
+  '/admin/user/self/access_token/{access-token-key}':
+    delete:
+      parameters:
+        - description: the key of the Access Token that should be deleted
+          in: path
+          name: access-token-key
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+        - description: the current checksum of the user to be modified
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+      responses:
+        '200':
+          description: An empty result if the API key deletion was successful.
+        default:
+          description: An error; may be unexpected or validation error if the last API was removed.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Delete the specified access token.
+      tags:
+        - User Management
+  /admin/user/self/access_tokens:
+    get:
+      responses:
+        '200':
+          description: A list of Access Tokens defined for the authenticated user.
+          schema:
+            $ref: '#/definitions/MultiAccessTokens'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Lists Access Tokens that are configured for the authenticated user.
+      tags:
+        - User Management
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - description: A short string (<255 characters) describing the expected use of the token.
+          in: body
+          name: description
+          required: true
+          schema:
+            $ref: '#/definitions/AccessTokenDescription'
+      responses:
+        '200':
+          description: The new Access Token that was created.
+          schema:
+            $ref: '#/definitions/AccessToken'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Creates a new Access Token and associates it with the authenticated user.
+      tags:
+        - User Management
+  /changelog/adhoc:
+    get:
+      description: Perform an adhoc query against the change log for your org. The filter is a JSON encoded FilterSum as defined in this file.
+      parameters:
+        - description: Encoded FilterSums representing the query you would like to execute. See object definition for details.
+          in: query
+          name: filter
+          type: string
+          x-ref-encoded-object: '#/definitions/FilterSums'
+      responses:
+        '200':
+          description: A list of changes that meet the provided filter.
+          schema:
+            $ref: '#/definitions/ChangeDescription'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Allows an arbitrary filter to be specified and applied to the org's change log.
+      tags:
+        - Audit Log
+  '/changelog/cluster-graph/{clusterKey}':
+    get:
+      description: |
+        Gets all changes to a cluster.
+      parameters:
+        - description: the cluster key to see an audit log for
+          in: path
+          name: clusterKey
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+        - description: |
+            The beginning of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: start
+          required: false
+          type: number
+        - description: |
+            The end of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: end
+          required: false
+          type: number
+      responses:
+        '200':
+          description: A list of changes occurring during the requested window.
+          schema:
+            $ref: '#/definitions/ChangeDescription'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get changes related to the indicated cluster
+      tags:
+        - Audit Log
+  '/changelog/domain-graph/{domainKey}':
+    get:
+      description: |
+        Gets all changes to a domain, the proxies that front the specified domain,
+        routes within that domain, the shared rules of each route, the clusters
+        connected via route or shared rules.
+      parameters:
+        - description: the domain key to see an audit log for
+          in: path
+          name: domainKey
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+        - description: |
+            The beginning of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: start
+          required: false
+          type: number
+        - description: |
+            The end of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: end
+          required: false
+          type: number
+      responses:
+        '200':
+          description: A list of changes occurring during the requested window.
+          schema:
+            $ref: '#/definitions/ChangeDescription'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get changes related to the indicated domain
+      tags:
+        - Audit Log
+  '/changelog/route-graph/{routeKey}':
+    get:
+      description: |
+        Gets all changes to a route, the domains associated with it, the shared
+        rules it references, and the clusters connected to it.
+      parameters:
+        - description: the route key to see an audit log for
+          in: path
+          name: routeKey
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+        - description: |
+            The beginning of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: start
+          required: false
+          type: number
+        - description: |
+            The end of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: end
+          required: false
+          type: number
+      responses:
+        '200':
+          description: A list of changes occurring during the requested window.
+          schema:
+            $ref: '#/definitions/ChangeDescription'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get changes related to the indicated route
+      tags:
+        - Audit Log
+  '/changelog/shared-rules-graph/{sharedRulesKey}':
+    get:
+      description: |
+        Gets all changes associated with set of Shared Rules; the domains using
+        it and the clusters referenced by it.
+      parameters:
+        - description: the shared rules key to see an audit log for
+          in: path
+          name: sharedRulesKey
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+        - description: |
+            The beginning of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: start
+          required: false
+          type: number
+        - description: |
+            The end of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: end
+          required: false
+          type: number
+      responses:
+        '200':
+          description: A list of changes occurring during the requested window.
+          schema:
+            $ref: '#/definitions/ChangeDescription'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get changes related to the indicated SharedRules
+      tags:
+        - Audit Log
+  '/changelog/zone/{zoneKey}':
+    get:
+      description: Retrieve all changes in the specified zone.
+      parameters:
+        - description: the zone key to see an audit log for
+          in: path
+          name: zoneKey
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+        - description: |
+            The beginning of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: start
+          required: false
+          type: number
+        - description: |
+            The end of the window we want to see changes for; measured in
+            microseconds since Unix Epoch.
+          format: int64
+          in: query
+          name: end
+          required: false
+          type: number
+      responses:
+        '200':
+          description: A list of changes occurring during the requested window.
+          schema:
+            $ref: '#/definitions/ChangeDescription'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get changes in a specified zone
+      tags:
+        - Audit Log
+  /cluster:
+    get:
+      description: Get a list of clusters
+      parameters:
+        - description: |
+            A JSON encoded array of ClusterFilter objects. The filter is taken
+            as a union of intersections. In other words an object that matches
+            every constraint in any ClusterFilter will be included.
+          in: query
+          name: filters
+          type: string
+      responses:
+        '200':
+          description: a result containing a list of clusters
+          schema:
+            $ref: '#/definitions/MultiClusterResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get clusters
+      tags:
+        - Cluster
+    post:
+      consumes:
+        - application/json
+      description: Create a new cluster
+      parameters:
+        - description: the cluster to create
+          in: body
+          name: cluster
+          required: true
+          schema:
+            $ref: '#/definitions/ClusterCreate'
+      responses:
+        '200':
+          description: the newly created cluster
+          schema:
+            $ref: '#/definitions/ClusterResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: create cluster
+      tags:
+        - Cluster
+  '/cluster/{clusterKey}':
+    delete:
+      description: Delete an existing cluster
+      parameters:
+        - description: the cluster key
+          in: path
+          name: clusterKey
+          required: true
+          type: string
+          x-example: 7ef80556-60bb-46bd-4cec-f4e2533aa75c
+        - description: the current checksum of the cluster to be deleted
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+      responses:
+        '200':
+          description: an empty result
+          schema:
+            $ref: '#/definitions/Empty'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: delete cluster
+      tags:
+        - Cluster
+    get:
+      description: Get details for an existing cluster
+      parameters:
+        - description: the cluster key
+          in: path
+          name: clusterKey
+          required: true
+          type: string
+          x-example: 7ef80556-60bb-46bd-4cec-f4e2533aa75c
+      responses:
+        '200':
+          description: a result containing a single cluster
+          schema:
+            $ref: '#/definitions/ClusterResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get cluster
+      tags:
+        - Cluster
+  '/cluster/{clusterKey}/instances':
+    post:
+      consumes:
+        - application/json
+      description: Add a new instance to a cluster
+      parameters:
+        - description: the cluster to add the instance to
+          in: path
+          name: clusterKey
+          required: true
+          type: string
+          x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+        - description: the instance to add
+          in: body
+          name: instance
+          required: true
+          schema:
+            $ref: '#/definitions/RouteCreate'
+      responses:
+        '200':
+          description: the newly created instance
+          schema:
+            $ref: '#/definitions/InstanceResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: add instance
+      tags:
+        - Cluster
+  '/cluster/{clusterKey}/instances/{instanceIdentifier}':
+    delete:
+      description: Remove an instance from a cluster
+      parameters:
+        - description: the current checksum of the instance to be deleted
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+        - description: the cluster to remove an instance from
+          in: path
+          name: clusterKey
+          required: true
+          type: string
+          x-example: 7ef80556-60bb-46bd-4cec-f4e2533aa75c
+        - description: 'the instance to remove, identified as <host>:<port>'
+          in: path
+          name: instanceIdentifier
+          required: true
+          type: string
+          x-example: 'foo-1.useast.test.com:8080'
+      responses:
+        '200':
+          description: an empty result
+          schema:
+            $ref: '#/definitions/Empty'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: remove instance
+      tags:
+        - Cluster
+  /domain:
+    get:
+      description: Get a list of domains
+      parameters:
+        - description: |
+            A JSON encoded array of DomainFilter objects. The filter is taken
+            as a union of intersections. In other words an object that matches
+            every constraint in any DomainFilter will be included.
+          in: query
+          name: filters
+          type: string
+      responses:
+        '200':
+          description: a result containing a list of domains
+          schema:
+            $ref: '#/definitions/MultiDomainResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get domains
+      tags:
+        - Domain
+    post:
+      consumes:
+        - application/json
+      description: Create a new domain
+      parameters:
+        - description: the domain to create
+          in: body
+          name: domain
+          required: true
+          schema:
+            $ref: '#/definitions/DomainCreate'
+      responses:
+        '200':
+          description: the newly created zone
+          schema:
+            $ref: '#/definitions/DomainResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: create domain
+      tags:
+        - Domain
+  '/domain/{domainKey}':
+    delete:
+      description: Delete an existing domain
+      parameters:
+        - description: the domain key
+          in: path
+          name: domainKey
+          required: true
+          type: string
+          x-example: 48cf1c9b-f027-4223-b405-d48018ffb900
+        - description: the current checksum of the domain to be deleted
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+      responses:
+        '200':
+          description: an empty result
+          schema:
+            $ref: '#/definitions/Empty'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: delete domain
+      tags:
+        - Domain
+    get:
+      description: Get details for a single domain
+      parameters:
+        - description: the domain key
+          in: path
+          name: domainKey
+          required: true
+          type: string
+          x-example: 48cf1c9b-f027-4223-b405-d48018ffb900
+      responses:
+        '200':
+          description: a result containing a single domain
+          schema:
+            $ref: '#/definitions/DomainResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get domain
+      tags:
+        - Domain
+  /proxy:
+    get:
+      description: Get a list of proxies
+      parameters:
+        - description: |
+            A JSON encoded array of ProxyFilter objects. The filter is taken
+            as a union of intersections. In other words an object that matches
+            every constraint in any ProxyFilter will be included.
+          in: query
+          name: filters
+          type: string
+      responses:
+        '200':
+          description: a result containing a list of proxies
+          schema:
+            $ref: '#/definitions/MultiProxyResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: list proxies
+      tags:
+        - Proxy
+    post:
+      consumes:
+        - application/json
+      description: Create a new proxy
+      parameters:
+        - description: the proxy to create
+          in: body
+          name: proxy
+          required: true
+          schema:
+            $ref: '#/definitions/ProxyCreate'
+      responses:
+        '200':
+          description: the newly created proxy
+          schema:
+            $ref: '#/definitions/ProxyResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: create proxy
+      tags:
+        - Proxy
+  '/proxy/{proxyKey}':
+    delete:
+      description: Delete existing proxy
+      parameters:
+        - description: the proxy key
+          in: path
+          name: proxyKey
+          required: true
+          type: string
+          x-example: 72c86057-ee8d-4a2b-a3a7-760fbd1d3b9f
+        - description: the current checksum of the proxy to be deleted
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+      responses:
+        '200':
+          description: an empty result
+          schema:
+            $ref: '#/definitions/Proxy'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: delete proxy
+      tags:
+        - Proxy
+    get:
+      description: Get details for a single proxy
+      parameters:
+        - description: the proxy key
+          in: path
+          name: proxyKey
+          required: true
+          type: string
+          x-example: 72c86057-ee8d-4a2b-a3a7-760fbd1d3b9f
+      responses:
+        '200':
+          description: a result containing a single proxy
+          schema:
+            $ref: '#/definitions/ProxyResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get proxy
+      tags:
+        - Proxy
+  /route:
+    get:
+      description: Get a list of routes
+      parameters:
+        - description: |
+            A JSON encoded array of RouteFilter objects. The filter is taken
+            as a union of intersections. In other words an object that matches
+            every constraint in any RouteFilter will be included.
+          in: query
+          name: filters
+          type: string
+      responses:
+        '200':
+          description: a result containing a list of routes
+          schema:
+            $ref: '#/definitions/MultiRouteResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get routes
+      tags:
+        - Route
+    post:
+      consumes:
+        - application/json
+      description: Create a new route
+      parameters:
+        - description: the route to create
+          in: body
+          name: route
+          required: true
+          schema:
+            $ref: '#/definitions/RouteCreate'
+      responses:
+        '200':
+          description: the newly created route
+          schema:
+            $ref: '#/definitions/RouteResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: create route
+      tags:
+        - Route
+  '/route/{routeKey}':
+    delete:
+      description: Delete an existing route
+      parameters:
+        - description: the route key
+          in: path
+          name: routeKey
+          required: true
+          type: string
+          x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+        - description: the current checksum of the route to be deleted
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+      responses:
+        '200':
+          description: an empty result
+          schema:
+            $ref: '#/definitions/Empty'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: delete route
+      tags:
+        - Route
+    get:
+      description: Get details for an existing route
+      parameters:
+        - description: the route key
+          in: path
+          name: routeKey
+          required: true
+          type: string
+          x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+      responses:
+        '200':
+          description: a result containing a single route
+          schema:
+            $ref: '#/definitions/RouteResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get route
+      tags:
+        - Route
+    put:
+      consumes:
+        - application/json
+      description: Modify an existing route
+      parameters:
+        - description: the route key
+          in: path
+          name: routeKey
+          required: true
+          type: string
+          x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+        - description: the route to modify
+          in: body
+          name: route
+          required: true
+          schema:
+            $ref: '#/definitions/Route'
+      responses:
+        '200':
+          description: A result containing the modified route
+          schema:
+            $ref: '#/definitions/RouteResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: modify route
+      tags:
+        - Route
+  /shared_rules:
+    get:
+      description: Get a list of shared_rules
+      parameters:
+        - description: |
+            A JSON encoded array of SharedRulesFilter objects. The filter is taken
+            as a union of intersections. In other words an object that matches
+            every constraint in any SharedRulesFilter will be included.
+          in: query
+          name: filters
+          type: string
+      responses:
+        '200':
+          description: a result containing a list of shared_rules
+          schema:
+            $ref: '#/definitions/MultiSharedRulesResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get shared_rules
+      tags:
+        - Shared Rules
+    post:
+      consumes:
+        - application/json
+      description: Create a new shared_rules object
+      parameters:
+        - description: the shared_rules object to create
+          in: body
+          name: shared_rules
+          required: true
+          schema:
+            $ref: '#/definitions/SharedRulesCreate'
+      responses:
+        '200':
+          description: the newly created shared_rules object
+          schema:
+            $ref: '#/definitions/SharedRulesResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: create shared_rules
+      tags:
+        - Shared Rules
+  '/shared_rules/{sharedRulesKey}':
+    delete:
+      description: Delete an existing shared_rules object
+      parameters:
+        - description: the shared_rules key
+          in: path
+          name: sharedRulesKey
+          required: true
+          type: string
+          x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+        - description: the current checksum of the shared_rules to be deleted
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+      responses:
+        '200':
+          description: an empty result
+          schema:
+            $ref: '#/definitions/Empty'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: delete shared_rules object
+      tags:
+        - Route
+    get:
+      description: Get details for an existing shared_rules object
+      parameters:
+        - description: the shared_rules key
+          in: path
+          name: sharedRulesKey
+          required: true
+          type: string
+          x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+      responses:
+        '200':
+          description: a result containing a single shared_rules object
+          schema:
+            $ref: '#/definitions/SharedRulesResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get shared_rules object
+      tags:
+        - Shared Rules
+    put:
+      consumes:
+        - application/json
+      description: Modify an existing shared_rules object
+      parameters:
+        - description: the shared_rules key
+          in: path
+          name: sharedRulesKey
+          required: true
+          type: string
+          x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+        - description: the shared_rules object to modify
+          in: body
+          name: shared_rules
+          required: true
+          schema:
+            $ref: '#/definitions/SharedRules'
+      responses:
+        '200':
+          description: A result containing the modified shared_rules object
+          schema:
+            $ref: '#/definitions/SharedRulesResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: modify shared_rules object
+      tags:
+        - Shared Rules
+  /zone:
+    get:
+      description: |
+        Get all zones. possibly with filters
+      parameters:
+        - description: |
+            A JSON encoded array of ZoneFilter objects. The filter is taken
+            as a union of intersections. In other words an object that matches
+            every constraint in any ZoneFilter will be included.
+          in: query
+          name: filters
+          type: string
+      responses:
+        '200':
+          description: A result containing an array of zones
+          schema:
+            $ref: '#/definitions/MultiZoneResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get a list of zones
+      tags:
+        - Zone
+    post:
+      consumes:
+        - application/json
+      description: |
+        Create a new zone.
+      parameters:
+        - description: the zone to create
+          in: body
+          name: zone
+          required: true
+          schema:
+            $ref: '#/definitions/ZoneCreate'
+      responses:
+        '200':
+          description: A result containing the newly created zone
+          schema:
+            $ref: '#/definitions/ZoneResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: create zone
+      tags:
+        - Zone
+  '/zone/{zoneKey}':
+    delete:
+      description: |
+        Delete a zone.
+      parameters:
+        - description: the zone key
+          in: path
+          name: zoneKey
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+        - description: the current checksum of the zone to be deleted
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+      responses:
+        '200':
+          description: an empty result
+          schema:
+            $ref: '#/definitions/Empty'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: delete zone
+      tags:
+        - Zone
+    get:
+      description: |
+        Get details for a single zone
+      parameters:
+        - description: the zone key
+          in: path
+          name: zoneKey
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+      responses:
+        '200':
+          description: a result containing a single zone
+          schema:
+            $ref: '#/definitions/ZoneResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get zone
+      tags:
+        - Zone
+definitions:
+  AccessToken:
+    properties:
+      access_token_key:
+        type: string
+      checksum:
+        type: string
+      created_at:
+        description: |
+          A timestamp that marks when a user was deleted. It is in the format
+          yyyy-mm-ddThh:mm:ss.SZ. The timezone will always be UTC.
+        type: string
+      description:
+        type: string
+      signed_token:
+        description: |
+          This will be set only when an AccessToken is initially created
+        type: string
+      user_key:
+        type: string
+    required:
+      - access_token_key
+      - description
+      - user_key
+      - created_at
+      - checksum
+    type: object
+  AccessTokenDescription:
+    properties:
+      description:
+        type: string
+    required:
+      - description
+    type: object
+  AllConstraints:
+    properties:
+      dark:
+        $ref: '#/definitions/ClusterConstraints'
+      light:
+        $ref: '#/definitions/ClusterConstraints'
+      tap:
+        $ref: '#/definitions/ClusterConstraints'
+    required:
+      - light
+    type: object
+  CORSConfig:
+    description: |
+      Experimental: Controls simple CORS responses for the associated domain.
+      The configurable properties map closely to the CORS specification which
+      should be referenced for a full discussion on their meaning:
+      https://www.w3.org/TR/cors/ or https://developer.mozilla.org/docs/Web/HTTP/Access_control_CORS.
+    properties:
+      allow_credentials:
+        description: |
+          Indicates whether the response to request can be exposed when the
+          omit credentials flag is unset
+          https://www.w3.org/TR/cors/#access-control-allow-credentials-response-header.
+        type: boolean
+      allowed_headers:
+        description: |
+          Specifies what headers are allowed to be set when a request is made.
+          https://www.w3.org/TR/cors/#access-control-allow-headers-response-header.
+        items:
+          type: string
+        type: array
+      allowed_methods:
+        description: |
+          Indicates which HTTP request types may be used to call an endpoint.
+          https://www.w3.org/TR/cors/#access-control-allow-methods-response-header.
+        items:
+          type: string
+        type: array
+      allowed_origins:
+        description: |
+          Must contain a single element specifying the domain (origin) allowed
+          to make requsets to this domain. If any origin is acceptable '*' may
+          be used as a wildcard https://www.w3.org/TR/cors/#origin-request-header,
+          https://www.w3.org/TR/cors/#access-control-allow-origin-response-header.
+        items:
+          type: string
+        type: array
+      exposed_headers:
+        description: |
+          Indicates which response headers may be accessed from the browser.
+          https://www.w3.org/TR/cors/#http-access-control-expose-headers.
+        items:
+          type: string
+        type: array
+      max_age:
+        description: |
+          Sets how long (in seconds) the response to a preflight request may be
+          cached. https://www.w3.org/TR/cors/#access-control-max-age-response-header.
+        type: integer
+    required:
+      - allowed_origins
+      - allowed_methods
+    type: object
+  CertKeyPathPair:
+    description: |
+      A key/cert pair that will be served when a domain terminates a SSL/TLS
+      request.  Paths should be absolute and accessible to the user running
+      the proxy instance.
+    properties:
+      certificate_path:
+        description: |
+          Path to a certificate in the PEM format for the domain. If multiple
+          certificates need to be specified then should be contained in this file
+          in the following order: first the primary certificate followed by any
+          intermediary certificats.
+        type: string
+      key_path:
+        description: |
+          Path to a file with the secret key in the PEM format for the domain.
+        type: string
+    required:
+      - certificate_path
+      - key_path
+    type: object
+  ChangeDescription:
+    properties:
+      actor_key:
+        description: The user who made the change.
+        type: string
+        x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+      at:
+        description: When the change took place in milliseconds since the Unix epoch.
+        format: int64
+        type: number
+      comment:
+        description: A description of the change.
+        type: string
+      diffs:
+        description: A collection of attribute updates that compose this change.
+        items:
+          $ref: '#/definitions/ChangeEntry'
+        type: array
+      txn:
+        description: |
+          A unique identifier for all this transaction. It is shared by all
+          attribute updates within a change.
+        type: string
+        x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+    type: object
+  ChangeEntry:
+    properties:
+      change_type:
+        description: Whether the value was added or removed to the object.
+        enum:
+          - addition
+          - removal
+        type: string
+      object_key:
+        description: An ID uniquely identifying the object being changed.
+        type: string
+        x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+      object_type:
+        description: The name of the object being being altered.
+        enum:
+          - org
+          - user
+          - zone
+          - proxy
+          - domain
+          - route
+          - shared_rules
+          - cluster
+        type: string
+      path:
+        description: A dot-separated / bracket-indexed path to the field changed on the object.
+        type: string
+        x-example: 'cluster.instance[10.0.1.5:8080].metadata[pod-template-hash]'
+      value:
+        description: |
+          The value that has been added or removed to the object at the attribute
+          path indicated in path.
+        type: string
+      zone_key:
+        description: The zone this object is located in.
+        type: string
+        x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+    type: object
+  Cluster:
+    properties:
+      checksum:
+        type: string
+      cluster_key:
+        type: string
+      instances:
+        $ref: '#/definitions/Instances'
+      name:
+        type: string
+      require_tls:
+        description: |
+          Experimental:
+          If set, requests to this collection of hosts will be made via HTTPS.
+          At this time neither certificate validation and certificate pinning
+          are supported for proxy clients of this cluster.
+        type: boolean
+      zone_key:
+        type: string
+    required:
+      - cluster_key
+      - zone_key
+      - name
+      - checksum
+    type: object
+  ClusterConstraint:
+    properties:
+      cluster_key:
+        type: string
+      constraint_key:
+        type: string
+      metadata:
+        $ref: '#/definitions/Metadata'
+      properties:
+        $ref: '#/definitions/Metadata'
+      response_data:
+        $ref: '#/definitions/ResponseData'
+        description: |
+          When a request is served by a cluster selected by this constraint annotate
+          the response with the information specified within this ResponseData
+          object. It's possible that multiple response data configurations will
+          apply; if that's the case then the values from ClusterConstarint takes
+          precedence over those from a Route or SharedRules object.
+      weight:
+        type: integer
+    type: object
+  ClusterConstraints:
+    items:
+      $ref: '#/definitions/ClusterConstraint'
+    type: array
+  ClusterCreate:
+    properties:
+      instances:
+        $ref: '#/definitions/Instances'
+      name:
+        type: string
+      zone_key:
+        type: string
+    required:
+      - zone_key
+      - name
+    type: object
+  ClusterFilter:
+    properties:
+      cluster_key:
+        type: string
+      name:
+        type: string
+      zone_key:
+        type: string
+    type: object
+  ClusterResult:
+    properties:
+      result:
+        $ref: '#/definitions/Cluster'
+    type: object
+  CohortSeed:
+    properties:
+      name:
+        description: |
+          The name of the cookie, the header field, or the query argument to
+          be checked for a cohort seed value.
+        type: string
+      type:
+        description: Where a request's cohort seed will be drawn from.
+        enum:
+          - header
+          - cookie
+          - query
+        type: string
+      use_zero_value_seed:
+        description: |
+          If true, requests with a seed source which resolves to an empty value
+          will still be grouped and routed consistently. This means a misspelled
+          or missing seed source on a request will sort all such traffic into a
+          single backend. This could result in all traffic being assigned to a
+          backend intended for only a small percentage of traffic. Use with
+          caution.
+        type: boolean
+    type: object
+  CookieDatum:
+    description: |
+      This describes a cookie that should be set in response to a HTTP request.
+    properties:
+      always_send:
+        description: |
+          If false or not set then this cookie will only be sent on HTTP response codes
+          of 2xx and 3xx. If true then data will be returned for 4xx and 5xx responses
+          as well.
+        type: boolean
+      domain:
+        description: |
+          Specifies the hosts to hich a cookie will be sent. Maps directly to a
+          cookie's 'Domain' attribute.
+        type: string
+      expires_in_sec:
+        description: |
+          This indicates how long a cookie will be valid, in seconds. If not set the
+          default is to provide no expiration information. If set to 0 the cookie will
+          have an 'Expires' attribute set to 'Mon, 1 Jan 0001 12:00:00 UTC'. For values
+          greater than 0 the cookie's 'Max-Age' attribute will be set to that value.
+        type: integer
+      http_only:
+        description: |
+          If set the cookie value will not be accessible via Document.cookie. Maps
+          directly to 'HttpOnly' attribute.
+        type: boolean
+      name:
+        description: The name of the cookie that will be attached to the response sent.
+        type: string
+      path:
+        description: |
+          Specifies the path a cookie will be associated with. Maps directly to
+          the 'Path' attribute.
+        type: string
+      same_site:
+        description: |
+          Allows assertions how a cookie should behave wend making cross-site requests.
+          Maps directly to 'SameSite' attribute. If unset no guidance will be included
+          in the cookie.
+        enum:
+          - Strict
+          - Lax
+        type: string
+      secure:
+        description: |
+          If set the cookie will only be sent on subsequent requests when accessing
+          a server via HTTPS. Maps directly to 'Secure' attribute.
+        type: boolean
+      value:
+        description: |
+          A literal value to send as the cookie value or a reference to
+          some metadatum value set on the Cluster Intsance that handles
+          a specific request.
+        type: string
+      value_is_literal:
+        description: |
+          If true then the value attribute is treated as a literal and no attempt
+          to resolve to a server metadatum.
+        type: boolean
+    type: object
+  Domain:
+    properties:
+      aliases:
+        description: |
+          A set of alternate names that this Domain may be referenced by. May
+          start ('*.') or end ('.*') with a wildcard.
+        items:
+          type: string
+        type: array
+      checksum:
+        type: string
+      cors_config:
+        $ref: '#/definitions/CORSConfig'
+      domain_key:
+        type: string
+      gzip_enabled:
+        description: 'Experimental: if set to true will enable gzip compression on data that passes trough this domain'
+        type: boolean
+      name:
+        type: string
+      port:
+        type: integer
+      redirects:
+        items:
+          $ref: '#/definitions/Redirect'
+        type: array
+      ssl_config:
+        $ref: '#/definitions/SSLConfig'
+      zone_key:
+        type: string
+    required:
+      - domain_key
+      - zone_key
+      - name
+      - port
+      - checksum
+    type: object
+  DomainCreate:
+    properties:
+      name:
+        type: string
+      port:
+        type: integer
+      zone_key:
+        type: string
+    required:
+      - zone_key
+      - name
+      - port
+    type: object
+  DomainFilter:
+    properties:
+      domain_key:
+        type: string
+      name:
+        type: string
+      zone_key:
+        type: string
+    type: object
+  DomainResult:
+    properties:
+      result:
+        $ref: '#/definitions/Domain'
+    type: object
+  Empty:
+    type: object
+  Error:
+    properties:
+      code:
+        format: int32
+        type: integer
+      fields:
+        type: string
+      message:
+        type: string
+    type: object
+  Filter:
+    properties:
+      absolute_match_only:
+        description: |
+          If set this will return ChangeEntry values with a path that matches
+          the attribute_path property exactly.
+        type: boolean
+      actor_key:
+        description: The user who made the change.
+        type: string
+        x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+      attribute_path:
+        description: |
+          A dot-separated / bracket-indexed path to the field changed on the
+          object. '%' may be used as a wildcard.
+        type: string
+        x-example: 'cluster.instance[%].metadata[app-name]'
+      attribute_value:
+        description: |
+          The value that has been added or removed to the object at the attribute
+          path indicated in path.
+        type: string
+      change_txn:
+        description: |
+          A unique identifier for all this transaction. It is shared by all
+          attribute updates within a change.
+        type: string
+        x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+      change_type:
+        description: Whether the value was added or removed to the object.
+        enum:
+          - addition
+          - removal
+        type: string
+      exclude_empty_values:
+        description: |
+          If set this will exclude ChangeEntry records that save the addition
+          or removal of an empty value.
+        type: boolean
+      negative_match:
+        description: |
+          If set this filter will match the all ChangeEntry records that do
+          NOT meet the constraints laid out in this Filter object.
+        type: boolean
+      object_key:
+        description: An ID uniquely identifying the object being changed.
+        type: string
+        x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+      object_type:
+        description: The name of the object being being altered.
+        enum:
+          - org
+          - user
+          - zone
+          - proxy
+          - domain
+          - route
+          - shared_rules
+          - cluster
+        type: string
+      org_key:
+        description: The organization the objects being updated belong to.
+        type: string
+        x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
+      time_range:
+        $ref: '#/definitions/TimeRange'
+      zone_key:
+        description: The zone this object is located in.
+        type: string
+        x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+    type: object
+  FilterProducts:
+    properties:
+      and:
+        description: An array of changelog filters that will be joined via logical AND.
+        items:
+          $ref: '#/definitions/Filter'
+        type: array
+    type: object
+  FilterSums:
+    properties:
+      or:
+        description: An array of changelog filters that will be joined via logical OR.
+        items:
+          $ref: '#/definitions/FilterProducts'
+        type: array
+    type: object
+  HeaderConstraint:
+    description: |
+      Indicates that a request's headers should meet some requirement before being
+      selected for a rewrite. Must have zore or one elements.
+    properties:
+      case_sensitive:
+        description: 'If set, the header value check will be case sensitive.'
+        type: boolean
+      invert:
+        description: |
+          If set, the header constraint will succeed if the match described faile.
+        type: boolean
+      name:
+        description: |
+          The header that is being checked. This must match the regexp "^[0-9a-zA-Z-]+$".
+          This is checked in a case insensitive manner.
+        type: string
+      value:
+        description: |
+          If set the header's value will be compared to this. The default is to
+          make case insensitive comparisons.
+        type: string
+    required:
+      - name
+    type: object
+  HeaderDatum:
+    description: |
+      This describes a HTTP header that should be attached to requests.
+    properties:
+      always_send:
+        description: |
+          If false or not set then this header will only be sent on HTTP response codes
+          of 2xx and 3xx. If true then data will be returned for 4xx and 5xx responses
+          as well.
+        type: boolean
+      name:
+        description: |
+          The name of the header that will be attached to the response sent.
+          This is case insensitive.
+        type: string
+      value:
+        description: |
+          A literal value to send as the header value or a reference to
+          some metadatum value set on the Cluster Intsance that handles
+          a specific request. If this value is empty after looking up an
+          Instance metadatum value no header will be sent.
+        type: string
+      value_is_literal:
+        description: |
+          If true then the value attribute is treated as a literal and no attempt
+          to resolve instance metadatum to find a value.
+        type: boolean
+    type: object
+  Instance:
+    properties:
+      host:
+        type: string
+      metadata:
+        $ref: '#/definitions/Metadata'
+      port:
+        type: integer
+    type: object
+  InstanceResult:
+    properties:
+      result:
+        $ref: '#/definitions/Instance'
+    type: object
+  Instances:
+    items:
+      $ref: '#/definitions/Instance'
+    type: array
+  Match:
+    properties:
+      from:
+        $ref: '#/definitions/Metadatum'
+      kind:
+        type: string
+      to:
+        $ref: '#/definitions/Metadatum'
+    type: object
+  Matches:
+    items:
+      $ref: '#/definitions/Match'
+    type: array
+  Metadata:
+    items:
+      $ref: '#/definitions/Metadatum'
+    type: array
+  Metadatum:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    type: object
+  MultiAccessTokens:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/AccessToken'
+        type: array
+    type: object
+  MultiClusterResult:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/Cluster'
+        type: array
+    type: object
+  MultiDomainResult:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/Domain'
+        type: array
+    type: object
+  MultiProxyResult:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/Proxy'
+        type: array
+    type: object
+  MultiRouteResult:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/Route'
+        type: array
+    type: object
+  MultiSharedRulesResult:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/SharedRules'
+        type: array
+    type: object
+  MultiZoneResult:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/Zone'
+        type: array
+    type: object
+  Proxy:
+    properties:
+      checksum:
+        type: string
+      domain_keys:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      proxy_key:
+        type: string
+      zone_key:
+        type: string
+    type: object
+  ProxyCreate:
+    properties:
+      domain_keys:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      zone_key:
+        type: string
+    required:
+      - zone_key
+      - name
+    type: object
+  ProxyFilter:
+    properties:
+      domain_keys:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      proxy_key:
+        type: string
+      zone_key:
+        type: string
+    type: object
+  ProxyResult:
+    properties:
+      result:
+        $ref: '#/definitions/Proxy'
+    type: object
+  Redirect:
+    description: |
+      Specifies how a URL within a domain should be rewritten when requested.
+    properties:
+      from:
+        description: A regexp that will be matched against the URL (not including the host/port). May include capture groups for reference in "to."
+        type: string
+      header_constraints:
+        items:
+          $ref: '#/definitions/HeaderConstraint'
+        type: array
+      name:
+        description: 'A unique (to this Domain) name for the Redirect. Must match the regexp "^[0-9a-zA-Z-]+$"'
+        type: string
+      redirect_type:
+        description: How this redirect should be presented via HTTP response code.
+        enum:
+          - permanent
+          - temporary
+        type: string
+      to:
+        description: The new URL that will be constructed from the request. Capture groups from "from" may be referenced as "$&lt;group number&gt;" which begins at 1.
+        type: string
+    required:
+      - name
+      - from
+      - to
+      - redirect_type
+    type: object
+  ResponseData:
+    properties:
+      cookies:
+        items:
+          $ref: '#/definitions/CookieDatum'
+        type: array
+      headers:
+        items:
+          $ref: '#/definitions/HeaderDatum'
+        type: array
+    type: object
+  Route:
+    properties:
+      checksum:
+        type: string
+      cohort_seed:
+        $ref: '#/definitions/CohortSeed'
+      domain_key:
+        type: string
+      path:
+        type: string
+      response_data:
+        $ref: '#/definitions/ResponseData'
+        description: |
+          When a request is served by this Route annotate the response with the
+          information specified within this ResponseData object. It's possible
+          that multiple response data configurations will apply; if that's the
+          case then the values from Route take precedence over those from a
+          SharedRules object.
+      route_key:
+        type: string
+      rules:
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      shared_rules_key:
+        type: string
+      zone_key:
+        type: string
+    required:
+      - route_key
+      - domain_key
+      - zone_key
+      - path
+      - checksum
+      - shared_rules_key
+    type: object
+  RouteCreate:
+    properties:
+      domain_keys:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      rules:
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      zone_key:
+        type: string
+    required:
+      - zone_key
+      - name
+      - domain_keys
+    type: object
+  RouteFilter:
+    properties:
+      domain_key:
+        type: string
+      path:
+        type: string
+      path_prefix:
+        type: string
+      route_key:
+        type: string
+      shared_rules_key:
+        type: string
+      zone_key:
+        type: string
+    type: object
+  RouteResult:
+    properties:
+      result:
+        $ref: '#/definitions/Route'
+    type: object
+  Rule:
+    properties:
+      cohort_seed:
+        $ref: '#/definitions/CohortSeed'
+      constraints:
+        $ref: '#/definitions/AllConstraints'
+      matches:
+        $ref: '#/definitions/Matches'
+      methods:
+        items:
+          type: string
+        type: array
+      rule_key:
+        type: string
+    type: object
+  SSLConfig:
+    description: |
+      Experimental: Specifies whether a domain should support SSL/TLS
+      connections from clients.  If not set the proxy will expect unencrypted HTTP
+      traffic.
+    properties:
+      cert_key_pairs:
+        description: SSLConfig must have one cert_key_pairs entry specified.
+        items:
+          $ref: '#/definitions/CertKeyPathPair'
+        type: array
+      cipher_filter:
+        description: |
+          An OpenSSL compatible filter string indicating the ciphers acceptable
+          for this proxy to use while communicating with clients. The default value
+          is EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH. For more information
+          see https://wiki.openssl.org/index.php/Manual:Ciphers(1)
+        type: string
+      protocols:
+        description: |
+          A list of acceptable SSL/TLS protocol. The default values are TLSv1,
+          TLSv1.1, TLSv1.2. Additional valid values are SSLv2 and SSLv3.
+        items:
+          type: string
+        type: array
+    required:
+      - cert_key_pairs
+    type: object
+  SharedRules:
+    properties:
+      checksum:
+        type: string
+      cohort_seed:
+        $ref: '#/definitions/CohortSeed'
+      default:
+        $ref: '#/definitions/AllConstraints'
+      properties:
+        $ref: '#/definitions/Metadata'
+      response_data:
+        $ref: '#/definitions/ResponseData'
+        description: |
+          When a request is served by a Route that is part of this SharedRules
+          group the response is annotated with the information specified within
+          this ResponseData object. It's possible that multiple response data
+          configurations will apply; if that's the case then the values from
+          the applicable Route and ClusterConstarint takes precedence over those
+          specified here.
+      rules:
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      shared_rules_key:
+        type: string
+      zone_key:
+        type: string
+    required:
+      - zone_key
+      - checksum
+    type: object
+  SharedRulesCreate:
+    properties:
+      default:
+        $ref: '#/definitions/AllConstraints'
+      name:
+        type: string
+      rules:
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      shared_rules_key:
+        type: string
+      zone_key:
+        type: string
+    required:
+      - name
+      - zone_key
+      - default
+    type: object
+  SharedRulesFilter:
+    properties:
+      name:
+        type: string
+      shared_rules_key:
+        type: string
+      zone_key:
+        type: string
+    type: object
+  SharedRulesResult:
+    properties:
+      result:
+        $ref: '#/definitions/SharedRules'
+    type: object
+  TimeRange:
+    properties:
+      end:
+        description: |
+          The end of the window we want to see changes for; measured in
+          microseconds since Unix Epoch.
+        format: int64
+        type: integer
+      start:
+        description: The beginning of the window we want to see changes for; measured in microseconds since Unix Epoch.
+        format: int64
+        type: integer
+    type: object
+  User:
+    properties:
+      checksum:
+        type: string
+      deleted_at:
+        description: |
+          A timestamp that marks when a user was deleted. It is in the format
+          yyyy-mm-ddThh:mm:ss.SZ. The timezone will always be UTC.
+        type: string
+        x-example: '2017-08-14T17:29:11.986Z'
+      login_email:
+        type: string
+      user_key:
+        type: string
+    required:
+      - user_key
+      - login_email
+      - checksum
+    type: object
+  Zone:
+    properties:
+      checksum:
+        type: string
+      name:
+        type: string
+      zone_key:
+        type: string
+    required:
+      - zone_key
+      - name
+      - checksum
+    type: object
+  ZoneCreate:
+    properties:
+      name:
+        type: string
+    required:
+      - name
+    type: object
+  ZoneFilter:
+    properties:
+      name:
+        type: string
+      zone_key:
+        type: string
+    type: object
+  ZoneResult:
+    properties:
+      result:
+        $ref: '#/definitions/Zone'
+    type: object
