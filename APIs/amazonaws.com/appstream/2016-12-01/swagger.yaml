@@ -144,6 +144,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CopyImage':
+    post:
+      operationId: CopyImage
+      description: Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyImageResponse'
+        '480':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: IncompatibleImageException
+          schema:
+            $ref: '#/definitions/IncompatibleImageException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyImageRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateDirectoryConfig':
     post:
       operationId: CreateDirectoryConfig
@@ -1412,6 +1457,31 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: An API error occurred. Wait a few minutes and try again.
+  CopyImageRequest:
+    type: object
+    required:
+      - SourceImageName
+      - DestinationImageName
+      - DestinationRegion
+    properties:
+      SourceImageName:
+        $ref: '#/definitions/Name'
+        description: The name of the image to copy.
+      DestinationImageName:
+        $ref: '#/definitions/Name'
+        description: The name that the image will have when it is copied to the destination.
+      DestinationRegion:
+        $ref: '#/definitions/RegionName'
+        description: 'The destination region to which the image will be copied. This parameter is required, even if you are copying an image within the same region.'
+      DestinationImageDescription:
+        $ref: '#/definitions/Description'
+        description: The description that the image will have when it is copied to the destination.
+  CopyImageResponse:
+    type: object
+    properties:
+      DestinationImageName:
+        $ref: '#/definitions/Name'
+        description: The name of the destination image.
   CreateDirectoryConfigRequest:
     type: object
     required:
@@ -1745,10 +1815,10 @@ definitions:
     properties:
       StackName:
         $ref: '#/definitions/String'
-        description: The name of the stack.
+        description: The name of the stack. This value is case-sensitive.
       FleetName:
         $ref: '#/definitions/String'
-        description: The name of the fleet.
+        description: The name of the fleet. This value is case-sensitive.
       UserId:
         $ref: '#/definitions/UserId'
         description: The user ID.
@@ -2132,6 +2202,7 @@ definitions:
       - PENDING
       - AVAILABLE
       - FAILED
+      - COPYING
       - DELETING
   ImageStateChangeReason:
     type: object
@@ -2148,6 +2219,7 @@ definitions:
     enum:
       - INTERNAL_ERROR
       - IMAGE_BUILDER_NOT_AVAILABLE
+      - IMAGE_COPY_FAILURE
   IncompatibleImageException:
     type: object
     properties:
@@ -2262,6 +2334,10 @@ definitions:
   RedirectURL:
     type: string
     maxLength: 1000
+  RegionName:
+    type: string
+    minLength: 1
+    maxLength: 32
   ResourceAlreadyExistsException:
     type: object
     properties:
