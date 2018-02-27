@@ -9,7 +9,7 @@ info:
     - education
   x-logo:
     backgroundColor: '#000000'
-    url: 'http://media.learnifier.com/2014/04/Learnifier-3201.png'
+    url: 'https://twitter.com/learnifier/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'http://learnifier.com/apidocs/learnifier.json'
@@ -486,7 +486,7 @@ paths:
   '/orgunits/{orgid}/projects/{projectid}/participants/${participantId}':
     delete:
       description: |
-        Deletes a participant. The user itself will still remain but any state related to the project will be deleted. 
+        Deletes a participant. The user itself will still remain but any state related to the project will be deleted.
         It might not be possible due to constraints from the products in the project to delete the participant. However
         this can only be determined at the time of the delete. If a delete fails the participant will have their inError
         flag set.
