@@ -64,7 +64,7 @@ exports.sortJson = function (json) {
   });
 
   //detect Swagger format.
-  if (_.get(json, 'swagger') !== '2.0')
+  if ((_.get(json, 'swagger') !== '2.0') && (!_.get(json,'openapi')))
     return json;
 
   var fieldOrder = [
@@ -72,6 +72,8 @@ exports.sortJson = function (json) {
     'schemes',
     'host',
     'basePath',
+    'openapi',
+    'servers',
     'x-hasEquivalentPaths',
     'info',
     'externalDocs',
@@ -83,7 +85,8 @@ exports.sortJson = function (json) {
     'responses',
     'tags',
     'paths',
-    'definitions'
+    'definitions',
+    'components'
   ];
 
   var sorted = {};
@@ -100,7 +103,9 @@ exports.sortJson = function (json) {
 }
 
 exports.getSpecs = function (dir) {
-  return exports.getYamlFiles('**/swagger.yaml', dir);
+  let result = exports.getYamlFiles('**/swagger.yaml', dir);
+  result = Object.assign(result,exports.getYamlFiles('**/openapi.yaml', dir));
+  return result;
 }
 
 exports.getYamlFiles = function (pattern, dir) {
@@ -166,7 +171,9 @@ exports.getOriginUrl = function (swagger) {
 }
 
 exports.saveSwagger = function (swagger) {
-  var path = exports.getSwaggerPath(swagger);
+  let filename = 'swagger.yaml';
+  if (swagger.openapi) filename = 'openapi.yaml';
+  var path = exports.getSwaggerPath(swagger,filename);
   exports.saveYaml(path, swagger);
   return path;
 }

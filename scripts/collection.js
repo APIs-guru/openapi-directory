@@ -3,6 +3,7 @@
 
 const assert = require('assert');
 const fs = require('fs');
+const url = require('url');
 const pathLib = require('path');
 const utilLib = require('util');
 
@@ -240,7 +241,9 @@ function updateCollection(dir, command) {
         return writeSpecFromLead(lead, command)
           .then(swagger => {
             if (swagger) {
-              var newFilename = util.getSwaggerPath(swagger);
+              let target = 'swagger.yaml';
+              if (swagger.openapi) target = 'openapi.yaml';
+              var newFilename = util.getSwaggerPath(swagger,target);
               if (newFilename !== filename)
                 warnings.push(`Spec was moved from "${filename}" to "${newFilename}"`);
             }
@@ -254,7 +257,7 @@ function updateCollection(dir, command) {
       console.log('Finishing successfully');
       fs.writeFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),YAML.safeDump(httpCache, {lineWidth:-1}),'utf8');
       if (newBlackList.length) {
-        console.warn(util.inspect(newBlackList));
+        console.warn(utilLib.inspect(newBlackList));
       }
     });
 }
@@ -786,7 +789,7 @@ function fixSpec(swagger, errors) {
       var value = jp.get(swagger, path);
     }
     catch(e) {
-      //FIXME: sway give path with intermediate $refs in them
+      //FIXME: sway gives path with intermediate $refs in them
       return;
     }
 
@@ -969,7 +972,9 @@ function errorToString(error, context) {
 }
 
 function validateSwagger(swagger, source) {
-  return converter.getSpec(swagger, 'swagger_2')
+  let target = 'swagger_2';
+  if (swagger.openapi) target = 'openapi_3';
+  return converter.getSpec(swagger, target)
     .then(function(spec){
       var relativeBase = source.split('/');
       relativeBase.pop();
@@ -1051,7 +1056,7 @@ function patchSwagger(swagger, exPatch) {
 
   removeEmpty(swagger.info);
 
-  if (swagger.host.indexOf('googleapis.com')>=0) {
+  if (swagger.host && swagger.host.indexOf('googleapis.com')>=0) {
     sp.sortParameters(swagger);
     sp.sortTags(swagger);
   }
@@ -1099,7 +1104,9 @@ function removeEmpty(obj) {
 }
 
 function convertToSwagger(spec) {
-  return spec.convertTo('swagger_2')
+  let target = 'swagger_2';
+  if (spec.format === 'openapi_3') target = spec.format;
+  return spec.convertTo(target)
     .then(swagger => {
       _.merge(swagger.spec.info, {
         'x-providerName': parseHost(swagger.spec, spec.source)
@@ -1127,6 +1134,11 @@ function convertToSwagger(spec) {
 
 function parseHost(swagger, altSource) {
   var swHost = swagger.host;
+
+  if (swagger.openapi) {
+    let u = url.parse(swagger.servers[0].url);
+    swHost = u.hostname;
+  }
 
   assert(swHost, 'Missing host');
   assert(!/^localhost/.test(swHost), 'Can not add localhost API');
