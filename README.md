@@ -60,11 +60,11 @@ Existing integrations
 
 [![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
- - https://any-api.com - Documentation and Test Consoles for Public APIs
+ - https://any-api.com - **Documentation and Test Consoles for Public APIs**
+ - https://datafire.io - **allows you to process and transfer data between APIs, databases, and more**
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
  - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
- - https://datafire.io - allows you to process and transfer data between APIs, databases, and more
  - [Material Swagger UI Hub](https://darosh.github.io/angular-swagger-ui-material/hub/) - testing and exploring hub for Material Swagger UI demo
  - [Paw](https://luckymarmot.com/paw) - The most powerful HTTP client for Mac - You can import definitions and directly play with the APIs, [see how](https://luckymarmot.com/paw/doc/examples/search-apis)
  - [Bitscoop](https://bitscoop.com/) - A better way to create and maintain integrations
