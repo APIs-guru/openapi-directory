@@ -1,0 +1,1919 @@
+openapi: 3.0.0
+servers:
+  - description: Main production server
+    url: 'https://api.brex.io'
+info:
+  title: Brex
+  version: 1.0.0
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://brex.io/img/logo_brex_small.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.6.2
+      format: openapi
+      url: 'https://api.brex.io/docs/'
+      version: '3.0'
+  x-providerName: brex.io
+tags:
+  - name: v1-system
+    description: System operations
+  - name: v1-company
+    description: Company Search operations
+  - name: v1-product
+    description: 'Product Search, Order and Retrieve operations'
+  - name: v1-pepsanction
+    description: Pep Sanction Check operations
+  - name: v1-vat-verification
+    description: VAT-Verification methods
+  - name: v1-nif-verification
+    description: NIF-Verification methods
+paths:
+  /api/v1/system/countries:
+    get:
+      description: Search for possible products for a particular subject
+      tags:
+        - v1-system
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of countries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    country_code:
+                      type: string
+                    country_name:
+                      type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  /api/v1/system/pricelist:
+    get:
+      description: Retrieve pricing rules for your subscription plan
+      tags:
+        - v1-system
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of pricing rules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    metric_id:
+                      type: string
+                    sku:
+                      type: string
+                    cost_per_unit:
+                      type: string
+                    min:
+                      type: string
+                    max:
+                      type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/{id}/{dataset}':
+    get:
+      description: Search for company by id from previous call
+      tags:
+        - v1-company
+      parameters:
+        - name: id
+          in: path
+          description: company master data by id
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: dataset
+          in: path
+          description: company master data by id
+          required: true
+          schema:
+            type: string
+            format: string
+            enum:
+              - ''
+              - mini
+              - master
+              - full
+              - refresh
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    country:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    registrationNumber:
+                      type: string
+                    status:
+                      type: string
+                    address:
+                      type: array
+                      items:
+                        type: string
+                    formattedAddress:
+                      type: array
+                      items:
+                        type: string
+                    managingDirectors:
+                      type: array
+                      items:
+                        type: string
+                    secretaries:
+                      type: array
+                      items:
+                        type: string
+                    dateOfIncorporation:
+                      type: string
+                    legalForm:
+                      type: string
+                    sicNaceCodes:
+                      type: array
+                      items:
+                        type: string
+                    extraData:
+                      type: object
+                    requestTime:
+                      type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/{id}/announcements':
+    post:
+      description: Search announcements by company id
+      tags:
+        - v1-company
+      parameters:
+        - name: id
+          in: path
+          description: company hex ID
+          required: true
+          schema:
+            type: string
+            format: string
+      requestBody:
+        description: Announcement details
+        required: false
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                data:
+                  description: include announcement text and structured data
+                  type: boolean
+                data-max-announcements:
+                  description: maximum amount of announcements that should include text
+                  type: integer
+                  format: int32
+              example:
+                data: true
+                data-max-announcements: 10
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: The details of announcement
+          content:
+            application/json:
+              schema:
+                required:
+                  - countryCode
+                  - id
+                  - registrationNumber
+                  - time
+                  - type
+                properties:
+                  id:
+                    type: string
+                  registrationNumber:
+                    type: string
+                  countryCode:
+                    type: string
+                  type:
+                    type: string
+                  time:
+                    type: string
+                    format: date
+                  text:
+                    type: string
+                  structured:
+                    type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+    get:
+      description: Search announcements by company id
+      tags:
+        - v1-company
+      parameters:
+        - name: id
+          in: path
+          description: company hex ID
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of announcements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                    registrationNumber:
+                      type: string
+                    countryCode:
+                      type: string
+                    type:
+                      type: string
+                    time:
+                      type: string
+                      format: date
+                    text:
+                      type: string
+                    structured:
+                      type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/{id}/super/{country}':
+    get:
+      description: Search for company superdata by id from previous call
+      tags:
+        - v1-company
+      parameters:
+        - name: id
+          in: path
+          description: company superdata by id
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    country:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    registrationNumber:
+                      type: string
+                    status:
+                      type: string
+                    address:
+                      type: array
+                      items:
+                        type: string
+                    formattedAddress:
+                      type: array
+                      items:
+                        type: string
+                    managingDirectors:
+                      type: array
+                      items:
+                        type: string
+                    secretaries:
+                      type: array
+                      items:
+                        type: string
+                    dateOfIncorporation:
+                      type: string
+                    legalForm:
+                      type: string
+                    sicNaceCodes:
+                      type: array
+                      items:
+                        type: string
+                    extraData:
+                      type: object
+                    requestTime:
+                      type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/announcement/{id}':
+    get:
+      description: Search announcements by id
+      tags:
+        - v1-company
+      parameters:
+        - name: id
+          in: path
+          description: announcement hex ID
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of announcements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                    registrationNumber:
+                      type: string
+                    countryCode:
+                      type: string
+                    type:
+                      type: string
+                    time:
+                      type: string
+                      format: date
+                    text:
+                      type: string
+                    structured:
+                      type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/deepsearch/name/{country}/{name}':
+    get:
+      description: Deep Search (Search on register) by country and name
+      tags:
+        - v1-company
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: name
+          in: path
+          description: company name
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    country:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    registrationNumber:
+                      type: string
+                    status:
+                      type: string
+                    address:
+                      type: array
+                      items:
+                        type: string
+                    formattedAddress:
+                      type: array
+                      items:
+                        type: string
+                    managingDirectors:
+                      type: array
+                      items:
+                        type: string
+                    secretaries:
+                      type: array
+                      items:
+                        type: string
+                    dateOfIncorporation:
+                      type: string
+                    legalForm:
+                      type: string
+                    sicNaceCodes:
+                      type: array
+                      items:
+                        type: string
+                    extraData:
+                      type: object
+                    requestTime:
+                      type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/deepsearch/number/{country}/{number}':
+    get:
+      description: Deep Search (Search on register) by country and register number.
+      tags:
+        - v1-company
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: number
+          in: path
+          description: company registration number
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    country:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    registrationNumber:
+                      type: string
+                    status:
+                      type: string
+                    address:
+                      type: array
+                      items:
+                        type: string
+                    formattedAddress:
+                      type: array
+                      items:
+                        type: string
+                    managingDirectors:
+                      type: array
+                      items:
+                        type: string
+                    secretaries:
+                      type: array
+                      items:
+                        type: string
+                    dateOfIncorporation:
+                      type: string
+                    legalForm:
+                      type: string
+                    sicNaceCodes:
+                      type: array
+                      items:
+                        type: string
+                    extraData:
+                      type: object
+                    requestTime:
+                      type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/search/{country}':
+    post:
+      description: >-
+        Search by country and mixed parameters. This function requires a country
+        code then a mixture of name, number, url, phone, and vat. 0 or 1 of each
+        parameter can be supplied. These are applied in a progressive filter
+        mechanism in the order they are supplied (when properly implemented).
+        This means it is possible to return empty sets when a later match
+        returns an empty set.
+      tags:
+        - v1-company
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+      requestBody:
+        description: VAT number and the company details
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: Company name
+                  type: string
+                number:
+                  description: Company registration number
+                  type: string
+                address:
+                  description: Company address (or address partial)
+                  type: string
+                phone:
+                  description: Company contact phone number
+                  type: string
+                url:
+                  description: Company url
+                  type: string
+                vat:
+                  description: Company VAT number
+                  type: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    country:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    registrationNumber:
+                      type: string
+                    status:
+                      type: string
+                    address:
+                      type: array
+                      items:
+                        type: string
+                    formattedAddress:
+                      type: array
+                      items:
+                        type: string
+                    managingDirectors:
+                      type: array
+                      items:
+                        type: string
+                    secretaries:
+                      type: array
+                      items:
+                        type: string
+                    dateOfIncorporation:
+                      type: string
+                    legalForm:
+                      type: string
+                    sicNaceCodes:
+                      type: array
+                      items:
+                        type: string
+                    extraData:
+                      type: object
+                    requestTime:
+                      type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/search/name/{country}/{name}':
+    get:
+      description: Search by country and name
+      tags:
+        - v1-company
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: name
+          in: path
+          description: company name
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: limit
+          in: query
+          description: number of search results
+          required: false
+          schema:
+            type: integer
+            format: int64
+      security:
+        - user_key: []
+      responses:
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/company/search/number/{country}/{number}':
+    get:
+      description: Search by country and registration number
+      tags:
+        - v1-company
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: number
+          in: path
+          description: company registration number
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: limit
+          in: query
+          description: number of search results
+          required: false
+          schema:
+            type: integer
+            format: int64
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    country:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    registrationNumber:
+                      type: string
+                    status:
+                      type: string
+                    address:
+                      type: array
+                      items:
+                        type: string
+                    formattedAddress:
+                      type: array
+                      items:
+                        type: string
+                    managingDirectors:
+                      type: array
+                      items:
+                        type: string
+                    secretaries:
+                      type: array
+                      items:
+                        type: string
+                    dateOfIncorporation:
+                      type: string
+                    legalForm:
+                      type: string
+                    sicNaceCodes:
+                      type: array
+                      items:
+                        type: string
+                    extraData:
+                      type: object
+                    requestTime:
+                      type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/product/{orderId}':
+    get:
+      description: Retrieves the document associated with a completed order
+      tags:
+        - v1-product
+      parameters:
+        - name: orderId
+          in: path
+          description: >-
+            ID of the ProductOrder as returned from a /product/buy call - 32
+            character hex value
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Details for retrieval of a delivered product
+          content:
+            application/json:
+              schema:
+                required:
+                  - mimeType
+                  - productOrderId
+                  - uri
+                properties:
+                  productOrderId:
+                    type: string
+                  mimeType:
+                    type: string
+                  uri:
+                    type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/product/availability/{sku}/{subjectId}':
+    get:
+      description: >-
+        Check availabilty and valid options for a particular product for a
+        particular subject
+      tags:
+        - v1-product
+      parameters:
+        - name: sku
+          in: path
+          description: SKU - 9 character value from a Product object
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: subjectId
+          in: path
+          description: Subject (e.g. Company) ID - 32 character hex value
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Product details
+          content:
+            application/json:
+              schema:
+                required:
+                  - availability
+                  - category
+                  - countryCode
+                  - description
+                  - hasOptions
+                  - options
+                  - price
+                  - provider
+                  - sku
+                  - type
+                properties:
+                  sku:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: number
+                    format: float
+                  type:
+                    type: string
+                  category:
+                    type: string
+                  provider:
+                    type: string
+                  countryCode:
+                    type: string
+                  hasOptions:
+                    type: boolean
+                  options:
+                    type: array
+                    items:
+                      type: string
+                  availability:
+                    type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/product/notifier/{notifierId}':
+    get:
+      description: Return the current status of an existing notifier
+      tags:
+        - v1-product
+      parameters:
+        - name: notifierId
+          in: path
+          description: >-
+            ID of the ProductOrderNotifier as returned from a /notifier POST
+            call - 32 character hex value
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Details of configured product order notification
+          content:
+            application/json:
+              schema:
+                required:
+                  - callback
+                  - lastCallTime
+                  - lastResponseCode
+                  - notifierType
+                  - productOrderIdentity
+                properties:
+                  identity:
+                    type: string
+                  productOrderIdentity:
+                    type: string
+                  notifierType:
+                    type: string
+                  callback:
+                    type: string
+                  lastCallTime:
+                    type: string
+                    format: date
+                  lastResponseCode:
+                    type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/product/order/{sku}/{option}/{subjectId}':
+    post:
+      description: Place an order for a particular product for a particular subject
+      tags:
+        - v1-product
+      parameters:
+        - name: sku
+          in: path
+          description: SKU - 9 character value from a Product object
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: option
+          in: path
+          description: >-
+            Product option (e.g. Accounts year) from a previous Availability
+            call
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: subjectId
+          in: path
+          description: Subject (e.g. Company) ID - 32 character hex value
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Product order details
+          content:
+            application/json:
+              schema:
+                required:
+                  - identity
+                  - option
+                  - ordered
+                  - owner
+                  - price
+                  - sku
+                  - status
+                  - subjectId
+                  - subjectValue
+                properties:
+                  identity:
+                    type: string
+                  owner:
+                    type: string
+                  sku:
+                    type: string
+                  price:
+                    type: number
+                    format: float
+                  subjectValue:
+                    type: string
+                  subjectId:
+                    type: string
+                  option:
+                    type: string
+                  status:
+                    type: string
+                  ordered:
+                    type: string
+                    format: date
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/product/order/{sku}/{subjectId}':
+    post:
+      description: Place an order for a particular product for a particular subject
+      tags:
+        - v1-product
+      parameters:
+        - name: sku
+          in: path
+          description: SKU - 9 character value from a Product object
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: subjectId
+          in: path
+          description: Subject (e.g. Company) ID - 32 character hex value
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Product order details
+          content:
+            application/json:
+              schema:
+                required:
+                  - identity
+                  - option
+                  - ordered
+                  - owner
+                  - price
+                  - sku
+                  - status
+                  - subjectId
+                  - subjectValue
+                properties:
+                  identity:
+                    type: string
+                  owner:
+                    type: string
+                  sku:
+                    type: string
+                  price:
+                    type: number
+                    format: float
+                  subjectValue:
+                    type: string
+                  subjectId:
+                    type: string
+                  option:
+                    type: string
+                  status:
+                    type: string
+                  ordered:
+                    type: string
+                    format: date
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/product/search/{subjectId}':
+    get:
+      description: Search for possible products for a particular subject
+      tags:
+        - v1-product
+      parameters:
+        - name: subjectId
+          in: path
+          description: Subject (e.g. Company) ID - 32 character hex value
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    sku:
+                      type: string
+                    description:
+                      type: string
+                    price:
+                      type: number
+                      format: float
+                    type:
+                      type: string
+                    category:
+                      type: string
+                    provider:
+                      type: string
+                    countryCode:
+                      type: string
+                    hasOptions:
+                      type: boolean
+                    options:
+                      type: array
+                      items:
+                        type: string
+                    availability:
+                      type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/product/status/{orderId}':
+    get:
+      description: Get the status of an ongoing order
+      tags:
+        - v1-product
+      parameters:
+        - name: orderId
+          in: path
+          description: >-
+            ID of the ProductOrder as returned from a /product/buy call - 32
+            character hex value
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Product order details
+          content:
+            application/json:
+              schema:
+                required:
+                  - identity
+                  - option
+                  - ordered
+                  - owner
+                  - price
+                  - sku
+                  - status
+                  - subjectId
+                  - subjectValue
+                properties:
+                  identity:
+                    type: string
+                  owner:
+                    type: string
+                  sku:
+                    type: string
+                  price:
+                    type: number
+                    format: float
+                  subjectValue:
+                    type: string
+                  subjectId:
+                    type: string
+                  option:
+                    type: string
+                  status:
+                    type: string
+                  ordered:
+                    type: string
+                    format: date
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/pepsanction/order/{type}/{search}':
+    post:
+      description: Order a new Pep Sanction Check
+      tags:
+        - v1-pepsanction
+      parameters:
+        - name: type
+          in: path
+          description: Type (Business or Person) of the requested Pep Sanction Check
+          required: true
+          schema:
+            type: string
+            format: string
+            enum:
+              - ''
+              - B
+              - P
+        - name: search
+          in: path
+          description: Search string for the Pep Sanction Check
+          required: true
+          schema:
+            type: string
+            format: string
+      requestBody:
+        description: Optional parameters to enhance search
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                GivenName:
+                  description: Optional parameter for first name when doing a person search
+                  type: string
+                MiddleName:
+                  description: >-
+                    Optional parameter for middle name when doing a person
+                    search
+                  type: string
+                FamilyName:
+                  description: Optional parameter for last name when doing a person search
+                  type: string
+                DOB:
+                  description: >-
+                    Optional parameter for date of birth name when doing a
+                    person search
+                  type: string
+                Aliases:
+                  description: >-
+                    Optional parameter for declaring alias names when doing a
+                    person search (seperated by commas)
+                  type: string
+                Filters:
+                  description: >-
+                    Optional parameter for restricting search when doing a
+                    person search (seperated by commas)
+                  type: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Product details
+          content:
+            application/json:
+              schema:
+                required:
+                  - availability
+                  - category
+                  - countryCode
+                  - description
+                  - hasOptions
+                  - options
+                  - price
+                  - provider
+                  - sku
+                  - type
+                properties:
+                  sku:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: number
+                    format: float
+                  type:
+                    type: string
+                  category:
+                    type: string
+                  provider:
+                    type: string
+                  countryCode:
+                    type: string
+                  hasOptions:
+                    type: boolean
+                  options:
+                    type: array
+                    items:
+                      type: string
+                  availability:
+                    type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/pepsanction/retrieve/{id}':
+    get:
+      description: Retrieve a delivered Pep Sanction check structured or in pdf
+      tags:
+        - v1-pepsanction
+      parameters:
+        - name: accept
+          in: header
+          description: The type (pdf or json) in which the check should be returned
+          required: false
+          schema:
+            type: string
+            format: string
+            enum:
+              - application/json
+              - application/pdf
+            default: application/json
+        - name: id
+          in: path
+          description: >-
+            The id of the ordered Pep Sanction Check (id as returned by
+            orderPepSanction call)
+          required: true
+          schema:
+            type: string
+            format: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Result of a PEP and sanctions list check
+          content:
+            application/json:
+              schema:
+                required:
+                  - listsChecked
+                  - search
+                  - status
+                  - timestamp
+                  - type
+                properties:
+                  status:
+                    type: string
+                  search:
+                    type: string
+                  type:
+                    type: string
+                  listsChecked:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date
+                  results:
+                    properties:
+                      SourceID:
+                        type: integer
+                        format: int64
+                      SourceName:
+                        type: string
+                      SourceAgency:
+                        type: string
+                      SourceEntity:
+                        type: string
+                      SourceType:
+                        type: string
+                      ResultsURL:
+                        type: string
+                      Excerpts:
+                        type: string
+                      SearchType:
+                        type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/vat-verification/basic-check/{country}':
+    post:
+      description: >-
+        Basic verification of given VAT number against VIES. Optional parameters
+        may help to build a better confidence score.
+      tags:
+        - v1-vat-verification
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+      requestBody:
+        description: VAT number and the company details
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - vatNumber
+              properties:
+                vatNumber:
+                  description: VAT number to validate
+                  type: string
+                companyName:
+                  description: Company name
+                  type: string
+                companyNumber:
+                  description: official company number
+                  type: string
+                companyAddress:
+                  description: company address lines
+                  type: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Denotes validity of checked VAT
+          content:
+            application/json:
+              schema:
+                required:
+                  - confidenceScore
+                  - validationStatus
+                properties:
+                  validationStatus:
+                    type: boolean
+                  confidenceScore:
+                    type: number
+                  company:
+                    required:
+                      - country
+                      - id
+                      - name
+                      - registrationNumber
+                    properties:
+                      country:
+                        type: string
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      registrationNumber:
+                        type: string
+                      status:
+                        type: string
+                      address:
+                        type: array
+                        items:
+                          type: string
+                      formattedAddress:
+                        type: array
+                        items:
+                          type: string
+                      managingDirectors:
+                        type: array
+                        items:
+                          type: string
+                      secretaries:
+                        type: array
+                        items:
+                          type: string
+                      dateOfIncorporation:
+                        type: string
+                      legalForm:
+                        type: string
+                      sicNaceCodes:
+                        type: array
+                        items:
+                          type: string
+                      extraData:
+                        type: object
+                      requestTime:
+                        type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/vat-verification/comprehensive-check/{country}':
+    post:
+      description: >-
+        Extended verification of given VAT number against VIES and register.
+        Optional parameters may help to build a better confidence score.
+      tags:
+        - v1-vat-verification
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+      requestBody:
+        description: VAT number and the company details
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - vatNumber
+              properties:
+                vatNumber:
+                  description: VAT number to validate
+                  type: string
+                companyName:
+                  description: Company name
+                  type: string
+                companyNumber:
+                  description: official company number
+                  type: string
+                companyAddress:
+                  description: company address lines
+                  type: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Denotes validity of checked VAT
+          content:
+            application/json:
+              schema:
+                required:
+                  - confidenceScore
+                  - validationStatus
+                properties:
+                  validationStatus:
+                    type: boolean
+                  confidenceScore:
+                    type: number
+                  company:
+                    required:
+                      - country
+                      - id
+                      - name
+                      - registrationNumber
+                    properties:
+                      country:
+                        type: string
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      registrationNumber:
+                        type: string
+                      status:
+                        type: string
+                      address:
+                        type: array
+                        items:
+                          type: string
+                      formattedAddress:
+                        type: array
+                        items:
+                          type: string
+                      managingDirectors:
+                        type: array
+                        items:
+                          type: string
+                      secretaries:
+                        type: array
+                        items:
+                          type: string
+                      dateOfIncorporation:
+                        type: string
+                      legalForm:
+                        type: string
+                      sicNaceCodes:
+                        type: array
+                        items:
+                          type: string
+                      extraData:
+                        type: object
+                      requestTime:
+                        type: integer
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/nif-verification/basic-check/{country}':
+    post:
+      description: >-
+        Basic verification of given portuguese NIF number against NIF.com.
+        Optional parameters may help to build a better confidence score.
+      tags:
+        - v1-nif-verification
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+      requestBody:
+        description: Company details
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - nifNumber
+              properties:
+                nifNumber:
+                  description: NIF number to validate
+                  type: string
+                companyName:
+                  description: Company name
+                  type: string
+                companyAddress:
+                  description: company address lines
+                  type: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Result of a basic NIF verification
+          content:
+            application/json:
+              schema:
+                required:
+                  - nifNumber
+                  - confidenceScore
+                  - validationStatus
+                properties:
+                  validationStatus:
+                    type: boolean
+                  confidenceScore:
+                    type: number
+                  nifNumber:
+                    type: number
+                  companyName:
+                    type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+  '/api/v1/nif-verification/comprehensive-check/{country}':
+    post:
+      description: >-
+        Comprehensive verification of given portuguese NIF number against
+        NIF.com. Optional parameters may help to build a better confidence
+        score.
+      tags:
+        - v1-nif-verification
+      parameters:
+        - name: country
+          in: path
+          description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          required: true
+          schema:
+            type: string
+            format: string
+      requestBody:
+        description: Company details
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - nifNumber
+              properties:
+                nifNumber:
+                  description: NIF number to validate
+                  type: string
+                companyName:
+                  description: Company name
+                  type: string
+                companyAddress:
+                  description: company address lines
+                  type: string
+      security:
+        - user_key: []
+      responses:
+        '200':
+          description: Result of a comprehensive NIF verification
+          content:
+            application/json:
+              schema:
+                required:
+                  - nifNumber
+                  - confidenceScore
+                  - validationStatus
+                properties:
+                  validationStatus:
+                    type: boolean
+                  confidenceScore:
+                    type: number
+                  nifNumber:
+                    type: number
+                  companyName:
+                    type: string
+                  address:
+                    type: string
+                  status:
+                    type: object
+                  activity:
+                    type: object
+                  email:
+                    type: string
+                  phone:
+                    type: string
+                  website:
+                    type: string
+                  fax:
+                    type: string
+                  legalType:
+                    type: string
+                  capital:
+                    type: number
+                  currency:
+                    type: string
+                  geo:
+                    type: string
+        default:
+          description: Detailed information about the error
+          content:
+            application/json:
+              schema:
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
