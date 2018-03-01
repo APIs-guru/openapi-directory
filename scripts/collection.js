@@ -173,9 +173,10 @@ program
   .command('add')
   .description('add new definition')
   .option('-b, --background <BACKGROUND>', 'specify background colour')
-  .option('-d, --desclang <LANG>', 'specify description language')
   .option('-c, --categories <CATEGORIES>', 'csv list of categories')
+  .option('-d, --desclang <LANG>', 'specify description language')
   .option('-f, --fixup', 'try to fix definition')
+  .option('-h, --host <HOST>', 'specify host for relative specs')
   .option('-i, --ignore','ignore validation errors')
   .option('-l, --logo <LOGO>', 'specify logo url')
   .option('-s, --service <NAME>', 'supply service name')
@@ -506,7 +507,7 @@ function writeSpec(source, format, exPatch, command) {
       var fixup = util.readYaml(getOriginFixupPath(spec));
       jsondiffpatch.patch(spec, fixup);
 
-      return convertToSwagger(spec);
+      return convertToSwagger(spec,command);
     })
     .then(swagger => {
       context.swagger = swagger;
@@ -1103,13 +1104,13 @@ function removeEmpty(obj) {
   });
 }
 
-function convertToSwagger(spec) {
+function convertToSwagger(spec,command) {
   let target = 'swagger_2';
   if (spec.format === 'openapi_3') target = spec.format;
   return spec.convertTo(target)
     .then(swagger => {
       _.merge(swagger.spec.info, {
-        'x-providerName': parseHost(swagger.spec, spec.source)
+        'x-providerName': parseHost(swagger.spec, command.host)
       });
     if (typeof swagger.spec.info['x-origin'] == 'undefined')
         swagger.spec.info['x-origin'] = [];
@@ -1140,11 +1141,13 @@ function parseHost(swagger, altSource) {
     swHost = u.hostname;
   }
 
+  if (swHost == 'raw.githubusercontent.com') {
+    swHost = altSource;
+    swagger.host = altSource+'.local';
+  }
+
   assert(swHost, 'Missing host');
   assert(!/^localhost/.test(swHost), 'Can not add localhost API');
-  if (swHost === 'raw.githubusercontent.com') {
-    throw new Error('Warning: relative/github host');
-  }
   assert(swHost !== 'raw.githubusercontent.com', 'Missing host + spec hosted on GitHub');
   assert(swHost !== 'virtserver.swaggerhub.com', 'Cannot add swaggerhub mock server API');
   assert(swHost !== 'example.com', 'Cannot add example.com API');
