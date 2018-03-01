@@ -114,7 +114,7 @@ function addSwagger(apiList, swagger, filename) {
 
 function buildVersionEntry(swagger, filename) {
   let target = 'swagger';
-  if (target.openapi) target = 'openapi';
+  if (swagger.openapi) target = 'openapi';
   var basename = 'specs/' + util.getSwaggerPath(swagger, target);
   util.saveJson(deployDir(`${basename}.json`), swagger);
   util.saveYaml(deployDir(`${basename}.yaml`), swagger);
