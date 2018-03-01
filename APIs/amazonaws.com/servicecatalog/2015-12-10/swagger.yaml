@@ -447,7 +447,7 @@ paths:
   '/#CreateProvisionedProductPlan':
     post:
       operationId: CreateProvisionedProductPlan
-      description: '<p>Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, it''s status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>'
+      description: '<p>Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>'
       responses:
         '200':
           description: Success
@@ -759,6 +759,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProvisioningArtifactInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTagOption':
+    post:
+      operationId: DeleteTagOption
+      description: <p>Deletes the specified TagOption.</p> <p>You cannot delete a TagOption if it is associated with a product or portfolio.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTagOptionInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1559,7 +1596,7 @@ paths:
   '/#ListProvisionedProductPlans':
     post:
       operationId: ListProvisionedProductPlans
-      description: Lists the plans for the specified provisioned product or all plans the user has access to.
+      description: Lists the plans for the specified provisioned product or all plans to which the user has access.
       responses:
         '200':
           description: Success
@@ -2794,6 +2831,17 @@ definitions:
   DeleteProvisioningArtifactOutput:
     type: object
     properties: {}
+  DeleteTagOptionInput:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/TagOptionId'
+        description: The TagOption identifier.
+  DeleteTagOptionOutput:
+    type: object
+    properties: {}
   DescribeConstraintInput:
     type: object
     required:
@@ -2974,7 +3022,7 @@ definitions:
         description: Information about the plan.
       ResourceChanges:
         $ref: '#/definitions/ResourceChanges'
-        description: Information about the resources changes that will occur when the plan is executed.
+        description: Information about the resource changes that will occur when the plan is executed.
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
@@ -4390,10 +4438,10 @@ definitions:
     properties:
       Target:
         $ref: '#/definitions/ResourceTargetDefinition'
-        description: Information about the resource attribute that will be modified.
+        description: Information about the resource attribute to be modified.
       Evaluation:
         $ref: '#/definitions/EvaluationType'
-        description: 'For static evaluations, the value the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.'
+        description: 'For static evaluations, the value of the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.'
       CausingEntity:
         $ref: '#/definitions/CausingEntity'
         description: The ID of the entity that caused the change.
@@ -4455,13 +4503,13 @@ definitions:
     properties:
       Attribute:
         $ref: '#/definitions/ResourceAttribute'
-        description: The attribute that will change.
+        description: The attribute to be changed.
       Name:
         $ref: '#/definitions/PropertyName'
         description: 'If the attribute is <code>Properties</code>, the value is the name of the property. Otherwise, the value is null.'
       RequiresRecreation:
         $ref: '#/definitions/RequiresRecreation'
-        description: 'If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be recreated.'
+        description: 'If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be re-created.'
     description: Information about a change to a resource attribute.
   ResourceType:
     type: string

@@ -4719,7 +4719,7 @@ definitions:
         description: 'The maximum number of instances that are allowed to execute the command at the same time. You can specify a number of instances, such as 10, or a percentage of instances, such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
-        description: 'The maximum number of errors allowed before the system stops sending the command to additional targets. You can specify a number of errors, such as 10, or a percentage or errors, such as 10%. The default value is 50. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: 'The maximum number of errors allowed before the system stops sending the command to additional targets. You can specify a number of errors, such as 10, or a percentage or errors, such as 10%. The default value is 0. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
       TargetCount:
         $ref: '#/definitions/TargetCount'
         description: The number of targets for the command.
@@ -7309,7 +7309,7 @@ definitions:
         description: 'The version of the SSM Agent running on your Linux instance. '
       IsLatestVersion:
         $ref: '#/definitions/Boolean'
-        description: 'Indicates whether latest version of the SSM Agent is running on your instance. '
+        description: 'Indicates whether latest version of the SSM Agent is running on your instance. Some older versions of Windows Server use the EC2Config service to process SSM requests. For this reason, this field does not indicate whether or not the latest version is installed on Windows managed instances.'
       PlatformType:
         $ref: '#/definitions/PlatformType'
         description: 'The operating system platform type. '
@@ -8012,6 +8012,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  LastResourceDataSyncMessage:
+    type: string
   LastResourceDataSyncStatus:
     type: string
     enum:
@@ -9876,6 +9878,9 @@ definitions:
       SyncCreatedTime:
         $ref: '#/definitions/ResourceDataSyncCreatedTime'
         description: The date and time the configuration was created (UTC).
+      LastSyncStatusMessage:
+        $ref: '#/definitions/LastResourceDataSyncMessage'
+        description: The status message details reported by the last sync.
     description: 'Information about a Resource Data Sync configuration, including its current status and last successful sync.'
   ResourceDataSyncItemList:
     type: array
@@ -10071,7 +10076,7 @@ definitions:
         description: '(Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html">Using Concurrency Controls</a>.'
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
-        description: 'The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html">Using Error Controls</a>.'
+        description: 'The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 0. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html">Using Error Controls</a>.'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
         description: 'The IAM role that Systems Manager uses to send notifications. '

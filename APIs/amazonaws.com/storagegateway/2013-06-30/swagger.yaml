@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: ActivateGateway
-      description: '<p>Activates the gateway you previously deployed on your host. For more information, see <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedActivateGateway-common.html"> Activate the AWS Storage Gateway</a>. In the activation process, you specify information such as the region you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see <a>UpdateGatewayInformation</a>.</p> <note> <p>You must turn on the gateway VM before you can activate your gateway.</p> </note>'
+      description: '<p>Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the region you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see <a>UpdateGatewayInformation</a>.</p> <note> <p>You must turn on the gateway VM before you can activate your gateway.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1688,7 +1688,7 @@ paths:
   '/#NotifyWhenUploaded':
     post:
       operationId: NotifyWhenUploaded
-      description: '<p>Sends you notification when all file data written to the NFS file share has been uploaded to Amazon S3.</p> <p>AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch event. You can configure CloudWatch Events to sent the notification through event targets such as email, SNS or a Lambda function. text or Lambda functions. This operation is only supported in the file gateway type.</p>'
+      description: '<p>Sends you notification through CloudWatch Events when all files written to your NFS file share have been uploaded to Amazon S3.</p> <p>AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported in the file gateway type.</p> <p>For more information, see Getting File Upload Notification in the Storage Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification). </p>'
       responses:
         '200':
           description: Success
@@ -1787,7 +1787,7 @@ paths:
   '/#ResetCache':
     post:
       operationId: ResetCache
-      description: '<p>Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume, tape and file gateway types.</p> <important> <p>If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly.</p> </important>'
+      description: '<p>Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume and tape types.</p> <important> <p>If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2265,7 +2265,7 @@ definitions:
     properties:
       ActivationKey:
         $ref: '#/definitions/ActivationKey'
-        description: 'Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter <code>activationKey</code>. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the <code>ActivateGateway</code> API call determine the actual configuration of your gateway.'
+        description: '<p>Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter <code>activationKey</code>. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the <code>ActivateGateway</code> API call determine the actual configuration of your gateway. </p> <p>For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html in the Storage Gateway User Guide.</p>'
       GatewayName:
         $ref: '#/definitions/GatewayName'
         description: The name you configured for your gateway.
@@ -2274,7 +2274,7 @@ definitions:
         description: 'A value that indicates the time zone you want to set for the gateway. The time zone is of the format "GMT-hr:mm" or "GMT+hr:mm". For example, GMT-4:00 indicates the time is 4 hours behind GMT. GMT+2:00 indicates the time is 2 hours ahead of GMT. The time zone is used, for example, for scheduling snapshots and your gateway''s maintenance schedule.'
       GatewayRegion:
         $ref: '#/definitions/RegionId'
-        description: '<p>A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p> Valid Values: "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1", "eu-west-2", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"</p>'
+        description: '<p>A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p> Valid Values: "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1", "eu-west-2", "eu-west-3", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"</p>'
       GatewayType:
         $ref: '#/definitions/GatewayType'
         description: '<p>A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>STORED</code>. </p> <p> Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"</p>'
@@ -2405,7 +2405,6 @@ definitions:
     minimum: 51200
   Boolean:
     type: boolean
-    description: 'A value that indicates whether the write status of a file share is read-only: "true" if write status is read-only, and otherwise "false".'
   CachediSCSIVolume:
     type: object
     properties:
@@ -2593,6 +2592,9 @@ definitions:
       DefaultStorageClass:
         $ref: '#/definitions/StorageClass'
         description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+        description: Sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is "private".
       ClientList:
         $ref: '#/definitions/FileShareClientList'
         description: 'The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. '
@@ -2601,10 +2603,13 @@ definitions:
         description: '<p>Maps a user to anonymous user. Valid options are the following: </p> <ul> <li> <p>"RootSquash" - Only root is mapped to anonymous user.</p> </li> <li> <p>"NoSquash" - No one is mapped to anonymous user.</p> </li> <li> <p>"AllSquash" - Everyone is mapped to anonymous user.</p> </li> </ul>'
       ReadOnly:
         $ref: '#/definitions/Boolean'
-        description: 'Sets the write status of a file share: "true" if the write status is read-only, and otherwise "false".'
+        description: 'Sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
       GuessMIMETypeEnabled:
         $ref: '#/definitions/Boolean'
-        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".'
+        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets who pays the cost of the request and the data download from the Amazon S3 bucket. Set this value to true if you want the requester to pay instead of the bucket owner, and otherwise to false.'
     description: CreateNFSFileShareInput
   CreateNFSFileShareOutput:
     type: object
@@ -4077,15 +4082,21 @@ definitions:
       DefaultStorageClass:
         $ref: '#/definitions/StorageClass'
         description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
       ClientList:
         $ref: '#/definitions/FileShareClientList'
       Squash:
         $ref: '#/definitions/Squash'
       ReadOnly:
         $ref: '#/definitions/Boolean'
+        description: 'Sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
       GuessMIMETypeEnabled:
         $ref: '#/definitions/Boolean'
-        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".'
+        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets who pays the cost of the request and the data download from the Amazon S3 bucket. Set this value to true if you want the requester to pay instead of the bucket owner, and otherwise to false.'
     description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
   NFSFileShareInfoList:
     type: array
@@ -4134,6 +4145,17 @@ definitions:
     type: integer
     minimum: 1
     maximum: 10
+  ObjectACL:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - authenticated-read
+      - bucket-owner-read
+      - bucket-owner-full-control
+      - aws-exec-read
+    description: Sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
   Path:
     type: string
     description: 'The file share path used by the NFS client to identify the mount point. '
@@ -4748,6 +4770,9 @@ definitions:
       DefaultStorageClass:
         $ref: '#/definitions/StorageClass'
         description: 'The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+        description: Sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
       ClientList:
         $ref: '#/definitions/FileShareClientList'
         description: The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
@@ -4756,10 +4781,13 @@ definitions:
         description: '<p>The user mapped to anonymous user. Valid options are the following:</p> <ul> <li> <p>"RootSquash" - Only root is mapped to anonymous user.</p> </li> <li> <p>"NoSquash" - No one is mapped to anonymous user</p> </li> <li> <p>"AllSquash" - Everyone is mapped to anonymous user.</p> </li> </ul>'
       ReadOnly:
         $ref: '#/definitions/Boolean'
-        description: 'Sets the write status of a file share: "true" if the write status is read-only, otherwise "false".'
+        description: 'Sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
       GuessMIMETypeEnabled:
         $ref: '#/definitions/Boolean'
-        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".'
+        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets who pays the cost of the request and the data download from the Amazon S3 bucket. Set this value to true if you want the requester to pay instead of the bucket owner, and otherwise to false.'
     description: UpdateNFSFileShareInput
   UpdateNFSFileShareOutput:
     type: object
