@@ -1145,10 +1145,13 @@ function parseHost(swagger, altSource) {
     swHost = u.hostname;
   }
 
-  if ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('example.com'))) {
+  if ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('example.com')) || (swHost.startsWith('localhost'))) {
+    let port = '';
+    if (swHost.indexOf(':')>=0) port = swHost.split(':')[1];
     swHost = altSource;
     let pd = parseDomain(swHost,{ customTlds: ["local"] });
     swagger.host = pd.domain+'.local';
+    if (port) swagger.host += ':'+port;
   }
 
   assert(swHost, 'Missing host');
