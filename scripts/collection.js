@@ -1141,7 +1141,7 @@ function parseHost(swagger, altSource) {
     swHost = u.hostname;
   }
 
-  if (swHost == 'raw.githubusercontent.com') {
+  if ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('example.com'))) {
     swHost = altSource;
     swagger.host = altSource+'.local';
   }
