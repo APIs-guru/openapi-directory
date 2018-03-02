@@ -556,6 +556,10 @@ function writeSpec(source, format, exPatch, command) {
       delete exPatch.info['x-preferred'];
       delete exPatch.info['x-origin'];
 
+      if (context.swagger.host && context.swagger.host.endsWith('.local')) {
+        exPatch.host = context.swagger.host;
+      }
+
       if (Object.keys(exPatch.info).length) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
         var patchFilename2 = pathLib.join(util.getPathComponents(context.swagger).join('/'),'patch.yaml');
@@ -1143,7 +1147,8 @@ function parseHost(swagger, altSource) {
 
   if ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('example.com'))) {
     swHost = altSource;
-    swagger.host = altSource+'.local';
+    let pd = parseDomain(swHost,{ customTlds: ["local"] });
+    swagger.host = pd.domain+'.local';
   }
 
   assert(swHost, 'Missing host');
@@ -1152,7 +1157,8 @@ function parseHost(swagger, altSource) {
   assert(swHost !== 'virtserver.swaggerhub.com', 'Cannot add swaggerhub mock server API');
   assert(swHost !== 'example.com', 'Cannot add example.com API');
 
-  var p = parseDomain(swHost);
+  console.log(swHost);
+  var p = parseDomain(swHost,{ customTlds: ["local"] });
   if (!p) p = parseDomain(altSource);
   p.domain = p.domain.replace(/^www.?/, '')
   p.subdomain = p.subdomain.replace(/^www.?/, '')
