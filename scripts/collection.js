@@ -74,6 +74,7 @@ converter.ResourceReaders.url = function (url) {
   var options = {
     headers: {
       'Accept': 'application/json,*/*',
+      'Accept-Language': 'en-GB,en;q=0.5'
     },
   retries : 10
   };
