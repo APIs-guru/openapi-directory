@@ -840,22 +840,29 @@ function fixSpec(swagger, errors) {
         }
         break;
       case 'UNRESOLVABLE_REFERENCE':
-        if (value.indexOf(' ') !== -1)
-          newValue = value = replaceSpaces(value);
+        if (value.indexOf(' ') !== -1) {
+          if (value !== encodeURI(value)) {
+            newValue = encodeURI(value);
+          }
+          else
+            newValue = replaceSpaces(value);
+        }
+        else
+          newValue = value;
 
         if (!swagger.definitions)
           swagger.definitions = {};
 
-        if (typeof swagger.definitions[value] !== 'undefined')
-          newValue = '#/definitions/' + value;
+        if (typeof swagger.definitions[newValue] !== 'undefined')
+          newValue = '#/definitions/' + newValue;
         else if (value.indexOf('#/definitions/#/parameters')>=0) {
           newValue = value.replace('#/definitions/','');
         }
         else {
-          if (value.startsWith('#/definitions/')) {
+          if ((value == newValue) && (value.startsWith('#/definitions/'))) {
             console.warn(error.code,value);
             let ptr = value.replace('#/definitions/','');
-            swagger.definitions[ptr] = { };
+            swagger.definitions[decodeURI(ptr)] = {};
             fixed = true;
           }
         }
