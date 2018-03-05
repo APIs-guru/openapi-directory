@@ -4142,7 +4142,7 @@ definitions:
         $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
         description: ResponseStatus
       Result:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult,_JE.Api.Payments.Contracts,_Version=6.16.0.0,_Culture=neutral,_PublicKeyToken=null]]'
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.CheckoutResult,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
       TransactionLinesWritten:
         description: Boolean
@@ -4182,7 +4182,7 @@ definitions:
         items:
           $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
       Result:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult,_JE.Api.Payments.Contracts,_Version=6.16.0.0,_Culture=neutral,_PublicKeyToken=null]]'
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.CheckoutResult,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
@@ -4343,8 +4343,8 @@ definitions:
           - AuthReversed
           - Failed
         type: string
-  'JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,_JE.Api.Payments.Contracts,_Version=6.16.0.0,_Culture=neutral,_PublicKeyToken=null]]': {}
-  'JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult,_JE.Api.Payments.Contracts,_Version=6.16.0.0,_Culture=neutral,_PublicKeyToken=null]]': {}
+  'JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]': {}
+  'JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]': {}
   JE.Api.Response.ErrorBase:
     properties:
       Code:
@@ -4568,7 +4568,7 @@ definitions:
       ScoreMetadata:
         description: 'IEnumerable[System.Collections.Generic.KeyValuePair`2]'
         items:
-          $ref: '#/definitions/System.Collections.Generic.KeyValuePair`2[[System.String,_mscorlib,_Version=4.0.0.0,_Culture=neutral,_PublicKeyToken=b77a5c561934e089],[System.String,_mscorlib,_Version=4.0.0.0,_Culture=neutral,_PublicKeyToken=b77a5c561934e089]]'
+          $ref: '#/definitions/System.Collections.Generic.KeyValuePair%602%5B%5BSystem.String,%20mscorlib,%20Version=4.0.0.0,%20Culture=neutral,%20PublicKeyToken=b77a5c561934e089%5D,%5BSystem.String,%20mscorlib,%20Version=4.0.0.0,%20Culture=neutral,%20PublicKeyToken=b77a5c561934e089%5D%5D'
         type: array
       SendsOnItsWayNotifications:
         description: Boolean
@@ -5554,7 +5554,7 @@ definitions:
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
       Reason:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,_JE.Api.Payments.Contracts,_Version=6.16.0.0,_Culture=neutral,_PublicKeyToken=null]]'
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes]'
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
@@ -5564,7 +5564,7 @@ definitions:
         items:
           $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
       Result:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult,_JE.Api.Payments.Contracts,_Version=6.16.0.0,_Culture=neutral,_PublicKeyToken=null]]'
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.CheckoutResult,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
@@ -5592,7 +5592,7 @@ definitions:
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
       Reason:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,_JE.Api.Payments.Contracts,_Version=6.16.0.0,_Culture=neutral,_PublicKeyToken=null]]'
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes]'
       ResponseStatus:
         $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
@@ -5600,7 +5600,7 @@ definitions:
         items:
           $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
       Result:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult,_JE.Api.Payments.Contracts,_Version=6.16.0.0,_Culture=neutral,_PublicKeyToken=null]]'
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.CheckoutResult,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
@@ -6374,7 +6374,7 @@ definitions:
       Value:
         description: String
         type: string
-  'System.Collections.Generic.KeyValuePair`2[[System.String,_mscorlib,_Version=4.0.0.0,_Culture=neutral,_PublicKeyToken=b77a5c561934e089],[System.String,_mscorlib,_Version=4.0.0.0,_Culture=neutral,_PublicKeyToken=b77a5c561934e089]]': {}
+  'System.Collections.Generic.KeyValuePair`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]': {}
   System.Decimal: {}
   System.Globalization.Calendar:
     properties:
