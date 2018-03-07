@@ -508,7 +508,7 @@ function writeSpec(source, format, exPatch, command) {
       var fixup = util.readYaml(getOriginFixupPath(spec));
       jsondiffpatch.patch(spec, fixup);
 
-      return convertToSwagger(spec,command);
+      return convertToSwagger(spec,exPatch,command);
     })
     .then(swagger => {
       context.swagger = swagger;
@@ -1116,13 +1116,13 @@ function removeEmpty(obj) {
   });
 }
 
-function convertToSwagger(spec,command) {
+function convertToSwagger(spec,exPatch,command) {
   let target = 'swagger_2';
   if (spec.format === 'openapi_3') target = spec.format;
   return spec.convertTo(target)
     .then(swagger => {
       _.merge(swagger.spec.info, {
-        'x-providerName': parseHost(swagger.spec, command.host)
+        'x-providerName': parseHost(swagger.spec, command.host||exPatch.info["x-providerName"])
       });
     if (typeof swagger.spec.info['x-origin'] == 'undefined')
         swagger.spec.info['x-origin'] = [];
@@ -1168,7 +1168,6 @@ function parseHost(swagger, altSource) {
   assert(swHost !== 'virtserver.swaggerhub.com', 'Cannot add swaggerhub mock server API');
   assert(swHost !== 'example.com', 'Cannot add example.com API');
 
-  console.log(swHost);
   var p = parseDomain(swHost,{ customTlds: ["local"] });
   if (!p) p = parseDomain(altSource);
   p.domain = p.domain.replace(/^www.?/, '')
