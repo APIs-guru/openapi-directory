@@ -11,6 +11,7 @@
     "gulp": "^3.9.1",
     "gulp-awspublish": "^3.2.0",
     "gulp-rename": "^1.2.2",
+    "jgexml": "^0.3.8",
     "jiff": "^0.7.3",
     "js-yaml": "^3.4.3",
     "json-merge-patch": "^0.2.3",
@@ -27,6 +28,7 @@
     "mktemp": "^0.4.0",
     "parse-domain": "^0.2.0",
     "recursive-readdir": "^2.1.1",
+    "remove-markdown": "^0.2.2",
     "sanitize-filename": "^1.5.3",
     "shelljs": "^0.7.0",
     "swagger-methods": "^1.0.0",
@@ -40,7 +42,7 @@
   },
   "scripts": {
     "test": "scripts/collection.js validate -q",
-    "deploy": "scripts/deploy.js && ./scripts/deploy_badges.js && gulp publish"
+    "deploy": "scripts/deploy.js && scripts/deployRss.js && ./scripts/deploy_badges.js && gulp publish"
   },
   "devDependencies": {
     "dredd": "^4.7.0"
