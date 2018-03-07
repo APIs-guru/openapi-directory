@@ -20,7 +20,7 @@ paths:
   /tyk/apis/:
     get:
       description: |
-        Gets a list of *API Definition* objects that are currently live on the gateway
+        Gets a list of *API Definition* objects that are currently live on the gateway 
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -447,7 +447,7 @@ paths:
   '/tyk/oauth/clients/{apiId}':
     get:
       description: |
-        Get a list of OAuth clients bound to this back end
+        Get a list of OAuth clients bound to this back end 
       parameters:
         - description: tyk gateway shared secret
           format: string
