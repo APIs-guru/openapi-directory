@@ -34,7 +34,7 @@ exports.getLeads = function (specs) {
     .values().flatten()
     .map(swagger => ({
       info: {
-	  	'version': swagger.info.version,
+        'version': swagger.info.version,
         'x-providerName': util.getProviderName(swagger),
         'x-serviceName': util.getServiceName(swagger),
         'x-origin': util.getOrigin(swagger)
