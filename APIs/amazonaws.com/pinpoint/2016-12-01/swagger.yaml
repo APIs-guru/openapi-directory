@@ -280,6 +280,101 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/jobs/export':
+    post:
+      operationId: CreateExportJob
+      description: Creates an export job.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateExportJobResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateExportJobRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetExportJobs
+      description: Returns information about your export jobs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetExportJobsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetExportJobsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
   '/v1/apps/{application-id}/jobs/import':
     post:
       operationId: CreateImportJob
@@ -1073,7 +1168,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApnsVoipSandboxChannel
-      description: Get an APNS VoipSandbox channel
+      description: Get an APNS VoIPSandbox channel
       responses:
         '200':
           description: Success
@@ -2606,6 +2701,63 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/jobs/export/{job-id}':
+    get:
+      operationId: GetExportJob
+      description: Returns information about an export job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetExportJobResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetExportJobRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: job-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/jobs/import/{job-id}':
     get:
       operationId: GetImportJob
@@ -2650,6 +2802,63 @@ paths:
           type: string
           required: true
         - name: job-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}/jobs/export':
+    get:
+      operationId: GetSegmentExportJobs
+      description: Returns a list of export jobs for a specific segment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSegmentExportJobsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSegmentExportJobsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: segment-id
           in: path
           type: string
           required: true
@@ -3016,7 +3225,7 @@ definitions:
     properties:
       ApplicationId:
         $ref: '#/definitions/__string'
-        description: Application id
+        description: The ID of the application to which the channel applies.
       CreationDate:
         $ref: '#/definitions/__string'
         description: When was this segment created
@@ -3025,7 +3234,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: Indicates whether the channel is configured with ADM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with ADM. Provide your credentials by setting the ClientId and ClientSecret attributes.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -3142,10 +3351,10 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: 'Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes.'
       HasTokenKey:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a token key for authentication.
+        description: Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute.
       Id:
         $ref: '#/definitions/__string'
         description: Channel ID. Not used. Present only for backwards compatibility.
@@ -3182,7 +3391,7 @@ definitions:
         description: Provide this key with a string value that represents the notification's type. This value corresponds to the value in the identifier property of one of your app's registered categories.
       CollapseId:
         $ref: '#/definitions/__string'
-        description: Multiple notifications with the same collapse identifier are displayed to the user as a single notification. The value of this key must not exceed 64 bytes.
+        description: 'An ID that, if assigned to multiple messages, causes APNs to coalesce the messages into a single push notification instead of delivering each message individually. The value must not exceed 64 bytes. Amazon Pinpoint uses this value to set the apns-collapse-id request header when it sends the message to APNs.'
       Data:
         $ref: '#/definitions/MapOf__string'
         description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
@@ -3194,7 +3403,18 @@ definitions:
         description: 'The preferred authentication method, either "CERTIFICATE" or "TOKEN"'
       Priority:
         $ref: '#/definitions/__string'
-        description: Is this a transaction priority message or lower priority.
+        description: |-
+          The message priority. Amazon Pinpoint uses this value to set the apns-priority request header when it sends the message to APNs. Accepts the following values:
+
+          "5" - Low priority. Messages might be delayed, delivered in groups, and throttled.
+
+          "10" - High priority. Messages are sent immediately. High priority messages must cause an alert, sound, or badge on the receiving device.
+
+          The default value is "10".
+
+          The equivalent values for FCM or GCM messages are "normal" and "high". Amazon Pinpoint accepts these values for APNs messages and converts them.
+
+          For more information about the apns-priority parameter, see Communicating with APNs in the APNs Local and Remote Notification Programming Guide.
       RawContent:
         $ref: '#/definitions/__string'
         description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
@@ -3212,7 +3432,7 @@ definitions:
         description: 'Provide this key with a string value that represents the app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together.'
       TimeToLive:
         $ref: '#/definitions/__integer'
-        description: 'This parameter specifies how long (in seconds) the message should be kept if APNS is unable to deliver the notification the first time. If the value is 0, APNS treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to APNS'
+        description: 'The length of time (in seconds) that APNs stores and attempts to deliver the message. If the value is 0, APNs does not store the message or attempt to deliver it more than once. Amazon Pinpoint uses this value to set the apns-expiration request header when it sends the message to APNs.'
       Title:
         $ref: '#/definitions/__string'
         description: The message title that displays above the message on the user's device.
@@ -3253,7 +3473,7 @@ definitions:
     properties:
       ApplicationId:
         $ref: '#/definitions/__string'
-        description: Application id
+        description: The ID of the application to which the channel applies.
       CreationDate:
         $ref: '#/definitions/__string'
         description: When was this segment created
@@ -3265,10 +3485,10 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: 'Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes.'
       HasTokenKey:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a token key for authentication.
+        description: Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -3497,7 +3717,7 @@ definitions:
         description: |-
           The channel type.
 
-          Valid values: GCM | APNS | SMS | EMAIL
+          Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
       Context:
         $ref: '#/definitions/MapOf__string'
         description: A map of custom attributes to attributes to be attached to the message for this address. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
@@ -3527,6 +3747,9 @@ definitions:
       ApplicationId:
         $ref: '#/definitions/__string'
         description: The unique ID for the application.
+      CampaignHook:
+        $ref: '#/definitions/CampaignHook'
+        description: Default campaign hook.
       LastModifiedDate:
         $ref: '#/definitions/__string'
         description: The date that the settings were last updated in ISO 8601 format.
@@ -3605,7 +3828,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: Indicates whether the channel is configured with Baidu Cloud Push credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with Baidu Cloud Push. Provide your credentials by setting the ApiKey and SecretKey attributes.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -3684,6 +3907,18 @@ definitions:
         $ref: '#/definitions/__string'
         description: The email title (Or subject).
     description: The email message configuration.
+  CampaignHook:
+    type: object
+    properties:
+      LambdaFunctionName:
+        $ref: '#/definitions/__string'
+        description: Lambda function name or arn to be called for delivery
+      Mode:
+        $ref: '#/definitions/Mode'
+        description: What mode Lambda should be invoked in.
+      WebUrl:
+        $ref: '#/definitions/__string'
+        description: Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request
   CampaignLimits:
     type: object
     properties:
@@ -3692,10 +3927,10 @@ definitions:
         description: The maximum number of messages that the campaign can send daily.
       MaximumDuration:
         $ref: '#/definitions/__integer'
-        description: The maximum duration of a campaign from the scheduled start. Must be a minimum of 60 seconds.
+        description: The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
       MessagesPerSecond:
         $ref: '#/definitions/__integer'
-        description: The maximum number of messages per second that the campaign will send. This is a best effort maximum cap and can go as high as 20000 and as low as 50
+        description: 'The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.'
       Total:
         $ref: '#/definitions/__integer'
         description: The maximum total number of messages that the campaign can send.
@@ -3721,6 +3956,9 @@ definitions:
       HoldoutPercent:
         $ref: '#/definitions/__integer'
         description: The allocated percentage of end users who will not receive messages from this campaign.
+      Hook:
+        $ref: '#/definitions/CampaignHook'
+        description: Campaign hook information.
       Id:
         $ref: '#/definitions/__string'
         description: The unique campaign ID.
@@ -3817,6 +4055,7 @@ definitions:
       - SMS
       - EMAIL
       - BAIDU
+      - CUSTOM
   CreateAppRequest:
     type: object
     required:
@@ -3852,6 +4091,20 @@ definitions:
     properties:
       CampaignResponse:
         $ref: '#/definitions/CampaignResponse'
+  CreateExportJobRequest:
+    type: object
+    required:
+      - ExportJobRequest
+    properties:
+      ExportJobRequest:
+        $ref: '#/definitions/ExportJobRequest'
+  CreateExportJobResponse:
+    type: object
+    required:
+      - ExportJobResponse
+    properties:
+      ExportJobResponse:
+        $ref: '#/definitions/ExportJobResponse'
   CreateImportJobRequest:
     type: object
     required:
@@ -4160,13 +4413,16 @@ definitions:
         description: The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
       Attributes:
         $ref: '#/definitions/MapOfListOf__string'
-        description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+        description: |-
+          Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+          The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
       ChannelType:
         $ref: '#/definitions/ChannelType'
         description: |-
           The channel type.
 
-          Valid values: GCM | APNS | SMS | EMAIL
+          Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
       Demographic:
         $ref: '#/definitions/EndpointDemographic'
         description: The endpoint demographic attributes.
@@ -4285,13 +4541,16 @@ definitions:
         description: The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
       Attributes:
         $ref: '#/definitions/MapOfListOf__string'
-        description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+        description: |-
+          Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+          The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
       ChannelType:
         $ref: '#/definitions/ChannelType'
         description: |-
           The channel type.
 
-          Valid values: GCM | APNS | SMS | EMAIL
+          Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
       Demographic:
         $ref: '#/definitions/EndpointDemographic'
         description: The endpoint demographic attributes.
@@ -4333,13 +4592,16 @@ definitions:
         description: The ID of the application associated with the endpoint.
       Attributes:
         $ref: '#/definitions/MapOfListOf__string'
-        description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+        description: |-
+          Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+          The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
       ChannelType:
         $ref: '#/definitions/ChannelType'
         description: |-
           The channel type.
 
-          Valid values: GCM | APNS | SMS | EMAIL
+          Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
       CohortId:
         $ref: '#/definitions/__string'
         description: 'A number from 0 - 99 that represents the cohort the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an app. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for a campaign.'
@@ -4403,7 +4665,10 @@ definitions:
     properties:
       UserAttributes:
         $ref: '#/definitions/MapOfListOf__string'
-        description: Custom attributes specific to the user.
+        description: |-
+          Custom attributes that describe an end user by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+          The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
       UserId:
         $ref: '#/definitions/__string'
         description: The unique ID of the user.
@@ -4422,7 +4687,7 @@ definitions:
            Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
       ExternalId:
         $ref: '#/definitions/__string'
-        description: The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
+        description: 'DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
       LastModifiedDate:
         $ref: '#/definitions/__string'
         description: The date the event stream was last updated in ISO 8601 format.
@@ -4433,6 +4698,94 @@ definitions:
         $ref: '#/definitions/__string'
         description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
     description: Model for an event publishing subscription export.
+  ExportJobRequest:
+    type: object
+    properties:
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
+      S3UrlPrefix:
+        $ref: '#/definitions/__string'
+        description: |-
+          A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+          The URL should follow this format: s3://bucket-name/folder-name/
+
+          Amazon Pinpoint will export endpoints to this location.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the segment to export endpoints from. If not present all endpoints will be exported.
+  ExportJobResource:
+    type: object
+    properties:
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
+      S3UrlPrefix:
+        $ref: '#/definitions/__string'
+        description: |-
+          A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+          The URL should follow this format: s3://bucket-name/folder-name/
+
+          Amazon Pinpoint will export endpoints to this location.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: 'The ID of the segment to export endpoints from. If not present, all endpoints are exported.'
+  ExportJobResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the application to which the job applies.
+      CompletedPieces:
+        $ref: '#/definitions/__integer'
+        description: The number of pieces that have successfully completed as of the time of the request.
+      CompletionDate:
+        $ref: '#/definitions/__string'
+        description: The date the job completed in ISO 8601 format.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date the job was created in ISO 8601 format.
+      Definition:
+        $ref: '#/definitions/ExportJobResource'
+        description: The export job settings.
+      FailedPieces:
+        $ref: '#/definitions/__integer'
+        description: The number of pieces that failed to be processed as of the time of the request.
+      Failures:
+        $ref: '#/definitions/ListOf__string'
+        description: 'Provides up to 100 of the first failed entries for the job, if any exist.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: |-
+          The status of the job.
+          Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
+
+          The job status is FAILED if one or more pieces failed.
+      TotalFailures:
+        $ref: '#/definitions/__integer'
+        description: 'The number of endpoints that were not processed; for example, because of syntax errors.'
+      TotalPieces:
+        $ref: '#/definitions/__integer'
+        description: The total number of pieces that must be processed to finish the job. Each piece is an approximately equal portion of the endpoints.
+      TotalProcessed:
+        $ref: '#/definitions/__integer'
+        description: The number of endpoints that were processed by the job.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The job type. Will be 'EXPORT'.
+  ExportJobsResponse:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfExportJobResponse'
+        description: A list of export jobs for the application.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The string that you use in a subsequent request to get the next page of results in a paginated response.
+    description: Export job list.
   ForbiddenException:
     type: object
     properties:
@@ -4483,7 +4836,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: Indicates whether the channel is configured with FCM or GCM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with FCM or GCM. Provide your credentials by setting the ApiKey attribute.
       Id:
         $ref: '#/definitions/__string'
         description: Channel ID. Not used. Present only for backwards compatibility.
@@ -4529,7 +4882,16 @@ definitions:
         description: The URL that points to an image used in the push notification.
       Priority:
         $ref: '#/definitions/__string'
-        description: Is this a transaction priority message or lower priority.
+        description: |-
+          The message priority. Amazon Pinpoint uses this value to set the FCM or GCM priority parameter when it sends the message. Accepts the following values:
+
+          "Normal" - Messages might be delayed. Delivery is optimized for battery usage on the receiving device. Use normal priority unless immediate delivery is required.
+
+          "High" - Messages are sent immediately and might wake a sleeping device.
+
+          The equivalent values for APNs messages are "5" and "10". Amazon Pinpoint accepts these values here and converts them.
+
+          For more information, see About FCM Messages in the Firebase documentation.
       RawContent:
         $ref: '#/definitions/__string'
         description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
@@ -4550,7 +4912,7 @@ definitions:
         description: Default message substitutions. Can be overridden by individual address substitutions.
       TimeToLive:
         $ref: '#/definitions/__integer'
-        description: 'This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks, and the default value is 4 weeks.'
+        description: 'The length of time (in seconds) that FCM or GCM stores and attempts to deliver the message. If unspecified, the value defaults to the maximum, which is 2,419,200 seconds (28 days). Amazon Pinpoint uses this value to set the FCM or GCM time_to_live parameter.'
       Title:
         $ref: '#/definitions/__string'
         description: The message title that displays above the message on the user's device.
@@ -4729,6 +5091,26 @@ definitions:
     properties:
       EventStream:
         $ref: '#/definitions/EventStream'
+  GetExportJobRequest:
+    type: object
+    properties: {}
+  GetExportJobResponse:
+    type: object
+    required:
+      - ExportJobResponse
+    properties:
+      ExportJobResponse:
+        $ref: '#/definitions/ExportJobResponse'
+  GetExportJobsRequest:
+    type: object
+    properties: {}
+  GetExportJobsResponse:
+    type: object
+    required:
+      - ExportJobsResponse
+    properties:
+      ExportJobsResponse:
+        $ref: '#/definitions/ExportJobsResponse'
   GetGcmChannelRequest:
     type: object
     properties: {}
@@ -4759,6 +5141,16 @@ definitions:
     properties:
       ImportJobsResponse:
         $ref: '#/definitions/ImportJobsResponse'
+  GetSegmentExportJobsRequest:
+    type: object
+    properties: {}
+  GetSegmentExportJobsResponse:
+    type: object
+    required:
+      - ExportJobsResponse
+    properties:
+      ExportJobsResponse:
+        $ref: '#/definitions/ExportJobsResponse'
   GetSegmentImportJobsRequest:
     type: object
     properties: {}
@@ -4827,7 +5219,7 @@ definitions:
         description: Sets whether the endpoints create a segment when they are imported.
       ExternalId:
         $ref: '#/definitions/__string'
-        description: "A unique, custom ID assigned to the IAM role that restricts who can assume the role.\t"
+        description: 'DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
       Format:
         $ref: '#/definitions/Format'
         description: |-
@@ -4860,7 +5252,7 @@ definitions:
         description: Sets whether the endpoints create a segment when they are imported.
       ExternalId:
         $ref: '#/definitions/__string'
-        description: "A unique, custom ID assigned to the IAM role that restricts who can assume the role.\t"
+        description: 'DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
       Format:
         $ref: '#/definitions/Format'
         description: |-
@@ -4977,6 +5369,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EndpointBatchItem'
+  ListOfExportJobResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ExportJobResponse'
   ListOfImportJobResponse:
     type: array
     items:
@@ -5230,6 +5626,11 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
     description: Simple message object.
+  Mode:
+    type: string
+    enum:
+      - DELIVERY
+      - FILTER
   NotFoundException:
     type: object
     properties:
@@ -5469,7 +5870,7 @@ definitions:
         description: Channel type counts
       ExternalId:
         $ref: '#/definitions/__string'
-        description: 'A unique, custom ID assigned to the IAM role that restricts who can assume the role.'
+        description: 'DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
       Format:
         $ref: '#/definitions/Format'
         description: |-
@@ -5842,6 +6243,9 @@ definitions:
   WriteApplicationSettingsRequest:
     type: object
     properties:
+      CampaignHook:
+        $ref: '#/definitions/CampaignHook'
+        description: Default campaign hook information.
       Limits:
         $ref: '#/definitions/CampaignLimits'
         description: 'The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.'
@@ -5861,6 +6265,9 @@ definitions:
       HoldoutPercent:
         $ref: '#/definitions/__integer'
         description: The allocated percentage of end users who will not receive messages from this campaign.
+      Hook:
+        $ref: '#/definitions/CampaignHook'
+        description: Campaign hook information.
       IsPaused:
         $ref: '#/definitions/__boolean'
         description: Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
