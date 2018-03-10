@@ -1,0 +1,337 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.fantasydata.net
+basePath: /v3/nhl/projections
+info:
+  contact:
+    x-twitter: nfldata
+  title: NHL v3 Projections
+  version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/nfldata/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://fantasydata.com/downloads/swagger/nhl-v3-projections.json'
+      version: '2.0'
+  x-providerName: fantasydata.net
+  x-serviceName: nhl-v3-projections
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+paths:
+  '/{format}/DfsSlatesByDate/{date}':
+    get:
+      operationId: DFS Slates by Date
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-DEC-01</code>, <code>2018-FEB-15</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/DfsSlate'
+            type: array
+  '/{format}/PlayerGameProjectionStatsByDate/{date}':
+    get:
+      operationId: 'Projected Player Game Stats by Date (w/ Injuries, DFS Salaries)'
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+             <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameProjection'
+            type: array
+  '/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}':
+    get:
+      operationId: 'Projected Player Game Stats by Player (w/ Injuries, DFS Salaries)'
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+             <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>30000378</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PlayerGameProjection'
+definitions:
+  DfsSlate:
+    properties:
+      DfsSlateGames:
+        items:
+          $ref: '#/definitions/DfsSlateGame'
+        type: array
+      DfsSlatePlayers:
+        items:
+          $ref: '#/definitions/DfsSlatePlayer'
+        type: array
+      IsMultiDaySlate:
+        type: boolean
+      NumberOfGames:
+        type: integer
+      Operator:
+        type: string
+      OperatorDay:
+        type: string
+      OperatorGameType:
+        type: string
+      OperatorName:
+        type: string
+      OperatorSlateID:
+        type: integer
+      OperatorStartTime:
+        type: string
+      RemovedByOperator:
+        type: boolean
+      SlateID:
+        type: integer
+  DfsSlateGame:
+    properties:
+      GameID:
+        type: integer
+      OperatorGameID:
+        type: integer
+      SlateGameID:
+        type: integer
+      SlateID:
+        type: integer
+  DfsSlatePlayer:
+    properties:
+      OperatorPlayerID:
+        type: string
+      OperatorPlayerName:
+        type: string
+      OperatorPosition:
+        type: string
+      OperatorRosterSlots:
+        items:
+          type: string
+        type: array
+      OperatorSalary:
+        type: integer
+      OperatorSlatePlayerID:
+        type: string
+      PlayerGameProjectionStatID:
+        type: integer
+      PlayerID:
+        type: integer
+      SlateGameID:
+        type: integer
+      SlateID:
+        type: integer
+      SlatePlayerID:
+        type: integer
+  PlayerGameProjection:
+    properties:
+      Assists:
+        type: number
+      BenchPenaltyMinutes:
+        type: number
+      Blocks:
+        type: number
+      DateTime:
+        type: string
+      Day:
+        type: string
+      DraftKingsPosition:
+        type: string
+      DraftKingsSalary:
+        type: integer
+      EmptyNetGoals:
+        type: number
+      FaceoffsLost:
+        type: number
+      FaceoffsWon:
+        type: number
+      FanDuelPosition:
+        type: string
+      FanDuelSalary:
+        type: integer
+      FantasyDataSalary:
+        type: integer
+      FantasyDraftPosition:
+        type: string
+      FantasyDraftSalary:
+        type: integer
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      GameID:
+        type: integer
+      Games:
+        type: integer
+      Giveaways:
+        type: number
+      GlobalGameID:
+        type: integer
+      GlobalOpponentID:
+        type: integer
+      GlobalTeamID:
+        type: integer
+      Goals:
+        type: number
+      GoaltendingGoalsAgainst:
+        type: number
+      GoaltendingLosses:
+        type: number
+      GoaltendingMinutes:
+        type: integer
+      GoaltendingOvertimeLosses:
+        type: number
+      GoaltendingSaves:
+        type: number
+      GoaltendingSeconds:
+        type: integer
+      GoaltendingShotsAgainst:
+        type: number
+      GoaltendingShutouts:
+        type: number
+      GoaltendingWins:
+        type: number
+      HatTricks:
+        type: number
+      Hits:
+        type: number
+      HomeOrAway:
+        type: string
+      InjuryBodyPart:
+        type: string
+      InjuryNotes:
+        type: string
+      InjuryStartDate:
+        type: string
+      InjuryStatus:
+        type: string
+      IsGameOver:
+        type: boolean
+      Minutes:
+        type: integer
+      Name:
+        type: string
+      Opponent:
+        type: string
+      OpponentID:
+        type: integer
+      OpponentPositionRank:
+        type: integer
+      OpponentRank:
+        type: integer
+      PenaltyMinutes:
+        type: number
+      PlayerID:
+        type: integer
+      PlusMinus:
+        type: number
+      Position:
+        type: string
+      PowerPlayAssists:
+        type: number
+      PowerPlayGoals:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Seconds:
+        type: integer
+      Shifts:
+        type: number
+      ShootoutGoals:
+        type: number
+      ShortHandedAssists:
+        type: number
+      ShortHandedGoals:
+        type: number
+      ShotsOnGoal:
+        type: number
+      Started:
+        type: integer
+      StatID:
+        type: integer
+      Takeaways:
+        type: number
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      Updated:
+        type: string
+      YahooPosition:
+        type: string
+      YahooSalary:
+        type: integer

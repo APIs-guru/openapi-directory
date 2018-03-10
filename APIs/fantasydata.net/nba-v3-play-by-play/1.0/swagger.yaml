@@ -1,0 +1,243 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.fantasydata.net
+basePath: /v3/nba/pbp
+info:
+  contact:
+    x-twitter: nfldata
+  description: NBA play-by-play API.
+  title: NBA v3 Play-by-Play
+  version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/nfldata/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://fantasydata.com/downloads/swagger/nba-v3-play-by-play.json'
+      version: '2.0'
+  x-providerName: fantasydata.net
+  x-serviceName: nba-v3-play-by-play
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+paths:
+  '/{format}/PlayByPlay/{gameid}':
+    get:
+      operationId: Play By Play
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'The GameID of an NBA game.  GameIDs can be found in the Games API.  Valid entries are <code>14620</code>, <code>16905</code>, etc.'
+          in: path
+          name: gameid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PlayByPlay'
+  '/{format}/PlayByPlayDelta/{date}/{minutes}':
+    get:
+      operationId: Play By Play Delta
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2016-OCT-31</code>, <code>2017-JAN-15</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+        - description: |-
+            Only returns plays that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:
+            <code>1</code>, <code>2</code> ... <code>all</code>.
+          in: path
+          name: minutes
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayByPlay'
+            type: array
+definitions:
+  Game:
+    properties:
+      Attendance:
+        type: integer
+      AwayTeam:
+        type: string
+      AwayTeamID:
+        type: integer
+      AwayTeamMoneyLine:
+        type: integer
+      AwayTeamScore:
+        type: integer
+      Channel:
+        type: string
+      DateTime:
+        type: string
+      Day:
+        type: string
+      GameID:
+        type: integer
+      GlobalAwayTeamID:
+        type: integer
+      GlobalGameID:
+        type: integer
+      GlobalHomeTeamID:
+        type: integer
+      HomeTeam:
+        type: string
+      HomeTeamID:
+        type: integer
+      HomeTeamMoneyLine:
+        type: integer
+      HomeTeamScore:
+        type: integer
+      IsClosed:
+        type: boolean
+      LastPlay:
+        type: string
+      OverUnder:
+        type: number
+      PointSpread:
+        type: number
+      PointSpreadAwayTeamMoneyLine:
+        type: integer
+      PointSpreadHomeTeamMoneyLine:
+        type: integer
+      Quarter:
+        type: string
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      StadiumID:
+        type: integer
+      Status:
+        type: string
+      TimeRemainingMinutes:
+        type: integer
+      TimeRemainingSeconds:
+        type: integer
+      Updated:
+        type: string
+  Play:
+    properties:
+      AssistedByPlayerID:
+        type: integer
+      AwayTeamScore:
+        type: integer
+      BlockedByPlayerID:
+        type: integer
+      Category:
+        type: string
+      Created:
+        type: string
+      Description:
+        type: string
+      FastBreak:
+        type: boolean
+      HomeTeamScore:
+        type: integer
+      Opponent:
+        type: string
+      OpponentID:
+        type: integer
+      PlayID:
+        type: integer
+      PlayerID:
+        type: integer
+      Points:
+        type: integer
+      PotentialPoints:
+        type: integer
+      QuarterID:
+        type: integer
+      QuarterName:
+        type: string
+      ReceivingTeam:
+        type: string
+      ReceivingTeamID:
+        type: integer
+      Sequence:
+        type: integer
+      ShotMade:
+        type: boolean
+      SideOfBasket:
+        type: string
+      SubstituteInPlayerID:
+        type: integer
+      SubstituteOutPlayerID:
+        type: integer
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      TimeRemainingMinutes:
+        type: integer
+      TimeRemainingSeconds:
+        type: integer
+      Type:
+        type: string
+      Updated:
+        type: string
+  PlayByPlay:
+    properties:
+      Game:
+        $ref: '#/definitions/Game'
+      Plays:
+        items:
+          $ref: '#/definitions/Play'
+        type: array
+      Quarters:
+        items:
+          $ref: '#/definitions/Quarter'
+        type: array
+  Quarter:
+    properties:
+      AwayScore:
+        type: integer
+      GameID:
+        type: integer
+      HomeScore:
+        type: integer
+      Name:
+        type: string
+      Number:
+        type: integer
+      QuarterID:
+        type: integer
