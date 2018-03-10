@@ -1,0 +1,310 @@
+swagger: '2.0'
+schemes:
+  - https
+host: weber-gesamtausgabe.de
+basePath: /api/v1
+info:
+  description: 'The OpenAPI documentation for the RESTful interface of the Carl-Maria-von-Weber-Gesamtausgabe. <br/> (No registration, authentication, or API key is required) <br/> For feedback or requests about this API please contact stadler@weber-gesamtausgabe.de or start the discussion at https://github.com/Edirom/WeGA-WebApp'
+  title: WeGA
+  version: 1.0.0
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://weber-gesamtausgabe.de/resources/img/logo_weber.png'
+  x-origin:
+    - format: swagger
+      url: 'https://weber-gesamtausgabe.de/api/v1/swagger.json'
+      version: '2.0'
+  x-providerName: weber-gesamtausgabe.de
+produces:
+  - application/json
+parameters:
+  docTypeParam:
+    collectionFormat: csv
+    description: The WeGA document type
+    in: query
+    items:
+      enum:
+        - biblio
+        - diaries
+        - documents
+        - letters
+        - news
+        - orgs
+        - persons
+        - places
+        - thematicCommentaries
+        - var
+        - works
+        - writings
+      type: string
+    name: docType
+    type: array
+  fromDateParam:
+    description: The earliest date
+    format: date
+    in: query
+    name: fromDate
+    type: string
+  limitParam:
+    default: 10
+    description: Number of items to retrieve (200 max)
+    format: int32
+    in: query
+    maximum: 200
+    name: limit
+    type: integer
+  offsetParam:
+    default: 1
+    description: Position of first item to retrieve (starting from 1)
+    format: int32
+    in: query
+    minimum: 1
+    name: offset
+    type: integer
+  toDateParam:
+    description: The latest date
+    format: date
+    in: query
+    name: toDate
+    type: string
+tags:
+  - description: Access to the documents of the WeGA digital edition
+    name: Documents
+  - description: Access to correspondence related information from the WeGA digital edition
+    name: Correspondence
+  - description: Access to encoding features
+    name: Code Samples
+paths:
+  '/code/findByElement/{element}':
+    get:
+      description: ''
+      parameters:
+        - description: The XML element to search for
+          in: path
+          name: element
+          required: true
+          type: string
+        - default: 'http://www.tei-c.org/ns/1.0'
+          description: The element namespace. Defaults to the TEI namespace
+          in: query
+          name: namespace
+          required: false
+          type: string
+        - $ref: '#/parameters/docTypeParam'
+        - $ref: '#/parameters/offsetParam'
+        - $ref: '#/parameters/limitParam'
+      responses:
+        '200':
+          description: An array of documents
+          schema:
+            items:
+              $ref: '#/definitions/CodeSample'
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Finds code samples by XML element
+      tags:
+        - Code Samples
+  /documents:
+    get:
+      description: |
+        The Documents endpoint returns a list of all documents from the WeGA digital edition.
+      parameters:
+        - $ref: '#/parameters/docTypeParam'
+        - $ref: '#/parameters/offsetParam'
+        - $ref: '#/parameters/limitParam'
+      responses:
+        '200':
+          description: An array of documents
+          schema:
+            items:
+              $ref: '#/definitions/Document'
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Lists all documents
+      tags:
+        - Documents
+  '/documents/findByAuthor/{authorID}':
+    get:
+      description: |
+        This endpoint returns a list of documents by a given author – optionally filtered by document type 
+      parameters:
+        - default: A002068
+          description: |
+            The author ID to search for. Accepted ID formats are WeGA, e.g. A002068 or http://weber-gesamtausgabe.de/A002068, VIAF, e.g. http://viaf.org/viaf/310642461, or  GND, e.g. http://d-nb.info/gnd/118629662
+          in: path
+          name: authorID
+          required: true
+          type: string
+        - $ref: '#/parameters/docTypeParam'
+        - $ref: '#/parameters/offsetParam'
+        - $ref: '#/parameters/limitParam'
+      responses:
+        '200':
+          description: An array of documents
+          schema:
+            items:
+              $ref: '#/definitions/Document'
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Finds documents by author
+      tags:
+        - Documents
+  /documents/findByDate:
+    get:
+      description: |
+        This endpoint returns a list of documents related to the given date – optionally filtered by document type. 
+      parameters:
+        - default: '1786-11-18'
+          description: The min date to search for
+          format: date
+          in: query
+          name: fromDate
+          required: true
+          type: string
+        - description: The max date to search for
+          format: date
+          in: query
+          name: toDate
+          required: false
+          type: string
+        - $ref: '#/parameters/docTypeParam'
+        - $ref: '#/parameters/offsetParam'
+        - $ref: '#/parameters/limitParam'
+      responses:
+        '200':
+          description: An array of documents
+          schema:
+            items:
+              $ref: '#/definitions/Document'
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Finds documents by date
+      tags:
+        - Documents
+  '/documents/findByMention/{docID}':
+    get:
+      description: |
+        This endpoint returns a list of documents that reference a particular docID – optionally filtered by document type. 
+      parameters:
+        - default: A002068
+          description: |
+            The document ID that is to be mentioned. Accepted ID formats are WeGA, e.g. A002068 or http://weber-gesamtausgabe.de/A002068, VIAF, e.g. http://viaf.org/viaf/310642461, or  GND, e.g. http://d-nb.info/gnd/118629662
+          in: path
+          name: docID
+          required: true
+          type: string
+        - $ref: '#/parameters/docTypeParam'
+        - $ref: '#/parameters/offsetParam'
+        - $ref: '#/parameters/limitParam'
+      responses:
+        '200':
+          description: An array of documents
+          schema:
+            items:
+              $ref: '#/definitions/Document'
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Finds documents by reference
+      tags:
+        - Documents
+  '/documents/{docID}':
+    get:
+      description: |
+        This endpoint returns documents, indicated by an ID.
+         Accepted ID formats are WeGA, e.g. A002068 or http://weber-gesamtausgabe.de/A002068, VIAF, e.g. http://viaf.org/viaf/310642461, or  GND, e.g. http://d-nb.info/gnd/118629662
+      parameters:
+        - default: A002068
+          description: The document identifier to search for
+          in: path
+          name: docID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: An array of documents
+          schema:
+            items:
+              $ref: '#/definitions/Document'
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns documents by ID
+      tags:
+        - Documents
+definitions:
+  CodeSample:
+    properties:
+      codeSample:
+        description: The code snippet
+        type: string
+      docID:
+        description: The WeGA document identifier representing a specific document
+        type: string
+      uri:
+        description: Unique identifier representing a specific document
+        type: string
+    type: object
+  Document:
+    properties:
+      docID:
+        description: The WeGA document identifier representing a specific document
+        type: string
+      docType:
+        description: The WeGA document type
+        type: string
+      title:
+        description: The title of the document
+        type: string
+      uri:
+        description: Unique identifier representing a specific document
+        type: string
+    type: object
+  Error:
+    properties:
+      code:
+        format: int32
+        type: integer
+      fields:
+        type: string
+      message:
+        type: string
+    type: object
+  svnHistoryPatch:
+    properties:
+      author:
+        description: The Subversion commit author
+        type: string
+      dateTime:
+        description: The Subversion commit dateTime
+        type: string
+      path:
+        description: 'The Subversion path, starting from the repository root'
+        type: string
+      rev:
+        description: The Subversion commit revision
+        type: integer
+      uri:
+        description: Unique identifier representing a specific document
+        type: string
+    type: object
+    xml:
+      name: patch
