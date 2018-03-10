@@ -266,6 +266,7 @@ definitions:
           properties:
             $ref: '#/definitions/SubnetPropertiesFormat'
             x-ms-client-flatten: true
+  InboundNatRulePropertiesFormat: {}
   NetworkInterface:
     allOf:
       - description: Azure resource manager resource properties.
@@ -522,3 +523,6 @@ definitions:
             description: Resource Identifier.
             type: string
         x-ms-azure-resource: true
+  NetworkSecurityGroupPropertiesFormat: {}
+  PublicIPAddressPropertiesFormat: {}
+  SubnetPropertiesFormat: {}

@@ -256,7 +256,6 @@ paths:
                   - GET
                 bearerTokenSendingMethods:
                   - authorizationHeader
-                clientAuthenticationMethod: null
                 clientId: '1'
                 clientRegistrationEndpoint: 'https://www.contoso.com/apps'
                 clientSecret: '2'
@@ -271,7 +270,6 @@ paths:
                 resourceOwnerPassword: pwd
                 resourceOwnerUsername: un
                 supportState: true
-                tokenBodyParameters: null
                 tokenEndpoint: 'https://www.contoso.com/oauth2/token'
     patch:
       description: Updates the details of the authorization server specified by its identifier.

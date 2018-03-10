@@ -255,8 +255,6 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'myManagementGroup,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/1ef5d536aec743a0aa801c1a
@@ -269,11 +267,8 @@ paths:
                     policyDefinitionId: /providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d
                     policyDefinitionName: 022d9357-5a90-46f7-9554-21d30ce4c32d
                     policyDefinitionReferenceId: '15521232277412542086'
-                    policySetDefinitionCategory: null
                     policySetDefinitionId: /providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policySetDefinitions/335cefd2-ab16-430f-b364-974a170eb1d5
                     policySetDefinitionName: 335cefd2-ab16-430f-b364-974a170eb1d5
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myrg1
                     resourceId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/microsoft.insights/autoscalesettings/mytest1
                     resourceLocation: westus
@@ -282,8 +277,6 @@ paths:
                     subscriptionId: fffedd8f-ffff-fffd-fffd-fffed2f84852
                     timestamp: '2018-02-09T17:41:47Z'
                   - '@odata.context': 'https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'myManagementGroup,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/186044306c044a1d8c0ff76c
@@ -296,11 +289,8 @@ paths:
                     policyDefinitionId: /providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d
                     policyDefinitionName: 022d9357-5a90-46f7-9554-21d30ce4c32d
                     policyDefinitionReferenceId: ''
-                    policySetDefinitionCategory: null
                     policySetDefinitionId: ''
                     policySetDefinitionName: ''
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myrg1
                     resourceId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/microsoft.insights/autoscalesettings/mytest1
                     resourceLocation: westus
@@ -348,7 +338,6 @@ paths:
                 '@odata.count': 1
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumDenyStates: 6
         Filter and group with aggregate:
           parameters:
@@ -367,14 +356,12 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumAuditDenyNonComplianceRecords: 10
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/e46af646ebdb461dba708e01
                     policyDefinitionAction: audit
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/c8b79b49-a579-4045-984e-1b249ab8b474
                     resourceId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myrg/providers/microsoft.classiccompute/domainnames/myDomainName
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumAuditDenyNonComplianceRecords: 10
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/ddd8ef92e3714a5ea3d208c1
                     policyDefinitionAction: audit
@@ -396,13 +383,11 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/enable monitoring in azure security center
                     policyDefinitionAction: auditifnotexists
                     policyDefinitionId: /providers/microsoft.authorization/policydefinitions/44452482-524f-4bf4-b852-0bff7cc4a3ed
                     resourceId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myrg/providers/microsoft.network/virtualnetworks/vnet
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/89b27f38-e9e4-4468-ab81-801c84b8c017
                     policyDefinitionAction: auditifnotexists
                     policyDefinitionId: /providers/microsoft.authorization/policydefinitions/44452482-524f-4bf4-b852-0bff7cc4a3ed
@@ -423,70 +408,60 @@ paths:
                 '@odata.count': 10
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 557
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/f4cc58b7db524a9799381531
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/24813039-7534-408a-9842-eb99f45721b1
                     policyDefinitionReferenceId: '14799174781370023846'
                     policySetDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policysetdefinitions/12b58873-e0f8-4b95-936c-86cbe7c9d697
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 557
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/f4cc58b7db524a9799381531
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/24813039-7534-408a-9842-eb99f45721b1
                     policyDefinitionReferenceId: '1679708035638239273'
                     policySetDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policysetdefinitions/12b58873-e0f8-4b95-936c-86cbe7c9d697
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 557
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/ddd8ef92e3714a5ea3d208c1
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/24813039-7534-408a-9842-eb99f45721b1
                     policyDefinitionReferenceId: '14799174781370023846'
                     policySetDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policysetdefinitions/12b58873-e0f8-4b95-936c-86cbe7c9d697
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 557
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/ddd8ef92e3714a5ea3d208c1
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/24813039-7534-408a-9842-eb99f45721b1
                     policyDefinitionReferenceId: '1679708035638239273'
                     policySetDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policysetdefinitions/12b58873-e0f8-4b95-936c-86cbe7c9d697
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 557
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/d9da7e80af6344ab9d342aa7
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/24813039-7534-408a-9842-eb99f45721b1
                     policyDefinitionReferenceId: ''
                     policySetDefinitionId: ''
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 557
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/dcda79d769674aea8bfcaa49
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/c8b79b49-a579-4045-984e-1b249ab8b474
                     policyDefinitionReferenceId: ''
                     policySetDefinitionId: ''
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 552
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/3f3c4330183b4e218fe6fd29
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/24813039-7534-408a-9842-eb99f45721b1
                     policyDefinitionReferenceId: ''
                     policySetDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policysetdefinitions/3e3807c1-65c9-49e0-a406-82d8ae3e338c
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 544
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/e46af646ebdb461dba708e01
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/c8b79b49-a579-4045-984e-1b249ab8b474
                     policyDefinitionReferenceId: '8935913113203900114'
                     policySetDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policysetdefinitions/a03db67e-a286-43c3-9098-b2da83d361ad
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 526
                     policyAssignmentId: /providers/microsoft.management/managementgroups/mymg/providers/microsoft.authorization/policyassignments/8174043a1e2849179635b874
                     policyDefinitionId: /providers/microsoft.management/managementgroups/mymg/providers/microsoft.authorization/policydefinitions/72c0c41a-c752-4bc0-9c61-0d6adc567066
                     policyDefinitionReferenceId: ''
                     policySetDefinitionId: ''
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     NumNonCompliantResources: 509
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/ddd8ef92e3714a5ea3d208c1
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/c8b79b49-a579-4045-984e-1b249ab8b474
@@ -504,8 +479,6 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policyAssignments/Enable Monitoring in Azure Security Center
@@ -517,12 +490,8 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/9daedab3-fb2d-461e-b861-71790eead4f6
                     policyDefinitionName: 9daedab3-fb2d-461e-b861-71790eead4f6
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
                     policySetDefinitionId: /providers/Microsoft.Authorization/policySetDefinitions/1f3afdf9-d0c9-4c3d-847f-89da613e70a8
                     policySetDefinitionName: 1f3afdf9-d0c9-4c3d-847f-89da613e70a8
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myrg1
                     resourceId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/Microsoft.Network/publicIPAddresses/mypubip1
                     resourceLocation: eastus
@@ -531,8 +500,6 @@ paths:
                     subscriptionId: fffedd8f-ffff-fffd-fffd-fffed2f84852
                     timestamp: '2018-02-09T17:48:05Z'
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policyAssignments/9ac09b0657d942e5ad4041a6
@@ -544,12 +511,8 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/9daedab3-fb2d-461e-b861-71790eead4f6
                     policyDefinitionName: 9daedab3-fb2d-461e-b861-71790eead4f6
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
                     policySetDefinitionId: /providers/Microsoft.Authorization/policySetDefinitions/1f3afdf9-d0c9-4c3d-847f-89da613e70a8
                     policySetDefinitionName: 1f3afdf9-d0c9-4c3d-847f-89da613e70a8
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myrg1
                     resourceId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/Microsoft.Network/publicIPAddresses/mypubip1
                     resourceLocation: eastus
@@ -574,7 +537,6 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     policyAssignmentId: /providers/Microsoft.Management/managementGroups/8cb1e007-947f-423a-ad0c-7ab7dc7d0255/providers/Microsoft.Authorization/policyAssignments/1654a0254ab34920a60f94eb
                     policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/655cb504-bcee-4362-bd4c-402e6aa38759
                     resourceGroup: myrg1
@@ -582,7 +544,6 @@ paths:
                     subscriptionId: fffedd8f-ffff-fffd-fffd-fffed2f84852
                     timestamp: '2018-02-06T17:58:00Z'
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
                     policyAssignmentId: /providers/Microsoft.Management/managementGroups/8cb1e007-947f-423a-ad0c-7ab7dc7d0255/providers/Microsoft.Authorization/policyAssignments/1654a0254ab34920a60f94eb
                     policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/655cb504-bcee-4362-bd4c-402e6aa38759
                     resourceGroup: myrg2
@@ -628,8 +589,6 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policyAssignments/3f3c4330183b4e218fe6fd29
@@ -641,12 +600,8 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policyDefinitions/24813039-7534-408a-9842-eb99f45721b1
                     policyDefinitionName: 24813039-7534-408a-9842-eb99f45721b1
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
                     policySetDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policySetDefinitions/3e3807c1-65c9-49e0-a406-82d8ae3e338c
                     policySetDefinitionName: 3e3807c1-65c9-49e0-a406-82d8ae3e338c
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myResourceGroup
                     resourceId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mysa1
                     resourceLocation: eastus
@@ -655,8 +610,6 @@ paths:
                     subscriptionId: fffedd8f-ffff-fffd-fffd-fffed2f84852
                     timestamp: '2018-02-09T18:42:42Z'
                   - '@odata.context': 'https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policyAssignments/3f3c4330183b4e218fe6fd29
@@ -668,12 +621,8 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policyDefinitions/3e3807c1-65c9-49e0-a406-82d8ae3e3682
                     policyDefinitionName: 3e3807c1-65c9-49e0-a406-82d8ae3e3682
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
                     policySetDefinitionId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policySetDefinitions/3e3807c1-65c9-49e0-a406-82d8ae3e338c
                     policySetDefinitionName: 3e3807c1-65c9-49e0-a406-82d8ae3e338c
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myResourceGroup
                     resourceId: /subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mysa1
                     resourceLocation: eastus
@@ -718,8 +667,6 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApplication/providers/Microsoft.PolicyInsights/policyStates/$metadata#default/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /providers/Microsoft.Management/managementGroups/mymg/providers/Microsoft.Authorization/policyAssignments/186044306c044a1d8c0ff76c
@@ -731,12 +678,6 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /providers/Microsoft.Management/managementGroups/mymg/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d
                     policyDefinitionName: 022d9357-5a90-46f7-9554-21d30ce4c32d
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
-                    policySetDefinitionId: null
-                    policySetDefinitionName: null
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myResourceGroup
                     resourceId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApplication
                     resourceLocation: eastus
@@ -745,8 +686,6 @@ paths:
                     subscriptionId: fff10b27-fff3-fff5-fff8-fffbe01e86a5
                     timestamp: '2018-02-09T16:04:31Z'
                   - '@odata.context': 'https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApplication/providers/Microsoft.PolicyInsights/policyStates/$metadata#default/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /providers/Microsoft.Management/managementGroups/mymg/providers/Microsoft.Authorization/policyAssignments/186044306c044a1d8c0ff76c
@@ -758,12 +697,6 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /providers/Microsoft.Management/managementGroups/mymg/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d
                     policyDefinitionName: 022d9357-5a90-46f7-9554-21d30ce4c32d
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
-                    policySetDefinitionId: null
-                    policySetDefinitionName: null
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myResourceGroup
                     resourceId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApplication
                     resourceLocation: eastus
@@ -783,8 +716,6 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ClassicCompute/domainNames/myDomainName/providers/Microsoft.PolicyInsights/policyStates/$metadata#default/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyAssignments/test
@@ -796,12 +727,6 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyDefinitions/Audit a tag and it's value
                     policyDefinitionName: Audit a tag and it's value
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
-                    policySetDefinitionId: null
-                    policySetDefinitionName: null
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myResourceGroup
                     resourceId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ClassicCompute/domainNames/myDomainName
                     resourceLocation: eastus
@@ -810,8 +735,6 @@ paths:
                     subscriptionId: fff10b27-fff3-fff5-fff8-fffbe01e86a5
                     timestamp: '2018-02-09T16:04:31Z'
                   - '@odata.context': 'https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ClassicCompute/domainNames/myDomainName/providers/Microsoft.PolicyInsights/policyStates/$metadata#default/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyAssignments/test
@@ -823,12 +746,6 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyDefinitions/Audit a tag and it's value
                     policyDefinitionName: Audit a tag and it's value
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
-                    policySetDefinitionId: null
-                    policySetDefinitionName: null
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: myResourceGroup
                     resourceId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ClassicCompute/domainNames/myDomainName
                     resourceLocation: eastus
@@ -848,8 +765,6 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.SomeNamespace/someResourceType/someResource/someNestedResourceType/someNestedResource/providers/Microsoft.PolicyInsights/policyStates/$metadata#default/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /providers/Microsoft.Management/managementGroups/mymg/providers/Microsoft.Authorization/policyAssignments/186044306c044a1d8c0ff76c
@@ -861,12 +776,6 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /providers/Microsoft.Management/managementGroups/mymg/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d
                     policyDefinitionName: 022d9357-5a90-46f7-9554-21d30ce4c32d
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
-                    policySetDefinitionId: null
-                    policySetDefinitionName: null
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: ''
                     resourceId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.SomeNamespace/someResourceType/someResource/someNestedResourceType/someNestedResource
                     resourceLocation: eastus
@@ -875,8 +784,6 @@ paths:
                     subscriptionId: fff10b27-fff3-fff5-fff8-fffbe01e86a5
                     timestamp: '2018-02-09T16:04:31Z'
                   - '@odata.context': 'https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.SomeNamespace/someResourceType/someResource/someNestedResourceType/someNestedResource/providers/Microsoft.PolicyInsights/policyStates/$metadata#default/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /providers/Microsoft.Management/managementGroups/mymg/providers/Microsoft.Authorization/policyAssignments/186044306c044a1d8c0ff76c
@@ -888,12 +795,6 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /providers/Microsoft.Management/managementGroups/mymg/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d
                     policyDefinitionName: 022d9357-5a90-46f7-9554-21d30ce4c32d
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
-                    policySetDefinitionId: null
-                    policySetDefinitionName: null
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: ''
                     resourceId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.SomeNamespace/someResourceType/someResource/someNestedResourceType/someNestedResource
                     resourceLocation: eastus
@@ -913,8 +814,6 @@ paths:
                 '@odata.count': 2
                 value:
                   - '@odata.context': 'https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.SomeNamespace/someResourceType/someResourceName/providers/Microsoft.PolicyInsights/policyStates/$metadata#default/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyAssignments/test
@@ -926,12 +825,6 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyDefinitions/Audit a tag and it's value
                     policyDefinitionName: Audit a tag and it's value
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
-                    policySetDefinitionId: null
-                    policySetDefinitionName: null
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: ''
                     resourceId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.SomeNamespace/someResourceType/someResourceName
                     resourceLocation: eastus
@@ -940,8 +833,6 @@ paths:
                     subscriptionId: fff10b27-fff3-fff5-fff8-fffbe01e86a5
                     timestamp: '2018-02-09T16:04:31Z'
                   - '@odata.context': 'https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.SomeNamespace/someResourceType/someResourceName/providers/Microsoft.PolicyInsights/policyStates/$metadata#default/$entity'
-                    '@odata.id': null
-                    effectiveParameters: null
                     isCompliant: false
                     managementGroupIds: 'mymg,fff988bf-fff1-ffff-fffb-fffcd011db47'
                     policyAssignmentId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyAssignments/test
@@ -953,12 +844,6 @@ paths:
                     policyDefinitionCategory: tbd
                     policyDefinitionId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyDefinitions/Audit a tag and it's value
                     policyDefinitionName: Audit a tag and it's value
-                    policyDefinitionReferenceId: null
-                    policySetDefinitionCategory: null
-                    policySetDefinitionId: null
-                    policySetDefinitionName: null
-                    policySetDefinitionOwner: null
-                    policySetDefinitionParameters: null
                     resourceGroup: ''
                     resourceId: /subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.SomeNamespace/someResourceType/someResourceName
                     resourceLocation: eastus

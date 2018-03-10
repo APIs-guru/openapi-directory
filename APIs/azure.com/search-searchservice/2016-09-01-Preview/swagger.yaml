@@ -112,8 +112,7 @@ paths:
                   - container:
                       name: myDocDbCollectionId
                       query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                    credentials:
-                      connectionString: null
+                    credentials: {}
                     dataChangeDetectionPolicy:
                       '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                       highWaterMarkColumnName: _ts
@@ -126,10 +125,7 @@ paths:
                     type: documentdb
                   - container:
                       name: mycontainer
-                    credentials:
-                      connectionString: null
-                    dataChangeDetectionPolicy: null
-                    dataDeletionDetectionPolicy: null
+                    credentials: {}
                     description: My Azure Blob data source.
                     name: myblobdatasource
                     type: azureblob
@@ -181,8 +177,7 @@ paths:
                 container:
                   name: myDocDbCollectionId
                   query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                credentials:
-                  connectionString: null
+                credentials: {}
                 dataChangeDetectionPolicy:
                   '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                   highWaterMarkColumnName: _ts
@@ -257,8 +252,7 @@ paths:
                 container:
                   name: myDocDbCollectionId
                   query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                credentials:
-                  connectionString: null
+                credentials: {}
                 dataChangeDetectionPolicy:
                   '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                   highWaterMarkColumnName: _ts
@@ -330,8 +324,7 @@ paths:
                 container:
                   name: myDocDbCollectionId
                   query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                credentials:
-                  connectionString: null
+                credentials: {}
                 dataChangeDetectionPolicy:
                   '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                   highWaterMarkColumnName: _ts
@@ -347,8 +340,7 @@ paths:
                 container:
                   name: myDocDbCollectionId
                   query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                credentials:
-                  connectionString: null
+                credentials: {}
                 dataChangeDetectionPolicy:
                   '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                   highWaterMarkColumnName: _ts
@@ -711,24 +703,18 @@ paths:
               body:
                 executionHistory:
                   - endTime: '2014-11-26T03:37:19.012Z'
-                    errorMessage: null
                     errors: []
-                    finalTrackingState: null
-                    initialTrackingState: null
                     itemsFailed: 0
                     itemsProcessed: 11
                     startTime: '2014-11-26T03:37:18.853Z'
                     status: success
                     warnings: []
                   - endTime: '2014-11-26T03:28:12.007Z'
-                    errorMessage: null
                     errors:
                       - errorMessage: Document key cannot be missing or empty.
                         key: ''
                         status: false
                         statusCode: 400
-                    finalTrackingState: null
-                    initialTrackingState: null
                     itemsFailed: 1
                     itemsProcessed: 1
                     startTime: '2014-11-26T03:28:10.125Z'
@@ -738,10 +724,7 @@ paths:
                         message: 'A warning doesn''t stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob.'
                 lastResult:
                   endTime: '2014-11-26T03:37:19.012Z'
-                  errorMessage: null
                   errors: []
-                  finalTrackingState: null
-                  initialTrackingState: null
                   itemsFailed: 0
                   itemsProcessed: 11
                   startTime: '2014-11-26T03:37:18.853Z'
@@ -792,38 +775,29 @@ paths:
                       maxAgeInSeconds: 60
                     defaultScoringProfile: geo
                     fields:
-                      - analyzer: null
-                        facetable: true
+                      - facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: true
                         name: hotelId
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.String
-                      - analyzer: null
-                        facetable: true
+                      - facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: baseRate
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.Double
-                      - analyzer: null
-                        facetable: false
+                      - facetable: false
                         filterable: false
-                        indexAnalyzer: null
                         key: false
                         name: description
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: true
                         sortable: false
                         synonymMaps: []
@@ -831,35 +805,27 @@ paths:
                       - analyzer: fr.lucene
                         facetable: false
                         filterable: false
-                        indexAnalyzer: null
                         key: false
                         name: description_fr
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: true
                         sortable: false
                         synonymMaps: []
                         type: Edm.String
-                      - analyzer: null
-                        facetable: true
+                      - facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: hotelName
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: true
                         sortable: true
                         synonymMaps: []
                         type: Edm.String
-                      - analyzer: null
-                        facetable: true
+                      - facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: category
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: true
                         sortable: true
                         synonymMaps: []
@@ -867,71 +833,54 @@ paths:
                       - analyzer: tagsAnalyzer
                         facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: tags
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: true
                         sortable: false
                         synonymMaps: []
                         type: Collection(Edm.String)
-                      - analyzer: null
-                        facetable: true
+                      - facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: parkingIncluded
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.Boolean
-                      - analyzer: null
-                        facetable: true
+                      - facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: smokingAllowed
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.Boolean
-                      - analyzer: null
-                        facetable: true
+                      - facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: lastRenovationDate
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.DateTimeOffset
-                      - analyzer: null
-                        facetable: true
+                      - facetable: true
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: rating
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.Int32
-                      - analyzer: null
-                        facetable: false
+                      - facetable: false
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: location
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
@@ -959,29 +908,21 @@ paths:
                     tokenizers: []
                   - analyzers: []
                     charFilters: []
-                    corsOptions: null
-                    defaultScoringProfile: null
                     fields:
-                      - analyzer: null
-                        facetable: false
+                      - facetable: false
                         filterable: false
-                        indexAnalyzer: null
                         key: true
                         name: id
                         retrievable: true
-                        searchAnalyzer: null
                         searchable: false
                         sortable: false
                         synonymMaps: []
                         type: Edm.String
-                      - analyzer: null
-                        facetable: false
+                      - facetable: false
                         filterable: true
-                        indexAnalyzer: null
                         key: false
                         name: hidden
                         retrievable: false
-                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
@@ -1099,38 +1040,29 @@ paths:
                   maxAgeInSeconds: 60
                 defaultScoringProfile: geo
                 fields:
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: true
                     name: hotelId
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: baseRate
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Double
-                  - analyzer: null
-                    facetable: false
+                  - facetable: false
                     filterable: false
-                    indexAnalyzer: null
                     key: false
                     name: description
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
@@ -1138,35 +1070,27 @@ paths:
                   - analyzer: fr.lucene
                     facetable: false
                     filterable: false
-                    indexAnalyzer: null
                     key: false
                     name: description_fr
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: hotelName
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: category
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
@@ -1174,71 +1098,54 @@ paths:
                   - analyzer: tagsAnalyzer
                     facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: tags
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Collection(Edm.String)
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: parkingIncluded
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: smokingAllowed
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: lastRenovationDate
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.DateTimeOffset
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: rating
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Int32
-                  - analyzer: null
-                    facetable: false
+                  - facetable: false
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: location
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
@@ -1338,38 +1245,29 @@ paths:
                   maxAgeInSeconds: 60
                 defaultScoringProfile: geo
                 fields:
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: true
                     name: hotelId
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: baseRate
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Double
-                  - analyzer: null
-                    facetable: false
+                  - facetable: false
                     filterable: false
-                    indexAnalyzer: null
                     key: false
                     name: description
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
@@ -1377,35 +1275,27 @@ paths:
                   - analyzer: fr.lucene
                     facetable: false
                     filterable: false
-                    indexAnalyzer: null
                     key: false
                     name: description_fr
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: hotelName
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: category
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
@@ -1413,71 +1303,54 @@ paths:
                   - analyzer: tagsAnalyzer
                     facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: tags
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Collection(Edm.String)
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: parkingIncluded
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: smokingAllowed
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: lastRenovationDate
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.DateTimeOffset
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: rating
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Int32
-                  - analyzer: null
-                    facetable: false
+                  - facetable: false
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: location
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
@@ -1630,38 +1503,29 @@ paths:
                   maxAgeInSeconds: 60
                 defaultScoringProfile: geo
                 fields:
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: true
                     name: hotelId
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: baseRate
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Double
-                  - analyzer: null
-                    facetable: false
+                  - facetable: false
                     filterable: false
-                    indexAnalyzer: null
                     key: false
                     name: description
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
@@ -1669,35 +1533,27 @@ paths:
                   - analyzer: fr.lucene
                     facetable: false
                     filterable: false
-                    indexAnalyzer: null
                     key: false
                     name: description_fr
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: hotelName
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: category
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
@@ -1705,71 +1561,54 @@ paths:
                   - analyzer: tagsAnalyzer
                     facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: tags
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Collection(Edm.String)
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: parkingIncluded
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: smokingAllowed
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: lastRenovationDate
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.DateTimeOffset
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: rating
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Int32
-                  - analyzer: null
-                    facetable: false
+                  - facetable: false
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: location
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
@@ -1810,38 +1649,29 @@ paths:
                   maxAgeInSeconds: 60
                 defaultScoringProfile: geo
                 fields:
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: true
                     name: hotelId
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: baseRate
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Double
-                  - analyzer: null
-                    facetable: false
+                  - facetable: false
                     filterable: false
-                    indexAnalyzer: null
                     key: false
                     name: description
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
@@ -1849,35 +1679,27 @@ paths:
                   - analyzer: fr.lucene
                     facetable: false
                     filterable: false
-                    indexAnalyzer: null
                     key: false
                     name: description_fr
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: hotelName
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: category
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
@@ -1885,71 +1707,54 @@ paths:
                   - analyzer: tagsAnalyzer
                     facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: tags
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Collection(Edm.String)
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: parkingIncluded
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: smokingAllowed
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: lastRenovationDate
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.DateTimeOffset
-                  - analyzer: null
-                    facetable: true
+                  - facetable: true
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: rating
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Int32
-                  - analyzer: null
-                    facetable: false
+                  - facetable: false
                     filterable: true
-                    indexAnalyzer: null
                     key: false
                     name: location
                     retrievable: true
-                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
