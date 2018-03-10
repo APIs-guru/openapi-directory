@@ -1,0 +1,213 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: Software load balancer multiplexer operation endpoints and objects.
+  title: FabricAdminClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/SlbMuxInstance.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-SlbMuxInstance
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  SLBMuxInstanceParameter:
+    description: Name of a SLB Mux instance.
+    in: path
+    name: slbMuxInstance
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/slbMuxInstances':
+    get:
+      description: Get a list of all software load balancer instances at a location.
+      operationId: SlbMuxInstances_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SlbMuxInstanceList'
+      tags:
+        - SlbMuxInstances
+      x-ms-examples:
+        List all Software Load Balancer Mux Instances:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/slbMuxInstances/AzS-SLB01
+                    location: local
+                    name: AzS-SLB01
+                    properties:
+                      bgpPeers:
+                        - BGPGateway-64000-64001
+                      configurationState: Success
+                      virtualServer: AzS-SLB01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/slbMuxInstances
+      x-ms-odata: '#/definitions/SlbMuxInstance'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/slbMuxInstances/{slbMuxInstance}':
+    get:
+      description: Get a software load balancer multiplexer instance.
+      operationId: SlbMuxInstances_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/SLBMuxInstanceParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SlbMuxInstance'
+      tags:
+        - SlbMuxInstances
+      x-ms-examples:
+        Get a Software Load Balancer Mux Instance:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            slbMuxInstance: AzS-SLB01
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/slbMuxInstances/AzS-SLB01
+                location: local
+                name: AzS-SLB01
+                properties:
+                  bgpPeers:
+                    - BGPGateway-64000-64001
+                  configurationState: Success
+                  virtualServer: AzS-SLB01
+                tags: {}
+                type: Microsoft.Fabric.Admin/fabricLocations/slbMuxInstances
+definitions:
+  SlbMuxInstance:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Region Location of resource.
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: 'This resource represents an SLB MUX (software load balancing multiplexer, which distributes the tenant and tenant customer network traffic).'
+    properties:
+      properties:
+        $ref: '#/definitions/SlbMuxInstanceModel'
+        description: Properties of a SLB MUX
+        x-ms-client-flatten: true
+    type: object
+  SlbMuxInstanceList:
+    description: A pageable list of SLB Mux instances.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: List of SLB Mux instances on this page.
+        items:
+          $ref: '#/definitions/SlbMuxInstance'
+        type: array
+    type: object
+  SlbMuxInstanceModel:
+    description: Properties of a SLB MUX
+    properties:
+      bgpPeers:
+        description: List of BGP peers.
+        items:
+          type: string
+        type: array
+      configurationState:
+        description: Configuration state.
+        type: string
+      virtualServer:
+        description: Virtual server.
+        type: string
+    type: object

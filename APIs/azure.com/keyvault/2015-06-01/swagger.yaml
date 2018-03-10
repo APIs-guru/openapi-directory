@@ -1,10 +1,10 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
-  description: The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.
-  title: KeyVaultManagementClient
+  description: Performs cryptographic key operations and vault operations against the Key Vault service.
+  title: KeyVaultClient
   version: '2015-06-01'
   x-apisguru-categories:
     - cloud
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/keyvault/resource-manager/Microsoft.KeyVault/stable/2015-06-01/keyvault.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/keyvault/data-plane/Microsoft.KeyVault/stable/2015-06-01/keyvault.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -31,376 +31,2146 @@ parameters:
     name: api-version
     required: true
     type: string
-  SubscriptionIdParameter:
-    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults':
+  /certificates:
     get:
-      description: The List operation gets information about the vaults associated with the subscription and within the specified resource group.
-      operationId: Vaults_ListByResourceGroup
+      description: List certificates in the specified vault
+      operationId: GetCertificates
       parameters:
-        - description: The name of the Resource Group to which the vault belongs.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: Maximum number of results to return.
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
           format: int32
           in: query
-          name: $top
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
           type: integer
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Get information about all key vaults in the specified resource group.
+          description: A response message containing a list of certificates in the vault along with a link to the next page of certificates
           schema:
-            $ref: '#/definitions/VaultListResult'
+            $ref: '#/definitions/CertificateListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
       tags:
-        - Vaults
+        - Certificates
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}':
+  /certificates/contacts:
     delete:
-      description: Deletes the specified Azure key vault.
-      operationId: Vaults_Delete
+      description: Deletes the certificate contacts for the specified vault.
+      operationId: DeleteCertificateContacts
       parameters:
-        - description: The name of the Resource Group to which the vault belongs.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the vault to delete
-          in: path
-          name: vaultName
-          required: true
-          type: string
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: OK Response.
-      tags:
-        - Vaults
-    get:
-      description: Gets the specified Azure key vault.
-      operationId: Vaults_Get
-      parameters:
-        - description: The name of the Resource Group to which the vault belongs.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the vault.
-          in: path
-          name: vaultName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Retrieved vault
+          description: The contacts for the vault certificates.
           schema:
-            $ref: '#/definitions/Vault'
+            $ref: '#/definitions/Contacts'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
       tags:
-        - Vaults
-    put:
-      description: Create or update a key vault in the specified subscription.
-      operationId: Vaults_CreateOrUpdate
+        - Certificates
+    get:
+      description: Gets the certificate contacts for the specified vault.
+      operationId: GetCertificateContacts
       parameters:
-        - description: The name of the Resource Group to which the server belongs.
-          in: path
-          name: resourceGroupName
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The contacts for the vault certificates.
+          schema:
+            $ref: '#/definitions/Contacts'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+    put:
+      description: Sets the certificate contacts for the specified vault.
+      operationId: SetCertificateContacts
+      parameters:
+        - description: The contacts for the vault certificates.
+          in: body
+          name: contacts
           required: true
-          type: string
-        - description: Name of the vault
+          schema:
+            $ref: '#/definitions/Contacts'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The contacts for the vault certificates.
+          schema:
+            $ref: '#/definitions/Contacts'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+  /certificates/issuers:
+    get:
+      description: List certificate issuers for the specified vault.
+      operationId: GetCertificateIssuers
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of certificates issuers in the vault along with a link to the next page of certificate issuers
+          schema:
+            $ref: '#/definitions/CertificateIssuerListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/certificates/issuers/{issuer-name}':
+    delete:
+      description: Deletes the specified certificate issuer.
+      operationId: DeleteCertificateIssuer
+      parameters:
+        - description: The name of the issuer.
           in: path
-          name: vaultName
-          pattern: '^[a-zA-Z0-9-]{3,24}$'
+          name: issuer-name
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-        - description: Parameters to create or update the vault
+      responses:
+        '200':
+          description: The issuer for the vault certificates.
+          schema:
+            $ref: '#/definitions/IssuerBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+    get:
+      description: Gets the specified certificate issuer.
+      operationId: GetCertificateIssuer
+      parameters:
+        - description: The name of the issuer.
+          in: path
+          name: issuer-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The issuer for the vault certificates.
+          schema:
+            $ref: '#/definitions/IssuerBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+    patch:
+      description: Updates the specified certificate issuer.
+      operationId: UpdateCertificateIssuer
+      parameters:
+        - description: The name of the issuer.
+          in: path
+          name: issuer-name
+          required: true
+          type: string
+        - description: Certificate issuer update parameter.
+          in: body
+          name: parameter
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateIssuerUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The issuer for the vault certificates.
+          schema:
+            $ref: '#/definitions/IssuerBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+    put:
+      description: Sets the specified certificate issuer.
+      operationId: SetCertificateIssuer
+      parameters:
+        - description: The name of the issuer.
+          in: path
+          name: issuer-name
+          required: true
+          type: string
+        - description: Certificate issuer set parameter.
+          in: body
+          name: parameter
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateIssuerSetParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The issuer for the vault certificates.
+          schema:
+            $ref: '#/definitions/IssuerBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}':
+    delete:
+      description: Deletes a certificate from the specified vault.
+      operationId: DeleteCertificate
+      parameters:
+        - description: The name of the certificate in the given vault
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The deleted certificate
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/create':
+    post:
+      description: 'Creates a new certificate version. If this is the first version, the certificate resource is created.'
+      operationId: CreateCertificate
+      parameters:
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters to create certificate.
           in: body
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/VaultCreateOrUpdateParameters'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+            $ref: '#/definitions/CertificateCreateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
-        '200':
-          description: Created or updated vault
+        '202':
+          description: Created certificate bundle to the vault
           schema:
-            $ref: '#/definitions/Vault'
-        '201':
-          description: Created or updated vault
+            $ref: '#/definitions/CertificateOperation'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
-            $ref: '#/definitions/Vault'
+            $ref: '#/definitions/KeyVaultError'
       tags:
-        - Vaults
-  '/subscriptions/{subscriptionId}/resources':
-    get:
-      description: The List operation gets information about the vaults associated with the subscription.
-      operationId: Vaults_List
+        - Certificates
+  '/certificates/{certificate-name}/import':
+    post:
+      description: Imports a certificate into the specified vault
+      operationId: ImportCertificate
       parameters:
-        - description: The filter to apply on the operation.
-          enum:
-            - resourceType eq 'Microsoft.KeyVault/vaults'
-          in: query
-          name: $filter
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          pattern: '^[0-9a-zA-Z-]+$'
           required: true
           type: string
-        - description: Maximum number of results to return.
+        - description: The parameters to import certificate.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateImportParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Imported certificate bundle to the vault
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/pending':
+    delete:
+      description: Deletes the certificate operation.
+      operationId: DeleteCertificateOperation
+      parameters:
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A message containing the certificate operation response.
+          schema:
+            $ref: '#/definitions/CertificateOperation'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+    get:
+      description: Gets the certificate operation response.
+      operationId: GetCertificateOperation
+      parameters:
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The certificate operation response.
+          schema:
+            $ref: '#/definitions/CertificateOperation'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+    patch:
+      description: Updates a certificate operation.
+      operationId: UpdateCertificateOperation
+      parameters:
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: The certificate operation response.
+          in: body
+          name: certificateOperation
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateOperationUpdateParameter'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A message containing the certificate operation response.
+          schema:
+            $ref: '#/definitions/CertificateOperation'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/pending/merge':
+    post:
+      description: Merges a certificate or a certificate chain with a key pair existing on the server.
+      operationId: MergeCertificate
+      parameters:
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: The parameters to merge certificate.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateMergeParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '201':
+          description: Merged certificate bundle to the vault
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/policy':
+    get:
+      description: Gets the policy for a certificate.
+      operationId: GetCertificatePolicy
+      parameters:
+        - description: The name of the certificate in the given vault.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The certificate policy
+          schema:
+            $ref: '#/definitions/CertificatePolicy'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+    patch:
+      description: Updates the policy for a certificate. Set appropriate members in the certificatePolicy that must be updated. Leave others as null.
+      operationId: UpdateCertificatePolicy
+      parameters:
+        - description: The name of the certificate in the given vault.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: The policy for the certificate.
+          in: body
+          name: certificatePolicy
+          required: true
+          schema:
+            $ref: '#/definitions/CertificatePolicy'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The certificate policy
+          schema:
+            $ref: '#/definitions/CertificatePolicy'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/versions':
+    get:
+      description: List the versions of a certificate.
+      operationId: GetCertificateVersions
+      parameters:
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
           format: int32
           in: query
-          name: $top
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
           type: integer
-        - description: Azure Resource Manager Api Version.
-          enum:
-            - '2015-11-01'
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
-          description: Get information about all key vaults in the subscription.
+          description: A response message containing a list of certificates in the vault along with a link to the next page of keys
           schema:
-            $ref: '#/definitions/ResourceListResult'
+            $ref: '#/definitions/CertificateListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
       tags:
-        - Vaults
+        - Certificates
       x-ms-pageable:
         nextLinkName: nextLink
-definitions:
-  AccessPolicyEntry:
-    description: An identity that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.
-    properties:
-      applicationId:
-        description: ' Application ID of the client making request on behalf of a principal'
-        format: uuid
-        type: string
-      objectId:
-        description: 'The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies.'
-        type: string
-      permissions:
-        $ref: '#/definitions/Permissions'
-        description: 'Permissions the identity has for keys, secrets and certificates.'
-      tenantId:
-        description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
-        format: uuid
-        type: string
-    required:
-      - tenantId
-      - objectId
-      - permissions
-  Permissions:
-    description: 'Permissions the identity has for keys, secrets and certificates.'
-    properties:
-      certificates:
-        description: Permissions to certificates
-        items:
-          enum:
-            - all
-            - get
-            - list
-            - delete
-            - create
-            - import
-            - update
-            - managecontacts
-            - getissuers
-            - listissuers
-            - setissuers
-            - deleteissuers
-            - manageissuers
-            - recover
-            - purge
+  '/certificates/{certificate-name}/{certificate-version}':
+    get:
+      description: Gets a Certificate.
+      operationId: GetCertificate
+      parameters:
+        - description: The name of the certificate in the given vault
+          in: path
+          name: certificate-name
+          required: true
           type: string
-          x-ms-enum:
-            modelAsString: true
-            name: CertificatePermissions
-        type: array
-      keys:
-        description: Permissions to keys
-        items:
-          enum:
-            - all
-            - encrypt
-            - decrypt
-            - wrapKey
-            - unwrapKey
-            - sign
-            - verify
-            - get
-            - list
-            - create
-            - update
-            - import
-            - delete
-            - backup
-            - restore
-            - recover
-            - purge
+        - description: The version of the certificate
+          in: path
+          name: certificate-version
+          required: true
           type: string
-          x-ms-enum:
-            modelAsString: true
-            name: KeyPermissions
-        type: array
-      secrets:
-        description: Permissions to secrets
-        items:
-          enum:
-            - all
-            - get
-            - list
-            - set
-            - delete
-            - backup
-            - restore
-            - recover
-            - purge
-          type: string
-          x-ms-enum:
-            modelAsString: true
-            name: SecretPermissions
-        type: array
-  Resource:
-    description: Key Vault resource
-    properties:
-      id:
-        description: The Azure Resource Manager resource ID for the key vault.
-        readOnly: true
-        type: string
-      location:
-        description: The supported Azure location where the key vault should be created.
-        type: string
-      name:
-        description: The name of the key vault.
-        type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The retrieved certificate
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
       tags:
-        additionalProperties:
+        - Certificates
+    patch:
+      description: Updates the attributes associated with the specified certificate
+      operationId: UpdateCertificate
+      parameters:
+        - description: The name of the certificate in the given vault
+          in: path
+          name: certificate-name
+          required: true
           type: string
-        description: 'The tags that will be assigned to the key vault. '
-        type: object
-      type:
-        description: The resource type of the key vault.
-        readOnly: true
-        type: string
-    required:
-      - location
-      - name
-    x-ms-azure-resource: true
-  ResourceListResult:
-    description: List of vault resources.
+        - description: The version of the certificate
+          in: path
+          name: certificate-version
+          required: true
+          type: string
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated certificate
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Certificates
+  /keys:
+    get:
+      description: List keys in the specified vault
+      operationId: GetKeys
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of keys in the vault along with a link to the next page of keys
+          schema:
+            $ref: '#/definitions/KeyListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+      x-ms-pageable:
+        nextLinkName: nextLink
+  /keys/restore:
+    post:
+      description: Restores the backup key in to a vault
+      operationId: RestoreKey
+      parameters:
+        - description: The parameters to restore key
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyRestoreParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Restored key bundle in the vault
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}':
+    delete:
+      description: Deletes the specified key
+      operationId: DeleteKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The public part of the deleted key
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+    put:
+      description: Imports a key into the specified vault
+      operationId: ImportKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters to import key.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyImportParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Imported key bundle to the vault
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/backup':
+    post:
+      description: Requests that a backup of the specified key be downloaded to the client.
+      operationId: BackupKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The backup blob containing the backed up key
+          schema:
+            $ref: '#/definitions/BackupKeyResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/create':
+    post:
+      description: 'Creates a new, named, key in the specified vault.'
+      operationId: CreateKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters to create key.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyCreateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A key bundle containing the result of the create request
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/versions':
+    get:
+      description: List the versions of the specified key
+      operationId: GetKeyVersions
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of keys along with a link to the next page of keys
+          schema:
+            $ref: '#/definitions/KeyListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/keys/{key-name}/{key-version}':
+    get:
+      description: Retrieves the public portion of a key plus its attributes
+      operationId: GetKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A Key bundle of the key and its attributes
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+    patch:
+      description: Updates the Key Attributes associated with the specified key
+      operationId: UpdateKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters to update key.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated key
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/decrypt':
+    post:
+      description: Decrypts a single block of encrypted data
+      operationId: decrypt
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for key operations.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyOperationsParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The decryption result
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/encrypt':
+    post:
+      description: Encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault.
+      operationId: encrypt
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for key operations.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyOperationsParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The encryption result
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/sign':
+    post:
+      description: Creates a signature from a digest using the specified key in the vault
+      operationId: sign
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for key operations.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeySignParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The signature value
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/unwrapkey':
+    post:
+      description: Unwraps a symmetric key using the specified key in the vault that has initially been used for wrapping the key.
+      operationId: unwrapKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for key operations.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyOperationsParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The unwrapped symmetric key
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/verify':
+    post:
+      description: Verifies a signature using the specified key
+      operationId: verify
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for key operations.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyVerifyParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The verification result
+          schema:
+            $ref: '#/definitions/KeyVerifyResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/wrapkey':
+    post:
+      description: Wraps a symmetric key using the specified key
+      operationId: wrapKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for key operations.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyOperationsParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The wrapped symmetric key
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Keys
+  /secrets:
+    get:
+      description: List secrets in the specified vault
+      operationId: GetSecrets
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of secrets in the vault along with a link to the next page of secrets
+          schema:
+            $ref: '#/definitions/SecretListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Secrets
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/secrets/{secret-name}':
+    delete:
+      description: Deletes a secret from the specified vault.
+      operationId: DeleteSecret
+      parameters:
+        - description: The name of the secret in the given vault
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The deleted secret
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Secrets
+    put:
+      description: Sets a secret in the specified vault.
+      operationId: SetSecret
+      parameters:
+        - description: The name of the secret in the given vault
+          in: path
+          name: secret-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters for secret set
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SecretSetParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A secret bundle containing the result of the secret set request
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Secrets
+  '/secrets/{secret-name}/versions':
+    get:
+      description: List the versions of the specified secret
+      operationId: GetSecretVersions
+      parameters:
+        - description: The name of the secret in the given vault
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of secrets along with a link to the next page of secrets
+          schema:
+            $ref: '#/definitions/SecretListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Secrets
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/secrets/{secret-name}/{secret-version}':
+    get:
+      description: Gets a secret.
+      operationId: GetSecret
+      parameters:
+        - description: The name of the secret in the given vault
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - description: The version of the secret
+          in: path
+          name: secret-version
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The retrieved secret
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Secrets
+    patch:
+      description: Updates the attributes associated with the specified secret
+      operationId: UpdateSecret
+      parameters:
+        - description: The name of the secret in the given vault
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - description: The version of the secret
+          in: path
+          name: secret-version
+          required: true
+          type: string
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SecretUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated secret
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Secrets
+definitions:
+  Action:
+    description: The action that will be executed.
     properties:
-      nextLink:
-        description: Gets the URL to get the next set of vault resources.
-        type: string
-      value:
-        description: Gets the list of vault resources.
-        items:
-          $ref: '#/definitions/Resource'
-        type: array
-  Sku:
-    description: SKU details
-    properties:
-      family:
-        description: SKU family name
+      action_type:
+        description: The type of the action.
         enum:
-          - A
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: SkuFamily
-      name:
-        description: SKU name to specify whether the key vault is a standard vault or a premium vault.
-        enum:
-          - standard
-          - premium
+          - EmailContacts
+          - AutoRenew
         type: string
         x-ms-enum:
           modelAsString: false
-          name: SkuName
-    required:
-      - name
-      - family
-  Vault:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: Resource information with extended details.
+          name: ActionType
+  AdministratorDetails:
+    description: Details of the organization administrator of the certificate issuer
     properties:
-      properties:
-        $ref: '#/definitions/VaultProperties'
-        description: Properties of the vault
-    required:
-      - properties
-  VaultCreateOrUpdateParameters:
-    description: Parameters for creating or updating a vault
-    properties:
-      location:
-        description: The supported Azure location where the key vault should be created.
+      email:
+        description: Email addresss.
         type: string
-      properties:
-        $ref: '#/definitions/VaultProperties'
-        description: Properties of the vault
+        x-ms-client-name: EmailAddress
+      first_name:
+        description: First name.
+        type: string
+      last_name:
+        description: Last name.
+        type: string
+      phone:
+        description: Phone number.
+        type: string
+  Attributes:
+    description: The object attributes managed by the KeyVault service
+    properties:
+      created:
+        description: Creation time in UTC
+        format: unixtime
+        readOnly: true
+        type: integer
+      enabled:
+        description: Determines whether the object is enabled
+        type: boolean
+      exp:
+        description: Expiry date in UTC
+        format: unixtime
+        type: integer
+        x-ms-client-name: Expires
+      nbf:
+        description: Not before date in UTC
+        format: unixtime
+        type: integer
+        x-ms-client-name: NotBefore
+      updated:
+        description: Last updated time in UTC
+        format: unixtime
+        readOnly: true
+        type: integer
+  BackupKeyResult:
+    description: 'The backup key result, containing the backup blob'
+    properties:
+      value:
+        description: The backup blob containing the backed up key
+        format: base64url
+        readOnly: true
+        type: string
+  CertificateAttributes:
+    allOf:
+      - $ref: '#/definitions/Attributes'
+    description: The certificate management attributes
+  CertificateBundle:
+    description: A certificate bundle consists of a certificate (X509) plus its attributes.
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The certificate attributes.
+      cer:
+        description: CER contents of x509 certificate.
+        format: byte
+        type: string
+      contentType:
+        description: The content type of the secret
+        type: string
+      id:
+        description: The certificate id
+        readOnly: true
+        type: string
+      kid:
+        description: The key id
+        readOnly: true
+        type: string
+      policy:
+        $ref: '#/definitions/CertificatePolicy'
+        description: The management policy.
+        readOnly: true
+      sid:
+        description: The secret id
+        readOnly: true
+        type: string
       tags:
         additionalProperties:
           type: string
-        description: 'The tags that will be assigned to the key vault. '
+        description: Application-specific metadata in the form of key-value pairs
         type: object
+      x5t:
+        description: Thumbprint of the certificate.
+        format: base64url
+        readOnly: true
+        type: string
+        x-ms-client-name: X509Thumbprint
+  CertificateCreateParameters:
+    description: The certificate create parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The attributes of the certificate (optional)
+        x-ms-client-name: CertificateAttributes
+      policy:
+        $ref: '#/definitions/CertificatePolicy'
+        description: The management policy for the certificate
+        x-ms-client-name: CertificatePolicy
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+  CertificateImportParameters:
+    description: The certificate import parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The attributes of the certificate (optional)
+        x-ms-client-name: CertificateAttributes
+      policy:
+        $ref: '#/definitions/CertificatePolicy'
+        description: The management policy for the certificate
+        x-ms-client-name: CertificatePolicy
+      pwd:
+        description: 'If the private key in base64EncodedCertificate is encrypted, the password used for encryption'
+        type: string
+        x-ms-client-name: password
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+      value:
+        description: Base64 encoded representation of the certificate object to import. This certificate needs to contain the private key.
+        type: string
+        x-ms-client-name: base64EncodedCertificate
     required:
-      - location
-      - properties
-    x-ms-azure-resource: true
-  VaultListResult:
-    description: List of vaults
+      - value
+  CertificateIssuerItem:
+    description: The certificate issuer item containing certificate issuer metadata
+    properties:
+      id:
+        description: Certificate Identifier
+        type: string
+      provider:
+        description: The issuer provider.
+        type: string
+  CertificateIssuerListResult:
+    description: The certificate issuer list result
     properties:
       nextLink:
-        description: Gets or sets the URL to get the next set of vaults.
+        description: The URL to get the next set of certificate issuers.
+        readOnly: true
         type: string
       value:
-        description: Gets or sets the list of vaults.
+        description: A response message containing a list of certificate issuers in the vault along with a link to the next page of certificate issuers
         items:
-          $ref: '#/definitions/Vault'
+          $ref: '#/definitions/CertificateIssuerItem'
+        readOnly: true
         type: array
-  VaultProperties:
-    description: Properties of the vault
+  CertificateIssuerSetParameters:
+    description: The certificate issuer set parameters.
     properties:
-      accessPolicies:
-        description: An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.
-        items:
-          $ref: '#/definitions/AccessPolicyEntry'
-        maxItems: 16
-        type: array
-      enableSoftDelete:
-        description: Property to specify whether the 'soft delete' functionality is enabled for this key vault.
-        type: boolean
-      enabledForDeployment:
-        description: Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
-        type: boolean
-      enabledForDiskEncryption:
-        description: Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.
-        type: boolean
-      enabledForTemplateDeployment:
-        description: Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
-        type: boolean
-      sku:
-        $ref: '#/definitions/Sku'
-        description: SKU details
-      tenantId:
-        description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
-        format: uuid
-        type: string
-      vaultUri:
-        description: The URI of the vault for performing operations on keys and secrets.
+      attributes:
+        $ref: '#/definitions/IssuerAttributes'
+        description: Attributes of the issuer object.
+      credentials:
+        $ref: '#/definitions/IssuerCredentials'
+        description: The credentials to be used for the issuer.
+      org_details:
+        $ref: '#/definitions/OrganizationDetails'
+        description: Details of the organization as provided to the issuer.
+        x-ms-client-name: OrganizationDetails
+      provider:
+        description: The issuer provider.
         type: string
     required:
-      - tenantId
-      - sku
-      - accessPolicies
+      - provider
+  CertificateIssuerUpdateParameters:
+    description: The certificate issuer update parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/IssuerAttributes'
+        description: Attributes of the issuer object.
+      credentials:
+        $ref: '#/definitions/IssuerCredentials'
+        description: The credentials to be used for the issuer.
+      org_details:
+        $ref: '#/definitions/OrganizationDetails'
+        description: Details of the organization as provided to the issuer.
+        x-ms-client-name: OrganizationDetails
+      provider:
+        description: The issuer provider.
+        type: string
+  CertificateItem:
+    description: The certificate item containing certificate metadata
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The certificate management attributes
+      id:
+        description: Certificate Identifier
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+      x5t:
+        description: Thumbprint of the certificate.
+        format: base64url
+        type: string
+        x-ms-client-name: X509Thumbprint
+  CertificateListResult:
+    description: The certificate list result
+    properties:
+      nextLink:
+        description: The URL to get the next set of certificates.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of certificates in the vault along with a link to the next page of certificates
+        items:
+          $ref: '#/definitions/CertificateItem'
+        readOnly: true
+        type: array
+  CertificateMergeParameters:
+    description: The certificate merge parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The attributes of the certificate (optional)
+        x-ms-client-name: CertificateAttributes
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+      x5c:
+        description: The certificate or the certificate chain to merge
+        items:
+          format: byte
+          type: string
+        type: array
+        x-ms-client-name: x509Certificates
+    required:
+      - x5c
+  CertificateOperation:
+    description: A certificate operation is returned in case of async requests.
+    properties:
+      cancellation_requested:
+        description: Indicates if cancellation was requested on the certificate operation.
+        type: boolean
+      csr:
+        description: The Certificate Signing Request (CSR) that is being used in the certificate operation.
+        format: byte
+        type: string
+      error:
+        $ref: '#/definitions/Error'
+        description: 'Error encountered, if any, during the certificate operation.'
+      id:
+        description: The certificate id
+        readOnly: true
+        type: string
+      issuer:
+        $ref: '#/definitions/IssuerParameters'
+        description: Parameters for the issuer of the X509 component of a certificate.
+        x-ms-client-name: IssuerParameters
+      request_id:
+        description: Identifier for the certificate operation.
+        type: string
+      status:
+        description: Status of the certificate operation.
+        type: string
+      status_details:
+        description: The status details of the certificate operation.
+        type: string
+      target:
+        description: Location which contains the result of the certificate operation.
+        type: string
+  CertificateOperationUpdateParameter:
+    description: The certificate operation update parameters.
+    properties:
+      cancellation_requested:
+        description: Indicates if cancellation was requested on the certificate operation.
+        type: boolean
+    required:
+      - cancellation_requested
+  CertificatePolicy:
+    description: Management policy for a certificate.
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The certificate attributes.
+      id:
+        description: The certificate id
+        readOnly: true
+        type: string
+      issuer:
+        $ref: '#/definitions/IssuerParameters'
+        description: Parameters for the issuer of the X509 component of a certificate.
+        x-ms-client-name: IssuerParameters
+      key_props:
+        $ref: '#/definitions/KeyProperties'
+        description: Properties of the key backing a certificate.
+        x-ms-client-name: KeyProperties
+      lifetime_actions:
+        description: Actions that will be performed by Key Vault over the lifetime of a certificate.
+        items:
+          $ref: '#/definitions/LifetimeAction'
+        type: array
+      secret_props:
+        $ref: '#/definitions/SecretProperties'
+        description: Properties of the secret backing a certificate.
+        x-ms-client-name: SecretProperties
+      x509_props:
+        $ref: '#/definitions/X509CertificateProperties'
+        description: Properties of the X509 component of a certificate.
+        x-ms-client-name: X509CertificateProperties
+  CertificateUpdateParameters:
+    description: The certificate update parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The attributes of the certificate (optional)
+        x-ms-client-name: CertificateAttributes
+      policy:
+        $ref: '#/definitions/CertificatePolicy'
+        description: The management policy for the certificate
+        x-ms-client-name: CertificatePolicy
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+  Contact:
+    description: The contact information for the vault certificates.
+    properties:
+      email:
+        description: Email addresss.
+        type: string
+        x-ms-client-name: EmailAddress
+      name:
+        description: Name.
+        type: string
+      phone:
+        description: Phone number.
+        type: string
+  Contacts:
+    description: The contacts for the vault certificates.
+    properties:
+      contacts:
+        description: The contact list for the vault certificates.
+        items:
+          $ref: '#/definitions/Contact'
+        type: array
+        x-ms-client-name: ContactList
+      id:
+        description: Identifier for the contacts collection.
+        readOnly: true
+        type: string
+  Error:
+    description: The key vault server error
+    properties:
+      code:
+        description: The error code.
+        readOnly: true
+        type: string
+      message:
+        description: The error message.
+        readOnly: true
+        type: string
+  IssuerAttributes:
+    description: The attributes of an issuer managed by the KeyVault service
+    properties:
+      created:
+        description: Creation time in UTC
+        format: unixtime
+        readOnly: true
+        type: integer
+      enabled:
+        description: Determines whether the issuer is enabled
+        type: boolean
+      updated:
+        description: Last updated time in UTC
+        format: unixtime
+        readOnly: true
+        type: integer
+  IssuerBundle:
+    description: The issuer for Key Vault certificate
+    properties:
+      attributes:
+        $ref: '#/definitions/IssuerAttributes'
+        description: Attributes of the issuer object.
+      credentials:
+        $ref: '#/definitions/IssuerCredentials'
+        description: The credentials to be used for the issuer.
+      id:
+        description: Identifier for the issuer object.
+        readOnly: true
+        type: string
+      org_details:
+        $ref: '#/definitions/OrganizationDetails'
+        description: Details of the organization as provided to the issuer.
+        x-ms-client-name: OrganizationDetails
+      provider:
+        description: The issuer provider.
+        type: string
+  IssuerCredentials:
+    description: The credentials to be used for the certificate issuer.
+    properties:
+      account_id:
+        description: The user name/account name/account id.
+        type: string
+      pwd:
+        description: The password/secret/account key.
+        type: string
+        x-ms-client-name: Password
+  IssuerParameters:
+    description: Parameters for the issuer of the X509 component of a certificate.
+    properties:
+      cty:
+        description: Type of certificate to be requested from the issuer provider.
+        type: string
+        x-ms-client-name: CertificateType
+      name:
+        description: 'Name of the referenced issuer object or reserved names e.g. ''Self'', ''Unknown''.'
+        type: string
+  JsonWebKey:
+    description: 'As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18'
+    properties:
+      d:
+        description: RSA private exponent
+        format: base64url
+        type: string
+      dp:
+        description: RSA Private Key Parameter
+        format: base64url
+        type: string
+        x-ms-client-name: DP
+      dq:
+        description: RSA Private Key Parameter
+        format: base64url
+        type: string
+        x-ms-client-name: DQ
+      e:
+        description: RSA public exponent
+        format: base64url
+        type: string
+      k:
+        description: Symmetric key
+        format: base64url
+        type: string
+      key_hsm:
+        description: 'HSM Token, used with Bring Your Own Key'
+        format: base64url
+        type: string
+        x-ms-client-name: t
+      key_ops:
+        items:
+          description: Supported Key Operations
+          type: string
+        type: array
+      kid:
+        description: Key Identifier
+        type: string
+      kty:
+        description: 'Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet, usually RSA'
+        enum:
+          - EC
+          - RSA
+          - RSA-HSM
+          - oct
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyType
+      'n':
+        description: RSA modulus
+        format: base64url
+        type: string
+      p:
+        description: RSA secret prime
+        format: base64url
+        type: string
+      q:
+        description: 'RSA secret prime, with p < q'
+        format: base64url
+        type: string
+      qi:
+        description: RSA Private Key Parameter
+        format: base64url
+        type: string
+        x-ms-client-name: QI
+  KeyAttributes:
+    allOf:
+      - $ref: '#/definitions/Attributes'
+    description: The attributes of a key managed by the KeyVault service
+  KeyBundle:
+    description: A KeyBundle consisting of a WebKey plus its Attributes
+    properties:
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        description: The key management attributes
+      key:
+        $ref: '#/definitions/JsonWebKey'
+        description: The Json web key
+      managed:
+        description: 'True if the key''s lifetime is managed by key vault i.e. if this is a key backing a certificate, then managed will be true.'
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+  KeyCreateParameters:
+    description: The key create parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        x-ms-client-name: keyAttributes
+      key_ops:
+        items:
+          description: 'JSON web key operations. For more information, see JsonWebKeyOperation.'
+          enum:
+            - encrypt
+            - decrypt
+            - sign
+            - verify
+            - wrapKey
+            - unwrapKey
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: JsonWebKeyOperation
+        type: array
+      key_size:
+        description: The key size in bytes. e.g. 1024 or 2048.
+        format: int32
+        type: integer
+      kty:
+        description: 'The type of key to create. Valid key types, see JsonWebKeyType. Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet'
+        enum:
+          - EC
+          - RSA
+          - RSA-HSM
+          - oct
+        minLength: 1
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyType
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+    required:
+      - kty
+  KeyImportParameters:
+    description: The key import parameters
+    properties:
+      Hsm:
+        description: Whether to import as a hardware key (HSM) or software key
+        type: boolean
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        description: The key management attributes
+        x-ms-client-name: keyAttributes
+      key:
+        $ref: '#/definitions/JsonWebKey'
+        description: The Json web key
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+    required:
+      - key
+  KeyItem:
+    description: The key item containing key metadata
+    properties:
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        description: The key management attributes
+      kid:
+        description: Key Identifier
+        type: string
+      managed:
+        description: 'True if the key''s lifetime is managed by key vault i.e. if this is a key backing a certificate, then managed will be true.'
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+  KeyListResult:
+    description: The key list result
+    properties:
+      nextLink:
+        description: The URL to get the next set of keys.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of keys in the vault along with a link to the next page of keys
+        items:
+          $ref: '#/definitions/KeyItem'
+        readOnly: true
+        type: array
+  KeyOperationResult:
+    description: The key operation result
+    properties:
+      kid:
+        description: Key identifier
+        readOnly: true
+        type: string
+      value:
+        format: base64url
+        readOnly: true
+        type: string
+        x-ms-client-name: result
+  KeyOperationsParameters:
+    description: The key operations parameters
+    properties:
+      alg:
+        description: algorithm identifier
+        enum:
+          - RSA-OAEP
+          - RSA-OAEP-256
+          - RSA1_5
+        minLength: 1
+        type: string
+        x-ms-client-name: algorithm
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyEncryptionAlgorithm
+      value:
+        format: base64url
+        type: string
+    required:
+      - alg
+      - value
+  KeyProperties:
+    description: Properties of the key pair backing a certificate.
+    properties:
+      exportable:
+        description: Indicates if the private key can be exported.
+        type: boolean
+      key_size:
+        description: The key size in bytes. e.g. 2048.
+        format: int32
+        type: integer
+      kty:
+        description: The key type.
+        type: string
+        x-ms-client-name: keyType
+      reuse_key:
+        description: Indicates if the same key pair will be used on certificate renewal.
+        type: boolean
+  KeyRestoreParameters:
+    description: The key restore parameters
+    properties:
+      value:
+        description: the backup blob associated with a key bundle
+        format: base64url
+        type: string
+        x-ms-client-name: keyBundleBackup
+    required:
+      - value
+  KeySignParameters:
+    description: The key operations parameters
+    properties:
+      alg:
+        description: 'The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.'
+        enum:
+          - PS256
+          - PS384
+          - PS512
+          - RS256
+          - RS384
+          - RS512
+          - RSNULL
+        minLength: 1
+        type: string
+        x-ms-client-name: algorithm
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeySignatureAlgorithm
+      value:
+        format: base64url
+        type: string
+    required:
+      - alg
+      - value
+  KeyUpdateParameters:
+    description: The key update parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        x-ms-client-name: keyAttributes
+      key_ops:
+        description: 'Json web key operations. For more information on possible key operations, see JsonWebKeyOperation.'
+        items:
+          enum:
+            - encrypt
+            - decrypt
+            - sign
+            - verify
+            - wrapKey
+            - unwrapKey
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: JsonWebKeyOperation
+        type: array
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+  KeyVaultError:
+    description: the key vault error exception
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+        readOnly: true
+  KeyVerifyParameters:
+    description: The key verify parameters
+    properties:
+      alg:
+        description: 'The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.'
+        enum:
+          - PS256
+          - PS384
+          - PS512
+          - RS256
+          - RS384
+          - RS512
+          - RSNULL
+        minLength: 1
+        type: string
+        x-ms-client-name: algorithm
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeySignatureAlgorithm
+      digest:
+        description: The digest used for signing
+        format: base64url
+        type: string
+      value:
+        description: The signature to be verified
+        format: base64url
+        type: string
+        x-ms-client-name: signature
+    required:
+      - alg
+      - digest
+      - value
+  KeyVerifyResult:
+    description: The key verify result
+    properties:
+      value:
+        description: 'true if the signature is verified, false otherwise.'
+        readOnly: true
+        type: boolean
+  LifetimeAction:
+    description: Action and its trigger that will be performed by Key Vault over the lifetime of a certificate.
+    properties:
+      action:
+        $ref: '#/definitions/Action'
+        description: The action that will be executed.
+      trigger:
+        $ref: '#/definitions/Trigger'
+        description: The condition that will execute the action.
+  OrganizationDetails:
+    description: Details of the organization of the certificate issuer.
+    properties:
+      admin_details:
+        description: Details of the organization administrator.
+        items:
+          $ref: '#/definitions/AdministratorDetails'
+        type: array
+      id:
+        description: Id of the organization.
+        type: string
+  PendingCertificateSigningRequestResult:
+    description: The pending certificate signing request result
+    properties:
+      value:
+        description: The pending certificate signing request as Base64 encoded string.
+        readOnly: true
+        type: string
+  SecretAttributes:
+    allOf:
+      - $ref: '#/definitions/Attributes'
+    description: The secret management attributes
+  SecretBundle:
+    description: 'A Secret consisting of a value, id and its attributes.'
+    properties:
+      attributes:
+        $ref: '#/definitions/SecretAttributes'
+        description: The secret management attributes
+      contentType:
+        description: The content type of the secret
+        type: string
+      id:
+        description: The secret id
+        type: string
+      kid:
+        description: 'If this is a secret backing a KV certificate, then this field specifies the corresponding key backing the KV certificate.'
+        readOnly: true
+        type: string
+      managed:
+        description: 'True if the secret''s lifetime is managed by key vault i.e. if this is a secret backing a certificate, then managed will be true.'
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+      value:
+        description: 'The secret value '
+        type: string
+  SecretItem:
+    description: The secret item containing secret metadata
+    properties:
+      attributes:
+        $ref: '#/definitions/SecretAttributes'
+        description: The secret management attributes
+      contentType:
+        description: Type of the secret value such as a password
+        type: string
+      id:
+        description: Secret Identifier
+        type: string
+      managed:
+        description: 'True if the secret''s lifetime is managed by key vault i.e. if this is a key backing a certificate, then managed will be true.'
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+  SecretListResult:
+    description: The secret list result
+    properties:
+      nextLink:
+        description: The URL to get the next set of secrets.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of secrets in the vault along with a link to the next page of secrets
+        items:
+          $ref: '#/definitions/SecretItem'
+        readOnly: true
+        type: array
+  SecretProperties:
+    description: Properties of the key backing a certificate.
+    properties:
+      contentType:
+        description: The media type (MIME type).
+        type: string
+  SecretSetParameters:
+    description: The secret set parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/SecretAttributes'
+        description: The secret management attributes
+        x-ms-client-name: secretAttributes
+      contentType:
+        description: Type of the secret value such as a password
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+      value:
+        description: The value of the secret
+        type: string
+    required:
+      - value
+  SecretUpdateParameters:
+    description: The secret update parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/SecretAttributes'
+        description: The secret management attributes
+        x-ms-client-name: secretAttributes
+      contentType:
+        description: Type of the secret value such as a password
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application-specific metadata in the form of key-value pairs
+        type: object
+  SubjectAlternativeNames:
+    description: The subject alternate names of a X509 object.
+    properties:
+      dns_names:
+        description: Domain names.
+        items:
+          type: string
+        type: array
+      emails:
+        description: Email addresses.
+        items:
+          type: string
+        type: array
+      upns:
+        description: User principal names.
+        items:
+          type: string
+        type: array
+  Trigger:
+    description: A condition to be satisfied for an action to be executed.
+    properties:
+      days_before_expiry:
+        description: Days before expiry.
+        format: int32
+        type: integer
+      lifetime_percentage:
+        description: Percentage of lifetime as which to trigger. Value should be between 1 and 99.
+        format: int32
+        maximum: 99
+        minimum: 1
+        type: integer
+  X509CertificateProperties:
+    description: Properties of the X509 component of a certificate.
+    properties:
+      ekus:
+        description: The enhanced key usage.
+        items:
+          type: string
+        type: array
+      key_usage:
+        description: List of key usages.
+        items:
+          enum:
+            - digitalSignature
+            - nonRepudiation
+            - keyEncipherment
+            - dataEncipherment
+            - keyAgreement
+            - keyCertSign
+            - cRLSign
+            - encipherOnly
+            - decipherOnly
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: KeyUsageType
+        type: array
+      sans:
+        $ref: '#/definitions/SubjectAlternativeNames'
+        description: The subject alternative names.
+        x-ms-client-name: SubjectAlternativeNames
+      subject:
+        description: The subject name. Should be a valid X509 Distinguished Name.
+        type: string
+      validity_months:
+        description: The duration that the ceritifcate is valid in months.
+        format: int32
+        minimum: 0
+        type: integer
+        x-ms-client-name: ValidityInMonths
+x-ms-parameterized-host:
+  hostTemplate: '{vaultBaseUrl}'
+  parameters:
+    - description: 'The vault name, e.g. https://myvault.vault.azure.net'
+      in: path
+      name: vaultBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

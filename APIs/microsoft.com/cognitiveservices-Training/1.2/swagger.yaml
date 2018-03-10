@@ -1,0 +1,2755 @@
+swagger: '2.0'
+schemes:
+  - https
+host: southcentralus.api.cognitive.microsoft.com
+basePath: /customvision/v1.2/Training
+info:
+  contact:
+    x-twitter: microsoft
+  title: TrainingApi
+  version: '1.2'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://twitter.com/microsoft/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Training/stable/v1.2/Training.json'
+      version: '2.0'
+  x-providerName: microsoft.com
+  x-serviceName: cognitiveservices-Training
+  x-tags:
+    - Microsoft
+parameters:
+  ApiKey:
+    in: header
+    name: Training-Key
+    required: true
+    type: string
+    x-ms-client-name: ApiKey
+paths:
+  /account:
+    get:
+      consumes: []
+      operationId: GetAccountInfo
+      parameters:
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Account'
+      summary: Get basic information about your account
+      tags:
+        - AccountApi
+      x-ms-examples:
+        Successful GetAccountInfo request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+          responses:
+            '200':
+              body:
+                Email: User@email.com
+                Keys:
+                  PredictionKeys:
+                    PrimaryKey: '{API Key}'
+                    SecondaryKey: '{API Key}'
+                  TrainingKeys:
+                    PrimaryKey: '{API Key}'
+                    SecondaryKey: '{API Key}'
+                Quotas:
+                  PerProject:
+                    - Images:
+                        Total: 1000
+                        Used: 0
+                      Iterations:
+                        Total: 20
+                        Used: 0
+                      ProjectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+                      Tags:
+                        Total: 50
+                        Used: 2
+                  Predictions:
+                    Total: 1000
+                    Used: 0
+                  Projects:
+                    Total: 20
+                    Used: 9
+                  Tier: Free
+                UserName: User Name
+              headers: {}
+  /domains:
+    get:
+      consumes: []
+      operationId: GetDomains
+      parameters:
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Domain'
+            type: array
+            x-nullable: true
+      summary: Get a list of the available domains
+      tags:
+        - DomainsApi
+      x-ms-examples:
+        Successful GetDomains request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+          responses:
+            '200':
+              body:
+                - Exportable: false
+                  Id: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                  Name: General
+                - Exportable: false
+                  Id: c151d5b5-dd07-472a-acc8-15d29dea8518
+                  Name: Food
+                - Exportable: false
+                  Id: ca455789-012d-4b50-9fec-5bb63841c793
+                  Name: Landmarks
+                - Exportable: false
+                  Id: b30a91ae-e3c1-4f73-a81e-c270bff27c39
+                  Name: Retail
+                - Exportable: false
+                  Id: 45badf75-3591-4f26-a705-45678d3e9f5f
+                  Name: Adult
+                - Exportable: true
+                  Id: 0732100f-1a38-4e49-a514-c9b44c697ab5
+                  Name: General (compact)
+                - Exportable: true
+                  Id: b5cfd229-2ac7-4b2b-8d0a-2b0661344894
+                  Name: Landmarks (compact)
+                - Exportable: true
+                  Id: 6b4faeda-8396-481b-9f8b-177b9fa3097f
+                  Name: Retail (compact)
+              headers: {}
+  '/domains/{domainId}':
+    get:
+      consumes: []
+      operationId: GetDomain
+      parameters:
+        - description: The id of the domain to get information about
+          format: uuid
+          in: path
+          name: domainId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Domain'
+      summary: Get information about a specific domain
+      tags:
+        - DomainsApi
+      x-ms-examples:
+        Successful GetDomain request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            domainId: b30a91ae-e3c1-4f73-a81e-c270bff27c39
+          responses:
+            '200':
+              body:
+                Exportable: false
+                Id: b30a91ae-e3c1-4f73-a81e-c270bff27c39
+                Name: Retail
+              headers: {}
+  /projects:
+    get:
+      consumes: []
+      operationId: GetProjects
+      parameters:
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Project'
+            type: array
+            x-nullable: true
+      summary: Get your projects
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful GetProjects request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+          responses:
+            '200':
+              body:
+                - Created: '2017-12-18T05:43:18.08Z'
+                  CurrentIterationId: a2a64ff1-22e6-418b-aeea-75e3b43f122c
+                  Description: ''
+                  Id: bc3f7dad-5544-468c-8573-3ef04d55463e
+                  LastModified: '2017-12-18T05:43:18.0962423Z'
+                  Name: My New Project
+                  Settings:
+                    DomainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                  ThumbnailUri: null
+              headers: {}
+    post:
+      consumes: []
+      operationId: CreateProject
+      parameters:
+        - description: Name of the project
+          in: query
+          name: name
+          required: true
+          type: string
+          x-nullable: true
+        - description: The description of the project
+          in: query
+          name: description
+          required: false
+          type: string
+          x-nullable: true
+        - description: The id of the domain to use for this project. Defaults to General
+          format: uuid
+          in: query
+          name: domainId
+          required: false
+          type: string
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Project'
+      summary: Create a project
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful CreateProject request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            description: A test project
+            domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+            name: My New Project
+          responses:
+            '200':
+              body:
+                Created: '2017-12-18T05:43:18.08Z'
+                CurrentIterationId: a2a64ff1-22e6-418b-aeea-75e3b43f122c
+                Description: A test project
+                Id: bc3f7dad-5544-468c-8573-3ef04d55463e
+                LastModified: '2017-12-18T05:43:18.0962423Z'
+                Name: My New Project
+                Settings:
+                  DomainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                ThumbnailUri: null
+              headers: {}
+  '/projects/{projectId}':
+    delete:
+      consumes: []
+      operationId: DeleteProject
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a specific project
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful DeleteProject request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+          responses:
+            '204':
+              body: ''
+              headers: {}
+    get:
+      consumes: []
+      operationId: GetProject
+      parameters:
+        - description: The id of the project to get
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Project'
+      summary: Get a specific project
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful GetProject request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+          responses:
+            '200':
+              body:
+                Created: '2017-12-18T05:43:18.08Z'
+                CurrentIterationId: a2a64ff1-22e6-418b-aeea-75e3b43f122c
+                Description: A test project
+                Id: bc3f7dad-5544-468c-8573-3ef04d55463e
+                LastModified: '2017-12-18T05:43:18.0962423Z'
+                Name: My New Project
+                Settings:
+                  DomainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                ThumbnailUri: null
+              headers: {}
+    patch:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: UpdateProject
+      parameters:
+        - description: The id of the project to update
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The updated project model
+          in: body
+          name: updatedProject
+          required: true
+          schema:
+            $ref: '#/definitions/Project'
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Project'
+      summary: Update a specific project
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful UpdateProject request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+            updatedProject:
+              Description: A new Description
+              Name: New Project Name
+          responses:
+            '200':
+              body:
+                Created: '2017-12-18T05:43:18.08Z'
+                CurrentIterationId: a2a64ff1-22e6-418b-aeea-75e3b43f122c
+                Description: A new Description
+                Id: bc3f7dad-5544-468c-8573-3ef04d55463e
+                LastModified: '2017-12-18T05:43:18.0962423Z'
+                Name: New Project Name
+                Settings:
+                  DomainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                ThumbnailUri: null
+              headers: {}
+  '/projects/{projectId}/images':
+    delete:
+      consumes: []
+      operationId: DeleteImages
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - collectionFormat: csv
+          description: Ids of the images to be deleted. Limted to 256 images per batch
+          in: query
+          items:
+            type: string
+            x-nullable: false
+          name: imageIds
+          required: true
+          type: array
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Delete images from the set of training images
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful DeleteImages request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            imageIds:
+              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '204':
+              body: ''
+              headers: {}
+    post:
+      consumes:
+        - multipart/form-data
+        - application/octet-stream
+      description: "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files"
+      operationId: CreateImagesFromData
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - collectionFormat: csv
+          description: The tags ids with which to tag each image. Limited to 20
+          in: query
+          items:
+            type: string
+            x-nullable: false
+          name: tagIds
+          required: false
+          type: array
+          x-nullable: true
+        - in: formData
+          name: imageData
+          required: true
+          type: file
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImageCreateSummary'
+      summary: Add the provided images to the set of training images
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful CreateImagesFromData request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            imageData: multipart data
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+            tagIds:
+              - b607964f-7bd6-4a3b-a869-6791fb6aab87
+          responses:
+            '200':
+              body:
+                Images:
+                  - Image:
+                      Created: '2017-12-19T15:56:10.65Z'
+                      Height: 900
+                      Id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
+                      ImageUri: '{Image Uri}'
+                      Tags:
+                        - Created: '2017-12-19T15:56:09.6105895Z'
+                          TagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
+                      ThumbnailUri: '{Thumbnail Uri}'
+                      Width: 1095
+                    SourceUrl: '"hemlock_10.jpg"'
+                    Status: OK
+                  - Image:
+                      Created: '2017-12-19T15:56:10.57Z'
+                      Height: 1531
+                      Id: f1855a92-b873-47e7-b513-f07a667ceda1
+                      ImageUri: '{Image Uri}'
+                      Tags:
+                        - Created: '2017-12-19T15:56:09.5168568Z'
+                          TagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
+                      ThumbnailUri: '{Thumbnail Uri}'
+                      Width: 900
+                    SourceUrl: '"hemlock_6.jpg"'
+                    Status: OK
+                IsBatchSuccessful: true
+              headers: {}
+  '/projects/{projectId}/images/files':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: CreateImagesFromFiles
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The batch of image files to add. Limited to 64 images and 20 tags per batch
+          in: body
+          name: batch
+          required: true
+          schema:
+            $ref: '#/definitions/ImageFileCreateBatch'
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImageCreateSummary'
+      summary: Add the provided batch of images to the set of training images
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful CreateImagesFromFiles request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            batch:
+              Images:
+                - Contents: '{image contents}'
+                  Name: hemlock_10.jpg
+              TagIds:
+                - b607964f-7bd6-4a3b-a869-6791fb6aab87
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
+          responses:
+            '200':
+              body:
+                Images:
+                  - Image:
+                      Created: '2017-12-19T15:56:10.65Z'
+                      Height: 900
+                      Id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
+                      ImageUri: '{Image Uri}'
+                      Tags:
+                        - Created: '2017-12-19T15:56:09.6105895Z'
+                          TagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
+                      ThumbnailUri: '{Thumbnail Uri}'
+                      Width: 1095
+                    SourceUrl: '"hemlock_10.jpg"'
+                    Status: OK
+                IsBatchSuccessful: true
+              headers: {}
+  '/projects/{projectId}/images/predictions':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: CreateImagesFromPredictions
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: Image and tag ids. Limted to 64 images and 20 tags per batch
+          in: body
+          name: batch
+          required: true
+          schema:
+            $ref: '#/definitions/ImageIdCreateBatch'
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImageCreateSummary'
+      summary: Add the specified predicted images to the set of training images
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful CreateImagesFromPredictions request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            batch:
+              Images:
+                - Id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
+              TagIds:
+                - b607964f-7bd6-4a3b-a869-6791fb6aab87
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
+          responses:
+            '200':
+              body:
+                Images:
+                  - Image:
+                      Created: '2017-12-19T15:56:10.65Z'
+                      Height: 900
+                      Id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
+                      ImageUri: '{Image Uri}'
+                      Tags:
+                        - Created: '2017-12-19T15:56:09.6105895Z'
+                          TagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
+                      ThumbnailUri: '{Thumbnail Uri}'
+                      Width: 1095
+                    SourceUrl: '"hemlock_10.jpg"'
+                    Status: OK
+                IsBatchSuccessful: true
+              headers: {}
+  '/projects/{projectId}/images/tagged':
+    get:
+      consumes: []
+      description: "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      operationId: GetTaggedImages
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The iteration id. Defaults to workspace
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - collectionFormat: csv
+          description: An list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20
+          in: query
+          items:
+            type: string
+            x-nullable: false
+          name: tagIds
+          required: false
+          type: array
+          x-nullable: true
+        - description: The ordering. Defaults to newest
+          enum:
+            - Newest
+            - Oldest
+          in: query
+          name: orderBy
+          required: false
+          type: string
+          x-nullable: false
+        - default: 50
+          description: 'Maximum number of images to return. Defaults to 50, limited to 256'
+          format: int32
+          in: query
+          name: take
+          required: false
+          type: integer
+        - default: 0
+          description: Number of images to skip before beginning the image batch. Defaults to 0
+          format: int32
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Image'
+            type: array
+            x-nullable: true
+      summary: Get tagged images for a given project iteration
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful GetTaggedImages request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+          responses:
+            '200':
+              body: []
+              headers: {}
+  '/projects/{projectId}/images/tags':
+    delete:
+      consumes: []
+      operationId: DeleteImageTags
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - collectionFormat: csv
+          description: Image ids. Limited to 64 images
+          in: query
+          items:
+            type: string
+            x-nullable: false
+          name: imageIds
+          required: true
+          type: array
+          x-nullable: true
+        - collectionFormat: csv
+          description: Tags to be deleted from the specified images. Limted to 20 tags
+          in: query
+          items:
+            type: string
+            x-nullable: false
+          name: tagIds
+          required: true
+          type: array
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a set of tags from a set of images
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful DeleteImageTags request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            imageIds:
+              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+            tagIds:
+              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
+          responses:
+            '204':
+              body: ''
+              headers: {}
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: PostImageTags
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: Batch of image tags. Limited to 128 tags per batch
+          in: body
+          name: batch
+          required: true
+          schema:
+            $ref: '#/definitions/ImageTagCreateBatch'
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImageTagCreateSummary'
+      summary: Associate a set of images with a set of tags
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful PostImageTags request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            batch:
+              Tags:
+                - ImageId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+                  TagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+          responses:
+            '200':
+              body:
+                Created:
+                  - ImageId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+                    TagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+                Duplicated: null
+                Exceeded: null
+              headers: {}
+  '/projects/{projectId}/images/untagged':
+    get:
+      consumes: []
+      description: "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch."
+      operationId: GetUntaggedImages
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The iteration id. Defaults to workspace
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - description: The ordering. Defaults to newest
+          enum:
+            - Newest
+            - Oldest
+          in: query
+          name: orderBy
+          required: false
+          type: string
+          x-nullable: false
+        - default: 50
+          description: 'Maximum number of images to return. Defaults to 50, limited to 256'
+          format: int32
+          in: query
+          name: take
+          required: false
+          type: integer
+        - default: 0
+          description: Number of images to skip before beginning the image batch. Defaults to 0
+          format: int32
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Image'
+            type: array
+            x-nullable: true
+      summary: Get untagged images for a given project iteration
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful GetUntaggedImages request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+          responses:
+            '200':
+              body: []
+              headers: {}
+  '/projects/{projectId}/images/urls':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: CreateImagesFromUrls
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: Image urls and tag ids. Limited to 64 images and 20 tags per batch
+          in: body
+          name: batch
+          required: true
+          schema:
+            $ref: '#/definitions/ImageUrlCreateBatch'
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImageCreateSummary'
+      summary: Add the provided images urls to the set of training images
+      tags:
+        - ImageApi
+      x-ms-examples:
+        Successful CreateImagesFromUrls request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            batch:
+              Images:
+                - Url: '{url to image}'
+              TagIds:
+                - b607964f-7bd6-4a3b-a869-6791fb6aab87
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
+          responses:
+            '200':
+              body:
+                Images:
+                  - Image:
+                      Created: '2017-12-19T15:56:10.65Z'
+                      Height: 900
+                      Id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
+                      ImageUri: '{Image Uri}'
+                      Tags:
+                        - Created: '2017-12-19T15:56:09.6105895Z'
+                          TagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
+                      ThumbnailUri: '{Thumbnail Uri}'
+                      Width: 1095
+                    SourceUrl: '{url to image}'
+                    Status: OK
+                IsBatchSuccessful: true
+              headers: {}
+  '/projects/{projectId}/iterations':
+    get:
+      consumes: []
+      operationId: GetIterations
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Iteration'
+            type: array
+            x-nullable: true
+      summary: Get iterations for the project
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful GetIterations request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                - Created: '2017-12-18T22:40:29.7304213Z'
+                  DomainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                  Exportable: false
+                  Id: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+                  IsDefault: true
+                  LastModified: '2017-12-18T22:40:41.3173903Z'
+                  Name: Iteration 1
+                  ProjectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+                  Status: Completed
+                  TrainedAt: '2017-12-18T22:40:41.0058589Z'
+                - Created: '2017-12-18T22:40:36.9066667Z'
+                  DomainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                  Exportable: false
+                  Id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+                  IsDefault: false
+                  LastModified: '2017-12-19T15:47:02.9511889Z'
+                  Name: Iteration 2
+                  ProjectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+                  Status: Completed
+                  TrainedAt: '2017-12-19T15:47:02.9511889Z'
+                - Created: '2017-12-19T15:46:59.2533333Z'
+                  DomainId: null
+                  Exportable: false
+                  Id: 3adaf7b2-18fc-4376-9da4-b5ea160a7cf5
+                  IsDefault: false
+                  LastModified: '2017-12-19T15:46:59.2699369Z'
+                  Name: Iteration 3
+                  ProjectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+                  Status: New
+              headers: {}
+  '/projects/{projectId}/iterations/{iterationId}':
+    delete:
+      consumes: []
+      operationId: DeleteIteration
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The iteration id
+          format: uuid
+          in: path
+          name: iterationId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a specific iteration of a project
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful DeleteIteration request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '204':
+              body: ''
+              headers: {}
+    get:
+      consumes: []
+      operationId: GetIteration
+      parameters:
+        - description: The id of the project the iteration belongs to
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The id of the iteration to get
+          format: uuid
+          in: path
+          name: iterationId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Iteration'
+      summary: Get a specific iteration
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful GetIteration request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                Created: '2017-12-18T22:40:36.9066667Z'
+                DomainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                Exportable: false
+                Id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+                IsDefault: false
+                LastModified: '2017-12-19T15:47:02.9511889Z'
+                Name: Iteration 2
+                ProjectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+                Status: Completed
+                TrainedAt: '2017-12-19T15:47:02.9511889Z'
+              headers: {}
+    patch:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: UpdateIteration
+      parameters:
+        - description: Project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: Iteration id
+          format: uuid
+          in: path
+          name: iterationId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The updated iteration model
+          in: body
+          name: updatedIteration
+          required: true
+          schema:
+            $ref: '#/definitions/Iteration'
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Iteration'
+      summary: Update a specific iteration
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful UpdateIteration request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+            updatedIteration:
+              Name: Best Iteration
+          responses:
+            '200':
+              body:
+                Created: '2017-12-18T22:40:36.9066667Z'
+                DomainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
+                Exportable: false
+                Id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+                IsDefault: false
+                LastModified: '2017-12-19T15:53:07.8782881Z'
+                Name: Best Iteration
+                ProjectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+                Status: Completed
+                TrainedAt: '2017-12-19T15:47:02.9511889Z'
+              headers: {}
+  '/projects/{projectId}/iterations/{iterationId}/export':
+    get:
+      consumes: []
+      operationId: GetExports
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The iteration id
+          format: uuid
+          in: path
+          name: iterationId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Export'
+            type: array
+            x-nullable: true
+      summary: Get the list of exports for a specific iteration
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful GetExports request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                - DownloadUri: '{Download URI'
+                  Platform: TensorFlow
+                  Status: Done
+              headers: {}
+    post:
+      consumes: []
+      operationId: ExportIteration
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The iteration id
+          format: uuid
+          in: path
+          name: iterationId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The target platform (coreml or tensorflow)
+          in: query
+          name: platform
+          required: true
+          type: string
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Export'
+      summary: Export a trained iteration
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful ExportIteration request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+            platform: tensorflow
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                DownloadUri: null
+                Platform: TensorFlow
+                Status: Exporting
+              headers: {}
+  '/projects/{projectId}/iterations/{iterationId}/performance':
+    get:
+      consumes: []
+      operationId: GetIterationPerformance
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The id of the trained iteration
+          format: uuid
+          in: path
+          name: iterationId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The 0 to 1 threshold to determine positive prediction
+          format: float
+          in: query
+          name: threshold
+          required: true
+          type: number
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IterationPerformance'
+      summary: Get detailed performance information about a trained iteration
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful GetIterationPerformance request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+            threshold: 0.9
+          responses:
+            '200':
+              body:
+                PerTagPerformance:
+                  - Id: e31ff107-5505-4753-be42-b369b21b026c
+                    Name: Hemlock
+                    Precision: 1
+                    PrecisionStdDeviation: 0
+                    Recall: 1
+                    RecallStdDeviation: 0
+                  - Id: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+                    Name: Japanese Cherry
+                    Precision: 1
+                    PrecisionStdDeviation: 0
+                    Recall: 1
+                    RecallStdDeviation: 0
+                Precision: 1
+                PrecisionStdDeviation: 0
+                Recall: 1
+                RecallStdDeviation: 0
+              headers: {}
+  '/projects/{projectId}/predictions':
+    delete:
+      consumes: []
+      operationId: DeletePrediction
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - collectionFormat: csv
+          description: The prediction ids. Limited to 64
+          in: query
+          items:
+            type: string
+            x-nullable: false
+          name: ids
+          required: true
+          type: array
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a set of predicted images and their associated prediction results
+      tags:
+        - PredictionsApi
+      x-ms-examples:
+        Successful DeletePrediction request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            ids:
+              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '204':
+              body: ''
+              headers: {}
+  '/projects/{projectId}/predictions/query':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: QueryPredictionResults
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: Parameters used to query the predictions. Limited to combining 2 tags
+          in: body
+          name: query
+          required: true
+          schema:
+            $ref: '#/definitions/PredictionQueryToken'
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PredictionQuery'
+      summary: Get images that were sent to your prediction endpoint
+      tags:
+        - PredictionsApi
+      x-ms-examples:
+        Successful QueryPredictionResults request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+            query:
+              OrderBy: Newest
+              Tags:
+                - Id: b5f7e6a2-a481-49a6-afec-a7cef1af3544
+                  MinThreshold: 0.9
+          responses:
+            '200':
+              body:
+                Results:
+                  - Created: '2018-01-31T20:18:26.5806336Z'
+                    Id: dfd2d346-3ed5-4e1e-857d-af4e32cec042
+                    ImageUri: <image uri>
+                    Iteration: b7b9d99c-a2c6-4658-9900-a98d2ff5bc66
+                    Predictions:
+                      - Probability: 1
+                        Tag: Tag 1
+                        TagId: b5f7e6a2-a481-49a6-afec-a7cef1af3544
+                      - Probability: 3.60627153e-12
+                        Tag: Tag 2
+                        TagId: 45619cda-d1c9-4bc8-a3e1-87c5d81adbc3
+                    Project: 8988643a-ae70-447d-9a22-15c4255e5ecb
+                    ThumbnailUri: <thumbnail uri>
+                Token:
+                  Application: null
+                  Continuation: null
+                  EndTime: null
+                  IterationId: null
+                  MaxCount: 0
+                  OrderBy: Newest
+                  Session: '1:286613'
+                  StartTime: null
+                  Tags:
+                    - Id: b5f7e6a2-a481-49a6-afec-a7cef1af3544
+                      MaxThreshold: 1
+                      MinThreshold: 0.9
+              headers: {}
+  '/projects/{projectId}/quicktest/image':
+    post:
+      consumes:
+        - application/json
+        - multipart/form-data
+        - application/octet-stream
+      operationId: QuickTestImage
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified."
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - in: formData
+          name: imageData
+          required: true
+          type: file
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImagePredictionResult'
+      summary: Quick test an image
+      tags:
+        - PredictionsApi
+      x-ms-examples:
+        Successful QuickTestImage request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            imageData: multipart-form-data
+            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                Created: '2017-12-19T14:21:41.6789561Z'
+                Id: 951098b2-9b69-427b-bddb-d5cb618874e3
+                Iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+                Predictions:
+                  - Probability: 0.05149666
+                    Tag: Hemlock
+                    TagId: e31ff107-5505-4753-be42-b369b21b026c
+                  - Probability: 0
+                    Tag: Japanese Cherry
+                    TagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+                Project: 64b822c5-8082-4b36-a426-27225f4aa18c
+              headers: {}
+  '/projects/{projectId}/quicktest/url':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: QuickTestImageUrl
+      parameters:
+        - description: The project to evaluate against
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: 'An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated'
+          in: body
+          name: imageUrl
+          required: true
+          schema:
+            $ref: '#/definitions/ImageUrl'
+        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified."
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImagePredictionResult'
+      summary: Quick test an image url
+      tags:
+        - PredictionsApi
+      x-ms-examples:
+        Successful QuickTestImageUrl request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            imageUrl:
+              Url: '{Image URL}'
+            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                Created: '2017-12-19T14:21:41.6789561Z'
+                Id: 951098b2-9b69-427b-bddb-d5cb618874e3
+                Iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+                Predictions:
+                  - Probability: 0.05149666
+                    Tag: Hemlock
+                    TagId: e31ff107-5505-4753-be42-b369b21b026c
+                  - Probability: 0.000193528482
+                    Tag: Japanese Cherry
+                    TagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+                Project: 64b822c5-8082-4b36-a426-27225f4aa18c
+              headers: {}
+  '/projects/{projectId}/tags':
+    get:
+      consumes: []
+      operationId: GetTags
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The iteration id. Defaults to workspace
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TagList'
+      summary: Get the tags for a given project and iteration
+      tags:
+        - TagsApi
+      x-ms-examples:
+        Successful GetTags request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+          responses:
+            '200':
+              body:
+                Tags:
+                  - Description: Description of Tag1
+                    Id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
+                    ImageCount: 0
+                    Name: Tag1
+                TotalTaggedImages: 0
+                TotalUntaggedImages: 0
+              headers: {}
+    post:
+      consumes: []
+      operationId: CreateTag
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The tag name
+          in: query
+          name: name
+          required: true
+          type: string
+          x-nullable: true
+        - description: Optional description for the tag
+          in: query
+          name: description
+          required: false
+          type: string
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Tag'
+      summary: Create a tag for the project
+      tags:
+        - TagsApi
+      x-ms-examples:
+        Successful CreateTag request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            body: ''
+            description: Description of Tag1
+            name: Tag1
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+          responses:
+            '200':
+              body:
+                Description: Description of Tag1
+                Id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
+                ImageCount: 0
+                Name: Tag1
+              headers: {}
+  '/projects/{projectId}/tags/{tagId}':
+    delete:
+      consumes: []
+      operationId: DeleteTag
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: Id of the tag to be deleted
+          format: uuid
+          in: path
+          name: tagId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a tag from the project
+      tags:
+        - TagsApi
+      x-ms-examples:
+        Successful DeleteTag request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
+          responses:
+            '204':
+              body: ''
+              headers: {}
+    get:
+      consumes: []
+      operationId: GetTag
+      parameters:
+        - description: The project this tag belongs to
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The tag id
+          format: uuid
+          in: path
+          name: tagId
+          required: true
+          type: string
+          x-nullable: false
+        - description: 'The iteration to retrieve this tag from. Optional, defaults to current training set'
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Tag'
+      summary: Get information about a specific tag
+      tags:
+        - TagsApi
+      x-ms-examples:
+        Successful GetTag request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
+          responses:
+            '200':
+              body:
+                Description: Description of Tag1
+                Id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
+                ImageCount: 0
+                Name: Tag1
+              headers: {}
+    patch:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: UpdateTag
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The id of the target tag
+          format: uuid
+          in: path
+          name: tagId
+          required: true
+          type: string
+          x-nullable: false
+        - description: The updated tag model
+          in: body
+          name: updatedTag
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Tag'
+      summary: Update a tag
+      tags:
+        - TagsApi
+      x-ms-examples:
+        Successful UpdateTag request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
+            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
+            updatedTag:
+              Description: Better description
+              Name: Better Tag Name
+          responses:
+            '200':
+              body:
+                Description: Better description
+                Id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
+                ImageCount: 0
+                Name: Better Tag Name
+              headers: {}
+  '/projects/{projectId}/train':
+    post:
+      consumes: []
+      operationId: TrainProject
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Iteration'
+      summary: Queues project for training
+      tags:
+        - ProjectApi
+      x-ms-examples:
+        Successful TrainProject request:
+          parameters:
+            Content-Type: application/json
+            Training-Key: '{API Key}'
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                Created: '2017-12-18T22:40:36.9066667Z'
+                DomainId: null
+                Exportable: false
+                Id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
+                IsDefault: false
+                LastModified: '2017-12-19T15:46:58.197323Z'
+                Name: Iteration 2
+                ProjectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+                Status: Training
+              headers: {}
+definitions:
+  Account:
+    description: Represents a user account
+    properties:
+      Email:
+        description: Gets the email associated with this account
+        readOnly: true
+        type: string
+        x-nullable: true
+      Keys:
+        $ref: '#/definitions/ApiKeys'
+        description: Gets the api keys associated with this account
+        readOnly: true
+      Quotas:
+        $ref: '#/definitions/AccountQuota'
+        description: Gets the quotas associated with this account
+        readOnly: true
+      UserName:
+        description: Gets the name of the account owner
+        readOnly: true
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  AccountQuota:
+    description: Represents a set of quotas assocated with an account
+    properties:
+      PerProject:
+        description: Gets a list of quotas that apply per-project for each project
+        items:
+          $ref: '#/definitions/PerProjectQuota'
+        readOnly: true
+        type: array
+        x-nullable: true
+      Predictions:
+        $ref: '#/definitions/Quota'
+        description: Gets the prediction quota
+        readOnly: true
+      Projects:
+        $ref: '#/definitions/Quota'
+        description: Gets the project quota
+        readOnly: true
+      Tier:
+        description: Gets the tier of user
+        readOnly: true
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ApiKeys:
+    properties:
+      PredictionKeys:
+        $ref: '#/definitions/KeyPair'
+      TrainingKeys:
+        $ref: '#/definitions/KeyPair'
+    type: object
+    x-nullable: true
+  Domain:
+    properties:
+      Exportable:
+        readOnly: true
+        type: boolean
+        x-nullable: false
+      Id:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Name:
+        readOnly: true
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  Export:
+    properties:
+      DownloadUri:
+        readOnly: true
+        type: string
+        x-nullable: true
+      Platform:
+        enum:
+          - CoreML
+          - TensorFlow
+        readOnly: true
+        type: string
+        x-nullable: false
+      Status:
+        enum:
+          - Exporting
+          - Failed
+          - Done
+        readOnly: true
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  Image:
+    description: Image model to be sent as JSON
+    properties:
+      Created:
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      Height:
+        format: int32
+        readOnly: true
+        type: integer
+        x-nullable: false
+      Id:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      ImageUri:
+        readOnly: true
+        type: string
+        x-nullable: true
+      Predictions:
+        items:
+          $ref: '#/definitions/PredictionTag'
+        readOnly: true
+        type: array
+        x-nullable: true
+      Tags:
+        items:
+          $ref: '#/definitions/ImageTag'
+        readOnly: true
+        type: array
+        x-nullable: true
+      ThumbnailUri:
+        readOnly: true
+        type: string
+        x-nullable: true
+      Width:
+        format: int32
+        readOnly: true
+        type: integer
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageCreateResult:
+    properties:
+      Image:
+        $ref: '#/definitions/Image'
+        readOnly: true
+      SourceUrl:
+        readOnly: true
+        type: string
+        x-nullable: true
+      Status:
+        enum:
+          - OK
+          - OKDuplicate
+          - ErrorSource
+          - ErrorImageFormat
+          - ErrorImageSize
+          - ErrorStorage
+          - ErrorLimitExceed
+          - ErrorTagLimitExceed
+          - ErrorUnknown
+        readOnly: true
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageCreateSummary:
+    properties:
+      Images:
+        items:
+          $ref: '#/definitions/ImageCreateResult'
+        readOnly: true
+        type: array
+        x-nullable: true
+      IsBatchSuccessful:
+        readOnly: true
+        type: boolean
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageFileCreateBatch:
+    properties:
+      Images:
+        items:
+          $ref: '#/definitions/ImageFileCreateEntry'
+        type: array
+        x-nullable: true
+      TagIds:
+        items:
+          format: uuid
+          type: string
+          x-nullable: false
+        type: array
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ImageFileCreateEntry:
+    properties:
+      Contents:
+        format: byte
+        type: string
+        x-nullable: true
+      Name:
+        type: string
+        x-nullable: true
+      TagIds:
+        items:
+          format: uuid
+          type: string
+          x-nullable: false
+        type: array
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ImageIdCreateBatch:
+    properties:
+      Images:
+        items:
+          $ref: '#/definitions/ImageIdCreateEntry'
+        type: array
+        x-nullable: true
+      TagIds:
+        items:
+          format: uuid
+          type: string
+          x-nullable: false
+        type: array
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ImageIdCreateEntry:
+    properties:
+      Id:
+        format: uuid
+        type: string
+        x-nullable: false
+      TagIds:
+        items:
+          format: uuid
+          type: string
+          x-nullable: false
+        type: array
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ImagePredictionResult:
+    description: result of an image prediction request
+    properties:
+      Created:
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      Id:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Iteration:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Predictions:
+        items:
+          $ref: '#/definitions/ImageTagPrediction'
+        readOnly: true
+        type: array
+        x-nullable: true
+      Project:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageTag:
+    properties:
+      Created:
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      TagId:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageTagCreateBatch:
+    properties:
+      Tags:
+        items:
+          $ref: '#/definitions/ImageTagCreateEntry'
+        type: array
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ImageTagCreateEntry:
+    properties:
+      ImageId:
+        format: uuid
+        type: string
+        x-nullable: false
+      TagId:
+        format: uuid
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageTagCreateSummary:
+    properties:
+      Created:
+        items:
+          $ref: '#/definitions/ImageTagCreateEntry'
+        type: array
+        x-nullable: true
+      Duplicated:
+        items:
+          $ref: '#/definitions/ImageTagCreateEntry'
+        type: array
+        x-nullable: true
+      Exceeded:
+        items:
+          $ref: '#/definitions/ImageTagCreateEntry'
+        type: array
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ImageTagPrediction:
+    properties:
+      Probability:
+        format: float
+        readOnly: true
+        type: number
+        x-nullable: false
+      Tag:
+        readOnly: true
+        type: string
+        x-nullable: true
+      TagId:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageUrl:
+    properties:
+      Url:
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ImageUrlCreateBatch:
+    properties:
+      Images:
+        items:
+          $ref: '#/definitions/ImageUrlCreateEntry'
+        type: array
+        x-nullable: true
+      TagIds:
+        items:
+          format: uuid
+          type: string
+          x-nullable: false
+        type: array
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ImageUrlCreateEntry:
+    properties:
+      TagIds:
+        items:
+          format: uuid
+          type: string
+          x-nullable: false
+        type: array
+        x-nullable: true
+      Url:
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  Iteration:
+    description: Iteration model to be sent over JSON
+    properties:
+      Created:
+        description: Gets the time this iteration was completed
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      DomainId:
+        description: Get or sets a guid of the domain the iteration has been trained on
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: true
+      Exportable:
+        description: Whether the iteration can be exported to another format for download
+        readOnly: true
+        type: boolean
+        x-nullable: false
+      Id:
+        description: Gets the id of the iteration
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      IsDefault:
+        description: Gets or sets a value indicating whether the iteration is the default iteration for the project
+        type: boolean
+        x-nullable: false
+      LastModified:
+        description: Gets the time this iteration was last modified
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      Name:
+        description: Gets or sets the name of the iteration
+        type: string
+        x-nullable: true
+      ProjectId:
+        description: Gets the project id of the iteration
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Status:
+        description: Gets the current iteration status
+        readOnly: true
+        type: string
+        x-nullable: true
+      TrainedAt:
+        description: Gets the time this iteration was last modified
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  IterationPerformance:
+    description: Represents the detailed performance data for a trained iteration
+    properties:
+      PerTagPerformance:
+        description: Gets the per-tag performance details for this iteration
+        items:
+          $ref: '#/definitions/TagPerformance'
+        readOnly: true
+        type: array
+        x-nullable: true
+      Precision:
+        description: Gets the precision
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      PrecisionStdDeviation:
+        description: Gets the standard deviation for the precision
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      Recall:
+        description: Gets the recall
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      RecallStdDeviation:
+        description: Gets the standard deviation for the recall
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+    type: object
+    x-nullable: true
+  KeyPair:
+    properties:
+      PrimaryKey:
+        type: string
+        x-nullable: true
+      SecondaryKey:
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  PerProjectQuota:
+    description: Represents a set of quotas for a given project
+    properties:
+      Images:
+        $ref: '#/definitions/Quota'
+        description: Gets the image quota for the project
+        readOnly: true
+      Iterations:
+        $ref: '#/definitions/Quota'
+        description: Gets the iteration quota for the project
+        readOnly: true
+      ProjectId:
+        description: Gets the project id of the project this quota applies to
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Tags:
+        $ref: '#/definitions/Quota'
+        description: Gets the tag quota for the project
+        readOnly: true
+    type: object
+    x-nullable: true
+  Prediction:
+    description: result of an image classification request
+    properties:
+      Created:
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      Id:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      ImageUri:
+        readOnly: true
+        type: string
+        x-nullable: true
+      Iteration:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Predictions:
+        items:
+          $ref: '#/definitions/PredictionTag'
+        readOnly: true
+        type: array
+        x-nullable: true
+      Project:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      ThumbnailUri:
+        readOnly: true
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  PredictionQuery:
+    properties:
+      Results:
+        items:
+          $ref: '#/definitions/Prediction'
+        readOnly: true
+        type: array
+        x-nullable: true
+      Token:
+        $ref: '#/definitions/PredictionQueryToken'
+        readOnly: true
+    type: object
+    x-nullable: true
+  PredictionQueryTag:
+    properties:
+      Id:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      MaxThreshold:
+        format: float
+        readOnly: true
+        type: number
+        x-nullable: false
+      MinThreshold:
+        format: float
+        readOnly: true
+        type: number
+        x-nullable: false
+    type: object
+    x-nullable: true
+  PredictionQueryToken:
+    properties:
+      Application:
+        type: string
+        x-nullable: true
+      Continuation:
+        type: string
+        x-nullable: true
+      EndTime:
+        format: date-time
+        type: string
+        x-nullable: true
+      IterationId:
+        format: uuid
+        type: string
+        x-nullable: true
+      MaxCount:
+        format: int32
+        type: integer
+        x-nullable: false
+      OrderBy:
+        enum:
+          - Newest
+          - Oldest
+          - Suggested
+        type: string
+        x-nullable: false
+      Session:
+        type: string
+        x-nullable: true
+      StartTime:
+        format: date-time
+        type: string
+        x-nullable: true
+      Tags:
+        items:
+          $ref: '#/definitions/PredictionQueryTag'
+        type: array
+        x-nullable: true
+    type: object
+    x-nullable: true
+  PredictionTag:
+    properties:
+      Probability:
+        format: float
+        readOnly: true
+        type: number
+        x-nullable: false
+      Tag:
+        readOnly: true
+        type: string
+        x-nullable: true
+      TagId:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  Project:
+    description: Represents a project
+    properties:
+      Created:
+        description: Gets the date this project was created
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      CurrentIterationId:
+        description: Gets the current iteration id
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: true
+      Description:
+        description: Gets or sets the description of the project
+        type: string
+        x-nullable: true
+      Id:
+        description: Gets the project id
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      LastModified:
+        description: Gets the date this project was last modifed
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      Name:
+        description: Gets or sets the name of the project
+        type: string
+        x-nullable: true
+      Settings:
+        $ref: '#/definitions/ProjectSettings'
+        description: Gets or sets the project settings
+      ThumbnailUri:
+        description: Gets the thumbnail url representing the image
+        readOnly: true
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  ProjectSettings:
+    description: Represents settings associated with a project
+    properties:
+      DomainId:
+        description: Gets or sets the id of the Domain to use with this project
+        format: uuid
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  Quota:
+    description: Represents a quota
+    properties:
+      TimeUntilReset:
+        description: Gets the time remaining until the quota resets. Null if this quota does not reset.
+        format: duration
+        readOnly: true
+        type: string
+        x-nullable: true
+      Total:
+        description: The total allowable amount in the quota
+        format: int32
+        readOnly: true
+        type: integer
+        x-nullable: false
+      Used:
+        description: The amount of quota that has currently been used
+        format: int32
+        readOnly: true
+        type: integer
+        x-nullable: false
+    type: object
+    x-nullable: true
+  Tag:
+    description: Represents a Tag
+    properties:
+      Description:
+        description: Gets or sets the description of the tag
+        type: string
+        x-nullable: true
+      Id:
+        description: Gets the Tag ID
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      ImageCount:
+        description: Gets the number of images with this tag
+        format: int32
+        readOnly: true
+        type: integer
+        x-nullable: false
+      Name:
+        description: Gets or sets the name of the tag
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true
+  TagList:
+    properties:
+      Tags:
+        items:
+          $ref: '#/definitions/Tag'
+        readOnly: true
+        type: array
+        x-nullable: true
+      TotalTaggedImages:
+        format: int32
+        readOnly: true
+        type: integer
+        x-nullable: false
+      TotalUntaggedImages:
+        format: int32
+        readOnly: true
+        type: integer
+        x-nullable: false
+    type: object
+    x-nullable: true
+  TagPerformance:
+    description: Represents performance data for a particular tag in a trained iteration
+    properties:
+      Id:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Name:
+        readOnly: true
+        type: string
+        x-nullable: true
+      Precision:
+        description: Gets the precision
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      PrecisionStdDeviation:
+        description: Gets the standard deviation for the precision
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      Recall:
+        description: Gets the recall
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      RecallStdDeviation:
+        description: Gets the standard deviation for the recall
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+    type: object
+    x-nullable: true

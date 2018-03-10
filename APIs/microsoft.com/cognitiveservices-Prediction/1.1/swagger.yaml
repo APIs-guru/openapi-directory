@@ -1,0 +1,356 @@
+swagger: '2.0'
+schemes:
+  - https
+host: southcentralus.api.cognitive.microsoft.com
+basePath: /customvision/v1.1/Prediction
+info:
+  contact:
+    x-twitter: microsoft
+  title: PredictionEndpoint
+  version: '1.1'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://twitter.com/microsoft/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Prediction/stable/v1.1/Prediction.json'
+      version: '2.0'
+  x-providerName: microsoft.com
+  x-serviceName: cognitiveservices-Prediction
+  x-tags:
+    - Microsoft
+produces:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
+parameters:
+  ApiKey:
+    in: header
+    name: Prediction-Key
+    required: true
+    type: string
+    x-ms-client-name: ApiKey
+paths:
+  '/{projectId}/image':
+    post:
+      consumes:
+        - multipart/form-data
+        - application/octet-stream
+      operationId: PredictImage
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified"
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - description: Optional. Specifies the name of application using the endpoint
+          in: query
+          name: application
+          required: false
+          type: string
+          x-nullable: true
+        - in: formData
+          name: imageData
+          required: true
+          type: file
+        - $ref: '#/parameters/ApiKey'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImagePredictionResultModel'
+      summary: Predict an image and saves the result
+      tags:
+        - ImagePredictionApi
+      x-ms-examples:
+        Successful Prediction with Image request:
+          parameters:
+            Content-Type: application/json
+            Prediction-Key: '{API Key}'
+            imageData: multipart-form-data
+            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                Created: '2017-12-19T14:21:41.6789561Z'
+                Id: 951098b2-9b69-427b-bddb-d5cb618874e3
+                Iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+                Predictions:
+                  - Probability: 0.05149666
+                    Tag: Hemlock
+                    TagId: e31ff107-5505-4753-be42-b369b21b026c
+                  - Probability: 0
+                    Tag: Japanese Cherry
+                    TagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+                Project: 64b822c5-8082-4b36-a426-27225f4aa18c
+              headers: {}
+  '/{projectId}/image/nostore':
+    post:
+      consumes:
+        - multipart/form-data
+        - application/octet-stream
+      operationId: PredictImageWithNoStore
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified"
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - description: Optional. Specifies the name of application using the endpoint
+          in: query
+          name: application
+          required: false
+          type: string
+          x-nullable: true
+        - in: formData
+          name: imageData
+          required: true
+          type: file
+        - $ref: '#/parameters/ApiKey'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImagePredictionResultModel'
+      summary: Predict an image without saving the result
+      tags:
+        - ImagePredictionApi
+      x-ms-examples:
+        Successful Prediction with Image request:
+          parameters:
+            Content-Type: application/json
+            Prediction-Key: '{API Key}'
+            imageData: multipart-form-data
+            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                Created: '2017-12-19T14:21:41.6789561Z'
+                Id: 951098b2-9b69-427b-bddb-d5cb618874e3
+                Iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+                Predictions:
+                  - Probability: 0.05149666
+                    Tag: Hemlock
+                    TagId: e31ff107-5505-4753-be42-b369b21b026c
+                  - Probability: 0
+                    Tag: Japanese Cherry
+                    TagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+                Project: 64b822c5-8082-4b36-a426-27225f4aa18c
+              headers: {}
+  '/{projectId}/url':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: PredictImageUrl
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: 'An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated'
+          in: body
+          name: imageUrl
+          required: true
+          schema:
+            $ref: '#/definitions/ImageUrl'
+        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified"
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - description: Optional. Specifies the name of application using the endpoint
+          in: query
+          name: application
+          required: false
+          type: string
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImagePredictionResultModel'
+      summary: Predict an image url and saves the result
+      tags:
+        - ImagePredictionApi
+      x-ms-examples:
+        Successful Prediction with Url request:
+          parameters:
+            Content-Type: application/json
+            Prediction-Key: '{API Key}'
+            imageUrl:
+              Url: '{Image URL}'
+            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                Created: '2017-12-19T14:21:41.6789561Z'
+                Id: 951098b2-9b69-427b-bddb-d5cb618874e3
+                Iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+                Predictions:
+                  - Probability: 0.05149666
+                    Tag: Hemlock
+                    TagId: e31ff107-5505-4753-be42-b369b21b026c
+                  - Probability: 0.000193528482
+                    Tag: Japanese Cherry
+                    TagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+                Project: 64b822c5-8082-4b36-a426-27225f4aa18c
+              headers: {}
+  '/{projectId}/url/nostore':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: PredictImageUrlWithNoStore
+      parameters:
+        - description: The project id
+          format: uuid
+          in: path
+          name: projectId
+          required: true
+          type: string
+          x-nullable: false
+        - description: 'An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated'
+          in: body
+          name: imageUrl
+          required: true
+          schema:
+            $ref: '#/definitions/ImageUrl'
+        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified"
+          format: uuid
+          in: query
+          name: iterationId
+          required: false
+          type: string
+          x-nullable: true
+        - description: Optional. Specifies the name of application using the endpoint
+          in: query
+          name: application
+          required: false
+          type: string
+          x-nullable: true
+        - $ref: '#/parameters/ApiKey'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImagePredictionResultModel'
+      summary: Predict an image url without saving the result
+      tags:
+        - ImagePredictionApi
+      x-ms-examples:
+        Successful Prediction with Url request:
+          parameters:
+            Content-Type: application/json
+            Prediction-Key: '{API Key}'
+            imageUrl:
+              Url: '{Image URL}'
+            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
+          responses:
+            '200':
+              body:
+                Created: '2017-12-19T14:21:41.6789561Z'
+                Id: 951098b2-9b69-427b-bddb-d5cb618874e3
+                Iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
+                Predictions:
+                  - Probability: 0.05149666
+                    Tag: Hemlock
+                    TagId: e31ff107-5505-4753-be42-b369b21b026c
+                  - Probability: 0.000193528482
+                    Tag: Japanese Cherry
+                    TagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
+                Project: 64b822c5-8082-4b36-a426-27225f4aa18c
+              headers: {}
+definitions:
+  ImagePredictionResultModel:
+    description: result of an image prediction request
+    properties:
+      Created:
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      Id:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Iteration:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      Predictions:
+        items:
+          $ref: '#/definitions/ImageTagPredictionModel'
+        readOnly: true
+        type: array
+        x-nullable: true
+      Project:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageTagPredictionModel:
+    properties:
+      Probability:
+        format: float
+        readOnly: true
+        type: number
+        x-nullable: false
+      Tag:
+        readOnly: true
+        type: string
+        x-nullable: true
+      TagId:
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+    type: object
+    x-nullable: true
+  ImageUrl:
+    properties:
+      Url:
+        type: string
+        x-nullable: true
+    type: object
+    x-nullable: true

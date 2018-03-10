@@ -1,0 +1,4290 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: The key vault client performs cryptographic key operations and vault operations against the Key Vault service.
+  title: KeyVaultClient
+  version: 7.0-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/keyvault/data-plane/Microsoft.KeyVault/preview/7.0/keyvault.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: keyvault
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  ApiVersionParameter:
+    description: Client API version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+paths:
+  /certificates:
+    get:
+      description: The GetCertificates operation returns the set of certificates resources in the specified key vault. This operation requires the certificates/list permission.
+      operationId: GetCertificates
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of certificates along with a link to the next page of certificates.
+          schema:
+            $ref: '#/definitions/CertificateListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: List certificates in a specified key vault
+      tags:
+        - Certificates
+      x-ms-pageable:
+        nextLinkName: nextLink
+  /certificates/contacts:
+    delete:
+      description: Deletes the certificate contacts for a specified key vault certificate. This operation requires the certificates/managecontacts permission.
+      operationId: DeleteCertificateContacts
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The contacts for the key vault certificate.
+          schema:
+            $ref: '#/definitions/Contacts'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Deletes the certificate contacts for a specified key vault.
+      tags:
+        - Certificates
+    get:
+      description: The GetCertificateContacts operation returns the set of certificate contact resources in the specified key vault. This operation requires the certificates/managecontacts permission.
+      operationId: GetCertificateContacts
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The contacts for the key vault certificate.
+          schema:
+            $ref: '#/definitions/Contacts'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Lists the certificate contacts for a specified key vault.
+      tags:
+        - Certificates
+    put:
+      description: Sets the certificate contacts for the specified key vault. This operation requires the certificates/managecontacts permission.
+      operationId: SetCertificateContacts
+      parameters:
+        - description: The contacts for the key vault certificate.
+          in: body
+          name: contacts
+          required: true
+          schema:
+            $ref: '#/definitions/Contacts'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The contacts for the key vault certificate.
+          schema:
+            $ref: '#/definitions/Contacts'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Sets the certificate contacts for the specified key vault.
+      tags:
+        - Certificates
+  /certificates/issuers:
+    get:
+      description: The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.
+      operationId: GetCertificateIssuers
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of certificate issuers in a key vault along with a link to the next page of certificate issuers.
+          schema:
+            $ref: '#/definitions/CertificateIssuerListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: List certificate issuers for a specified key vault.
+      tags:
+        - Certificates
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/certificates/issuers/{issuer-name}':
+    delete:
+      description: The DeleteCertificateIssuer operation permanently removes the specified certificate issuer from the vault. This operation requires the certificates/manageissuers/deleteissuers permission.
+      operationId: DeleteCertificateIssuer
+      parameters:
+        - description: The name of the issuer.
+          in: path
+          name: issuer-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The issuer for the key vault certificate.
+          schema:
+            $ref: '#/definitions/IssuerBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Deletes the specified certificate issuer.
+      tags:
+        - Certificates
+    get:
+      description: The GetCertificateIssuer operation returns the specified certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.
+      operationId: GetCertificateIssuer
+      parameters:
+        - description: The name of the issuer.
+          in: path
+          name: issuer-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The issuer for the key vault certificate.
+          schema:
+            $ref: '#/definitions/IssuerBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Lists the specified certificate issuer.
+      tags:
+        - Certificates
+    patch:
+      description: The UpdateCertificateIssuer operation performs an update on the specified certificate issuer entity. This operation requires the certificates/setissuers permission.
+      operationId: UpdateCertificateIssuer
+      parameters:
+        - description: The name of the issuer.
+          in: path
+          name: issuer-name
+          required: true
+          type: string
+        - description: Certificate issuer update parameter.
+          in: body
+          name: parameter
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateIssuerUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The issuer for the key vault certificate.
+          schema:
+            $ref: '#/definitions/IssuerBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Updates the specified certificate issuer.
+      tags:
+        - Certificates
+    put:
+      description: The SetCertificateIssuer operation adds or updates the specified certificate issuer. This operation requires the certificates/setissuers permission.
+      operationId: SetCertificateIssuer
+      parameters:
+        - description: The name of the issuer.
+          in: path
+          name: issuer-name
+          required: true
+          type: string
+        - description: Certificate issuer set parameter.
+          in: body
+          name: parameter
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateIssuerSetParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The issuer for the key vault certificate.
+          schema:
+            $ref: '#/definitions/IssuerBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Sets the specified certificate issuer.
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}':
+    delete:
+      description: Deletes all versions of a certificate object along with its associated policy. Delete certificate cannot be used to remove individual versions of a certificate object. This operation requires the certificates/delete permission.
+      operationId: DeleteCertificate
+      parameters:
+        - description: The name of the certificate.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The deleted certificate.
+          schema:
+            $ref: '#/definitions/DeletedCertificateBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Deletes a certificate from a specified key vault.
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/create':
+    post:
+      description: 'If this is the first version, the certificate resource is created. This operation requires the certificates/create permission.'
+      operationId: CreateCertificate
+      parameters:
+        - description: The name of the certificate.
+          in: path
+          name: certificate-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters to create a certificate.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateCreateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '202':
+          description: Created certificate bundle.
+          schema:
+            $ref: '#/definitions/CertificateOperation'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Creates a new certificate.
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/import':
+    post:
+      description: 'Imports an existing valid certificate, containing a private key, into Azure Key Vault. The certificate to be imported can be in either PFX or PEM format. If the certificate is in PEM format the PEM file must contain the key as well as x509 certificates. This operation requires the certificates/import permission.'
+      operationId: ImportCertificate
+      parameters:
+        - description: The name of the certificate.
+          in: path
+          name: certificate-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters to import the certificate.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateImportParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Imported certificate bundle to the vault.
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Imports a certificate into a specified key vault.
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/pending':
+    delete:
+      description: Deletes the creation operation for a specified certificate that is in the process of being created. The certificate is no longer created. This operation requires the certificates/update permission.
+      operationId: DeleteCertificateOperation
+      parameters:
+        - description: The name of the certificate.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A message containing the certificate operation response.
+          schema:
+            $ref: '#/definitions/CertificateOperation'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Deletes the creation operation for a specific certificate.
+      tags:
+        - Certificates
+    get:
+      description: Gets the creation operation associated with a specified certificate. This operation requires the certificates/get permission.
+      operationId: GetCertificateOperation
+      parameters:
+        - description: The name of the certificate.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The certificate operation response.
+          schema:
+            $ref: '#/definitions/CertificateOperation'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Gets the creation operation of a certificate.
+      tags:
+        - Certificates
+    patch:
+      description: Updates a certificate creation operation that is already in progress. This operation requires the certificates/update permission.
+      operationId: UpdateCertificateOperation
+      parameters:
+        - description: The name of the certificate.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: The certificate operation response.
+          in: body
+          name: certificateOperation
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateOperationUpdateParameter'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A message containing the certificate operation response.
+          schema:
+            $ref: '#/definitions/CertificateOperation'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Updates a certificate operation.
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/pending/merge':
+    post:
+      description: The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. This operation requires the certificates/create permission.
+      operationId: MergeCertificate
+      parameters:
+        - description: The name of the certificate.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: The parameters to merge certificate.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateMergeParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '201':
+          description: Merged certificate bundle to the vault.
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Merges a certificate or a certificate chain with a key pair existing on the server.
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/policy':
+    get:
+      description: The GetCertificatePolicy operation returns the specified certificate policy resources in the specified key vault. This operation requires the certificates/get permission.
+      operationId: GetCertificatePolicy
+      parameters:
+        - description: The name of the certificate in a given key vault.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The certificate policy.
+          schema:
+            $ref: '#/definitions/CertificatePolicy'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Lists the policy for a certificate.
+      tags:
+        - Certificates
+    patch:
+      description: Set specified members in the certificate policy. Leave others as null. This operation requires the certificates/update permission.
+      operationId: UpdateCertificatePolicy
+      parameters:
+        - description: The name of the certificate in the given vault.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: The policy for the certificate.
+          in: body
+          name: certificatePolicy
+          required: true
+          schema:
+            $ref: '#/definitions/CertificatePolicy'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The certificate policy
+          schema:
+            $ref: '#/definitions/CertificatePolicy'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Updates the policy for a certificate.
+      tags:
+        - Certificates
+  '/certificates/{certificate-name}/versions':
+    get:
+      description: The GetCertificateVersions operation returns the versions of a certificate in the specified key vault. This operation requires the certificates/list permission.
+      operationId: GetCertificateVersions
+      parameters:
+        - description: The name of the certificate.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of certificates in the key vault along with a link to the next page of keys.
+          schema:
+            $ref: '#/definitions/CertificateListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: List the versions of a certificate.
+      tags:
+        - Certificates
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/certificates/{certificate-name}/{certificate-version}':
+    get:
+      description: Gets information about a specific certificate. This operation requires the certificates/get permission.
+      operationId: GetCertificate
+      parameters:
+        - description: The name of the certificate in the given vault.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: The version of the certificate.
+          in: path
+          name: certificate-version
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The retrieved certificate.
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Gets information about a certificate.
+      tags:
+        - Certificates
+    patch:
+      description: The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.
+      operationId: UpdateCertificate
+      parameters:
+        - description: The name of the certificate in the given key vault.
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - description: The version of the certificate.
+          in: path
+          name: certificate-version
+          required: true
+          type: string
+        - description: The parameters for certificate update.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated certificate.
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Updates the specified attributes associated with the given certificate.
+      tags:
+        - Certificates
+  /deletedcertificates:
+    get:
+      description: The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. This operation requires the certificates/get/list permission. This operation can only be enabled on soft-delete enabled vaults.
+      operationId: GetDeletedCertificates
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates
+          schema:
+            $ref: '#/definitions/DeletedCertificateListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Lists the deleted certificates in the specified vault currently available for recovery.
+      tags:
+        - DeletedCertificates
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/deletedcertificates/{certificate-name}':
+    delete:
+      description: 'The PurgeDeletedCertificate operation performs an irreversible deletion of the specified certificate, without possibility for recovery. The operation is not available if the recovery level does not specify ''Purgeable''. This operation requires the certificate/purge permission.'
+      operationId: PurgeDeletedCertificate
+      parameters:
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '204':
+          description: No content signaling that the certificate was purged forever.
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Permanently deletes the specified deleted certificate.
+      tags:
+        - DeletedCertificates
+    get:
+      description: 'The GetDeletedCertificate operation retrieves the deleted certificate information plus its attributes, such as retention interval, scheduled permanent deletion and the current deletion recovery level. This operation requires the certificates/get permission.'
+      operationId: GetDeletedCertificate
+      parameters:
+        - description: The name of the certificate
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A Certificate bundle of the certificate and its attributes
+          schema:
+            $ref: '#/definitions/DeletedCertificateBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Retrieves information about the specified deleted certificate.
+      tags:
+        - DeletedCertificates
+  '/deletedcertificates/{certificate-name}/recover':
+    post:
+      description: 'The RecoverDeletedCertificate operation performs the reversal of the Delete operation. The operation is applicable in vaults enabled for soft-delete, and must be issued during the retention interval (available in the deleted certificate''s attributes). This operation requires the certificates/recover permission.'
+      operationId: RecoverDeletedCertificate
+      parameters:
+        - description: The name of the deleted certificate
+          in: path
+          name: certificate-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A Certificate bundle of the original certificate and its attributes
+          schema:
+            $ref: '#/definitions/CertificateBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Recovers the deleted certificate back to its current version under /certificates.
+      tags:
+        - DeletedCertificates
+  /deletedkeys:
+    get:
+      description: 'Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. This operation includes deletion-specific information. The Get Deleted Keys operation is applicable for vaults enabled for soft-delete. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/list permission.'
+      operationId: GetDeletedKeys
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys.
+          schema:
+            $ref: '#/definitions/DeletedKeyListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Lists the deleted keys in the specified vault.
+      tags:
+        - DeletedKeys
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/deletedkeys/{key-name}':
+    delete:
+      description: 'The Purge Deleted Key operation is applicable for soft-delete enabled vaults. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/purge permission.'
+      operationId: PurgeDeletedKey
+      parameters:
+        - description: The name of the key
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '204':
+          description: 'No content, signaling that the key was permanently purged.'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Permanently deletes the specified key.
+      tags:
+        - DeletedKeys
+    get:
+      description: 'The Get Deleted Key operation is applicable for soft-delete enabled vaults. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/get permission. '
+      operationId: GetDeletedKey
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion information.
+          schema:
+            $ref: '#/definitions/DeletedKeyBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Gets the public part of a deleted key.
+      tags:
+        - DeletedKeys
+  '/deletedkeys/{key-name}/recover':
+    post:
+      description: The Recover Deleted Key operation is applicable for deleted keys in soft-delete enabled vaults. It recovers the deleted key back to its latest version under /keys. An attempt to recover an non-deleted key will return an error. Consider this the inverse of the delete operation on soft-delete enabled vaults. This operation requires the keys/recover permission.
+      operationId: RecoverDeletedKey
+      parameters:
+        - description: The name of the deleted key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A Key bundle of the original key and its attributes
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Recovers the deleted key to its latest version.
+      tags:
+        - DeletedKeys
+  /deletedsecrets:
+    get:
+      description: The Get Deleted Secrets operation returns the secrets that have been deleted for a vault enabled for soft-delete. This operation requires the secrets/list permission.
+      operationId: GetDeletedSecrets
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'A response message containing a list of deleted secrets in the vault, along with a link to the next page of deleted secrets.'
+          schema:
+            $ref: '#/definitions/DeletedSecretListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Lists deleted secrets for the specified vault.
+      tags:
+        - DeletedSecrets
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/deletedsecrets/{secret-name}':
+    delete:
+      description: 'The purge deleted secret operation removes the secret permanently, without the possibility of recovery. This operation can only be enabled on a soft-delete enabled vault. This operation requires the secrets/purge permission.'
+      operationId: PurgeDeletedSecret
+      parameters:
+        - description: The name of the secret.
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '204':
+          description: No content signaling that the secret was purged forever.
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Permanently deletes the specified secret.
+      tags:
+        - DeletedSecrets
+    get:
+      description: The Get Deleted Secret operation returns the specified deleted secret along with its attributes. This operation requires the secrets/get permission.
+      operationId: GetDeletedSecret
+      parameters:
+        - description: The name of the secret.
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A secret bundle of the secret and its attributes.
+          schema:
+            $ref: '#/definitions/DeletedSecretBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Gets the specified deleted secret.
+      tags:
+        - DeletedSecrets
+  '/deletedsecrets/{secret-name}/recover':
+    post:
+      description: Recovers the deleted secret in the specified vault. This operation can only be performed on a soft-delete enabled vault. This operation requires the secrets/recover permission.
+      operationId: RecoverDeletedSecret
+      parameters:
+        - description: The name of the deleted secret.
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A Secret bundle of the original secret and its attributes.
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Recovers the deleted secret to the latest version.
+      tags:
+        - DeletedSecrets
+  /deletedstorage:
+    get:
+      description: The Get Deleted Storage Accounts operation returns the storage accounts that have been deleted for a vault enabled for soft-delete. This operation requires the storage/list permission.
+      operationId: GetDeletedStorageAccounts
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'A response message containing a list of deleted storage accounts in the vault, along with a link to the next page of deleted storage accounts.'
+          schema:
+            $ref: '#/definitions/DeletedStorageListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Lists deleted storage accounts for the specified vault.
+      tags:
+        - DeletedStorage
+      x-ms-examples:
+        List Deleted Storage Accounts:
+          parameters:
+            api-version: 7.0-preview
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                nextLink: 'https://{BaseUri}/storage?api-version=7.0-preview&%24skiptoken=<token>'
+                value:
+                  - attributes:
+                      created: 1490738386
+                      enabled: true
+                      recoveryLevel: Recoverable+Purgeable
+                      updated: 1490738386
+                    deletedDate: 1490760000
+                    id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/listDeletedStorage01'
+                    recoveryId: 'https://storage-sdk-test.vault-int.azure-int.net/deletedstorage/listDeletedStorage01'
+                    resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc1'
+                    scheduledPurgeDate: 1490790000
+                    tags:
+                      tag1: val1
+                      tag2: val2
+                  - attributes:
+                      created: 1490738386
+                      enabled: true
+                      recoveryLevel: Recoverable+Purgeable
+                      updated: 1490738386
+                    deletedDate: 1490760000
+                    id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/listDeletedStorage02'
+                    recoveryId: 'https://storage-sdk-test.vault-int.azure-int.net/deletedstorage/listDeletedStorage02'
+                    resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc2'
+                    scheduledPurgeDate: 1490790000
+                    tags:
+                      tag3: val3
+                      tag4: val4
+              headers: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/deletedstorage/{storage-account-name}':
+    delete:
+      description: 'The purge deleted storage account operation removes the secret permanently, without the possibility of recovery. This operation can only be performed on a soft-delete enabled vault. This operation requires the storage/purge permission.'
+      operationId: PurgeDeletedStorgeAccount
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '204':
+          description: No content signaling that the storage account was purged forever.
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Permanently deletes the specified storage account.
+      tags:
+        - DeletedStorage
+      x-ms-examples:
+        Purge Deleted Storage Account:
+          parameters:
+            api-version: 7.0-preview
+            storage-account-name: purgeStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '204':
+              body: {}
+              headers: {}
+    get:
+      description: The Get Deleted Storage Account operation returns the specified deleted storage account along with its attributes. This operation requires the storage/get permission.
+      operationId: GetDeletedStorageAccount
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'The deleted storage account and information on when it will be purged, and how to recover the deleted storage account.'
+          schema:
+            $ref: '#/definitions/DeletedStorageBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Gets the specified deleted storage account.
+      tags:
+        - DeletedStorage
+      x-ms-examples:
+        Get Deleted Storage:
+          parameters:
+            api-version: 7.0-preview
+            storage-account-name: deleteStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                activeKeyName: key1
+                attributes:
+                  created: 1490738386
+                  enabled: true
+                  recoveryLevel: Recoverable+Purgeable
+                  updated: 1490738386
+                autoRegenerateKey: true
+                deletedDate: 1490760000
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/deleteStrg01'
+                recoveryId: 'https://storage-sdk-test.vault-int.azure-int.net/deletedstorage/deleteStrg01'
+                regenerationPeriod: P30D
+                resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+                scheduledPurgeDate: 1490790000
+                tags:
+                  tag1: val1
+                  tag2: val2
+              headers: {}
+  '/deletedstorage/{storage-account-name}/recover':
+    post:
+      description: Recovers the deleted storage account in the specified vault. This operation can only be performed on a soft-delete enabled vault. This operation requires the storage/recover permission.
+      operationId: RecoverDeletedStorageAccount
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A storage bundle of the original storage account and its attributes.
+          schema:
+            $ref: '#/definitions/StorageBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Recovers the deleted storage account.
+      tags:
+        - DeletedStorage
+      x-ms-examples:
+        Recover Deleted Storage Account:
+          parameters:
+            api-version: 7.0-preview
+            storage-account-name: recoverStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                activeKeyName: key1
+                attributes:
+                  created: 1490738386
+                  enabled: true
+                  recoveryLevel: Recoverable+Purgeable
+                  updated: 1490738386
+                autoRegenerateKey: true
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/recoverStrg01'
+                regenerationPeriod: P30D
+                resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+                tags:
+                  tag1: val1
+                  tag2: val2
+              headers: {}
+  '/deletedstorage/{storage-account-name}/sas':
+    get:
+      description: The Get Deleted Sas Definitions operation returns the SAS definitions that have been deleted for a vault enabled for soft-delete. This operation requires the storage/listsas permission.
+      operationId: GetDeletedSasDefinitions
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'A response message containing a list of deleted SAS definitions for the storage account, along with a link to the next page of deleted SAS definitions.'
+          schema:
+            $ref: '#/definitions/DeletedSasDefinitionListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Lists deleted SAS definitions for the specified vault and storage account.
+      tags:
+        - DeletedStorage
+      x-ms-examples:
+        List Deleted Storage Sas Definitions:
+          parameters:
+            api-version: 7.0-preview
+            storage-account-name: listsas01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                nextLink: 'https://{BaseUri}/deletedstorage/listsas01/sas?api-version=7.0-preview&%24skiptoken=<token>'
+                value:
+                  - attributes:
+                      created: 1490738438
+                      enabled: true
+                      recoveryLevel: Recoverable
+                      updated: 1490738438
+                    deletedDate: 1490760000
+                    id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/listsas01/sas/listDeletedSasDef01'
+                    recoveryId: 'https://storage-sdk-test.vault-int.azure-int.net/deletedstorage/listsas01/sas/listDeletedSasDef01'
+                    scheduledPurgeDate: 1490790000
+                    sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/listsas01-listDeletedSasDef01'
+                  - attributes:
+                      created: 1490738438
+                      enabled: true
+                      recoveryLevel: Recoverable
+                      updated: 1490738438
+                    deletedDate: 1490760000
+                    id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/listsas01/sas/listDeletedSasDef02'
+                    recoveryId: 'https://storage-sdk-test.vault-int.azure-int.net/deletedstorage/listsas01/sas/listDeletedSasDef02'
+                    scheduledPurgeDate: 1490790000
+                    sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/listsas01-listDeletedSasDef02'
+              headers: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/deletedstorage/{storage-account-name}/sas/{sas-definition-name}':
+    get:
+      description: The Get Deleted SAS Definition operation returns the specified deleted SAS definition along with its attributes. This operation requires the storage/getsas permission.
+      operationId: GetDeletedSasDefinition
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The name of the SAS definition.
+          in: path
+          name: sas-definition-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'The deleted SAS definition and information on when the it will be purged, and how to recover the deleted SAS definition.'
+          schema:
+            $ref: '#/definitions/DeletedSasDefinitionBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Gets the specified deleted sas definition.
+      tags:
+        - DeletedStorage
+      x-ms-examples:
+        Get Deleted Storage Sas Definition:
+          parameters:
+            api-version: 7.0-preview
+            sas-definition-name: deleteStrgSasDef01
+            storage-account-name: deletesas01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                attributes:
+                  created: 1490738438
+                  enabled: true
+                  recoveryLevel: Recoverable
+                  updated: 1490738438
+                deletedDate: 1490760000
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/deletesas01/sas/deleteStrgSasDef01'
+                recoveryId: 'https://storage-sdk-test.vault-int.azure-int.net/deletedstorage/deletesas01/sas/deleteStrgSasDef01'
+                sasType: service
+                scheduledPurgeDate: 1490790000
+                sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/deletesas01-deleteStrgSasDef01'
+                templateUri: se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D
+                validityPeriod: P15D
+              headers: {}
+  '/deletedstorage/{storage-account-name}/sas/{sas-definition-name}/recover':
+    post:
+      description: Recovers the deleted SAS definition for the specified storage account. This operation can only be performed on a soft-delete enabled vault. This operation requires the storage/recover permission.
+      operationId: RecoverDeletedSasDefinition
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The name of the SAS definition.
+          in: path
+          name: sas-definition-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A SAS definition bundle of the original SAS definition and its attributes.
+          schema:
+            $ref: '#/definitions/SasDefinitionBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Recovers the deleted SAS definition.
+      tags:
+        - DeletedStorage
+      x-ms-examples:
+        Recover Deleted Storage Sas Definition:
+          parameters:
+            api-version: 7.0-preview
+            sas-definition-name: recoverStrgSasDef01
+            storage-account-name: recoversas01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                attributes:
+                  created: 1490738438
+                  enabled: true
+                  recoveryLevel: Recoverable
+                  updated: 1490738438
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/recoversas01/sas/recoverStrgSasDef01'
+                sasType: service
+                sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/recoversas01-recoverStrgSasDef01'
+                templateUri: se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D
+                validityPeriod: P15D
+              headers: {}
+  /keys:
+    get:
+      description: 'Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a stored key. The LIST operation is applicable to all key types, however only the base key identifier, attributes, and tags are provided in the response. Individual versions of a key are not listed in the response. This operation requires the keys/list permission.'
+      operationId: GetKeys
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of keys in the vault along with a link to the next page of keys.
+          schema:
+            $ref: '#/definitions/KeyListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: List keys in the specified vault.
+      tags:
+        - Keys
+      x-ms-pageable:
+        nextLinkName: nextLink
+  /keys/restore:
+    post:
+      description: 'Imports a previously backed up key into Azure Key Vault, restoring the key, its key identifier, attributes and access control policies. The RESTORE operation may be used to import a previously backed up key. Individual versions of a key cannot be restored. The key is restored in its entirety with the same key name as it had when it was backed up. If the key name is not available in the target Key Vault, the RESTORE operation will be rejected. While the key name is retained during restore, the final key identifier will change if the key is restored to a different vault. Restore will restore all versions and preserve version identifiers. The RESTORE operation is subject to security constraints: The target Key Vault must be owned by the same Microsoft Azure Subscription as the source Key Vault The user must have RESTORE permission in the target Key Vault. This operation requires the keys/restore permission.'
+      operationId: RestoreKey
+      parameters:
+        - description: The parameters to restore the key.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyRestoreParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Restored key bundle in the vault.
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Restores a backed up key to a vault.
+      tags:
+        - Keys
+  '/keys/{key-name}':
+    delete:
+      description: 'The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. This operation requires the keys/delete permission.'
+      operationId: DeleteKey
+      parameters:
+        - description: The name of the key to delete.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The public part of the deleted key and deletion information on when the key will be purged.
+          schema:
+            $ref: '#/definitions/DeletedKeyBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Deletes a key of any type from storage in Azure Key Vault.
+      tags:
+        - Keys
+    put:
+      description: 'The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. This operation requires the keys/import permission.'
+      operationId: ImportKey
+      parameters:
+        - description: Name for the imported key.
+          in: path
+          name: key-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters to import a key.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyImportParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Imported key bundle to the vault.
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: 'Imports an externally created key, stores it, and returns key parameters and attributes to the client.'
+      tags:
+        - Keys
+  '/keys/{key-name}/backup':
+    post:
+      description: 'The Key Backup operation exports a key from Azure Key Vault in a protected form. Note that this operation does NOT return key material in a form that can be used outside the Azure Key Vault system, the returned key material is either protected to a Azure Key Vault HSM or to Azure Key Vault itself. The intent of this operation is to allow a client to GENERATE a key in one Azure Key Vault instance, BACKUP the key, and then RESTORE it into another Azure Key Vault instance. The BACKUP operation may be used to export, in protected form, any key type from Azure Key Vault. Individual versions of a key cannot be backed up. BACKUP / RESTORE can be performed within geographical boundaries only; meaning that a BACKUP from one geographical area cannot be restored to another geographical area. For example, a backup from the US geographical area cannot be restored in an EU geographical area. This operation requires the key/backup permission.'
+      operationId: BackupKey
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The backup blob containing the backed up key.
+          schema:
+            $ref: '#/definitions/BackupKeyResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Requests that a backup of the specified key be downloaded to the client.
+      tags:
+        - Keys
+  '/keys/{key-name}/create':
+    post:
+      description: 'The create key operation can be used to create any key type in Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. It requires the keys/create permission.'
+      operationId: CreateKey
+      parameters:
+        - description: The name for the new key. The system will generate the version name for the new key.
+          in: path
+          name: key-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters to create a key.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyCreateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A key bundle containing the result of the create key request.
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: 'Creates a new key, stores it, then returns key parameters and attributes to the client.'
+      tags:
+        - Keys
+  '/keys/{key-name}/versions':
+    get:
+      description: 'The full key identifier, attributes, and tags are provided in the response. This operation requires the keys/list permission.'
+      operationId: GetKeyVersions
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of keys along with a link to the next page of keys.
+          schema:
+            $ref: '#/definitions/KeyListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Retrieves a list of individual key versions with the same key name.
+      tags:
+        - Keys
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/keys/{key-name}/{key-version}':
+    get:
+      description: 'The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. This operation requires the keys/get permission.'
+      operationId: GetKey
+      parameters:
+        - description: The name of the key to get.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: Adding the version parameter retrieves a specific version of a key.
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A key bundle containing the key and its attributes.
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Gets the public part of a stored key.
+      tags:
+        - Keys
+    patch:
+      description: 'In order to perform this operation, the key must already exist in the Key Vault. Note: The cryptographic material of a key itself cannot be changed. This operation requires the keys/update permission.'
+      operationId: UpdateKey
+      parameters:
+        - description: The name of key to update.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key to update.
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters of the key to update.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated key.
+          schema:
+            $ref: '#/definitions/KeyBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/decrypt':
+    post:
+      description: 'The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission.'
+      operationId: decrypt
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key.
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for the decryption operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyOperationsParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The decryption result.
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Decrypts a single block of encrypted data.
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/encrypt':
+    post:
+      description: 'The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encypt permission.'
+      operationId: encrypt
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key.
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for the encryption operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyOperationsParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The encryption result.
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/sign':
+    post:
+      description: The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key. This operation requires the keys/sign permission.
+      operationId: sign
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key.
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for the signing operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeySignParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The signature value.
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Creates a signature from a digest using the specified key.
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/unwrapkey':
+    post:
+      description: The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation. The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.
+      operationId: unwrapKey
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key.
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for the key operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyOperationsParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The unwrapped symmetric key.
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Unwraps a symmetric key using the specified key that was initially used for wrapping that key.
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/verify':
+    post:
+      description: The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key. This operation requires the keys/verify permission.
+      operationId: verify
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key.
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for verify operations.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyVerifyParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The verification result.
+          schema:
+            $ref: '#/definitions/KeyVerifyResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Verifies a signature using a specified key.
+      tags:
+        - Keys
+  '/keys/{key-name}/{key-version}/wrapkey':
+    post:
+      description: The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.
+      operationId: wrapKey
+      parameters:
+        - description: The name of the key.
+          in: path
+          name: key-name
+          required: true
+          type: string
+        - description: The version of the key.
+          in: path
+          name: key-version
+          required: true
+          type: string
+        - description: The parameters for wrap operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/KeyOperationsParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The wrapped symmetric key.
+          schema:
+            $ref: '#/definitions/KeyOperationResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Wraps a symmetric key using a specified key.
+      tags:
+        - Keys
+  /secrets:
+    get:
+      description: 'The Get Secrets operation is applicable to the entire vault. However, only the base secret identifier and its attributes are provided in the response. Individual secret versions are not listed in the response. This operation requires the secrets/list permission.'
+      operationId: GetSecrets
+      parameters:
+        - description: 'Maximum number of results to return in a page. If not specified, the service will return up to 25 results.'
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of secrets in the vault along with a link to the next page of secrets.
+          schema:
+            $ref: '#/definitions/SecretListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: List secrets in a specified key vault.
+      tags:
+        - Secrets
+      x-ms-pageable:
+        nextLinkName: nextLink
+  /secrets/restore:
+    post:
+      description: 'Restores a backed up secret, and all its versions, to a vault. This operation requires the secrets/restore permission.'
+      operationId: RestoreSecret
+      parameters:
+        - description: The parameters to restore the secret.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SecretRestoreParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Restored secret bundle in the vault.
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Restores a backed up secret to a vault.
+      tags:
+        - Secrets
+  '/secrets/{secret-name}':
+    delete:
+      description: The DELETE operation applies to any secret stored in Azure Key Vault. DELETE cannot be applied to an individual version of a secret. This operation requires the secrets/delete permission.
+      operationId: DeleteSecret
+      parameters:
+        - description: The name of the secret.
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'The deleted secret and information on when the secret will be deleted, and how to recover the deleted secret.'
+          schema:
+            $ref: '#/definitions/DeletedSecretBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Deletes a secret from a specified key vault.
+      tags:
+        - Secrets
+    put:
+      description: ' The SET operation adds a secret to the Azure Key Vault. If the named secret already exists, Azure Key Vault creates a new version of that secret. This operation requires the secrets/set permission.'
+      operationId: SetSecret
+      parameters:
+        - description: The name of the secret.
+          in: path
+          name: secret-name
+          pattern: '^[0-9a-zA-Z-]+$'
+          required: true
+          type: string
+        - description: The parameters for setting the secret.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SecretSetParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A secret bundle containing the result of the set secret request.
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Sets a secret in a specified key vault.
+      tags:
+        - Secrets
+  '/secrets/{secret-name}/backup':
+    post:
+      description: Requests that a backup of the specified secret be downloaded to the client. All versions of the secret will be downloaded. This operation requires the secrets/backup permission.
+      operationId: BackupSecret
+      parameters:
+        - description: The name of the secret.
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The backup blob containing the backed up secret.
+          schema:
+            $ref: '#/definitions/BackupSecretResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Backs up the specified secret.
+      tags:
+        - Secrets
+  '/secrets/{secret-name}/versions':
+    get:
+      description: The full secret identifier and attributes are provided in the response. No values are returned for the secrets. This operations requires the secrets/list permission.
+      operationId: GetSecretVersions
+      parameters:
+        - description: The name of the secret.
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - description: 'Maximum number of results to return in a page. If not specified, the service will return up to 25 results.'
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of secrets along with a link to the next page of secrets.
+          schema:
+            $ref: '#/definitions/SecretListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: List all versions of the specified secret.
+      tags:
+        - Secrets
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/secrets/{secret-name}/{secret-version}':
+    get:
+      description: The GET operation is applicable to any secret stored in Azure Key Vault. This operation requires the secrets/get permission.
+      operationId: GetSecret
+      parameters:
+        - description: The name of the secret.
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - description: The version of the secret.
+          in: path
+          name: secret-version
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The retrieved secret.
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Get a specified secret from a given key vault.
+      tags:
+        - Secrets
+    patch:
+      description: The UPDATE operation changes specified attributes of an existing stored secret. Attributes that are not specified in the request are left unchanged. The value of a secret itself cannot be changed. This operation requires the secrets/set permission.
+      operationId: UpdateSecret
+      parameters:
+        - description: The name of the secret.
+          in: path
+          name: secret-name
+          required: true
+          type: string
+        - description: The version of the secret.
+          in: path
+          name: secret-version
+          required: true
+          type: string
+        - description: The parameters for update secret operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SecretUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated secret.
+          schema:
+            $ref: '#/definitions/SecretBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Updates the attributes associated with a specified secret in a given key vault.
+      tags:
+        - Secrets
+  /storage:
+    get:
+      description: List storage accounts managed by the specified key vault. This operation requires the storage/list permission.
+      operationId: GetStorageAccounts
+      parameters:
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of storage accounts along with a link to the next page of storage accounts.
+          schema:
+            $ref: '#/definitions/StorageListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        List Storage account:
+          parameters:
+            api-version: 7.0-preview
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                nextLink: 'https://{BaseUri}/storage?api-version=7.0-preview&%24skiptoken=<token>'
+                value:
+                  - attributes:
+                      created: 1490738386
+                      enabled: true
+                      recoveryLevel: Recoverable+Purgeable
+                      updated: 1490738386
+                    id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/listStorage01'
+                    resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc1'
+                    tags:
+                      tag1: val1
+                      tag2: val2
+                  - attributes:
+                      created: 1490738386
+                      enabled: true
+                      recoveryLevel: Recoverable+Purgeable
+                      updated: 1490738386
+                    id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/listStorage02'
+                    resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc2'
+                    tags:
+                      tag3: val3
+                      tag4: val4
+              headers: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  /storage/restore:
+    post:
+      description: Restores a backed up storage account to a vault. This operation requires the storage/restore permission.
+      operationId: RestoreStorageAccount
+      parameters:
+        - description: The parameters to restore the storage account.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/StorageRestoreParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Restored storage account bundle in the vault.
+          schema:
+            $ref: '#/definitions/StorageBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Restores a backed up storage account to a vault.
+      tags:
+        - Storage
+      x-ms-examples:
+        Restore Storage Account:
+          parameters:
+            api-version: 7.0-preview
+            parameters:
+              value: KUF6dXJlS2V5VmF1bHRTZWNyZXRCYWNrdXBWMS5taWNyb3NvZnQuY29tZXlKcmFXUWlPaUkwTXpnMVlqQTNZaTFrTlRRM0xUUXlaVFV0WVdVNVpTMDJNVEJrWXpNNVpHWmhaamdpTENKaGJHY2lPaUpTVTBFdFQwRkZVQ0lzSW1WdVl5STZJa0V4TWpoRFFrTXRTRk15TlRZaWZRLk1JeFMyLXh0eHAxekpaZ3ZrTUY3d2pGMWxiLVJyNWFrbHFMLXpBaVVOODJKZFJNUDFwak5iS0phRktIOXBRcDg4ODBKeERDSmdESUZHc19OOGlnYmdIZ0Q1c0xVMi1pRzdKM29Hc00taFRMb05oaUd6aGY1YVREakYzWjZpZVhxcFMzVFVOVUFkeFhpTkpIYk94YjBmWHNtcWFtNnA0dXJ3Yzl3Qnk1c2pwRnJheHNRM3NRcHBDLXZybXlVZExaelJIWS0xYnhwaFQxVUdiS0Zsd1dSODU5TmFSQ1BZOFhDWUVrX0hxNnc5S0lWSXRTTlRYYWYxUWFzUDJob0NHT19PMzkzVUNzWGp0NzRtOURqdi1vTHRoMUl6TU5sSWp0STg2MTRhTGs0RTFMUXd6ZUx2X2Y1cndKeXJOWkF1c3VWRlRieFp1Zzh6T3BfYTdCOGhGSEJyQS5rc3pPdTN3blllb1ZUUjRLc2dqMUxBLmYyY3huVE1BbU13Ty1RcmdHSUFYUFN2bEdZUDRYWmJvMFVFOGxtY2xZa3ZhRE5ab3E0Wm41MVNKTDNuUFZsVnBaRFlrUmlpd05BSUxvRS12QWtVbmZoLUczOWo3RHhqWm1zZW02bXBmOWxoZjBnZFFNTDdmejBqRDZ0dW1xSVFaWUhFalV3VG5xdDloeEw5N0lnUUV0WmtFV0VnUEJETnJJNFpYWXdNU2ZyR0FfdkgzYXU1MWpabDFTWjlGajJsTHpEblNqbFd0U05QSzc3X2RwbUxrTXNCSmMtamRteUpxYmVxdmdRcGFTSUNsOXpUUXFQM2RxN1VQV2c1R1ZDNmlNZjlTcnBoUVRKX1V2bnp4LWk4ZWR6ZUppd2hYNW9HQ043RDNDWjkxTzNLQkhmYklOX1VvQWlQVWxzazFveU9KOEVjMk5mbHhOaFlrNFRKUTFBN2xnbXlLRlNQeVMyaFlwUDA2VEpTb0JUenVTQk5OTVdmT0RaTDFfV3V5eThJcDktdlVHMW5JOENDQ1hIeEVVN2FVLW5nRVR5aFBfbWt3Q2FGLWx2WTNqZlV1Z29wSllLR3VscXZadk1VZHhLYU1oemR2a05ubFdGeXlJNXdiRUdZcWgzWEJ0MS11TThrOFZVTDdQallzVUt4S1dYbzBMblJPZmFTbTZpTm9ZTmFOTm5YbF9fVW9rd05fSWM0eVVYR3RuMFhUcTZ4anQwZUpEajlET3FyYmdiLTZoclltRmxLTUNqalVxSGtLU1VPaHVYSE9jOFdFa0JEM1hiR29idi03b3c0c0gyN0YxbHh2UVh0OVgtOUl1akN5dHBMYmt6YnJVdHZJT2puY19xTUNjMXFFTG1wZHJCTGFoMzVmWHZQZXotVk9zSXBNOGdsekhWUUgyWWZHU0UwaTJqVkxpVllkZlFHeDNwdTZPamdUc1hPUm5acldlbFExMVlNbUJkWlVqWFNlZkVlQkxuT1lBbUNtYWM0dHNTa2JHTXZzQm92OWNEc1NRLWlsQUhsT1Fsanp3Umt1bnIxdk1ITlFhRDJLUEE5eGxxZ2NKU3FGT3d3RzROSzBxamhyb0NoZDFxM2RHR2V3U2tTd2xZbW44ZlM0VEJ5VjFMYmtWb2NZZHpiWDhiZG54dHRhVDhKS0pUbjJETWxjVFpvR1hFbWQzN2ZZVnlaNm5uMXdxZExtVW9XLW5OQXc3T3RLV3hyMXJUNV9qOHZjRGhTWk1HdTF6aV81NDEyVTRLcG01dlQ3c3BpWXA4aDl3Rk5scmFjYnVjZGVlaS1zMWR6cDlqWGo2NjRuWWxoYzNjOHJubjJ4ZWlna09YLTNUSWxnbmdxeXpJWG5ROHU0dTc5TC1ObXk1VFNjLU4wTnJVTUxQVE51MnhsUlE4Y0VLT0h4QkJGQV80Nk1yVXlhbjUwODFMSlYtTVVyaXAycl9tS3FJRjJET2wxS2V1aGg5am9PeFVybUk0T19MYkduVjJTbUdoZEZSd3FxUS15U2pxcFE2OFBza3hlQmxTdDZnX28tLVl6Qkg3dDI4V3ZYYzdIT3paNFBwa0psTjVmWFRwOXgtOGNuTGptcG5Pc2hUZWxTUXRYaDMwcTU3LXJZbVJzc2t2cFZfaTZFX2JUMTk2VWtTOHo2WUp1QXh3LXdlZ2tPY1ZITUxkeW5vaDU2UUtuWDhMVFdHdjhqWWNQazlaSlNSbXljTExOcWNtRnpUU1JEbzBXMXBkQVJXY2tqRFM2VFZIdTlHSElsTG9oRnpONEU1T3FqdUMxRjEwSFZjUGxoNTc5UmczWk1SNWJoVjltSEZNOFhJZU9HTHAxZFkxbnNLY2dqRVVlUW5qcF9za0RzanJZMVVncXRkTTVNVWhNSHlEZlhaZ3libk1jSDVRaml0YjdWZktrQk1YcGRwU3pLQWx0WDNjelIwODRPVm5nVGtiV2JZQURDTUQ2N1dlLWM1ZDFONHI2WFdFb2RXelNyWlhyZmc0RVRNNG1UZnV3ZjB0d3NORkRJdW5BWDkwbnZJWm1Ualo2RktpTjBiRnVNWmRpR1NKNTZNUEZMcFd3N3p0dmVmN0xENmhjNHJESXBQbEkwTVlVWTJSLWZGakdaZ29JTmdKMkVuMGFFM0c1V1RySjRxcHhhdHB4MVk3ZUgzOUk3WTYzcEJFWEtkRWIwTmstM0tnM0ljbDJPSkp6SU1fM1VHSlJTTmRQWGlfV3ViNGRTMDV4eURzZTR0d1FXdm9rb1QybHlZNGphNlVOc3lvYWN1eGFsTUZvUFR5dHF4YlVTaXFIMEZab0pWcm84amZja2wyYklmSzRqRzN6TnJIOWU1c3VUVWJDV09wYjczeFNMMG9TLVQ0T1JSNnBRbTZHQk05bFJ0eUhtMHJUMy1sNXc0c2ItNnRDcTM4S3FRdURRTGVTcDI1Rk8zMU1uVE5nTFlUeEUwUEZDT3hmRG1RY3BOOFRoWHBGbzZLNHNrd0dmQkpKTU9BTWtIUWZnMUM0c0V5cS1PLS1FWFhjbVV6QjJGRnR4c1gwR3o0aGJSdTFiUlhXcWMxU0IyUk82d0JsWGdPUmJqZjJlLWJQUFFMdmtGcWR3bFpUTE1kaWVUdjQyQmd1SFd3dzI5OEVqcnNNUXg1WG9aRG11MDFRTzlZSjFmTEYtWjkwWEVOU2p5OTM0M3UyUHhrNjhheG10bnp2ZTdwd3Q3Z0ZMMUoxZlZEd3BqMUtBZDdwdGZoWG4yUzJmT1Bfc3JOM3QxNk1qX29qOUVLQm5VNC1jQ3RLWGRkZS1EWk5zQkNhSGZ1bEtHSkFHYmx1UWs2Yi1kQk5oUS05Z19kajdfcjZub2Z2aDRielEybGlQd1E3M1RTazNiQTdzd2EzclZ5ZTVDTVNlOVotNkVKV1phek1sN0w4VUJ3cFllN0J0eHhUNEVBVGo2SXBvYWhGNTgtRHpiMmRsc1c1ZDZIWmpYZUNMTGtVRmQ5Mll3eDBibFlCanc4eTVzM040OEJMME84WG51ak42c0F0eG04Sm9hWXFVUUd3LXNBS1pTZHAzNk1GNlZXYkpUcHBoZHQ2aEhWQjFoRzdpSGN1STBTRzY0WjczNXEzZ0tSYXFHdzhIUXItSWNyeks0VEQwenk5b01NMHpRLVFBSE1PdzAyX0ozU3pVQWZ1bzFWNU42ajB0VGsyeEt0TFp3cmlHOHJNRl9NWTJrN09mdkxqNFlCb3VNN2lBNVM4LnNfM0VabFhIb1lrV283ZzdpRUp1bHc
+            storage-account-name: readStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                activeKeyName: key1
+                attributes:
+                  created: 1490738386
+                  enabled: true
+                  recoveryLevel: Recoverable+Purgeable
+                  updated: 1490738386
+                autoRegenerateKey: true
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/restoreStrg01'
+                regenerationPeriod: P30D
+                resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+                tags:
+                  tag1: val1
+                  tag2: val2
+              headers: {}
+  '/storage/{storage-account-name}':
+    delete:
+      description: Deletes a storage account. This operation requires the storage/delete permission.
+      operationId: DeleteStorageAccount
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'The deleted storage account and information on when the storage account will be deleted, and how to recover the deleted storage account.'
+          schema:
+            $ref: '#/definitions/DeletedStorageBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Delete Storage account:
+          parameters:
+            api-version: 7.0-preview
+            storage-account-name: deleteStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                activeKeyName: key1
+                attributes:
+                  created: 1490738386
+                  enabled: true
+                  recoveryLevel: Recoverable+Purgeable
+                  updated: 1490738386
+                autoRegenerateKey: true
+                deletedDate: 1490760000
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/deleteStrg01'
+                recoveryId: 'https://storage-sdk-test.vault-int.azure-int.net/deletedstorage/deleteStrg01'
+                regenerationPeriod: P30D
+                resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+                scheduledPurgeDate: 1490790000
+                tags:
+                  tag1: val1
+                  tag2: val2
+              headers: {}
+    get:
+      description: Gets information about a specified storage account. This operation requires the storage/get permission.
+      operationId: GetStorageAccount
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The retrieved storage account.
+          schema:
+            $ref: '#/definitions/StorageBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Get Storage account:
+          parameters:
+            api-version: 7.0-preview
+            storage-account-name: readStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                activeKeyName: key1
+                attributes:
+                  created: 1490738386
+                  enabled: true
+                  recoveryLevel: Recoverable+Purgeable
+                  updated: 1490738386
+                autoRegenerateKey: true
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/readStrg01'
+                regenerationPeriod: P30D
+                resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+                tags:
+                  tag1: val1
+                  tag2: val2
+              headers: {}
+    patch:
+      description: Updates the specified attributes associated with the given storage account. This operation requires the storage/set/update permission.
+      operationId: UpdateStorageAccount
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The parameters to update a storage account.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/StorageAccountUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated storage account.
+          schema:
+            $ref: '#/definitions/StorageBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Update Storage account:
+          parameters:
+            api-version: 7.0-preview
+            parameters:
+              activeKeyName: key1
+              regenerationPeriod: P10D
+            storage-account-name: patchStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                activeKeyName: key1
+                attributes:
+                  created: 1490738386
+                  enabled: true
+                  recoveryLevel: Recoverable+Purgeable
+                  updated: 1490738386
+                autoRegenerateKey: true
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/patchStrg01'
+                regenerationPeriod: P10D
+                resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+                tags:
+                  tag1: val1
+                  tag2: val2
+              headers: {}
+    put:
+      description: Creates or updates a new storage account. This operation requires the storage/set permission.
+      operationId: SetStorageAccount
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The parameters to create a storage account.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/StorageAccountCreateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The created storage account.
+          schema:
+            $ref: '#/definitions/StorageBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Set Storage account:
+          parameters:
+            api-version: 7.0-preview
+            parameters:
+              activeKeyName: key2
+              attributes:
+                enabled: true
+              autoRegenerateKey: true
+              regenerationPeriod: P15D
+              resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+              tags:
+                tag1: val1
+                tag2: val2
+            storage-account-name: setStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                activeKeyName: key2
+                attributes:
+                  created: 1490738386
+                  enabled: true
+                  recoveryLevel: Recoverable+Purgeable
+                  updated: 1490738386
+                autoRegenerateKey: true
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/setStrg01'
+                regenerationPeriod: P15D
+                resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+                tags:
+                  tag1: val1
+                  tag2: val2
+              headers: {}
+  '/storage/{storage-account-name}/backup':
+    post:
+      description: Requests that a backup of the specified storage account be downloaded to the client. This operation requires the storage/backup permission.
+      operationId: BackupStorageAccount
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The backup blob containing the backed up storage account.
+          schema:
+            $ref: '#/definitions/BackupStorageResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      summary: Backs up the specified storage account.
+      tags:
+        - Storage
+      x-ms-examples:
+        Backup Storage Account:
+          parameters:
+            api-version: 7.0-preview
+            storage-account-name: backupStrg01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                value: KUF6dXJlS2V5VmF1bHRTZWNyZXRCYWNrdXBWMS5taWNyb3NvZnQuY29tZXlKcmFXUWlPaUkwTXpnMVlqQTNZaTFrTlRRM0xUUXlaVFV0WVdVNVpTMDJNVEJrWXpNNVpHWmhaamdpTENKaGJHY2lPaUpTVTBFdFQwRkZVQ0lzSW1WdVl5STZJa0V4TWpoRFFrTXRTRk15TlRZaWZRLk1JeFMyLXh0eHAxekpaZ3ZrTUY3d2pGMWxiLVJyNWFrbHFMLXpBaVVOODJKZFJNUDFwak5iS0phRktIOXBRcDg4ODBKeERDSmdESUZHc19OOGlnYmdIZ0Q1c0xVMi1pRzdKM29Hc00taFRMb05oaUd6aGY1YVREakYzWjZpZVhxcFMzVFVOVUFkeFhpTkpIYk94YjBmWHNtcWFtNnA0dXJ3Yzl3Qnk1c2pwRnJheHNRM3NRcHBDLXZybXlVZExaelJIWS0xYnhwaFQxVUdiS0Zsd1dSODU5TmFSQ1BZOFhDWUVrX0hxNnc5S0lWSXRTTlRYYWYxUWFzUDJob0NHT19PMzkzVUNzWGp0NzRtOURqdi1vTHRoMUl6TU5sSWp0STg2MTRhTGs0RTFMUXd6ZUx2X2Y1cndKeXJOWkF1c3VWRlRieFp1Zzh6T3BfYTdCOGhGSEJyQS5rc3pPdTN3blllb1ZUUjRLc2dqMUxBLmYyY3huVE1BbU13Ty1RcmdHSUFYUFN2bEdZUDRYWmJvMFVFOGxtY2xZa3ZhRE5ab3E0Wm41MVNKTDNuUFZsVnBaRFlrUmlpd05BSUxvRS12QWtVbmZoLUczOWo3RHhqWm1zZW02bXBmOWxoZjBnZFFNTDdmejBqRDZ0dW1xSVFaWUhFalV3VG5xdDloeEw5N0lnUUV0WmtFV0VnUEJETnJJNFpYWXdNU2ZyR0FfdkgzYXU1MWpabDFTWjlGajJsTHpEblNqbFd0U05QSzc3X2RwbUxrTXNCSmMtamRteUpxYmVxdmdRcGFTSUNsOXpUUXFQM2RxN1VQV2c1R1ZDNmlNZjlTcnBoUVRKX1V2bnp4LWk4ZWR6ZUppd2hYNW9HQ043RDNDWjkxTzNLQkhmYklOX1VvQWlQVWxzazFveU9KOEVjMk5mbHhOaFlrNFRKUTFBN2xnbXlLRlNQeVMyaFlwUDA2VEpTb0JUenVTQk5OTVdmT0RaTDFfV3V5eThJcDktdlVHMW5JOENDQ1hIeEVVN2FVLW5nRVR5aFBfbWt3Q2FGLWx2WTNqZlV1Z29wSllLR3VscXZadk1VZHhLYU1oemR2a05ubFdGeXlJNXdiRUdZcWgzWEJ0MS11TThrOFZVTDdQallzVUt4S1dYbzBMblJPZmFTbTZpTm9ZTmFOTm5YbF9fVW9rd05fSWM0eVVYR3RuMFhUcTZ4anQwZUpEajlET3FyYmdiLTZoclltRmxLTUNqalVxSGtLU1VPaHVYSE9jOFdFa0JEM1hiR29idi03b3c0c0gyN0YxbHh2UVh0OVgtOUl1akN5dHBMYmt6YnJVdHZJT2puY19xTUNjMXFFTG1wZHJCTGFoMzVmWHZQZXotVk9zSXBNOGdsekhWUUgyWWZHU0UwaTJqVkxpVllkZlFHeDNwdTZPamdUc1hPUm5acldlbFExMVlNbUJkWlVqWFNlZkVlQkxuT1lBbUNtYWM0dHNTa2JHTXZzQm92OWNEc1NRLWlsQUhsT1Fsanp3Umt1bnIxdk1ITlFhRDJLUEE5eGxxZ2NKU3FGT3d3RzROSzBxamhyb0NoZDFxM2RHR2V3U2tTd2xZbW44ZlM0VEJ5VjFMYmtWb2NZZHpiWDhiZG54dHRhVDhKS0pUbjJETWxjVFpvR1hFbWQzN2ZZVnlaNm5uMXdxZExtVW9XLW5OQXc3T3RLV3hyMXJUNV9qOHZjRGhTWk1HdTF6aV81NDEyVTRLcG01dlQ3c3BpWXA4aDl3Rk5scmFjYnVjZGVlaS1zMWR6cDlqWGo2NjRuWWxoYzNjOHJubjJ4ZWlna09YLTNUSWxnbmdxeXpJWG5ROHU0dTc5TC1ObXk1VFNjLU4wTnJVTUxQVE51MnhsUlE4Y0VLT0h4QkJGQV80Nk1yVXlhbjUwODFMSlYtTVVyaXAycl9tS3FJRjJET2wxS2V1aGg5am9PeFVybUk0T19MYkduVjJTbUdoZEZSd3FxUS15U2pxcFE2OFBza3hlQmxTdDZnX28tLVl6Qkg3dDI4V3ZYYzdIT3paNFBwa0psTjVmWFRwOXgtOGNuTGptcG5Pc2hUZWxTUXRYaDMwcTU3LXJZbVJzc2t2cFZfaTZFX2JUMTk2VWtTOHo2WUp1QXh3LXdlZ2tPY1ZITUxkeW5vaDU2UUtuWDhMVFdHdjhqWWNQazlaSlNSbXljTExOcWNtRnpUU1JEbzBXMXBkQVJXY2tqRFM2VFZIdTlHSElsTG9oRnpONEU1T3FqdUMxRjEwSFZjUGxoNTc5UmczWk1SNWJoVjltSEZNOFhJZU9HTHAxZFkxbnNLY2dqRVVlUW5qcF9za0RzanJZMVVncXRkTTVNVWhNSHlEZlhaZ3libk1jSDVRaml0YjdWZktrQk1YcGRwU3pLQWx0WDNjelIwODRPVm5nVGtiV2JZQURDTUQ2N1dlLWM1ZDFONHI2WFdFb2RXelNyWlhyZmc0RVRNNG1UZnV3ZjB0d3NORkRJdW5BWDkwbnZJWm1Ualo2RktpTjBiRnVNWmRpR1NKNTZNUEZMcFd3N3p0dmVmN0xENmhjNHJESXBQbEkwTVlVWTJSLWZGakdaZ29JTmdKMkVuMGFFM0c1V1RySjRxcHhhdHB4MVk3ZUgzOUk3WTYzcEJFWEtkRWIwTmstM0tnM0ljbDJPSkp6SU1fM1VHSlJTTmRQWGlfV3ViNGRTMDV4eURzZTR0d1FXdm9rb1QybHlZNGphNlVOc3lvYWN1eGFsTUZvUFR5dHF4YlVTaXFIMEZab0pWcm84amZja2wyYklmSzRqRzN6TnJIOWU1c3VUVWJDV09wYjczeFNMMG9TLVQ0T1JSNnBRbTZHQk05bFJ0eUhtMHJUMy1sNXc0c2ItNnRDcTM4S3FRdURRTGVTcDI1Rk8zMU1uVE5nTFlUeEUwUEZDT3hmRG1RY3BOOFRoWHBGbzZLNHNrd0dmQkpKTU9BTWtIUWZnMUM0c0V5cS1PLS1FWFhjbVV6QjJGRnR4c1gwR3o0aGJSdTFiUlhXcWMxU0IyUk82d0JsWGdPUmJqZjJlLWJQUFFMdmtGcWR3bFpUTE1kaWVUdjQyQmd1SFd3dzI5OEVqcnNNUXg1WG9aRG11MDFRTzlZSjFmTEYtWjkwWEVOU2p5OTM0M3UyUHhrNjhheG10bnp2ZTdwd3Q3Z0ZMMUoxZlZEd3BqMUtBZDdwdGZoWG4yUzJmT1Bfc3JOM3QxNk1qX29qOUVLQm5VNC1jQ3RLWGRkZS1EWk5zQkNhSGZ1bEtHSkFHYmx1UWs2Yi1kQk5oUS05Z19kajdfcjZub2Z2aDRielEybGlQd1E3M1RTazNiQTdzd2EzclZ5ZTVDTVNlOVotNkVKV1phek1sN0w4VUJ3cFllN0J0eHhUNEVBVGo2SXBvYWhGNTgtRHpiMmRsc1c1ZDZIWmpYZUNMTGtVRmQ5Mll3eDBibFlCanc4eTVzM040OEJMME84WG51ak42c0F0eG04Sm9hWXFVUUd3LXNBS1pTZHAzNk1GNlZXYkpUcHBoZHQ2aEhWQjFoRzdpSGN1STBTRzY0WjczNXEzZ0tSYXFHdzhIUXItSWNyeks0VEQwenk5b01NMHpRLVFBSE1PdzAyX0ozU3pVQWZ1bzFWNU42ajB0VGsyeEt0TFp3cmlHOHJNRl9NWTJrN09mdkxqNFlCb3VNN2lBNVM4LnNfM0VabFhIb1lrV283ZzdpRUp1bHc
+              headers: {}
+  '/storage/{storage-account-name}/regeneratekey':
+    post:
+      description: Regenerates the specified key value for the given storage account. This operation requires the storage/regeneratekey permission.
+      operationId: RegenerateStorageAccountKey
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The parameters to regenerate storage account key.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/StorageAccountRegenerteKeyParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated storage account.
+          schema:
+            $ref: '#/definitions/StorageBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Regenerate Storage account key:
+          parameters:
+            api-version: 7.0-preview
+            parameters:
+              keyName: key2
+            storage-account-name: regenerateKey01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                activeKeyName: key2
+                attributes:
+                  created: 1490738386
+                  enabled: true
+                  recoveryLevel: Recoverable+Purgeable
+                  updated: 1490738386
+                autoRegenerateKey: true
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/regenerateKey01'
+                regenerationPeriod: P10D
+                resourceId: '/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc'
+                tags:
+                  tag1: val1
+                  tag2: val2
+              headers: {}
+  '/storage/{storage-account-name}/sas':
+    get:
+      description: List storage SAS definitions for the given storage account. This operation requires the storage/listsas permission.
+      operationId: GetSasDefinitions
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: Maximum number of results to return in a page. If not specified the service will return up to 25 results.
+          format: int32
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxresults
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: A response message containing a list of SAS definitions along with a link to the next page of SAS definitions.
+          schema:
+            $ref: '#/definitions/SasDefinitionListResult'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        List Storage Sas Definition:
+          parameters:
+            api-version: 7.0-preview
+            storage-account-name: listsas01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                nextLink: 'https://{BaseUri}/storage/listsas01/sas?api-version=7.0-preview&%24skiptoken=<token>'
+                value:
+                  - attributes:
+                      created: 1490738438
+                      enabled: true
+                      recoveryLevel: Recoverable
+                      updated: 1490738438
+                    id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/listsas01/sas/listStrgSasDef01'
+                    sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/listsas01-listStrgSasDef01'
+                  - attributes:
+                      created: 1490738438
+                      enabled: true
+                      recoveryLevel: Recoverable
+                      updated: 1490738438
+                    id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/listsas01/sas/listStrgSasDef02'
+                    sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/listsas01-listStrgSasDef02'
+              headers: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/storage/{storage-account-name}/sas/{sas-definition-name}':
+    delete:
+      description: Deletes a SAS definition from a specified storage account. This operation requires the storage/deletesas permission.
+      operationId: DeleteSasDefinition
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The name of the SAS definition.
+          in: path
+          name: sas-definition-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'The deleted SAS definition and information on when the SAS definition will be deleted, and how to recover the deleted SAS definition.'
+          schema:
+            $ref: '#/definitions/DeletedSasDefinitionBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Delete Storage Sas Definition:
+          parameters:
+            api-version: 7.0-preview
+            sas-definition-name: deleteStrgSasDef01
+            storage-account-name: deletesas01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                attributes:
+                  created: 1490738438
+                  enabled: true
+                  recoveryLevel: Recoverable
+                  updated: 1490738438
+                deletedDate: 1490760000
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/deletesas01/sas/deleteStrgSasDef01'
+                recoveryId: 'https://storage-sdk-test.vault-int.azure-int.net/deletedstorage/deletesas01/sas/deleteStrgSasDef01'
+                sasType: service
+                scheduledPurgeDate: 1490790000
+                sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/deletesas01-deleteStrgSasDef01'
+                templateUri: se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D
+                validityPeriod: P15D
+              headers: {}
+    get:
+      description: Gets information about a SAS definition for the specified storage account. This operation requires the storage/getsas permission.
+      operationId: GetSasDefinition
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The name of the SAS definition.
+          in: path
+          name: sas-definition-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The retrieved SAS definition.
+          schema:
+            $ref: '#/definitions/SasDefinitionBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Get Storage Sas Definition:
+          parameters:
+            api-version: 7.0-preview
+            sas-definition-name: getStrgSasDef01
+            storage-account-name: getsas01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                attributes:
+                  created: 1490738438
+                  enabled: true
+                  recoveryLevel: Recoverable
+                  updated: 1490738438
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/getsas01/sas/getStrgSasDef01'
+                sasType: service
+                sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/getsas01-getStrgSasDef01'
+                templateUri: se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D
+                validityPeriod: P15D
+              headers: {}
+    patch:
+      description: Updates the specified attributes associated with the given SAS definition. This operation requires the storage/setsas permission.
+      operationId: UpdateSasDefinition
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The name of the SAS definition.
+          in: path
+          name: sas-definition-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The parameters to update a SAS definition.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SasDefinitionUpdateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The updated SAS definition.
+          schema:
+            $ref: '#/definitions/SasDefinitionBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Update Storage Sas definition:
+          parameters:
+            api-version: 7.0-preview
+            parameters:
+              attributes:
+                enabled: true
+              sasType: service
+              templateUri: se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D
+              validityPeriod: P15D
+            sas-definition-name: patchStrgSasDef01
+            storage-account-name: patchsas01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                attributes:
+                  created: 1490738438
+                  enabled: true
+                  recoveryLevel: Recoverable
+                  updated: 1490738438
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/patchsas01/sas/patchStrgSasDef01'
+                sasType: service
+                sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/patchsas01-patchStrgSasDef01'
+                templateUri: se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D
+                validityPeriod: P15D
+              headers: {}
+    put:
+      description: Creates or updates a new SAS definition for the specified storage account. This operation requires the storage/setsas permission.
+      operationId: SetSasDefinition
+      parameters:
+        - description: The name of the storage account.
+          in: path
+          name: storage-account-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The name of the SAS definition.
+          in: path
+          name: sas-definition-name
+          pattern: '^[0-9a-zA-Z]+$'
+          required: true
+          type: string
+        - description: The parameters to create a SAS definition.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SasDefinitionCreateParameters'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The created SAS definition.
+          schema:
+            $ref: '#/definitions/SasDefinitionBundle'
+        default:
+          description: Key Vault error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/KeyVaultError'
+      tags:
+        - Storage
+      x-ms-examples:
+        Set Storage Sas definition:
+          parameters:
+            api-version: 7.0-preview
+            parameters:
+              attributes:
+                enabled: true
+              sasType: service
+              templateUri: se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D
+              validityPeriod: P15D
+            sas-definition-name: setStrgSasDef01
+            storage-account-name: setsas01
+            vaultBaseUrl: 'https://storage-sdk-test.vault-int.azure-int.net/'
+          responses:
+            '200':
+              body:
+                attributes:
+                  created: 1490738438
+                  enabled: true
+                  recoveryLevel: Recoverable
+                  updated: 1490738438
+                id: 'https://storage-sdk-test.vault-int.azure-int.net/storage/setsas01/sas/setStrgSasDef01'
+                sasType: service
+                sid: 'https://storage-sdk-test.vault-int.azure-int.net/secrets/setsas01-setStrgSasDef01'
+                templateUri: se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D
+                validityPeriod: P15D
+              headers: {}
+definitions:
+  Action:
+    description: The action that will be executed.
+    properties:
+      action_type:
+        description: The type of the action.
+        enum:
+          - EmailContacts
+          - AutoRenew
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ActionType
+  AdministratorDetails:
+    description: Details of the organization administrator of the certificate issuer.
+    properties:
+      email:
+        description: Email addresss.
+        type: string
+        x-ms-client-name: EmailAddress
+      first_name:
+        description: First name.
+        type: string
+      last_name:
+        description: Last name.
+        type: string
+      phone:
+        description: Phone number.
+        type: string
+  Attributes:
+    description: The object attributes managed by the KeyVault service.
+    properties:
+      created:
+        description: Creation time in UTC.
+        format: unixtime
+        readOnly: true
+        type: integer
+      enabled:
+        description: Determines whether the object is enabled.
+        type: boolean
+      exp:
+        description: Expiry date in UTC.
+        format: unixtime
+        type: integer
+        x-ms-client-name: Expires
+      nbf:
+        description: Not before date in UTC.
+        format: unixtime
+        type: integer
+        x-ms-client-name: NotBefore
+      updated:
+        description: Last updated time in UTC.
+        format: unixtime
+        readOnly: true
+        type: integer
+  BackupKeyResult:
+    description: 'The backup key result, containing the backup blob.'
+    properties:
+      value:
+        description: The backup blob containing the backed up key.
+        format: base64url
+        readOnly: true
+        type: string
+  BackupSecretResult:
+    description: 'The backup secret result, containing the backup blob.'
+    properties:
+      value:
+        description: The backup blob containing the backed up secret.
+        format: base64url
+        readOnly: true
+        type: string
+  BackupStorageResult:
+    description: 'The backup storage result, containing the backup blob.'
+    properties:
+      value:
+        description: The backup blob containing the backed up storage account.
+        format: base64url
+        readOnly: true
+        type: string
+  CertificateAttributes:
+    allOf:
+      - $ref: '#/definitions/Attributes'
+    description: The certificate management attributes.
+    properties:
+      recoveryLevel:
+        description: 'Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains ''Purgeable'', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.'
+        enum:
+          - Purgeable
+          - Recoverable+Purgeable
+          - Recoverable
+          - Recoverable+ProtectedSubscription
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DeletionRecoveryLevel
+        x-nullable: false
+  CertificateBundle:
+    description: A certificate bundle consists of a certificate (X509) plus its attributes.
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The certificate attributes.
+      cer:
+        description: CER contents of x509 certificate.
+        format: byte
+        type: string
+      contentType:
+        description: The content type of the secret.
+        type: string
+      id:
+        description: The certificate id.
+        readOnly: true
+        type: string
+      kid:
+        description: The key id.
+        readOnly: true
+        type: string
+      policy:
+        $ref: '#/definitions/CertificatePolicy'
+        description: The management policy.
+        readOnly: true
+      sid:
+        description: The secret id.
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs
+        type: object
+      x5t:
+        description: Thumbprint of the certificate.
+        format: base64url
+        readOnly: true
+        type: string
+        x-ms-client-name: X509Thumbprint
+  CertificateCreateParameters:
+    description: The certificate create parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The attributes of the certificate (optional).
+        x-ms-client-name: CertificateAttributes
+      policy:
+        $ref: '#/definitions/CertificatePolicy'
+        description: The management policy for the certificate.
+        x-ms-client-name: CertificatePolicy
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+  CertificateImportParameters:
+    description: The certificate import parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The attributes of the certificate (optional).
+        x-ms-client-name: CertificateAttributes
+      policy:
+        $ref: '#/definitions/CertificatePolicy'
+        description: The management policy for the certificate.
+        x-ms-client-name: CertificatePolicy
+      pwd:
+        description: 'If the private key in base64EncodedCertificate is encrypted, the password used for encryption.'
+        type: string
+        x-ms-client-name: password
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+      value:
+        description: Base64 encoded representation of the certificate object to import. This certificate needs to contain the private key.
+        type: string
+        x-ms-client-name: base64EncodedCertificate
+    required:
+      - value
+  CertificateIssuerItem:
+    description: The certificate issuer item containing certificate issuer metadata.
+    properties:
+      id:
+        description: Certificate Identifier.
+        type: string
+      provider:
+        description: The issuer provider.
+        type: string
+  CertificateIssuerListResult:
+    description: The certificate issuer list result.
+    properties:
+      nextLink:
+        description: The URL to get the next set of certificate issuers.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of certificate issuers in the key vault along with a link to the next page of certificate issuers.
+        items:
+          $ref: '#/definitions/CertificateIssuerItem'
+        readOnly: true
+        type: array
+  CertificateIssuerSetParameters:
+    description: The certificate issuer set parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/IssuerAttributes'
+        description: Attributes of the issuer object.
+      credentials:
+        $ref: '#/definitions/IssuerCredentials'
+        description: The credentials to be used for the issuer.
+      org_details:
+        $ref: '#/definitions/OrganizationDetails'
+        description: Details of the organization as provided to the issuer.
+        x-ms-client-name: OrganizationDetails
+      provider:
+        description: The issuer provider.
+        type: string
+    required:
+      - provider
+  CertificateIssuerUpdateParameters:
+    description: The certificate issuer update parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/IssuerAttributes'
+        description: Attributes of the issuer object.
+      credentials:
+        $ref: '#/definitions/IssuerCredentials'
+        description: The credentials to be used for the issuer.
+      org_details:
+        $ref: '#/definitions/OrganizationDetails'
+        description: Details of the organization as provided to the issuer.
+        x-ms-client-name: OrganizationDetails
+      provider:
+        description: The issuer provider.
+        type: string
+  CertificateItem:
+    description: The certificate item containing certificate metadata.
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The certificate management attributes.
+      id:
+        description: Certificate identifier.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+      x5t:
+        description: Thumbprint of the certificate.
+        format: base64url
+        type: string
+        x-ms-client-name: X509Thumbprint
+  CertificateListResult:
+    description: The certificate list result.
+    properties:
+      nextLink:
+        description: The URL to get the next set of certificates.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of certificates in the key vault along with a link to the next page of certificates.
+        items:
+          $ref: '#/definitions/CertificateItem'
+        readOnly: true
+        type: array
+  CertificateMergeParameters:
+    description: The certificate merge parameters
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The attributes of the certificate (optional).
+        x-ms-client-name: CertificateAttributes
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+      x5c:
+        description: The certificate or the certificate chain to merge.
+        items:
+          format: byte
+          type: string
+        type: array
+        x-ms-client-name: x509Certificates
+    required:
+      - x5c
+  CertificateOperation:
+    description: A certificate operation is returned in case of asynchronous requests.
+    properties:
+      cancellation_requested:
+        description: Indicates if cancellation was requested on the certificate operation.
+        type: boolean
+      csr:
+        description: The certificate signing request (CSR) that is being used in the certificate operation.
+        format: byte
+        type: string
+      error:
+        $ref: '#/definitions/Error'
+        description: 'Error encountered, if any, during the certificate operation.'
+      id:
+        description: The certificate id.
+        readOnly: true
+        type: string
+      issuer:
+        $ref: '#/definitions/IssuerParameters'
+        description: Parameters for the issuer of the X509 component of a certificate.
+        x-ms-client-name: IssuerParameters
+      request_id:
+        description: Identifier for the certificate operation.
+        type: string
+      status:
+        description: Status of the certificate operation.
+        type: string
+      status_details:
+        description: The status details of the certificate operation.
+        type: string
+      target:
+        description: Location which contains the result of the certificate operation.
+        type: string
+  CertificateOperationUpdateParameter:
+    description: The certificate operation update parameters.
+    properties:
+      cancellation_requested:
+        description: Indicates if cancellation was requested on the certificate operation.
+        type: boolean
+    required:
+      - cancellation_requested
+  CertificatePolicy:
+    description: Management policy for a certificate.
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The certificate attributes.
+      id:
+        description: The certificate id.
+        readOnly: true
+        type: string
+      issuer:
+        $ref: '#/definitions/IssuerParameters'
+        description: Parameters for the issuer of the X509 component of a certificate.
+        x-ms-client-name: IssuerParameters
+      key_props:
+        $ref: '#/definitions/KeyProperties'
+        description: Properties of the key backing a certificate.
+        x-ms-client-name: KeyProperties
+      lifetime_actions:
+        description: Actions that will be performed by Key Vault over the lifetime of a certificate.
+        items:
+          $ref: '#/definitions/LifetimeAction'
+        type: array
+      secret_props:
+        $ref: '#/definitions/SecretProperties'
+        description: Properties of the secret backing a certificate.
+        x-ms-client-name: SecretProperties
+      x509_props:
+        $ref: '#/definitions/X509CertificateProperties'
+        description: Properties of the X509 component of a certificate.
+        x-ms-client-name: X509CertificateProperties
+  CertificateUpdateParameters:
+    description: The certificate update parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/CertificateAttributes'
+        description: The attributes of the certificate (optional).
+        x-ms-client-name: CertificateAttributes
+      policy:
+        $ref: '#/definitions/CertificatePolicy'
+        description: The management policy for the certificate.
+        x-ms-client-name: CertificatePolicy
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+  Contact:
+    description: The contact information for the vault certificates.
+    properties:
+      email:
+        description: Email addresss.
+        type: string
+        x-ms-client-name: EmailAddress
+      name:
+        description: Name.
+        type: string
+      phone:
+        description: Phone number.
+        type: string
+  Contacts:
+    description: The contacts for the vault certificates.
+    properties:
+      contacts:
+        description: The contact list for the vault certificates.
+        items:
+          $ref: '#/definitions/Contact'
+        type: array
+        x-ms-client-name: ContactList
+      id:
+        description: Identifier for the contacts collection.
+        readOnly: true
+        type: string
+  DeletedCertificateBundle:
+    allOf:
+      - $ref: '#/definitions/CertificateBundle'
+    description: 'A Deleted Certificate consisting of its previous id, attributes and its tags, as well as information on when it will be purged.'
+    properties:
+      deletedDate:
+        description: 'The time when the certificate was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted certificate.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the certificate is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedCertificateItem:
+    allOf:
+      - $ref: '#/definitions/CertificateItem'
+    description: The deleted certificate item containing metadata about the deleted certificate.
+    properties:
+      deletedDate:
+        description: 'The time when the certificate was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted certificate.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the certificate is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedCertificateListResult:
+    description: A list of certificates that have been deleted in this vault.
+    properties:
+      nextLink:
+        description: The URL to get the next set of deleted certificates.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates
+        items:
+          $ref: '#/definitions/DeletedCertificateItem'
+        readOnly: true
+        type: array
+  DeletedKeyBundle:
+    allOf:
+      - $ref: '#/definitions/KeyBundle'
+    description: A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info
+    properties:
+      deletedDate:
+        description: 'The time when the key was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted key.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the key is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedKeyItem:
+    allOf:
+      - $ref: '#/definitions/KeyItem'
+    description: The deleted key item containing the deleted key metadata and information about deletion.
+    properties:
+      deletedDate:
+        description: 'The time when the key was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted key.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the key is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedKeyListResult:
+    description: A list of keys that have been deleted in this vault.
+    properties:
+      nextLink:
+        description: The URL to get the next set of deleted keys.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys
+        items:
+          $ref: '#/definitions/DeletedKeyItem'
+        readOnly: true
+        type: array
+  DeletedSasDefinitionBundle:
+    allOf:
+      - $ref: '#/definitions/SasDefinitionBundle'
+    description: 'A deleted SAS definition bundle consisting of its previous id, attributes and its tags, as well as information on when it will be purged.'
+    properties:
+      deletedDate:
+        description: 'The time when the SAS definition was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted SAS definition.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the SAS definition is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedSasDefinitionItem:
+    allOf:
+      - $ref: '#/definitions/SasDefinitionItem'
+    description: The deleted SAS definition item containing metadata about the deleted SAS definition.
+    properties:
+      deletedDate:
+        description: 'The time when the SAS definition was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted SAS definition.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the SAS definition is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedSasDefinitionListResult:
+    description: The deleted SAS definition list result
+    properties:
+      nextLink:
+        description: The URL to get the next set of deleted SAS definitions.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of the deleted SAS definitions in the vault along with a link to the next page of deleted sas definitions
+        items:
+          $ref: '#/definitions/DeletedSasDefinitionItem'
+        readOnly: true
+        type: array
+  DeletedSecretBundle:
+    allOf:
+      - $ref: '#/definitions/SecretBundle'
+    description: 'A Deleted Secret consisting of its previous id, attributes and its tags, as well as information on when it will be purged.'
+    properties:
+      deletedDate:
+        description: 'The time when the secret was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted secret.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the secret is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedSecretItem:
+    allOf:
+      - $ref: '#/definitions/SecretItem'
+    description: The deleted secret item containing metadata about the deleted secret.
+    properties:
+      deletedDate:
+        description: 'The time when the secret was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted secret.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the secret is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedSecretListResult:
+    description: The deleted secret list result
+    properties:
+      nextLink:
+        description: The URL to get the next set of deleted secrets.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of the deleted secrets in the vault along with a link to the next page of deleted secrets
+        items:
+          $ref: '#/definitions/DeletedSecretItem'
+        readOnly: true
+        type: array
+  DeletedStorageAccountItem:
+    allOf:
+      - $ref: '#/definitions/StorageAccountItem'
+    description: The deleted storage account item containing metadata about the deleted storage account.
+    properties:
+      deletedDate:
+        description: 'The time when the storage account was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted storage account.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the storage account is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedStorageBundle:
+    allOf:
+      - $ref: '#/definitions/StorageBundle'
+    description: 'A deleted storage account bundle consisting of its previous id, attributes and its tags, as well as information on when it will be purged.'
+    properties:
+      deletedDate:
+        description: 'The time when the storage account was deleted, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+      recoveryId:
+        description: 'The url of the recovery object, used to identify and recover the deleted storage account.'
+        type: string
+      scheduledPurgeDate:
+        description: 'The time when the storage account is scheduled to be purged, in UTC'
+        format: unixtime
+        readOnly: true
+        type: integer
+  DeletedStorageListResult:
+    description: The deleted storage account list result
+    properties:
+      nextLink:
+        description: The URL to get the next set of deleted storage accounts.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of the deleted storage accounts in the vault along with a link to the next page of deleted storage accounts
+        items:
+          $ref: '#/definitions/DeletedStorageAccountItem'
+        readOnly: true
+        type: array
+  Error:
+    description: The key vault server error.
+    properties:
+      code:
+        description: The error code.
+        readOnly: true
+        type: string
+      innererror:
+        $ref: '#/definitions/Error'
+        readOnly: true
+        x-ms-client-name: innerError
+      message:
+        description: The error message.
+        readOnly: true
+        type: string
+  IssuerAttributes:
+    description: The attributes of an issuer managed by the Key Vault service.
+    properties:
+      created:
+        description: Creation time in UTC.
+        format: unixtime
+        readOnly: true
+        type: integer
+      enabled:
+        description: Determines whether the issuer is enabled.
+        type: boolean
+      updated:
+        description: Last updated time in UTC.
+        format: unixtime
+        readOnly: true
+        type: integer
+  IssuerBundle:
+    description: The issuer for Key Vault certificate.
+    properties:
+      attributes:
+        $ref: '#/definitions/IssuerAttributes'
+        description: Attributes of the issuer object.
+      credentials:
+        $ref: '#/definitions/IssuerCredentials'
+        description: The credentials to be used for the issuer.
+      id:
+        description: Identifier for the issuer object.
+        readOnly: true
+        type: string
+      org_details:
+        $ref: '#/definitions/OrganizationDetails'
+        description: Details of the organization as provided to the issuer.
+        x-ms-client-name: OrganizationDetails
+      provider:
+        description: The issuer provider.
+        type: string
+  IssuerCredentials:
+    description: The credentials to be used for the certificate issuer.
+    properties:
+      account_id:
+        description: The user name/account name/account id.
+        type: string
+      pwd:
+        description: The password/secret/account key.
+        type: string
+        x-ms-client-name: Password
+  IssuerParameters:
+    description: Parameters for the issuer of the X509 component of a certificate.
+    properties:
+      cty:
+        description: Type of certificate to be requested from the issuer provider.
+        type: string
+        x-ms-client-name: CertificateType
+      name:
+        description: 'Name of the referenced issuer object or reserved names; for example, ''Self'' or ''Unknown''.'
+        type: string
+  JsonWebKey:
+    description: 'As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18'
+    properties:
+      crv:
+        description: 'Elliptic curve name. For valid values, see JsonWebKeyCurveName.'
+        enum:
+          - P-256
+          - P-384
+          - P-521
+          - SECP256K1
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyCurveName
+      d:
+        description: 'RSA private exponent, or the D component of an EC private key.'
+        format: base64url
+        type: string
+      dp:
+        description: RSA private key parameter.
+        format: base64url
+        type: string
+        x-ms-client-name: DP
+      dq:
+        description: RSA private key parameter.
+        format: base64url
+        type: string
+        x-ms-client-name: DQ
+      e:
+        description: RSA public exponent.
+        format: base64url
+        type: string
+      k:
+        description: Symmetric key.
+        format: base64url
+        type: string
+      key_hsm:
+        description: 'HSM Token, used with ''Bring Your Own Key''.'
+        format: base64url
+        type: string
+        x-ms-client-name: t
+      key_ops:
+        items:
+          description: Supported key operations.
+          type: string
+        type: array
+      kid:
+        description: Key identifier.
+        type: string
+      kty:
+        description: JsonWebKey key type (kty).
+        enum:
+          - EC
+          - EC-HSM
+          - RSA
+          - RSA-HSM
+          - oct
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyType
+      'n':
+        description: RSA modulus.
+        format: base64url
+        type: string
+      p:
+        description: RSA secret prime.
+        format: base64url
+        type: string
+      q:
+        description: 'RSA secret prime, with p < q.'
+        format: base64url
+        type: string
+      qi:
+        description: RSA private key parameter.
+        format: base64url
+        type: string
+        x-ms-client-name: QI
+      x:
+        description: X component of an EC public key.
+        format: base64url
+        type: string
+      'y':
+        description: Y component of an EC public key.
+        format: base64url
+        type: string
+  KeyAttributes:
+    allOf:
+      - $ref: '#/definitions/Attributes'
+    description: The attributes of a key managed by the key vault service.
+    properties:
+      recoveryLevel:
+        description: 'Reflects the deletion recovery level currently in effect for keys in the current vault. If it contains ''Purgeable'' the key can be permanently deleted by a privileged user; otherwise, only the system can purge the key, at the end of the retention interval.'
+        enum:
+          - Purgeable
+          - Recoverable+Purgeable
+          - Recoverable
+          - Recoverable+ProtectedSubscription
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DeletionRecoveryLevel
+        x-nullable: false
+  KeyBundle:
+    description: A KeyBundle consisting of a WebKey plus its attributes.
+    properties:
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        description: The key management attributes.
+      key:
+        $ref: '#/definitions/JsonWebKey'
+        description: The Json web key.
+      managed:
+        description: 'True if the key''s lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.'
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+  KeyCreateParameters:
+    description: The key create parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        x-ms-client-name: keyAttributes
+      crv:
+        description: 'Elliptic curve name. For valid values, see JsonWebKeyCurveName.'
+        enum:
+          - P-256
+          - P-384
+          - P-521
+          - SECP256K1
+        type: string
+        x-ms-client-name: curve
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyCurveName
+      key_ops:
+        items:
+          description: 'JSON web key operations. For more information, see JsonWebKeyOperation.'
+          enum:
+            - encrypt
+            - decrypt
+            - sign
+            - verify
+            - wrapKey
+            - unwrapKey
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: JsonWebKeyOperation
+        type: array
+      key_size:
+        description: 'The key size in bytes. For example, 1024 or 2048.'
+        format: int32
+        type: integer
+      kty:
+        description: 'The type of key to create. For valid values, see JsonWebKeyType.'
+        enum:
+          - EC
+          - EC-HSM
+          - RSA
+          - RSA-HSM
+          - oct
+        minLength: 1
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyType
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+    required:
+      - kty
+  KeyImportParameters:
+    description: The key import parameters.
+    properties:
+      Hsm:
+        description: Whether to import as a hardware key (HSM) or software key.
+        type: boolean
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        description: The key management attributes.
+        x-ms-client-name: keyAttributes
+      key:
+        $ref: '#/definitions/JsonWebKey'
+        description: The Json web key
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+    required:
+      - key
+  KeyItem:
+    description: The key item containing key metadata.
+    properties:
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        description: The key management attributes.
+      kid:
+        description: Key identifier.
+        type: string
+      managed:
+        description: 'True if the key''s lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.'
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+  KeyListResult:
+    description: The key list result.
+    properties:
+      nextLink:
+        description: The URL to get the next set of keys.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of keys in the key vault along with a link to the next page of keys.
+        items:
+          $ref: '#/definitions/KeyItem'
+        readOnly: true
+        type: array
+  KeyOperationResult:
+    description: The key operation result.
+    properties:
+      kid:
+        description: Key identifier
+        readOnly: true
+        type: string
+      value:
+        format: base64url
+        readOnly: true
+        type: string
+        x-ms-client-name: result
+  KeyOperationsParameters:
+    description: The key operations parameters.
+    properties:
+      alg:
+        description: algorithm identifier
+        enum:
+          - RSA-OAEP
+          - RSA-OAEP-256
+          - RSA1_5
+        minLength: 1
+        type: string
+        x-ms-client-name: algorithm
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyEncryptionAlgorithm
+      value:
+        format: base64url
+        type: string
+    required:
+      - alg
+      - value
+  KeyProperties:
+    description: Properties of the key pair backing a certificate.
+    properties:
+      exportable:
+        description: Indicates if the private key can be exported.
+        type: boolean
+      key_size:
+        description: The key size in bytes. For example;  1024 or 2048.
+        format: int32
+        type: integer
+      kty:
+        description: The key type.
+        type: string
+        x-ms-client-name: keyType
+      reuse_key:
+        description: Indicates if the same key pair will be used on certificate renewal.
+        type: boolean
+  KeyRestoreParameters:
+    description: The key restore parameters.
+    properties:
+      value:
+        description: The backup blob associated with a key bundle.
+        format: base64url
+        type: string
+        x-ms-client-name: keyBundleBackup
+    required:
+      - value
+  KeySignParameters:
+    description: The key operations parameters.
+    properties:
+      alg:
+        description: 'The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.'
+        enum:
+          - PS256
+          - PS384
+          - PS512
+          - RS256
+          - RS384
+          - RS512
+          - RSNULL
+          - ES256
+          - ES384
+          - ES512
+          - ECDSA256
+        minLength: 1
+        type: string
+        x-ms-client-name: algorithm
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeySignatureAlgorithm
+      value:
+        format: base64url
+        type: string
+    required:
+      - alg
+      - value
+  KeyUpdateParameters:
+    description: The key update parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/KeyAttributes'
+        x-ms-client-name: keyAttributes
+      key_ops:
+        description: 'Json web key operations. For more information on possible key operations, see JsonWebKeyOperation.'
+        items:
+          enum:
+            - encrypt
+            - decrypt
+            - sign
+            - verify
+            - wrapKey
+            - unwrapKey
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: JsonWebKeyOperation
+        type: array
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+  KeyVaultError:
+    description: The key vault error exception.
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+        readOnly: true
+  KeyVerifyParameters:
+    description: The key verify parameters.
+    properties:
+      alg:
+        description: 'The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.'
+        enum:
+          - PS256
+          - PS384
+          - PS512
+          - RS256
+          - RS384
+          - RS512
+          - RSNULL
+          - ES256
+          - ES384
+          - ES512
+          - ECDSA256
+        minLength: 1
+        type: string
+        x-ms-client-name: algorithm
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeySignatureAlgorithm
+      digest:
+        description: The digest used for signing.
+        format: base64url
+        type: string
+      value:
+        description: The signature to be verified.
+        format: base64url
+        type: string
+        x-ms-client-name: signature
+    required:
+      - alg
+      - digest
+      - value
+  KeyVerifyResult:
+    description: The key verify result.
+    properties:
+      value:
+        description: 'True if the signature is verified, otherwise false.'
+        readOnly: true
+        type: boolean
+  LifetimeAction:
+    description: Action and its trigger that will be performed by Key Vault over the lifetime of a certificate.
+    properties:
+      action:
+        $ref: '#/definitions/Action'
+        description: The action that will be executed.
+      trigger:
+        $ref: '#/definitions/Trigger'
+        description: The condition that will execute the action.
+  OrganizationDetails:
+    description: Details of the organization of the certificate issuer.
+    properties:
+      admin_details:
+        description: Details of the organization administrator.
+        items:
+          $ref: '#/definitions/AdministratorDetails'
+        type: array
+      id:
+        description: Id of the organization.
+        type: string
+  PendingCertificateSigningRequestResult:
+    description: The pending certificate signing request result.
+    properties:
+      value:
+        description: The pending certificate signing request as Base64 encoded string.
+        readOnly: true
+        type: string
+  SasDefinitionAttributes:
+    description: The SAS definition management attributes.
+    properties:
+      created:
+        description: Creation time in UTC.
+        format: unixtime
+        readOnly: true
+        type: integer
+      enabled:
+        description: the enabled state of the object.
+        type: boolean
+      recoveryLevel:
+        description: 'Reflects the deletion recovery level currently in effect for SAS definitions in the current vault. If it contains ''Purgeable'' the SAS definition can be permanently deleted by a privileged user; otherwise, only the system can purge the SAS definition, at the end of the retention interval.'
+        enum:
+          - Purgeable
+          - Recoverable+Purgeable
+          - Recoverable
+          - Recoverable+ProtectedSubscription
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DeletionRecoveryLevel
+        x-nullable: false
+      updated:
+        description: Last updated time in UTC.
+        format: unixtime
+        readOnly: true
+        type: integer
+  SasDefinitionBundle:
+    description: A SAS definition bundle consists of key vault SAS definition details plus its attributes.
+    properties:
+      attributes:
+        $ref: '#/definitions/SasDefinitionAttributes'
+        description: The SAS definition attributes.
+        readOnly: true
+      id:
+        description: The SAS definition id.
+        readOnly: true
+        type: string
+      sasType:
+        description: The type of SAS token the SAS definition will create.
+        enum:
+          - account
+          - service
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SasTokenType
+      sid:
+        description: Storage account SAS definition secret id.
+        readOnly: true
+        type: string
+        x-ms-client-name: SecretId
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs
+        readOnly: true
+        type: object
+      templateUri:
+        description: The SAS definition token template signed with an arbitrary key.  Tokens created according to the SAS definition will have the same properties as the template.
+        readOnly: true
+        type: string
+      validityPeriod:
+        description: The validity period of SAS tokens created according to the SAS definition.
+        readOnly: true
+        type: string
+  SasDefinitionCreateParameters:
+    description: The SAS definition create parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/SasDefinitionAttributes'
+        description: The attributes of the SAS definition.
+        x-ms-client-name: SasDefinitionAttributes
+      sasType:
+        description: The type of SAS token the SAS definition will create.
+        enum:
+          - account
+          - service
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SasTokenType
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+      templateUri:
+        description: The SAS definition token template signed with an arbitrary key.  Tokens created according to the SAS definition will have the same properties as the template.
+        type: string
+      validityPeriod:
+        description: The validity period of SAS tokens created according to the SAS definition.
+        type: string
+    required:
+      - templateUri
+      - sasType
+      - validityPeriod
+  SasDefinitionItem:
+    description: The SAS definition item containing storage SAS definition metadata.
+    properties:
+      attributes:
+        $ref: '#/definitions/SasDefinitionAttributes'
+        description: The SAS definition management attributes.
+        readOnly: true
+      id:
+        description: The storage SAS identifier.
+        readOnly: true
+        type: string
+      sid:
+        description: The storage account SAS definition secret id.
+        readOnly: true
+        type: string
+        x-ms-client-name: SecretId
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        readOnly: true
+        type: object
+  SasDefinitionListResult:
+    description: The storage account SAS definition list result.
+    properties:
+      nextLink:
+        description: The URL to get the next set of SAS defintions.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of SAS definitions along with a link to the next page of SAS definitions.
+        items:
+          $ref: '#/definitions/SasDefinitionItem'
+        readOnly: true
+        type: array
+  SasDefinitionUpdateParameters:
+    description: The SAS definition update parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/SasDefinitionAttributes'
+        description: The attributes of the SAS definition.
+        x-ms-client-name: SasDefinitionAttributes
+      sasType:
+        description: The type of SAS token the SAS definition will create.
+        enum:
+          - account
+          - service
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SasTokenType
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+      templateUri:
+        description: The SAS definition token template signed with an arbitrary key.  Tokens created according to the SAS definition will have the same properties as the template.
+        type: string
+      validityPeriod:
+        description: The validity period of SAS tokens created according to the SAS definition.
+        type: string
+  SecretAttributes:
+    allOf:
+      - $ref: '#/definitions/Attributes'
+    description: The secret management attributes.
+    properties:
+      recoveryLevel:
+        description: 'Reflects the deletion recovery level currently in effect for secrets in the current vault. If it contains ''Purgeable'', the secret can be permanently deleted by a privileged user; otherwise, only the system can purge the secret, at the end of the retention interval.'
+        enum:
+          - Purgeable
+          - Recoverable+Purgeable
+          - Recoverable
+          - Recoverable+ProtectedSubscription
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DeletionRecoveryLevel
+        x-nullable: false
+  SecretBundle:
+    description: 'A secret consisting of a value, id and its attributes.'
+    properties:
+      attributes:
+        $ref: '#/definitions/SecretAttributes'
+        description: The secret management attributes.
+      contentType:
+        description: The content type of the secret.
+        type: string
+      id:
+        description: The secret id.
+        type: string
+      kid:
+        description: 'If this is a secret backing a KV certificate, then this field specifies the corresponding key backing the KV certificate.'
+        readOnly: true
+        type: string
+      managed:
+        description: 'True if the secret''s lifetime is managed by key vault. If this is a secret backing a certificate, then managed will be true.'
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+      value:
+        description: The secret value.
+        type: string
+  SecretItem:
+    description: The secret item containing secret metadata.
+    properties:
+      attributes:
+        $ref: '#/definitions/SecretAttributes'
+        description: The secret management attributes.
+      contentType:
+        description: Type of the secret value such as a password.
+        type: string
+      id:
+        description: Secret identifier.
+        type: string
+      managed:
+        description: 'True if the secret''s lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.'
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+  SecretListResult:
+    description: The secret list result.
+    properties:
+      nextLink:
+        description: The URL to get the next set of secrets.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of secrets in the key vault along with a link to the next page of secrets.
+        items:
+          $ref: '#/definitions/SecretItem'
+        readOnly: true
+        type: array
+  SecretProperties:
+    description: Properties of the key backing a certificate.
+    properties:
+      contentType:
+        description: The media type (MIME type).
+        type: string
+  SecretRestoreParameters:
+    description: The secret restore parameters.
+    properties:
+      value:
+        description: The backup blob associated with a secret bundle.
+        format: base64url
+        type: string
+        x-ms-client-name: secretBundleBackup
+    required:
+      - value
+  SecretSetParameters:
+    description: The secret set parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/SecretAttributes'
+        description: The secret management attributes.
+        x-ms-client-name: secretAttributes
+      contentType:
+        description: Type of the secret value such as a password.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+      value:
+        description: The value of the secret.
+        type: string
+    required:
+      - value
+  SecretUpdateParameters:
+    description: The secret update parameters.
+    properties:
+      attributes:
+        $ref: '#/definitions/SecretAttributes'
+        description: The secret management attributes.
+        x-ms-client-name: secretAttributes
+      contentType:
+        description: Type of the secret value such as a password.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+  StorageAccountAttributes:
+    description: The storage account management attributes.
+    properties:
+      created:
+        description: Creation time in UTC.
+        format: unixtime
+        readOnly: true
+        type: integer
+      enabled:
+        description: the enabled state of the object.
+        type: boolean
+      recoveryLevel:
+        description: 'Reflects the deletion recovery level currently in effect for storage accounts in the current vault. If it contains ''Purgeable'' the storage account can be permanently deleted by a privileged user; otherwise, only the system can purge the storage account, at the end of the retention interval.'
+        enum:
+          - Purgeable
+          - Recoverable+Purgeable
+          - Recoverable
+          - Recoverable+ProtectedSubscription
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DeletionRecoveryLevel
+        x-nullable: false
+      updated:
+        description: Last updated time in UTC.
+        format: unixtime
+        readOnly: true
+        type: integer
+  StorageAccountCreateParameters:
+    description: The storage account create parameters.
+    properties:
+      activeKeyName:
+        description: Current active storage account key name.
+        type: string
+      attributes:
+        $ref: '#/definitions/StorageAccountAttributes'
+        description: The attributes of the storage account.
+        x-ms-client-name: StorageAccountAttributes
+      autoRegenerateKey:
+        description: whether keyvault should manage the storage account for the user.
+        type: boolean
+      regenerationPeriod:
+        description: The key regeneration time duration specified in ISO-8601 format.
+        type: string
+      resourceId:
+        description: Storage account resource id.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+    required:
+      - resourceId
+      - activeKeyName
+      - autoRegenerateKey
+  StorageAccountItem:
+    description: The storage account item containing storage account metadata.
+    properties:
+      attributes:
+        $ref: '#/definitions/StorageAccountAttributes'
+        description: The storage account management attributes.
+        readOnly: true
+      id:
+        description: Storage identifier.
+        readOnly: true
+        type: string
+      resourceId:
+        description: Storage account resource Id.
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        readOnly: true
+        type: object
+  StorageAccountRegenerteKeyParameters:
+    description: The storage account key regenerate parameters.
+    properties:
+      keyName:
+        description: The storage account key name.
+        type: string
+    required:
+      - keyName
+  StorageAccountUpdateParameters:
+    description: The storage account update parameters.
+    properties:
+      activeKeyName:
+        description: The current active storage account key name.
+        type: string
+      attributes:
+        $ref: '#/definitions/StorageAccountAttributes'
+        description: The attributes of the storage account.
+        x-ms-client-name: StorageAccountAttributes
+      autoRegenerateKey:
+        description: whether keyvault should manage the storage account for the user.
+        type: boolean
+      regenerationPeriod:
+        description: The key regeneration time duration specified in ISO-8601 format.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs.
+        type: object
+  StorageBundle:
+    description: A Storage account bundle consists of key vault storage account details plus its attributes.
+    properties:
+      activeKeyName:
+        description: The current active storage account key name.
+        readOnly: true
+        type: string
+      attributes:
+        $ref: '#/definitions/StorageAccountAttributes'
+        description: The storage account attributes.
+        readOnly: true
+      autoRegenerateKey:
+        description: whether keyvault should manage the storage account for the user.
+        readOnly: true
+        type: boolean
+      id:
+        description: The storage account id.
+        readOnly: true
+        type: string
+      regenerationPeriod:
+        description: The key regeneration time duration specified in ISO-8601 format.
+        readOnly: true
+        type: string
+      resourceId:
+        description: The storage account resource id.
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Application specific metadata in the form of key-value pairs
+        readOnly: true
+        type: object
+  StorageListResult:
+    description: The storage accounts list result.
+    properties:
+      nextLink:
+        description: The URL to get the next set of storage accounts.
+        readOnly: true
+        type: string
+      value:
+        description: A response message containing a list of storage accounts in the key vault along with a link to the next page of storage accounts.
+        items:
+          $ref: '#/definitions/StorageAccountItem'
+        readOnly: true
+        type: array
+  StorageRestoreParameters:
+    description: The secret restore parameters.
+    properties:
+      value:
+        description: The backup blob associated with a storage account.
+        format: base64url
+        type: string
+        x-ms-client-name: storageBundleBackup
+    required:
+      - value
+  SubjectAlternativeNames:
+    description: The subject alternate names of a X509 object.
+    properties:
+      dns_names:
+        description: Domain names.
+        items:
+          type: string
+        type: array
+      emails:
+        description: Email addresses.
+        items:
+          type: string
+        type: array
+      upns:
+        description: User principal names.
+        items:
+          type: string
+        type: array
+  Trigger:
+    description: A condition to be satisfied for an action to be executed.
+    properties:
+      days_before_expiry:
+        description: 'Days before expiry to attempt renewal. Value should be between 1 and validity_in_months multiplied by 27. If validity_in_months is 36, then value should be between 1 and 972 (36 * 27).'
+        format: int32
+        type: integer
+      lifetime_percentage:
+        description: Percentage of lifetime at which to trigger. Value should be between 1 and 99.
+        format: int32
+        maximum: 99
+        minimum: 1
+        type: integer
+  X509CertificateProperties:
+    description: Properties of the X509 component of a certificate.
+    properties:
+      ekus:
+        description: The enhanced key usage.
+        items:
+          type: string
+        type: array
+      key_usage:
+        description: List of key usages.
+        items:
+          enum:
+            - digitalSignature
+            - nonRepudiation
+            - keyEncipherment
+            - dataEncipherment
+            - keyAgreement
+            - keyCertSign
+            - cRLSign
+            - encipherOnly
+            - decipherOnly
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: KeyUsageType
+        type: array
+      sans:
+        $ref: '#/definitions/SubjectAlternativeNames'
+        description: The subject alternative names.
+        x-ms-client-name: SubjectAlternativeNames
+      subject:
+        description: The subject name. Should be a valid X509 distinguished Name.
+        type: string
+      validity_months:
+        description: The duration that the ceritifcate is valid in months.
+        format: int32
+        minimum: 0
+        type: integer
+        x-ms-client-name: ValidityInMonths
+x-ms-parameterized-host:
+  hostTemplate: '{vaultBaseUrl}'
+  parameters:
+    - description: 'The vault name, for example https://myvault.vault.azure.net.'
+      in: path
+      name: vaultBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

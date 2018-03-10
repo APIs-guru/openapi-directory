@@ -1,0 +1,260 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: Scale unit operation endpoints and objects.
+  title: FabricAdminClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/ScaleUnit.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-ScaleUnit
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ScaleUnitParameter:
+    description: Name of the scale units.
+    in: path
+    name: scaleUnit
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits':
+    get:
+      description: Get a list of all scale units at a location.
+      operationId: ScaleUnits_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ScaleUnitList'
+      tags:
+        - ScaleUnits
+      x-ms-examples:
+        List all scale units:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/scaleUnits/S-Cluster
+                    location: local
+                    name: S-Cluster
+                    properties:
+                      logicalFaultDomain: 0
+                      nodes:
+                        - /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/scaleUnitNodes/HC1n25r2236
+                      scaleUnitType: HyperConverged
+                      state: Running
+                      totalCapacity:
+                        cores: 56
+                        memoryGB: 255.875
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/scaleUnits
+      x-ms-odata: '#/definitions/ScaleUnit'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}':
+    get:
+      description: Get a scale unit.
+      operationId: ScaleUnits_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ScaleUnitParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ScaleUnit'
+      tags:
+        - ScaleUnits
+      x-ms-examples:
+        Get a scale unit:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            scaleUnit: S-Cluster
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/scaleUnits/S-Cluster
+                location: local
+                name: S-Cluster
+                properties:
+                  logicalFaultDomain: 0
+                  nodes:
+                    - /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/scaleUnitNodes/HC1n25r2236
+                  scaleUnitType: HyperConverged
+                  state: Running
+                  totalCapacity:
+                    cores: 56
+                    memoryGB: 255.875
+                tags: {}
+                type: Microsoft.Fabric.Admin/fabricLocations/scaleUnits
+definitions:
+  ScaleUnit:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Region Location of resource.
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: Represents a cluster - generally this will be a collection of Hosts backed by Failover Cluster Manager.
+    properties:
+      properties:
+        $ref: '#/definitions/ScaleUnitModel'
+        description: Properties of a scale unit.
+        x-ms-client-flatten: true
+    type: object
+  ScaleUnitCapacity:
+    description: The capacity information for a physical machine.
+    properties:
+      cores:
+        description: The number of CPU cores for the physical machine.
+        format: int64
+        type: integer
+      memoryGB:
+        description: The memory for the physical machine.
+        format: float
+        type: number
+    type: object
+  ScaleUnitList:
+    description: A pageable list of scale units.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: The list of scale units on this page.
+        items:
+          $ref: '#/definitions/ScaleUnit'
+        type: array
+    type: object
+  ScaleUnitModel:
+    description: Properties of a scale unit.
+    properties:
+      logicalFaultDomain:
+        description: Fault domain name of the cluster.
+        format: int32
+        type: integer
+      model:
+        description: Model of the servers in the cluster.
+        type: string
+      nodes:
+        description: List of nodes in the server.
+        items:
+          type: string
+        type: array
+      scaleUnitType:
+        description: Type of the cluster.
+        enum:
+          - Unknown
+          - ComputeOnly
+          - StorageOnly
+          - HyperConverged
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ScaleUnitType
+      state:
+        description: Current state of the cluster.
+        enum:
+          - Unknown
+          - Creating
+          - Running
+          - Upgrading
+          - Deleting
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ScaleUnitState
+      totalCapacity:
+        $ref: '#/definitions/ScaleUnitCapacity'
+        description: Capacity information for the cluster.
+    type: object

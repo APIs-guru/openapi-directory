@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: Use these REST APIs for performing operations on Identity Provider entity associated with your Azure API Management deployment. Setting up an external Identity Provider for authentication can help you manage the developer portal logins using the OAuth2 flow.
   title: ApiManagementClient
@@ -12,9 +12,9 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimidentityprovider.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimidentityprovider.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimidentityprovider
   x-tags:
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   IdentityProviderNameParameter:
     description: Identity Provider Type identifier.
@@ -67,33 +63,13 @@ parameters:
           value: aadB2C
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders':
+  /identityProviders:
     get:
       description: Lists a collection of Identity Provider configured in the specified service instance.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory'
-      operationId: IdentityProvider_ListByService
+      operationId: IdentityProvider_List
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -133,64 +109,22 @@ paths:
       tags:
         - IdentityProvider
       x-ms-examples:
-        ApiManagementListIdentityProviders:
+        ApiManagementListIdentityproviders:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
-                value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Google
-                    name: Google
-                    properties:
-                      clientId: googleId
-                      clientSecret: googlesecret
-                      type: google
-                    type: Microsoft.ApiManagement/service/identityProviders
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Aad
-                    name: Aad
-                    properties:
-                      allowedTenants:
-                        - samiraad.onmicrosoft.com
-                      clientId: aadapplicationid
-                      clientSecret: aadapplicationkey
-                      type: aad
-                    type: Microsoft.ApiManagement/service/identityProviders
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C
-                    name: AadB2C
-                    properties:
-                      allowedTenants:
-                        - samirtestbc.onmicrosoft.com
-                      clientId: aadb2clientId
-                      clientSecret: aadb2cClientKey
-                      signinPolicyName: B2C_1_Signin_Default
-                      signupPolicyName: B2C_1_Signup_Default
-                      type: aadB2C
-                    type: Microsoft.ApiManagement/service/identityProviders
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}':
+                count: 0
+                value: []
+      x-ms-pageable: {}
+  '/identityProviders/{identityProviderName}':
     delete:
       description: Deletes the specified identity provider configuration.
       operationId: IdentityProvider_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/IdentityProviderNameParameter'
         - description: The entity state (Etag) version of the backend to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
@@ -200,11 +134,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -239,40 +168,18 @@ paths:
       tags:
         - IdentityProvider
       x-ms-examples:
-        ApiManagementDeleteIdentityProvider:
+        ApiManagementDeleteIdentityproviders:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
-            identityProviderName: aad
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            identityProviderName: aadB2C
           responses:
             '204': {}
     get:
       description: Gets the configuration details of the identity Provider configured in specified service instance.
       operationId: IdentityProvider_Get
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/IdentityProviderNameParameter'
         - description: Version of the API to be used with the client request.
           in: query
@@ -317,123 +224,23 @@ paths:
       tags:
         - IdentityProvider
       x-ms-examples:
-        ApiManagementGetIdentityProvider:
+        ApiManagementGetIdentityproviders:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            identityProviderName: aadB2C
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            identityProviderName: google
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/aadB2C
-                name: aadB2C
-                properties:
-                  allowedTenants:
-                    - samirtestbc.onmicrosoft.com
-                  clientId: 315c8e2b-29fc-413d-822f-4efab7f43c42
-                  clientSecret: SnE4laLjmxc2QKWTPoRxOiwvSnnwMCFN+jLYDpBCUXw=
-                  signinPolicyName: B2C_1_signup-policy
-                  signupPolicyName: B2C_1_Signup_Default
-                  type: aadB2C
-                type: Microsoft.ApiManagement/service/identityProviders
-    head:
-      description: Gets the entity state (Etag) version of the identityProvider specified by its identifier.
-      operationId: IdentityProvider_GetEntityTag
-      parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/IdentityProviderNameParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified identity provider entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - IdentityProvider
-      x-ms-examples:
-        ApiManagementHeadIdentityProvider:
-          parameters:
-            api-version: '2017-03-01'
-            identityProviderName: aadB2C
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                clientId: FOLBTMWPUI
+                clientSecret: GVGOUEEPZYUHRDIATOXM
+                id: /identityProviders/Google
+                type: google
     patch:
       description: Updates an existing IdentityProvider configuration.
       operationId: IdentityProvider_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/IdentityProviderNameParameter'
         - description: Update parameters.
           in: body
@@ -449,11 +256,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -488,39 +290,21 @@ paths:
       tags:
         - IdentityProviders
       x-ms-examples:
-        ApiManagementUpdateIdentityProvider:
+        ApiManagementPatchIdentityproviders:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             identityProviderName: facebook
             parameters:
-              properties:
-                clientId: updatedfacebookid
-                clientSecret: updatedfacebooksecret
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              clientId: BDNYXUKKLB
+              clientSecret: QNFYIDJQVSGXDCXYLECG
           responses:
             '204': {}
     put:
       description: Creates or Updates the IdentityProvider configuration.
       operationId: IdentityProvider_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/IdentityProviderNameParameter'
         - description: Create parameters.
           in: body
@@ -531,11 +315,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -576,36 +355,28 @@ paths:
       tags:
         - IdentityProvider
       x-ms-examples:
-        ApiManagementCreateIdentityProvider:
+        ApiManagementPutIdentityproviders:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             identityProviderName: facebook
             parameters:
-              properties:
-                clientId: facebookid
-                clientSecret: facebookapplicationsecret
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              clientId: BDNYXUKKLB
+              clientSecret: QNFYIDJQVSGXDCXYLECG
+              type: facebook
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Facebook
-                name: Facebook
-                properties:
-                  clientId: facebookid
-                  clientSecret: facebookapplicationsecret
-                  type: facebook
-                type: Microsoft.ApiManagement/service/identityProviders
+                clientId: BDNYXUKKLB
+                clientSecret: QNFYIDJQVSGXDCXYLECG
+                id: /identityProviders/Facebook
+                type: facebook
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Facebook
-                name: Facebook
-                properties:
-                  clientId: facebookid
-                  clientSecret: facebookapplicationsecret
-                  type: facebook
-                type: Microsoft.ApiManagement/service/identityProviders
+                clientId: BDNYXUKKLB
+                clientSecret: QNFYIDJQVSGXDCXYLECG
+                id: /identityProviders/Facebook
+                type: facebook
 definitions:
   IdentityProviderBaseParameters:
     description: Identity Provider Base Parameter Properties.
@@ -660,27 +431,12 @@ definitions:
               value: aadB2C
   IdentityProviderContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/IdentityProviderContractProperties'
     description: Identity Provider details.
     properties:
-      properties:
-        $ref: '#/definitions/IdentityProviderContractProperties'
-        description: Identity Provider contract properties.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the identity provider.
+        type: string
   IdentityProviderContractProperties:
     allOf:
       - $ref: '#/definitions/IdentityProviderBaseParameters'
@@ -700,22 +456,15 @@ definitions:
   IdentityProviderList:
     description: List of all the Identity Providers configured on the service instance.
     properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
+      count:
+        description: Total number of identity providers
+        type: integer
       value:
         description: Identity Provider configuration values.
         items:
           $ref: '#/definitions/IdentityProviderContract'
         type: array
   IdentityProviderUpdateParameters:
-    description: Parameters supplied to update Identity Provider
-    properties:
-      properties:
-        $ref: '#/definitions/IdentityProviderUpdateProperties'
-        description: Identity Provider update properties.
-        x-ms-client-flatten: true
-  IdentityProviderUpdateProperties:
     allOf:
       - $ref: '#/definitions/IdentityProviderBaseParameters'
     description: Parameters supplied to the Update Identity Provider operation.
@@ -728,3 +477,14 @@ definitions:
         description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
         minLength: 1
         type: string
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

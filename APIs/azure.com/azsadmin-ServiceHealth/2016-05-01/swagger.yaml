@@ -1,0 +1,342 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: Service health operation endpoints and objects.
+  title: InfrastructureInsightsManagementClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/InfrastructureInsights/Microsoft.InfrastructureInsights.Admin/stable/2016-05-01/ServiceHealth.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-ServiceHealth
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ServiceHealthParameter:
+    description: Service Health name.
+    in: path
+    name: serviceHealth
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths':
+    get:
+      description: Get a list of all services health
+      operationId: ServiceHealths_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location name.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceHealthList'
+      tags:
+        - ServiceHealths
+      x-ms-examples:
+        List all services health:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                nextLink: ''
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/serviceHealths/23c54265-0e65-4d53-abdc-6734bd6a59f6
+                    location: local
+                    name: 23c54265-0e65-4d53-abdc-6734bd6a59f6
+                    properties:
+                      alertSummary:
+                        criticalAlertCount: 0
+                        warningAlertCount: 0
+                      displayName: Network
+                      healthState: Healthy
+                      infraURI: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Network.Admin/infraRoles/Network
+                      namespace: Microsoft.Network.Admin
+                      registrationId: 23c54265-0e65-4d53-abdc-6734bd6a59f6
+                      routePrefix: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Network.Admin/
+                      serviceLocation: local
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/serviceHealths
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/serviceHealths/385a3e01-3685-45ae-a073-f00dda2b1f7d
+                    location: local
+                    name: 385a3e01-3685-45ae-a073-f00dda2b1f7d
+                    properties:
+                      alertSummary:
+                        criticalAlertCount: 0
+                        warningAlertCount: 0
+                      displayName: Storage
+                      healthState: Healthy
+                      infraURI: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Storage.Admin/farms/84e1c82f-06e2-4bf7-8a9e-646cfa4e4988/infraRoles/Storage
+                      namespace: Microsoft.Storage.Admin
+                      registrationId: 385a3e01-3685-45ae-a073-f00dda2b1f7d
+                      routePrefix: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Storage.Admin/farms/84e1c82f-06e2-4bf7-8a9e-646cfa4e4988
+                      serviceLocation: local
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/serviceHealths
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/serviceHealths/9d9bd18c-5f8d-4f3d-b680-7a27161527ca
+                    location: local
+                    name: 9d9bd18c-5f8d-4f3d-b680-7a27161527ca
+                    properties:
+                      alertSummary:
+                        criticalAlertCount: 0
+                        warningAlertCount: 0
+                      displayName: Key Vault
+                      healthState: Healthy
+                      infraURI: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.KeyVault.Admin/locations/local/infraRoles/Key Vault
+                      namespace: Microsoft.KeyVault.Admin
+                      registrationId: 9d9bd18c-5f8d-4f3d-b680-7a27161527ca
+                      routePrefix: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.KeyVault.Admin/locations/local
+                      serviceLocation: local
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/serviceHealths
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/serviceHealths/bb58377f-3d7d-4d7f-b3b3-d433d422bf9e
+                    location: local
+                    name: bb58377f-3d7d-4d7f-b3b3-d433d422bf9e
+                    properties:
+                      alertSummary:
+                        criticalAlertCount: 0
+                        warningAlertCount: 0
+                      displayName: Region Management
+                      healthState: Unknown
+                      infraURI: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/infraRoles/Region Management
+                      namespace: Microsoft.InfrastructureInsights.Admin
+                      registrationId: bb58377f-3d7d-4d7f-b3b3-d433d422bf9e
+                      routePrefix: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local
+                      serviceLocation: local
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/serviceHealths
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/serviceHealths/c720a7de-4812-4b58-969d-c2e2a5cd89ec
+                    location: local
+                    name: c720a7de-4812-4b58-969d-c2e2a5cd89ec
+                    properties:
+                      alertSummary:
+                        criticalAlertCount: 0
+                        warningAlertCount: 0
+                      displayName: Compute
+                      healthState: Unknown
+                      infraURI: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Compute.Admin/infraRoles/Compute
+                      namespace: Microsoft.Compute.Admin
+                      registrationId: c720a7de-4812-4b58-969d-c2e2a5cd89ec
+                      routePrefix: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Compute.Admin/
+                      serviceLocation: local
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/serviceHealths
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/serviceHealths/ca6d95e7-7fe1-4c10-b0db-ab4cc835a811
+                    location: local
+                    name: ca6d95e7-7fe1-4c10-b0db-ab4cc835a811
+                    properties:
+                      alertSummary:
+                        criticalAlertCount: 0
+                        warningAlertCount: 0
+                      displayName: Updates
+                      healthState: Unknown
+                      infraURI: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Update.Admin/updateLocations/local/infraRoles/Updates
+                      namespace: Microsoft.Update.Admin
+                      registrationId: ca6d95e7-7fe1-4c10-b0db-ab4cc835a811
+                      routePrefix: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Update.Admin/updateLocations/local
+                      serviceLocation: local
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/serviceHealths
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/serviceHealths/e56bc7b8-c8b5-4e25-b00c-4f951effb22c
+                    location: local
+                    name: e56bc7b8-c8b5-4e25-b00c-4f951effb22c
+                    properties:
+                      alertSummary:
+                        criticalAlertCount: 0
+                        warningAlertCount: 1
+                      displayName: Capacity
+                      healthState: Warning
+                      infraURI: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Capacity
+                      namespace: Microsoft.Fabric.Admin
+                      registrationId: e56bc7b8-c8b5-4e25-b00c-4f951effb22c
+                      routePrefix: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local
+                      serviceLocation: local
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/serviceHealths
+      x-ms-odata: '#/definitions/ServiceHealth'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceHealth}':
+    get:
+      description: Get a services health
+      operationId: ServiceHealths_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location name.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ServiceHealthParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceHealth'
+      tags:
+        - ServiceHealths
+      x-ms-examples:
+        Get a services health:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            serviceHealth: c720a7de-4812-4b58-969d-c2e2a5cd89ec
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/serviceHealths/c720a7de-4812-4b58-969d-c2e2a5cd89ec
+                location: local
+                name: c720a7de-4812-4b58-969d-c2e2a5cd89ec
+                properties:
+                  alertSummary:
+                    criticalAlertCount: 0
+                    warningAlertCount: 0
+                  displayName: Compute
+                  healthState: Unknown
+                  infraURI: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Compute.Admin/infraRoles/Compute
+                  namespace: Microsoft.Compute.Admin
+                  registrationId: c720a7de-4812-4b58-969d-c2e2a5cd89ec
+                  routePrefix: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Compute.Admin/
+                  serviceLocation: local
+                tags: {}
+                type: Microsoft.InfrastructureInsights.Admin/regionHealths/serviceHealths
+definitions:
+  ServiceHealth:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            type: string
+          location:
+            description: Location where resource is location.
+            readOnly: true
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            readOnly: true
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: Holds information about a services health.
+    properties:
+      properties:
+        $ref: '#/definitions/ServiceHealthModel'
+        description: Holds information about a services health.
+        x-ms-client-flatten: true
+  ServiceHealthList:
+    description: Pageable list of service health instances.
+    properties:
+      nextLink:
+        description: URI of the next page.
+        type: string
+      value:
+        description: Array of service health instances.
+        items:
+          $ref: '#/definitions/ServiceHealth'
+        type: array
+  ServiceHealthModel:
+    allOf:
+      - description: Models the base properties for health resource.
+        properties:
+          alertSummary:
+            description: Summary of the alerts.
+            properties:
+              criticalAlertCount:
+                description: How many critical alerts this service has.
+                type: integer
+              warningAlertCount:
+                description: How many warning alerts this service has.
+                type: integer
+          healthState:
+            description: Gets or sets the health status.
+            type: string
+          namespace:
+            description: Gets or sets the name space.
+            type: string
+          registrationId:
+            description: Gets or sets the registration id.
+            type: string
+          routePrefix:
+            description: Gets or sets the route prefix.
+            type: string
+    description: Holds information about a services health.
+    properties:
+      displayName:
+        description: Name of the alert.
+        type: string
+      infraURI:
+        description: The route prefix to the alert.
+        type: string
+      serviceLocation:
+        description: Location of the service.
+        type: string

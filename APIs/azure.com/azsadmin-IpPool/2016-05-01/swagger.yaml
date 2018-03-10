@@ -1,0 +1,351 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: Ip pool operation endpoints and objects.
+  title: FabricAdminClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/IpPool.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-IpPool
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  IpPoolNameParameter:
+    description: Ip pool name.
+    in: path
+    name: ipPool
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  IpPoolParameter:
+    description: Ip pool object to send.
+    in: body
+    name: pool
+    required: true
+    schema:
+      $ref: '#/definitions/IpPool'
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/ipPools':
+    get:
+      description: Get a list of all ip pools at a certain location.
+      operationId: IpPools_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IpPoolList'
+      tags:
+        - IpPools
+      x-ms-examples:
+        List all ip pools:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/ipPools/04938f7f-797b-4dd2-80c6-077542be121a
+                    location: local
+                    name: 04938f7f-797b-4dd2-80c6-077542be121a
+                    properties:
+                      endIpAddress: 192.168.102.255
+                      numberOfAllocatedIpAddresses: 31
+                      numberOfIpAddresses: 255
+                      numberOfIpAddressesInTransition: 0
+                      startIpAddress: 192.168.102.1
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/ipPools
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/ipPools/3019a64c-9886-4e94-ba6e-2241da0472eb
+                    location: local
+                    name: 3019a64c-9886-4e94-ba6e-2241da0472eb
+                    properties:
+                      endIpAddress: 192.168.200.111
+                      numberOfAllocatedIpAddresses: 0
+                      numberOfIpAddresses: 47
+                      numberOfIpAddressesInTransition: 0
+                      startIpAddress: 192.168.200.65
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/ipPools
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/ipPools/8516e3aa-0aea-4503-88d7-335ebd1f1a46
+                    location: local
+                    name: 8516e3aa-0aea-4503-88d7-335ebd1f1a46
+                    properties:
+                      endIpAddress: 192.168.200.62
+                      numberOfAllocatedIpAddresses: 1
+                      numberOfIpAddresses: 62
+                      numberOfIpAddressesInTransition: 0
+                      startIpAddress: 192.168.200.1
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/ipPools
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/ipPools/90e70aa4-663f-44e5-a7c5-d77d9f06f809
+                    location: local
+                    name: 90e70aa4-663f-44e5-a7c5-d77d9f06f809
+                    properties:
+                      endIpAddress: 192.168.105.255
+                      numberOfAllocatedIpAddresses: 8
+                      numberOfIpAddresses: 255
+                      numberOfIpAddressesInTransition: 0
+                      startIpAddress: 192.168.105.1
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/ipPools
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/ipPools/981fec89-67d6-453e-bf21-5ff11562564f
+                    location: local
+                    name: 981fec89-67d6-453e-bf21-5ff11562564f
+                    properties:
+                      endIpAddress: 192.168.200.254
+                      numberOfAllocatedIpAddresses: 1
+                      numberOfIpAddresses: 31
+                      numberOfIpAddressesInTransition: 0
+                      startIpAddress: 192.168.200.224
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/ipPools
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/ipPools/f5c138af-2f47-4c22-81fe-c675a5d2c3a2
+                    location: local
+                    name: f5c138af-2f47-4c22-81fe-c675a5d2c3a2
+                    properties:
+                      endIpAddress: 192.168.200.127
+                      numberOfAllocatedIpAddresses: 1
+                      numberOfIpAddresses: 16
+                      numberOfIpAddressesInTransition: 0
+                      startIpAddress: 192.168.200.112
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/ipPools
+      x-ms-odata: '#/definitions/IpPool'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/ipPools/{ipPool}':
+    get:
+      description: Get an ip pool.
+      operationId: IpPools_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/IpPoolNameParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IpPool'
+      tags:
+        - IpPools
+      x-ms-examples:
+        Get an ip pool:
+          parameters:
+            api-version: '2016-05-01'
+            ipPool: 981fec89-67d6-453e-bf21-5ff11562564f
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/ipPools/981fec89-67d6-453e-bf21-5ff11562564f
+                location: local
+                name: 981fec89-67d6-453e-bf21-5ff11562564f
+                properties:
+                  endIpAddress: 192.168.200.254
+                  numberOfAllocatedIpAddresses: 1
+                  numberOfIpAddresses: 31
+                  numberOfIpAddressesInTransition: 0
+                  startIpAddress: 192.168.200.224
+                tags: {}
+                type: Microsoft.Fabric.Admin/fabricLocations/ipPools
+    put:
+      description: Create an ip pool.
+      operationId: IpPools_Create
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/IpPoolNameParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - $ref: '#/parameters/IpPoolParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Status of the compute operation.
+            properties:
+              properties:
+                description: The state of the operation.
+                properties:
+                  provisioningState:
+                    description: The state of the operation.
+                    type: string
+        '202':
+          description: OK
+          schema:
+            description: Status of the compute operation.
+            properties:
+              properties:
+                description: The state of the operation.
+                properties:
+                  provisioningState:
+                    description: The state of the operation.
+                    type: string
+      tags:
+        - IpPools
+      x-ms-examples:
+        Create an ip pool:
+          parameters:
+            api-version: '2016-05-01'
+            ipPool: myPool
+            location: local
+            pool:
+              properties:
+                endIpAddress: 10.10.1.254
+                startIpAddress: 10.10.1.1
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body: {}
+      x-ms-long-running-operation: true
+definitions:
+  IpPool:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Region Location of resource.
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: This resource defines the range of IP addresses from which addresses are  allocated for nodes within a subnet.
+    properties:
+      properties:
+        $ref: '#/definitions/IpPoolModel'
+        description: Properties of an IpPool.
+        x-ms-client-flatten: true
+    type: object
+  IpPoolList:
+    description: Pageable list of ip pools.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: List of ip pools for this page.
+        items:
+          $ref: '#/definitions/IpPool'
+        type: array
+    type: object
+  IpPoolModel:
+    description: Properties of an IpPool.
+    properties:
+      addressPrefix:
+        description: The address prefix.
+        type: string
+      endIpAddress:
+        description: The ending Ip address.
+        type: string
+      numberOfAllocatedIpAddresses:
+        description: The number of currently allocated ip addresses.
+        format: int64
+        type: integer
+      numberOfIpAddresses:
+        description: The total number of ip addresses.
+        format: int64
+        type: integer
+      numberOfIpAddressesInTransition:
+        description: The current number of ip addresses in transition.
+        format: int64
+        type: integer
+      startIpAddress:
+        description: The starting Ip address.
+        type: string
+    type: object

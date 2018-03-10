@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: 'Use these REST APIs for performing operations on Property entity associated with your Azure API Management deployment. API Management policies are a powerful capability of the system that allow the publisher to change the behavior of the API through configuration. Policies are a collection of statements that are executed sequentially on the request or response of an API. Policy statements can be constructed using literal text values, policy expressions, and properties. Each API Management service instance has a properties collection of key/value pairs that are global to the service instance. These properties can be used to manage constant string values across all API configuration and policies.'
   title: ApiManagementClient
@@ -12,9 +12,9 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimproperties.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimproperties.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimproperties
   x-tags:
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   PropertyIdParameter:
     description: Identifier of the property.
@@ -46,28 +42,13 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties':
+  /properties:
     get:
       description: Lists a collection of properties defined within a service instance.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-properties'
-      operationId: Property_ListByService
+      operationId: Property_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: |-
             | Field | Supported operators    | Supported functions                                   |
             |-------|------------------------|-------------------------------------------------------|
@@ -98,11 +79,6 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
       responses:
         '200':
           description: A Collection of the Property entities for the specified API Management service instance.
@@ -113,55 +89,36 @@ paths:
       x-ms-examples:
         ApiManagementListProperties:
           parameters:
+            $filter: 'tags/any(t: t eq ''5a58bd1fa40f7e104892a21f'')'
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 2
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/592f1174cc83890dc4f32686
-                    name: 592f1174cc83890dc4f32686
-                    properties:
-                      displayName: Logger-Credentials-592f1174cc83890dc4f32687
-                      secret: true
-                      value: 'Endpoint=sb://testtemplatetesteh.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=...'
-                    type: Microsoft.ApiManagement/service/properties
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testarmTemplateproperties2
-                    name: testarmTemplateproperties2
-                    properties:
-                      displayName: propName
-                      secret: false
-                      tags:
-                        - foo
-                        - bar
-                      value: propValue
-                    type: Microsoft.ApiManagement/service/properties
+                  - id: /properties/5a58bd1fa40f7e104892a220
+                    name: 5a58bd1fa40f7e104892a221
+                    secret: true
+                    tags:
+                      - 5a58bd1fa40f7e104892a21f
+                      - b
+                    value: OZPCHNQMWBOXOTZNUPWFIMZDPXLAQKSR
+                  - id: /properties/5a58bd1fa40f7e104892a223
+                    name: 5a58bd1fa40f7e104892a224
+                    secret: true
+                    tags:
+                      - 5a58bd1fa40f7e104892a21f
+                    value: GTBYQGFBBXFAXTMCDOOZQQXBALMJBQWM
       x-ms-odata: '#/definitions/PropertyContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}':
+  '/properties/{propId}':
     delete:
       description: Deletes specific property from the the API Management service instance.
       operationId: Property_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/PropertyIdParameter'
         - description: The entity state (Etag) version of the property to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
@@ -171,11 +128,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -210,44 +162,22 @@ paths:
       tags:
         - Property
       x-ms-examples:
-        ApiManagementDeleteProperty:
+        ApiManagementDeleteProperties:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
-            propId: testprop2
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            propId: 5a58bd51a40f7e104892a4cf
           responses:
             '204': {}
     get:
       description: Gets the details of the property specified by its identifier.
       operationId: Property_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/PropertyIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -288,122 +218,24 @@ paths:
       tags:
         - Property
       x-ms-examples:
-        ApiManagementGetProperty:
+        ApiManagementGetProperties:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            propId: testarmTemplateproperties2
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            propId: 5a58bd11a40f7e104892a06e
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testarmTemplateproperties2
-                name: testarmTemplateproperties2
-                properties:
-                  displayName: propName
-                  secret: false
-                  tags:
-                    - foo
-                    - bar
-                  value: propValue
-                type: Microsoft.ApiManagement/service/properties
-    head:
-      description: Gets the entity state (Etag) version of the property specified by its identifier.
-      operationId: Property_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/PropertyIdParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified Property entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - Property
-      x-ms-examples:
-        ApiManagementHeadProperty:
-          parameters:
-            api-version: '2017-03-01'
-            propId: testarmTemplateproperties2
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                id: /properties/5a58bd11a40f7e104892a06e
+                name: 5a58bd11a40f7e104892a06f
+                secret: true
+                tags: null
+                value: ODPGOQTTJSCGQQTOYHHRIENMAFDNJQTUDKSCLBQMBSIGMIRQYOQVIURJPDFIMGKSYIDFYQDWQUQQWHZRONOUAYLJTIMHWIZVIPHEFLRHLTENDANHDNTZRPSAWUMQDVAIVVIGAVMDVGJHTXFSUFDIOZDSXGHKZBDPSWSIRGGIBQDKGKHZPTVYRSUVRQJUNCDUDTOXFWBOYUGXWTMMZIVFFFXABWRBXMVYMIHMWKTSSHAWLWZYDWVFGYOXVNVIFZQLZIKNLZPOOCNYEBOFXTXARPROTJRIPKNSQOXDLLMEGGQDKQTUZPLMBPTKQWTBIGZDPVHPELTLGTULZNEDQWJZZAQBVMNPRLWZGMOPJDQNWZFIVIKCSQKLWAEOEFURYDTUWUFMZPTNGWCZUHFNCKXBALCFIZKDIZPSFKLACYCDXXEAXEUWAHPNGSULRZDAEPEHGKUJWFKDIUECGBHEFNDBKCLMQAIDVBYHSXUNKKAUXLEMOREQRZVQMDXEYHTVWGIGVWJJHUUVNJDYXZYYVSMVGIVPZQPCQEXQDYQSIUIXFADDZZGYJVAEUMANBUKQEREILNUZIGQAKOQFESPAJQTVETVRXDQNKRSOVUSMEHQDEZUFVUIJEJHOXJERRDBFPCPSWCJKZDWCAQQEZQVDVHJBKDQMQAVBGLNCJBJTLXJBNENHSZRBHYJISOHSMWUZHUWPCNUYHBRXXINFPITQJUTHBEJVTQHODKTSIYEEFTTFGMLKABDDCDPNBONYEZEQUDTNOVXRDPLQANBOTZUSNDLZUGRUKGAFPDLDSXVFELANSZMNMZEFEMDRRUSIEDGWOFAXCYWWDONBDXHUTDHLCVADZULYFNBAFDZMYPLOCIBQYCNUNXPAWUUTEXYIMYRPMNVAYUVDRSJUTKEWGRKHYAEKJGHBRDCERMDLHNVSCLJDLZZTTBBVNJRLILQSMUMOQEDHHTPSVSFMRAYJGOIPBGRHURCVWDGHYVNHWSMZMJZVEEUHMHMYMWMJNWMQQTVSLYNW
     patch:
       description: Updates the specific property.
       operationId: Property_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/PropertyIdParameter'
         - description: Update parameters.
           in: body
@@ -419,11 +251,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -458,41 +285,22 @@ paths:
       tags:
         - Property
       x-ms-examples:
-        ApiManagementUpdateProperty:
+        ApiManagementPatchProperties:
           parameters:
-            If-Match: '*'
+            If-Match: '"AAAAAAAAGaY="'
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
-              properties:
-                secret: true
-                tags:
-                  - foo
-                  - bar2
-            propId: testprop2
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              name: 5a58bd16a40f7e104892a090
+              secret: true
+              value: HDNRYZOJPPKUIVYGMJRDXQGFUDEFQXKORLMIDUKRYQERGDPHKZOIZOVQXHXVVITRFVDWIPDRZZEGMPZQNWVQIBPCPWLVXOWQXMMKASYUVWIZJPDHIGHYNCJDFAHLEIULCOJADOPVYAULSPTATEMQHYDVCIFALMQNCXXVGCEURLZMHYLPGHSZWDDDLNYUIPKLKHIVSXUQZSZVYQNEXPTEUQQYTUKSEJLBBOCZPQXJMBAEEIEUATXTVGQTQKBXNCMPGXTKONOGSKRTQMULPQRKLSGVXIJFOZVKOKXGOUFMFQAKPXDDQQIXKBENRYMFEJSSOGEFPNWVKFFURVFAFFOYRYANGJPQIAHVYIWITXOCTNNEWJWVSMAZUTAQFRZFXGMKXKWJZWGHQLFELVQXNUXWZIAFHGDCYJFNADHMMMVVFTIIOWEKABRDIQKOJRBTTEIHGREIOEKBYBRFZRQLBTBWRBEKSSCVKCBALBCWSWVVRQEHZFOSAQSACLPENUPVCOQVZQTYPUTEXFFAXXKMDJVTKBYZLXJYGATCAIHJLQDGXNDWFPHQJDRTTWLYRUMRLUXWMDAOPBBNFPWXYBUWPSODJAIDXIRRDLUCPGKBOTAICENEAOAQZQCSGUNMVWQHKJJUUTHRRSHVSGBFNEDJIARNJCWVTYGRDTYSUTJHGIYGIGZZSIYRTHYJRWLRWLYTMPSZIJKUUWCACLECCXDKZPYVUOAXHRKVKFUSOAQJXEWXFYHGRJPZINUXRXETIMMCLGPWQLNCGUNUSAQWHUFYCLMXLXBRWXAKSTLYIKPGVMSOZZEQGHLOGNZAUSKTKWFJTCCZPRNXEZDPSYXMTKKOLMDFTLEQZWVZHJUXXFBPTOJHJKIVVYAZLQYGYXFDNXXIDEIIDZOOJVUWDWVJCIUAVWNQLOYAZXBWQADFBZSVJMQQVBDBBVBECWMHRSXPBOOLTYGCTPIDQZRJFWUKKWYEWWTUOWOJCCUUXEWXUBIMNYODFDBUXMEEQKPWFMNXBYAOEWLB
+            propId: 5a58bd16a40f7e104892a08d
           responses:
             '204': {}
     put:
       description: Creates or updates a property.
       operationId: Property_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/PropertyIdParameter'
         - description: Create parameters.
           in: body
@@ -503,11 +311,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -548,49 +351,35 @@ paths:
       tags:
         - Property
       x-ms-examples:
-        ApiManagementCreateProperty:
+        ApiManagementPutProperties:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
-              properties:
-                displayName: prop3name
-                secret: true
-                tags:
-                  - foo
-                  - bar
-                value: propValue
-            propId: testprop2
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              name: cacheDuration5a58bc49a40f7e10489293ae
+              secret: true
+              value: '10'
+            propId: 5a58bc49a40f7e10489293ad
           responses:
             '200':
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testprop2
-              name: testprop2
-              properties:
-                displayName: prop3name
+              body:
+                id: /properties/5a58bc49a40f7e10489293ad
+                name: cacheDuration5a58bc49a40f7e10489293ae
                 secret: true
-                tags:
-                  - foo
-                  - bar
-                value: propValue
-              type: Microsoft.ApiManagement/service/properties
+                value: '10'
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testprop2
-                name: testprop2
-                properties:
-                  displayName: prop3name
-                  secret: true
-                  tags:
-                    - foo
-                    - bar
-                  value: propValue
-                type: Microsoft.ApiManagement/service/properties
+                id: /properties/5a58bc49a40f7e10489293ad
+                name: cacheDuration5a58bc49a40f7e10489293ae
+                secret: true
+                value: '10'
 definitions:
   PropertyCollection:
     description: Paged Property list representation.
     properties:
+      count:
+        description: Total number of entities
+        type: integer
       nextLink:
         description: Next page link if any.
         type: string
@@ -601,33 +390,18 @@ definitions:
         type: array
   PropertyContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/PropertyContractProperties'
     description: Property details.
     properties:
-      properties:
-        $ref: '#/definitions/PropertyContractProperties'
-        description: Property entity contract properties.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the Property.
+        type: string
   PropertyContractProperties:
     allOf:
       - $ref: '#/definitions/PropertyEntityBaseParameters'
     description: Property Contract properties.
     properties:
-      displayName:
+      name:
         description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
         maxLength: 256
         minLength: 1
@@ -639,7 +413,7 @@ definitions:
         minLength: 1
         type: string
     required:
-      - displayName
+      - name
       - value
   PropertyEntityBaseParameters:
     description: Property Entity Base Parameters set.
@@ -653,12 +427,12 @@ definitions:
           type: string
         maxItems: 32
         type: array
-  PropertyUpdateParameterProperties:
+  PropertyUpdateParameters:
     allOf:
       - $ref: '#/definitions/PropertyEntityBaseParameters'
     description: Property Contract properties.
     properties:
-      displayName:
+      name:
         description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
         maxLength: 256
         minLength: 1
@@ -669,10 +443,14 @@ definitions:
         maxLength: 4096
         minLength: 1
         type: string
-  PropertyUpdateParameters:
-    description: Property update Parameters.
-    properties:
-      properties:
-        $ref: '#/definitions/PropertyUpdateParameterProperties'
-        description: Property entity Update contract properties.
-        x-ms-client-flatten: true
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

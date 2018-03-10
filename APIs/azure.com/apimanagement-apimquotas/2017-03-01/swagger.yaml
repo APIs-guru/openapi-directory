@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: 'Use these REST APIs for performing operations on Quota entity associated with your Azure API Management deployment. To configure call rate limit and quota policies refer to [how to configure call rate limit and quota](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies).'
   title: ApiManagementClient
@@ -12,9 +12,9 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimquotas.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimquotas.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimquotas
   x-tags:
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   QuotaCounterKeyParameter:
     description: 'Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key="boo" in the policy, then it’s accessible by "boo" counter key. But if it’s defined as counter-key="@("b"+"a")" then it will be accessible by "ba" key'
@@ -51,34 +47,14 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}':
+  '/quotas/{quotaCounterKey}':
     get:
       description: Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.
       externalDocs:
         description: Document describing how to configure the quota policies.
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies'
-      operationId: QuotaByCounterKeys_ListByService
+      operationId: QuotaByCounterKeys_List
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/QuotaCounterKeyParameter'
         - description: Version of the API to be used with the client request.
           in: query
@@ -119,13 +95,11 @@ paths:
       tags:
         - QuotaByCounterKeys
       x-ms-examples:
-        ApiManagementGetQuotaCounteryKeys:
+        ApiManagementGetQuotas:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             quotaCounterKey: ba
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
           responses:
             '200':
               body:
@@ -143,21 +117,6 @@ paths:
       description: Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.
       operationId: QuotaByCounterKeys_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/QuotaCounterKeyParameter'
         - description: The value of the quota counter to be applied to all quota counter periods.
           in: body
@@ -168,11 +127,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -207,19 +161,17 @@ paths:
       tags:
         - QuotaByCounterKeys
       x-ms-examples:
-        ApiManagementUpdateQuotaCounterKey:
+        ApiManagementPatchQuotas:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
               callsCount: 0
               kbTransferred: 2.5630078125
             quotaCounterKey: ba
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
           responses:
             '204': {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/{quotaPeriodKey}':
+  '/quotas/{quotaCounterKey}/{quotaPeriodKey}':
     get:
       description: Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.
       externalDocs:
@@ -227,26 +179,6 @@ paths:
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies'
       operationId: QuotaByPeriodKeys_Get
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/QuotaCounterKeyParameter'
         - $ref: '#/parameters/QuotaPeriodKeyParameter'
         - description: Version of the API to be used with the client request.
@@ -288,14 +220,15 @@ paths:
       tags:
         - QuotaByPeriodKeys
       x-ms-examples:
-        ApiManagementGetQuotaCounteryKeysByQuotaPeriod:
+        ApiManagementGetQuotasByQuotaPeriod:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            parameters:
+              callsCount: 0
+              kbTransferred: 0
             quotaCounterKey: ba
             quotaPeriodKey: 0_P3Y6M4DT12H30M5S
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
           responses:
             '200':
               body:
@@ -310,21 +243,6 @@ paths:
       description: Updates an existing quota counter value in the specified service instance.
       operationId: QuotaByPeriodKeys_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/QuotaCounterKeyParameter'
         - $ref: '#/parameters/QuotaPeriodKeyParameter'
         - description: The value of the Quota counter to be applied on the specified period.
@@ -336,11 +254,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -375,17 +288,15 @@ paths:
       tags:
         - QuotaByPeriodKeys
       x-ms-examples:
-        ApiManagementUpdateQuotaCounterKeyByQuotaPeriod:
+        ApiManagementPatchQuotasByQuotaPeriod:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
               callsCount: 0
               kbTransferred: 0
             quotaCounterKey: ba
             quotaPeriodKey: 0_P3Y6M4DT12H30M5S
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
           responses:
             '204': {}
 definitions:
@@ -451,3 +362,14 @@ definitions:
         description: Data Transferred in KiloBytes.
         format: double
         type: number
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

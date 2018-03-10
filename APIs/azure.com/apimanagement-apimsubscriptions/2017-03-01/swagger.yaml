@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: 'Use these REST APIs for performing operations on Subscription entity associated with your Azure API Management deployment. The Subscription entity represents the association between a user and a product in API Management. Products contain one or more APIs, and once a product is published, developers can subscribe to the product and begin to use the product’s APIs.'
   title: ApiManagementClient
@@ -12,9 +12,9 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimsubscriptions.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimsubscriptions.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimsubscriptions
   x-tags:
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   SubscriptionEntityIdParameter:
     description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
@@ -46,26 +42,11 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions':
+  /subscriptions:
     get:
       description: Lists all subscriptions of the API Management service instance.
       operationId: Subscription_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: |-
             | Field        | Supported operators    | Supported functions                         |
             |--------------|------------------------|---------------------------------------------|
@@ -98,11 +79,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -141,73 +117,31 @@ paths:
       x-ms-examples:
         ApiManagementListSubscriptions:
           parameters:
+            $skip: 0
+            $top: 10000
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 1
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/5600b59475ff190048070001
-                    name: 5600b59475ff190048070001
-                    properties:
-                      createdDate: '2015-09-22T01:57:40.3Z'
-                      primaryKey: a24782fc06f648cbb1c3406c41dc9a3a
-                      productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060001
-                      secondaryKey: b366198986614a7497a5a68fae19119d
-                      state: active
-                      userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/1
-                    type: Microsoft.ApiManagement/service/subscriptions
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/56eaed3dbaf08b06e46d27fe
-                    name: 56eaed3dbaf08b06e46d27fe
-                    properties:
-                      createdDate: '2016-03-17T17:45:33.837Z'
-                      displayName: Starter
-                      expirationDate: '2016-04-01T00:00:00Z'
-                      notificationDate: '2016-03-20T00:00:00Z'
-                      primaryKey: 77708695e79a495bb99b95f32adfa1f0
-                      productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060001
-                      secondaryKey: 12e2e4ba857e420b88450dc8fe2a6cf9
-                      startDate: '2016-03-17T00:00:00Z'
-                      state: active
-                      userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/56eaec62baf08b06e46d27fd
-                    type: Microsoft.ApiManagement/service/subscriptions
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/5931a769d8d14f0ad8ce13b8
-                    name: 5931a769d8d14f0ad8ce13b8
-                    properties:
-                      createdDate: '2017-06-02T17:59:06.223Z'
-                      displayName: Unlimited
-                      primaryKey: 6de0a3b2da204e459148d2f6785873f0
-                      productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
-                      secondaryKey: c6de00b451f64ea780db1eb8dcf30b62
-                      state: submitted
-                      userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512a88c680b
-                    type: Microsoft.ApiManagement/service/subscriptions
+                  - createdDate: '2018-01-12T13:39:28.57Z'
+                    id: /subscriptions/5a58ba90a40f7e0034070001
+                    primaryKey: 2D9B138F40C1244CB6B48D0378865469
+                    productId: /products/starter
+                    secondaryKey: 5163734D7AF0CC4AB5A59345E1B6BF6D
+                    state: active
+                    userId: /users/1
       x-ms-odata: '#/definitions/SubscriptionContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}':
+  '/subscriptions/{sid}':
     delete:
       description: Deletes the specified subscription.
       operationId: Subscription_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/SubscriptionEntityIdParameter'
         - description: ETag of the Subscription Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
@@ -217,11 +151,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -256,44 +185,22 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        ApiManagementDeleteSubscription:
+        ApiManagementDeleteSubscriptions:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            sid: testsub
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            sid: 5a58bcd5a40f7e1048929a61
           responses:
             '204': {}
     get:
       description: Gets the specified Subscription entity.
       operationId: Subscription_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/SubscriptionEntityIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -334,123 +241,28 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        ApiManagementGetSubscription:
+        ApiManagementGetSubscriptions:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            sid: 5931a769d8d14f0ad8ce13b8
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            sid: 5a58baf8a40f7ef2e05bcfb7
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/5931a769d8d14f0ad8ce13b8
-                name: 5931a769d8d14f0ad8ce13b8
-                properties:
-                  createdDate: '2017-06-02T17:59:06.223Z'
-                  displayName: Unlimited
-                  primaryKey: 6de0a3b2da204e459148d2f6785873f0
-                  productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
-                  secondaryKey: c6de00b451f64ea780db1eb8dcf30b62
-                  state: submitted
-                  userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512a88c680b
-                type: Microsoft.ApiManagement/service/subscriptions
-    head:
-      description: Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
-      operationId: Subscription_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/SubscriptionEntityIdParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified apimanagement subscription entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - Subscriptions
-      x-ms-examples:
-        ApiManagementHeadSubscription:
-          parameters:
-            api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            sid: 5931a769d8d14f0ad8ce13b8
-            subscriptionId: subid
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                createdDate: '2018-01-12T13:41:12.18Z'
+                id: /subscriptions/5a58baf8a40f7ef2e05bcfb7
+                name: product_5a58baf7a40f7ef2e05bcfa4 subscription
+                primaryKey: 2ce7fde4e2df43a39331f0bc5798e77f
+                productId: /products/5a58baf7a40f7ef2e05bcfa3
+                secondaryKey: 3ddb12a0c41f4eb58540c8903aff3306
+                startDate: '2018-01-12T00:00:00Z'
+                state: active
+                userId: /users/5a58baf8a40f7ef2e05bcfb1
     patch:
       description: Updates the details of a subscription specificied by its identifier.
       operationId: Subscription_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/SubscriptionEntityIdParameter'
         - description: Update parameters.
           in: body
@@ -463,14 +275,18 @@ paths:
           name: If-Match
           required: true
           type: string
+        - default: 'False'
+          description: Notify the subscriber of the subscription state change to Submitted or Active state.
+          enum:
+            - 'False'
+            - 'True'
+          in: query
+          name: notify
+          required: false
+          type: string
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -505,38 +321,21 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        ApiManagementUpdateSubscription:
+        ApiManagementPatchSubscriptions:
           parameters:
-            If-Match: '*'
+            If-Match: '"AAAAAAAADgQ="'
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            notify: 'False'
             parameters:
-              properties:
-                displayName: testsub
-            resourceGroupName: rg1
-            serviceName: apimService1
-            sid: testsub
-            subscriptionId: subid
+              expirationDate: '2019-01-12T13:41:58.5287235Z'
+            sid: 5a58bb26a40f7ef2e05bd5e9
           responses:
             '204': {}
     put:
       description: Creates or updates the subscription of specified user to the specified product.
       operationId: Subscription_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/SubscriptionEntityIdParameter'
         - description: Create parameters.
           in: body
@@ -544,14 +343,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SubscriptionCreateParameters'
+        - default: 'False'
+          description: Notify the subscriber of the subscription state change to Submitted or Active state.
+          enum:
+            - 'False'
+            - 'True'
+          in: query
+          name: notify
+          required: false
+          type: string
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -592,73 +395,47 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        ApiManagementCreateSubscription:
+        ApiManagementPutSubscriptions:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            notify: 'False'
             parameters:
-              properties:
-                displayName: testsub
-                productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
-                userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57127d485157a511ace86ae7
-            resourceGroupName: rg1
-            serviceName: apimService1
-            sid: testsub
-            subscriptionId: subid
+              productId: /products/5a58bae0a40f7ef2e05bcd3d
+              userId: /users/5a58bae0a40f7ef2e05bcd4b
+            sid: '%20%E2%99%A5john.5a58bae0a40f7ef2e05bcd51@gmail.com000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
           responses:
             '200':
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/testsub
-              name: testsub
-              properties:
-                createdDate: '2017-06-02T23:34:03.1055076Z'
-                displayName: testsub
-                primaryKey: 06c34e1a9d394412b292e0611e73d417
-                productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
-                secondaryKey: 1e756a7705364c529e8d1760190f47b3
-                state: submitted
-                userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57127d485157a511ace86ae7
-              type: Microsoft.ApiManagement/service/subscriptions
+              body:
+                createdDate: '2018-01-12T13:40:48.276514Z'
+                id: /subscriptions/ ♥john.5a58bae0a40f7ef2e05bcd51@gmail.com000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+                name: product_5a58bae0a40f7ef2e05bcd3e subscription
+                primaryKey: 84269e1cb0634af796bcf60e366a03bd
+                productId: /products/5a58bae0a40f7ef2e05bcd3d
+                secondaryKey: b5225c62265f44088aaaae1ac7185e93
+                startDate: '2018-01-12T00:00:00Z'
+                state: active
+                userId: /users/5a58bae0a40f7ef2e05bcd4b
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/testsub
-                name: testsub
-                properties:
-                  createdDate: '2017-06-02T23:34:03.1055076Z'
-                  displayName: testsub
-                  primaryKey: 06c34e1a9d394412b292e0611e73d417
-                  productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
-                  secondaryKey: 1e756a7705364c529e8d1760190f47b3
-                  state: submitted
-                  userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57127d485157a511ace86ae7
-                type: Microsoft.ApiManagement/service/subscriptions
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/regeneratePrimaryKey':
+                createdDate: '2018-01-12T13:40:48.276514Z'
+                id: /subscriptions/ ♥john.5a58bae0a40f7ef2e05bcd51@gmail.com000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+                name: product_5a58bae0a40f7ef2e05bcd3e subscription
+                primaryKey: 84269e1cb0634af796bcf60e366a03bd
+                productId: /products/5a58bae0a40f7ef2e05bcd3d
+                secondaryKey: b5225c62265f44088aaaae1ac7185e93
+                startDate: '2018-01-12T00:00:00Z'
+                state: active
+                userId: /users/5a58bae0a40f7ef2e05bcd4b
+  '/subscriptions/{sid}/regeneratePrimaryKey':
     post:
       description: Regenerates primary key of existing subscription of the API Management service instance.
       operationId: Subscription_RegeneratePrimaryKey
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/SubscriptionEntityIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -693,44 +470,22 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        ApiManagementSubscriptionRegenerateKey:
+        ApiManagementPostSubscriptionsRegenerateprimarykey:
           parameters:
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            sid: testsub
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            sid: 5a58bb98a40f7ef2e05be76e
           responses:
             '204': {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/regenerateSecondaryKey':
+  '/subscriptions/{sid}/regenerateSecondaryKey':
     post:
       description: Regenerates secondary key of existing subscription of the API Management service instance.
       operationId: Subscription_RegenerateSecondaryKey
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/SubscriptionEntityIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -765,19 +520,20 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        ApiManagementSubscriptionRegenerateKey:
+        ApiManagementPostSubscriptionsRegeneratesecondarykey:
           parameters:
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            sid: testsub
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            sid: 5a58bd09a40f7e1048929de9
           responses:
             '204': {}
 definitions:
   SubscriptionCollection:
     description: Paged Subscriptions list representation.
     properties:
+      count:
+        description: Total number of entities
+        type: integer
       nextLink:
         description: Next page link if any.
         type: string
@@ -788,27 +544,12 @@ definitions:
         type: array
   SubscriptionContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/SubscriptionContractProperties'
     description: Subscription details.
     properties:
-      properties:
-        $ref: '#/definitions/SubscriptionContractProperties'
-        description: Subscription contract properties.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the Subscription.
+        type: string
   SubscriptionContractProperties:
     description: Subscription details.
     properties:
@@ -817,11 +558,6 @@ definitions:
           Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
         readOnly: true
-        type: string
-      displayName:
-        description: 'The name of the subscription, or null if the subscription has no name.'
-        maxLength: 100
-        minLength: 0
         type: string
       endDate:
         description: |
@@ -832,6 +568,11 @@ definitions:
         description: |
           Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
+        type: string
+      name:
+        description: 'The name of the subscription, or null if the subscription has no name.'
+        maxLength: 100
+        minLength: 0
         type: string
       notificationDate:
         description: |
@@ -881,13 +622,13 @@ definitions:
       - state
       - primaryKey
       - secondaryKey
-  SubscriptionCreateParameterProperties:
+  SubscriptionCreateParameters:
     description: Parameters supplied to the Create subscription operation.
     properties:
-      displayName:
+      name:
         description: Subscription name.
         maxLength: 100
-        minLength: 1
+        minLength: 0
         type: string
       primaryKey:
         description: Primary subscription key. If not specified during request key will be generated automatically.
@@ -921,23 +662,15 @@ definitions:
     required:
       - userId
       - productId
-      - displayName
-  SubscriptionCreateParameters:
-    description: Subscription create details.
-    properties:
-      properties:
-        $ref: '#/definitions/SubscriptionCreateParameterProperties'
-        description: Subscription contract properties.
-        x-ms-client-flatten: true
-  SubscriptionUpdateParameterProperties:
+  SubscriptionUpdateParameters:
     description: Parameters supplied to the Update subscription operation.
     properties:
-      displayName:
-        description: Subscription name.
-        type: string
       expirationDate:
         description: 'Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.'
         format: date-time
+        type: string
+      name:
+        description: Subscription name.
         type: string
       primaryKey:
         description: Primary subscription key.
@@ -971,10 +704,14 @@ definitions:
       userId:
         description: 'User identifier path: /users/{uid}'
         type: string
-  SubscriptionUpdateParameters:
-    description: Subscription update details.
-    properties:
-      properties:
-        $ref: '#/definitions/SubscriptionUpdateParameterProperties'
-        description: Subscription Update contract properties.
-        x-ms-client-flatten: true
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

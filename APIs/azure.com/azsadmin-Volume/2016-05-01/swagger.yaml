@@ -1,0 +1,244 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: Volume operation endpoints and objects.
+  title: FabricAdminClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/Volume.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-Volume
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  VolumeParameter:
+    description: Name of the volume.
+    in: path
+    name: volume
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems/{storageSubSystem}/storagePools/{storagePool}/volumes':
+    get:
+      description: Get a list of all volumes at a location.
+      operationId: Volumes_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of the storage system.
+          in: path
+          name: storageSubSystem
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Storage pool name.
+          in: path
+          name: storagePool
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VolumeList'
+      tags:
+        - Volumes
+      x-ms-examples:
+        List all volumes:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            storagePool: SU1_Pool
+            storageSubSystem: S-Cluster.azurestack.local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/storageSubSystems/S-Cluster.azurestack.local/storagePools/SU1_Pool/volumes/28fbffa4
+                    location: local
+                    name: 28fbffa4
+                    properties:
+                      fileSystem: CSVFS_ReFS
+                      remainingSizeGB: 2367
+                      sizeGB: 2525
+                      volumeLabel: SU1_Volume
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/storageSubSystems/storagePools/volumes
+      x-ms-odata: '#/definitions/Volume'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems/{storageSubSystem}/storagePools/{storagePool}/volumes/{volume}':
+    get:
+      description: Get a volume.
+      operationId: Volumes_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of the storage system.
+          in: path
+          name: storageSubSystem
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Storage pool name.
+          in: path
+          name: storagePool
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/VolumeParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Volume'
+      tags:
+        - Volumes
+      x-ms-examples:
+        Get a volume:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            storagePool: SU1_Pool
+            storageSubSystem: S-Cluster.azurestack.local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            volume: 28fbffa4
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/storageSubSystems/S-Cluster.azurestack.local/storagePools/SU1_Pool/volumes/28fbffa4
+                location: local
+                name: 28fbffa4
+                properties:
+                  fileSystem: CSVFS_ReFS
+                  remainingSizeGB: 2367
+                  sizeGB: 2525
+                  volumeLabel: SU1_Volume
+                tags: {}
+                type: Microsoft.Fabric.Admin/fabricLocations/storageSubSystems/storagePools/volumes
+definitions:
+  Volume:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Region Location of resource.
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: Representation of a volume resource.
+    properties:
+      properties:
+        $ref: '#/definitions/VolumeModel'
+        description: Properties of a volume.
+        x-ms-client-flatten: true
+    type: object
+  VolumeList:
+    description: Pageable list of volumes.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: List of volumes on this page.
+        items:
+          $ref: '#/definitions/Volume'
+        type: array
+    type: object
+  VolumeModel:
+    description: Properties of a volume.
+    properties:
+      fileSystem:
+        description: Filesystem type.
+        type: string
+      remainingSizeGB:
+        description: Amount of free space in GB.
+        format: int32
+        type: integer
+      sizeGB:
+        description: Total amount of space in GB.
+        format: int32
+        type: integer
+      volumeLabel:
+        description: Volume label.
+        type: string
+    type: object

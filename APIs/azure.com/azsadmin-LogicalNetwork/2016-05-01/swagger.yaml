@@ -1,0 +1,258 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: Logical network operation endpoints and objects.
+  title: FabricAdminClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/LogicalNetwork.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-LogicalNetwork
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  LogicalNetworkParameter:
+    description: Name of the logical network.
+    in: path
+    name: logicalNetwork
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks':
+    get:
+      description: Get a list of all logical networks at a location.
+      operationId: LogicalNetworks_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LogicalNetworkList'
+      tags:
+        - LogicalNetworks
+      x-ms-examples:
+        List all logical networks:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/00000000-2222-1111-9999-000000000001
+                    location: local
+                    name: 00000000-2222-1111-9999-000000000001
+                    properties:
+                      networkVirtualizationEnabled: false
+                      subnets:
+                        - 9ea1839b-4025-416b-b67c-405d667691bb
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/47931036-2874-4d45-b1f1-b69666088968
+                    location: local
+                    name: 47931036-2874-4d45-b1f1-b69666088968
+                    properties:
+                      networkVirtualizationEnabled: false
+                      subnets:
+                        - af95176a-98f5-4302-b5d9-8723c535deef
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/B60B71AA-36BF-40AC-A9CE-A6915D1EAE1A
+                    location: local
+                    name: B60B71AA-36BF-40AC-A9CE-A6915D1EAE1A
+                    properties:
+                      networkVirtualizationEnabled: false
+                      subnets:
+                        - 75d0e314-a6f5-4c06-a430-88419a931df7
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/bb6c6f28-bad9-441b-8e62-57d2be255904
+                    location: local
+                    name: bb6c6f28-bad9-441b-8e62-57d2be255904
+                    properties:
+                      networkVirtualizationEnabled: true
+                      subnets:
+                        - cbcf1be3-652f-4854-b57d-e3b07401f29e
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/F207C184-367C-4BC7-8C74-03AA39D68C24
+                    location: local
+                    name: F207C184-367C-4BC7-8C74-03AA39D68C24
+                    properties:
+                      networkVirtualizationEnabled: false
+                      subnets:
+                        - 3a1e55ef-6cb9-40fa-8deb-48db9363975c
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/f8f67956-3906-4303-94c5-09cf91e7e311
+                    location: local
+                    name: f8f67956-3906-4303-94c5-09cf91e7e311
+                    properties:
+                      networkVirtualizationEnabled: false
+                      subnets:
+                        - b5f364e5-e154-41ec-99c1-12ce4abfbc0c
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks
+      x-ms-odata: '#/definitions/LogicalNetwork'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}':
+    get:
+      description: Get a logical network.
+      operationId: LogicalNetworks_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/LogicalNetworkParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LogicalNetwork'
+      tags:
+        - LogicalNetworks
+      x-ms-examples:
+        Get a logical network:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            logicalNetwork: B60B71AA-36BF-40AC-A9CE-A6915D1EAE1A
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/B60B71AA-36BF-40AC-A9CE-A6915D1EAE1A
+                location: local
+                name: B60B71AA-36BF-40AC-A9CE-A6915D1EAE1A
+                properties:
+                  networkVirtualizationEnabled: false
+                  subnets:
+                    - 75d0e314-a6f5-4c06-a430-88419a931df7
+                tags: {}
+                type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks
+definitions:
+  LogicalNetwork:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Region Location of resource.
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: This resource represents a logical partition of physical network that is dedicated for a particular purpose.  A logical network comprises of a collection of logical subnets.
+    properties:
+      properties:
+        $ref: '#/definitions/LogicalNetworkModel'
+        description: Properties of a logical network.
+        x-ms-client-flatten: true
+    type: object
+  LogicalNetworkList:
+    description: A pageable list of logical networks.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: List of logical networks for this page.
+        items:
+          $ref: '#/definitions/LogicalNetwork'
+        type: array
+    type: object
+  LogicalNetworkModel:
+    description: Properties of a logical network.
+    properties:
+      metadata:
+        additionalProperties:
+          type: string
+        description: Metadata related to this Logical Network.
+        type: object
+      networkVirtualizationEnabled:
+        description: Is Network Virtualization is enabled on this Logical Network.
+        type: boolean
+      subnets:
+        description: List of subnets belonging to this Logical Network.
+        items:
+          type: string
+        type: array
+    type: object

@@ -1,0 +1,221 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: MAC address pool operation endpoints and objects.
+  title: FabricAdminClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/MacAddressPool.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-MacAddressPool
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  MACAddressPoolParameter:
+    description: Name of the MAC address pool.
+    in: path
+    name: macAddressPool
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/macAddressPools':
+    get:
+      description: Get a list of all MAC address pools at a location.
+      operationId: MacAddressPools_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MacAddressPoolList'
+      tags:
+        - MacAddressPools
+      x-ms-examples:
+        List all mac address pools:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/macAddressPools/8197fd09-8a69-417e-a55c-10c2c61f5ee7
+                    location: local
+                    name: 8197fd09-8a69-417e-a55c-10c2c61f5ee7
+                    properties:
+                      endMacAddress: 00-1D-D8-F4-1F-FF
+                      numberOfAllocatedMacAddresses: 2
+                      numberOfAvailableMacAddresses: 3998718
+                      startMacAddress: 00-1D-D8-B7-1C-00
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/macAddressPools
+      x-ms-odata: '#/definitions/MacAddressPool'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/macAddressPools/{macAddressPool}':
+    get:
+      description: Get a MAC address pool.
+      operationId: MacAddressPools_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/MACAddressPoolParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MacAddressPool'
+      tags:
+        - MacAddressPools
+      x-ms-examples:
+        Get a mac address pool:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            macAddressPool: 8197fd09-8a69-417e-a55c-10c2c61f5ee7
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/macAddressPools/8197fd09-8a69-417e-a55c-10c2c61f5ee7
+                location: local
+                name: 8197fd09-8a69-417e-a55c-10c2c61f5ee7
+                properties:
+                  endMacAddress: 00-1D-D8-F4-1F-FF
+                  numberOfAllocatedMacAddresses: 2
+                  numberOfAvailableMacAddresses: 3998718
+                  startMacAddress: 00-1D-D8-B7-1C-00
+                tags: {}
+                type: Microsoft.Fabric.Admin/fabricLocations/macAddressPools
+definitions:
+  MacAddressPool:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Region Location of resource.
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: 'This resource represents a MAC address pool.  The default MAC address pools are used if you set the MAC address type for a virtual machine to ''Static''.  If the virtual machine setting is “Dynamic”, the hypervisor assigns the MAC address.'
+    properties:
+      properties:
+        $ref: '#/definitions/MacAddressPoolModel'
+        description: Properties of a MAC address pool.
+        x-ms-client-flatten: true
+    type: object
+  MacAddressPoolList:
+    description: A pageable list of MAC address pools.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: The list of MAC address pools on this page.
+        items:
+          $ref: '#/definitions/MacAddressPool'
+        type: array
+    type: object
+  MacAddressPoolModel:
+    description: Properties of a MAC address pool.
+    properties:
+      endMacAddress:
+        description: Ending MAC address.
+        type: string
+      metadata:
+        additionalProperties:
+          type: string
+        description: Metadata related to this MAC pool.
+        type: object
+      numberOfAllocatedMacAddresses:
+        description: Number of MAC addresses allocated.
+        format: int64
+        type: integer
+      numberOfAvailableMacAddresses:
+        description: Number of MAC addresses available.
+        format: int64
+        type: integer
+      startMacAddress:
+        description: Starting MAC address.
+        type: string
+    type: object

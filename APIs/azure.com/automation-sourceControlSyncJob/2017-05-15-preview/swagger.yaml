@@ -1,0 +1,459 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: AutomationManagement
+  version: 2017-05-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/automation/resource-manager/Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: automation-sourceControlSyncJob
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}/sourceControlSyncJobs':
+    get:
+      description: Retrieve a list of source control sync jobs.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations'
+      operationId: SourceControlSyncJob_ListByAutomationAccount
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The source control name.
+          in: path
+          name: sourceControlName
+          required: true
+          type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: The response model for the list source control sync jobs operation.
+            properties:
+              nextLink:
+                description: Gets or sets the next link.
+                type: string
+              value:
+                description: Gets a list of source control sync jobs.
+                items:
+                  description: Definition of the source control sync job.
+                  properties:
+                    id:
+                      description: Resource id.
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Resource name.
+                      readOnly: true
+                      type: string
+                    properties:
+                      description: Definition of source control sync job properties.
+                      properties:
+                        creationTime:
+                          description: Gets the creation time of the job.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        endTime:
+                          description: Gets the end time of the job.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        provisioningState:
+                          description: Gets the provisioning state of the job.
+                          enum:
+                            - Completed
+                            - Failed
+                            - Running
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: provisioningState
+                        sourceControlSyncJobId:
+                          description: Gets the source control sync job id.
+                          type: string
+                        startTime:
+                          description: Gets the start time of the job.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        startedBy:
+                          description: Gets the user who started the sync job.
+                          type: string
+                    type:
+                      description: Resource type.
+                      readOnly: true
+                      type: string
+                type: array
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - SourceControlSyncJob
+      x-ms-examples:
+        Get a list of source control sync jobs:
+          parameters:
+            api-version: 2017-05-15-preview
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            sourceControlName: MySourceControl
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/sourceControls/MySourceControl/sourceControlSyncJobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a1a
+                    properties:
+                      creationTime: '2017-03-28T23:14:26.903+00:00'
+                      endTime: null
+                      provisioningState: Running
+                      sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a1a
+                      startTime: null
+                      startedBy: User1
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/sourceControls/MySourceControl/sourceControlSyncJobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a2a
+                    properties:
+                      creationTime: '2017-03-28T23:14:26.903+00:00'
+                      endTime: null
+                      provisioningState: Running
+                      sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a2a
+                      startTime: null
+                      startedBy: User1
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/sourceControls/MySourceControl/sourceControlSyncJobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a3a
+                    properties:
+                      creationTime: '2017-03-28T23:14:26.903+00:00'
+                      endTime: null
+                      provisioningState: Running
+                      sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a3a
+                      startTime: null
+                      startedBy: User1
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/sourceControls/MySourceControl/sourceControlSyncJobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a4a
+                    properties:
+                      creationTime: '2017-03-28T23:14:26.903+00:00'
+                      endTime: null
+                      provisioningState: Running
+                      sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a4a
+                      startTime: null
+                      startedBy: User1
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/sourceControls/MySourceControl/sourceControlSyncJobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a5a
+                    properties:
+                      creationTime: '2017-03-28T23:14:26.903+00:00'
+                      endTime: null
+                      provisioningState: Running
+                      sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a5a
+                      startTime: null
+                      startedBy: User1
+              headers: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}/sourceControlSyncJobs/{sourceControlSyncJobId}':
+    get:
+      description: Retrieve the source control sync job identified by job id.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations'
+      operationId: SourceControlSyncJob_Get
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The source control name.
+          in: path
+          name: sourceControlName
+          required: true
+          type: string
+        - description: The source control sync job id.
+          format: uuid
+          in: path
+          name: sourceControlSyncJobId
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Definition of the source control sync job.
+            properties:
+              id:
+                description: Gets the id of the job.
+                type: string
+              properties:
+                description: Definition of source control sync job properties.
+                properties:
+                  creationTime:
+                    description: Gets the creation time of the job.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  endTime:
+                    description: Gets the end time of the job.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  errors:
+                    description: Error details of the source control sync job.
+                    properties:
+                      code:
+                        description: Gets the error code for the job.
+                        type: string
+                      message:
+                        description: Gets the error message for the job.
+                        type: string
+                    type: object
+                  provisioningState:
+                    description: Gets the provisioning state of the job.
+                    enum:
+                      - Completed
+                      - Failed
+                      - Running
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: provisioningState
+                  sourceControlSyncJobId:
+                    description: Gets the source control sync job id.
+                    type: string
+                  startTime:
+                    description: Gets the start time of the job.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  startedBy:
+                    description: Gets the user who started the sync job.
+                    type: string
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - SourceControlSyncJob
+      x-ms-examples:
+        Get a source control sync job by job id:
+          parameters:
+            api-version: 2017-05-15-preview
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            sourceControlName: MySourceControl
+            sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/sourceControls/MySourceControl/sourceControlSyncJobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                properties:
+                  creationTime: '2017-03-28T23:14:26.903+00:00'
+                  endTime: null
+                  errors:
+                    code: null
+                    message: null
+                  provisioningState: Running
+                  sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                  startTime: null
+                  startedBy: User1
+              headers: {}
+    put:
+      description: Creates the sync job for a source control.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations'
+      operationId: SourceControlSyncJob_Create
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The source control name.
+          in: path
+          name: sourceControlName
+          required: true
+          type: string
+        - description: The source control sync job id.
+          format: uuid
+          in: path
+          name: sourceControlSyncJobId
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            description: Definition of the source control sync job.
+            properties:
+              id:
+                description: Resource id.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              properties:
+                description: Definition of source control sync job properties.
+                properties:
+                  creationTime:
+                    description: Gets the creation time of the job.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  endTime:
+                    description: Gets the end time of the job.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  provisioningState:
+                    description: Gets the provisioning state of the job.
+                    enum:
+                      - Completed
+                      - Failed
+                      - Running
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: provisioningState
+                  sourceControlSyncJobId:
+                    description: Gets the source control sync job id.
+                    type: string
+                  startTime:
+                    description: Gets the start time of the job.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  startedBy:
+                    description: Gets the user who started the sync job.
+                    type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - SourceControlSyncJob
+      x-ms-examples:
+        Create or update a source control sync job:
+          parameters:
+            api-version: 2017-05-15-preview
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            sourceControlName: MySourceControl
+            sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+            subscriptionId: subid
+          responses:
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/sourceControls/MySourceControl/sourceControlSyncJobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                properties:
+                  creationTime: '2017-03-28T23:14:26.903+00:00'
+                  endTime: null
+                  provisioningState: Running
+                  sourceControlSyncJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                  startTime: null
+                  startedBy: User1
+              headers: {}

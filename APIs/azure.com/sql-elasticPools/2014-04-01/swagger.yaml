@@ -1,0 +1,564 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: 'Provides create, read, update and delete functionality for Azure SQL Database elastic pools.'
+  title: Azure SQL Database
+  version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/elasticPools.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: sql-elasticPools
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for the request.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  DatabaseExpandParameter:
+    description: 'A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.'
+    in: query
+    name: $expand
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupParameter:
+    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ServerNameParameter:
+    description: The name of the server.
+    in: path
+    name: serverName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The subscription ID that identifies an Azure subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+  TransparentDataEncryptionNameParameter:
+    description: The name of the transparent data encryption configuration.
+    enum:
+      - current
+    in: path
+    name: transparentDataEncryptionName
+    required: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: TransparentDataEncryptionName
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools':
+    get:
+      description: Returns a list of elastic pools in a server.
+      operationId: ElasticPools_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPoolListResult'
+      tags:
+        - ElasticPools
+      x-ms-examples:
+        List elastic pools:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-2729
+                    kind: null
+                    location: Japan East
+                    name: sqlcrudtest-2729
+                    properties:
+                      creationDate: '2017-02-10T01:27:21.32Z'
+                      databaseDtuMax: 5
+                      databaseDtuMin: 0
+                      dtu: 50
+                      edition: Basic
+                      state: Ready
+                      storageMB: 5000
+                    type: Microsoft.Sql/servers/elasticPools
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-3191
+                    kind: null
+                    location: Japan East
+                    name: sqlcrudtest-3191
+                    properties:
+                      creationDate: '2017-02-10T01:26:26.45Z'
+                      databaseDtuMax: 5
+                      databaseDtuMin: 0
+                      dtu: 50
+                      edition: Basic
+                      state: Ready
+                      storageMB: 5000
+                    type: Microsoft.Sql/servers/elasticPools
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                    kind: null
+                    location: Japan East
+                    name: sqlcrudtest-8102
+                    properties:
+                      creationDate: '2017-02-10T01:25:25.033Z'
+                      databaseDtuMax: 5
+                      databaseDtuMin: 0
+                      dtu: 50
+                      edition: Basic
+                      state: Ready
+                      storageMB: 5000
+                    type: Microsoft.Sql/servers/elasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}':
+    delete:
+      description: Deletes the elastic pool.
+      operationId: ElasticPools_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the elastic pool to be deleted.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: Accepted
+      tags:
+        - ElasticPools
+      x-ms-examples:
+        Delete elastic pool:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-3851
+            resourceGroupName: sqlcrudtest-3129
+            serverName: sqlcrudtest-228
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body: ''
+            '204':
+              body: ''
+    get:
+      description: Gets an elastic pool.
+      operationId: ElasticPools_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the elastic pool to be retrieved.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPool'
+      tags:
+        - ElasticPools
+      x-ms-examples:
+        Get elastic pool:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+    patch:
+      description: Updates an existing elastic pool.
+      operationId: ElasticPools_Update
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the elastic pool to be updated.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+        - description: The required parameters for updating an elastic pool.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ElasticPoolUpdate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPool'
+        '202':
+          description: Accepted
+      tags:
+        - ElasticPools
+      x-ms-examples:
+        Update elastic pool max:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            parameters:
+              properties:
+                creationDate: '2017-02-10T01:25:25.033Z'
+                databaseDtuMax: 5
+                databaseDtuMin: 0
+                dtu: 50
+                edition: Basic
+                state: Ready
+                storageMB: 5000
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '202': {}
+        Update elastic pool min:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            parameters: {}
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '202': {}
+      x-ms-long-running-operation: true
+    put:
+      description: Creates a new elastic pool or updates an existing elastic pool.
+      operationId: ElasticPools_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the elastic pool to be operated on (updated or created).
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+        - description: The required parameters for creating or updating an elastic pool.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ElasticPool'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPool'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ElasticPool'
+        '202':
+          description: Accepted
+      tags:
+        - ElasticPools
+      x-ms-examples:
+        Create elastic pool max:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            parameters:
+              location: Japan East
+              properties:
+                creationDate: '2017-02-10T01:25:25.033Z'
+                databaseDtuMax: 5
+                databaseDtuMin: 0
+                dtu: 50
+                edition: Basic
+                state: Ready
+                storageMB: 5000
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '202': {}
+        Create elastic pool min:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            parameters:
+              location: Japan East
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 100
+                  databaseDtuMin: 0
+                  dtu: 100
+                  edition: Standard
+                  state: Ready
+                  storageMB: 102400
+                type: Microsoft.Sql/servers/elasticPools
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 100
+                  databaseDtuMin: 0
+                  dtu: 100
+                  edition: Standard
+                  state: Ready
+                  storageMB: 102400
+                type: Microsoft.Sql/servers/elasticPools
+            '202': {}
+      x-ms-long-running-operation: true
+definitions:
+  ElasticPool:
+    allOf:
+      - $ref: '#/definitions/TrackedResource'
+    description: Represents a database elastic pool.
+    properties:
+      kind:
+        description: Kind of elastic pool.  This is metadata used for the Azure portal experience.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/ElasticPoolProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  ElasticPoolListResult:
+    description: Represents the response to a list elastic pool request.
+    properties:
+      value:
+        description: The list of elastic pools hosted in the server.
+        items:
+          $ref: '#/definitions/ElasticPool'
+        type: array
+    required:
+      - value
+  ElasticPoolProperties:
+    description: Represents the properties of an elastic pool.
+    properties:
+      creationDate:
+        description: The creation date of the elastic pool (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      databaseDtuMax:
+        description: The maximum DTU any one database can consume.
+        format: int32
+        type: integer
+      databaseDtuMin:
+        description: The minimum DTU all databases are guaranteed.
+        format: int32
+        type: integer
+      dtu:
+        description: The total shared DTU for the database elastic pool.
+        format: int32
+        type: integer
+      edition:
+        description: The edition of the elastic pool.
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ElasticPoolEdition
+        x-ms-mutability:
+          - create
+          - read
+      state:
+        description: The state of the elastic pool.
+        enum:
+          - Creating
+          - Ready
+          - Disabled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ElasticPoolState
+      storageMB:
+        description: Gets storage limit for the database elastic pool in MB.
+        format: int32
+        type: integer
+      zoneRedundant:
+        description: 'Whether or not this database elastic pool is zone redundant, which means the replicas of this database will be spread across multiple availability zones.'
+        type: boolean
+  ElasticPoolUpdate:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an elastic pool update.
+    properties:
+      properties:
+        $ref: '#/definitions/ElasticPoolProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+  Resource:
+    description: ARM resource.
+    properties:
+      id:
+        description: Resource ID.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM tracked top level resource.
+    properties:
+      location:
+        description: Resource location.
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    required:
+      - location

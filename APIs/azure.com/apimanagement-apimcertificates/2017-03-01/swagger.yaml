@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: 'Use these REST APIs for performing operations on Certificate entity in your Azure API Management deployment. Certificates can be used to setup mutual authentication with your Backend in API Management. For more information refer to [How to secure backend using Mutual Auth Certificate](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-mutual-certificates).'
   title: ApiManagementClient
@@ -12,9 +12,9 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimcertificates.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimcertificates.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimcertificates
   x-tags:
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   CertificateIdParameter:
     description: Identifier of the certificate entity. Must be unique in the current API Management service instance.
@@ -47,26 +43,11 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates':
+  /certificates:
     get:
       description: Lists a collection of all certificates in the specified service instance.
-      operationId: Certificate_ListByService
+      operationId: Certificate_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: |-
             | Field          | Supported operators    | Supported functions                         |
             |----------------|------------------------|---------------------------------------------|
@@ -97,11 +78,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -140,45 +116,42 @@ paths:
       x-ms-examples:
         ApiManagementListCertificates:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 5
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/kjoshiarmtemplateCert1
-                    name: templateCert1
-                    properties:
-                      expirationDate: '2017-04-23T17:03:41Z'
-                      subject: CN=mutual-authcert
-                      thumbprint: EBA************************48594A6
-                    type: Microsoft.ApiManagement/service/certificates
+                  - expirationDate: '2019-01-12T00:00:00Z'
+                    id: /certificates/5a58bad2a40f7ef2e05bcce2
+                    subject: CN=localhost
+                    thumbprint: C2728598048BE9C8BD559A159BD70525A4EA0367
+                  - expirationDate: '2019-01-12T00:00:00Z'
+                    id: /certificates/5a58bb7ea40f7ef2e05be3d4
+                    subject: CN=localhost
+                    thumbprint: FB085F34A60C2AD8EED59C58B961BD5FBEFC38BE
+                  - expirationDate: '2019-01-12T00:00:00Z'
+                    id: /certificates/5a58bc74a40f7e1048929958
+                    subject: CN=localhost
+                    thumbprint: 61EF1C104C1949E219995A2F0628F3D66D595F32
+                  - expirationDate: '2019-01-12T00:00:00Z'
+                    id: /certificates/5a58bcd2a40f7e1048929a35
+                    subject: CN=localhost
+                    thumbprint: E359B9813314091B0EDED4AD804A9163D0FF3B84
+                  - expirationDate: '2019-01-12T00:00:00Z'
+                    id: /certificates/5a58bcd2a40f7e1048929a36
+                    subject: CN=localhost
+                    thumbprint: 0997AAAF7DB834B9F5726F20FED2F3D3D086DA07
       x-ms-odata: '#/definitions/CertificateContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}':
+  '/certificates/{certificateId}':
     delete:
       description: Deletes specific certificate.
       operationId: Certificate_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/CertificateIdParameter'
         - description: The entity state (Etag) version of the certificate to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
@@ -188,11 +161,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -227,44 +195,22 @@ paths:
       tags:
         - Certificates
       x-ms-examples:
-        ApiManagementDeleteCertificate:
+        ApiManagementDeleteCertificates:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
-            certificateId: tempcert
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            certificateId: 5a58bb04a40f7ef2e05bd3a6
           responses:
             '204': {}
     get:
       description: Gets the details of the certificate specified by its identifier.
       operationId: Certificate_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/CertificateIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -305,100 +251,19 @@ paths:
       tags:
         - Certificates
       x-ms-examples:
-        ApiManagementGetCertificate:
+        ApiManagementGetCertificates:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            certificateId: templateCert1
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            certificateId: 5a58be29a40f7e104892af64
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/templateCert1
-                name: templateCert1
-                properties:
-                  expirationDate: '2017-04-23T17:03:41Z'
-                  subject: CN=mutual-authcert
-                  thumbprint: EBA**********************8594A6
-                type: Microsoft.ApiManagement/service/certificates
-    head:
-      description: Gets the entity state (Etag) version of the certificate specified by its identifier.
-      operationId: Certificate_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/CertificateIdParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified certificate entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - Certificates
-      x-ms-examples:
-        ApiManagementHeadCertificate:
-          parameters:
-            api-version: '2017-03-01'
-            certificateId: templateCert1
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                expirationDate: '2019-01-12T00:00:00Z'
+                id: /certificates/5a58be29a40f7e104892af64
+                subject: CN=localhost
+                thumbprint: F71A638FEC037AA826A30755DF2732DB5A4CB776
     put:
       description: Creates or updates the certificate being used for authentication with the backend.
       externalDocs:
@@ -406,21 +271,6 @@ paths:
         url: 'https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/'
       operationId: Certificate_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/CertificateIdParameter'
         - description: Create or Update parameters.
           in: body
@@ -436,11 +286,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -481,40 +326,34 @@ paths:
       tags:
         - Certificates
       x-ms-examples:
-        ApiManagementCreateCertificate:
+        ApiManagementPutCertificates:
           parameters:
             api-version: '2017-03-01'
-            certificateId: tempcert
+            apimBaseUrl: apimservice1.management.azure-api.net
+            certificateId: 5a58bad2a40f7ef2e05bcce2
             parameters:
-              properties:
-                data: '****************Base 64 Encoded Certificate *******************************'
-                password: '****Certificate Password******'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              data: Based 64 Encoded Certificate string
+              password: whatever
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/tempcert
-                name: tempcert
-                properties:
-                  expirationDate: '2018-03-17T21:55:07+00:00'
-                  subject: CN=contoso.com
-                  thumbprint: '*******************3'
-                type: Microsoft.ApiManagement/service/certificates
+                expirationDate: '2019-01-12T08:00:00Z'
+                id: /certificates/5a58bad2a40f7ef2e05bcce2
+                subject: CN=localhost
+                thumbprint: C2728598048BE9C8BD559A159BD70525A4EA0367
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/tempcert
-                name: tempcert
-                properties:
-                  expirationDate: '2018-03-17T21:55:07+00:00'
-                  subject: CN=contoso.com
-                  thumbprint: '*******************3'
-                type: Microsoft.ApiManagement/service/certificates
+                expirationDate: '2019-01-12T08:00:00Z'
+                id: /certificates/5a58bad2a40f7ef2e05bcce2
+                subject: CN=localhost
+                thumbprint: C2728598048BE9C8BD559A159BD70525A4EA0367
 definitions:
   CertificateCollection:
     description: Paged Certificates list representation.
     properties:
+      count:
+        description: Total number of entities
+        type: integer
       nextLink:
         description: Next page link if any.
         type: string
@@ -525,27 +364,12 @@ definitions:
         type: array
   CertificateContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/CertificateContractProperties'
     description: Certificate details.
     properties:
-      properties:
-        $ref: '#/definitions/CertificateContractProperties'
-        description: Certificate properties details.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the Certificate entity.
+        type: string
   CertificateContractProperties:
     description: Properties of the Certificate contract.
     properties:
@@ -565,13 +389,6 @@ definitions:
       - thumbprint
       - expirationDate
   CertificateCreateOrUpdateParameters:
-    description: Certificate create or update details.
-    properties:
-      properties:
-        $ref: '#/definitions/CertificateCreateOrUpdateProperties'
-        description: Certificate create or update properties details.
-        x-ms-client-flatten: true
-  CertificateCreateOrUpdateProperties:
     description: Parameters supplied to the CreateOrUpdate certificate operation.
     properties:
       data:
@@ -583,3 +400,14 @@ definitions:
     required:
       - data
       - password
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

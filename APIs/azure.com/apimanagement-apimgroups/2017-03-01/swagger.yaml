@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: 'Use these REST APIs for performing operations on Group entity in your Azure API Management deployment. Groups are used to manage the visibility of products to developers. Each API Management service instance comes with the following immutable system groups whose membership is automatically managed by API Management.  - **Administrators** - Azure subscription administrators are members of this group. - **Developers** - Authenticated developer portal users fall into this group. - **Guests** - Unauthenticated developer portal users are placed into this group. In addition to these system groups, administrators can create custom groups or [leverage external groups in associated Azure Active Directory tenants](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-add-an-external-azure-active-directory-group). Custom and external groups can be used alongside system groups in giving developers visibility and access to API products. For example, you could create one custom group for developers affiliated with a specific partner organization and allow them access to the APIs from a product containing relevant APIs only. A user can be a member of more than one group.'
   title: ApiManagementClient
@@ -12,9 +12,9 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimgroups.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimgroups.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimgroups
   x-tags:
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   GroupIdParameter:
     description: Group identifier. Must be unique in the current API Management service instance.
@@ -47,28 +43,13 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups':
+  /groups:
     get:
       description: Lists a collection of groups defined within a service instance.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-groups'
-      operationId: Group_ListByService
+      operationId: Group_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: |-
             | Field       | Supported operators    | Supported functions                         |
             |-------------|------------------------|---------------------------------------------|
@@ -101,11 +82,6 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
       responses:
         '200':
           description: Lists a collection of Group entities.
@@ -116,71 +92,39 @@ paths:
       x-ms-examples:
         ApiManagementListGroups:
           parameters:
+            $skip: 0
+            $top: 10000
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 3
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/5600b59375ff190048020001
-                    name: 5600b59375ff190048020001
-                    properties:
-                      builtIn: true
-                      description: Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.
-                      displayName: Administrators
-                      type: system
-                    type: Microsoft.ApiManagement/service/groups
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/59306a29e4bbd510dc24e5f9
-                    name: 59306a29e4bbd510dc24e5f9
-                    properties:
-                      builtIn: false
-                      description: awesome group of people
-                      displayName: AwesomeGroup (samiraad.onmicrosoft.com)
-                      externalId: 'aad://samiraad.onmicrosoft.com/groups/3773adf4-032e-4d25-9988-eaff9ca72eca'
-                      type: external
-                    type: Microsoft.ApiManagement/service/groups
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/5600b59375ff190048020002
-                    name: 5600b59375ff190048020002
-                    properties:
-                      builtIn: true
-                      description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
-                      displayName: Developers
-                      type: system
-                    type: Microsoft.ApiManagement/service/groups
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/5600b59375ff190048020003
-                    name: 5600b59375ff190048020003
-                    properties:
-                      builtIn: true
-                      description: Guests is a built-in group. Its membership is managed by the system. Unauthenticated users visiting the developer portal fall into this group.
-                      displayName: Guests
-                      type: system
-                    type: Microsoft.ApiManagement/service/groups
+                  - builtIn: true
+                    description: Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.
+                    id: /groups/administrators
+                    name: Administrators
+                    type: system
+                  - builtIn: true
+                    description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
+                    id: /groups/developers
+                    name: Developers
+                    type: system
+                  - builtIn: true
+                    description: Guests is a built-in group. Its membership is managed by the system. Unauthenticated users visiting the developer portal fall into this group.
+                    id: /groups/guests
+                    name: Guests
+                    type: system
       x-ms-odata: '#/definitions/GroupContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}':
+  '/groups/{groupId}':
     delete:
       description: Deletes specific group of the API Management service instance.
       operationId: Group_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/GroupIdParameter'
         - description: ETag of the Group Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
@@ -190,11 +134,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -229,44 +168,22 @@ paths:
       tags:
         - Groups
       x-ms-examples:
-        ApiManagementDeleteGroup:
+        ApiManagementDeleteGroups:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
-            groupId: aadGroup
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            groupId: 5a58bb18a40f7ef2e05bd532
           responses:
             '204': {}
     get:
       description: Gets the details of the group specified by its identifier.
       operationId: Group_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/GroupIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -307,121 +224,23 @@ paths:
       tags:
         - Groups
       x-ms-examples:
-        ApiManagementGetGroup:
+        ApiManagementGetGroups:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            groupId: 59306a29e4bbd510dc24e5f9
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            groupId: 5a58baeea40f7ef2e05bcf5a
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/59306a29e4bbd510dc24e5f9
-                name: 59306a29e4bbd510dc24e5f9
-                properties:
-                  builtIn: false
-                  description: awesome group of people
-                  displayName: AwesomeGroup (samiraad.onmicrosoft.com)
-                  externalId: 'aad://samiraad.onmicrosoft.com/groups/3773adf4-032e-4d25-9988-eaff9ca72eca'
-                  type: external
-                type: Microsoft.ApiManagement/service/groups
-    head:
-      description: Gets the entity state (Etag) version of the group specified by its identifier.
-      operationId: Group_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified group entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - Groups
-      x-ms-examples:
-        ApiManagementHeadGroup:
-          parameters:
-            api-version: '2017-03-01'
-            groupId: 59306a29e4bbd510dc24e5f9
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                builtIn: false
+                id: /groups/5a58baeea40f7ef2e05bcf5a
+                name: 5a58baeea40f7ef2e05bcf5b
+                type: custom
     patch:
       description: Updates the details of the group specified by its identifier.
       operationId: Group_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/GroupIdParameter'
         - description: Update parameters.
           in: body
@@ -437,11 +256,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -476,38 +290,21 @@ paths:
       tags:
         - Groups
       x-ms-examples:
-        ApiManagementUpdateGroup:
+        ApiManagementPatchGroups:
           parameters:
-            If-Match: '*'
+            If-Match: '"AAAAAAAACo0="'
             api-version: '2017-03-01'
-            groupId: tempgroup
+            apimBaseUrl: apimservice1.management.azure-api.net
+            groupId: 5a58baf9a40f7ef2e05bcfb9
             parameters:
-              properties:
-                displayName: temp group
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              description: some new description
+              name: 5a58baf9a40f7ef2e05bcfbc
           responses:
             '204': {}
     put:
       description: Creates or Updates a group.
       operationId: Group_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/GroupIdParameter'
         - description: Create parameters.
           in: body
@@ -518,11 +315,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -563,87 +355,32 @@ paths:
       tags:
         - Groups
       x-ms-examples:
-        ApiManagementCreateGroup:
+        ApiManagementPutGroups:
           parameters:
             api-version: '2017-03-01'
-            groupId: tempgroup
+            apimBaseUrl: apimservice1.management.azure-api.net
+            groupId: 5a58babda40f7ef2e05bc7b6
             parameters:
-              properties:
-                displayName: temp group
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              name: 5a58babda40f7ef2e05bc7b7
+              type: custom
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/tempgroup
-                name: tempgroup
-                properties:
-                  displayName: temp group
-                  type: custom
-                type: Microsoft.ApiManagement/service/groups
+                builtIn: false
+                id: /groups/5a58babda40f7ef2e05bc7b6
+                name: 5a58babda40f7ef2e05bc7b7
+                type: custom
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/tempgroup
-                name: tempgroup
-                properties:
-                  displayName: temp group
-                  type: custom
-                type: Microsoft.ApiManagement/service/groups
-        ApiManagementCreateGroupExternal:
-          parameters:
-            api-version: '2017-03-01'
-            groupId: aadGroup
-            parameters:
-              properties:
-                description: new group to test
-                displayName: NewGroup (samiraad.onmicrosoft.com)
-                externalId: 'aad://samiraad.onmicrosoft.com/groups/83cf2753-5831-4675-bc0e-2f8dc067c58d'
-                type: external
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/aadGroup
-                name: aadGroup
-                properties:
-                  description: new group to test
-                  displayName: NewGroup (samiraad.onmicrosoft.com)
-                  externalId: 'aad://samiraad.onmicrosoft.com/groups/83cf2753-5831-4675-bc0e-2f8dc067c58d'
-                  type: external
-                type: Microsoft.ApiManagement/service/groups
-            '201':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/aadGroup
-                name: aadGroup
-                properties:
-                  description: new group to test
-                  displayName: NewGroup (samiraad.onmicrosoft.com)
-                  externalId: 'aad://samiraad.onmicrosoft.com/groups/83cf2753-5831-4675-bc0e-2f8dc067c58d'
-                  type: external
-                type: Microsoft.ApiManagement/service/groups
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users':
+                builtIn: false
+                id: /groups/5a58babda40f7ef2e05bc7b6
+                name: 5a58babda40f7ef2e05bc7b7
+                type: custom
+  '/groups/{groupId}/users':
     get:
       description: 'Lists a collection of the members of the group, specified by its identifier.'
       operationId: GroupUser_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/GroupIdParameter'
         - description: |-
             | Field            | Supported operators    | Supported functions               |
@@ -680,17 +417,15 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
       responses:
         '200':
           description: Lists a collection of user entities associated with the group.
           schema:
             description: Paged Users list representation.
             properties:
+              count:
+                description: Total number of entities
+                type: integer
               nextLink:
                 description: Next page link if any.
                 type: string
@@ -698,25 +433,7 @@ paths:
                 description: Page values.
                 items:
                   allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: User details.
-                  properties:
-                    properties:
-                      allOf:
+                    - allOf:
                         - description: User Entity Base Parameters set.
                           properties:
                             identities:
@@ -741,21 +458,10 @@ paths:
                               enum:
                                 - active
                                 - blocked
-                                - pending
-                                - deleted
                               type: string
                               x-ms-enum:
                                 modelAsString: true
                                 name: UserState
-                                values:
-                                  - description: User state is active.
-                                    value: active
-                                  - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
-                                    value: blocked
-                                  - description: User account is pending. Requires identity confirmation before it can be made active.
-                                    value: pending
-                                  - description: User account is closed. All identities and related entities are removed.
-                                    value: deleted
                       description: User profile.
                       properties:
                         email:
@@ -768,25 +474,7 @@ paths:
                           description: Collection of groups user is part of.
                           items:
                             allOf:
-                              - description: The Resource definition.
-                                properties:
-                                  id:
-                                    description: Resource ID.
-                                    readOnly: true
-                                    type: string
-                                  name:
-                                    description: Resource name.
-                                    readOnly: true
-                                    type: string
-                                  type:
-                                    description: Resource type for API Management resource.
-                                    readOnly: true
-                                    type: string
-                                x-ms-azure-resource: true
-                            description: Contract details.
-                            properties:
-                              properties:
-                                description: Group contract Properties.
+                              - description: Developer group.
                                 properties:
                                   builtIn:
                                     description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -796,13 +484,13 @@ paths:
                                     description: Group description. Can contain HTML formatting tags.
                                     maxLength: 1000
                                     type: string
-                                  displayName:
+                                  externalId:
+                                    description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+                                    type: string
+                                  name:
                                     description: Group name.
                                     maxLength: 300
                                     minLength: 1
-                                    type: string
-                                  externalId:
-                                    description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
                                     type: string
                                   type:
                                     description: Group type.
@@ -815,7 +503,12 @@ paths:
                                       modelAsString: false
                                       name: GroupType
                                 required:
-                                  - displayName
+                                  - name
+                            description: Contract details.
+                            properties:
+                              id:
+                                description: Identifier of the Group entity.
+                                type: string
                           readOnly: true
                           type: array
                         lastName:
@@ -826,6 +519,11 @@ paths:
                             Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
                           format: date-time
                           type: string
+                  description: User details.
+                  properties:
+                    id:
+                      description: Identifier of the entity.
+                      type: string
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -856,54 +554,52 @@ paths:
       tags:
         - GroupUsers
       x-ms-examples:
-        ApiManagementListGroupUsers:
+        ApiManagementListGroupsUsers:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            groupId: 57d2ef278aa04f0888cba3f3
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            groupId: 5a58bad0a40f7ef2e05bccca
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 3
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/kjoshiarmTemplateUser1
-                    name: armTemplateUser1
-                    properties:
-                      email: user1@live.com
-                      firstName: user1
-                      identities:
-                        - id: user1@live.com
-                          provider: Basic
-                      lastName: lastname1
-                      note: note for user 1
-                      registrationDate: '2017-05-31T18:54:41.447Z'
-                      state: active
-                    type: Microsoft.ApiManagement/service/groups/users
+                  - email: 5a58bad0a40f7ef2e05bccce@contoso.com
+                    firstName: 5a58bad0a40f7ef2e05bcccf
+                    id: /users/5a58bad0a40f7ef2e05bcccd
+                    identities:
+                      - id: 5a58bad0a40f7ef2e05bccce@contoso.com
+                        provider: Basic
+                    lastName: 5a58bad0a40f7ef2e05bccd0
+                    registrationDate: '2018-01-12T13:40:32.81Z'
+                    state: active
+                  - email: 5a58bad0a40f7ef2e05bccd3@contoso.com
+                    firstName: 5a58bad0a40f7ef2e05bccd4
+                    id: /users/5a58bad0a40f7ef2e05bccd2
+                    identities:
+                      - id: 5a58bad0a40f7ef2e05bccd3@contoso.com
+                        provider: Basic
+                    lastName: 5a58bad0a40f7ef2e05bccd5
+                    registrationDate: '2018-01-12T13:40:32.81Z'
+                    state: active
+                  - email: 5a58bad0a40f7ef2e05bccd8@contoso.com
+                    firstName: 5a58bad0a40f7ef2e05bccd9
+                    id: /users/5a58bad0a40f7ef2e05bccd7
+                    identities:
+                      - id: 5a58bad0a40f7ef2e05bccd8@contoso.com
+                        provider: Basic
+                    lastName: 5a58bad0a40f7ef2e05bccda
+                    registrationDate: '2018-01-12T13:40:32.86Z'
+                    state: active
       x-ms-odata: './apimusers.json#/definitions/UserContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{uid}':
+  '/groups/{groupId}/users/{uid}':
     delete:
       description: Remove existing user from existing group.
       operationId: GroupUser_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/GroupIdParameter'
         - description: User identifier. Must be unique in the current API Management service instance.
           in: path
@@ -917,11 +613,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -956,117 +647,18 @@ paths:
       tags:
         - GroupUsers
       x-ms-examples:
-        ApiManagementDeleteGroupUser:
-          parameters:
-            If-Match: '*'
-            api-version: '2017-03-01'
-            groupId: templategroup
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 59307d350af58404d8a26300
-          responses:
-            '204': {}
-    head:
-      description: Checks that user entity specified by identifier is associated with the group entity.
-      operationId: GroupUser_CheckEntityExists
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
-        - description: User identifier. Must be unique in the current API Management service instance.
-          in: path
-          maxLength: 256
-          minLength: 1
-          name: uid
-          pattern: '^[^*#&+:<>?]+$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '204':
-          description: Entity exists
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - GroupUsers
-      x-ms-examples:
-        ApiManagementHeadGroupUser:
+        ApiManagementDeleteGroupsUsers:
           parameters:
             api-version: '2017-03-01'
-            groupId: 59306a29e4bbd510dc24e5f9
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 5931a75ae4bbd512a88c680b
+            apimBaseUrl: apimservice1.management.azure-api.net
+            groupId: 5a58bae8a40f7ef2e05bcda2
+            uid: 5a58bae8a40f7ef2e05bcda5
           responses:
             '204': {}
     put:
       description: Adds a user to the specified group.
       operationId: GroupUser_Create
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/GroupIdParameter'
         - description: User identifier. Must be unique in the current API Management service instance.
           in: path
@@ -1080,11 +672,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -1092,25 +679,7 @@ paths:
           description: The specified user is already a member of the specified group.
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
-            description: User details.
-            properties:
-              properties:
-                allOf:
+              - allOf:
                   - description: User Entity Base Parameters set.
                     properties:
                       identities:
@@ -1135,21 +704,10 @@ paths:
                         enum:
                           - active
                           - blocked
-                          - pending
-                          - deleted
                         type: string
                         x-ms-enum:
                           modelAsString: true
                           name: UserState
-                          values:
-                            - description: User state is active.
-                              value: active
-                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
-                              value: blocked
-                            - description: User account is pending. Requires identity confirmation before it can be made active.
-                              value: pending
-                            - description: User account is closed. All identities and related entities are removed.
-                              value: deleted
                 description: User profile.
                 properties:
                   email:
@@ -1162,25 +720,7 @@ paths:
                     description: Collection of groups user is part of.
                     items:
                       allOf:
-                        - description: The Resource definition.
-                          properties:
-                            id:
-                              description: Resource ID.
-                              readOnly: true
-                              type: string
-                            name:
-                              description: Resource name.
-                              readOnly: true
-                              type: string
-                            type:
-                              description: Resource type for API Management resource.
-                              readOnly: true
-                              type: string
-                          x-ms-azure-resource: true
-                      description: Contract details.
-                      properties:
-                        properties:
-                          description: Group contract Properties.
+                        - description: Developer group.
                           properties:
                             builtIn:
                               description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -1190,13 +730,13 @@ paths:
                               description: Group description. Can contain HTML formatting tags.
                               maxLength: 1000
                               type: string
-                            displayName:
+                            externalId:
+                              description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+                              type: string
+                            name:
                               description: Group name.
                               maxLength: 300
                               minLength: 1
-                              type: string
-                            externalId:
-                              description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
                               type: string
                             type:
                               description: Group type.
@@ -1209,7 +749,12 @@ paths:
                                 modelAsString: false
                                 name: GroupType
                           required:
-                            - displayName
+                            - name
+                      description: Contract details.
+                      properties:
+                        id:
+                          description: Identifier of the Group entity.
+                          type: string
                     readOnly: true
                     type: array
                   lastName:
@@ -1220,29 +765,16 @@ paths:
                       Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
                     format: date-time
                     type: string
+            description: User details.
+            properties:
+              id:
+                description: Identifier of the entity.
+                type: string
         '201':
           description: The user was successfully added to the group.
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
-            description: User details.
-            properties:
-              properties:
-                allOf:
+              - allOf:
                   - description: User Entity Base Parameters set.
                     properties:
                       identities:
@@ -1267,21 +799,10 @@ paths:
                         enum:
                           - active
                           - blocked
-                          - pending
-                          - deleted
                         type: string
                         x-ms-enum:
                           modelAsString: true
                           name: UserState
-                          values:
-                            - description: User state is active.
-                              value: active
-                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
-                              value: blocked
-                            - description: User account is pending. Requires identity confirmation before it can be made active.
-                              value: pending
-                            - description: User account is closed. All identities and related entities are removed.
-                              value: deleted
                 description: User profile.
                 properties:
                   email:
@@ -1294,25 +815,7 @@ paths:
                     description: Collection of groups user is part of.
                     items:
                       allOf:
-                        - description: The Resource definition.
-                          properties:
-                            id:
-                              description: Resource ID.
-                              readOnly: true
-                              type: string
-                            name:
-                              description: Resource name.
-                              readOnly: true
-                              type: string
-                            type:
-                              description: Resource type for API Management resource.
-                              readOnly: true
-                              type: string
-                          x-ms-azure-resource: true
-                      description: Contract details.
-                      properties:
-                        properties:
-                          description: Group contract Properties.
+                        - description: Developer group.
                           properties:
                             builtIn:
                               description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -1322,13 +825,13 @@ paths:
                               description: Group description. Can contain HTML formatting tags.
                               maxLength: 1000
                               type: string
-                            displayName:
+                            externalId:
+                              description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+                              type: string
+                            name:
                               description: Group name.
                               maxLength: 300
                               minLength: 1
-                              type: string
-                            externalId:
-                              description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
                               type: string
                             type:
                               description: Group type.
@@ -1341,7 +844,12 @@ paths:
                                 modelAsString: false
                                 name: GroupType
                           required:
-                            - displayName
+                            - name
+                      description: Contract details.
+                      properties:
+                        id:
+                          description: Identifier of the Group entity.
+                          type: string
                     readOnly: true
                     type: array
                   lastName:
@@ -1352,6 +860,11 @@ paths:
                       Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
                     format: date-time
                     type: string
+            description: User details.
+            properties:
+              id:
+                description: Identifier of the entity.
+                type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1381,45 +894,40 @@ paths:
       tags:
         - GroupUsers
       x-ms-examples:
-        ApiManagementCreateGroupUser:
+        ApiManagementPutGroupsUsers:
           parameters:
             api-version: '2017-03-01'
-            groupId: tempgroup
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 59307d350af58404d8a26300
+            apimBaseUrl: apimservice1.management.azure-api.net
+            groupId: 5a58bacfa40f7ef2e05bccc6
+            uid: 5a58bacfa40f7ef2e05bccc0
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/59307d350af58404d8a26300
-                name: 59307d350af58404d8a26300
-                properties:
-                  email: testuser1@live.com
-                  firstName: test
-                  groups: []
-                  identities: []
-                  lastName: user
-                  registrationDate: '2017-06-01T20:46:45.437Z'
-                  state: active
-                type: Microsoft.ApiManagement/service/groups/users
+                email: 5a58bacfa40f7ef2e05bccc1@contoso.com
+                firstName: 5a58bacfa40f7ef2e05bccc2
+                groups: []
+                id: /users/5a58bacfa40f7ef2e05bccc0
+                identities: []
+                lastName: 5a58bacfa40f7ef2e05bccc3
+                registrationDate: '2018-01-12T13:40:31.663Z'
+                state: active
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/59307d350af58404d8a26300
-                name: 59307d350af58404d8a26300
-                properties:
-                  email: testuser1@live.com
-                  firstName: test
-                  groups: []
-                  identities: []
-                  lastName: user
-                  registrationDate: '2017-06-01T20:46:45.437Z'
-                  state: active
-                type: Microsoft.ApiManagement/service/groups/users
+                email: 5a58bacfa40f7ef2e05bccc1@contoso.com
+                firstName: 5a58bacfa40f7ef2e05bccc2
+                groups: []
+                id: /users/5a58bacfa40f7ef2e05bccc0
+                identities: []
+                lastName: 5a58bacfa40f7ef2e05bccc3
+                registrationDate: '2018-01-12T13:40:31.663Z'
+                state: active
 definitions:
   GroupCollection:
     description: Paged Group list representation.
     properties:
+      count:
+        description: Total number of entities
+        type: integer
       nextLink:
         description: Next page link if any.
         type: string
@@ -1430,25 +938,7 @@ definitions:
         type: array
   GroupContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Contract details.
-    properties:
-      properties:
-        description: Group contract Properties.
+      - description: Developer group.
         properties:
           builtIn:
             description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -1458,13 +948,13 @@ definitions:
             description: Group description. Can contain HTML formatting tags.
             maxLength: 1000
             type: string
-          displayName:
+          externalId:
+            description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+            type: string
+          name:
             description: Group name.
             maxLength: 300
             minLength: 1
-            type: string
-          externalId:
-            description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
             type: string
           type:
             description: Group type.
@@ -1477,9 +967,14 @@ definitions:
               modelAsString: false
               name: GroupType
         required:
-          - displayName
+          - name
+    description: Contract details.
+    properties:
+      id:
+        description: Identifier of the Group entity.
+        type: string
   GroupContractProperties:
-    description: Group contract Properties.
+    description: Developer group.
     properties:
       builtIn:
         description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -1489,14 +984,14 @@ definitions:
         description: Group description. Can contain HTML formatting tags.
         maxLength: 1000
         type: string
-      displayName:
-        description: Group name.
-        maxLength: 300
-        minLength: 1
-        type: string
       externalId:
         description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
         type: string
+      name:
+        description: Group name.
+        maxLength: 300
+        minLength: 1
+        type: string
       type:
         description: Group type.
         enum:
@@ -1508,27 +1003,20 @@ definitions:
           modelAsString: false
           name: GroupType
     required:
-      - displayName
+      - name
   GroupCreateParameters:
     description: Parameters supplied to the Create Group operation.
     properties:
-      properties:
-        $ref: '#/definitions/GroupCreateParametersProperties'
-        description: Properties supplied to Create Group operation.
-        x-ms-client-flatten: true
-  GroupCreateParametersProperties:
-    description: Parameters supplied to the Create Group operation.
-    properties:
       description:
         description: Group description.
         type: string
-      displayName:
+      externalId:
+        description: 'Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+        type: string
+      name:
         description: Group name.
         maxLength: 300
         minLength: 1
-        type: string
-      externalId:
-        description: 'Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
         type: string
       type:
         description: Group type.
@@ -1541,27 +1029,20 @@ definitions:
           modelAsString: false
           name: GroupType
     required:
-      - displayName
+      - name
   GroupUpdateParameters:
-    description: Parameters supplied to the Update Group operation.
-    properties:
-      properties:
-        $ref: '#/definitions/GroupUpdateParametersProperties'
-        description: Group entity update contract properties.
-        x-ms-client-flatten: true
-  GroupUpdateParametersProperties:
     description: Parameters supplied to the Update Group operation.
     properties:
       description:
         description: Group description.
         type: string
-      displayName:
+      externalId:
+        description: 'Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+        type: string
+      name:
         description: Group name.
         maxLength: 300
         minLength: 1
-        type: string
-      externalId:
-        description: 'Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
         type: string
       type:
         description: Group type.
@@ -1573,3 +1054,14 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: GroupType
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false
