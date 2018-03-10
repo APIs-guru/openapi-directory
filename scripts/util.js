@@ -214,6 +214,17 @@ exports.editFile = function (str) {
   });
 }
 
+exports.listZipFiles = function(url, pattern) {
+  let lines = exports.exec(`wget -q -O /tmp/t.zip ${url} && unzip -l /tmp/t.zip`).split('\n');
+  let files = [];
+  for (let line of lines) {
+    let filename = line.split('  ').pop().trim();
+    if (filename.match(pattern))
+      files.push(filename);
+  }
+  return files;
+};
+
 exports.listGitHubFiles = function (user, repo, branch, glob) {
   //TODO: use makeRequest lib to dowload archive
   var files = exports.exec(`wget -q -O- https://codeload.github.com/${user}/${repo}/tar.gz/${branch} | tar -tz --wildcards '*/${glob}'`);

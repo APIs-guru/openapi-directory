@@ -168,6 +168,7 @@ program
 program
   .command('leads')
   .description('add/remove definitions from 3rd-party catalogs')
+  .arguments('[DIR]')
   .action(updateCatalogLeads);
 
 program
@@ -321,8 +322,8 @@ function validatePreferred(specs) {
     var spath = util.getSwaggerPath(swagger);
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
-    //assert(Object.keys(swagger.paths).length>0, `"${id}" "${version}" has no paths`);
-    assert(Object.keys(swagger.paths).length>0, `"${spath}" has no paths`);
+    if (Object.keys(swagger.paths).length<1)
+      warnings.push(`"${spath}" has no paths`);
   });
 
   _.each(preferred, function (versions, id) {
@@ -349,15 +350,15 @@ function validatePreferred(specs) {
       //assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
       let swagger = specs[id.replace(':','/')+'/'+version+'/swagger.yaml'];
       if (_.isUndefined(value)) {
+        value = false;
         if (swagger) {
-          swagger.info["x-preferred"] = false;
+          swagger.info["x-preferred"] = value;
           util.saveSwagger(swagger);
-          value = false;
         }
         else console.warn('Not found',id,version);
       }
-      assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}"`);
-      assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}"`);
+      assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}": "${typeof value}"`);
+      assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}": "${value}"`);
       seenTrue = value || seenTrue;
       if ((version > maxVersion) && (version.indexOf('alpha')<0) && (version.indexOf('beta')<0)) {
         maxVersion = version;
@@ -382,11 +383,11 @@ function addToCollection(format, url, command) {
     exPatch.info['x-serviceName'] = command.service;
   if (command.logo) {
     exPatch.info['x-logo'] = {
-    url: command.logo
-  };
-  if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
-    exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
-  }
+      url: command.logo
+    };
+    if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
+      exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
+    }
   }
   if (command.unofficial) {
     exPatch.info['x-unofficialSpec'] = true;
@@ -463,9 +464,15 @@ function appendFixup(fixupPath, spec, editedSpec) {
   saveFixup(fixupPath, spec, editedSpec);
 }
 
-function updateCatalogLeads() {
+function updateCatalogLeads(dir,command) {
   fromLeads = true;
   var knownUrls = _.map(util.getSpecs(), util.getOriginUrl);
+
+  let providers;
+  if (dir) {
+    providers = [];
+    providers.push(dir.replace('/',''));
+  }
 
   specSources.getCatalogsLeads()
     .then(function (catalogsLeads) {
@@ -1220,6 +1227,7 @@ function logYaml(json) {
 
 process.on('exit', function() {
   if (warnings.length) {
+    process.exitCode = 1;
     for (var w of warnings) {
       console.log(w);
     }
@@ -1229,5 +1237,6 @@ process.on('exit', function() {
       console.log('Deleted? '+d);
     }
   }
+  console.log('Exiting with '+process.exitCode||0);
 });
 
