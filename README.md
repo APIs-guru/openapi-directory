@@ -15,7 +15,7 @@
 <img src="https://opencollective.com/openapi-directory/tiers/partner/badge.svg?label=partner&color=brightgreen" />
 
 Directory of API definitions in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) and [3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) formats.<BR>
-API access to collection: [Go!][apiDoc-link]
+API access to collection: [Go!][apiDoc-link] - [RSS Feed](http://api.apis.guru/v2/list.rss)
 
 [![Add API][addAPI-image]][addAPI-link]
 
