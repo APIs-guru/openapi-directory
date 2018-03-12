@@ -15,11 +15,11 @@
 <img src="https://opencollective.com/openapi-directory/tiers/partner/badge.svg?label=partner&color=brightgreen" />
 
 Directory of API definitions in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) and [3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) formats.<BR>
-API access to collection: [Go!][apiDoc-link] - [RSS Feed](http://api.apis.guru/v2/list.rss)
+API access to collection: [Go!][apiDoc-link] - We also have an [RSS Feed](http://api.apis.guru/v2/list.rss)
 
 [![Add API][addAPI-image]][addAPI-link]
 
-Our goal is to create a machine-readable Wikipedia for REST APIs with the following principals:
+Our goal is to create the most comprehensive, standards-compliant and up-to-date directory of machine-readable API definitions with the following principles:
 - Open source, community driven project.
 - Only publicly available APIs (free or paid).
 - Anyone can add or change an API, not only API owners.
@@ -88,7 +88,7 @@ Licenses
 --------------------------
 All code is released under the [MIT](http://opensource.org/licenses/MIT) licence.<br>
 All API definitions contributed to project by authors are covered by the [CC01.0](https://creativecommons.org/publicdomain/zero/1.0/) license.<br>
-All API definitions acquired from public sources under the [Fair use](http://en.wikipedia.org/wiki/Fair_use) principal.
+All API definitions acquired from public sources under the [Fair use](http://en.wikipedia.org/wiki/Fair_use) principle.
 
 Definition sources
 --------------------------
