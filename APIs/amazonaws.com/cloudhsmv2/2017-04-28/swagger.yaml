@@ -849,7 +849,7 @@ definitions:
         description: An opaque string that indicates that the response contains only a subset of clusters. Use this value in a subsequent <code>DescribeClusters</code> request to get more clusters.
   EniId:
     type: string
-    pattern: 'eni-[0-9a-fA-F]{8}'
+    pattern: 'eni-[0-9a-fA-F]{8,17}'
   ExternalAz:
     type: string
     pattern: '[a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-\d[a-z]'
@@ -1002,7 +1002,7 @@ definitions:
       $ref: '#/definitions/String'
   SubnetId:
     type: string
-    pattern: 'subnet-[0-9a-fA-F]{8}'
+    pattern: 'subnet-[0-9a-fA-F]{8,17}'
   SubnetIds:
     type: array
     items:
@@ -1056,6 +1056,7 @@ definitions:
     properties: {}
   TagValue:
     type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 0
     maxLength: 256
   Timestamp:

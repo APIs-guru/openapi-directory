@@ -799,6 +799,10 @@ paths:
           description: InternalFailureException
           schema:
             $ref: '#/definitions/InternalFailureException'
+        '486':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
       parameters:
         - name: body
           in: body
@@ -6020,6 +6024,12 @@ definitions:
       autoRegistrationStatus:
         $ref: '#/definitions/AutoRegistrationStatus'
         description: Whether the CA certificate configured for auto registration of device certificates. Valid values are "ENABLE" and "DISABLE"
+      lastModifiedDate:
+        $ref: '#/definitions/DateType'
+      customerVersion:
+        $ref: '#/definitions/CustomerVersion'
+      generationId:
+        $ref: '#/definitions/GenerationId'
     description: Describes a CA certificate.
   CACertificateStatus:
     type: string
@@ -6120,9 +6130,13 @@ definitions:
       lastModifiedDate:
         $ref: '#/definitions/DateType'
         description: The date and time the certificate was last modified.
+      customerVersion:
+        $ref: '#/definitions/CustomerVersion'
       transferData:
         $ref: '#/definitions/TransferData'
         description: The transfer data.
+      generationId:
+        $ref: '#/definitions/GenerationId'
     description: Describes a certificate.
   CertificateId:
     type: string
@@ -6632,6 +6646,9 @@ definitions:
         $ref: '#/definitions/SignatureAlgorithm'
         description: The signature algorithm used to code sign the file.
     description: Describes a custom method used to code sign a file.
+  CustomerVersion:
+    type: integer
+    minimum: 1
   DateType:
     type: string
     format: date-time
@@ -7237,6 +7254,8 @@ definitions:
     type: integer
     minimum: 1
     maximum: 10000
+  GenerationId:
+    type: string
   GetEffectivePoliciesRequest:
     type: object
     properties:
@@ -7312,6 +7331,12 @@ definitions:
       defaultVersionId:
         $ref: '#/definitions/PolicyVersionId'
         description: The default policy version ID.
+      creationDate:
+        $ref: '#/definitions/DateType'
+      lastModifiedDate:
+        $ref: '#/definitions/DateType'
+      generationId:
+        $ref: '#/definitions/GenerationId'
     description: The output from the GetPolicy operation.
   GetPolicyVersionRequest:
     type: object
@@ -7335,6 +7360,12 @@ definitions:
       isDefaultVersion:
         $ref: '#/definitions/IsDefaultVersion'
         description: Specifies whether the policy version is the default.
+      creationDate:
+        $ref: '#/definitions/DateType'
+      lastModifiedDate:
+        $ref: '#/definitions/DateType'
+      generationId:
+        $ref: '#/definitions/GenerationId'
     description: The output from the GetPolicyVersion operation.
   GetRegistrationCodeRequest:
     type: object
@@ -8769,6 +8800,8 @@ definitions:
       roleAlias:
         $ref: '#/definitions/RoleAlias'
         description: The role alias.
+      roleAliasArn:
+        $ref: '#/definitions/RoleAliasArn'
       roleArn:
         $ref: '#/definitions/RoleArn'
         description: The role ARN.
