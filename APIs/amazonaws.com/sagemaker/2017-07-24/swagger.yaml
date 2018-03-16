@@ -214,7 +214,7 @@ paths:
   '/#CreateNotebookInstance':
     post:
       operationId: CreateNotebookInstance
-      description: '<p>Creates an Amazon SageMaker notebook instance. A notebook instance is an ML compute instance running on a Jupyter notebook. </p> <p>In a <code>CreateNotebookInstance</code> request, you specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance. </p> <p>Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific an algorithm or with a machine learning framework. </p> <p>After receiving the request, Amazon SageMaker does the following:</p> <ol> <li> <p>Creates a network interface in the Amazon SageMaker VPC.</p> </li> <li> <p>(Option) If you specified <code>SubnetId</code>, creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.</p> </li> <li> <p>Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified <code>SubnetId</code> of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.</p> </li> </ol> <p>After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN).</p> <p>After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p>'
+      description: '<p>Creates an Amazon SageMaker notebook instance. A notebook instance is a machine learning (ML) compute instance running on a Jupyter notebook. </p> <p>In a <code>CreateNotebookInstance</code> request, specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance. </p> <p>Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific algorithm or with a machine learning framework. </p> <p>After receiving the request, Amazon SageMaker does the following:</p> <ol> <li> <p>Creates a network interface in the Amazon SageMaker VPC.</p> </li> <li> <p>(Option) If you specified <code>SubnetId</code>, Amazon SageMaker creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.</p> </li> <li> <p>Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified <code>SubnetId</code> of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.</p> </li> </ol> <p>After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN).</p> <p>After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p>'
       responses:
         '200':
           description: Success
@@ -230,6 +230,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateNotebookInstanceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateNotebookInstanceLifecycleConfig':
+    post:
+      operationId: CreateNotebookInstanceLifecycleConfig
+      description: '<p>Creates a lifecycle configuration that you can associate with a notebook instance. A <i>lifecycle configuration</i> is a collection of shell scripts that run when you create or start a notebook instance.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateNotebookInstanceLifecycleConfigOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateNotebookInstanceLifecycleConfigInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -380,6 +409,29 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteNotebookInstanceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteNotebookInstanceLifecycleConfig':
+    post:
+      operationId: DeleteNotebookInstanceLifecycleConfig
+      description: Deletes a notebook instance lifecycle configuration.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteNotebookInstanceLifecycleConfigInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -578,6 +630,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeNotebookInstanceLifecycleConfig':
+    post:
+      operationId: DescribeNotebookInstanceLifecycleConfig
+      description: '<p>Returns a description of a notebook instance lifecycle configuration.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeNotebookInstanceLifecycleConfigOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeNotebookInstanceLifecycleConfigInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeTrainingJob':
     post:
       operationId: DescribeTrainingJob
@@ -712,6 +789,41 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListModelsInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListNotebookInstanceLifecycleConfigs':
+    post:
+      operationId: ListNotebookInstanceLifecycleConfigs
+      description: Lists notebook instance lifestyle configurations created with the API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListNotebookInstanceLifecycleConfigsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListNotebookInstanceLifecycleConfigsInput'
         - name: MaxResults
           type: string
           in: query
@@ -1001,6 +1113,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateNotebookInstanceLifecycleConfig':
+    post:
+      operationId: UpdateNotebookInstanceLifecycleConfig
+      description: Updates a notebook instance lifecycle configuration created with the API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateNotebookInstanceLifecycleConfigOutput'
+        '480':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateNotebookInstanceLifecycleConfigInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AddTagsInput:
     type: object
@@ -1010,7 +1151,7 @@ definitions:
     properties:
       ResourceArn:
         $ref: '#/definitions/ResourceArn'
-        description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. '
+        description: The Amazon Resource Name (ARN) of the resource that you want to tag.
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of <code>Tag</code> objects. Each tag is a key-value pair. Only the <code>key</code> parameter is required. If you don''t specify a value, Amazon SageMaker sets the value to an empty string. '
@@ -1034,7 +1175,7 @@ definitions:
         description: 'The registry path of the Docker image that contains the training algorithm. For information about using your own algorithms, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos-docker-registry-paths.html">Docker Registry Paths for Algorithms Provided by Amazon SageMaker </a>. '
       TrainingInputMode:
         $ref: '#/definitions/TrainingInputMode'
-        description: '<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accomodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won''t be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>'
+        description: '<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won''t be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>'
     description: '<p>Specifies the training algorithm to use in a <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html">CreateTrainingJob</a> request. </p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html">Bring Your Own Algorithms </a>. </p>'
   Channel:
     type: object
@@ -1197,6 +1338,32 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: A list of tags to associate with the notebook instance. You can add tags later by using the <code>CreateTags</code> API.
+      LifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: 'The name of a lifecycle configuration to associate with the notebook instance. For information about lifestyle configurations, see <a>notebook-lifecycle-config</a>.'
+      DirectInternetAccess:
+        $ref: '#/definitions/DirectInternetAccess'
+        description: '<p>Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to <code>Disabled</code> this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.</p> <p>For more information, see <a>appendix-notebook-and-internet-access</a>. You can set the value of this parameter to <code>Disabled</code> only if you set a value for the <code>SubnetId</code> parameter.</p>'
+  CreateNotebookInstanceLifecycleConfigInput:
+    type: object
+    required:
+      - NotebookInstanceLifecycleConfigName
+    properties:
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration.
+      OnCreate:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'A shell script that runs only once, when you create a notebook instance.'
+      OnStart:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'A shell script that runs every time you start a notebook instance, including when you create the notebook instance.'
+  CreateNotebookInstanceLifecycleConfigOutput:
+    type: object
+    properties:
+      NotebookInstanceLifecycleConfigArn:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigArn'
+        description: The Amazon Resource Name (ARN) of the lifecycle configuration.
   CreateNotebookInstanceOutput:
     type: object
     properties:
@@ -1310,6 +1477,14 @@ definitions:
       NotebookInstanceName:
         $ref: '#/definitions/NotebookInstanceName'
         description: The name of the Amazon SageMaker notebook instance to delete.
+  DeleteNotebookInstanceLifecycleConfigInput:
+    type: object
+    required:
+      - NotebookInstanceLifecycleConfigName
+    properties:
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration to delete.
   DeleteTagsInput:
     type: object
     required:
@@ -1438,6 +1613,35 @@ definitions:
       NotebookInstanceName:
         $ref: '#/definitions/NotebookInstanceName'
         description: The name of the notebook instance that you want information about.
+  DescribeNotebookInstanceLifecycleConfigInput:
+    type: object
+    required:
+      - NotebookInstanceLifecycleConfigName
+    properties:
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration to describe.
+  DescribeNotebookInstanceLifecycleConfigOutput:
+    type: object
+    properties:
+      NotebookInstanceLifecycleConfigArn:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigArn'
+        description: The Amazon Resource Name (ARN) of the lifecycle configuration.
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration.
+      OnCreate:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'The shell script that runs only once, when you create a notebook instance.'
+      OnStart:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'The shell script that runs every time you start a notebook instance, including when you create the notebook instance.'
+      LastModifiedTime:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A timestamp that tells when the lifecycle configuration was last modified.
+      CreationTime:
+        $ref: '#/definitions/CreationTime'
+        description: A timestamp that tells when the lifecycle configuration was created.
   DescribeNotebookInstanceOutput:
     type: object
     properties:
@@ -1452,7 +1656,7 @@ definitions:
         description: The status of the notebook instance.
       FailureReason:
         $ref: '#/definitions/FailureReason'
-        description: 'If staus is failed, the reason it failed.'
+        description: 'If status is failed, the reason it failed.'
       Url:
         $ref: '#/definitions/NotebookInstanceUrl'
         description: 'The URL that you use to connect to the Jupyter notebook that is running in your notebook instance. '
@@ -1480,6 +1684,12 @@ definitions:
       CreationTime:
         $ref: '#/definitions/CreationTime'
         description: A timestamp. Use this parameter to return the time when the notebook instance was created
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: '<p>Returns the name of a notebook instance lifecycle configuration.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>'
+      DirectInternetAccess:
+        $ref: '#/definitions/DirectInternetAccess'
+        description: '<p>Describes whether the notebook instance has internet access.</p> <p>For more information, see <a>appendix-notebook-and-internet-access</a>.</p>'
   DescribeTrainingJobRequest:
     type: object
     required:
@@ -1573,6 +1783,11 @@ definitions:
     items:
       $ref: '#/definitions/DesiredWeightAndCapacity'
     minItems: 1
+  DirectInternetAccess:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
   EndpointArn:
     type: string
     minLength: 20
@@ -1713,6 +1928,7 @@ definitions:
       - ml.t2.medium
       - ml.m4.xlarge
       - ml.p2.xlarge
+      - ml.p3.2xlarge
   KmsKeyId:
     type: string
     maxLength: 2048
@@ -1833,6 +2049,45 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of models, use it in the subsequent request. '
+  ListNotebookInstanceLifecycleConfigsInput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of a <code>ListNotebookInstanceLifecycleConfigs</code> request was truncated, the response includes a <code>NextToken</code>. To get the next set of lifecycle configurations, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of lifecycle configurations to return in the response.
+      SortBy:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigSortKey'
+        description: Sorts the list of results. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigSortOrder'
+        description: The sort order for results.
+      NameContains:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigNameContains'
+        description: A string in the lifecycle configuration name. This filter returns only lifecycle configurations whose name contains the specified string.
+      CreationTimeBefore:
+        $ref: '#/definitions/CreationTime'
+        description: A filter that returns only lifecycle configurations that were created before the specified time (timestamp).
+      CreationTimeAfter:
+        $ref: '#/definitions/CreationTime'
+        description: A filter that returns only lifecycle configurations that were created after the specified time (timestamp).
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A filter that returns only lifecycle configurations that were modified before the specified time (timestamp).
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A filter that returns only lifecycle configurations that were modified after the specified time (timestamp).
+  ListNotebookInstanceLifecycleConfigsOutput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request. '
+      NotebookInstanceLifecycleConfigs:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigSummaryList'
+        description: 'An array of <code>NotebookInstanceLifecycleConfiguration</code> objects, each listing a lifecycle configuration.'
   ListNotebookInstancesInput:
     type: object
     properties:
@@ -1850,7 +2105,7 @@ definitions:
         description: 'The sort order for results. '
       NameContains:
         $ref: '#/definitions/NotebookInstanceNameContains'
-        description: 'A string in the notebook instances'' name. This filter returns only notebook instances whose name contains the specified string. '
+        description: A string in the notebook instances' name. This filter returns only notebook instances whose name contains the specified string.
       CreationTimeBefore:
         $ref: '#/definitions/CreationTime'
         description: 'A filter that returns only notebook instances that were created before the specified time (timestamp). '
@@ -1866,6 +2121,9 @@ definitions:
       StatusEquals:
         $ref: '#/definitions/NotebookInstanceStatus'
         description: A filter that returns only notebook instances with the specified status.
+      NotebookInstanceLifecycleConfigNameContains:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: A string in the name of a notebook instances lifecycle configuration associated with this notebook instance. This filter returns only notebook instances associated with a lifecycle configuration with a name that contains the specified string.
   ListNotebookInstancesOutput:
     type: object
     properties:
@@ -2010,6 +2268,66 @@ definitions:
   NotebookInstanceArn:
     type: string
     maxLength: 256
+  NotebookInstanceLifecycleConfigArn:
+    type: string
+    maxLength: 256
+  NotebookInstanceLifecycleConfigContent:
+    type: string
+    minLength: 1
+    maxLength: 16384
+  NotebookInstanceLifecycleConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/NotebookInstanceLifecycleHook'
+    maxItems: 1
+  NotebookInstanceLifecycleConfigName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  NotebookInstanceLifecycleConfigNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  NotebookInstanceLifecycleConfigSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - LastModifiedTime
+  NotebookInstanceLifecycleConfigSortOrder:
+    type: string
+    enum:
+      - Ascending
+      - Descending
+  NotebookInstanceLifecycleConfigSummary:
+    type: object
+    required:
+      - NotebookInstanceLifecycleConfigName
+      - NotebookInstanceLifecycleConfigArn
+    properties:
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration.
+      NotebookInstanceLifecycleConfigArn:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigArn'
+        description: The Amazon Resource Name (ARN) of the lifecycle configuration.
+      CreationTime:
+        $ref: '#/definitions/CreationTime'
+        description: A timestamp that tells when the lifecycle configuration was created.
+      LastModifiedTime:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A timestamp that tells when the lifecycle configuration was last modified.
+    description: Provides a summary of a notebook instance lifecycle configuration.
+  NotebookInstanceLifecycleConfigSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/NotebookInstanceLifecycleConfigSummary'
+  NotebookInstanceLifecycleHook:
+    type: object
+    properties:
+      Content:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigContent'
+        description: A base64-encoded string that contains a shell script for a notebook instance lifecycle configuration.
+    description: '<p>Contains the notebook instance lifecycle configuration script.</p> <p>This script runs in the path <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>'
   NotebookInstanceName:
     type: string
     pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
@@ -2064,6 +2382,9 @@ definitions:
       LastModifiedTime:
         $ref: '#/definitions/LastModifiedTime'
         description: A timestamp that shows when the notebook instance was last modified.
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: '<p>The name of a notebook instance lifecycle configuration associated with this notebook instance.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>'
     description: Provides summary information for an Amazon SageMaker notebook instance.
   NotebookInstanceSummaryList:
     type: array
@@ -2152,14 +2473,14 @@ definitions:
         description: The weight associated with the variant.
       DesiredWeight:
         $ref: '#/definitions/VariantWeight'
-        description: 'The requested weight, as specified in the <code>UpdateWeightAndCapacities</code> request. '
+        description: 'The requested weight, as specified in the <code>UpdateEndpointWeightsAndCapacities</code> request. '
       CurrentInstanceCount:
         $ref: '#/definitions/TaskCount'
         description: The number of instances associated with the variant.
       DesiredInstanceCount:
         $ref: '#/definitions/TaskCount'
-        description: 'The number of instances requested in the <code>UpdateWeightAndCapacities</code> request. '
-    description: 'Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateWeightAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. '
+        description: 'The number of instances requested in the <code>UpdateEndpointWeightsAndCapacities</code> request. '
+    description: 'Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateEndpointWeightsAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. '
   ProductionVariantSummaryList:
     type: array
     items:
@@ -2486,6 +2807,23 @@ definitions:
       RoleArn:
         $ref: '#/definitions/RoleArn'
         description: Amazon Resource Name (ARN) of the IAM role to associate with the instance.
+  UpdateNotebookInstanceLifecycleConfigInput:
+    type: object
+    required:
+      - NotebookInstanceLifecycleConfigName
+    properties:
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration.
+      OnCreate:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'The shell script that runs only once, when you create a notebook instance'
+      OnStart:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'The shell script that runs every time you start a notebook instance, including when you create the notebook instance.'
+  UpdateNotebookInstanceLifecycleConfigOutput:
+    type: object
+    properties: {}
   UpdateNotebookInstanceOutput:
     type: object
     properties: {}

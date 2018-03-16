@@ -1768,6 +1768,155 @@ paths:
           in: path
           type: string
           required: true
+  '/v1/apps/{application-id}/endpoints/{endpoint-id}':
+    delete:
+      operationId: DeleteEndpoint
+      description: Deletes an endpoint.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteEndpointResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteEndpointRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: endpoint-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetEndpoint
+      description: Returns information about an endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEndpointResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEndpointRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: endpoint-id
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateEndpoint
+      description: Use to update an endpoint.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateEndpointResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEndpointRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: endpoint-id
+          in: path
+          type: string
+          required: true
   '/v1/apps/{application-id}/eventstream':
     delete:
       operationId: DeleteEventStream
@@ -2598,109 +2747,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apps/{application-id}/endpoints/{endpoint-id}':
-    get:
-      operationId: GetEndpoint
-      description: Returns information about an endpoint.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetEndpointResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: MethodNotAllowedException
-          schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEndpointRequest'
-        - name: application-id
-          in: path
-          type: string
-          required: true
-        - name: endpoint-id
-          in: path
-          type: string
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      operationId: UpdateEndpoint
-      description: Use to update an endpoint.
-      responses:
-        '202':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateEndpointResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: MethodNotAllowedException
-          schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateEndpointRequest'
-        - name: application-id
-          in: path
-          type: string
-          required: true
-        - name: endpoint-id
-          in: path
-          type: string
-          required: true
   '/v1/apps/{application-id}/jobs/export/{job-id}':
     get:
       operationId: GetExportJob
@@ -4262,6 +4308,16 @@ definitions:
     type: object
     properties: {}
     description: DeleteEventStream Request
+  DeleteEndpointRequest:
+    type: object
+    properties: {}
+  DeleteEndpointResponse:
+    type: object
+    required:
+      - EndpointResponse
+    properties:
+      EndpointResponse:
+        $ref: '#/definitions/EndpointResponse'
   DeleteEventStreamResponse:
     type: object
     required:
@@ -5748,9 +5804,12 @@ definitions:
       MessageType:
         $ref: '#/definitions/MessageType'
         description: Is this a transaction priority message or lower priority.
+      OriginationNumber:
+        $ref: '#/definitions/__string'
+        description: 'The phone number that the SMS message originates from. Specify one of the dedicated long codes or short codes that you requested from AWS Support and that is assigned to your account. If this attribute is not specified, Amazon Pinpoint randomly assigns a long code.'
       SenderId:
         $ref: '#/definitions/__string'
-        description: Sender ID of sent message.
+        description: The sender ID that is shown as the message sender on the recipient's device. Support for sender IDs varies by country or region.
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
         description: Default message substitutions. Can be overridden by individual address substitutions.
