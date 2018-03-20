@@ -584,6 +584,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAccountAttributes':
+    post:
+      operationId: DescribeAccountAttributes
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAccountAttributesResult'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeApplicationVersions':
     post:
       operationId: DescribeApplicationVersions
@@ -2341,6 +2364,11 @@ definitions:
   DeploymentTimestamp:
     type: string
     format: date-time
+  DescribeAccountAttributesResult:
+    type: object
+    properties:
+      ResourceQuotas:
+        $ref: '#/definitions/ResourceQuotas'
   DescribeApplicationVersionsMessage:
     type: object
     example:
@@ -3734,6 +3762,24 @@ definitions:
     type: object
     properties: {}
     description: A resource doesn't exist for the specified Amazon Resource Name (ARN).
+  ResourceQuota:
+    type: object
+    properties:
+      Maximum:
+        $ref: '#/definitions/BoxedInt'
+  ResourceQuotas:
+    type: object
+    properties:
+      ApplicationQuota:
+        $ref: '#/definitions/ResourceQuota'
+      ApplicationVersionQuota:
+        $ref: '#/definitions/ResourceQuota'
+      EnvironmentQuota:
+        $ref: '#/definitions/ResourceQuota'
+      ConfigurationTemplateQuota:
+        $ref: '#/definitions/ResourceQuota'
+      CustomPlatformQuota:
+        $ref: '#/definitions/ResourceQuota'
   ResourceTagsDescriptionMessage:
     type: object
     properties:

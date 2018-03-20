@@ -8525,7 +8525,7 @@ definitions:
       - High
   S3BucketType:
     type: string
-    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
+    pattern: '^[0-9A-Za-z\.\-_]*$'
     minLength: 3
     maxLength: 1024
   SMSMfaSettingsType:

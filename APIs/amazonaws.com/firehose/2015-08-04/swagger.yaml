@@ -376,7 +376,7 @@ definitions:
     description: Describes the Amazon CloudWatch logging options for your delivery stream.
   ClusterJDBCURL:
     type: string
-    pattern: 'jdbc:(redshift|postgresql)://((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+redshift\.amazonaws\.com:\d{1,5}/[a-zA-Z0-9_$]+'
+    pattern: 'jdbc:\(redshift\|postgresql\)://\(\(\?!-\)[A-Za-z0-9-]\{1,63\}\.\)\+redshift\.amazonaws\.com:\d\{1,5\}/[a-zA-Z0-9_$]\+'
     minLength: 1
   CompressionFormat:
     type: string
