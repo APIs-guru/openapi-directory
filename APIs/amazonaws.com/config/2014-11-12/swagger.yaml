@@ -101,6 +101,39 @@ security:
 paths:
   /:
     post:
+      operationId: BatchGetResourceConfig
+      description: '<p>Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list. </p> <note> <ul> <li> <p>The API does not return results for deleted resources.</p> </li> <li> <p> The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchGetResourceConfigResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: NoAvailableConfigurationRecorderException
+          schema:
+            $ref: '#/definitions/NoAvailableConfigurationRecorderException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchGetResourceConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConfigRule':
+    post:
       operationId: DeleteConfigRule
       description: '<p>Deletes the specified AWS Config rule and all of its evaluation results.</p> <p>AWS Config sets the state of a rule to <code>DELETING</code> until the deletion is complete. You cannot update a rule while it is in this state. If you make a <code>PutConfigRule</code> or <code>DeleteConfigRule</code> request for the rule, you will receive a <code>ResourceInUseException</code>.</p> <p>You can check the state of a rule by using the <code>DescribeConfigRules</code> request.</p>'
       responses:
@@ -1045,10 +1078,77 @@ definitions:
     type: string
   AwsRegion:
     type: string
+  BaseConfigurationItem:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/Version'
+        description: The version number of the resource configuration.
+      accountId:
+        $ref: '#/definitions/AccountId'
+        description: The 12 digit AWS account ID associated with the resource.
+      configurationItemCaptureTime:
+        $ref: '#/definitions/ConfigurationItemCaptureTime'
+        description: The time when the configuration recording was initiated.
+      configurationItemStatus:
+        $ref: '#/definitions/ConfigurationItemStatus'
+        description: The configuration item status.
+      configurationStateId:
+        $ref: '#/definitions/ConfigurationStateId'
+        description: An identifier that indicates the ordering of the configuration items of a resource.
+      arn:
+        $ref: '#/definitions/ARN'
+        description: The Amazon Resource Name (ARN) of the resource.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of AWS resource.
+      resourceId:
+        $ref: '#/definitions/ResourceId'
+        description: 'The ID of the resource (for example., sg-xxxxxx).'
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The custom name of the resource, if available.'
+      awsRegion:
+        $ref: '#/definitions/AwsRegion'
+        description: The region where the resource resides.
+      availabilityZone:
+        $ref: '#/definitions/AvailabilityZone'
+        description: The Availability Zone associated with the resource.
+      resourceCreationTime:
+        $ref: '#/definitions/ResourceCreationTime'
+        description: The time stamp when the resource was created.
+      configuration:
+        $ref: '#/definitions/Configuration'
+        description: The description of the resource configuration.
+      supplementaryConfiguration:
+        $ref: '#/definitions/SupplementaryConfiguration'
+        description: Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the configuration parameter.
+    description: The detailed configuration of a specified resource.
+  BaseConfigurationItems:
+    type: array
+    items:
+      $ref: '#/definitions/BaseConfigurationItem'
   BaseResourceId:
     type: string
     minLength: 1
     maxLength: 768
+  BatchGetResourceConfigRequest:
+    type: object
+    required:
+      - resourceKeys
+    properties:
+      resourceKeys:
+        $ref: '#/definitions/ResourceKeys'
+        description: A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID.
+  BatchGetResourceConfigResponse:
+    type: object
+    properties:
+      baseConfigurationItems:
+        $ref: '#/definitions/BaseConfigurationItems'
+        description: A list that contains the current configuration of one or more resources.
+      unprocessedResourceKeys:
+        $ref: '#/definitions/ResourceKeys'
+        description: 'A list of resource keys that were not processed with the current response. The unprocessesResourceKeys value is in the same form as ResourceKeys, so the value can be directly provided to a subsequent BatchGetResourceConfig operation. If there are no unprocessed resource keys, the response contains an empty unprocessedResourceKeys list. '
   Boolean:
     type: boolean
   ChannelName:
@@ -1571,7 +1671,7 @@ definitions:
         description: 'The ID of the AWS resource for which you want compliance information. You can specify only one resource ID. If you specify a resource ID, you must also specify a type for <code>ResourceType</code>.'
       ComplianceTypes:
         $ref: '#/definitions/ComplianceTypes'
-        description: '<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code>.</p>'
+        description: <p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>
       Limit:
         $ref: '#/definitions/Limit'
         description: 'The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a limit greater than 100. If you specify 0, AWS Config uses the default.'
@@ -2247,6 +2347,25 @@ definitions:
     type: object
     properties: {}
     description: The rule is currently being deleted or the rule is deleting your evaluation results. Try your request again later.
+  ResourceKey:
+    type: object
+    required:
+      - resourceType
+      - resourceId
+    properties:
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The resource type.
+      resourceId:
+        $ref: '#/definitions/ResourceId'
+        description: 'The ID of the resource (for example., sg-xxxxxx). '
+    description: 'The details that identify a resource within AWS Config, including the resource type and resource ID.'
+  ResourceKeys:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceKey'
+    minItems: 1
+    maxItems: 100
   ResourceName:
     type: string
   ResourceNotDiscoveredException:
@@ -2360,10 +2479,10 @@ definitions:
         description: 'The source of the event, such as an AWS service, that triggers AWS Config to evaluate your AWS resources.'
       MessageType:
         $ref: '#/definitions/MessageType'
-        description: '<p>The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:</p> <ul> <li> <p> <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.</p> </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p> <code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> <li> <p> <code>ConfigurationSnapshotDeliveryCompleted</code> - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.</p> </li> </ul> <p>If you want your custom rule to be triggered by configuration changes, specify both <code>ConfigurationItemChangeNotification</code> and <code>OversizedConfigurationItemChangeNotification</code>. </p>'
+        description: '<p>The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:</p> <ul> <li> <p> <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.</p> </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p> <code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> <li> <p> <code>ConfigurationSnapshotDeliveryCompleted</code> - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.</p> </li> </ul> <p>If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for <code>ConfigurationItemChangeNotification</code> and one for <code>OversizedConfigurationItemChangeNotification</code>.</p>'
       MaximumExecutionFrequency:
         $ref: '#/definitions/MaximumExecutionFrequency'
-        description: '<p>The frequency that you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> </note>'
+        description: '<p>The frequency that you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> <p>Based on the valid value you choose, AWS Config runs evaluations once for each valid value. For example, if you choose <code>Three_Hours</code>, AWS Config runs evaluations once every three hours. In this case, <code>Three_Hours</code> is the frequency of this rule. </p> </note>'
     description: 'Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for <code>SourceDetail</code> only for custom rules. '
   SourceDetails:
     type: array

@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: GetCostAndUsage
-      description: 'Retrieve cost and usage metrics for your account. You can specify which cost and usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that you want the request to return. You can also filter and group your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. See the <code>GetDimensionValues</code> action for a complete list of the valid dimensions. Master accounts in an organization have access to all member accounts.'
+      description: 'Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that you want the request to return. You can also filter and group your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. For a complete list of valid dimensions, see the <code> <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html">GetDimensionValues</a> </code> operation. Master accounts in an organization in AWS Organizations have access to all member accounts.'
       responses:
         '200':
           description: Success
@@ -143,7 +143,7 @@ paths:
   '/#GetDimensionValues':
     post:
       operationId: GetDimensionValues
-      description: 'You can use <code>GetDimensionValues</code> to retrieve all available filter values for a specific filter over a period of time. You can search the dimension values for an arbitrary string. '
+      description: 'Retrieves all available filter values for a specific filter over a period of time. You can search the dimension values for an arbitrary string. '
       responses:
         '200':
           description: Success
@@ -180,7 +180,7 @@ paths:
   '/#GetReservationCoverage':
     post:
       operationId: GetReservationCoverage
-      description: '<p>Retrieve the reservation coverage for your account. An organization''s master account has access to the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions. </p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>'
+      description: '<p>Retrieves the reservation coverage for your account. This allows you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization''s master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>'
       responses:
         '200':
           description: Success
@@ -214,10 +214,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetReservationPurchaseRecommendation':
+    post:
+      operationId: GetReservationPurchaseRecommendation
+      description: '<p>Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing.</p> <p>AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings. </p> <p>For example, AWS automatically aggregates your EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for <code>c4.large</code>, because that is the smallest size instance in the c4 instance family.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetReservationPurchaseRecommendationResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: DataUnavailableException
+          schema:
+            $ref: '#/definitions/DataUnavailableException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetReservationPurchaseRecommendationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetReservationUtilization':
     post:
       operationId: GetReservationUtilization
-      description: 'You can retrieve the Reservation utilization for your account. Master accounts in an organization have access to their associated member accounts. You can filter data by dimensions in a time period. You can use <code>GetDimensionValues</code> to determine the possible dimension values. Currently, you can group only by <code>SUBSCRIPTION_ID</code>. '
+      description: 'You can retrieve the reservation utilization for your account. Master accounts in an organization in AWS Organizations have access to their associated member accounts. You can filter data by dimensions in a time period. You can use <code>GetDimensionValues</code> to determine the possible dimension values. Currently, you can group only by <code>SUBSCRIPTION_ID</code>. '
       responses:
         '200':
           description: Success
@@ -289,6 +326,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AccountScope:
+    type: string
+    enum:
+      - PAYER
   AttributeType:
     type: string
   AttributeValue:
@@ -328,26 +369,26 @@ definitions:
         description: The period over which this coverage was used.
       Groups:
         $ref: '#/definitions/ReservationCoverageGroups'
-        description: The group of instances that a reservation covered.
+        description: The groups of instances that are covered by a reservation.
       Total:
         $ref: '#/definitions/Coverage'
         description: 'The total reservation coverage, in hours.'
-    description: 'Reservation coverage, in hours.'
+    description: 'Reservation coverage for a specified period, in hours.'
   CoverageHours:
     type: object
     properties:
       OnDemandHours:
         $ref: '#/definitions/OnDemandHours'
-        description: The number of instance running hours covered by On-Demand Instances.
+        description: The number of instance running hours that are covered by On-Demand Instances.
       ReservedHours:
         $ref: '#/definitions/ReservedHours'
-        description: The number of instance running hours covered by reservations.
+        description: The number of instance running hours that are covered by reservations.
       TotalRunningHours:
         $ref: '#/definitions/TotalRunningHours'
         description: 'The total instance usage, in hours.'
       CoverageHoursPercentage:
         $ref: '#/definitions/CoverageHoursPercentage'
-        description: The percentage of instance hours covered by a reservation.
+        description: The percentage of instance hours that are covered by a reservation.
     description: How long a running instance either used a reservation or was On-Demand.
   CoverageHoursPercentage:
     type: string
@@ -369,10 +410,10 @@ definitions:
     properties:
       Start:
         $ref: '#/definitions/YearMonthDay'
-        description: 'The beginning of the time period that you want the usage and costs for. The start date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, then the cost and usage data is retrieved starting at <code>2017-01-01</code> up to the end date.'
+        description: 'The beginning of the time period that you want the usage and costs for. The start date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, AWS retrieves cost and usage data starting at <code>2017-01-01</code> up to the end date.'
       End:
         $ref: '#/definitions/YearMonthDay'
-        description: 'The end of the time period that you want the usage and costs for. The end date is exclusive. For example, if the <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from the start date but not including <code>2017-05-01</code>.'
+        description: 'The end of the time period that you want the usage and costs for. The end date is exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, AWS retrieves cost and usage data from the start date up to, but not including, <code>2017-05-01</code>.'
     description: 'The time period that you want the usage and costs for. '
   Dimension:
     type: string
@@ -421,6 +462,41 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DimensionValuesWithAttributes'
+  EC2InstanceDetails:
+    type: object
+    properties:
+      Family:
+        $ref: '#/definitions/GenericString'
+        description: The instance family of the recommended reservation.
+      InstanceType:
+        $ref: '#/definitions/GenericString'
+        description: The type of instance that AWS recommends.
+      Region:
+        $ref: '#/definitions/GenericString'
+        description: The AWS Region of the recommended reservation.
+      AvailabilityZone:
+        $ref: '#/definitions/GenericString'
+        description: The Availability Zone of the recommended reservation.
+      Platform:
+        $ref: '#/definitions/GenericString'
+        description: 'The platform of the recommended reservation. The platform is the specific combination of operating system, license model, and software on an instance.'
+      Tenancy:
+        $ref: '#/definitions/GenericString'
+        description: Whether the recommended reservation is dedicated or shared.
+      CurrentGeneration:
+        $ref: '#/definitions/GenericBoolean'
+        description: 'Whether the recommendation is for a current generation instance. '
+      SizeFlexEligible:
+        $ref: '#/definitions/GenericBoolean'
+        description: Whether the recommended reservation is size flexible.
+    description: Details about the EC2 instances that AWS recommends that you purchase.
+  EC2Specification:
+    type: object
+    properties:
+      OfferingClass:
+        $ref: '#/definitions/OfferingClass'
+        description: Whether you want a recommendation for standard or convertible reservations.
+    description: The EC2 hardware specifications that you want AWS to provide recommendations for.
   Entity:
     type: string
   ErrorMessage:
@@ -432,24 +508,28 @@ definitions:
     properties:
       Or:
         $ref: '#/definitions/Expressions'
-        description: Return results that match either <code>Dimension</code>.
+        description: Return results that match either <code>Dimension</code> object.
       And:
         $ref: '#/definitions/Expressions'
         description: Return results that match both <code>Dimension</code> objects.
       Not:
         $ref: '#/definitions/Expression'
-        description: Return results that don't match <code>Dimension</code>.
+        description: Return results that don't match a <code>Dimension</code> object.
       Dimensions:
         $ref: '#/definitions/DimensionValues'
         description: The specific <code>Dimension</code> to use for <code>Expression</code>.
       Tags:
         $ref: '#/definitions/TagValues'
         description: The specific <code>Tag</code> to use for <code>Expression</code>.
-    description: '<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>INSTANCE_TYPE==m4.xlarge OR INSTANCE_TYPE==c4.large</code>. The <code>Expression</code> for that looks like this.</p> <p> <code>{ "Dimensions": { "Key": "INSTANCE_TYPE", "Values": [ "m4.xlarge", “c4.large” ] } }</code> </p> <p>The list of dimension values are OR''d together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((INSTANCE_TYPE == m4.large OR INSTANCE_TYPE == m3.large) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this.</p> <p> <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "INSTANCE_TYPE", "Values": [ "m4.x.large", "c4.large" ] }}, {"Tag": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an Expression object that will create an error.</p> </note> <p> <code> { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> </li> </ul>'
+    description: '<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>INSTANCE_TYPE==m4.xlarge OR INSTANCE_TYPE==c4.large</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "Dimensions": { "Key": "INSTANCE_TYPE", "Values": [ "m4.xlarge", “c4.large” ] } }</code> </p> <p>The list of dimension values are OR''d together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((INSTANCE_TYPE == m4.large OR INSTANCE_TYPE == m3.large) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "INSTANCE_TYPE", "Values": [ "m4.x.large", "c4.large" ] }}, {"Tag": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> </li> </ul>'
   Expressions:
     type: array
     items:
       $ref: '#/definitions/Expression'
+  GenericBoolean:
+    type: boolean
+  GenericString:
+    type: string
   GetCostAndUsageRequest:
     type: object
     properties:
@@ -461,13 +541,13 @@ definitions:
         description: 'Sets the AWS cost granularity to <code>MONTHLY</code> or <code>DAILY</code>. If <code>Granularity</code> isn''t set, the response object doesn''t include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>. '
       Filter:
         $ref: '#/definitions/Expression'
-        description: 'Filters AWS costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. '
+        description: 'Filters AWS costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. '
       Metrics:
         $ref: '#/definitions/MetricNames'
-        description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>BlendedCost</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>.</p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate <code>usageQuantity</code> across all of EC2, the results aren''t meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note>'
+        description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>BlendedCost</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>.</p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate <code>usageQuantity</code> across all of EC2, the results aren''t meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsage</code> requests.</p>'
       GroupBy:
         $ref: '#/definitions/GroupDefinitions'
-        description: '<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, or both.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, and <code>USAGE_TYPE</code>.</p>'
+        description: '<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, or both.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, and <code>USAGE_TYPE</code>.</p>'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
@@ -479,10 +559,10 @@ definitions:
         description: The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
       GroupDefinitions:
         $ref: '#/definitions/GroupDefinitions'
-        description: The groups specified by the the <code>Filter</code> or <code>GroupBy</code> parameters in the request.
+        description: The groups that are specified by the <code>Filter</code> or <code>GroupBy</code> parameters in the request.
       ResultsByTime:
         $ref: '#/definitions/ResultsByTime'
-        description: The time period covered by the results in the response.
+        description: The time period that is covered by the results in the response.
   GetDimensionValuesRequest:
     type: object
     required:
@@ -497,10 +577,10 @@ definitions:
         description: 'The start and end dates for retrieving the dimension values. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.'
       Dimension:
         $ref: '#/definitions/Dimension'
-        description: 'The name of the dimension. Each <code>Dimensions</code>is available for different a <code>Context</code>. For more information, see <code>Context</code>.'
+        description: 'The name of the dimension. Each <code>Dimension</code> is available for different a <code>Context</code>. For more information, see <code>Context</code>.'
       Context:
         $ref: '#/definitions/Context'
-        description: '<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> action. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>CostAndUsage</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is us-east-1a.</p> </li> <li> <p>INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account</p> </li> <li> <p>OPERATION - The action performed. Examples include RunInstance and CreateBucket.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include: On Demand Instances and Standard Reserved Instances</p> </li> <li> <p>SERVICE - The AWS service such as DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues action includes a unit attribute, examples of which include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this action includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is us-east-1a.</p> </li> <li> <p>INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account</p> </li> <li> <p>PLATFORM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The AWS region.</p> </li> <li> <p>SCOPE - The scope of a reserved instance (RI). Values are regional or a single availability zone.</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul>'
+        description: '<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code> the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>CostAndUsage</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of instance. An example is an EC2 <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is <code>DataTransfer-In-Bytes</code>. The response for the <code>GetDimensionValues</code> operation includes a unit attribute, examples of which include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of instance. An example is an EC2 <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The specific combination of operating system, license model, and software on an instance. For example, a Windows instance with SQL Server Web and no license, or a Red Hat Enterprise Linux instance.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul>'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
@@ -513,7 +593,7 @@ definitions:
     properties:
       DimensionValues:
         $ref: '#/definitions/DimensionValuesWithAttributesList'
-        description: '<p>The filters that you used to filter your request. Some dimensions are available only for a specific context:</p> <p>If you set the context to <code>CostAndUsage</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is us-east-1a.</p> </li> <li> <p>INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account</p> </li> <li> <p>OPERATION - The action performed. Examples include RunInstance and CreateBucket.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include: On Demand Instances and Standard Reserved Instances</p> </li> <li> <p>SERVICE - The AWS service such as DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues action includes a unit attribute, examples of which include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this action includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is us-east-1a.</p> </li> <li> <p>INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account</p> </li> <li> <p>PLATFORM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The AWS region.</p> </li> <li> <p>SCOPE - The scope of a reserved instance (RI). Values are regional or a single availability zone.</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul>'
+        description: '<p>The filters that you used to filter your request. Some dimensions are available only for a specific context:</p> <p>If you set the context to <code>CostAndUsage</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of instance. An example is an EC2 <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is <code>DataTransfer-In-Bytes</code>. The response for the <code>GetDimensionValues</code> operation includes a unit attribute, examples of which include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of instance. An example is an EC2 <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The specific combination of operating system, license model, and software on an instance. For example, a Windows instance with SQL Server Web and no license, or a Red Hat Enterprise Linux instance.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul>'
       ReturnSize:
         $ref: '#/definitions/PageSize'
         description: The number of results that AWS returned at one time.
@@ -530,20 +610,20 @@ definitions:
     properties:
       TimePeriod:
         $ref: '#/definitions/DateInterval'
-        description: 'The start and end dates of the period for which you want to retrieve data about reservation coverage. You can retrieve data for a maximum of 13 months-the last 12 months and the current month. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. '
+        description: 'The start and end dates of the period for which you want to retrieve data about reservation coverage. You can retrieve data for a maximum of 13 months: the last 12 months and the current month. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. '
       GroupBy:
         $ref: '#/definitions/GroupDefinitions'
-        description: <p>You can group the data by the following attributes. </p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul>
+        description: '<p>You can group the data by the following attributes:</p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul>'
       Granularity:
         $ref: '#/definitions/Granularity'
         description: '<p>The granularity of the AWS cost data for the reservation. Valid values are <code>MONTHLY</code> and <code>DAILY</code>.</p> <p>If <code>GroupBy</code> is set, <code>Granularity</code> can''t be set. If <code>Granularity</code> isn''t set, the response object doesn''t include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>.</p>'
       Filter:
         $ref: '#/definitions/Expression'
-        description: '<p>Filters utilization data by dimensions. You can filter by the following dimensions.</p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationCoverage</code> uses the same <code>Expression</code> object as the other operations, but only <code>AND</code> is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR''d together.</p>'
+        description: '<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationCoverage</code> uses the same <code> <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> </code> object as the other operations, but only <code>AND</code> is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR''d together.</p>'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-    description: You can query for how much of your instance usage was covered by a reservation.
+    description: You can use the following request parameters to query for how much of your instance usage is covered by a reservation.
   GetReservationCoverageResponse:
     type: object
     required:
@@ -554,10 +634,54 @@ definitions:
         description: The amount of time that your reservations covered.
       Total:
         $ref: '#/definitions/Coverage'
-        description: The total amount of instance usage covered by a reservation.
+        description: The total amount of instance usage that is covered by a reservation.
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+  GetReservationPurchaseRecommendationRequest:
+    type: object
+    required:
+      - Service
+    properties:
+      AccountId:
+        $ref: '#/definitions/GenericString'
+        description: 'The account ID that is associated with the recommendation. '
+      Service:
+        $ref: '#/definitions/GenericString'
+        description: The specific service that you want recommendations for.
+      AccountScope:
+        $ref: '#/definitions/AccountScope'
+        description: The account scope that you want recommendations for. The only valid value is <code>Payer</code>. This means that AWS includes the master account and any member accounts when it calculates its recommendations.
+      LookbackPeriodInDays:
+        $ref: '#/definitions/LookbackPeriodInDays'
+        description: The number of previous days that you want AWS to consider when it calculates your recommendations.
+      TermInYears:
+        $ref: '#/definitions/TermInYears'
+        description: The reservation term that you want recommendations for.
+      PaymentOption:
+        $ref: '#/definitions/PaymentOption'
+        description: The reservation purchase option that you want recommendations for.
+      ServiceSpecification:
+        $ref: '#/definitions/ServiceSpecification'
+        description: 'The specific service, such as EC2, that you want recommendations for.'
+      PageSize:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: The number of recommendations that you want returned in a single response object.
+      NextPageToken:
+        $ref: '#/definitions/NextPageToken'
+        description: The pagination token that indicates the next set of results that you want to retrieve.
+  GetReservationPurchaseRecommendationResponse:
+    type: object
+    properties:
+      Metadata:
+        $ref: '#/definitions/ReservationPurchaseRecommendationMetadata'
+        description: 'Information about this specific recommendation call, such as the time stamp for when Cost Explorer generated this recommendation.'
+      Recommendations:
+        $ref: '#/definitions/ReservationPurchaseRecommendations'
+        description: Recommendations for reservations to purchase.
+      NextPageToken:
+        $ref: '#/definitions/NextPageToken'
+        description: The pagination token for the next set of retrievable results.
   GetReservationUtilizationRequest:
     type: object
     required:
@@ -574,7 +698,7 @@ definitions:
         description: 'If <code>GroupBy</code> is set, <code>Granularity</code> can''t be set. If <code>Granularity</code> isn''t set, the response object doesn''t include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>. If both <code>GroupBy</code> and <code>Granularity</code> aren''t set, <code>GetReservationUtilization</code> defaults to <code>DAILY</code>.'
       Filter:
         $ref: '#/definitions/Expression'
-        description: 'Filters utilization data by using different dimensions. <code>GetReservationUtilization</code> uses the same <code>Expression</code> object as the other operations, but only <code>AND</code> is supported among each dimension, and nesting is supported up to only one level deep. If there are multiple values for a dimension, they are OR''d together.'
+        description: 'Filters utilization data by using different dimensions. <code>GetReservationUtilization</code> uses the same <code> <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> </code> object as the other operations, but only <code>AND</code> is supported among each dimension, and nesting is supported to only one level deep. If there are multiple values for a dimension, they are OR''d together.'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
@@ -638,10 +762,10 @@ definitions:
     properties:
       Keys:
         $ref: '#/definitions/Keys'
-        description: The keys included in this group.
+        description: The keys that are included in this group.
       Metrics:
         $ref: '#/definitions/Metrics'
-        description: The metrics included in this group.
+        description: The metrics that are included in this group.
     description: One level of grouped data within the results.
   GroupDefinition:
     type: object
@@ -668,6 +792,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Group'
+  InstanceDetails:
+    type: object
+    properties:
+      EC2InstanceDetails:
+        $ref: '#/definitions/EC2InstanceDetails'
+        description: The EC2 instances that AWS recommends that you purchase.
+    description: Details about the instances that AWS recommends that you purchase.
   InvalidNextTokenException:
     type: object
     properties:
@@ -686,6 +817,12 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: You made too many calls in a short period of time. Try again later.
+  LookbackPeriodInDays:
+    type: string
+    enum:
+      - SEVEN_DAYS
+      - THIRTY_DAYS
+      - SIXTY_DAYS
   MetricAmount:
     type: string
   MetricName:
@@ -717,10 +854,24 @@ definitions:
           $ref: '#/definitions/MetricValue'
   NextPageToken:
     type: string
+  NonNegativeInteger:
+    type: integer
+    minimum: 0
+  OfferingClass:
+    type: string
+    enum:
+      - STANDARD
+      - CONVERTIBLE
   OnDemandHours:
     type: string
   PageSize:
     type: integer
+  PaymentOption:
+    type: string
+    enum:
+      - NO_UPFRONT
+      - PARTIAL_UPFRONT
+      - ALL_UPFRONT
   PurchasedHours:
     type: string
   ReservationAggregates:
@@ -731,7 +882,7 @@ definitions:
         description: The percentage of RI time that you used.
       PurchasedHours:
         $ref: '#/definitions/PurchasedHours'
-        description: How many RI hours you purchased.
+        description: How many RI hours that you purchased.
       TotalActualHours:
         $ref: '#/definitions/TotalActualHours'
         description: The total number of RI hours that you used.
@@ -757,6 +908,120 @@ definitions:
     type: string
   ReservationGroupValue:
     type: string
+  ReservationPurchaseRecommendation:
+    type: object
+    properties:
+      AccountScope:
+        $ref: '#/definitions/AccountScope'
+        description: 'The account scope that AWS recommends that you purchase this instance for. For example, you can purchase this reservation for an entire organization in AWS Organizations.'
+      LookbackPeriodInDays:
+        $ref: '#/definitions/LookbackPeriodInDays'
+        description: How many days of previous usage that AWS takes into consideration when making this recommendation.
+      TermInYears:
+        $ref: '#/definitions/TermInYears'
+        description: 'The term of the reservation that you want recommendations for, in years.'
+      PaymentOption:
+        $ref: '#/definitions/PaymentOption'
+        description: 'The payment option for the reservation. For example, <code>AllUpfront</code> or <code>NoUpfront</code>.'
+      ServiceSpecification:
+        $ref: '#/definitions/ServiceSpecification'
+        description: Hardware specifications for the service that you want recommendations for.
+      RecommendationDetails:
+        $ref: '#/definitions/ReservationPurchaseRecommendationDetails'
+        description: Details about the recommended purchases.
+      RecommendationSummary:
+        $ref: '#/definitions/ReservationPurchaseRecommendationSummary'
+        description: A summary about the recommended purchase.
+    description: A specific reservation that AWS recommends for purchase.
+  ReservationPurchaseRecommendationDetail:
+    type: object
+    properties:
+      InstanceDetails:
+        $ref: '#/definitions/InstanceDetails'
+        description: Details about the instances that AWS recommends that you purchase.
+      RecommendedNumberOfInstancesToPurchase:
+        $ref: '#/definitions/GenericString'
+        description: The number of instances that AWS recommends that you purchase.
+      RecommendedNormalizedUnitsToPurchase:
+        $ref: '#/definitions/GenericString'
+        description: The number of normalized units that AWS recommends that you purchase.
+      MinimumNumberOfInstancesUsedPerHour:
+        $ref: '#/definitions/GenericString'
+        description: The minimum number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+      MinimumNormalizedUnitsUsedPerHour:
+        $ref: '#/definitions/GenericString'
+        description: The minimum number of hours that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+      MaximumNumberOfInstancesUsedPerHour:
+        $ref: '#/definitions/GenericString'
+        description: The maximum number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+      MaximumNormalizedUnitsUsedPerHour:
+        $ref: '#/definitions/GenericString'
+        description: The maximum number of normalized units that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+      AverageNumberOfInstancesUsedPerHour:
+        $ref: '#/definitions/GenericString'
+        description: The average number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+      AverageNormalizedUnitsUsedPerHour:
+        $ref: '#/definitions/GenericString'
+        description: The average number of normalized units that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+      AverageUtilization:
+        $ref: '#/definitions/GenericString'
+        description: The average utilization of your instances. AWS uses this to calculate your recommended reservation purchases.
+      EstimatedBreakEvenInMonths:
+        $ref: '#/definitions/GenericString'
+        description: 'How long AWS estimates that it takes for this instance to start saving you money, in months.'
+      CurrencyCode:
+        $ref: '#/definitions/GenericString'
+        description: The currency code that AWS used to calculate the costs for this instance.
+      EstimatedMonthlySavingsAmount:
+        $ref: '#/definitions/GenericString'
+        description: How much AWS estimates that this specific recommendation could save you in a month.
+      EstimatedMonthlySavingsPercentage:
+        $ref: '#/definitions/GenericString'
+        description: 'How much AWS estimates that this specific recommendation could save you in a month, as a percentage of your overall costs.'
+      EstimatedMonthlyOnDemandCost:
+        $ref: '#/definitions/GenericString'
+        description: How much AWS estimates that you spend on On-Demand Instances in a month.
+      EstimatedReservationCostForLookbackPeriod:
+        $ref: '#/definitions/GenericString'
+        description: How much AWS estimates that you spent on Reserved Instances during the specified historical period.
+      UpfrontCost:
+        $ref: '#/definitions/GenericString'
+        description: How much purchasing this instance costs you upfront.
+      RecurringStandardMonthlyCost:
+        $ref: '#/definitions/GenericString'
+        description: How much purchasing this instance costs you on a monthly basis.
+    description: Details about your recommended reservation purchase.
+  ReservationPurchaseRecommendationDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ReservationPurchaseRecommendationDetail'
+  ReservationPurchaseRecommendationMetadata:
+    type: object
+    properties:
+      RecommendationId:
+        $ref: '#/definitions/GenericString'
+        description: The ID for this specific recommendation.
+      GenerationTimestamp:
+        $ref: '#/definitions/GenericString'
+        description: The time stamp for when AWS made this recommendation.
+    description: 'Information about this specific recommendation, such as the time stamp for when AWS made a specific recommendation.'
+  ReservationPurchaseRecommendationSummary:
+    type: object
+    properties:
+      TotalEstimatedMonthlySavingsAmount:
+        $ref: '#/definitions/GenericString'
+        description: The total amount that AWS estimates that this recommendation could save you in a month.
+      TotalEstimatedMonthlySavingsPercentage:
+        $ref: '#/definitions/GenericString'
+        description: 'The total amount that AWS estimates that this recommendation could save you in a month, as a percentage of your costs.'
+      CurrencyCode:
+        $ref: '#/definitions/GenericString'
+        description: The currency code used for this recommendation.
+    description: 'A summary about this recommendation, such as the currency code, the amount that AWS estimates you could save, and the total amount of reservation to purchase.'
+  ReservationPurchaseRecommendations:
+    type: array
+    items:
+      $ref: '#/definitions/ReservationPurchaseRecommendation'
   ReservationUtilizationGroup:
     type: object
     properties:
@@ -793,7 +1058,7 @@ definitions:
         description: The groups that are included in this time period.
       Estimated:
         $ref: '#/definitions/Estimated'
-        description: Whether or not this result is estimated.
+        description: Whether this result is estimated.
     description: The result that is associated with a time period.
   ResultsByTime:
     type: array
@@ -801,6 +1066,13 @@ definitions:
       $ref: '#/definitions/ResultByTime'
   SearchString:
     type: string
+  ServiceSpecification:
+    type: object
+    properties:
+      EC2Specification:
+        $ref: '#/definitions/EC2Specification'
+        description: The EC2 hardware specifications that you want AWS to provide recommendations for.
+    description: Hardware specifications for the service that you want recommendations for.
   TagKey:
     type: string
   TagList:
@@ -817,6 +1089,11 @@ definitions:
         $ref: '#/definitions/Values'
         description: The specific value of a tag.
     description: The values that are available for a tag.
+  TermInYears:
+    type: string
+    enum:
+      - ONE_YEAR
+      - THREE_YEARS
   TotalActualHours:
     type: string
   TotalRunningHours:

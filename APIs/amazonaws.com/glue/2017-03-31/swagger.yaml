@@ -4195,7 +4195,6 @@ definitions:
     required:
       - EndpointName
       - RoleArn
-      - PublicKey
     properties:
       EndpointName:
         $ref: '#/definitions/GenericString'
@@ -4737,12 +4736,15 @@ definitions:
       YarnEndpointAddress:
         $ref: '#/definitions/GenericString'
         description: The YARN endpoint address used by this DevEndpoint.
+      PrivateAddress:
+        $ref: '#/definitions/GenericString'
+        description: The private address used by this DevEndpoint.
       ZeppelinRemoteSparkInterpreterPort:
         $ref: '#/definitions/IntegerValue'
         description: The Apache Zeppelin port for the remote Apache Spark interpreter.
       PublicAddress:
         $ref: '#/definitions/GenericString'
-        description: The public address used by this DevEndpoint.
+        description: The public VPC address used by this DevEndpoint.
       Status:
         $ref: '#/definitions/GenericString'
         description: The current status of this DevEndpoint.

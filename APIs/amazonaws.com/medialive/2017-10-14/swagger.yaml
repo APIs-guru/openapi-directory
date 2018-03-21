@@ -109,13 +109,13 @@ paths:
           schema:
             $ref: '#/definitions/CreateChannelResponse'
         '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
           description: UnprocessableEntityException
           schema:
             $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
         '482':
           description: InternalServerErrorException
           schema:
@@ -514,13 +514,13 @@ paths:
           schema:
             $ref: '#/definitions/UpdateChannelResponse'
         '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
           description: UnprocessableEntityException
           schema:
             $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
         '482':
           description: InternalServerErrorException
           schema:
@@ -658,6 +658,52 @@ paths:
           in: path
           type: string
           required: true
+    put:
+      operationId: UpdateInput
+      description: Updates an input.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateInputResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateInputRequest'
+        - name: inputId
+          in: path
+          type: string
+          required: true
   '/prod/inputSecurityGroups/{inputSecurityGroupId}':
     delete:
       operationId: DeleteInputSecurityGroup
@@ -757,6 +803,52 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeInputSecurityGroupRequest'
+        - name: inputSecurityGroupId
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateInputSecurityGroup
+      description: Update an Input Security Group's Whilelists.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateInputSecurityGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateInputSecurityGroupRequest'
         - name: inputSecurityGroupId
           in: path
           type: string
@@ -1950,6 +2042,12 @@ definitions:
       Id:
         $ref: '#/definitions/__string'
         description: The Id of the Input Security Group
+      Inputs:
+        $ref: '#/definitions/__listOf__string'
+        description: The list of inputs currently using this Input Security Group.
+      State:
+        $ref: '#/definitions/InputSecurityGroupState'
+        description: The current state of the Input Security Group.
       WhitelistRules:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status
@@ -3233,10 +3331,24 @@ definitions:
       Id:
         $ref: '#/definitions/__string'
         description: The Id of the Input Security Group
+      Inputs:
+        $ref: '#/definitions/__listOf__string'
+        description: The list of inputs currently using this Input Security Group.
+      State:
+        $ref: '#/definitions/InputSecurityGroupState'
+        description: The current state of the Input Security Group.
       WhitelistRules:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status
     description: An Input Security Group
+  InputSecurityGroupState:
+    type: string
+    enum:
+      - IDLE
+      - IN_USE
+      - UPDATING
+      - DELETED
+    description: Placeholder documentation for InputSecurityGroupState
   InputSecurityGroupWhitelistRequest:
     type: object
     properties:
@@ -3358,7 +3470,7 @@ definitions:
     properties:
       Cidr:
         $ref: '#/definitions/__string'
-        description: The IPv4 CIDR to whitelist
+        description: The IPv4 CIDR to whitelist.
     description: An IPv4 CIDR to whitelist.
   InternalServerErrorException:
     type: object
@@ -4387,6 +4499,8 @@ definitions:
       EncoderSettings:
         $ref: '#/definitions/EncoderSettings'
         description: The encoder settings for this channel.
+      InputAttachments:
+        $ref: '#/definitions/__listOfInputAttachment'
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
         description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
@@ -4406,6 +4520,8 @@ definitions:
       EncoderSettings:
         $ref: '#/definitions/EncoderSettings'
         description: The encoder settings for this channel.
+      InputAttachments:
+        $ref: '#/definitions/__listOfInputAttachment'
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
         description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
@@ -4428,6 +4544,75 @@ definitions:
       Channel:
         $ref: '#/definitions/Channel'
     description: The updated channel's description.
+  UpdateInput:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/__listOfInputDestinationRequest'
+        description: Destination settings for PUSH type inputs.
+      InputSecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of security groups referenced by IDs to attach to the input.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the input.
+      Sources:
+        $ref: '#/definitions/__listOfInputSourceRequest'
+        description: |
+          The source URLs for a PULL-type input. Every PULL type input needs
+          exactly two source URLs for redundancy.
+          Only specify sources for PULL type Inputs. Leave Destinations empty.
+    description: Placeholder documentation for UpdateInput
+  UpdateInputRequest:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/__listOfInputDestinationRequest'
+        description: Destination settings for PUSH type inputs.
+      InputSecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of security groups referenced by IDs to attach to the input.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the input.
+      Sources:
+        $ref: '#/definitions/__listOfInputSourceRequest'
+        description: |
+          The source URLs for a PULL-type input. Every PULL type input needs
+          exactly two source URLs for redundancy.
+          Only specify sources for PULL type Inputs. Leave Destinations empty.
+    description: A request to update an input.
+  UpdateInputResponse:
+    type: object
+    properties:
+      Input:
+        $ref: '#/definitions/Input'
+    description: Placeholder documentation for UpdateInputResponse
+  UpdateInputResultModel:
+    type: object
+    properties:
+      Input:
+        $ref: '#/definitions/Input'
+    description: Placeholder documentation for UpdateInputResultModel
+  UpdateInputSecurityGroupRequest:
+    type: object
+    properties:
+      WhitelistRules:
+        $ref: '#/definitions/__listOfInputWhitelistRuleCidr'
+        description: List of IPv4 CIDR addresses to whitelist
+    description: The request to update some combination of the Input Security Group name and the IPv4 CIDRs the Input Security Group should allow.
+  UpdateInputSecurityGroupResponse:
+    type: object
+    properties:
+      SecurityGroup:
+        $ref: '#/definitions/InputSecurityGroup'
+    description: Placeholder documentation for UpdateInputSecurityGroupResponse
+  UpdateInputSecurityGroupResultModel:
+    type: object
+    properties:
+      SecurityGroup:
+        $ref: '#/definitions/InputSecurityGroup'
+    description: Placeholder documentation for UpdateInputSecurityGroupResultModel
   ValidationError:
     type: object
     properties:
