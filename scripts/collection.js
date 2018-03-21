@@ -548,7 +548,7 @@ function writeSpec(source, format, exPatch, command) {
       if (validation.remotesResolved) {
         context.swagger = validation.remotesResolved;
       }
-      else {
+      else if (!format.startsWith('openapi')) {
         console.warn('No remotesResolved returned');
       }
 
