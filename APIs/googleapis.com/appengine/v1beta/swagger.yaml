@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: The App Engine Admin API enables developers to provision and manage their App Engine applications.
-  title: Google App Engine Admin
+  title: App Engine Admin
   version: v1beta
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://appengine.googleapis.com/$discovery/rest?version=v1beta'
       version: v1
@@ -1696,7 +1696,7 @@ definitions:
         description: 'Identifier of the Application resource. This identifier is equivalent to the project ID of the Google Cloud Platform project where you want to deploy your application. Example: myapp.'
         type: string
       locationId:
-        description: 'Location from which this application runs. Application instances run out of the data centers in the specified location, which is also where all of the application''s end user content is stored.Defaults to us-central1.View the list of supported locations (https://cloud.google.com/appengine/docs/locations).'
+        description: 'Location from which this application runs. Application instances run out of the data centers in the specified location, which is also where all of the application''s end user content is stored.Defaults to us-central.View the list of supported locations (https://cloud.google.com/appengine/docs/locations).'
         type: string
       name:
         description: 'Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly'
@@ -2335,6 +2335,9 @@ definitions:
   Location:
     description: A resource that represents Google Cloud Platform location.
     properties:
+      displayName:
+        description: 'The friendly name for this location, typically a nearby city name. For example, "Tokyo".'
+        type: string
       labels:
         additionalProperties:
           type: string

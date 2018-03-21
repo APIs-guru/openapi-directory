@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/PlayByPlay/{season}/{week}/{hometeam}':
     get:
-      operationId: Play By Play
+      operationId: 578e4c7835491a147898b4a4
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -76,9 +76,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayByPlay'
+      summary: Play By Play
   '/{format}/PlayByPlayDelta/{season}/{week}/{minutes}':
     get:
-      operationId: Play By Play Delta
+      operationId: 578e4ce914338d1fc0b406be
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -122,6 +123,7 @@ paths:
             items:
               $ref: '#/definitions/PlayByPlay'
             type: array
+      summary: Play By Play Delta
 definitions:
   Play:
     properties:

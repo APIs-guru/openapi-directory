@@ -447,6 +447,23 @@ paths:
       summary: Find posts
       tags:
         - analytics
+  '/offerings/{offeringId}/analytics/channels/{channelId}/replies':
+    get:
+      description: Responds with a list of all replies in any of the posts for a channel in a offering
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - $ref: '#/parameters/channelId'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            items:
+              $ref: '#/definitions/Comment'
+            title: Comments
+            type: array
+      summary: Find replies
+      tags:
+        - analytics
   '/offerings/{offeringId}/analytics/learners-progress':
     get:
       description: Responds with learners progress.
@@ -1010,14 +1027,17 @@ paths:
       tags:
         - offering users
     post:
-      description: Adds user to the offering.
+      description: Adds one or more users to the offering.
       parameters:
         - $ref: '#/parameters/offeringId'
         - in: body
-          name: user
+          name: users
           required: true
           schema:
-            $ref: '#/definitions/OfferingUser'
+            items:
+              $ref: '#/definitions/OfferingUser'
+            title: users to be added to the offering.
+            type: array
       produces:
         - application/json
       responses:
@@ -1521,6 +1541,8 @@ definitions:
         type: boolean
       moderation:
         $ref: '#/definitions/Moderation'
+      parentCommentId:
+        type: string
       postId:
         type: string
   CourseMetaResponse:
@@ -1532,6 +1554,10 @@ definitions:
         type: string
       id:
         type: string
+      learning_outcomes:
+        items:
+          $ref: '#/definitions/LearningOutcomes'
+        type: array
       metadata:
         $ref: '#/definitions/PortfolioMetadata'
       name:
@@ -1546,6 +1572,10 @@ definitions:
         type: string
       id:
         type: string
+      learning_outcomes:
+        items:
+          $ref: '#/definitions/LearningOutcomes'
+        type: array
       name:
         type: string
     title: Course
@@ -1618,6 +1648,12 @@ definitions:
         type: array
       personId:
         type: string
+  LearningOutcomes:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
   Mark:
     properties:
       createdAt:
@@ -1683,7 +1719,19 @@ definitions:
       isReadonly:
         type: boolean
       metadata:
-        $ref: '#/definitions/PortfolioMetadata'
+        additionalProperties: false
+        properties:
+          category:
+            type: string
+          level:
+            type: string
+          tags:
+            items:
+              type: string
+            type: array
+          topic:
+            type: string
+        type: object
       name:
         minLength: 1
         type: string

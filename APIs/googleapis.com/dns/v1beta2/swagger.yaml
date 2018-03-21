@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/dns/v1beta2/rest'
       version: v1
@@ -222,8 +222,6 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/definitions/ManagedZonesDeleteResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -993,11 +991,6 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
-    type: object
-  ManagedZonesDeleteResponse:
-    properties:
-      header:
-        $ref: '#/definitions/ResponseHeader'
     type: object
   ManagedZonesListResponse:
     properties:

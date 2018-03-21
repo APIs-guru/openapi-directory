@@ -14,7 +14,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: swagger
       url: 'http://api.oceandrivers.com/static/resources.json'
       version: '1.2'
@@ -32,7 +32,7 @@ paths:
       operationId: compareStation
       parameters:
         - default: cnarenal
-          description: 'Weather station to compare, values: cnareanl|cmsap|boyaenderrocat|areopuertopalma'
+          description: 'Weather station to compare, values: cnareanl|rcnp | cmsap|boyaenderrocat|areopuertopalma'
           in: path
           name: stationName
           required: true

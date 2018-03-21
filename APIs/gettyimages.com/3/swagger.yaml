@@ -63,6 +63,7 @@ paths:
               - date_submitted
               - keywords
               - license_model
+              - max_dimensions
               - title
             type: string
           name: fields
@@ -1552,6 +1553,8 @@ paths:
           description: InvalidParameterValue
         '401':
           description: Unauthorized
+        '500':
+          description: CreditPack
       summary: Get Products
       tags:
         - Products
@@ -3724,6 +3727,7 @@ paths:
               - copyright
               - comp
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - download_sizes
@@ -3808,6 +3812,7 @@ paths:
               - copyright
               - comp
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - download_sizes
@@ -4216,6 +4221,8 @@ definitions:
         type: array
       license_model:
         type: string
+      max_dimensions:
+        $ref: '#/definitions/GettyImages.Models.MaxDimensions'
       title:
         type: string
     type: object
@@ -4796,6 +4803,9 @@ definitions:
           - active
           - inactive
         type: string
+      team_credits:
+        format: int32
+        type: integer
       type:
         enum:
           - easyaccess
@@ -5333,6 +5343,9 @@ definitions:
       copyright:
         type: string
       date_created:
+        format: date-time
+        type: string
+      date_submitted:
         format: date-time
         type: string
       display_sizes:

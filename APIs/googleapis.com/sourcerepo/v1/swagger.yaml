@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://sourcerepo.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -455,7 +455,7 @@ definitions:
       If there are AuditConfigs for both `allServices` and a specific service,
       the union of the two AuditConfigs is used for that service: the log_types
       specified in each AuditConfig are enabled, and the exempted_members in each
-      AuditConfig are exempted.
+      AuditLogConfig are exempted.
 
       Example Policy with multiple AuditConfigs:
 
@@ -506,10 +506,6 @@ definitions:
         items:
           $ref: '#/definitions/AuditLogConfig'
         type: array
-      exemptedMembers:
-        items:
-          type: string
-        type: array
       service:
         description: |-
           Specifies a service that will be enabled for audit logging.
@@ -559,14 +555,6 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
-      condition:
-        $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
-          binding. Different bindings, including their conditions, are examined
-          independently.
-          This field is GOOGLE_INTERNAL.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -614,39 +602,6 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
-    type: object
-  Expr:
-    description: |-
-      Represents an expression text. Example:
-
-          title: "User account presence"
-          description: "Determines whether the request has a user account"
-          expression: "size(request.user) > 0"
-    properties:
-      description:
-        description: |-
-          An optional description of the expression. This is a longer text which
-          describes the expression, e.g. when hovered over it in a UI.
-        type: string
-      expression:
-        description: |-
-          Textual representation of an expression in
-          Common Expression Language syntax.
-
-          The application context of the containing message determines which
-          well-known feature set of CEL is supported.
-        type: string
-      location:
-        description: |-
-          An optional string indicating the location of the expression for error
-          reporting, e.g. a file name and a position in the file.
-        type: string
-      title:
-        description: |-
-          An optional title for the expression, i.e. a short string describing
-          its purpose. This can be used e.g. in UIs which allow to enter the
-          expression.
-        type: string
     type: object
   ListReposResponse:
     description: Response for ListRepos.  The size is not set in the returned repositories.
@@ -717,7 +672,7 @@ definitions:
           }
 
       For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       auditConfigs:
         description: Specifies cloud audit logging configuration for this policy.
@@ -745,10 +700,8 @@ definitions:
           policy is overwritten blindly.
         format: byte
         type: string
-      iamOwned:
-        type: boolean
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object

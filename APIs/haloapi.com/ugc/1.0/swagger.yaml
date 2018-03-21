@@ -53,7 +53,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Game Variants
+      operationId: 58acde292109180bdcacc40d
       parameters:
         - description: The Gamertag of the Player that owns the listed Game Variants.
           in: path
@@ -121,6 +121,7 @@ paths:
           description: The player does not exist.
         '500':
           description: Internal Server Error
+      summary: Halo 5 - Player Game Variants
   '/h5/players/{player}/gamevariants/{variant}':
     get:
       description: |
@@ -140,7 +141,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Game Variant
+      operationId: 58acde292109180bdcacc40c
       parameters:
         - description: The Gamertag of the Player that owns the Game Variant.
           in: path
@@ -191,6 +192,7 @@ paths:
           description: The player does not exist or the Game Variant does not exist in the provided Player's file share.
         '500':
           description: Internal Server Error
+      summary: Halo 5 - Player Game Variant
   '/h5/players/{player}/mapvariants':
     get:
       description: |
@@ -210,7 +212,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Map Variants
+      operationId: 58acde292109180bdcacc40f
       parameters:
         - description: The Gamertag of the Player that owns the listed Map Variants.
           in: path
@@ -272,6 +274,7 @@ paths:
           description: The Player does not exist.
         '500':
           description: Internal Server Error
+      summary: Halo 5 - Player Map Variants
   '/h5/players/{player}/mapvariants/{variant}':
     get:
       description: |
@@ -291,7 +294,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Map Variant
+      operationId: 58acde292109180bdcacc40e
       parameters:
         - description: The Gamertag of the Player that owns the Map Variant.
           in: path
@@ -342,3 +345,4 @@ paths:
           description: The Player does not exist or the Map Variant does not exist in the provided Player's file share.
         '500':
           description: Internal Server Error
+      summary: Halo 5 - Player Map Variant

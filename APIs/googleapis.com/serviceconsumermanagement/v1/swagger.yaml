@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://serviceconsumermanagement.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -118,13 +118,12 @@ paths:
   '/v1/{name}':
     delete:
       description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: serviceconsumermanagement.operations.delete
+        Delete a tenancy unit.  Before the tenancy unit is deleted, there should be
+        no tenant resources in it.
+        Operation<response: Empty>.
+      operationId: serviceconsumermanagement.services.tenancyUnits.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Name of the tenancy unit to be deleted.
           in: path
           name: name
           required: true
@@ -134,14 +133,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - operations
+        - services
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
@@ -281,10 +280,10 @@ paths:
   '/v1/{parent}/tenancyUnits':
     get:
       description: |-
-        Find tenancy unit for a service and consumer.
-        This method should not be used in producers' runtime path, e.g. finding
-        the tenant project number when creating VMs. Producers should persist
-        the tenant project information after the project is created.
+        Find the tenancy unit for a service and consumer.
+        This method should not be used in producers' runtime path, for example
+        finding the tenant project number when creating VMs. Producers should
+        persist the tenant project information after the project is created.
       operationId: serviceconsumermanagement.services.tenancyUnits.list
       parameters:
         - description: Filter expression over tenancy resources field. Optional.
@@ -386,10 +385,10 @@ paths:
     post:
       description: |-
         Add a new tenant project to the tenancy unit.
-        There can be at most 512 tenant projects in a tenancy units.
-        If there are previously failed AddTenantProject calls, you might need to
-        call RemoveTenantProject first to clean them before you can make another
-        AddTenantProject with the same tag.
+        There can be at most 512 tenant projects in a tenancy unit.
+        If there are previously failed `AddTenantProject` calls, you might need to
+        call `RemoveTenantProject` first to clean them before you can make another
+        `AddTenantProject` with the same tag.
         Operation<response: Empty>.
       operationId: serviceconsumermanagement.services.tenancyUnits.addProject
       parameters:
@@ -420,8 +419,9 @@ paths:
       parameters:
         - description: |-
             The maximum number of results returned by this request. Currently, the
-            default maximum is set to 1000. If page_size is not provided or provided a
-            number larger than 1000, it will be automatically set to 1000.
+            default maximum is set to 1000. If page_size is not provided or the size
+            provided is a number larger than 1000, it will be automatically set to
+            1000.
 
             Optional.
           in: query
@@ -449,7 +449,7 @@ paths:
             Set a query `{expression}` for querying tenancy units. Your `{expression}`
             must be in the format: `field_name=literal_string`. The `field_name` is the
             name of the field you want to compare. Supported fields are
-            `tenant_resources.tag` and`tenant_resources.resource`.
+            `tenant_resources.tag` and `tenant_resources.resource`.
 
             For example, to search tenancy units that contain at least one tenant
             resource with given tag 'xyz', use query `tenant_resources.tag=xyz`.
@@ -492,7 +492,7 @@ paths:
 definitions:
   AddTenantProjectRequest:
     description: |-
-      Request to add a newly created and configured tenant project to tenancy
+      Request to add a newly created and configured tenant project to a tenancy
       unit.
     properties:
       projectConfig:
@@ -857,7 +857,7 @@ definitions:
         type: array
     type: object
   BillingConfig:
-    description: Describes billing configuration for new a Tenant Project
+    description: Describes billing configuration for a new tenant project.
     properties:
       billingAccount:
         description: |-
@@ -988,13 +988,13 @@ definitions:
     properties:
       tenancyUnitId:
         description: |-
-          Optional producer provided identifier of the tenancy unit
-          Must be no longer than 40 characters and preferably URI friendly
-          If it is not provided, UID for the tenancy unit will be auto generated
+          Optional producer provided identifier of the tenancy unit.
+          Must be no longer than 40 characters and preferably URI friendly.
+          If it is not provided, a UID for the tenancy unit will be auto generated.
           It must be unique across a service.
           If the tenancy unit already exists for the service and consumer pair,
-          CreateTenancyUnit will return existing tenancy unit if provided identifier
-          is identical or empty, otherwise the call will fail.
+          `CreateTenancyUnit` will return the existing tenancy unit if the provided
+          identifier is identical or empty, otherwise the call will fail.
         type: string
     type: object
   CustomAuthRequirements:
@@ -1104,9 +1104,7 @@ definitions:
       <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
       Text can be excluded from doc using the following notation:
       <pre><code>&#40;-- internal comment --&#41;</code></pre>
-      Comments can be made conditional using a visibility label. The below
-      text will be only rendered if the `BETA` label is available:
-      <pre><code>&#40;--BETA: comment for BETA users --&#41;</code></pre>
+
       A few directives are available in documentation. Note that
       directives must appear on a single line to be properly
       identified. The `include` directive includes a markdown file from
@@ -1751,7 +1749,7 @@ definitions:
         description: Pagination token for large results.
         type: string
       tenancyUnits:
-        description: Tenancy Units matching the request.
+        description: Tenancy units matching the request.
         items:
           $ref: '#/definitions/TenancyUnit'
         type: array
@@ -2484,7 +2482,7 @@ definitions:
       members:
         description: |-
           Uses the same format as in IAM policy.
-          `member` must include both prefix and id. E.g., `user:{emailId}`,
+          `member` must include both prefix and ID. For example, `user:{emailId}`,
           `serviceAccount:{emailId}`, `group:{emailId}`.
         items:
           type: string
@@ -2848,9 +2846,6 @@ definitions:
       usage:
         $ref: '#/definitions/Usage'
         description: Configuration controlling usage of this service.
-      visibility:
-        $ref: '#/definitions/Visibility'
-        description: API visibility configuration.
     type: object
   ServiceAccountConfig:
     description: Describes service account configuration for the tenant project.
@@ -2864,7 +2859,7 @@ definitions:
           have to guarantee it.
         type: string
       tenantProjectRoles:
-        description: Roles for the service account above on tenant project.
+        description: Roles for the associated service account for the tenant project.
         items:
           type: string
         type: array
@@ -3058,8 +3053,8 @@ definitions:
     properties:
       consumer:
         description: |-
-          @OutputOnly Cloud resource One Platform Name of the consumer of this
-          service. For example 'projects/123456'.
+          @OutputOnly Cloud resource name of the consumer of this service.
+          For example 'projects/123456'.
         type: string
       createTime:
         description: '@OutputOnly The time this tenancy unit was created.'
@@ -3078,7 +3073,7 @@ definitions:
       tenantResources:
         description: |-
           Resources constituting the tenancy unit.
-          There can be at most 512 tenant resources in a tenancy units.
+          There can be at most 512 tenant resources in a tenancy unit.
         items:
           $ref: '#/definitions/TenantResource'
         type: array
@@ -3095,7 +3090,7 @@ definitions:
         $ref: '#/definitions/BillingConfig'
         description: |-
           Billing account properties.
-          It may be specified explicitly, or created from the specified group
+          It might be specified explicitly, or created from the specified group
           during provisioning
       folder:
         description: |-
@@ -3117,7 +3112,7 @@ definitions:
         description: |-
           Google Cloud API names of services that will be activated on this project
           during provisioning.  If any of these services can not be activated,
-          addTenantProject method will fail.
+          request will fail.
           For example: 'compute.googleapis.com','cloudfunctions.googleapis.com'
         items:
           type: string
@@ -3129,7 +3124,7 @@ definitions:
   TenantProjectPolicy:
     description: |-
       Describes policy settings that need to be applied to a newly
-      created Tenant Project.
+      created tenant project.
     properties:
       policyBindings:
         description: |-
@@ -3149,7 +3144,7 @@ definitions:
       resource:
         description: |-
           @OutputOnly Identifier of the tenant resource.
-          For cloud projects it is in the form 'projects/{number}'.
+          For cloud projects, it is in the form 'projects/{number}'.
           For example 'projects/123456'.
         type: string
       status:
@@ -3274,68 +3269,4 @@ definitions:
           This flag is used by Google Cloud Endpoints to bypass checks for internal
           methods, such as service health check methods.
         type: boolean
-    type: object
-  Visibility:
-    description: |-
-      `Visibility` defines restrictions for the visibility of service
-      elements.  Restrictions are specified using visibility labels
-      (e.g., TRUSTED_TESTER) that are elsewhere linked to users and projects.
-
-      Users and projects can have access to more than one visibility label. The
-      effective visibility for multiple labels is the union of each label's
-      elements, plus any unrestricted elements.
-
-      If an element and its parents have no restrictions, visibility is
-      unconditionally granted.
-
-      Example:
-
-          visibility:
-            rules:
-            - selector: google.calendar.Calendar.EnhancedSearch
-              restriction: TRUSTED_TESTER
-            - selector: google.calendar.Calendar.Delegate
-              restriction: GOOGLE_INTERNAL
-
-      Here, all methods are publicly visible except for the restricted methods
-      EnhancedSearch and Delegate.
-    properties:
-      rules:
-        description: |-
-          A list of visibility rules that apply to individual API elements.
-
-          **NOTE:** All service configuration rules follow "last one wins" order.
-        items:
-          $ref: '#/definitions/VisibilityRule'
-        type: array
-    type: object
-  VisibilityRule:
-    description: |-
-      A visibility rule provides visibility configuration for an individual API
-      element.
-    properties:
-      restriction:
-        description: |-
-          A comma-separated list of visibility labels that apply to the `selector`.
-          Any of the listed labels can be used to grant the visibility.
-
-          If a rule has multiple labels, removing one of the labels but not all of
-          them can break clients.
-
-          Example:
-
-              visibility:
-                rules:
-                - selector: google.calendar.Calendar.EnhancedSearch
-                  restriction: GOOGLE_INTERNAL, TRUSTED_TESTER
-
-          Removing GOOGLE_INTERNAL from this restriction will break clients that
-          rely on this method and only had access to it through GOOGLE_INTERNAL.
-        type: string
-      selector:
-        description: |-
-          Selects methods, messages, fields, enums, etc. to which this rule applies.
-
-          Refer to selector for syntax details.
-        type: string
     type: object

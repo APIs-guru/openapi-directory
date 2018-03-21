@@ -353,72 +353,6 @@ paths:
             $ref: '#/definitions/Object'
       tags:
         - Delivery
-  '/restaurants/{restaurantReference}/order-flow-rate':
-    put:
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      deprecated: false
-      description: "- This method requires the use of an Authorization Key.\r\n"
-      operationId: Restaurants_SetFlowRate
-      parameters:
-        - in: path
-          name: restaurantReference
-          required: true
-          type: string
-        - in: body
-          name: orderFlowRate
-          required: true
-          schema:
-            $ref: '#/definitions/PartnerRestaurantOrderFlowRate'
-        - description: access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      tags:
-        - Restaurants
-  '/restaurants/{restaurantReference}/temporary-offline-status':
-    put:
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      deprecated: false
-      description: "- This method requires the use of an Authorization Key.\r\n"
-      operationId: Restaurants_UpdateRestaurantTemporaryOfflineStatus
-      parameters:
-        - in: path
-          name: restaurantReference
-          required: true
-          type: string
-        - in: body
-          name: temporaryOfflineStatus
-          required: true
-          schema:
-            $ref: '#/definitions/PartnerRestaurantTemporaryOfflineStatus'
-        - description: access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      tags:
-        - Restaurants
 definitions:
   BulkDeliveryDetails:
     properties:
@@ -453,9 +387,12 @@ definitions:
   DeliveryDetails:
     example:
       Location:
+        Accuracy: 12.923
+        Heading: 312.29
         Latitude: 51.51641
         Longitude: -0.103198
-      TimeStampWithUtcOffset: '2018-03-03T17:33:38.5306606+00:00'
+        Speed: 4.12
+      TimeStampWithUtcOffset: '2018-03-21T13:01:59.2182723+00:00'
     properties:
       Location:
         $ref: '#/definitions/Location'
@@ -542,10 +479,19 @@ definitions:
     type: object
   Location:
     properties:
+      Accuracy:
+        format: double
+        type: number
+      Heading:
+        format: double
+        type: number
       Latitude:
         format: double
         type: number
       Longitude:
+        format: double
+        type: number
+      Speed:
         format: double
         type: number
     type: object
@@ -561,25 +507,6 @@ definitions:
         $ref: '#/definitions/Location'
       TimeStampWithUtcOffset:
         format: date-time
-        type: string
-    type: object
-  PartnerRestaurantOrderFlowRate:
-    properties:
-      FlowRate:
-        type: string
-    type: object
-  PartnerRestaurantTemporaryOfflineStatus:
-    example:
-      Message: Too busy
-      Status: TempOffline
-    properties:
-      Message:
-        type: string
-      Status:
-        enum:
-          - TempOffline
-          - ClosedToday
-          - None
         type: string
     type: object
   VehicleDetails:

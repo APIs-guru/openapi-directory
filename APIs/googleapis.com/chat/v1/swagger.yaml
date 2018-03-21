@@ -7,6 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
+  description: Create bots and extend the new Hangouts Chat.
   title: Hangouts Chat
   version: v1
   x-apiClientRegistration:
@@ -16,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://chat.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -166,14 +167,14 @@ paths:
       tags:
         - spaces
     get:
-      description: Returns a membership.
-      operationId: chat.spaces.members.get
+      description: Returns a message.
+      operationId: chat.spaces.messages.get
       parameters:
         - description: |-
-            Required. Resource name of the membership to be retrieved, in the form
-            "spaces/*/members/*".
+            Required. Resource name of the message to be retrieved, in the form
+            "spaces/*/messages/*".
 
-            Example: spaces/AAAAMpdlehY/members/105115627578887013105
+            Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4
           in: path
           name: name
           required: true
@@ -183,7 +184,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Membership'
+            $ref: '#/definitions/Message'
       tags:
         - spaces
     parameters:
@@ -295,7 +296,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a message.
-      operationId: chat.rooms.messages.create
+      operationId: chat.dms.conversations.messages.create
       parameters:
         - in: body
           name: body
@@ -328,7 +329,7 @@ paths:
           schema:
             $ref: '#/definitions/Message'
       tags:
-        - rooms
+        - dms
 definitions:
   ActionParameter:
     description: |-

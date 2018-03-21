@@ -4,7 +4,7 @@ schemes:
 host: wft-geo-db.p.mashape.com
 basePath: /
 info:
-  description: 'This developer-centric REST API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li> <li>Developer-friendly RESTful API adheres to industry best-practices, including HATEOS-style links to facilitate paging results.</li> <li>Backed by Amazon AWS load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames.org.</li></ul><p>Notes:<ul><li>All endpoints implicitly support JSONP-style invocation via an optional <tt>callback</tt> param.</li><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geo-db-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geo-db-java-client''>Java</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
+  description: 'This developer-centric REST API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li><li>Sort cities by name, country code, elevation, and population - or any combination of these.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li> <li>Developer-friendly RESTful API adheres to industry best-practices, including HATEOAS-style links to facilitate paging results.</li> <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames.org.</li></ul><p>Notes:<ul><li>All endpoints implicitly support JSONP-style invocation via an optional <tt>callback</tt> param.</li><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geo-db-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geo-db-java-client''>Java</a></li><li><a href=''https://www.npmjs.com/package/wft-geodb-js-client''>JavaScript</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -67,19 +67,19 @@ paths:
           type: integer
         - description: 'Only cities near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
           in: query
-          name: nearLocation
+          name: location
           required: false
           type: string
         - description: The location radius within which to find cities
           format: int32
           in: query
-          name: nearLocationRadius
+          name: radius
           required: false
           type: integer
         - default: MI
-          description: 'The location radius unit of distance: MI | KM'
+          description: 'The unit of distance: MI | KM'
           in: query
-          name: nearLocationRadiusUnit
+          name: distanceUnit
           required: false
           type: string
         - description: Only cities in these time-zones
@@ -87,10 +87,9 @@ paths:
           name: timeZoneIds
           required: false
           type: string
-        - default: NONE
-          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
           in: query
-          name: includeDeleted
+          name: sort
           required: false
           type: string
         - default: 10
@@ -107,6 +106,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: NONE
+          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -210,8 +215,8 @@ paths:
         - Geo
   '/v1/geo/cities/{cityId}/nearbyCities':
     get:
-      description: Get nearby cities
-      operationId: findNearbyCitiesUsingGET
+      description: 'Find cities near the given origin city, filtering by optional criteria. If no criteria are set, you will get back all known cities with a population of at least 1000. (Currently over 115,000.)'
+      operationId: findCitiesNearCityUsingGET
       parameters:
         - description: cityId
           format: int32
@@ -228,19 +233,18 @@ paths:
         - description: The location radius within which to find cities
           format: int32
           in: query
-          name: nearLocationRadius
+          name: radius
           required: false
           type: integer
         - default: MI
-          description: 'The location radius unit of distance: MI | KM'
+          description: 'The unit of distance: MI | KM'
           in: query
-          name: nearLocationRadiusUnit
+          name: distanceUnit
           required: false
           type: string
-        - default: NONE
-          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
           in: query
-          name: includeDeleted
+          name: sort
           required: false
           type: string
         - default: 10
@@ -257,6 +261,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: NONE
+          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -268,7 +278,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: 'Find cities near the given city, filtering by optional criteria.'
+      summary: Find cities near city
       tags:
         - Geo
   '/v1/geo/cities/{cityId}/time':
@@ -456,10 +466,9 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - default: NONE
-          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = elevation | name | population'
           in: query
-          name: includeDeleted
+          name: sort
           required: false
           type: string
         - default: 10
@@ -476,6 +485,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: NONE
+          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -488,6 +503,78 @@ paths:
         '404':
           description: Not Found
       summary: Find country region cities
+      tags:
+        - Geo
+  '/v1/geo/locations/{locationId}/nearbyCities':
+    get:
+      description: 'Find cities near the given location, filtering by optional criteria. If no criteria are set, you will get back all known cities with a population of at least 1000. (Currently over 115,000.)'
+      operationId: findCitiesNearLocationUsingGET
+      parameters:
+        - description: 'Only cities near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
+          in: path
+          name: locationId
+          required: true
+          type: string
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: Only cities whose names start with this prefix
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: The location radius within which to find cities
+          format: int32
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - default: MI
+          description: 'The unit of distance: MI | KM'
+          in: query
+          name: distanceUnit
+          required: false
+          type: string
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: 5
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - default: NONE
+          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CitiesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find cities near location
       tags:
         - Geo
   /v1/locale/currencies:
@@ -992,6 +1079,7 @@ definitions:
     enum:
       - ACCESS_DENIED
       - ENTITY_NOT_FOUND
+      - INCOMPATIBLE
       - PARAM_INVALID
       - PARAMS_MUTUALLY_EXCLUSIVE
     type: string

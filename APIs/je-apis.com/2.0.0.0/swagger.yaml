@@ -27,6 +27,8 @@ tags:
     name: baskets
   - description: Operations about consumer
     name: consumer
+  - description: Operations about consumerhelp
+    name: consumerhelp
   - description: Operations about countries
     name: countries
   - description: Operations about discovery
@@ -1132,6 +1134,161 @@ paths:
       summary: Returns the consumers serviceable addresses based the Auth-Token and the TR id
       tags:
         - consumer
+  /consumerhelp/customisation:
+    get:
+      description: 'Uri template /consumerhelp/customisation?orderid={orderid}&requestcontext={requestcontext}'
+      operationId: GetCustomisation
+      parameters:
+        - description: uk
+          in: header
+          name: Accept-Tenant
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          required: true
+          type: string
+        - in: query
+          name: orderId
+          required: false
+          type: string
+        - in: query
+          name: requestContext
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Customisation.HelpCustomisation'
+        '400':
+          description: Bad request
+      summary: Get customisation info for Consumer Help
+      tags:
+        - consumerhelp
+  '/consumerhelp/flows/{flow}/{orderId}/{action}':
+    post:
+      description: 'Uri template /consumerhelp/flows/{flow}/{orderId}/{action}?fee={fee}'
+      operationId: PostFlowStep1
+      parameters:
+        - description: uk
+          in: header
+          name: Accept-Tenant
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          required: true
+          type: string
+        - in: path
+          name: flow
+          required: true
+          type: string
+        - in: path
+          name: orderId
+          required: true
+          type: string
+        - in: path
+          name: action
+          required: true
+          type: string
+        - in: query
+          name: fee
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+        '400':
+          description: Bad request
+      summary: Post to a Consumer Help flow and get the next step
+      tags:
+        - consumerhelp
+  '/consumerhelp/flows/{flow}/{orderId}/{action}/{subaction}':
+    get:
+      description: 'Uri template /consumerhelp/flows/{flow}/{orderId}/{action}/{subaction}'
+      operationId: GetFlowStep2
+      parameters:
+        - description: uk
+          in: header
+          name: Accept-Tenant
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          required: true
+          type: string
+        - in: path
+          name: flow
+          required: true
+          type: string
+        - in: path
+          name: orderId
+          required: true
+          type: string
+        - in: path
+          name: action
+          required: true
+          type: string
+        - in: path
+          name: subaction
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+            items:
+              $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+        '400':
+          description: Bad request
+      summary: Get the next flow step in a Consumer Help flow; extra URL segment
+      tags:
+        - consumerhelp
+    post:
+      description: 'Uri template /consumerhelp/flows/{flow}/{orderId}/{action}/{subaction}'
+      operationId: PostFlowStep2
+      parameters:
+        - description: uk
+          in: header
+          name: Accept-Tenant
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          required: true
+          type: string
+        - in: path
+          name: flow
+          required: true
+          type: string
+        - in: path
+          name: orderId
+          required: true
+          type: string
+        - in: path
+          name: action
+          required: true
+          type: string
+        - in: path
+          name: subaction
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+            items:
+              $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+        '400':
+          description: Bad request
+      summary: Post to a Consumer Help flow and get the next step; extra URL segment
+      tags:
+        - consumerhelp
   /countries:
     get:
       description: Uri template /countries
@@ -4661,6 +4818,175 @@ definitions:
         description: String
         type: string
       PropertyName:
+        description: String
+        type: string
+  JustEat.ConsumerHelpApi.Contracts.Customisation.GaTracking:
+    properties:
+      Action:
+        description: String
+        type: string
+      Category:
+        description: String
+        type: string
+      Label:
+        description: String
+        type: string
+  JustEat.ConsumerHelpApi.Contracts.Customisation.HelpAction:
+    properties:
+      Action:
+        description: String
+        type: string
+      ButtonType:
+        description: HelpActionButtonType
+        enum:
+          - Primary
+          - Secondary
+          - TextOnly
+        type: string
+      Department:
+        description: String
+        type: string
+      GaTracking:
+        $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Customisation.GaTracking'
+        description: GaTracking
+      Id:
+        description: String
+        type: string
+      Title:
+        description: String
+        type: string
+      Type:
+        description: HelpActionType
+        enum:
+          - LogIn
+          - Call
+          - Chatbot
+          - LiveChat
+          - ChapiGet
+          - ChapiPost
+          - Link
+          - HelpArticleLink
+          - EndFlow
+        type: string
+  JustEat.ConsumerHelpApi.Contracts.Customisation.HelpConfig:
+    properties:
+      ChatbotButtonText:
+        description: String
+        type: string
+      ChatbotEnabled:
+        description: Boolean
+        type: boolean
+      EmailButtonText:
+        description: String
+        type: string
+      EmailEnabled:
+        description: Boolean
+        type: boolean
+      LiveChatButtonText:
+        description: String
+        type: string
+      LiveChatEnabled:
+        description: Boolean
+        type: boolean
+      PersonalisedHelpEnabled:
+        description: Boolean
+        type: boolean
+      PhoneButtonText:
+        description: String
+        type: string
+      PhoneEnabled:
+        description: Boolean
+        type: boolean
+  JustEat.ConsumerHelpApi.Contracts.Customisation.HelpCustomisation:
+    properties:
+      Config:
+        $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Customisation.HelpConfig'
+        description: HelpConfig
+      HelpSessionId:
+        description: String
+        type: string
+      Personalisation:
+        $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Customisation.HelpPersonalisation'
+        description: HelpPersonalisation
+  JustEat.ConsumerHelpApi.Contracts.Customisation.HelpOrder:
+    properties:
+      DueAt:
+        description: DateTimeOffset
+        format: time-span
+        type: string
+      MinutesAdded:
+        description: Int32
+        format: int32
+        type: integer
+      OrderId:
+        description: String
+        type: string
+      OrderNumber:
+        description: Int64
+        format: int64
+        type: integer
+      RestaurantLogo:
+        description: String
+        type: string
+      RestaurantName:
+        description: String
+        type: string
+      RestaurantTelephone:
+        description: String
+        type: string
+      Status:
+        description: String
+        type: string
+  JustEat.ConsumerHelpApi.Contracts.Customisation.HelpPersonalisation:
+    properties:
+      CallRestaurant:
+        description: Boolean
+        type: boolean
+      CallRestaurantText:
+        description: String
+        type: string
+      CancellationFee:
+        $ref: '#/definitions/System.Decimal'
+        description: Decimal
+      LatestOrder:
+        $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Customisation.HelpOrder'
+        description: HelpOrder
+      LatestOrderLoadError:
+        description: Boolean
+        type: boolean
+      OrderActions:
+        description: 'IEnumerable[JustEat.ConsumerHelpApi.Contracts.Customisation.HelpAction]'
+        items:
+          $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Customisation.HelpAction'
+        type: array
+  JustEat.ConsumerHelpApi.Contracts.Flows.ContainerWithType_x0060_1_x005B__x005B_JustEat.ConsumerHelpApi.Contracts.Flows.FlowStep_x002C__x0020_JustEat.ConsumerHelpApi.Contracts_x002C__x0020_Version_x003D_1.0.92.0_x002C__x0020_Culture_x003D_neutral_x002C__x0020_PublicKeyToken_x003D_null_x005D__x005D_:
+    properties:
+      Data:
+        $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowStep'
+        description: FlowStep
+      Id:
+        description: String
+        type: string
+      Type:
+        description: String
+        type: string
+  'JustEat.ConsumerHelpApi.Contracts.Flows.ContainerWithType`1[[JustEat.ConsumerHelpApi.Contracts.Flows.FlowStep, JustEat.ConsumerHelpApi.Contracts, Version=1.0.92.0, Culture=neutral, PublicKeyToken=null]]': {}
+  JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse:
+    properties:
+      OrderUpdate:
+        $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.OrderUpdate'
+        description: OrderUpdate
+      StepResponse:
+        $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.ContainerWithType%601%5B%5BJustEat.ConsumerHelpApi.Contracts.Flows.FlowStep,%20JustEat.ConsumerHelpApi.Contracts,%20Version=1.0.92.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
+        description: 'ContainerWithType`1[JustEat.ConsumerHelpApi.Contracts.Flows.FlowStep]'
+  JustEat.ConsumerHelpApi.Contracts.Flows.FlowStep:
+    properties:
+      Title:
+        description: String
+        type: string
+  JustEat.ConsumerHelpApi.Contracts.Flows.OrderUpdate:
+    properties:
+      Status:
         description: String
         type: string
   JustEat.Core.Model.ApplicationVersion:

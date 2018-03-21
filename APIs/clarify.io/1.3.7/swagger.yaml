@@ -15,7 +15,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: swagger
       url: 'https://api.clarify.io/api-docs'
       version: '1.2'
@@ -125,7 +125,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Ref_(of_Bundle)'
+            $ref: '#/definitions/Ref%20(of%20Bundle)'
         '201':
           description: Created
         '400':
@@ -215,7 +215,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Ref_(of_Bundle)'
+            $ref: '#/definitions/Ref%20(of%20Bundle)'
         '202':
           description: Accepted
         '400':
@@ -501,7 +501,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Ref_(of_Track)'
+            $ref: '#/definitions/Ref%20(of%20Track)'
         '201':
           description: Created
         '400':
@@ -657,7 +657,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Ref_(of_Track)'
+            $ref: '#/definitions/Ref%20(of%20Track)'
         '202':
           description: Accepted
         '400':
@@ -1069,8 +1069,43 @@ definitions:
     required:
       - _class
       - _links
-  Ref_(of_Bundle): {}
-  Ref_(of_Track): {}
+  Ref (of Bundle): {}
+  Ref (of Track): {}
+  Ref_(of_Bundle):
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Ref
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks, clarify:tracks (if track created))'
+      id:
+        description: id of the bundle
+        type: string
+      track_id:
+        description: id of created track (if a track was created)
+        type: string
+    required:
+      - _class
+      - _links
+      - id
+  Ref_(of_Track):
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Ref
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, parent, clarify:bundle)'
+      id:
+        description: id of the track
+        type: string
+    required:
+      - _class
+      - _links
+      - id
   ReportPeriod:
     $ref: '#/definitions/object'
     properties:

@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://spanner.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -339,14 +339,10 @@ paths:
         - projects
   '/v1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: spanner.projects.instances.operations.delete
+      description: 'Ends a session, releasing server resources associated with it.'
+      operationId: spanner.projects.instances.databases.sessions.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. The name of the session to delete.
           in: path
           name: name
           required: true
@@ -361,7 +357,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.admin'
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
     get:
@@ -499,7 +495,7 @@ paths:
         the operation is not deleted; instead, it becomes an operation with
         an Operation.error value with a google.rpc.Status.code of 1,
         corresponding to `Code.CANCELLED`.
-      operationId: spanner.projects.instances.operations.cancel
+      operationId: spanner.projects.instances.databases.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -1588,7 +1584,10 @@ definitions:
     properties:
       keySet:
         $ref: '#/definitions/KeySet'
-        description: Required. The primary keys of the rows within table to delete.
+        description: |-
+          Required. The primary keys of the rows within table to delete.
+          Delete is idempotent. The transaction will succeed even if some or all
+          rows do not exist.
       table:
         description: Required. The table whose rows will be deleted.
         type: string
@@ -2226,15 +2225,21 @@ definitions:
     properties:
       maxPartitions:
         description: |-
+          **Note:** This hint is currently ignored by PartitionQuery and
+          PartitionRead requests.
+
           The desired maximum number of partitions to return.  For example, this may
           be set to the number of workers available.  The default for this option
           is currently 10,000. The maximum value is currently 200,000.  This is only
-          a hint.  The actual number of partitions returned may be smaller than
-          this maximum count request.
+          a hint.  The actual number of partitions returned may be smaller or larger
+          than this maximum count request.
         format: int64
         type: string
       partitionSizeBytes:
         description: |-
+          **Note:** This hint is currently ignored by PartitionQuery and
+          PartitionRead requests.
+
           The desired data size for each partition generated.  The default for this
           option is currently 1 GiB.  This is only a hint. The actual size of each
           partition may be smaller or larger than this size request.

@@ -1126,25 +1126,6 @@ paths:
       summary: Gets the next arrival predictions for all stops of a given mode
       tags:
         - Mode
-  /NetworkStatus:
-    get:
-      deprecated: false
-      operationId: NetworkStatus_Get
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/NetworkStatus'
-            type: array
-      summary: Get travel network status
-      tags:
-        - NetworkStatus
   '/Occupancy/BikePoints/{ids}':
     get:
       deprecated: false
@@ -2344,6 +2325,39 @@ paths:
               $ref: '#/definitions/StopPoint'
             type: array
       summary: Gets all stop points of a given type
+      tags:
+        - StopPoint
+  '/StopPoint/Type/{types}/page/{page}':
+    get:
+      deprecated: false
+      operationId: StopPoint_GetByTypeWithPagination
+      parameters:
+        - description: ''
+          in: path
+          items:
+            type: string
+          name: types
+          required: true
+          type: array
+        - description: ''
+          format: int32
+          in: path
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/StopPoint'
+            type: array
+      summary: Gets all the stop points of given type(s) with a page number
       tags:
         - StopPoint
   '/StopPoint/{ids}':

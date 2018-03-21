@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides access to information about profiles and contacts.
-  title: Google People
+  title: People
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://people.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -248,7 +248,8 @@ paths:
       parameters:
         - description: |-
             **Required.** A field mask to restrict which fields on each person are
-            returned. Valid values are:
+            returned. Multiple fields can be specified by separating them with commas.
+            Valid values are:
 
             * addresses
             * ageRanges
@@ -419,38 +420,11 @@ paths:
           name: maxMembers
           type: integer
         - description: |-
-            **Required.** A field mask to restrict which fields on the person are
-            returned. Valid values are:
-
-            * addresses
-            * ageRanges
-            * biographies
-            * birthdays
-            * braggingRights
-            * coverPhotos
-            * emailAddresses
-            * events
-            * genders
-            * imClients
-            * interests
-            * locales
-            * memberships
-            * metadata
-            * names
-            * nicknames
-            * occupations
-            * organizations
-            * phoneNumbers
-            * photos
-            * relations
-            * relationshipInterests
-            * relationshipStatuses
-            * residences
-            * skills
-            * taglines
-            * urls
+            **Required.** Comma-separated list of person fields to be included in the
+            response. Each path should start with `person.`: for example,
+            `person.names` or `person.photos`.
           in: query
-          name: personFields
+          name: requestMask.includeField
           type: string
         - description: The resource name of the contact group to get.
           in: path
@@ -547,7 +521,8 @@ paths:
           type: string
         - description: |-
             **Required.** A field mask to restrict which fields on each person are
-            returned. Valid values are:
+            returned. Multiple fields can be specified by separating them with commas.
+            Valid values are:
 
             * addresses
             * ageRanges
@@ -763,12 +738,12 @@ paths:
           x-reservedExpansion: true
         - description: |-
             **Required.** A field mask to restrict which fields on the person are
-            updated. Valid values are:
+            updated. Multiple fields can be specified by separating them with commas.
+            All updated fields will be replaced. Valid values are:
 
             * addresses
             * biographies
             * birthdays
-            * braggingRights
             * emailAddresses
             * events
             * genders
@@ -782,7 +757,6 @@ paths:
             * phoneNumbers
             * relations
             * residences
-            * skills
             * urls
           in: query
           name: updatePersonFields
@@ -1305,7 +1279,10 @@ definitions:
         description: Metadata about the membership.
     type: object
   ModifyContactGroupMembersRequest:
-    description: A request to modify an existing contact group's members.
+    description: |-
+      A request to modify an existing contact group's members. Contacts can be
+      removed from any group but they can only be added to a user group or
+      myContacts or starred system groups.
     properties:
       resourceNamesToAdd:
         description: |-
@@ -2022,7 +1999,9 @@ definitions:
         type: string
     type: object
   UpdateContactGroupRequest:
-    description: A request to update an existing contact group. Only the name can be updated.
+    description: |-
+      A request to update an existing user contact group. All updated fields will
+      be replaced.
     properties:
       contactGroup:
         $ref: '#/definitions/ContactGroup'

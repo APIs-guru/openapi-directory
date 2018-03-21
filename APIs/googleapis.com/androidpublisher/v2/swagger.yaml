@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidpublisher/v2/rest'
       version: v1
@@ -1251,7 +1251,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -1291,7 +1291,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -1323,7 +1323,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -1386,7 +1386,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -1427,7 +1427,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -1460,7 +1460,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -2717,9 +2717,18 @@ definitions:
       developerPayload:
         description: A developer-specified string that contains supplemental information about an order.
         type: string
+      emailAddress:
+        description: The email address of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
+        type: string
       expiryTimeMillis:
         description: 'Time at which the subscription will expire, in milliseconds since the Epoch.'
         format: int64
+        type: string
+      familyName:
+        description: The family name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
+        type: string
+      givenName:
+        description: The given name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
         type: string
       kind:
         default: 'androidpublisher#subscriptionPurchase'
@@ -2748,6 +2757,12 @@ definitions:
         type: string
       priceCurrencyCode:
         description: 'ISO 4217 currency code for the subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is "GBP".'
+        type: string
+      profileId:
+        description: The profile id of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
+        type: string
+      profileName:
+        description: The profile name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
         type: string
       purchaseType:
         description: |-
@@ -2807,7 +2822,7 @@ definitions:
   Track:
     properties:
       track:
-        description: 'Identifier for this track. One of "alpha", "beta", "production" or "rollout".'
+        description: 'Identifier for this track. One of "alpha", "beta", "production", "rollout" or "internal".'
         type: string
       userFraction:
         format: double

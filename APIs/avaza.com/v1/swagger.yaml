@@ -501,6 +501,11 @@ paths:
           name: Sort
           required: false
           type: string
+        - format: int32
+          in: query
+          name: CompanyIDFK
+          required: false
+          type: integer
       responses:
         '200':
           description: Success
@@ -2004,6 +2009,9 @@ definitions:
       PaymentNumber:
         description: Optional. If not specified will be automatically generated
         type: string
+      PaymentProviderCode:
+        description: Optional for storing the payment provider who was the source of funds.
+        type: string
       TransactionPrefix:
         description: Optional to override the default prefix added to Payment Numbers
         type: string
@@ -2076,6 +2084,12 @@ definitions:
         format: date-time
         type: string
       DateDueUTC:
+        format: date-time
+        type: string
+      DateStart:
+        format: date-time
+        type: string
+      DateStartUTC:
         format: date-time
         type: string
       Description:
@@ -2460,6 +2474,12 @@ definitions:
         format: date-time
         type: string
       DateDueUTC:
+        format: date-time
+        type: string
+      DateStart:
+        format: date-time
+        type: string
+      DateStartUTC:
         format: date-time
         type: string
       DateUpdated:

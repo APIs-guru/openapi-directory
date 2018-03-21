@@ -72,7 +72,7 @@ paths:
           name: page
           required: false
           type: string
-        - description: 'Number of results to be shown per page, should be a positive integer (optional, defaults to 500)'
+        - description: 'Number of results to be shown per page, should be a positive integer (optional, defaults to 500, max 500)'
           in: query
           name: display_size
           required: false
@@ -85,13 +85,13 @@ paths:
         '401':
           description: Credentials are required to access this resource
         '422':
-          description: 'Invalid parameters: from_date, to_date, status. See Public API documentation for the correct data formats'
+          description: 'Invalid parameters: from_date, to_date, status, display_size. See Public API documentation for the correct data formats'
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '500':
           description: Downstream system error
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
       summary: Search payments
     post:
       consumes:
@@ -113,17 +113,17 @@ paths:
         '400':
           description: Bad request
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '401':
           description: Credentials are required to access this resource
         '422':
           description: 'Invalid attribute value: description. Must be less than or equal to 255 characters length'
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '500':
           description: Downstream system error
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
       summary: Create new payment
   '/v1/payments/{paymentId}':
     get:
@@ -144,11 +144,11 @@ paths:
         '404':
           description: Not found
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '500':
           description: Downstream system error
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
       summary: Find payment by ID
   '/v1/payments/{paymentId}/cancel':
     post:
@@ -165,21 +165,21 @@ paths:
         '400':
           description: Cancellation of payment failed
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '401':
           description: Credentials are required to access this resource
         '404':
           description: Not found
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '409':
           description: Conflict
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '500':
           description: Downstream system error
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
       summary: Cancel payment
   '/v1/payments/{paymentId}/events':
     get:
@@ -200,11 +200,11 @@ paths:
         '404':
           description: Not found
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '500':
           description: Downstream system error
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
       summary: Return payment events by ID
   '/v1/payments/{paymentId}/refunds':
     get:
@@ -223,11 +223,11 @@ paths:
         '404':
           description: Not found
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '500':
           description: Downstream system error
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
       summary: Get all refunds for a payment.
       tags:
         - refunds
@@ -256,13 +256,13 @@ paths:
         '404':
           description: Not found
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '412':
           description: Refund amount available mismatch
         '500':
           description: Downstream system error
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
       summary: Submit a refund for a payment
       tags:
         - refunds
@@ -287,15 +287,16 @@ paths:
         '404':
           description: Not found
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
         '500':
           description: Downstream system error
           schema:
-            $ref: '#/definitions/Payment_Error'
+            $ref: '#/definitions/Payment%20Error'
       summary: Find payment refund by ID
       tags:
         - refunds
 definitions:
+  Billing Address: {}
   Billing_Address:
     description: A structure representing the billing address of a card
     properties:
@@ -320,7 +321,26 @@ definitions:
         readOnly: true
         type: string
     type: object
-  Card_Payment: {}
+  Card Payment: {}
+  Card_Payment:
+    allOf:
+      - $ref: '#/definitions/Payment'
+      - properties:
+          card_brand:
+            description: Card Brand
+            example: Visa
+            readOnly: true
+            type: string
+          card_details:
+            $ref: '#/definitions/Payment%20card%20details'
+            readOnly: true
+          refund_summary:
+            $ref: '#/definitions/Refund%20Summary'
+            readOnly: true
+          settlement_summary:
+            $ref: '#/definitions/Settlement%20Summary'
+            readOnly: true
+        type: object
   CreatePaymentRefundRequest:
     description: The Payment Refund Request Payload
     properties:
@@ -408,8 +428,12 @@ definitions:
         readOnly: true
         type: string
       state:
-        $ref: '#/definitions/Payment_state'
+        $ref: '#/definitions/Payment%20state'
     type: object
+  Payment Error: {}
+  Payment Event information: {}
+  Payment card details: {}
+  Payment state: {}
   PaymentEventsInformation:
     description: A List of Payment Events information
     properties:
@@ -417,7 +441,7 @@ definitions:
         $ref: '#/definitions/linksForEvents'
       events:
         items:
-          $ref: '#/definitions/Payment_Event_information'
+          $ref: '#/definitions/Payment%20Event%20information'
         type: array
       payment_id:
         example: hu20sqlact5260q2nanm0q8u93
@@ -428,7 +452,7 @@ definitions:
     properties:
       results:
         items:
-          $ref: '#/definitions/Card_Payment'
+          $ref: '#/definitions/Card%20Payment'
         readOnly: true
         type: array
     type: object
@@ -440,12 +464,125 @@ definitions:
       payment:
         $ref: '#/definitions/Payment'
     type: object
-  Payment_Error: {}
-  Payment_Event_information: {}
-  Payment_card_details: {}
-  Payment_state: {}
-  Refund_Summary: {}
-  Settlement_Summary: {}
+  Payment_Error:
+    description: A Payment Error response
+    properties:
+      code:
+        example: P0102
+        type: string
+      description:
+        example: 'Invalid attribute value: amount. Must be less than or equal to 10000000'
+        type: string
+      field:
+        example: amount
+        type: string
+    type: object
+  Payment_Event_information:
+    description: A List of Payment Events information
+    properties:
+      _links:
+        $ref: '#/definitions/payment-event-link'
+        readOnly: true
+      payment_id:
+        example: hu20sqlact5260q2nanm0q8u93
+        readOnly: true
+        type: string
+      state:
+        $ref: '#/definitions/Payment%20state'
+        description: state
+        readOnly: true
+      updated:
+        description: updated
+        example: updated_date
+        readOnly: true
+        type: string
+    type: object
+  Payment_card_details:
+    description: A structure representing the payment card
+    properties:
+      billing_address:
+        $ref: '#/definitions/Billing%20Address'
+        readOnly: true
+      card_brand:
+        example: Visa
+        readOnly: true
+        type: string
+      cardholder_name:
+        example: Mr. Card holder
+        readOnly: true
+        type: string
+      expiry_date:
+        example: 12/20
+        readOnly: true
+        type: string
+      last_digits_card_number:
+        example: '1234'
+        readOnly: true
+        type: string
+    type: object
+  Payment_state:
+    description: A structure representing the current state of the payment in its lifecycle.
+    properties:
+      code:
+        description: What went wrong with the Payment if it finished with an error - error code
+        example: P010
+        readOnly: true
+        type: string
+      finished:
+        default: false
+        description: Whether the payment has finished
+        readOnly: true
+        type: boolean
+      message:
+        description: What went wrong with the Payment if it finished with an error - English message
+        example: User cancelled the payment
+        readOnly: true
+        type: string
+      status:
+        description: Current progress of the payment in its lifecycle
+        example: created
+        readOnly: true
+        type: string
+    required:
+      - code
+      - finished
+      - message
+      - status
+    type: object
+  Refund Summary: {}
+  Refund_Summary:
+    description: A structure representing the refunds availability
+    properties:
+      amount_available:
+        description: Amount available for refund in pence
+        format: int64
+        readOnly: true
+        type: integer
+      amount_submitted:
+        description: Amount submitted for refunds on this Payment in pence
+        format: int64
+        readOnly: true
+        type: integer
+      status:
+        description: Availability status of the refund
+        example: available
+        type: string
+    type: object
+  Settlement Summary: {}
+  Settlement_Summary:
+    description: A structure representing information about a settlement
+    properties:
+      capture_submit_time:
+        description: Date and time capture request has been submitted (may be null if capture request was not immediately acknowledged by payment gateway)
+        example: '2016-01-21T17:15:00Z'
+        readOnly: true
+        type: string
+      captured_date:
+        description: Date of the capture event
+        example: '2016-01-21'
+        readOnly: true
+        type: string
+    type: object
   allLinksForAPayment:
     description: 'self,events and next links of a Payment'
     properties:

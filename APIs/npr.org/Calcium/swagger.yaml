@@ -418,6 +418,7 @@ paths:
             - google
             - microsoft
             - janrain
+            - comcast
           in: formData
           name: service
           required: false
@@ -1560,6 +1561,11 @@ definitions:
         items:
           $ref: '#/definitions/OtherLink'
         type: array
+      ratings:
+        description: This is an alternate URL to use to POST the ratings JSON. Difference between this and 'recommendations' is that 'ratings' will NOT return back recommendations of audio to play next.
+        items:
+          $ref: '#/definitions/OtherLink'
+        type: array
       recommendations:
         description: This is the URL that should be POSTed with the ratings JSON when this audio starts to play
         items:
@@ -1690,7 +1696,7 @@ definitions:
         description: The actual value that should be sent
         type: string
       refreshRule:
-        description: 'In the explore view of a client, this field indicates how this channel should be refreshed.  This is an experimental field and subject to change, but for now zero indicates the client should refresh this channel every time a START rating is sent for a type=audio recommendation, while a 1 would indicate it can be refreshed much less often, such as on a 30 minute timer.   We are still experimenting on the number of rules necessary and the best implementation for each type of rule. '
+        description: 'In the explore view of a client, this field indicates how this channel should be refreshed.  This is an experimental field and subject to change, but for now zero indicates the client should refresh this channel every time a START rating is sent for a type=audio recommendation, while a 1 would indicate it can be refreshed much less often, such as on a 30 minute timer. 2 would indicate even less time to update, say every hour. We are still experimenting on the number of rules necessary and the best implementation for each type of rule. '
         type: integer
     required:
       - id

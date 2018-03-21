@@ -333,9 +333,8 @@ paths:
         '200':
           description: List of dealers for the search
           schema:
-            items:
-              $ref: '#/definitions/Dealer'
-            type: array
+            $ref: '#/definitions/DealersResponse'
+            type: object
         default:
           description: Error
           schema:
@@ -538,6 +537,7 @@ paths:
           description: Listing for the given id
           schema:
             $ref: '#/definitions/Listing'
+            type: object
         default:
           description: Error
           schema:
@@ -607,6 +607,12 @@ paths:
           in: path
           name: id
           required: true
+          type: string
+        - description: Get only HTML for given listings VDP page
+          format: string
+          in: query
+          name: html
+          required: false
           type: string
       responses:
         '200':
@@ -1278,6 +1284,7 @@ definitions:
         $ref: '#/definitions/Build'
       dealer:
         $ref: '#/definitions/Dealer'
+        type: object
       distance:
         description: Distance of the car's location from the specified user lcoation
         type: number
@@ -1649,6 +1656,18 @@ definitions:
         description: Zip of the dealer
         type: string
     type: object
+  DealersResponse:
+    description: Dealers Response
+    properties:
+      dealers:
+        items:
+          $ref: '#/definitions/Dealer'
+          type: object
+        type: array
+      num_found:
+        description: number of dealers found
+        type: number
+    type: object
   DepreciationPoint:
     properties:
       similar_models:
@@ -1789,6 +1808,7 @@ definitions:
         type: object
       dealer:
         $ref: '#/definitions/Dealer'
+        type: object
       dom:
         description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
         type: number
@@ -1986,11 +2006,26 @@ definitions:
     type: object
   PopularityItem:
     properties:
-      count:
-        description: Popularity item count
+      color:
+        description: Color depending upon left and right analysis numbers
+        type: string
+      delta_percent:
+        description: Delta percent
         type: number
-      item:
-        description: Popularity item
+      difference:
+        description: Difference depending upon left and right analysis
+        type: number
+      left:
+        description: Left side rating for above description (2016 ford F-150 Lariat)
+        type: number
+      right:
+        description: Right side rating for above description (All Other Cars)
+        type: number
+      text:
+        description: 'Description for which popularity should be show eg: 2016 ford F-150 Lariat vs All Other Cars'
+        type: string
+      thumbs:
+        description: Thumbs up/down depending upon left and right analysis numbers
         type: string
     type: object
   RatingComponents:

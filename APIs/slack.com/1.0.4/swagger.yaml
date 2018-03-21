@@ -6,7 +6,7 @@ basePath: /api
 info:
   description: 'One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.'
   title: Slack
-  version: 1.0.3
+  version: 1.0.4
   x-apisguru-categories:
     - collaboration
     - messaging
@@ -166,7 +166,7 @@ paths:
                       - D0C0NU1Q8
                       - D0BH95DLH
                   scopes:
-                    - 'chat:write:user'
+                    - 'chat:write'
                     - 'im:history'
                     - 'im:read'
                 channel:
@@ -383,7 +383,7 @@ paths:
               user:
                 type: string
               user_id:
-                $ref: '#/definitions/defs_user'
+                $ref: '#/definitions/defs_user_id'
             required:
               - ok
               - url
@@ -407,6 +407,7 @@ paths:
                 enum:
                   - not_authed
                   - invalid_auth
+                  - token_revoked
                   - account_inactive
                   - invalid_arg_name
                   - invalid_array_arg
@@ -1961,7 +1962,7 @@ paths:
         url: 'https://api.slack.com/methods/chat.getPermalink'
       operationId: chat_getPermalink
       parameters:
-        - description: 'Authentication token. Requires scope: `tokens.basic`'
+        - description: 'Authentication token. Requires scope: `none`'
           in: query
           name: token
           type: string
@@ -2006,7 +2007,7 @@ paths:
           schema: {}
       security:
         - slackAuth:
-            - tokens.basic
+            - none
       tags:
         - chat
   /chat.meMessage:
@@ -2194,6 +2195,10 @@ paths:
           in: header
           name: token
           type: string
+        - description: Disable Slack markup parsing by setting to `false`. Enabled by default.
+          in: formData
+          name: mrkdwn
+          type: boolean
         - description: 'Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below.'
           in: formData
           name: icon_emoji
@@ -2916,7 +2921,7 @@ paths:
           type: boolean
       responses:
         '200':
-          description: Typical success response for a public channel
+          description: 'Typical success response for a public channel. (Also, a response from a private channel and a multi-party IM is very similar to this example.)'
           examples:
             application/json:
               channel:
@@ -3178,7 +3183,7 @@ paths:
                     ok:
                       $ref: '#/definitions/defs_ok_false'
                     user:
-                      $ref: '#/definitions/defs_user'
+                      $ref: '#/definitions/defs_user_id'
                   required:
                     - ok
                     - error
@@ -3741,7 +3746,7 @@ paths:
             properties:
               members:
                 items:
-                  $ref: '#/definitions/defs_user'
+                  $ref: '#/definitions/defs_user_id'
                 minItems: 1
                 type: array
                 uniqueItems: true
@@ -4139,18 +4144,18 @@ paths:
               messages:
                 items:
                   items:
-                    - additionalProperties: false
+                    - additionalProperties: true
                       properties:
                         last_read:
                           $ref: '#/definitions/defs_ts'
                         replies:
                           items:
-                            additionalProperties: false
+                            additionalProperties: true
                             properties:
                               ts:
                                 $ref: '#/definitions/defs_ts'
                               user:
-                                $ref: '#/definitions/defs_user'
+                                $ref: '#/definitions/defs_user_id'
                             required:
                               - user
                               - ts
@@ -4175,7 +4180,7 @@ paths:
                         unread_count:
                           type: integer
                         user:
-                          $ref: '#/definitions/defs_user'
+                          $ref: '#/definitions/defs_user_id'
                         user_profile:
                           $ref: '#/definitions/objs_user_profile_short'
                         user_team:
@@ -4192,12 +4197,12 @@ paths:
                         - unread_count
                         - ts
                       type: object
-                    - additionalProperties: false
+                    - additionalProperties: true
                       properties:
                         is_starred:
                           type: boolean
                         parent_user_id:
-                          $ref: '#/definitions/defs_user'
+                          $ref: '#/definitions/defs_user_id'
                         source_team:
                           $ref: '#/definitions/defs_team'
                         team:
@@ -4211,7 +4216,7 @@ paths:
                         type:
                           type: string
                         user:
-                          $ref: '#/definitions/defs_user'
+                          $ref: '#/definitions/defs_user_id'
                         user_profile:
                           $ref: '#/definitions/objs_user_profile_short'
                         user_team:
@@ -5353,7 +5358,7 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Schema for successful response files.info method
+            description: Schema for successful response from files.info method
             properties:
               comments:
                 $ref: '#/definitions/objs_comments'
@@ -5378,7 +5383,7 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Schema for error response files.info method
+            description: Schema for error response from files.info method
             properties:
               error:
                 enum:
@@ -5472,13 +5477,23 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response from files.list method
             properties:
+              files:
+                items:
+                  $ref: '#/definitions/objs_file'
+                minItems: 0
+                type: array
+                uniqueItems: true
               ok:
                 $ref: '#/definitions/defs_ok_true'
+              paging:
+                $ref: '#/definitions/objs_paging'
             required:
               - ok
-            title: Default success template
+              - files
+              - paging
+            title: files.list schema
             type: object
         default:
           description: Typical error response
@@ -5488,13 +5503,35 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from files.list method
             properties:
+              error:
+                enum:
+                  - user_not_found
+                  - unknown_type
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - user_is_bot
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: files.list error schema
             type: object
       security:
         - slackAuth:
@@ -7277,6 +7314,8 @@ paths:
           description: Typical success response
           examples:
             application/json:
+              channel:
+                id: D947RLWRX
               ok: true
           schema:
             additionalProperties: true
@@ -7304,7 +7343,7 @@ paths:
                   unread_count_display:
                     type: number
                   user:
-                    $ref: '#/definitions/defs_user'
+                    $ref: '#/definitions/defs_user_id'
                 required:
                   - id
                 type: object
@@ -8195,15 +8234,77 @@ paths:
                   type: message
               ok: true
           schema:
-            additionalProperties: true
-            description: Verbose schema not yet ready for this method.
-            properties:
-              ok:
-                $ref: '#/definitions/defs_ok_true'
-            required:
-              - ok
-            title: Default success template
-            type: object
+            description: Schema for successful response from pins.list method
+            items:
+              - additionalProperties: true
+                properties:
+                  items:
+                    items:
+                      - additionalProperties: true
+                        properties:
+                          comment:
+                            $ref: '#/definitions/objs_comment'
+                          created:
+                            type: integer
+                          created_by:
+                            $ref: '#/definitions/defs_user_id'
+                          file:
+                            $ref: '#/definitions/objs_file'
+                          type:
+                            enum:
+                              - file_comment
+                            type: string
+                        title: File Comment Pin
+                        type: object
+                      - additionalProperties: true
+                        properties:
+                          created:
+                            type: integer
+                          created_by:
+                            $ref: '#/definitions/defs_user_id'
+                          file:
+                            $ref: '#/definitions/objs_file'
+                          type:
+                            enum:
+                              - file
+                            type: string
+                        title: File Pin
+                        type: object
+                      - additionalProperties: true
+                        properties:
+                          channel:
+                            $ref: '#/definitions/defs_channel'
+                          created:
+                            type: integer
+                          created_by:
+                            $ref: '#/definitions/defs_user_id'
+                          message:
+                            $ref: '#/definitions/objs_message'
+                          type:
+                            enum:
+                              - message
+                            type: string
+                        title: Message Pin
+                        type: object
+                    type: array
+                    uniqueItems: true
+                  ok:
+                    $ref: '#/definitions/defs_ok_true'
+                required:
+                  - ok
+                  - items
+                type: object
+              - additionalProperties: true
+                properties:
+                  count:
+                    type: integer
+                  ok:
+                    $ref: '#/definitions/defs_ok_true'
+                required:
+                  - ok
+                  - count
+                type: object
+            title: pins.list success schema
         default:
           description: Typical error response
           examples:
@@ -8212,13 +8313,33 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from pins.list method
             properties:
+              error:
+                enum:
+                  - channel_not_found
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: pins.list error schema
             type: object
       security:
         - slackAuth:
@@ -8362,13 +8483,13 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response from reactions.add method
             properties:
               ok:
                 $ref: '#/definitions/defs_ok_true'
             required:
               - ok
-            title: Default success template
+            title: reactions.add schema
             type: object
         default:
           description: Typical error response
@@ -8378,13 +8499,41 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from reactions.add method
             properties:
+              error:
+                enum:
+                  - bad_timestamp
+                  - file_not_found
+                  - file_comment_not_found
+                  - message_not_found
+                  - no_item_specified
+                  - invalid_name
+                  - already_reacted
+                  - too_many_emoji
+                  - too_many_reactions
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: reactions.add error schema
             type: object
       security:
         - slackAuth:
@@ -8450,14 +8599,57 @@ paths:
               ok: true
               type: file
           schema:
-            additionalProperties: true
-            description: Verbose schema not yet ready for this method.
-            properties:
-              ok:
-                $ref: '#/definitions/defs_ok_true'
-            required:
-              - ok
-            title: Default success template
+            description: Schema for successful response from reactions.get method
+            items:
+              - additionalProperties: true
+                properties:
+                  channel:
+                    $ref: '#/definitions/defs_channel'
+                  message:
+                    $ref: '#/definitions/objs_message'
+                  ok:
+                    $ref: '#/definitions/defs_ok_true'
+                  type:
+                    enum:
+                      - message
+                    type: string
+                required:
+                  - ok
+                  - type
+                  - channel
+                  - message
+              - additionalProperties: true
+                properties:
+                  file:
+                    $ref: '#/definitions/objs_file'
+                  ok:
+                    $ref: '#/definitions/defs_ok_true'
+                  type:
+                    enum:
+                      - file
+                    type: string
+                required:
+                  - ok
+                  - type
+                  - file
+              - additionalProperties: true
+                properties:
+                  comment:
+                    $ref: '#/definitions/objs_comment'
+                  file:
+                    $ref: '#/definitions/objs_file'
+                  ok:
+                    $ref: '#/definitions/defs_ok_true'
+                  type:
+                    enum:
+                      - file_comment
+                    type: string
+                required:
+                  - ok
+                  - type
+                  - file
+                  - comment
+            title: reactions.get success schema
             type: object
         default:
           description: Typical error response
@@ -8467,13 +8659,36 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from reactions.get method
             properties:
+              error:
+                enum:
+                  - bad_timestamp
+                  - file_not_found
+                  - file_comment_not_found
+                  - message_not_found
+                  - no_item_specified
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: reactions.get error schema
             type: object
       security:
         - slackAuth:
@@ -8577,13 +8792,62 @@ paths:
                 total: 3
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response from reactions.list method
             properties:
+              items:
+                items:
+                  items:
+                    - additionalProperties: true
+                      properties:
+                        channel:
+                          $ref: '#/definitions/defs_channel'
+                        message:
+                          $ref: '#/definitions/objs_message'
+                        type:
+                          enum:
+                            - message
+                          type: string
+                      required:
+                        - type
+                        - channel
+                        - message
+                      type: object
+                    - additionalProperties: true
+                      properties:
+                        file:
+                          $ref: '#/definitions/objs_file'
+                        type:
+                          enum:
+                            - file
+                          type: string
+                      required:
+                        - type
+                        - file
+                      type: object
+                    - additionalProperties: true
+                      properties:
+                        comment:
+                          $ref: '#/definitions/objs_comment'
+                        file:
+                          $ref: '#/definitions/objs_file'
+                        type:
+                          enum:
+                            - file_comment
+                          type: string
+                      required:
+                        - type
+                        - file
+                        - comment
+                      type: object
+                type: array
               ok:
                 $ref: '#/definitions/defs_ok_true'
+              paging:
+                $ref: '#/definitions/objs_paging'
             required:
               - ok
-            title: Default success template
+              - items
+            title: reactions.list schema
             type: object
         default:
           description: Typical error response
@@ -8593,13 +8857,34 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from reactions.list method
             properties:
+              error:
+                enum:
+                  - user_not_found
+                  - not_authed
+                  - invalid_auth
+                  - account_inactiv
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                  - fatal_error
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: reactions.list error schema
             type: object
       security:
         - slackAuth:
@@ -8649,13 +8934,13 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response from reactions.remove method
             properties:
               ok:
                 $ref: '#/definitions/defs_ok_true'
             required:
               - ok
-            title: Default success template
+            title: reactions.remove schema
             type: object
         default:
           description: Typical error response
@@ -8665,13 +8950,40 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from reactions.remove method
             properties:
+              error:
+                enum:
+                  - bad_timestamp
+                  - file_not_found
+                  - file_comment_not_found
+                  - message_not_found
+                  - no_item_specified
+                  - invalid_name
+                  - no_reaction
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                  - fatal_error
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: reactions.remove error schema
             type: object
       security:
         - slackAuth:
@@ -8970,11 +9282,15 @@ paths:
         url: 'https://api.slack.com/methods/rtm.connect'
       operationId: rtm_connect
       parameters:
+        - description: 'Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).'
+          in: query
+          name: presence_sub
+          type: boolean
         - description: 'Authentication token. Requires scope: `rtm:stream`'
           in: query
           name: token
           type: string
-        - description: 'Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).'
+        - description: 'Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).'
           in: query
           name: batch_presence_aware
           type: boolean
@@ -9045,11 +9361,15 @@ paths:
           in: query
           name: include_locale
           type: boolean
+        - description: 'Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).'
+          in: query
+          name: presence_sub
+          type: boolean
         - description: Skip unread counts for each channel (improves performance).
           in: query
           name: no_unreads
           type: boolean
-        - description: 'Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).'
+        - description: 'Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).'
           in: query
           name: batch_presence_aware
           type: boolean
@@ -10908,72 +11228,7 @@ paths:
               ok:
                 $ref: '#/definitions/defs_ok_true'
               user:
-                additionalProperties: true
-                properties:
-                  color:
-                    pattern: '^[a-fA-F0-9]{6}$'
-                    type: string
-                  deleted:
-                    type: boolean
-                  has_2fa:
-                    type: boolean
-                  id:
-                    $ref: '#/definitions/defs_user'
-                  is_admin:
-                    type: boolean
-                  is_app_user:
-                    type: boolean
-                  is_bot:
-                    type: boolean
-                  is_owner:
-                    type: boolean
-                  is_primary_owner:
-                    type: boolean
-                  is_restricted:
-                    type: boolean
-                  is_ultra_restricted:
-                    type: boolean
-                  locale:
-                    type: string
-                  name:
-                    type: string
-                  profile:
-                    $ref: '#/definitions/objs_user_profile'
-                  real_name:
-                    type: string
-                  team_id:
-                    $ref: '#/definitions/defs_team'
-                  tz:
-                    type:
-                      - 'null'
-                      - string
-                  tz_label:
-                    type: string
-                  tz_offset:
-                    type: number
-                  updated:
-                    type: number
-                required:
-                  - id
-                  - team_id
-                  - name
-                  - deleted
-                  - color
-                  - real_name
-                  - tz
-                  - tz_label
-                  - tz_offset
-                  - profile
-                  - is_admin
-                  - is_owner
-                  - is_primary_owner
-                  - is_restricted
-                  - is_ultra_restricted
-                  - is_bot
-                  - updated
-                  - is_app_user
-                  - has_2fa
-                type: object
+                $ref: '#/definitions/objs_user'
             required:
               - ok
               - user
@@ -11030,7 +11285,7 @@ paths:
         url: 'https://api.slack.com/methods/users.list'
       operationId: users_list
       parameters:
-        - description: 'Whether to include presence data in the output. Setting this to `false` improves performance, especially with large teams.'
+        - description: 'Deprecated. Whether to include presence data in the output. Defaults to `false`. Setting this to `true` reduces performance, especially with large teams.'
           in: query
           name: presence
           type: boolean
@@ -11133,13 +11388,23 @@ paths:
                 next_cursor: dXNlcjpVMEc5V0ZYTlo=
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response from users.list method
             properties:
+              cache_ts:
+                type: integer
+              members:
+                items:
+                  $ref: '#/definitions/objs_user'
+                minItems: 1
+                type: array
+                uniqueItems: true
               ok:
                 $ref: '#/definitions/defs_ok_true'
             required:
               - ok
-            title: Default success template
+              - members
+              - cache_ts
+            title: users.list schema
             type: object
         default:
           description: Typical error response
@@ -11149,13 +11414,34 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from users.list method
             properties:
+              error:
+                enum:
+                  - invalid_cursor
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                  - fatal_error
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: users.list error schema
             type: object
       security:
         - slackAuth:
@@ -11228,7 +11514,7 @@ paths:
               ok:
                 $ref: '#/definitions/defs_ok_true'
               user:
-                $ref: '#/definitions/defs_user'
+                $ref: '#/definitions/objs_user'
             required:
               - ok
               - user
@@ -11238,7 +11524,7 @@ paths:
           description: Typical error response
           examples:
             application/json:
-              error: user_not_found
+              error: users_not_found
               ok: false
           schema:
             additionalProperties: true
@@ -11246,7 +11532,23 @@ paths:
             properties:
               error:
                 enum:
-                  - user_not_found
+                  - users_not_found
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                  - fatal_error
                 type: string
               ok:
                 $ref: '#/definitions/defs_ok_false'
@@ -11426,7 +11728,7 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
         - application/json
-      description: Marks a user as active.
+      description: Marked a user as active. Deprecated and non-functional.
       externalDocs:
         description: API method documentation
         url: 'https://api.slack.com/methods/users.setActive'
@@ -11612,6 +11914,10 @@ definitions:
   defs_channel_name:
     title: Name of a channel
     type: string
+  defs_comment_id:
+    pattern: '^Fc[A-Z0-9]{8}$'
+    title: File Comment ID
+    type: string
   defs_dm_id:
     pattern: '^[D][A-Z0-9]{8}$'
     title: Direct Message Channel ID
@@ -11653,10 +11959,6 @@ definitions:
     pattern: '^\d{10}\.\d{6}$'
     title: Timestamp in format 0123456789.012345
     type: string
-  defs_user:
-    pattern: '^[UW][A-Z0-9]{8}$'
-    title: User ID
-    type: string
   defs_user_id:
     pattern: '^[UW][A-Z0-9]{8}$'
     title: User ID
@@ -11665,11 +11967,11 @@ definitions:
     additionalProperties: true
     properties:
       accepted_user:
-        $ref: '#/definitions/defs_user'
+        $ref: '#/definitions/defs_user_id'
       created:
         type: integer
       creator:
-        $ref: '#/definitions/defs_user'
+        $ref: '#/definitions/defs_user_id'
       id:
         $ref: '#/definitions/defs_channel_id'
       is_archived:
@@ -11702,7 +12004,7 @@ definitions:
           - type: 'null'
       members:
         items:
-          $ref: '#/definitions/defs_user'
+          $ref: '#/definitions/defs_user_id'
         minItems: 0
         type: array
         uniqueItems: true
@@ -11785,9 +12087,17 @@ definitions:
       created:
         type: integer
       id:
-        type: string
+        $ref: '#/definitions/defs_comment_id'
       is_intro:
         type: boolean
+      pinned_to:
+        items:
+          $ref: '#/definitions/defs_channel'
+        type: array
+      reactions:
+        items:
+          $ref: '#/definitions/objs_reaction'
+        type: array
       timestamp:
         type: integer
       user:
@@ -11800,16 +12110,16 @@ definitions:
     type: array
   objs_conversation:
     items:
-      - additionalProperties: false
+      - additionalProperties: true
         properties:
           accepted_user:
-            $ref: '#/definitions/defs_user'
+            $ref: '#/definitions/defs_user_id'
           created:
             type: integer
           creator:
-            $ref: '#/definitions/defs_user'
+            $ref: '#/definitions/defs_user_id'
           display_counts:
-            additionalProperties: false
+            additionalProperties: true
             properties:
               display_counts:
                 type: integer
@@ -11882,7 +12192,7 @@ definitions:
           priority:
             type: integer
           purpose:
-            additionalProperties: false
+            additionalProperties: true
             properties:
               creator:
                 $ref: '#/definitions/defs_topic_purpose_creator'
@@ -11895,18 +12205,24 @@ definitions:
               - creator
               - last_set
             type: object
+          shared_team_ids:
+            items:
+              $ref: '#/definitions/defs_team'
+            minItems: 0
+            type: array
+            uniqueItems: true
           shares:
             items:
-              additionalProperties: false
+              additionalProperties: true
               properties:
                 accepted_user:
-                  $ref: '#/definitions/defs_user'
+                  $ref: '#/definitions/defs_user_id'
                 is_active:
                   type: boolean
                 team:
                   $ref: '#/definitions/objs_team'
                 user:
-                  $ref: '#/definitions/defs_user'
+                  $ref: '#/definitions/defs_user_id'
               required:
                 - team
                 - user
@@ -11919,7 +12235,7 @@ definitions:
           timezone_count:
             type: integer
           topic:
-            additionalProperties: false
+            additionalProperties: true
             properties:
               creator:
                 $ref: '#/definitions/defs_topic_purpose_creator'
@@ -11940,7 +12256,7 @@ definitions:
           unread_count_display:
             type: integer
           user:
-            $ref: '#/definitions/defs_user'
+            $ref: '#/definitions/defs_user_id'
         required:
           - id
           - name
@@ -11961,16 +12277,16 @@ definitions:
           - purpose
         title: Conversation object
         type: object
-      - additionalProperties: false
+      - additionalProperties: true
         properties:
           accepted_user:
-            $ref: '#/definitions/defs_user'
+            $ref: '#/definitions/defs_user_id'
           created:
             type: integer
           creator:
-            $ref: '#/definitions/defs_user'
+            $ref: '#/definitions/defs_user_id'
           display_counts:
-            additionalProperties: false
+            additionalProperties: true
             properties:
               display_counts:
                 type: integer
@@ -12022,7 +12338,7 @@ definitions:
               - type: 'null'
           members:
             items:
-              $ref: '#/definitions/defs_user'
+              $ref: '#/definitions/defs_user_id'
             minItems: 0
             type: array
             uniqueItems: true
@@ -12049,7 +12365,7 @@ definitions:
           priority:
             type: integer
           purpose:
-            additionalProperties: false
+            additionalProperties: true
             properties:
               creator:
                 $ref: '#/definitions/defs_topic_purpose_creator'
@@ -12062,18 +12378,24 @@ definitions:
               - creator
               - last_set
             type: object
+          shared_team_ids:
+            items:
+              $ref: '#/definitions/defs_team'
+            minItems: 0
+            type: array
+            uniqueItems: true
           shares:
             items:
-              additionalProperties: false
+              additionalProperties: true
               properties:
                 accepted_user:
-                  $ref: '#/definitions/defs_user'
+                  $ref: '#/definitions/defs_user_id'
                 is_active:
                   type: boolean
                 team:
                   $ref: '#/definitions/objs_team'
                 user:
-                  $ref: '#/definitions/defs_user'
+                  $ref: '#/definitions/defs_user_id'
               required:
                 - team
                 - user
@@ -12086,7 +12408,7 @@ definitions:
           timezone_count:
             type: integer
           topic:
-            additionalProperties: false
+            additionalProperties: true
             properties:
               creator:
                 $ref: '#/definitions/defs_topic_purpose_creator'
@@ -12107,7 +12429,7 @@ definitions:
           unread_count_display:
             type: integer
           user:
-            $ref: '#/definitions/defs_user'
+            $ref: '#/definitions/defs_user_id'
         required:
           - id
           - name
@@ -12128,7 +12450,7 @@ definitions:
           - purpose
         title: Conversation MPIM Object
         type: object
-      - additionalProperties: false
+      - additionalProperties: true
         properties:
           created:
             type: integer
@@ -12147,7 +12469,7 @@ definitions:
           priority:
             type: integer
           user:
-            $ref: '#/definitions/defs_user'
+            $ref: '#/definitions/defs_user_id'
         required:
           - id
           - created
@@ -12203,34 +12525,50 @@ definitions:
       original_w:
         type: integer
       permalink:
+        format: uri
         type: string
       permalink_public:
+        format: uri
         type: string
+      pinned_to:
+        items:
+          $ref: '#/definitions/defs_channel'
+        type: array
       pretty_type:
         type: string
       public_url_shared:
         type: boolean
+      reactions:
+        items:
+          $ref: '#/definitions/objs_reaction'
+        type: array
       size:
         type: integer
       thumb_160:
+        format: uri
         type: string
       thumb_360:
+        format: uri
         type: string
       thumb_360_h:
         type: integer
       thumb_360_w:
         type: integer
       thumb_64:
+        format: uri
         type: string
       thumb_80:
+        format: uri
         type: string
       timestamp:
         type: integer
       title:
         type: string
       url_private:
+        format: uri
         type: string
       url_private_download:
+        format: uri
         type: string
       user:
         type: string
@@ -12249,7 +12587,7 @@ definitions:
       created:
         type: integer
       creator:
-        $ref: '#/definitions/defs_user'
+        $ref: '#/definitions/defs_user_id'
       id:
         $ref: '#/definitions/defs_group_id'
       is_archived:
@@ -12272,7 +12610,7 @@ definitions:
           - type: 'null'
       members:
         items:
-          $ref: '#/definitions/defs_user'
+          $ref: '#/definitions/defs_user_id'
         minItems: 1
         type: array
         uniqueItems: true
@@ -12342,7 +12680,7 @@ definitions:
       priority:
         type: integer
       user:
-        $ref: '#/definitions/defs_user'
+        $ref: '#/definitions/defs_user_id'
     required:
       - id
       - is_im
@@ -12351,6 +12689,37 @@ definitions:
       - created
       - is_user_deleted
     title: IM Object
+    type: object
+  objs_inviting_user:
+    additionalProperties: true
+    properties:
+      id:
+        $ref: '#/definitions/defs_user_id'
+      is_app_user:
+        type: boolean
+      is_restricted:
+        type: boolean
+      is_ultra_restricted:
+        type: boolean
+      name:
+        type: string
+      profile:
+        $ref: '#/definitions/objs_user_profile_shortest'
+      real_name:
+        type: string
+      team_id:
+        $ref: '#/definitions/defs_team'
+      updated:
+        type: number
+    required:
+      - id
+      - team_id
+      - name
+      - profile
+      - is_restricted
+      - is_ultra_restricted
+      - updated
+      - is_app_user
     type: object
   objs_message:
     additionalProperties: true
@@ -12386,15 +12755,26 @@ definitions:
             type: string
         type: object
       inviter:
-        $ref: '#/definitions/defs_user'
+        $ref: '#/definitions/defs_user_id'
       last_read:
         $ref: '#/definitions/defs_ts'
       name:
         type: string
       old_name:
         type: string
+      permalink:
+        format: uri
+        type: string
+      pinned_to:
+        items:
+          $ref: '#/definitions/defs_channel'
+        type: array
       purpose:
         type: string
+      reactions:
+        items:
+          $ref: '#/definitions/objs_reaction'
+        type: array
       replies:
         items:
           additionalProperties: true
@@ -12402,7 +12782,7 @@ definitions:
             ts:
               $ref: '#/definitions/defs_ts'
             user:
-              $ref: '#/definitions/defs_user'
+              $ref: '#/definitions/defs_user_id'
           required:
             - user
             - ts
@@ -12431,7 +12811,7 @@ definitions:
       unread_count:
         type: integer
       user:
-        $ref: '#/definitions/defs_user'
+        $ref: '#/definitions/defs_user_id'
       user_profile:
         $ref: '#/definitions/objs_user_profile_short'
       user_team:
@@ -12460,6 +12840,23 @@ definitions:
       - page
       - total
     title: paging object for files
+    type: object
+  objs_reaction:
+    additionalProperties: true
+    properties:
+      count:
+        type: integer
+      name:
+        type: string
+      users:
+        items:
+          $ref: '#/definitions/objs_user'
+        type: array
+    required:
+      - name
+      - users
+      - count
+    title: Reaction object
     type: object
   objs_team:
     additionalProperties: true
@@ -12543,9 +12940,77 @@ definitions:
       - type
       - options
     type: object
+  objs_user:
+    additionalProperties: true
+    properties:
+      color:
+        pattern: '^[a-fA-F0-9]{6}$'
+        type: string
+      deleted:
+        type: boolean
+      has_2fa:
+        type: boolean
+      id:
+        $ref: '#/definitions/defs_user_id'
+      is_admin:
+        type: boolean
+      is_app_user:
+        type: boolean
+      is_bot:
+        type: boolean
+      is_owner:
+        type: boolean
+      is_primary_owner:
+        type: boolean
+      is_restricted:
+        type: boolean
+      is_ultra_restricted:
+        type: boolean
+      locale:
+        type: string
+      name:
+        type: string
+      profile:
+        $ref: '#/definitions/objs_user_profile'
+      real_name:
+        type: string
+      team_id:
+        $ref: '#/definitions/defs_team'
+      tz:
+        type:
+          - 'null'
+          - string
+      tz_label:
+        type: string
+      tz_offset:
+        type: number
+      updated:
+        type: number
+    required:
+      - id
+      - team_id
+      - name
+      - deleted
+      - color
+      - real_name
+      - tz
+      - tz_label
+      - tz_offset
+      - profile
+      - is_admin
+      - is_owner
+      - is_primary_owner
+      - is_restricted
+      - is_ultra_restricted
+      - is_bot
+      - updated
+      - is_app_user
+    type: object
   objs_user_profile:
     additionalProperties: true
     properties:
+      always_active:
+        type: boolean
       avatar_hash:
         type: string
       display_name:
@@ -12556,7 +13021,9 @@ definitions:
         format: email
         type: string
       fields:
-        type: object
+        type:
+          - object
+          - 'null'
       first_name:
         type: string
       guest_channels:
@@ -12594,7 +13061,11 @@ definitions:
         type: string
       status_emoji:
         type: string
+      status_expiration:
+        type: integer
       status_text:
+        type: string
+      status_text_canonical:
         type: string
       team:
         $ref: '#/definitions/defs_team'
@@ -12606,7 +13077,6 @@ definitions:
       - avatar_hash
       - real_name_normalized
       - display_name_normalized
-      - email
       - image_24
       - image_32
       - image_48
@@ -12648,4 +13118,30 @@ definitions:
       - name
       - is_restricted
       - is_ultra_restricted
+    type: object
+  objs_user_profile_shortest:
+    additionalProperties: true
+    properties:
+      avatar_hash:
+        type: string
+      display_name:
+        type: string
+      first_name:
+        type:
+          - string
+          - 'null'
+      image_72:
+        format: uri
+        type: string
+      real_name:
+        type: string
+      team:
+        $ref: '#/definitions/defs_team'
+    required:
+      - avatar_hash
+      - image_72
+      - first_name
+      - real_name
+      - display_name
+      - team
     type: object

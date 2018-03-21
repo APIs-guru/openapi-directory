@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
-  title: DLP
+  title: Cloud DLP
   version: v2beta2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2beta2'
       version: v1
@@ -161,12 +161,13 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v2beta2/{name}':
     delete:
-      description: Deletes a job trigger.
-      operationId: dlp.projects.jobTriggers.delete
+      description: Deletes inspect templates.
+      operationId: dlp.projects.deidentifyTemplates.delete
       parameters:
         - description: |-
-            Resource name of the project and the triggeredJob, for example
-            `projects/dlp-test-project/jobTriggers/53234423`.
+            Resource name of the organization and deidentify template to be deleted,
+            for example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -183,12 +184,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a job trigger.
-      operationId: dlp.projects.jobTriggers.get
+      description: Gets an inspect template.
+      operationId: dlp.projects.deidentifyTemplates.get
       parameters:
         - description: |-
-            Resource name of the project and the triggeredJob, for example
-            `projects/dlp-test-project/jobTriggers/53234423`.
+            Resource name of the organization and deidentify template to be read, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -198,7 +200,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2beta2JobTrigger'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta2DeidentifyTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -219,16 +221,17 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates a job trigger.
-      operationId: dlp.projects.jobTriggers.patch
+      description: Updates the inspect template.
+      operationId: dlp.projects.deidentifyTemplates.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2beta2UpdateJobTriggerRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta2UpdateDeidentifyTemplateRequest'
         - description: |-
-            Resource name of the project and the triggeredJob, for example
-            `projects/dlp-test-project/jobTriggers/53234423`.
+            Resource name of organization and deidentify template to be updated, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -238,7 +241,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2beta2JobTrigger'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta2DeidentifyTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -2154,6 +2157,7 @@ definitions:
       replaced with the same surrogate.
       Identifiers must be at least two characters long.
       In the case that the identifier is the empty string, it will be skipped.
+      See [Pseudonymization](/dlp/docs/pseudonymization) for example usage.
     properties:
       commonAlphabet:
         enum:
@@ -2658,11 +2662,18 @@ definitions:
           $ref: '#/definitions/GooglePrivacyDlpV2beta2InfoTypeLimit'
         type: array
       maxFindingsPerItem:
-        description: Max number of findings that will be returned for each item scanned.
+        description: |-
+          Max number of findings that will be returned for each item scanned.
+          When set within `InspectDataSourceRequest`,
+          the maximum returned is 1000 regardless if this is set higher.
+          When set within `InspectContentRequest`, this field is ignored.
         format: int32
         type: integer
       maxFindingsPerRequest:
-        description: Max total number of findings that will be returned per request/job.
+        description: |-
+          Max number of findings that will be returned per request/job.
+          When set within `InspectContentRequest`, the maximum returned is 1000
+          regardless if this is set higher.
         format: int32
         type: integer
     type: object

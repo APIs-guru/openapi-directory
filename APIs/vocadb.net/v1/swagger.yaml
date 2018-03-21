@@ -419,6 +419,87 @@ paths:
       summary: Gets a list of album names. Ideal for autocomplete boxes.
       tags:
         - AlbumApi
+  /api/albums/new:
+    get:
+      consumes: []
+      deprecated: false
+      description: Output is cached for 1 hour.
+      operationId: AlbumApi_GetNewAlbums
+      parameters:
+        - enum:
+            - Default
+            - Japanese
+            - Romaji
+            - English
+          in: query
+          name: languagePreference
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AlbumContract'
+            type: array
+      summary: 'Gets list of upcoming or recent albums, same as front page.'
+      tags:
+        - AlbumApi
+  /api/albums/top:
+    get:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: Output is cached for 1 hour.
+      operationId: AlbumApi_GetTopAlbums
+      parameters:
+        - in: body
+          name: ignoreIds
+          required: true
+          schema:
+            items:
+              format: int32
+              type: integer
+            type: array
+        - enum:
+            - Default
+            - Japanese
+            - Romaji
+            - English
+          in: query
+          name: languagePreference
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AlbumContract'
+            type: array
+      summary: 'Gets list of top rated albums, same as front page.'
+      tags:
+        - AlbumApi
   '/api/albums/{id}':
     delete:
       consumes: []
@@ -3212,6 +3293,57 @@ paths:
       summary: Updates a comment.
       tags:
         - SongApi
+  /api/songs/highlighted:
+    get:
+      consumes: []
+      deprecated: false
+      description: Output is cached for 1 hour.
+      operationId: SongApi_GetHighlightedSongs
+      parameters:
+        - enum:
+            - Default
+            - Japanese
+            - Romaji
+            - English
+          in: query
+          name: languagePreference
+          required: false
+          type: string
+        - enum:
+            - None
+            - AdditionalNames
+            - Albums
+            - Artists
+            - Lyrics
+            - MainPicture
+            - Names
+            - PVs
+            - ReleaseEvent
+            - Tags
+            - ThumbUrl
+            - WebLinks
+          in: query
+          name: fields
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/SongForApiContract'
+            type: array
+      summary: 'Gets list of highlighted songs, same as front page.'
+      tags:
+        - SongApi
   '/api/songs/lyrics/{lyricsId}':
     get:
       consumes: []
@@ -5073,6 +5205,7 @@ paths:
             - Utaite
             - Band
             - Vocalist
+            - Character
           in: query
           name: artistType
           required: false
@@ -5999,6 +6132,7 @@ definitions:
           - Utaite
           - Band
           - Vocalist
+          - Character
         type: string
       deleted:
         type: boolean
@@ -6038,6 +6172,7 @@ definitions:
           - Other
           - Band
           - Illustrator
+          - Subject
         type: string
       effectiveRoles:
         enum:
@@ -6115,6 +6250,7 @@ definitions:
           - Utaite
           - Band
           - Vocalist
+          - Character
         type: string
       baseVoicebank:
         $ref: '#/definitions/ArtistContract'
@@ -6238,6 +6374,7 @@ definitions:
           - Other
           - Band
           - Illustrator
+          - Subject
         type: string
       effectiveRoles:
         enum:
@@ -6416,6 +6553,7 @@ definitions:
           - Utaite
           - Band
           - Vocalist
+          - Character
         type: string
       createDate:
         format: date-time

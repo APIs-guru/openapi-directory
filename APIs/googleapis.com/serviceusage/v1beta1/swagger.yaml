@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://serviceusage.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -175,14 +175,13 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{name}':
     get:
-      description: Returns the service configuration and enabled state for a given service.
-      operationId: serviceusage.services.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: serviceusage.operations.get
       parameters:
-        - description: |-
-            Name of the consumer and service to get the `ConsumerState` for.
-
-            An example name would be:
-            projects/123/services/serviceusage.googleapis.com
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -192,14 +191,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - services
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -252,7 +251,8 @@ paths:
             The enable and disable methods currently only support projects.
 
             An example name would be:
-            projects/123/services/serviceusage.googleapis.com
+            `projects/123/services/serviceusage.googleapis.com`
+            where `123` is the project number (not project ID).
           in: path
           name: name
           required: true
@@ -306,7 +306,8 @@ paths:
             the user enabling the service.
 
             An example name would be:
-            projects/123/services/serviceusage.googleapis.com
+            `projects/123/services/serviceusage.googleapis.com`
+            where `123` is the project number (not project ID).
           in: path
           name: name
           required: true
@@ -359,7 +360,8 @@ paths:
             Parent to search for services on.
 
             An example name would be:
-            projects/123
+            `projects/123`
+            where `123` is the project number (not project ID).
           in: path
           name: parent
           required: true
@@ -422,7 +424,8 @@ paths:
             Parent to enable services on.
 
             An example name would be:
-            projects/123
+            `projects/123`
+            where `123` is the project number (not project ID).
 
             The `BatchEnableServices` method currently only supports projects.
           in: path
@@ -1043,9 +1046,7 @@ definitions:
       <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
       Text can be excluded from doc using the following notation:
       <pre><code>&#40;-- internal comment --&#41;</code></pre>
-      Comments can be made conditional using a visibility label. The below
-      text will be only rendered if the `BETA` label is available:
-      <pre><code>&#40;--BETA: comment for BETA users --&#41;</code></pre>
+
       A few directives are available in documentation. Note that
       directives must appear on a single line to be properly
       identified. The `include` directive includes a markdown file from
@@ -1459,9 +1460,6 @@ definitions:
       usage:
         $ref: '#/definitions/Usage'
         description: Configuration controlling usage of this service.
-      visibility:
-        $ref: '#/definitions/Visibility'
-        description: API visibility configuration.
     type: object
   Http:
     description: |-
@@ -3156,68 +3154,4 @@ definitions:
           This flag is used by Google Cloud Endpoints to bypass checks for internal
           methods, such as service health check methods.
         type: boolean
-    type: object
-  Visibility:
-    description: |-
-      `Visibility` defines restrictions for the visibility of service
-      elements.  Restrictions are specified using visibility labels
-      (e.g., TRUSTED_TESTER) that are elsewhere linked to users and projects.
-
-      Users and projects can have access to more than one visibility label. The
-      effective visibility for multiple labels is the union of each label's
-      elements, plus any unrestricted elements.
-
-      If an element and its parents have no restrictions, visibility is
-      unconditionally granted.
-
-      Example:
-
-          visibility:
-            rules:
-            - selector: google.calendar.Calendar.EnhancedSearch
-              restriction: TRUSTED_TESTER
-            - selector: google.calendar.Calendar.Delegate
-              restriction: GOOGLE_INTERNAL
-
-      Here, all methods are publicly visible except for the restricted methods
-      EnhancedSearch and Delegate.
-    properties:
-      rules:
-        description: |-
-          A list of visibility rules that apply to individual API elements.
-
-          **NOTE:** All service configuration rules follow "last one wins" order.
-        items:
-          $ref: '#/definitions/VisibilityRule'
-        type: array
-    type: object
-  VisibilityRule:
-    description: |-
-      A visibility rule provides visibility configuration for an individual API
-      element.
-    properties:
-      restriction:
-        description: |-
-          A comma-separated list of visibility labels that apply to the `selector`.
-          Any of the listed labels can be used to grant the visibility.
-
-          If a rule has multiple labels, removing one of the labels but not all of
-          them can break clients.
-
-          Example:
-
-              visibility:
-                rules:
-                - selector: google.calendar.Calendar.EnhancedSearch
-                  restriction: GOOGLE_INTERNAL, TRUSTED_TESTER
-
-          Removing GOOGLE_INTERNAL from this restriction will break clients that
-          rely on this method and only had access to it through GOOGLE_INTERNAL.
-        type: string
-      selector:
-        description: |-
-          Selects methods, messages, fields, enums, etc. to which this rule applies.
-
-          Refer to selector for syntax details.
-        type: string
     type: object

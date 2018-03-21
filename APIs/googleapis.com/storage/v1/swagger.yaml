@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/storage/v1/rest'
       version: v1
@@ -559,7 +559,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates an ACL entry on the specified bucket. This method supports patch semantics.
+      description: Patches an ACL entry on the specified bucket.
       operationId: storage.bucketAccessControls.patch
       parameters:
         - in: body
@@ -765,7 +765,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a default object ACL entry on the specified bucket. This method supports patch semantics.
+      description: Patches a default object ACL entry on the specified bucket.
       operationId: storage.defaultObjectAccessControls.patch
       parameters:
         - in: body
@@ -1792,7 +1792,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates an ACL entry on the specified object. This method supports patch semantics.
+      description: Patches an ACL entry on the specified object.
       operationId: storage.objectAccessControls.patch
       parameters:
         - in: body

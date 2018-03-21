@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/PlayerGameProjectionStatsByCompetition/{competition}/{date}':
     get:
-      operationId: Projected Player Game Stats by Competition (w/ DFS Salaries)
+      operationId: 594408ca35491a0cc050ffed
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -66,9 +66,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
+      summary: Projected Player Game Stats by Competition (w/ DFS Salaries)
   '/{format}/PlayerGameProjectionStatsByDate/{date}':
     get:
-      operationId: Projected Player Game Stats by Date (w/ DFS Salaries)
+      operationId: 594408ca35491a0cc050ffeb
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -93,9 +94,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
+      summary: Projected Player Game Stats by Date (w/ DFS Salaries)
   '/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}':
     get:
-      operationId: Projected Player Game Stats by Player (w/ DFS Salaries)
+      operationId: 594408ca35491a0cc050ffec
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -127,6 +129,7 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
+      summary: Projected Player Game Stats by Player (w/ DFS Salaries)
 definitions:
   PlayerGameProjection:
     properties:

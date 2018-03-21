@@ -334,7 +334,7 @@ tags:
     name: Transactions
   - description: |
       The Rebilly User API is primarily for our GUI apps.  You may see
-      the [Reports User API Documentation here](https://rebilly.github.io/RebillyUserAPI/).
+      the [User API Documentation here](https://rebilly.github.io/RebillyUserAPI/).
       A User represents a person who can login to Rebilly, and take actions subject to
       their granted permissions.  It has resources less commonly integrated by
       3rd parties.
@@ -6270,6 +6270,102 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  '/subscriptions/{id}/change-plan':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Change a subscription's plan and designate when and if there should be pro rata credits given.
+      parameters:
+        - description: Change the plan
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SubscriptionChange'
+      responses:
+        '200':
+          description: Subscription was changed
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Subscription'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Change a subscription's plan
+      tags:
+        - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscriptionChangePlanForm = new Rebilly\Entities\SubscriptionChangePlan();
+            $subscriptionChangePlanForm->setPlanId('newPlanId');
+            $subscriptionChangePlanForm->setRenewalPolicy('retain');
+            $subscriptionChangePlanForm->setPreview(true);
+            $subscriptionChangePlanForm->setProrated(true);
+            $subscriptionChangePlanForm->setEffectiveTime('2018-02-02 00:00:00');
+
+            try {
+                $subscription = $client->subscriptions()->changePlan('subscriptionId', $subscriptionChangePlanForm);
+                echo $subscription->getLineItemSubtotal();
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
+  '/subscriptions/{id}/interim-invoice':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Issue an interim invoice for a subscription, typically used in conjunction with plan changes and pro rata adjustments.
+        This process creates an invoice, adds the subscription's line items to the invoice, and issues the invoice, and applies
+        payment to it if a transaction id is supplied.
+      parameters:
+        - description: Issue an interim invoice
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SubscriptionInvoice'
+      responses:
+        '201':
+          description: Invoice was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Invoice'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Issue an interim invoice for a subscription
+      tags:
+        - Subscriptions
   '/subscriptions/{id}/lead-source':
     delete:
       description: |
@@ -12101,6 +12197,52 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: Unique id for the initial invoice
+      lineItemSubtotal:
+        description: 'Subtotal of line items in this subscription (signed value).  If credits exceed debits, it will be a negative number.'
+        example: 49.95
+        readOnly: true
+        type: number
+      lineItems:
+        description: Subscription line items which queue until the next renewal (or interim) invoice is issued for the subscription.
+        items:
+          description: Line item
+          properties:
+            createdTime:
+              description: Date-time when the item was added to the subscription
+              format: date-time
+              type: string
+            description:
+              description: Description of line item
+              type: string
+            periodEndTime:
+              description: Date-time when the period ends for this item
+              format: date-time
+              type: string
+            periodStartTime:
+              description: Date-time when the period begins for this item
+              format: date-time
+              type: string
+            quantity:
+              description: Quantity of line item
+              example: 1
+              type: integer
+            type:
+              description: Type of line item
+              enum:
+                - debit
+                - credit
+              type: string
+            unitPriceAmount:
+              description: Unit price in minor unit coins of the line item
+              example: 4995
+              type: integer
+            unitPriceCurrency:
+              description: Currency ISO code
+              example: USD
+              type: string
+          type: object
+        readOnly: true
+        type: array
       planId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -12177,6 +12319,44 @@ definitions:
       - policy
       - canceledBy
       - cancelCategory
+    type: object
+  SubscriptionChange:
+    properties:
+      effectiveTime:
+        description: 'The date from which the renewal time (for `reset` operations) and proration calculations are made.  If omitted, it will default to the current time.'
+        format: date-time
+        type: string
+      planId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The plan identifier string
+      preview:
+        default: false
+        description: 'If set to true, it will not change the subscription.  It allows for a way to preview the changes that would be made to a subscription.'
+        type: boolean
+      prorated:
+        description: |
+          Whether or not to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
+          In addition, if the `renewalTime` is retained (by setting the `renewalPolicy` to `retain`), then a pro rata debit will occur as well,
+          for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period size.
+        type: boolean
+      renewalPolicy:
+        description: The value determines whether the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
+        enum:
+          - reset
+          - retain
+        type: string
+    required:
+      - planId
+      - renewalPolicy
+      - prorated
+    type: object
+  SubscriptionInvoice:
+    properties:
+      transactionId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: 'If present, applies a payment to the invoice created.  If the payment is for the invoice total, it would be marked as paid.'
     type: object
   SubscriptionLink:
     allOf:

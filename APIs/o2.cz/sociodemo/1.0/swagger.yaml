@@ -11,7 +11,7 @@ info:
     name: O2 Czech Republic
     url: 'https://developer.o2.cz/portal/vop'
   title: Socio-demo
-  version: 1.0-M6-SNAPSHOT
+  version: '1.0'
   x-apisguru-categories:
     - telecom
   x-logo:
@@ -26,8 +26,8 @@ info:
 produces:
   - application/json
 tags:
-  - name: sociodemo
   - name: info
+  - name: sociodemo
 paths:
   '/age/{location}':
     get:

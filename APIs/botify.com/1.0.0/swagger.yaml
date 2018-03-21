@@ -826,6 +826,7 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
@@ -903,8 +904,14 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
+          required: false
+          type: string
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
           required: false
           type: string
       responses:
@@ -934,6 +941,7 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
@@ -979,6 +987,7 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
@@ -1093,8 +1102,14 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
+          required: false
+          type: string
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
           required: false
           type: string
       responses:
@@ -1335,38 +1350,12 @@ paths:
     get:
       description: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
       operationId: getSavedFilters
-      parameters:
-        - default: 1
-          description: Page Number
-          in: query
-          name: page
-          required: false
-          type: integer
-        - description: Page Size
-          in: query
-          name: size
-          required: false
-          type: integer
+      parameters: []
       responses:
         '200':
           description: Successful operation
           schema:
-            properties:
-              count:
-                type: integer
-              next:
-                type: string
-              page:
-                type: integer
-              previous:
-                type: string
-              results:
-                items:
-                  $ref: '#/definitions/ProjectSavedFilter'
-                type: array
-              size:
-                type: integer
-            type: object
+            $ref: '#/definitions/ProjectSavedFilter'
         default:
           description: error payload
           schema:
@@ -1445,6 +1434,7 @@ paths:
             - disappeared
             - new
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
@@ -1612,6 +1602,9 @@ definitions:
       import_keywords_data:
         readOnly: true
         type: string
+      import_keywords_data_by_country:
+        readOnly: true
+        type: string
       name:
         readOnly: true
         type: string
@@ -1674,6 +1667,9 @@ definitions:
         readOnly: true
         type: string
       import_keywords_data:
+        readOnly: true
+        type: string
+      import_keywords_data_by_country:
         readOnly: true
         type: string
       name:
@@ -2621,6 +2617,9 @@ definitions:
     properties: {}
     type: object
   UrlHTML:
+    properties: {}
+    type: object
+  UrlKeywords:
     properties: {}
     type: object
   User:

@@ -1770,6 +1770,26 @@ definitions:
           $ref: '#/definitions/HeaderDatum'
         type: array
     type: object
+  RetryPolicy:
+    description: Number of times to retry a request and how long to wait before timing out.
+    properties:
+      num_retries:
+        description: |
+          Number of times to retry an upstream request. Note that the initial
+          connection attempt is not included in this number, hence 0 means initial
+          attempt and no retries, and 1 means initial attempt plus one retry.
+        format: int64
+        type: integer
+      per_try_timeout_msec:
+        description: Time limit in milliseconds for a single attempt.
+        format: int64
+        type: integer
+      timeout_msec:
+        description: |
+          Total time limit in milliseconds for all attempts (including the initial attempt)
+        format: int64
+        type: integer
+    type: object
   Route:
     properties:
       checksum:
@@ -1788,6 +1808,8 @@ definitions:
           that multiple response data configurations will apply; if that's the
           case then the values from Route take precedence over those from a
           SharedRules object.
+      retry_policy:
+        $ref: '#/definitions/RetryPolicy'
       route_key:
         type: string
       rules:
@@ -1907,6 +1929,8 @@ definitions:
           configurations will apply; if that's the case then the values from
           the applicable Route and ClusterConstarint takes precedence over those
           specified here.
+      retry_policy:
+        $ref: '#/definitions/RetryPolicy'
       rules:
         items:
           $ref: '#/definitions/Rule'

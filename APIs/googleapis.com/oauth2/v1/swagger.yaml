@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Obtains end-user authorization grants for use with other Google APIs.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google OAuth2
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/oauth2/v1/rest'
       version: v1
@@ -35,24 +31,13 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
       'https://www.googleapis.com/auth/plus.me': Know who you are on Google
       'https://www.googleapis.com/auth/userinfo.email': View your email address
       'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
-      'https://www.googleapis.com/auth/plus.me': Know who you are on Google
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-      'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -167,19 +152,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.profile'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - userinfo
@@ -269,19 +246,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.profile'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - userinfo

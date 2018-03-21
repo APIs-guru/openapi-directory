@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/RotoBallerArticles':
     get:
-      operationId: RotoBaller Articles
+      operationId: 597a419835491a13601d8e0f
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -54,9 +54,10 @@ paths:
             items:
               $ref: '#/definitions/Article'
             type: array
+      summary: RotoBaller Articles
   '/{format}/RotoBallerArticlesByDate/{date}':
     get:
-      operationId: RotoBaller Articles by Date
+      operationId: 597a41a514338d078cae549b
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -81,9 +82,10 @@ paths:
             items:
               $ref: '#/definitions/Article'
             type: array
+      summary: RotoBaller Articles by Date
   '/{format}/RotoBallerArticlesByPlayerID/{playerid}':
     get:
-      operationId: RotoBaller Articles by Player
+      operationId: 597a419f14338d078cae549a
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -108,6 +110,7 @@ paths:
             items:
               $ref: '#/definitions/Article'
             type: array
+      summary: RotoBaller Articles by Player
 definitions:
   Article:
     properties:

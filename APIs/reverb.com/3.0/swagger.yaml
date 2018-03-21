@@ -854,6 +854,8 @@ paths:
                 description: 'Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to ''seller_site'''
                 enum:
                   - seller_site
+                  - reverb
+                  - none
                 type: string
               finish:
                 description: 'Finish, e.g. ''Sunburst'''
@@ -1468,6 +1470,8 @@ paths:
                 description: 'Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to ''seller_site'''
                 enum:
                   - seller_site
+                  - reverb
+                  - none
                 type: string
               finish:
                 description: 'Finish, e.g. ''Sunburst'''
@@ -3764,54 +3768,6 @@ paths:
       summary: Get list of payment methods
       tags:
         - payment_methods
-  /priceguide:
-    get:
-      description: Search the Price Guide
-      parameters:
-        - description: Search query.
-          in: query
-          name: query
-          required: false
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Search the Price Guide
-      tags:
-        - priceguide
-  '/priceguide/{id}':
-    get:
-      description: Retrieve a Price Guide
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Retrieve a Price Guide
-      tags:
-        - priceguide
-  '/priceguide/{id}/transactions':
-    get:
-      description: Get a list of paginated transactions for a price guide.
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-        - default: used
-          in: query
-          name: condition
-          required: false
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Get a list of paginated transactions for a price guide.
-      tags:
-        - priceguide
   '/priceguide/{id}/transactions/summary':
     get:
       description: Get a summary of transactions for a given price guide

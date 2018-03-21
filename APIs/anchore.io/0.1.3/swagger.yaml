@@ -1156,7 +1156,8 @@ definitions:
         format: int32
         type: integer
       detail:
-        type: string
+        description: Details structure for additional information about the error if available. Content and structure will be error specific.
+        type: object
       error_type:
         type: string
       message:

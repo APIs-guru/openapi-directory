@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/dns/v2beta1/rest'
       version: v1
@@ -222,8 +222,6 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema:
-            $ref: '#/definitions/ManagedZonesDeleteResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -932,6 +930,11 @@ definitions:
         default: 'dns#managedZone'
         description: 'Identifies what kind of resource this is. Value: the fixed string "dns#managedZone".'
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: User labels.
+        type: object
       name:
         description: 'User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.'
         type: string
@@ -988,11 +991,6 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
-    type: object
-  ManagedZonesDeleteResponse:
-    properties:
-      header:
-        $ref: '#/definitions/ResponseHeader'
     type: object
   ManagedZonesListResponse:
     properties:

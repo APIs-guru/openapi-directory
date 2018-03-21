@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Builds container images in the cloud.
-  title: Google Cloud Container Builder
+  title: Cloud Container Builder
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://cloudbuild.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -168,9 +168,9 @@ paths:
       description: |-
         Starts a build with the specified configuration.
 
-        The long-running Operation returned by this method will include the ID of
-        the build, which can be passed to GetBuild to determine its status (e.g.,
-        success or failure).
+        This method returns a long-running `Operation`, which includes the build
+        ID. Pass the build ID to `GetBuild` to determine the build status (such as
+        `SUCCESS` or `FAILURE`).
       operationId: cloudbuild.projects.builds.create
       parameters:
         - in: body
@@ -197,8 +197,8 @@ paths:
       description: |-
         Returns information about a previously requested build.
 
-        The Build that is returned includes its status (e.g., success or failure,
-        or in-progress), and timing information.
+        The `Build` that is returned includes its status (such as `SUCCESS`,
+        `FAILURE`, or `WORKING`), and timing information.
       operationId: cloudbuild.projects.builds.get
       parameters:
         - description: ID of the build.
@@ -251,7 +251,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Cancels a requested build in progress.
+      description: Cancels a build in progress.
       operationId: cloudbuild.projects.builds.cancel
       parameters:
         - in: body
@@ -295,17 +295,17 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Creates a new build based on the given build.
+        Creates a new build based on the specified build.
 
-        This API creates a new build using the original build request,  which may
+        This method creates a new build using the original build request, which may
         or may not result in an identical build.
 
         For triggered builds:
 
-        * Triggered builds resolve to a precise revision, so a retry of a triggered
-        build will result in a build that uses the same revision.
+        * Triggered builds resolve to a precise revision; therefore a retry of a
+        triggered build will result in a build that uses the same revision.
 
-        For non-triggered builds that specify RepoSource:
+        For non-triggered builds that specify `RepoSource`:
 
         * If the original build built from the tip of a branch, the retried build
         will build from the tip of that branch, which may not be the same revision
@@ -313,11 +313,11 @@ paths:
         * If the original build specified a commit sha or revision ID, the retried
         build will use the identical source.
 
-        For builds that specify StorageSource:
+        For builds that specify `StorageSource`:
 
-        * If the original build pulled source from Cloud Storage without specifying
-        the generation of the object, the new build will use the current object,
-        which may be different from the original build source.
+        * If the original build pulled source from Google Cloud Storage without
+        specifying the generation of the object, the new build will use the current
+        object, which may be different from the original build source.
         * If the original build pulled source from Cloud Storage and specified the
         generation of the object, the new build will attempt to use the same
         object, which may or may not be available depending on the bucket's
@@ -351,7 +351,7 @@ paths:
   '/v1/projects/{projectId}/triggers':
     get:
       description: |-
-        Lists existing BuildTrigger.
+        Lists existing `BuildTrigger`s.
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.list
@@ -387,7 +387,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Creates a new BuildTrigger.
+        Creates a new `BuildTrigger`.
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.create
@@ -414,7 +414,7 @@ paths:
   '/v1/projects/{projectId}/triggers/{triggerId}':
     delete:
       description: |-
-        Deletes an BuildTrigger by its project ID and trigger ID.
+        Deletes a `BuildTrigger` by its project ID and trigger ID.
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.delete
@@ -424,7 +424,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: ID of the BuildTrigger to delete.
+        - description: ID of the `BuildTrigger` to delete.
           in: path
           name: triggerId
           required: true
@@ -441,7 +441,7 @@ paths:
         - projects
     get:
       description: |-
-        Gets information about a BuildTrigger.
+        Returns information about a `BuildTrigger`.
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.get
@@ -451,7 +451,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: ID of the BuildTrigger to get.
+        - description: ID of the `BuildTrigger` to get.
           in: path
           name: triggerId
           required: true
@@ -482,7 +482,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates an BuildTrigger by its project ID and trigger ID.
+        Updates a `BuildTrigger` by its project ID and trigger ID.
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.patch
@@ -496,7 +496,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: ID of the BuildTrigger to update.
+        - description: ID of the `BuildTrigger` to update.
           in: path
           name: triggerId
           required: true
@@ -527,7 +527,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Runs a BuildTrigger at a particular source revision.
+      description: Runs a `BuildTrigger` at a particular source revision.
       operationId: cloudbuild.projects.triggers.run
       parameters:
         - in: body
@@ -646,11 +646,11 @@ definitions:
     description: |-
       A build resource in the Container Builder API.
 
-      At a high level, a Build describes where to find source code, how to build
-      it (for example, the builder image to run on the source), and what tag to
-      apply to the built image when it is pushed to Google Container Registry.
+      At a high level, a `Build` describes where to find source code, how to build
+      it (for example, the builder image to run on the source), and where to store
+      the built artifacts.
 
-      Fields can include the following variables which will be expanded when the
+      Fields can include the following variables, which will be expanded when the
       build is created:
 
       - $PROJECT_ID: the project ID of the build.
@@ -664,7 +664,7 @@ definitions:
     properties:
       buildTriggerId:
         description: |-
-          The ID of the BuildTrigger that triggered this build, if it was
+          The ID of the `BuildTrigger` that triggered this build, if it was
           triggered automatically.
           @OutputOnly
         type: string
@@ -693,12 +693,13 @@ definitions:
           A list of images to be pushed upon the successful completion of all build
           steps.
 
-          The images will be pushed using the builder service account's credentials.
+          The images are pushed using the builder service account's credentials.
 
-          The digests of the pushed images will be stored in the Build resource's
+          The digests of the pushed images will be stored in the `Build` resource's
           results field.
 
-          If any of the images fail to be pushed, the build is marked FAILURE.
+          If any of the images fail to be pushed, the build status is marked
+          `FAILURE`.
         items:
           type: string
         type: array
@@ -728,13 +729,13 @@ definitions:
           Results of the build.
           @OutputOnly
       secrets:
-        description: Secrets to decrypt using Cloud KMS.
+        description: Secrets to decrypt using Cloud Key Management Service.
         items:
           $ref: '#/definitions/Secret'
         type: array
       source:
         $ref: '#/definitions/Source'
-        description: Describes where to find the source files to build.
+        description: The location of the source files to build.
       sourceProvenance:
         $ref: '#/definitions/SourceProvenance'
         description: |-
@@ -766,17 +767,17 @@ definitions:
           @OutputOnly
         type: string
       steps:
-        description: Describes the operations to be performed on the workspace.
+        description: Required. The operations to be performed on the workspace.
         items:
           $ref: '#/definitions/BuildStep'
         type: array
       substitutions:
         additionalProperties:
           type: string
-        description: Substitutions data for Build resource.
+        description: Substitutions data for `Build` resource.
         type: object
       tags:
-        description: Tags for annotation of a Build. These are not docker tags.
+        description: Tags for annotation of a `Build`. These are not docker tags.
         items:
           type: string
         type: array
@@ -784,7 +785,7 @@ definitions:
         description: |-
           Amount of time that this build should be allowed to run, to second
           granularity. If this amount of time elapses, work on the build will cease
-          and the build status will be TIMEOUT.
+          and the build status will be `TIMEOUT`.
 
           Default time is ten minutes.
         format: google-duration
@@ -799,7 +800,7 @@ definitions:
           * PUSH: time to push all specified images.
           * FETCHSOURCE: time to fetch source.
 
-          If the build does not specify source, or does not specify images,
+          If the build does not specify source or images,
           these keys will not be included.
           @OutputOnly
         type: object
@@ -826,7 +827,7 @@ definitions:
         type: string
       logStreamingOption:
         description: |-
-          LogStreamingOption to define build log streaming behavior to Google Cloud
+          Option to define build log streaming behavior to Google Cloud
           Storage.
         enum:
           - STREAM_DEFAULT
@@ -855,22 +856,24 @@ definitions:
           type: string
         type: array
       substitutionOption:
-        description: SubstitutionOption to allow unmatch substitutions.
+        description: |-
+          Option to specify behavior when there is an error in the substitution
+          checks.
         enum:
           - MUST_MATCH
           - ALLOW_LOOSE
         type: string
     type: object
   BuildStep:
-    description: BuildStep describes a step to perform in the build pipeline.
+    description: A step in the build pipeline.
     properties:
       args:
         description: |-
           A list of arguments that will be presented to the step when it is started.
 
-          If the image used to run the step's container has an entrypoint, these args
-          will be used as arguments to that entrypoint. If the image does not define
-          an entrypoint, the first element in args will be used as the entrypoint,
+          If the image used to run the step's container has an entrypoint, the `args`
+          are used as arguments to that entrypoint. If the image does not define
+          an entrypoint, the first element in args is used as the entrypoint,
           and the remainder will be used as arguments.
         items:
           type: string
@@ -882,16 +885,16 @@ definitions:
           If this value is a relative path, it is relative to the build's working
           directory. If this value is absolute, it may be outside the build's working
           directory, in which case the contents of the path may not be persisted
-          across build step executions, unless a volume for that path is specified.
+          across build step executions, unless a `volume` for that path is specified.
 
-          If the build specifies a RepoSource with dir and a step with a dir which
-          specifies an absolute path, the RepoSource dir is ignored for the step's
-          execution.
+          If the build specifies a `RepoSource` with `dir` and a step with a `dir`,
+          which specifies an absolute path, the `RepoSource` `dir` is ignored for
+          the step's execution.
         type: string
       entrypoint:
         description: |-
-          Optional entrypoint to be used instead of the build step image's default
-          If unset, the image's default will be used.
+          Entrypoint to be used instead of the build step image's default entrypoint.
+          If unset, the image's default entrypoint is used.
         type: string
       env:
         description: |-
@@ -904,14 +907,15 @@ definitions:
         type: array
       id:
         description: |-
-          Optional unique identifier for this build step, used in wait_for to
+          Unique identifier for this build step, used in `wait_for` to
           reference this build step as a dependency.
         type: string
       name:
         description: |-
-          The name of the container image that will run this particular build step.
+          Required. The name of the container image that will run this particular
+          build step.
 
-          If the image is already available in the host's Docker daemon's cache, it
+          If the image is available in the host's Docker daemon's cache, it
           will be run directly. If not, the host will attempt to pull the image
           first, using the builder service account's credentials if necessary.
 
@@ -928,11 +932,35 @@ definitions:
         type: string
       secretEnv:
         description: |-
-          A list of environment variables which are encrypted using a Cloud KMS
-          crypto key. These values must be specified in the build's secrets.
+          A list of environment variables which are encrypted using a Cloud Key
+          Management Service crypto key. These values must be specified in the
+          build's `Secret`.
         items:
           type: string
         type: array
+      status:
+        description: |-
+          Status of the build step. At this time, build step status is only updated
+          on build completion; step status is not updated in real-time as the build
+          progresses.
+          @OutputOnly
+        enum:
+          - STATUS_UNKNOWN
+          - QUEUED
+          - WORKING
+          - SUCCESS
+          - FAILURE
+          - INTERNAL_ERROR
+          - TIMEOUT
+          - CANCELLED
+        type: string
+      timeout:
+        description: |-
+          Time limit for executing this build step. If not defined, the step has no
+          time limit and will be allowed to continue to run until either it completes
+          or the build itself times out.
+        format: google-duration
+        type: string
       timing:
         $ref: '#/definitions/TimeSpan'
         description: |-
@@ -954,10 +982,10 @@ definitions:
       waitFor:
         description: |-
           The ID(s) of the step(s) that this build step depends on.
-          This build step will not start until all the build steps in wait_for
-          have completed successfully. If wait_for is empty, this build step will
-          start when all previous build steps in the Build.Steps list have completed
-          successfully.
+          This build step will not start until all the build steps in `wait_for`
+          have completed successfully. If `wait_for` is empty, this build step will
+          start when all previous build steps in the `Build.Steps` list have
+          completed successfully.
         items:
           type: string
         type: array
@@ -1009,7 +1037,7 @@ definitions:
           will trigger a build.
     type: object
   BuiltImage:
-    description: BuiltImage describes an image built by the pipeline.
+    description: An image built by the pipeline.
     properties:
       digest:
         description: Docker Registry 2.0 digest.
@@ -1072,10 +1100,10 @@ definitions:
         type: string
     type: object
   ListBuildTriggersResponse:
-    description: Response containing existing BuildTriggers.
+    description: Response containing existing `BuildTriggers`.
     properties:
       triggers:
-        description: 'BuildTriggers for the project, sorted by create_time descending.'
+        description: '`BuildTriggers` for the project, sorted by `create_time` descending.'
         items:
           $ref: '#/definitions/BuildTrigger'
         type: array
@@ -1084,7 +1112,7 @@ definitions:
     description: Response including listed builds.
     properties:
       builds:
-        description: 'Builds will be sorted by create_time, descending.'
+        description: 'Builds will be sorted by `create_time`, descending.'
         items:
           $ref: '#/definitions/Build'
         type: array
@@ -1148,9 +1176,7 @@ definitions:
         type: object
     type: object
   RepoSource:
-    description: |-
-      RepoSource describes the location of the source in a Google Cloud Source
-      Repository.
+    description: Location of the source in a Google Cloud Source Repository.
     properties:
       branchName:
         description: Name of the branch to build.
@@ -1162,42 +1188,46 @@ definitions:
         description: |-
           Directory, relative to the source root, in which to run the build.
 
-          This must be a relative path. If a step's dir is specified and is an
+          This must be a relative path. If a step's `dir` is specified and is an
           absolute path, this value is ignored for that step's execution.
         type: string
       projectId:
         description: |-
-          ID of the project that owns the repo. If omitted, the project ID requesting
-          the build is assumed.
+          ID of the project that owns the Cloud Source Repository. If omitted, the
+          project ID requesting the build is assumed.
         type: string
       repoName:
-        description: 'Name of the repo. If omitted, the name "default" is assumed.'
+        description: |-
+          Name of the Cloud Source Repository. If omitted, the name "default" is
+          assumed.
         type: string
       tagName:
         description: Name of the tag to build.
         type: string
     type: object
   Results:
-    description: Results describes the artifacts created by the build pipeline.
+    description: Artifacts created by the build pipeline.
     properties:
       buildStepImages:
-        description: 'List of build step digests, in order corresponding to build step indices.'
+        description: |-
+          List of build step digests, in the order corresponding to build step
+          indices.
         items:
           type: string
         type: array
       images:
-        description: Images that were built as a part of the build.
+        description: Container images that were built as a part of the build.
         items:
           $ref: '#/definitions/BuiltImage'
         type: array
     type: object
   RetryBuildRequest:
-    description: RetryBuildRequest specifies a build to retry.
+    description: Specifies a build to retry.
     properties: {}
     type: object
   Secret:
     description: |-
-      Secret pairs a set of secret environment variables containing encrypted
+      Pairs a set of secret environment variables containing encrypted
       values with the Cloud KMS key to use to decrypt the value.
     properties:
       kmsKeyName:
@@ -1217,13 +1247,13 @@ definitions:
         type: object
     type: object
   Source:
-    description: |-
-      Source describes the location of the source in a supported storage
-      service.
+    description: Location of the source in a supported storage service.
     properties:
       repoSource:
         $ref: '#/definitions/RepoSource'
-        description: 'If provided, get source from this location in a Cloud Repo.'
+        description: |-
+          If provided, get the source from this location in a Cloud Source
+          Repository.
       storageSource:
         $ref: '#/definitions/StorageSource'
         description: 'If provided, get the source from this location in Google Cloud Storage.'
@@ -1238,25 +1268,25 @@ definitions:
           $ref: '#/definitions/FileHashes'
         description: |-
           Hash(es) of the build source, which can be used to verify that the original
-          source integrity was maintained in the build. Note that FileHashes will
-          only be populated if BuildOptions has requested a SourceProvenanceHash.
+          source integrity was maintained in the build. Note that `FileHashes` will
+          only be populated if `BuildOptions` has requested a `SourceProvenanceHash`.
 
           The keys to this map are file paths used as build source and the values
           contain the hash values for those files.
 
           If the build source came in a single package such as a gzipped tarfile
-          (.tar.gz), the FileHash will be for the single path to that file.
+          (`.tar.gz`), the `FileHash` will be for the single path to that file.
           @OutputOnly
         type: object
       resolvedRepoSource:
         $ref: '#/definitions/RepoSource'
         description: |-
-          A copy of the build's source.repo_source, if exists, with any
+          A copy of the build's `source.repo_source`, if exists, with any
           revisions resolved.
       resolvedStorageSource:
         $ref: '#/definitions/StorageSource'
         description: |-
-          A copy of the build's source.storage_source, if exists, with any
+          A copy of the build's `source.storage_source`, if exists, with any
           generations resolved.
     type: object
   Status:
@@ -1335,13 +1365,11 @@ definitions:
         type: string
     type: object
   StorageSource:
-    description: |-
-      StorageSource describes the location of the source in an archive file in
-      Google Cloud Storage.
+    description: Location of the source in an archive file in Google Cloud Storage.
     properties:
       bucket:
         description: |-
-          Google Cloud Storage bucket containing source (see
+          Google Cloud Storage bucket containing the source (see
           [Bucket Name
           Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
         type: string
@@ -1353,14 +1381,14 @@ definitions:
         type: string
       object:
         description: |-
-          Google Cloud Storage object containing source.
+          Google Cloud Storage object containing the source.
 
-          This object must be a gzipped archive file (.tar.gz) containing source to
+          This object must be a gzipped archive file (`.tar.gz`) containing source to
           build.
         type: string
     type: object
   TimeSpan:
-    description: Stores start and end times for a build execution phase.
+    description: Start and end times for a build execution phase.
     properties:
       endTime:
         description: End of time span.

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/bigquery/v2/rest'
       version: v1
@@ -655,10 +655,18 @@ paths:
           in: query
           name: allUsers
           type: boolean
+        - description: 'Max value for job creation time, in milliseconds since the POSIX epoch. If set, only jobs created before or at this timestamp are returned'
+          in: query
+          name: maxCreationTime
+          type: string
         - description: Maximum number of results to return
           in: query
           name: maxResults
           type: integer
+        - description: 'Min value for job creation time, in milliseconds since the POSIX epoch. If set, only jobs created after or at this timestamp are returned'
+          in: query
+          name: minCreationTime
+          type: string
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
@@ -1823,6 +1831,10 @@ definitions:
         type: string
       totalBytesProcessed:
         description: '[Output-only] Total bytes processed for the job.'
+        format: int64
+        type: string
+      totalPartitionsProcessed:
+        description: '[Output-only] Total number of partitions processed from all partitioned tables referenced in the job.'
         format: int64
         type: string
       totalSlotMs:

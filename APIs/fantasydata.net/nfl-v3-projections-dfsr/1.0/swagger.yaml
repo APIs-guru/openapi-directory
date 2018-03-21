@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/DfsrFantasyDefenseProjectionsByGame/{season}/{week}':
     get:
-      operationId: DFSR Projected Fantasy Defense Game Stats
+      operationId: 57d9aabd35491a1da044c7d5
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -73,9 +73,10 @@ paths:
             items:
               $ref: '#/definitions/FantasyDefenseGameProjectionDfsr'
             type: array
+      summary: DFSR Projected Fantasy Defense Game Stats
   '/{format}/DfsrPlayerGameProjectionStatsByWeek/{season}/{week}':
     get:
-      operationId: DFSR Projected Player Game Stats
+      operationId: 57d9aab835491a1da044c7d4
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -111,6 +112,7 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjectionDfsr'
             type: array
+      summary: DFSR Projected Player Game Stats
 definitions:
   FantasyDefenseGameProjectionDfsr:
     properties:

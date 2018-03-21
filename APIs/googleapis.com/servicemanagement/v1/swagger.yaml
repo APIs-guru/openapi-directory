@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: servicemanagement.googleapis.com
+host: content-servicemanagement.googleapis.com
 basePath: /
 info:
   contact:
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://servicemanagement.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1574,14 +1574,6 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
-      condition:
-        $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
-          binding. Different bindings, including their conditions, are examined
-          independently.
-          This field is only visible as GOOGLE_INTERNAL or CONDITION_TRUSTED_TESTER.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1750,6 +1742,25 @@ definitions:
 
       Available context types are defined in package
       `google.rpc.context`.
+
+      This also provides mechanism to whitelist any protobuf message extension that
+      can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
+      “x-goog-ext-<extension_id>-jspb” format. For example, list any service
+      specific protobuf types that can appear in grpc metadata as follows in your
+      yaml file:
+
+      Example:
+
+          context:
+            rules:
+             - selector: "google.example.library.v1.LibraryService.CreateBook"
+               allowed_request_extensions:
+               - google.foo.v1.NewExtension
+               allowed_response_extensions:
+               - google.foo.v1.NewExtension
+
+      You can also specify extension ID instead of fully qualified extension name
+      here.
     properties:
       rules:
         description: |-
@@ -1765,6 +1776,20 @@ definitions:
       A context rule provides information about the context for an individual API
       element.
     properties:
+      allowedRequestExtensions:
+        description: |-
+          A list of full type names or extension IDs of extensions allowed in grpc
+          side channel from client to backend.
+        items:
+          type: string
+        type: array
+      allowedResponseExtensions:
+        description: |-
+          A list of full type names or extension IDs of extensions allowed in grpc
+          side channel from backend to client.
+        items:
+          type: string
+        type: array
       provided:
         description: A list of full type names of provided contexts.
         items:
@@ -2133,39 +2158,6 @@ definitions:
       authorization:
         $ref: '#/definitions/AuthorizationConfig'
         description: Authorization configuration.
-    type: object
-  Expr:
-    description: |-
-      Represents an expression text. Example:
-
-          title: "User account presence"
-          description: "Determines whether the request has a user account"
-          expression: "size(request.user) > 0"
-    properties:
-      description:
-        description: |-
-          An optional description of the expression. This is a longer text which
-          describes the expression, e.g. when hovered over it in a UI.
-        type: string
-      expression:
-        description: |-
-          Textual representation of an expression in
-          Common Expression Language syntax.
-
-          The application context of the containing message determines which
-          well-known feature set of CEL is supported.
-        type: string
-      location:
-        description: |-
-          An optional string indicating the location of the expression for error
-          reporting, e.g. a file name and a position in the file.
-        type: string
-      title:
-        description: |-
-          An optional title for the expression, i.e. a short string describing
-          its purpose. This can be used e.g. in UIs which allow to enter the
-          expression.
-        type: string
     type: object
   Field:
     description: A single field of a message type.

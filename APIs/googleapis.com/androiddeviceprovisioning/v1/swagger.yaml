@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://androiddeviceprovisioning.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -159,20 +159,20 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Update the metadata.
+      description: Updates reseller metadata associated with the device.
       operationId: androiddeviceprovisioning.partners.devices.metadata
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UpdateDeviceMetadataRequest'
-        - description: ID of the partner.
+        - description: Required. The ID of the reseller partner.
           in: path
           name: deviceId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The owner of the newly set metadata. Set this to the partner ID.
+        - description: Required. The owner of the newly set metadata. Set this to the partner ID.
           in: path
           name: metadataOwnerId
           required: true
@@ -193,7 +193,7 @@ paths:
         created and customers that enrolled themselves using the portal.
       operationId: androiddeviceprovisioning.partners.customers.list
       parameters:
-        - description: The ID of the partner.
+        - description: Required. The ID of the reseller partner.
           in: path
           name: partnerId
           required: true
@@ -236,14 +236,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Claim the device identified by device identifier.
+      description: |-
+        Claims a device for a customer and adds it to zero-touch enrollment. If the
+        device is already claimed by another customer, the call returns an error.
       operationId: androiddeviceprovisioning.partners.devices.claim
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ClaimDeviceRequest'
-        - description: ID of the partner.
+        - description: Required. The ID of the reseller partner.
           in: path
           name: partnerId
           required: true
@@ -272,14 +274,17 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Claim devices asynchronously.
+      description: |-
+        Claims a batch of devices for a customer asynchronously. Adds the devices
+        to zero-touch enrollment. To learn more, read [Long‑running batch
+        operations](/zero-touch/guides/how-it-works#operations).
       operationId: androiddeviceprovisioning.partners.devices.claimAsync
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ClaimDevicesRequest'
-        - description: Partner ID.
+        - description: Required. The ID of the reseller partner.
           in: path
           name: partnerId
           required: true
@@ -308,14 +313,14 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Find devices by device identifier.
+      description: 'Finds devices by hardware identifiers, such as IMEI.'
       operationId: androiddeviceprovisioning.partners.devices.findByIdentifier
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/FindDevicesByDeviceIdentifierRequest'
-        - description: ID of the partner.
+        - description: Required. The ID of the reseller partner.
           in: path
           name: partnerId
           required: true
@@ -344,14 +349,18 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Find devices by ownership.
+      description: |-
+        Finds devices claimed for customers. The results only contain devices
+        registered to the reseller that's identified by the `partnerId` argument.
+        The customer's devices purchased from other resellers don't appear in the
+        results.
       operationId: androiddeviceprovisioning.partners.devices.findByOwner
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/FindDevicesByOwnerRequest'
-        - description: ID of the partner.
+        - description: Required. The ID of the reseller partner.
           in: path
           name: partnerId
           required: true
@@ -380,14 +389,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Unclaim the device identified by the `device_id` or the `deviceIdentifier`.
+      description: |-
+        Unclaims a device from a customer and removes it from zero-touch
+        enrollment.
       operationId: androiddeviceprovisioning.partners.devices.unclaim
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UnclaimDeviceRequest'
-        - description: ID of the partner.
+        - description: Required. The ID of the reseller partner.
           in: path
           name: partnerId
           required: true
@@ -416,14 +427,17 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Unclaim devices asynchronously.
+      description: |-
+        Unclaims a batch of devices for a customer asynchronously. Removes the
+        devices from zero-touch enrollment. To learn more, read [Long‑running batch
+        operations](/zero-touch/guides/how-it-works#operations).
       operationId: androiddeviceprovisioning.partners.devices.unclaimAsync
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UnclaimDevicesRequest'
-        - description: Partner ID.
+        - description: Required. The reseller partner ID.
           in: path
           name: partnerId
           required: true
@@ -452,14 +466,18 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Set metadata in batch asynchronously.
+      description: |-
+        Updates the reseller metadata attached to a batch of devices. This method
+        updates devices asynchronously and returns an `Operation` that can be used
+        to track progress. Read [Long‑running batch
+        operations](/zero-touch/guides/how-it-works#operations).
       operationId: androiddeviceprovisioning.partners.devices.updateMetadataAsync
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UpdateDeviceMetadataInBatchRequest'
-        - description: Partner ID.
+        - description: Required. The reseller partner ID.
           in: path
           name: partnerId
           required: true
@@ -868,14 +886,14 @@ definitions:
     description: Request message to claim a device on behalf of a customer.
     properties:
       customerId:
-        description: The customer to claim for.
+        description: Required. The ID of the customer for whom the device is being claimed.
         format: int64
         type: string
       deviceIdentifier:
         $ref: '#/definitions/DeviceIdentifier'
-        description: The device identifier of the device to claim.
+        description: Required. The device identifier of the device to claim.
       sectionType:
-        description: The section to claim.
+        description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
           - SECTION_TYPE_ZERO_TOUCH
@@ -895,10 +913,13 @@ definitions:
         type: string
     type: object
   ClaimDevicesRequest:
-    description: Request to claim devices asynchronously in batch.
+    description: |-
+      Request to claim devices asynchronously in batch. Claiming a device adds the
+      device to zero-touch enrollment and shows the device in the customer's view
+      of the portal.
     properties:
       claims:
-        description: List of claims.
+        description: Required. A list of device claims.
         items:
           $ref: '#/definitions/PartnerClaim'
         type: array
@@ -1206,14 +1227,20 @@ definitions:
         description: The hardware IDs of the device.
     type: object
   DevicesLongRunningOperationMetadata:
-    description: Long running operation metadata.
+    description: |-
+      Tracks the status of a long-running operation to asynchronously update a
+      batch of reseller metadata attached to devices. To learn more, read
+      [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
     properties:
       devicesCount:
-        description: Number of devices parsed in your requests.
+        description: |-
+          The number of metadata updates in the operation. This might be different
+          from the number of updates in the request if the API can't parse some of
+          the updates.
         format: int32
         type: integer
       processingStatus:
-        description: The overall processing status.
+        description: The processing status of the operation.
         enum:
           - BATCH_PROCESS_STATUS_UNSPECIFIED
           - BATCH_PROCESS_PENDING
@@ -1221,22 +1248,31 @@ definitions:
           - BATCH_PROCESS_PROCESSED
         type: string
       progress:
-        description: Processing progress from 0 to 100.
+        description: |-
+          The processing progress of the operation. Measured as a number from 0 to
+          100. A value of 10O doesnt always mean the operation completed—check for
+          the inclusion of a `done` field.
         format: int32
         type: integer
     type: object
   DevicesLongRunningOperationResponse:
-    description: Long running operation response.
+    description: |-
+      Tracks the status of a long-running operation to claim, unclaim, or attach
+      metadata to devices. To learn more, read
+      [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
     properties:
       perDeviceStatus:
         description: |-
-          Processing status for each device.
-          One `PerDeviceStatus` per device. The order is the same as in your requests.
+          The processing status for each device in the operation.
+          One `PerDeviceStatus` per device. The list order matches the items in the
+          original request.
         items:
           $ref: '#/definitions/OperationPerDevice'
         type: array
       successCount:
-        description: Number of succeesfully processed ones.
+        description: |-
+          A summary of how many items in the operation the server processed
+          successfully. Updated as the operation progresses.
         format: int32
         type: integer
     type: object
@@ -1284,13 +1320,15 @@ definitions:
     properties:
       deviceIdentifier:
         $ref: '#/definitions/DeviceIdentifier'
-        description: The device identifier to search.
+        description: Required. The device identifier to search for.
       limit:
-        description: Number of devices to show.
+        description: |-
+          Required. The maximum number of devices to show in a page of results. Must
+          be between 1 and 100 inclusive.
         format: int64
         type: string
       pageToken:
-        description: Page token.
+        description: A token specifying which result page to return.
         type: string
     type: object
   FindDevicesByDeviceIdentifierResponse:
@@ -1302,27 +1340,31 @@ definitions:
           $ref: '#/definitions/Device'
         type: array
       nextPageToken:
-        description: Page token of the next page.
+        description: |-
+          A token used to access the next page of results. Omitted if no further
+          results are available.
         type: string
     type: object
   FindDevicesByOwnerRequest:
     description: Request to find devices by customers.
     properties:
       customerId:
-        description: List of customer IDs to search for.
+        description: Required. The list of customer IDs to search for.
         items:
           format: int64
           type: string
         type: array
       limit:
-        description: The number of devices to show in the result.
+        description: |-
+          Required. The maximum number of devices to show in a page of results. Must
+          be between 1 and 100 inclusive.
         format: int64
         type: string
       pageToken:
-        description: Page token.
+        description: A token specifying which result page to return.
         type: string
       sectionType:
-        description: The section type.
+        description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
           - SECTION_TYPE_ZERO_TOUCH
@@ -1332,19 +1374,21 @@ definitions:
     description: Response containing found devices.
     properties:
       devices:
-        description: Devices found.
+        description: The customer's devices.
         items:
           $ref: '#/definitions/Device'
         type: array
       nextPageToken:
-        description: Page token of the next page.
+        description: |-
+          A token used to access the next page of results.
+          Omitted if no further results are available.
         type: string
     type: object
   ListCustomersResponse:
     description: Response message of all customers related to this partner.
     properties:
       customers:
-        description: List of customers related to this partner.
+        description: List of customers related to this reseller partner.
         items:
           $ref: '#/definitions/Company'
         type: array
@@ -1381,36 +1425,38 @@ definitions:
         type: object
     type: object
   OperationPerDevice:
-    description: Operation the server received for every device.
+    description: |-
+      A task for each device in the operation. Corresponds to each device
+      change in the request.
     properties:
       claim:
         $ref: '#/definitions/PartnerClaim'
-        description: Request to claim a device.
+        description: A copy of the original device-claim request received by the server.
       result:
         $ref: '#/definitions/PerDeviceStatusInBatch'
-        description: Processing result for every device.
+        description: The processing result for each device.
       unclaim:
         $ref: '#/definitions/PartnerUnclaim'
-        description: Request to unclaim a device.
+        description: A copy of the original device-unclaim request received by the server.
       updateMetadata:
         $ref: '#/definitions/UpdateMetadataArguments'
-        description: Request to set metadata for a device.
+        description: A copy of the original metadata-update request received by the server.
     type: object
   PartnerClaim:
     description: Identifies one claim request.
     properties:
       customerId:
-        description: Customer ID to claim for.
+        description: Required. The ID of the customer for whom the device is being claimed.
         format: int64
         type: string
       deviceIdentifier:
         $ref: '#/definitions/DeviceIdentifier'
-        description: Device identifier of the device.
+        description: Required. Device identifier of the device.
       deviceMetadata:
         $ref: '#/definitions/DeviceMetadata'
-        description: Metadata to set at claim.
+        description: Required. The metadata to attach to the device at claim.
       sectionType:
-        description: Section type to claim.
+        description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
           - SECTION_TYPE_ZERO_TOUCH
@@ -1427,27 +1473,27 @@ definitions:
         $ref: '#/definitions/DeviceIdentifier'
         description: Device identifier of the device.
       sectionType:
-        description: Section type to unclaim.
+        description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
           - SECTION_TYPE_ZERO_TOUCH
         type: string
     type: object
   PerDeviceStatusInBatch:
-    description: Stores the processing result for each device.
+    description: Captures the processing status for each device in the operation.
     properties:
       deviceId:
-        description: Device ID of the device if process succeeds.
+        description: 'If processing succeeds, the device ID of the device.'
         format: int64
         type: string
       errorIdentifier:
-        description: Error identifier.
+        description: 'If processing fails, the error type.'
         type: string
       errorMessage:
-        description: Error message.
+        description: 'If processing fails, a developer message explaining what went wrong.'
         type: string
       status:
-        description: Process result.
+        description: The result status of the device after processing.
         enum:
           - SINGLE_DEVICE_STATUS_UNSPECIFIED
           - SINGLE_DEVICE_STATUS_UNKNOWN_ERROR
@@ -1545,7 +1591,7 @@ definitions:
         $ref: '#/definitions/DeviceIdentifier'
         description: The device identifier you used when you claimed this device.
       sectionType:
-        description: The section type to unclaim for.
+        description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
           - SECTION_TYPE_ZERO_TOUCH
@@ -1555,7 +1601,7 @@ definitions:
     description: Request to unclaim devices asynchronously in batch.
     properties:
       unclaims:
-        description: List of devices to unclaim.
+        description: Required. The list of devices to unclaim.
         items:
           $ref: '#/definitions/PartnerUnclaim'
         type: array
@@ -1564,7 +1610,7 @@ definitions:
     description: Request to update device metadata in batch.
     properties:
       updates:
-        description: List of metadata updates.
+        description: Required. The list of metadata updates.
         items:
           $ref: '#/definitions/UpdateMetadataArguments'
         type: array
@@ -1574,7 +1620,7 @@ definitions:
     properties:
       deviceMetadata:
         $ref: '#/definitions/DeviceMetadata'
-        description: The metdata to set.
+        description: Required. The metdata to attach to the device.
     type: object
   UpdateMetadataArguments:
     description: Identifies metdata updates to one device.
@@ -1588,5 +1634,5 @@ definitions:
         description: Device identifier.
       deviceMetadata:
         $ref: '#/definitions/DeviceMetadata'
-        description: The metadata to update.
+        description: Required. The metadata to update.
     type: object

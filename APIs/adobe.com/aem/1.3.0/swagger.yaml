@@ -12,7 +12,7 @@ info:
     x-twitter: Adobe
   description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
   title: Adobe Experience Manager (AEM)
-  version: 1.2.1
+  version: 1.3.0
   x-apisguru-categories:
     - marketing
   x-logo:
@@ -512,6 +512,22 @@ paths:
       responses:
         default:
           description: Default response
+          schema:
+            type: string
+      tags:
+        - crx
+  '/crx/server/crx.default/jcr:root/.1.json':
+    get:
+      operationId: getCrxdeStatus
+      produces:
+        - plain/text
+      responses:
+        '200':
+          description: CRXDE is enabled
+          schema:
+            type: string
+        '404':
+          description: CRXDE is disabled
           schema:
             type: string
       tags:

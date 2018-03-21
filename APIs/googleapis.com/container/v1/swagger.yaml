@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://container.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1912,6 +1912,7 @@ definitions:
           - RECONCILING
           - STOPPING
           - ERROR
+          - DEGRADED
         type: string
       statusMessage:
         description: |-
@@ -2400,6 +2401,7 @@ definitions:
           in length. These are reflected as part of a URL in the metadata server.
           Additionally, to avoid ambiguity, keys must not conflict with any other
           metadata keys for the project or be one of the reserved keys:
+           "cluster-location"
            "cluster-name"
            "cluster-uid"
            "configure-sh"

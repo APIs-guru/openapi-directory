@@ -6,7 +6,7 @@ basePath: /latest
 info:
   description: An OpenAPI for EVE Online
   title: EVE Swagger Interface
-  version: 0.7.5
+  version: 0.7.6
   x-apisguru-categories:
     - media
   x-logo:
@@ -6408,14 +6408,15 @@ paths:
         Return character notifications
 
         ---
-        Alternate route: `/dev/characters/{character_id}/notifications/`
-
         Alternate route: `/legacy/characters/{character_id}/notifications/`
 
         Alternate route: `/v1/characters/{character_id}/notifications/`
 
         ---
         This route is cached for up to 600 seconds
+
+        ---
+        [This route has an available update](https://esi.tech.ccp.is/diff/latest/dev/#GET-/characters/{character_id}/notifications/)
       operationId: get_characters_character_id_notifications
       parameters:
         - $ref: '#/parameters/character_id'
@@ -6696,7 +6697,6 @@ paths:
       tags:
         - Character
       x-alternate-versions:
-        - dev
         - legacy
         - v1
       x-cached-seconds: 600
@@ -6983,18 +6983,15 @@ paths:
   '/characters/{character_id}/orders/':
     get:
       description: |-
-        List market orders placed by a character
+        List open market orders placed by a character
 
         ---
-        Alternate route: `/legacy/characters/{character_id}/orders/`
+        Alternate route: `/dev/characters/{character_id}/orders/`
 
-        Alternate route: `/v1/characters/{character_id}/orders/`
-
-        ---
-        This route is cached for up to 3600 seconds
+        Alternate route: `/v2/characters/{character_id}/orders/`
 
         ---
-        [This route has an available update](https://esi.tech.ccp.is/diff/latest/dev/#GET-/characters/{character_id}/orders/)
+        This route is cached for up to 1200 seconds
       operationId: get_characters_character_id_orders
       parameters:
         - $ref: '#/parameters/character_id'
@@ -7004,14 +7001,13 @@ paths:
         - $ref: '#/parameters/X-User-Agent'
       responses:
         '200':
-          description: Market orders placed by a character
+          description: Open market orders placed by a character
           examples:
             application/json:
-              - account_id: 1000
-                duration: 30
+              - duration: 30
                 escrow: 45.6
                 is_buy_order: true
-                is_corp: false
+                is_corporation: false
                 issued: '2016-09-03T05:12:25Z'
                 location_id: 456
                 min_volume: 1
@@ -7019,7 +7015,6 @@ paths:
                 price: 33.3
                 range: station
                 region_id: 123
-                state: open
                 type_id: 456
                 volume_remain: 4422
                 volume_total: 123456
@@ -7038,13 +7033,8 @@ paths:
             items:
               description: 200 ok object
               properties:
-                account_id:
-                  description: Wallet division for the buyer or seller of this order. Always 1000 for characters. Currently 1000 through 1006 for corporations
-                  format: int32
-                  title: get_characters_character_id_orders_account_id
-                  type: integer
                 duration:
-                  description: Number of days the order is valid for (starting from the issued date). An order expires at time issued + duration
+                  description: Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
                   format: int32
                   title: get_characters_character_id_orders_duration
                   type: integer
@@ -7054,12 +7044,12 @@ paths:
                   title: get_characters_character_id_orders_escrow
                   type: number
                 is_buy_order:
-                  description: True for a bid (buy) order. False for an offer (sell) order
+                  description: True if the order is a bid (buy) order
                   title: get_characters_character_id_orders_is_buy_order
                   type: boolean
-                is_corp:
-                  description: is_corp boolean
-                  title: get_characters_character_id_orders_is_corp
+                is_corporation:
+                  description: Signifies whether the buy/sell order was placed on behalf of a corporation.
+                  title: get_characters_character_id_orders_is_corporation
                   type: boolean
                 issued:
                   description: Date and time when this order was issued
@@ -7072,7 +7062,7 @@ paths:
                   title: get_characters_character_id_orders_location_id
                   type: integer
                 min_volume:
-                  description: 'For bids (buy orders), the minimum quantity that will be accepted in a matching offer (sell order)'
+                  description: 'For buy orders, the minimum quantity that will be accepted in a matching sell order'
                   format: int32
                   title: get_characters_character_id_orders_min_volume
                   type: integer
@@ -7108,17 +7098,6 @@ paths:
                   format: int32
                   title: get_characters_character_id_orders_region_id
                   type: integer
-                state:
-                  description: Current order state
-                  enum:
-                    - cancelled
-                    - character_deleted
-                    - closed
-                    - expired
-                    - open
-                    - pending
-                  title: get_characters_character_id_orders_state
-                  type: string
                 type_id:
                   description: The type ID of the item transacted in this order
                   format: int32
@@ -7135,25 +7114,20 @@ paths:
                   title: get_characters_character_id_orders_volume_total
                   type: integer
               required:
+                - is_corporation
+                - duration
                 - order_id
                 - type_id
                 - region_id
                 - location_id
                 - range
-                - is_buy_order
                 - price
                 - volume_total
                 - volume_remain
                 - issued
-                - state
-                - min_volume
-                - account_id
-                - duration
-                - is_corp
-                - escrow
               title: get_characters_character_id_orders_200_ok
               type: object
-            maxItems: 500
+            maxItems: 305
             title: get_characters_character_id_orders_ok
             type: array
         '403':
@@ -7177,9 +7151,9 @@ paths:
       tags:
         - Market
       x-alternate-versions:
-        - legacy
-        - v1
-      x-cached-seconds: 3600
+        - dev
+        - v2
+      x-cached-seconds: 1200
   '/characters/{character_id}/orders/history/':
     get:
       description: |-
@@ -10674,12 +10648,13 @@ paths:
         Retrieve character wallet journal
 
         ---
-        Alternate route: `/dev/characters/{character_id}/wallet/journal/`
-
         Alternate route: `/v3/characters/{character_id}/wallet/journal/`
 
         ---
         This route is cached for up to 3600 seconds
+
+        ---
+        [This route has an available update](https://esi.tech.ccp.is/diff/latest/dev/#GET-/characters/{character_id}/wallet/journal/)
       operationId: get_characters_character_id_wallet_journal
       parameters:
         - $ref: '#/parameters/character_id'
@@ -10996,7 +10971,6 @@ paths:
       tags:
         - Wallet
       x-alternate-versions:
-        - dev
         - v3
       x-cached-seconds: 3600
   '/characters/{character_id}/wallet/transactions/':
@@ -11167,6 +11141,7 @@ paths:
       parameters:
         - $ref: '#/parameters/corporation_id'
         - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -11190,6 +11165,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -11869,12 +11849,10 @@ paths:
       x-cached-seconds: 3600
   '/corporations/{corporation_id}/assets/':
     get:
-      description: |
+      description: |-
         Return a list of the corporation assets
 
         ---
-        Alternate route: `/dev/corporations/{corporation_id}/assets/`
-
         Alternate route: `/v2/corporations/{corporation_id}/assets/`
 
         ---
@@ -11882,6 +11860,10 @@ paths:
 
         ---
         Requires one of the following EVE corporation role(s): Director
+
+
+        ---
+        [This route has an available update](https://esi.tech.ccp.is/diff/latest/dev/#GET-/corporations/{corporation_id}/assets/)
       operationId: get_corporations_corporation_id_assets
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -12108,7 +12090,6 @@ paths:
       tags:
         - Assets
       x-alternate-versions:
-        - dev
         - v2
       x-cached-seconds: 3600
       x-required-roles:
@@ -12321,12 +12302,10 @@ paths:
         - Director
   '/corporations/{corporation_id}/blueprints/':
     get:
-      description: |
+      description: |-
         Returns a list of blueprints the corporation owns
 
         ---
-        Alternate route: `/dev/corporations/{corporation_id}/blueprints/`
-
         Alternate route: `/legacy/corporations/{corporation_id}/blueprints/`
 
         Alternate route: `/v1/corporations/{corporation_id}/blueprints/`
@@ -12336,6 +12315,10 @@ paths:
 
         ---
         Requires one of the following EVE corporation role(s): Director
+
+
+        ---
+        [This route has an available update](https://esi.tech.ccp.is/diff/latest/dev/#GET-/corporations/{corporation_id}/blueprints/)
       operationId: get_corporations_corporation_id_blueprints
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -12573,7 +12556,6 @@ paths:
       tags:
         - Corporation
       x-alternate-versions:
-        - dev
         - legacy
         - v1
       x-cached-seconds: 3600
@@ -12971,12 +12953,10 @@ paths:
       x-required-roles: []
   '/corporations/{corporation_id}/containers/logs/':
     get:
-      description: |
+      description: |-
         Returns logs recorded in the past seven days from all audit log secure containers (ALSC) owned by a given corporation
 
         ---
-        Alternate route: `/dev/corporations/{corporation_id}/containers/logs/`
-
         Alternate route: `/legacy/corporations/{corporation_id}/containers/logs/`
 
         Alternate route: `/v1/corporations/{corporation_id}/containers/logs/`
@@ -12986,6 +12966,10 @@ paths:
 
         ---
         Requires one of the following EVE corporation role(s): Director
+
+
+        ---
+        [This route has an available update](https://esi.tech.ccp.is/diff/latest/dev/#GET-/corporations/{corporation_id}/containers/logs/)
       operationId: get_corporations_corporation_id_containers_logs
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -13266,7 +13250,6 @@ paths:
       tags:
         - Corporation
       x-alternate-versions:
-        - dev
         - legacy
         - v1
       x-cached-seconds: 600
@@ -15299,23 +15282,19 @@ paths:
         - Director
   '/corporations/{corporation_id}/orders/':
     get:
-      description: |-
+      description: |
         List open market orders placed on behalf of a corporation
 
         ---
-        Alternate route: `/legacy/corporations/{corporation_id}/orders/`
+        Alternate route: `/dev/corporations/{corporation_id}/orders/`
 
-        Alternate route: `/v1/corporations/{corporation_id}/orders/`
+        Alternate route: `/v2/corporations/{corporation_id}/orders/`
 
         ---
         This route is cached for up to 1200 seconds
 
         ---
         Requires one of the following EVE corporation role(s): Accountant, Trader
-
-
-        ---
-        [This route has an available update](https://esi.tech.ccp.is/diff/latest/dev/#GET-/corporations/{corporation_id}/orders/)
       operationId: get_corporations_corporation_id_orders
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -15339,7 +15318,6 @@ paths:
                 price: 33.3
                 range: station
                 region_id: 123
-                state: open
                 type_id: 456
                 volume_remain: 4422
                 volume_total: 123456
@@ -15365,7 +15343,7 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days the order is valid for (starting from the issued date). An order expires at time issued + duration
+                  description: Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
                   format: int32
                   title: get_corporations_corporation_id_orders_duration
                   type: integer
@@ -15375,7 +15353,7 @@ paths:
                   title: get_corporations_corporation_id_orders_escrow
                   type: number
                 is_buy_order:
-                  description: True for a bid (buy) order. False for an offer (sell) order
+                  description: True if the order is a bid (buy) order
                   title: get_corporations_corporation_id_orders_is_buy_order
                   type: boolean
                 issued:
@@ -15389,7 +15367,7 @@ paths:
                   title: get_corporations_corporation_id_orders_location_id
                   type: integer
                 min_volume:
-                  description: 'For bids (buy orders), the minimum quantity that will be accepted in a matching offer (sell order)'
+                  description: 'For buy orders, the minimum quantity that will be accepted in a matching sell order'
                   format: int32
                   title: get_corporations_corporation_id_orders_min_volume
                   type: integer
@@ -15425,17 +15403,6 @@ paths:
                   format: int32
                   title: get_corporations_corporation_id_orders_region_id
                   type: integer
-                state:
-                  description: Current order state
-                  enum:
-                    - cancelled
-                    - character_deleted
-                    - closed
-                    - expired
-                    - open
-                    - pending
-                  title: get_corporations_corporation_id_orders_state
-                  type: string
                 type_id:
                   description: The type ID of the item transacted in this order
                   format: int32
@@ -15459,21 +15426,17 @@ paths:
                   title: get_corporations_corporation_id_orders_wallet_division
                   type: integer
               required:
+                - duration
+                - wallet_division
                 - order_id
                 - type_id
                 - region_id
                 - location_id
                 - range
-                - is_buy_order
                 - price
                 - volume_total
                 - volume_remain
                 - issued
-                - state
-                - min_volume
-                - wallet_division
-                - duration
-                - escrow
               title: get_corporations_corporation_id_orders_200_ok
               type: object
             maxItems: 1000
@@ -15500,8 +15463,8 @@ paths:
       tags:
         - Market
       x-alternate-versions:
-        - legacy
-        - v1
+        - dev
+        - v2
       x-cached-seconds: 1200
       x-required-roles:
         - Accountant
@@ -18328,12 +18291,10 @@ paths:
         - Junior_Accountant
   '/corporations/{corporation_id}/wallets/{division}/journal/':
     get:
-      description: |
+      description: |-
         Retrieve corporation wallet journal
 
         ---
-        Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/journal/`
-
         Alternate route: `/v2/corporations/{corporation_id}/wallets/{division}/journal/`
 
         ---
@@ -18341,6 +18302,10 @@ paths:
 
         ---
         Requires one of the following EVE corporation role(s): Accountant, Junior_Accountant
+
+
+        ---
+        [This route has an available update](https://esi.tech.ccp.is/diff/latest/dev/#GET-/corporations/{corporation_id}/wallets/{division}/journal/)
       operationId: get_corporations_corporation_id_wallets_division_journal
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -18665,7 +18630,6 @@ paths:
       tags:
         - Wallet
       x-alternate-versions:
-        - dev
         - v2
       x-cached-seconds: 3600
       x-required-roles:

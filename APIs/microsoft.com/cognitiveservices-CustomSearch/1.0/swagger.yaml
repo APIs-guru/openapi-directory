@@ -85,8 +85,9 @@ paths:
           type: string
           x-ms-client-name: Location
         - description: The identifier for the custom search configuration
-          format: int32
+          format: int64
           in: query
+          minimum: 0
           name: customConfig
           required: true
           type: integer
@@ -178,6 +179,7 @@ paths:
           parameters:
             Ocp-Apim-Subscription-Key: '{API key}'
             X-BingApis-SDK: 'true'
+            customConfig: 123456
             q: cortana
           responses:
             '200':

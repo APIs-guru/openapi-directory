@@ -12,7 +12,7 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   termsOfService: 'http://swagger.io/terms/'
   title: Swagger Generator
-  version: 2.2.3
+  version: 2.3.1
   x-apisguru-categories:
     - developer_tools
     - tools
@@ -52,23 +52,26 @@ paths:
       parameters:
         - description: The target language for the client library
           enum:
+            - ada
             - akka-scala
             - android
             - apex
-            - async-scala
             - bash
             - clojure
             - cpprest
             - csharp
-            - CsharpDotNet2
+            - csharp-dotnet2
             - cwiki
             - dart
             - dynamic-html
             - eiffel
             - elixir
+            - elm
+            - erlang-client
             - flash
             - go
             - groovy
+            - haskell-http-client
             - html
             - html2
             - java
@@ -77,14 +80,18 @@ paths:
             - jaxrs-cxf-client
             - jmeter
             - kotlin
+            - lua
             - objc
             - perl
             - php
             - powershell
             - python
             - qt5cpp
+            - r
             - ruby
+            - rust
             - scala
+            - scalaz
             - swagger
             - swagger-yaml
             - swift
@@ -92,7 +99,8 @@ paths:
             - swift4
             - tizen
             - typescript-angular
-            - typescript-angular2
+            - typescript-angularjs
+            - typescript-aurelia
             - typescript-fetch
             - typescript-jquery
             - typescript-node
@@ -118,23 +126,26 @@ paths:
       parameters:
         - description: The target language for the client library
           enum:
+            - ada
             - akka-scala
             - android
             - apex
-            - async-scala
             - bash
             - clojure
             - cpprest
             - csharp
-            - CsharpDotNet2
+            - csharp-dotnet2
             - cwiki
             - dart
             - dynamic-html
             - eiffel
             - elixir
+            - elm
+            - erlang-client
             - flash
             - go
             - groovy
+            - haskell-http-client
             - html
             - html2
             - java
@@ -143,14 +154,18 @@ paths:
             - jaxrs-cxf-client
             - jmeter
             - kotlin
+            - lua
             - objc
             - perl
             - php
             - powershell
             - python
             - qt5cpp
+            - r
             - ruby
+            - rust
             - scala
+            - scalaz
             - swagger
             - swagger-yaml
             - swift
@@ -158,7 +173,8 @@ paths:
             - swift4
             - tizen
             - typescript-angular
-            - typescript-angular2
+            - typescript-angularjs
+            - typescript-aurelia
             - typescript-fetch
             - typescript-jquery
             - typescript-node
@@ -222,13 +238,14 @@ paths:
       parameters:
         - description: The target language for the server framework
           enum:
-            - aspnet5
+            - ada-server
             - aspnetcore
             - erlang-server
             - finch
             - go-server
             - haskell
             - inflector
+            - java-pkmst
             - java-play-framework
             - java-vertx
             - jaxrs
@@ -241,13 +258,15 @@ paths:
             - msf4j
             - nancyfx
             - nodejs-server
+            - php-silex
             - php-symfony
             - pistache-server
             - python-flask
             - rails5
             - restbed
+            - rust-server
+            - scala-lagom-server
             - scalatra
-            - silex-PHP
             - sinatra
             - slim
             - spring
@@ -275,13 +294,14 @@ paths:
       parameters:
         - description: framework
           enum:
-            - aspnet5
+            - ada-server
             - aspnetcore
             - erlang-server
             - finch
             - go-server
             - haskell
             - inflector
+            - java-pkmst
             - java-play-framework
             - java-vertx
             - jaxrs
@@ -294,13 +314,15 @@ paths:
             - msf4j
             - nancyfx
             - nodejs-server
+            - php-silex
             - php-symfony
             - pistache-server
             - python-flask
             - rails5
             - restbed
+            - rust-server
+            - scala-lagom-server
             - scalatra
-            - silex-PHP
             - sinatra
             - slim
             - spring

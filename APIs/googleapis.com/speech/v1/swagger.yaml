@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Converts audio to text by applying powerful neural network models.
-  title: Google Cloud Speech
+  title: Cloud Speech
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://speech.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -313,12 +313,6 @@ definitions:
       Provides information to the recognizer that specifies how to process the
       request.
     properties:
-      enableWordConfidence:
-        description: |-
-          *Optional* If `true`, the top result includes a list of words and the
-          confidence for those words. If `false`, no word-level confidence
-          information is returned. The default is `false`.
-        type: boolean
       enableWordTimeOffsets:
         description: |-
           *Optional* If `true`, the top result includes a list of words and
@@ -327,7 +321,10 @@ definitions:
           `false`.
         type: boolean
       encoding:
-        description: '*Required* Encoding of audio data sent in all `RecognitionAudio` messages.'
+        description: |-
+          Encoding of audio data sent in all `RecognitionAudio` messages.
+          This field is optional for `FLAC` and `WAV` audio files and required
+          for all other audio formats. For details, see AudioEncoding.
         enum:
           - ENCODING_UNSPECIFIED
           - LINEAR16
@@ -365,11 +362,13 @@ definitions:
         type: boolean
       sampleRateHertz:
         description: |-
-          *Required* Sample rate in Hertz of the audio data sent in all
+          Sample rate in Hertz of the audio data sent in all
           `RecognitionAudio` messages. Valid values are: 8000-48000.
           16000 is optimal. For best results, set the sampling rate of the audio
           source to 16000 Hz. If that's not possible, use the native sample rate of
           the audio source (instead of re-sampling).
+          This field is optional for `FLAC` and `WAV` audio files and required
+          for all other audio formats. For details, see AudioEncoding.
         format: int32
         type: integer
       speechContexts:

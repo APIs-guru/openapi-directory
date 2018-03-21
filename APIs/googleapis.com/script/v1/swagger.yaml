@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://script.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -197,6 +197,7 @@ paths:
               - FAILED
               - TIMED_OUT
               - UNKNOWN
+              - DELAYED
             type: string
           name: userProcessFilter.statuses
           type: array
@@ -315,6 +316,7 @@ paths:
               - FAILED
               - TIMED_OUT
               - UNKNOWN
+              - DELAYED
             type: string
           name: scriptProcessFilter.statuses
           type: array
@@ -1182,6 +1184,7 @@ definitions:
           - FAILED
           - TIMED_OUT
           - UNKNOWN
+          - DELAYED
         type: string
       processType:
         description: The executions type.

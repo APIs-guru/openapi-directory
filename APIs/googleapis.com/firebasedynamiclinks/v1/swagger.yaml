@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://firebasedynamiclinks.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -268,13 +268,13 @@ definitions:
         $ref: '#/definitions/DynamicLinkInfo'
         description: |-
           Information about the Dynamic Link to be shortened.
-          [Learn more](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+          [Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).
       longDynamicLink:
         description: |-
           Full long Dynamic Link URL with desired query parameters specified.
           For example,
           "https://sample.app.goo.gl/?link=http://www.google.com&apn=com.sample",
-          [Learn more](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+          [Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).
         type: string
       suffix:
         $ref: '#/definitions/Suffix'

@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://dataproc.googleapis.com/$discovery/rest?version=v1beta2'
       version: v1
@@ -182,6 +182,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'Optional. A unique id used to identify the request. If the server receives two CreateClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -215,6 +219,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: 'Optional. A unique id used to identify the request. If the server receives two DeleteClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -296,8 +304,12 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'Optional. A unique id used to identify the request. If the server receives two UpdateClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+          in: query
+          name: requestId
+          type: string
         - description: |-
-            Required. Specifies the path, relative to <code>Cluster</code>, of the field to update. For example, to change the number of workers in a cluster to 5, the <code>update_mask</code> parameter would be specified as <code>config.worker_config.num_instances</code>, and the PATCH request body would specify the new value, as follows:
+            Required. Specifies the path, relative to Cluster, of the field to update. For example, to change the number of workers in a cluster to 5, the update_mask parameter would be specified as config.worker_config.num_instances, and the PATCH request body would specify the new value, as follows:
             {
               "config":{
                 "workerConfig":{
@@ -305,7 +317,7 @@ paths:
                 }
               }
             }
-            Similarly, to change the number of preemptible workers in a cluster to 5, the <code>update_mask</code> parameter would be <code>config.secondary_worker_config.num_instances</code>, and the PATCH request body would be set as follows:
+            Similarly, to change the number of preemptible workers in a cluster to 5, the update_mask parameter would be config.secondary_worker_config.num_instances, and the PATCH request body would be set as follows:
             {
               "config":{
                 "secondaryWorkerConfig":{
@@ -313,7 +325,30 @@ paths:
                 }
               }
             }
-            <strong>Note:</strong> currently only some fields can be updated: |Mask|Purpose| |labels|Updates labels| |config.worker_config.num_instances|Resize primary worker group| |config.secondary_worker_config.num_instances|Resize secondary worker group| |config.lifecycle_config.auto_delete_ttl|Reset MAX TTL duration| |config.lifecycle_config.auto_delete_time|Update MAX TTL deletion timestamp| |config.lifecycle_config.idle_delete_ttl|Update Idle TTL duration|
+            <strong>Note:</strong> currently only the following fields can be updated:
+            <table>
+            <tr>
+            <td><strong>Mask</strong></td><td><strong>Purpose</strong></td>
+            </tr>
+            <tr>
+            <td>labels</td><td>Updates labels</td>
+            </tr>
+            <tr>
+            <td>config.worker_config.num_instances</td><td>Resize primary worker group</td>
+            </tr>
+            <tr>
+            <td>config.secondary_worker_config.num_instances</td><td>Resize secondary worker group</td>
+            </tr>
+            <tr>
+            <td>config.lifecycle_config.auto_delete_ttl</td><td>Reset MAX TTL duration</td>
+            </tr>
+            <tr>
+            <td>config.lifecycle_config.auto_delete_time</td><td>Update MAX TTL deletion timestamp</td>
+            </tr>
+            <tr>
+            <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL duration</td>
+            </tr>
+            </table>
           in: query
           name: updateMask
           type: string
@@ -641,10 +676,10 @@ paths:
         - projects
   '/v1beta2/{name}':
     delete:
-      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED.'
-      operationId: dataproc.projects.regions.operations.delete
+      description: Deletes a workflow template. It does not cancel in-progress workflows.
+      operationId: dataproc.projects.locations.workflowTemplates.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
           name: name
           required: true
@@ -665,10 +700,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: dataproc.projects.regions.operations.get
+      description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
+      operationId: dataproc.projects.locations.workflowTemplates.get
       parameters:
-        - description: The name of the operation resource.
+        - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
           name: name
           required: true
@@ -682,7 +717,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/WorkflowTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -704,7 +739,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
-      operationId: dataproc.projects.regions.workflowTemplates.update
+      operationId: dataproc.projects.locations.workflowTemplates.update
       parameters:
         - in: body
           name: body
@@ -778,7 +813,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.regions.workflowTemplates.instantiate
+      operationId: dataproc.projects.locations.workflowTemplates.instantiate
       parameters:
         - in: body
           name: body
@@ -803,7 +838,7 @@ paths:
   '/v1beta2/{parent}/workflowTemplates':
     get:
       description: Lists workflows that match the specified filter in the request.
-      operationId: dataproc.projects.regions.workflowTemplates.list
+      operationId: dataproc.projects.locations.workflowTemplates.list
       parameters:
         - description: Optional. The maximum number of results to return in each response.
           in: query
@@ -845,7 +880,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates new workflow template.
-      operationId: dataproc.projects.regions.workflowTemplates.create
+      operationId: dataproc.projects.locations.workflowTemplates.create
       parameters:
         - in: body
           name: body
@@ -884,7 +919,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.regions.workflowTemplates.instantiateInline
+      operationId: dataproc.projects.locations.workflowTemplates.instantiateInline
       parameters:
         - in: body
           name: body
@@ -913,7 +948,7 @@ paths:
   '/v1beta2/{resource}:getIamPolicy':
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: dataproc.projects.regions.clusters.getIamPolicy
+      operationId: dataproc.projects.locations.workflowTemplates.getIamPolicy
       parameters:
         - description: 'REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.'
           in: path
@@ -962,7 +997,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: dataproc.projects.regions.clusters.setIamPolicy
+      operationId: dataproc.projects.locations.workflowTemplates.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -1001,7 +1036,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: dataproc.projects.regions.clusters.testIamPermissions
+      operationId: dataproc.projects.locations.workflowTemplates.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1032,7 +1067,7 @@ definitions:
         format: int32
         type: integer
       acceleratorTypeUri:
-        description: 'Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Google Compute Engine AcceleratorTypes( /compute/docs/reference/beta/acceleratorTypes)Examples * https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * nvidia-tesla-k80'
+        description: 'Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypes( /compute/docs/reference/beta/acceleratorTypes)Examples * https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * nvidia-tesla-k80'
         type: string
     type: object
   Binding:
@@ -1059,7 +1094,7 @@ definitions:
     properties: {}
     type: object
   Cluster:
-    description: 'Describes the identifying information, config, and status of a cluster of Google Compute Engine instances.'
+    description: 'Describes the identifying information, config, and status of a cluster of Compute Engine instances.'
     properties:
       clusterName:
         description: Required. The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.
@@ -1094,11 +1129,11 @@ definitions:
     description: The cluster config.
     properties:
       configBucket:
-        description: 'Optional. A Google Cloud Storage staging bucket used for sharing generated SSH keys and config. If you do not specify a staging bucket, Cloud Dataproc will determine an appropriate Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then it will create and manage this project-level, per-location bucket for you.'
+        description: 'Optional. A Cloud Storage staging bucket used for sharing generated SSH keys and config. If you do not specify a staging bucket, Cloud Dataproc will determine an appropriate Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then it will create and manage this project-level, per-location bucket for you.'
         type: string
       gceClusterConfig:
         $ref: '#/definitions/GceClusterConfig'
-        description: Required. The shared Google Compute Engine config settings for all instances in a cluster.
+        description: Required. The shared Compute Engine config settings for all instances in a cluster.
       initializationActions:
         description: |
           Optional. Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node's <code>role</code> metadata to run an executable on a master or worker node, as shown below using curl (you can also use wget):
@@ -1116,16 +1151,16 @@ definitions:
         description: Optional. The config setting for auto delete cluster schedule.
       masterConfig:
         $ref: '#/definitions/InstanceGroupConfig'
-        description: Optional. The Google Compute Engine config settings for the master instance in a cluster.
+        description: Optional. The Compute Engine config settings for the master instance in a cluster.
       secondaryWorkerConfig:
         $ref: '#/definitions/InstanceGroupConfig'
-        description: Optional. The Google Compute Engine config settings for additional worker instances in a cluster.
+        description: Optional. The Compute Engine config settings for additional worker instances in a cluster.
       softwareConfig:
         $ref: '#/definitions/SoftwareConfig'
         description: Optional. The config settings for software inside the cluster.
       workerConfig:
         $ref: '#/definitions/InstanceGroupConfig'
-        description: Optional. The Google Compute Engine config settings for worker instances in a cluster.
+        description: Optional. The Compute Engine config settings for worker instances in a cluster.
     type: object
   ClusterMetrics:
     description: 'Contains cluster daemon metrics, such as HDFS and YARN stats.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'
@@ -1260,7 +1295,7 @@ definitions:
     description: The location of diagnostic output.
     properties:
       outputUri:
-        description: Output only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
+        description: Output only. The Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
         type: string
     type: object
   DiskConfig:
@@ -1288,7 +1323,7 @@ definitions:
     properties: {}
     type: object
   GceClusterConfig:
-    description: 'Common config settings for resources of Google Compute Engine cluster instances, applicable to all instances in the cluster.'
+    description: 'Common config settings for resources of Compute Engine cluster instances, applicable to all instances in the cluster.'
     properties:
       internalIpOnly:
         description: 'Optional. If true, all instances in the cluster will only have internal IP addresses. By default, clusters are not restricted to internal IP addresses, and will have ephemeral external IP addresses assigned to each instance. This internal_ip_only restriction can only be enabled for subnetwork enabled networks, and all off-cluster dependencies must be configured to be accessible without external IP addresses.'
@@ -1296,18 +1331,18 @@ definitions:
       metadata:
         additionalProperties:
           type: string
-        description: 'The Google Compute Engine metadata entries to add to all instances (see Project and instance metadata (https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).'
+        description: 'The Compute Engine metadata entries to add to all instances (see Project and instance metadata (https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).'
         type: object
       networkUri:
         description: |-
-          Optional. The Google Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks for more information).A full URL, partial URI, or short name are valid. Examples:
+          Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks for more information).A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default
           projects/[project_id]/regions/global/default
           default
         type: string
       serviceAccount:
         description: |-
-          Optional. The service account of the instances. Defaults to the default Google Compute Engine service account. Custom service accounts need permissions equivalent to the folloing IAM roles:
+          Optional. The service account of the instances. Defaults to the default Compute Engine service account. Custom service accounts need permissions equivalent to the folloing IAM roles:
           roles/logging.logWriter
           roles/storage.objectAdmin(see https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts for more information). Example: [account_id]@[project_id].iam.gserviceaccount.com
         type: string
@@ -1326,19 +1361,19 @@ definitions:
         type: array
       subnetworkUri:
         description: |-
-          Optional. The Google Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri.A full URL, partial URI, or short name are valid. Examples:
+          Optional. The Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri.A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0
           projects/[project_id]/regions/us-east1/sub0
           sub0
         type: string
       tags:
-        description: The Google Compute Engine tags to add to all instances (see Tagging instances).
+        description: The Compute Engine tags to add to all instances (see Tagging instances).
         items:
           type: string
         type: array
       zoneUri:
         description: |-
-          Optional. The zone where the Google Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Cloud Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples:
+          Optional. The zone where the Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Cloud Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]
           projects/[project_id]/zones/[zone]
           us-central1-f
@@ -1411,10 +1446,10 @@ definitions:
         type: object
     type: object
   InstanceGroupConfig:
-    description: 'Optional. The config settings for Google Compute Engine resources in an instance group, such as a master or worker group.'
+    description: 'Optional. The config settings for Compute Engine resources in an instance group, such as a master or worker group.'
     properties:
       accelerators:
-        description: 'Optional. The Google Compute Engine accelerator configuration for these instances.Beta Feature: This feature is still under development. It may be changed before final release.'
+        description: 'Optional. The Compute Engine accelerator configuration for these instances.Beta Feature: This feature is still under development. It may be changed before final release.'
         items:
           $ref: '#/definitions/AcceleratorConfig'
         type: array
@@ -1422,7 +1457,7 @@ definitions:
         $ref: '#/definitions/DiskConfig'
         description: Optional. Disk option config settings.
       imageUri:
-        description: Output only. The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
+        description: Output only. The Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
         type: string
       instanceNames:
         description: 'Optional. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group if not set by user (recommended practice is to let Cloud Dataproc derive the name).'
@@ -1434,14 +1469,14 @@ definitions:
         type: boolean
       machineTypeUri:
         description: |-
-          Optional. The Google Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples:
+          Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
           projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
           n1-standard-2
         type: string
       managedGroupConfig:
         $ref: '#/definitions/ManagedGroupConfig'
-        description: Output only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
+        description: Output only. The config for Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
       minCpuPlatform:
         description: Optional. Specifies the minimum cpu platform for the Instance Group. See Cloud Dataproc&rarr;Minimum CPU Platform.
         type: string
@@ -1664,7 +1699,7 @@ definitions:
     description: Cluster that is managed by the workflow.
     properties:
       clusterName:
-        description: Required. The cluster name. Cluster names within a project must be unique. Names from deleted clusters can be reused.
+        description: 'Required. The cluster name prefix. A unique cluster name will be formed by appending a random suffix.The name must contain only lower-case letters (a-z), numbers (0-9), and hyphens (-). Must begin with a letter. Cannot begin or end with hyphen. Must consist of between 2 and 35 characters.'
         type: string
       config:
         $ref: '#/definitions/ClusterConfig'
@@ -1672,7 +1707,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: 'Optional. The labels to associate with this cluster.Label keys must be between 1 and 63 characters long, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}{0,62}Label values must be between 1 and 63 characters long, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}\p{N}_-{0,63}No more than 64 labels can be associated with a given cluster.'
+        description: 'Optional. The labels to associate with this cluster.Label keys must be between 1 and 63 characters long, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}{0,62}Label values must be between 1 and 63 characters long, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}\p{N}_-{0,63}No more than 32 labels can be associated with a given cluster.'
         type: object
     type: object
   ManagedGroupConfig:
@@ -1689,7 +1724,7 @@ definitions:
     description: Specifies an executable to run on a fully configured node and a timeout period for executable completion.
     properties:
       executableFile:
-        description: Required. Google Cloud Storage URI of executable file.
+        description: Required. Cloud Storage URI of executable file.
         type: string
       executionTimeout:
         description: Optional. Amount of time executable has to complete. Default is 10 minutes. Cluster creation fails with an explanatory error message (the name of the executable that caused the error and the exceeded timeout period) if the executable is not completed at end of the timeout period.
@@ -1731,7 +1766,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: 'Optional. The labels to associate with this job.Label keys must be between 1 and 63 characters long, and must conform to the following regular expression: \p{Ll}\p{Lo}{0,62}Label values must be between 1 and 63 characters long, and must conform to the following regular expression: \p{Ll}\p{Lo}\p{N}_-{0,63}No more than 64 labels can be associated with a given job.'
+        description: 'Optional. The labels to associate with this job.Label keys must be between 1 and 63 characters long, and must conform to the following regular expression: \p{Ll}\p{Lo}{0,62}Label values must be between 1 and 63 characters long, and must conform to the following regular expression: \p{Ll}\p{Lo}\p{N}_-{0,63}No more than 32 labels can be associated with a given job.'
         type: object
       pigJob:
         $ref: '#/definitions/PigJob'
@@ -1754,7 +1789,7 @@ definitions:
         $ref: '#/definitions/SparkSqlJob'
         description: Job is a SparkSql job.
       stepId:
-        description: 'Required. The step id. The id must be unique among all jobs within the template.The step id is used as prefix for job id, as job workflow-step-id label, and in prerequisite_step_ids field from other steps.'
+        description: 'Required. The step id. The id must be unique among all jobs within the template.The step id is used as prefix for job id, as job goog-dataproc-workflow-step-id label, and in prerequisiteStepIds field from other steps.The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end with underscore or hyphen. Must consist of between 3 and 50 characters.'
         type: string
     type: object
   PigJob:
@@ -2010,6 +2045,9 @@ definitions:
       job:
         $ref: '#/definitions/Job'
         description: Required. The job resource.
+      requestId:
+        description: 'Optional. A unique id used to identify the request. If the server receives two SubmitJobRequest requests with the same id, then the second request will be ignored and the first Job created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+        type: string
     type: object
   TestIamPermissionsRequest:
     description: Request message for TestIamPermissions method.
@@ -2105,7 +2143,7 @@ definitions:
         format: google-datetime
         type: string
       id:
-        description: Required. The template id.
+        description: 'Required. The template id.The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end with underscore or hyphen. Must consist of between 3 and 50 characters.'
         type: string
       jobs:
         description: Required. The Directed Acyclic Graph of Jobs to submit.

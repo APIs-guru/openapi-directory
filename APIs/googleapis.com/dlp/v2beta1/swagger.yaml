@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
-  title: DLP
+  title: Cloud DLP
   version: v2beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -612,6 +612,21 @@ definitions:
       table:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
         description: 'Auxiliary table location. [required]'
+    type: object
+  GooglePrivacyDlpV2beta1BigQueryKey:
+    description: |-
+      LINT.IfChange
+      Row key for identifying a record in BigQuery table.
+    properties:
+      rowNumber:
+        description: |-
+          Absolute number of the row from the beginning of the table at the time
+          of scanning.
+        format: int64
+        type: string
+      tableReference:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
+        description: Complete BigQuery table reference.
     type: object
   GooglePrivacyDlpV2beta1BigQueryOptions:
     description: Options defining BigQuery table and row identifiers.
@@ -2143,6 +2158,8 @@ definitions:
   GooglePrivacyDlpV2beta1RecordKey:
     description: Message for a unique key indicating a record that contains a finding.
     properties:
+      bigQueryKey:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryKey'
       cloudStorageKey:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CloudStorageKey'
       datastoreKey:

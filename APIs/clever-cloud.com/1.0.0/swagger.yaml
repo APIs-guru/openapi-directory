@@ -82,7 +82,7 @@ paths:
         '200':
           description: startGithub
           schema:
-            $ref: '#/definitions/Transaction_Id'
+            $ref: '#/definitions/Transaction%20Id'
       tags:
         - all
         - github
@@ -3298,7 +3298,7 @@ paths:
           description: getAvailablePaymentProviders
           schema:
             items:
-              $ref: '#/definitions/Payment_Provider'
+              $ref: '#/definitions/Payment%20Provider'
             type: array
       tags:
         - all
@@ -4554,7 +4554,7 @@ paths:
         '200':
           description: changeUserPassword
           schema:
-            $ref: '#/definitions/Change_Password'
+            $ref: '#/definitions/Change%20Password'
       tags:
         - all
         - self
@@ -5507,7 +5507,17 @@ definitions:
     required:
       - body
     type: object
-  Change_Password: {}
+  Change Password: {}
+  Change_Password:
+    properties:
+      newPassword:
+        type: string
+      oldPassword:
+        type: string
+    required:
+      - newPassword
+      - oldPassword
+    type: object
   Conso:
     properties:
       appId:
@@ -5886,6 +5896,7 @@ definitions:
       - vatState
       - zipcode
     type: object
+  Payment Provider: {}
   PaymentData:
     properties:
       deviceData:
@@ -5901,7 +5912,23 @@ definitions:
       - token
       - type
     type: object
-  Payment_Provider: {}
+  Payment_Provider:
+    properties:
+      comingSoon:
+        default: false
+        type: boolean
+      imgUrl:
+        type: string
+      name:
+        type: string
+      title:
+        type: string
+    required:
+      - comingSoon
+      - imgUrl
+      - name
+      - title
+    type: object
   Plan:
     properties:
       features:
@@ -6199,7 +6226,16 @@ definitions:
       - rights
       - token
     type: object
-  Transaction_Id: {}
+  Transaction Id: {}
+  Transaction_Id:
+    description: A simple transaction id
+    properties:
+      transactionId:
+        description: The transaction Id
+        type: string
+    required:
+      - transactionId
+    type: object
   URL:
     description: Must be a valid HTTP URL
     properties:

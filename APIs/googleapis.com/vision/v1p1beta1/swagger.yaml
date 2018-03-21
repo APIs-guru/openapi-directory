@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://vision.googleapis.com/$discovery/rest?version=v1p1beta1'
       version: v1
@@ -898,14 +898,18 @@ definitions:
         format: float
         type: number
       height:
-        description: Page height in pixels.
+        description: |-
+          Page height. For PDFs the unit is points. For images (including
+          TIFFs) the unit is pixels.
         format: int32
         type: integer
       property:
         $ref: '#/definitions/GoogleCloudVisionV1p1beta1TextAnnotationTextProperty'
         description: Additional information detected on the page.
       width:
-        description: Page width in pixels.
+        description: |-
+          Page width. For PDFs the unit is points. For images (including
+          TIFFs) the unit is pixels.
         format: int32
         type: integer
     type: object
@@ -1302,6 +1306,88 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVisionV1p1beta1Symbol'
         type: array
+    type: object
+  GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse:
+    description: The response for a single offline file annotation request.
+    properties:
+      outputConfig:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1OutputConfig'
+        description: The output location and metadata from AsyncAnnotateFileRequest.
+    type: object
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse:
+    description: Response to an async batch file annotation request.
+    properties:
+      responses:
+        description: |-
+          The list of file annotation responses, one for each request in
+          AsyncBatchAnnotateFilesRequest.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse'
+        type: array
+    type: object
+  GoogleCloudVisionV1p2beta1GcsDestination:
+    description: The Google Cloud Storage location where the output will be written to.
+    properties:
+      uri:
+        description: |-
+          Google Cloud Storage URI where the results will be stored. Results will
+          be in JSON format and preceded by its corresponding input URI. This field
+          can either represent a single file, or a prefix for multiple outputs.
+          Prefixes must end in a `/`.
+
+          Examples:
+
+          *    File: gs://bucket-name/filename.json
+          *    Prefix: gs://bucket-name/prefix/here/
+          *    File: gs://bucket-name/prefix/here
+
+          If multiple outputs, each response is still AnnotateFileResponse, each of
+          which contains some subset of the full list of AnnotateImageResponse.
+          Multiple outputs can happen if, for example, the output JSON is too large
+          and overflows into multiple sharded files.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1OperationMetadata:
+    description: Contains metadata for the BatchAnnotateImages operation.
+    properties:
+      createTime:
+        description: The time when the batch request was received.
+        format: google-datetime
+        type: string
+      state:
+        description: Current state of the batch operation.
+        enum:
+          - STATE_UNSPECIFIED
+          - CREATED
+          - RUNNING
+          - DONE
+          - CANCELLED
+        type: string
+      updateTime:
+        description: The time when the operation result was last updated.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1OutputConfig:
+    description: The desired output location and metadata.
+    properties:
+      batchSize:
+        description: |-
+          The max number of response protos to put into each output JSON file on GCS.
+          The valid range is [1, 100]. If not specified, the default value is 20.
+
+          For example, for one pdf file with 100 pages, 100 response protos will
+          be generated. If `batch_size` = 20, then 5 json files each
+          containing 20 response protos will be written under the prefix
+          `gcs_destination`.`uri`.
+
+          Currently, batch_size only applies to GcsDestination, with potential future
+          support for other output configurations.
+        format: int32
+        type: integer
+      gcsDestination:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1GcsDestination'
+        description: The Google Cloud Storage location to write the output(s) to.
     type: object
   LatLng:
     description: |-

@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: The App Engine Admin API enables developers to provision and manage their App Engine applications.
-  title: Google App Engine Admin
+  title: App Engine Admin
   version: v1beta4
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://appengine.googleapis.com/$discovery/rest?version=v1beta4'
       version: v1
@@ -1403,6 +1403,9 @@ definitions:
   Location:
     description: A resource that represents Google Cloud Platform location.
     properties:
+      displayName:
+        description: 'The friendly name for this location, typically a nearby city name. For example, "Tokyo".'
+        type: string
       labels:
         additionalProperties:
           type: string

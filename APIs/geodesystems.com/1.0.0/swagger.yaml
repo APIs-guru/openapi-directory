@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
-  - http
-host: geodesystems.com
+  - https
+host: 'geodesystems.com:443'
 basePath: /
 info:
   description: 'Search for data in lots of places - manage your documents, photos and critical business knowledge - communicate and coordinate with blogs, interactive wikis, and data integration dashboards.'
@@ -12,7 +12,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: swagger
       url: 'http://geodesystems.com/repository/swagger/api-docs'
       version: '1.2'
@@ -96,6 +96,10 @@ tags:
     name: service/imagemagick_strip
   - description: ' API for Extract sheets'
     name: service/media_tabular_extractsheet
+  - description: Search API for '2017 Boulder Election Expenditures' entry type
+    name: type/2017_boulder_election_expenditures
+  - description: Search API for 'Any file type' entry type
+    name: type/any
   - description: Search API for 'Before and After Images' entry type
     name: type/beforeafter
   - description: Search API for 'Bibliographic Entry' entry type
@@ -140,6 +144,8 @@ tags:
     name: type/bolder_rental_housing
   - description: Search API for 'Bookmarks' entry type
     name: type/bookmarks
+  - description: Search API for 'Boulder 2017 Election Contributions' entry type
+    name: type/boulder_2017_election_contributions
   - description: Search API for 'Boulder Consulting Services Database' entry type
     name: type/boulder_consulting_services
   - description: Search API for 'Boulder County Voter Details' entry type
@@ -188,6 +194,10 @@ tags:
     name: type/gadgets_stock
   - description: Search API for 'Weather' entry type
     name: type/gadgets_weather
+  - description: Search API for 'Census Tracts' entry type
+    name: type/gazeteer_census_tracts
+  - description: Search API for 'Census Gazeteer Counties' entry type
+    name: type/gazeteer_counties
   - description: Search API for 'Google Docs View' entry type
     name: type/gdata_docs
   - description: Search API for 'Google Web Albums View' entry type
@@ -580,6 +590,274 @@ paths:
       summary: API for View GPS QC
       tags:
         - service/gps.teqc.qc
+  /repository/search/type/2017_boulder_election_expenditures:
+    get:
+      description: API to search for entries of type 2017 Boulder Election Expenditures
+      operationId: search_2017_boulder_election_expenditures
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Committee
+          in: query
+          name: search.db_2017_boulder_election_expenditures.committee
+          required: false
+          type: string
+        - description: Transaction Date
+          in: query
+          name: search.db_2017_boulder_election_expenditures.transaction_date
+          required: false
+          type: string
+        - description: Name
+          in: query
+          name: search.db_2017_boulder_election_expenditures.name
+          required: false
+          type: string
+        - description: Street
+          in: query
+          name: search.db_2017_boulder_election_expenditures.street
+          required: false
+          type: string
+        - description: City
+          in: query
+          name: search.db_2017_boulder_election_expenditures.city
+          required: false
+          type: string
+        - description: State
+          in: query
+          name: search.db_2017_boulder_election_expenditures.state
+          required: false
+          type: string
+        - description: Zip
+          in: query
+          name: search.db_2017_boulder_election_expenditures.zip
+          required: false
+          type: string
+        - description: Expenditure
+          format: double
+          in: query
+          name: search.db_2017_boulder_election_expenditures.expenditure
+          required: false
+          type: number
+        - description: Purpose
+          in: query
+          name: search.db_2017_boulder_election_expenditures.purpose
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for '2017 Boulder Election Expenditures' entry type
+      tags:
+        - type/2017_boulder_election_expenditures
+  /repository/search/type/any:
+    get:
+      description: API to search for entries of type Any file type
+      operationId: search_any
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Any file type' entry type
+      tags:
+        - type/any
   /repository/search/type/beforeafter:
     get:
       description: API to search for entries of type Before and After Images
@@ -3218,6 +3496,190 @@ paths:
       summary: Search API for 'Bookmarks' entry type
       tags:
         - type/bookmarks
+  /repository/search/type/boulder_2017_election_contributions:
+    get:
+      description: API to search for entries of type Boulder 2017 Election Contributions
+      operationId: search_boulder_2017_election_contributions
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Committee
+          in: query
+          name: search.db_boulder_2017_election_contributions.committee
+          required: false
+          type: string
+        - description: Last Name
+          in: query
+          name: search.db_boulder_2017_election_contributions.last_name
+          required: false
+          type: string
+        - description: First Name
+          in: query
+          name: search.db_boulder_2017_election_contributions.first_name
+          required: false
+          type: string
+        - description: Street
+          in: query
+          name: search.db_boulder_2017_election_contributions.street
+          required: false
+          type: string
+        - description: City
+          in: query
+          name: search.db_boulder_2017_election_contributions.city
+          required: false
+          type: string
+        - description: State
+          in: query
+          name: search.db_boulder_2017_election_contributions.state
+          required: false
+          type: string
+        - description: Zip
+          in: query
+          name: search.db_boulder_2017_election_contributions.zip
+          required: false
+          type: string
+        - description: Contribution Type
+          in: query
+          name: search.db_boulder_2017_election_contributions.contribution_type
+          required: false
+          type: string
+        - description: From Candidate
+          in: query
+          name: search.db_boulder_2017_election_contributions.from_candidate
+          required: false
+          type: string
+        - description: Date
+          in: query
+          name: search.db_boulder_2017_election_contributions.date
+          required: false
+          type: string
+        - description: Amount
+          format: double
+          in: query
+          name: search.db_boulder_2017_election_contributions.amount
+          required: false
+          type: number
+        - description: Match Amount
+          format: double
+          in: query
+          name: search.db_boulder_2017_election_contributions.match_amount
+          required: false
+          type: number
+        - description: Ytd Amount
+          format: double
+          in: query
+          name: search.db_boulder_2017_election_contributions.ytd_amount
+          required: false
+          type: number
+        - description: Location
+          in: query
+          name: search.db_boulder_2017_election_contributions.location
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Boulder 2017 Election Contributions' entry type
+      tags:
+        - type/boulder_2017_election_contributions
   /repository/search/type/boulder_consulting_services:
     get:
       description: API to search for entries of type Boulder Consulting Services Database
@@ -6356,6 +6818,317 @@ paths:
       summary: Search API for 'Weather' entry type
       tags:
         - type/gadgets_weather
+  /repository/search/type/gazeteer_census_tracts:
+    get:
+      description: API to search for entries of type Census Tracts
+      operationId: search_gazeteer_census_tracts
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: State
+          in: query
+          name: search.db_gazeteer_census_tracts.state
+          required: false
+          type: string
+        - description: State Fips
+          in: query
+          name: search.db_gazeteer_census_tracts.state_fips
+          required: false
+          type: string
+        - description: County Name
+          in: query
+          name: search.db_gazeteer_census_tracts.county_name
+          required: false
+          type: string
+        - description: County Fips
+          in: query
+          name: search.db_gazeteer_census_tracts.county_fips
+          required: false
+          type: string
+        - description: Census Tract Id
+          in: query
+          name: search.db_gazeteer_census_tracts.census_tract_id
+          required: false
+          type: string
+        - description: Full Census Tract Id
+          in: query
+          name: search.db_gazeteer_census_tracts.full_census_tract_id
+          required: false
+          type: string
+        - description: Land Area
+          format: double
+          in: query
+          name: search.db_gazeteer_census_tracts.land_area
+          required: false
+          type: number
+        - description: Water Area
+          format: double
+          in: query
+          name: search.db_gazeteer_census_tracts.water_area
+          required: false
+          type: number
+        - description: Location
+          in: query
+          name: search.db_gazeteer_census_tracts.location
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Census Tracts' entry type
+      tags:
+        - type/gazeteer_census_tracts
+  /repository/search/type/gazeteer_counties:
+    get:
+      description: API to search for entries of type Census Gazeteer Counties
+      operationId: search_gazeteer_counties
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: State Abbreviation
+          in: query
+          name: search.db_gazeteer_counties.state_abbreviation
+          required: false
+          type: string
+        - description: State Fips
+          in: query
+          name: search.db_gazeteer_counties.state_fips
+          required: false
+          type: string
+        - description: County Fips
+          in: query
+          name: search.db_gazeteer_counties.county_fips
+          required: false
+          type: string
+        - description: Full County Fips
+          in: query
+          name: search.db_gazeteer_counties.full_county_fips
+          required: false
+          type: string
+        - description: County Name
+          in: query
+          name: search.db_gazeteer_counties.county_name
+          required: false
+          type: string
+        - description: Area Land
+          format: double
+          in: query
+          name: search.db_gazeteer_counties.area_land
+          required: false
+          type: number
+        - description: Area Water
+          format: double
+          in: query
+          name: search.db_gazeteer_counties.area_water
+          required: false
+          type: number
+        - description: Location
+          in: query
+          name: search.db_gazeteer_counties.location
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Census Gazeteer Counties' entry type
+      tags:
+        - type/gazeteer_counties
   /repository/search/type/gdata_docs:
     get:
       description: API to search for entries of type Google Docs View
@@ -6789,6 +7562,42 @@ paths:
           name: skip
           required: false
           type: integer
+        - description: Distance
+          format: double
+          in: query
+          name: search.geo_gpx.distance
+          required: false
+          type: number
+        - description: Total Time
+          format: double
+          in: query
+          name: search.geo_gpx.total_time
+          required: false
+          type: number
+        - description: Moving Time
+          format: double
+          in: query
+          name: search.geo_gpx.moving_time
+          required: false
+          type: number
+        - description: Average Speed
+          format: double
+          in: query
+          name: search.geo_gpx.speed
+          required: false
+          type: number
+        - description: Elevation Gain
+          format: double
+          in: query
+          name: search.geo_gpx.elevation_gain
+          required: false
+          type: number
+        - description: Elevation Loss
+          format: double
+          in: query
+          name: search.geo_gpx.elevation_loss
+          required: false
+          type: number
       produces:
         - application/json
         - application/xml

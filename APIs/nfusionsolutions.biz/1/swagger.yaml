@@ -115,11 +115,6 @@ paths:
       description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
       operationId: 'ApiV{versionCurrenciesHistoryGet'
       parameters:
-        - description: '<b>REQUIRED</b> - comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
-          in: query
-          name: pairs
-          required: false
-          type: string
         - description: "optional - aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
           in: query
           name: interval
@@ -135,6 +130,11 @@ paths:
           format: date-time
           in: query
           name: end
+          required: false
+          type: string
+        - description: '<b>REQUIRED</b> - comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
+          in: query
+          name: pairs
           required: false
           type: string
         - description: <b>REQUIRED</b> - auth token
@@ -442,21 +442,6 @@ paths:
       description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.\r\n\r\nThe historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
       operationId: 'ApiV{versionMetalsSpotHistoryGet'
       parameters:
-        - description: <b>REQUIRED</b> - comma separated list of metals
-          in: query
-          name: metals
-          required: false
-          type: string
-        - description: 'optional - currency for pricing, defaults to USD'
-          in: query
-          name: currency
-          required: false
-          type: string
-        - description: "optional - unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
-          in: query
-          name: unitofmeasure
-          required: false
-          type: string
         - description: "optional - aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
           in: query
           name: interval
@@ -474,16 +459,31 @@ paths:
           name: end
           required: false
           type: string
+        - description: optional - if true use historical currency rates otherwise current currency rates. Defaults to false.
+          in: query
+          name: historicalfx
+          required: true
+          type: boolean
+        - description: <b>REQUIRED</b> - comma separated list of metals
+          in: query
+          name: metals
+          required: false
+          type: string
+        - description: 'optional - currency for pricing, defaults to USD'
+          in: query
+          name: currency
+          required: false
+          type: string
+        - description: "optional - unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          in: query
+          name: unitofmeasure
+          required: false
+          type: string
         - description: <b>REQUIRED</b> - auth token
           in: query
           name: token
           required: false
           type: string
-        - description: optional - if true use historical currency rates otherwise current currency rates. Defaults to false.
-          in: query
-          name: historicalfx
-          required: false
-          type: boolean
         - description: optional - to override content negotiation specify a value of json or xml
           in: query
           name: format
@@ -514,6 +514,11 @@ paths:
       description: Current and daily summary information combined into a single quote
       operationId: 'ApiV{versionMetalsSpotSummaryGet'
       parameters:
+        - description: optional - apply global and per-tenant spot price adjustments. Defaults to true.
+          in: query
+          name: adjust
+          required: false
+          type: boolean
         - description: <b>REQUIRED</b> - comma separated list of metals
           in: query
           name: metals
@@ -534,11 +539,6 @@ paths:
           name: token
           required: false
           type: string
-        - description: optional - apply global and per-tenant spot price adjustments. Defaults to true.
-          in: query
-          name: adjust
-          required: false
-          type: boolean
         - description: optional - to override content negotiation specify a value of json or xml
           in: query
           name: format

@@ -7,7 +7,7 @@ info:
   contact:
     name: Who Hosts This
     url: 'https://www.who-hosts-this.com/Contact'
-  description: Hosting provider discover
+  description: Discover the hosting provider for any web site
   title: Who Hosts This
   version: 0.0.1
   x-apisguru-categories:
@@ -35,7 +35,7 @@ securityDefinitions:
 security:
   - QueryKey: []
 paths:
-  /:
+  /Detect:
     get:
       parameters:
         - description: The url of the page to check
@@ -46,6 +46,12 @@ paths:
       responses:
         '200':
           description: Status of the detection and list of any found hosting providers
-      summary: Discover the hosting provider for any web site
+      summary: Discover the hosting provider for a web site
       tags:
         - hosting
+  /Status:
+    get:
+      responses:
+        '200':
+          description: Status of the detection and list of any found hosting providers
+      summary: View usage details for the current billing period

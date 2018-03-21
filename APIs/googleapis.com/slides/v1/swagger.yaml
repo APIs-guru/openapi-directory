@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://slides.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -138,8 +138,9 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Creates a new presentation using the title given in the request. Other
-        fields in the request are ignored.
+        Creates a new presentation using the title given in the request. If a
+        presentationId is provided, uses it as the ID of the new presentation.
+        Otherwise, a new presentationId is generated.
         Returns the created presentation.
       operationId: slides.presentations.create
       parameters:
@@ -570,7 +571,7 @@ definitions:
 
           The image is fetched once at insertion time and a copy is stored for
           display inside the presentation. Images must be less than 50MB in size,
-          cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+          cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
           format.
 
           The provided URL can be at most 2 kB in length.
@@ -2292,7 +2293,7 @@ definitions:
 
           The image is fetched once at insertion time and a copy is stored for
           display inside the presentation. Images must be less than 50MB in size,
-          cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+          cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
           format.
 
           The provided URL can be at most 2 kB in length.
@@ -2405,6 +2406,34 @@ definitions:
         format: int32
         type: integer
     type: object
+  ReplaceImageRequest:
+    description: |-
+      Replaces an existing image with a new image.
+
+      Replacing an image removes some image effects from the existing image.
+    properties:
+      imageObjectId:
+        description: The ID of the existing image that will be replaced.
+        type: string
+      imageReplaceMethod:
+        description: The replacement method.
+        enum:
+          - IMAGE_REPLACE_METHOD_UNSPECIFIED
+          - CENTER_INSIDE
+          - CENTER_CROP
+        type: string
+      url:
+        description: |-
+          The URL of the new image.
+
+          The image is fetched once at insertion time and a copy is stored for
+          display inside the presentation. Images must be less than 50MB in size,
+          cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
+          format.
+
+          The provided URL can be at most 2 kB in length.
+        type: string
+    type: object
   Request:
     description: A single kind of update to apply to a presentation.
     properties:
@@ -2477,6 +2506,9 @@ definitions:
       replaceAllText:
         $ref: '#/definitions/ReplaceAllTextRequest'
         description: Replaces all instances of specified text.
+      replaceImage:
+        $ref: '#/definitions/ReplaceImageRequest'
+        description: Replaces an existing image with a new image.
       ungroupObjects:
         $ref: '#/definitions/UngroupObjectsRequest'
         description: 'Ungroups objects, such as groups.'
@@ -3000,7 +3032,7 @@ definitions:
 
           The picture is fetched once at insertion time and a copy is stored for
           display inside the presentation. Pictures must be less than 50MB in size,
-          cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+          cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
           format.
 
           The provided URL can be at most 2 kB in length.
@@ -3997,11 +4029,38 @@ definitions:
   VideoProperties:
     description: The properties of the Video.
     properties:
+      autoPlay:
+        description: |-
+          Whether to enable video autoplay when the page is displayed in present
+          mode. Defaults to false.
+        type: boolean
+      end:
+        description: |-
+          The time at which to end playback, measured in seconds from the beginning
+          of the video.
+          If set, the end time should be after the start time.
+          If not set or if you set this to a value that exceeds the video's length,
+          the video will be played until its end.
+        format: uint32
+        type: integer
+      mute:
+        description: Whether to mute the audio during video playback. Defaults to false.
+        type: boolean
       outline:
         $ref: '#/definitions/Outline'
         description: |-
           The outline of the video. The default outline matches the defaults for new
           videos created in the Slides editor.
+      start:
+        description: |-
+          The time at which to start playback, measured in seconds from the beginning
+          of the video.
+          If set, the start time should be before the end time.
+          If you set this to a value that exceeds the video's length in seconds, the
+          video will be played from the last second.
+          If not set, the video will be played from the beginning.
+        format: uint32
+        type: integer
     type: object
   WeightedFontFamily:
     description: Represents a font family and weight used to style a TextRun.

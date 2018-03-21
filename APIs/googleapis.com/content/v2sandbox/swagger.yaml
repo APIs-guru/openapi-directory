@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2sandbox/rest'
       version: v1
@@ -994,7 +994,7 @@ definitions:
   OrderCustomer:
     properties:
       email:
-        description: Email address of the customer.
+        description: 'Email address that should be used for order related communications. In certain cases this might not be a real users email, but a proxy email.'
         type: string
       explicitMarketingPreference:
         description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the checkout flow.'

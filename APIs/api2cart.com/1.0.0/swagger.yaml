@@ -1463,6 +1463,11 @@ paths:
           name: accessToken
           required: false
           type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: access_token
+          required: false
+          type: string
         - description: Shopify API Key
           in: query
           name: apiKey_shopify
@@ -1585,6 +1590,11 @@ paths:
         - description: Demandware api password
           in: query
           name: dw_api_pass
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
           required: false
           type: string
       responses:
@@ -6303,9 +6313,15 @@ definitions:
         type: string
       country:
         type: string
+      country_iso2_codes:
+        items:
+          type: string
+        type: array
       custom_fields:
         type: object
       id:
+        type: string
+      name:
         type: string
     type: object
   Cart_StoreInfo:
@@ -6939,6 +6955,8 @@ definitions:
     properties:
       additional_fields:
         type: object
+      city:
+        type: string
       country:
         type: string
       custom_fields:

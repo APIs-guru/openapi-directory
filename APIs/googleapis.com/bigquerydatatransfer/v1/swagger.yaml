@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://bigquerydatatransfer.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -118,7 +118,7 @@ paths:
   '/v1/{name}':
     delete:
       description: Deletes the specified transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.delete
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.delete
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
@@ -142,7 +142,7 @@ paths:
         - projects
     get:
       description: Returns information about the particular transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.get
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.get
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
@@ -184,7 +184,7 @@ paths:
       description: |-
         Updates a data transfer configuration.
         All fields must be set, even if they are not updated.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.patch
+      operationId: bigquerydatatransfer.projects.transferConfigs.patch
       parameters:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
@@ -232,8 +232,6 @@ paths:
           schema:
             $ref: '#/definitions/TransferConfig'
       security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
@@ -312,7 +310,7 @@ paths:
         them on behalf of the end user. This API just checks whether we have OAuth
         token for the particular user, which is a pre-requisite before user can
         create a transfer config.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
+      operationId: bigquerydatatransfer.projects.dataSources.checkValidCreds
       parameters:
         - in: body
           name: body
@@ -345,7 +343,7 @@ paths:
       description: |-
         Lists supported data sources and returns their settings,
         which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.list
+      operationId: bigquerydatatransfer.projects.dataSources.list
       parameters:
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
@@ -399,20 +397,10 @@ paths:
   '/v1/{parent}/runs':
     get:
       description: Returns information about running and completed jobs.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.list
       parameters:
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            enum:
-              - TRANSFER_STATE_UNSPECIFIED
-              - PENDING
-              - RUNNING
-              - SUCCEEDED
-              - FAILED
-              - CANCELLED
-            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -421,9 +409,6 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
-          enum:
-            - RUN_ATTEMPT_UNSPECIFIED
-            - LATEST
           in: query
           name: pageToken
           type: string
@@ -488,7 +473,7 @@ paths:
   '/v1/{parent}/transferConfigs':
     get:
       description: Returns information about all data transfers in the project.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.list
       parameters:
         - collectionFormat: multi
           description: 'When specified, only configurations of requested data sources are returned.'
@@ -548,7 +533,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new data transfer configuration.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.create
+      operationId: bigquerydatatransfer.projects.transferConfigs.create
       parameters:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
@@ -591,15 +576,13 @@ paths:
             $ref: '#/definitions/TransferConfig'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/transferLogs':
     get:
       description: Returns user facing log messages for the data transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list
       parameters:
         - collectionFormat: multi
           description: |-
@@ -615,8 +598,16 @@ paths:
             type: string
           name: messageTypes
           type: array
-        - description: Page size. The default page size is the maximum value of 1000 results.
+        - collectionFormat: multi
+          description: Page size. The default page size is the maximum value of 1000 results.
           in: query
+          items:
+            enum:
+              - MESSAGE_SEVERITY_UNSPECIFIED
+              - INFO
+              - WARNING
+              - ERROR
+            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -685,7 +676,7 @@ paths:
         For each date - or whatever granularity the data source supports - in the
         range, one transfer run is created.
         Note that runs are created per UTC time in the time range.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns
+      operationId: bigquerydatatransfer.projects.transferConfigs.scheduleRuns
       parameters:
         - in: body
           name: body
@@ -821,10 +812,7 @@ definitions:
           to different BigQuery targets.
         type: boolean
       transferType:
-        description: |-
-          Transfer type. Currently supports only batch transfers,
-          which are transfers that use the BigQuery batch APIs (load or
-          query) to ingest the data.
+        description: Deprecated. This field has no effect.
         enum:
           - TRANSFER_TYPE_UNSPECIFIED
           - BATCH
@@ -1002,6 +990,11 @@ definitions:
   Location:
     description: A resource that represents Google Cloud Platform location.
     properties:
+      displayName:
+        description: |-
+          The friendly name for this location, typically a nearby city name.
+          For example, "Tokyo".
+        type: string
       labels:
         additionalProperties:
           type: string

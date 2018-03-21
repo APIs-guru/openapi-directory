@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: swagger
       url: 'https://semantria.com/developer/api-docs-prod'
       version: '1.2'
@@ -140,7 +140,7 @@ paths:
           name: Blacklisted items
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -181,7 +181,7 @@ paths:
           name: Blacklisted items
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -293,7 +293,7 @@ paths:
           name: Categories
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -334,7 +334,7 @@ paths:
           name: Categories
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -376,7 +376,7 @@ paths:
           name: Collection
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -566,7 +566,7 @@ paths:
           name: Configurations
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -602,7 +602,7 @@ paths:
           name: Configurations
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -644,7 +644,7 @@ paths:
           name: Document
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -682,7 +682,7 @@ paths:
           name: Batch of Documents
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -878,7 +878,7 @@ paths:
           name: User entities
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -919,7 +919,7 @@ paths:
           name: User entities
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1061,7 +1061,7 @@ paths:
           name: Sentiment phrases
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1102,7 +1102,7 @@ paths:
           name: Sentiment phrases
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1214,7 +1214,7 @@ paths:
           name: Queries
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1255,7 +1255,7 @@ paths:
           name: Queries
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1446,7 +1446,7 @@ paths:
           name: Taxonomy
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1487,7 +1487,7 @@ paths:
           name: Taxonomy
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -2883,6 +2883,7 @@ definitions:
     required:
       - entity_type
       - title
+  Request class: {}
   Request_class: {}
   Statistic:
     properties:

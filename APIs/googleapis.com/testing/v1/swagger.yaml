@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://testing.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -630,6 +630,12 @@ definitions:
         items:
           type: string
         type: array
+      videoRecordingNotSupported:
+        description: |-
+          True if and only if tests with this model DO NOT have video output.
+          See also TestSpecification.disable_video_recording
+          @OutputOnly
+        type: boolean
     type: object
   AndroidRoboTest:
     description: |-
@@ -675,6 +681,12 @@ definitions:
         items:
           $ref: '#/definitions/RoboDirective'
         type: array
+      roboScript:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          A JSON file with a sequence of actions Robo should perform as a prologue
+          for the crawl.
+          Optional
       startingIntents:
         description: |-
           The intents used to launch the app for the crawl.
@@ -785,6 +797,20 @@ definitions:
           A string representing this version of the Android OS.
           Examples: "4.3", "4.4"
           @OutputOnly
+        type: string
+    type: object
+  Apk:
+    description: An Android package file to install.
+    properties:
+      location:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          The path to an APK to be installed on the device before the test begins.
+          Optional
+      packageName:
+        description: |-
+          The java package for the APK to be installed.
+          Optional, value is determined by examining the application's manifest.
         type: string
     type: object
   ApkDetail:
@@ -906,6 +932,9 @@ definitions:
       obbFile:
         $ref: '#/definitions/ObbFile'
         description: A reference to an opaque binary blob file
+      regularFile:
+        $ref: '#/definitions/RegularFile'
+        description: A reference to a regular file
     type: object
   Distribution:
     description: |-
@@ -1109,6 +1138,34 @@ definitions:
           type: string
         type: array
     type: object
+  RegularFile:
+    description: A file or directory to install on the device before the test starts
+    properties:
+      content:
+        $ref: '#/definitions/FileReference'
+        description: Required
+      devicePath:
+        description: |-
+          Where to put the content on the device. Must be an absolute, whitelisted
+          path. If the file exists, it will be replaced.
+          The following device-side directories and any of their subdirectories are
+          whitelisted:
+          <p>${EXTERNAL_STORAGE}, or /sdcard</p>
+          <p>${ANDROID_DATA}/local/tmp, or /data/local/tmp</p>
+          <p>Specifying a path outside of these directory trees is invalid.
+
+          <p> The paths /sdcard and /data will be made available and treated as
+          implicit path substitutions. E.g. if /sdcard on a particular device does
+          not map to external storage, the system will replace it with the external
+          storage path prefix for that device and copy the file there.
+
+          <p> It is strongly advised to use the <a href=
+          "http://developer.android.com/reference/android/os/Environment.html">
+          Environment API</a> in app and test code to access files on the device in a
+          portable way.
+          Required
+        type: string
+    type: object
   ResultStorage:
     description: Locations where the results of running the test are stored.
     properties:
@@ -1209,6 +1266,13 @@ definitions:
         items:
           type: string
         type: array
+      videoRecordingDisabled:
+        description: |-
+          Indicates that video will not be recorded for this execution either because
+          the user chose to disable it or the device does not support it.
+          See AndroidModel.video_recording_not_supported
+          @OutputOnly
+        type: boolean
     type: object
   TestEnvironmentCatalog:
     description: A description of a test environment.
@@ -1377,13 +1441,21 @@ definitions:
         type: string
     type: object
   TestSetup:
-    description: A description of how to set up the device prior to running the test
+    description: A description of how to set up the Android device prior to running the test.
     properties:
       account:
         $ref: '#/definitions/Account'
         description: |-
           The device will be logged in on this account for the duration of the test.
           Optional
+      additionalApks:
+        description: |-
+          APKs to install in addition to those being directly tested.
+          Currently capped at 100.
+          Optional
+        items:
+          $ref: '#/definitions/Apk'
+        type: array
       directoriesToPull:
         description: |-
           List of directories on the device to upload to GCS at the end of the test;
@@ -1453,7 +1525,8 @@ definitions:
       testSetup:
         $ref: '#/definitions/TestSetup'
         description: |-
-          Test setup requirements e.g. files to install, bootstrap scripts
+          Test setup requirements for Android e.g. files to install, bootstrap
+          scripts.
           Optional
       testTimeout:
         description: |-

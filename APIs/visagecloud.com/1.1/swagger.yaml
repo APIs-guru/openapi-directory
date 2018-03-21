@@ -275,6 +275,12 @@ paths:
           name: storeResult
           required: false
           type: boolean
+        - description: How many seconds the results should be retained in stoarage?
+          format: int32
+          in: query
+          name: retentionTime
+          required: false
+          type: integer
         - description: 'The URL of the picture, assuming it is served by a third party server. Server should be accesible from the Internet or through another netwoek by VisageCloud infrastructure'
           in: query
           name: pictureURL
@@ -410,6 +416,12 @@ paths:
           name: storeResult
           required: false
           type: boolean
+        - description: How many seconds the results should be retained in stoarage?
+          format: int32
+          in: query
+          name: retentionTime
+          required: false
+          type: integer
         - description: Uniquely identified collection that can store multiple profiles
           in: query
           name: collectionId

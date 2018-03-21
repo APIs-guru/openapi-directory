@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/DfsSlatesByDate/{date}':
     get:
-      operationId: DFS Slates by Date
+      operationId: 5a05c07b35491a1818cb7dcd
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -61,9 +61,10 @@ paths:
             items:
               $ref: '#/definitions/DfsSlate'
             type: array
+      summary: DFS Slates by Date
   '/{format}/PlayerGameProjectionStatsByDate/{date}':
     get:
-      operationId: 'Projected Player Game Stats by Date (w/ Injuries, DFS Salaries)'
+      operationId: 584f6e9c14338d0e1053f0d7
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -86,9 +87,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
+      summary: 'Projected Player Game Stats by Date (w/ Injuries, DFS Salaries)'
   '/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}':
     get:
-      operationId: 'Projected Player Game Stats by Player (w/ Injuries, DFS Salaries)'
+      operationId: 584f6e9c14338d0e1053f0d8
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -114,6 +116,7 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayerGameProjection'
+      summary: 'Projected Player Game Stats by Player (w/ Injuries, DFS Salaries)'
 definitions:
   DfsSlate:
     properties:

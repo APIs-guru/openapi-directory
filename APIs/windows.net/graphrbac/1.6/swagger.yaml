@@ -46,6 +46,7 @@ parameters:
     name: tenantID
     required: true
     type: string
+    x-ms-parameter-location: client
 paths:
   '/{tenantID}/applications':
     get:
@@ -1444,6 +1445,10 @@ definitions:
       type: object
     description: Active Directory Key Credential information.
     properties:
+      customKeyIdentifier:
+        description: Custom Key Identifier
+        format: byte
+        type: string
       endDate:
         description: End date.
         format: date-time

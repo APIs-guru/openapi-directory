@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://manufacturers.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -265,19 +265,22 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
-        Uploads the product in a Manufacturer Center account.
+        Inserts or updates the attributes of the product in a Manufacturer Center
+        account.
 
-        The checks at upload time are minimal. All required attributes need to be
-        present for a product to be valid. Issues may show up later
-        after the API has accepted a new upload for a product and it is possible to
-        overwrite an existing valid product with an invalid product. To detect
-        this, you should retrieve the product and check it for issues once the
-        new version is available.
+        Creates a product with the provided attributes. If the product already
+        exists, then all attributes are replaced with the new ones. The checks at
+        upload time are minimal. All required attributes need to be present for a
+        product to be valid. Issues may show up later after the API has accepted a
+        new upload for a product and it is possible to overwrite an existing valid
+        product with an invalid product. To detect this, you should retrieve the
+        product and check it for issues once the new version is available.
 
-        Uploaded products first need to be processed before they can be
+        Uploaded attributes first need to be processed before they can be
         retrieved. Until then, new products will be unavailable, and retrieval
-        of uploaded products will return the original state of the product.
-      operationId: manufacturers.accounts.products.uploadProduct
+        of previously uploaded products will return the original state of the
+        product.
+      operationId: manufacturers.accounts.products.update
       parameters:
         - in: body
           name: body

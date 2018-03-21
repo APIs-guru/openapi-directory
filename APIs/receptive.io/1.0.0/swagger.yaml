@@ -214,6 +214,47 @@ paths:
       summary: Overwrite current custom Account tags with the given tags
       tags:
         - account
+  /features:
+    get:
+      parameters:
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/start'
+        - $ref: '#/parameters/order_dir'
+        - description: 'Filter by whether the features are shown/hidden from customer, if supplied.'
+          in: query
+          name: is_private
+          required: false
+          type: boolean
+        - description: 'Filter by User ID, if supplied.'
+          in: query
+          name: wanted_by
+          required: false
+          type: integer
+        - description: The field to use for sort
+          enum:
+            - title
+            - created_at
+            - updated_at
+            - declined_at
+            - developing_at
+            - planned_at
+            - released_at
+            - waiting_at
+            - deleted_at
+          in: query
+          name: order_by
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Feature'
+            type: array
+      summary: Query features
+      tags:
+        - feature
   '/features/{id}':
     get:
       parameters:
@@ -629,6 +670,18 @@ paths:
           name: negative
           required: false
           type: boolean
+        - description: Offset to start at
+          in: query
+          minimum: 0
+          name: start
+          required: false
+          type: number
+        - description: Limit the number of records returned
+          in: query
+          minimum: 0
+          name: limit
+          required: false
+          type: number
       responses:
         '200':
           description: Vote records

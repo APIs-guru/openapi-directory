@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: tpu.googleapis.com
+host: content-tpu.googleapis.com
 basePath: /
 info:
   contact:
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://tpu.googleapis.com/$discovery/rest?version=v1alpha1'
       version: v1
@@ -139,13 +139,10 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: tpu.projects.locations.operations.get
+      description: Gets AcceleratorType.
+      operationId: tpu.projects.locations.acceleratorTypes.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The resource name.
           in: path
           name: name
           required: true
@@ -155,7 +152,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/AcceleratorType'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -480,6 +477,57 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1alpha1/{parent}/acceleratorTypes':
+    get:
+      description: Lists accelerator types supported by this API.
+      operationId: tpu.projects.locations.acceleratorTypes.list
+      parameters:
+        - description: List filter.
+          in: query
+          name: filter
+          type: string
+        - description: Sort results.
+          in: query
+          name: orderBy
+          type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous List request, if any.'
+          in: query
+          name: pageToken
+          type: string
+        - description: The parent resource name.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListAcceleratorTypesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1alpha1/{parent}/nodes':
     get:
       description: Lists nodes.
@@ -603,6 +651,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
 definitions:
+  AcceleratorType:
+    description: A accelerator type that a Node can be configured with.
+    properties:
+      name:
+        description: The resource name.
+        type: string
+      type:
+        description: the accelerator type.
+        type: string
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -615,6 +673,18 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  ListAcceleratorTypesResponse:
+    description: Response for ListAcceleratorTypes.
+    properties:
+      acceleratorTypes:
+        description: The listed nodes.
+        items:
+          $ref: '#/definitions/AcceleratorType'
+        type: array
+      nextPageToken:
+        description: The next page token or empty if none.
+        type: string
     type: object
   ListLocationsResponse:
     description: The response message for Locations.ListLocations.
@@ -667,6 +737,11 @@ definitions:
   Location:
     description: A resource that represents Google Cloud Platform location.
     properties:
+      displayName:
+        description: |-
+          The friendly name for this location, typically a nearby city name.
+          For example, "Tokyo".
+        type: string
       labels:
         additionalProperties:
           type: string

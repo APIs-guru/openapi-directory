@@ -11,7 +11,7 @@ info:
   description: 'The Stripe REST API. Please see https://stripe.com/docs/api for more details.'
   termsOfService: 'https://stripe.com/us/terms/'
   title: Stripe
-  version: '2018-02-06'
+  version: '2018-02-28'
   x-apisguru-categories:
     - financial
   x-logo:
@@ -116,7 +116,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/account'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -145,7 +145,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      description: '<p>Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can only be changed for Custom accounts. Parameters marked <b>Custom and Express</b> are supported by both. To update your own account, use the <a href="%= Opus::DaemonCommon.stripe_link(''dashboard.stripe.com'', ''/account'') %">Dashboard</a>.</p><p>Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>'
+      description: '<p>Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can only be changed for Custom accounts. Parameters marked <b>Custom and Express</b> are supported by both. To update your own account, use the <a href="https://dashboard.stripe.com/account">Dashboard</a>.</p><p>Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>'
       parameters:
         - description: Body parameters for the request.
           in: body
@@ -1980,7 +1980,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/external_account_source'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -2182,7 +2182,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/external_account_source'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -2374,8 +2374,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/accounts
                 type: string
             required:
               - data
@@ -4206,7 +4204,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/account'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -4235,7 +4233,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      description: '<p>Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can only be changed for Custom accounts. Parameters marked <b>Custom and Express</b> are supported by both. To update your own account, use the <a href="%= Opus::DaemonCommon.stripe_link(''dashboard.stripe.com'', ''/account'') %">Dashboard</a>.</p><p>Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>'
+      description: '<p>Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can only be changed for Custom accounts. Parameters marked <b>Custom and Express</b> are supported by both. To update your own account, use the <a href="https://dashboard.stripe.com/account">Dashboard</a>.</p><p>Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>'
       parameters:
         - in: path
           name: account
@@ -6080,7 +6078,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/external_account_source'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -6302,7 +6300,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/external_account_source'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -6541,8 +6539,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/apple_pay/domains
                 type: string
             required:
               - data
@@ -6609,7 +6605,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/apple_pay_domain'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -6691,8 +6687,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/application_fees
                 type: string
             required:
               - data
@@ -7019,8 +7013,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/balance/history
                 type: string
             required:
               - data
@@ -7121,8 +7113,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/bitcoin/receivers
                 type: string
             required:
               - data
@@ -7362,8 +7352,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/charges
                 type: string
             required:
               - data
@@ -7627,7 +7615,7 @@ paths:
                 description: 'A set of key/value pairs you can attach to a charge giving information about its riskiness. If you believe a charge is fraudulent, include a `user_report` key with a value of `fraudulent`. If you believe a charge is safe, include a `user_report` key with a value of `safe`. Note that you must refund a charge before setting the `user_report` to `fraudulent`. Stripe will use the information you send to improve our fraud detection algorithms.'
                 type: object
               metadata:
-                description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to metadata.
+                description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                 type: object
               receipt_email:
                 description: 'This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.'
@@ -8137,8 +8125,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/country_specs
                 type: string
             required:
               - data
@@ -8192,7 +8178,7 @@ paths:
           in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
           in: query
           name: ending_before
@@ -8227,8 +8213,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/coupons
                 type: string
             required:
               - data
@@ -8324,7 +8308,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/coupon'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -8439,8 +8423,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/customers
                 type: string
             required:
               - data
@@ -8556,7 +8538,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/customer'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -9234,7 +9216,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/discount'
+            $ref: '#/definitions/deleted_no_id_object'
         default:
           description: Error response.
           schema:
@@ -9754,7 +9736,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/subscription'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -9787,7 +9769,10 @@ paths:
                   - send_invoice
                 type: string
               billing_cycle_anchor:
-                description: 'String, `unchanged` (default) or `now`. This allows you to reset the [billing cycle](/docs/subscriptions/billing-cycle#prorations) of a subscription.'
+                description: 'String, `unchanged` (default) or `now`. This allows you to reset the [billing cycle](/docs/subscriptions/billing-cycle) of a subscription.'
+              cancel_at_period_end:
+                description: Boolean indicating whether this subscription should cancel at the end of the current period.
+                type: boolean
               coupon:
                 description: The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
                 type: string
@@ -9870,7 +9855,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/discount'
+            $ref: '#/definitions/deleted_no_id_object'
         default:
           description: Error response.
           schema:
@@ -9950,8 +9935,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/disputes
                 type: string
             required:
               - data
@@ -10177,7 +10160,7 @@ paths:
   /v1/events:
     get:
       description: '<p>List events, going back up to 30 days.</p>'
-      operationId: AllEvents
+      operationId: NotificationEventAll
       parameters:
         - description: Specifies which fields in the response should be expanded.
           in: query
@@ -10188,7 +10171,7 @@ paths:
         - in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
           in: query
           name: ending_before
@@ -10222,7 +10205,7 @@ paths:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/event'
+                  $ref: '#/definitions/notification_event'
                 type: array
               has_more:
                 description: True if this list has another page of items after this one that can be fetched.
@@ -10234,8 +10217,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/events
                 type: string
             required:
               - data
@@ -10252,7 +10233,7 @@ paths:
   '/v1/events/{id}':
     get:
       description: '<p>Retrieves the details of an event. Supply the unique identifier of the event, which you might have received in a webhook.</p>'
-      operationId: RetrieveEvent
+      operationId: NotificationEventRetrieve
       parameters:
         - description: Specifies which fields in the response should be expanded.
           in: query
@@ -10269,7 +10250,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/event'
+            $ref: '#/definitions/notification_event'
         default:
           description: Error response.
           schema:
@@ -10277,7 +10258,7 @@ paths:
   '/v1/events/{id}/retry':
     post:
       description: <p>Resend an event. This only works in testmode</p>
-      operationId: RetryEvent
+      operationId: NotificationEventRetry
       parameters:
         - in: path
           name: id
@@ -10298,7 +10279,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/event'
+            $ref: '#/definitions/notification_event'
         default:
           description: Error response.
           schema:
@@ -10348,8 +10329,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/exchange_rates
                 type: string
             required:
               - data
@@ -10413,6 +10392,11 @@ paths:
           name: ending_before
           required: false
           type: string
+        - description: 'Only return invoice items belonging to this invoice. If none is provided, all invoice items will be returned. If specifying an invoice, no customer identifier is needed.'
+          in: query
+          name: invoice
+          required: false
+          type: string
         - description: 'A limit on the number of objects to be returned. Limit can range between 1 and 100 items, and the default is 10 items.'
           in: query
           name: limit
@@ -10442,8 +10426,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/invoiceitems
                 type: string
             required:
               - data
@@ -10493,11 +10475,16 @@ paths:
               metadata:
                 description: A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format.
                 type: object
+              quantity:
+                description: Non-negative integer. The quantity of units for the invoice item.
+                type: integer
               subscription:
                 description: 'The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.'
                 type: string
+              unit_amount:
+                description: 'The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer''s account, pass a negative unit_amount.'
+                type: integer
             required:
-              - amount
               - currency
               - customer
       responses:
@@ -10534,7 +10521,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/invoice_item'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -10594,6 +10581,12 @@ paths:
               metadata:
                 description: A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format.
                 type: object
+              quantity:
+                description: Non-negative integer. The quantity of units for the invoice item.
+                type: integer
+              unit_amount:
+                description: 'The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer''s account, pass a negative unit_amount.'
+                type: integer
       responses:
         '200':
           description: Successful response.
@@ -10671,8 +10664,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/invoices
                 type: string
             required:
               - data
@@ -10854,8 +10845,14 @@ paths:
               closed:
                 description: 'Boolean representing whether an invoice is closed or not. To close an invoice, pass true.'
                 type: boolean
+              days_until_due:
+                description: The number of days from which the invoice is created until it is due. Only valid for invoices where `billing=send_invoice`.
+                type: integer
               description:
                 type: string
+              due_date:
+                description: The date on which payment for this invoice is due. Only valid for invoices where `billing=send_invoice`.
+                type: integer
               expand:
                 description: Specifies which fields in the response should be expanded.
                 items:
@@ -11076,8 +11073,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/order_returns
                 type: string
             required:
               - data
@@ -11131,7 +11126,7 @@ paths:
           in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: Only return orders for the given customer.
           in: query
           name: customer
@@ -11193,8 +11188,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/orders
                 type: string
             required:
               - data
@@ -11482,74 +11475,6 @@ paths:
           schema:
             $ref: '#/definitions/error'
   /v1/payments:
-    get:
-      description: ''
-      operationId: AllPayments
-      parameters:
-        - description: Specifies which fields in the response should be expanded.
-          in: query
-          items: {}
-          name: expand
-          required: false
-          type: array
-        - description: Only return payments for the customer specified by this customer ID.
-          in: query
-          name: customer
-          required: false
-          type: string
-        - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
-          in: query
-          name: ending_before
-          required: false
-          type: string
-        - description: 'A limit on the number of objects to be returned. Limit can range between 1 and 100 items, and the default is 10 items.'
-          in: query
-          name: limit
-          required: false
-          type: integer
-        - description: 'A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.'
-          in: query
-          name: starting_after
-          required: false
-          type: string
-        - in: query
-          name: transfer_group
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Successful response.
-          schema:
-            properties:
-              data:
-                items:
-                  $ref: '#/definitions/charge'
-                type: array
-              has_more:
-                description: True if this list has another page of items after this one that can be fetched.
-                type: boolean
-              object:
-                description: String representing the object's type. Objects of the same type share the same value. Always has the value "list".
-                enum:
-                  - list
-                type: string
-              url:
-                description: The URL where this list can be accessed.
-                enum:
-                  - /v1/payments
-                type: string
-            required:
-              - data
-              - has_more
-              - object
-              - url
-            type: object
-            x-expandableFields:
-              - data
-        default:
-          description: Error response.
-          schema:
-            $ref: '#/definitions/error'
     post:
       description: ''
       operationId: CreatePayment
@@ -11788,11 +11713,11 @@ paths:
         - in: query
           name: arrival_date
           required: false
-          type: string
+          type: integer
         - in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: The ID of an external account - only return payouts sent to this external account.
           in: query
           name: destination
@@ -11837,8 +11762,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/payouts
                 type: string
             required:
               - data
@@ -12016,7 +11939,7 @@ paths:
           in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
           in: query
           name: ending_before
@@ -12056,8 +11979,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/plans
                 type: string
             required:
               - data
@@ -12156,7 +12077,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/plan'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -12189,7 +12110,7 @@ paths:
       description: '<p>Updates the specified plan by setting the values of the parameters passed. Any parameters not provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or billing cycle.</p>'
       operationId: UpdatePlan
       parameters:
-        - description: The identifier of the plan to be updated. May only be set if type=`service`.
+        - description: The identifier of the plan to be updated.
           in: path
           name: plan
           required: true
@@ -12206,10 +12127,10 @@ paths:
                   type: string
                 type: array
               metadata:
-                description: A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. Applicable to both `service` and `good` types.
+                description: 'A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. '
                 type: object
               name:
-                description: The plan name. Customers may see this value on Stripe-generated invoices and receipts. Applicable to both `service` and `good` types.
+                description: 'The plan name. Customers may see this value on Stripe-generated invoices and receipts. '
                 type: string
               nickname:
                 description: 'A brief description of the plan, hidden from customers.'
@@ -12218,7 +12139,7 @@ paths:
                 description: 'The product the plan belongs to. Note that after updating, statement descriptors and line items of the plan in active subscriptions will be affected.'
                 type: string
               statement_descriptor:
-                description: 'An arbitrary string to be displayed on your customer''s credit card statement. This may be up to 22 characters. The statement description may not include <>"'' characters, and will appear on your customer''s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all. May only be set if type=`service`.'
+                description: 'An arbitrary string to be displayed on your customer''s credit card statement. This may be up to 22 characters. The statement description may not include <>"'' characters, and will appear on your customer''s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all.'
                 type: string
       responses:
         '200':
@@ -12249,7 +12170,7 @@ paths:
           in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
           in: query
           name: ending_before
@@ -12305,8 +12226,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/products
                 type: string
             required:
               - data
@@ -12438,7 +12357,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/product'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -12558,7 +12477,7 @@ paths:
         - in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
           in: query
           name: ending_before
@@ -12602,8 +12521,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/recipients
                 type: string
             required:
               - data
@@ -12685,7 +12602,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/transfer_recipient'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -12710,7 +12627,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/transfer_recipient'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -12810,8 +12727,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/refunds
                 type: string
             required:
               - data
@@ -12997,8 +12912,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/skus
                 type: string
             required:
               - data
@@ -13128,7 +13041,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/sku'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -13152,7 +13065,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/sku'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -13717,8 +13630,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/subscription_items
                 type: string
             required:
               - data
@@ -13808,7 +13719,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/subscription_item'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -13950,8 +13861,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/subscriptions
                 type: string
             required:
               - data
@@ -14090,7 +13999,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/subscription'
+            $ref: '#/definitions/deleted_object'
         default:
           description: Error response.
           schema:
@@ -14119,7 +14028,10 @@ paths:
                   - send_invoice
                 type: string
               billing_cycle_anchor:
-                description: 'String, `unchanged` (default) or `now`. This allows you to reset the [billing cycle](/docs/subscriptions/billing-cycle#prorations) of a subscription.'
+                description: 'String, `unchanged` (default) or `now`. This allows you to reset the [billing cycle](/docs/subscriptions/billing-cycle) of a subscription.'
+              cancel_at_period_end:
+                description: Boolean indicating whether this subscription should cancel at the end of the current period.
+                type: boolean
               coupon:
                 description: The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
                 type: string
@@ -14199,7 +14111,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/discount'
+            $ref: '#/definitions/deleted_no_id_object'
         default:
           description: Error response.
           schema:
@@ -15965,14 +15877,16 @@ paths:
           name: expand
           required: false
           type: array
-        - in: query
+        - description: A positive integer in %s representing how much to transfer.
+          in: query
           name: amount
           required: false
-          type: string
-        - in: query
+          type: integer
+        - description: 'A filter on the list based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.'
+          in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: 'A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.'
           in: query
           name: ending_before
@@ -15988,7 +15902,8 @@ paths:
           name: starting_after
           required: false
           type: string
-        - in: query
+        - description: 'Only return top-ups that have the given status. One of `failed`, `pending` or `succeeded`.'
+          in: query
           name: status
           required: false
           type: string
@@ -16011,8 +15926,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/topups
                 type: string
             required:
               - data
@@ -16038,12 +15951,13 @@ paths:
           schema:
             properties:
               amount:
+                description: A positive integer in %s representing how much to transfer.
                 type: integer
-              bank_account:
-                type: string
               currency:
+                description: 'Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).'
                 type: string
               description:
+                description: An arbitrary string attached to the object. Often useful for displaying to users.
                 type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
@@ -16051,10 +15965,13 @@ paths:
                   type: string
                 type: array
               metadata:
+                description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format.
                 type: object
               source:
+                description: The source to transfer funds from.
                 type: string
               statement_descriptor:
+                description: Extra information about a top-up for the source's bank statement.
                 type: string
             required:
               - amount
@@ -16110,13 +16027,16 @@ paths:
           required: false
           schema:
             properties:
+              description:
+                description: An arbitrary string attached to the object. Often useful for displaying to users.
+                type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
                 items:
                   type: string
                 type: array
               metadata:
-                description: A set of key/value pairs that you can attach to a topup object. It can be useful for storing additional information about the topup in a structured format.
+                description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format.
                 type: object
       responses:
         '200':
@@ -16141,7 +16061,7 @@ paths:
         - in: query
           name: created
           required: false
-          type: string
+          type: integer
         - description: Only return transfers for the destination specified by this account ID.
           in: query
           name: destination
@@ -16186,8 +16106,6 @@ paths:
                 type: string
               url:
                 description: The URL where this list can be accessed.
-                enum:
-                  - /v1/transfers
                 type: string
             required:
               - data
@@ -16203,7 +16121,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      description: ''
+      description: '<p>To send funds from your Stripe account to a connected account, you create a new transfer object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.</p>'
       operationId: TransferCreate
       parameters:
         - description: Body parameters for the request.
@@ -16213,12 +16131,13 @@ paths:
           schema:
             properties:
               amount:
+                description: A positive integer in %s representing how much to transfer.
                 type: integer
               currency:
-                type: string
-              description:
+                description: '3-letter [ISO code for currency](/docs/payouts).'
                 type: string
               destination:
+                description: The ID of a connected Stripe account. <a href="/docs/connect/charges-transfers">See the Connect documentation</a> for details.
                 type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
@@ -16226,19 +16145,13 @@ paths:
                   type: string
                 type: array
               metadata:
+                description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                 type: object
               source_transaction:
-                type: string
-              source_type:
-                enum:
-                  - alipay_account
-                  - bank_account
-                  - bitcoin_receiver
-                  - card
-                  - source
-                  - stripe_account
+                description: 'You can use this parameter to transfer funds from a charge before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available. [See the Connect documentation](/docs/connect/charges-transfers#transfer-availability) for details.'
                 type: string
               transfer_group:
+                description: 'A string that identifies this transaction as part of a group. See the [Connect documentation](/docs/connect/charges-transfers#grouping-transactions) for details.'
                 type: string
             required:
               - amount
@@ -16256,7 +16169,7 @@ paths:
   '/v1/transfers/{id}/reversals':
     get:
       description: '<p>You can see a list of the reversals belonging to a specific transfer. Note that the 10 most recent reversals are always available by default on the transfer object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional reversals.</p>'
-      operationId: AllTransferReversals
+      operationId: TransferReversalAll
       parameters:
         - description: Specifies which fields in the response should be expanded.
           in: query
@@ -16318,10 +16231,11 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      description: ''
+      description: '<p>When you create a new reversal, you must specify a transfer to create it on.</p><p>When reversing transfers, you can optionally reverse part of the transfer. You can do so as many times as you wish until the entire transfer has been reversed.</p><p>Once entirely reversed, a transfer can’t be reversed again. This method will return an error when called on an already-reversed transfer, or when trying to reverse more money than is left on a transfer.</p>'
       operationId: CreateTransferReversal
       parameters:
-        - in: path
+        - description: The ID of the transfer to be reversed.
+          in: path
           name: id
           required: true
           type: string
@@ -16332,8 +16246,10 @@ paths:
           schema:
             properties:
               amount:
+                description: A positive integer in %s representing how much of this transfer to reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed for transfers to Stripe Accounts.
                 type: integer
               description:
+                description: An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the Dashboard. This will be unset if you POST an empty value.
                 type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
@@ -16341,8 +16257,10 @@ paths:
                   type: string
                 type: array
               metadata:
+                description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                 type: object
               refund_application_fee:
+                description: 'Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.'
                 type: boolean
       responses:
         '200':
@@ -16379,10 +16297,11 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      description: ''
+      description: <p>Updates the specified transfer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p><p>This request accepts only metadata as an argument.</p>
       operationId: UpdateTransfer
       parameters:
-        - in: path
+        - description: The ID of the transfer to be updated.
+          in: path
           name: transfer
           required: true
           type: string
@@ -16398,6 +16317,7 @@ paths:
                   type: string
                 type: array
               metadata:
+                description: Set of key/value pairs that you can attach to an object. It can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                 type: object
       responses:
         '200':
@@ -16411,7 +16331,7 @@ paths:
   '/v1/transfers/{transfer}/reversals/{id}':
     get:
       description: '<p>By default, you can see the 10 most recent reversals stored directly on the transfer object, but you can also retrieve details about a specific reversal stored on the transfer.</p>'
-      operationId: RetrieveTransferReversal
+      operationId: TransferReversalRetrieve
       parameters:
         - description: Specifies which fields in the response should be expanded.
           in: query
@@ -16440,13 +16360,15 @@ paths:
             $ref: '#/definitions/error'
     post:
       description: <p>Updates the specified reversal by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p><p>This request only accepts metadata and description as arguments.</p>
-      operationId: UpdateTransferReversal
+      operationId: TransferReversalUpdate
       parameters:
-        - in: path
+        - description: The ID of the transfer reversal to be updated.
+          in: path
           name: id
           required: true
           type: string
-        - in: path
+        - description: The ID of the transfer the transfer reversal is for.
+          in: path
           name: transfer
           required: true
           type: string
@@ -17399,7 +17321,7 @@ definitions:
           type: string
         type: array
       brand:
-        description: 'Card brand. Can be `Visa`, `American Express`, `MasterCard`, `Discover`, `JCB`, `Diners Club`, or `Unknown`.'
+        description: 'Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.'
         type: string
       country:
         description: Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
@@ -17620,7 +17542,7 @@ definitions:
         type: string
         x-expansionResources:
           oneOf:
-            - $ref: '#/definitions/review'
+            - $ref: '#/definitions/radar_review'
       shipping:
         $ref: '#/definitions/shipping'
       source:
@@ -17697,7 +17619,7 @@ definitions:
         type: string
         x-expansionResources:
           oneOf:
-            - $ref: '#/definitions/rule'
+            - $ref: '#/definitions/radar_rule'
       seller_message:
         description: 'A human-readable description of the outcome type and reason, designed for you (the recipient of the payment), not your customer.'
         type: string
@@ -18042,6 +17964,29 @@ definitions:
         - $ref: '#/definitions/card'
         - $ref: '#/definitions/source'
     x-resourceId: customer_source_create
+  deleted_no_id_object:
+    properties:
+      deleted:
+        enum:
+          - true
+        type: boolean
+    required:
+      - deleted
+    type: object
+    x-resourceId: deleted_no_id_object
+  deleted_object:
+    properties:
+      deleted:
+        enum:
+          - true
+        type: boolean
+      id:
+        type: string
+    required:
+      - deleted
+      - id
+    type: object
+    x-resourceId: deleted_object
   delivery_estimate:
     properties:
       date:
@@ -18418,73 +18363,6 @@ definitions:
     required:
       - error
     type: object
-  event:
-    properties:
-      api_version:
-        description: 'The Stripe API version used to render `data`. *Note: this property is populated for events on or after October 31, 2014*.'
-        type: string
-      created:
-        description: Time at which the object was created. Measured in seconds since the Unix epoch.
-        type: integer
-      data:
-        $ref: '#/definitions/event_data'
-      id:
-        description: Unique identifier for the object.
-        type: string
-      livemode:
-        description: Flag indicating whether the object exists in live mode or test mode.
-        type: boolean
-      object:
-        description: String representing the object's type. Objects of the same type share the same value.
-        enum:
-          - event
-        type: string
-      pending_webhooks:
-        description: Number of webhooks yet to be delivered successfully (return a 20x response) to the URLs you've specified.
-        type: integer
-      request:
-        $ref: '#/definitions/event_request'
-      type:
-        description: 'Description of the event (e.g., `invoice.created` or `charge.refunded`).'
-        type: string
-    required:
-      - created
-      - data
-      - id
-      - livemode
-      - object
-      - pending_webhooks
-      - type
-    title: Event
-    type: object
-    x-expandableFields:
-      - data
-      - request
-    x-resourceId: event
-  event_data:
-    properties:
-      object:
-        description: 'Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](#invoice_object) as the value of the object key.'
-        type: object
-      previous_attributes:
-        description: Object containing the names of the attributes that have changed and their previous values (only sent along with *.updated events)
-        type: object
-    required:
-      - object
-    title: EventData
-    type: object
-    x-expandableFields: []
-  event_request:
-    properties:
-      id:
-        description: 'ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe''s automatic subscription handling). Request logs are available in the [dashboard](https://dashboard.stripe.com/logs) but currently not in the API.'
-        type: string
-      idempotency_key:
-        description: 'The idempotency key transmitted during the request, if any. *Note: this proprety is only populated for events on or after May 23, 2017*.'
-        type: string
-    title: EventRequest
-    type: object
-    x-expandableFields: []
   exchange_rate:
     properties:
       id:
@@ -18653,7 +18531,7 @@ definitions:
         description: The size in bytes of the file upload object.
         type: integer
       type:
-        description: 'The type of the file returned. Returns one of the following: `jpg`, `png`, ``, `pdf`, `csv`, `xls`, `xlsx`, or `docx`.'
+        description: 'The type of the file returned. Returns one of the following: `jpg`, `png`, `gif`, `pdf`, `csv`, `xls`, `xlsx`, or `docx`.'
         type: string
       url:
         description: A read-only URL where the uploaded file can be accessed. Will be nil if the purpose of the uploaded file is `identity_document`. Also nil if retrieved with the publishable API key.
@@ -18726,7 +18604,7 @@ definitions:
       discount:
         $ref: '#/definitions/discount'
       due_date:
-        description: The date on which payment for this invoice is due. This value will be `null` for invoices where `billing=charå†ge_automatically`.
+        description: The date on which payment for this invoice is due. This value will be `null` for invoices where `billing=charge_automatically`.
         type: integer
       ending_balance:
         description: 'Ending customer balance after the invoice is frozen. Invoices are frozen approximately an hour after successful webhook delivery or when payment collection is attempted for the invoice. If the invoice has not been frozen yet, this will be null.'
@@ -18854,7 +18732,7 @@ definitions:
   invoice_item:
     properties:
       amount:
-        description: Amount (in the `currency` specified) of the invoice item.
+        description: Amount (in the `currency` specified) of the invoice item. This should always be equal to `unit_amount * quantity`.
         type: integer
       currency:
         description: 'Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).'
@@ -18901,7 +18779,7 @@ definitions:
         description: Whether the invoice item was created automatically as a proration adjustment when the customer switched plans.
         type: boolean
       quantity:
-        description: 'If the invoice item is a proration, the quantity of the subscription that the proration was computed for.'
+        description: 'Quantity of units for the invoice item. If the invoice item is a proration, the quantity of the subscription that the proration was computed for.'
         type: integer
       subscription:
         description: 'The subscription that this invoice item has been created for, if any.'
@@ -18911,6 +18789,9 @@ definitions:
             - $ref: '#/definitions/subscription'
       subscription_item:
         type: string
+      unit_amount:
+        description: Unit Amount (in the `currency` specified) of the invoice item.
+        type: integer
     required:
       - amount
       - currency
@@ -18922,6 +18803,8 @@ definitions:
       - metadata
       - object
       - proration
+      - quantity
+      - unit_amount
     title: InvoiceItem
     type: object
     x-expandableFields:
@@ -19298,6 +19181,73 @@ definitions:
     type: object
     x-expandableFields: []
     x-resourceId: login_link
+  notification_event:
+    properties:
+      api_version:
+        description: 'The Stripe API version used to render `data`. *Note: this property is populated for events on or after October 31, 2014*.'
+        type: string
+      created:
+        description: Time at which the object was created. Measured in seconds since the Unix epoch.
+        type: integer
+      data:
+        $ref: '#/definitions/notification_event_data'
+      id:
+        description: Unique identifier for the object.
+        type: string
+      livemode:
+        description: Flag indicating whether the object exists in live mode or test mode.
+        type: boolean
+      object:
+        description: String representing the object's type. Objects of the same type share the same value.
+        enum:
+          - event
+        type: string
+      pending_webhooks:
+        description: Number of webhooks yet to be delivered successfully (return a 20x response) to the URLs you've specified.
+        type: integer
+      request:
+        $ref: '#/definitions/notification_event_request'
+      type:
+        description: 'Description of the event (e.g., `invoice.created` or `charge.refunded`).'
+        type: string
+    required:
+      - created
+      - data
+      - id
+      - livemode
+      - object
+      - pending_webhooks
+      - type
+    title: NotificationEvent
+    type: object
+    x-expandableFields:
+      - data
+      - request
+    x-resourceId: notification_event
+  notification_event_data:
+    properties:
+      object:
+        description: 'Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](#invoice_object) as the value of the object key.'
+        type: object
+      previous_attributes:
+        description: Object containing the names of the attributes that have changed and their previous values (only sent along with *.updated events)
+        type: object
+    required:
+      - object
+    title: NotificationEventData
+    type: object
+    x-expandableFields: []
+  notification_event_request:
+    properties:
+      id:
+        description: 'ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe''s automatic subscription handling). Request logs are available in the [dashboard](https://dashboard.stripe.com/logs) but currently not in the API.'
+        type: string
+      idempotency_key:
+        description: 'The idempotency key transmitted during the request, if any. *Note: this proprety is only populated for events on or after May 23, 2017*.'
+        type: string
+    title: NotificationEventRequest
+    type: object
+    x-expandableFields: []
   order:
     properties:
       amount:
@@ -20005,6 +19955,64 @@ definitions:
       - package_dimensions
       - skus
     x-resourceId: product
+  radar_review:
+    properties:
+      charge:
+        description: The charge associated with this review.
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/charge'
+      created:
+        description: Time at which the object was created. Measured in seconds since the Unix epoch.
+        type: integer
+      id:
+        description: Unique identifier for the object.
+        type: string
+      livemode:
+        description: Flag indicating whether the object exists in live mode or test mode.
+        type: boolean
+      object:
+        description: String representing the object's type. Objects of the same type share the same value.
+        enum:
+          - review
+        type: string
+      open:
+        description: 'If `true`, the review needs action.'
+        type: boolean
+      reason:
+        description: 'The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, or `disputed`.'
+        type: string
+    required:
+      - charge
+      - created
+      - id
+      - livemode
+      - object
+      - open
+      - reason
+    title: RadarReview
+    type: object
+    x-expandableFields:
+      - charge
+  radar_rule:
+    properties:
+      action:
+        description: The action taken on the payment.
+        type: string
+      id:
+        description: Unique identifier for the object.
+        type: string
+      predicate:
+        description: The predicate to evaluate the payment against.
+        type: string
+    required:
+      - action
+      - id
+      - predicate
+    title: RadarRule
+    type: object
+    x-expandableFields: []
   refund:
     properties:
       amount:
@@ -20095,64 +20103,6 @@ definitions:
       - id
       - object
     title: ReserveTransaction
-    type: object
-    x-expandableFields: []
-  review:
-    properties:
-      charge:
-        description: The charge associated with this review.
-        type: string
-        x-expansionResources:
-          oneOf:
-            - $ref: '#/definitions/charge'
-      created:
-        description: Time at which the object was created. Measured in seconds since the Unix epoch.
-        type: integer
-      id:
-        description: Unique identifier for the object.
-        type: string
-      livemode:
-        description: Flag indicating whether the object exists in live mode or test mode.
-        type: boolean
-      object:
-        description: String representing the object's type. Objects of the same type share the same value.
-        enum:
-          - review
-        type: string
-      open:
-        description: 'If `true`, the review needs action.'
-        type: boolean
-      reason:
-        description: 'The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, or `disputed`.'
-        type: string
-    required:
-      - charge
-      - created
-      - id
-      - livemode
-      - object
-      - open
-      - reason
-    title: Review
-    type: object
-    x-expandableFields:
-      - charge
-  rule:
-    properties:
-      action:
-        description: 'The action (`allow`, `block`, or `manual_review`) taken on the payment.'
-        type: string
-      id:
-        description: Unique identifier for the object.
-        type: string
-      predicate:
-        description: The predicate to evaluate the payment against.
-        type: string
-    required:
-      - action
-      - id
-      - predicate
-    title: Rule
     type: object
     x-expandableFields: []
   shipping:
@@ -20282,6 +20232,19 @@ definitions:
           routing_number:
             type: string
           swift_code:
+            type: string
+        type: object
+      ach_debit:
+        properties:
+          country:
+            type: string
+          fingerprint:
+            type: string
+          last4:
+            type: string
+          routing_number:
+            type: string
+          type:
             type: string
         type: object
       alipay:
@@ -20450,6 +20413,25 @@ definitions:
         $ref: '#/definitions/source_receiver_flow'
       redirect:
         $ref: '#/definitions/source_redirect_flow'
+      sepa_debit:
+        properties:
+          bank_code:
+            type: string
+          branch_code:
+            type: string
+          country:
+            type: string
+          fingerprint:
+            type: string
+          last4:
+            type: string
+          mandate_reference:
+            type: string
+          mandate_url:
+            type: string
+          skip_validation:
+            type: boolean
+        type: object
       sofort:
         properties:
           bank_code:
@@ -20486,6 +20468,7 @@ definitions:
         description: 'The `type` of the source. The `type` is a payment method, one of `card`, `three_d_secure`, `giropay`, `sepa_debit`, `ideal`, `sofort`, `bancontact`, or `alipay`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](/docs/sources) used.'
         enum:
           - ach_credit_transfer
+          - ach_debit
           - alipay
           - bancontact
           - bitcoin
@@ -20495,6 +20478,7 @@ definitions:
           - ideal
           - multibanco
           - p24
+          - sepa_debit
           - sofort
           - three_d_secure
         type: string
@@ -20662,6 +20646,19 @@ definitions:
           swift_code:
             type: string
         type: object
+      ach_debit:
+        properties:
+          country:
+            type: string
+          fingerprint:
+            type: string
+          last4:
+            type: string
+          routing_number:
+            type: string
+          type:
+            type: string
+        type: object
       alipay:
         properties:
           data_string:
@@ -20811,6 +20808,25 @@ definitions:
           reference:
             type: string
         type: object
+      sepa_debit:
+        properties:
+          bank_code:
+            type: string
+          branch_code:
+            type: string
+          country:
+            type: string
+          fingerprint:
+            type: string
+          last4:
+            type: string
+          mandate_reference:
+            type: string
+          mandate_url:
+            type: string
+          skip_validation:
+            type: boolean
+        type: object
       sofort:
         properties:
           bank_code:
@@ -20844,6 +20860,7 @@ definitions:
         description: The type of source this transaction is attached to.
         enum:
           - ach_credit_transfer
+          - ach_debit
           - alipay
           - bancontact
           - bitcoin
@@ -20853,6 +20870,7 @@ definitions:
           - ideal
           - multibanco
           - p24
+          - sepa_debit
           - sofort
           - three_d_secure
         type: string
@@ -21203,7 +21221,7 @@ definitions:
         description: 'If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.'
         type: string
       brand:
-        description: 'Card brand. Can be `Visa`, `American Express`, `MasterCard`, `Discover`, `JCB`, `Diners Club`, or `Unknown`.'
+        description: 'Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.'
         type: string
       country:
         description: Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
@@ -21267,7 +21285,7 @@ definitions:
         description: 'Amount transferred, in %s.'
         type: integer
       balance_transaction:
-        description: ID of the balance transaction that describes the impact of this topup on your account balance.
+        description: ID of the balance transaction that describes the impact of this top-up on your account balance.
         type: string
         x-expansionResources:
           oneOf:
@@ -21278,13 +21296,17 @@ definitions:
       currency:
         description: 'Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).'
         type: string
+      description:
+        description: An arbitrary string attached to the object. Often useful for displaying to users.
+        type: string
       expected_availability_date:
+        description: Date the funds are expected to arrive in your Stripe account for payouts. This factors in delays like weekends or bank holidays.
         type: integer
       failure_code:
-        description: 'Error code explaining reason for topup failure if available (see [the errors section](/docs/api#errors) for a list of codes).'
+        description: 'Error code explaining reason for top up failure if available (see [the errors section](/docs/api#errors) for a list of codes).'
         type: string
       failure_message:
-        description: Message to user further explaining reason for topup failure if available.
+        description: Message to user further explaining reason for top up failure if available.
         type: string
       id:
         description: Unique identifier for the object.
@@ -21303,8 +21325,10 @@ definitions:
       source:
         $ref: '#/definitions/source'
       statement_descriptor:
+        description: Extra information about a top-up. This will appear on your source's bank statement. It must contain at least one letter.
         type: string
       status:
+        description: 'The status of the top-up is either `failed`, `pending` or `succeeded`.'
         type: string
     required:
       - amount
@@ -21783,7 +21807,7 @@ definitions:
       discount:
         $ref: '#/definitions/discount'
       due_date:
-        description: The date on which payment for this invoice is due. This value will be `null` for invoices where `billing=charå†ge_automatically`.
+        description: The date on which payment for this invoice is due. This value will be `null` for invoices where `billing=charge_automatically`.
         type: integer
       ending_balance:
         description: 'Ending customer balance after the invoice is frozen. Invoices are frozen approximately an hour after successful webhook delivery or when payment collection is attempted for the invoice. If the invoice has not been frozen yet, this will be null.'

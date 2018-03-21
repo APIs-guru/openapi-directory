@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/DriverRaceProjections/{raceid}':
     get:
-      operationId: Driver Race Projections (Entry List)
+      operationId: 5899e4f635491a0fa8b093dc
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -61,9 +61,10 @@ paths:
             items:
               $ref: '#/definitions/DriverRaceProjection'
             type: array
+      summary: Driver Race Projections (Entry List)
   '/{format}/driver/{driverid}':
     get:
-      operationId: Driver Details
+      operationId: 577e898535491a039c951a00
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -86,9 +87,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/Driver'
+      summary: Driver Details
   '/{format}/drivers':
     get:
-      operationId: Drivers
+      operationId: 577e895e35491a039c9519ff
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -106,9 +108,10 @@ paths:
             items:
               $ref: '#/definitions/Driver'
             type: array
+      summary: Drivers
   '/{format}/raceresult/{raceid}':
     get:
-      operationId: Race Results
+      operationId: 577e8a4e35491a039c951a01
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -131,9 +134,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/RaceResult'
+      summary: Race Results
   '/{format}/races/{season}':
     get:
-      operationId: Races / Schedule
+      operationId: 577e891635491a039c9519fe
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -158,9 +162,10 @@ paths:
             items:
               $ref: '#/definitions/Race'
             type: array
+      summary: Races / Schedule
   '/{format}/series':
     get:
-      operationId: Series
+      operationId: 577e88e635491a039c9519fd
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -178,6 +183,7 @@ paths:
             items:
               $ref: '#/definitions/Series'
             type: array
+      summary: Series
 definitions:
   Driver:
     properties:
