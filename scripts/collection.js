@@ -225,7 +225,7 @@ function updateCollection(dir, command) {
     .then(leadPairs => {
       if (command.resume) {
         _.remove(leadPairs, function(lp){
-          return (lp[0] < command.resume);
+          return (lp[0] <= command.resume+'zzzz');
         });
       }
       return leadPairs;
@@ -1237,6 +1237,6 @@ process.on('exit', function() {
       console.log('Deleted? '+d);
     }
   }
-  console.log('Exiting with '+process.exitCode||0);
+  console.log('Exiting with '+(process.exitCode||0));
 });
 
