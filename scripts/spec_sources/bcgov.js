@@ -15,8 +15,8 @@ module.exports = function () {
         'x-serviceName': filename.split('/')[0],
         'x-origin': [{
           url: util.rawGitHubUrl('bcgov', 'api-specs', 'master', filename),
-          format: 'swagger',
-          version: '2.0'
+          format: 'openapi',
+          version: '3.0'
         }]
       }
     }
