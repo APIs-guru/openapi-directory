@@ -1232,7 +1232,7 @@ process.on('exit', function() {
       console.log(w);
     }
   }
-  if (specSources.deletions.length) {
+  if (!process.exitCode && specSources.deletions.length) {
     for (var d of specSources.deletions) {
       console.log('Deleted? '+d);
     }
