@@ -48,6 +48,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -156,6 +157,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Automation account name.
           in: path
           name: automationAccountName
@@ -215,6 +217,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -315,6 +318,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -396,4 +400,27 @@ paths:
             type: object
       tags:
         - HybridRunbookWorkerGroup
+      x-ms-examples:
+        Update hybrid worker group:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: testaccount
+            hybridRunbookWorkerGroupName: TestHybridGroup
+            parameters:
+              credential:
+                name: myRunAsCredentialName
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                credential:
+                  name: myRunAsCredentialName
+                hybridRunbookWorkers:
+                  - ip: 100.1.1.1
+                    name: TestHybridWorker
+                    registrationTime: '2017-03-24T12:43:45.0146578-07:00'
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup
+                name: TestHybridGroup
+              headers: {}
 definitions: {}

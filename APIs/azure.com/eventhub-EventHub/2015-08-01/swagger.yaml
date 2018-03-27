@@ -1236,6 +1236,44 @@ paths:
                     - Listen
                     - Send
                 type: Microsoft.EventHub/AuthorizationRules
+    post:
+      description: Gets an AuthorizationRule for an Event Hub by rule name.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt706097.aspx'
+      operationId: EventHubs_PosttAuthorizationRule
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/eventHubNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Event Hub AuthorizationRule successfully returned.
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - EventHubs
+      x-ms-examples:
+        EventHubAutorizationRuleGet:
+          parameters:
+            api-version: '2015-08-01'
+            authorizationRuleName: sdk-Authrules9261
+            eventHubName: sdk-EventHub8887
+            namespaceName: sdk-Namespace2290
+            resourceGroupName: Default-ServiceBus-WestUS
+            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
+          responses:
+            '200':
+              body:
+                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace2290/eventhubs/sdk-EventHub8887/authorizationRules/sdk-Authrules9261
+                name: sdk-Authrules9261
+                properties:
+                  rights:
+                    - Listen
+                    - Send
+                type: Microsoft.EventHub/AuthorizationRules
     put:
       description: Creates or updates an AuthorizationRule for the specified Event Hub.
       externalDocs:

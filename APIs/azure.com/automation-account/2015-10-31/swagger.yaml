@@ -1632,6 +1632,97 @@ paths:
                 tags: {}
                 type: Microsoft.Automation/AutomationAccounts
               headers: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/listKeys':
+    post:
+      description: Retrieve the automation keys for an account.
+      operationId: Keys_ListByAutomationAccount
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              value:
+                description: Lists the automation keys.
+                items:
+                  description: Automation key which is used to register a DSC Node
+                  properties:
+                    keyName:
+                      description: Automation key name.
+                      enum:
+                        - primary
+                        - secondary
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: AutomationKeyName
+                    permissions:
+                      description: Automation key permissions.
+                      enum:
+                        - Full
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: AutomationKeyPermissions
+                    value:
+                      description: Value of the Automation Key used for registration.
+                      type: string
+                type: array
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - ListKeys
+      x-ms-examples:
+        Get usages of an automation account:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: MyAutomationAccount
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                keys:
+                  - KeyName: Primary
+                    Permissions: Full
+                    Value: '**************************************************************'
+                  - KeyName: Secondary
+                    Permissions: Full
+                    Value: '**************************************************************'
+              headers: {}
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/statistics':
     get:
       description: Retrieve the statistics for the account.

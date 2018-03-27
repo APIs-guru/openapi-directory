@@ -56,11 +56,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Client Api Version.
           in: query
           name: api-version
@@ -71,6 +73,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
         - description: 'The filter to apply on the operation. You can use the following filters: ''properties/osType'', ''properties/status'', ''properties/startTime'', and ''properties/softwareUpdateConfiguration/name'''
           in: query
           name: $filter
@@ -286,11 +289,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The Id of the software update configuration run.
           format: uuid
           in: path
@@ -307,6 +312,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: A single software update configuration Run.

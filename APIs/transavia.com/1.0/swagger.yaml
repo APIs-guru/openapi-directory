@@ -38,7 +38,7 @@ paths:
   /:
     get:
       description: Retrieve all airports.
-      operationId: 58d8bcb7a9e6240e200cff24
+      operationId: All airports
       responses:
         '200':
           description: OK
@@ -52,11 +52,10 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerErrorResponse'
-      summary: All airports
   '/countrycode/{countryCode}':
     get:
       description: Retrieve airports by country code.
-      operationId: 58d8bcb8a9e6240e200cff26
+      operationId: Airport(s) by country code.
       parameters:
         - description: Comma-separated list of country codes (2-character ISO 3166-1). More than 3 country codes is not allowed.
           in: path
@@ -76,11 +75,10 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerErrorResponse'
-      summary: Airport(s) by country code.
   /nearest:
     get:
       description: Retrieve nearest airports by geo coordinates (latitude/longitude).
-      operationId: 58d8bcb8a9e6240e200cff27
+      operationId: Nearest airport(s) by geo coordinates.
       parameters:
         - description: 'Latitude in decimals, lower than -90.0 and higher than 90.0 is not allowed.'
           in: query
@@ -111,11 +109,10 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerErrorResponse'
-      summary: Nearest airport(s) by geo coordinates.
   '/nearest/{id}':
     get:
       description: Retrieve nearest airports by station id.
-      operationId: 58d8bcb8a9e6240e200cff28
+      operationId: Nearest airport(s) by airport id.
       parameters:
         - description: Airport (IATA code) to search nearest airports for.
           in: path
@@ -143,11 +140,10 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerErrorResponse'
-      summary: Nearest airport(s) by airport id.
   '/{id}':
     get:
       description: Retrieve airport by id.
-      operationId: 58d8bcb7a9e6240e200cff25
+      operationId: Airport by id.
       parameters:
         - description: Airport code (3-character IATA code).
           in: path
@@ -167,7 +163,6 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerErrorResponse'
-      summary: Airport by id.
 definitions:
   AirportDetailsDto:
     properties:

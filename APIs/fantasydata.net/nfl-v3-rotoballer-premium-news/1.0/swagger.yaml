@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/RotoBallerPremiumNews':
     get:
-      operationId: 596958af35491a09e8d4d50d
+      operationId: Premium News
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -54,10 +54,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: Premium News
   '/{format}/RotoBallerPremiumNewsByDate/{date}':
     get:
-      operationId: 596958f235491a09e8d4d50f
+      operationId: Premium News by Date
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -82,10 +81,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: Premium News by Date
   '/{format}/RotoBallerPremiumNewsByPlayerID/{playerid}':
     get:
-      operationId: 596958ef35491a09e8d4d50e
+      operationId: Premium News by Player
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -110,10 +108,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: Premium News by Player
   '/{format}/RotoBallerPremiumNewsByTeam/{team}':
     get:
-      operationId: 59699cde35491a16c40cc117
+      operationId: Premium News by Team
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -136,7 +133,6 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: Premium News by Team
 definitions:
   News:
     properties:

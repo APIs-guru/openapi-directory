@@ -34,6 +34,7 @@ parameters:
     name: timeout
     required: false
     type: integer
+    x-ms-parameter-location: client
 paths:
   /$/GetClusterHealth:
     get:

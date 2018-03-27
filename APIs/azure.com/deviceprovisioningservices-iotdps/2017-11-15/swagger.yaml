@@ -719,7 +719,7 @@ paths:
     get:
       consumes: []
       description: Get all the certificates tied to the provisioning service.
-      operationId: DpsCertificates_List
+      operationId: DpsCertificate_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - description: Name of resource group.
@@ -1593,10 +1593,10 @@ definitions:
           name: state
     type: object
   IotDpsSkuDefinition:
-    description: Available Sku's of tier and units.
+    description: Available SKU's of tier and units.
     properties:
       name:
-        description: Sku name.
+        description: SKU name.
         enum:
           - S1
         type: string
@@ -1641,14 +1641,14 @@ definitions:
     description: Description of the IoT hub.
     properties:
       allocationWeight:
-        description: weight to apply for a given iot h.
+        description: Weight to apply for a given IoT hub.
         format: int32
         type: integer
       applyAllocationPolicy:
-        description: flag for applying allocationPolicy or not for a given iot hub.
+        description: Flag for applying allocationPolicy or not for a given IoT hub.
         type: boolean
       connectionString:
-        description: Connection string og the IoT hub.
+        description: Connection string of the IoT hub.
         type: string
       location:
         description: ARM region of the IoT hub.
@@ -1738,7 +1738,7 @@ definitions:
         description: Service specific properties for a provisioning service
       sku:
         $ref: '#/definitions/IotDpsSkuInfo'
-        description: Sku info for a provisioning Service.
+        description: SKU info for a provisioning service.
     required:
       - sku
       - properties

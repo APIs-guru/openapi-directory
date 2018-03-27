@@ -68,7 +68,7 @@ paths:
                 <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b37
+      operationId: Halo 5 - Match Result - Arena
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -262,7 +262,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Match Result - Arena
   '/h5/campaign/matches/{matchId}':
     get:
       description: |
@@ -295,7 +294,7 @@ paths:
                 <li>Added documentation for the "GameVariantResourceId", "MapVariantResourceId", and "PlayerScore" fields.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b38
+      operationId: Halo 5 - Match Result - Campaign
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -424,7 +423,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Match Result - Campaign
   '/h5/companies/{companyId}':
     get:
       description: |
@@ -437,7 +435,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 596968ade2f7f7051870d29f
+      operationId: Halo 5 - Company
       parameters:
         - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
           in: path
@@ -535,7 +533,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Company
   '/h5/companies/{companyId}/commendations':
     get:
       description: |
@@ -548,7 +545,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 596968ade2f7f7051870d2a0
+      operationId: Halo 5 - Company Commendations
       parameters:
         - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
           in: path
@@ -582,7 +579,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Company Commendations
   '/h5/custom/matches/{matchId}':
     get:
       description: |
@@ -617,7 +613,7 @@ paths:
                 <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b39
+      operationId: Halo 5 - Match Result - Custom
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -754,7 +750,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Match Result - Custom
   '/h5/customlocal/matches/{matchId}':
     get:
       description: |
@@ -767,7 +762,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 5a3d9a2e51059d1090806fe8
+      operationId: Halo 5 - Match Result - Custom Local
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -904,7 +899,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Match Result - Custom Local
   '/h5/matches/{matchId}/events':
     get:
       description: |
@@ -939,7 +933,7 @@ paths:
                 <li>Fixed an issue that caused the API to consistently return HTTP 500's for matches where a player left and rejoined the match.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b36
+      operationId: Halo 5 - Match Events
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -1001,7 +995,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Match Events
   '/h5/player-leaderboards/csr/{seasonId}/{playlistId}':
     get:
       description: |
@@ -1033,7 +1026,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b35
+      operationId: Halo 5 - Leaderboard - Player CSR
       parameters:
         - description: The ID for the Season.
           in: path
@@ -1083,7 +1076,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Leaderboard - Player CSR
   '/h5/players/{player}/commendations':
     get:
       description: |
@@ -1096,7 +1088,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 596968ade2f7f7051870d2a1
+      operationId: Halo 5 - Player Commendations
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -1130,7 +1122,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Player Commendations
   '/h5/players/{player}/matches':
     get:
       description: |
@@ -1158,7 +1149,7 @@ paths:
                 <li>Corrected "OwnerType" values for the "MapVariant" and "GameVariant" fields.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b3b
+      operationId: Halo 5 - Player Match History
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -1423,7 +1414,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Player Match History
   /h5/servicerecords/arena:
     get:
       description: |
@@ -1449,7 +1439,7 @@ paths:
                 <li>Added documentation for the "CsrPercentile" field.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b3c
+      operationId: Halo 5 - Player Service Records - Arena
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -2341,7 +2331,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Player Service Records - Arena
   /h5/servicerecords/campaign:
     get:
       description: |
@@ -2361,7 +2350,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b3d
+      operationId: Halo 5 - Player Service Records - Campaign
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -2551,7 +2540,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Player Service Records - Campaign
   /h5/servicerecords/custom:
     get:
       description: |
@@ -2571,7 +2559,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b3e
+      operationId: Halo 5 - Player Service Records - Custom
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -2750,7 +2738,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Player Service Records - Custom
   /h5/servicerecords/customlocal:
     get:
       description: |
@@ -2763,7 +2750,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 5a3d9a2e51059d1090806fe9
+      operationId: Halo 5 - Player Service Records - Custom Local
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -2942,7 +2929,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Player Service Records - Custom Local
   /h5/servicerecords/warzone:
     get:
       description: |
@@ -2962,7 +2948,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b3f
+      operationId: Halo 5 - Player Service Records - Warzone
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -3137,7 +3123,6 @@ paths:
           description: One or more Gamertags don't pass validation rules.
         '500':
           description: Internal Server Error
-      summary: Halo 5 - Player Service Records - Warzone
   '/h5/warzone/matches/{matchId}':
     get:
       description: |
@@ -3172,7 +3157,7 @@ paths:
                 <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b3a
+      operationId: Halo 5 - Match Result - Warzone
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -3355,7 +3340,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 - Match Result - Warzone
   '/h5pc/custom/matches/{matchId}':
     get:
       description: |
@@ -3390,7 +3374,7 @@ paths:
                 <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b40
+      operationId: Halo 5 PC - Match Result - Custom
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 PC - Player Match History" Endpoint.
           in: path
@@ -3527,7 +3511,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 PC - Match Result - Custom
   '/h5pc/players/{player}/matches':
     get:
       description: |
@@ -3555,7 +3538,7 @@ paths:
                 <li>Corrected "OwnerType" values for the "MapVariant" and "GameVariant" fields.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b41
+      operationId: Halo 5 PC - Player Match History
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -3820,7 +3803,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 PC - Player Match History
   /h5pc/servicerecords/custom:
     get:
       description: |
@@ -3840,7 +3822,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b42
+      operationId: Halo 5 PC - Player Service Records - Custom
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -4019,7 +4001,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo 5 PC - Player Service Records - Custom
   '/hw2/matches/{matchId}':
     get:
       description: |
@@ -4038,7 +4019,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b44
+      operationId: Halo Wars 2 - Match Result
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
           in: path
@@ -4137,7 +4118,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Match Result
   '/hw2/matches/{matchId}/events':
     get:
       description: |
@@ -4157,7 +4137,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b43
+      operationId: Halo Wars 2 - Match Events
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
           in: path
@@ -4178,7 +4158,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Match Events
   '/hw2/player-leaderboards/csr/{seasonId}/{playlistId}':
     get:
       description: |
@@ -4203,7 +4182,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 596968ade2f7f7051870d2a2
+      operationId: Halo Wars 2 - Leaderboard - Player CSR
       parameters:
         - description: The ID for the Season.
           in: path
@@ -4253,7 +4232,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Leaderboard - Player CSR
   '/hw2/players/{player}/campaign-progress':
     get:
       description: |
@@ -4266,7 +4244,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b45
+      operationId: Halo Wars 2 - Player Campaign Progress
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -4305,7 +4283,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Player Campaign Progress
   '/hw2/players/{player}/matches':
     get:
       description: |
@@ -4324,7 +4301,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b46
+      operationId: Halo Wars 2 - Player Match History
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -4428,7 +4405,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Player Match History
   '/hw2/players/{player}/stats':
     get:
       description: |
@@ -4448,7 +4424,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b49
+      operationId: Halo Wars 2 - Player Stats Summary
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -4486,7 +4462,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Player Stats Summary
   '/hw2/players/{player}/stats/seasons/{seasonId}':
     get:
       description: |
@@ -4507,7 +4482,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b48
+      operationId: Halo Wars 2 - Player Season Stats Summary
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -4563,7 +4538,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Player Season Stats Summary
   '/hw2/playlist/{playlistId}/rating':
     get:
       description: |
@@ -4576,7 +4550,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b47
+      operationId: Halo Wars 2 - Player Playlist Ratings
       parameters:
         - description: The ID of the Playlist to get Ratings for.
           in: path
@@ -4614,7 +4588,6 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Player Playlist Ratings
   /hw2/xp:
     get:
       description: |
@@ -4627,7 +4600,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58acdf28e2f7f70db4854b4a
+      operationId: Halo Wars 2 - Player XPs
       parameters:
         - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be specified.
           in: query
@@ -4654,4 +4627,3 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-      summary: Halo Wars 2 - Player XPs

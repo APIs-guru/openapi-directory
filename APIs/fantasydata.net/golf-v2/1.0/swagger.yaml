@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/DfsSlatesByTournament/{tournamentid}':
     get:
-      operationId: 5aa1970e14338d10688ae08d
+      operationId: DFS Slates
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -59,10 +59,9 @@ paths:
             items:
               $ref: '#/definitions/DfsSlate'
             type: array
-      summary: DFS Slates
   '/{format}/Injuries':
     get:
-      operationId: 56acdf6d35491a182489bd01
+      operationId: Injuries
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -80,10 +79,9 @@ paths:
             items:
               $ref: '#/definitions/Injury'
             type: array
-      summary: Injuries
   '/{format}/InjuriesByHistorical':
     get:
-      operationId: 56acdf9935491a182489bd02
+      operationId: Injuries (Historical)
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -101,10 +99,9 @@ paths:
             items:
               $ref: '#/definitions/Injury'
             type: array
-      summary: Injuries (Historical)
   '/{format}/Leaderboard/{tournamentid}':
     get:
-      operationId: 566b44d214338d0d6cda60ea
+      operationId: Leaderboard
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -125,10 +122,9 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/Leaderboard'
-      summary: Leaderboard
   '/{format}/News':
     get:
-      operationId: 566f59df35491a245c49e48a
+      operationId: News
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -146,10 +142,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: News
   '/{format}/NewsByDate/{date}':
     get:
-      operationId: 566f59db35491a245c49e489
+      operationId: News by Date
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -174,10 +169,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: News by Date
   '/{format}/NewsByPlayerID/{playerid}':
     get:
-      operationId: 566f59b235491a245c49e488
+      operationId: News by Player
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -202,10 +196,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: News by Player
   '/{format}/Player/{playerid}':
     get:
-      operationId: 566b44d014338d0d6cda60e9
+      operationId: Player
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -228,10 +221,9 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/Player'
-      summary: Player
   '/{format}/PlayerSeasonStats/{season}':
     get:
-      operationId: 5913755735491a1868fe8258
+      operationId: Player Season Stats (w/ World Golf Rankings)
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -256,10 +248,9 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeason'
             type: array
-      summary: Player Season Stats (w/ World Golf Rankings)
   '/{format}/PlayerTournamentProjectionStats/{tournamentid}':
     get:
-      operationId: 573b918f35491a07c459c2fa
+      operationId: Player Tournament Projected Stats (w/ DraftKings Salaries)
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -282,10 +273,9 @@ paths:
             items:
               $ref: '#/definitions/PlayerTournamentProjection'
             type: array
-      summary: Player Tournament Projected Stats (w/ DraftKings Salaries)
   '/{format}/PlayerTournamentStatsByPlayer/{tournamentid}/{playerid}':
     get:
-      operationId: 56ace16214338d1bc05fc412
+      operationId: Player Tournament Stats By Player
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -313,10 +303,9 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayerTournament'
-      summary: Player Tournament Stats By Player
   '/{format}/Players':
     get:
-      operationId: 566b44cb14338d0d6cda60e8
+      operationId: Players
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -334,10 +323,9 @@ paths:
             items:
               $ref: '#/definitions/Player'
             type: array
-      summary: Players
   '/{format}/Tournaments':
     get:
-      operationId: 566b43ab14338d0d6cda60e7
+      operationId: Schedule
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -355,10 +343,9 @@ paths:
             items:
               $ref: '#/definitions/Tournament'
             type: array
-      summary: Schedule
   '/{format}/Tournaments/{season}':
     get:
-      operationId: 5aa1970514338d10688ae08c
+      operationId: Schedule by Season
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -383,7 +370,6 @@ paths:
             items:
               $ref: '#/definitions/Tournament'
             type: array
-      summary: Schedule by Season
 definitions:
   DfsSlate:
     properties:

@@ -408,6 +408,11 @@ paths:
                 azureAppPushReceivers:
                   - emailAddress: johndoe@email.com
                     name: Sample azureAppPush
+                azureFunctionReceivers:
+                  - functionAppResourceId: /subscriptions/5def922a-3ed4-49c1-b9fd-05ec533819a3/resourceGroups/aznsTest/providers/Microsoft.Web/sites/testFunctionApp
+                    functionName: HttpTriggerCSharp1
+                    httpTriggerUrl: 'https://testfunctionapp.azurewebsites.net/api/HttpTriggerCSharp1?code=4CopFfiXqUQC8dvIM7F53J7tIU3Gy9QQIG/vKAXMe2avhHqK3/jVYw=='
+                    name: Sample azureFunction
                 emailReceivers:
                   - emailAddress: johndoe@email.com
                     name: John Doe's email
@@ -461,6 +466,11 @@ paths:
                   azureAppPushReceivers:
                     - emailAddress: johndoe@email.com
                       name: Sample azureAppPush
+                  azureFunctionReceivers:
+                    - functionAppResourceId: /subscriptions/5def922a-3ed4-49c1-b9fd-05ec533819a3/resourceGroups/aznsTest/providers/Microsoft.Web/sites/testFunctionApp
+                      functionName: HttpTriggerCSharp1
+                      httpTriggerUrl: 'https://testfunctionapp.azurewebsites.net/api/HttpTriggerCSharp1?code=4CopFfiXqUQC8dvIM7F53J7tIU3Gy9QQIG/vKAXMe2avhHqK3/jVYw=='
+                      name: Sample azureFunction
                   emailReceivers:
                     - emailAddress: johndoe@email.com
                       name: John Doe's email
@@ -515,6 +525,11 @@ paths:
                   azureAppPushReceivers:
                     - emailAddress: johndoe@email.com
                       name: Sample azureAppPush
+                  azureFunctionReceivers:
+                    - functionAppResourceId: /subscriptions/5def922a-3ed4-49c1-b9fd-05ec533819a3/resourceGroups/aznsTest/providers/Microsoft.Web/sites/testFunctionApp
+                      functionName: HttpTriggerCSharp1
+                      httpTriggerUrl: 'https://testfunctionapp.azurewebsites.net/api/HttpTriggerCSharp1?code=4CopFfiXqUQC8dvIM7F53J7tIU3Gy9QQIG/vKAXMe2avhHqK3/jVYw=='
+                      name: Sample azureFunction
                   emailReceivers:
                     - emailAddress: johndoe@email.com
                       name: John Doe's email
@@ -604,6 +619,11 @@ definitions:
         description: The list of AzureAppPush receivers that are part of this action group.
         items:
           $ref: '#/definitions/AzureAppPushReceiver'
+        type: array
+      azureFunctionReceivers:
+        description: The list of azure function receivers that are part of this action group.
+        items:
+          $ref: '#/definitions/AzureFunctionReceiver'
         type: array
       emailReceivers:
         description: The list of email receivers that are part of this action group.
@@ -722,6 +742,26 @@ definitions:
     required:
       - name
       - emailAddress
+  AzureFunctionReceiver:
+    description: An azure function receiver.
+    properties:
+      functionAppResourceId:
+        description: The azure resource id of the function app.
+        type: string
+      functionName:
+        description: The function name in the function app.
+        type: string
+      httpTriggerUrl:
+        description: The http trigger url where http request sent to.
+        type: string
+      name:
+        description: The name of the azure function receiver. Names must be unique across all receivers within an action group.
+        type: string
+    required:
+      - name
+      - functionAppResourceId
+      - functionName
+      - httpTriggerUrl
   EmailReceiver:
     description: An email receiver.
     properties:

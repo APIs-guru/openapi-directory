@@ -59,6 +59,7 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/CheckNameAvailabilityRequest'
+    x-ms-parameter-location: client
   CreateManagementGroupRequestParameter:
     description: Management group creation parameters.
     in: body
@@ -66,6 +67,7 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/CreateManagementGroupRequest'
+    x-ms-parameter-location: client
   EntityViewParameter:
     description: The view parameter allows clients to request that the list of entities be returned in the form of a hierarchy.
     enum:
@@ -114,6 +116,7 @@ parameters:
     name: operationResultId
     required: true
     type: string
+    x-ms-parameter-location: client
   PatchGroupRequestParameter:
     description: Management group patch parameters.
     in: body
@@ -121,6 +124,7 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/PatchManagementGroupRequest'
+    x-ms-parameter-location: client
   RecurseParameter:
     description: The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload. Note that  $expand=children must be passed up if $recurse is set to true.
     in: query
@@ -136,6 +140,7 @@ parameters:
     name: $skiptoken
     required: false
     type: string
+    x-ms-parameter-location: client
   SubscriptionIdParameter:
     description: Subscription ID.
     in: path
@@ -196,7 +201,6 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SkipTokenParameter'
         - $ref: '#/parameters/GroupNameParameter'
-        - $ref: '#/parameters/EntityViewParameter'
         - $ref: '#/parameters/CacheControlHeader'
       responses:
         '200':

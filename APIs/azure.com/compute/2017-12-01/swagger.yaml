@@ -49,6 +49,20 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Compute/operations:
+    get:
+      description: Gets a list of compute operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ComputeOperationListResult'
+      tags:
+        - ComputeOperations
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images':
     get:
       description: Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
@@ -614,6 +628,35 @@ paths:
             $ref: '#/definitions/AvailabilitySet'
       tags:
         - AvailabilitySets
+    patch:
+      description: Update an availability set.
+      operationId: AvailabilitySets_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the availability set.
+          in: path
+          name: availabilitySetName
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Availability Set operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/AvailabilitySetUpdate'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AvailabilitySet'
+      tags:
+        - AvailabilitySets
     put:
       description: Create or update an availability set.
       operationId: AvailabilitySets_CreateOrUpdate
@@ -839,6 +882,40 @@ paths:
                         id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1'
                       storageAccountType: Standard_LRS
                 type: Microsoft.Compute/images
+    patch:
+      description: Update an image.
+      operationId: Images_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the image.
+          in: path
+          name: imageName
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Image operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ImageUpdate'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Image'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Image'
+      tags:
+        - Images
+      x-ms-long-running-operation: true
     put:
       description: Create or update an image.
       operationId: Images_CreateOrUpdate
@@ -2695,10 +2772,76 @@ paths:
       tags:
         - VirtualMachineScaleSetRollingUpgrades
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance':
+    post:
+      description: Perform maintenance on one or more virtual machines in a VM scale set.
+      operationId: VirtualMachineScaleSets_PerformMaintenance
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the VM scale set.
+          in: path
+          name: vmScaleSetName
+          required: true
+          type: string
+        - description: A list of virtual machine instance IDs from the VM scale set.
+          in: body
+          name: vmInstanceIDs
+          required: false
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSetVMInstanceIDs'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
+        '202':
+          description: Accepted
+      tags:
+        - VirtualMachineScaleSets
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff':
     post:
       description: 'Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.'
       operationId: VirtualMachineScaleSets_PowerOff
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the VM scale set.
+          in: path
+          name: vmScaleSetName
+          required: true
+          type: string
+        - description: A list of virtual machine instance IDs from the VM scale set.
+          in: body
+          name: vmInstanceIDs
+          required: false
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSetVMInstanceIDs'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
+        '202':
+          description: Accepted
+      tags:
+        - VirtualMachineScaleSets
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy':
+    post:
+      description: Redeploy one or more virtual machines in a VM scale set.
+      operationId: VirtualMachineScaleSets_Redeploy
       parameters:
         - description: The name of the resource group.
           in: path
@@ -3099,10 +3242,74 @@ paths:
             $ref: '#/definitions/VirtualMachineScaleSetVMInstanceView'
       tags:
         - VirtualMachineScaleSetVMs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/performMaintenance':
+    post:
+      description: Performs maintenance on a virtual machine in a VM scale set.
+      operationId: VirtualMachineScaleSetVMs_PerformMaintenance
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the VM scale set.
+          in: path
+          name: vmScaleSetName
+          required: true
+          type: string
+        - description: The instance ID of the virtual machine.
+          in: path
+          name: instanceId
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
+        '202':
+          description: Accepted
+      tags:
+        - VirtualMachineScaleSetVMs
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff':
     post:
       description: 'Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.'
       operationId: VirtualMachineScaleSetVMs_PowerOff
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the VM scale set.
+          in: path
+          name: vmScaleSetName
+          required: true
+          type: string
+        - description: The instance ID of the virtual machine.
+          in: path
+          name: instanceId
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
+        '202':
+          description: Accepted
+      tags:
+        - VirtualMachineScaleSetVMs
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy':
+    post:
+      description: Redeploys a virtual machine in a VM scale set.
+      operationId: VirtualMachineScaleSetVMs_Redeploy
       parameters:
         - description: The name of the resource group.
           in: path
@@ -3342,6 +3549,40 @@ paths:
             $ref: '#/definitions/VirtualMachine'
       tags:
         - VirtualMachines
+    patch:
+      description: The operation to update a virtual machine.
+      operationId: VirtualMachines_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual machine.
+          in: path
+          name: vmName
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Virtual Machine operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/VirtualMachineUpdate'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualMachine'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/VirtualMachine'
+      tags:
+        - VirtualMachines
+      x-ms-long-running-operation: true
     put:
       description: The operation to create or update a virtual machine.
       operationId: VirtualMachines_CreateOrUpdate
@@ -4638,6 +4879,35 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions':
+    get:
+      description: The operation to get all extensions of a Virtual Machine.
+      operationId: VirtualMachines_GetExtensions
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual machine containing the extension.
+          in: path
+          name: vmName
+          required: true
+          type: string
+        - description: The expand expression to apply on the operation.
+          in: query
+          name: $expand
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualMachineExtensionsListResult'
+      tags:
+        - VirtualMachineExtensions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}':
     delete:
       description: The operation to delete the extension.
@@ -4705,6 +4975,41 @@ paths:
             $ref: '#/definitions/VirtualMachineExtension'
       tags:
         - VirtualMachineExtensions
+    patch:
+      description: The operation to update the extension.
+      operationId: VirtualMachineExtensions_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual machine where the extension should be updated.
+          in: path
+          name: vmName
+          required: true
+          type: string
+        - description: The name of the virtual machine extension.
+          in: path
+          name: vmExtensionName
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Virtual Machine Extension operation.
+          in: body
+          name: extensionParameters
+          required: true
+          schema:
+            $ref: '#/definitions/VirtualMachineExtensionUpdate'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualMachineExtension'
+      tags:
+        - VirtualMachineExtensions
+      x-ms-long-running-operation: true
     put:
       description: The operation to create or update the extension.
       operationId: VirtualMachineExtensions_CreateOrUpdate
@@ -4714,7 +5019,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine where the extension should be create or updated.
+        - description: The name of the virtual machine where the extension should be created or updated.
           in: path
           name: vmName
           required: true
@@ -5063,6 +5368,17 @@ definitions:
         items:
           $ref: '#/definitions/SubResource'
         type: array
+  AvailabilitySetUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
+    properties:
+      properties:
+        $ref: '#/definitions/AvailabilitySetProperties'
+        x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/Sku'
+        description: Sku of the availability set
   BootDiagnostics:
     description: 'Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor.'
     properties:
@@ -5097,6 +5413,48 @@ definitions:
       output:
         description: Operation output data (raw JSON)
         type: object
+  ComputeOperationListResult:
+    description: The List Compute Operation operation response.
+    properties:
+      value:
+        description: The list of compute operations
+        items:
+          $ref: '#/definitions/ComputeOperationValue'
+        readOnly: true
+        type: array
+  ComputeOperationValue:
+    description: Describes the properties of a Compute Operation value.
+    properties:
+      display:
+        $ref: '#/definitions/ComputeOperationValueDisplay'
+        x-ms-client-flatten: true
+      name:
+        description: The name of the compute operation.
+        readOnly: true
+        type: string
+      origin:
+        description: The origin of the compute operation.
+        readOnly: true
+        type: string
+  ComputeOperationValueDisplay:
+    description: Describes the properties of a Compute Operation Value Display.
+    properties:
+      description:
+        description: The description of the operation.
+        readOnly: true
+        type: string
+      operation:
+        description: The display name of the compute operation.
+        readOnly: true
+        type: string
+      provider:
+        description: The resource provider for the operation.
+        readOnly: true
+        type: string
+      resource:
+        description: The display name of the resource the operation applies to.
+        readOnly: true
+        type: string
   CreateOption:
     description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
     enum:
@@ -5105,7 +5463,7 @@ definitions:
       - Attach
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: DiskCreateOptionTypes
   DataDisk:
     description: Describes a data disk.
@@ -5188,7 +5546,7 @@ definitions:
     description: Specifies the hardware settings for the virtual machine.
     properties:
       vmSize:
-        description: 'Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](virtualmachines-list-sizes-availability-set.md) <br><br> [List all available virtual machine sizes in a region](virtualmachines-list-sizes-region.md) <br><br> [List all available virtual machine sizes for resizing](virtualmachines-list-sizes-for-resizing.md)'
+        description: 'Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) <br><br> [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) <br><br> [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)'
         enum:
           - Basic_A0
           - Basic_A1
@@ -5507,8 +5865,17 @@ definitions:
       osDisk:
         $ref: '#/definitions/ImageOSDisk'
         description: 'Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).'
-    required:
-      - osDisk
+      zoneResilient:
+        description: Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS).
+        type: boolean
+  ImageUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: 'The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.'
+    properties:
+      properties:
+        $ref: '#/definitions/ImageProperties'
+        x-ms-client-flatten: true
   InnerError:
     description: Inner error details.
     properties:
@@ -6038,7 +6405,7 @@ definitions:
       - Premium_LRS
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: StorageAccountTypes
   StorageProfile:
     description: Specifies the storage settings for the virtual machine disks.
@@ -6338,6 +6705,46 @@ definitions:
       typeHandlerVersion:
         description: Specifies the version of the script handler.
         type: string
+  VirtualMachineExtensionUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Describes a Virtual Machine Extension.
+    properties:
+      properties:
+        $ref: '#/definitions/VirtualMachineExtensionUpdateProperties'
+        x-ms-client-flatten: true
+  VirtualMachineExtensionUpdateProperties:
+    description: Describes the properties of a Virtual Machine Extension.
+    properties:
+      autoUpgradeMinorVersion:
+        description: 'Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.'
+        type: boolean
+      forceUpdateTag:
+        description: How the extension handler should be forced to update even if the extension configuration has not changed.
+        type: string
+      protectedSettings:
+        description: The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
+        type: object
+      publisher:
+        description: The name of the extension handler publisher.
+        type: string
+      settings:
+        description: Json formatted public settings for the extension.
+        type: object
+      type:
+        description: Specifies the type of the extension; an example is "CustomScriptExtension".
+        type: string
+      typeHandlerVersion:
+        description: Specifies the version of the script handler.
+        type: string
+  VirtualMachineExtensionsListResult:
+    description: The List Extension operation response
+    properties:
+      value:
+        description: The list of extensions
+        items:
+          $ref: '#/definitions/VirtualMachineExtension'
+        type: array
   VirtualMachineHealthStatus:
     description: The health status of the VM.
     properties:
@@ -7288,6 +7695,9 @@ definitions:
         items:
           $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         type: array
+      maintenanceRedeployStatus:
+        $ref: '#/definitions/MaintenanceRedeployStatus'
+        description: The Maintenance Operation status on the virtual machine.
       placementGroupId:
         description: The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
         type: string
@@ -7443,6 +7853,25 @@ definitions:
         format: int32
         readOnly: true
         type: integer
+  VirtualMachineUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Describes a Virtual Machine.
+    properties:
+      identity:
+        $ref: '#/definitions/VirtualMachineIdentity'
+        description: 'The identity of the virtual machine, if configured.'
+      plan:
+        $ref: '#/definitions/Plan'
+        description: 'Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.'
+      properties:
+        $ref: '#/definitions/VirtualMachineProperties'
+        x-ms-client-flatten: true
+      zones:
+        description: The virtual machine zones.
+        items:
+          type: string
+        type: array
   WinRMConfiguration:
     description: Describes Windows Remote Management configuration of the VM
     properties:

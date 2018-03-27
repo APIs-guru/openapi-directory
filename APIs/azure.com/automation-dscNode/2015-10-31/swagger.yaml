@@ -48,6 +48,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -131,6 +132,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -243,6 +245,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -267,74 +270,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list dsc nodes operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of dsc nodes.
-                items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Definition of the dsc node type.
-                  properties:
-                    accountId:
-                      description: Gets or sets the account id of the node.
-                      type: string
-                    etag:
-                      description: Gets or sets the etag of the resource.
-                      type: string
-                    extensionHandler:
-                      description: Gets or sets the list of extensionHandler properties for a Node.
-                      items:
-                        description: The dsc extensionHandler property associated with the node
-                        properties:
-                          name:
-                            description: Gets or sets the name of the extension handler.
-                            type: string
-                          version:
-                            description: Gets or sets the version of the extension handler.
-                            type: string
-                      type: array
-                    ip:
-                      description: Gets or sets the ip of the node.
-                      type: string
-                    lastSeen:
-                      description: Gets or sets the last seen time of the node.
-                      format: date-time
-                      type: string
-                    nodeConfiguration:
-                      description: The dsc nodeconfiguration property associated with the entity.
-                      properties:
-                        name:
-                          description: Gets or sets the name of the dsc nodeconfiguration.
-                          type: string
-                    nodeId:
-                      description: Gets or sets the node id.
-                      type: string
-                    registrationTime:
-                      description: Gets or sets the registration time of the node.
-                      format: date-time
-                      type: string
-                    status:
-                      description: Gets or sets the status of the node.
-                      type: string
-                type: array
+            $ref: '#/definitions/DscNodeListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -385,6 +321,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Automation account name.
           in: path
           name: automationAccountName
@@ -409,65 +346,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
-            description: Definition of the dsc node type.
-            properties:
-              accountId:
-                description: Gets or sets the account id of the node.
-                type: string
-              etag:
-                description: Gets or sets the etag of the resource.
-                type: string
-              extensionHandler:
-                description: Gets or sets the list of extensionHandler properties for a Node.
-                items:
-                  description: The dsc extensionHandler property associated with the node
-                  properties:
-                    name:
-                      description: Gets or sets the name of the extension handler.
-                      type: string
-                    version:
-                      description: Gets or sets the version of the extension handler.
-                      type: string
-                type: array
-              ip:
-                description: Gets or sets the ip of the node.
-                type: string
-              lastSeen:
-                description: Gets or sets the last seen time of the node.
-                format: date-time
-                type: string
-              nodeConfiguration:
-                description: The dsc nodeconfiguration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the dsc nodeconfiguration.
-                    type: string
-              nodeId:
-                description: Gets or sets the node id.
-                type: string
-              registrationTime:
-                description: Gets or sets the registration time of the node.
-                format: date-time
-                type: string
-              status:
-                description: Gets or sets the status of the node.
-                type: string
+            $ref: '#/definitions/DscNode'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -504,6 +383,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -528,65 +408,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
-            description: Definition of the dsc node type.
-            properties:
-              accountId:
-                description: Gets or sets the account id of the node.
-                type: string
-              etag:
-                description: Gets or sets the etag of the resource.
-                type: string
-              extensionHandler:
-                description: Gets or sets the list of extensionHandler properties for a Node.
-                items:
-                  description: The dsc extensionHandler property associated with the node
-                  properties:
-                    name:
-                      description: Gets or sets the name of the extension handler.
-                      type: string
-                    version:
-                      description: Gets or sets the version of the extension handler.
-                      type: string
-                type: array
-              ip:
-                description: Gets or sets the ip of the node.
-                type: string
-              lastSeen:
-                description: Gets or sets the last seen time of the node.
-                format: date-time
-                type: string
-              nodeConfiguration:
-                description: The dsc nodeconfiguration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the dsc nodeconfiguration.
-                    type: string
-              nodeId:
-                description: Gets or sets the node id.
-                type: string
-              registrationTime:
-                description: Gets or sets the registration time of the node.
-                format: date-time
-                type: string
-              status:
-                description: Gets or sets the status of the node.
-                type: string
+            $ref: '#/definitions/DscNode'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -634,6 +456,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -674,65 +497,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
-            description: Definition of the dsc node type.
-            properties:
-              accountId:
-                description: Gets or sets the account id of the node.
-                type: string
-              etag:
-                description: Gets or sets the etag of the resource.
-                type: string
-              extensionHandler:
-                description: Gets or sets the list of extensionHandler properties for a Node.
-                items:
-                  description: The dsc extensionHandler property associated with the node
-                  properties:
-                    name:
-                      description: Gets or sets the name of the extension handler.
-                      type: string
-                    version:
-                      description: Gets or sets the version of the extension handler.
-                      type: string
-                type: array
-              ip:
-                description: Gets or sets the ip of the node.
-                type: string
-              lastSeen:
-                description: Gets or sets the last seen time of the node.
-                format: date-time
-                type: string
-              nodeConfiguration:
-                description: The dsc nodeconfiguration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the dsc nodeconfiguration.
-                    type: string
-              nodeId:
-                description: Gets or sets the node id.
-                type: string
-              registrationTime:
-                description: Gets or sets the registration time of the node.
-                format: date-time
-                type: string
-              status:
-                description: Gets or sets the status of the node.
-                type: string
+            $ref: '#/definitions/DscNode'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -784,6 +549,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1215,6 +981,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1478,6 +1245,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1734,4 +1502,75 @@ paths:
                     status: Compliant
                     type: Consistency
               headers: {}
-definitions: {}
+definitions:
+  DscNode:
+    allOf:
+      - description: The Resource definition.
+        properties:
+          id:
+            description: Resource Id
+            readOnly: true
+            type: string
+          name:
+            description: Resource name
+            readOnly: true
+            type: string
+          type:
+            description: Resource type
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Definition of the dsc node type.
+    properties:
+      accountId:
+        description: Gets or sets the account id of the node.
+        type: string
+      etag:
+        description: Gets or sets the etag of the resource.
+        type: string
+      extensionHandler:
+        description: Gets or sets the list of extensionHandler properties for a Node.
+        items:
+          description: The dsc extensionHandler property associated with the node
+          properties:
+            name:
+              description: Gets or sets the name of the extension handler.
+              type: string
+            version:
+              description: Gets or sets the version of the extension handler.
+              type: string
+        type: array
+      ip:
+        description: Gets or sets the ip of the node.
+        type: string
+      lastSeen:
+        description: Gets or sets the last seen time of the node.
+        format: date-time
+        type: string
+      nodeConfiguration:
+        description: The dsc nodeconfiguration property associated with the entity.
+        properties:
+          name:
+            description: Gets or sets the name of the dsc nodeconfiguration.
+            type: string
+      nodeId:
+        description: Gets or sets the node id.
+        type: string
+      registrationTime:
+        description: Gets or sets the registration time of the node.
+        format: date-time
+        type: string
+      status:
+        description: Gets or sets the status of the node.
+        type: string
+  DscNodeListResult:
+    description: The response model for the list dsc nodes operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of dsc nodes.
+        items:
+          $ref: '#/definitions/DscNode'
+        type: array

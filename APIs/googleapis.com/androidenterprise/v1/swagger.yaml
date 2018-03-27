@@ -3215,6 +3215,18 @@ definitions:
         description: The text localized in the associated locale.
         type: string
     type: object
+  MaintenanceWindow:
+    description: Maintenance window for managed Google Play Accounts. This allows Play store to update the apps on the foreground in the designated window.
+    properties:
+      durationMs:
+        description: 'Duration of the maintenance window, in milliseconds. The duration must be between 30 minutes and 24 hours (inclusive).'
+        format: int64
+        type: string
+      startTimeAfterMidnightMs:
+        description: 'Start time of the maintenance window, in milliseconds after midnight on the device. Windows can span midnight.'
+        format: int64
+        type: string
+    type: object
   ManagedConfiguration:
     description: 'A managed configuration resource contains the set of managed properties defined by the app developer in the app''s managed configurations schema, as well as any configuration variables defined for the user.'
     properties:
@@ -3462,6 +3474,9 @@ definitions:
       autoUpdatePolicy:
         description: The auto-update policy for apps installed on the device. "choiceToTheUser" allows the device's user to configure the app update policy. "always" enables auto updates. "never" disables auto updates. "wifiOnly" enables auto updates only when the device is connected to wifi.
         type: string
+      maintenanceWindow:
+        $ref: '#/definitions/MaintenanceWindow'
+        description: The maintenance window defining when apps running in the foreground should be updated. This feature is only supported on fully managed devices.
       productAvailabilityPolicy:
         description: 'The availability granted to the device for the specified products. "all" gives the device access to all products, regardless of approval status. "allApproved" entitles the device to access all products that are approved for the enterprise. "allApproved" and "all" do not enable automatic visibility of "alpha" or "beta" tracks. "whitelist" grants the device access the products specified in productPolicy[]. Only products that are approved or products that were previously approved (products with revoked approval) by the enterprise can be whitelisted. If no value is provided, the availability set at the user level is applied by default.'
         type: string

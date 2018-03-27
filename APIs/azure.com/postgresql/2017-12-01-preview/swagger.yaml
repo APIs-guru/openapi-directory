@@ -2574,7 +2574,8 @@ definitions:
         description: 'The tier of the particular SKU, e.g. Basic.'
         enum:
           - Basic
-          - Standard
+          - GeneralPurpose
+          - MemoryOptimized
         type: string
         x-ms-enum:
           modelAsString: true

@@ -865,6 +865,11 @@ paths:
           name: radius
           required: false
           type: integer
+        - description: car search bases on zipcode
+          in: query
+          name: zip
+          required: false
+          type: string
         - description: Car type. Allowed values are - new / used / certified
           enum:
             - new

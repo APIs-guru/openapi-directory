@@ -49,11 +49,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The filter to apply on the operation.
           in: query
           name: $filter
@@ -74,6 +76,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: OK
@@ -251,11 +254,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job name.
           in: path
           name: jobName
@@ -271,6 +276,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: OK
@@ -441,11 +447,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job name.
           in: path
           name: jobName
@@ -489,6 +497,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '201':
           description: Created
@@ -668,11 +677,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the job to be created.
           in: path
           name: jobName
@@ -688,6 +699,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       produces:
         - text/plain
       responses:
@@ -735,11 +747,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job name.
           in: path
           name: jobName
@@ -760,6 +774,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: OK
@@ -805,11 +820,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job name.
           in: path
           name: jobName
@@ -825,6 +842,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       produces:
         - text/powershell
       responses:
@@ -872,11 +890,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job name.
           in: path
           name: jobName
@@ -897,6 +917,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: OK
@@ -937,11 +958,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job name.
           in: path
           name: jobName
@@ -967,6 +990,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: OK
@@ -1079,11 +1103,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job name.
           in: path
           name: jobName
@@ -1104,6 +1130,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: OK
@@ -1201,11 +1228,13 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job name.
           in: path
           name: jobName
@@ -1221,6 +1250,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: OK

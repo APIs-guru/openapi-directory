@@ -48,6 +48,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -72,47 +73,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list job operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of Dsc node configurations.
-                items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Definition of the dsc node configuration.
-                  properties:
-                    configuration:
-                      description: The Dsc configuration property associated with the entity.
-                      properties:
-                        name:
-                          description: Gets or sets the name of the Dsc configuration.
-                          type: string
-                    creationTime:
-                      description: Gets or sets creation time.
-                      format: date-time
-                      type: string
-                    lastModifiedTime:
-                      description: Gets or sets the last modified time.
-                      format: date-time
-                      type: string
-                type: array
+            $ref: '#/definitions/DscNodeConfigurationListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -160,6 +121,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -220,6 +182,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -244,38 +207,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
-            description: Definition of the dsc node configuration.
-            properties:
-              configuration:
-                description: The Dsc configuration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the Dsc configuration.
-                    type: string
-              creationTime:
-                description: Gets or sets creation time.
-                format: date-time
-                type: string
-              lastModifiedTime:
-                description: Gets or sets the last modified time.
-                format: date-time
-                type: string
+            $ref: '#/definitions/DscNodeConfiguration'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -320,6 +252,7 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -397,38 +330,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
-            description: Definition of the dsc node configuration.
-            properties:
-              configuration:
-                description: The Dsc configuration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the Dsc configuration.
-                    type: string
-              creationTime:
-                description: Gets or sets creation time.
-                format: date-time
-                type: string
-              lastModifiedTime:
-                description: Gets or sets the last modified time.
-                format: date-time
-                type: string
+            $ref: '#/definitions/DscNodeConfiguration'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -474,4 +376,48 @@ paths:
                 lastModifiedTime: '2017-06-16T01:18:39.010771+00:00'
                 name: nodeConfigName
               headers: {}
-definitions: {}
+definitions:
+  DscNodeConfiguration:
+    allOf:
+      - description: The Resource definition.
+        properties:
+          id:
+            description: Resource Id
+            readOnly: true
+            type: string
+          name:
+            description: Resource name
+            readOnly: true
+            type: string
+          type:
+            description: Resource type
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Definition of the dsc node configuration.
+    properties:
+      configuration:
+        description: The Dsc configuration property associated with the entity.
+        properties:
+          name:
+            description: Gets or sets the name of the Dsc configuration.
+            type: string
+      creationTime:
+        description: Gets or sets creation time.
+        format: date-time
+        type: string
+      lastModifiedTime:
+        description: Gets or sets the last modified time.
+        format: date-time
+        type: string
+  DscNodeConfigurationListResult:
+    description: The response model for the list job operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of Dsc node configurations.
+        items:
+          $ref: '#/definitions/DscNodeConfiguration'
+        type: array

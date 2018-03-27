@@ -1010,6 +1010,11 @@ paths:
           name: product_type
           required: false
           type: string
+        - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
+          in: query
+          name: use_team_credits
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json
@@ -1075,6 +1080,11 @@ paths:
           name: size
           required: false
           type: string
+        - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
+          in: query
+          name: use_team_credits
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json

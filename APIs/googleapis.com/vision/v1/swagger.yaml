@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.'
-  title: Google Cloud Vision
+  title: Cloud Vision
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -116,6 +116,7 @@ parameters:
     type: string
 tags:
   - name: images
+  - name: locations
   - name: operations
 paths:
   '/v1/images:annotate':
@@ -185,7 +186,7 @@ paths:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: vision.operations.get
+      operationId: vision.locations.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -204,7 +205,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-vision'
       tags:
-        - operations
+        - locations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -911,6 +912,11 @@ definitions:
       outputConfig:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1OutputConfig'
         description: The output location and metadata from AsyncAnnotateFileRequest.
+      outputs:
+        description: The full list of output files in GCS.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1GcsDestination'
+        type: array
     type: object
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse:
     description: Response to an async batch file annotation request.

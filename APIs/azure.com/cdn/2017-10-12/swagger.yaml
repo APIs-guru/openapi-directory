@@ -247,6 +247,44 @@ paths:
                     name: Microsoft.Cdn/operationresults/profileresults/GenerateSsoUri/action
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/checkNameAvailability':
+    post:
+      description: 'Check the availability of a resource name. This is needed for resources where name is globally unique, such as a CDN endpoint.'
+      operationId: CheckNameAvailabilityWithSubscription
+      parameters:
+        - description: Input to check.
+          in: body
+          name: checkNameAvailabilityInput
+          required: true
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityInput'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityOutput'
+        default:
+          description: CDN error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - CheckNameAvailabilityWithSubscription
+      x-ms-examples:
+        CheckNameAvailabilityWithSubscription:
+          parameters:
+            api-version: '2017-10-12'
+            checkNameAvailabilityInput:
+              name: sampleName
+              type: Microsoft.Cdn/Profiles/Endpoints
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                message: Name not available
+                nameAvailable: false
+                reason: Name is already in use
   '/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/checkResourceUsage':
     post:
       description: Check the quota and actual usage of the CDN profiles under the given subscription.

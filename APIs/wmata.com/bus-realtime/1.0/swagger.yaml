@@ -34,7 +34,7 @@ paths:
   /Predictions:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns next bus arrival times at a stop.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Predictions</td>\r\n\r\n<td>\r\nArray containing bus predictions (<a href=\r\n\"#NextBusPrediction\">NextBusPrediction</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopName</td>\r\n\r\n<td>Full name of the given StopID.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"NextBusPrediction\" name=\r\n\"NextBusPrediction\">NextBusPrediction Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DirectionNum</td>\r\n\r\n<td>Denotes a binary direction (0 or 1) of the bus. There is no\r\nspecific mapping to direction, but a different value for the same\r\nroute signifies that the buses are traveling in opposite\r\ndirections. Use the DirectionText element to show the actual\r\ndestination of the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DirectionText</td>\r\n\r\n<td>Customer-friendly description of direction and destination for\r\na bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Minutes</td>\r\n\r\n<td>Minutes until bus arrival at this stop. Numeric value.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Base route name as shown on the bus. This can be used in other\r\nbus-related methods. Note that all variants will be shown as their\r\nbase route names (i.e.: 10Av1 and 10Av2 will be shown as 10A).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripID</td>\r\n\r\n<td>Trip identifier. This can be correlated with the data in our\r\nbus schedule information as well as bus positions.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>VehicleID</td>\r\n\r\n<td>Bus identifier. This can be correlated with results returned\r\nfrom bus positions.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: 5476365e031f5909e4fe331e
+      operationId: XML - Next Buses
       parameters:
         - default: '1001195'
           description: 7-digit regional stop ID.
@@ -95,11 +95,10 @@ paths:
           description: Response from invalid Stop ID.
           examples:
             application/xml: '<Error><Message>Stop Id not specified, invalid, or does not exist.</Message></Error>'
-      summary: XML - Next Buses
   /json/jPredictions:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns next bus arrival times at a stop.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Predictions</td>\r\n\r\n<td>\r\nArray containing bus predictions (<a href=\r\n\"#NextBusPrediction\">NextBusPrediction</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopName</td>\r\n\r\n<td>Full name of the given StopID.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"NextBusPrediction\" name=\r\n\"NextBusPrediction\">NextBusPrediction Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DirectionNum</td>\r\n\r\n<td>Denotes a binary direction (0 or 1) of the bus. There is no\r\nspecific mapping to direction, but a different value for the same\r\nroute signifies that the buses are traveling in opposite\r\ndirections. Use the DirectionText element to show the actual\r\ndestination of the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DirectionText</td>\r\n\r\n<td>Customer-friendly description of direction and destination for\r\na bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Minutes</td>\r\n\r\n<td>Minutes until bus arrival at this stop. Numeric value.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Base route name as shown on the bus. This can be used in other\r\nbus-related methods. Note that all variants will be shown as their\r\nbase route names (i.e.: 10Av1 and 10Av2 will be shown as 10A).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripID</td>\r\n\r\n<td>Trip identifier. This can be correlated with the data in our\r\nbus schedule information as well as bus positions.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>VehicleID</td>\r\n\r\n<td>Bus identifier. This can be correlated with results returned\r\nfrom bus positions.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: 5476365e031f5909e4fe331d
+      operationId: JSON - Next Buses
       parameters:
         - default: '1001195'
           description: 7-digit regional stop ID.
@@ -147,4 +146,3 @@ paths:
           examples:
             application/json:
               Message: 'Stop Id not specified, invalid, or does not exist.'
-      summary: JSON - Next Buses

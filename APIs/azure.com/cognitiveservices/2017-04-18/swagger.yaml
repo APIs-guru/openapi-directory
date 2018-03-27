@@ -52,6 +52,13 @@ parameters:
     name: subscriptionId
     required: true
     type: string
+  usageFilterParameter:
+    description: 'An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).'
+    in: query
+    name: $filter
+    required: false
+    type: string
+    x-ms-parameter-location: client
 paths:
   /providers/Microsoft.CognitiveServices/operations:
     get:
@@ -853,6 +860,58 @@ paths:
                     sku:
                       name: S0
                       tier: Standard
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/usages':
+    get:
+      description: Get usages for the requested Cognitive Services account
+      operationId: Accounts_GetUsages
+      parameters:
+        - description: The name of the resource group within the user's subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of Cognitive Services account.
+          in: path
+          maxLength: 64
+          minLength: 2
+          name: accountName
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/usageFilterParameter'
+      responses:
+        '200':
+          description: The usages for Cognitive Services account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/UsagesResult'
+        default:
+          description: 'Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.'
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - CognitiveServicesAccounts
+      x-ms-examples:
+        Get Usages:
+          parameters:
+            accountName: TestUsage02
+            api-version: '2017-04-18'
+            resourceGroupName: felixwa-01
+            subscriptionId: 5a4f5c2e-6983-4ccb-bd34-2196d5b5bbd3
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 3
+                    limit: 30000
+                    name:
+                      localizedValue: Face.Transactions
+                      value: Face.Transactions
+                    nextResetTime: '2018-03-28T09:33:51Z'
+                    quotaPeriod: '30.00:00:00'
+                    status: Included
+                    unit: Count
 definitions:
   CheckSkuAvailabilityParameter:
     description: Check SKU availability parameter.
@@ -985,24 +1044,21 @@ definitions:
   CognitiveServicesAccountKind:
     description: Required. Indicates the type of cognitive service account.
     enum:
-      - Academic
-      - Bing.Autosuggest
       - Bing.Autosuggest.v7
       - Bing.CustomSearch
-      - Bing.Search
       - Bing.Search.v7
       - Bing.Speech
-      - Bing.SpellCheck
       - Bing.SpellCheck.v7
       - ComputerVision
       - ContentModerator
       - CustomSpeech
+      - CustomVision.Prediction
+      - CustomVision.Training
       - Emotion
       - Face
       - LUIS
-      - Recommendations
+      - QnAMaker
       - SpeakerRecognition
-      - Speech
       - SpeechTranslation
       - TextAnalytics
       - TextTranslation
@@ -1084,6 +1140,17 @@ definitions:
     required:
       - code
       - message
+  MetricName:
+    description: A metric name.
+    properties:
+      localizedValue:
+        description: The friendly name of the metric.
+        readOnly: true
+        type: string
+      value:
+        description: The name of the metric.
+        readOnly: true
+        type: string
   OperationDisplayInfo:
     description: The operation supported by Cognitive Services.
     properties:
@@ -1179,3 +1246,66 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: SkuName
+  UnitType:
+    description: The unit of the metric.
+    enum:
+      - Count
+      - Bytes
+      - Seconds
+      - Percent
+      - CountPerSecond
+      - BytesPerSecond
+      - Milliseconds
+    readOnly: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: UnitType
+  Usage:
+    description: The usage data for a usage request.
+    properties:
+      currentValue:
+        description: Current value for this metric.
+        format: double
+        readOnly: true
+        type: number
+      limit:
+        description: Maximum value for this metric.
+        format: double
+        readOnly: true
+        type: number
+      name:
+        $ref: '#/definitions/MetricName'
+        description: The name information for the metric.
+        readOnly: true
+      nextResetTime:
+        description: Next reset time for current quota.
+        readOnly: true
+        type: string
+      quotaPeriod:
+        description: The quota period used to summarize the usage values.
+        readOnly: true
+        type: string
+      status:
+        description: Cognitive Services account quota usage status.
+        enum:
+          - Included
+          - Blocked
+          - InOverage
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: QuotaUsageStatus
+      unit:
+        $ref: '#/definitions/UnitType'
+        description: The unit of the metric.
+  UsagesResult:
+    description: The response to a list usage request.
+    properties:
+      value:
+        description: The list of usages for Cognitive Service account.
+        items:
+          $ref: '#/definitions/Usage'
+        readOnly: true
+        type: array

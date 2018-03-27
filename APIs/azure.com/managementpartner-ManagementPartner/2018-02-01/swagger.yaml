@@ -156,6 +156,7 @@ paths:
                   createdTime: '2018-01-20T01:23:40.5280496Z'
                   objectId: aa67f786-0552-423e-8849-244ed12bf581
                   partnerId: '123456'
+                  partnerName: Test_jefl
                   state: Active
                   tenantId: 1b1121dd-6900-412a-af73-e8d44f81e1c1
                   updatedTime: '2018-01-20T01:52:57.9126052Z'
@@ -194,6 +195,7 @@ paths:
                   createdTime: '2018-01-20T01:23:40.5280496Z'
                   objectId: aa67f786-0552-423e-8849-244ed12bf581
                   partnerId: '123456'
+                  partnerName: Test_jefl
                   state: Active
                   tenantId: 1b1121dd-6900-412a-af73-e8d44f81e1c1
                   updatedTime: '2018-01-20T01:52:57.9126052Z'
@@ -232,6 +234,7 @@ paths:
                   createdTime: '2018-01-20T01:23:40.5280496Z'
                   objectId: aa67f786-0552-423e-8849-244ed12bf581
                   partnerId: '123456'
+                  partnerName: Test_jefl
                   state: Active
                   tenantId: 1b1121dd-6900-412a-af73-e8d44f81e1c1
                   updatedTime: '2018-01-20T01:52:57.9126052Z'
@@ -322,6 +325,9 @@ definitions:
         type: string
       partnerId:
         description: This is the partner id
+        type: string
+      partnerName:
+        description: This is the partner name
         type: string
       state:
         $ref: '#/definitions/ManagementPartnerState'

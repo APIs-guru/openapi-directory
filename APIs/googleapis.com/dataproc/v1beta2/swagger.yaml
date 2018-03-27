@@ -2091,6 +2091,11 @@ definitions:
       graph:
         $ref: '#/definitions/WorkflowGraph'
         description: Output only. The workflow graph.
+      parameters:
+        additionalProperties:
+          type: string
+        description: Map from parameter names to values that were used for those parameters.
+        type: object
       state:
         description: Output only. The workflow state.
         enum:

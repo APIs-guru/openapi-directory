@@ -50,6 +50,7 @@ parameters:
     name: indexName
     required: true
     type: string
+    x-ms-parameter-location: client
     x-ms-skip-url-encoding: false
   SearchDnsSuffixParameter:
     default: search.windows.net
@@ -58,6 +59,7 @@ parameters:
     name: searchDnsSuffix
     required: true
     type: string
+    x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
   SearchServiceNameParameter:
     description: The name of the Azure Search service.
@@ -65,6 +67,7 @@ parameters:
     name: searchServiceName
     required: true
     type: string
+    x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
 paths:
   /docs/$count:

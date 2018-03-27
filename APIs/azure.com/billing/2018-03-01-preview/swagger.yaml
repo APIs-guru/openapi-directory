@@ -49,47 +49,47 @@ parameters:
     required: true
     type: string
 paths:
-  /providers/Microsoft.Billing/billingAccounts:
+  /providers/Microsoft.Billing/enrollmentAccounts:
     get:
-      description: Lists the billing accounts the caller has access to.
-      operationId: BillingAccounts_List
+      description: Lists the enrollment accounts the caller has access to.
+      operationId: EnrollmentAccounts_List
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
           description: OK. The request has succeeded.
           schema:
-            $ref: '#/definitions/BillingAccountListResult'
+            $ref: '#/definitions/EnrollmentAccountListResult'
         default:
           description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/ErrorResponse'
       tags:
-        - BillingAccounts
+        - EnrollmentAccounts
       x-ms-examples:
-        BillingAccountsList:
+        EnrollmentAccountsList:
           parameters:
             api-version: 2018-03-01-preview
           responses:
             '200':
               body:
                 value:
-                  - id: /providers/Microsoft.Billing/billingAccounts/e1bf1c8c-5ac6-44a0-bdcd-aa7c1cf60556
+                  - id: /providers/Microsoft.Billing/enrollmentAccounts/e1bf1c8c-5ac6-44a0-bdcd-aa7c1cf60556
                     name: e1bf1c8c-5ac6-44a0-bdcd-aa7c1cf60556
                     properties:
                       principalName: kathy@contoso.com
-                    type: Microsoft.Billing/billingAccounts
-                  - id: /providers/Microsoft.Billing/billingAccounts/edd24053-07cd-4ed4-aa5b-326160a6680d
+                    type: Microsoft.Billing/enrollmentAccounts
+                  - id: /providers/Microsoft.Billing/enrollmentAccounts/edd24053-07cd-4ed4-aa5b-326160a6680d
                     name: edd24053-07cd-4ed4-aa5b-326160a6680d
                     properties:
                       principalName: dan@contoso.com
-                    type: Microsoft.Billing/billingAccounts
-  '/providers/Microsoft.Billing/billingAccounts/{name}':
+                    type: Microsoft.Billing/enrollmentAccounts
+  '/providers/Microsoft.Billing/enrollmentAccounts/{name}':
     get:
-      description: Gets a billing account by name.
-      operationId: BillingAccounts_Get
+      description: Gets a enrollment account by name.
+      operationId: EnrollmentAccounts_Get
       parameters:
-        - description: Billing Account name.
+        - description: Enrollment Account name.
           in: path
           name: name
           required: true
@@ -99,26 +99,26 @@ paths:
         '200':
           description: OK. The request has succeeded.
           schema:
-            $ref: '#/definitions/BillingAccountResult'
+            $ref: '#/definitions/EnrollmentAccount'
         default:
           description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/ErrorResponse'
       tags:
-        - BillingAccounts
+        - EnrollmentAccounts
       x-ms-examples:
-        BillingAccountsGet:
+        EnrollmentAccountsGet:
           parameters:
             api-version: 2018-03-01-preview
             name: e1bf1c8c-5ac6-44a0-bdcd-aa7c1cf60556
           responses:
             '200':
               body:
-                id: /providers/Microsoft.Billing/billingAccounts/e1bf1c8c-5ac6-44a0-bdcd-aa7c1cf60556
+                id: /providers/Microsoft.Billing/enrollmentAccounts/e1bf1c8c-5ac6-44a0-bdcd-aa7c1cf60556
                 name: e1bf1c8c-5ac6-44a0-bdcd-aa7c1cf60556
                 properties:
                   principalName: kathy@contoso.com
-                type: Microsoft.Billing/billingAccounts
+                type: Microsoft.Billing/enrollmentAccounts
   /providers/Microsoft.Billing/operations:
     get:
       description: Lists all of the available billing REST API operations.
@@ -404,32 +404,6 @@ paths:
                   invoicePeriodStartDate: '2017-01-01'
                 type: Microsoft.Billing/invoices
 definitions:
-  BillingAccountListResult:
-    description: Result of listing billing accounts.
-    properties:
-      value:
-        description: The list of billing accounts.
-        items:
-          $ref: '#/definitions/BillingAccountResult'
-        readOnly: true
-        type: array
-  BillingAccountProperties:
-    description: The properties of the billing account.
-    properties:
-      principalName:
-        description: The account owner's principal name.
-        readOnly: true
-        type: string
-  BillingAccountResult:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: A billing account resource.
-    properties:
-      properties:
-        $ref: '#/definitions/BillingAccountProperties'
-        description: A billing account.
-        x-ms-client-flatten: true
-    type: object
   BillingPeriod:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -482,6 +456,36 @@ definitions:
         type: string
       url:
         description: The URL to the PDF file.
+        readOnly: true
+        type: string
+  EnrollmentAccount:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: An enrollment account resource.
+    properties:
+      properties:
+        $ref: '#/definitions/EnrollmentAccountProperties'
+        description: An enrollment account.
+        x-ms-client-flatten: true
+    type: object
+  EnrollmentAccountListResult:
+    description: Result of listing enrollment accounts.
+    properties:
+      nextLink:
+        description: The link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of enrollment accounts.
+        items:
+          $ref: '#/definitions/EnrollmentAccount'
+        readOnly: true
+        type: array
+  EnrollmentAccountProperties:
+    description: The properties of the enrollment account.
+    properties:
+      principalName:
+        description: The account owner's principal name.
         readOnly: true
         type: string
   ErrorDetails:

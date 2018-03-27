@@ -44,6 +44,7 @@ parameters:
     name: catalogName
     required: true
     type: string
+    x-ms-parameter-location: client
   ResourceGroupNameParameter:
     description: The name of the resource group within the user's subscription. The name is case insensitive.
     in: path

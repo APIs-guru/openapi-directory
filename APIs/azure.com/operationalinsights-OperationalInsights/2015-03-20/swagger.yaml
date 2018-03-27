@@ -71,6 +71,7 @@ parameters:
     name: purgeId
     required: true
     type: string
+    x-ms-parameter-location: client
   WorkspacePurgeParameter:
     description: Describes the body of a request to purge data in a single table of an Log Analytics Workspace
     in: body
@@ -78,6 +79,7 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/WorkspacePurgeBody'
+    x-ms-parameter-location: client
 paths:
   /providers/Microsoft.OperationalInsights/operations:
     get:
@@ -1404,7 +1406,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge':
     post:
       description: Purges data in an Log Analytics workspace by a set of user-defined filters.
-      operationId: Workspace_Purge
+      operationId: Workspaces_Purge
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
@@ -1420,6 +1422,8 @@ paths:
           description: Accepted request for purging an Log Analytics workspace.
           schema:
             $ref: '#/definitions/WorkspacePurgeResponse'
+      tags:
+        - Workspaces
       x-ms-examples:
         WorkspacePurge:
           parameters:

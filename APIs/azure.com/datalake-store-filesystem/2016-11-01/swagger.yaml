@@ -38,6 +38,7 @@ parameters:
     name: adlsFileSystemDnsSuffix
     required: true
     type: string
+    x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
 paths:
   '/WebHdfsExt/{path}':

@@ -598,16 +598,8 @@ paths:
             type: string
           name: messageTypes
           type: array
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            enum:
-              - MESSAGE_SEVERITY_UNSPECIFIED
-              - INFO
-              - WARNING
-              - ERROR
-            type: string
           name: pageSize
           type: integer
         - description: |-

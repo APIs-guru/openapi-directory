@@ -1432,6 +1432,14 @@ definitions:
         type: string
       name:
         type: string
+      proxy_keys:
+        description: |
+          matches Domains with a superset of the specified proxy_keys. A
+          slice with a single value of "-" will produce Domains with no linked
+          Proxies.
+        items:
+          type: string
+        type: array
       zone_key:
         type: string
     type: object
@@ -1715,6 +1723,10 @@ definitions:
   ProxyFilter:
     properties:
       domain_keys:
+        description: |
+          matches Proxies with a superset of the specified domain_keys. A
+          slice with a single value of "-" will produce Proxies with no linked
+          Domains.
         items:
           type: string
         type: array

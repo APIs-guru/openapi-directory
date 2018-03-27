@@ -100,6 +100,15 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  skuNameParameter:
+    description: The sku type.
+    in: path
+    maxLength: 50
+    minLength: 1
+    name: sku
+    required: true
+    type: string
+    x-ms-parameter-location: method
 paths:
   /providers/Microsoft.EventHub/operations:
     get:
@@ -1432,6 +1441,27 @@ paths:
                       tier: Standard
                     tags: {}
                     type: Microsoft.EventHub/Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions':
+    get:
+      description: Gets the available Regions for a given sku
+      operationId: Regions_ListBySku
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/skuNameParameter'
+      responses:
+        '200':
+          description: Regions successfully returned.
+          schema:
+            $ref: '#/definitions/MessagingRegionsListResult'
+        default:
+          description: EventHub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Regions
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces':
@@ -3297,6 +3327,22 @@ paths:
                   createdAt: '2017-05-25T03:43:09.4536234Z'
                   updatedAt: '2017-05-25T03:43:09.4536234Z'
                 type: Microsoft.EventHub/Namespaces/EventHubs/ConsumerGroups
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/messagingplan':
+    get:
+      description: Gets a description for the specified namespace.
+      operationId: MessagingPlan_Get
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Messaging Plan successfully returned.
+          schema:
+            $ref: '#/definitions/MessagingPlan'
+      tags:
+        - MessagingPlan
 definitions:
   AccessKeys:
     description: Namespace/EventHub Connection String
@@ -3644,6 +3690,62 @@ definitions:
             readOnly: true
             type: string
         x-ms-client-flatten: true
+  MessagingPlan:
+    allOf:
+      - $ref: '#/definitions/TrackedResource'
+    description: Messaging
+    properties:
+      properties:
+        $ref: '#/definitions/MessagingPlanproperties'
+        x-ms-client-flatten: true
+    type: object
+  MessagingPlanproperties:
+    description: Messaging Region
+    properties:
+      revision:
+        description: revision number
+        format: int64
+        type: integer
+      selectedEventHubUnit:
+        description: Selected event hub unit
+        format: int32
+        type: integer
+      sku:
+        description: Sku type
+        format: int32
+        type: integer
+      updatedAt:
+        description: The exact time the messaging plan was updated.
+        format: date-time
+        readOnly: true
+        type: string
+  MessagingRegions:
+    allOf:
+      - $ref: '#/definitions/TrackedResource'
+    description: Messaging Region
+    properties:
+      properties:
+        properties:
+          code:
+            description: Region code
+            readOnly: true
+            type: string
+          fullName:
+            description: Full name of the region
+            readOnly: true
+            type: string
+  MessagingRegionsListResult:
+    description: The response of the List MessagingRegions operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of MessagingRegions.
+        readOnly: true
+        type: string
+      value:
+        description: Result of the List MessagingRegions type.
+        items:
+          $ref: '#/definitions/MessagingRegions'
+        type: array
   Operation:
     description: A Event Hub REST API operation
     properties:

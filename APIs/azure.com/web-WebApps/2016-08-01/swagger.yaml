@@ -1855,10 +1855,6 @@ paths:
           in: query
           name: deleteEmptyServerFarm
           type: boolean
-        - description: 'If true, DNS registration is skipped.'
-          in: query
-          name: skipDnsRegistration
-          type: boolean
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
@@ -2766,24 +2762,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SitePatchResource'
-        - description: |-
-            If true web app hostname is not registered with DNS on creation. This parameter is
-             only used for app creation.
-          in: query
-          name: skipDnsRegistration
-          type: boolean
-        - description: 'If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.'
-          in: query
-          name: skipCustomDomainVerification
-          type: boolean
-        - description: 'If true, web app hostname is force registered with DNS.'
-          in: query
-          name: forceDnsRegistration
-          type: boolean
-        - description: Time to live in seconds for web app's default domain name.
-          in: query
-          name: ttlInSeconds
-          type: string
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
@@ -5385,24 +5363,6 @@ paths:
                       name: UsageState
                 x-ms-client-flatten: true
             type: object
-        - description: |-
-            If true web app hostname is not registered with DNS on creation. This parameter is
-             only used for app creation.
-          in: query
-          name: skipDnsRegistration
-          type: boolean
-        - description: 'If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.'
-          in: query
-          name: skipCustomDomainVerification
-          type: boolean
-        - description: 'If true, web app hostname is force registered with DNS.'
-          in: query
-          name: forceDnsRegistration
-          type: boolean
-        - description: Time to live in seconds for web app's default domain name.
-          in: query
-          name: ttlInSeconds
-          type: string
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:

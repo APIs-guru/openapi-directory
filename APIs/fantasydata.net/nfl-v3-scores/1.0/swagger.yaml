@@ -38,7 +38,7 @@ paths:
   '/{format}/AllTeams':
     get:
       description: 'Gets all teams, including pro bowl teams.'
-      operationId: 5889011914338d162cb1b03d
+      operationId: Teams (All)
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -56,11 +56,10 @@ paths:
             items:
               $ref: '#/definitions/Team'
             type: array
-      summary: Teams (All)
   '/{format}/AreAnyGamesInProgress':
     get:
       description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
-      operationId: 57a0190a35491a0ef079a13e
+      operationId: Are Games In Progress
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -76,11 +75,10 @@ paths:
           description: ''
           schema:
             type: boolean
-      summary: Are Games In Progress
   '/{format}/Byes/{season}':
     get:
       description: 'Get bye weeks for the teams during a specified NFL season. '
-      operationId: 57a0190a35491a0ef079a140
+      operationId: Bye Weeks
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -107,11 +105,10 @@ paths:
             items:
               $ref: '#/definitions/Bye'
             type: array
-      summary: Bye Weeks
   '/{format}/CurrentSeason':
     get:
       description: Year of the current NFL season. This value changes on July 1st. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
-      operationId: 57a0190a35491a0ef079a141
+      operationId: Season Current
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -127,11 +124,10 @@ paths:
           description: ''
           schema:
             type: integer
-      summary: Season Current
   '/{format}/CurrentWeek':
     get:
       description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight EST. Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.
-      operationId: 57a0190a35491a0ef079a142
+      operationId: Week Current
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -147,10 +143,9 @@ paths:
           description: ''
           schema:
             type: integer
-      summary: Week Current
   '/{format}/GameStats/{season}':
     get:
-      operationId: 58137e6935491a152057513f
+      operationId: 'Game Stats by Season (Deprecated, use Team Game Stats instead)'
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -176,10 +171,9 @@ paths:
             items:
               $ref: '#/definitions/Game'
             type: array
-      summary: 'Game Stats by Season (Deprecated, use Team Game Stats instead)'
   '/{format}/GameStatsByWeek/{season}/{week}':
     get:
-      operationId: 58137eb435491a1520575140
+      operationId: 'Game Stats by Week (Deprecated, use Team Game Stats instead)'
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -215,11 +209,10 @@ paths:
             items:
               $ref: '#/definitions/Game'
             type: array
-      summary: 'Game Stats by Week (Deprecated, use Team Game Stats instead)'
   '/{format}/LastCompletedSeason':
     get:
       description: Year of the most recently completed season. this value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
-      operationId: 57a0190a35491a0ef079a144
+      operationId: Season Last Completed
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -235,7 +228,6 @@ paths:
           description: ''
           schema:
             type: integer
-      summary: Season Last Completed
   '/{format}/LastCompletedWeek':
     get:
       description: |-
@@ -243,7 +235,7 @@ paths:
                 Number of the last completed week in the current NFL season. This value changes immediately after the last game of the week is completed and the data is available. This usually happens right after the Monday night game.
                 Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.
               
-      operationId: 57a0190a35491a0ef079a145
+      operationId: Week Last Completed
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -259,10 +251,9 @@ paths:
           description: ''
           schema:
             type: integer
-      summary: Week Last Completed
   '/{format}/News':
     get:
-      operationId: 57a0190a35491a0ef079a146
+      operationId: News
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -280,10 +271,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: News
   '/{format}/NewsByDate/{date}':
     get:
-      operationId: 59699de735491a16c40cc119
+      operationId: News by Date
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -308,10 +298,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: News by Date
   '/{format}/NewsByPlayerID/{playerid}':
     get:
-      operationId: 57a0190a35491a0ef079a147
+      operationId: News by Player
       parameters:
         - default: XML
           description: |-
@@ -337,10 +326,9 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: News by Player
   '/{format}/NewsByTeam/{team}':
     get:
-      operationId: 57a0190a35491a0ef079a148
+      operationId: News by Team
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -363,11 +351,10 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
-      summary: News by Team
   '/{format}/Ping':
     get:
       description: Ping NFL API
-      operationId: 59b89c0014338d1f00cb0fd3
+      operationId: X Ping
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -383,11 +370,10 @@ paths:
           description: ''
           schema:
             type: 'null'
-      summary: X Ping
   '/{format}/Schedules/{season}':
     get:
       description: Game schedule for a specified season.
-      operationId: 57a0190a35491a0ef079a149
+      operationId: Schedule
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -414,11 +400,10 @@ paths:
             items:
               $ref: '#/definitions/Schedule'
             type: array
-      summary: Schedule
   '/{format}/Scores/{season}':
     get:
       description: Game scores for a specified season.
-      operationId: 57a0190a35491a0ef079a143
+      operationId: 'Scores by Season '
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -445,11 +430,10 @@ paths:
             items:
               $ref: '#/definitions/Score'
             type: array
-      summary: 'Scores by Season '
   '/{format}/ScoresByWeek/{season}/{week}':
     get:
       description: Get game scores for a specified week of a season.
-      operationId: 57a0190a35491a0ef079a14a
+      operationId: Scores by Week
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -485,11 +469,10 @@ paths:
             items:
               $ref: '#/definitions/Score'
             type: array
-      summary: Scores by Week
   '/{format}/Stadiums':
     get:
       description: This method returns all stadiums.
-      operationId: 57a0190a35491a0ef079a14b
+      operationId: Stadiums
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -507,10 +490,9 @@ paths:
             items:
               $ref: '#/definitions/Stadium'
             type: array
-      summary: Stadiums
   '/{format}/Standings/{season}':
     get:
-      operationId: 57a0190a35491a0ef079a14c
+      operationId: Standings
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -537,10 +519,9 @@ paths:
             items:
               $ref: '#/definitions/Standing'
             type: array
-      summary: Standings
   '/{format}/TeamGameStats/{season}/{week}':
     get:
-      operationId: 58137f1c35491a1520575141
+      operationId: Team Game Stats
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -576,10 +557,9 @@ paths:
             items:
               $ref: '#/definitions/TeamGame'
             type: array
-      summary: Team Game Stats
   '/{format}/TeamSeasonStats/{season}':
     get:
-      operationId: 58137f4f35491a1520575142
+      operationId: Team Season Stats
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -606,11 +586,10 @@ paths:
             items:
               $ref: '#/definitions/TeamSeason'
             type: array
-      summary: Team Season Stats
   '/{format}/Teams':
     get:
       description: Gets all active teams.
-      operationId: 57a0190a35491a0ef079a13f
+      operationId: Teams (Active)
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -628,11 +607,10 @@ paths:
             items:
               $ref: '#/definitions/Team'
             type: array
-      summary: Teams (Active)
   '/{format}/Teams/{season}':
     get:
       description: List of teams playing in a specified season.
-      operationId: 57a0190a35491a0ef079a14d
+      operationId: Teams by Season
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -659,11 +637,10 @@ paths:
             items:
               $ref: '#/definitions/Team'
             type: array
-      summary: Teams by Season
   '/{format}/Timeframes/{type}':
     get:
       description: 'Get detailed information about past, present, and future timeframes.'
-      operationId: 57a0190a35491a0ef079a14e
+      operationId: Timeframes
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -693,11 +670,10 @@ paths:
             items:
               $ref: '#/definitions/Timeframe'
             type: array
-      summary: Timeframes
   '/{format}/UpcomingSeason':
     get:
       description: 'Year of the current NFL season, if we are in the mid-season. If we are in the off-season, then year of the next upcoming season. This value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.'
-      operationId: 57a0190a35491a0ef079a14f
+      operationId: Season Upcoming
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -713,11 +689,10 @@ paths:
           description: ''
           schema:
             type: integer
-      summary: Season Upcoming
   '/{format}/UpcomingWeek':
     get:
       description: 'Number of the upcoming week of the NFL season. This value changes immediately after the final game of the week is completed. We consider upcoming week to be the current week, until current week is over. Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.'
-      operationId: 57a0190a35491a0ef079a150
+      operationId: Week Upcoming
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -733,7 +708,6 @@ paths:
           description: ''
           schema:
             type: integer
-      summary: Week Upcoming
 definitions:
   Bye:
     properties:

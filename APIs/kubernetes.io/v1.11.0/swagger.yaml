@@ -57746,16 +57746,16 @@ definitions:
     description: AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
     properties:
       driver:
-        description: Driver is the name of the Flexvolume driver.
+        description: driver is the name of the Flexvolume driver.
         type: string
     required:
       - driver
   io.k8s.api.extensions.v1beta1.AllowedHostPath:
-    description: defines the host volume conditions that will be enabled by a policy for pods to use. It requires the path prefix to be defined.
+    description: AllowedHostPath defines the host volume conditions that will be enabled by a policy for pods to use. It requires the path prefix to be defined.
     properties:
       pathPrefix:
         description: |-
-          is the path prefix that the host volume must match. It does not support `*`. Trailing slashes are trimmed when validating the path prefix with a host path.
+          pathPrefix is the path prefix that the host volume must match. It does not support `*`. Trailing slashes are trimmed when validating the path prefix with a host path.
 
           Examples: `/foo` would allow `/foo`, `/foo/` and `/foo/bar` `/foo` would not allow `/food` or `/etc/foo`
         type: string
@@ -58094,12 +58094,12 @@ definitions:
     description: FSGroupStrategyOptions defines the strategy type and options used to create the strategy.
     properties:
       ranges:
-        description: Ranges are the allowed ranges of fs groups.  If you would like to force a single fs group then supply a single range with the same start and end.
+        description: ranges are the allowed ranges of fs groups.  If you would like to force a single fs group then supply a single range with the same start and end. Required for MustRunAs.
         items:
           $ref: '#/definitions/io.k8s.api.extensions.v1beta1.IDRange'
         type: array
       rule:
-        description: Rule is the strategy that will dictate what FSGroup is used in the SecurityContext.
+        description: rule is the strategy that will dictate what FSGroup is used in the SecurityContext.
         type: string
   io.k8s.api.extensions.v1beta1.HTTPIngressPath:
     description: HTTPIngressPath associates a path regex with a backend. Incoming urls matching the path are forwarded to the backend.
@@ -58123,7 +58123,7 @@ definitions:
     required:
       - paths
   io.k8s.api.extensions.v1beta1.HostPortRange:
-    description: Host Port Range defines a range of host ports that will be enabled by a policy for pods to use.  It requires both the start and end to be defined.
+    description: HostPortRange defines a range of host ports that will be enabled by a policy for pods to use.  It requires both the start and end to be defined.
     properties:
       max:
         description: 'max is the end of the range, inclusive.'
@@ -58137,14 +58137,14 @@ definitions:
       - min
       - max
   io.k8s.api.extensions.v1beta1.IDRange:
-    description: ID Range provides a min/max of an allowed range of IDs.
+    description: IDRange provides a min/max of an allowed range of IDs.
     properties:
       max:
-        description: 'Max is the end of the range, inclusive.'
+        description: 'max is the end of the range, inclusive.'
         format: int64
         type: integer
       min:
-        description: 'Min is the start of the range, inclusive.'
+        description: 'min is the start of the range, inclusive.'
         format: int64
         type: integer
     required:
@@ -58334,13 +58334,19 @@ definitions:
     properties:
       ipBlock:
         $ref: '#/definitions/io.k8s.api.extensions.v1beta1.IPBlock'
-        description: IPBlock defines policy on a particular IPBlock
+        description: IPBlock defines policy on a particular IPBlock. If this field is set then neither of the other fields can be.
       namespaceSelector:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector'
-        description: 'Selects Namespaces using cluster scoped-labels.  This matches all pods in all namespaces selected by this label selector. This field follows standard label selector semantics. If present but empty, this selector selects all namespaces.'
+        description: |-
+          Selects Namespaces using cluster-scoped labels. This field follows standard label selector semantics; if present but empty, it selects all namespaces.
+
+          If PodSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects all Pods in the Namespaces selected by NamespaceSelector.
       podSelector:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector'
-        description: 'This is a label selector which selects Pods in this namespace. This field follows standard label selector semantics. If present but empty, this selector selects all pods in this namespace.'
+        description: |-
+          This is a label selector which selects Pods. This field follows standard label selector semantics; if present but empty, it selects all pods.
+
+          If NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects the Pods matching PodSelector in the policy's own Namespace.
   io.k8s.api.extensions.v1beta1.NetworkPolicyPort:
     description: DEPRECATED 1.9 - This group version of NetworkPolicyPort is deprecated by networking/v1/NetworkPolicyPort.
     properties:
@@ -58374,7 +58380,7 @@ definitions:
     required:
       - podSelector
   io.k8s.api.extensions.v1beta1.PodSecurityPolicy:
-    description: Pod Security Policy governs the ability to make requests that affect the Security Context that will be applied to a pod and container.
+    description: PodSecurityPolicy governs the ability to make requests that affect the Security Context that will be applied to a pod and container.
     properties:
       apiVersion:
         description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
@@ -58393,13 +58399,13 @@ definitions:
         kind: PodSecurityPolicy
         version: v1beta1
   io.k8s.api.extensions.v1beta1.PodSecurityPolicyList:
-    description: Pod Security Policy List is a list of PodSecurityPolicy objects.
+    description: PodSecurityPolicyList is a list of PodSecurityPolicy objects.
     properties:
       apiVersion:
         description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
         type: string
       items:
-        description: Items is a list of schema objects.
+        description: items is a list of schema objects.
         items:
           $ref: '#/definitions/io.k8s.api.extensions.v1beta1.PodSecurityPolicy'
         type: array
@@ -58416,37 +58422,37 @@ definitions:
         kind: PodSecurityPolicyList
         version: v1beta1
   io.k8s.api.extensions.v1beta1.PodSecurityPolicySpec:
-    description: Pod Security Policy Spec defines the policy enforced.
+    description: PodSecurityPolicySpec defines the policy enforced.
     properties:
       allowPrivilegeEscalation:
-        description: 'AllowPrivilegeEscalation determines if a pod can request to allow privilege escalation. If unspecified, defaults to true.'
+        description: 'allowPrivilegeEscalation determines if a pod can request to allow privilege escalation. If unspecified, defaults to true.'
         type: boolean
       allowedCapabilities:
-        description: AllowedCapabilities is a list of capabilities that can be requested to add to the container. Capabilities in this field may be added at the pod author's discretion. You must not list a capability in both AllowedCapabilities and RequiredDropCapabilities.
+        description: allowedCapabilities is a list of capabilities that can be requested to add to the container. Capabilities in this field may be added at the pod author's discretion. You must not list a capability in both allowedCapabilities and requiredDropCapabilities.
         items:
           type: string
         type: array
       allowedFlexVolumes:
-        description: AllowedFlexVolumes is a whitelist of allowed Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "Volumes" field.
+        description: allowedFlexVolumes is a whitelist of allowed Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "volumes" field.
         items:
           $ref: '#/definitions/io.k8s.api.extensions.v1beta1.AllowedFlexVolume'
         type: array
       allowedHostPaths:
-        description: is a white list of allowed host paths. Empty indicates that all host paths may be used.
+        description: allowedHostPaths is a white list of allowed host paths. Empty indicates that all host paths may be used.
         items:
           $ref: '#/definitions/io.k8s.api.extensions.v1beta1.AllowedHostPath'
         type: array
       defaultAddCapabilities:
-        description: 'DefaultAddCapabilities is the default set of capabilities that will be added to the container unless the pod spec specifically drops the capability.  You may not list a capability in both DefaultAddCapabilities and RequiredDropCapabilities. Capabilities added here are implicitly allowed, and need not be included in the AllowedCapabilities list.'
+        description: 'defaultAddCapabilities is the default set of capabilities that will be added to the container unless the pod spec specifically drops the capability.  You may not list a capability in both defaultAddCapabilities and requiredDropCapabilities. Capabilities added here are implicitly allowed, and need not be included in the allowedCapabilities list.'
         items:
           type: string
         type: array
       defaultAllowPrivilegeEscalation:
-        description: DefaultAllowPrivilegeEscalation controls the default setting for whether a process can gain more privileges than its parent process.
+        description: defaultAllowPrivilegeEscalation controls the default setting for whether a process can gain more privileges than its parent process.
         type: boolean
       fsGroup:
         $ref: '#/definitions/io.k8s.api.extensions.v1beta1.FSGroupStrategyOptions'
-        description: FSGroup is the strategy that will dictate what fs group is used by the SecurityContext.
+        description: fsGroup is the strategy that will dictate what fs group is used by the SecurityContext.
       hostIPC:
         description: hostIPC determines if the policy allows the use of HostIPC in the pod spec.
         type: boolean
@@ -58465,10 +58471,10 @@ definitions:
         description: privileged determines if a pod can request to be run as privileged.
         type: boolean
       readOnlyRootFilesystem:
-        description: ReadOnlyRootFilesystem when set to true will force containers to run with a read only root file system.  If the container specifically requests to run with a non-read only root file system the PSP should deny the pod. If set to false the container may run with a read only root file system if it wishes but it will not be forced to.
+        description: readOnlyRootFilesystem when set to true will force containers to run with a read only root file system.  If the container specifically requests to run with a non-read only root file system the PSP should deny the pod. If set to false the container may run with a read only root file system if it wishes but it will not be forced to.
         type: boolean
       requiredDropCapabilities:
-        description: RequiredDropCapabilities are the capabilities that will be dropped from the container.  These are required to be dropped and cannot be added.
+        description: requiredDropCapabilities are the capabilities that will be dropped from the container.  These are required to be dropped and cannot be added.
         items:
           type: string
         type: array
@@ -58480,9 +58486,9 @@ definitions:
         description: seLinux is the strategy that will dictate the allowable labels that may be set.
       supplementalGroups:
         $ref: '#/definitions/io.k8s.api.extensions.v1beta1.SupplementalGroupsStrategyOptions'
-        description: SupplementalGroups is the strategy that will dictate what supplemental groups are used by the SecurityContext.
+        description: supplementalGroups is the strategy that will dictate what supplemental groups are used by the SecurityContext.
       volumes:
-        description: volumes is a white list of allowed volume plugins.  Empty indicates that all plugins may be used.
+        description: volumes is a white list of allowed volume plugins. Empty indicates that no volumes may be used. To allow all volumes you may use '*'.
         items:
           type: string
         type: array
@@ -58629,23 +58635,23 @@ definitions:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
         description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By default, a fixed value of 1 is used. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
   io.k8s.api.extensions.v1beta1.RunAsUserStrategyOptions:
-    description: Run A sUser Strategy Options defines the strategy type and any options used to create the strategy.
+    description: RunAsUserStrategyOptions defines the strategy type and any options used to create the strategy.
     properties:
       ranges:
-        description: Ranges are the allowed ranges of uids that may be used.
+        description: ranges are the allowed ranges of uids that may be used. If you would like to force a single uid then supply a single range with the same start and end. Required for MustRunAs.
         items:
           $ref: '#/definitions/io.k8s.api.extensions.v1beta1.IDRange'
         type: array
       rule:
-        description: Rule is the strategy that will dictate the allowable RunAsUser values that may be set.
+        description: rule is the strategy that will dictate the allowable RunAsUser values that may be set.
         type: string
     required:
       - rule
   io.k8s.api.extensions.v1beta1.SELinuxStrategyOptions:
-    description: SELinux  Strategy Options defines the strategy type and any options used to create the strategy.
+    description: SELinuxStrategyOptions defines the strategy type and any options used to create the strategy.
     properties:
       rule:
-        description: type is the strategy that will dictate the allowable labels that may be set.
+        description: rule is the strategy that will dictate the allowable labels that may be set.
         type: string
       seLinuxOptions:
         $ref: '#/definitions/io.k8s.api.core.v1.SELinuxOptions'
@@ -58702,12 +58708,12 @@ definitions:
     description: SupplementalGroupsStrategyOptions defines the strategy type and options used to create the strategy.
     properties:
       ranges:
-        description: Ranges are the allowed ranges of supplemental groups.  If you would like to force a single supplemental group then supply a single range with the same start and end.
+        description: ranges are the allowed ranges of supplemental groups.  If you would like to force a single supplemental group then supply a single range with the same start and end. Required for MustRunAs.
         items:
           $ref: '#/definitions/io.k8s.api.extensions.v1beta1.IDRange'
         type: array
       rule:
-        description: Rule is the strategy that will dictate what supplemental groups is used in the SecurityContext.
+        description: rule is the strategy that will dictate what supplemental groups is used in the SecurityContext.
         type: string
   io.k8s.api.networking.v1.IPBlock:
     description: IPBlock describes a particular CIDR (Ex. "192.168.1.1/24") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.
@@ -58791,17 +58797,23 @@ definitions:
         kind: NetworkPolicyList
         version: v1
   io.k8s.api.networking.v1.NetworkPolicyPeer:
-    description: NetworkPolicyPeer describes a peer to allow traffic from. Exactly one of its fields must be specified.
+    description: NetworkPolicyPeer describes a peer to allow traffic from. Only certain combinations of fields are allowed
     properties:
       ipBlock:
         $ref: '#/definitions/io.k8s.api.networking.v1.IPBlock'
-        description: IPBlock defines policy on a particular IPBlock
+        description: IPBlock defines policy on a particular IPBlock. If this field is set then neither of the other fields can be.
       namespaceSelector:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector'
-        description: 'Selects Namespaces using cluster scoped-labels. This matches all pods in all namespaces selected by this label selector. This field follows standard label selector semantics. If present but empty, this selector selects all namespaces.'
+        description: |-
+          Selects Namespaces using cluster-scoped labels. This field follows standard label selector semantics; if present but empty, it selects all namespaces.
+
+          If PodSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects all Pods in the Namespaces selected by NamespaceSelector.
       podSelector:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector'
-        description: 'This is a label selector which selects Pods in this namespace. This field follows standard label selector semantics. If present but empty, this selector selects all pods in this namespace.'
+        description: |-
+          This is a label selector which selects Pods. This field follows standard label selector semantics; if present but empty, it selects all pods.
+
+          If NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects the Pods matching PodSelector in the policy's own Namespace.
   io.k8s.api.networking.v1.NetworkPolicyPort:
     description: NetworkPolicyPort describes a port to allow traffic on
     properties:
@@ -58838,16 +58850,16 @@ definitions:
     description: AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
     properties:
       driver:
-        description: Driver is the name of the Flexvolume driver.
+        description: driver is the name of the Flexvolume driver.
         type: string
     required:
       - driver
   io.k8s.api.policy.v1beta1.AllowedHostPath:
-    description: defines the host volume conditions that will be enabled by a policy for pods to use. It requires the path prefix to be defined.
+    description: AllowedHostPath defines the host volume conditions that will be enabled by a policy for pods to use. It requires the path prefix to be defined.
     properties:
       pathPrefix:
         description: |-
-          is the path prefix that the host volume must match. It does not support `*`. Trailing slashes are trimmed when validating the path prefix with a host path.
+          pathPrefix is the path prefix that the host volume must match. It does not support `*`. Trailing slashes are trimmed when validating the path prefix with a host path.
 
           Examples: `/foo` would allow `/foo`, `/foo/` and `/foo/bar` `/foo` would not allow `/food` or `/etc/foo`
         type: string
@@ -58874,15 +58886,15 @@ definitions:
     description: FSGroupStrategyOptions defines the strategy type and options used to create the strategy.
     properties:
       ranges:
-        description: Ranges are the allowed ranges of fs groups.  If you would like to force a single fs group then supply a single range with the same start and end.
+        description: ranges are the allowed ranges of fs groups.  If you would like to force a single fs group then supply a single range with the same start and end. Required for MustRunAs.
         items:
           $ref: '#/definitions/io.k8s.api.policy.v1beta1.IDRange'
         type: array
       rule:
-        description: Rule is the strategy that will dictate what FSGroup is used in the SecurityContext.
+        description: rule is the strategy that will dictate what FSGroup is used in the SecurityContext.
         type: string
   io.k8s.api.policy.v1beta1.HostPortRange:
-    description: Host Port Range defines a range of host ports that will be enabled by a policy for pods to use.  It requires both the start and end to be defined.
+    description: HostPortRange defines a range of host ports that will be enabled by a policy for pods to use.  It requires both the start and end to be defined.
     properties:
       max:
         description: 'max is the end of the range, inclusive.'
@@ -58896,14 +58908,14 @@ definitions:
       - min
       - max
   io.k8s.api.policy.v1beta1.IDRange:
-    description: ID Range provides a min/max of an allowed range of IDs.
+    description: IDRange provides a min/max of an allowed range of IDs.
     properties:
       max:
-        description: 'Max is the end of the range, inclusive.'
+        description: 'max is the end of the range, inclusive.'
         format: int64
         type: integer
       min:
-        description: 'Min is the start of the range, inclusive.'
+        description: 'min is the start of the range, inclusive.'
         format: int64
         type: integer
     required:
@@ -58998,7 +59010,7 @@ definitions:
       - desiredHealthy
       - expectedPods
   io.k8s.api.policy.v1beta1.PodSecurityPolicy:
-    description: Pod Security Policy governs the ability to make requests that affect the Security Context that will be applied to a pod and container.
+    description: PodSecurityPolicy governs the ability to make requests that affect the Security Context that will be applied to a pod and container.
     properties:
       apiVersion:
         description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
@@ -59017,13 +59029,13 @@ definitions:
         kind: PodSecurityPolicy
         version: v1beta1
   io.k8s.api.policy.v1beta1.PodSecurityPolicyList:
-    description: Pod Security Policy List is a list of PodSecurityPolicy objects.
+    description: PodSecurityPolicyList is a list of PodSecurityPolicy objects.
     properties:
       apiVersion:
         description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
         type: string
       items:
-        description: Items is a list of schema objects.
+        description: items is a list of schema objects.
         items:
           $ref: '#/definitions/io.k8s.api.policy.v1beta1.PodSecurityPolicy'
         type: array
@@ -59040,37 +59052,37 @@ definitions:
         kind: PodSecurityPolicyList
         version: v1beta1
   io.k8s.api.policy.v1beta1.PodSecurityPolicySpec:
-    description: Pod Security Policy Spec defines the policy enforced.
+    description: PodSecurityPolicySpec defines the policy enforced.
     properties:
       allowPrivilegeEscalation:
-        description: 'AllowPrivilegeEscalation determines if a pod can request to allow privilege escalation. If unspecified, defaults to true.'
+        description: 'allowPrivilegeEscalation determines if a pod can request to allow privilege escalation. If unspecified, defaults to true.'
         type: boolean
       allowedCapabilities:
-        description: AllowedCapabilities is a list of capabilities that can be requested to add to the container. Capabilities in this field may be added at the pod author's discretion. You must not list a capability in both AllowedCapabilities and RequiredDropCapabilities.
+        description: allowedCapabilities is a list of capabilities that can be requested to add to the container. Capabilities in this field may be added at the pod author's discretion. You must not list a capability in both allowedCapabilities and requiredDropCapabilities.
         items:
           type: string
         type: array
       allowedFlexVolumes:
-        description: AllowedFlexVolumes is a whitelist of allowed Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "Volumes" field.
+        description: allowedFlexVolumes is a whitelist of allowed Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "volumes" field.
         items:
           $ref: '#/definitions/io.k8s.api.policy.v1beta1.AllowedFlexVolume'
         type: array
       allowedHostPaths:
-        description: is a white list of allowed host paths. Empty indicates that all host paths may be used.
+        description: allowedHostPaths is a white list of allowed host paths. Empty indicates that all host paths may be used.
         items:
           $ref: '#/definitions/io.k8s.api.policy.v1beta1.AllowedHostPath'
         type: array
       defaultAddCapabilities:
-        description: 'DefaultAddCapabilities is the default set of capabilities that will be added to the container unless the pod spec specifically drops the capability.  You may not list a capability in both DefaultAddCapabilities and RequiredDropCapabilities. Capabilities added here are implicitly allowed, and need not be included in the AllowedCapabilities list.'
+        description: 'defaultAddCapabilities is the default set of capabilities that will be added to the container unless the pod spec specifically drops the capability.  You may not list a capability in both defaultAddCapabilities and requiredDropCapabilities. Capabilities added here are implicitly allowed, and need not be included in the allowedCapabilities list.'
         items:
           type: string
         type: array
       defaultAllowPrivilegeEscalation:
-        description: DefaultAllowPrivilegeEscalation controls the default setting for whether a process can gain more privileges than its parent process.
+        description: defaultAllowPrivilegeEscalation controls the default setting for whether a process can gain more privileges than its parent process.
         type: boolean
       fsGroup:
         $ref: '#/definitions/io.k8s.api.policy.v1beta1.FSGroupStrategyOptions'
-        description: FSGroup is the strategy that will dictate what fs group is used by the SecurityContext.
+        description: fsGroup is the strategy that will dictate what fs group is used by the SecurityContext.
       hostIPC:
         description: hostIPC determines if the policy allows the use of HostIPC in the pod spec.
         type: boolean
@@ -59089,10 +59101,10 @@ definitions:
         description: privileged determines if a pod can request to be run as privileged.
         type: boolean
       readOnlyRootFilesystem:
-        description: ReadOnlyRootFilesystem when set to true will force containers to run with a read only root file system.  If the container specifically requests to run with a non-read only root file system the PSP should deny the pod. If set to false the container may run with a read only root file system if it wishes but it will not be forced to.
+        description: readOnlyRootFilesystem when set to true will force containers to run with a read only root file system.  If the container specifically requests to run with a non-read only root file system the PSP should deny the pod. If set to false the container may run with a read only root file system if it wishes but it will not be forced to.
         type: boolean
       requiredDropCapabilities:
-        description: RequiredDropCapabilities are the capabilities that will be dropped from the container.  These are required to be dropped and cannot be added.
+        description: requiredDropCapabilities are the capabilities that will be dropped from the container.  These are required to be dropped and cannot be added.
         items:
           type: string
         type: array
@@ -59104,9 +59116,9 @@ definitions:
         description: seLinux is the strategy that will dictate the allowable labels that may be set.
       supplementalGroups:
         $ref: '#/definitions/io.k8s.api.policy.v1beta1.SupplementalGroupsStrategyOptions'
-        description: SupplementalGroups is the strategy that will dictate what supplemental groups are used by the SecurityContext.
+        description: supplementalGroups is the strategy that will dictate what supplemental groups are used by the SecurityContext.
       volumes:
-        description: volumes is a white list of allowed volume plugins.  Empty indicates that all plugins may be used.
+        description: volumes is a white list of allowed volume plugins. Empty indicates that no volumes may be used. To allow all volumes you may use '*'.
         items:
           type: string
         type: array
@@ -59116,23 +59128,23 @@ definitions:
       - supplementalGroups
       - fsGroup
   io.k8s.api.policy.v1beta1.RunAsUserStrategyOptions:
-    description: Run A sUser Strategy Options defines the strategy type and any options used to create the strategy.
+    description: RunAsUserStrategyOptions defines the strategy type and any options used to create the strategy.
     properties:
       ranges:
-        description: Ranges are the allowed ranges of uids that may be used.
+        description: ranges are the allowed ranges of uids that may be used. If you would like to force a single uid then supply a single range with the same start and end. Required for MustRunAs.
         items:
           $ref: '#/definitions/io.k8s.api.policy.v1beta1.IDRange'
         type: array
       rule:
-        description: Rule is the strategy that will dictate the allowable RunAsUser values that may be set.
+        description: rule is the strategy that will dictate the allowable RunAsUser values that may be set.
         type: string
     required:
       - rule
   io.k8s.api.policy.v1beta1.SELinuxStrategyOptions:
-    description: SELinux  Strategy Options defines the strategy type and any options used to create the strategy.
+    description: SELinuxStrategyOptions defines the strategy type and any options used to create the strategy.
     properties:
       rule:
-        description: type is the strategy that will dictate the allowable labels that may be set.
+        description: rule is the strategy that will dictate the allowable labels that may be set.
         type: string
       seLinuxOptions:
         $ref: '#/definitions/io.k8s.api.core.v1.SELinuxOptions'
@@ -59143,12 +59155,12 @@ definitions:
     description: SupplementalGroupsStrategyOptions defines the strategy type and options used to create the strategy.
     properties:
       ranges:
-        description: Ranges are the allowed ranges of supplemental groups.  If you would like to force a single supplemental group then supply a single range with the same start and end.
+        description: ranges are the allowed ranges of supplemental groups.  If you would like to force a single supplemental group then supply a single range with the same start and end. Required for MustRunAs.
         items:
           $ref: '#/definitions/io.k8s.api.policy.v1beta1.IDRange'
         type: array
       rule:
-        description: Rule is the strategy that will dictate what supplemental groups is used in the SecurityContext.
+        description: rule is the strategy that will dictate what supplemental groups is used in the SecurityContext.
         type: string
   io.k8s.api.rbac.v1.AggregationRule:
     description: AggregationRule describes how to locate ClusterRoles to aggregate into the ClusterRole

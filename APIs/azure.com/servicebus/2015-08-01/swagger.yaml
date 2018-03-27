@@ -2712,9 +2712,6 @@ definitions:
       enablePartitioning:
         description: Value that indicates whether the topic to be partitioned across multiple message brokers is enabled.
         type: boolean
-      enableSubscriptionPartitioning:
-        description: 'Value that indicates whether partitioning is enabled or disabled. NOTE: This property is unsupported, and may be deprecated.'
-        type: boolean
       entityAvailabilityStatus:
         $ref: '#/definitions/EntityAvailabilityStatus'
         description: Entity availability status for the topic.

@@ -3816,36 +3816,80 @@ paths:
       tags:
         - Rules
       x-ms-examples:
-        RulesCreateOrUpdate:
+        RulesCreateCorelationFilter:
           parameters:
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-1319
             parameters:
               properties:
-                action:
-                  sqlExpression: myproperty='test'
-                correlationFilter: {}
-                filterType: SqlFilter
-                sqlFilter:
-                  sqlExpression: myproperty='test'
-            resourceGroupName: ArunMonocle
+                correlationFilter:
+                  properties:
+                    topicHint: Crop
+                filterType: CorrelationFilter
+            resourceGroupName: resourceGroupName
             ruleName: sdk-Rules-6571
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            subscriptionId: subscriptionId
             subscriptionName: sdk-Subscriptions-8691
             topicName: sdk-Topics-2081
           responses:
             '200':
               body:
-                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ArunMonocle/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1319/topics/sdk-Topics-2081/subscriptions/sdk-Subscriptions-8691/rules/sdk-Rules-6571
+                id: /subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1319/topics/sdk-Topics-2081/subscriptions/sdk-Subscriptions-8691/rules/sdk-Rules-6571
                 name: sdk-Rules-6571
                 properties:
-                  action:
-                    compatibilityLevel: 20
-                    sqlExpression: myproperty='test'
+                  action: {}
+                  correlationFilter:
+                    properties:
+                      queueHint: Crop
+                  filterType: CorrelationFilter
+                type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions/Rules
+        RulesCreateOrUpdate:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-1319
+            parameters: {}
+            resourceGroupName: resourceGroupName
+            ruleName: sdk-Rules-6571
+            subscriptionId: subscriptionId
+            subscriptionName: sdk-Subscriptions-8691
+            topicName: sdk-Topics-2081
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1319/topics/sdk-Topics-2081/subscriptions/sdk-Subscriptions-8691/rules/sdk-Rules-6571
+                name: sdk-Rules-6571
+                properties:
+                  action: {}
                   filterType: SqlFilter
                   sqlFilter:
                     compatibilityLevel: 20
-                    sqlExpression: myproperty='test'
+                    sqlExpression: 1=1
+                type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions/Rules
+        RulesCreateSQLFilter:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-1319
+            parameters:
+              properties:
+                filterType: SqlFilter
+                sqlFilter:
+                  sqlExpression: myproperty=test
+            resourceGroupName: resourceGroupName
+            ruleName: sdk-Rules-6571
+            subscriptionId: subscriptionId
+            subscriptionName: sdk-Subscriptions-8691
+            topicName: sdk-Topics-2081
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1319/topics/sdk-Topics-2081/subscriptions/sdk-Subscriptions-8691/rules/sdk-Rules-6571
+                name: sdk-Rules-6571
+                properties:
+                  action: {}
+                  filterType: SqlFilter
+                  sqlFilter:
+                    compatibilityLevel: 20
+                    sqlExpression: myproperty=test
                 type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions/Rules
 definitions:
   AccessKeys:
@@ -4026,6 +4070,11 @@ definitions:
       messageId:
         description: Identifier of the message.
         type: string
+      properties:
+        additionalProperties:
+          type: string
+        description: dictionary object for custom filters
+        type: object
       replyTo:
         description: Address of the queue to reply to.
         type: string
@@ -4484,6 +4533,9 @@ definitions:
         description: ISO 8601 timeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.
         format: duration
         type: string
+      enableBatchedOperations:
+        description: Value that indicates whether server-side batched operations are enabled.
+        type: boolean
       enableExpress:
         description: A value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage.
         type: boolean

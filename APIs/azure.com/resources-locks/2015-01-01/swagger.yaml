@@ -430,6 +430,7 @@ definitions:
     properties:
       id:
         description: The Id of the lock.
+        readOnly: true
         type: string
       name:
         description: The name of the lock.
@@ -440,6 +441,7 @@ definitions:
         x-ms-client-flatten: true
       type:
         description: The type of the lock.
+        readOnly: true
         type: string
     x-ms-azure-resource: true
   ManagementLockProperties:

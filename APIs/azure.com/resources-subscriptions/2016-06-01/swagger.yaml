@@ -42,6 +42,14 @@ parameters:
     name: api-version
     required: true
     type: string
+    x-ms-parameter-location: client
+  SubscriptionIdParameter:
+    description: The ID of the target subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+    x-ms-parameter-location: method
 paths:
   /subscriptions:
     get:
@@ -63,11 +71,7 @@ paths:
       description: Gets details about a specified subscription.
       operationId: Subscriptions_Get
       parameters:
-        - description: The ID of the target subscription.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
@@ -81,11 +85,7 @@ paths:
       description: 'This operation provides all the locations that are available for resource providers; however, each resource provider may support a subset of this list.'
       operationId: Subscriptions_ListLocations
       parameters:
-        - description: The ID of the target subscription.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':

@@ -77,12 +77,12 @@ paths:
         '200':
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/Recommendation'
-            type: array
+            $ref: '#/definitions/RecommendationCollection'
       summary: List all recommendations for a subscription.
       tags:
         - Recommendations
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/recommendations/reset':
     post:
       description: Reset all recommendation opt-out settings for a subscription.
@@ -94,6 +94,24 @@ paths:
         '204':
           description: No Content
       summary: Reset all recommendation opt-out settings for a subscription.
+      tags:
+        - Recommendations
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Web/recommendations/{name}/disable':
+    post:
+      description: Disables the specified rule so it will not apply to a subscription in the future.
+      operationId: Recommendations_DisableRecommendationForSubscription
+      parameters:
+        - description: Rule name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully disabled recommendations.
+      summary: Disables the specified rule so it will not apply to a subscription in the future.
       tags:
         - Recommendations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendationHistory':
@@ -118,12 +136,12 @@ paths:
         '200':
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/Recommendation'
-            type: array
+            $ref: '#/definitions/RecommendationCollection'
       summary: 'Get past recommendations for an app, optionally specified by the time range.'
       tags:
         - Recommendations
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations':
     get:
       description: Get all recommendations for an app.
@@ -150,12 +168,12 @@ paths:
         '200':
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/Recommendation'
-            type: array
+            $ref: '#/definitions/RecommendationCollection'
       summary: Get all recommendations for an app.
       tags:
         - Recommendations
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations/disable':
     post:
       description: Disable all recommendations for an app.
@@ -214,6 +232,10 @@ paths:
           in: query
           name: updateSeen
           type: boolean
+        - description: The GUID of the recommedation object if you query an expired one. You don't need to specify it to query an active entry.
+          in: query
+          name: recommendationId
+          type: string
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
@@ -224,172 +246,257 @@ paths:
       summary: Get a recommendation rule for an app.
       tags:
         - Recommendations
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations/{name}/disable':
+    post:
+      description: Disables the specific rule for a web site permanently.
+      operationId: Recommendations_DisableRecommendationForSite
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name
+          in: path
+          name: siteName
+          required: true
+          type: string
+        - description: Rule name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully disabled recommendations.
+      summary: Disables the specific rule for a web site permanently.
+      tags:
+        - Recommendations
 definitions:
   Recommendation:
+    allOf:
+      - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
+        properties:
+          id:
+            description: Resource Id.
+            readOnly: true
+            type: string
+          kind:
+            description: Kind of resource.
+            type: string
+          name:
+            description: Resource Name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
     description: Represents a recommendation result generated by the recommendation engine.
     properties:
-      actionName:
-        description: Name of action recommended by this object.
+      properties:
+        description: Recommendation resource specific properties
+        properties:
+          actionName:
+            description: Name of action recommended by this object.
+            type: string
+          bladeName:
+            description: Deep link to a blade on the portal.
+            type: string
+          channels:
+            description: List of channels that this recommendation can apply.
+            enum:
+              - Notification
+              - Api
+              - Email
+              - Webhook
+              - All
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: Channels
+          creationTime:
+            description: Timestamp when this instance was created.
+            format: date-time
+            type: string
+          displayName:
+            description: UI friendly name of the rule (may not be unique).
+            type: string
+          endTime:
+            description: The end time in UTC of a range that the recommendation refers to.
+            format: date-time
+            type: string
+          extensionName:
+            description: Extension name of the portal if exists.
+            type: string
+          forwardLink:
+            description: Forward link to an external document associated with the rule.
+            type: string
+          isDynamic:
+            description: True if this is associated with a dynamically added rule
+            type: boolean
+          level:
+            description: Level indicating how critical this recommendation can impact.
+            enum:
+              - Critical
+              - Warning
+              - Information
+              - NonUrgentSuggestion
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: NotificationLevel
+          message:
+            description: Recommendation text.
+            type: string
+          nextNotificationTime:
+            description: When to notify this recommendation next in UTC. Null means that this will never be notified anymore.
+            format: date-time
+            type: string
+          notificationExpirationTime:
+            description: Date and time in UTC when this notification expires.
+            format: date-time
+            type: string
+          notifiedTime:
+            description: Last timestamp in UTC this instance was actually notified. Null means that this recommendation hasn't been notified yet.
+            format: date-time
+            type: string
+          recommendationId:
+            description: A GUID value that each recommendation object is associated with.
+            example: 00000000-0000-0000-0000-000000000000
+            format: uuid
+            type: string
+          resourceId:
+            description: Full ARM resource ID string that this recommendation object is associated with.
+            type: string
+          resourceScope:
+            description: 'Name of a resource type this recommendation applies, e.g. Subscription, ServerFarm, Site.'
+            enum:
+              - ServerFarm
+              - Subscription
+              - WebSite
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: ResourceScopeType
+          ruleName:
+            description: Unique name of the rule.
+            type: string
+          score:
+            description: A metric value measured by the rule.
+            format: double
+            type: number
+          startTime:
+            description: The beginning time in UTC of a range that the recommendation refers to.
+            format: date-time
+            type: string
+          tags:
+            description: The list of category tags that this recommendation belongs to.
+            items:
+              type: string
+            type: array
+        x-ms-client-flatten: true
+    type: object
+  RecommendationCollection:
+    description: Collection of recommendations.
+    properties:
+      nextLink:
+        description: Link to next page of resources.
+        readOnly: true
         type: string
-      bladeName:
-        description: Deep link to a blade on the portal.
-        type: string
-      channels:
-        description: List of channels that this recommendation can apply.
-        enum:
-          - Notification
-          - Api
-          - Email
-          - Webhook
-          - All
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: Channels
-      creationTime:
-        description: Timestamp when this instance was created.
-        format: date-time
-        type: string
-      displayName:
-        description: UI friendly name of the rule (may not be unique).
-        type: string
-      endTime:
-        description: The end time in UTC of a range that the recommendation refers to.
-        format: date-time
-        type: string
-      extensionName:
-        description: Extension name of the portal if exists.
-        type: string
-      forwardLink:
-        description: Forward link to an external document associated with the rule.
-        type: string
-      isDynamic:
-        description: True if this is associated with a dynamically added rule
-        type: boolean
-      level:
-        description: Level indicating how critical this recommendation can impact.
-        enum:
-          - Critical
-          - Warning
-          - Information
-          - NonUrgentSuggestion
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: NotificationLevel
-      message:
-        description: Recommendation text.
-        type: string
-      nextNotificationTime:
-        description: When to notify this recommendation next in UTC. Null means that this will never be notified anymore.
-        format: date-time
-        type: string
-      notificationExpirationTime:
-        description: Date and time in UTC when this notification expires.
-        format: date-time
-        type: string
-      notifiedTime:
-        description: Last timestamp in UTC this instance was actually notified. Null means that this recommendation hasn't been notified yet.
-        format: date-time
-        type: string
-      recommendationId:
-        description: A GUID value that each recommendation object is associated with.
-        example: 00000000-0000-0000-0000-000000000000
-        format: uuid
-        type: string
-      resourceId:
-        description: Full ARM resource ID string that this recommendation object is associated with.
-        type: string
-      resourceScope:
-        description: 'Name of a resource type this recommendation applies, e.g. Subscription, ServerFarm, Site.'
-        enum:
-          - ServerFarm
-          - Subscription
-          - WebSite
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: ResourceScopeType
-      ruleName:
-        description: Unique name of the rule.
-        type: string
-      score:
-        description: A metric value measured by the rule.
-        format: double
-        type: number
-      startTime:
-        description: The beginning time in UTC of a range that the recommendation refers to.
-        format: date-time
-        type: string
-      tags:
-        description: The list of category tags that this recommendation belongs to.
+      value:
+        description: Collection of resources.
         items:
-          type: string
+          $ref: '#/definitions/Recommendation'
         type: array
+    required:
+      - value
     type: object
   RecommendationRule:
+    allOf:
+      - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
+        properties:
+          id:
+            description: Resource Id.
+            readOnly: true
+            type: string
+          kind:
+            description: Kind of resource.
+            type: string
+          name:
+            description: Resource Name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
     description: Represents a recommendation rule that the recommendation engine can perform.
     properties:
-      actionName:
-        description: Name of action that is recommended by this rule in string.
-        type: string
-      bladeName:
-        description: Deep link to a blade on the portal. Applicable to dynamic rule only.
-        type: string
-      channels:
-        description: List of available channels that this rule applies.
-        enum:
-          - Notification
-          - Api
-          - Email
-          - Webhook
-          - All
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: Channels
-      description:
-        description: Localized detailed description of the rule.
-        type: string
-      displayName:
-        description: UI friendly name of the rule.
-        type: string
-      extensionName:
-        description: Extension name of the portal if exists. Applicable to dynamic rule only.
-        type: string
-      forwardLink:
-        description: Forward link to an external document associated with the rule. Applicable to dynamic rule only.
-        type: string
-      isDynamic:
-        description: True if this is associated with a dynamically added rule
-        type: boolean
-      level:
-        description: Level of impact indicating how critical this rule is.
-        enum:
-          - Critical
-          - Warning
-          - Information
-          - NonUrgentSuggestion
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: NotificationLevel
-      message:
-        description: Localized name of the rule (Good for UI).
-        type: string
-      name:
-        description: Unique name of the rule.
-        type: string
-      recommendationId:
-        description: |-
-          Recommendation ID of an associated recommendation object tied to the rule, if exists.
-          If such an object doesn't exist, it is set to null.
-        example: 00000000-0000-0000-0000-000000000000
-        format: uuid
-        type: string
-      tags:
-        description: An array of category tags that the rule contains.
-        items:
-          type: string
-        type: array
+      properties:
+        description: RecommendationRule resource specific properties
+        properties:
+          actionName:
+            description: Name of action that is recommended by this rule in string.
+            type: string
+          bladeName:
+            description: Deep link to a blade on the portal. Applicable to dynamic rule only.
+            type: string
+          channels:
+            description: List of available channels that this rule applies.
+            enum:
+              - Notification
+              - Api
+              - Email
+              - Webhook
+              - All
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: Channels
+          description:
+            description: Localized detailed description of the rule.
+            type: string
+          displayName:
+            description: UI friendly name of the rule.
+            type: string
+          extensionName:
+            description: Extension name of the portal if exists. Applicable to dynamic rule only.
+            type: string
+          forwardLink:
+            description: Forward link to an external document associated with the rule. Applicable to dynamic rule only.
+            type: string
+          isDynamic:
+            description: True if this is associated with a dynamically added rule
+            type: boolean
+          level:
+            description: Level of impact indicating how critical this rule is.
+            enum:
+              - Critical
+              - Warning
+              - Information
+              - NonUrgentSuggestion
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: NotificationLevel
+          message:
+            description: Localized name of the rule (Good for UI).
+            type: string
+          name:
+            description: Unique name of the rule.
+            type: string
+          recommendationId:
+            description: |-
+              Recommendation ID of an associated recommendation object tied to the rule, if exists.
+              If such an object doesn't exist, it is set to null.
+            example: 00000000-0000-0000-0000-000000000000
+            format: uuid
+            type: string
+          tags:
+            description: An array of category tags that the rule contains.
+            items:
+              type: string
+            type: array
+        x-ms-client-flatten: true
     type: object

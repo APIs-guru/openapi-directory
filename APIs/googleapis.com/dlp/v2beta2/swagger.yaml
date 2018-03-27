@@ -7,8 +7,8 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
-  title: Cloud DLP
+  description: 'Provides methods for detection, risk analysis, and de-identification of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
+  title: Cloud Data Loss Prevention (DLP)
   version: v2beta2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -161,13 +161,12 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v2beta2/{name}':
     delete:
-      description: Deletes inspect templates.
-      operationId: dlp.projects.deidentifyTemplates.delete
+      description: Deletes a job trigger.
+      operationId: dlp.projects.jobTriggers.delete
       parameters:
         - description: |-
-            Resource name of the organization and deidentify template to be deleted,
-            for example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -184,13 +183,12 @@ paths:
       tags:
         - projects
     get:
-      description: Gets an inspect template.
-      operationId: dlp.projects.deidentifyTemplates.get
+      description: Gets a job trigger.
+      operationId: dlp.projects.jobTriggers.get
       parameters:
         - description: |-
-            Resource name of the organization and deidentify template to be read, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -200,7 +198,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2beta2DeidentifyTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta2JobTrigger'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -221,17 +219,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates the inspect template.
-      operationId: dlp.projects.deidentifyTemplates.patch
+      description: Updates a job trigger.
+      operationId: dlp.projects.jobTriggers.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2beta2UpdateDeidentifyTemplateRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta2UpdateJobTriggerRequest'
         - description: |-
-            Resource name of organization and deidentify template to be updated, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -241,7 +238,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2beta2DeidentifyTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta2JobTrigger'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

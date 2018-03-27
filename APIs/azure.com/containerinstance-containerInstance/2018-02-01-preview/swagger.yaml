@@ -56,6 +56,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  OperationIdParameter:
+    description: The operation Id.
+    in: path
+    name: operationId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: The name of the resource group.
     in: path
@@ -436,6 +443,7 @@ paths:
         - description: The container group resource with just the tags to be updated.
           in: body
           name: Resource
+          required: true
           schema:
             $ref: '#/definitions/Resource'
       responses:
@@ -686,6 +694,51 @@ paths:
                     - name: volume3
                       secret: {}
                 type: Microsoft.ContainerInstance/containerGroups
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/exec':
+    post:
+      description: Starts the exec command for a specified container instance in a specified resource group and container group.
+      operationId: StartContainer_LaunchExec
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ContainerGroupNameParameter'
+        - description: The name of the container instance.
+          in: path
+          name: containerName
+          required: true
+          type: string
+        - description: The request for the exec command.
+          in: body
+          name: containerExecRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ContainerExecRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ContainerExecResponse'
+      summary: Starts the exec command for a specific container instance.
+      x-ms-examples:
+        ContainerExecStart:
+          parameters:
+            api-version: 2018-02-01-preview
+            containerExecRequest:
+              command: /bin/bash
+              terminalSize:
+                column: 12
+                row: 12
+            containerGroupName: demo1
+            containerName: container1
+            resourceGroupName: demo
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                password: password
+                webSocketUri: 'wss://web-socket-uri'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs':
     get:
       description: Get the logs for a specified container instance in a specified resource group and container group.
@@ -756,6 +809,33 @@ definitions:
     required:
       - properties
       - name
+    type: object
+  ContainerExecRequest:
+    description: The start container exec request.
+    properties:
+      command:
+        description: The command to be executed.
+        type: string
+      terminalSize:
+        description: The size of the terminal.
+        properties:
+          cols:
+            description: The column size of the terminal
+            type: integer
+          rows:
+            description: The row size of the terminal
+            type: integer
+        type: object
+    type: object
+  ContainerExecResponse:
+    description: The information for the container exec command.
+    properties:
+      password:
+        description: The password to start the exec command.
+        type: string
+      webSocketUri:
+        description: The uri for the exec websocket.
+        type: string
     type: object
   ContainerGroup:
     allOf:

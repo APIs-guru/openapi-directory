@@ -579,7 +579,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1alpha/apps/{appsId}/locations/{locationsId}':
     get:
-      description: Get information about a location.
+      description: Gets information about a location.
       operationId: appengine.apps.locations.get
       parameters:
         - description: Part of `name`. Resource name for the location.
@@ -769,6 +769,13 @@ definitions:
         type: string
       publicCertificate:
         description: 'PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: <pre> -----BEGIN CERTIFICATE----- <certificate_value> -----END CERTIFICATE----- </pre>'
+        type: string
+    type: object
+  CreateVersionMetadataV1:
+    description: Metadata for the given google.longrunning.Operation during a google.appengine.v1.CreateVersionRequest.
+    properties:
+      cloudBuildId:
+        description: The Cloud Build ID if one was created as part of the version create. @OutputOnly
         type: string
     type: object
   CreateVersionMetadataV1Alpha:
@@ -977,6 +984,8 @@ definitions:
   OperationMetadataV1:
     description: Metadata for the given google.longrunning.Operation.
     properties:
+      createVersionMetadata:
+        $ref: '#/definitions/CreateVersionMetadataV1'
       endTime:
         description: Time that this operation completed.@OutputOnly
         format: google-datetime

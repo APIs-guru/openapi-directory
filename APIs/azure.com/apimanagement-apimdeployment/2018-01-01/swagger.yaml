@@ -1261,6 +1261,130 @@ paths:
                   name: Developer
                 tags: {}
                 type: Microsoft.ApiManagement/service
+        ApiManagementCreateServiceWithSystemCertificates:
+          parameters:
+            api-version: '2018-01-01'
+            parameters:
+              location: Central US
+              properties:
+                certificates:
+                  - certificatePassword: '**************Password of the Certificate************************************************'
+                    encodedCertificate: '************Base 64 Encoded Pfx Certificate************************'
+                    storeName: CertificateAuthority
+                publisherEmail: apim@autorestsdk.com
+                publisherName: autorestsdk
+              sku:
+                capacity: 1
+                name: Basic
+              tags:
+                tag1: value1
+                tag2: value2
+                tag3: value3
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              etag: AAAAAADauqg=
+              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+              location: Central US
+              name: apimService1
+              properties:
+                certificates:
+                  - certificate:
+                      expiry: '2035-12-31T23:00:00-08:00'
+                      subject: CN=*.msitesting.net
+                      thumbprint: 8E989652XXXXXXXXXXXXXXXDB3A2
+                    storeName: CertificateAuthority
+                createdAtUtc: '2018-02-19T16:42:47.362368Z'
+                gatewayRegionalUrl: 'https://apimService1-centralus-01.regional.azure-api.net'
+                gatewayUrl: 'https://apimService1.azure-api.net'
+                hostnameConfigurations: []
+                managementApiUrl: 'https://apimService1.management.azure-api.net'
+                notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                portalUrl: 'https://apimService1.portal.azure-api.net'
+                provisioningState: Succeeded
+                publicIPAddresses:
+                  - 40.69.153.91
+                publisherEmail: apim@autorestsdk.com
+                publisherName: autorestsdk
+                scmUrl: 'https://apimService1.scm.azure-api.net'
+                targetProvisioningState: ''
+                virtualNetworkType: None
+              sku:
+                capacity: 1
+                name: Basic
+              tags:
+                tag1: value1
+                tag2: value2
+                tag3: value3
+              type: Microsoft.ApiManagement/service
+            '201':
+              body:
+                etag: AAAAAADauaY=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                location: Central US
+                name: apimService1
+                properties:
+                  certificates:
+                    - certificate:
+                        expiry: '2035-12-31T23:00:00-08:00'
+                        subject: CN=*.msitesting.net
+                        thumbprint: 8E989652XXXXXXXXXXXXXXXDB3A2
+                      storeName: CertificateAuthority
+                  createdAtUtc: '2018-02-19T16:42:47.362368Z'
+                  hostnameConfigurations: []
+                  notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                  provisioningState: Created
+                  publisherEmail: apim@autorestsdk.com
+                  publisherName: autorestsdk
+                  targetProvisioningState: Activating
+                  virtualNetworkType: None
+                sku:
+                  capacity: 1
+                  name: Basic
+                tags:
+                  tag1: value1
+                  tag2: value2
+                  tag3: value3
+                type: Microsoft.ApiManagement/service
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2018-01-01'
+            '202':
+              etag: AAAAAADauqg=
+              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+              location: Central US
+              name: apimService1
+              properties:
+                certificates:
+                  - certificate:
+                      expiry: '2035-12-31T23:00:00-08:00'
+                      subject: CN=*.msitesting.net
+                      thumbprint: 8E989652XXXXXXXXXXXXXXXDB3A2
+                    storeName: CertificateAuthority
+                createdAtUtc: '2018-02-19T16:42:47.362368Z'
+                gatewayRegionalUrl: 'https://apimService1-centralus-01.regional.azure-api.net'
+                gatewayUrl: 'https://apimService1.azure-api.net'
+                hostnameConfigurations: []
+                managementApiUrl: 'https://apimService1.management.azure-api.net'
+                notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                portalUrl: 'https://apimService1.portal.azure-api.net'
+                provisioningState: Succeeded
+                publicIPAddresses:
+                  - 40.69.153.91
+                publisherEmail: apim@autorestsdk.com
+                publisherName: autorestsdk
+                scmUrl: 'https://apimService1.scm.azure-api.net'
+                targetProvisioningState: ''
+                virtualNetworkType: None
+              sku:
+                capacity: 1
+                name: Basic
+              tags:
+                tag1: value1
+                tag2: value2
+                tag3: value3
+              type: Microsoft.ApiManagement/service
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/applynetworkconfigurationupdates':
     post:

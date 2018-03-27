@@ -272,6 +272,23 @@ paths:
           name: running
           required: false
           type: boolean
+        - description: '~'
+          in: query
+          name: scheduled
+          required: false
+          type: boolean
+        - description: '~'
+          format: int64
+          in: query
+          name: intervalBegin
+          required: false
+          type: integer
+        - description: '~'
+          format: int64
+          in: query
+          name: intervalEnd
+          required: false
+          type: integer
       responses:
         '200':
           description: successful operation
@@ -3746,6 +3763,23 @@ paths:
           name: running
           required: false
           type: boolean
+        - description: '~'
+          in: query
+          name: scheduled
+          required: false
+          type: boolean
+        - description: '~'
+          format: int64
+          in: query
+          name: intervalBegin
+          required: false
+          type: integer
+        - description: '~'
+          format: int64
+          in: query
+          name: intervalEnd
+          required: false
+          type: integer
       responses:
         '200':
           description: successful operation

@@ -3716,12 +3716,22 @@ definitions:
         description: 'The Azure Data Factory nested object which identifies data within different data stores, such as tables, files, folders, and documents.'
         discriminator: type
         properties:
+          annotations:
+            description: List of tags that can be used for describing the Dataset.
+            items:
+              type: object
+            type: array
           description:
             description: Dataset description.
             type: string
           linkedServiceName:
             description: Linked service reference type.
             properties:
+              parameters:
+                additionalProperties:
+                  type: object
+                description: An object mapping parameter names to argument values.
+                type: object
               referenceName:
                 description: Reference LinkedService name.
                 type: string
@@ -3749,6 +3759,7 @@ definitions:
                     - Float
                     - Bool
                     - Array
+                    - SecureString
                   type: string
                   x-ms-enum:
                     modelAsString: true
@@ -4023,6 +4034,11 @@ definitions:
   LinkedServiceReference:
     description: Linked service reference type.
     properties:
+      parameters:
+        additionalProperties:
+          type: object
+        description: An object mapping parameter names to argument values.
+        type: object
       referenceName:
         description: Reference LinkedService name.
         type: string
@@ -4045,6 +4061,11 @@ definitions:
         description: The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.
         discriminator: type
         properties:
+          annotations:
+            description: List of tags that can be used for describing the Dataset.
+            items:
+              type: object
+            type: array
           connectVia:
             description: Integration runtime reference type.
             properties:
@@ -4067,6 +4088,32 @@ definitions:
           description:
             description: Linked service description.
             type: string
+          parameters:
+            additionalProperties:
+              description: Definition of a single parameter for an entity.
+              properties:
+                defaultValue:
+                  description: Default value of parameter.
+                  type: object
+                type:
+                  description: Parameter type.
+                  enum:
+                    - Object
+                    - String
+                    - Int
+                    - Float
+                    - Bool
+                    - Array
+                    - SecureString
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ParameterType
+              required:
+                - type
+              type: object
+            description: Definition of all parameters for an entity.
+            type: object
           type:
             description: Type of linked service.
             type: string
@@ -4209,6 +4256,7 @@ definitions:
             - Float
             - Bool
             - Array
+            - SecureString
           type: string
           x-ms-enum:
             modelAsString: true
@@ -4233,6 +4281,7 @@ definitions:
           - Float
           - Bool
           - Array
+          - SecureString
         type: string
         x-ms-enum:
           modelAsString: true
@@ -4336,6 +4385,11 @@ definitions:
                 - type
               type: object
             type: array
+          annotations:
+            description: List of tags that can be used for describing the Pipeline.
+            items:
+              type: object
+            type: array
           concurrency:
             description: The max number of concurrent runs for the pipeline.
             minimum: 1
@@ -4359,6 +4413,7 @@ definitions:
                     - Float
                     - Bool
                     - Array
+                    - SecureString
                   type: string
                   x-ms-enum:
                     modelAsString: true

@@ -998,9 +998,36 @@ paths:
           headers: {}
       summary: Hashtag Stats
       tags: []
+  /v2/instagram/hashtags-cleaner:
+    get:
+      description: Remove banned hashtags before posting to Instagram
+      parameters:
+        - description: post
+          in: query
+          name: post
+          required: true
+          type: string
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              bannedHashtags:
+                - '#instagirl'
+                - '#woman'
+                - '#women'
+              message: OK
+              post: '#instaphotography #instabeauty #instagirls #instanature #photography #beauty #girls #nature #girl #sky #water #lady #ladies #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies'
+              result: true
+          headers: {}
+      summary: Hashtags cleaner
+      tags: []
 definitions:
   Emojis: {}
   Hashtags: {}
   Images: {}
   Influencers: {}
+  Instagram: {}
   Link_shortening: {}

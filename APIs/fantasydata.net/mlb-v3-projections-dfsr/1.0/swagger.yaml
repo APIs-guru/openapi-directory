@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/DfsrPlayerGameProjectionStatsByDate/{date}':
     get:
-      operationId: 5944043735491a0cc050ffaa
+      operationId: 'Projected Player Game Stats by Date (w/ Injuries, Lineups, DFS Salaries)'
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -62,10 +62,9 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
-      summary: 'Projected Player Game Stats by Date (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/DfsrPlayerGameProjectionStatsByPlayer/{date}/{playerid}':
     get:
-      operationId: 5944043735491a0cc050ffab
+      operationId: 'Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)'
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -97,7 +96,6 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
-      summary: 'Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)'
 definitions:
   PlayerGameProjection:
     properties:

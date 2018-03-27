@@ -49,12 +49,14 @@ parameters:
     name: resourceGroupName
     required: true
     type: string
+    x-ms-parameter-location: client
   ResourceName:
     description: The name of the recovery services vault.
     in: path
     name: resourceName
     required: true
     type: string
+    x-ms-parameter-location: client
   SubscriptionId:
     description: The subscription Id.
     in: path

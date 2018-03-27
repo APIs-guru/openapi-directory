@@ -7,12 +7,12 @@ info:
   contact:
     name: 'eBay Inc,'
     x-twitter: ebay
-  description: Item Feed Service
+  description: The Feed API provides the ability to download daily TSV_GZIP feed files containing all the newly listed eBay items and an hourly snapshot file of the items that have changed within an hour for a specific category and date.
   license:
     name: eBay API License Agreement
     url: 'https://go.developer.ebay.com/api-license-agreement'
   title: Item Feed Service
-  version: v1_beta.4.0
+  version: v1_beta.6.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
@@ -51,7 +51,7 @@ paths:
           name: Range
           required: true
           type: string
-        - description: 'Controls the contents of the feed file. Valid Value: NEWLY_LISTED - Contains all items that were listed on the day specified by the date parameter in the category specified by the category_id parameter. The items will be Good ''til Cancelled and non-Good ''til Cancelled items. If the item is a non-Good ''til Cancelled item, the item''s end date will be returned in the itemEndDate column. /item?feed_scope=NEWLY_LISTED&amp;category_id=15032&amp;date=20170925'
+        - description: 'Controls the contents of the feed file. Valid Value: NEWLY_LISTED - Contains all items that were listed on the day specified by the date parameter in the category specified by the category_id parameter. The items will be Good ''Til Cancelled and non-Good ''Til Cancelled items. If the item is a non-Good ''Til Cancelled item, the item''s end date will be returned in the itemEndDate column. /item?feed_scope=NEWLY_LISTED&amp;category_id=15032&amp;date=20170925'
           in: query
           name: feed_scope
           required: true
@@ -111,7 +111,7 @@ paths:
           name: Range
           required: true
           type: string
-        - description: 'Controls the contents of the feed file. Valid Value: NEWLY_LISTED - Contains all items that were listed on the day specified by the date parameter in the category specified by the category_id parameter. The items will be Good ''til Cancelled and non-Good ''til Cancelled items. If the item is a non-Good ''til Cancelled item, the item''s end date will be returned in the itemEndDate column. /item_description?feed_scope=NEWLY_LISTED&amp;category_id=15032&amp;date=20170925'
+        - description: 'Controls the contents of the feed file. Valid Value: NEWLY_LISTED - Contains all items that were listed on the day specified by the date parameter in the category specified by the category_id parameter. The items will be Good ''Til Cancelled and non-Good ''Til Cancelled items. If the item is a non-Good ''Til Cancelled item, the item''s end date will be returned in the itemEndDate column. /item_description?feed_scope=NEWLY_LISTED&amp;category_id=15032&amp;date=20170925'
           in: query
           name: feed_scope
           required: true
@@ -216,22 +216,25 @@ definitions:
     description: The type that defines the fields for the data returned by the <b> getItemFeed</b> call.
     properties:
       acceptedPaymentMethods:
-        description: 'Indicates whether you can checkout using the Buy Order API. If this column contains PAYPAL, you can use the Buy Order API to checkout and purchase the item. If this column is empty, you must use another method for checkout.'
+        description: 'Indicates the credit card service that will be used to process the transaction. If this column contains PAYPAL, you can use the Buy Order API to checkout and purchase the item. If this column is empty, you must use another method for checkout.'
+        type: string
+      additionalImageUrls:
+        description: 'A pipe separated (|) list of URLs for the additional images of the item. These images are in addition to the primary image, which is returned in the imageUrl column.'
         type: string
       availability:
-        description: 'An enumeration representing the item''s availability (possibility of being in purchasable). For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value representing the item''s availability (possibility of being purchased). Values: AVAILABLE TEMPORARILY_UNAVAILABLE UNAVAILABLE Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityEnum.html''>eBay API documentation</a>'
         type: string
       availabilityThreshold:
-        description: The 'display item quantity' threshold value the seller has set in the seller preferences on eBay.
+        description: 'This column has a value only when the seller sets their ''display item quantity'' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.'
         type: integer
       availabilityThresholdType:
-        description: 'This value will be null or MORE_THAN, which indicates that the seller has more that the ''quantity display preference'' value in stock for this item. The value of this column depends on how the seller has set their item quantity display preference. Let''s say the following are the quantity display preferences the seller can choose between. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column returns ''MORE_THAN'' as long as there are more than 10 items in the inventory. If the quantity is equal to 10 or drops below 10, this column will be empty and the actual quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your listings If the seller enables this preference, the availabilityThresholdType column will be empty and the actual quantity of the item is returned in the estimatedAvailableQuantity column. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html''>eBay API documentation</a>'
+        description: 'This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the ''Display Item Quantity'', which is 10, in stock for this item. The followng are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html''>eBay API documentation</a>'
         type: string
       brand:
         description: 'The name brand of the item, such as Nike, Apple, etc.'
         type: string
       buyingOptions:
-        description: 'The purchase option available for the item, such as FIXED_PRICE.'
+        description: 'A comma separated list of the purchase options available for the item, such as FIXED_PRICE, AUCTION. Code so that your app gracefully handles any future changes to this list.'
         type: string
       category:
         description: 'The label of the category. For example: Toys &amp; Hobbies|Action Figures|Comic Book Heroes'
@@ -240,16 +243,19 @@ definitions:
         description: 'The ID of the category of the item. For example: The ID for Toys &amp; Hobbies|Action Figures|Comic Book Heroes is 158671.'
         type: string
       condition:
-        description: 'The text describing the condition of the item. For example: NEW.'
+        description: 'The text describing the condition of the item. For a list of condition names, see ConditionEnum. Code so that your app gracefully handles any future changes to this list.'
         type: string
       conditionId:
-        description: The identifier of the condition of the item.
+        description: 'The identifier of the condition of the item. For a list of condition IDs, see ConditionEnum. Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      deliveryOptions:
+        description: 'A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/DeliveryOptionsEnum.html''>eBay API documentation</a>'
         type: string
       epid:
-        description: The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API search call to retrieve items for this product and in the Marketing API calls to retrieve 'also viewed' and 'also bought' products to encourage upselling and cross-selling.
+        description: The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API search call to retrieve items for this product and in the Marketing API calls to retrieve 'also viewed' and 'also bought' products to encourage up-selling and cross-selling.
         type: string
       estimatedAvailableQuantity:
-        description: The estimated number of items that are available for purchase.
+        description: 'The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned.'
         type: integer
       gtin:
         description: 'The unique Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value.'
@@ -258,7 +264,22 @@ definitions:
         description: 'A boolean that indicates whether the images can be altered. If the value is true, you cannot modify the image. Note: Due to image licensing agreements and other legal concerns, modification (including resizing) of some images is strictly prohibited. These images are for display as-is only.'
         type: boolean
       imageUrl:
-        description: The URL to the primary image of the item.
+        description: The URL to the primary image of the item. This is the URL of the largest image available based on what the seller submitted.
+        type: string
+      inferredBrand:
+        description: 'The name brand for the item, such as Nike or Apple, which has been programmatically determined by eBay. To identify the product, this is always used along with MPN. If the seller provided a brand for the item, the seller''s value is returned in the brand column.'
+        type: string
+      inferredEpid:
+        description: 'The ePID (eBay Product ID of a product from the eBay product catalog) for the item, which has been programmatically determined by eBay. If the seller provided an ePID for the item, the seller''s value is returned in the epid column.'
+        type: string
+      inferredGtin:
+        description: 'The GTIN (Global Trade Item Number) of the product as defined by http://www.gtin.info, which as been programmatically determined by eBay. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value. If the seller provided a GTIN for the item, the seller''s value is returned in the gtin column.'
+        type: string
+      inferredLocalizedAspects:
+        description: 'A semicolon separated list of the name/value pairs for the aspects of the item, which are BASE64 encoded. These aspects have been programmatically determined by eBay. If the seller provided aspects for the item, the seller''s values are returned in the localizedAspects column. The information label is separated by a pipe (|), the aspect name and value are separated by a colon (:) and the name/value pairs are separated by a semicolon (;). Example without Label &nbsp;&nbsp; Encoded Format: &nbsp;&nbsp;&nbsp;encodedName:encodedValue;encodedName:encodedValue;encodedName:encodedValue &nbsp;&nbsp; Encoded Example (encoded text shown in orange): &nbsp;&nbsp;&nbsp;U2l6ZQ==:WEw=;Q29sb3I=:UmVk;U2xlZXZlcw==:TG9uZw== &nbsp;&nbsp; Decoded: &nbsp;&nbsp;&nbsp;Size:XL;Color:Red;Sleeves:Long Example with Label &nbsp;&nbsp; Encoded Format: &nbsp;&nbsp;&nbsp;encodedLabel|encodedName:encodedValue;encodedName:encodedValue;encodedLabel| &nbsp;&nbsp; Encoded Example (encoded text shown in orange): &nbsp;&nbsp;&nbsp;UHJvZHVjdCBJZGVudGlmaWVycw==|R1RJTg==:MDE5MDE5ODA2NjYzMw==;QlJBTkQ=:QXBwbGU=;UHJvZHVjdCBLZXkgRmVhdHVyZXM=|TW9kZWw=:aVBob25lIDc= &nbsp;&nbsp; Decoded: &nbsp;&nbsp;&nbsp;Product Identifiers|GTIN:0190198066633;BRAND:Apple;Product Key Features|Model:iPhone 7 Note: The separators ( | : ; ) are not encoded. You must decode each label, name, and value separately. You cannot decode the entire string. For more information, see Encoded Aspects in the Buying Integration Guide.'
+        type: string
+      inferredMpn:
+        description: 'The MPN (Manufacturer''s Part Number) for the item, which has been programmatically determined by eBay. To identify the product, this is always used along with brand. If the seller provided a MPN for the item, the seller''s value is returned in the mpn column.'
         type: string
       itemEndDate:
         description: 'A timestamp indicating when the item''s sale period will end based on its start date and duration. For Good ''Til Cancelled'' items, no value is returned in this column. Format: UTC (yyyy-MM-ddThh:mm:ss.sssZ).'
@@ -270,13 +291,13 @@ definitions:
         description: The country where the item is physically located.
         type: string
       localizedAspects:
-        description: 'The name/value pairs for the aspects of the item, which are BASE64 encoded. The information label is separated by a pipe (|), the aspect name and value are separated by a colon (:) and the name/value pairs are separated by a semicolon (;). Example without Label Encoded: encodedName:encodedValue;encodedName:encodedValue;encodedName:encodedValue Decoded: Size:XL;Color:Red;Sleeves:Long Example with Label Encoded: encodedLabel|encodedName:encodedValue;encodedName:encodedValue;encodedLabel|encodedName:encodedValue Decoded: Product Identifiers|GTIN:0190198066633;BRAND:Apple;Product Key Features|Model:iPhone 7 Note: The separators ( | : ; ) are not encoded. You must decode each label, name, and value separately. You cannot decode the entire string. For more information, see Encoded Aspects in the Buying Integration Guide.'
+        description: 'A semicolon separated list of the name/value pairs for the aspects of the item, which are BASE64 encoded. The information label is separated by a pipe (|), the aspect name and value are separated by a colon (:) and the name/value pairs are separated by a semicolon (;). Example without Label &nbsp;&nbsp; Encoded Format: &nbsp;&nbsp;&nbsp;encodedName:encodedValue;encodedName:encodedValue;encodedName:encodedValue &nbsp;&nbsp; Encoded Example (encoded text shown in orange): &nbsp;&nbsp;&nbsp;U2l6ZQ==:WEw=;Q29sb3I=:UmVk;U2xlZXZlcw==:TG9uZw== &nbsp;&nbsp; Decoded: &nbsp;&nbsp;&nbsp;Size:XL;Color:Red;Sleeves:Long Example with Label &nbsp;&nbsp; Encoded Format: &nbsp;&nbsp;&nbsp;encodedLabel|encodedName:encodedValue;encodedName:encodedValue;encodedLabel| &nbsp;&nbsp; Encoded Example (encoded text shown in orange): &nbsp;&nbsp;&nbsp;UHJvZHVjdCBJZGVudGlmaWVycw==|R1RJTg==:MDE5MDE5ODA2NjYzMw==;QlJBTkQ=:QXBwbGU=;UHJvZHVjdCBLZXkgRmVhdHVyZXM=|TW9kZWw=:aVBob25lIDc= &nbsp;&nbsp; Decoded: &nbsp;&nbsp;&nbsp;Product Identifiers|GTIN:0190198066633;BRAND:Apple;Product Key Features|Model:iPhone 7 Note: The separators ( | : ; ) are not encoded. You must decode each label, name, and value separately. You cannot decode the entire string. For more information, see Encoded Aspects in the Buying Integration Guide.'
         type: string
       mpn:
-        description: 'The manufacturer part number, which is a unique number that identifies a specific product.'
+        description: 'The manufacturer part number, which is a number that is used in combination with brand to identify a product.'
         type: string
       priceCurrency:
-        description: 'The currency used for the price of the item. Generally, this is the currency used by the country of eBay site offering the item. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
+        description: 'The currency used for the price of the item. Generally, this is the currency used by the country of the eBay site offering the item. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
         type: string
       priceValue:
         description: The price of the item.
@@ -285,10 +306,10 @@ definitions:
         description: 'The unique identifier for the item group that contains this item. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc.'
         type: string
       primaryItemGroupType:
-        description: 'The item group type. For example: SELLER_DEFINED_VARIATIONS, indicates that the item group was created by the seller.'
+        description: 'The item group type. Supported value: SELLER_DEFINED_VARIATIONS, indicates that the item group was created by the seller.'
         type: string
       refundMethod:
-        description: 'An enumeration value that indicates how a buyer is refunded when an item is returned. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/RefundMethodEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates how a buyer is refunded when an item is returned. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/RefundMethodEnum.html''>eBay API documentation</a>'
         type: string
       restockingFeePercentage:
         description: 'The restocking fee percentage that the seller has set on the item. Sellers have the option of setting no restocking fee for an item, or they can set the percentage to 10, 15, or 20 percent. For example, if the cost of the item was $100, and the restocking percentage was 20 percent, the buyer would be charged $20 to return that item. This means that instead of receiving a $100 refund, they would received $80 due to the restocking fee. Values Returned: NoRestockingFee, Percent_10, Percent_15, and Percent_20'
@@ -300,10 +321,10 @@ definitions:
         description: 'An enumeration value that indicates the alternative methods for a full refund when an item is returned. This column will have data if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnMethodEnum.html''>eBay API documentation</a>'
         type: string
       returnPeriodUnit:
-        description: 'An enumeration value that indicates the period of time being used to measure the duration, such as business days, months, or years. See the TimeDurationUnitEnum type for a list of possible time-measuring units. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/TimeDurationUnitEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value that indicates the period of time being used to measure the duration, such as business days or months, or years. See the TimeDurationUnitEnum type for a list of possible time-measuring units. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/TimeDurationUnitEnum.html''>eBay API documentation</a>'
         type: string
       returnPeriodValue:
-        description: 'The amount of time the buyer has to return the item after the purchase date. This can be shown in the number of years, months, and days. If this value is ''30'', and the returnPeriodUnit value is ''DAY'', the return period is 30 days.'
+        description: 'The amount of time the buyer has to return the item after the purchase date. This can be the number of years, months, or days depending on returnPeriodUnit. For example, if this value is ''30'', and the returnPeriodUnit value is ''DAY'', the return period is 30 days.'
         type: integer
       returnShippingCostPayer:
         description: 'The party responsible for the return shipping costs when an item is returned. This will be either buyer or seller. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnShippingCostPayerEnum.html''>eBay API documentation</a>'
@@ -312,7 +333,7 @@ definitions:
         description: Indicates whether the seller accepts returns for the item.
         type: boolean
       sellerFeedbackPercentage:
-        description: The percentage of the total positive feedback.
+        description: The percentage of the seller's total positive feedback.
         type: string
       sellerFeedbackScore:
         description: The feedback score of the seller. This value is based on the ratings from eBay members that bought items from this seller.
@@ -321,10 +342,16 @@ definitions:
         description: 'An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title and eBay system changes, such as changing the quantity when an item is purchased. This ID is changed only when the seller makes a change to the item.'
         type: string
       sellerTrustLevel:
-        description: 'An enumeration value representing the eBay status of the seller. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/SellerTrustLevelEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value representing the eBay status of the seller. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/SellerTrustLevelEnum.html''>eBay API documentation</a>'
         type: string
       sellerUsername:
         description: The seller's eBay user name.
+        type: string
+      shipToExcludedRegions:
+        description: 'A pipe (|) separated alphabetical list of the geographic countries and regions where the item cannot be shipped. These countries and regions refine (restrict) the shipToIncludedRegions list. The COUNTRY: list is separated from the REGION: list with a semicolon (;). Format Example: COUNTRY:US|BM|GL|MX|PM;REGION:AFRICA|ASIA|CENTRAL_AMERICA_AND_CARIBBEAN|EUROPE|MIDDLE_EAST|OCEANIA|SOUTH_AMERICA|SOUTHEAST_ASIA; Country Values: The two-letter ISO 3166 standard code of the country. Region Values: AFRICA, AMERICAS, ANTARCTIC, ARCTIC, ASIA, AUSTRALIA, CENTRAL_AMERICA_AND_CARIBBEAN, EUROPE, EURO_UNION, GREATER_CHINA, MIDDLE_EAST, NORTH_AMERICA, OCEANIA, REST_OF_ASIA, SOUTHEAST_ASIA, SOUTH_AMERICA, WORLDWIDE Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      shipToIncludedRegions:
+        description: 'A pipe (|) separated alphabetical list of the geographic countries and regions where the seller will ship the item. If a region is specified, you will need to subtract any countries and regions returned in the shipToExcludedRegions column to fully understand where the seller will ship. The COUNTRY: list is separated from the REGION: list with a semicolon (;). Format Example: COUNTRY:US|BM|GL|MX|PM;REGION:AFRICA|ASIA|CENTRAL_AMERICA_AND_CARIBBEAN|EUROPE|MIDDLE_EAST|OCEANIA|SOUTH_AMERICA|SOUTHEAST_ASIA; Country Values: The two-letter ISO 3166 standard code of the country. Region Values: AFRICA, AMERICAS, ANTARCTIC, ARCTIC, ASIA, AUSTRALIA, CENTRAL_AMERICA_AND_CARIBBEAN, EUROPE, EURO_UNION, GREATER_CHINA, MIDDLE_EAST, NORTH_AMERICA, OCEANIA, REST_OF_ASIA, SOUTHEAST_ASIA, SOUTH_AMERICA, WORLDWIDE Code so that your app gracefully handles any future changes to this list.'
         type: string
       title:
         description: The seller created title of the item.
@@ -365,19 +392,19 @@ definitions:
     description: 'The type that defines the fields for the data returned by the <b> getItemSnapshotFeed</b> call. <p class="tablenote"><b>Note: </b> The  <b> imageAlteringProhibited</b> column is not returned.</p>'
     properties:
       availability:
-        description: 'A enumeration representing the item''s availability (possibility of being in purchasable). For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityEnum.html''>eBay API documentation</a>'
+        description: 'An enumeration value representing the item''s availability (possibility of being purchased). Values: AVAILABLE TEMPORARILY_UNAVAILABLE UNAVAILABLE Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityEnum.html''>eBay API documentation</a>'
         type: string
       availabilityThreshold:
-        description: The 'display item quantity' threshold value the seller has set in the seller preferences on eBay.
+        description: 'This column has a value only when the seller sets their ''display item quantity'' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.'
         type: integer
       availabilityThresholdType:
-        description: 'This value will be null or MORE_THAN, which indicates that the seller has more that the ''quantity display preference'' value in stock for this item. The value of this column depends on how the seller has set their item quantity display preference. Let''s say the following are the quantity display preferences the seller can choose between. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column returns ''MORE_THAN'' as long as there are more than 10 items in the inventory. If the quantity is equal to 10 or drops below 10, this column will be empty and the actual quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your listings If the seller enables this preference, the availabilityThresholdType column will be empty and the actual quantity of the item is returned in the estimatedAvailableQuantity column. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html''>eBay API documentation</a>'
+        description: 'This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the ''Display Item Quantity'', which is 10, in stock for this item. The followng are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html''>eBay API documentation</a>'
         type: string
       brand:
         description: 'The name brand of the item, such as Nike, Apple, etc.'
         type: string
       buyingOptions:
-        description: 'The purchase option available for the item, such as ALL_FIXED_PRICE.'
+        description: 'A comma separated list of the purchase options available for the item, such as FIXED_PRICE, AUCTION. Code so that your app gracefully handles any future changes to this list.'
         type: string
       category:
         description: 'The label of the category of the item. For example: Toys &amp; Hobbies|Action Figures|Comic Book Heroes .'
@@ -386,22 +413,22 @@ definitions:
         description: 'The ID of the category of the item. For example: The ID for Toys &amp; Hobbies|Action Figures|Comic Book Heroes is 158671.'
         type: string
       condition:
-        description: 'The text describing the condition of the item. For example: NEW.'
+        description: 'The text describing the condition of the item. For a list of condition names, see ConditionEnum. Code so that your app gracefully handles any future changes to this list.'
         type: string
       conditionId:
-        description: The identifier of the condition of the item.
+        description: 'The identifier of the condition of the item. For a list of condition IDs, see ConditionEnum. Code so that your app gracefully handles any future changes to this list.'
         type: string
       epid:
-        description: The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API search call to retrieve items for this product and in the Marketing API calls to retrieve 'also viewed' and 'also bought' products to encourage upselling and cross-selling.
+        description: The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API search call to retrieve items for this product and in the Marketing API calls to retrieve 'also viewed' and 'also bought' products to encourage up-selling and cross-selling.
         type: string
       estimatedAvailableQuantity:
-        description: 'The estimated number of the item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, this returns the estimated availability of the item.'
+        description: 'The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned.'
         type: integer
       gtin:
         description: 'The unique Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value.'
         type: string
       imageUrl:
-        description: The URL to the primary image of the item.
+        description: The URL to the primary image of the item. This is the URL of the largest image available based on what the seller submitted.
         type: string
       itemEndDate:
         description: 'A timestamp indicating when the item''s sale period will end based on its start date and duration. For Good ''Til Cancelled'' items, no value is returned in this column. Format: UTC (yyyy-MM-ddThh:mm:ss.sssZ).'
@@ -416,10 +443,10 @@ definitions:
         description: 'This timestamp denotes the date and time the changes for that item were picked up and added to the snapshot feed file. For example, let''s say you have a snapshot feed file and also ran the getItem call. When you compare the same item information from the two sources, you see that the price in the getItem call response is different from the price in the snapshot feed file. By knowing the date and time you submitted the getItem call, you can use the itemSnapshotDate data to determine which price is the most current for this item.'
         type: string
       localizedAspects:
-        description: 'The name/value pairs for the aspects of the item, which are BASE64 encoded. The information label is separated by a pipe (|), the aspect name and value are separated by a colon (:) and the name/value pairs are separated by a semicolon (;). Example without Label Encoded: encodedName:encodedValue;encodedName:encodedValue;encodedName:encodedValue Decoded: Size:XL;Color:Red;Sleeves:Long Example with Label Encoded: encodedLabel|encodedName:encodedValue;encodedName:encodedValue;encodedLabel|encodedName:encodedValue Decoded: Product Identifiers|GTIN:0190198066633;BRAND:Apple;Product Key Features|Model:iPhone 7 Note: The separators ( | : ; ) are not encoded. You must decode each label, name, and value separately. You cannot decode the entire string. For more information, see Encoded Aspects in the Buying Integration Guide.'
+        description: 'A semicolon separated list of the name/value pairs for the aspects of the item, which are BASE64 encoded. The information label is separated by a pipe (|), the aspect name and value are separated by a colon (:) and the name/value pairs are separated by a semicolon (;). Example without Label &nbsp;&nbsp; Encoded Format: &nbsp;&nbsp;&nbsp;encodedName:encodedValue;encodedName:encodedValue;encodedName:encodedValue &nbsp;&nbsp; Encoded Example (encoded text shown in orange): &nbsp;&nbsp;&nbsp;U2l6ZQ==:WEw=;Q29sb3I=:UmVk;U2xlZXZlcw==:TG9uZw== &nbsp;&nbsp; Decoded: &nbsp;&nbsp;&nbsp;Size:XL;Color:Red;Sleeves:Long Example with Label &nbsp;&nbsp; Encoded Format: &nbsp;&nbsp;&nbsp;encodedLabel|encodedName:encodedValue;encodedName:encodedValue;encodedLabel| &nbsp;&nbsp; Encoded Example (encoded text shown in orange): &nbsp;&nbsp;&nbsp;UHJvZHVjdCBJZGVudGlmaWVycw==|R1RJTg==:MDE5MDE5ODA2NjYzMw==;QlJBTkQ=:QXBwbGU=;UHJvZHVjdCBLZXkgRmVhdHVyZXM=|TW9kZWw=:aVBob25lIDc= &nbsp;&nbsp; Decoded: &nbsp;&nbsp;&nbsp;Product Identifiers|GTIN:0190198066633;BRAND:Apple;Product Key Features|Model:iPhone 7 Note: The separators ( | : ; ) are not encoded. You must decode each label, name, and value separately. You cannot decode the entire string. For more information, see Encoded Aspects in the Buying Integration Guide.'
         type: string
       mpn:
-        description: 'The manufacturer part number, which is a unique number that identifies a specific product.'
+        description: 'The manufacturer part number, which is a number that is used in combination with brand to identify a product.'
         type: string
       priceCurrency:
         description: 'The currency used for the price of the item. Generally, this is the currency used by the country of the eBay site offering the item. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
@@ -431,7 +458,7 @@ definitions:
         description: 'The unique identifier for the item group that contains this item. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc.'
         type: string
       primaryItemGroupType:
-        description: 'The item group type. For example: SELLER_DEFINED_VARIATIONS, indicates that the item group was created by the seller.'
+        description: 'The item group type. Supported value: SELLER_DEFINED_VARIATIONS, indicates that the item group was created by the seller.'
         type: string
       sellerFeedbackPercentage:
         description: The percentage of the seller's total positive feedback.
@@ -450,7 +477,7 @@ definitions:
         type: string
     type: object
   ItemSnapshotResponse:
-    description: The type that defines the container for the items returned by the <b>getItemSnapshotResponse</b>.
+    description: The type that defines the container for the items returned by the <b> getItemSnapshotResponse</b>.
     properties:
       items:
         description: The type that defines the array for the items returned by the getItemSnapshotFeed call.

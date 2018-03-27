@@ -465,6 +465,10 @@ paths:
         This method only stores the service configuration. To roll out the service
         configuration to backend systems please call
         CreateServiceRollout.
+
+        Only the 100 most recent service configurations and ones referenced by
+        existing rollouts are kept for each service. The rest will be deleted
+        eventually.
       operationId: servicemanagement.services.configs.create
       parameters:
         - in: body
@@ -571,6 +575,10 @@ paths:
         other services,
         please call CreateServiceRollout.
 
+        Only the 100 most recent configuration sources and ones referenced by
+        existing service configurtions are kept for each service. The rest will be
+        deleted eventually.
+
         Operation<response: SubmitConfigSourceResponse>
       operationId: servicemanagement.services.configs.submit
       parameters:
@@ -671,6 +679,10 @@ paths:
         Please note that any previous pending and running Rollouts and associated
         Operations will be automatically cancelled so that the latest Rollout will
         not be blocked by previous Rollouts.
+
+        Only the 100 most recent (in any state) and the last 10 successful (if not
+        already part of the set of 100 most recent) rollouts are kept for each
+        service. The rest will be deleted eventually.
 
         Operation<response: Rollout>
       operationId: servicemanagement.services.rollouts.create
@@ -1964,9 +1976,7 @@ definitions:
       <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
       Text can be excluded from doc using the following notation:
       <pre><code>&#40;-- internal comment --&#41;</code></pre>
-      Comments can be made conditional using a visibility label. The below
-      text will be only rendered if the `BETA` label is available:
-      <pre><code>&#40;--BETA: comment for BETA users --&#41;</code></pre>
+
       A few directives are available in documentation. Note that
       directives must appear on a single line to be properly
       identified. The `include` directive includes a markdown file from
@@ -3856,9 +3866,6 @@ definitions:
       usage:
         $ref: '#/definitions/Usage'
         description: Configuration controlling usage of this service.
-      visibility:
-        $ref: '#/definitions/Visibility'
-        description: API visibility configuration.
     type: object
   SetIamPolicyRequest:
     description: Request message for `SetIamPolicy` method.
@@ -4284,68 +4291,4 @@ definitions:
           This flag is used by Google Cloud Endpoints to bypass checks for internal
           methods, such as service health check methods.
         type: boolean
-    type: object
-  Visibility:
-    description: |-
-      `Visibility` defines restrictions for the visibility of service
-      elements.  Restrictions are specified using visibility labels
-      (e.g., TRUSTED_TESTER) that are elsewhere linked to users and projects.
-
-      Users and projects can have access to more than one visibility label. The
-      effective visibility for multiple labels is the union of each label's
-      elements, plus any unrestricted elements.
-
-      If an element and its parents have no restrictions, visibility is
-      unconditionally granted.
-
-      Example:
-
-          visibility:
-            rules:
-            - selector: google.calendar.Calendar.EnhancedSearch
-              restriction: TRUSTED_TESTER
-            - selector: google.calendar.Calendar.Delegate
-              restriction: GOOGLE_INTERNAL
-
-      Here, all methods are publicly visible except for the restricted methods
-      EnhancedSearch and Delegate.
-    properties:
-      rules:
-        description: |-
-          A list of visibility rules that apply to individual API elements.
-
-          **NOTE:** All service configuration rules follow "last one wins" order.
-        items:
-          $ref: '#/definitions/VisibilityRule'
-        type: array
-    type: object
-  VisibilityRule:
-    description: |-
-      A visibility rule provides visibility configuration for an individual API
-      element.
-    properties:
-      restriction:
-        description: |-
-          A comma-separated list of visibility labels that apply to the `selector`.
-          Any of the listed labels can be used to grant the visibility.
-
-          If a rule has multiple labels, removing one of the labels but not all of
-          them can break clients.
-
-          Example:
-
-              visibility:
-                rules:
-                - selector: google.calendar.Calendar.EnhancedSearch
-                  restriction: GOOGLE_INTERNAL, TRUSTED_TESTER
-
-          Removing GOOGLE_INTERNAL from this restriction will break clients that
-          rely on this method and only had access to it through GOOGLE_INTERNAL.
-        type: string
-      selector:
-        description: |-
-          Selects methods, messages, fields, enums, etc. to which this rule applies.
-
-          Refer to selector for syntax details.
-        type: string
     type: object

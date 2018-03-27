@@ -64,7 +64,35 @@ paths:
         - Operations
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Cache/Redis/':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Cache/CheckNameAvailability':
+    post:
+      description: Checks that the redis cache name is valid and is not already in use.
+      operationId: Redis_CheckNameAvailability
+      parameters:
+        - description: Parameters supplied to the CheckNameAvailability Redis operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Name is available
+      tags:
+        - Redis
+      x-ms-examples:
+        RedisCacheList:
+          parameters:
+            api-version: '2017-10-01'
+            parameters:
+              name: cacheName
+              type: Microsoft.Cache/Redis
+            subscriptionId: subid
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Cache/Redis':
     get:
       description: Gets all Redis caches in the specified subscription.
       operationId: Redis_List
@@ -106,7 +134,7 @@ paths:
                     type: Microsoft.Cache/Redis
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis':
     get:
       description: Lists all Redis caches in a resource group.
       operationId: Redis_ListByResourceGroup
@@ -1009,7 +1037,52 @@ paths:
               body:
                 primaryKey: secretkey1
                 secondaryKey: secretKey2
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/default':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/listUpgradeNotifications':
+    get:
+      description: Gets any upgrade notifications for a Redis cache.
+      operationId: Redis_ListUpgradeNotifications
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Redis cache.
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: how many minutes in past to look for upgrade notifications
+          format: double
+          in: query
+          name: history
+          required: true
+          type: number
+      responses:
+        '200':
+          description: All upgrade notifications in given time range
+          schema:
+            $ref: '#/definitions/NotificationListResponse'
+      tags:
+        - Redis
+      x-ms-examples:
+        RedisCacheGet:
+          parameters:
+            api-version: '2017-10-01'
+            history: '5000'
+            name: cache1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - name: notification1
+                    timestamp: '2017-02-16T23:20:50.52Z'
+                    upsellNotification: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/{default}':
     delete:
       description: Deletes the patching schedule of a redis cache (requires Premium SKU).
       operationId: PatchSchedules_Delete
@@ -1024,6 +1097,16 @@ paths:
           name: name
           required: true
           type: string
+        - description: Default string modeled as parameter for auto generation to work correctly.
+          enum:
+            - default
+          in: path
+          name: default
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: defaultName
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -1037,6 +1120,7 @@ paths:
         RedisCachePatchSchedulesDelete:
           parameters:
             api-version: '2017-10-01'
+            default: default
             name: cache1
             resourceGroupName: rg1
             subscriptionId: subid
@@ -1057,6 +1141,16 @@ paths:
           name: name
           required: true
           type: string
+        - description: Default string modeled as parameter for auto generation to work correctly.
+          enum:
+            - default
+          in: path
+          name: default
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: defaultName
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -1070,6 +1164,7 @@ paths:
         RedisCachePatchSchedulesGet:
           parameters:
             api-version: '2017-10-01'
+            default: default
             name: cache1
             resourceGroupName: rg1
             subscriptionId: subid
@@ -1100,6 +1195,16 @@ paths:
           name: name
           required: true
           type: string
+        - description: Default string modeled as parameter for auto generation to work correctly.
+          enum:
+            - default
+          in: path
+          name: default
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: defaultName
         - description: Parameters to set the patching schedule for Redis cache.
           in: body
           name: parameters
@@ -1123,6 +1228,7 @@ paths:
         RedisCachePatchSchedulesCreateOrUpdate:
           parameters:
             api-version: '2017-10-01'
+            default: default
             name: cache1
             parameters:
               properties:
@@ -1204,6 +1310,15 @@ paths:
                 primaryKey: secretkey1
                 secondaryKey: secretKey2
 definitions:
+  CheckNameAvailabilityParameters:
+    description: Parameters body to pass for  name availability check.
+    properties:
+      name:
+        description: Resource name.
+        type: string
+      type:
+        description: Resource type.
+        type: string
   ExportRDBParameters:
     description: Parameters for Redis export operation.
     properties:
@@ -1232,6 +1347,18 @@ definitions:
         type: string
     required:
       - files
+  NotificationListResponse:
+    description: The response of listUpgradeNotifications.
+    properties:
+      nextLink:
+        description: Link for next set of notifications.
+        readOnly: true
+        type: string
+      value:
+        description: List of all notifications.
+        items:
+          $ref: '#/definitions/UpgradeNotification'
+        type: array
   Operation:
     description: REST API operation
     properties:
@@ -1706,3 +1833,21 @@ definitions:
           - update
     required:
       - location
+  UpgradeNotification:
+    description: Properties of upgrade notification.
+    properties:
+      name:
+        description: Name of upgrade notification.
+        readOnly: true
+        type: string
+      timestamp:
+        description: Timestamp when upgrade notification occured.
+        format: date-time
+        readOnly: true
+        type: string
+      upsellNotification:
+        additionalProperties:
+          type: string
+        description: Details about this upgrade notification
+        readOnly: true
+        type: object

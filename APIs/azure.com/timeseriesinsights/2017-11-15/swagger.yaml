@@ -1809,6 +1809,15 @@ definitions:
   ReferenceDataSetCreationProperties:
     description: Properties used to create a reference data set.
     properties:
+      dataStringComparisonBehavior:
+        description: 'The reference data set key comparison behavior can be set using this property. By default, the value is ''Ordinal'' - which means case sensitive key comparison will be performed while joining reference data with events or while adding new reference data. When ''OrdinalIgnoreCase'' is set, case insensitive comparison will be used.'
+        enum:
+          - Ordinal
+          - OrdinalIgnoreCase
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DataStringComparisonBehavior
       keyProperties:
         description: The list of key properties for the reference data set.
         items:

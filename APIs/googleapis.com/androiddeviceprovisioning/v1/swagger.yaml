@@ -514,12 +514,13 @@ paths:
       tags:
         - customers
     get:
-      description: Gets the details of a configuration.
-      operationId: androiddeviceprovisioning.customers.configurations.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: androiddeviceprovisioning.operations.get
       parameters:
-        - description: |-
-            Required. The configuration to get. An API resource name in the format
-            `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -529,9 +530,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Configuration'
+            $ref: '#/definitions/Operation'
       tags:
-        - customers
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.'
-  title: Google Cloud Vision
+  title: Cloud Vision
   version: v1p1beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -1313,6 +1313,11 @@ definitions:
       outputConfig:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1OutputConfig'
         description: The output location and metadata from AsyncAnnotateFileRequest.
+      outputs:
+        description: The full list of output files in GCS.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1GcsDestination'
+        type: array
     type: object
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse:
     description: Response to an async batch file annotation request.

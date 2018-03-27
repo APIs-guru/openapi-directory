@@ -61,6 +61,7 @@ parameters:
     name: groupId
     required: true
     type: string
+    x-ms-parameter-location: client
   RecurseParameter:
     description: The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload.
     in: query

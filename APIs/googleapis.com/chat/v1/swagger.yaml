@@ -296,7 +296,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a message.
-      operationId: chat.dms.conversations.messages.create
+      operationId: chat.spaces.messages.create
       parameters:
         - in: body
           name: body
@@ -329,7 +329,7 @@ paths:
           schema:
             $ref: '#/definitions/Message'
       tags:
-        - dms
+        - spaces
 definitions:
   ActionParameter:
     description: |-

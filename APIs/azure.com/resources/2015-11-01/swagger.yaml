@@ -1410,6 +1410,7 @@ definitions:
     properties:
       id:
         description: Gets or sets the ID of the deployment.
+        readOnly: true
         type: string
       name:
         description: Gets or sets the name of the deployment.
@@ -1419,6 +1420,7 @@ definitions:
         description: Gets or sets deployment properties.
     required:
       - name
+    x-ms-azure-resource: true
   DeploymentExtendedFilter:
     description: Deployment filter.
     properties:
@@ -1756,6 +1758,7 @@ definitions:
         type: object
     required:
       - location
+    x-ms-azure-resource: true
   ResourceGroupFilter:
     description: Resource group filter.
     properties:
@@ -1896,6 +1899,7 @@ definitions:
         description: Gets or sets the tag count.
       id:
         description: Gets or sets the tag ID.
+        readOnly: true
         type: string
       tagName:
         description: Gets or sets the tag name.
@@ -1913,10 +1917,12 @@ definitions:
         description: Gets or sets the tag value count.
       id:
         description: Gets or sets the tag ID.
+        readOnly: true
         type: string
       tagValue:
         description: Gets or sets the tag value.
         type: string
+    x-ms-azure-resource: true
   TagsListResult:
     description: List of subscription tags.
     properties:
