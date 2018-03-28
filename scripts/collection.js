@@ -334,11 +334,13 @@ function validatePreferred(specs) {
       //  'Preferred not true in "' + id + '"');
       if (versions[0] === false) {
         let swagger = specs[id.replace(':','/')+'/'+oversion+'/swagger.yaml'];
+        if (!swagger)
+          swagger = specs[id.replace(':','/')+'/'+oversion+'/openapi.yaml'];
         if (swagger) {
           swagger.info["x-preferred"] = true;
           util.saveSwagger(swagger);
         }
-        else console.warn('Not found',id,oversion);
+        else console.warn('In validatePreferred (1). Not found',id,oversion);
       }
       return;
     }
@@ -349,13 +351,15 @@ function validatePreferred(specs) {
     _.each(versions, function (value, version) {
       //assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
       let swagger = specs[id.replace(':','/')+'/'+version+'/swagger.yaml'];
+      if (!swagger)
+        swagger = specs[id.replace(':','/')+'/'+version+'/openapi.yaml'];
       if (_.isUndefined(value)) {
         value = false;
         if (swagger) {
           swagger.info["x-preferred"] = value;
           util.saveSwagger(swagger);
         }
-        else console.warn('Not found',id,version);
+        else console.warn('In validatePreferred (2). Not found',id,version);
       }
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}": "${typeof value}"`);
       assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}": "${value}"`);
