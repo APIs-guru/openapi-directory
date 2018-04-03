@@ -7113,6 +7113,9 @@ definitions:
       description:
         $ref: '#/definitions/String'
         description: The description of an <a>SdkType</a> configuration property.
+      required:
+        $ref: '#/definitions/Boolean'
+        description: A boolean flag of an <a>SdkType</a> configuration property to indicate if the associated SDK configuration property is required (<code>true</code>) or not (<code>false</code>).
       defaultValue:
         $ref: '#/definitions/String'
         description: The default value of an <a>SdkType</a> configuration property.
