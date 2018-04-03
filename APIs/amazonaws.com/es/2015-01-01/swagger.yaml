@@ -767,6 +767,35 @@ definitions:
   CloudWatchLogsLogGroupArn:
     type: string
     description: ARN of the Cloudwatch log group to which log needs to be published.
+  CognitoOptions:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Specifies the option to enable Cognito for Kibana authentication.
+      UserPoolId:
+        $ref: '#/definitions/UserPoolId'
+        description: Specifies the Cognito user pool ID for Kibana authentication.
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: Specifies the Cognito identity pool ID for Kibana authentication.
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
+    description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+  CognitoOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/CognitoOptions'
+        description: Specifies the Cognito options for the specified Elasticsearch domain.
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: Specifies the status of the Cognito options for the specified Elasticsearch domain.
+    description: Status of the Cognito options for the specified Elasticsearch domain.
   CreateElasticsearchDomainRequest:
     type: object
     required:
@@ -793,6 +822,9 @@ definitions:
       VPCOptions:
         $ref: '#/definitions/VPCOptions'
         description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
+      CognitoOptions:
+        $ref: '#/definitions/CognitoOptions'
+        description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
       EncryptionAtRestOptions:
         $ref: '#/definitions/EncryptionAtRestOptions'
         description: Specifies the Encryption At Rest Options.
@@ -1033,6 +1065,9 @@ definitions:
       VPCOptions:
         $ref: '#/definitions/VPCDerivedInfoStatus'
         description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+      CognitoOptions:
+        $ref: '#/definitions/CognitoOptionsStatus'
+        description: 'The <code>CognitoOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
       EncryptionAtRestOptions:
         $ref: '#/definitions/EncryptionAtRestOptionsStatus'
         description: Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.
@@ -1092,6 +1127,9 @@ definitions:
       VPCOptions:
         $ref: '#/definitions/VPCDerivedInfo'
         description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+      CognitoOptions:
+        $ref: '#/definitions/CognitoOptions'
+        description: 'The <code>CognitoOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
       EncryptionAtRestOptions:
         $ref: '#/definitions/EncryptionAtRestOptions'
         description: ' Specifies the status of the <code>EncryptionAtRestOptions</code>.'
@@ -1166,6 +1204,11 @@ definitions:
           $ref: '#/definitions/ServiceUrl'
   ErrorMessage:
     type: string
+  IdentityPoolId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
   InstanceCountLimits:
     type: object
     properties:
@@ -1375,6 +1418,10 @@ definitions:
     type: object
     properties: {}
     description: An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.
+  RoleArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
   ServiceUrl:
     type: string
     description: 'The endpoint to which service requests are submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code>.'
@@ -1485,6 +1532,9 @@ definitions:
       VPCOptions:
         $ref: '#/definitions/VPCOptions'
         description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
+      CognitoOptions:
+        $ref: '#/definitions/CognitoOptions'
+        description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptions'
         description: 'Modifies the advanced option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
@@ -1507,6 +1557,11 @@ definitions:
   UpdateTimestamp:
     type: string
     format: date-time
+  UserPoolId:
+    type: string
+    pattern: '[\w-]+_[0-9a-zA-Z]+'
+    minLength: 1
+    maxLength: 55
   VPCDerivedInfo:
     type: object
     properties:

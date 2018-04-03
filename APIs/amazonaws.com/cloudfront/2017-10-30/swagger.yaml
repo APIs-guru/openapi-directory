@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '2017-03-25'
+  version: '2017-10-30'
   x-release: v4
   title: Amazon CloudFront
   description: '<fullname>Amazon CloudFront</fullname> <p>This is the <i>Amazon CloudFront API Reference</i>. This guide is for developers who need detailed information about CloudFront API actions, data types, and errors. For detailed information about CloudFront features, see the <i>Amazon CloudFront Developer Guide</i>.</p>'
@@ -20,7 +20,7 @@ info:
   x-serviceName: cloudfront
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudfront-2017-03-25.normal.json'
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudfront-2017-10-30.normal.json'
       converter:
         url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
@@ -29,7 +29,7 @@ info:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-preferred: false
+  x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://aws.amazon.com/cloudfront/'
@@ -98,7 +98,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /2017-03-25/origin-access-identity/cloudfront:
+  /2017-10-30/origin-access-identity/cloudfront:
     post:
       operationId: CreateCloudFrontOriginAccessIdentity
       description: 'Creates a new origin access identity. If you''re using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.'
@@ -171,7 +171,7 @@ paths:
           in: query
           description: Pagination token
           required: false
-  /2017-03-25/distribution:
+  /2017-10-30/distribution:
     post:
       operationId: CreateDistribution
       description: Creates a new web distribution. Send a <code>POST</code> request to the <code>/<i>CloudFront API version</i>/distribution</code>/<code>distribution ID</code> resource.
@@ -340,6 +340,18 @@ paths:
           description: InvalidOriginKeepaliveTimeout
           schema:
             $ref: '#/definitions/InvalidOriginKeepaliveTimeout'
+        '520':
+          description: NoSuchFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionConfig'
+        '521':
+          description: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
+          schema:
+            $ref: '#/definitions/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior'
+        '522':
+          description: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig'
       parameters:
         - name: body
           in: body
@@ -384,7 +396,7 @@ paths:
           in: query
           description: Pagination token
           required: false
-  /2017-03-25/distribution?WithTags:
+  /2017-10-30/distribution?WithTags:
     post:
       operationId: CreateDistributionWithTags
       description: Create a new distribution with tags.
@@ -557,6 +569,18 @@ paths:
           description: InvalidOriginKeepaliveTimeout
           schema:
             $ref: '#/definitions/InvalidOriginKeepaliveTimeout'
+        '521':
+          description: NoSuchFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionConfig'
+        '522':
+          description: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
+          schema:
+            $ref: '#/definitions/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior'
+        '523':
+          description: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig'
       parameters:
         - name: body
           in: body
@@ -573,7 +597,157 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2017-03-25/distribution/{DistributionId}/invalidation':
+  /2017-10-30/field-level-encryption:
+    post:
+      operationId: CreateFieldLevelEncryptionConfig
+      description: Create a new field-level encryption configuration.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFieldLevelEncryptionConfigResult'
+        '480':
+          description: InconsistentQuantities
+          schema:
+            $ref: '#/definitions/InconsistentQuantities'
+        '481':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '482':
+          description: NoSuchFieldLevelEncryptionProfile
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionProfile'
+        '483':
+          description: FieldLevelEncryptionConfigAlreadyExists
+          schema:
+            $ref: '#/definitions/FieldLevelEncryptionConfigAlreadyExists'
+        '484':
+          description: TooManyFieldLevelEncryptionConfigs
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionConfigs'
+        '485':
+          description: TooManyFieldLevelEncryptionQueryArgProfiles
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionQueryArgProfiles'
+        '486':
+          description: TooManyFieldLevelEncryptionContentTypeProfiles
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionContentTypeProfiles'
+        '487':
+          description: QueryArgProfileEmpty
+          schema:
+            $ref: '#/definitions/QueryArgProfileEmpty'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFieldLevelEncryptionConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListFieldLevelEncryptionConfigs
+      description: List all field-level encryption configurations that have been created in CloudFront for this account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFieldLevelEncryptionConfigsResult'
+        '480':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFieldLevelEncryptionConfigsRequest'
+  /2017-10-30/field-level-encryption-profile:
+    post:
+      operationId: CreateFieldLevelEncryptionProfile
+      description: Create a field-level encryption profile.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFieldLevelEncryptionProfileResult'
+        '480':
+          description: InconsistentQuantities
+          schema:
+            $ref: '#/definitions/InconsistentQuantities'
+        '481':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '482':
+          description: NoSuchPublicKey
+          schema:
+            $ref: '#/definitions/NoSuchPublicKey'
+        '483':
+          description: FieldLevelEncryptionProfileAlreadyExists
+          schema:
+            $ref: '#/definitions/FieldLevelEncryptionProfileAlreadyExists'
+        '484':
+          description: FieldLevelEncryptionProfileSizeExceeded
+          schema:
+            $ref: '#/definitions/FieldLevelEncryptionProfileSizeExceeded'
+        '485':
+          description: TooManyFieldLevelEncryptionProfiles
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionProfiles'
+        '486':
+          description: TooManyFieldLevelEncryptionEncryptionEntities
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionEncryptionEntities'
+        '487':
+          description: TooManyFieldLevelEncryptionFieldPatterns
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionFieldPatterns'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFieldLevelEncryptionProfileRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListFieldLevelEncryptionProfiles
+      description: Request a list of field-level encryption profiles that have been created in CloudFront for this account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFieldLevelEncryptionProfilesResult'
+        '480':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFieldLevelEncryptionProfilesRequest'
+  '/2017-10-30/distribution/{DistributionId}/invalidation':
     post:
       operationId: CreateInvalidation
       description: 'Create a new invalidation. '
@@ -670,7 +844,62 @@ paths:
           in: path
           type: string
           required: true
-  /2017-03-25/streaming-distribution:
+  /2017-10-30/public-key:
+    post:
+      operationId: CreatePublicKey
+      description: 'Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePublicKeyResult'
+        '480':
+          description: PublicKeyAlreadyExists
+          schema:
+            $ref: '#/definitions/PublicKeyAlreadyExists'
+        '481':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '482':
+          description: TooManyPublicKeys
+          schema:
+            $ref: '#/definitions/TooManyPublicKeys'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePublicKeyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListPublicKeys
+      description: List all public keys that have been added to CloudFront for this account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPublicKeysResult'
+        '480':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPublicKeysRequest'
+  /2017-10-30/streaming-distribution:
     post:
       operationId: CreateStreamingDistribution
       description: '<p>Creates a new RMTP distribution. An RTMP distribution is similar to a web distribution, but an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP. </p> <p>To create a new web distribution, submit a <code>POST</code> request to the <i>CloudFront API version</i>/distribution resource. The request body must include a document with a <i>StreamingDistributionConfig</i> element. The response echoes the <code>StreamingDistributionConfig</code> element and returns other information about the RTMP distribution.</p> <p>To get the status of your request, use the <i>GET StreamingDistribution</i> API action. When the value of <code>Enabled</code> is <code>true</code> and the value of <code>Status</code> is <code>Deployed</code>, your distribution is ready. A distribution usually deploys in less than 15 minutes.</p> <p>For more information about web distributions, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html">Working with RTMP Distributions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <important> <p>Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a web distribution or an RTMP distribution, and when you invalidate objects. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there''s a mismatch between the number of values you say you''re specifying in the <code>Quantity</code> element and the number of values specified.</p> </important>'
@@ -771,7 +1000,7 @@ paths:
           in: query
           description: Pagination token
           required: false
-  /2017-03-25/streaming-distribution?WithTags:
+  /2017-10-30/streaming-distribution?WithTags:
     post:
       operationId: CreateStreamingDistributionWithTags
       description: Create a new streaming distribution with tags.
@@ -848,7 +1077,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2017-03-25/origin-access-identity/cloudfront/{Id}':
+  '/2017-10-30/origin-access-identity/cloudfront/{Id}':
     delete:
       operationId: DeleteCloudFrontOriginAccessIdentity
       description: 'Delete an origin access identity. '
@@ -921,7 +1150,7 @@ paths:
           in: path
           type: string
           required: true
-  '/2017-03-25/distribution/{Id}':
+  '/2017-10-30/distribution/{Id}':
     delete:
       operationId: DeleteDistribution
       description: 'Delete a distribution. '
@@ -1004,7 +1233,226 @@ paths:
               matcher: path
               state: success
               argument: Distribution.Status
-  '/2017-03-25/service-linked-role/{RoleName}':
+  '/2017-10-30/field-level-encryption/{Id}':
+    delete:
+      operationId: DeleteFieldLevelEncryptionConfig
+      description: Remove a field-level encryption configuration.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '482':
+          description: NoSuchFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionConfig'
+        '483':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+        '484':
+          description: FieldLevelEncryptionConfigInUse
+          schema:
+            $ref: '#/definitions/FieldLevelEncryptionConfigInUse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFieldLevelEncryptionConfigRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetFieldLevelEncryption
+      description: Get the field-level encryption configuration information.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFieldLevelEncryptionResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: NoSuchFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionConfig'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFieldLevelEncryptionRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+  '/2017-10-30/field-level-encryption-profile/{Id}':
+    delete:
+      operationId: DeleteFieldLevelEncryptionProfile
+      description: Remove a field-level encryption profile.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '482':
+          description: NoSuchFieldLevelEncryptionProfile
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionProfile'
+        '483':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+        '484':
+          description: FieldLevelEncryptionProfileInUse
+          schema:
+            $ref: '#/definitions/FieldLevelEncryptionProfileInUse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFieldLevelEncryptionProfileRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetFieldLevelEncryptionProfile
+      description: Get the field-level encryption profile information.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFieldLevelEncryptionProfileResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: NoSuchFieldLevelEncryptionProfile
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionProfile'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFieldLevelEncryptionProfileRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+  '/2017-10-30/public-key/{Id}':
+    delete:
+      operationId: DeletePublicKey
+      description: Remove a public key you previously added to CloudFront.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: PublicKeyInUse
+          schema:
+            $ref: '#/definitions/PublicKeyInUse'
+        '482':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '483':
+          description: NoSuchPublicKey
+          schema:
+            $ref: '#/definitions/NoSuchPublicKey'
+        '484':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeletePublicKeyRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetPublicKey
+      description: Get the public key information.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPublicKeyResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: NoSuchPublicKey
+          schema:
+            $ref: '#/definitions/NoSuchPublicKey'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetPublicKeyRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+  '/2017-10-30/service-linked-role/{RoleName}':
     delete:
       operationId: DeleteServiceLinkedRole
       description: ''
@@ -1047,7 +1495,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2017-03-25/streaming-distribution/{Id}':
+  '/2017-10-30/streaming-distribution/{Id}':
     delete:
       operationId: DeleteStreamingDistribution
       description: '<p>Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.</p> <p> <b>To delete an RTMP distribution using the CloudFront API</b>:</p> <ol> <li> <p>Disable the RTMP distribution.</p> </li> <li> <p>Submit a <code>GET Streaming Distribution Config</code> request to get the current configuration and the <code>Etag</code> header for the distribution. </p> </li> <li> <p>Update the XML document that was returned in the response to your <code>GET Streaming Distribution Config</code> request to change the value of <code>Enabled</code> to <code>false</code>.</p> </li> <li> <p>Submit a <code>PUT Streaming Distribution Config</code> request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Streaming Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to the <code>PUT Streaming Distribution Config</code> request to confirm that the distribution was successfully disabled.</p> </li> <li> <p>Submit a <code>GET Streaming Distribution Config</code> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> <li> <p>Submit a <code>DELETE Streaming Distribution</code> request. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Streaming Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to your <code>DELETE Streaming Distribution</code> request to confirm that the distribution was successfully deleted.</p> </li> </ol> <p>For information about deleting a distribution using the CloudFront console, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html">Deleting a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
@@ -1130,7 +1578,7 @@ paths:
               matcher: path
               state: success
               argument: StreamingDistribution.Status
-  '/2017-03-25/origin-access-identity/cloudfront/{Id}/config':
+  '/2017-10-30/origin-access-identity/cloudfront/{Id}/config':
     get:
       operationId: GetCloudFrontOriginAccessIdentityConfig
       description: 'Get the configuration information about an origin access identity. '
@@ -1217,7 +1665,7 @@ paths:
           in: path
           type: string
           required: true
-  '/2017-03-25/distribution/{Id}/config':
+  '/2017-10-30/distribution/{Id}/config':
     get:
       operationId: GetDistributionConfig
       description: 'Get the configuration information about a distribution. '
@@ -1422,6 +1870,18 @@ paths:
           description: InvalidOriginKeepaliveTimeout
           schema:
             $ref: '#/definitions/InvalidOriginKeepaliveTimeout'
+        '520':
+          description: NoSuchFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionConfig'
+        '521':
+          description: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
+          schema:
+            $ref: '#/definitions/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior'
+        '522':
+          description: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig'
       parameters:
         - name: body
           in: body
@@ -1432,7 +1892,209 @@ paths:
           in: path
           type: string
           required: true
-  '/2017-03-25/distribution/{DistributionId}/invalidation/{Id}':
+  '/2017-10-30/field-level-encryption/{Id}/config':
+    get:
+      operationId: GetFieldLevelEncryptionConfig
+      description: Get the field-level encryption configuration information.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFieldLevelEncryptionConfigResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: NoSuchFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionConfig'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFieldLevelEncryptionConfigRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateFieldLevelEncryptionConfig
+      description: 'Update a field-level encryption configuration. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFieldLevelEncryptionConfigResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: IllegalUpdate
+          schema:
+            $ref: '#/definitions/IllegalUpdate'
+        '482':
+          description: InconsistentQuantities
+          schema:
+            $ref: '#/definitions/InconsistentQuantities'
+        '483':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '484':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '485':
+          description: NoSuchFieldLevelEncryptionProfile
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionProfile'
+        '486':
+          description: NoSuchFieldLevelEncryptionConfig
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionConfig'
+        '487':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+        '488':
+          description: TooManyFieldLevelEncryptionQueryArgProfiles
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionQueryArgProfiles'
+        '489':
+          description: TooManyFieldLevelEncryptionContentTypeProfiles
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionContentTypeProfiles'
+        '490':
+          description: QueryArgProfileEmpty
+          schema:
+            $ref: '#/definitions/QueryArgProfileEmpty'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFieldLevelEncryptionConfigRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+  '/2017-10-30/field-level-encryption-profile/{Id}/config':
+    get:
+      operationId: GetFieldLevelEncryptionProfileConfig
+      description: Get the field-level encryption profile configuration information.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFieldLevelEncryptionProfileConfigResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: NoSuchFieldLevelEncryptionProfile
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionProfile'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFieldLevelEncryptionProfileConfigRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateFieldLevelEncryptionProfile
+      description: 'Update a field-level encryption profile. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFieldLevelEncryptionProfileResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: FieldLevelEncryptionProfileAlreadyExists
+          schema:
+            $ref: '#/definitions/FieldLevelEncryptionProfileAlreadyExists'
+        '482':
+          description: IllegalUpdate
+          schema:
+            $ref: '#/definitions/IllegalUpdate'
+        '483':
+          description: InconsistentQuantities
+          schema:
+            $ref: '#/definitions/InconsistentQuantities'
+        '484':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '485':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '486':
+          description: NoSuchPublicKey
+          schema:
+            $ref: '#/definitions/NoSuchPublicKey'
+        '487':
+          description: NoSuchFieldLevelEncryptionProfile
+          schema:
+            $ref: '#/definitions/NoSuchFieldLevelEncryptionProfile'
+        '488':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+        '489':
+          description: FieldLevelEncryptionProfileSizeExceeded
+          schema:
+            $ref: '#/definitions/FieldLevelEncryptionProfileSizeExceeded'
+        '490':
+          description: TooManyFieldLevelEncryptionEncryptionEntities
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionEncryptionEntities'
+        '491':
+          description: TooManyFieldLevelEncryptionFieldPatterns
+          schema:
+            $ref: '#/definitions/TooManyFieldLevelEncryptionFieldPatterns'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFieldLevelEncryptionProfileRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+  '/2017-10-30/distribution/{DistributionId}/invalidation/{Id}':
     get:
       operationId: GetInvalidation
       description: 'Get the information about an invalidation. '
@@ -1487,7 +2149,90 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2017-03-25/streaming-distribution/{Id}/config':
+  '/2017-10-30/public-key/{Id}/config':
+    get:
+      operationId: GetPublicKeyConfig
+      description: Return public key configuration informaation
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPublicKeyConfigResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: NoSuchPublicKey
+          schema:
+            $ref: '#/definitions/NoSuchPublicKey'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetPublicKeyConfigRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdatePublicKey
+      description: Update public key information. Note that the only value you can change is the comment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdatePublicKeyResult'
+        '480':
+          description: AccessDenied
+          schema:
+            $ref: '#/definitions/AccessDenied'
+        '481':
+          description: CannotChangeImmutablePublicKeyFields
+          schema:
+            $ref: '#/definitions/CannotChangeImmutablePublicKeyFields'
+        '482':
+          description: InvalidArgument
+          schema:
+            $ref: '#/definitions/InvalidArgument'
+        '483':
+          description: InvalidIfMatchVersion
+          schema:
+            $ref: '#/definitions/InvalidIfMatchVersion'
+        '484':
+          description: IllegalUpdate
+          schema:
+            $ref: '#/definitions/IllegalUpdate'
+        '485':
+          description: NoSuchPublicKey
+          schema:
+            $ref: '#/definitions/NoSuchPublicKey'
+        '486':
+          description: PreconditionFailed
+          schema:
+            $ref: '#/definitions/PreconditionFailed'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePublicKeyRequest'
+        - name: Id
+          in: path
+          type: string
+          required: true
+  '/2017-10-30/streaming-distribution/{Id}/config':
     get:
       operationId: GetStreamingDistributionConfig
       description: 'Get the configuration information about a streaming distribution. '
@@ -1594,7 +2339,7 @@ paths:
           in: path
           type: string
           required: true
-  '/2017-03-25/distributionsByWebACLId/{WebACLId}':
+  '/2017-10-30/distributionsByWebACLId/{WebACLId}':
     get:
       operationId: ListDistributionsByWebACLId
       description: 'List the distributions that are associated with a specified AWS WAF web ACL. '
@@ -1631,7 +2376,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /2017-03-25/tagging:
+  /2017-10-30/tagging:
     get:
       operationId: ListTagsForResource
       description: List tags for a CloudFront resource.
@@ -1672,7 +2417,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /2017-03-25/tagging?Operation=Tag:
+  /2017-10-30/tagging?Operation=Tag:
     post:
       operationId: TagResource
       description: Add tags to a CloudFront resource.
@@ -1711,7 +2456,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /2017-03-25/tagging?Operation=Untag:
+  /2017-10-30/tagging?Operation=Untag:
     post:
       operationId: UntagResource
       description: Remove tags from a CloudFront resource.
@@ -1863,6 +2608,8 @@ definitions:
       LambdaFunctionAssociations:
         $ref: '#/definitions/LambdaFunctionAssociations'
         description: A complex type that contains zero or more Lambda function associations for a cache behavior.
+      FieldLevelEncryptionId:
+        $ref: '#/definitions/string'
     description: '<p>A complex type that describes how CloudFront processes requests.</p> <p>You must create at least as many cache behaviors (including the default cache behavior) as you have origins if you want CloudFront to distribute objects from all of the origins. Each cache behavior specifies the one origin from which you want CloudFront to get objects. If you have two origins and only the default cache behavior, the default cache behavior will cause CloudFront to get objects from one of the origins, but the other origin is never used.</p> <p>For the current limit on the number of cache behaviors that you can add to a distribution, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront">Amazon CloudFront Limits</a> in the <i>AWS General Reference</i>.</p> <p>If you don''t want to specify any cache behaviors, include only an empty <code>CacheBehaviors</code> element. Don''t include an empty <code>CacheBehavior</code> element, or CloudFront returns a <code>MalformedXML</code> error.</p> <p>To delete all cache behaviors in an existing distribution, update the distribution configuration and include only an empty <code>CacheBehaviors</code> element.</p> <p>To add, change, or remove one or more cache behaviors, update the distribution configuration and specify all of the cache behaviors that you want to include in the updated distribution.</p> <p>For more information about cache behaviors, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior">Cache Behaviors</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
   CacheBehaviorList:
     type: array
@@ -1893,6 +2640,12 @@ definitions:
         $ref: '#/definitions/MethodsList'
         description: A complex type that contains the HTTP methods that you want CloudFront to cache responses to.
     description: '<p>A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:</p> <ul> <li> <p>CloudFront caches responses to <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront caches responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> </ul> <p>If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly. </p>'
+  CannotChangeImmutablePublicKeyFields:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: You can't change the value of a public key.
   CertificateSource:
     type: string
     enum:
@@ -1987,6 +2740,50 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CloudFrontOriginAccessIdentitySummary'
+  ContentTypeProfile:
+    type: object
+    required:
+      - Format
+      - ContentType
+    properties:
+      Format:
+        $ref: '#/definitions/Format'
+        description: 'The format for a field-level encryption content type-profile mapping. '
+      ProfileId:
+        $ref: '#/definitions/string'
+        description: 'The profile ID for a field-level encryption content type-profile mapping. '
+      ContentType:
+        $ref: '#/definitions/string'
+        description: 'The content type for a field-level encryption content type-profile mapping. '
+    description: 'A field-level encryption content type profile. '
+  ContentTypeProfileConfig:
+    type: object
+    required:
+      - ForwardWhenContentTypeIsUnknown
+    properties:
+      ForwardWhenContentTypeIsUnknown:
+        $ref: '#/definitions/boolean'
+        description: 'The setting in a field-level encryption content type-profile mapping that specifies what to do when an unknown content type is provided for the profile. If true, content is forwarded without being encrypted when the content type is unknown. If false (the default), an error is returned when the content type is unknown. '
+      ContentTypeProfiles:
+        $ref: '#/definitions/ContentTypeProfiles'
+        description: 'The configuration for a field-level encryption content type-profile. '
+    description: 'The configuration for a field-level encryption content type-profile mapping. '
+  ContentTypeProfileList:
+    type: array
+    items:
+      $ref: '#/definitions/ContentTypeProfile'
+  ContentTypeProfiles:
+    type: object
+    required:
+      - Quantity
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: 'The number of field-level encryption content type-profile mappings. '
+      Items:
+        $ref: '#/definitions/ContentTypeProfileList'
+        description: 'Items in a field-level encryption content type-profile mapping. '
+    description: 'Field-level encryption content type-profile. '
   CookieNameList:
     type: array
     items:
@@ -2025,7 +2822,7 @@ definitions:
         description: The current configuration information for the identity.
     description: The request to create a new origin access identity.
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   CreateCloudFrontOriginAccessIdentityResult:
     type: object
     properties:
@@ -2043,7 +2840,7 @@ definitions:
         description: The distribution's configuration information.
     description: The request to create a new distribution.
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   CreateDistributionResult:
     type: object
     properties:
@@ -2061,7 +2858,7 @@ definitions:
         description: 'The distribution''s configuration information. '
     description: 'The request to create a new distribution with tags. '
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   CreateDistributionWithTagsResult:
     type: object
     properties:
@@ -2069,6 +2866,38 @@ definitions:
         $ref: '#/definitions/Distribution'
         description: 'The distribution''s information. '
     description: 'The returned result of the corresponding request. '
+  CreateFieldLevelEncryptionConfigRequest:
+    type: object
+    required:
+      - FieldLevelEncryptionConfig
+    properties:
+      FieldLevelEncryptionConfig:
+        $ref: '#/definitions/FieldLevelEncryptionConfig'
+        description: The request to create a new field-level encryption configuration.
+    xml:
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
+  CreateFieldLevelEncryptionConfigResult:
+    type: object
+    properties:
+      FieldLevelEncryption:
+        $ref: '#/definitions/FieldLevelEncryption'
+        description: Returned when you create a new field-level encryption configuration.
+  CreateFieldLevelEncryptionProfileRequest:
+    type: object
+    required:
+      - FieldLevelEncryptionProfileConfig
+    properties:
+      FieldLevelEncryptionProfileConfig:
+        $ref: '#/definitions/FieldLevelEncryptionProfileConfig'
+        description: The request to create a field-level encryption profile.
+    xml:
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
+  CreateFieldLevelEncryptionProfileResult:
+    type: object
+    properties:
+      FieldLevelEncryptionProfile:
+        $ref: '#/definitions/FieldLevelEncryptionProfile'
+        description: Returned when you create a new field-level encryption profile.
   CreateInvalidationRequest:
     type: object
     required:
@@ -2079,7 +2908,7 @@ definitions:
         description: The batch information for the invalidation.
     description: The request to create an invalidation.
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   CreateInvalidationResult:
     type: object
     properties:
@@ -2087,6 +2916,22 @@ definitions:
         $ref: '#/definitions/Invalidation'
         description: The invalidation's information.
     description: The returned result of the corresponding request.
+  CreatePublicKeyRequest:
+    type: object
+    required:
+      - PublicKeyConfig
+    properties:
+      PublicKeyConfig:
+        $ref: '#/definitions/PublicKeyConfig'
+        description: The request to add a public key to CloudFront.
+    xml:
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
+  CreatePublicKeyResult:
+    type: object
+    properties:
+      PublicKey:
+        $ref: '#/definitions/PublicKey'
+        description: Returned when you add a public key.
   CreateStreamingDistributionRequest:
     type: object
     required:
@@ -2097,7 +2942,7 @@ definitions:
         description: The streaming distribution's configuration information.
     description: The request to create a new streaming distribution.
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   CreateStreamingDistributionResult:
     type: object
     properties:
@@ -2115,7 +2960,7 @@ definitions:
         description: ' The streaming distribution''s configuration information. '
     description: The request to create a new streaming distribution with tags.
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   CreateStreamingDistributionWithTagsResult:
     type: object
     properties:
@@ -2235,6 +3080,8 @@ definitions:
       LambdaFunctionAssociations:
         $ref: '#/definitions/LambdaFunctionAssociations'
         description: A complex type that contains zero or more Lambda function associations for a cache behavior.
+      FieldLevelEncryptionId:
+        $ref: '#/definitions/string'
     description: A complex type that describes the default cache behavior if you don't specify a <code>CacheBehavior</code> element or if files don't match any of the values of <code>PathPattern</code> in <code>CacheBehavior</code> elements. You must create exactly one default cache behavior.
   DeleteCloudFrontOriginAccessIdentityRequest:
     type: object
@@ -2244,6 +3091,15 @@ definitions:
     type: object
     properties: {}
     description: '<p>This action deletes a web distribution. To delete a web distribution using the CloudFront API, perform the following steps.</p> <p> <b>To delete a web distribution using the CloudFront API:</b> </p> <ol> <li> <p>Disable the web distribution </p> </li> <li> <p>Submit a <code>GET Distribution Config</code> request to get the current configuration and the <code>Etag</code> header for the distribution.</p> </li> <li> <p>Update the XML document that was returned in the response to your <code>GET Distribution Config</code> request to change the value of <code>Enabled</code> to <code>false</code>.</p> </li> <li> <p>Submit a <code>PUT Distribution Config</code> request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to the <code>PUT Distribution Config</code> request to confirm that the distribution was successfully disabled.</p> </li> <li> <p>Submit a <code>GET Distribution</code> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> <li> <p>Submit a <code>DELETE Distribution</code> request. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Distribution Config</code> request in Step 6.</p> </li> <li> <p>Review the response to your <code>DELETE Distribution</code> request to confirm that the distribution was successfully deleted.</p> </li> </ol> <p>For information about deleting a distribution using the CloudFront console, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html">Deleting a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+  DeleteFieldLevelEncryptionConfigRequest:
+    type: object
+    properties: {}
+  DeleteFieldLevelEncryptionProfileRequest:
+    type: object
+    properties: {}
+  DeletePublicKeyRequest:
+    type: object
+    properties: {}
   DeleteServiceLinkedRoleRequest:
     type: object
     properties: {}
@@ -2473,6 +3329,39 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DistributionSummary'
+  EncryptionEntities:
+    type: object
+    required:
+      - Quantity
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: 'Number of field pattern items in a field-level encryption content type-profile mapping. '
+      Items:
+        $ref: '#/definitions/EncryptionEntityList'
+        description: 'An array of field patterns in a field-level encryption content type-profile mapping. '
+    description: 'Complex data type for field-level encryption profiles that includes all of the encryption entities. '
+  EncryptionEntity:
+    type: object
+    required:
+      - PublicKeyId
+      - ProviderId
+      - FieldPatterns
+    properties:
+      PublicKeyId:
+        $ref: '#/definitions/string'
+        description: 'The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns. '
+      ProviderId:
+        $ref: '#/definitions/string'
+        description: The provider associated with the public key being used for encryption. This value must also be provided with the private key for applications to be able to decrypt data.
+      FieldPatterns:
+        $ref: '#/definitions/FieldPatterns'
+        description: 'Field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted. You can provide the full field name, or any beginning characters followed by a wildcard (*). You can''t overlap field patterns. For example, you can''t have both ABC* and AB*. Note that field patterns are case-sensitive. '
+    description: 'Complex data type for field-level encryption profiles that includes the encryption key and field pattern specifications. '
+  EncryptionEntityList:
+    type: array
+    items:
+      $ref: '#/definitions/EncryptionEntity'
   EventType:
     type: string
     enum:
@@ -2480,6 +3369,220 @@ definitions:
       - viewer-response
       - origin-request
       - origin-response
+  FieldLevelEncryption:
+    type: object
+    required:
+      - Id
+      - LastModifiedTime
+      - FieldLevelEncryptionConfig
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: The configuration ID for a field-level encryption configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
+      LastModifiedTime:
+        $ref: '#/definitions/timestamp'
+        description: 'The last time the field-level encryption configuration was changed. '
+      FieldLevelEncryptionConfig:
+        $ref: '#/definitions/FieldLevelEncryptionConfig'
+        description: 'A complex data type that includes the profile configurations specified for field-level encryption. '
+    description: 'A complex data type that includes the profile configurations and other options specified for field-level encryption. '
+  FieldLevelEncryptionConfig:
+    type: object
+    required:
+      - CallerReference
+    properties:
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: A unique number that ensures the request can't be replayed.
+      Comment:
+        $ref: '#/definitions/string'
+        description: An optional comment about the configuration.
+      QueryArgProfileConfig:
+        $ref: '#/definitions/QueryArgProfileConfig'
+        description: A complex data type that specifies when to forward content if a profile isn't found and the profile that can be provided as a query argument in a request.
+      ContentTypeProfileConfig:
+        $ref: '#/definitions/ContentTypeProfileConfig'
+        description: A complex data type that specifies when to forward content if a content type isn't recognized and profiles to use as by default in a request if a query argument doesn't specify a profile to use.
+    description: 'A complex data type that includes the profile configurations specified for field-level encryption. '
+  FieldLevelEncryptionConfigAlreadyExists:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified configuration for field-level encryption already exists.
+  FieldLevelEncryptionConfigInUse:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified configuration for field-level encryption is in use.
+  FieldLevelEncryptionList:
+    type: object
+    required:
+      - MaxItems
+      - Quantity
+    properties:
+      NextMarker:
+        $ref: '#/definitions/string'
+        description: 'If there are more elements to be listed, this element is present and contains the value that you can use for the <code>Marker</code> request parameter to continue listing your configurations where you left off.'
+      MaxItems:
+        $ref: '#/definitions/integer'
+        description: 'The maximum number of elements you want in the response body. '
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of field-level encryption items.
+      Items:
+        $ref: '#/definitions/FieldLevelEncryptionSummaryList'
+        description: An array of field-level encryption items.
+    description: List of field-level encrpytion configurations.
+  FieldLevelEncryptionProfile:
+    type: object
+    required:
+      - Id
+      - LastModifiedTime
+      - FieldLevelEncryptionProfileConfig
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: The ID for a field-level encryption profile configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
+      LastModifiedTime:
+        $ref: '#/definitions/timestamp'
+        description: The last time the field-level encryption profile was updated.
+      FieldLevelEncryptionProfileConfig:
+        $ref: '#/definitions/FieldLevelEncryptionProfileConfig'
+        description: A complex data type that includes the profile name and the encryption entities for the field-level encryption profile.
+    description: A complex data type for field-level encryption profiles.
+  FieldLevelEncryptionProfileAlreadyExists:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified profile for field-level encryption already exists.
+  FieldLevelEncryptionProfileConfig:
+    type: object
+    required:
+      - Name
+      - CallerReference
+      - EncryptionEntities
+    properties:
+      Name:
+        $ref: '#/definitions/string'
+        description: Profile name for the field-level encryption profile.
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: A unique number that ensures the request can't be replayed.
+      Comment:
+        $ref: '#/definitions/string'
+        description: An optional comment for the field-level encryption profile.
+      EncryptionEntities:
+        $ref: '#/definitions/EncryptionEntities'
+        description: 'A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.'
+    description: A complex data type of profiles for the field-level encryption.
+  FieldLevelEncryptionProfileInUse:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified profile for field-level encryption is in use.
+  FieldLevelEncryptionProfileList:
+    type: object
+    required:
+      - MaxItems
+      - Quantity
+    properties:
+      NextMarker:
+        $ref: '#/definitions/string'
+        description: 'If there are more elements to be listed, this element is present and contains the value that you can use for the <code>Marker</code> request parameter to continue listing your profiles where you left off.'
+      MaxItems:
+        $ref: '#/definitions/integer'
+        description: 'The maximum number of field-level encryption profiles you want in the response body. '
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of field-level encryption profiles.
+      Items:
+        $ref: '#/definitions/FieldLevelEncryptionProfileSummaryList'
+        description: The field-level encryption profile items.
+    description: List of field-level encryption profiles.
+  FieldLevelEncryptionProfileSizeExceeded:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The maximum size of a profile for field-level encryption was exceeded.
+  FieldLevelEncryptionProfileSummary:
+    type: object
+    required:
+      - Id
+      - LastModifiedTime
+      - Name
+      - EncryptionEntities
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: ID for the field-level encryption profile summary.
+      LastModifiedTime:
+        $ref: '#/definitions/timestamp'
+        description: The time when the the field-level encryption profile summary was last updated.
+      Name:
+        $ref: '#/definitions/string'
+        description: Name for the field-level encryption profile summary.
+      EncryptionEntities:
+        $ref: '#/definitions/EncryptionEntities'
+        description: 'A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.'
+      Comment:
+        $ref: '#/definitions/string'
+        description: An optional comment for the field-level encryption profile summary.
+    description: The field-level encryption profile summary.
+  FieldLevelEncryptionProfileSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/FieldLevelEncryptionProfileSummary'
+  FieldLevelEncryptionSummary:
+    type: object
+    required:
+      - Id
+      - LastModifiedTime
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: The unique ID of a field-level encryption item.
+      LastModifiedTime:
+        $ref: '#/definitions/timestamp'
+        description: The last time that the summary of field-level encryption items was modified.
+      Comment:
+        $ref: '#/definitions/string'
+        description: An optional comment about the field-level encryption item.
+      QueryArgProfileConfig:
+        $ref: '#/definitions/QueryArgProfileConfig'
+        description: ' A summary of a query argument-profile mapping. '
+      ContentTypeProfileConfig:
+        $ref: '#/definitions/ContentTypeProfileConfig'
+        description: ' A summary of a content type-profile mapping. '
+    description: A summary of a field-level encryption item.
+  FieldLevelEncryptionSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/FieldLevelEncryptionSummary'
+  FieldPatternList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
+  FieldPatterns:
+    type: object
+    required:
+      - Quantity
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of field-level encryption field patterns.
+      Items:
+        $ref: '#/definitions/FieldPatternList'
+        description: An array of the field-level encryption field patterns.
+    description: A complex data type that includes the field patterns to match for field-level encryption.
+  Format:
+    type: string
+    enum:
+      - URLEncoded
   ForwardedValues:
     type: object
     required:
@@ -2565,6 +3668,42 @@ definitions:
         $ref: '#/definitions/Distribution'
         description: The distribution's information.
     description: The returned result of the corresponding request.
+  GetFieldLevelEncryptionConfigRequest:
+    type: object
+    properties: {}
+  GetFieldLevelEncryptionConfigResult:
+    type: object
+    properties:
+      FieldLevelEncryptionConfig:
+        $ref: '#/definitions/FieldLevelEncryptionConfig'
+        description: Return the field-level encryption configuration information.
+  GetFieldLevelEncryptionProfileConfigRequest:
+    type: object
+    properties: {}
+  GetFieldLevelEncryptionProfileConfigResult:
+    type: object
+    properties:
+      FieldLevelEncryptionProfileConfig:
+        $ref: '#/definitions/FieldLevelEncryptionProfileConfig'
+        description: Return the field-level encryption profile configuration information.
+  GetFieldLevelEncryptionProfileRequest:
+    type: object
+    properties: {}
+  GetFieldLevelEncryptionProfileResult:
+    type: object
+    properties:
+      FieldLevelEncryptionProfile:
+        $ref: '#/definitions/FieldLevelEncryptionProfile'
+        description: Return the field-level encryption profile information.
+  GetFieldLevelEncryptionRequest:
+    type: object
+    properties: {}
+  GetFieldLevelEncryptionResult:
+    type: object
+    properties:
+      FieldLevelEncryption:
+        $ref: '#/definitions/FieldLevelEncryption'
+        description: Return the field-level encryption configuration information.
   GetInvalidationRequest:
     type: object
     properties: {}
@@ -2576,6 +3715,24 @@ definitions:
         $ref: '#/definitions/Invalidation'
         description: 'The invalidation''s information. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html">Invalidation Complex Type</a>. '
     description: The returned result of the corresponding request.
+  GetPublicKeyConfigRequest:
+    type: object
+    properties: {}
+  GetPublicKeyConfigResult:
+    type: object
+    properties:
+      PublicKeyConfig:
+        $ref: '#/definitions/PublicKeyConfig'
+        description: Return the result for the public key configuration.
+  GetPublicKeyRequest:
+    type: object
+    properties: {}
+  GetPublicKeyResult:
+    type: object
+    properties:
+      PublicKey:
+        $ref: '#/definitions/PublicKey'
+        description: Return the public key.
   GetStreamingDistributionConfigRequest:
     type: object
     properties: {}
@@ -2619,6 +3776,12 @@ definitions:
     enum:
       - http1.1
       - http2
+  IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified configuration for field-level encryption can't be associated with the specified cache behavior.
   IllegalUpdate:
     type: object
     properties:
@@ -2859,11 +4022,16 @@ definitions:
         $ref: '#/definitions/KeyPairIdList'
         description: '<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>.</p> <p>For more information, see <a>ActiveTrustedSigners</a>.</p>'
     description: '<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>. </p> <p>For more information, see <a>ActiveTrustedSigners</a>.</p>'
+  LambdaFunctionARN:
+    type: string
   LambdaFunctionAssociation:
     type: object
+    required:
+      - LambdaFunctionARN
+      - EventType
     properties:
       LambdaFunctionARN:
-        $ref: '#/definitions/string'
+        $ref: '#/definitions/LambdaFunctionARN'
         description: The ARN of the Lambda function. You must specify the ARN of a function version; you can't specify a Lambda alias or $LATEST.
       EventType:
         $ref: '#/definitions/EventType'
@@ -2918,6 +4086,24 @@ definitions:
         $ref: '#/definitions/DistributionList'
         description: 'The <code>DistributionList</code> type. '
     description: 'The returned result of the corresponding request. '
+  ListFieldLevelEncryptionConfigsRequest:
+    type: object
+    properties: {}
+  ListFieldLevelEncryptionConfigsResult:
+    type: object
+    properties:
+      FieldLevelEncryptionList:
+        $ref: '#/definitions/FieldLevelEncryptionList'
+        description: Returns a list of all field-level encryption configurations that have been created in CloudFront for this account.
+  ListFieldLevelEncryptionProfilesRequest:
+    type: object
+    properties: {}
+  ListFieldLevelEncryptionProfilesResult:
+    type: object
+    properties:
+      FieldLevelEncryptionProfileList:
+        $ref: '#/definitions/FieldLevelEncryptionProfileList'
+        description: Returns a list of the field-level encryption profiles that have been created in CloudFront for this account.
   ListInvalidationsRequest:
     type: object
     properties: {}
@@ -2929,6 +4115,15 @@ definitions:
         $ref: '#/definitions/InvalidationList'
         description: 'Information about invalidation batches. '
     description: 'The returned result of the corresponding request. '
+  ListPublicKeysRequest:
+    type: object
+    properties: {}
+  ListPublicKeysResult:
+    type: object
+    properties:
+      PublicKeyList:
+        $ref: '#/definitions/PublicKeyList'
+        description: Returns a list of all public keys that have been added to CloudFront for this account.
   ListStreamingDistributionsRequest:
     type: object
     properties: {}
@@ -3018,6 +4213,18 @@ definitions:
       Message:
         $ref: '#/definitions/string'
     description: The specified distribution does not exist.
+  NoSuchFieldLevelEncryptionConfig:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified configuration for field-level encryption doesn't exist.
+  NoSuchFieldLevelEncryptionProfile:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified profile for field-level encryption doesn't exist.
   NoSuchInvalidation:
     type: object
     properties:
@@ -3030,6 +4237,12 @@ definitions:
       Message:
         $ref: '#/definitions/string'
     description: 'No origin exists with the specified <code>Origin Id</code>. '
+  NoSuchPublicKey:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified public key doesn't exist.
   NoSuchResource:
     type: object
     properties:
@@ -3147,6 +4360,149 @@ definitions:
       - PriceClass_100
       - PriceClass_200
       - PriceClass_All
+  PublicKey:
+    type: object
+    required:
+      - Id
+      - CreatedTime
+      - PublicKeyConfig
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: A unique ID assigned to a public key you've added to CloudFront.
+      CreatedTime:
+        $ref: '#/definitions/timestamp'
+        description: A time you added a public key to CloudFront.
+      PublicKeyConfig:
+        $ref: '#/definitions/PublicKeyConfig'
+        description: A complex data type for a public key you add to CloudFront to use with features like field-level encryption.
+    description: A complex data type of public keys you add to CloudFront to use with features like field-level encryption.
+  PublicKeyAlreadyExists:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The specified public key already exists.
+  PublicKeyConfig:
+    type: object
+    required:
+      - CallerReference
+      - Name
+      - EncodedKey
+    properties:
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: A unique number that ensures the request can't be replayed.
+      Name:
+        $ref: '#/definitions/string'
+        description: The name for a public key you add to CloudFront to use with features like field-level encryption.
+      EncodedKey:
+        $ref: '#/definitions/string'
+        description: The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+      Comment:
+        $ref: '#/definitions/string'
+        description: An optional comment about a public key.
+    description: Information about a public key you add to CloudFront to use with features like field-level encryption.
+  PublicKeyInUse:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: 'The specified public key is in use. '
+  PublicKeyList:
+    type: object
+    required:
+      - MaxItems
+      - Quantity
+    properties:
+      NextMarker:
+        $ref: '#/definitions/string'
+        description: 'If there are more elements to be listed, this element is present and contains the value that you can use for the <code>Marker</code> request parameter to continue listing your public keys where you left off.'
+      MaxItems:
+        $ref: '#/definitions/integer'
+        description: 'The maximum number of public keys you want in the response body. '
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of public keys you added to CloudFront to use with features like field-level encryption.
+      Items:
+        $ref: '#/definitions/PublicKeySummaryList'
+        description: An array of information about a public key you add to CloudFront to use with features like field-level encryption.
+    description: A list of public keys you've added to CloudFront to use with features like field-level encryption.
+  PublicKeySummary:
+    type: object
+    required:
+      - Id
+      - Name
+      - CreatedTime
+      - EncodedKey
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: ' ID for public key information summary. '
+      Name:
+        $ref: '#/definitions/string'
+        description: ' Name for public key information summary. '
+      CreatedTime:
+        $ref: '#/definitions/timestamp'
+        description: ' Creation time for public key information summary. '
+      EncodedKey:
+        $ref: '#/definitions/string'
+        description: ' Encoded key for public key information summary. '
+      Comment:
+        $ref: '#/definitions/string'
+        description: ' Comment for public key information summary. '
+    description: ' Public key information summary. '
+  PublicKeySummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/PublicKeySummary'
+  QueryArgProfile:
+    type: object
+    required:
+      - QueryArg
+      - ProfileId
+    properties:
+      QueryArg:
+        $ref: '#/definitions/string'
+        description: Query argument for field-level encryption query argument-profile mapping.
+      ProfileId:
+        $ref: '#/definitions/string'
+        description: ID of profile to use for field-level encryption query argument-profile mapping
+    description: Query argument-profile mapping for field-level encryption.
+  QueryArgProfileConfig:
+    type: object
+    required:
+      - ForwardWhenQueryArgProfileIsUnknown
+    properties:
+      ForwardWhenQueryArgProfileIsUnknown:
+        $ref: '#/definitions/boolean'
+        description: 'Flag to set if you want a request to be forwarded to the origin even if the profile specified by the field-level encryption query argument, fle-profile, is unknown.'
+      QueryArgProfiles:
+        $ref: '#/definitions/QueryArgProfiles'
+        description: Profiles specified for query argument-profile mapping for field-level encryption.
+    description: Configuration for query argument-profile mapping for field-level encryption.
+  QueryArgProfileEmpty:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: No profile specified for the field-level encryption query argument.
+  QueryArgProfileList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryArgProfile'
+  QueryArgProfiles:
+    type: object
+    required:
+      - Quantity
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: Number of profiles for query argument-profile mapping for field-level encryption.
+      Items:
+        $ref: '#/definitions/QueryArgProfileList'
+        description: Number of items for query argument-profile mapping for field-level encryption.
+    description: Query argument-profile mapping for field-level encryption.
   QueryStringCacheKeys:
     type: object
     required:
@@ -3457,7 +4813,7 @@ definitions:
         description: ' A complex type that contains zero or more <code>Tag</code> elements.'
     description: ' The request to add tags to a CloudFront resource.'
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   TagValue:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -3506,12 +4862,54 @@ definitions:
       Message:
         $ref: '#/definitions/string'
     description: Processing your request would cause you to exceed the maximum number of distributions allowed.
+  TooManyDistributionsAssociatedToFieldLevelEncryptionConfig:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The maximum number of distributions have been associated with the specified configuration for field-level encryption.
   TooManyDistributionsWithLambdaAssociations:
     type: object
     properties:
       Message:
         $ref: '#/definitions/string'
     description: Processing your request would cause the maximum number of distributions with Lambda function associations per owner to be exceeded.
+  TooManyFieldLevelEncryptionConfigs:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The maximum number of configurations for field-level encryption have been created.
+  TooManyFieldLevelEncryptionContentTypeProfiles:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The maximum number of content type profiles for field-level encryption have been created.
+  TooManyFieldLevelEncryptionEncryptionEntities:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The maximum number of encryption entities for field-level encryption have been created.
+  TooManyFieldLevelEncryptionFieldPatterns:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The maximum number of field patterns for field-level encryption have been created.
+  TooManyFieldLevelEncryptionProfiles:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The maximum number of profiles for field-level encryption have been created.
+  TooManyFieldLevelEncryptionQueryArgProfiles:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: The maximum number of query arg profiles for field-level encryption have been created.
   TooManyHeadersInForwardedValues:
     type: object
     properties:
@@ -3540,6 +4938,12 @@ definitions:
       Message:
         $ref: '#/definitions/string'
     description: You cannot create more origins for the distribution.
+  TooManyPublicKeys:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/string'
+    description: 'The maximum number of public keys for field-level encryption have been created. To create a new public key, delete one of the existing keys.'
   TooManyQueryStringParameters:
     type: object
     properties:
@@ -3594,7 +4998,7 @@ definitions:
         description: ' A complex type that contains zero or more <code>Tag</code> key elements.'
     description: ' The request to remove tags from a CloudFront resource.'
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   UpdateCloudFrontOriginAccessIdentityRequest:
     type: object
     required:
@@ -3605,7 +5009,7 @@ definitions:
         description: The identity's configuration information.
     description: The request to update an origin access identity.
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   UpdateCloudFrontOriginAccessIdentityResult:
     type: object
     properties:
@@ -3623,7 +5027,7 @@ definitions:
         description: The distribution's configuration information.
     description: The request to update a distribution.
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   UpdateDistributionResult:
     type: object
     properties:
@@ -3631,6 +5035,54 @@ definitions:
         $ref: '#/definitions/Distribution'
         description: The distribution's information.
     description: The returned result of the corresponding request.
+  UpdateFieldLevelEncryptionConfigRequest:
+    type: object
+    required:
+      - FieldLevelEncryptionConfig
+    properties:
+      FieldLevelEncryptionConfig:
+        $ref: '#/definitions/FieldLevelEncryptionConfig'
+        description: 'Request to update a field-level encryption configuration. '
+    xml:
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
+  UpdateFieldLevelEncryptionConfigResult:
+    type: object
+    properties:
+      FieldLevelEncryption:
+        $ref: '#/definitions/FieldLevelEncryption'
+        description: Return the results of updating the configuration.
+  UpdateFieldLevelEncryptionProfileRequest:
+    type: object
+    required:
+      - FieldLevelEncryptionProfileConfig
+    properties:
+      FieldLevelEncryptionProfileConfig:
+        $ref: '#/definitions/FieldLevelEncryptionProfileConfig'
+        description: 'Request to update a field-level encryption profile. '
+    xml:
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
+  UpdateFieldLevelEncryptionProfileResult:
+    type: object
+    properties:
+      FieldLevelEncryptionProfile:
+        $ref: '#/definitions/FieldLevelEncryptionProfile'
+        description: Return the results of updating the profile.
+  UpdatePublicKeyRequest:
+    type: object
+    required:
+      - PublicKeyConfig
+    properties:
+      PublicKeyConfig:
+        $ref: '#/definitions/PublicKeyConfig'
+        description: Request to update public key information.
+    xml:
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
+  UpdatePublicKeyResult:
+    type: object
+    properties:
+      PublicKey:
+        $ref: '#/definitions/PublicKey'
+        description: Return the results of updating the public key.
   UpdateStreamingDistributionRequest:
     type: object
     required:
@@ -3641,7 +5093,7 @@ definitions:
         description: The streaming distribution's configuration information.
     description: The request to update a streaming distribution.
     xml:
-      namespace: 'http://cloudfront.amazonaws.com/doc/2017-03-25/'
+      namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
   UpdateStreamingDistributionResult:
     type: object
     properties:
