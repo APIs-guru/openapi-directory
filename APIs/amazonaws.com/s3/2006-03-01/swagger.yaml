@@ -2054,6 +2054,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Bucket'
+  BytesProcessed:
+    type: integer
+  BytesScanned:
+    type: integer
   CORSConfiguration:
     type: object
     required:
@@ -2217,6 +2221,11 @@ definitions:
       $ref: '#/definitions/CompletedPart'
     xml:
       wrapped: false
+  CompressionType:
+    type: string
+    enum:
+      - NONE
+      - GZIP
   Condition:
     type: object
     properties:
@@ -2242,6 +2251,9 @@ definitions:
     type: string
   ContentType:
     type: string
+  ContinuationEvent:
+    type: object
+    properties: {}
   CopyObjectOutput:
     type: object
     example:
@@ -2534,6 +2546,8 @@ definitions:
     type: string
   EmailAddress:
     type: string
+  EnableRequestProgress:
+    type: boolean
   EncodingType:
     type: string
     enum:
@@ -2561,6 +2575,9 @@ definitions:
         $ref: '#/definitions/ReplicaKmsKeyID'
         description: The id of the KMS key used to encrypt the replica object.
     description: Container for information regarding encryption based configuration for replicas.
+  EndEvent:
+    type: object
+    properties: {}
   Error:
     type: object
     properties:
@@ -3110,6 +3127,12 @@ definitions:
       CSV:
         $ref: '#/definitions/CSVInput'
         description: Describes the serialization of a CSV-encoded object.
+      CompressionType:
+        $ref: '#/definitions/CompressionType'
+        description: 'Specifies object''s compression format. Valid values: NONE, GZIP. Default Value: NONE.'
+      JSON:
+        $ref: '#/definitions/JSONInput'
+        description: Specifies JSON as object's input serialization format.
     description: Describes the serialization format of the object.
   InventoryConfiguration:
     type: object
@@ -3239,6 +3262,23 @@ definitions:
     type: boolean
   IsTruncated:
     type: boolean
+  JSONInput:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/JSONType'
+        description: 'The type of JSON. Valid values: Document, Lines.'
+  JSONOutput:
+    type: object
+    properties:
+      RecordDelimiter:
+        $ref: '#/definitions/RecordDelimiter'
+        description: The value used to separate individual records in the output.
+  JSONType:
+    type: string
+    enum:
+      - DOCUMENT
+      - LINES
   KMSContext:
     type: string
   KeyCount:
@@ -3733,6 +3773,9 @@ definitions:
     type: string
   LoggingEnabled:
     type: object
+    required:
+      - TargetBucket
+      - TargetPrefix
     properties:
       TargetBucket:
         $ref: '#/definitions/TargetBucket'
@@ -3742,6 +3785,7 @@ definitions:
       TargetPrefix:
         $ref: '#/definitions/TargetPrefix'
         description: This element lets you specify a prefix for the keys that the log files will be stored under.
+    description: Container for logging information. Presence of this element indicates that logging is enabled. Parameters TargetBucket and TargetPrefix are required in this case.
   MFA:
     type: string
   MFADelete:
@@ -3904,7 +3948,7 @@ definitions:
       StorageClass:
         $ref: '#/definitions/TransitionStorageClass'
         description: The class of storage used to store the object.
-    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA or GLACIER storage class at a specific period in the object''s lifetime.'
+    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA or GLACIER storage class at a specific period in the object''s lifetime.'
   NoncurrentVersionTransitionList:
     type: array
     items:
@@ -4018,6 +4062,8 @@ definitions:
       - STANDARD
       - REDUCED_REDUNDANCY
       - GLACIER
+      - STANDARD_IA
+      - ONEZONE_IA
   ObjectVersion:
     type: object
     properties:
@@ -4068,6 +4114,9 @@ definitions:
       CSV:
         $ref: '#/definitions/CSVOutput'
         description: Describes the serialization of CSV-encoded Select results.
+      JSON:
+        $ref: '#/definitions/JSONOutput'
+        description: Specifies JSON as request's output serialization format.
     description: Describes how results of the Select job are serialized.
   Owner:
     type: object
@@ -4124,6 +4173,21 @@ definitions:
     type: string
   Prefix:
     type: string
+  Progress:
+    type: object
+    properties:
+      BytesScanned:
+        $ref: '#/definitions/BytesScanned'
+        description: Current number of object bytes scanned.
+      BytesProcessed:
+        $ref: '#/definitions/BytesProcessed'
+        description: Current number of uncompressed object bytes processed.
+  ProgressEvent:
+    type: object
+    properties:
+      Details:
+        $ref: '#/definitions/Progress'
+        description: The Progress event details.
   Protocol:
     type: string
     enum:
@@ -4493,6 +4557,12 @@ definitions:
     type: string
   RecordDelimiter:
     type: string
+  RecordsEvent:
+    type: object
+    properties:
+      Payload:
+        $ref: '#/definitions/Body'
+        description: 'The byte array of partial, one or more result records.'
   Redirect:
     type: object
     properties:
@@ -4600,6 +4670,12 @@ definitions:
       Payer:
         $ref: '#/definitions/Payer'
         description: Specifies who pays for the download and request fees.
+  RequestProgress:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/EnableRequestProgress'
+        description: 'Specifies whether periodic QueryProgress frames should be sent. Valid values: TRUE, FALSE. Default value: FALSE.'
   ResponseCacheControl:
     type: string
   ResponseContentDisposition:
@@ -4771,6 +4847,53 @@ definitions:
     type: object
     properties: {}
     description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+  SelectObjectContentEventStream:
+    type: object
+    properties:
+      Records:
+        $ref: '#/definitions/RecordsEvent'
+        description: The Records Event.
+      Stats:
+        $ref: '#/definitions/StatsEvent'
+        description: The Stats Event.
+      Progress:
+        $ref: '#/definitions/ProgressEvent'
+        description: The Progress Event.
+      Cont:
+        $ref: '#/definitions/ContinuationEvent'
+        description: The Continuation Event.
+      End:
+        $ref: '#/definitions/EndEvent'
+        description: The End Event.
+  SelectObjectContentOutput:
+    type: object
+    properties:
+      Payload:
+        $ref: '#/definitions/SelectObjectContentEventStream'
+  SelectObjectContentRequest:
+    type: object
+    required:
+      - Expression
+      - ExpressionType
+      - InputSerialization
+      - OutputSerialization
+    properties:
+      Expression:
+        $ref: '#/definitions/Expression'
+        description: The expression that is used to query the object.
+      ExpressionType:
+        $ref: '#/definitions/ExpressionType'
+        description: 'The type of the provided expression (e.g., SQL).'
+      RequestProgress:
+        $ref: '#/definitions/RequestProgress'
+        description: Specifies if periodic request progress information should be enabled.
+      InputSerialization:
+        $ref: '#/definitions/InputSerialization'
+        description: Describes the format of the data in the object that is being queried.
+      OutputSerialization:
+        $ref: '#/definitions/OutputSerialization'
+        description: Describes the format of the data that you want Amazon S3 to return in response.
+    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, go to <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
   SelectParameters:
     type: object
     required:
@@ -4856,12 +4979,28 @@ definitions:
       - Disabled
   StartAfter:
     type: string
+  Stats:
+    type: object
+    properties:
+      BytesScanned:
+        $ref: '#/definitions/BytesScanned'
+        description: Total number of object bytes scanned.
+      BytesProcessed:
+        $ref: '#/definitions/BytesProcessed'
+        description: Total number of uncompressed object bytes processed.
+  StatsEvent:
+    type: object
+    properties:
+      Details:
+        $ref: '#/definitions/Stats'
+        description: The Stats event details.
   StorageClass:
     type: string
     enum:
       - STANDARD
       - REDUCED_REDUNDANCY
       - STANDARD_IA
+      - ONEZONE_IA
   StorageClassAnalysis:
     type: object
     properties:
@@ -5002,6 +5141,7 @@ definitions:
     enum:
       - GLACIER
       - STANDARD_IA
+      - ONEZONE_IA
   Type:
     type: string
     enum:
