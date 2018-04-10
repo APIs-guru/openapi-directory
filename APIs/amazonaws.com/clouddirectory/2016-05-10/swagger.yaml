@@ -101,7 +101,7 @@ paths:
   /amazonclouddirectory/2017-01-11/object/facets:
     put:
       operationId: AddFacetToObject
-      description: Adds a new <a>Facet</a> to an object.
+      description: Adds a new <a>Facet</a> to an object. An object can have more than one facet applied on it.
       responses:
         '200':
           description: Success
@@ -327,14 +327,10 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '489':
+        '488':
           description: NotPolicyException
           schema:
             $ref: '#/definitions/NotPolicyException'
@@ -392,18 +388,22 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
+          description: InvalidAttachmentException
+          schema:
+            $ref: '#/definitions/InvalidAttachmentException'
+        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '488':
+        '489':
           description: LinkNameAlreadyInUseException
           schema:
             $ref: '#/definitions/LinkNameAlreadyInUseException'
-        '489':
+        '490':
           description: IndexedAttributeMissingException
           schema:
             $ref: '#/definitions/IndexedAttributeMissingException'
-        '490':
+        '491':
           description: NotIndexException
           schema:
             $ref: '#/definitions/NotIndexException'
@@ -640,10 +640,6 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryAlreadyExistsException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
@@ -835,22 +831,18 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '489':
+        '488':
           description: FacetValidationException
           schema:
             $ref: '#/definitions/FacetValidationException'
-        '490':
+        '489':
           description: LinkNameAlreadyInUseException
           schema:
             $ref: '#/definitions/LinkNameAlreadyInUseException'
-        '491':
+        '490':
           description: UnsupportedIndexTypeException
           schema:
             $ref: '#/definitions/UnsupportedIndexTypeException'
@@ -1395,6 +1387,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '488':
+          description: NotNodeException
+          schema:
+            $ref: '#/definitions/NotNodeException'
       parameters:
         - name: body
           in: body
@@ -1449,14 +1445,10 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '489':
+        '488':
           description: NotPolicyException
           schema:
             $ref: '#/definitions/NotPolicyException'
@@ -1862,6 +1854,67 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateFacetRequest'
+  /amazonclouddirectory/2017-01-11/object/attributes/get:
+    post:
+      operationId: GetObjectAttributes
+      description: Retrieves attributes within a facet that are associated with an object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectAttributesResponse'
+        '480':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '481':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '482':
+          description: RetryableConflictException
+          schema:
+            $ref: '#/definitions/RetryableConflictException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
+          description: DirectoryNotEnabledException
+          schema:
+            $ref: '#/definitions/DirectoryNotEnabledException'
+        '487':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '488':
+          description: FacetValidationException
+          schema:
+            $ref: '#/definitions/FacetValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectAttributesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /amazonclouddirectory/2017-01-11/object/information:
     post:
       operationId: GetObjectInformation
@@ -2553,7 +2606,7 @@ paths:
   /amazonclouddirectory/2017-01-11/index/targets:
     post:
       operationId: ListIndex
-      description: Lists objects and indexed values attached to the index.
+      description: Lists objects attached to the specified index.
       responses:
         '200':
           description: Success
@@ -2572,26 +2625,34 @@ paths:
           schema:
             $ref: '#/definitions/RetryableConflictException'
         '483':
+          description: FacetValidationException
+          schema:
+            $ref: '#/definitions/FacetValidationException'
+        '484':
           description: ValidationException
           schema:
             $ref: '#/definitions/ValidationException'
-        '484':
+        '485':
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
-        '485':
+        '486':
           description: AccessDeniedException
           schema:
             $ref: '#/definitions/AccessDeniedException'
-        '486':
+        '487':
           description: DirectoryNotEnabledException
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
-        '487':
+        '488':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '489':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '488':
+        '490':
           description: NotIndexException
           schema:
             $ref: '#/definitions/NotIndexException'
@@ -2659,18 +2720,14 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '489':
+        '488':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
-        '490':
+        '489':
           description: FacetValidationException
           schema:
             $ref: '#/definitions/FacetValidationException'
@@ -2738,18 +2795,14 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '489':
+        '488':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
-        '490':
+        '489':
           description: NotNodeException
           schema:
             $ref: '#/definitions/NotNodeException'
@@ -2888,18 +2941,14 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '489':
+        '488':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
-        '490':
+        '489':
           description: CannotListParentOfRootException
           schema:
             $ref: '#/definitions/CannotListParentOfRootException'
@@ -3103,18 +3152,14 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
-        '489':
+        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '490':
+        '489':
           description: NotPolicyException
           schema:
             $ref: '#/definitions/NotPolicyException'
@@ -3147,7 +3192,7 @@ paths:
   /amazonclouddirectory/2017-01-11/schema/published:
     post:
       operationId: ListPublishedSchemaArns
-      description: 'Lists schema major versions for a published schema. If <code>SchemaArn</code> is provided, lists the minor version.'
+      description: 'Lists the major version families of each published schema. If a major version ARN is provided as <code>SchemaArn</code>, the minor version revisions in that family are listed instead.'
       responses:
         '200':
           description: Success
@@ -3454,14 +3499,10 @@ paths:
           schema:
             $ref: '#/definitions/DirectoryNotEnabledException'
         '487':
-          description: InvalidArnException
-          schema:
-            $ref: '#/definitions/InvalidArnException'
-        '488':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
-        '489':
+        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
@@ -4361,9 +4402,6 @@ definitions:
     required:
       - SchemaFacet
       - ObjectAttributeList
-      - ParentReference
-      - LinkName
-      - BatchReferenceName
     properties:
       SchemaFacet:
         $ref: '#/definitions/SchemaFacetList'
@@ -4426,7 +4464,6 @@ definitions:
     required:
       - ParentReference
       - LinkName
-      - BatchReferenceName
     properties:
       ParentReference:
         $ref: '#/definitions/ObjectReference'
@@ -4475,6 +4512,30 @@ definitions:
     type: object
     properties: {}
     description: Represents the output of a <a>DetachTypedLink</a> response operation.
+  BatchGetObjectAttributes:
+    type: object
+    required:
+      - ObjectReference
+      - SchemaFacet
+      - AttributeNames
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object whose attributes will be retrieved.
+      SchemaFacet:
+        $ref: '#/definitions/SchemaFacet'
+        description: Identifier for the facet whose attributes will be retrieved. See <a>SchemaFacet</a> for details.
+      AttributeNames:
+        $ref: '#/definitions/AttributeNameList'
+        description: List of attribute names whose values will be retrieved.
+    description: 'Retrieves attributes within a facet that are associated with an object inside an <a>BatchRead</a> operation. For more information, see <a>GetObjectAttributes</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchGetObjectAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/AttributeKeyAndValueList'
+        description: The attribute values that are associated with an object.
+    description: Represents the output of a <a>GetObjectAttributes</a> response operation.
   BatchGetObjectInformation:
     type: object
     required:
@@ -4808,6 +4869,9 @@ definitions:
       GetObjectInformation:
         $ref: '#/definitions/BatchGetObjectInformation'
         description: Retrieves metadata about an object.
+      GetObjectAttributes:
+        $ref: '#/definitions/BatchGetObjectAttributes'
+        description: Retrieves attributes within a facet that are associated with an object.
       ListObjectPolicies:
         $ref: '#/definitions/BatchListObjectPolicies'
         description: Returns policies attached to an object in pagination fashion.
@@ -4871,6 +4935,9 @@ definitions:
       GetObjectInformation:
         $ref: '#/definitions/BatchGetObjectInformationResponse'
         description: Retrieves metadata about an object.
+      GetObjectAttributes:
+        $ref: '#/definitions/BatchGetObjectAttributesResponse'
+        description: Retrieves attributes within a facet that are associated with an object.
       ListAttachedIndices:
         $ref: '#/definitions/BatchListAttachedIndicesResponse'
         description: Lists indices attached to an object.
@@ -4959,6 +5026,7 @@ definitions:
       - AccessDeniedException
       - InvalidAttachmentException
       - NotIndexException
+      - NotNodeException
       - IndexedAttributeMissingException
       - ObjectAlreadyDetachedException
       - NotPolicyException
@@ -5382,7 +5450,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ExceptionMessage'
-    description: An operation can only operate on a directory that is not enabled.
+    description: Operations are only permitted on enabled directories.
   DirectoryState:
     type: string
     enum:
@@ -5422,7 +5490,7 @@ definitions:
       ObjectType:
         $ref: '#/definitions/ObjectType'
         description: The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.
-    description: 'A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <a>Rule</a>s, and <code>ObjectTypes</code>.'
+    description: 'A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code> <a>Rule</a>s</code>, and <code>ObjectTypes</code>. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html">Facets</a> for more information.'
   FacetAlreadyExistsException:
     type: object
     properties:
@@ -5570,6 +5638,28 @@ definitions:
       Facet:
         $ref: '#/definitions/Facet'
         description: The <a>Facet</a> structure that is associated with the facet.
+  GetObjectAttributesRequest:
+    type: object
+    required:
+      - ObjectReference
+      - SchemaFacet
+      - AttributeNames
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object whose attributes will be retrieved.
+      SchemaFacet:
+        $ref: '#/definitions/SchemaFacet'
+        description: Identifier for the facet whose attributes will be retrieved. See <a>SchemaFacet</a> for details.
+      AttributeNames:
+        $ref: '#/definitions/AttributeNameList'
+        description: List of attribute names whose values will be retrieved.
+  GetObjectAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/AttributeKeyAndValueList'
+        description: The attributes that are associated with the object.
   GetObjectInformationRequest:
     type: object
     required:
@@ -6574,7 +6664,7 @@ definitions:
       EndValue:
         $ref: '#/definitions/TypedAttributeValue'
         description: The attribute value to terminate the range at.
-    description: A range of attribute values.
+    description: 'A range of attribute values. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters">Range Filters</a>.'
   TypedLinkAttributeDefinition:
     type: object
     required:

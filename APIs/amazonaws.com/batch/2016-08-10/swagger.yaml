@@ -698,10 +698,10 @@ definitions:
         description: Details about the container in this job attempt.
       startedAt:
         $ref: '#/definitions/Long'
-        description: The Unix time stamp for when the attempt was started (when the attempt transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).
+        description: The Unix time stamp (in seconds and milliseconds) for when the attempt was started (when the attempt transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).
       stoppedAt:
         $ref: '#/definitions/Long'
-        description: 'The Unix time stamp for when the attempt was stopped (when the attempt transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).'
+        description: 'The Unix time stamp (in seconds and milliseconds) for when the attempt was stopped (when the attempt transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).'
       statusReason:
         $ref: '#/definitions/String'
         description: 'A short, human-readable string to provide additional details about the current status of the job attempt.'
@@ -967,7 +967,7 @@ definitions:
         description: 'The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.'
       memory:
         $ref: '#/definitions/Integer'
-        description: 'The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to <code>Memory</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. You must specify at least 4 MiB of memory for a job.'
+        description: '<p>The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to <code>Memory</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. You must specify at least 4 MiB of memory for a job.</p> <note> <p>If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/memory-management.html">Memory Management</a> in the <i>AWS Batch User Guide</i>.</p> </note>'
       command:
         $ref: '#/definitions/StringList'
         description: 'The command that is passed to the container. This parameter maps to <code>Cmd</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>COMMAND</code> parameter to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. For more information, see <a href="https://docs.docker.com/engine/reference/builder/#cmd">https://docs.docker.com/engine/reference/builder/#cmd</a>.'
@@ -1383,6 +1383,9 @@ definitions:
       containerProperties:
         $ref: '#/definitions/ContainerProperties'
         description: 'An object with various properties specific to container-based jobs. '
+      timeout:
+        $ref: '#/definitions/JobTimeout'
+        description: The timeout configuration for jobs that are submitted with this job definition. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished.
     description: An object representing an AWS Batch job definition.
   JobDefinitionList:
     type: array
@@ -1436,16 +1439,16 @@ definitions:
         description: 'A short, human-readable string to provide additional details about the current status of the job. '
       createdAt:
         $ref: '#/definitions/Long'
-        description: 'The Unix time stamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.'
+        description: 'The Unix time stamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.'
       retryStrategy:
         $ref: '#/definitions/RetryStrategy'
         description: The retry strategy to use for this job if an attempt fails.
       startedAt:
         $ref: '#/definitions/Long'
-        description: The Unix time stamp for when the job was started (when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).
+        description: The Unix time stamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).
       stoppedAt:
         $ref: '#/definitions/Long'
-        description: 'The Unix time stamp for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).'
+        description: 'The Unix time stamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).'
       dependsOn:
         $ref: '#/definitions/JobDependencyList'
         description: A list of job names or IDs on which this job depends.
@@ -1461,6 +1464,9 @@ definitions:
       arrayProperties:
         $ref: '#/definitions/ArrayPropertiesDetail'
         description: 'The array properties of the job, if it is an array job.'
+      timeout:
+        $ref: '#/definitions/JobTimeout'
+        description: 'The timeout configuration for the job. '
     description: An object representing an AWS Batch job.
   JobDetailList:
     type: array
@@ -1549,6 +1555,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobSummary'
+  JobTimeout:
+    type: object
+    properties:
+      attemptDurationSeconds:
+        $ref: '#/definitions/Integer'
+        description: The time duration in seconds (measured from the job attempt's <code>startedAt</code> timestamp) after which AWS Batch terminates your jobs if they have not finished.
+    description: An object representing a job timeout configuration.
   KeyValuePair:
     type: object
     properties:
@@ -1653,7 +1666,10 @@ definitions:
         description: An object with various properties specific for container-based jobs. This parameter is required if the <code>type</code> parameter is <code>container</code>.
       retryStrategy:
         $ref: '#/definitions/RetryStrategy'
-        description: The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here.
+        description: 'The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried. '
+      timeout:
+        $ref: '#/definitions/JobTimeout'
+        description: 'The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a <a>SubmitJob</a> operation overrides the timeout configuration defined here. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
   RegisterJobDefinitionResponse:
     type: object
     required:
@@ -1728,6 +1744,9 @@ definitions:
       retryStrategy:
         $ref: '#/definitions/RetryStrategy'
         description: 'The retry strategy to use for failed jobs from this <a>SubmitJob</a> operation. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.'
+      timeout:
+        $ref: '#/definitions/JobTimeout'
+        description: 'The timeout configuration for this <a>SubmitJob</a> operation. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. This configuration overrides any timeout configuration specified in the job definition. For array jobs, child jobs have the same timeout configuration as the parent job. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
   SubmitJobResponse:
     type: object
     required:
