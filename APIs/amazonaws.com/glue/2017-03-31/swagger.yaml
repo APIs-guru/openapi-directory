@@ -348,7 +348,7 @@ paths:
   '/#BatchStopJobRun':
     post:
       operationId: BatchStopJobRun
-      description: Stops one or more job runs for a specified Job.
+      description: Stops one or more job runs for a specified job definition.
       responses:
         '200':
           description: Success
@@ -606,7 +606,7 @@ paths:
   '/#CreateJob':
     post:
       operationId: CreateJob
-      description: Creates a new job.
+      description: Creates a new job definition.
       responses:
         '200':
           description: Success
@@ -1085,7 +1085,7 @@ paths:
   '/#DeleteJob':
     post:
       operationId: DeleteJob
-      description: 'Deletes a specified job. If the job is not found, no exception is thrown.'
+      description: 'Deletes a specified job definition. If the job definition is not found, no exception is thrown.'
       responses:
         '200':
           description: Success
@@ -1918,7 +1918,7 @@ paths:
   '/#GetJobRuns':
     post:
       operationId: GetJobRuns
-      description: Retrieves metadata for all runs of a given job.
+      description: Retrieves metadata for all runs of a given job definition.
       responses:
         '200':
           description: Success
@@ -1969,7 +1969,7 @@ paths:
   '/#GetJobs':
     post:
       operationId: GetJobs
-      description: Retrieves all current jobs.
+      description: Retrieves all current job definitions.
       responses:
         '200':
           description: Success
@@ -2714,7 +2714,7 @@ paths:
   '/#StartJobRun':
     post:
       operationId: StartJobRun
-      description: Runs a job.
+      description: Starts a job run using a job definition.
       responses:
         '200':
           description: Success
@@ -3427,7 +3427,10 @@ definitions:
         description: The name of a job to be executed.
       Arguments:
         $ref: '#/definitions/GenericMap'
-        description: '<p>Arguments to be passed to the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+        description: '<p>Arguments to be passed to the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: The job run timeout in minutes. It overrides the timeout value of the job.
     description: Defines an action to be initiated by a trigger.
   ActionList:
     type: array
@@ -3615,14 +3618,14 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the Job in question.
+        description: The name of the job definition used in the job run in question.
       JobRunId:
         $ref: '#/definitions/IdString'
-        description: The JobRunId of the JobRun in question.
+        description: The JobRunId of the job run in question.
       ErrorDetail:
         $ref: '#/definitions/ErrorDetail'
         description: Specifies details about the error that was encountered.
-    description: Records an error that occurred when attempting to stop a specified JobRun.
+    description: Records an error that occurred when attempting to stop a specified job run.
   BatchStopJobRunErrorList:
     type: array
     items:
@@ -3641,10 +3644,10 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the Job in question.
+        description: The name of the job definition for which to stop job runs.
       JobRunIds:
         $ref: '#/definitions/BatchStopJobRunJobRunIdList'
-        description: A list of the JobRunIds that should be stopped for that Job.
+        description: A list of the JobRunIds that should be stopped for that job definition.
   BatchStopJobRunResponse:
     type: object
     properties:
@@ -3659,10 +3662,10 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The Name of the Job in question.
+        description: The name of the job definition used in the job run that was stopped.
       JobRunId:
         $ref: '#/definitions/IdString'
-        description: The JobRunId of the JobRun in question.
+        description: The JobRunId of the job run that was stopped.
     description: Records a successful request to stop a specified JobRun.
   BatchStopJobRunSuccessfulSubmissionList:
     type: array
@@ -3867,7 +3870,7 @@ definitions:
         description: The name of the Job to whose JobRuns this condition applies and on which this trigger waits.
       State:
         $ref: '#/definitions/JobRunState'
-        description: 'The condition state. Currently, the values supported are SUCCEEDED, STOPPED and FAILED.'
+        description: 'The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.'
     description: Defines a condition under which a trigger fires.
   ConditionList:
     type: array
@@ -4294,16 +4297,16 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: The name you assign to this job. It must be unique in your account.
+        description: The name you assign to this job definition. It must be unique in your account.
       Description:
         $ref: '#/definitions/DescriptionString'
-        description: Description of the job.
+        description: Description of the job being defined.
       LogUri:
         $ref: '#/definitions/UriString'
         description: This field is reserved for future use.
       Role:
         $ref: '#/definitions/RoleString'
-        description: The name of the IAM role associated with this job.
+        description: The name or ARN of the IAM role associated with this job.
       ExecutionProperty:
         $ref: '#/definitions/ExecutionProperty'
         description: An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.
@@ -4312,7 +4315,7 @@ definitions:
         description: The JobCommand that executes this job.
       DefaultArguments:
         $ref: '#/definitions/GenericMap'
-        description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+        description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
       Connections:
         $ref: '#/definitions/ConnectionsList'
         description: The connections used for this job.
@@ -4322,12 +4325,15 @@ definitions:
       AllocatedCapacity:
         $ref: '#/definitions/IntegerValue'
         description: 'The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: The job timeout in minutes. The default is 2880 minutes (48 hours).
   CreateJobResponse:
     type: object
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: The unique name that was provided.
+        description: The unique name that was provided for this job definition.
   CreateJsonClassifierRequest:
     type: object
     required:
@@ -4427,6 +4433,9 @@ definitions:
       Description:
         $ref: '#/definitions/DescriptionString'
         description: A description of the new trigger.
+      StartOnCreation:
+        $ref: '#/definitions/BooleanValue'
+        description: Set to true to start SCHEDULED and CONDITIONAL triggers when created. True not supported for ON_DEMAND triggers.
   CreateTriggerResponse:
     type: object
     properties:
@@ -4607,13 +4616,13 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the job to delete.
+        description: The name of the job definition to delete.
   DeleteJobResponse:
     type: object
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the job that was deleted.
+        description: The name of the job definition that was deleted.
   DeletePartitionRequest:
     type: object
     required:
@@ -4826,7 +4835,7 @@ definitions:
     properties:
       MaxConcurrentRuns:
         $ref: '#/definitions/MaxConcurrentRuns'
-        description: The maximum number of concurrent runs allowed for a job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
+        description: The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
     description: An execution property of a job.
   FieldType:
     type: string
@@ -5092,7 +5101,7 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the job to retrieve.
+        description: The name of the job definition to retrieve.
   GetJobResponse:
     type: object
     properties:
@@ -5107,7 +5116,7 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: Name of the job being run.
+        description: Name of the job definition being run.
       RunId:
         $ref: '#/definitions/IdString'
         description: The ID of the job run.
@@ -5127,7 +5136,7 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the job for which to retrieve all job runs.
+        description: The name of the job definition for which to retrieve all job runs.
       NextToken:
         $ref: '#/definitions/GenericString'
         description: 'A continuation token, if this is a continuation call.'
@@ -5157,10 +5166,10 @@ definitions:
     properties:
       Jobs:
         $ref: '#/definitions/JobList'
-        description: A list of jobs.
+        description: A list of job definitions.
       NextToken:
         $ref: '#/definitions/GenericString'
-        description: 'A continuation token, if not all jobs have yet been returned.'
+        description: 'A continuation token, if not all job definitions have yet been returned.'
   GetMappingRequest:
     type: object
     required:
@@ -5567,22 +5576,22 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: The name you assign to this job.
+        description: The name you assign to this job definition.
       Description:
         $ref: '#/definitions/DescriptionString'
-        description: Description of this job.
+        description: Description of the job being defined.
       LogUri:
         $ref: '#/definitions/UriString'
         description: This field is reserved for future use.
       Role:
         $ref: '#/definitions/RoleString'
-        description: The name of the IAM role associated with this job.
+        description: The name or ARN of the IAM role associated with this job.
       CreatedOn:
         $ref: '#/definitions/TimestampValue'
-        description: The time and date that this job specification was created.
+        description: The time and date that this job definition was created.
       LastModifiedOn:
         $ref: '#/definitions/TimestampValue'
-        description: The last point in time when this job specification was modified.
+        description: The last point in time when this job definition was modified.
       ExecutionProperty:
         $ref: '#/definitions/ExecutionProperty'
         description: An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.
@@ -5591,17 +5600,20 @@ definitions:
         description: The JobCommand that executes this job.
       DefaultArguments:
         $ref: '#/definitions/GenericMap'
-        description: '<p>The default arguments for this job, specified as name-value pairs.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+        description: '<p>The default arguments for this job, specified as name-value pairs.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
       Connections:
         $ref: '#/definitions/ConnectionsList'
         description: The connections used for this job.
       MaxRetries:
         $ref: '#/definitions/MaxRetries'
-        description: The maximum number of times to retry this job if it fails.
+        description: The maximum number of times to retry this job after a JobRun fails.
       AllocatedCapacity:
         $ref: '#/definitions/IntegerValue'
-        description: 'The number of AWS Glue data processing units (DPUs) allocated to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
-    description: Specifies a job.
+        description: 'The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: The job timeout in minutes.
+    description: Specifies a job definition.
   JobBookmarkEntry:
     type: object
     properties:
@@ -5630,7 +5642,7 @@ definitions:
       ScriptLocation:
         $ref: '#/definitions/ScriptLocationString'
         description: Specifies the S3 path to a script that executes a job (required).
-    description: Specifies code that executes a job.
+    description: Specifies code executed when a job is run.
   JobList:
     type: array
     items:
@@ -5654,7 +5666,7 @@ definitions:
         description: The name of the trigger that started this job run.
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the job being run.
+        description: The name of the job definition being used in this run.
       StartedOn:
         $ref: '#/definitions/TimestampValue'
         description: The date and time at which this job run was started.
@@ -5669,7 +5681,7 @@ definitions:
         description: The current state of the job run.
       Arguments:
         $ref: '#/definitions/GenericMap'
-        description: '<p>The job arguments associated with this run. These override equivalent default arguments set for the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+        description: '<p>The job arguments associated with this run. These override equivalent default arguments set for the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
       ErrorMessage:
         $ref: '#/definitions/ErrorString'
         description: An error message associated with this job run.
@@ -5679,6 +5691,12 @@ definitions:
       AllocatedCapacity:
         $ref: '#/definitions/IntegerValue'
         description: 'The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
+      ExecutionTime:
+        $ref: '#/definitions/IntegerValue'
+        description: The amount of time (in seconds) that the job run consumed resources.
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: The job run timeout in minutes.
     description: Contains information about a job run.
   JobRunList:
     type: array
@@ -5693,18 +5711,19 @@ definitions:
       - STOPPED
       - SUCCEEDED
       - FAILED
+      - TIMEOUT
   JobUpdate:
     type: object
     properties:
       Description:
         $ref: '#/definitions/DescriptionString'
-        description: Description of the job.
+        description: Description of the job being defined.
       LogUri:
         $ref: '#/definitions/UriString'
         description: This field is reserved for future use.
       Role:
         $ref: '#/definitions/RoleString'
-        description: The name of the IAM role associated with this job (required).
+        description: The name or ARN of the IAM role associated with this job (required).
       ExecutionProperty:
         $ref: '#/definitions/ExecutionProperty'
         description: An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.
@@ -5713,7 +5732,7 @@ definitions:
         description: The JobCommand that executes this job (required).
       DefaultArguments:
         $ref: '#/definitions/GenericMap'
-        description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+        description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
       Connections:
         $ref: '#/definitions/ConnectionsList'
         description: The connections used for this job.
@@ -5723,7 +5742,10 @@ definitions:
       AllocatedCapacity:
         $ref: '#/definitions/IntegerValue'
         description: 'The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
-    description: Specifies information used to update an existing job. Note that the previous job definition will be completely overwritten by this information.
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: The job timeout in minutes. The default is 2880 minutes (48 hours).
+    description: Specifies information used to update an existing job definition. Note that the previous job definition will be completely overwritten by this information.
   JsonClassifier:
     type: object
     required:
@@ -6042,7 +6064,7 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the predecessor job.
+        description: The name of the job definition used by the predecessor job run.
       RunId:
         $ref: '#/definitions/IdString'
         description: The job-run ID of the predecessor job run.
@@ -6056,7 +6078,7 @@ definitions:
     properties:
       Logical:
         $ref: '#/definitions/Logical'
-        description: Currently "OR" is not supported.
+        description: 'Optional field if only one condition is listed. If multiple conditions are listed, then this field is required.'
       Conditions:
         $ref: '#/definitions/ConditionList'
         description: A list of the conditions that determine when the trigger will fire.
@@ -6267,16 +6289,19 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: The name of the job to start.
+        description: The name of the job definition to use.
       JobRunId:
         $ref: '#/definitions/IdString'
         description: The ID of a previous JobRun to retry.
       Arguments:
         $ref: '#/definitions/GenericMap'
-        description: '<p>The job arguments specifically for this run. They override the equivalent default arguments set for the job itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+        description: '<p>The job arguments specifically for this run. They override the equivalent default arguments set for in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
       AllocatedCapacity:
         $ref: '#/definitions/IntegerValue'
         description: 'The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: The job run timeout in minutes. It overrides the timeout value of the job.
   StartJobRunResponse:
     type: object
     properties:
@@ -6527,6 +6552,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TableVersionError'
+  Timeout:
+    type: integer
+    minimum: 1
   Timestamp:
     type: string
     format: date-time
@@ -6769,13 +6797,13 @@ definitions:
         description: Name of the job definition to update.
       JobUpdate:
         $ref: '#/definitions/JobUpdate'
-        description: Specifies the values with which to update the job.
+        description: Specifies the values with which to update the job definition.
   UpdateJobResponse:
     type: object
     properties:
       JobName:
         $ref: '#/definitions/NameString'
-        description: Returns the name of the updated job.
+        description: Returns the name of the updated job definition.
   UpdateJsonClassifierRequest:
     type: object
     required:

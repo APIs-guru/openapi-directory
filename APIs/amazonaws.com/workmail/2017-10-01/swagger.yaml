@@ -527,6 +527,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteMailboxPermissions':
+    post:
+      operationId: DeleteMailboxPermissions
+      description: Deletes permissions granted to a user or group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteMailboxPermissionsResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: EntityStateException
+          schema:
+            $ref: '#/definitions/EntityStateException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '484':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteMailboxPermissionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteResource':
     post:
       operationId: DeleteResource
@@ -1085,6 +1130,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListMailboxPermissions':
+    post:
+      operationId: ListMailboxPermissions
+      description: Lists the mailbox permissions associated with a mailbox.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMailboxPermissionsResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '483':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListMailboxPermissionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListOrganizations':
     post:
       operationId: ListOrganizations
@@ -1253,6 +1349,51 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutMailboxPermissions':
+    post:
+      operationId: PutMailboxPermissions
+      description: Sets permissions for a user or group. This replaces any pre-existing permissions set for the entity.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutMailboxPermissionsResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: EntityStateException
+          schema:
+            $ref: '#/definitions/EntityStateException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '484':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutMailboxPermissionsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1721,6 +1862,25 @@ definitions:
   DeleteGroupResponse:
     type: object
     properties: {}
+  DeleteMailboxPermissionsRequest:
+    type: object
+    required:
+      - OrganizationId
+      - EntityId
+      - GranteeId
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier of the organization under which the entity (user or group) exists.
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the entity (user or group) for which to delete mailbox permissions.
+      GranteeId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the entity (user or group) for which to delete granted permissions.
+  DeleteMailboxPermissionsResponse:
+    type: object
+    properties: {}
   DeleteResourceRequest:
     type: object
     required:
@@ -2123,6 +2283,33 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+  ListMailboxPermissionsRequest:
+    type: object
+    required:
+      - OrganizationId
+      - EntityId
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier of the organization under which the entity (user or group) exists.
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the entity (user or group) for which to list mailbox permissions.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+  ListMailboxPermissionsResponse:
+    type: object
+    properties:
+      Permissions:
+        $ref: '#/definitions/Permissions'
+        description: One page of the entity's mailbox permissions.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
   ListOrganizationsRequest:
     type: object
     properties:
@@ -2316,6 +2503,60 @@ definitions:
     pattern: '[\u0020-\u00FF]+'
     maxLength: 256
     format: password
+  Permission:
+    type: object
+    required:
+      - GranteeId
+      - GranteeType
+      - PermissionValues
+    properties:
+      GranteeId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the entity (user or group) to which the permissions are granted.
+      GranteeType:
+        $ref: '#/definitions/MemberType'
+        description: 'The type of entity (user, group) of the entity referred to in GranteeId.'
+      PermissionValues:
+        $ref: '#/definitions/PermissionValues'
+        description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
+    description: 'Permission granted to an entity (user, group) to access a certain aspect of another entity''s mailbox.'
+  PermissionType:
+    type: string
+    enum:
+      - FULL_ACCESS
+      - SEND_AS
+      - SEND_ON_BEHALF
+  PermissionValues:
+    type: array
+    items:
+      $ref: '#/definitions/PermissionType'
+  Permissions:
+    type: array
+    items:
+      $ref: '#/definitions/Permission'
+  PutMailboxPermissionsRequest:
+    type: object
+    required:
+      - OrganizationId
+      - EntityId
+      - GranteeId
+      - PermissionValues
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier of the organization under which the entity (user or group) exists.
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the entity (user or group) for which to update mailbox permissions.
+      GranteeId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the entity (user or group) to which to grant the permissions.
+      PermissionValues:
+        $ref: '#/definitions/PermissionValues'
+        description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
+  PutMailboxPermissionsResponse:
+    type: object
+    properties: {}
   RegisterToWorkMailRequest:
     type: object
     required:

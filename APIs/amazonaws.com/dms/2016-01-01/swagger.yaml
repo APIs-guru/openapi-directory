@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: AddTagsToResource
-      description: 'Adds metadata tags to a DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.'
+      description: 'Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.'
       responses:
         '200':
           description: Success
@@ -1656,6 +1656,10 @@ paths:
           description: InvalidResourceStateFault
           schema:
             $ref: '#/definitions/InvalidResourceStateFault'
+        '482':
+          description: AccessDeniedFault
+          schema:
+            $ref: '#/definitions/AccessDeniedFault'
       parameters:
         - name: body
           in: body
@@ -1951,7 +1955,7 @@ definitions:
         description: The type of endpoint.
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.'
+        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.'
       Username:
         $ref: '#/definitions/String'
         description: The user name to be used to login to the endpoint database.
@@ -1982,12 +1986,18 @@ definitions:
       SslMode:
         $ref: '#/definitions/DmsSslModeValue'
         description: '<p>The SSL mode to use for the SSL connection.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>'
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/String'
+        description: ' The Amazon Resource Name (ARN) for the service access role you want to use to create the endpoint. '
+      ExternalTableDefinition:
+        $ref: '#/definitions/String'
+        description: 'The external table definition. '
       DynamoDbSettings:
         $ref: '#/definitions/DynamoDbSettings'
         description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the <b>Using Object Mapping to Migrate Data to DynamoDB</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html"> Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service</a>. '
       S3Settings:
         $ref: '#/definitions/S3Settings'
-        description: 'Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the <b>Extra Connection Attributes</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. '
+        description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see the <b>Extra Connection Attributes</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. '
       MongoDbSettings:
         $ref: '#/definitions/MongoDbSettings'
         description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the <b>Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. '
@@ -2018,7 +2028,7 @@ definitions:
     properties:
       SubscriptionName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the DMS event notification subscription. </p> <p>Constraints: The name must be less than 255 characters. </p>'
+        description: '<p>The name of the AWS DMS event notification subscription. </p> <p>Constraints: The name must be less than 255 characters. </p>'
       SnsTopicArn:
         $ref: '#/definitions/String'
         description: ' The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it. '
@@ -2232,7 +2242,13 @@ definitions:
         description: 'Settings for the task, such as target metadata settings. For a complete list of task settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings for AWS Database Migration Service Tasks</a>.'
       CdcStartTime:
         $ref: '#/definitions/TStamp'
-        description: The start time for the Change Data Capture (CDC) operation.
+        description: Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+      CdcStartPosition:
+        $ref: '#/definitions/String'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
+      CdcStopPosition:
+        $ref: '#/definitions/String'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: Tags to be added to the replication instance.
@@ -2732,7 +2748,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the replication instance.
       ReplicationInstanceTaskLogs:
         $ref: '#/definitions/ReplicationInstanceTaskLogsList'
-        description: 'An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes).'
+        description: 'An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes). '
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
@@ -2962,7 +2978,10 @@ definitions:
         description: The type of endpoint.
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.'
+        description: 'The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.'
+      EngineDisplayName:
+        $ref: '#/definitions/String'
+        description: 'The expanded name for the engine name. For example, if the <code>EngineName</code> parameter is "aurora," this value would be "Amazon Aurora MySQL."'
       Username:
         $ref: '#/definitions/String'
         description: The user name used to connect to the endpoint.
@@ -2993,6 +3012,12 @@ definitions:
       SslMode:
         $ref: '#/definitions/DmsSslModeValue'
         description: '<p>The SSL mode used to connect to the endpoint.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>'
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) used by the service access IAM role.
+      ExternalTableDefinition:
+        $ref: '#/definitions/String'
+        description: The external table definition.
       ExternalId:
         $ref: '#/definitions/String'
         description: ' Value returned by a call to CreateEndpoint that can be used for cross-account validation. Use it on a subsequent call to CreateEndpoint to create the endpoint with a cross-account. '
@@ -3236,7 +3261,7 @@ definitions:
         description: The type of endpoint.
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.'
+        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.'
       Username:
         $ref: '#/definitions/String'
         description: The user name to be used to login to the endpoint database.
@@ -3261,6 +3286,12 @@ definitions:
       SslMode:
         $ref: '#/definitions/DmsSslModeValue'
         description: '<p>The SSL mode to be used.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>'
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/String'
+        description: ' The Amazon Resource Name (ARN) for the service access role you want to use to modify the endpoint. '
+      ExternalTableDefinition:
+        $ref: '#/definitions/String'
+        description: The external table definition.
       DynamoDbSettings:
         $ref: '#/definitions/DynamoDbSettings'
         description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the <b>Using Object Mapping to Migrate Data to DynamoDB</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html"> Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service</a>. '
@@ -3452,7 +3483,13 @@ definitions:
         description: 'JSON file that contains settings for the task, such as target metadata settings.'
       CdcStartTime:
         $ref: '#/definitions/TStamp'
-        description: The start time for the Change Data Capture (CDC) operation.
+        description: Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+      CdcStartPosition:
+        $ref: '#/definitions/String'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
+      CdcStopPosition:
+        $ref: '#/definitions/String'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
     description: <p/>
   ModifyReplicationTaskResponse:
     type: object
@@ -3497,6 +3534,9 @@ definitions:
       AuthSource:
         $ref: '#/definitions/String'
         description: <p> The MongoDB database name. This attribute is not used when <code>authType=NO</code>. </p> <p>The default is admin.</p>
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: ' The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. '
     description: <p/>
   NestingLevelValue:
     type: string
@@ -3709,6 +3749,9 @@ definitions:
       SecondaryAvailabilityZone:
         $ref: '#/definitions/String'
         description: The availability zone of the standby replication instance in a Multi-AZ deployment.
+      FreeUntil:
+        $ref: '#/definitions/TStamp'
+        description: ' The expiration date of the free replication instance that is part of the Free DMS program. '
     description: <p/>
   ReplicationInstanceList:
     type: array
@@ -3824,6 +3867,15 @@ definitions:
       ReplicationTaskStartDate:
         $ref: '#/definitions/TStamp'
         description: The date the replication task is scheduled to start.
+      CdcStartPosition:
+        $ref: '#/definitions/String'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
+      CdcStopPosition:
+        $ref: '#/definitions/String'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
+      RecoveryCheckpoint:
+        $ref: '#/definitions/String'
+        description: Indicates the last checkpoint that occurred during a change data capture (CDC) operation. You can provide this value to the <code>CdcStartPosition</code> parameter to start a CDC operation that begins at that checkpoint.
       ReplicationTaskArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the replication task.
@@ -3915,7 +3967,7 @@ definitions:
         description: ' The Amazon Resource Name (ARN) used by the service access IAM role. '
       ExternalTableDefinition:
         $ref: '#/definitions/String'
-        description: ' '
+        description: ' The external table definition. '
       CsvRowDelimiter:
         $ref: '#/definitions/String'
         description: ' The delimiter used to separate rows in the source files. The default is a carriage return (\n). '
@@ -3995,7 +4047,13 @@ definitions:
         description: The type of replication task.
       CdcStartTime:
         $ref: '#/definitions/TStamp'
-        description: The start time for the Change Data Capture (CDC) operation.
+        description: Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+      CdcStartPosition:
+        $ref: '#/definitions/String'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
+      CdcStopPosition:
+        $ref: '#/definitions/String'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
     description: <p/>
   StartReplicationTaskResponse:
     type: object
@@ -4094,13 +4152,16 @@ definitions:
     properties:
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.'
+        description: 'The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.'
       SupportsCDC:
         $ref: '#/definitions/Boolean'
         description: Indicates if Change Data Capture (CDC) is supported.
       EndpointType:
         $ref: '#/definitions/ReplicationEndpointTypeValue'
         description: The type of endpoint.
+      EngineDisplayName:
+        $ref: '#/definitions/String'
+        description: 'The expanded name for the engine name. For example, if the <code>EngineName</code> parameter is "aurora," this value would be "Amazon Aurora MySQL."'
     description: <p/>
   SupportedEndpointTypeList:
     type: array
