@@ -6527,57 +6527,6 @@ paths:
         - Subscriptions
     parameters:
       - $ref: '#/parameters/resourceId'
-  '/subscriptions/{id}/switch':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    post:
-      description: |
-        Switch a subscription
-      parameters:
-        - description: SubscriptionSwitch resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/SubscriptionSwitch'
-      responses:
-        '201':
-          description: Subscription was switched
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/Subscription'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Switch a subscription
-      tags:
-        - Subscriptions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $subscriptionSwitchForm = new Rebilly\Entities\SubscriptionSwitch();
-            $subscriptionSwitchForm->setPlanId('newPlanId');
-            $subscriptionSwitchForm->setPolicy($subscriptionSwitchForm::NOW);
-
-            try {
-                $subscription = $client->subscriptions()->switchTo('subscriptionId', $subscriptionSwitchForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
   /tax-categories:
     get:
       description: |
@@ -7232,79 +7181,6 @@ definitions:
     required:
       - name
     type: object
-  AcquirerName:
-    description: Acquirer name
-    enum:
-      - Alipay
-      - AIB
-      - AstroPay Card
-      - Ipay Options
-      - B+S
-      - Bank of America
-      - Bank of Moscow
-      - Bank of Rebilly
-      - Bank One
-      - Beanstream
-      - BMO Harris Bank
-      - Borgun
-      - BraintreePayments
-      - Catalunya Caixa
-      - Chase
-      - ChinaUnionPay
-      - CIM
-      - Credorax
-      - Elavon
-      - EMS
-      - Fifth Third Bank
-      - First Data Buypass
-      - First Data Nashville
-      - First Data North
-      - First Data Omaha
-      - Flexepin
-      - Forte
-      - FundSend
-      - GlobalCollect
-      - Global East
-      - Gpaysafe
-      - Heartland
-      - HSBC
-      - iCheque
-      - Ilixium
-      - Intuit
-      - Jeton
-      - Masapay
-      - Merrick
-      - Mission Valley Bank
-      - Moneris
-      - NATWEST
-      - NMI
-      - OchaPay
-      - Other
-      - Panda Bank
-      - PayPal
-      - Payr
-      - Payvision
-      - Peoples Trust Company
-      - Privatbank
-      - RBC
-      - RBS WorldPay
-      - RealTime
-      - RebillyProcessor
-      - SMSVoucher
-      - State Bank of Mauritius
-      - Stripe
-      - TBI
-      - TrustPay
-      - TSYS
-      - UPayCard
-      - Vantiv
-      - VoicePay
-      - WeChat Pay
-      - Wells Fargo
-      - Wing Hang Bank
-      - Wirecard
-      - WorldPay
-    type: string
   AmexVPC:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -7962,96 +7838,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Chase Gateway config
-  CheckoutPage:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      allowCustomCustomerId:
-        description: If to enable your own customer ID in requests
-        type: boolean
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Checkout page created time
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Checkout page identifier string
-        readOnly: true
-      isActive:
-        description: If checkout page active
-        type: boolean
-      name:
-        description: Checkout page name
-        type: string
-      planId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Checkout page plan ID
-        type: string
-      redirectTimeout:
-        description: Checkout page redirect timeout
-        type: integer
-      redirectUrl:
-        description: Checkout page url
-        type: string
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Checkout page updated time
-      uriPath:
-        description: 'Your own custom uri path for this Checkout Page. It will be appended to checkout url https://checkout.rebilly.com/checkout/<uriPath>'
-        maxLength: 50
-        type: string
-      websiteId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Checkout page website ID
-        type: string
-    required:
-      - name
-      - planId
-      - websiteId
-      - uriPath
-    type: object
-  ChinaUnionPay:
-    allOf:
-      - $ref: '#/definitions/GatewayAccount'
-      - properties:
-          gatewayConfig:
-            properties:
-              accountId:
-                description: China Union Pay Gateway account ID
-                type: string
-              goods:
-                description: China Union Pay Gateway goods
-                type: string
-              md5key:
-                description: China Union Pay Gateway md5key
-                format: password
-                type: string
-              mobilePay:
-                description: China Union Pay Gateway mobile pay param
-                type: string
-              partyId:
-                description: China Union Pay Gateway party ID
-                type: string
-            required:
-              - accountId
-              - partyId
-              - goods
-              - md5key
-              - mobilePay
-            type: object
-        required:
-          - gatewayConfig
-        type: object
-    description: China Union Pay Gateway config
   CommonScheduleInstruction:
     description: The calculation instruction of scheduled time
     discriminator: method
@@ -9229,7 +9015,83 @@ definitions:
           type: string
         type: array
       acquirerName:
-        $ref: '#/definitions/AcquirerName'
+        description: The acquirer name
+        enum:
+          - Alipay
+          - AIB
+          - ApcoPay
+          - AstroPay Card
+          - Ipay Options
+          - B+S
+          - Bambora
+          - Bank of America
+          - Bank of Moscow
+          - Bank of Rebilly
+          - Bank One
+          - BMO Harris Bank
+          - Borgun
+          - BraintreePayments
+          - Catalunya Caixa
+          - Chase
+          - ChinaUnionPay
+          - CIM
+          - Credorax
+          - Cryptonator
+          - Elavon
+          - EMS
+          - Fifth Third Bank
+          - First Data Buypass
+          - First Data Nashville
+          - First Data North
+          - First Data Omaha
+          - FinTecSystems
+          - Flexepin
+          - Forte
+          - FundSend
+          - Global East
+          - Gpaysafe
+          - Heartland
+          - HSBC
+          - iCheque
+          - Ilixium
+          - Ingenico
+          - Intuit
+          - Jeton
+          - Masapay
+          - Merrick
+          - Mission Valley Bank
+          - Moneris
+          - NATWEST
+          - NMI
+          - OchaPay
+          - Other
+          - Panda Bank
+          - PayPal
+          - Payr
+          - Payvision
+          - Peoples Trust Company
+          - Privatbank
+          - QQPay
+          - RBC
+          - RBS WorldPay
+          - RealTime
+          - RebillyProcessor
+          - Skrill
+          - SMSVoucher
+          - State Bank of Mauritius
+          - Stripe
+          - TBI
+          - TrustPay
+          - TSYS
+          - UPayCard
+          - Vantiv
+          - VoicePay
+          - WeChat Pay
+          - Wells Fargo
+          - Wing Hang Bank
+          - Wirecard
+          - WorldPay
+        type: string
       amountRestrictions:
         description: Set restrictions on allowed amounts per currency
         items:
@@ -9267,7 +9129,68 @@ definitions:
           type: string
         type: array
       gatewayName:
-        $ref: '#/definitions/GatewayName'
+        description: The payment gateway name
+        enum:
+          - A1Gateway
+          - AmexVPC
+          - ApcoPay
+          - AstroPay
+          - AstroPayCard
+          - AuthorizeNet
+          - Bambora
+          - BraintreePayments
+          - Cashflows
+          - Cayan
+          - Chase
+          - Credorax
+          - Cryptonator
+          - DataCash
+          - Dengi
+          - eMerchantPay
+          - Flexepin
+          - FinTecSystems
+          - FundSend
+          - Forte
+          - GET
+          - GlobalOnePay
+          - Gpaysafe
+          - iCheque
+          - Ilixium
+          - Ingenico
+          - Intuit
+          - IpayOptions
+          - JetPay
+          - Jeton
+          - Moneris
+          - MtaPay
+          - NMI
+          - OchaPay
+          - PandaGateway
+          - Payeezy
+          - Payflow
+          - PayPal
+          - Payr
+          - Paysafe
+          - Payvision
+          - Plugnpay
+          - Realex
+          - RealTime
+          - RebillyProcessor
+          - Redsys
+          - RPN
+          - Sagepay
+          - Skrill
+          - SMSVoucher
+          - StaticGateway
+          - Stripe
+          - UPayCard
+          - USAePay
+          - VantivLitle
+          - vegaaH
+          - Walpay
+          - Wirecard
+          - Worldpay
+        type: string
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -9361,64 +9284,6 @@ definitions:
     required:
       - method
     type: object
-  GatewayName:
-    description: The gateway name
-    enum:
-      - A1Gateway
-      - AmexVPC
-      - AstroPayCard
-      - AuthorizeNet
-      - Beanstream
-      - BraintreePayments
-      - Cashflows
-      - Cayan
-      - Chase
-      - ChinaUnionPay
-      - Credorax
-      - DataCash
-      - Dengi
-      - eMerchantPay
-      - Flexepin
-      - FundSend
-      - Forte
-      - GET
-      - GlobalCollect
-      - GlobalOne
-      - Gpaysafe
-      - iCheque
-      - Ilixium
-      - Intuit
-      - IpayOptions
-      - JetPay
-      - Jeton
-      - Moneris
-      - NMI
-      - OchaPay
-      - Optimal
-      - PandaGateway
-      - Payeezy
-      - Payflow
-      - PayPal
-      - Payr
-      - Payvision
-      - Plugnpay
-      - Realex
-      - RealTime
-      - RebillyProcessor
-      - Redsys
-      - RPN
-      - Sagepay
-      - SMSVoucher
-      - StaticGateway
-      - Stripe
-      - UPayCard
-      - USAePay
-      - VantivLitle
-      - vegaaH
-      - Walpay
-      - Wirecard
-      - Worldpay
-    type: string
   GlobalCollect:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -10167,6 +10032,32 @@ definitions:
       - online-bank-transfer
       - phone
       - voucher
+      - QQPay
+      - miscellaneous1
+      - miscellaneous2
+      - miscellaneous3
+      - miscellaneous4
+      - miscellaneous5
+      - miscellaneous6
+      - miscellaneous7
+      - miscellaneous8
+      - miscellaneous9
+      - miscellaneous10
+      - miscellaneous11
+      - miscellaneous12
+      - miscellaneous13
+      - miscellaneous14
+      - miscellaneous15
+      - miscellaneous16
+      - miscellaneous17
+      - miscellaneous18
+      - miscellaneous19
+      - miscellaneous20
+      - miscellaneous21
+      - miscellaneous22
+      - miscellaneous23
+      - miscellaneous24
+      - miscellaneous25
     type: string
   Moneris:
     allOf:
@@ -10201,6 +10092,39 @@ definitions:
       - CardinalCommerce
       - Other
     type: string
+  MtaPay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              accountId:
+                description: MTA Pay Gateway account ID
+                type: string
+              goods:
+                description: MTA Pay Gateway goods
+                type: string
+              md5key:
+                description: MTA Pay Gateway md5key
+                format: password
+                type: string
+              mobilePay:
+                description: MTA Pay Gateway mobile pay param
+                type: string
+              partyId:
+                description: MTA Pay Gateway party ID
+                type: string
+            required:
+              - accountId
+              - partyId
+              - goods
+              - md5key
+              - mobilePay
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: MTA Pay Gateway config
   NMI:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -12370,30 +12294,6 @@ definitions:
     required:
       - rel
     type: object
-  SubscriptionSwitch:
-    properties:
-      planId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The plan identifier string
-      policy:
-        description: Switch policy
-        enum:
-          - at-next-renewal
-          - now-with-prorata-credit
-          - now
-        type: string
-      quantity:
-        description: Quantity for each subscription. Default value to 1
-        type: integer
-      websiteId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The website's ID
-    required:
-      - planId
-      - policy
-    type: object
   SubscriptionTracking:
     description: Tracking subscription log
     properties:
@@ -12640,9 +12540,86 @@ definitions:
         readOnly: true
         type: array
       acquirerName:
+        allOf:
+          - description: The acquirer name
+            enum:
+              - Alipay
+              - AIB
+              - ApcoPay
+              - AstroPay Card
+              - Ipay Options
+              - B+S
+              - Bambora
+              - Bank of America
+              - Bank of Moscow
+              - Bank of Rebilly
+              - Bank One
+              - BMO Harris Bank
+              - Borgun
+              - BraintreePayments
+              - Catalunya Caixa
+              - Chase
+              - ChinaUnionPay
+              - CIM
+              - Credorax
+              - Cryptonator
+              - Elavon
+              - EMS
+              - Fifth Third Bank
+              - First Data Buypass
+              - First Data Nashville
+              - First Data North
+              - First Data Omaha
+              - FinTecSystems
+              - Flexepin
+              - Forte
+              - FundSend
+              - Global East
+              - Gpaysafe
+              - Heartland
+              - HSBC
+              - iCheque
+              - Ilixium
+              - Ingenico
+              - Intuit
+              - Jeton
+              - Masapay
+              - Merrick
+              - Mission Valley Bank
+              - Moneris
+              - NATWEST
+              - NMI
+              - OchaPay
+              - Other
+              - Panda Bank
+              - PayPal
+              - Payr
+              - Payvision
+              - Peoples Trust Company
+              - Privatbank
+              - QQPay
+              - RBC
+              - RBS WorldPay
+              - RealTime
+              - RebillyProcessor
+              - Skrill
+              - SMSVoucher
+              - State Bank of Mauritius
+              - Stripe
+              - TBI
+              - TrustPay
+              - TSYS
+              - UPayCard
+              - Vantiv
+              - VoicePay
+              - WeChat Pay
+              - Wells Fargo
+              - Wing Hang Bank
+              - Wirecard
+              - WorldPay
+            type: string
         description: 'Acquirer name, available only when transaction use gateway, else null'
         readOnly: true
-        type: string
       amount:
         description: The transactions's amount
         format: double
@@ -12778,14 +12755,80 @@ definitions:
         description: The transactions's Gateway Account ID
         readOnly: true
       gatewayName:
+        allOf:
+          - description: The payment gateway name
+            enum:
+              - A1Gateway
+              - AmexVPC
+              - ApcoPay
+              - AstroPay
+              - AstroPayCard
+              - AuthorizeNet
+              - Bambora
+              - BraintreePayments
+              - Cashflows
+              - Cayan
+              - Chase
+              - Credorax
+              - Cryptonator
+              - DataCash
+              - Dengi
+              - eMerchantPay
+              - Flexepin
+              - FinTecSystems
+              - FundSend
+              - Forte
+              - GET
+              - GlobalOnePay
+              - Gpaysafe
+              - iCheque
+              - Ilixium
+              - Ingenico
+              - Intuit
+              - IpayOptions
+              - JetPay
+              - Jeton
+              - Moneris
+              - MtaPay
+              - NMI
+              - OchaPay
+              - PandaGateway
+              - Payeezy
+              - Payflow
+              - PayPal
+              - Payr
+              - Paysafe
+              - Payvision
+              - Plugnpay
+              - Realex
+              - RealTime
+              - RebillyProcessor
+              - Redsys
+              - RPN
+              - Sagepay
+              - Skrill
+              - SMSVoucher
+              - StaticGateway
+              - Stripe
+              - UPayCard
+              - USAePay
+              - VantivLitle
+              - vegaaH
+              - Walpay
+              - Wirecard
+              - Worldpay
+            type: string
         description: 'Payment Gateway name, available only when transaction use gateway, else null'
         readOnly: true
-        type: string
       gatewayTransactionId:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The gateway's transaction ID
         readOnly: true
+      hadDiscrepancy:
+        description: True if the transaction has been updated due to a disprepancy with its source of truth
+        readOnly: true
+        type: boolean
       has3ds:
         readOnly: true
         type: boolean
@@ -12830,6 +12873,12 @@ definitions:
         readOnly: true
       paymentInstrument:
         $ref: '#/definitions/PaymentInstrument'
+      planIds:
+        description: The plan IDs related to transaction's subscription(s)
+        items:
+          - $ref: '#/definitions/ResourceId'
+        readOnly: true
+        type: array
       processedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -12896,7 +12945,7 @@ definitions:
         readOnly: true
         type: string
       subscriptionIds:
-        description: The subscription IDs related to transaction
+        description: The subscription IDs related to transaction's invoice(s)
         items:
           - $ref: '#/definitions/ResourceId'
         readOnly: true
@@ -13922,9 +13971,146 @@ definitions:
             items:
               properties:
                 acquirerName:
-                  $ref: '#/definitions/AcquirerName'
+                  description: The acquirer name
+                  enum:
+                    - Alipay
+                    - AIB
+                    - ApcoPay
+                    - AstroPay Card
+                    - Ipay Options
+                    - B+S
+                    - Bambora
+                    - Bank of America
+                    - Bank of Moscow
+                    - Bank of Rebilly
+                    - Bank One
+                    - BMO Harris Bank
+                    - Borgun
+                    - BraintreePayments
+                    - Catalunya Caixa
+                    - Chase
+                    - ChinaUnionPay
+                    - CIM
+                    - Credorax
+                    - Cryptonator
+                    - Elavon
+                    - EMS
+                    - Fifth Third Bank
+                    - First Data Buypass
+                    - First Data Nashville
+                    - First Data North
+                    - First Data Omaha
+                    - FinTecSystems
+                    - Flexepin
+                    - Forte
+                    - FundSend
+                    - Global East
+                    - Gpaysafe
+                    - Heartland
+                    - HSBC
+                    - iCheque
+                    - Ilixium
+                    - Ingenico
+                    - Intuit
+                    - Jeton
+                    - Masapay
+                    - Merrick
+                    - Mission Valley Bank
+                    - Moneris
+                    - NATWEST
+                    - NMI
+                    - OchaPay
+                    - Other
+                    - Panda Bank
+                    - PayPal
+                    - Payr
+                    - Payvision
+                    - Peoples Trust Company
+                    - Privatbank
+                    - QQPay
+                    - RBC
+                    - RBS WorldPay
+                    - RealTime
+                    - RebillyProcessor
+                    - Skrill
+                    - SMSVoucher
+                    - State Bank of Mauritius
+                    - Stripe
+                    - TBI
+                    - TrustPay
+                    - TSYS
+                    - UPayCard
+                    - Vantiv
+                    - VoicePay
+                    - WeChat Pay
+                    - Wells Fargo
+                    - Wing Hang Bank
+                    - Wirecard
+                    - WorldPay
+                  type: string
                 gatewayName:
-                  $ref: '#/definitions/GatewayName'
+                  description: The payment gateway name
+                  enum:
+                    - A1Gateway
+                    - AmexVPC
+                    - ApcoPay
+                    - AstroPay
+                    - AstroPayCard
+                    - AuthorizeNet
+                    - Bambora
+                    - BraintreePayments
+                    - Cashflows
+                    - Cayan
+                    - Chase
+                    - Credorax
+                    - Cryptonator
+                    - DataCash
+                    - Dengi
+                    - eMerchantPay
+                    - Flexepin
+                    - FinTecSystems
+                    - FundSend
+                    - Forte
+                    - GET
+                    - GlobalOnePay
+                    - Gpaysafe
+                    - iCheque
+                    - Ilixium
+                    - Ingenico
+                    - Intuit
+                    - IpayOptions
+                    - JetPay
+                    - Jeton
+                    - Moneris
+                    - MtaPay
+                    - NMI
+                    - OchaPay
+                    - PandaGateway
+                    - Payeezy
+                    - Payflow
+                    - PayPal
+                    - Payr
+                    - Paysafe
+                    - Payvision
+                    - Plugnpay
+                    - Realex
+                    - RealTime
+                    - RebillyProcessor
+                    - Redsys
+                    - RPN
+                    - Sagepay
+                    - Skrill
+                    - SMSVoucher
+                    - StaticGateway
+                    - Stripe
+                    - UPayCard
+                    - USAePay
+                    - VantivLitle
+                    - vegaaH
+                    - Walpay
+                    - Wirecard
+                    - Worldpay
+                  type: string
                 weight:
                   type: integer
               required:

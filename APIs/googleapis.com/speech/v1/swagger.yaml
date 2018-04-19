@@ -397,7 +397,7 @@ definitions:
     properties:
       results:
         description: |-
-          *Output-only* Sequential list of transcription results corresponding to
+          Output only. Sequential list of transcription results corresponding to
           sequential portions of audio.
         items:
           $ref: '#/definitions/SpeechRecognitionResult'
@@ -425,7 +425,7 @@ definitions:
     properties:
       confidence:
         description: |-
-          *Output-only* The confidence estimate between 0.0 and 1.0. A higher number
+          Output only. The confidence estimate between 0.0 and 1.0. A higher number
           indicates an estimated greater likelihood that the recognized words are
           correct. This field is set only for the top alternative of a non-streaming
           result or, of a streaming result where `is_final=true`.
@@ -435,10 +435,10 @@ definitions:
         format: float
         type: number
       transcript:
-        description: '*Output-only* Transcript text representing the words that the user spoke.'
+        description: Output only. Transcript text representing the words that the user spoke.
         type: string
       words:
-        description: '*Output-only* A list of word-specific information for each recognized word.'
+        description: Output only. A list of word-specific information for each recognized word.
         items:
           $ref: '#/definitions/WordInfo'
         type: array
@@ -448,7 +448,7 @@ definitions:
     properties:
       alternatives:
         description: |-
-          *Output-only* May contain one or more recognition hypotheses (up to the
+          Output only. May contain one or more recognition hypotheses (up to the
           maximum specified in `max_alternatives`).
           These alternatives are ordered in terms of accuracy, with the top (first)
           alternative being the most probable, as ranked by the recognizer.
@@ -536,7 +536,7 @@ definitions:
     properties:
       endTime:
         description: |-
-          *Output-only* Time offset relative to the beginning of the audio,
+          Output only. Time offset relative to the beginning of the audio,
           and corresponding to the end of the spoken word.
           This field is only set if `enable_word_time_offsets=true` and only
           in the top hypothesis.
@@ -546,7 +546,7 @@ definitions:
         type: string
       startTime:
         description: |-
-          *Output-only* Time offset relative to the beginning of the audio,
+          Output only. Time offset relative to the beginning of the audio,
           and corresponding to the start of the spoken word.
           This field is only set if `enable_word_time_offsets=true` and only
           in the top hypothesis.
@@ -555,6 +555,6 @@ definitions:
         format: google-duration
         type: string
       word:
-        description: '*Output-only* The word corresponding to this set of information.'
+        description: Output only. The word corresponding to this set of information.
         type: string
     type: object

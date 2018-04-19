@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Allows developers to run automated tests for their mobile applications on Google infrastructure.
-  title: Google Cloud Testing
+  title: Cloud Testing
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -916,7 +916,9 @@ definitions:
         format: int32
         type: integer
       month:
-        description: Month of year. Must be from 1 to 12.
+        description: |-
+          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+          month.
         format: int32
         type: integer
       year:

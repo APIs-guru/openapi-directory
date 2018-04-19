@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Google Service Control provides control plane functionality to managed services, such as logging, monitoring, and status checks.'
-  title: Google Service Control
+  title: Service Control
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -1234,7 +1234,9 @@ definitions:
               - “organizations/<organization-id>”
         type: string
       resources:
-        description: The resources that are involved in the operation.
+        description: |-
+          The resources that are involved in the operation.
+          The maximum supported number of entries in this field is 100.
         items:
           $ref: '#/definitions/ResourceInfo'
         type: array

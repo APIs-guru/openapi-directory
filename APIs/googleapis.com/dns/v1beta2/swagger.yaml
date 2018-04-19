@@ -272,7 +272,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Update an existing ManagedZone. This method supports patch semantics.
+      description: Apply a partial update to an existing ManagedZone.
       operationId: dns.managedZones.patch
       parameters:
         - in: body

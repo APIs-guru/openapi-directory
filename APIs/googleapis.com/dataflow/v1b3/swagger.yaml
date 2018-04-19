@@ -1862,6 +1862,11 @@ definitions:
           num_workers value.
         format: google-datetime
         type: string
+      workerPool:
+        description: |-
+          A short and friendly name for the worker pool this event refers to,
+          populated from the value of PoolStageRelation::user_pool_name.
+        type: string
     type: object
   AutoscalingSettings:
     description: Settings for WorkerPool autoscaling.
@@ -3150,6 +3155,11 @@ definitions:
         type: boolean
       distribution:
         description: A struct value describing properties of a distribution of numeric values.
+      gauge:
+        description: |-
+          A struct value describing properties of a Gauge.
+          Metrics of gauge type show the value of a metric across time, and is
+          aggregated based on the newest value.
       internal:
         description: |-
           Worker-computed aggregate value for internal use by the Dataflow

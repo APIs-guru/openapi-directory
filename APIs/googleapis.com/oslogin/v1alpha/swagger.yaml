@@ -324,7 +324,7 @@ definitions:
     properties: {}
     type: object
   ImportSshPublicKeyResponse:
-    description: A response message for importing an SSH public key.
+    description: A response message from importing an SSH public key.
     properties:
       loginProfile:
         $ref: '#/definitions/LoginProfile'
@@ -364,6 +364,13 @@ definitions:
         type: string
       homeDirectory:
         description: The path to the home directory for this account.
+        type: string
+      operatingSystemType:
+        description: The operating system type where this account applies.
+        enum:
+          - OPERATING_SYSTEM_TYPE_UNSPECIFIED
+          - LINUX
+          - WINDOWS
         type: string
       primary:
         description: Only one POSIX account can be marked as primary.

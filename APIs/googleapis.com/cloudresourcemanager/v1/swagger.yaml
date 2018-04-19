@@ -21,7 +21,7 @@ info:
       format: google
       url: 'https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v1'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
 externalDocs:
@@ -652,9 +652,11 @@ paths:
         must be granted the owner role using the Cloud Platform Console and must
         explicitly accept the invitation.
 
-        + Invitations to grant the owner role cannot be sent using
-        `setIamPolicy()`;
-        they must be sent only using the Cloud Platform Console.
+        + You can only grant ownership of a project to a member by using the
+        GCP Console. Inviting a member will deliver an invitation email that
+        they must accept. An invitation email is not generated if you are
+        granting a role other than owner, or if both the member you are inviting
+        and the project are part of your organization.
 
         + Membership changes that leave the project without any owners that have
         accepted the Terms of Service (ToS) will be rejected.
@@ -829,7 +831,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Clears a `Policy` from a resource.
-      operationId: cloudresourcemanager.projects.clearOrgPolicy
+      operationId: cloudresourcemanager.organizations.clearOrgPolicy
       parameters:
         - in: body
           name: body
@@ -850,7 +852,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getEffectiveOrgPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -871,7 +873,7 @@ paths:
         Gets the effective `Policy` on a resource. This is the result of merging
         `Policies` in the resource hierarchy. The returned `Policy` will not have
         an `etag`set because it is a computed `Policy` across multiple resources.
-      operationId: cloudresourcemanager.projects.getEffectiveOrgPolicy
+      operationId: cloudresourcemanager.organizations.getEffectiveOrgPolicy
       parameters:
         - in: body
           name: body
@@ -894,7 +896,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -967,7 +969,7 @@ paths:
         values including `POLICY_TYPE_NOT_SET` for the `policy_type oneof`. The
         `etag` value can be used with `SetOrgPolicy()` to create or update a
         `Policy` during read-modify-write.
-      operationId: cloudresourcemanager.projects.getOrgPolicy
+      operationId: cloudresourcemanager.organizations.getOrgPolicy
       parameters:
         - in: body
           name: body
@@ -990,7 +992,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:listAvailableOrgPolicyConstraints':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1008,7 +1010,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists `Constraints` that could be applied on the specified resource.
-      operationId: cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
+      operationId: cloudresourcemanager.organizations.listAvailableOrgPolicyConstraints
       parameters:
         - in: body
           name: body
@@ -1031,7 +1033,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:listOrgPolicies':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1049,7 +1051,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists all the `Policies` set for a particular resource.
-      operationId: cloudresourcemanager.projects.listOrgPolicies
+      operationId: cloudresourcemanager.organizations.listOrgPolicies
       parameters:
         - in: body
           name: body
@@ -1072,7 +1074,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1142,7 +1144,7 @@ paths:
 
         Not supplying an `etag` on the request `Policy` results in an unconditional
         write of the `Policy`.
-      operationId: cloudresourcemanager.projects.setOrgPolicy
+      operationId: cloudresourcemanager.organizations.setOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1163,7 +1165,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1275,9 +1277,7 @@ definitions:
       bar@gmail.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
-        description: |-
-          The configuration for logging of each type of permission.
-          Next ID: 4
+        description: The configuration for logging of each type of permission.
         items:
           $ref: '#/definitions/AuditLogConfig'
         type: array
@@ -1561,7 +1561,7 @@ definitions:
         description: |-
           Ancestors are ordered from bottom to top of the resource hierarchy. The
           first ancestor is the project itself, followed by the project's parent,
-          etc.
+          etc..
         items:
           $ref: '#/definitions/Ancestor'
         type: array
@@ -2044,12 +2044,12 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
       `members` to a `role`, where the members can be user accounts, Google groups,
       Google domains, and service accounts. A `role` is a named list of permissions
       defined by IAM.
 
-      **Example**
+      **JSON Example**
 
           {
             "bindings": [
@@ -2059,7 +2059,7 @@ definitions:
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
                 ]
               },
               {
@@ -2068,6 +2068,20 @@ definitions:
               }
             ]
           }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).

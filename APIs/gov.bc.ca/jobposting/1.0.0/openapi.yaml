@@ -1,4 +1,4 @@
-swagger: '2.0'
+openapi: '3.0.0'
 schemes:
   - https
 host: workbcjobs.api.gov.bc.ca
@@ -12,9 +12,9 @@ info:
   x-logo:
     url: 'https://avatars1.githubusercontent.com/u/916280?v=3&s=200'
   x-origin:
-    - format: swagger
+    - format: openapi
       url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/jobposting/jobposting.json'
-      version: '2.0'
+      version: '3.0'
   x-providerName: gov.bc.ca
   x-serviceName: jobposting
 produces:
@@ -23,8 +23,8 @@ paths:
   /Industries:
     get:
       description: |
-        The Industries endpoint returns all the Industries and related sub industries 
-        defined in WorkBC's Job Board. The response includes the id and caption for 
+        The Industries endpoint returns all the Industries and related sub industries
+        defined in WorkBC's Job Board. The response includes the id and caption for
         each industry and each sub industry.
       responses:
         '200':

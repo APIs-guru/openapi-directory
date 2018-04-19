@@ -1915,7 +1915,9 @@ definitions:
         format: int32
         type: integer
       month:
-        description: Month of year. Must be from 1 to 12.
+        description: |-
+          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+          month.
         format: int32
         type: integer
       year:
@@ -2859,6 +2861,11 @@ definitions:
   User:
     description: A resource representing a user of the Partners platform.
     properties:
+      afaInfoShared:
+        description: |-
+          Whether or not the user has opted to share their Academy for Ads info with
+          Google Partners.
+        type: boolean
       availableAdwordsManagerAccounts:
         description: |-
           This is the list of AdWords Manager Accounts the user has edit access to.

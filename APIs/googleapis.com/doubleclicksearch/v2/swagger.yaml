@@ -717,7 +717,9 @@ definitions:
     description: A request object used to create a DoubleClick Search report.
     properties:
       columns:
-        description: 'The columns to include in the report. This includes both DoubleClick Search columns and saved columns. For DoubleClick Search columns, only the columnName parameter is required. For saved columns only the savedColumnName parameter is required. Both columnName and savedColumnName cannot be set in the same stanza.'
+        description: |-
+          The columns to include in the report. This includes both DoubleClick Search columns and saved columns. For DoubleClick Search columns, only the columnName parameter is required. For saved columns only the savedColumnName parameter is required. Both columnName and savedColumnName cannot be set in the same stanza.
+          The maximum number of columns per request is 300.
         items:
           $ref: '#/definitions/ReportApiColumnSpec'
         type: array
@@ -725,7 +727,9 @@ definitions:
         description: Format that the report should be returned in. Currently csv or tsv is supported.
         type: string
       filters:
-        description: A list of filters to be applied to the report.
+        description: |-
+          A list of filters to be applied to the report.
+          The maximum number of filters per request is 300.
         items:
           properties:
             column:
@@ -735,7 +739,9 @@ definitions:
               description: Operator to use in the filter. See the filter reference for a list of available operators.
               type: string
             values:
-              description: A list of values to filter the column value against.
+              description: |-
+                A list of values to filter the column value against.
+                The maximum number of filter values per request is 300.
               items: {}
               type: array
           type: object
@@ -755,7 +761,9 @@ definitions:
         minimum: 1000000
         type: integer
       orderBy:
-        description: Synchronous report only. A list of columns and directions defining sorting to be performed on the report rows.
+        description: |-
+          Synchronous report only. A list of columns and directions defining sorting to be performed on the report rows.
+          The maximum number of orderings per request is 300.
         items:
           properties:
             column:

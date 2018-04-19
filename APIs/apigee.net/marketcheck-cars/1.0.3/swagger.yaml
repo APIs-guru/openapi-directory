@@ -885,6 +885,18 @@ paths:
           name: seller_type
           required: false
           type: string
+        - description: Indicates whether car has had only one owner or not
+          format: string
+          in: query
+          name: carfax_1_owner
+          required: false
+          type: string
+        - description: Indicates whether car has had any accidents or not
+          format: string
+          in: query
+          name: carfax_clean_title
+          required: false
+          type: string
         - description: Car year - 1980 onwards. Valid filter values are those that our Search facets API returns for unique years. You can pass in multiple year values comma separated.
           in: query
           name: year

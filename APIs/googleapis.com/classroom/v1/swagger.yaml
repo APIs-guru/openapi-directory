@@ -2115,129 +2115,6 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v1/courses/{courseId}/topics':
-    get:
-      description: |-
-        Returns the list of topics that the requester is permitted to view.
-
-        This method returns the following error codes:
-
-        * `PERMISSION_DENIED` if the requesting user is not permitted to access
-        the requested course or for access errors.
-        * `INVALID_ARGUMENT` if the request is malformed.
-        * `NOT_FOUND` if the requested course does not exist.
-      operationId: classroom.courses.topics.list
-      parameters:
-        - description: |-
-            Identifier of the course.
-            This identifier can be either the Classroom-assigned identifier or an
-            alias.
-          in: path
-          name: courseId
-          required: true
-          type: string
-        - description: |-
-            Maximum number of items to return. Zero or unspecified indicates that the
-            server may assign a maximum.
-
-            The server may return fewer than the specified number of results.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            nextPageToken
-            value returned from a previous
-            list call,
-            indicating that the subsequent page of results should be returned.
-
-            The list request
-            must be otherwise identical to the one that resulted in this token.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListTopicResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/classroom.coursework.me'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/classroom.coursework.students'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
-      tags:
-        - courses
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v1/courses/{courseId}/topics/{id}':
-    get:
-      description: |-
-        Returns a topic.
-
-        This method returns the following error codes:
-
-        * `PERMISSION_DENIED` if the requesting user is not permitted to access the
-        requested course or topic, or for access errors.
-        * `INVALID_ARGUMENT` if the request is malformed.
-        * `NOT_FOUND` if the requested course or topic does not exist.
-      operationId: classroom.courses.topics.get
-      parameters:
-        - description: Identifier of the course.
-          in: path
-          name: courseId
-          required: true
-          type: string
-        - description: Identifier of the topic.
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Topic'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/classroom.coursework.me'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/classroom.coursework.students'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
-      tags:
-        - courses
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   '/v1/courses/{id}':
     delete:
       description: |-
@@ -3502,7 +3379,7 @@ definitions:
         description: |-
           Name of the course.
           For example, "10th Grade Biology".
-          The name is required. It must be between 1 and 750 characters and a valid
+          The name is required. It must be between 1 and 50 characters and a valid
           UTF-8 string.
         type: string
       ownerId:
@@ -3803,7 +3680,9 @@ definitions:
         format: int32
         type: integer
       month:
-        description: Month of year. Must be from 1 to 12.
+        description: |-
+          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+          month.
         format: int32
         type: integer
       year:
@@ -4216,20 +4095,6 @@ definitions:
         description: Teachers who match the list request.
         items:
           $ref: '#/definitions/Teacher'
-        type: array
-    type: object
-  ListTopicResponse:
-    description: Response when listing topics.
-    properties:
-      nextPageToken:
-        description: |-
-          Token identifying the next page of results to return. If empty, no further
-          results are available.
-        type: string
-      topic:
-        description: Topic items that match the request.
-        items:
-          $ref: '#/definitions/Topic'
         type: array
     type: object
   Material:
@@ -4674,36 +4539,6 @@ definitions:
           allow the value 60 if it allows leap-seconds.
         format: int32
         type: integer
-    type: object
-  Topic:
-    description: Topic created by a teacher for the course
-    properties:
-      courseId:
-        description: |-
-          Identifier of the course.
-
-          Read-only.
-        type: string
-      name:
-        description: |-
-          The name of the topic, generated by the user.
-          Leading and trailing whitespaces, if any, will be trimmed. Also, multiple
-          consecutive whitespaces will be collapsed into one inside the name.
-          Topic names are case sensitive, and must be no longer than 100 characters.
-        type: string
-      topicId:
-        description: |-
-          Unique identifier for the topic.
-
-          Read-only.
-        type: string
-      updateTime:
-        description: |-
-          The time the topic was last updated by the system.
-
-          Read-only.
-        format: google-datetime
-        type: string
     type: object
   TurnInStudentSubmissionRequest:
     description: Request to turn in a student submission.

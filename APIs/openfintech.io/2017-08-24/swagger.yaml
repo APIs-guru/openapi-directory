@@ -61,6 +61,20 @@ parameters:
     in: query
     name: 'page[size]'
     type: integer
+  'second_filter[status]':
+    collectionFormat: csv
+    description: Filtration by status.
+    in: query
+    items:
+      enum:
+        - active
+        - liquidated
+        - problem
+        - deleted
+      type: string
+    name: 'filter[status]'
+    type: array
+    uniqueItems: true
 tags:
   - description: Information about countries
     name: Countries
@@ -74,6 +88,8 @@ tags:
     name: Banks
   - description: Information about payment methods
     name: Payment methods
+  - description: Information about deposit methods
+    name: Deposit methods
   - description: Information about payment providers
     name: Payment providers
   - description: Information about merchant industries
@@ -91,19 +107,7 @@ paths:
           name: 'filter[sort_code]'
           type: string
         - $ref: '#/parameters/filter[code]'
-        - collectionFormat: csv
-          description: Filtration by status.
-          in: query
-          items:
-            enum:
-              - active
-              - liquidated
-              - problem
-              - deleted
-            type: string
-          name: 'filter[status]'
-          type: array
-          uniqueItems: true
+        - $ref: '#/parameters/second_filter[status]'
         - collectionFormat: csv
           description: |
             Sort params:<br>
@@ -376,6 +380,93 @@ paths:
       summary: Currency by ID
       tags:
         - Currencies
+  /deposit-methods:
+    get:
+      description: |
+        Returns list of deposit methods. Each object contains information about deposit method such as name and category, also related link to deposit method issuer (which processing it).
+      parameters:
+        - $ref: '#/parameters/page[number]'
+        - $ref: '#/parameters/page[size]'
+        - description: 'Full text search with id, name, code, category.'
+          in: query
+          name: 'filter[search]'
+          type: string
+        - $ref: '#/parameters/filter[name]'
+        - $ref: '#/parameters/filter[code]'
+        - description: Filtering by processor_name.
+          in: query
+          name: 'filter[processor_name]'
+          type: string
+        - collectionFormat: csv
+          description: Filtering by category.
+          in: query
+          items:
+            enum:
+              - card
+              - alternative
+              - wallet
+              - credit_cards
+              - debit_cards
+              - prepaid_cards
+              - check
+              - invoice
+              - bank_transaction
+              - direct_debits
+              - mobile_carrier_billing
+              - cash_on_delivery
+            type: string
+          name: 'filter[category]'
+          type: array
+          uniqueItems: true
+        - collectionFormat: csv
+          description: |
+            Sort params:<br>
+
+            | ASC | DESC |
+            |-----|------|
+            | name | -name |
+            | code | -code |
+            | processor_name | -processor_name |
+            | category | -category |
+          in: query
+          items:
+            enum:
+              - name
+              - '-name'
+              - code
+              - '-code'
+              - processor_name
+              - '-processor_name'
+              - category
+              - '-category'
+            type: string
+          name: sort
+          type: array
+          uniqueItems: true
+      responses:
+        '200':
+          description: List of deposit methods.
+          schema:
+            $ref: '#/definitions/DepositMethodsResponse'
+      summary: List of deposit methods
+      tags:
+        - Deposit methods
+  '/deposit-methods/{id}':
+    get:
+      description: |
+        Returns deposit method with specific ID.
+      parameters:
+        - $ref: '#/parameters/id'
+      responses:
+        '200':
+          description: Deposit method information.
+          schema:
+            $ref: '#/definitions/DepositMethodResponse'
+        '404':
+          description: deposit method ID is not valid.
+      summary: Deposit method by ID
+      tags:
+        - Deposit methods
   /exchangers:
     get:
       description: |
@@ -744,6 +835,27 @@ paths:
       tags:
         - Payment providers
 definitions:
+  ActiveInCountriesRelationship:
+    description: Active in countries
+    properties:
+      data:
+        items:
+          properties:
+            id:
+              example: UA
+              type: string
+            type:
+              example: countries
+              type: string
+          type: object
+        type: array
+      links:
+        properties:
+          related:
+            example: /v1/deposit-methods/dm_fyBYShF7DuOXzeiR/active_in_countries
+            type: string
+        type: object
+    type: object
   Bank:
     properties:
       attributes:
@@ -1173,6 +1285,91 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/Currency'
+    type: object
+  DepositMethod:
+    properties:
+      attributes:
+        $ref: '#/definitions/DepositMethodAttributes'
+      id:
+        description: Deposit-methods`s ID
+        example: paym_8NBX4V5fAEmqr3PO
+        type: string
+      links:
+        $ref: '#/definitions/SelfLinks'
+      relationships:
+        $ref: '#/definitions/DepositMethodRelationships'
+      type:
+        example: deposit-methods
+        type: string
+    type: object
+  DepositMethodAttributes:
+    description: Array of Deposit-method attributes
+    properties:
+      category:
+        example: wallet
+        type: string
+      code:
+        description: Deposit-method`s code
+        example: justpayewallet
+        type: string
+      name:
+        description: Deposit-method`s name
+        example: TOT Just Pay
+        type: string
+      processor_name:
+        description: Deposit-method`s processor
+        example: TOT Just Pay
+        type: string
+    type: object
+  DepositMethodProcessorData:
+    description: Processor`s Data.
+    properties:
+      data:
+        items:
+          properties:
+            id:
+              description: Processor`s id.
+              example: ppr_zkqg6xJKCIoWjBB9
+              type: string
+            type:
+              description: Processor`s type.
+              example: organizations
+              type: string
+          type: object
+        type: array
+      links:
+        properties:
+          related:
+            example: /v1/payment-methods/pm_QcW80uZ5XefiQYwp/payment-processor
+            type: string
+        type: object
+    type: object
+  DepositMethodRelationships:
+    properties:
+      actiove_in_countries:
+        $ref: '#/definitions/ActiveInCountriesRelationship'
+      currencies:
+        $ref: '#/definitions/CurrencyParent'
+      payment_processor:
+        $ref: '#/definitions/DepositMethodProcessorData'
+      supported_psps:
+        $ref: '#/definitions/SupportedPspsRelationship'
+    type: object
+  DepositMethodResponse:
+    properties:
+      data:
+        $ref: '#/definitions/DepositMethod'
+    type: object
+  DepositMethodsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/DepositMethod'
+        type: array
+      links:
+        $ref: '#/definitions/ResponseLinks'
+      meta:
+        $ref: '#/definitions/ResponseMeta'
     type: object
   Exchanger:
     properties:
@@ -1779,4 +1976,25 @@ definitions:
       self:
         example: '/v1/{path}/{id}'
         type: string
+    type: object
+  SupportedPspsRelationship:
+    description: Supported psps
+    properties:
+      data:
+        items:
+          properties:
+            id:
+              example: psp_xhaKgsBvEUZzWGIP
+              type: string
+            type:
+              example: payment-providers
+              type: string
+          type: object
+        type: array
+      links:
+        properties:
+          related:
+            example: /v1/deposit-methods/dm_fyBYShF7DuOXzeiR/supported_psps
+            type: string
+        type: object
     type: object

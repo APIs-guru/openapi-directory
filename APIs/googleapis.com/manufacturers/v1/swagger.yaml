@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: content-manufacturers.googleapis.com
+host: manufacturers.googleapis.com
 basePath: /
 info:
   contact:
@@ -120,6 +120,24 @@ paths:
       description: Lists all the products in a Manufacturer Center account.
       operationId: manufacturers.accounts.products.list
       parameters:
+        - collectionFormat: multi
+          description: |-
+            The information to be included in the response. Only sections listed here
+            will be returned.
+
+            If this parameter is not specified, ATTRIBUTES and ISSUES are returned.
+            This behavior is temporary and will be removed once all clients are ready
+            or at the latest end of July 2018. After that no sections will be returned.
+          in: query
+          items:
+            enum:
+              - UNKNOWN
+              - ATTRIBUTES
+              - ISSUES
+              - DESTINATION_STATUSES
+            type: string
+          name: include
+          type: array
         - description: |-
             Maximum number of product statuses to return in the response, used for
             paging.
@@ -214,6 +232,24 @@ paths:
         to appear.
       operationId: manufacturers.accounts.products.get
       parameters:
+        - collectionFormat: multi
+          description: |-
+            The information to be included in the response. Only sections listed here
+            will be returned.
+
+            If this parameter is not specified, ATTRIBUTES and ISSUES are returned.
+            This behavior is temporary and will be removed once all clients are ready
+            or at the latest end of July 2018. After that no sections will be returned.
+          in: query
+          items:
+            enum:
+              - UNKNOWN
+              - ATTRIBUTES
+              - ISSUES
+              - DESTINATION_STATUSES
+            type: string
+          name: include
+          type: array
         - description: |-
             Name in the format `{target_country}:{content_language}:{product_id}`.
 
@@ -369,6 +405,11 @@ definitions:
           The disclosure date of the product. For more information, see
           https://support.google.com/manufacturers/answer/6124116#disclosure.
         type: string
+      excludedDestination:
+        description: A list of excluded destinations.
+        items:
+          type: string
+        type: array
       featureDescription:
         description: |-
           The rich format description of the product. For more information, see
@@ -403,6 +444,11 @@ definitions:
         description: |-
           The image of the product. For more information, see
           https://support.google.com/manufacturers/answer/6124116#image.
+      includedDestination:
+        description: A list of included destinations.
+        items:
+          type: string
+        type: array
       itemGroupId:
         description: |-
           The item group id of the product. For more information, see
@@ -532,6 +578,21 @@ definitions:
         format: int64
         type: string
     type: object
+  DestinationStatus:
+    description: The destination status.
+    properties:
+      destination:
+        description: The name of the destination.
+        type: string
+      status:
+        description: The status of the destination.
+        enum:
+          - UNKNOWN
+          - ACTIVE
+          - PENDING
+          - DISAPPROVED
+        type: string
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -610,6 +671,16 @@ definitions:
       description:
         description: Longer description of the issue focused on how to resolve it.
         type: string
+      destination:
+        description: The destination this issue applies to.
+        type: string
+      resolution:
+        description: What needs to happen to resolve the issue.
+        enum:
+          - RESOLUTION_UNSPECIFIED
+          - USER_ACTION
+          - PENDING_PROCESSING
+        type: string
       severity:
         description: The severity of the issue.
         enum:
@@ -621,6 +692,9 @@ definitions:
       timestamp:
         description: The timestamp when this issue appeared.
         format: google-datetime
+        type: string
+      title:
+        description: Short title describing the nature of the issue.
         type: string
       type:
         description: |-
@@ -652,12 +726,19 @@ definitions:
   Product:
     description: Product data.
     properties:
+      attributes:
+        $ref: '#/definitions/Attributes'
+        description: Attributes of the product uploaded to the Manufacturer Center.
       contentLanguage:
         description: |-
           The content language of the product as a two-letter ISO 639-1 language code
           (for example, en).
-          @OutputOnly
         type: string
+      destinationStatuses:
+        description: The status of the destinations.
+        items:
+          $ref: '#/definitions/DestinationStatus'
+        type: array
       finalAttributes:
         $ref: '#/definitions/Attributes'
         description: |-
@@ -665,11 +746,11 @@ definitions:
           overriding the uploaded attributes with the manually provided and deleted
           attributes. Google systems only process, evaluate, review, and/or use final
           attributes.
-          @OutputOnly
+
+          This field is deprecated and will be removed end of July 2018. Please use
+          attributes.
       issues:
-        description: |-
-          A server-generated list of issues associated with the product.
-          @OutputOnly
+        description: A server-generated list of issues associated with the product.
         items:
           $ref: '#/definitions/Issue'
         type: array
@@ -677,7 +758,9 @@ definitions:
         description: |-
           Names of the attributes of the product deleted manually via the
           Manufacturer Center UI.
-          @OutputOnly
+
+          This field is deprecated and will be removed end of July 2018. Please use
+          attributes.
         items:
           type: string
         type: array
@@ -685,7 +768,9 @@ definitions:
         $ref: '#/definitions/Attributes'
         description: |-
           Attributes of the product provided manually via the Manufacturer Center UI.
-          @OutputOnly
+
+          This field is deprecated and will be removed end of July 2018. Please use
+          attributes.
       name:
         description: |-
           Name in the format `{target_country}:{content_language}:{product_id}`.
@@ -698,32 +783,31 @@ definitions:
 
           `product_id`     -   The ID of the product. For more information, see
                                https://support.google.com/manufacturers/answer/6124116#id.
-          @OutputOnly
         type: string
       parent:
         description: |-
           Parent ID in the format `accounts/{account_id}`.
 
           `account_id` - The ID of the Manufacturer Center account.
-          @OutputOnly
         type: string
       productId:
         description: |-
           The ID of the product. For more information, see
           https://support.google.com/manufacturers/answer/6124116#id.
-          @OutputOnly
         type: string
       targetCountry:
         description: |-
           The target country of the product as a CLDR territory code (for example,
           US).
-          @OutputOnly
         type: string
       uploadedAttributes:
         $ref: '#/definitions/Attributes'
         description: |-
           Attributes of the product uploaded via the Manufacturer Center API or via
           feeds.
+
+          This field is deprecated and will be removed end of July 2018. Please use
+          attributes.
     type: object
   ProductDetail:
     description: |-

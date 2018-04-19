@@ -104,10 +104,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/Company'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -201,10 +201,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/CompanyContact'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -262,10 +262,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/CreditNote'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -406,10 +406,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ExpenseDetails'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -464,10 +464,10 @@ paths:
           required: true
           type: integer
       responses:
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -557,10 +557,10 @@ paths:
           required: true
           type: integer
       responses:
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -644,10 +644,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/Payment'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -736,10 +736,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ProjectDetails'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -906,10 +906,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/TaskDetails'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -1090,10 +1090,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/TimesheetDetails'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -1110,10 +1110,17 @@ paths:
           name: Roles
           required: false
           type: string
-        - in: query
+        - description: Optional boolean (true/false) to filter to only show current authenticated user
+          in: query
           name: CurrentUserOnly
           required: false
           type: boolean
+        - description: Optionally filter by Company ID
+          format: int32
+          in: query
+          name: CompanyIDFK
+          required: false
+          type: integer
       responses:
         '200':
           description: OK
@@ -1895,6 +1902,9 @@ definitions:
       CurrencyCode:
         description: Expects ISO Standard 3 character currency code. If left blank the currency will default to account's currency in general setting. For existing companies this field will be ignored and the invoice will use the currency of the customer. For new customers if the currency is not specified then account currency will be used otherwise the specified currency will be used.
         type: string
+      CustomerPONumber:
+        description: Plain UTF8 text. 100 characters max
+        type: string
       DateIssued:
         description: If not specified it will use today's date. The date should be specified as local date.
         format: date-time
@@ -1960,6 +1970,10 @@ definitions:
       InventoryItemName:
         description: If not specified then Inventory item ID must be specified. If specified and not matched to any existing inventory items then a new inventory item will be created. Max 200 characters.
         type: string
+      ProjectIDFK:
+        description: 'Optional. Project ID of an Avaza Project that belongs to this customer, so line item is attributed to that Project for reporting.'
+        format: int32
+        type: integer
       Quantity:
         description: The quantity for the line item
         format: double

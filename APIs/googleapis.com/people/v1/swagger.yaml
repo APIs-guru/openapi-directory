@@ -420,39 +420,11 @@ paths:
           name: maxMembers
           type: integer
         - description: |-
-            **Required.** A field mask to restrict which fields on the person are
-            returned. Multiple fields can be specified by separating them with commas.
-            Valid values are:
-
-            * addresses
-            * ageRanges
-            * biographies
-            * birthdays
-            * braggingRights
-            * coverPhotos
-            * emailAddresses
-            * events
-            * genders
-            * imClients
-            * interests
-            * locales
-            * memberships
-            * metadata
-            * names
-            * nicknames
-            * occupations
-            * organizations
-            * phoneNumbers
-            * photos
-            * relations
-            * relationshipInterests
-            * relationshipStatuses
-            * residences
-            * skills
-            * taglines
-            * urls
+            **Required.** Comma-separated list of person fields to be included in the
+            response. Each path should start with `person.`: for example,
+            `person.names` or `person.photos`.
           in: query
-          name: personFields
+          name: requestMask.includeField
           type: string
         - description: The resource name of the contact group to get.
           in: path
@@ -1053,7 +1025,9 @@ definitions:
         format: int32
         type: integer
       month:
-        description: Month of year. Must be from 1 to 12.
+        description: |-
+          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+          month.
         format: int32
         type: integer
       year:

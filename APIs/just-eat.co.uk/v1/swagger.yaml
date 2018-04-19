@@ -372,6 +372,9 @@ definitions:
       DeliveryDurationInSeconds:
         format: int32
         type: integer
+      EstimatedWaitForDeliveryPickupInSeconds:
+        format: int32
+        type: integer
       Restaurant:
         $ref: '#/definitions/DeliveryableRestaurantLocationInfo'
     type: object
@@ -392,7 +395,7 @@ definitions:
         Latitude: 51.51641
         Longitude: -0.103198
         Speed: 4.12
-      TimeStampWithUtcOffset: '2018-03-27T12:39:29.2696275+00:00'
+      TimeStampWithUtcOffset: '2018-04-19T18:00:17.5357233+00:00'
     properties:
       Location:
         $ref: '#/definitions/Location'

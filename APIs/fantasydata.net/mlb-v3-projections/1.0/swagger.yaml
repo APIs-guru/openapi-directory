@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/DfsSlatesByDate/{date}':
     get:
-      operationId: DFS Slates by Date
+      operationId: 5a05bfbb35491a1818cb7dcc
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -62,9 +62,10 @@ paths:
             items:
               $ref: '#/definitions/DfsSlate'
             type: array
+      summary: DFS Slates by Date
   '/{format}/PlayerGameProjectionStatsByDate/{date}':
     get:
-      operationId: 'Projected Player Game Stats by Date (w/ Injuries, Lineups, DFS Salaries)'
+      operationId: 594401b235491a0cc050ffa5
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -89,9 +90,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
+      summary: 'Projected Player Game Stats by Date (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}':
     get:
-      operationId: 'Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)'
+      operationId: 594401b235491a0cc050ffa6
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -123,9 +125,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
+      summary: 'Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerSeasonProjectionStats/{season}':
     get:
-      operationId: Projected Player Season Stats (with ADP)
+      operationId: 594401b235491a0cc050ffa7
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -150,6 +153,7 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeasonProjection'
             type: array
+      summary: Projected Player Season Stats (with ADP)
 definitions:
   DfsSlate:
     properties:
@@ -187,6 +191,8 @@ definitions:
         type: integer
       OperatorGameID:
         type: integer
+      RemovedByOperator:
+        type: boolean
       SlateGameID:
         type: integer
       SlateID:
@@ -211,6 +217,8 @@ definitions:
         type: integer
       PlayerID:
         type: integer
+      RemovedByOperator:
+        type: boolean
       SlateGameID:
         type: integer
       SlateID:

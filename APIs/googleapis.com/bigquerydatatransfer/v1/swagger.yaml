@@ -561,7 +561,7 @@ paths:
             $ref: '#/definitions/TransferConfig'
         - description: |-
             The BigQuery project id where the transfer configuration should be created.
-            Must be in the format /projects/{project_id}/locations/{location_id}
+            Must be in the format projects/{project_id}/locations/{location_id}
             If specified location and location of the destination bigquery dataset
             do not match - the request will fail.
           in: path
@@ -776,7 +776,7 @@ definitions:
         format: google-duration
         type: string
       name:
-        description: Data source resource name.
+        description: Output only. Data source resource name.
         type: string
       parameters:
         description: Data source parameters.
@@ -1119,7 +1119,6 @@ definitions:
       When a new transfer configuration is created, the specified
       `destination_dataset_id` is created when needed and shared with the
       appropriate data source service account.
-      Next id: 21
     properties:
       dataRefreshWindowDays:
         description: |-
@@ -1225,9 +1224,7 @@ definitions:
         type: string
     type: object
   TransferRun:
-    description: |-
-      Represents a data transfer run.
-      Next id: 27
+    description: Represents a data transfer run.
     properties:
       dataSourceId:
         description: Output only. Data source id.

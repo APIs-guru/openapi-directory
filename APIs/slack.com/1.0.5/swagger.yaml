@@ -6,7 +6,7 @@ basePath: /api
 info:
   description: 'One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.'
   title: Slack
-  version: 1.0.4
+  version: 1.0.5
   x-apisguru-categories:
     - collaboration
     - messaging
@@ -1922,13 +1922,19 @@ paths:
               ts: '1401383885.000061'
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response of chat.delete method
             properties:
+              channel:
+                $ref: '#/definitions/defs_channel'
               ok:
                 $ref: '#/definitions/defs_ok_true'
+              ts:
+                $ref: '#/definitions/defs_ts'
             required:
               - ok
-            title: Default success template
+              - channel
+              - ts
+            title: chat.delete success schema
             type: object
         default:
           description: Typical error response
@@ -1936,16 +1942,7 @@ paths:
             application/json:
               error: message_not_found
               ok: false
-          schema:
-            additionalProperties: true
-            description: Verbose schema not yet ready for this method.
-            properties:
-              ok:
-                $ref: '#/definitions/defs_ok_true'
-            required:
-              - ok
-            title: Default error template
-            type: object
+          schema: {}
       security:
         - slackAuth:
             - 'chat:write:user'
@@ -2444,7 +2441,44 @@ paths:
             application/json:
               error: cant_update_message
               ok: false
-          schema: {}
+          schema:
+            additionalProperties: true
+            description: Schema for error response chat.update method
+            properties:
+              error:
+                enum:
+                  - message_not_found
+                  - cant_update_message
+                  - channel_not_found
+                  - edit_window_closed
+                  - msg_too_long
+                  - too_many_attachments
+                  - rate_limited
+                  - no_text
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - token_revoked
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - request_timeout
+                  - invalid_json
+                  - json_not_object
+                  - upgrade_required
+                  - fatal_error
+                type: string
+              ok:
+                $ref: '#/definitions/defs_ok_false'
+            required:
+              - ok
+              - error
+            title: chat.update error schema
+            type: object
       security:
         - slackAuth:
             - 'chat:write:user'
@@ -4193,8 +4227,6 @@ paths:
                         - reply_count
                         - replies
                         - subscribed
-                        - last_read
-                        - unread_count
                         - ts
                       type: object
                     - additionalProperties: true
@@ -10197,13 +10229,16 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response from team.info method
             properties:
               ok:
                 $ref: '#/definitions/defs_ok_true'
+              team:
+                $ref: '#/definitions/objs_team'
             required:
               - ok
-            title: Default success template
+              - team
+            title: team.info schema
             type: object
         default:
           description: Typical error response
@@ -10213,13 +10248,33 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from team.info method
             properties:
+              error:
+                enum:
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - token_revokedno_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                  - fatal_error
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: team.info error schema
             type: object
       security:
         - slackAuth:
@@ -10978,6 +11033,142 @@ paths:
       tags:
         - usergroups.users
         - usergroups
+  /users.conversations:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: List conversations the calling user may access.
+      externalDocs:
+        description: API method documentation
+        url: 'https://api.slack.com/methods/users.conversations'
+      operationId: users_conversations
+      parameters:
+        - description: 'Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request''s `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.'
+          in: query
+          name: cursor
+          type: string
+        - description: 'Authentication token. Requires scope: `conversations:read`'
+          in: query
+          name: token
+          type: string
+        - description: 'The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn''t been reached. Must be an integer no larger than 1000.'
+          in: query
+          name: limit
+          type: integer
+        - description: Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership.
+          in: query
+          name: user
+          type: string
+        - description: Set to `true` to exclude archived channels from the list
+          in: query
+          name: exclude_archived
+          type: boolean
+        - description: 'Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`'
+          in: query
+          name: types
+          type: string
+      responses:
+        '200':
+          description: Typical success response with only public channels. Note how `num_members` and `is_member` are not returned like typical `conversations` objects.
+          examples:
+            application/json:
+              channels:
+                - created: 1449252889
+                  creator: U012A3CDE
+                  id: C012AB3CD
+                  is_archived: false
+                  is_channel: true
+                  is_ext_shared: false
+                  is_general: true
+                  is_group: false
+                  is_im: false
+                  is_mpim: false
+                  is_org_shared: false
+                  is_pending_ext_shared: false
+                  is_private: false
+                  is_shared: false
+                  name: general
+                  name_normalized: general
+                  pending_shared: []
+                  previous_names: []
+                  purpose:
+                    creator: ''
+                    last_set: 0
+                    value: This channel is for team-wide communication and announcements. All team members are in this channel.
+                  topic:
+                    creator: ''
+                    last_set: 0
+                    value: Company-wide announcements and work-based matters
+                  unlinked: 0
+                - created: 1449252889
+                  creator: U061F7AUR
+                  id: C061EG9T2
+                  is_archived: false
+                  is_channel: true
+                  is_ext_shared: false
+                  is_general: false
+                  is_group: false
+                  is_im: false
+                  is_mpim: false
+                  is_org_shared: false
+                  is_pending_ext_shared: false
+                  is_private: false
+                  is_shared: false
+                  name: random
+                  name_normalized: random
+                  pending_shared: []
+                  previous_names: []
+                  purpose:
+                    creator: ''
+                    last_set: 0
+                    value: 'A place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber you''d prefer to keep out of more focused work-related channels.'
+                  topic:
+                    creator: ''
+                    last_set: 0
+                    value: Non-work banter and water cooler conversation
+                  unlinked: 0
+              ok: true
+              response_metadata:
+                next_cursor: dGVhbTpDMDYxRkE1UEI=
+          schema:
+            additionalProperties: true
+            description: Schema for successful response from users.conversations method. Returned conversation objects do not include `num_members` or `is_member`
+            properties:
+              channels:
+                items:
+                  $ref: '#/definitions/objs_conversation'
+                type: array
+                uniqueItems: true
+              ok:
+                $ref: '#/definitions/defs_ok_true'
+              response_metadata:
+                additionalProperties: true
+                properties:
+                  next_cursor:
+                    type: string
+                required:
+                  - next_cursor
+                type: object
+            required:
+              - ok
+              - channels
+            title: conversations.list success schema
+            type: object
+        default:
+          description: Typical error response
+          examples:
+            application/json:
+              error: invalid_auth
+              ok: false
+          schema: {}
+      security:
+        - slackAuth:
+            - 'channels:read'
+            - 'groups:read'
+            - 'im:read'
+            - 'mpim:read'
+      tags:
+        - users
   /users.deletePhoto:
     post:
       consumes:
@@ -11215,7 +11406,7 @@ paths:
                   status_emoji: ':books:'
                   status_text: Print is dead
                   team: T012AB3C4
-                real_name: episod
+                real_name: Egon Spengler
                 team_id: T012AB3C4
                 tz: America/Los_Angeles
                 tz_label: Pacific Daylight Time
@@ -11501,7 +11692,7 @@ paths:
                   status_emoji: ':books:'
                   status_text: Print is dead
                   team: T012AB3C4
-                real_name: episod
+                real_name: Egon Spengler
                 team_id: T012AB3C4
                 tz: America/Los_Angeles
                 tz_label: Pacific Daylight Time
@@ -12265,7 +12456,6 @@ definitions:
           - is_archived
           - is_channel
           - is_general
-          - is_member
           - is_mpim
           - is_group
           - is_org_shared
@@ -12544,6 +12734,13 @@ definitions:
         type: array
       size:
         type: integer
+      thumb_1024:
+        format: uri
+        type: string
+      thumb_1024_h:
+        type: integer
+      thumb_1024_w:
+        type: integer
       thumb_160:
         format: uri
         type: string
@@ -12554,12 +12751,40 @@ definitions:
         type: integer
       thumb_360_w:
         type: integer
+      thumb_480:
+        format: uri
+        type: string
+      thumb_480_h:
+        type: integer
+      thumb_480_w:
+        type: integer
       thumb_64:
         format: uri
         type: string
+      thumb_720:
+        format: uri
+        type: string
+      thumb_720_h:
+        type: integer
+      thumb_720_w:
+        type: integer
       thumb_80:
         format: uri
         type: string
+      thumb_800:
+        format: uri
+        type: string
+      thumb_800_h:
+        type: integer
+      thumb_800_w:
+        type: integer
+      thumb_960:
+        format: uri
+        type: string
+      thumb_960_h:
+        type: integer
+      thumb_960_w:
+        type: integer
       timestamp:
         type: integer
       title:
@@ -12747,7 +12972,16 @@ definitions:
         type: array
         uniqueItems: true
       bot_id:
-        $ref: '#/definitions/defs_bot_id'
+        items:
+          - $ref: '#/definitions/defs_bot_id'
+          - title: Nil bot_id set when display_as_bot is false
+            type: 'null'
+      comment:
+        $ref: '#/definitions/objs_comment'
+      display_as_bot:
+        type: boolean
+      file:
+        $ref: '#/definitions/objs_file'
       icons:
         additionalProperties: true
         properties:
@@ -12756,6 +12990,8 @@ definitions:
         type: object
       inviter:
         $ref: '#/definitions/defs_user_id'
+      is_intro:
+        type: boolean
       last_read:
         $ref: '#/definitions/defs_ts'
       name:
@@ -12810,6 +13046,8 @@ definitions:
         type: string
       unread_count:
         type: integer
+      upload:
+        type: boolean
       user:
         $ref: '#/definitions/defs_user_id'
       user_profile:
@@ -12850,7 +13088,7 @@ definitions:
         type: string
       users:
         items:
-          $ref: '#/definitions/objs_user'
+          $ref: '#/definitions/defs_user_id'
         type: array
     required:
       - name
@@ -12864,6 +13102,10 @@ definitions:
       domain:
         type: string
       email_domain:
+        type: string
+      enterprise_id:
+        type: string
+      enterprise_name:
         type: string
       has_compliance_export:
         type: boolean
@@ -12891,12 +13133,11 @@ definitions:
       name:
         type: string
     required:
-      - domain
-      - email_domain
-      - has_compliance_export
-      - icon
       - id
       - name
+      - domain
+      - email_domain
+      - icon
     title: Team Object
     type: object
   objs_team_profile_field:
@@ -12914,15 +13155,15 @@ definitions:
       label:
         type: string
       options:
-        type:
-          - 'null'
-          - array
+        items:
+          type: string
+        type: array
       ordering:
         type: number
       possible_values:
-        type:
-          - 'null'
-          - array
+        items:
+          type: string
+        type: array
       type:
         enum:
           - text
@@ -12977,9 +13218,7 @@ definitions:
       team_id:
         $ref: '#/definitions/defs_team'
       tz:
-        type:
-          - 'null'
-          - string
+        type: string
       tz_label:
         type: string
       tz_offset:
@@ -13021,9 +13260,7 @@ definitions:
         format: email
         type: string
       fields:
-        type:
-          - object
-          - 'null'
+        type: object
       first_name:
         type: string
       guest_channels:
@@ -13092,9 +13329,7 @@ definitions:
       display_name:
         type: string
       first_name:
-        type:
-          - string
-          - 'null'
+        type: string
       image_72:
         format: uri
         type: string
@@ -13127,9 +13362,7 @@ definitions:
       display_name:
         type: string
       first_name:
-        type:
-          - string
-          - 'null'
+        type: string
       image_72:
         format: uri
         type: string

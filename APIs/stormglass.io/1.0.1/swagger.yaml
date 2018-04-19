@@ -9,7 +9,7 @@ info:
   description: Global marine weather data from multiple sources in one single API with hourly resolution. Get your API key by visiting the Storm Glass web site.
   termsOfService: 'https://stormglass.io'
   title: Storm Glass Marine Weather
-  version: 1.0.0
+  version: 1.0.1
   x-apisguru-categories:
     - location
   x-logo:
@@ -39,12 +39,12 @@ paths:
       description: 'Get forecast info for the given coordinates. For every hour and property, you will get a list of weather sources and their values.'
       operationId: getForecast
       parameters:
-        - description: The latitude for a location
+        - description: The latitude for a location. Valid input is a number between -90 and 90.
           in: query
           name: lat
           required: true
           type: number
-        - description: The longitude for a location
+        - description: The longitude for a location. Valid input is a number between -180 and 180.
           in: query
           name: lng
           required: true

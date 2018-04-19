@@ -1,6 +1,6 @@
 swagger: '2.0'
 schemes:
-  - http
+  - https
 host: vocadb.net
 info:
   contact:
@@ -2010,6 +2010,11 @@ paths:
           name: notes
           required: false
           type: string
+        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be restored normally, but they will be moved to trash.\r\n            If false, the entry is soft deleted, meaning it can still be restored."
+          in: query
+          name: hardDelete
+          required: false
+          type: boolean
       produces: []
       responses:
         '204':
@@ -4190,6 +4195,12 @@ paths:
           name: categoryName
           required: false
           type: string
+        - description: Maximum number of tags to return.
+          format: int32
+          in: query
+          name: maxResults
+          required: false
+          type: integer
         - description: Content language preference (optional).
           enum:
             - Default

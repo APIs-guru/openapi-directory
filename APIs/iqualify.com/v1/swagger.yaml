@@ -65,6 +65,15 @@ parameters:
     name: offeringId
     required: true
     type: string
+  permissionName:
+    description: permission name
+    enum:
+      - builder
+      - manager
+    in: path
+    name: permissionName
+    required: true
+    type: string
   userEmail:
     description: user's email
     format: email
@@ -295,6 +304,32 @@ paths:
           schema:
             $ref: '#/definitions/CourseMetaResponse'
       summary: Update course topic
+      tags:
+        - courses
+  '/courses/{contentId}/permissions':
+    post:
+      parameters:
+        - description: The content Id
+          in: path
+          name: contentId
+          required: true
+          type: string
+        - in: body
+          name: users
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/CourseUser'
+            title: users to be added to the offering.
+            type: array
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: user successfully added to the course with the specified permission.
+          schema:
+            $ref: '#/definitions/CourseUser'
+      summary: Update course access
       tags:
         - courses
   /offerings:
@@ -1261,6 +1296,25 @@ paths:
       summary: Gets user's open response assignment submissions
       tags:
         - submissions
+  /users:
+    post:
+      description: Adds new user
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: user added
+          schema:
+            $ref: '#/definitions/UserResponse'
+      summary: Add new user
+      tags:
+        - users
   /users/all/progress:
     get:
       description: Returns offering progress for each learner
@@ -1356,6 +1410,22 @@ paths:
             title: Offerings
             type: array
       summary: Get user's offerings
+      tags:
+        - users
+  '/users/{userEmail}/permissions/{permissionName}':
+    post:
+      description: Adds permission to user
+      parameters:
+        - $ref: '#/parameters/userEmail'
+        - $ref: '#/parameters/permissionName'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: permission successfully added to user
+          schema:
+            $ref: '#/definitions/UserResponse'
+      summary: Add permission to user
       tags:
         - users
 definitions:
@@ -1579,6 +1649,20 @@ definitions:
       name:
         type: string
     title: Course
+  CourseUser:
+    allOf:
+      - $ref: '#/definitions/User'
+    properties:
+      isBuilder:
+        default: false
+        type: boolean
+      isReviewer:
+        default: false
+        type: boolean
+      profile:
+        $ref: '#/definitions/UserProfile'
+    required:
+      - email
   Criteria:
     properties:
       hasCompletedCourse:
@@ -1753,6 +1837,8 @@ definitions:
       coverImageUrl:
         minLength: 1
         type: string
+      currency:
+        type: string
       description:
         minLength: 1
         type: string
@@ -1762,6 +1848,8 @@ definitions:
       end:
         format: date-time
         type: string
+      enrollmentLimit:
+        type: number
       id:
         type: string
       isReadonly:
@@ -1771,6 +1859,8 @@ definitions:
       name:
         minLength: 1
         type: string
+      price:
+        type: number
       start:
         format: date-time
         type: string
@@ -1801,6 +1891,8 @@ definitions:
       coverImageUrl:
         minLength: 1
         type: string
+      currency:
+        type: string
       description:
         minLength: 1
         type: string
@@ -1810,6 +1902,8 @@ definitions:
       end:
         format: date-time
         type: string
+      enrollmentLimit:
+        type: number
       id:
         type: string
       isReadonly:
@@ -1817,6 +1911,8 @@ definitions:
       name:
         minLength: 1
         type: string
+      price:
+        type: number
       start:
         format: date-time
         type: string
@@ -1830,10 +1926,6 @@ definitions:
     allOf:
       - $ref: '#/definitions/User'
     properties:
-      email:
-        format: email
-        minLength: 1
-        type: string
       isFacilitator:
         default: false
         type: boolean
@@ -2012,6 +2104,9 @@ definitions:
         type: string
   User:
     properties:
+      email:
+        minLength: 1
+        type: string
       firstName:
         minLength: 1
         type: string

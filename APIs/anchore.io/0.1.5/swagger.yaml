@@ -13,7 +13,7 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   title: Anchore Engine API Server
-  version: 0.1.3
+  version: 0.1.5
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -781,6 +781,17 @@ paths:
   /subscriptions:
     get:
       operationId: list_subscriptions
+      parameters:
+        - description: filter only subscriptions matching key
+          in: query
+          name: subscription_key
+          required: false
+          type: string
+        - description: filter only subscriptions matching type
+          in: query
+          name: subscription_type
+          required: false
+          type: string
       responses:
         '200':
           description: Subscription listing
@@ -908,6 +919,50 @@ paths:
       summary: System status
       tags:
         - System
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
+  /system/feeds:
+    get:
+      description: ''
+      operationId: get_system_feeds
+      responses:
+        '200':
+          description: success
+          schema:
+            items:
+              type: string
+            type: array
+        '500':
+          description: Internal Error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: list feeds operations and information
+      tags:
+        - catalog
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
+    post:
+      description: ''
+      operationId: post_system_feeds
+      parameters:
+        - description: instruct system to flush existing data feeds records from anchore-engine
+          in: query
+          name: flush
+          required: false
+          type: boolean
+        - description: instruct system to re-sync data feeds
+          in: query
+          name: sync
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Feeds operation success
+        '500':
+          description: Internal Error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: trigger feeds operations
+      tags:
+        - catalog
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /system/policy_spec:
     get:
@@ -1183,6 +1238,16 @@ definitions:
         type: string
       name:
         description: 'Gate name, as it would appear in a policy document'
+        type: string
+      state:
+        description: State of the gate and transitively all triggers it contains if not 'active'
+        enum:
+          - active
+          - deprecated
+          - eol
+        type: string
+      superceded_by:
+        description: The name of another trigger that supercedes this on functionally if this is deprecated
         type: string
       triggers:
         description: List of the triggers that can fire for this Gate
@@ -1587,12 +1652,25 @@ definitions:
     properties:
       description:
         type: string
+      example:
+        description: An example value for the parameter (encoded as a string if the parameter is an object or list type)
+        type: string
       name:
         description: Parameter name as it appears in policy document
         type: string
       required:
         description: Is this a required parameter or optional
         type: boolean
+      state:
+        description: State of the trigger parameter
+        enum:
+          - active
+          - deprecated
+          - eol
+        type: string
+      superceded_by:
+        description: The name of another trigger that supercedes this on functionally if this is deprecated
+        type: string
       validator:
         description: 'If present, a definition for validation of input. Typically a jsonschema object that can be used to validate an input against.'
         type: object
@@ -1611,6 +1689,16 @@ definitions:
         items:
           $ref: '#/definitions/TriggerParamSpec'
         type: array
+      state:
+        description: State of the trigger
+        enum:
+          - active
+          - deprecated
+          - eol
+        type: string
+      superceded_by:
+        description: The name of another trigger that supercedes this on functionally if this is deprecated
+        type: string
     type: object
   Vulnerability:
     properties:

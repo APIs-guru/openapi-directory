@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/DfsSlatesByDate/{date}':
     get:
-      operationId: DFS Slates by Date
+      operationId: 5a05bf1514338d154014bf24
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -62,9 +62,10 @@ paths:
             items:
               $ref: '#/definitions/DfsSlate'
             type: array
+      summary: DFS Slates by Date
   '/{format}/DfsSlatesByWeek/{season}/{week}':
     get:
-      operationId: DFS Slates by Week
+      operationId: 5a05bf1c14338d154014bf25
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -96,9 +97,10 @@ paths:
             items:
               $ref: '#/definitions/DfsSlate'
             type: array
+      summary: DFS Slates by Week
   '/{format}/FantasyDefenseProjectionsByGame/{season}/{week}':
     get:
-      operationId: Projected Fantasy Defense Game Stats (w/ DFS Salaries)
+      operationId: 57a021f314338d0a985480f1
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -134,9 +136,10 @@ paths:
             items:
               $ref: '#/definitions/FantasyDefenseGameProjection'
             type: array
+      summary: Projected Fantasy Defense Game Stats (w/ DFS Salaries)
   '/{format}/FantasyDefenseProjectionsBySeason/{season}':
     get:
-      operationId: 'Projected Fantasy Defense Season Stats (w/ Bye Week, ADP)'
+      operationId: 57a021f314338d0a985480f0
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -163,9 +166,10 @@ paths:
             items:
               $ref: '#/definitions/FantasyDefenseSeasonProjection'
             type: array
+      summary: 'Projected Fantasy Defense Season Stats (w/ Bye Week, ADP)'
   '/{format}/PlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}':
     get:
-      operationId: 'Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)'
+      operationId: 57a021f314338d0a985480f2
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -204,9 +208,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayerGameProjection'
+      summary: 'Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerGameProjectionStatsByTeam/{season}/{week}/{team}':
     get:
-      operationId: 'Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)'
+      operationId: 57a021f314338d0a985480f4
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -247,9 +252,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
+      summary: 'Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerGameProjectionStatsByWeek/{season}/{week}':
     get:
-      operationId: 'Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)'
+      operationId: 57a021f314338d0a985480f7
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -285,9 +291,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameProjection'
             type: array
+      summary: 'Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerSeasonProjectionStats/{season}':
     get:
-      operationId: 'Projected Player Season Stats (w/ Bye Week, ADP)'
+      operationId: 57a021f314338d0a985480f5
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -314,9 +321,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeasonProjection'
             type: array
+      summary: 'Projected Player Season Stats (w/ Bye Week, ADP)'
   '/{format}/PlayerSeasonProjectionStatsByPlayerID/{season}/{playerid}':
     get:
-      operationId: 'Projected Player Season Stats by Player (w/ Bye Week, ADP)'
+      operationId: 57a021f314338d0a985480f3
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -346,9 +354,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayerSeasonProjection'
+      summary: 'Projected Player Season Stats by Player (w/ Bye Week, ADP)'
   '/{format}/PlayerSeasonProjectionStatsByTeam/{season}/{team}':
     get:
-      operationId: 'Projected Player Season Stats by Team (w/ Bye Week, ADP)'
+      operationId: 57a021f314338d0a985480f6
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -380,6 +389,7 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeasonProjection'
             type: array
+      summary: 'Projected Player Season Stats by Team (w/ Bye Week, ADP)'
 definitions:
   DfsSlate:
     properties:
@@ -417,6 +427,8 @@ definitions:
         type: integer
       OperatorGameID:
         type: integer
+      RemovedByOperator:
+        type: boolean
       SlateGameID:
         type: integer
       SlateID:
@@ -443,6 +455,8 @@ definitions:
         type: integer
       PlayerID:
         type: integer
+      RemovedByOperator:
+        type: boolean
       SlateGameID:
         type: integer
       SlateID:

@@ -2,7 +2,6 @@ swagger: '2.0'
 schemes:
   - https
 host: api.nfusionsolutions.biz
-basePath: /
 info:
   contact:
     email: support@nfusionsolutions.com
@@ -40,17 +39,17 @@ paths:
       description: Current Best Bid and Offer
       operationId: 'ApiV{versionCurrenciesBboGet'
       parameters:
-        - description: '<b>REQUIRED</b> - comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
-          in: query
-          name: pairs
-          required: false
-          type: string
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: 'comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
+          in: query
+          name: pairs
+          required: true
+          type: string
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -80,12 +79,12 @@ paths:
       description: "Only the currency pairs in the direction noted can be used with the BBO endpoint.\r\nFor example: USD/CAD is not the same as CAD/USD"
       operationId: 'ApiV{versionCurrenciesBboSupportedGet'
       parameters:
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -115,34 +114,34 @@ paths:
       description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
       operationId: 'ApiV{versionCurrenciesHistoryGet'
       parameters:
-        - description: "optional - aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
+        - description: auth token
           in: query
-          name: interval
-          required: false
+          name: token
+          required: true
           type: string
-        - description: <b>REQUIRED</b> - start date of time period. format is <i>yyyy-mm-dd</i>
+        - description: 'comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
+          in: query
+          name: pairs
+          required: true
+          type: string
+        - description: start date of time period. format is <i>yyyy-mm-dd</i>
           format: date-time
           in: query
           name: start
-          required: false
+          required: true
           type: string
-        - description: optional - end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
+        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
           format: date-time
           in: query
           name: end
           required: false
           type: string
-        - description: '<b>REQUIRED</b> - comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
+        - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
           in: query
-          name: pairs
+          name: interval
           required: false
           type: string
-        - description: <b>REQUIRED</b> - auth token
-          in: query
-          name: token
-          required: false
-          type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -172,12 +171,12 @@ paths:
       description: "Only the currency pairs in the direction noted can be used with the history endpoint.\r\nFor example: USD/CAD is not the same as CAD/USD"
       operationId: 'ApiV{versionCurrenciesHistorySupportedGet'
       parameters:
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -207,12 +206,12 @@ paths:
       description: "Only the currency pairs in the direction noted can be used with the Level2 endpoint.\r\nFor example: USD/CAD is not the same as CAD/USD"
       operationId: 'ApiV{versionCurrenciesLevel2SupportedGet'
       parameters:
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -242,17 +241,17 @@ paths:
       description: Current Mid Rate
       operationId: 'ApiV{versionCurrenciesRateGet'
       parameters:
-        - description: '<b>REQUIRED</b> - comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
-          in: query
-          name: pairs
-          required: false
-          type: string
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: 'comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
+          in: query
+          name: pairs
+          required: true
+          type: string
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -282,12 +281,12 @@ paths:
       description: "Any of the currencies in this list can be paired with any other currency in this list when supplied to the Rate endpoint.\r\nFor example: USD/CAD,CAD/USD,USD/EUR,EUR/CAD"
       operationId: 'ApiV{versionCurrenciesRateSupportedGet'
       parameters:
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -317,17 +316,17 @@ paths:
       description: Current and daily summary information combined into a single quote
       operationId: 'ApiV{versionCurrenciesSummaryGet'
       parameters:
-        - description: '<b>REQUIRED</b> - comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
-          in: query
-          name: pairs
-          required: false
-          type: string
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: 'comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
+          in: query
+          name: pairs
+          required: true
+          type: string
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -357,12 +356,12 @@ paths:
       description: "Only the currency pairs in the direction noted can be used with the Summary endpoint.\r\nFor example: USD/CAD is not the same as CAD/USD"
       operationId: 'ApiV{versionCurrenciesSummarySupportedGet'
       parameters:
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -392,27 +391,27 @@ paths:
       description: Current Spot Price Best Bid and Offer
       operationId: 'ApiV{versionMetalsSpotBboGet'
       parameters:
-        - description: <b>REQUIRED</b> - comma separated list of metals
+        - description: auth token
+          in: query
+          name: token
+          required: true
+          type: string
+        - description: comma separated list of metals
           in: query
           name: metals
-          required: false
+          required: true
           type: string
-        - description: 'optional - currency for pricing, defaults to USD'
+        - description: 'currency for pricing, defaults to USD'
           in: query
           name: currency
           required: false
           type: string
-        - description: "optional - unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+        - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
           in: query
           name: unitofmeasure
           required: false
           type: string
-        - description: <b>REQUIRED</b> - auth token
-          in: query
-          name: token
-          required: false
-          type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -442,49 +441,49 @@ paths:
       description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.\r\n\r\nThe historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
       operationId: 'ApiV{versionMetalsSpotHistoryGet'
       parameters:
-        - description: "optional - aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
+        - description: auth token
           in: query
-          name: interval
-          required: false
+          name: token
+          required: true
           type: string
-        - description: <b>REQUIRED</b> - start date of time period. format is <i>yyyy-mm-dd</i>
+        - description: comma separated list of metals
+          in: query
+          name: metals
+          required: true
+          type: string
+        - description: start date of time period. format is <i>yyyy-mm-dd</i>
           format: date-time
           in: query
           name: start
-          required: false
+          required: true
           type: string
-        - description: optional - end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
+        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
           format: date-time
           in: query
           name: end
           required: false
           type: string
-        - description: optional - if true use historical currency rates otherwise current currency rates. Defaults to false.
+        - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
           in: query
-          name: historicalfx
-          required: true
-          type: boolean
-        - description: <b>REQUIRED</b> - comma separated list of metals
-          in: query
-          name: metals
+          name: interval
           required: false
           type: string
-        - description: 'optional - currency for pricing, defaults to USD'
+        - description: if true use historical currency rates otherwise current currency rates. Defaults to false.
+          in: query
+          name: historicalfx
+          required: false
+          type: boolean
+        - description: 'currency for pricing, defaults to USD'
           in: query
           name: currency
           required: false
           type: string
-        - description: "optional - unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+        - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
           in: query
           name: unitofmeasure
           required: false
           type: string
-        - description: <b>REQUIRED</b> - auth token
-          in: query
-          name: token
-          required: false
-          type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -514,36 +513,36 @@ paths:
       description: Current and daily summary information combined into a single quote
       operationId: 'ApiV{versionMetalsSpotSummaryGet'
       parameters:
-        - description: optional - apply global and per-tenant spot price adjustments. Defaults to true.
+        - description: auth token
           in: query
-          name: adjust
-          required: false
-          type: boolean
-        - description: <b>REQUIRED</b> - comma separated list of metals
+          name: token
+          required: true
+          type: string
+        - description: comma separated list of metals
           in: query
           name: metals
-          required: false
+          required: true
           type: string
-        - description: 'optional - currency for pricing, defaults to USD'
+        - description: 'currency for pricing, defaults to USD'
           in: query
           name: currency
           required: false
           type: string
-        - description: "optional - unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+        - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
           in: query
           name: unitofmeasure
           required: false
           type: string
-        - description: <b>REQUIRED</b> - auth token
-          in: query
-          name: token
-          required: false
-          type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
           type: string
+        - description: apply global and per-tenant spot price adjustments. Defaults to true.
+          in: query
+          name: adjust
+          required: false
+          type: boolean
         - default: '1'
           description: The requested API version
           in: path
@@ -569,12 +568,12 @@ paths:
       description: ''
       operationId: 'ApiV{versionMetalsSpotSupportedGet'
       parameters:
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false
@@ -604,12 +603,12 @@ paths:
       description: ''
       operationId: 'ApiV{versionMetalsSpotSupportedCurrencyGet'
       parameters:
-        - description: <b>REQUIRED</b> - auth token
+        - description: auth token
           in: query
           name: token
-          required: false
+          required: true
           type: string
-        - description: optional - to override content negotiation specify a value of json or xml
+        - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           required: false

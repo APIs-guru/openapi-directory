@@ -30,9 +30,9 @@ info:
       - Le contrôle IP est configurable dans le rubrique mon "compte", sous-rubrique "mon API"
       - Il s'agit d'un système de liste blanche, vous devez entrer les IP utilisées pour appeler l'API
       - Vous pouvez également désactiver totalement le contrôle IP
-  termsOfService: 'https://www.isendpro.com/cgv.php'
+  termsOfService: cf CGV iSendPro.com
   title: API iSendPro
-  version: 1.0.0
+  version: 1.1.1
   x-apisguru-categories:
     - messaging
   x-logo:
@@ -79,7 +79,7 @@ paths:
           type: string
       produces:
         - application/json
-        - application/octet-stream
+        - file
       responses:
         '200':
           description: Successful response
@@ -111,7 +111,7 @@ paths:
         '200':
           description: Reponse OK
           examples:
-            application/json:
+            etat:
               etat:
                 nb_caractere: '222'
                 nb_sms: '2'
@@ -182,7 +182,7 @@ paths:
           enum:
             - '1'
           in: query
-          name: dellisteNoire
+          name: delListeNoire
           required: true
           type: string
         - description: numéro de mobile à supprimer
@@ -261,8 +261,9 @@ paths:
           examples:
             application/json:
               etat:
-                operateur: ORAN
-                tel: 0680010203
+                etat:
+                  operateur: ORAN
+                  tel: 0680010203
           schema:
             $ref: '#/definitions/HLRReponse'
         '400':
@@ -365,6 +366,40 @@ paths:
       summary: Ajoute un numero en liste noire
       tags:
         - setListeNoire
+  /shortlink:
+    post:
+      consumes:
+        - application/json
+      description: add a shortlink
+      operationId: addShortlink
+      parameters:
+        - description: add sub account request
+          in: body
+          name: addshortlinkrequest
+          required: true
+          schema:
+            $ref: '#/definitions/ShortlinkRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Reponse OK
+          examples:
+            exemple1:
+              etat:
+                etat:
+                  code: 250
+                  message: Le lien court a ete genere
+                  shortlink: ww.sms.ht/aOHi
+          schema:
+            $ref: '#/definitions/ShortlinkResponse'
+        '400':
+          description: Dysfonctionnement
+          schema:
+            $ref: '#/definitions/Erreur'
+      summary: add a shortlink
+      tags:
+        - add shortlink
   /sms:
     post:
       consumes:
@@ -384,7 +419,7 @@ paths:
         '200':
           description: Reponse OK
           examples:
-            application/json:
+            etat:
               etat:
                 code: '0'
                 message: hello world!
@@ -418,7 +453,7 @@ paths:
         '200':
           description: Reponse OK
           examples:
-            application/json:
+            etat:
               etat:
                 code: '0'
                 message: hello world!
@@ -432,6 +467,68 @@ paths:
       summary: Envoyer des SMS
       tags:
         - sms
+  /subaccount:
+    post:
+      consumes:
+        - application/json
+      description: Ajoute un sous compte
+      operationId: subaccountAdd
+      parameters:
+        - description: add sub account request
+          in: body
+          name: addsubaccountrequest
+          required: true
+          schema:
+            $ref: '#/definitions/SubaccountAddRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Reponse OK
+          examples:
+            exemple1:
+              etat:
+                etat:
+                  code: 230
+                  subAccountId: 20150
+                  subAccountKeyId: a9bc68fe78
+                  subAccountLogin: marion.peltier.agence06
+                  tel: Le sous compte a ete ajoute
+          schema:
+            $ref: '#/definitions/SubaccountAddResponse'
+        '400':
+          description: Dysfonctionnement
+          schema:
+            $ref: '#/definitions/Erreur'
+      summary: Ajoute un sous compte
+      tags:
+        - add subaccount
+    put:
+      consumes:
+        - application/json
+      description: Edit a subaccount
+      operationId: subaccountEdit
+      parameters:
+        - description: edit sub account request
+          in: body
+          name: editsubaccountrequest
+          required: true
+          schema:
+            $ref: '#/definitions/SubaccountRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Reponse OK
+          schema:
+            $ref: '#/definitions/SubaccountResponse'
+        '400':
+          description: Dysfonctionnement
+          schema:
+            $ref: '#/definitions/Erreur'
+      summary: Edit a subaccount
+      tags:
+        - edit subaccount
 definitions:
   ComptageReponse:
     properties:
@@ -474,6 +571,100 @@ definitions:
       emetteur:
         description: "- L'emetteur doit être une chaîne alphanumérique comprise entre 4 et 11 caractères.\n\n- Les caractères acceptés sont les chiffres entre 0 et 9, les lettres entre A et Z et l’espace.\n\n- Il ne peut pas comporter uniquement des chiffres. \n\n- Pour la modification de l'émetteur et dans le cadre de campagnes commerciales, les opérateurs imposent contractuellement d'ajouter en fin de message le texte \"STOP XXXXX\". De ce fait, le message envoyé ne pourra excéder une longueur de 148 caractères au lieu des 160 caractères, le «\_STOP\_» étant rajouté automatiquement.\n"
         type: string
+      gmt_zone:
+        description: Fuseau horaire de la date d'envoi
+        enum:
+          - Pacific/Midway
+          - America/Adak
+          - Etc/GMT+10
+          - Pacific/Marquesas
+          - Pacific/Gambier
+          - America/Anchorage
+          - America/Ensenada
+          - Etc/GMT+8
+          - America/Los_Angeles
+          - America/Denver
+          - America/Chihuahua
+          - America/Dawson_Creek
+          - America/Belize
+          - America/Cancun
+          - Chile/EasterIsland
+          - America/Chicago
+          - America/New_York
+          - America/Havana
+          - America/Bogota
+          - America/Caracas
+          - America/Santiago
+          - America/La_Paz
+          - Atlantic/Stanley
+          - America/Campo_Grande
+          - America/Goose_Bay
+          - America/Glace_Bay
+          - America/St_Johns
+          - America/Araguaina
+          - America/Montevideo
+          - America/Miquelon
+          - America/Godthab
+          - America/Argentina/Buenos_Aires
+          - America/Sao_Paulo
+          - America/Noronha
+          - Atlantic/Cape_Verde
+          - Atlantic/Azores
+          - Europe/Belfast
+          - Europe/Dublin
+          - Europe/Lisbon
+          - Europe/London
+          - Africa/Abidjan
+          - Europe/Amsterdam
+          - Europe/Belgrade
+          - Europe/Brussels
+          - Africa/Algiers
+          - Africa/Windhoek
+          - Asia/Beirut
+          - Africa/Cairo
+          - Asia/Gaza
+          - Africa/Blantyre
+          - Asia/Jerusalem
+          - Europe/Minsk
+          - Asia/Damascus
+          - Europe/Moscow
+          - Africa/Addis_Ababa
+          - Asia/Tehran
+          - Asia/Dubai
+          - Asia/Yerevan
+          - Asia/Kabul
+          - Asia/Yekaterinburg
+          - Asia/Tashkent
+          - Asia/Kolkata
+          - Asia/Katmandu
+          - Asia/Dhaka
+          - Asia/Novosibirsk
+          - Asia/Rangoon
+          - Asia/Bangkok
+          - Asia/Krasnoyarsk
+          - Asia/Hong_Kong
+          - Asia/Irkutsk
+          - Australia/Perth
+          - Australia/Eucla
+          - Asia/Tokyo
+          - Asia/Seoul
+          - Asia/Yakutsk
+          - Australia/Adelaide
+          - Australia/Darwin
+          - Australia/Brisbane
+          - Australia/Hobart
+          - Asia/Vladivostok
+          - Australia/Lord_Howe
+          - Etc/GMT-11
+          - Asia/Magadan
+          - Pacific/Norfolk
+          - Asia/Anadyr
+          - Pacific/Auckland
+          - Etc/GMT-12
+          - Pacific/Chatham
+          - Pacific/Tongatapu
+          - Pacific/Kiritimati
+        type: string
       keyid:
         description: Clé API
         type: string
@@ -482,6 +673,10 @@ definitions:
         type: string
       num:
         description: Numero de téléphone au format national (exemple 0680010203) ou international (example 33680010203)
+        type: string
+      numAzur:
+        enum:
+          - '1'
         type: string
       sms:
         description: 'Message à envoyer aux destinataires. Le message doit être encodé au format utf-8 et ne contenir que des caractères existant dans l''alphabet GSM. Il est également possible d''envoyer (à l''étranger uniquement) des SMS en UCS-2, cf paramètre ucs2 pour plus de détails.'
@@ -932,6 +1127,100 @@ definitions:
       emetteur:
         description: "L'emetteur doit être une chaîne alphanumérique comprise entre 4 et 11 caractères. Les caractères acceptés sont les chiffres entre 0 et 9, les lettres entre A et Z et l’espace. Il ne peut pas comporter uniquement des chiffres. Pour la modification de l’émetteur et dans le cadre de campagnes commerciales, les opérateurs imposent contractuellement d’ajouter en fin de message le texte suivant : STOP XXXXX De ce fait, le message envoyé ne pourra excéder une longueur de 148 caractères au lieu des 160 caractères, le «\_STOP\_» étant rajouté automatiquement."
         type: string
+      gmt_zone:
+        description: Fuseau horaire de la date d'envoi
+        enum:
+          - Pacific/Midway
+          - America/Adak
+          - Etc/GMT+10
+          - Pacific/Marquesas
+          - Pacific/Gambier
+          - America/Anchorage
+          - America/Ensenada
+          - Etc/GMT+8
+          - America/Los_Angeles
+          - America/Denver
+          - America/Chihuahua
+          - America/Dawson_Creek
+          - America/Belize
+          - America/Cancun
+          - Chile/EasterIsland
+          - America/Chicago
+          - America/New_York
+          - America/Havana
+          - America/Bogota
+          - America/Caracas
+          - America/Santiago
+          - America/La_Paz
+          - Atlantic/Stanley
+          - America/Campo_Grande
+          - America/Goose_Bay
+          - America/Glace_Bay
+          - America/St_Johns
+          - America/Araguaina
+          - America/Montevideo
+          - America/Miquelon
+          - America/Godthab
+          - America/Argentina/Buenos_Aires
+          - America/Sao_Paulo
+          - America/Noronha
+          - Atlantic/Cape_Verde
+          - Atlantic/Azores
+          - Europe/Belfast
+          - Europe/Dublin
+          - Europe/Lisbon
+          - Europe/London
+          - Africa/Abidjan
+          - Europe/Amsterdam
+          - Europe/Belgrade
+          - Europe/Brussels
+          - Africa/Algiers
+          - Africa/Windhoek
+          - Asia/Beirut
+          - Africa/Cairo
+          - Asia/Gaza
+          - Africa/Blantyre
+          - Asia/Jerusalem
+          - Europe/Minsk
+          - Asia/Damascus
+          - Europe/Moscow
+          - Africa/Addis_Ababa
+          - Asia/Tehran
+          - Asia/Dubai
+          - Asia/Yerevan
+          - Asia/Kabul
+          - Asia/Yekaterinburg
+          - Asia/Tashkent
+          - Asia/Kolkata
+          - Asia/Katmandu
+          - Asia/Dhaka
+          - Asia/Novosibirsk
+          - Asia/Rangoon
+          - Asia/Bangkok
+          - Asia/Krasnoyarsk
+          - Asia/Hong_Kong
+          - Asia/Irkutsk
+          - Australia/Perth
+          - Australia/Eucla
+          - Asia/Tokyo
+          - Asia/Seoul
+          - Asia/Yakutsk
+          - Australia/Adelaide
+          - Australia/Darwin
+          - Australia/Brisbane
+          - Australia/Hobart
+          - Asia/Vladivostok
+          - Australia/Lord_Howe
+          - Etc/GMT-11
+          - Asia/Magadan
+          - Pacific/Norfolk
+          - Asia/Anadyr
+          - Pacific/Auckland
+          - Etc/GMT-12
+          - Pacific/Chatham
+          - Pacific/Tongatapu
+          - Pacific/Kiritimati
+        type: string
       keyid:
         description: Clé API
         type: string
@@ -943,6 +1232,10 @@ definitions:
           description: Numeros de téléphone au format national (exemple 0680010203) ou international (example 33680010203)
           type: string
         type: array
+      numAzur:
+        enum:
+          - '1'
+        type: string
       repertoireId:
         description: Id du repertoire
         type: string
@@ -967,6 +1260,33 @@ definitions:
       - num
       - sms
     type: object
+  ShortlinkRequest:
+    properties:
+      keyid:
+        type: string
+      shortlink:
+        type: string
+    required:
+      - keyid
+      - shortlink
+    type: object
+  ShortlinkResponse:
+    properties:
+      etat:
+        properties:
+          etat:
+            items:
+              properties:
+                code:
+                  type: number
+                message:
+                  type: string
+                shortlink:
+                  type: string
+              type: object
+            type: array
+        type: object
+    type: object
   SmsUniqueRequest:
     example:
       emetteur: iSendPro
@@ -980,6 +1300,100 @@ definitions:
       emetteur:
         description: "- L'emetteur doit être une chaîne alphanumérique comprise entre 4 et 11 caractères.\n\n- Les caractères acceptés sont les chiffres entre 0 et 9, les lettres entre A et Z et l’espace.\n\n- Il ne peut pas comporter uniquement des chiffres. \n\n- Pour la modification de l'émetteur et dans le cadre de campagnes commerciales, les opérateurs imposent contractuellement d'ajouter en fin de message le texte \"STOP XXXXX\". De ce fait, le message envoyé ne pourra excéder une longueur de 148 caractères au lieu des 160 caractères, le «\_STOP\_» étant rajouté automatiquement.\n"
         type: string
+      gmt_zone:
+        description: Fuseau horaire de la date d'envoi
+        enum:
+          - Pacific/Midway
+          - America/Adak
+          - Etc/GMT+10
+          - Pacific/Marquesas
+          - Pacific/Gambier
+          - America/Anchorage
+          - America/Ensenada
+          - Etc/GMT+8
+          - America/Los_Angeles
+          - America/Denver
+          - America/Chihuahua
+          - America/Dawson_Creek
+          - America/Belize
+          - America/Cancun
+          - Chile/EasterIsland
+          - America/Chicago
+          - America/New_York
+          - America/Havana
+          - America/Bogota
+          - America/Caracas
+          - America/Santiago
+          - America/La_Paz
+          - Atlantic/Stanley
+          - America/Campo_Grande
+          - America/Goose_Bay
+          - America/Glace_Bay
+          - America/St_Johns
+          - America/Araguaina
+          - America/Montevideo
+          - America/Miquelon
+          - America/Godthab
+          - America/Argentina/Buenos_Aires
+          - America/Sao_Paulo
+          - America/Noronha
+          - Atlantic/Cape_Verde
+          - Atlantic/Azores
+          - Europe/Belfast
+          - Europe/Dublin
+          - Europe/Lisbon
+          - Europe/London
+          - Africa/Abidjan
+          - Europe/Amsterdam
+          - Europe/Belgrade
+          - Europe/Brussels
+          - Africa/Algiers
+          - Africa/Windhoek
+          - Asia/Beirut
+          - Africa/Cairo
+          - Asia/Gaza
+          - Africa/Blantyre
+          - Asia/Jerusalem
+          - Europe/Minsk
+          - Asia/Damascus
+          - Europe/Moscow
+          - Africa/Addis_Ababa
+          - Asia/Tehran
+          - Asia/Dubai
+          - Asia/Yerevan
+          - Asia/Kabul
+          - Asia/Yekaterinburg
+          - Asia/Tashkent
+          - Asia/Kolkata
+          - Asia/Katmandu
+          - Asia/Dhaka
+          - Asia/Novosibirsk
+          - Asia/Rangoon
+          - Asia/Bangkok
+          - Asia/Krasnoyarsk
+          - Asia/Hong_Kong
+          - Asia/Irkutsk
+          - Australia/Perth
+          - Australia/Eucla
+          - Asia/Tokyo
+          - Asia/Seoul
+          - Asia/Yakutsk
+          - Australia/Adelaide
+          - Australia/Darwin
+          - Australia/Brisbane
+          - Australia/Hobart
+          - Asia/Vladivostok
+          - Australia/Lord_Howe
+          - Etc/GMT-11
+          - Asia/Magadan
+          - Pacific/Norfolk
+          - Asia/Anadyr
+          - Pacific/Auckland
+          - Etc/GMT-12
+          - Pacific/Chatham
+          - Pacific/Tongatapu
+          - Pacific/Kiritimati
+        type: string
       keyid:
         description: Clé API
         type: string
@@ -988,6 +1402,10 @@ definitions:
         type: string
       num:
         description: Numero de téléphone au format national (exemple 0680010203) ou international (example 33680010203)
+        type: string
+      numAzur:
+        enum:
+          - '1'
         type: string
       sms:
         description: 'Message à envoyer aux destinataires. Le message doit être encodé au format utf-8 et ne contenir que des caractères existant dans l''alphabet GSM. Il est également possible d''envoyer (à l''étranger uniquement) des SMS en UCS-2, cf paramètre ucs2 pour plus de détails.'
@@ -1010,4 +1428,98 @@ definitions:
       - keyid
       - num
       - sms
+    type: object
+  SubaccountAddRequest:
+    properties:
+      keyid:
+        type: string
+      subAccountEdit:
+        enum:
+          - addAccount
+        type: string
+      subAccountLogin:
+        type: string
+      subAccountPassword:
+        type: string
+    required:
+      - keyid
+      - subAccountEdit
+      - subAccountLogin
+      - subAccountPassword
+    type: object
+  SubaccountAddResponse:
+    properties:
+      etat:
+        properties:
+          etat:
+            items:
+              properties:
+                code:
+                  type: number
+                message:
+                  type: string
+                subAccountId:
+                  type: string
+                subAccountKeyId:
+                  type: string
+                subAccountLogin:
+                  type: string
+              type: object
+            type: array
+        type: object
+    type: object
+  SubaccountRequest:
+    properties:
+      keyid:
+        description: Clé API
+        type: string
+      subAccountAddCredit:
+        description: montant du crédit à ajouter
+        type: string
+      subAccountCountryCode:
+        type: string
+      subAccountEdit:
+        description: action à réaliser soit setPrice pour définir un prix ou addCredit pour ajouter du credit ou setRestriction modifier la restriction stop /
+        enum:
+          - setPrice
+          - addCredit
+          - setRestriction
+        type: string
+      subAccountKeyId:
+        description: keyid du sous-compte
+        type: string
+      subAccountPrice:
+        type: string
+      subAccountRestrictionStop:
+        enum:
+          - '0'
+          - '1'
+        type: string
+      subAccountRestrictionTime:
+        enum:
+          - '0'
+          - '1'
+        type: string
+    required:
+      - keyid
+      - subAccountEdit
+    type: object
+  SubaccountResponse:
+    properties:
+      etat:
+        properties:
+          etat:
+            items:
+              properties:
+                code:
+                  type: string
+                message:
+                  type: string
+                subAccountId:
+                  type: string
+                subAccountKeyid:
+                  type: string
+              type: object
+            type: array
+        type: object
     type: object

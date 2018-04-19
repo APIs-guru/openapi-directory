@@ -1381,6 +1381,12 @@ paths:
           name: maxlength
           required: false
           type: integer
+        - description: keyword to search for in the quote
+          format: string
+          in: query
+          name: query
+          required: false
+          type: string
         - default: false
           description: Should search private collection? Default searches public collection.
           format: boolean

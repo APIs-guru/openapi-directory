@@ -1457,6 +1457,11 @@ definitions:
       For example, if charting stock prices over time, multiple series may exist,
       one for the "Open Price", "High Price", "Low Price" and "Close Price".
     properties:
+      color:
+        $ref: '#/definitions/Color'
+        description: |-
+          The color for elements (i.e. bars, lines, points) associated with this
+          series.  If empty, a default color will be used.
       lineStyle:
         $ref: '#/definitions/LineStyle'
         description: |-
@@ -2348,7 +2353,8 @@ definitions:
           with length 1.
           The domain (if it exists) & all series must have the same number
           of source ranges. If using more than one source range, then the source
-          range at a given offset must be contiguous across the domain and series.
+          range at a given offset must be in order and contiguous across the domain
+          and series.
 
           For example, these are valid configurations:
 
@@ -2650,7 +2656,7 @@ definitions:
         description: |-
           A value the condition is based on.
           The value will be parsed as if the user typed into a cell.
-          Formulas are supported (and must begin with an `=`).
+          Formulas are supported (and must begin with an `=` or a '+').
         type: string
     type: object
   ConditionalFormatRule:
@@ -3640,18 +3646,20 @@ definitions:
     properties:
       end:
         description: |-
-          Optional. The maximum value at which items will be placed into buckets
+          The maximum value at which items will be placed into buckets
           of constant size. Values above end will be lumped into a single bucket.
+          This field is optional.
         format: double
         type: number
       interval:
-        description: Required. The size of the buckets that will be created. Must be positive.
+        description: The size of the buckets that will be created. Must be positive.
         format: double
         type: number
       start:
         description: |-
-          Optional. The minimum value at which items will be placed into buckets
+          The minimum value at which items will be placed into buckets
           of constant size. Values below start will be lumped into a single bucket.
+          This field is optional.
         format: double
         type: number
     type: object
@@ -5593,9 +5601,9 @@ definitions:
           subtotal. Otherwise, the subtotal appears after the data point with
           this index. A series can have multiple subtotals at arbitrary indices,
           but subtotals do not affect the indices of the data points. For
-          example, if a series has 3 data points, their indices will always be 0,
-          1, and 2, regardless of how many subtotals exist on the series or what
-          data points they are associated with.
+          example, if a series has three data points, their indices will always
+          be 0, 1, and 2, regardless of how many subtotals exist on the series or
+          what data points they are associated with.
         format: int32
         type: integer
     type: object

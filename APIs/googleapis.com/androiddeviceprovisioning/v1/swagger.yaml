@@ -514,13 +514,12 @@ paths:
       tags:
         - customers
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: androiddeviceprovisioning.operations.get
+      description: Gets a device.
+      operationId: androiddeviceprovisioning.partners.devices.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Required. The device API resource name in the format
+            `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
           in: path
           name: name
           required: true
@@ -530,9 +529,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Device'
       tags:
-        - operations
+        - partners
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1279,7 +1278,8 @@ definitions:
     type: object
   Dpc:
     description: |-
-      An EMM's DPC ([device policy controller](/android/work/dpc/build-dpc)).
+      An EMM's DPC ([device policy
+      controller](http://developer.android.com/work/dpc/build-dpc.html)).
       Zero-touch enrollment installs a DPC (listed in the `Configuration`) on a
       device to maintain the customer's mobile policies. All the DPCs listed by the
       API support zero-touch enrollment and are available in Google Play.

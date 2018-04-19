@@ -122,6 +122,27 @@ paths:
         name: analysis_slug
         required: true
         type: string
+    put:
+      description: Update an Analysis' attribute
+      operationId: updateAnalysis
+      parameters:
+        - description: Analysis Update
+          in: body
+          name: AnalysisUpdate
+          schema:
+            $ref: '#/definitions/AnalysisUpdate'
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/AnalysisUpdate'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Update an Analysis' attribute
+      tags:
+        - Analysis
   '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics':
     get:
       description: Return global statistics for an analysis
@@ -792,6 +813,129 @@ paths:
         name: source
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes':
+    get:
+      description: Return a list of all robots.txt files found on the project's domains.
+      operationId: getRobotsTxtIndexesView
+      parameters:
+        - default: 1
+          description: Page Number
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+              page:
+                type: integer
+              previous:
+                type: string
+              results:
+                items:
+                  $ref: '#/definitions/Default'
+                type: array
+              size:
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Return a list of all robots
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes/{robots_txt}':
+    get:
+      description: Return content of a robots.txt file.
+      operationId: getRobotsTxtFileView
+      parameters:
+        - default: 1
+          description: Page Number
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+              page:
+                type: integer
+              previous:
+                type: string
+              results:
+                items:
+                  $ref: '#/definitions/Default'
+                type: array
+              size:
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Return content of a robots
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - description: Filename
+        in: path
+        name: robots_txt
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls':
     parameters:
       - description: User's identifier
@@ -1112,6 +1256,18 @@ paths:
           name: previous_crawl
           required: false
           type: string
+        - description: Maximum size of the export (deprecated => size instead)
+          format: int32
+          in: query
+          name: export_size
+          required: false
+          type: integer
+        - description: Maximum size of the export
+          format: int32
+          in: query
+          name: size
+          required: false
+          type: integer
       responses:
         '201':
           description: Successful operation
@@ -1486,9 +1642,6 @@ definitions:
       job_url:
         readOnly: true
         type: string
-      nb_lines:
-        readOnly: true
-        type: string
       query:
         readOnly: true
         type: string
@@ -1611,6 +1764,11 @@ definitions:
       owner:
         readOnly: true
         type: string
+      pinned:
+        type: boolean
+      pins_balance:
+        readOnly: true
+        type: string
       red_button_domain:
         type: string
       slug:
@@ -1618,6 +1776,9 @@ definitions:
         type: string
       status:
         readOnly: true
+        type: string
+      to_be_deleted_at:
+        format: date-time
         type: string
       url:
         readOnly: true
@@ -1678,6 +1839,11 @@ definitions:
       owner:
         readOnly: true
         type: string
+      pinned:
+        type: boolean
+      pins_balance:
+        readOnly: true
+        type: string
       red_button_domain:
         type: string
       slug:
@@ -1685,6 +1851,9 @@ definitions:
         type: string
       status:
         readOnly: true
+        type: string
+      to_be_deleted_at:
+        format: date-time
         type: string
       url:
         readOnly: true
@@ -1699,6 +1868,12 @@ definitions:
         $ref: '#/definitions/User'
     required:
       - user
+    type: object
+  AnalysisUpdate:
+    description: Analysis Update
+    properties:
+      pinned:
+        type: boolean
     type: object
   AnalysisUpdateLaunch:
     description: Launch Analysis Update
@@ -1920,8 +2095,12 @@ definitions:
       results:
         readOnly: true
         type: string
+      size:
+        format: int64
+        type: integer
     required:
       - query
+      - size
     type: object
   Datamodel:
     properties:

@@ -945,6 +945,11 @@ definitions:
       pubsubTopic:
         description: 'The topic that Cloud Pub/Sub notifications are published to, in the form projects/{project}/topics/{topic}. This field is only required if Pub/Sub notifications are enabled.'
         type: string
+      termsAndConditions:
+        description: Terms and conditions that must be accepted when provisioning a device for this enterprise. A page of terms is generated for each value in this list.
+        items:
+          $ref: '#/definitions/TermsAndConditions'
+        type: array
     type: object
   ExternalData:
     description: Data hosted at an external location. The data is to be downloaded by Android Device Policy and verified against the hash.
@@ -1647,7 +1652,7 @@ definitions:
         description: Whether transferring files over USB is disabled.
         type: boolean
       usbMassStorageEnabled:
-        description: 'Allows admins to toggle whether USB storge is enabled or disabled on user''s devices. Next ID: 113'
+        description: 'Allows admins to toggle whether USB storge is enabled or disabled on user''s devices. Next ID: 114'
         type: boolean
       version:
         description: The version of the policy. This is a read-only field. The version is incremented each time the policy is updated.
@@ -1819,6 +1824,16 @@ definitions:
           - WINDOWED
           - POSTPONE
         type: string
+    type: object
+  TermsAndConditions:
+    description: A terms and conditions page to be accepted during provisioning.
+    properties:
+      content:
+        $ref: '#/definitions/UserFacingMessage'
+        description: 'A well-formatted HTML string. It will be parsed on the client with android.text.Html#fromHtml.'
+      header:
+        $ref: '#/definitions/UserFacingMessage'
+        description: A short header which appears above the HTML content.
     type: object
   UserFacingMessage:
     description: Provides a user-facing message with locale info. The maximum message length is 4096 characters.

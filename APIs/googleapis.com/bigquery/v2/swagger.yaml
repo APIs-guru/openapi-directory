@@ -1097,7 +1097,7 @@ definitions:
         format: int64
         type: string
       location:
-        description: The geographic location where the dataset should reside. Possible values include EU and US. The default value is US.
+        description: The geographic location where the dataset should reside. The default value is US.
         type: string
       selfLink:
         description: '[Output-only] A URL that can be used to access the resource again. You can use this URL in Get or Update requests to the resource.'
@@ -2089,11 +2089,11 @@ definitions:
     type: object
   QueryTimelineSample:
     properties:
-      activeInputs:
-        description: Total number of active workers. This does not correspond directly to slot usage. This is the largest value observed since the last sample.
+      activeUnits:
+        description: Total number of units currently being processed by workers. This does not correspond directly to slot usage. This is the largest value observed since the last sample.
         format: int64
         type: string
-      completedInputs:
+      completedUnits:
         description: Total parallel units of work completed by this query.
         format: int64
         type: string
@@ -2101,7 +2101,7 @@ definitions:
         description: Milliseconds elapsed since the start of query execution.
         format: int64
         type: string
-      pendingInputs:
+      pendingUnits:
         description: Total parallel units of work remaining for the active stages.
         format: int64
         type: string

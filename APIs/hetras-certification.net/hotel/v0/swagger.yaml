@@ -1478,84 +1478,6 @@ paths:
       summary: Partially updates a room.
       tags:
         - Rooms
-  '/api/hotel/v0/hotels/{hotelId}/transaction_codes':
-    get:
-      consumes: []
-      deprecated: false
-      operationId: TransactionCodes_GetTransactionCodes
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - format: int32
-          in: path
-          name: hotelId
-          required: true
-          type: integer
-        - description: The type group of the Transactions you want to see details for.
-          enum:
-            - Charge
-            - Payment
-            - Transfer
-          in: query
-          name: transactionType
-          required: false
-          type: string
-        - description: Specify whether will the inactive TransactionCodes be added or not
-          in: query
-          name: includeInactive
-          required: false
-          type: boolean
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      tags:
-        - TransactionCodes
-  '/api/hotel/v0/hotels/{hotelId}/transaction_codes/{code}':
-    get:
-      consumes: []
-      deprecated: false
-      operationId: TransactionCodes_GetTransactionCode
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - format: int32
-          in: path
-          name: hotelId
-          required: true
-          type: integer
-        - in: path
-          name: code
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      tags:
-        - TransactionCodes
   '/api/hotel/v0/hotels/{hotelId}/yieldable_rateplans/{rateplanCode}/$rates':
     put:
       consumes:
@@ -2855,19 +2777,6 @@ definitions:
         type: integer
     required:
       - _count
-    type: object
-  TransactionCodesListRequest:
-    properties:
-      includeInactive:
-        description: Specify whether will the inactive TransactionCodes be added or not
-        type: boolean
-      transactionType:
-        description: The type group of the Transactions you want to see details for.
-        enum:
-          - Charge
-          - Payment
-          - Transfer
-        type: string
     type: object
   YieldableRateTimeSlice:
     properties:

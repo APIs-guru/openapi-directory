@@ -1189,6 +1189,10 @@ definitions:
         description: 'Indicates type of MOTO transaction: 0 = Card Present (not MOTO/e-Commerce), 1 = One Time MOTO transaction, 2 = Recurring, 3 = Installment, 5 = Full 3D-Secure transaction, 6 = Merchant 3D-Secure transaction, 7 = e-Commerce Channel Encrypted (SSL).'
         example: '1'
         type: string
+      partial_Auth:
+        description: 'This field must be present and set to a value of ''true'' in order for the request to allow for approval of a partial amount. This would be used to allow a merchant to accept a partial payment from pre-paid and debit cards. When only part of the requested amount is available, the response code will be 010 and the amt_tran field in the response will contain the amount that was approved. A second sale on a different card is required to capture the remaining amount. Applicable only for ''auth'' and ''sale'' requests. '
+        example: true
+        type: boolean
       pg_id:
         description: 'PG ID of previously authorized transaction. This field is required when sending a capture, refund, or void request.'
         example: d24ac6189b0b11e6966ca68d5edbef41

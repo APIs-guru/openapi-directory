@@ -10,7 +10,7 @@ info:
     url: 'https://google.com'
   description: |
     Provides reliable, many-to-many, asynchronous messaging between applications.
-  title: Google Cloud Pub/Sub
+  title: Cloud Pub/Sub
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -137,6 +137,7 @@ paths:
       description: |-
         Updates an existing snapshot. Note that certain properties of a
         snapshot are not modifiable.
+        [ALPHA] This method is a part of a closed Alpha API.
       operationId: pubsub.projects.snapshots.patch
       parameters:
         - in: body
@@ -195,7 +196,9 @@ paths:
         - projects
   '/v1/{project}/snapshots':
     get:
-      description: Lists the existing snapshots.
+      description: |-
+        Lists the existing snapshots.
+        [ALPHA] This method is a part of a closed Alpha API.
       operationId: pubsub.projects.snapshots.list
       parameters:
         - description: Maximum number of snapshots to return.
@@ -487,6 +490,7 @@ paths:
         are immediately dropped. After a snapshot is deleted, a new one may be
         created with the same name, but the new one has no association with the old
         snapshot or its subscription, unless the same subscription is specified.
+        [ALPHA] This method is a part of a closed Alpha API.
       operationId: pubsub.projects.snapshots.delete
       parameters:
         - description: |-
@@ -510,7 +514,9 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the configuration details of a snapshot.
+      description: |-
+        Gets the configuration details of a snapshot.
+        [ALPHA] This method is a part of a closed Alpha API.
       operationId: pubsub.projects.snapshots.get
       parameters:
         - description: |-
@@ -828,6 +834,7 @@ paths:
       description: |-
         Seeks an existing subscription to a point in time or to a given snapshot,
         whichever is provided in the request.
+        [ALPHA] This method is a part of a closed Alpha API.
       operationId: pubsub.projects.subscriptions.seek
       parameters:
         - in: body
@@ -922,7 +929,9 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1/{topic}/snapshots':
     get:
-      description: Lists the names of the snapshots on this topic.
+      description: |-
+        Lists the names of the snapshots on this topic.
+        [ALPHA] This method is a part of a closed Alpha API.
       operationId: pubsub.projects.topics.snapshots.list
       parameters:
         - description: Maximum number of snapshot names to return.
@@ -1175,7 +1184,9 @@ definitions:
         type: array
     type: object
   ListTopicSnapshotsResponse:
-    description: Response for the `ListTopicSnapshots` method.
+    description: |-
+      Response for the `ListTopicSnapshots` method.
+      [ALPHA] This method is a part of a closed Alpha API.
     properties:
       nextPageToken:
         description: |-
@@ -1536,6 +1547,7 @@ definitions:
           of acknowledged messages, and thus configures how far back in time a `Seek`
           can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
           minutes.
+          [ALPHA] This field is a part of a closed Alpha API.
         format: google-duration
         type: string
       name:
@@ -1559,6 +1571,7 @@ definitions:
           messages are not expunged from the subscription's backlog, even if they are
           acknowledged, until they fall out of the `message_retention_duration`
           window.
+          [ALPHA] This field is a part of a closed Alpha API.
         type: boolean
       topic:
         description: |-

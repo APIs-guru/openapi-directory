@@ -38,12 +38,17 @@ tags:
       Note: Assume undocumented routes/features/fields are unstable.
 
       #### Canonical URLs
+
       All canonical URLs have trailing slashes.  A request to an endpoint without a trailing slash will result in a **301 Redirect** to the canonical URL.  There are some exceptions when working with the Files API, so if a URL in a response does not have a slash, do not append one.
+
       #### Plurals
+
       Endpoints are always pluralized.  `/users/`, not `/user/`, `/nodes/`, not `/node/`.
 
       The only exception are the node and preprint citation endpoints, which are `/citation/`, not `/citations/`.
+
       #### Common Actions
+
       Every endpoint in the OSF API responds to `GET`, `HEAD`, and `OPTION` requests.
 
       You must have adequate permissions to interact with any endpoint. Unauthorized use will result in **401 Unauthorized** or **403 Forbidden** responses.
@@ -55,7 +60,9 @@ tags:
       An `OPTIONS` request will return a JSON object that describes the endpoint, including the name, a description, the acceptable request formats, the allowed response formats, and any actions available via the endpoint.
 
       #### Testing
+
       ##### Testing Server
+
       The test-* subdomains of the osf are intended to match, at any given time, the current production environment of the Open Science Framework.
 
       We have staging servers that will have newer features, including newer API features, that aren't ready for production. However, because those servers are subject to the whims of QA and whichever group needs to do specific testing, they aren't particular stable for API developers.
@@ -65,7 +72,9 @@ tags:
       https://test.osf.io/
 
       https://test-api.osf.io/v2/
+
       ##### Ephemerality Notice
+
       Expect the server to be down from time to time while we update software, and don't expect that anything you create on here to exist long-term.
 
       While this is more stable than a staging server, we won't necessarily run data migrations if anything major happens to our database schema, so we may clear out the data on the test servers periodically.
@@ -73,18 +82,34 @@ tags:
     x-traitTag: true
   - description: |-
       #### Token Auth
-      To use a Personal Access Token, make an `Authorization` header with the contents `Bearer <token>` as shown in the example below, replacing `<token>` with your token.
+
+      To use a Personal Access Token (PAT), make an `Authorization` header with the contents `Bearer <token>` as shown in the example below, replacing `<token>` with your token.
+
 
           curl -X "GET" "https://api.osf.io/v2/users/me/" \
           -H "Authorization: Bearer <token>"
 
+
       To make a Personal Access Token, visit your OSF settings page (either on the [OSF](https://osf.io/settings/tokens/) or our [testing server](https://test.osf.io/settings/tokens/)) to create one. You can limit the scope of the token, but remember that it has access to all of the information that you do within the limits of the scope, so be careful with your tokens.
+
       #### OAuth
+
       The OSF allows third-party web applications to connect to the OSF on behalf of other users via the OAuth 2.0 web application flow.
+
       You can add a developer application from the OSF settings page (either on the [OSF](https://osf.io/settings/tokens/) or our [testing server](https://test.osf.io/settings/tokens/)).
 
       We will be adding narrative documentation for handling OAuth flows, but for now, if you're familiar with OAuth, you can check out the [CAS overlay documentation](https://github.com/CenterForOpenScience/cas-overlay#web-server-authorization) for options.
-      We've also created a [test application](https://github.com/abought/osf_oauth2_demo) for verifying that our OAuth workflow works correctly. If you set up an OAuth application on https://test.osf.io/, you should be able to add the client secret and client id to the settings file and it should work properly. If it does not, please let us know.
+
+      #### When to use Token Auth
+      You should use Token Auth if:
+      + You want to use the API to interact with your own OSF data
+      + You have scripts to push or extract data from your OSF account
+      + You want to use the API to programmatically automate certain actions in your own OSF account
+
+      #### When to use OAuth
+      You should use OAuth if:
+      + You are requesting access to other people's OSF accounts/data to push or extract data on their behalf
+      + You currently ask people for their PAT to request resources on their behalf
     name: Authentication
     x-traitTag: true
   - description: |-
@@ -93,49 +118,75 @@ tags:
       However, links to the first, last, previous, and next pages of results are provided in the `links` key of the response, and you are encouraged to use those rather than adding query parameters by hand.
 
       If there are only enough results to fill one page, the `first`, `last`, `prev`, and `next` links will be null.
+
       #### Versioning
+
       As of version `2.3`, pagination links conform to the JSON API specification. Meta information was pulled out of the `links` object and placed in a top-level `meta` object.
 
       The `meta` key contains the total number of entities available, as well as the current number of results displayed per page.
     name: Pagination
     x-traitTag: true
   - description: |-
+      For any additions to the api (new fields, routes, methods, or relationships), those additions will be added simultaneously to all versions. For any breaking changes and deletions, a new API version will be released. Requesting the base API takes the most compatible version of the API, not the one with the latest changes. Note that, in the case of the OSF model changing, legacy API functionality *may* break. We try very hard not to let this happen, but sometimes it's unavoidable.
+
       Versioning can be specified in three different ways:
 
       #### URL Path Versioning
+
       + `/v2/` or `/v3/`
+
       + A version specified via the URL path is a **required** part of the URL.
+
       + Only a major version can be specified via the URL path, i.e. `/v2.0.6/` is invalid, additionally, paths such as `/v2.0/` are invalid.
+
       + If the default version of the API is within the major version specified in the URL path, the default version will be applied (i.e. if the default version is `2.3` and the URL path is `/v2/`, then version returned will be `2.3`).
+
       + If the default version of the API is not within the major version specified in the URL path, the URL path version will be applied (i.e. if the default version is `3.0` and the URL path is `/v2/`, then the version returned will be `2.0`)
 
       #### Query Parameter Versioning
+
       + `/v2/nodes/?version=2.1.6`
+
       + Pinning to a specific version via a query parameter is **optional**.
+
       + A specific version (major, minor, or patch) for a single request can be specified via the `version` query parameter, as long as it is an allowed version.
+
       + If the version specified in the query parameter does not fall within the same major version specified in the URL path, i.e `/v2/nodes/?version=3.1.4` a 409 Conflict response will be returned.
 
       #### Header Versioning
+
       + `Accept-Header=application/vnd.api+json;version=3.0.1`
+
       + Pinning to a specific version via request header is **optional**.
+
       + A specific version (major, minor, or patch) for a single request can be specified via the `Accept Header` of the request, as long as it is an allowed version.
+
       + If the version specified in the header does not fall within the same major version specified in the URL path a 409 Conflict response will be returned.
+
       + If both a header version and query parameter version are specified, the versions must match exactly or a 409 Conflict response will be returned (i.e. one does not take precedence over the other).
 
       #### CHANGELOG
+
       `v2.1`
+
       + Pagination links conform to JSON API specification, i.e. `meta` information was pulled out of the `links` object and placed in a top-level `meta` object.
+
       + Deprecate the `node_links` field in the **Node** and **Registration** serializers in favor of `linked_nodes` and `linked_registrations`.
 
       `v2.2`
+
       + Modify institution nodes list so that affiliated components are also returned from `/v2/institutions/<id>/nodes/`.
+
       + Ensure all existing date fields are standardized on UTC.
 
       `v2.3`
+
       + Handle merged users more correctly on `/v2/users/`.
 
       `v2.4`
+
       + Deprecate the `parents` field in the **Taxonomies** serializer.
+
       + Deprecate the following fields in the **Preprint Provider** serializer:
           + `social_facebook`, `social_instagram`, and `social_twitter`
           + `banner_path`, `logo_path`, and `header_text`
@@ -166,6 +217,30 @@ tags:
       You can filter with case-sensitivity or case-insensitivity by using `contains` and `icontains`, respectively.
 
       &nbsp;&nbsp;&nbsp;&nbsp;`/nodes/?filter[tags][icontains]=help`
+
+      You can also filter on comparable, ordered fields, including datetimes and integers.
+
+      You can filter using comparisons by using the follow syntax:
+
+      &nbsp;&nbsp;&nbsp;&nbsp;`?filter[date_modified][gte]=2014-10-10`
+
+      Valid comparison operators include:
+      + `[gte]` = greater than or equal
+      + `[gt]` = greater than
+      + `[lte]` = less than or equal
+      + `[lt]` = less than
+      + `[eq]` = equals
+      + `[ne]` = does not equal
+
+      These comparison filters work for dates and integers. For example, you can use two comparison filters to specify
+
+      &nbsp;&nbsp;&nbsp;&nbsp;`[date_modified][gte]=2014-10-10&[date_modified][lt]=2014-11-10`
+
+      or exclude
+
+      &nbsp;&nbsp;&nbsp;&nbsp;`[date_created][lt]=2014-10-10&[date_created][gt]=2014-11-10`
+
+      a range of dates from your search. Note that the dates must be in YYYY-MM-DD format.
     name: Filtering
     x-traitTag: true
   - description: |
@@ -174,13 +249,16 @@ tags:
 
       From the specification:
 
+
       <blockquote>
         <p>A client MAY request that an endpoint return only specific fields in the response on a per-type basis by including a fields[TYPE] parameter.</p>
         <p>The value of the fields parameter MUST be a comma-separated (U+002C COMMA, “,”) list that refers to the name(s) of the fields to be returned.</p>
         <p>If a client requests a restricted set of fields for a given resource type, an endpoint MUST NOT include additional fields in resource objects of that type in its response.</p>
       </blockquote>
 
+
       #### Basic Usage
+
 
       When making a request to an endpoint that returns a serialized object of some `type`, you can specify `fields[<type>]=<comma,separated,list,of,fields>` to receive a subset of the object's fields in the response.
 
@@ -194,7 +272,9 @@ tags:
       Sparse fieldsets can be used to restrict both attribute and relationship fields.
       Note that top-level objects (such as `type`, `id`, `attributes`, `relationships`, and `links`) will always be serialized and cannot be excluded.
 
+
       #### Advanced Usage
+
 
       Sparse fieldsets can be used to restrict any entity returned in the response.
 
@@ -249,6 +329,7 @@ tags:
     x-traitTag: true
   - description: |-
       ## Attribute Validation
+
       Endpoints that allow creation or modification of entities generally limit updates to certain attributes of the entity.
 
       If you attempt to set an attribute that does not permit updates (such as a `date_created` timestamp), the API will silently ignore that attribute.
@@ -256,8 +337,11 @@ tags:
       This will not affect the response from the API: if the request would have succeeded without the updated attribute, it will still report as successful. Likewise, if the request would have failed without the attribute update, the API will still report a failure.
 
       Typoed or non-existent attributes will behave the same as non-updatable attributes and will be silently ignored. If a request is not working the way you expect, make sure to double check your spelling.
+
       ## Create/Update Requests
+
       #### Formatting POST/PUT/PATCH Request Bodies
+
       The OSF API follows the JSON-API spec for [create and update requests](http://jsonapi.org/format/1.0/#crud). This means all request bodies must be wrapped with some metadata.
 
       Each request body must be an object with a `data` key containing at least a `type` member. The value of the `type` member must agree with the `type` of the entities represented by the endpoint. If not, a **409 Conflict** will be returned.
@@ -267,6 +351,7 @@ tags:
       **PUT/PATCH** requests must also have an `id` key that matches the ID part of the endpoint you are making a request to. If the `id` key does not match the ID part of the URL path, a **409 Conflict** error will be returned.
 
       #### Creating a Node via POST Example
+
 
           POST /v2/nodes/
           {
@@ -283,6 +368,7 @@ tags:
 
       #### Updating a User via PUT Example
 
+
           PUT /v2/users/me/
           {
             "data": {
@@ -297,9 +383,11 @@ tags:
             }
           }
 
+
       **Note:** If you PUT/PATCH to the `/users/me/` endpoint, you must still provide your full user id in the `id` field of the request.  We do not support using the `me` alias in request bodies at this time.
 
       #### PUT vs. PATCH
+
       For most endpoints that support updates via **PUT** requests, we also allow **PATCH** updates.
 
       **PUT** requests require all mandatory attributes to be set, even if their value is unchanged. **PATCH** requests may omit mandatory attributes, whose value will be unchanged.
@@ -307,6 +395,7 @@ tags:
     x-traitTag: true
   - description: |-
       ## Errors
+
       When a request fails for any reason, the OSF API will return an appropriate HTTP response code and include a descriptive error in the body of the response.
 
       The response body will be a JSON object with a key, `errors`, pointing to an array of error objects.
@@ -316,7 +405,9 @@ tags:
       The `error` objects may include additional information in accordance with the [JSON-API error spec](http://jsonapi.org/format/1.0/#error-objects).
 
       #### Example
+
       An error response from an incorrect create node request:
+
 
           {
             "errors": [
@@ -341,7 +432,9 @@ tags:
             ]
           }
 
+
       ## Error Codes
+
       The OSF API uses conventional HTTP response codes to indicate the success or failure of an API request.
 
       In general, codes in the `2xx` range indicate success, codes in the `4xx` range indicate an error that failed given the information provided (e.g., a required parameter was omitted, invalid authentication credentials were provided, etc.), and codes in the `5xx` range indicate an error with our API servers (these are rare, and if they occur consistently, should be [reported](mailto:support@osf.io)).
@@ -403,14 +496,23 @@ tags:
     x-traitTag: true
   - description: |-
       ## Entities
+
       An entity is a single resource that has been retrieved from the API, usually from an endpoint with the entity's ID as the final path part. A successful response from an entity request will be a JSON object with a top level `data` key pointing to a sub-object with the following members:
+
       #### ID
+
       The identifier for the entity.  This **MUST** be included with all PUT and PATCH requests.
+
       #### Type
+
       The type identifier of this entity.  This **MUST** be included with all create and update requests.
+
       #### Attributes
+
       The properties of the entity.  Names, descriptions, etc.
+
       #### Relationships
+
       Relationships are URLs to other entities or entity collections that have a relationship to the entity.
 
       For example, the node entity provides a `contributors` relationship that points to the endpoint to retrieve all contributors to that node. It is recommended to use these links rather than to filter general entity collection endpoints by IDs. They'll be faster, easier, and less error-prone.
@@ -429,29 +531,46 @@ tags:
 
 
       If there are no related entities, `href` will be null.
+
       #### Embeds
+
       Please see the [embedding](#tag/Embedding) documentation.
+
       #### Links
+
       Links are urls to alternative representations of the entity or actions that may be performed on the entity.
 
       Most entities will provide a `self` link that is the canonical endpoint for the entity where update and delete requests should be sent. Most entities will also provide an `html` link that directs to the entity's page on the Open Science Framework.
+
       ## Entity Collections
+
       Entity collection endpoints return a list of entities and an additional data structure with pagination links, such as `next`, `prev`, `first`, and `last`.
 
       The OSF API limits all entity collection responses to a maximum of 10 entities.
 
       The response object has two keys:
+
       #### Data
+
       The `data` key is an array of entities that match the query.
 
       Each entity in the array is the same representation that is returned from that entity's `self` link, meaning that refetching the entity is unnecessary.
+
       #### Links
+
       The `links` key contains pagination information, including links to the previous, next, first, and last pages of results.
 
       The `meta` key contains the total number of entities available, as well as the current number of results displayed per page.
 
       If there are only enough results to fill one page, the `first`, `last`, `prev`, and `next` values will be null.
     name: Entities & Entity Collections
+    x-traitTag: true
+  - description: |-
+      #### [osfclient](https://github.com/osfclient/osfclient)
+      A python library and command-line client for file storage on the OSF.
+      #### [OSFR](https://github.com/chartgerink/osfr)
+      An R package to interface with the OSF.
+    name: External Libraries
     x-traitTag: true
 paths:
   /:
@@ -460,6 +579,7 @@ paths:
         Welcome to the Open Science Framework API. With this API you can access users, projects, components, logs, and files from the [Open Science Framework](https://osf.io/). The Open Science Framework (OSF) is a free, open-source service maintained by the [Center for Open Science](http://cos.io/).
 
         #### Returns
+
         A JSON object with `meta` and `links` keys.
 
         The `meta` key contains information such as a welcome message from the API, the specified version of the request, and the full representation of the current user, if authentication credentials were provided in the request.
@@ -475,69 +595,141 @@ paths:
   /actions/:
     get:
       description: |-
-
         A log can have one of many actions. The complete list of loggable actions (in the format {identifier}: {description}) is as follows:
+
         * `project_created`: A Node is created
+
         * `project_registered`: A Node is registered
+
         * `project_deleted`: A Node is deleted
+        ---
+
         * `created_from`: A Node is created using an existing Node as a template
+
         * `pointer_created`: A Pointer is created
+
         * `pointer_forked`: A Pointer is forked
+
         * `pointer_removed`: A Pointer is removed
+
         * `node_removed`: A component is deleted
+
         * `node_forked`: A Node is forked
         ---
+
         * `made_public`: A Node is made public
+
         * `made_private`: A Node is made private
+
         * `tag_added`: A tag is added to a Node
+
         * `tag_removed`: A tag is removed from a Node
+
         * `edit_title`: A Node's title is changed
+
         * `edit_description`: A Node's description is changed
+
         * `updated_fields`: One or more of a Node's fields are changed
+
         * `external_ids_added`: An external identifier is added to a Node (e.g. DOI, ARK)
+        ---
+
         * `view_only_link_added`: A view-only link was added to a Node
+
         * `view_only_link_removed`:  A view-only link was removed from a Node
+
         ---
+
         * `contributor_added`: A Contributor is added to a Node
+
         * `contributor_removed`: A Contributor is removed from a Node
+
         * `contributors_reordered`: A Contributor's position in a Node's bibliography is changed
+
         * `permissions_updated`: A Contributor`s permissions on a Node are changed
+
         * `made_contributor_visible`: A Contributor is made bibliographically visible on a Node
+
         * `made_contributor_invisible`: A Contributor is made bibliographically invisible on a Node
+
         ---
+
         * `wiki_updated`: A Node's wiki is updated
+
         * `wiki_deleted`: A Node's wiki is deleted
+
         * `wiki_renamed`: A Node's wiki is renamed
+
         * `made_wiki_public`: A Node's wiki is made public
+
         * `made_wiki_private`: A Node's wiki is made private
+
         ---
+
         * `addon_added`: An add-on is linked to a Node
+
         * `addon_removed`: An add-on is unlinked from a Node
+
         * `addon_file_moved`: A File in a Node's linked add-on is moved
+
         * `addon_file_copied`: A File in a Node's linked add-on is copied
+
         * `addon_file_renamed`: A File in a Node's linked add-on is renamed
+        ---
+
         * `node_authorized`: An addon is authorized for a project
+
         * `node_deauthorized`: An addon is deauthorized for a project
+        ---
+
         * `folder_created`: A Folder is created in a Node's linked add-on
+
         * `file_added`: A File is added to a Node's linked add-on
+
         * `file_updated`: A File is updated on a Node's linked add-on
+
         * `file_removed`: A File is removed from a Node's linked add-on
+
         * `file_restored`: A File is restored in a Node's linked add-on
+
         ---
+
         * `comment_added`: A Comment is added to some item
+
         * `comment_removed`: A Comment is removed from some item
+
         * `comment_updated`: A Comment is updated on some item
+
         ---
+
         * `embargo_initiated`: An embargoed Registration is proposed on a Node
+
         * `embargo_approved`: A proposed Embargo of a Node is approved
+
         * `embargo_cancelled`: A proposed Embargo of a Node is cancelled
+
         * `embargo_completed`: A proposed Embargo of a Node is completed
+        ---
+
         * `retraction_initiated`: A Withdrawal of a Registration is proposed
+
         * `retraction_approved`: A Withdrawal of a Registration is approved
+
         * `retraction_cancelled`: A Withdrawal of a Registration is cancelled
+        ---
+
         * `registration_initiated`: A Registration of a Node is proposed
+
         * `registration_approved`: A proposed Registration is approved
+
         * `registration_cancelled`: A proposed Registration is cancelled
+        ---
+
+        * `preprint_initiated`: A preprint is made from the node
+
+        * `preprint_license_updated`: A license is added or updated to the preprint
+
+        * `preprint_file_updated`: The primary file of a preprint is updated
       operationId: logs_actions
       responses:
         '200':
@@ -548,9 +740,10 @@ paths:
   /addons/:
     get:
       description: |-
-
         A paginated list of addons configurable with the OSF
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 addons. Each resource in the array is a separate addon object.
@@ -710,9 +903,10 @@ paths:
   /citations/styles/:
     get:
       description: |-
-
         A paginated list of all standard citation styles available for rendering citations.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 citation styles. Each resource in the array is a separate citation syle and contains the full representation of the citation style object.
@@ -720,10 +914,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include citation styles that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/citations/styles/?filter[title]=open.
 
         Citation styles may be filtered by their `id`, `title`, `short-title`, and `summary`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: citations_styles_list
       responses:
         '200':
@@ -880,7 +1078,9 @@ paths:
     delete:
       description: |-
         Deletes a comment. This action can be undone by setting deleted to False in a comment update request.
+
         #### Returns
+
         If the request is successful, no content is returned.
 
         If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -900,7 +1100,9 @@ paths:
     get:
       description: |-
         Retrieves the details of a comment
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested comment, if the request was successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -1117,45 +1319,16 @@ paths:
     get:
       description: |-
         Retrieves the details of a file (or folder)
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested file, if the request was successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
-        ###Waterbutler API actions
 
-        Files can be modified through the Waterbutler API routes found in `links` (`new_folder`, `move`, `upload`, `download`, and `delete`).
+        ### Waterbutler API actions
 
-        #### Download (files)
-
-        To download a file, issue a GET request against the download link. The response will have the Content-Disposition header set, which will will trigger a download in a browser.
-
-        #### Create Subfolder (folders)
-
-        You can create a subfolder of an existing folder by issuing a PUT request against the new_folder link. The ?kind=folder portion of the query parameter is already included in the new_folder link. The name of the new subfolder should be provided in the name query parameter. The response will contain a WaterButler folder entity. If a folder with that name already exists in the parent directory, the server will return a 409 Conflict error response.
-
-        #### Upload New File (folders)
-
-
-          To upload a file to a folder, issue a PUT request to the folder's upload link with the raw file data in the request body, and the kind and name query parameters set to 'file' and the desired name of the file. The response will contain a WaterButler file entity that describes the new file. If a file with the same name already exists in the folder, the server will return a 409 Conflict error response.
-
-
-        #### Update Existing File (file)
-
-        To update an existing file, issue a PUT request to the file's upload link with the raw file data in the request body and the kind query parameter set to "file". The update action will create a new version of the file. The response will contain a WaterButler file entity that describes the updated file.
-
-        #### Rename (files, folders)
-
-        To rename a file or folder, issue a POST request to the move link with the action body parameter set to "rename" and the rename body parameter set to the desired name. The response will contain either a folder entity or file entity with the new name.
-
-        #### Move & Copy (files, folders)
-
-        Move and copy actions both use the same request structure, a POST to the move url, but with different values for the action body parameters. The path parameter is also required and should be the OSF path attribute of the folder being written to. The rename and conflict parameters are optional. If you wish to change the name of the file or folder at its destination, set the rename parameter to the new name. The conflict param governs how name clashes are resolved. Possible values are replace and keep. replace is the default and will overwrite the file that already exists in the target folder. keep will attempt to keep both by adding a suffix to the new file's name until it no longer conflicts. The suffix will be ' (x)' where x is a increasing integer starting from 1. This behavior is intended to mimic that of the OS X Finder. The response will contain either a folder entity or file entity with the new name.
-        Files and folders can also be moved between nodes and providers. The resource parameter is the id of the node under which the file/folder should be moved. It must agree with the path parameter, that is the path must identify a valid folder under the node identified by resource. Likewise, the provider parameter may be used to move the file/folder to another storage provider, but both the resource and path parameters must belong to a node and folder already extant on that provider. Both resource and provider default to the current node and providers.
-        If a moved/copied file is overwriting an existing file, a 200 OK response will be returned. Otherwise, a 201 Created will be returned.
-
-        #### Delete (file, folders)
-
-        To delete a file or folder send a DELETE request to the delete link. Nothing will be returned in the response body.
+        Files can be modified via the Waterbutler URLs found in the `links` key of the response (new_folder, move, upload, download, and delete). Further information about how to interact with files can be found in the [Waterbutler API documentation](https://waterbutler.readthedocs.io/en/latest/api.html#v1-api).
       operationId: files_detail
       parameters:
         - description: The unique identifier of the file you wish to retrieve.
@@ -1192,7 +1365,7 @@ paths:
                 id: 553e69248c5e4a219919ea54
                 links:
                   delete: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
-                  download: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                  download: 'https://osf.io/download/sejcv'
                   info: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
                   move: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
                   self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
@@ -1408,9 +1581,10 @@ paths:
   '/files/{file_id}/versions/':
     get:
       description: |-
-
         A paginated list of all file versions.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 file versions. Each resource in the array is a separate file version object.
@@ -1499,7 +1673,8 @@ paths:
     get:
       description: |-
         Retrieves the details of a file version
-        ####Returns
+
+        #### Returns
 
         Returns a JSON object with a `data` key containing the representation of the requested file, if the request was successful.
 
@@ -1585,9 +1760,10 @@ paths:
   /institutions/:
     get:
       description: |-
-
         A paginated list of all verified institutions.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 institutions. Each resource in the array is a separate institution object.
@@ -1595,10 +1771,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include institutions that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/institutions/?filter[id]=cos.
 
         Institutions may be filtered by their `id`, `name`, and `auth_url`
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: institutions_list
       responses:
         '200':
@@ -1712,7 +1892,9 @@ paths:
     get:
       description: |-
         Retrieves the details of an institution
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested institution, if the request was successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -1829,9 +2011,13 @@ paths:
     get:
       description: |-
         A paginated list of all nodes affiliated with an institution.
+
         #### Versioning
+
         As of version `2.2`, affiliated components (in addition to affiliated top-level projects) are returned from this endpoint.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 nodes. Each resource in the array is a separate nodes object.
@@ -1839,10 +2025,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
         #### Filtering
+
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/institutions/cos/nodes?filter[title]=science.
 
-        Nodes may be filtered by their `id`, `title`, `description`, `public`, `tags`, `category`, `date_created`, `date_modified`, `root`, `parent`, `contributors`, and `preprint`
+        Nodes may be filtered by their `id`, `title`, `description`, `public`, `tags`, `category`, `date_created`, `date_modified`, `root`, `parent`, `contributors`, and `preprint`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: institutions_node_list
       parameters:
         - description: The unique identifier of the institution you wish to retrieve.
@@ -2159,7 +2349,7 @@ paths:
                       readOnly: true
                       type: string
                     node_links:
-                      description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                      description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                       readOnly: true
                       type: string
                     parent:
@@ -2211,7 +2401,9 @@ paths:
     get:
       description: |-
         A paginated list of all registrations affiliated with an institution.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 registrations. Each resource in the array is a separate users object.
@@ -2219,7 +2411,9 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
         #### Filtering
+
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/institutions/cos/registrations?filter[title]=science.
 
         Registrations may be filtered by their  `id`, `title`, `description`, `public`, `tags`, `category`, `date_created`, `date_modified`, `root`, `parent`, `contributors`, and `preprint`
@@ -2360,7 +2554,9 @@ paths:
     get:
       description: |-
         A paginated list of all users affiliated with an institution.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 users. Each resource in the array is a separate users object.
@@ -2368,10 +2564,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
         #### Filtering
+
         You can optionally request that the response only include users that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/institutions/cos/users?filter[family_name]=Nosek.
 
         Users may be filtered by their `id`, `full_name`, `given_name`, `middle_names`, and `family_name`
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: institutions_users_list
       parameters:
         - description: The unique identifier of the institution you wish to retrieve.
@@ -2533,7 +2733,9 @@ paths:
     get:
       description: |-
         Retrieves the details of a license.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested license, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -2558,6 +2760,7 @@ paths:
                   text: |
                     Copyright (c) {{year}}, {{copyrightHolders}}
                     All rights reserved.
+
 
                     The full descriptive text of the License
                 id: 563c1cf88c5e4a3877f9e968
@@ -2617,17 +2820,24 @@ paths:
     get:
       description: |-
         A paginated list of licenses. The returned licenses are sorted by their name.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
+
         The `data` key contains an array of 10 licenses. Each resource in the array is a separate license object and contains the full representation of the license, meaning additional requests to a license's detail view are not necessary.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include licenses that match your filters by utilizing the `filter` query parameter, e.g. [https://api.osf.io/v2/licenses/?filter[name]=apache](https://api.osf.io/v2/licenses/?filter[name]=apache).
 
         Licenses may be filtered by their `id`, and `name`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: license_list
       responses:
         '200':
@@ -2712,8 +2922,11 @@ paths:
     get:
       description: |-
         Retrieves the details of a log.
+
         A log is permanent immutable record of a node's history. A log is created when a user performs one of many actions. See the [actions](#Logs_logs_actions) section for more details.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested log, if the request was successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -3017,10 +3230,12 @@ paths:
   /metaschemas/:
     get:
       description: |-
-
         A paginated list of all active metaschemas.
+
         Metaschemas describe the supplemental questions that accompany a registration.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 metaschemas. Each resource in the array is a separate metaschema object.
@@ -3141,6 +3356,7 @@ paths:
         Metaschemas describe the supplemental questions that accompany a registration.
 
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested metaschema, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -3253,7 +3469,6 @@ paths:
   /nodes/:
     get:
       description: |-
-
         A paginated list of nodes, representing projects and components, on the OSF.
 
         The returned nodes are those which are public or which the user has access to view.
@@ -3261,7 +3476,9 @@ paths:
         The returned nodes are sorted by their `date_modified`, with the most recently updated nodes appearing first.
 
         Registrations cannot be accessed through this endpoint (use the [registrations](#tag/Registrations) endpoints instead).
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 nodes. Each resource in the array is a separate node object and contains the full representation of the node, meaning additional requests to a node's detail view are not necessary.
@@ -3269,12 +3486,16 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/?filter[title]=reproducibility.
 
         Nodes may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, `preprint`, and `contributors`.
 
         Most fields are string fields and will be filtered using simple substring matching. Public and preprint are boolean fields, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting true or false in the query will cause the match to fail.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_list
       responses:
         '200':
@@ -3584,7 +3805,7 @@ paths:
                       readOnly: true
                       type: string
                     node_links:
-                      description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                      description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                       readOnly: true
                       type: string
                     parent:
@@ -3833,7 +4054,7 @@ paths:
                     readOnly: true
                     type: string
                   node_links:
-                    description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                    description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                     readOnly: true
                     type: string
                   parent:
@@ -3886,11 +4107,14 @@ paths:
   '/nodes/{node_id}/':
     delete:
       description: |-
-
         Permanently deletes a node. This action cannot be undone.
+
         #### Permissions
+
         Only project administrators may delete a node. Attempting to delete a node for which you are not an administrator will result in a **403 Forbidden** response.
+
         #### Returns
+
         If the request is successful, no content is returned.
 
         If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -3910,11 +4134,15 @@ paths:
     get:
       description: |-
         Retrieves the details of a given node (project or component).
+
         #### Permissions
+
         Only project contributors may retrieve the details of a private node. Attempting to retreive a private node for which you are not a contributor will result in a **403 Forbidden** response.
 
         Authentication is not required to view the details of a public node, as public nodes give read-only access to everyone.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested node, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -4222,7 +4450,7 @@ paths:
                     readOnly: true
                     type: string
                   node_links:
-                    description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                    description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                     readOnly: true
                     type: string
                   parent:
@@ -4276,9 +4504,13 @@ paths:
         Updates a node by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
 
         Nodes can be updated with either a **PUT** or **PATCH** request. The `title` and `category` fields are mandatory in a **PUT** request, and optional in a **PATCH**.
+
         #### Permissions
+
         Only write contributors may update a node. Attempting to update a node for which you do not have write access will result in a **403 Forbidden** response.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the new representation of the updated node, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -4314,9 +4546,10 @@ paths:
   '/nodes/{node_id}/addons/':
     get:
       description: |-
-
         A paginated list of addons connected to the given node or project.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of at most 10 addon objects. Each resource in the array is a separate addon object and contains the full representation of the addon, meaning additional requests to a addon's detail view are not necessary.
@@ -4406,10 +4639,15 @@ paths:
     get:
       description: |-
         Retrieve details of an individual addon connected to this node.
+
         #### Permissions
+
         NodeSettings that are attached to public nodes will give read-only access to everyone. Private nodes require explicit read permission. Write and admin access are the same for public and private nodes. Administrators on a parent node have implicit read permissions for all child nodes.
+
         Any users with write or admin access to the node are able to deauthorize an enabled addon, but only the addon authorizer is able to change the configuration (i.e. selected folder) of an already-configured NodeSettings entity.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the details of the requested addon, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -4518,11 +4756,15 @@ paths:
         Node addon can be updated with either a **PUT** or **PATCH** request. The `external_account_id`, `enabled`, and `folder_id` fields are mandatory in a **PUT**, and optional in **PATCH**. Non-string values will be accepted and stringified, however we make no promises about the stringification output.
 
         To delete or deauthorize a node addon, issue a **PUT** with all fields set to `null` or `False`, or a **PATCH** with enabled set `False`.
+
         #### Permissions
+
         NodeSettings that are attached to public nodes will give read-only access to everyone. Private nodes require explicit read permission. Write and admin access are the same for public and private nodes. Administrators on a parent node have implicit read permissions for all child nodes.
+
         Any users with write or admin access to the node are able to deauthorize an enabled addon, but only the addon authorizer is able to change the configuration (i.e. selected folder) of an already-configured NodeSettings entity.
 
         #### Returns
+
         Returns a JSON object with a `data` key containing the new representation of the updated node addon, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -4562,11 +4804,14 @@ paths:
   '/nodes/{node_id}/addons/{provider}/folders/':
     get:
       description: |-
-
         A paginated list of folders retrieved from the associated third-party (provider) service.
+
         #### Permissions
+
         Folders are visible only to the user that authorized the addon.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of addon folder objects. Each resource in the array is a separate addon folder object and contains the full representation of the addon folder, meaning additional requests to a addon folder's detail view are not necessary.
@@ -4657,11 +4902,12 @@ paths:
   '/nodes/{node_id}/children/':
     get:
       description: |-
-
         A paginated list of the next level child nodes for the given node. The returned nodes are sorted by their `date_modified`, with the most recently updated child nodes appearing first.
 
         The list will include child nodes that are public, as well as child nodes that are private, if the authenticated user has permission to view them.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 child nodes. If the given node has zero child nodes, the `data` key will contain an empty array. Each resource in the array is a separate node object and contains the full representation of the child node, meaning additional requests to the child node's detail view are not necessary.
@@ -4669,12 +4915,16 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/children/?filter[title]=reproducibility.
 
         Nodes may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, `preprint`, and `contributors`.
 
         Most fields are string fields and will be filtered using simple substring matching. Public and preprint are boolean fields, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting true or false in the query will cause the match to fail.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_children_list
       parameters:
         - description: The unique identifier of the node.
@@ -4990,7 +5240,7 @@ paths:
                       readOnly: true
                       type: string
                     node_links:
-                      description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                      description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                       readOnly: true
                       type: string
                     parent:
@@ -5045,9 +5295,13 @@ paths:
         Creates a new child node.
 
         Note: Creating a child node via this endpoint will function the same as creating a node via the node list endpoint, but the child node will have the given node set as its parent.
+
         #### Permissions
+
         Only write contributors may create children nodes.
+
         #### Required
+
         Required fields for creating a node include:
 
         &nbsp;&nbsp;&nbsp;&nbsp;`title`
@@ -5055,7 +5309,9 @@ paths:
         &nbsp;&nbsp;&nbsp;&nbsp;`category`
 
         Note: nodes default to **private** unless the `public` field is explicitly set to **true** in the request payload.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the created node, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -5244,7 +5500,7 @@ paths:
                     readOnly: true
                     type: string
                   node_links:
-                    description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                    description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                     readOnly: true
                     type: string
                   parent:
@@ -5298,7 +5554,9 @@ paths:
     get:
       description: |-
         The citation details for a node, in CSL format.
+
         #### Returns
+
         Returns a JSON object with a `data` key that contains the representation of the details necessary for the node citation.
       operationId: nodes_citation_list
       parameters:
@@ -5381,7 +5639,9 @@ paths:
     get:
       description: |-
         The citation for a node in a specific style.
+
         #### Returns
+
         Returns a JSON object with a `data` key that contains the representation of the node citation, in the requested style.
       operationId: nodes_citation_read
       parameters:
@@ -5435,11 +5695,12 @@ paths:
   '/nodes/{node_id}/comments/':
     get:
       description: |-
-
         A paginated list of comments related to a given node.
 
         The returned comments are sorted by their creation date, with the most recent comments appearing first.
-        ####Permissions
+
+        #### Permissions
+
         Comments on public nodes are given read-only access to everyone.
 
         If the node comment-level is `private`, only contributors have permission to comment.
@@ -5447,18 +5708,24 @@ paths:
         If the comment-level is `public`, any logged-in OSF user can comment.
 
         Comments on private nodes are only visible to contributors and administrators on the parent node.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of comment objects. Each resource in the array is a separate comment object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
         #### Filtering
+
         You can optionally request that the response only include comments that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/comments/?filter[target_id]=jg7sezmdnt93
 
         Nodes may be filtered by their `deleted`, `target_id`, `date_created`, `date_modified`.
 
         Most fields are string fields and will be filtered using simple substring matching. Public and preprint are boolean fields, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting `true` or `false` in the query will cause the match to fail.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_comments_list
       parameters:
         - description: The unique identifier of the node.
@@ -5477,7 +5744,9 @@ paths:
                     content: |-
                       We have published a Bayesian reanalysis of this project at PLOS ONE: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0149794
 
+
                       I explain some of the context on my blog: http://alexanderetz.com/2016/02/26/the-bayesian-rpp-take-2/
+
 
                       Please note that the analysis we use in this paper is very different from the analysis used in the blog I posted in the previous comment, so the results are different as well.
                     date_created: '2016-02-27T13:50:24.240000'
@@ -5699,10 +5968,15 @@ paths:
         To create a comment on the node overview page, the target `type` would be "nodes" and the target `id` would be the node `id`.
 
         To reply to a comment on this node, the target `type` would be "comments" and the target `id` would be the `id` of the comment to reply to.
-        ####Required
+
+        #### Required
+
         A relationship object with a `data` key, containing the target (`comments` or `nodes`) type and a target `id` is required.
+
         In addition, the `content` attribute describing the relationship between the node and the comment is required.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a data key containing the representation of the new comment, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -5853,15 +6127,20 @@ paths:
         Note that if an anonymous view_only key is being used to view the list of contributors, the user relationship will not be exposed and the contributor ID will be an empty string.
 
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 contributors. Each resource in the array contains the full representation of the contributor, meaning additional requests to a contributor's detail view are not necessary. Additionally, the full representation of the user this contributor represents is automatically embedded within the `data` key of the response.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
         #### Filtering
+
         You can optionally request that the response only include contributors that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/y9jdt/contributors/?filter[bibliographic]=true.
 
         Contributors may be filtered by their `bibliographic` and `permission` attributes.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_contributors_list
       parameters:
         - description: The unique identifier of the node.
@@ -6167,7 +6446,9 @@ paths:
         Contributors are users who can make changes to the node or, in the case of private nodes, have read access to the node.
 
         Contributors are categorized as either "bibliographic" or "non-bibliographic". From a permissions standpoint, both are the same, but bibliographic contributors are included in citations and are listed on the project overview page on the OSF, while non-bibliographic contributors are not.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested contributor, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -6448,9 +6729,13 @@ paths:
         Draft registrations contain the supplemental registration questions that accompany a registration. A registration is a frozen version of the project that can never be edited or deleted, but can be withdrawn.
 
         Your original project remains editable but will now have the draft registration linked to it.
+
         #### Permissions
+
         Only project administrators may view draft registrations.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 draft registrations. Each resource in the array is a separate draft registration object and contains the full representation of the draft registration, meaning additional requests to a draft registration's detail view are not necessary.
@@ -6750,12 +7035,17 @@ paths:
     get:
       description: |-
         Retrieve the details of a given draft registration.
+
         Draft registrations contain the supplemental registration questions that accompany a registration. A registration is a frozen version of the project that can never be edited or deleted, but can be withdrawn.
 
         Your original project remains editable but will now have the draft registration linked to it.
+
         #### Permissions
+
         Only project administrators may view draft registrations.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested draft registration, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -6996,7 +7286,8 @@ paths:
         Users of the OSF may access their data on a [number of cloud-storage services](https://api.osf.io/v2/#storage-providers) that have integrations with the OSF. We call these **providers**. By default, every node has access to the OSF-provided storage but may use as many of the supported providers as desired.
 
 
-        ####Returns
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of files. Each resource in the array is a separate file object.
@@ -7203,7 +7494,9 @@ paths:
     get:
       description: |-
         Retrieves the details of a storage provider enabled on this node.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested file object, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -7405,52 +7698,26 @@ paths:
     get:
       description: |-
         List of all the files/folders that are attached to your project for a given storage provider.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of files. Each resource in the array is a separate file object and contains the full representation of the file.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        ####Filtering
+        #### Filtering
 
         You can optionally request that the response only include files that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/files/osfstorage/?filter[kind]=file
 
         Node files may be filtered by `id`, `name`, `node`, `kind`, `path`, `provider`, `size`, and `last_touched`.
 
-        ###Waterbutler API actions
+        You can learn more about advanced filtering features [here](#tag/Filtering).
 
-        Files can be modified through the Waterbutler API routes found in `links` (`new_folder`, `move`, `upload`, `download`, and `delete`).
+        ### Waterbutler API actions
 
-        #### Download (files)
-
-        To download a file, issue a GET request against the download link. The response will have the Content-Disposition header set, which will will trigger a download in a browser.
-
-        #### Create Subfolder (folders)
-
-        You can create a subfolder of an existing folder by issuing a PUT request against the new_folder link. The ?kind=folder portion of the query parameter is already included in the new_folder link. The name of the new subfolder should be provided in the name query parameter. The response will contain a WaterButler folder entity. If a folder with that name already exists in the parent directory, the server will return a 409 Conflict error response.
-
-        #### Upload New File (folders)
-
-        To upload a file to a folder, issue a PUT request to the folder's upload link with the raw file data in the request body, and the kind and name query parameters set to 'file' and the desired name of the file. The response will contain a WaterButler file entity that describes the new file. If a file with the same name already exists in the folder, the server will return a 409 Conflict error response.
-
-        #### Update Existing File (file)
-
-        To update an existing file, issue a PUT request to the file's upload link with the raw file data in the request body and the kind query parameter set to "file". The update action will create a new version of the file. The response will contain a WaterButler file entity that describes the updated file.
-
-        #### Rename (files, folders)
-
-        To rename a file or folder, issue a POST request to the move link with the action body parameter set to "rename" and the rename body parameter set to the desired name. The response will contain either a folder entity or file entity with the new name.
-
-        #### Move & Copy (files, folders)
-
-        Move and copy actions both use the same request structure, a POST to the move url, but with different values for the action body parameters. The path parameter is also required and should be the OSF path attribute of the folder being written to. The rename and conflict parameters are optional. If you wish to change the name of the file or folder at its destination, set the rename parameter to the new name. The conflict param governs how name clashes are resolved. Possible values are replace and keep. replace is the default and will overwrite the file that already exists in the target folder. keep will attempt to keep both by adding a suffix to the new file's name until it no longer conflicts. The suffix will be ' (x)' where x is a increasing integer starting from 1. This behavior is intended to mimic that of the OS X Finder. The response will contain either a folder entity or file entity with the new name.
-        Files and folders can also be moved between nodes and providers. The resource parameter is the id of the node under which the file/folder should be moved. It must agree with the path parameter, that is the path must identify a valid folder under the node identified by resource. Likewise, the provider parameter may be used to move the file/folder to another storage provider, but both the resource and path parameters must belong to a node and folder already extant on that provider. Both resource and provider default to the current node and providers.
-        If a moved/copied file is overwriting an existing file, a 200 OK response will be returned. Otherwise, a 201 Created will be returned.
-
-        #### Delete (file, folders)
-
-        To delete a file or folder send a DELETE request to the delete link. Nothing will be returned in the response body.
+        Files can be modified via the Waterbutler URLs found in the `links` key of the response (new_folder, move, upload, download, and delete). Further information about how to interact with files can be found in the [Waterbutler API documentation](https://waterbutler.readthedocs.io/en/latest/api.html#v1-api).
       operationId: nodes_files_list
       parameters:
         - description: The unique identifier of the node.
@@ -7492,7 +7759,7 @@ paths:
                   id: 553e69248c5e4a219919ea54
                   links:
                     delete: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
-                    download: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                    download: 'https://osf.io/download/sejcv'
                     info: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
                     move: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
                     self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
@@ -7682,7 +7949,9 @@ paths:
     get:
       description: |-
         Retrieves the details of a file attached to given node (project or component) for the given storage provider.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested file object, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -7732,7 +8001,7 @@ paths:
                 id: 553e69248c5e4a219919ea54
                 links:
                   delete: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
-                  download: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                  download: 'https://osf.io/download/sejcv'
                   info: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
                   move: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
                   self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
@@ -8248,7 +8517,7 @@ paths:
                       readOnly: true
                       type: string
                     node_links:
-                      description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                      description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                       readOnly: true
                       type: string
                     parent:
@@ -8307,12 +8576,17 @@ paths:
         You might use a fork to copy another's work to build on and extend. For example, a professor may create an OSF project of materials for individual student use. Each student forks the project to have his or her own copy of the materials to start his/her own work.
 
         When creating a fork, your fork will only contain public components of the current node and components for which you are a contributor. Private components that you do not have access to will not be forked.
+
         #### Required
+
         There are no required attributes when creating a fork, as all of the forked node's attributes will be copied from the current node.
 
         The `title` field is optional, with the default title being "Fork of " prepended to the current node's title.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the complete srepresentation of the forked node, if the request is successful.
+
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_forks_create
       parameters:
@@ -8499,7 +8773,7 @@ paths:
                     readOnly: true
                     type: string
                   node_links:
-                    description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                    description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                     readOnly: true
                     type: string
                   parent:
@@ -8553,17 +8827,22 @@ paths:
     get:
       description: |-
         List all identifiers associated with a given node.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of identifiers. Each resource in the array is a separate identifier object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-        ####Filtering
+
+        #### Filtering
 
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/identifiers/?filter[category]=ark
 
         Identifiers may be filtered by their `category` e.g `ark` or `doi`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_identifiers_list
       parameters:
         - description: The unique identifier of the node.
@@ -8668,7 +8947,9 @@ paths:
     get:
       description: |-
         List of all institutions affiliated with this node.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 affilited institutions. Each resource in the array is a separate institution object.
@@ -8816,16 +9097,22 @@ paths:
     get:
       description: |-
         List of all nodes linked to the given node.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 nodes. Each resource in the array is a separate node object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-        ####Filtering
+
+        #### Filtering
+
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/?filter[title]=reproducibility.
 
         Nodes may be filtered by their `title`, `category`, `description`, `public`, `registration`, or `tags`. `title`, `description`, and `category` are string fields and will be filteres using simple substring matching. `public`, `registration` are boolean and can be filtered using truthy values, such as `true`, `false`, `0`, `1`. `tags` is an array of simple strings.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_linked_nodes_list
       parameters:
         - description: The unique identifier of the node.
@@ -9261,7 +9548,7 @@ paths:
                       readOnly: true
                       type: string
                     node_links:
-                      description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                      description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                       readOnly: true
                       type: string
                     parent:
@@ -9318,16 +9605,21 @@ paths:
 
         This list includes the logs of the specified node as well as the logs of that node's children to which the current user has read-only access.
 
-        ####Returns
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 logs. Each resource in the array is a separate logs object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-        ####Filtering
+
+        #### Filtering
+
         You can optionally request that the response only include logs that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/logs/?filter[action]=made_private.
 
         Nodes may be filtered by their `action`, and `date`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_logs_list
       parameters:
         - description: The unique identifier of the node.
@@ -9700,7 +9992,9 @@ paths:
         A paginated list of preprints related to a given node. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
 
         **Note: This API endpoint is under active development, and is subject to change in the future.**
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 preprints. Each resource in the array is a separate preprint object.
@@ -9918,18 +10212,22 @@ paths:
     get:
       description: |-
         List of all registrations of the given node.
-        ####Returns
+
+        #### Returns
 
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 registrations. Each resource in the array is a separate registrations object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-        ####Filtering
+
+        #### Filtering
 
         You can optionally request that the response only include registrations that match your filters by utilizing the filter query parameter, e.g. https://api.osf.io/v2/registrations/?filter[title]=open.
 
         Registrations may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, and `contributors`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_registrations_list
       parameters:
         - description: The unique identifier of the node.
@@ -10646,22 +10944,26 @@ paths:
     get:
       description: |-
         List of view only links on a node.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 view only links. Each resource in the array is a view only link object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        ####Permissions
+        #### Permissions
 
         View only links on a node, public or private, are readable and writeable only by users that are administrators on the node.
 
-        ####Filtering
+        #### Filtering
 
         You can optionally request that the response only include view only links that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/view_only_links/?filter[anonymous]=true.
 
         View Only Links may be filtered based on their `name`, `anonymous` and `date_created` fields. Possible comparison operators include 'gt' (greater than), 'gte'(greater than or equal to), 'lt' (less than) and 'lte' (less than or equal to). The date must be in the format YYYY-MM-DD and the time is optional.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_view_only_links_list
       parameters:
         - description: The unique identifier of the node.
@@ -10794,11 +11096,14 @@ paths:
     get:
       description: |-
         Retrieves the details of a view only link on a node.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
-        ####Permissions
+
+        #### Permissions
 
         View only links on a node, public or private, are readable and writeable only by users that are administrators on the node.
       operationId: nodes_view_only_links_read
@@ -10885,18 +11190,25 @@ paths:
     get:
       description: |-
         List of wiki pages on a node.
-        ####Returns
-        Paginated list of the node's current wiki page versions ordered by their date_modified. Each resource contains the full representation of the wiki, meaning additional requests to an individual wiki's detail view are not necessary.
+        #### Returns
+
+        Paginated list of the node's current wiki pages, ordered by their date_modified. Each resource contains the full representation of the wiki, meaning additional requests to an individual wiki's detail view are not necessary.
 
         Note that if an anonymous view_only key is being used, the user relationship will not be exposed.
 
         If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
         #### Filtering
+
         Wiki pages can be filtered based on their `name` and `date_modified` fields.
+
         + `filter[name]=<Str>` -- filter wiki pages by name
+
         + `filter[date_modified][comparison_operator]=YYYY-MM-DDTH:M:S` -- filter wiki pages based on date modified.
 
         Possible comparison operators include 'gt' (greater than), 'gte'(greater than or equal to), 'lt' (less than) and 'lte' (less than or equal to). The date must be in the format YYYY-MM-DD and the time is optional.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_wikis_list
       parameters:
         - description: The unique identifier of the node.
@@ -10953,6 +11265,12 @@ paths:
                 prev: ''
           schema:
             items:
+              example:
+                data:
+                  attributes:
+                    content: Your wiki content goes here.
+                    name: A brand new wiki page
+                  type: wikis
               properties:
                 attributes:
                   description: The properties of the wiki.
@@ -10984,7 +11302,7 @@ paths:
                       type: string
                     name:
                       description: The name/title of the wiki page.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     path:
                       description: Path to the wiki object.
@@ -11047,11 +11365,16 @@ paths:
                       description: A relationship to the user associated with this wiki.
                       readOnly: false
                       type: string
+                    versions:
+                      description: A relationship to the versions related to this wiki.
+                      readOnly: false
+                      type: string
                   readOnly: false
                   required:
                     - node
                     - user
                     - comments
+                    - versions
                   title: Relationships
                   type: object
                 type:
@@ -11068,23 +11391,182 @@ paths:
       tags:
         - Nodes
       x-response-schema: Wiki
+    post:
+      consumes:
+        - application/json
+      description: |-
+        Creates a new wiki page on the given node.
+
+        `name` is the only required field when creating a new wiki page. The `content` of the wiki page may optionally be included.
+
+        Returns a JSON object with a `data` key containing the representation of the created wiki, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: nodes_wikis_list_create
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  content: Your wiki content goes here.
+                  name: A brand new wiki page
+                type: wikis
+            properties:
+              attributes:
+                description: The properties of the wiki.
+                properties:
+                  content_type:
+                    description: Content type of the wiki (`text/markdown`).
+                    readOnly: true
+                    type: string
+                  current_user_can_comment:
+                    description: Whether the current user is allowed to post comments on this wiki.
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The date and time at which the wiki was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  extra:
+                    description: 'A dictionary containing additional metadata about this wiki, including version information.'
+                    readOnly: true
+                    type: string
+                  kind:
+                    description: The type of object.
+                    readOnly: true
+                    type: string
+                  materialized_path:
+                    description: Materialized path to the wiki object.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: The name/title of the wiki page.
+                    readOnly: false
+                    type: string
+                  path:
+                    description: Path to the wiki object.
+                    readOnly: true
+                    type: string
+                  size:
+                    description: Size of the wiki.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                required:
+                  - kind
+                  - name
+                  - date_modified
+                  - extra
+                  - content_type
+                  - path
+                  - current_user_can_comment
+                  - materialized_path
+                  - size
+                title: Attributes
+                type: object
+              id:
+                description: The identifier of the wiki.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the wiki.
+                properties:
+                  download:
+                    description: The URL to download the content of the wiki.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  info:
+                    description: A link to the detail page for the wiki.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the detail page for the wiki.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the wiki.
+                properties:
+                  comments:
+                    description: A relationship to the comments related to this wiki.
+                    readOnly: false
+                    type: string
+                  node:
+                    description: A relationship to the associated node.
+                    readOnly: false
+                    type: string
+                  user:
+                    description: A relationship to the user associated with this wiki.
+                    readOnly: false
+                    type: string
+                  versions:
+                    description: A relationship to the versions related to this wiki.
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - node
+                  - user
+                  - comments
+                  - versions
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the wiki (`wikis`).
+                readOnly: false
+                type: string
+            required:
+              - type
+              - relationships
+            title: Wiki
+            type: object
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+      responses:
+        '201':
+          description: Success
+      summary: Create a wiki
+      tags:
+        - Nodes
+      x-response-schema: Wiki
   /preprint_providers/:
     get:
       description: |-
+        A paginated list of all preprint providers.
 
-        A paginated list of all preprint providers. The returned preprint providers are sorted by their creation date, with the most recent preprints appearing first.
+        The returned preprint providers are sorted by their creation date, with the most recent preprints appearing first.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
-        The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
+        The `data` key contains an array of 10 preprint providers.
+
+        Each resource in the array is a separate preprint provider object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include preprint providers that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/preprint_providers/?filter[id]=osf.
 
         Preprint Providers may be filtered by their `id`, `name`,  and `description`
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: preprint_provider_list
       responses:
         '200':
@@ -11248,14 +11730,19 @@ paths:
     get:
       description: |-
         Retrieves the details of a preprint provider.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested preprint provider, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
 
         #### Acceptable Subjects Structure
+
         Each preprint provider specifies acceptable subjects.
+
         `subjects_acceptable` is an array found in `attributes`.
+
         Subjects consist of general parent subjects (e.g., Engineering), more specific child subjects (e.g., Aerospace Engineering), and even more specific grandchild subjects (e.g., Aerodynamics and Fluid Mechanics). Subjects can only be nested 3 deep.
 
 
@@ -11291,6 +11778,7 @@ paths:
                     false
                 ]
             ]
+
 
         The above structure would allow Architecture, Architectural Engineering, all of Architectural Engineering's children, Engineering, Aerospace Engineering, and Aerodynamics and Fluid Mechanics.
       operationId: preprint_provider_detail
@@ -11465,9 +11953,10 @@ paths:
   '/preprint_providers/{preprint_provider_id}/licenses/':
     get:
       description: |-
-
         A paginated list of the licenses allowed bya preprint provider.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
@@ -11554,9 +12043,10 @@ paths:
   '/preprint_providers/{preprint_provider_id}/preprints/':
     get:
       description: |-
-
         A paginated list of preprints from the specified preprint provider. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 preprints. Each resource in the array is a separate preprint object.
@@ -11566,9 +12056,12 @@ paths:
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
 
         #### Filtering
+
         You can optionally request that the response only include preprints that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/preprint_providers/osf/preprints/?filter[is_published]=true.
 
         Preprints may be filtered by their `id`, `is_published`, `date_created`, `date_modified`, and `provider`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: preprint_providers_preprints_list
       parameters:
         - description: The unique identifier of the preprint provider.
@@ -11772,9 +12265,12 @@ paths:
   '/preprint_providers/{preprint_provider_id}/taxonomies/':
     get:
       description: |-
+        A paginated list of the taxonomies for a preprint provider.
 
-        A paginated list of the taxonomies for a preprint provider. The returned preprint providers taxonomies are sorted by their creation date, with the most recent preprints appearing first.
+        The returned preprint providers taxonomies are sorted by their creation date, with the most recent preprints appearing first.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
@@ -11869,9 +12365,10 @@ paths:
   /preprints/:
     get:
       description: |-
-
         A paginated list of preprints from all preprint providers. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 preprints. Each resource in the array is a separate preprint object.
@@ -11879,10 +12376,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include preprints that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/preprints/?filter[provider]=socarxiv.
 
         Preprints may be filtered by their `id`, `is_published`, `date_created`, `date_modified`, and `provider`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: preprints_list
       responses:
         '200':
@@ -12238,7 +12739,9 @@ paths:
     get:
       description: |-
         Retrieves the details of a preprint.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested preprint, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -12492,7 +12995,9 @@ paths:
     get:
       description: |-
         The citation details for a preprint, in CSL format.
+
         #### Returns
+
         Returns a JSON object with a `data` key that contains the representation of the details necessary for the preprint citation.
       operationId: preprints_citation_list
       parameters:
@@ -12595,7 +13100,9 @@ paths:
     get:
       description: |-
         The citation for a preprint in a specific style.
+
         #### Returns
+
         Returns a JSON object with a `data` key that contains the representation of the preprint citation, in the requested style.
       operationId: preprints_citation_read
       parameters:
@@ -12656,13 +13163,17 @@ paths:
         Non-registered nodes cannot be accessed through this endpoint (use the [nodes](#Nodes_nodes_list) endpoints instead).
 
         #### Registrations
+
         A registration on the OSF creates a frozen, time-stamped version of a project that cannot be edited or deleted. The *original project* can still be edited, while the registered version cannot.
 
         Registrations can be made public immediately or embargoed for up to 4 years.
 
         #### Withdrawals
+
         Registrations cannot be deleted, but they can be withdrawn. Withdrawing a registration removes the content of the registration but leaves behind basic metadata. A withdrawn registration will display a limited subset of information, namely, title, description, date_created, date_registered, date_withdrawn, registration, withdrawn, withdrawal_justification, and registration supplement. All other fields will be displayed as null. Additionally, the only relationship that remains accesible for a withdrawn registration is the contributors. All other relationships will return a **403 Forbidden** response.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 registrations. Each resource in the array is a separate registration object and contains the full representation of the registration, meaning additional requests to a registration's detail view are not necessary.
@@ -12670,10 +13181,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/?filter[title]=open.
 
         Registrations may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, and `contributors`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_list
       responses:
         '200':
@@ -13081,18 +13596,27 @@ paths:
     get:
       description: |-
         Retrieve the details of a given registration.
+
         #### Permissions
+
         Only project contributors may retrieve the details of a registration that is embargoed, or has not yet been made public. Attempting to retrieve a private registration for which you are not a contributor will result in a **403 Forbidden** response.
 
         Authentication is not required to view the details of a public registration, as public registrations give read-only access to everyone.
+
         #### Registrations
-        A registration on the OSF creates a frozen, time-stamped version of a project that cannot be edited or deleted. The *original project* can still be edited, while the registered version cannot.
+
+        A registration on the OSF creates a frozen, time-stamped version of a project that cannot be edited or deleted.
+
+        The *original project* can still be edited, while the registered version cannot.
 
         Registrations can be made public immediately or embargoed for up to 4 years.
 
         #### Withdrawals
+
         Registrations cannot be deleted, but they can be withdrawn. Withdrawing a registration removes the content of the registration but leaves behind basic metadata. A withdrawn registration will display a limited subset of information, namely, title, description, date_created, date_registered, date_withdrawn, registration, withdrawn, withdrawal_justification, and registration supplement. All other fields will be displayed as null. Additionally, the only relationship that remains accesible for a withdrawn registration is the contributors. All other relationships will return a **403 Forbidden** response.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested registration, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -13666,13 +14190,14 @@ paths:
   '/registrations/{registration_id}/children/':
     get:
       description: |-
-
         A paginated list of children of a registration.
 
         The list consists of the next level child registrations for the given registration. The returned registrations are sorted by their `date_modified`, with the most recently updated child registrations appearing first.
 
         The list will include child registrations that are public, as well as child registrations that are private, if the authenticated user has permission to view them.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 child registrations. If the given registration has zero child registrations, the `data` key will contain an empty array. Each resource in the array is a separate registration object and contains the full representation of the child registration.
@@ -13680,11 +14205,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         #### Filtering
+
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/children/?filter[title]=reproducibility.
 
         Registrations may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, and `contributors`.
 
         Most fields are string fields and will be filtered using simple substring matching. Public is a boolean field, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting true or false in the query will cause the match to fail.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_children_list
       parameters:
         - description: The unique identifier of the registration.
@@ -14105,19 +14633,23 @@ paths:
   '/registrations/{registration_id}/citations/':
     get:
       description: |-
-
         A paginated list of the registration's alternative citation styles
 
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 citation styles. Each resource in the array is a separate citation styles object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
         #### Filtering
+
         You can optionally request that the response only include citation styles that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/citations/?filter[title]=open.
 
         Citation styles may be filtered by their `id`, `title`, `short-title`, and `summary`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_citations_list
       parameters:
         - description: The unique identifier of the registration.
@@ -14199,7 +14731,9 @@ paths:
     get:
       description: |-
         Retrieves the citation style details for a registration, in CSL format.
+
         #### Returns
+
         Returns a JSON object with a `data` key that contains the representation of the details necessary for the citation style.
       operationId: registrations_citation_read
       parameters:
@@ -14286,11 +14820,12 @@ paths:
   '/registrations/{registration_id}/comments/':
     get:
       description: |-
-
         A paginated list of the registration's comments.
 
         The returned comments are sorted by their creation date, with the most recent comments appearing first.
-        ####Permissions
+
+        #### Permissions
+
         Comments of public registrations are given read-only access to everyone.
 
         If the comment-level is `private`, only registration contributors have permission to comment.
@@ -14298,18 +14833,24 @@ paths:
         If the comment-level is `public`, any logged-in OSF user can comment.
 
         Comments of private registrations are only visible to contributors and administrators on the registration.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of comment objects. Each resource in the array is a separate comment object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
         #### Filtering
+
         You can optionally request that the response only include comments that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wuerf/comments/?filter[target]=wuerf
 
         Comments may be filtered by their `deleted`, `target`, `date_created`, `date_modified`.
 
         Most fields are string fields and will be filtered using simple substring matching. Deleted is a boolean field, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting `true` or `false` in the query will cause the match to fail.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_comments_list
       parameters:
         - description: The unique identifier of the registration.
@@ -14545,6 +15086,7 @@ paths:
     get:
       description: |-
         A paginated list of all contributors on this registration.
+
         The returned contributors are sorted by their index.
 
         Contributors are users who can make changes to the registration or, in the case of private registration, have read access to the registration.
@@ -14554,15 +15096,20 @@ paths:
         Note that if an anonymous view_only key is being used to view the list of contributors, the user relationship will not be exposed and the contributor ID will be an empty string.
 
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 contributors. Each resource in the array contains the full representation of the contributor. Additionally, the full representation of the user this contributor represents is automatically embedded within the `data` key of the response.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
         #### Filtering
+
         You can optionally request that the response only include contributors that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wu3a4/contributors/?filter[bibliographic]=true.
 
         Contributors may be filtered by their `bibliographic` and `permission` attributes.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_contributors_list
       parameters:
         - description: The unique identifier of the registration.
@@ -14721,6 +15268,7 @@ paths:
         Retrieves the details of a contributor on this registration.
 
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested contributor, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -14885,7 +15433,8 @@ paths:
         Users of the OSF may access their data on a [number of cloud-storage services](https://api.osf.io/v2/#storage-providers) that have integrations with the OSF. We call these **providers**. By default, every node has access to the OSF-provided storage but may use as many of the supported providers as desired.
 
 
-        ####Returns
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 files. Each resource in the array is a separate file object.
@@ -15093,7 +15642,7 @@ paths:
       description: |-
         List of all the registration's files/folders for a given storage provider.
 
-        ####Returns
+        #### Returns
 
         Returns a JSON object containing `data` and `links` keys.
 
@@ -15101,11 +15650,13 @@ paths:
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        ####Filtering
+        #### Filtering
 
         You can optionally request that the response only include files that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/files/osfstorage/?filter[kind]=file
 
         Files may be filtered by `id`, `name`, `node`, `kind`, `path`, `provider`, `size`, and `last_touched`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_files_list
       parameters:
         - description: The unique identifier of the registration.
@@ -15147,7 +15698,7 @@ paths:
                   id: 553e69248c5e4a219919ea54
                   links:
                     delete: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
-                    download: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                    download: 'https://osf.io/download/sejcv'
                     info: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
                     move: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
                     self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
@@ -15337,7 +15888,9 @@ paths:
     get:
       description: |-
         Retrieves the details of a registration file for the given storage provider.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested registration file object, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -15387,7 +15940,7 @@ paths:
                 id: 553e69248c5e4a219919ea54
                 links:
                   delete: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
-                  download: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                  download: 'https://osf.io/download/sejcv'
                   info: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
                   move: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
                   self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
@@ -15570,13 +16123,14 @@ paths:
   '/registrations/{registration_id}/forks/':
     get:
       description: |-
-
         A paginated list of the registration’s forks
 
         The returned forks are sorted by their `forked_date`, with the most recent forks appearing first.
 
         Forking a registration creates a copy of an existing registration and all of its contents.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 forks. If the current registration has no fork, the `data` key will contain an empty array. Each resource in the array is a separate registration object and contains the full representation of the registration's fork.
@@ -16299,17 +16853,22 @@ paths:
     get:
       description: |-
         A paginated list of the registration's identifiers.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of identifiers. Each resource in the array is a separate identifier object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-        ####Filtering
+
+        #### Filtering
 
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/identifiers/?filter[category]=ark
 
         Identifiers may be filtered by their `category` e.g `ark` or `doi`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_identifiers_list
       parameters:
         - description: The unique identifier of the registration.
@@ -16414,7 +16973,9 @@ paths:
     get:
       description: |-
         A paginated list of institutions affiliated with the registration.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 affiliated institutions. Each resource in the array is a separate institution object.
@@ -16562,16 +17123,22 @@ paths:
     get:
       description: |-
         List of all nodes linked to the registration.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 nodes. Each resource in the array is a separate node object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-        ####Filtering
+
+        #### Filtering
+
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/linked_nodes/?filter[title]=reproducibility/?filter[title]=reproducibility.
 
         Nodes may be filtered by their `title`, `category`, `description`, `public`, `registration`, or `tags`. `title`, `description`, and `category` are string fields and will be filteres using simple substring matching. `public`, `registration` are boolean and can be filtered using truthy values, such as `true`, `false`, `0`, `1`. `tags` is an array of simple strings.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_linked_nodes_list
       parameters:
         - description: The unique identifier of the registration.
@@ -17007,7 +17574,7 @@ paths:
                       readOnly: true
                       type: string
                     node_links:
-                      description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                      description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                       readOnly: true
                       type: string
                     parent:
@@ -17062,16 +17629,21 @@ paths:
 
         The returned logs are sorted by their `date`, with the most recents logs appearing first.
 
-        ####Returns
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 logs. Each resource in the array is a separate logs object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-        ####Filtering
+
+        #### Filtering
+
         You can optionally request that the response only include logs that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/logs/?filter[action]=made_private.
 
         Logs may be filtered by their `action`, and `date`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_logs_list
       parameters:
         - description: The unique identifier of the registration.
@@ -17501,22 +18073,26 @@ paths:
     get:
       description: |-
         A paginated list of view only links created for this registration.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 view only links. Each resource in the array is a view only link object.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
-        ####Permissions
+        #### Permissions
 
         View only links on a registration, public or private, are readable and writeable only by users that are administrators on the registration.
 
-        ####Filtering
+        #### Filtering
 
         You can optionally request that the response only include view only links that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wu3a4/view_only_links/?filter[anonymous]=true.
 
         View Only Links may be filtered based on their `name`, `anonymous` and `date_created` fields. Possible comparison operators include 'gt' (greater than), 'gte'(greater than or equal to), 'lt' (less than) and 'lte' (less than or equal to). The date must be in the format YYYY-MM-DD and the time is optional.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_view_only_links_list
       parameters:
         - description: The unique identifier of the registration.
@@ -17650,11 +18226,14 @@ paths:
     get:
       description: |-
         Retrieves the details of a view only link created from this registration.
-        ####Returns
+
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
-        ####Permissions
+
+        #### Permissions
 
         View only links on a registration, public or private, are readable and writeable only by users that are administrators on the registration.
       operationId: registrations_view_only_links_read
@@ -17764,16 +18343,24 @@ paths:
     get:
       description: |-
         A paginated list of the registration's wiki pages
-        ####Returns
+
+        #### Returns
+
         A list of all registration's current wiki page versions ordered by their date_modified. Each resource contains the full representation of the wiki, meaning additional requests to an individual wiki's detail view are not necessary.
 
         If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
         #### Filtering
+
         Wiki pages can be filtered based on their `name` and `date_modified` fields.
+
         + `filter[name]=<Str>` -- filter wiki pages by name
+
         + `filter[date_modified][comparison_operator]=YYYY-MM-DDTH:M:S` -- filter wiki pages based on date modified.
 
         Possible comparison operators include 'gt' (greater than), 'gte'(greater than or equal to), 'lt' (less than) and 'lte' (less than or equal to). The date must be in the format YYYY-MM-DD and the time is optional.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_wikis_list
       parameters:
         - description: The unique identifier of the registration.
@@ -17826,6 +18413,12 @@ paths:
                   total: 1
           schema:
             items:
+              example:
+                data:
+                  attributes:
+                    content: Your wiki content goes here.
+                    name: A brand new wiki page
+                  type: wikis
               properties:
                 attributes:
                   description: The properties of the wiki.
@@ -17857,7 +18450,7 @@ paths:
                       type: string
                     name:
                       description: The name/title of the wiki page.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     path:
                       description: Path to the wiki object.
@@ -17920,11 +18513,16 @@ paths:
                       description: A relationship to the user associated with this wiki.
                       readOnly: false
                       type: string
+                    versions:
+                      description: A relationship to the versions related to this wiki.
+                      readOnly: false
+                      type: string
                   readOnly: false
                   required:
                     - node
                     - user
                     - comments
+                    - versions
                   title: Relationships
                   type: object
                 type:
@@ -17943,11 +18541,14 @@ paths:
       x-response-schema: Wiki
   /taxonomies/:
     get:
+      deprecated: true
       description: |-
-
         A paginated list of all [bepress disciplines taxonomies](https://www.bepress.com/wp-content/uploads/2016/12/Digital-Commons-Disciplines-taxonomy-2017-01.pdf).
+
         Note: this API endpoint is under active development, and is subject to change in the future.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 taxonomies. Each resource in the array is a separate taxonomy object.
@@ -17955,10 +18556,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include taxonomies that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/taxonomies/?filter['id']='{taxonomy_id}'.
 
         Taxonomies may be filtered by their `id`, `parents`, and `text`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: taxonomies_list
       responses:
         '200':
@@ -18088,6 +18693,7 @@ paths:
     get:
       description: |-
         Retrieves the details of a taxonomy.
+
         #### Returns
 
         Returns a JSON object with a `data` key containing the representation of the requested taxonomy, if the request is successful.
@@ -18174,13 +18780,16 @@ paths:
   /users/:
     get:
       description: |-
-
         A paginated list of all users registered on the OSF. The returned users are sorted by their `date_registered`, with the most recently registered users appearing first.
 
         The subroute `/users/me/` is a special endpoint that always points to the currently logged-in user.
+
         #### Versioning
+
         As of version `2.3`, merged users will not be returned from this endpoint.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 users. Each resource in the array is a separate users object and contains the full representation of the user, meaning additional requests to a user's detail view are not necessary.
@@ -18188,10 +18797,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
         #### Filtering
+
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/users/?filter[family_name]=Nosek.
 
         Users may be filtered by their `id`, `full_name`, `given_name`, `middle_name`, or `family_name`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: users_list
       responses:
         '200':
@@ -18353,7 +18966,9 @@ paths:
         Additionally, relationships to the list of institutions with which the user is affiliated, and to the list of nodes which the user contributes to (that the requesting user has permission to see) are returned.
 
         If `me` is given as the `user_id` in the request path, the record of the currently logged-in user will be returned.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested user, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -18641,7 +19256,6 @@ paths:
   '/users/{user_id}/addons/':
     get:
       description: |-
-
         A paginated list of authorized user addons
 
         #### Permissions
@@ -18649,6 +19263,7 @@ paths:
         User addons are visible only to the user that authorized the addon.
 
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of up to 10 addons. Each resource in the array is a separate addon object.
@@ -18782,7 +19397,8 @@ paths:
 
         User addons are visible only to the user that authorized the addon.
 
-        ####Returns
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested user addon, if the request was successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -18868,7 +19484,6 @@ paths:
   '/users/{user_id}/addons/{provider}/accounts/':
     get:
       description: |-
-
         A paginated list of addon accounts authorized by this user.
 
         #### Permissions
@@ -18876,6 +19491,7 @@ paths:
         Addon accounts are visible only to the user that authorized the account.
 
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of at most 10 addon account objects. Each resource in the array is a separate  addon account object and contains the full representation of the addon account.
@@ -18974,7 +19590,8 @@ paths:
 
         Addon accounts are visible only to the user that authorized the account.
 
-        ####Returns
+        #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested addon account, if the request was successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
@@ -19066,7 +19683,9 @@ paths:
     get:
       description: |-
         A paginated list of institutions that the user is affiliated with.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 institutions. Each resource in the array is a complete institution object and contains the full representation of the institution, meaning additional requests to a institution's detail view are not necessary.
@@ -19194,16 +19813,22 @@ paths:
         If the user ID in the path is the same as the logged-in user, all nodes will be returned. Otherwise, only the user's public nodes will be returned.
 
         User registrations are not available at this endpoint.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 nodes. Each resource in the array is a separate node object and contains the full representation of the node, meaning additional requests to a node's detail view are not necessary.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
         #### Filtering
+
         You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/users/cdi38/nodes/?filter[title]=open.
 
         Nodes may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, `preprint`, and `contributors`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: users_nodes_list
       parameters:
         - description: The unique identifier of the user.
@@ -19515,7 +20140,7 @@ paths:
                       readOnly: true
                       type: string
                     node_links:
-                      description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                      description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                       readOnly: true
                       type: string
                     parent:
@@ -19567,16 +20192,22 @@ paths:
     get:
       description: |-
         A paginated list of preprints that the user contributes to. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 preprints. Each resource in the array is a complete preprint object and contains the full representation of the preprint, meaning additional requests to a preprint's detail view are not necessary.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
         #### Filtering
+
         You can optionally request that the response only include preprints that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/users/cdi38/preprints/?filter[provider]=psyarxiv.
 
         Preprints may be filtered by their `id`, `is_published`, `date_created`, `date_modified`, and `provider`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: users_preprints_list
       parameters:
         - description: The unique identifier of the user.
@@ -19793,16 +20424,22 @@ paths:
         If the user ID in the path is the same as the logged-in user, all registrations will be returned. Otherwise, only the user's public registrations will be returned.
 
         User nodes are not available at this endpoint.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
 
         The `data` key contains an array of 10 registrations. Each resource in the array is a separate registration object and contains the full representation of the registration, meaning additional requests to a registration's detail view are not necessary.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
         #### Filtering
+
         You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/users/cdi38/registrations/?filter[title]=replication.
 
         Registrations may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, and `contributors`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: users_registrations_list
       parameters:
         - description: The unique identifier of the user.
@@ -19963,10 +20600,15 @@ paths:
     get:
       description: |-
         Retrieves details about a specific view only link.
-        ####Permissions
+
+        #### Permissions
+
         Only project administrators may retrieve the details of a view only link. Attempting to retrieve a view only link without appropriate permissions will result in a 403 Forbidden response.
+
         #### Returns
+
         Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
+
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: view_only_links_read
       parameters:
@@ -20069,12 +20711,16 @@ paths:
   '/view_only_links/{link_id}/nodes/':
     get:
       description: |-
-
         The list of nodes which this view only link gives read-only access to.
+
         #### Permissions
+
         Only project administrators may retrieve the nodes of a view only link. Attempting to retrieve a view only link without appropriate permissions will result in a 403 Forbidden response.
+
         #### Returns
+
         Returns a JSON object containing `data` and `links` keys.
+
         The `data` key contains an array of up to 10 nodes. Each resource in the array is a separate node object and contains the full representation of the node, meaning additional requests to a node's detail view are not necessary.
 
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
@@ -20630,7 +21276,7 @@ paths:
                       readOnly: true
                       type: string
                     node_links:
-                      description: A link to the list of nodes that are linked to the current node. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                      description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
                       readOnly: true
                       type: string
                     parent:
@@ -20679,12 +21325,38 @@ paths:
         - View Only Links
       x-response-schema: Node
   '/wikis/{wiki_id}/':
+    delete:
+      description: |-
+
+        Permanently deletes a wiki page. This action cannot be undone.
+
+        Note: the "Home" wiki page cannot be deleted.
+
+        Only contributors with write permissions may delete a wiki page. Attempting to delete a wiki for which you do not have write permission will result in a **403 Forbidden** response.
+
+        If the request is successful, no content is returned.
+
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: wiki_delete
+      parameters:
+        - description: The unique identifier of the wiki.
+          in: path
+          name: wiki_id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No content
+      summary: Delete a wiki
+      tags:
+        - Wikis
     get:
       description: |-
-        Retrieves the details about a specific wiki.
-        A wiki is a collection of markdown text pages that can be used to describe the project or dataset of contained in the attached node.
-        ####Returns
-        Returns a JSON object with a `data` key containing the representation of the requested wiki, if the request was successful.
+        Retrieves the details of a given wiki page.
+
+        The wiki is a collection of markdown text pages that can be used to further describe or document a project.
+
+        Returns a JSON object with a `data` key containing the representation of the requested wiki page, if the request was successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: wiki_read
@@ -20732,8 +21404,19 @@ paths:
                       related:
                         href: 'https://api.osf.io/v2/users/5k3hq/'
                         meta: {}
+                  versions:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/wikis/zveyb/versions/'
+                        meta: {}
                 type: wikis
           schema:
+            example:
+              data:
+                attributes:
+                  content: Your wiki content goes here.
+                  name: A brand new wiki page
+                type: wikis
             properties:
               attributes:
                 description: The properties of the wiki.
@@ -20765,7 +21448,7 @@ paths:
                     type: string
                   name:
                     description: The name/title of the wiki page.
-                    readOnly: true
+                    readOnly: false
                     type: string
                   path:
                     description: Path to the wiki object.
@@ -20828,11 +21511,16 @@ paths:
                     description: A relationship to the user associated with this wiki.
                     readOnly: false
                     type: string
+                  versions:
+                    description: A relationship to the versions related to this wiki.
+                    readOnly: false
+                    type: string
                 readOnly: false
                 required:
                   - node
                   - user
                   - comments
+                  - versions
                 title: Relationships
                 type: object
               type:
@@ -20844,7 +21532,45 @@ paths:
               - relationships
             title: Wiki
             type: object
-      summary: Retrieve a Wiki
+      summary: Retrieve a wiki
+      tags:
+        - Wikis
+      x-response-schema: Wiki
+    patch:
+      consumes:
+        - application/json
+      description: |-
+        Renames the given wiki page.
+
+        Note: the "Home" wiki page may not be renamed.
+
+        Only write contributors may rename wiki pages. Attempting to rename a wiki page for which you do not have write access will result in a **403 Forbidden** response.
+
+        Returns a JSON object with a `data` key containing the new representation of the updated node, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: wiki_partial_update
+      parameters:
+        - description: The unique identifier of the wiki.
+          in: path
+          name: wiki_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  name: Examination of non-newtonian fluids
+                id: '{wiki_id}'
+                type: wikis
+            type: object
+      responses:
+        '200':
+          description: OK
+      summary: Rename a wiki
       tags:
         - Wikis
       x-response-schema: Wiki
@@ -20852,8 +21578,9 @@ paths:
     get:
       description: |-
         Retrieves the plaintext content of a wiki in markdown format.
-        ####Returns
+
         Returns `text/markdown` of the wiki content itself.
+
         If the request is unsuccessful, plaintext with the error message will be displayed.
       operationId: wiki_content
       parameters:
@@ -20865,7 +21592,412 @@ paths:
       responses:
         '200':
           description: OK
-      summary: Retrieve the Content of a Wiki
+      summary: Retrieve the content of a wiki
+      tags:
+        - Wikis
+      x-response-schema: Wiki
+  '/wikis/{wiki_id}/versions/':
+    get:
+      description: |-
+        Lists all versions of a wiki.
+
+        The wiki is a collection of markdown text pages that can be used to describe the project or dataset contained in the attached node.  Every time the content of a wiki page is updated, a new version is created.
+
+        Returns a JSON object with a `data` key containing the representation of the requested wiki, if the request was successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+      operationId: wiki_versions_list
+      parameters:
+        - description: The unique identifier of the wiki.
+          in: path
+          name: wiki_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    content_type: text/markdown
+                    date_created: '2018-02-17T01:39:09.930740'
+                    size: 115
+                  id: '2'
+                  links:
+                    download: 'https://api.osf.io/v2/wikis/3va7z/versions/2/content/'
+                    self: 'https://api.osf.io/v2/wikis/3va7z/versions/2/'
+                  relationships:
+                    user:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/users/nrws6/'
+                          meta: {}
+                    wiki_page:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/wikis/3va7z/'
+                          meta: {}
+                  type: wiki-versions
+                - attributes:
+                    content_type: text/markdown
+                    date_created: '2017-02-16T15:45:57.671957'
+                    size: 108
+                  id: '1'
+                  links:
+                    download: 'https://api.osf.io/v2/wikis/3va7z/versions/1/content/'
+                    self: 'https://api.osf.io/v2/wikis/3va7z/versions/1/'
+                  relationships:
+                    user:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/users/nrws6/'
+                          meta: {}
+                    wiki_page:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/wikis/3va7z/'
+                          meta: {}
+                  type: wiki-versions
+          schema:
+            items:
+              example:
+                data:
+                  attributes:
+                    content: Your wiki content goes here.
+                  id: '{wiki_id}'
+                  type: wiki-versions
+              properties:
+                attributes:
+                  description: The properties of the wiki version.
+                  properties:
+                    content_type:
+                      description: Content type of the wiki version (`text/markdown`).
+                      readOnly: false
+                      type: string
+                    date_created:
+                      description: 'The date and time at which the wiki version was saved, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: false
+                      type: string
+                    size:
+                      description: Size of the wiki version.
+                      readOnly: false
+                      type: string
+                  readOnly: false
+                  required:
+                    - date_created
+                    - content_type
+                    - size
+                  title: Attributes
+                  type: object
+                id:
+                  description: The wiki version.
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the wiki version.
+                  properties:
+                    download:
+                      description: The URL to download the content of the wiki version.
+                      format: URL
+                      readOnly: true
+                      type: string
+                    self:
+                      description: A link to the detail page for the wiki version.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                relationships:
+                  description: URLs to other entities or entity collections that have a relationship to the wiki version.
+                  properties:
+                    user:
+                      description: A relationship to the user associated with this wiki version.
+                      readOnly: false
+                      type: string
+                    wiki_page:
+                      description: A relationship to the associated wiki.
+                      readOnly: false
+                      type: string
+                  readOnly: false
+                  required:
+                    - wiki_page
+                    - user
+                  title: Relationships
+                  type: object
+                type:
+                  description: The type identifier of the wiki version (`wiki-versions`).
+                  readOnly: false
+                  type: string
+              required:
+                - type
+                - relationships
+              title: Wiki
+              type: object
+            type: array
+      summary: List all wiki versions
+      tags:
+        - Wikis
+      x-response-schema: Wiki
+    post:
+      consumes:
+        - application/json
+      description: |-
+        Updates the content of the given wiki page by creating a new wiki version.
+
+        `content` is the only required field when updating a wiki page.
+
+        Returns a JSON object with a `data` key containing the representation of the created wiki version, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: wiki_versions_create
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  content: Your wiki content goes here.
+                id: '{wiki_id}'
+                type: wiki-versions
+            properties:
+              attributes:
+                description: The properties of the wiki version.
+                properties:
+                  content_type:
+                    description: Content type of the wiki version (`text/markdown`).
+                    readOnly: false
+                    type: string
+                  date_created:
+                    description: 'The date and time at which the wiki version was saved, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: false
+                    type: string
+                  size:
+                    description: Size of the wiki version.
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - date_created
+                  - content_type
+                  - size
+                title: Attributes
+                type: object
+              id:
+                description: The wiki version.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the wiki version.
+                properties:
+                  download:
+                    description: The URL to download the content of the wiki version.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the detail page for the wiki version.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the wiki version.
+                properties:
+                  user:
+                    description: A relationship to the user associated with this wiki version.
+                    readOnly: false
+                    type: string
+                  wiki_page:
+                    description: A relationship to the associated wiki.
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - wiki_page
+                  - user
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the wiki version (`wiki-versions`).
+                readOnly: false
+                type: string
+            required:
+              - type
+              - relationships
+            title: Wiki
+            type: object
+        - description: The unique identifier of the wiki.
+          in: path
+          name: wiki_id
+          required: true
+          type: string
+      responses:
+        '201':
+          description: Success
+      summary: Update a wiki
+      tags:
+        - Wikis
+      x-response-schema: Wiki
+  '/wikis/{wiki_id}/versions/{version_id}/':
+    get:
+      description: |-
+        A wiki is a collection of markdown text pages that can be used to describe the project or dataset contained in the attached node.  Every time the content of a wiki is updated, a new version is created.
+
+        Returns a JSON object with a `data` key containing the representation of the requested wiki, if the request was successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#Introduction_error_codes) to understand why this request may have failed.
+      operationId: wiki_version_detail
+      parameters:
+        - description: The unique identifier of the wiki.
+          in: path
+          name: wiki_id
+          required: true
+          type: string
+        - description: The unique identifier of the wiki version
+          in: path
+          name: version_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                attributes:
+                  content_type: text/markdown
+                  date_created: '2018-02-17T01:39:09.930740'
+                  size: 115
+                id: '2'
+                links:
+                  download: 'https://api.osf.io/v2/wikis/3va7z/versions/2/content/'
+                  self: 'https://api.osf.io/v2/wikis/3va7z/versions/2/'
+                relationships:
+                  user:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/users/nrws6/'
+                        meta: {}
+                  wiki_page:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/wikis/3va7z/'
+                        meta: {}
+                type: wiki-versions
+          schema:
+            example:
+              data:
+                attributes:
+                  content: Your wiki content goes here.
+                id: '{wiki_id}'
+                type: wiki-versions
+            properties:
+              attributes:
+                description: The properties of the wiki version.
+                properties:
+                  content_type:
+                    description: Content type of the wiki version (`text/markdown`).
+                    readOnly: false
+                    type: string
+                  date_created:
+                    description: 'The date and time at which the wiki version was saved, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: false
+                    type: string
+                  size:
+                    description: Size of the wiki version.
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - date_created
+                  - content_type
+                  - size
+                title: Attributes
+                type: object
+              id:
+                description: The wiki version.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the wiki version.
+                properties:
+                  download:
+                    description: The URL to download the content of the wiki version.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the detail page for the wiki version.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the wiki version.
+                properties:
+                  user:
+                    description: A relationship to the user associated with this wiki version.
+                    readOnly: false
+                    type: string
+                  wiki_page:
+                    description: A relationship to the associated wiki.
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - wiki_page
+                  - user
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the wiki version (`wiki-versions`).
+                readOnly: false
+                type: string
+            required:
+              - type
+              - relationships
+            title: Wiki
+            type: object
+      summary: Retrieve a wiki version
+      tags:
+        - Wikis
+      x-response-schema: Wiki
+  '/wikis/{wiki_id}/versions/{version_id}/content/':
+    get:
+      description: |-
+        Retrieves the plaintext content of a specific wiki version in markdown format.
+
+        Returns `text/markdown` of the wiki content itself.
+
+        If the request is unsuccessful, plaintext with the error message will be displayed.
+      operationId: wiki_version_content
+      parameters:
+        - description: The unique identifier of the wiki.
+          in: path
+          name: wiki_id
+          required: true
+          type: string
+        - description: The unique identifier of the wiki version.
+          in: path
+          name: version_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Retrieve the content of a wiki version
       tags:
         - Wikis
       x-response-schema: Wiki
@@ -20883,6 +22015,7 @@ x-tagGroups:
       - Request Formatting
       - Errors & Error Codes
       - Entities & Entity Collections
+      - External Libraries
   - name: API Reference
     tags:
       - Addons
@@ -20901,3 +22034,4 @@ x-tagGroups:
       - Taxonomies
       - Users
       - View Only Links
+      - Wikis

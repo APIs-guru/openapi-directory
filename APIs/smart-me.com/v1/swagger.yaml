@@ -102,42 +102,6 @@ paths:
       summary: Gets all available Actions of a Device
       tags:
         - Actions
-  /api/ChargingUser:
-    get:
-      consumes: []
-      deprecated: false
-      operationId: ChargingUser_Get
-      parameters:
-        - description: The ID of the user
-          format: int64
-          in: query
-          name: userId
-          required: true
-          type: integer
-        - description: The current Date
-          format: int64
-          in: query
-          name: date
-          required: true
-          type: integer
-        - description: The Password token
-          in: query
-          name: passwordToken
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/User'
-      summary: Gets the informations for the user.
-      tags:
-        - ChargingUser
   /api/CustomDevice:
     get:
       consumes: []
@@ -1067,6 +1031,14 @@ definitions:
         type: integer
       CounterReading:
         description: The Meter Counter Reading (Total Energy used)
+        format: double
+        type: number
+      CounterReadingExport:
+        description: The Meter Counter Reading only export
+        format: double
+        type: number
+      CounterReadingImport:
+        description: The Meter Counter Reading only import
         format: double
         type: number
       CounterReadingT1:

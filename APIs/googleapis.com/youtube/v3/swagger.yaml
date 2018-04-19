@@ -4505,6 +4505,7 @@ definitions:
           - private
           - public
           - unlisted
+          - unlisted_new
         type: string
     type: object
   ChannelTopicDetails:
@@ -5102,6 +5103,7 @@ definitions:
         description: The video's rating in Israel.
         enum:
           - ilfilm12
+          - ilfilm14
           - ilfilm16
           - ilfilm18
           - ilfilmAa
@@ -6090,6 +6092,7 @@ definitions:
           - private
           - public
           - unlisted
+          - unlisted_new
         type: string
       recordingStatus:
         description: The broadcast's recording status.
@@ -6867,6 +6870,7 @@ definitions:
           - private
           - public
           - unlisted
+          - unlisted_new
         type: string
     type: object
   PlaylistListResponse:
@@ -6958,6 +6962,7 @@ definitions:
           - private
           - public
           - unlisted
+          - unlisted_new
         type: string
     type: object
   PromotedItem:
@@ -8103,6 +8108,7 @@ definitions:
           - private
           - public
           - unlisted
+          - unlisted_new
         type: string
       publicStatsViewable:
         description: 'This value indicates if the extended video statistics on the watch page can be viewed by everyone. Note that the view count, likes, etc will still be visible if this is disabled.'

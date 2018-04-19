@@ -440,11 +440,6 @@ definitions:
       outputConfig:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1OutputConfig'
         description: The output location and metadata from AsyncAnnotateFileRequest.
-      outputs:
-        description: The full list of output files in GCS.
-        items:
-          $ref: '#/definitions/GoogleCloudVisionV1p2beta1GcsDestination'
-        type: array
     type: object
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest:
     description: |-
@@ -968,7 +963,7 @@ definitions:
         type: array
       latLongRect:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1LatLongRect'
-        description: lat/long rectangle that specifies the location of the image.
+        description: Not used.
       webDetectionParams:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionParams'
         description: Parameters for web detection.

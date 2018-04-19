@@ -256,6 +256,8 @@ paths:
             properties:
               country_code:
                 type: string
+              layaway_terms_slug:
+                type: string
               message:
                 description: Message to include with counter offer
                 type: string
@@ -295,6 +297,8 @@ paths:
                   - amount
                   - currency
                 type: object
+              quantity:
+                type: string
               region_code:
                 type: string
               shipping_price:
@@ -3101,6 +3105,8 @@ paths:
             properties:
               country_code:
                 type: string
+              layaway_terms_slug:
+                type: string
               message:
                 description: Message to include with counter offer
                 type: string
@@ -3140,6 +3146,8 @@ paths:
                   - amount
                   - currency
                 type: object
+              quantity:
+                type: string
               region_code:
                 type: string
               shipping_price:
@@ -3264,41 +3272,6 @@ paths:
   /my/orders/selling/all:
     get:
       description: 'Get all seller orders, newest first.'
-      parameters:
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_start_date
-          required: false
-          type: string
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_end_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_start_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_end_date
-          required: false
-          type: string
-        - default: 1
-          in: query
-          name: page
-          required: false
-          type: integer
-        - default: 24
-          in: query
-          name: per_page
-          required: false
-          type: integer
-        - in: query
-          name: offset
-          required: false
-          type: integer
       responses:
         default:
           description: Unexpected error
@@ -3310,49 +3283,14 @@ paths:
         - my
   /my/orders/selling/awaiting_shipment:
     get:
-      description: 'Get seller orders awaiting shipment, newest first.'
-      parameters:
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_start_date
-          required: false
-          type: string
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_end_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_start_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_end_date
-          required: false
-          type: string
-        - default: 1
-          in: query
-          name: page
-          required: false
-          type: integer
-        - default: 24
-          in: query
-          name: per_page
-          required: false
-          type: integer
-        - in: query
-          name: offset
-          required: false
-          type: integer
+      description: 'Get unpaid seller orders, newest first.'
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - read_orders
-      summary: 'Get seller orders awaiting shipment, newest first.'
+      summary: 'Get unpaid seller orders, newest first.'
       tags:
         - my
   '/my/orders/selling/buyer_history/{buyer_id}':
@@ -3375,41 +3313,6 @@ paths:
   /my/orders/selling/unpaid:
     get:
       description: 'Get unpaid seller orders, newest first.'
-      parameters:
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_start_date
-          required: false
-          type: string
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_end_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_start_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_end_date
-          required: false
-          type: string
-        - default: 1
-          in: query
-          name: page
-          required: false
-          type: integer
-        - default: 24
-          in: query
-          name: per_page
-          required: false
-          type: integer
-        - in: query
-          name: offset
-          required: false
-          type: integer
       responses:
         default:
           description: Unexpected error

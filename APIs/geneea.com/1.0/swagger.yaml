@@ -102,8 +102,6 @@ info:
   x-providerName: geneea.com
 consumes:
   - application/json
-produces:
-  - application/json
 securityDefinitions:
   user_key:
     in: query
@@ -116,12 +114,16 @@ tags:
     name: account
   - description: Geneea simple REST API version 1
     name: geneea-api-s1
+  - description: REST API for status monitoring
+    name: status-api
 paths:
   /account:
     get:
       deprecated: false
       description: getInfo
       operationId: getInfo
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -170,6 +172,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -195,6 +199,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -245,6 +251,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -270,6 +278,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -320,6 +330,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -345,6 +357,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -395,6 +409,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -420,6 +436,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -470,6 +488,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -495,6 +515,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -511,6 +533,28 @@ paths:
       summary: Performs topic detection on the given document
       tags:
         - geneea-api-s1
+  /status:
+    get:
+      deprecated: false
+      description: status
+      operationId: status
+      produces:
+        - text/plain
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Gets status of the Interpretor service
+      tags:
+        - status-api
 definitions:
   EntitiesResponse:
     description: Response for the named-entity recognition

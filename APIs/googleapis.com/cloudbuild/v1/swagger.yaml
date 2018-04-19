@@ -642,6 +642,82 @@ paths:
       tags:
         - operations
 definitions:
+  ArtifactObjects:
+    description: |-
+      Files in the workspace to upload to Cloud Storage upon successful
+      completion of all build steps.
+    properties:
+      location:
+        description: |-
+          Cloud Storage bucket and optional object path, in the form
+          "gs://bucket/path/to/somewhere/". (see [Bucket Name
+          Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
+
+          Files in the workspace matching any path pattern will be uploaded to
+          Cloud Storage with this location as a prefix.
+        type: string
+      paths:
+        description: Path globs used to match files in the build's workspace.
+        items:
+          type: string
+        type: array
+      timing:
+        $ref: '#/definitions/TimeSpan'
+        description: |-
+          Stores timing information for pushing all artifact objects.
+          @OutputOnly
+    type: object
+  ArtifactResult:
+    description: |-
+      An artifact that was uploaded during a build. This
+      is a single record in the artifact manifest JSON file.
+    properties:
+      fileHash:
+        description: The file hash of the artifact.
+        items:
+          $ref: '#/definitions/FileHashes'
+        type: array
+      location:
+        description: |-
+          The path of an artifact in a Google Cloud Storage bucket, with the
+          generation number. For example,
+          `gs://mybucket/path/to/output.jar#generation`.
+        type: string
+    type: object
+  Artifacts:
+    description: |-
+      Artifacts produced by a build that should be uploaded upon
+      successful completion of all build steps.
+    properties:
+      images:
+        description: |-
+          A list of images to be pushed upon the successful completion of all build
+          steps.
+
+          The images will be pushed using the builder service account's credentials.
+
+          The digests of the pushed images will be stored in the Build resource's
+          results field.
+
+          If any of the images fail to be pushed, the build is marked FAILURE.
+        items:
+          type: string
+        type: array
+      objects:
+        $ref: '#/definitions/ArtifactObjects'
+        description: |-
+          A list of objects to be uploaded to Cloud Storage upon successful
+          completion of all build steps.
+
+          Files in the workspace matching specified paths globs will be uploaded to
+          the specified Cloud Storage location using the builder service account's
+          credentials.
+
+          The location and generation of the uploaded objects will be stored in the
+          Build resource's results field.
+
+          If any objects fail to be pushed, the build is marked FAILURE.
+    type: object
   Build:
     description: |-
       A build resource in the Container Builder API.
@@ -662,6 +738,11 @@ definitions:
         resolved from the specified branch or tag.
       - $SHORT_SHA: first 7 characters of $REVISION_ID or $COMMIT_SHA.
     properties:
+      artifacts:
+        $ref: '#/definitions/Artifacts'
+        description: |-
+          Artifacts produced by the build that should be uploaded upon
+          successful completion of all build steps.
       buildTriggerId:
         description: |-
           The ID of the `BuildTrigger` that triggered this build, if it was
@@ -853,6 +934,7 @@ definitions:
           enum:
             - NONE
             - SHA256
+            - MD5
           type: string
         type: array
       substitutionOption:
@@ -1093,6 +1175,7 @@ definitions:
         enum:
           - NONE
           - SHA256
+          - MD5
         type: string
       value:
         description: The hash value.
@@ -1208,6 +1291,9 @@ definitions:
   Results:
     description: Artifacts created by the build pipeline.
     properties:
+      artifactManifest:
+        description: Path to the artifact manifest. Only populated when artifacts are uploaded.
+        type: string
       buildStepImages:
         description: |-
           List of build step digests, in the order corresponding to build step
@@ -1220,6 +1306,10 @@ definitions:
         items:
           $ref: '#/definitions/BuiltImage'
         type: array
+      numArtifacts:
+        description: Number of artifacts uploaded. Only populated when artifacts are uploaded.
+        format: int64
+        type: string
     type: object
   RetryBuildRequest:
     description: Specifies a build to retry.

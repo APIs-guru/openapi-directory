@@ -118,13 +118,12 @@ paths:
   '/v1/{name}':
     delete:
       description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: serviceconsumermanagement.operations.delete
+        Delete a tenancy unit.  Before the tenancy unit is deleted, there should be
+        no tenant resources in it.
+        Operation<response: Empty>.
+      operationId: serviceconsumermanagement.services.tenancyUnits.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Name of the tenancy unit to be deleted.
           in: path
           name: name
           required: true
@@ -134,14 +133,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - operations
+        - services
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
@@ -703,14 +702,7 @@ definitions:
       ignored.
     properties:
       allowWithoutCredential:
-        description: |-
-          Whether to allow requests without a credential. The credential can be
-          an OAuth token, Google cookies (first-party auth) or EndUserCreds.
-
-          For requests without credentials, if the service control environment is
-          specified, each incoming request **must** be associated with a service
-          consumer. This can be done by passing an API key that belongs to a consumer
-          project.
+        description: 'If true, the service accepts API keys without any other credential.'
         type: boolean
       customAuth:
         $ref: '#/definitions/CustomAuthRequirements'
@@ -2857,7 +2849,8 @@ definitions:
           The email format of the service account will be
           "<account-id>@<tenant-project-id>.iam.gserviceaccount.com".
           This account id has to be unique within tenant project and producers
-          have to guarantee it.
+          have to guarantee it. And it must be 6-30 characters long, and matches the
+          regular expression `[a-z]([-a-z0-9]*[a-z0-9])`.
         type: string
       tenantProjectRoles:
         description: Roles for the associated service account for the tenant project.

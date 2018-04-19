@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Kubernetes Engine API is used for building and managing container based applications, powered by the open source Kubernetes technology.'
-  title: Google Kubernetes Engine
+  title: Kubernetes Engine
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -725,8 +725,8 @@ paths:
           required: true
           type: string
         - description: |-
-            The parent (project, location, cluster id) where the node pools will be listed.
-            Specified in the format 'projects/*/locations/*/clusters/*'.
+            The parent (project, location, cluster id) where the node pools will be
+            listed. Specified in the format 'projects/*/locations/*/clusters/*'.
           in: query
           name: parent
           type: string
@@ -826,8 +826,9 @@ paths:
           required: true
           type: string
         - description: |-
-            The name (project, location, cluster, node pool id) of the node pool to delete.
-            Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+            The name (project, location, cluster, node pool id) of the node pool to
+            delete. Specified in the format
+            'projects/*/locations/*/clusters/*/nodePools/*'.
           in: query
           name: name
           type: string
@@ -877,8 +878,9 @@ paths:
           required: true
           type: string
         - description: |-
-            The name (project, location, cluster, node pool id) of the node pool to get.
-            Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+            The name (project, location, cluster, node pool id) of the node pool to
+            get. Specified in the format
+            'projects/*/locations/*/clusters/*/nodePools/*'.
           in: query
           name: name
           type: string
@@ -1614,9 +1616,9 @@ paths:
           required: true
           type: string
         - description: |-
-            Deprecated. The name of the Google Compute Engine [zone](/compute/docs/zones#available)
-            to return operations for, or `-` for all zones.
-            This field has been deprecated and replaced by the parent field.
+            Deprecated. The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) to return operations for, or `-` for
+            all zones. This field has been deprecated and replaced by the parent field.
           in: path
           name: zone
           required: true
@@ -1823,8 +1825,9 @@ paths:
           name: clusterId
           type: string
         - description: |-
-            The name (project, location, cluster, node pool id) of the node pool to delete.
-            Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+            The name (project, location, cluster, node pool id) of the node pool to
+            delete. Specified in the format
+            'projects/*/locations/*/clusters/*/nodePools/*'.
           in: path
           name: name
           required: true
@@ -1862,12 +1865,19 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the specified operation.
-      operationId: container.projects.locations.operations.get
+      description: Retrieves the node pool requested.
+      operationId: container.projects.locations.clusters.nodePools.get
       parameters:
         - description: |-
-            The name (project, location, operation id) of the operation to get.
-            Specified in the format 'projects/*/locations/*/operations/*'.
+            Deprecated. The name of the cluster.
+            This field has been deprecated and replaced by the name field.
+          in: query
+          name: clusterId
+          type: string
+        - description: |-
+            The name (project, location, cluster, node pool id) of the node pool to
+            get. Specified in the format
+            'projects/*/locations/*/clusters/*/nodePools/*'.
           in: path
           name: name
           required: true
@@ -1880,14 +1890,8 @@ paths:
           name: nodePoolId
           type: string
         - description: |-
-            Deprecated. The server-assigned `name` of the operation.
-            This field has been deprecated and replaced by the name field.
-          in: query
-          name: operationId
-          type: string
-        - description: |-
             Deprecated. The Google Developers Console [project ID or project
-            number](https://support.google.com/cloud/answer/6158840).
+            number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: query
           name: projectId
@@ -1904,7 +1908,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/NodePool'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1933,8 +1937,9 @@ paths:
           schema:
             $ref: '#/definitions/UpdateNodePoolRequest'
         - description: |-
-            The name (project, location, cluster, node pool) of the node pool to update.
-            Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+            The name (project, location, cluster, node pool) of the node pool to
+            update. Specified in the format
+            'projects/*/locations/*/clusters/*/nodePools/*'.
           in: path
           name: name
           required: true
@@ -2066,8 +2071,8 @@ paths:
           schema:
             $ref: '#/definitions/CompleteIPRotationRequest'
         - description: |-
-            The name (project, location, cluster id) of the cluster to complete IP rotation.
-            Specified in the format 'projects/*/locations/*/clusters/*'.
+            The name (project, location, cluster id) of the cluster to complete IP
+            rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
           in: path
           name: name
           required: true
@@ -2526,8 +2531,8 @@ paths:
           schema:
             $ref: '#/definitions/SetNetworkPolicyRequest'
         - description: |-
-            The name (project, location, cluster id) of the cluster to set networking policy.
-            Specified in the format 'projects/*/locations/*/clusters/*'.
+            The name (project, location, cluster id) of the cluster to set networking
+            policy. Specified in the format 'projects/*/locations/*/clusters/*'.
           in: path
           name: name
           required: true
@@ -2650,8 +2655,8 @@ paths:
           schema:
             $ref: '#/definitions/StartIPRotationRequest'
         - description: |-
-            The name (project, location, cluster id) of the cluster to start IP rotation.
-            Specified in the format 'projects/*/locations/*/clusters/*'.
+            The name (project, location, cluster id) of the cluster to start IP
+            rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
           in: path
           name: name
           required: true
@@ -2814,8 +2819,8 @@ paths:
           name: clusterId
           type: string
         - description: |-
-            The parent (project, location, cluster id) where the node pools will be listed.
-            Specified in the format 'projects/*/locations/*/clusters/*'.
+            The parent (project, location, cluster id) where the node pools will be
+            listed. Specified in the format 'projects/*/locations/*/clusters/*'.
           in: path
           name: parent
           required: true
@@ -2869,8 +2874,9 @@ paths:
           schema:
             $ref: '#/definitions/CreateNodePoolRequest'
         - description: |-
-            The parent (project, location, cluster id) where the node pool will be created.
-            Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+            The parent (project, location, cluster id) where the node pool will be
+            created. Specified in the format
+            'projects/*/locations/*/clusters/*/nodePools/*'.
           in: path
           name: parent
           required: true
@@ -2908,9 +2914,9 @@ paths:
           name: projectId
           type: string
         - description: |-
-            Deprecated. The name of the Google Compute Engine [zone](/compute/docs/zones#available)
-            to return operations for, or `-` for all zones.
-            This field has been deprecated and replaced by the parent field.
+            Deprecated. The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) to return operations for, or `-` for
+            all zones. This field has been deprecated and replaced by the parent field.
           in: query
           name: zone
           type: string
@@ -3367,8 +3373,8 @@ definitions:
         type: string
       name:
         description: |-
-          The name (project, location, cluster id) of the cluster to complete IP rotation.
-          Specified in the format 'projects/*/locations/*/clusters/*'.
+          The name (project, location, cluster id) of the cluster to complete IP
+          rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
         type: string
       projectId:
         description: |-
@@ -3424,8 +3430,9 @@ definitions:
         description: The node pool to create.
       parent:
         description: |-
-          The parent (project, location, cluster id) where the node pool will be created.
-          Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+          The parent (project, location, cluster id) where the node pool will be
+          created. Specified in the format
+          'projects/*/locations/*/clusters/*/nodePools/*'.
         type: string
       projectId:
         description: |-
@@ -3848,7 +3855,8 @@ definitions:
           friendly names of CPU platforms, such as
           <code>minCpuPlatform: &quot;Intel Haswell&quot;</code> or
           <code>minCpuPlatform: &quot;Intel Sandy Bridge&quot;</code>. For more
-          information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
+          information, read [how to specify min CPU
+          platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
         type: string
       oauthScopes:
         description: |-
@@ -4425,8 +4433,8 @@ definitions:
         type: string
       name:
         description: |-
-          The name (project, location, cluster id) of the cluster to set networking policy.
-          Specified in the format 'projects/*/locations/*/clusters/*'.
+          The name (project, location, cluster id) of the cluster to set networking
+          policy. Specified in the format 'projects/*/locations/*/clusters/*'.
         type: string
       networkPolicy:
         $ref: '#/definitions/NetworkPolicy'
@@ -4570,8 +4578,8 @@ definitions:
         type: string
       name:
         description: |-
-          The name (project, location, cluster id) of the cluster to start IP rotation.
-          Specified in the format 'projects/*/locations/*/clusters/*'.
+          The name (project, location, cluster id) of the cluster to start IP
+          rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
         type: string
       projectId:
         description: |-
@@ -4579,6 +4587,9 @@ definitions:
           number](https://developers.google.com/console/help/new/#projectnumber).
           This field has been deprecated and replaced by the name field.
         type: string
+      rotateCredentials:
+        description: Whether to rotate credentials during IP rotation.
+        type: boolean
       zone:
         description: |-
           Deprecated. The name of the Google Compute Engine
@@ -4670,8 +4681,9 @@ definitions:
         type: string
       name:
         description: |-
-          The name (project, location, cluster, node pool) of the node pool to update.
-          Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+          The name (project, location, cluster, node pool) of the node pool to
+          update. Specified in the format
+          'projects/*/locations/*/clusters/*/nodePools/*'.
         type: string
       nodePoolId:
         description: |-

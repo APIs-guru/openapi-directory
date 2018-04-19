@@ -38,7 +38,7 @@ paths:
   '/{format}/ActiveBoxScores':
     get:
       description: This method returns box scores for all games that are either in-progress or have been updated within the last 30 minutes.
-      operationId: Legacy Box Scores Active
+      operationId: 57a01ec514338d0a985480cc
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -56,10 +56,11 @@ paths:
             items:
               $ref: '#/definitions/BoxScore'
             type: array
+      summary: Legacy Box Scores Active
   '/{format}/AllTeams':
     get:
       description: 'Gets all teams, including pro bowl teams.'
-      operationId: Teams (All)
+      operationId: 5943f7d7b1e6f58c010325a4
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -73,10 +74,11 @@ paths:
             items:
               $ref: '#/definitions/Team'
             type: array
+      summary: Teams (All)
   '/{format}/AreAnyGamesInProgress':
     get:
       description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
-      operationId: Are Games In Progress
+      operationId: 5943f7d78a940ff458b40dfe
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -92,9 +94,10 @@ paths:
           description: ''
           schema:
             type: boolean
+      summary: Are Games In Progress
   '/{format}/BoxScore/{season}/{week}/{hometeam}':
     get:
-      operationId: Legacy Box Score
+      operationId: 57a01ec514338d0a985480cd
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -133,9 +136,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/BoxScore'
+      summary: Legacy Box Score
   '/{format}/BoxScoreByScoreIDV3/{scoreid}':
     get:
-      operationId: Box Score by ScoreID V3
+      operationId: 597262a614338d1b20c91378
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -156,9 +160,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/BoxScoreV3'
+      summary: Box Score by ScoreID V3
   '/{format}/BoxScoreV3/{season}/{week}/{hometeam}':
     get:
-      operationId: Box Score V3
+      operationId: 5972625714338d1b20c91377
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -195,10 +200,11 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/BoxScoreV3'
+      summary: Box Score V3
   '/{format}/BoxScores/{season}/{week}':
     get:
       description: This method returns all box scores for a given season and week.
-      operationId: Legacy Box Scores
+      operationId: 57a01ec514338d0a985480ce
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -234,10 +240,11 @@ paths:
             items:
               $ref: '#/definitions/BoxScore'
             type: array
+      summary: Legacy Box Scores
   '/{format}/BoxScoresDelta/{season}/{week}/{minutes}':
     get:
       description: 'This method returns all box scores for a given season and week, but only returns player stats that have changed in the last X minutes.'
-      operationId: Legacy Box Scores Delta
+      operationId: 57a01ec514338d0a985480e8
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -279,10 +286,11 @@ paths:
             items:
               $ref: '#/definitions/BoxScore'
             type: array
+      summary: Legacy Box Scores Delta
   '/{format}/BoxScoresDeltaV3/{season}/{week}/{playerstoinclude}/{minutes}':
     get:
       description: 'This method returns all box scores for a given season and week, but only returns player stats that have changed in the last X minutes. You can also filter by type of player stats to include, such as traditional fantasy players, IDP players or all players.'
-      operationId: Box Scores Delta V3
+      operationId: 597261f914338d1b20c91376
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -338,10 +346,11 @@ paths:
             items:
               $ref: '#/definitions/BoxScoreV3'
             type: array
+      summary: Box Scores Delta V3
   '/{format}/Byes/{season}':
     get:
       description: 'Get bye weeks for the teams during a specified NFL season. '
-      operationId: Bye Weeks
+      operationId: 5943f7d72731df36660417ec
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -364,10 +373,11 @@ paths:
             items:
               $ref: '#/definitions/Bye'
             type: array
+      summary: Bye Weeks
   '/{format}/CurrentSeason':
     get:
       description: Year of the current NFL season. This value changes on July 1st. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
-      operationId: Season Current
+      operationId: 5943f7d788c077177c96df8e
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -379,10 +389,11 @@ paths:
           description: ''
           schema:
             type: integer
+      summary: Season Current
   '/{format}/CurrentWeek':
     get:
       description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight EST. Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.
-      operationId: Week Current
+      operationId: 5943f7d7b39458a92670ef9a
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -394,9 +405,10 @@ paths:
           description: ''
           schema:
             type: integer
+      summary: Week Current
   '/{format}/DailyFantasyPlayers/{date}':
     get:
-      operationId: Daily Fantasy Players
+      operationId: 57a01ec514338d0a985480cf
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -424,9 +436,10 @@ paths:
             items:
               $ref: '#/definitions/DailyFantasyPlayer'
             type: array
+      summary: Daily Fantasy Players
   '/{format}/DailyFantasyPoints/{date}':
     get:
-      operationId: Daily Fantasy Scoring
+      operationId: 57a01ec514338d0a985480e9
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -452,9 +465,10 @@ paths:
             items:
               $ref: '#/definitions/DailyFantasyScoring'
             type: array
+      summary: Daily Fantasy Scoring
   '/{format}/DfsSlatesByDate/{date}':
     get:
-      operationId: DFS Slates by Date
+      operationId: 5988b38435491a1b5434a169
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -479,9 +493,10 @@ paths:
             items:
               $ref: '#/definitions/DfsSlate'
             type: array
+      summary: DFS Slates by Date
   '/{format}/DfsSlatesByWeek/{season}/{week}':
     get:
-      operationId: DFS Slates by Week
+      operationId: 58de9ec635491a1e88853aa1
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -515,9 +530,10 @@ paths:
             items:
               $ref: '#/definitions/DfsSlate'
             type: array
+      summary: DFS Slates by Week
   '/{format}/FantasyDefenseByGame/{season}/{week}':
     get:
-      operationId: Fantasy Defense Game Stats
+      operationId: 57a01ec514338d0a985480d2
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -553,9 +569,10 @@ paths:
             items:
               $ref: '#/definitions/FantasyDefenseGame'
             type: array
+      summary: Fantasy Defense Game Stats
   '/{format}/FantasyDefenseByGameByTeam/{season}/{week}/{team}':
     get:
-      operationId: Fantasy Defense Game Stats by Team
+      operationId: 57a01ec514338d0a985480ec
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -592,9 +609,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/FantasyDefenseGame'
+      summary: Fantasy Defense Game Stats by Team
   '/{format}/FantasyDefenseBySeason/{season}':
     get:
-      operationId: Fantasy Defense Season Stats
+      operationId: 57a01ec514338d0a985480d3
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -621,9 +639,10 @@ paths:
             items:
               $ref: '#/definitions/FantasyDefenseSeason'
             type: array
+      summary: Fantasy Defense Season Stats
   '/{format}/FantasyDefenseBySeasonByTeam/{season}/{team}':
     get:
-      operationId: Fantasy Defense Season Stats by Team
+      operationId: 57a01ec514338d0a985480ed
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -652,10 +671,11 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/FantasyDefenseSeason'
+      summary: Fantasy Defense Season Stats by Team
   '/{format}/FantasyPlayers':
     get:
       description: 'This method returns a comprehensive list of draftable fantasy football players, including QB, RB, WR, TE, K and DEF.  Players are sorted by ADP (AverageDraftPosition).'
-      operationId: Fantasy Players with ADP
+      operationId: 57a01ec514338d0a985480e6
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -673,10 +693,11 @@ paths:
             items:
               $ref: '#/definitions/FantasyPlayer'
             type: array
+      summary: Fantasy Players with ADP
   '/{format}/FantasyPlayersIDP':
     get:
       description: 'This method returns the top 300+ IDP Fantasy Players for the current or upcoming season, ordered by AverageDraftPositionIDP.'
-      operationId: IDP Fantasy Players with ADP
+      operationId: 597793c135491a03048c44ef
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -694,9 +715,10 @@ paths:
             items:
               $ref: '#/definitions/FantasyPlayer'
             type: array
+      summary: IDP Fantasy Players with ADP
   '/{format}/FinalBoxScores':
     get:
-      operationId: Legacy Box Scores Final
+      operationId: 57a01ec514338d0a985480d4
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -714,9 +736,10 @@ paths:
             items:
               $ref: '#/definitions/BoxScore'
             type: array
+      summary: Legacy Box Scores Final
   '/{format}/FreeAgents':
     get:
-      operationId: Player Details by Free Agents
+      operationId: 57a01ec514338d0a985480d5
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -734,9 +757,10 @@ paths:
             items:
               $ref: '#/definitions/Player'
             type: array
+      summary: Player Details by Free Agents
   '/{format}/GameLeagueLeaders/{season}/{week}/{position}/{column}':
     get:
-      operationId: League Leaders by Week
+      operationId: 57a01ec514338d0a985480d6
       parameters:
         - default: XML
           description: |-
@@ -806,10 +830,11 @@ paths:
             items:
               $ref: '#/definitions/PlayerGame'
             type: array
+      summary: League Leaders by Week
   '/{format}/GameStats/{season}':
     get:
       description: Game stats for a specified season.
-      operationId: 'Game Stats by Season (Deprecated, use Team Game Stats instead)'
+      operationId: 57a01ec514338d0a985480d7
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -836,10 +861,11 @@ paths:
             items:
               $ref: '#/definitions/Game'
             type: array
+      summary: 'Game Stats by Season (Deprecated, use Team Game Stats instead)'
   '/{format}/GameStatsByWeek/{season}/{week}':
     get:
       description: Game stats for a specified season and week.
-      operationId: 'Game Stats by Week (Deprecated, use Team Game Stats instead)'
+      operationId: 57a01ec514338d0a985480d8
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -875,9 +901,10 @@ paths:
             items:
               $ref: '#/definitions/Game'
             type: array
+      summary: 'Game Stats by Week (Deprecated, use Team Game Stats instead)'
   '/{format}/Injuries/{season}/{week}':
     get:
-      operationId: Injuries
+      operationId: 57a01ec514338d0a985480d9
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -913,9 +940,10 @@ paths:
             items:
               $ref: '#/definitions/Injury'
             type: array
+      summary: Injuries
   '/{format}/Injuries/{season}/{week}/{team}':
     get:
-      operationId: Injuries by Team
+      operationId: 57a01ec514338d0a985480da
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -956,10 +984,11 @@ paths:
             items:
               $ref: '#/definitions/Injury'
             type: array
+      summary: Injuries by Team
   '/{format}/LastCompletedSeason':
     get:
       description: Year of the most recently completed season. this value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
-      operationId: Season Last Completed
+      operationId: 5943f7d7756c2df49f1d7b0b
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -971,6 +1000,7 @@ paths:
           description: ''
           schema:
             type: integer
+      summary: Season Last Completed
   '/{format}/LastCompletedWeek':
     get:
       description: |-
@@ -978,7 +1008,7 @@ paths:
                 Number of the last completed week in the current NFL season. This value changes immediately after the last game of the week is completed and the data is available. This usually happens right after the Monday night game.
                 Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.
               
-      operationId: Week Last Completed
+      operationId: 5943f7d766f5c7f1cf713480
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -990,9 +1020,10 @@ paths:
           description: ''
           schema:
             type: integer
+      summary: Week Last Completed
   '/{format}/LiveBoxScores':
     get:
-      operationId: Legacy Box Scores Live
+      operationId: 57a01ec514338d0a985480db
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1010,9 +1041,10 @@ paths:
             items:
               $ref: '#/definitions/BoxScore'
             type: array
+      summary: Legacy Box Scores Live
   '/{format}/News':
     get:
-      operationId: News
+      operationId: 5943f7d7d8c2f4039b5e2101
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1026,9 +1058,10 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
+      summary: News
   '/{format}/NewsByDate/{date}':
     get:
-      operationId: News by Date
+      operationId: 59699d8035491a16c40cc118
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1049,9 +1082,10 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
+      summary: News by Date
   '/{format}/NewsByPlayerID/{playerid}':
     get:
-      operationId: News by Player
+      operationId: 5943f7d78c60cb40748b3fbc
       parameters:
         - description: |-
 
@@ -1073,9 +1107,10 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
+      summary: News by Player
   '/{format}/NewsByTeam/{team}':
     get:
-      operationId: News by Team
+      operationId: 5943f7d77e44f5f235d8178d
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1094,9 +1129,10 @@ paths:
             items:
               $ref: '#/definitions/News'
             type: array
+      summary: News by Team
   '/{format}/Player/{playerid}':
     get:
-      operationId: Player Details by Player
+      operationId: 57a01ec514338d0a985480de
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1117,9 +1153,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayerDetail'
+      summary: Player Details by Player
   '/{format}/PlayerGameRedZoneStats/{season}/{week}':
     get:
-      operationId: Player Game Red Zone Stats
+      operationId: 59960fa435491a0af8ba4753
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1153,9 +1190,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGameRedZone'
             type: array
+      summary: Player Game Red Zone Stats
   '/{format}/PlayerGameStatsByPlayerID/{season}/{week}/{playerid}':
     get:
-      operationId: Player Game Stats by Player
+      operationId: 57a01ec514338d0a985480dc
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1194,9 +1232,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayerGame'
+      summary: Player Game Stats by Player
   '/{format}/PlayerGameStatsByTeam/{season}/{week}/{team}':
     get:
-      operationId: Player Game Stats by Team
+      operationId: 57a01ec514338d0a985480df
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1237,9 +1276,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGame'
             type: array
+      summary: Player Game Stats by Team
   '/{format}/PlayerGameStatsByWeek/{season}/{week}':
     get:
-      operationId: Player Game Stats by Week
+      operationId: 57a01ec514338d0a985480ea
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1275,9 +1315,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGame'
             type: array
+      summary: Player Game Stats by Week
   '/{format}/PlayerGameStatsByWeekDelta/{season}/{week}/{minutes}':
     get:
-      operationId: Player Game Stats by Week Delta
+      operationId: 57a01ec514338d0a985480e0
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1321,9 +1362,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGame'
             type: array
+      summary: Player Game Stats by Week Delta
   '/{format}/PlayerGameStatsDelta/{minutes}':
     get:
-      operationId: Player Game Stats Delta
+      operationId: 57a01ec514338d0a985480d1
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1350,9 +1392,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerGame'
             type: array
+      summary: Player Game Stats Delta
   '/{format}/PlayerOwnership/{season}/{week}':
     get:
-      operationId: Fantasy Player Ownership Percentages (Season-Long)
+      operationId: 598cab6214338d1b7c5a4e90
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1386,9 +1429,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerOwnership'
             type: array
+      summary: Fantasy Player Ownership Percentages (Season-Long)
   '/{format}/PlayerSeasonRedZoneStats/{season}':
     get:
-      operationId: Player Season Red Zone Stats
+      operationId: 57cad20735491a1a5434c63a
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1415,9 +1459,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeasonRedZone'
             type: array
+      summary: Player Season Red Zone Stats
   '/{format}/PlayerSeasonStats/{season}':
     get:
-      operationId: Player Season Stats
+      operationId: 57a01ec514338d0a985480eb
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1444,9 +1489,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeason'
             type: array
+      summary: Player Season Stats
   '/{format}/PlayerSeasonStatsByPlayerID/{season}/{playerid}':
     get:
-      operationId: Player Season Stats by Player
+      operationId: 57a01ec514338d0a985480dd
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1476,9 +1522,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayerSeason'
+      summary: Player Season Stats by Player
   '/{format}/PlayerSeasonStatsByTeam/{season}/{team}':
     get:
-      operationId: Player Season Stats by Team
+      operationId: 57a01ec514338d0a985480e1
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1510,9 +1557,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeason'
             type: array
+      summary: Player Season Stats by Team
   '/{format}/PlayerSeasonThirdDownStats/{season}':
     get:
-      operationId: Player Season Third Down Stats
+      operationId: 57cad20e35491a1a5434c63b
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1539,9 +1587,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeasonThirdDown'
             type: array
+      summary: Player Season Third Down Stats
   '/{format}/Players':
     get:
-      operationId: Player Details by Available
+      operationId: 57a01ec514338d0a985480e7
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1559,9 +1608,10 @@ paths:
             items:
               $ref: '#/definitions/Player'
             type: array
+      summary: Player Details by Available
   '/{format}/Players/{team}':
     get:
-      operationId: Player Details by Team
+      operationId: 57a01ec514338d0a985480e3
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1584,9 +1634,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerDetail'
             type: array
+      summary: Player Details by Team
   '/{format}/ProBowlers/{season}':
     get:
-      operationId: Pro Bowlers
+      operationId: 5a5fafce35491a14908e1e17
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1611,9 +1662,10 @@ paths:
             items:
               $ref: '#/definitions/PlayerInfo'
             type: array
+      summary: Pro Bowlers
   '/{format}/RecentlyUpdatedBoxScores/{minutes}':
     get:
-      operationId: Legacy Box Scores Delta (Current Week)
+      operationId: 57a01ec514338d0a985480d0
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1639,21 +1691,18 @@ paths:
             items:
               $ref: '#/definitions/BoxScore'
             type: array
+      summary: Legacy Box Scores Delta (Current Week)
   '/{format}/Schedules/{season}':
     get:
       description: Game schedule for a specified season.
-      operationId: Schedule
+      operationId: 5943f7d75fde0bdf65093730
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
           type: string
-        - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
-                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
-                    
+        - description: 'Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc.'
           in: path
           name: season
           required: true
@@ -1665,21 +1714,18 @@ paths:
             items:
               $ref: '#/definitions/Schedule'
             type: array
+      summary: Schedule
   '/{format}/Scores/{season}':
     get:
       description: Game scores for a specified season.
-      operationId: 'Scores by Season '
+      operationId: 5943f7d739df4560e9fd5d03
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
           type: string
-        - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
-                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
-                    
+        - description: 'Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc.'
           in: path
           name: season
           required: true
@@ -1691,10 +1737,11 @@ paths:
             items:
               $ref: '#/definitions/Score'
             type: array
+      summary: 'Scores by Season '
   '/{format}/ScoresByWeek/{season}/{week}':
     get:
       description: Get game scores for a specified week of a season.
-      operationId: Scores by Week
+      operationId: 5943f7d742a73a0d50a90705
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1726,9 +1773,10 @@ paths:
             items:
               $ref: '#/definitions/Score'
             type: array
+      summary: Scores by Week
   '/{format}/SeasonLeagueLeaders/{season}/{position}/{column}':
     get:
-      operationId: League Leaders by Season
+      operationId: 57a01ec514338d0a985480e2
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1786,10 +1834,65 @@ paths:
             items:
               $ref: '#/definitions/PlayerSeason'
             type: array
+      summary: League Leaders by Season
+  '/{format}/SimulatedBoxScoresV3/{numberofplays}':
+    get:
+      description: 'Gets simulated live box scores of NFL games, covering the Conference Championship games on January 21, 2018.'
+      operationId: 5ac78fea14338d21bc296406
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'The number of plays to progress in this NFL live game simulation. Example entries are <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>150</code>, <code>200</code>, etc.'
+          in: path
+          name: numberofplays
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/BoxScoreV3'
+            type: array
+      summary: Box Scores V3 Simulation
+  '/{format}/SimulatedScores/{numberofplays}':
+    get:
+      description: 'Gets simulated live scores of NFL games, covering the Conference Championship games on January 21, 2018.'
+      operationId: 5ac8269e14338d21bc296409
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'The number of plays to progress in this NFL live game simulation. Example entries are <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>150</code>, <code>200</code>, etc.'
+          in: path
+          name: numberofplays
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Score'
+            type: array
+      summary: Scores by Week Simulation
   '/{format}/Stadiums':
     get:
       description: This method returns all stadiums.
-      operationId: Stadiums
+      operationId: 5943f7d73c3710a43e4ae9cc
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1803,9 +1906,10 @@ paths:
             items:
               $ref: '#/definitions/Stadium'
             type: array
+      summary: Stadiums
   '/{format}/Standings/{season}':
     get:
-      operationId: Standings
+      operationId: 5943f7d700825705b1d44977
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1828,9 +1932,10 @@ paths:
             items:
               $ref: '#/definitions/Standing'
             type: array
+      summary: Standings
   '/{format}/TeamGameStats/{season}/{week}':
     get:
-      operationId: Team Game Stats
+      operationId: 57a01ec514338d0a985480e5
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1866,9 +1971,10 @@ paths:
             items:
               $ref: '#/definitions/TeamGame'
             type: array
+      summary: Team Game Stats
   '/{format}/TeamSeasonStats/{season}':
     get:
-      operationId: Team Season Stats
+      operationId: 57a01ec514338d0a985480e4
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1895,10 +2001,11 @@ paths:
             items:
               $ref: '#/definitions/TeamSeason'
             type: array
+      summary: Team Season Stats
   '/{format}/Teams':
     get:
       description: Gets all active teams.
-      operationId: Teams (Active)
+      operationId: 5943f7d7d58c4bfe37a739d9
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1912,10 +2019,11 @@ paths:
             items:
               $ref: '#/definitions/Team'
             type: array
+      summary: Teams (Active)
   '/{format}/Teams/{season}':
     get:
       description: List of teams playing in a specified season.
-      operationId: Teams by Season
+      operationId: 5943f7d7695f6509900a8bfe
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1938,10 +2046,11 @@ paths:
             items:
               $ref: '#/definitions/Team'
             type: array
+      summary: Teams by Season
   '/{format}/Timeframes/{type}':
     get:
       description: 'Get detailed information about past, present, and future timeframes.'
-      operationId: Timeframes
+      operationId: 5943f7d7bff39745fbd3c754
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1960,10 +2069,11 @@ paths:
             items:
               $ref: '#/definitions/Timeframe'
             type: array
+      summary: Timeframes
   '/{format}/UpcomingSeason':
     get:
       description: 'Year of the current NFL season, if we are in the mid-season. If we are in the off-season, then year of the next upcoming season. This value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.'
-      operationId: Season Upcoming
+      operationId: 5943f7d70276880ce131246a
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1975,10 +2085,11 @@ paths:
           description: ''
           schema:
             type: integer
+      summary: Season Upcoming
   '/{format}/UpcomingWeek':
     get:
       description: 'Number of the upcoming week of the NFL season. This value changes immediately after the final game of the week is completed. We consider upcoming week to be the current week, until current week is over. Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.'
-      operationId: Week Upcoming
+      operationId: 5943f7d7011d5072ce543a89
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -1990,6 +2101,7 @@ paths:
           description: ''
           schema:
             type: integer
+      summary: Week Upcoming
 definitions:
   BoxScore:
     properties:
@@ -2211,6 +2323,8 @@ definitions:
         type: integer
       OperatorGameID:
         type: integer
+      RemovedByOperator:
+        type: boolean
       SlateGameID:
         type: integer
       SlateID:
@@ -2237,6 +2351,8 @@ definitions:
         type: integer
       PlayerID:
         type: integer
+      RemovedByOperator:
+        type: boolean
       SlateGameID:
         type: integer
       SlateID:

@@ -50890,7 +50890,7 @@ definitions:
 
           If the webhook is running within the cluster, then you should use `service`.
 
-          If there is only one port open for the service, that port will be used. If there are multiple ports open, port 443 will be used if it is open, otherwise it is an error.
+          Port 443 will be used if it is open, otherwise it is an error.
       url:
         description: |-
           `url` gives the location of the webhook, in standard URL form (`[scheme://]host:port/path`). Exactly one of `url` or `service` must be specified.
@@ -51382,10 +51382,10 @@ definitions:
     properties:
       maxSurge:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new RC can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is at most 130% of desired pods.'
+        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is at most 130% of desired pods.'
       maxUnavailable:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
+        description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
   io.k8s.api.apps.v1.RollingUpdateStatefulSetStrategy:
     description: RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
     properties:
@@ -51785,10 +51785,10 @@ definitions:
     properties:
       maxSurge:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new RC can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.'
+        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.'
       maxUnavailable:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
+        description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
   io.k8s.api.apps.v1beta1.RollingUpdateStatefulSetStrategy:
     description: RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
     properties:
@@ -52469,10 +52469,10 @@ definitions:
     properties:
       maxSurge:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new RC can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.'
+        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.'
       maxUnavailable:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
+        description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
   io.k8s.api.apps.v1beta2.RollingUpdateStatefulSetStrategy:
     description: RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
     properties:
@@ -55771,7 +55771,7 @@ definitions:
         $ref: '#/definitions/io.k8s.api.core.v1.NodeConfigSource'
         description: 'If specified, the source to get node configuration from The DynamicKubeletConfig feature gate must be enabled for the Kubelet to use this field'
       externalID:
-        description: External ID of the node assigned by some machine database (e.g. a cloud provider). Deprecated.
+        description: 'Deprecated. Not all kubelets will set this field. Remove field after 1.13. see: https://issues.k8s.io/61966'
         type: string
       podCIDR:
         description: PodCIDR represents the pod IP range assigned to the node.
@@ -57743,7 +57743,7 @@ definitions:
       - lastObservedTime
       - state
   io.k8s.api.extensions.v1beta1.AllowedFlexVolume:
-    description: AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
+    description: 'AllowedFlexVolume represents a single Flexvolume that is allowed to be used. Deprecated: use AllowedFlexVolume from policy API Group instead.'
     properties:
       driver:
         description: driver is the name of the Flexvolume driver.
@@ -57751,7 +57751,7 @@ definitions:
     required:
       - driver
   io.k8s.api.extensions.v1beta1.AllowedHostPath:
-    description: AllowedHostPath defines the host volume conditions that will be enabled by a policy for pods to use. It requires the path prefix to be defined.
+    description: 'AllowedHostPath defines the host volume conditions that will be enabled by a policy for pods to use. It requires the path prefix to be defined. Deprecated: use AllowedHostPath from policy API Group instead.'
     properties:
       pathPrefix:
         description: |-
@@ -58091,7 +58091,7 @@ definitions:
         description: Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
         type: string
   io.k8s.api.extensions.v1beta1.FSGroupStrategyOptions:
-    description: FSGroupStrategyOptions defines the strategy type and options used to create the strategy.
+    description: 'FSGroupStrategyOptions defines the strategy type and options used to create the strategy. Deprecated: use FSGroupStrategyOptions from policy API Group instead.'
     properties:
       ranges:
         description: ranges are the allowed ranges of fs groups.  If you would like to force a single fs group then supply a single range with the same start and end. Required for MustRunAs.
@@ -58123,7 +58123,7 @@ definitions:
     required:
       - paths
   io.k8s.api.extensions.v1beta1.HostPortRange:
-    description: HostPortRange defines a range of host ports that will be enabled by a policy for pods to use.  It requires both the start and end to be defined.
+    description: 'HostPortRange defines a range of host ports that will be enabled by a policy for pods to use.  It requires both the start and end to be defined. Deprecated: use HostPortRange from policy API Group instead.'
     properties:
       max:
         description: 'max is the end of the range, inclusive.'
@@ -58137,7 +58137,7 @@ definitions:
       - min
       - max
   io.k8s.api.extensions.v1beta1.IDRange:
-    description: IDRange provides a min/max of an allowed range of IDs.
+    description: 'IDRange provides a min/max of an allowed range of IDs. Deprecated: use IDRange from policy API Group instead.'
     properties:
       max:
         description: 'max is the end of the range, inclusive.'
@@ -58380,7 +58380,7 @@ definitions:
     required:
       - podSelector
   io.k8s.api.extensions.v1beta1.PodSecurityPolicy:
-    description: PodSecurityPolicy governs the ability to make requests that affect the Security Context that will be applied to a pod and container.
+    description: 'PodSecurityPolicy governs the ability to make requests that affect the Security Context that will be applied to a pod and container. Deprecated: use PodSecurityPolicy from policy API Group instead.'
     properties:
       apiVersion:
         description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
@@ -58399,7 +58399,7 @@ definitions:
         kind: PodSecurityPolicy
         version: v1beta1
   io.k8s.api.extensions.v1beta1.PodSecurityPolicyList:
-    description: PodSecurityPolicyList is a list of PodSecurityPolicy objects.
+    description: 'PodSecurityPolicyList is a list of PodSecurityPolicy objects. Deprecated: use PodSecurityPolicyList from policy API Group instead.'
     properties:
       apiVersion:
         description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
@@ -58422,7 +58422,7 @@ definitions:
         kind: PodSecurityPolicyList
         version: v1beta1
   io.k8s.api.extensions.v1beta1.PodSecurityPolicySpec:
-    description: PodSecurityPolicySpec defines the policy enforced.
+    description: 'PodSecurityPolicySpec defines the policy enforced. Deprecated: use PodSecurityPolicySpec from policy API Group instead.'
     properties:
       allowPrivilegeEscalation:
         description: 'allowPrivilegeEscalation determines if a pod can request to allow privilege escalation. If unspecified, defaults to true.'
@@ -58635,7 +58635,7 @@ definitions:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
         description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By default, a fixed value of 1 is used. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
   io.k8s.api.extensions.v1beta1.RunAsUserStrategyOptions:
-    description: RunAsUserStrategyOptions defines the strategy type and any options used to create the strategy.
+    description: 'RunAsUserStrategyOptions defines the strategy type and any options used to create the strategy. Deprecated: use RunAsUserStrategyOptions from policy API Group instead.'
     properties:
       ranges:
         description: ranges are the allowed ranges of uids that may be used. If you would like to force a single uid then supply a single range with the same start and end. Required for MustRunAs.
@@ -58648,7 +58648,7 @@ definitions:
     required:
       - rule
   io.k8s.api.extensions.v1beta1.SELinuxStrategyOptions:
-    description: SELinuxStrategyOptions defines the strategy type and any options used to create the strategy.
+    description: 'SELinuxStrategyOptions defines the strategy type and any options used to create the strategy. Deprecated: use SELinuxStrategyOptions from policy API Group instead.'
     properties:
       rule:
         description: rule is the strategy that will dictate the allowable labels that may be set.
@@ -58705,7 +58705,7 @@ definitions:
     required:
       - replicas
   io.k8s.api.extensions.v1beta1.SupplementalGroupsStrategyOptions:
-    description: SupplementalGroupsStrategyOptions defines the strategy type and options used to create the strategy.
+    description: 'SupplementalGroupsStrategyOptions defines the strategy type and options used to create the strategy. Deprecated: use SupplementalGroupsStrategyOptions from policy API Group instead.'
     properties:
       ranges:
         description: ranges are the allowed ranges of supplemental groups.  If you would like to force a single supplemental group then supply a single range with the same start and end. Required for MustRunAs.

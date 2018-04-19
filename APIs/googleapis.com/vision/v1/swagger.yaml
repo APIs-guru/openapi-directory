@@ -186,7 +186,7 @@ paths:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: vision.locations.operations.get
+      operationId: vision.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -205,7 +205,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-vision'
       tags:
-        - locations
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -912,11 +912,6 @@ definitions:
       outputConfig:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1OutputConfig'
         description: The output location and metadata from AsyncAnnotateFileRequest.
-      outputs:
-        description: The full list of output files in GCS.
-        items:
-          $ref: '#/definitions/GoogleCloudVisionV1p2beta1GcsDestination'
-        type: array
     type: object
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse:
     description: Response to an async batch file annotation request.
@@ -1031,7 +1026,7 @@ definitions:
         type: array
       latLongRect:
         $ref: '#/definitions/LatLongRect'
-        description: lat/long rectangle that specifies the location of the image.
+        description: Not used.
       webDetectionParams:
         $ref: '#/definitions/WebDetectionParams'
         description: Parameters for web detection.

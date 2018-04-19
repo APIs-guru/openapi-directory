@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Lets you manage permission levels and related settings of a group.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Groups Settings
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/groupssettings/v1/rest'
       version: v1
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/apps.groups.settings': View and manage the settings of a G Suite group
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/apps.groups.settings': View and manage the settings of a G Suite group
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -110,8 +98,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.groups.settings'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.groups.settings'
       tags:
         - groups
     parameters:
@@ -143,8 +129,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.groups.settings'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.groups.settings'
       tags:
         - groups
     put:
@@ -167,8 +151,6 @@ paths:
             $ref: '#/definitions/Groups'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.groups.settings'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.groups.settings'
       tags:
         - groups
@@ -248,25 +230,25 @@ definitions:
         description: 'Moderation level for messages detected as spam. Possible values are: ALLOW MODERATE SILENTLY_MODERATE REJECT'
         type: string
       whoCanAdd:
-        description: 'Permissions to add members. Possible values are: ALL_MANAGERS_CAN_ADD ALL_MEMBERS_CAN_ADD NONE_CAN_ADD'
+        description: 'Permissions to add members. Possible values are: ALL_MANAGERS_CAN_ADD ALL_OWNERS_CAN_ADD ALL_MEMBERS_CAN_ADD NONE_CAN_ADD'
         type: string
       whoCanContactOwner:
         description: 'Permission to contact owner of the group via web UI. Possible values are: ANYONE_CAN_CONTACT ALL_IN_DOMAIN_CAN_CONTACT ALL_MEMBERS_CAN_CONTACT ALL_MANAGERS_CAN_CONTACT'
         type: string
       whoCanInvite:
-        description: 'Permissions to invite members. Possible values are: ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE NONE_CAN_INVITE'
+        description: 'Permissions to invite members. Possible values are: ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE ALL_OWNERS_CAN_INVITE NONE_CAN_INVITE'
         type: string
       whoCanJoin:
         description: 'Permissions to join the group. Possible values are: ANYONE_CAN_JOIN ALL_IN_DOMAIN_CAN_JOIN INVITED_CAN_JOIN CAN_REQUEST_TO_JOIN'
         type: string
       whoCanLeaveGroup:
-        description: 'Permission to leave the group. Possible values are: ALL_MANAGERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE NONE_CAN_LEAVE'
+        description: 'Permission to leave the group. Possible values are: ALL_MANAGERS_CAN_LEAVE ALL_OWNERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE NONE_CAN_LEAVE'
         type: string
       whoCanPostMessage:
         description: 'Permissions to post messages to the group. Possible values are: NONE_CAN_POST ALL_MANAGERS_CAN_POST ALL_MEMBERS_CAN_POST ALL_OWNERS_CAN_POST ALL_IN_DOMAIN_CAN_POST ANYONE_CAN_POST'
         type: string
       whoCanViewGroup:
-        description: 'Permissions to view group. Possible values are: ANYONE_CAN_VIEW ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW'
+        description: 'Permissions to view group. Possible values are: ANYONE_CAN_VIEW ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW ALL_OWNERS_CAN_VIEW'
         type: string
       whoCanViewMembership:
         description: 'Permissions to view membership. Possible values are: ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW'

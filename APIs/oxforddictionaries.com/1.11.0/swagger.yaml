@@ -10,7 +10,7 @@ info:
     url: 'https://developer.oxforddictionaries.com/api-terms-and-conditions'
   termsOfService: 'http://helloreverb.com/terms/'
   title: Oxford Dictionaries
-  version: 1.8.0
+  version: 1.11.0
   x-apisguru-categories:
     - text
   x-logo:
@@ -1004,7 +1004,7 @@ paths:
   '/stats/frequency/ngrams/{source_lang}/{corpus}/{ngram-size}/':
     get:
       description: |
-        This endpoint returns frequencies of ngrams of size 1-4. That is the number of times a word (ngram size = 1) or words (ngram size > 1) appear in the corpus. Ngrams are case sensitive ("I AM" and "I am" will have different frequency) and frequencies are calculated per word (true case) so "the book" and "the books" are two different ngrams. The results can be filtered based on query parameters. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overriden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> Example for bigrams (ngram of size 2):
+        This endpoint returns frequencies of ngrams of size 1-4. That is the number of times a word (ngram size = 1) or words (ngram size > 1) appear in the corpus. Ngrams are case sensitive ("I AM" and "I am" will have different frequency) and frequencies are calculated per word (true case) so "the book" and "the books" are two different ngrams. The results can be filtered based on query parameters. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overridden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> Example for bigrams (ngram of size 2):
         * PATH: /tokens=a word,another word
         * GET: /?tokens=a word&tokens=another word
         * POST (json):
@@ -1014,6 +1014,16 @@ paths:
                 "tokens": ["a word", "another word"]
             }
           ```
+
+        Either "tokens" or "contains" has to be provided. <br> <br> Some queries with "contains" or "sort" can exceed the 30s timeout, in which case the API will return an error message with status code 503. You mitigate this by providing additional restrictions such as "minFrequency" and "maxFrequency". <br> <br> You can use the parameters "offset" and "limit" to paginate through large result sets. For convenience, the HTTP header "Link" is set on the response to provide links to "first", "self", "next", "prev" and "last" pages of results (depending on the context). For example, if the result set contains 50 results and the parameter "limit" is set to 25, the Links header will contain an URL for the first 25 results and the next 25 results. <br> <br> Some libraries such as python's `requests` can parse the header automatically and offer a convenient way of iterating through the results. For example:
+        ```python def get_all_results(url):
+            while url:
+                r = requests.get(url)
+                r.raise_for_status()
+                for item in r.json()['results']:
+                  yield item
+                url = r.links.get('next', {}).get('url')
+        ```
       parameters:
         - default: en
           description: IANA language code
@@ -1078,6 +1088,16 @@ paths:
           name: maxDocumentFrequency
           required: false
           type: integer
+        - description: 'collate the results by wordform, trueCase, lemma, lexicalCategory. Multiple values can be separated by commas (e.g., collate=trueCase,lemma,lexicalCategory).'
+          in: query
+          name: collate
+          required: false
+          type: string
+        - description: 'sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign (''-''). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)'
+          in: query
+          name: sort
+          required: false
+          type: string
         - default: 0
           description: pagination - results offset
           format: int64
@@ -1191,7 +1211,7 @@ paths:
   '/stats/frequency/words/{source_lang}/':
     get:
       description: |
-        This endpoint provides a list of frequencies for a given word or words. Unlike the /word/ endpoint, the results are split into the smallest units. <br> <br> To exclude a specific value, prepend it with the minus sign ('-'). For example, to get frequencies of the lemma 'happy' but exclude superlative forms (i.e., happiest) you could use options 'lemma=happy;grammaticalFeatures=-degreeType:superlative'. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overriden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> The parameters wordform/trueCase/lemma/lexicalCategory also exist in a plural form, taking a lists of items. Examples:
+        This endpoint provides a list of frequencies for a given word or words. Unlike the /word/ endpoint, the results are split into the smallest units. <br> <br> To exclude a specific value, prepend it with the minus sign ('-'). For example, to get frequencies of the lemma 'happy' but exclude superlative forms (i.e., happiest) you could use options 'lemma=happy;grammaticalFeatures=-degreeType:superlative'. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overridden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> The parameters wordform/trueCase/lemma/lexicalCategory also exist in a plural form, taking a lists of items. Examples:
         * PATH: /wordforms=happy,happier,happiest
         * GET: /?wordforms=happy&wordforms=happier&wordforms=happiest
         * POST (json):
@@ -1200,30 +1220,25 @@ paths:
             "wordforms": ["happy", "happier", "happiest"]
           }
         ```
-        <br> Aside from individual frequency requests, users can also post a list of items for which they would like to get frequencies. The list has to be uploaded in json and the required fields are "items" and "collate". <br> <br> The field "items" is a list of items for which you want the frequencies. The content of the items depends on the option for "collate". The value of "collate" should be a list of "columns" that the items contain. The list is limited to combinations of "wordform", "lemma", "trueCase" and "lexicalCategory". The fields that are listed in the "collate" options have to be present in each item. Here are some examples of queries:
-        * ### Get frequencies of provided wordforms:
-        ```javascript
+        A mor complex example of retrieving frequencies of multiple lemmas:
+        ```
           {
-              "collate": ["wordform"],
-              "items": [{"wordform": "test"}, {"wordform": "Test"}]
+              "lemmas": ["happy", "content", "cheerful", "cheery", "merry", "joyful", "ecstatic"],
+              "grammaticalFeatures": {
+                  "adjectiveFunctionType": "predicative"
+              },
+              "lexicalCategory": "adjective",
+              "sort": ["lemma", "-frequency"]
           }
         ```
-        * ### Get frequencies of provided lemmas:
-        ```javascript
-          {
-              "collate": ["lemma"],
-              "items": [{"lemma": "test"}, {"lemma": "Test"}]
-          }
-        ```
-        * ### Get frequencies of provided lemmas per lexical category:
-        ```javascript
-          {
-              "collate": ["lemma", "lexicalCategory"],
-              "items": [
-                  {"lemma": "test", "lexicalCategory": "verb"},
-                  {"lemma": "test", "lexicalCategory": "noun"}
-              ]
-          }
+        Some queries with "collate" or "sort" can exceed the 30s timeout, in which case the API will return an error message with status code 503. You mitigate this by providing additional restrictions such as "minFrequency" and "maxFrequency". <br> <br> You can use the parameters "offset" and "limit" to paginate through large result sets. For convenience, the HTTP header "Link" is set on the response to provide links to "first", "self", "next", "prev" and "last" pages of results (depending on the context). For example, if the result set contains 50 results and the parameter "limit" is set to 25, the Links header will contain an URL for the first 25 results and the next 25 results. <br> <br> Some libraries such as python's `requests` can parse the header automatically and offer a convenient way of iterating through the results. For example:
+        ```python def get_all_results(url):
+            while url:
+                r = requests.get(url)
+                r.raise_for_status()
+                for item in r.json()['results']:
+                  yield item
+                url = r.links.get('next', {}).get('url')
         ```
       parameters:
         - default: en
@@ -1267,6 +1282,11 @@ paths:
         - description: 'sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign (''-''). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)'
           in: query
           name: sort
+          required: false
+          type: string
+        - description: 'collate the results by wordform, trueCase, lemma, lexicalCategory. Multiple values can be separated by commas (e.g., collate=trueCase,lemma,lexicalCategory).'
+          in: query
+          name: collate
           required: false
           type: string
         - description: Restrict the query to entries with frequency of at least `minFrequency`
@@ -1818,11 +1838,8 @@ definitions:
           additionalProperties: true
           description: Ngrams matching the given options
           properties:
-            documentFrequency:
-              description: The document frequency (number of documents containing the ngram) of the ngram in the given corpus
-              type: integer
             frequency:
-              description: The frequency of the ngram in the given corpus
+              description: The number of times the ngram (a sequence of n words) appears in the corpus
               type: integer
             tokens:
               description: A list of tokens
@@ -1833,7 +1850,6 @@ definitions:
           required:
             - tokens
             - frequency
-            - documentFrequency
           type: object
         minItems: 0
         type: array
@@ -1919,10 +1935,19 @@ definitions:
       registers:
         $ref: '#/definitions/arrayofstrings'
         description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+      short_definitions:
+        $ref: '#/definitions/arrayofstrings'
+        description: A list of short statements of the exact meaning of a word
       subsenses:
         description: Ordered list of subsenses of a sense
         items:
           $ref: '#/definitions/Sense'
+        minItems: 1
+        type: array
+      thesaurusLinks:
+        description: Ordered list of links to the Thesaurus Dictionary
+        items:
+          $ref: '#/definitions/thesaurusLink'
         minItems: 1
         type: array
       translations:
@@ -1996,7 +2021,7 @@ definitions:
         type: array
     type: object
   StatsWordResult:
-    description: Schema for LexiStats results for a word/trueCase/lemma/lexicalCategory returned as a frequency
+    description: Schema for lexi-stats results for a word/trueCase/lemma/lexicalCategory returned as a frequency
     properties:
       metadata:
         description: Additional Information provided by OUP
@@ -2006,10 +2031,10 @@ definitions:
         description: Frequency information for a given entity
         properties:
           frequency:
-            description: The frequency of the word calculated from a corpus ("sample_corpus" used by default)
+            description: The number of times a word appears in the entire corpus
             type: integer
           lemma:
-            description: 'A lemma of the word (e.g., wordforms "lay", "laid" and "laying" have all lemma "lay").'
+            description: 'A lemma of the word (e.g., wordforms "lay", "laid" and "laying" have all lemma "lay")'
             type: string
           lexicalCategory:
             description: A lexical category such as 'verb' or 'noun'
@@ -2018,7 +2043,7 @@ definitions:
             description: The number of database records that matched the query params (stated frequency is the sum of the individual frequencies)
             type: integer
           normalizedFrequency:
-            description: The frequency of the word per million calculated from a corpus ("sample_corpus" used by default)
+            description: The number of times a word appears on average in 1 million words
             type: integer
           trueCase:
             description: 'A given written realisation of a an entry (e.g., "lay") usually lower case'
@@ -2033,7 +2058,7 @@ definitions:
         type: object
     type: object
   StatsWordResultList:
-    description: Schema for LexiStats results for a word/trueCase/lemma/lexicalCategory returned as a list of frequencies per wordform-trueCase-lemma-lexicalCategory entry.
+    description: Schema for lexi-stats results for a word/trueCase/lemma/lexicalCategory returned as a list of frequencies per wordform-trueCase-lemma-lexicalCategory entry.
     properties:
       metadata:
         description: Additional Information provided by OUP
@@ -2045,7 +2070,7 @@ definitions:
           description: Statistical information about a word
           properties:
             frequency:
-              description: The frequency of the word calculated from a corpus ("sample_corpus" used by default)
+              description: The number of times a word appears in the entire corpus
               type: integer
             lemma:
               description: A lemma of the word.
@@ -2054,7 +2079,7 @@ definitions:
               description: A lexical category such as 'verb' or 'noun'
               type: string
             normalizedFrequency:
-              description: The frequency of the word per million calculated from a corpus ("sample_corpus" used by default)
+              description: The number of times a word appears on average in 1 million words
               type: integer
             trueCase:
               description: 'A given written realisation of a an entry (e.g., "lay") usually lower case'
@@ -2320,4 +2345,17 @@ definitions:
       - language
       - lexicalCategory
       - text
+    type: object
+  thesaurusLink:
+    description: Link to a sense of a specific entry in the thesaurus Dictionary
+    properties:
+      entry_id:
+        description: identifier of a word
+        type: string
+      sense_id:
+        description: identifier of a sense
+        type: string
+    required:
+      - entry_id
+      - sense_id
     type: object

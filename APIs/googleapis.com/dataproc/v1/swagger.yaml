@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages Hadoop-based clusters and jobs on Google Cloud Platform.
-  title: Google Cloud Dataproc
+  title: Cloud Dataproc
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -754,7 +754,7 @@ definitions:
           Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypes.Examples:
           https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80
           projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80
-          nvidia-tesla-k80
+          nvidia-tesla-k80Auto Zone Exception: If you are using the Cloud Dataproc Auto Zone Placement feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.
         type: string
     type: object
   CancelJobRequest:
@@ -935,7 +935,7 @@ definitions:
     description: The location of diagnostic output.
     properties:
       outputUri:
-        description: Output only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
+        description: Output only. The Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
         type: string
     type: object
   DiskConfig:
@@ -979,13 +979,13 @@ definitions:
         type: string
       serviceAccount:
         description: |-
-          Optional. The service account of the instances. Defaults to the default Compute Engine service account. Custom service accounts need permissions equivalent to the folloing IAM roles:
+          Optional. The service account of the instances. Defaults to the default Compute Engine service account. Custom service accounts need permissions equivalent to the following IAM roles:
           roles/logging.logWriter
           roles/storage.objectAdmin(see https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts for more information). Example: [account_id]@[project_id].iam.gserviceaccount.com
         type: string
       serviceAccountScopes:
         description: |-
-          Optional. The URIs of service account scopes to be included in Google Compute Engine instances. The following base set of scopes is always included:
+          Optional. The URIs of service account scopes to be included in Compute Engine instances. The following base set of scopes is always included:
           https://www.googleapis.com/auth/cloud.useraccounts.readonly
           https://www.googleapis.com/auth/devstorage.read_write
           https://www.googleapis.com/auth/logging.writeIf no scopes are specified, the following defaults are also provided:
@@ -1109,7 +1109,7 @@ definitions:
           Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
           projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
-          n1-standard-2
+          n1-standard-2Auto Zone Exception: If you are using the Cloud Dataproc Auto Zone Placement feature, you must use the short name of the machine type resource, for example, n1-standard-2.
         type: string
       managedGroupConfig:
         $ref: '#/definitions/ManagedGroupConfig'
@@ -1428,7 +1428,7 @@ definitions:
     description: Specifies the selection and config of software inside the cluster.
     properties:
       imageVersion:
-        description: 'Optional. The version of software inside the cluster. It must match the regular expression [0-9]+\.[0-9]+. If unspecified, it defaults to the latest version (see Cloud Dataproc Versioning).'
+        description: 'Optional. The version of software inside the cluster. It must be one of the supported Cloud Dataproc Versions, such as "1.2" (including a subminor version, such as "1.2.29"), or the "preview" version. If unspecified, it defaults to the latest version.'
         type: string
       properties:
         additionalProperties:

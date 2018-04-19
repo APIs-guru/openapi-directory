@@ -1166,46 +1166,6 @@ paths:
       summary: Get customisation info for Consumer Help
       tags:
         - consumerhelp
-  '/consumerhelp/flows/{flow}/{orderId}/{action}':
-    post:
-      description: 'Uri template /consumerhelp/flows/{flow}/{orderId}/{action}?fee={fee}'
-      operationId: PostFlowStep1
-      parameters:
-        - description: uk
-          in: header
-          name: Accept-Tenant
-          required: true
-          type: string
-        - in: header
-          name: Authorization
-          required: true
-          type: string
-        - in: path
-          name: flow
-          required: true
-          type: string
-        - in: path
-          name: orderId
-          required: true
-          type: string
-        - in: path
-          name: action
-          required: true
-          type: string
-        - in: query
-          name: fee
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Operation successful
-          schema:
-            $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
-        '400':
-          description: Bad request
-      summary: Post to a Consumer Help flow and get the next step
-      tags:
-        - consumerhelp
   '/consumerhelp/flows/{flow}/{orderId}/{action}/{subaction}':
     get:
       description: 'Uri template /consumerhelp/flows/{flow}/{orderId}/{action}/{subaction}'
@@ -1241,8 +1201,6 @@ paths:
           description: Operation successful
           schema:
             $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
-            items:
-              $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
         '400':
           description: Bad request
       summary: Get the next flow step in a Consumer Help flow; extra URL segment

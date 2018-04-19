@@ -5528,6 +5528,9 @@ definitions:
       asset_family:
         description: Specifies the asset family for the channel (e.g. "editorial" or "creative")
         type: string
+      asset_type:
+        description: 'Specifies channel''s asset type (i.e. "image", "film")'
+        type: string
       channel_id:
         description: Specifies the identification number for the channel
         format: int32
@@ -5539,6 +5542,10 @@ definitions:
         description: Specifies the current count of notifications pending in the channel
         format: int32
         type: integer
+      oldest_notification_date_utc:
+        description: Specifies the date of the oldest notification currently in the channel in UTC
+        format: date-time
+        type: string
       start_date:
         description: ''
         format: date-time

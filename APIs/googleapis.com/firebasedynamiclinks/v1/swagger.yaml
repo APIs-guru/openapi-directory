@@ -113,6 +113,7 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: managedShortLinks
   - name: shortLinks
   - name: v1
 paths:
@@ -149,6 +150,52 @@ paths:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - v1
+  '/v1/managedShortLinks:create':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a managed short Dynamic Link given either a valid long Dynamic Link
+        or details such as Dynamic Link domain, Android and iOS app information.
+        The created short Dynamic Link will not expire.
+
+        This differs from CreateShortDynamicLink in the following ways:
+          - The request will also contain a name for the link (non unique name
+            for the front end).
+          - The response must be authenticated with an auth token (generated with
+            the admin service account).
+          - The link will appear in the FDL list of links in the console front end.
+
+        The Dynamic Link domain in the request must be owned by requester's
+        Firebase project.
+      operationId: firebasedynamiclinks.managedShortLinks.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateManagedShortLinkRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CreateManagedShortLinkResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+      tags:
+        - managedShortLinks
   /v1/shortLinks:
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -261,6 +308,47 @@ definitions:
         description: Android package name of the app.
         type: string
     type: object
+  CreateManagedShortLinkRequest:
+    description: Request to create a managed Short Dynamic Link.
+    properties:
+      dynamicLinkInfo:
+        $ref: '#/definitions/DynamicLinkInfo'
+        description: |-
+          Information about the Dynamic Link to be shortened.
+          [Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).
+      longDynamicLink:
+        description: |-
+          Full long Dynamic Link URL with desired query parameters specified.
+          For example,
+          "https://sample.app.goo.gl/?link=http://www.google.com&apn=com.sample",
+          [Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).
+        type: string
+      name:
+        description: |-
+          Link name to associate with the link. It's used for marketer to identify
+          manually-created links in the Firebase console
+          (https://console.firebase.google.com/).
+          Links must be named to be tracked.
+        type: string
+      suffix:
+        $ref: '#/definitions/Suffix'
+        description: Short Dynamic Link suffix. Optional.
+    type: object
+  CreateManagedShortLinkResponse:
+    description: Response to create a short Dynamic Link.
+    properties:
+      managedShortLink:
+        $ref: '#/definitions/ManagedShortLink'
+        description: 'Short Dynamic Link value. e.g. https://abcd.app.goo.gl/wxyz'
+      previewLink:
+        description: Preview link to show the link flow chart. (debug info.)
+        type: string
+      warning:
+        description: Information about potential warnings on link creation.
+        items:
+          $ref: '#/definitions/DynamicLinkWarning'
+        type: array
+    type: object
   CreateShortDynamicLinkRequest:
     description: Request to create a short Dynamic Link.
     properties:
@@ -284,7 +372,7 @@ definitions:
     description: Response to create a short Dynamic Link.
     properties:
       previewLink:
-        description: Preivew link to show the link flow chart.
+        description: Preview link to show the link flow chart. (debug info.)
         type: string
       shortLink:
         description: 'Short Dynamic Link value. e.g. https://abcd.app.goo.gl/wxyz'
@@ -379,6 +467,12 @@ definitions:
         description: |-
           Desktop related information. See desktop related parameters in the
           [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
+      domainUriPrefix:
+        description: |-
+          E.g. https://maps.app.goo.gl, https://maps.page.link, https://g.co/maps
+          More examples can be found in description of getNormalizedUriPrefix in
+          j/c/g/firebase/dynamiclinks/uri/DdlDomain.java
+        type: string
       dynamicLinkDomain:
         description: |-
           Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl
@@ -669,6 +763,45 @@ definitions:
         description: 'If specified, this overrides the ios_fallback_link value on iPads.'
         type: string
     type: object
+  ManagedShortLink:
+    description: Managed Short Link.
+    properties:
+      creationTime:
+        description: Creation timestamp of the short link.
+        format: google-datetime
+        type: string
+      flaggedAttribute:
+        description: Attributes that have been flagged about this short url.
+        items:
+          enum:
+            - UNSPECIFIED_ATTRIBUTE
+            - SPAM
+          type: string
+        type: array
+      info:
+        $ref: '#/definitions/DynamicLinkInfo'
+        description: Full Dyamic Link info
+      link:
+        description: |-
+          Short durable link url, for example, "https://sample.app.goo.gl/xyz123".
+
+          Required.
+        type: string
+      linkName:
+        description: |-
+          Link name defined by the creator.
+
+          Required.
+        type: string
+      visibility:
+        description: Visibility status of link.
+        enum:
+          - UNSPECIFIED_VISIBILITY
+          - UNARCHIVED
+          - ARCHIVED
+          - NEVER_SHOWN
+        type: string
+    type: object
   NavigationInfo:
     description: Information of navigation behavior.
     properties:
@@ -696,11 +829,15 @@ definitions:
   Suffix:
     description: Short Dynamic Link suffix.
     properties:
+      customSuffix:
+        description: Only applies to Option.CUSTOM.
+        type: string
       option:
         description: Suffix option.
         enum:
           - OPTION_UNSPECIFIED
           - UNGUESSABLE
           - SHORT
+          - CUSTOM
         type: string
     type: object

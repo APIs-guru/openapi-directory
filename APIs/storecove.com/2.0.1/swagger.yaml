@@ -1223,6 +1223,16 @@ definitions:
         description: The number of items (may be fractional).
         title: Quantity
         type: number
+      sellersItemIdentification:
+        description: The ID the seller assigned to this item.
+        minLength: 1
+        title: Sellers Item Identification
+        type: string
+      standardItemIdentification:
+        description: Standardized ID for the item. Identifiers based on GTIN.
+        minLength: 1
+        title: Standard Item Identification
+        type: string
       tax:
         description: The tax for this invoice line.
         properties:

@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/PlayByPlay/{gameid}':
     get:
-      operationId: Play By Play
+      operationId: 5944054835491a0cc050ffb2
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -58,9 +58,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PlayByPlay'
+      summary: Play By Play
   '/{format}/PlayByPlayDelta/{date}/{minutes}':
     get:
-      operationId: Play By Play Delta
+      operationId: 5944054835491a0cc050ffb3
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -92,6 +93,7 @@ paths:
             items:
               $ref: '#/definitions/PlayByPlay'
             type: array
+      summary: Play By Play Delta
 definitions:
   Game:
     properties:

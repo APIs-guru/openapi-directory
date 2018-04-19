@@ -1,14 +1,14 @@
 swagger: '2.0'
 schemes:
   - https
-host: content-servicemanagement.googleapis.com
+host: servicemanagement.googleapis.com
 basePath: /
 info:
   contact:
     name: Google
     url: 'https://google.com'
   description: Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
-  title: Google Service Management
+  title: Service Management
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -1264,9 +1264,7 @@ definitions:
       bar@gmail.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
-        description: |-
-          The configuration for logging of each type of permission.
-          Next ID: 4
+        description: The configuration for logging of each type of permission.
         items:
           $ref: '#/definitions/AuditLogConfig'
         type: array
@@ -1448,14 +1446,7 @@ definitions:
       ignored.
     properties:
       allowWithoutCredential:
-        description: |-
-          Whether to allow requests without a credential. The credential can be
-          an OAuth token, Google cookies (first-party auth) or EndUserCreds.
-
-          For requests without credentials, if the service control environment is
-          specified, each incoming request **must** be associated with a service
-          consumer. This can be done by passing an API key that belongs to a consumer
-          project.
+        description: 'If true, the service accepts API keys without any other credential.'
         type: boolean
       customAuth:
         $ref: '#/definitions/CustomAuthRequirements'

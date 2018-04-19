@@ -23,7 +23,7 @@ info:
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2beta2'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: dlp
 externalDocs:
@@ -4382,7 +4382,9 @@ definitions:
         format: int32
         type: integer
       month:
-        description: Month of year. Must be from 1 to 12.
+        description: |-
+          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+          month.
         format: int32
         type: integer
       year:

@@ -574,7 +574,8 @@ definitions:
           cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
           format.
 
-          The provided URL can be at most 2 kB in length.
+          The provided URL can be at most 2 kB in length. The URL itself is saved
+          with the image, and exposed via the Image.source_url field.
         type: string
     type: object
   CreateImageResponse:
@@ -843,7 +844,7 @@ definitions:
       Creates an embedded Google Sheets chart.
 
       NOTE: Chart creation requires at least one of the spreadsheets.readonly,
-      spreadsheets, drive.readonly, or drive OAuth scopes.
+      spreadsheets, drive.readonly, drive.file, or drive OAuth scopes.
     properties:
       chartId:
         description: The ID of the specific chart in the Google Sheets spreadsheet.
@@ -1528,7 +1529,7 @@ definitions:
   Line:
     description: |-
       A PageElement kind representing a
-      line, curved connector, or bent connector.
+      non-connector line, straight connector, curved connector, or bent connector.
     properties:
       lineProperties:
         $ref: '#/definitions/LineProperties'
@@ -1546,6 +1547,7 @@ definitions:
           - CURVED_CONNECTOR_3
           - CURVED_CONNECTOR_4
           - CURVED_CONNECTOR_5
+          - STRAIGHT_LINE
         type: string
     type: object
   LineFill:
@@ -2263,7 +2265,11 @@ definitions:
         type: string
     type: object
   ReplaceAllShapesWithImageRequest:
-    description: Replaces all shapes that match the given criteria with the provided image.
+    description: |-
+      Replaces all shapes that match the given criteria with the provided image.
+
+      The images replacing the shapes are rectangular after being inserted into
+      the presentation and do not take on the forms of the shapes.
     properties:
       containsText:
         $ref: '#/definitions/SubstringMatchCriteria'
@@ -2296,7 +2302,8 @@ definitions:
           cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
           format.
 
-          The provided URL can be at most 2 kB in length.
+          The provided URL can be at most 2 kB in length. The URL itself is saved
+          with the image, and exposed via the Image.source_url field.
         type: string
       pageObjectIds:
         description: |-
@@ -2431,7 +2438,8 @@ definitions:
           cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
           format.
 
-          The provided URL can be at most 2 kB in length.
+          The provided URL can be at most 2 kB in length. The URL itself is saved
+          with the image, and exposed via the Image.source_url field.
         type: string
     type: object
   Request:

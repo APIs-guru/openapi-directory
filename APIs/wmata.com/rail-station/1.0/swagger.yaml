@@ -34,7 +34,7 @@ paths:
   /Lines:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns information about all rail lines.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Lines</td>\r\n\r\n<td>\r\nArray containing line information (<a href=\"#Line\">Line</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Line\" name=\"Line\">Line Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DisplayName</td>\r\n\r\n<td>Full name of line color.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>EndStationCode</td>\r\n\r\n<td>End station code. For example, will be E10 (Greenbelt) for the\r\nGreen Line, B11 (Glenmont) for the Red Line, etc. Use this value in\r\nother rail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>InternalDestination1</td>\r\n\r\n<td>Intermediate terminal station code. During normal service, some\r\ntrains on some lines might end their trip prior to the\r\nStartStationCode or EndStationCode. A good example is on the Red\r\nLine where some trains stop at A11 (Grosvenor) or B08 (Silver\r\nSpring). Empty string if not defined.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>InternalDestination2</td>\r\n\r\n<td>Similar to InternalDestination1.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode</td>\r\n\r\n<td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r\nor SV).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StartStationCode</td>\r\n\r\n<td>Start station code. For example, will be F11 (Branch Avenue)\r\nfor the Green Line, A15 (Shady Grove) for the Red Line, etc. Use\r\nthis value in other rail-related APIs to retrieve data about a\r\nstation.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Lines
+      operationId: 5476364f031f5909e4fe3314
       produces:
         - application/xml
       responses:
@@ -94,10 +94,11 @@ paths:
                       </Line>
                   </Lines>
               </LinesResp>
+      summary: XML - Lines
   /Path:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a set of ordered stations and distances between two stations on the\r\n<em>same line</em>.</p>\r\n\r\n<p>Note that this method is not suitable on its own as a pathfinding solution\r\nbetween stations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Path</td>\r\n\r\n<td>\r\nArray containing path details (<a href=\r\n\"#MetroPathItem\">MetroPathItem</a>)\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"MetroPathItem\" name=\"MetroPathItem\">MetroPathItem\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DistanceToPrev</td>\r\n\r\n<td>Distance in feet to the previous station in the list.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode</td>\r\n\r\n<td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r\nor SV) this station's platform is on.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SeqNum</td>\r\n\r\n<td>Ordered sequence number.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationCode</td>\r\n\r\n<td>Station code for this station. Use this value in other\r\nrail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationName</td>\r\n\r\n<td>Full name for this station, as shown on the WMATA website.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Path Between Stations
+      operationId: 5476364f031f5909e4fe3316
       parameters:
         - default: N06
           description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
@@ -326,10 +327,11 @@ paths:
                       </MetroPathItem>
                   </Path>
               </PathResp>
+      summary: XML - Path Between Stations
   /SrcStationToDstStationInfo:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a distance, fare information, and estimated travel time between any\r\ntwo stations, including those on different lines. Omit both parameters to\r\nretrieve data for all stations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>StationToStationInfos</td>\r\n\r\n<td>\r\nArray containing station to station information (<a href=\r\n\"#StationToStationInfo\">StationToStationInfo</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationToStationInfo\" name=\r\n\"StationToStationInfo\">StationToStationInfo Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>CompositeMiles</td>\r\n\r\n<td>Distance in miles from the source to destination station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DestinationStation</td>\r\n\r\n<td>Destination station code. Use this value in other rail-related\r\nAPIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RailFare</td>\r\n\r\n<td>\r\nStructure containing <a href=\"#RailFare\">fare</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RailTime</td>\r\n\r\n<td>Estimated travel time (schedule time) in minutes between the source and destination station. This is not correlated to minutes <span class=\"text-info\">(Min)</span> in Real-Time Rail Predictions.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SourceStation</td>\r\n\r\n<td>Origin station code. Use this value in other rail-related APIs\r\nto retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"RailFare\" name=\"RailFare\">RailFare Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>OffPeakTime</td>\r\n\r\n<td>Fare during off-peak times (times other than the ones described\r\nbelow).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>PeakTime</td>\r\n\r\n<td>Fare during peak times (weekdays from opening to 9:30 AM and\r\n3-7 PM, and weekends from midnight to closing).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SeniorDisabled</td>\r\n\r\n<td>\r\nReduced fare for <a href=\r\n\"http://www.wmata.com/fares/reduced.cfm\">senior citizens or\r\npeople with disabilities</a>.\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Station to Station Information
+      operationId: 5476364f031f5909e4fe331b
       parameters:
         - default: E10
           description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
@@ -367,10 +369,11 @@ paths:
                       </StationToStationInfo>
                   </StationToStationInfos>
               </StationToStationInfoResp>
+      summary: XML - Station to Station Information
   /StationEntrances:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of nearby station entrances based on latitude, longitude, and\r\nradius (meters). Omit search parameters to return all station entrances.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Entrances</td>\r\n\r\n<td>\r\nArray containing detailed information about station entrances\r\n(<a href=\"#StationEntrance\">StationEntrance</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationEntrance\" name=\r\n\"StationEntrance\">StationEntrance Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Description</td>\r\n\r\n<td>Additional information for the entrance, if available.\r\nCurrently available data usually shows the same value as the Name\r\nelement.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">ID</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Name of the entrance (usually the station name and nearest\r\nintersection).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationCode1</td>\r\n\r\n<td>The station code associated with this entrance. Use this value\r\nin other rail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationCode2</td>\r\n\r\n<td>For stations containing multiple platforms (e.g.: Gallery\r\nPlace, Fort Totten, L'Enfant Plaza, and Metro Center), the other\r\nstation code.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Station Entrances
+      operationId: 5476364f031f5909e4fe3317
       parameters:
         - description: 'Center point Latitude, required if Longitude and Radius are specified.'
           enum:
@@ -421,10 +424,11 @@ paths:
                       </StationEntrance>
                   </Entrances>
               </StationEntrancesResp>
+      summary: XML - Station Entrances
   /StationInfo:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns station location and address information based on a given\r\nStationCode.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Address</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#Address\">address</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Code</td>\r\n\r\n<td>Station code. Repeated from input.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode1</td>\r\n\r\n<td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r\nor SV) served by this station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode2</td>\r\n\r\n<td>Additional line served by this station. This is often the case\r\nwhen stations have multiple platforms (e.g.: Gallery Place, Fort\r\nTotten, L'Enfant Plaza, and Metro Center).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode3</td>\r\n\r\n<td>Similar to function as LineCodeX.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode4</td>\r\n\r\n<td>Similar to function as LineCodeX. Currently not in use.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Station name.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationTogether1</td>\r\n\r\n<td>For stations with multiple platforms (e.g.: Gallery Place, Fort\r\nTotten, L'Enfant Plaza, and Metro Center), the additional\r\nStationCode will be listed here.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationTogether2</td>\r\n\r\n<td>Similar in function to StationTogether2. Currently not in\r\nuse.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a name=\"Address\">Address Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>City</td>\r\n\r\n<td>City.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>State</td>\r\n\r\n<td>State (abbreviated).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Street</td>\r\n\r\n<td>Street address (for GPS use).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Zip</td>\r\n\r\n<td>Zip code.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Station Information
+      operationId: 5476364f031f5909e4fe3318
       parameters:
         - default: A01
           description: Station code.  Use the Station List method to return a list of all station codes.
@@ -461,6 +465,7 @@ paths:
                   <StationTogether1>C01</StationTogether1>
                   <StationTogether2/>
               </Station>
+      summary: XML - Station Information
   /StationParking:
     get:
       description: |-
@@ -609,7 +614,7 @@ paths:
         </tr>
         </tbody>
         </table>
-      operationId: XML - Parking Information
+      operationId: 5476364f031f5909e4fe3315
       parameters:
         - description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
@@ -646,10 +651,11 @@ paths:
                       </StationParking>
                   </StationsParking>
               </StationParkingResp>
+      summary: XML - Parking Information
   /StationTimes:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns opening and scheduled first/last train times based on a given\r\nStationCode. Omit the StationCode to return timing information for all\r\nstations.</p>\r\n\r\n<p>Note that for stations with multiple platforms (e.g.: Metro Center, L'Enfant\r\nPlaza, etc.), a distinct call is required for each StationCode to retrieve the\r\nfull set of train times at such stations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>StationTimes</td>\r\n\r\n<td>\r\nArray containing station timing information (<a href=\r\n\"#StationTime\">StationTime</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationTime\" name=\"StationTime\">StationTime\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Code</td>\r\n\r\n<td>Station code for this station. Use this value in other\r\nrail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationName</td>\r\n\r\n<td>Full name of the station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>*Day Elements</td>\r\n\r\n<td>\r\nContainer elements containing timing information based on\r\n<a href=\"#dow\">day of the week.</a>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"dow\" name=\"dow\">Monday/Tuesday/Wednesday/etc.\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>OpeningTime</td>\r\n\r\n<td>Station opening time. Format is HH:mm.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>FirstTrains</td>\r\n\r\n<td>\r\nStructure containing <a href=\"#first\">first train</a>\r\ninformation.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LastTrains</td>\r\n\r\n<td>\r\nStructure containing <a href=\"#last\">last train</a>\r\ninformation.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"first\" name=\"first\">FirstTrains Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Time</td>\r\n\r\n<td>First train leaves the station at this time. Format is\r\nHH:mm.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DestinationStation</td>\r\n\r\n<td>Station code for the train's destination. Use this value in\r\nother rail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"last\" name=\"last\">LastTrains Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Time</td>\r\n\r\n<td>Last train leaves the station at this time. Format is HH:mm.\r\nNote that when the time is AM, it signifies the next day. For\r\nexample, a value of 02:30 under a Saturday element means the last\r\ntrain leaves on Sunday at 2:30 AM.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DestinationStation</td>\r\n\r\n<td>Station code for the train's destination. Use this value in\r\nother rail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Station Timings
+      operationId: 5476364f031f5909e4fe331a
       parameters:
         - default: E10
           description: Station code.  Use the Station List method to return a list of all station codes.
@@ -780,10 +786,11 @@ paths:
                       </StationTime>
                   </StationTimes>
               </StationTimeResp>
+      summary: XML - Station Timings
   /Stations:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of station location and address information based on a given\r\nLineCode. Omit the LineCode to return all stations. The response is an array of\r\nobjects identical to those returned in the Station Information method.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Stations</td>\r\n\r\n<td>\r\nArray containing station information (<a href=\r\n\"#Station\">Station</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Station\" name=\"Station\">Station Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Address</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#Address\">address</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Code</td>\r\n\r\n<td>Station code. Repeated from input.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode1</td>\r\n\r\n<td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r\nor SV) served by this station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode2</td>\r\n\r\n<td>Additional line served by this station. This is often the case\r\nwhen stations have multiple platforms (e.g.: Gallery Place, Fort\r\nTotten, L'Enfant Plaza, and Metro Center).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode3</td>\r\n\r\n<td>Similar to function as LineCodeX.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode4</td>\r\n\r\n<td>Similar to function as LineCodeX. Currently not in use.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Station name.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationTogether1</td>\r\n\r\n<td>For stations with multiple platforms (e.g.: Gallery Place, Fort\r\nTotten, L'Enfant Plaza, and Metro Center), the additional\r\nStationCode will be listed here.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationTogether2</td>\r\n\r\n<td>Similar in function to StationTogether2. Currently not in\r\nuse.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Address\" name=\"Address\">Address Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>City</td>\r\n\r\n<td>City.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>State</td>\r\n\r\n<td>State (abbreviated).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Street</td>\r\n\r\n<td>Street address (for GPS use).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Zip</td>\r\n\r\n<td>Zip code.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Station List
+      operationId: 5476364f031f5909e4fe3319
       parameters:
         - description: |-
             Two-letter line code abbreviation:
@@ -1307,10 +1314,11 @@ paths:
                       </Station>
                   </Stations>
               </StationsResp>
+      summary: XML - Station List
   /json/jLines:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns information about all rail lines.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Lines</td>\r\n\r\n<td>\r\nArray containing line information (<a href=\"#Line\">Line</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Line\" name=\"Line\">Line Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DisplayName</td>\r\n\r\n<td>Full name of line color.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>EndStationCode</td>\r\n\r\n<td>End station code. For example, will be E10 (Greenbelt) for the\r\nGreen Line, B11 (Glenmont) for the Red Line, etc. Use this value in\r\nother rail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>InternalDestination1</td>\r\n\r\n<td>Intermediate terminal station code. During normal service, some\r\ntrains on some lines might end their trip prior to the\r\nStartStationCode or EndStationCode. A good example is on the Red\r\nLine where some trains stop at A11 (Grosvenor) or B08 (Silver\r\nSpring). Empty string if not defined.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>InternalDestination2</td>\r\n\r\n<td>Similar to InternalDestination1.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode</td>\r\n\r\n<td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r\nor SV).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StartStationCode</td>\r\n\r\n<td>Start station code. For example, will be F11 (Branch Avenue)\r\nfor the Green Line, A15 (Shady Grove) for the Red Line, etc. Use\r\nthis value in other rail-related APIs to retrieve data about a\r\nstation.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Lines
+      operationId: 5476364f031f5909e4fe330c
       produces:
         - application/json
       responses:
@@ -1355,10 +1363,11 @@ paths:
                   InternalDestination2: ''
                   LineCode: YL
                   StartStationCode: C15
+      summary: JSON - Lines
   /json/jPath:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a set of ordered stations and distances between two stations on the\r\n<em>same line</em>.</p>\r\n\r\n<p>Note that this method is not suitable on its own as a pathfinding solution\r\nbetween stations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Path</td>\r\n\r\n<td>\r\nArray containing path details (<a href=\r\n\"#MetroPathItem\">MetroPathItem</a>)\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"MetroPathItem\" name=\"MetroPathItem\">MetroPathItem\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DistanceToPrev</td>\r\n\r\n<td>Distance in feet to the previous station in the list.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode</td>\r\n\r\n<td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r\nor SV) this station's platform is on.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SeqNum</td>\r\n\r\n<td>Ordered sequence number.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationCode</td>\r\n\r\n<td>Station code for this station. Use this value in other\r\nrail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationName</td>\r\n\r\n<td>Full name for this station, as shown on the WMATA website.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Path Between Stations
+      operationId: 5476364f031f5909e4fe330e
       parameters:
         - default: N06
           description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
@@ -1524,10 +1533,11 @@ paths:
                   SeqNum: 28
                   StationCode: G05
                   StationName: Largo Town Center
+      summary: JSON - Path Between Stations
   /json/jSrcStationToDstStationInfo:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a distance, fare information, and estimated travel time between any\r\ntwo stations, including those on different lines. Omit both parameters to\r\nretrieve data for all stations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>StationToStationInfos</td>\r\n\r\n<td>\r\nArray containing station to station information (<a href=\r\n\"#StationToStationInfo\">StationToStationInfo</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationToStationInfo\" name=\r\n\"StationToStationInfo\">StationToStationInfo Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>CompositeMiles</td>\r\n\r\n<td>Distance in miles from the source to destination station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DestinationStation</td>\r\n\r\n<td>Destination station code. Use this value in other rail-related\r\nAPIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RailFare</td>\r\n\r\n<td>\r\nStructure containing <a href=\"#RailFare\">fare</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RailTime</td>\r\n\r\n<td>Estimated travel time (schedule time) in minutes between the source and\r\ndestination station. This is not correlated to minutes <span class=\"text-info\">(Min)</span> in Real-Time Rail Predictions.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SourceStation</td>\r\n\r\n<td>Origin station code. Use this value in other rail-related APIs\r\nto retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"RailFare\" name=\"RailFare\">RailFare Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>OffPeakTime</td>\r\n\r\n<td>Fare during off-peak times (times other than the ones described\r\nbelow).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>PeakTime</td>\r\n\r\n<td>Fare during peak times (weekdays from opening to 9:30 AM and\r\n3-7 PM, and weekends from midnight to closing).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SeniorDisabled</td>\r\n\r\n<td>\r\nReduced fare for <a href=\r\n\"http://www.wmata.com/fares/reduced.cfm\">senior citizens or\r\npeople with disabilities</a>.\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Station to Station Information
+      operationId: 5476364f031f5909e4fe3313
       parameters:
         - default: E10
           description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
@@ -1559,10 +1569,11 @@ paths:
                     SeniorDisabled: 2.95
                   RailTime: 66
                   SourceStation: E10
+      summary: JSON - Station to Station Information
   /json/jStationEntrances:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of nearby station entrances based on latitude, longitude, and\r\nradius (meters). Omit search parameters to return all station entrances.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Entrances</td>\r\n\r\n<td>\r\nArray containing detailed information about station entrances\r\n(<a href=\"#StationEntrance\">StationEntrance</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationEntrance\" name=\r\n\"StationEntrance\">StationEntrance Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Description</td>\r\n\r\n<td>Additional information for the entrance, if available.\r\nCurrently available data usually shows the same value as the Name\r\nelement.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">ID</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Name of the entrance (usually the station name and nearest\r\nintersection).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationCode1</td>\r\n\r\n<td>The station code associated with this entrance. Use this value\r\nin other rail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationCode2</td>\r\n\r\n<td>For stations containing multiple platforms (e.g.: Gallery\r\nPlace, Fort Totten, L'Enfant Plaza, and Metro Center), the other\r\nstation code.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Station Entrances
+      operationId: 5476364f031f5909e4fe330f
       parameters:
         - description: 'Center point Latitude, required if Longitude and Radius are specified.'
           enum:
@@ -1604,10 +1615,11 @@ paths:
                   Name: Farragut West 18th & I St
                   StationCode1: C03
                   StationCode2: ''
+      summary: JSON - Station Entrances
   /json/jStationInfo:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns station location and address information based on a given\r\nStationCode.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Address</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#Address\">address</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Code</td>\r\n\r\n<td>Station code. Repeated from input.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode1</td>\r\n\r\n<td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r\nor SV) served by this station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode2</td>\r\n\r\n<td>Additional line served by this station. This is often the case\r\nwhen stations have multiple platforms (e.g.: Gallery Place, Fort\r\nTotten, L'Enfant Plaza, and Metro Center).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode3</td>\r\n\r\n<td>Similar to function as LineCodeX.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode4</td>\r\n\r\n<td>Similar to function as LineCodeX. Currently not in use.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Station name.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationTogether1</td>\r\n\r\n<td>For stations with multiple platforms (e.g.: Gallery Place, Fort\r\nTotten, L'Enfant Plaza, and Metro Center), the additional\r\nStationCode will be listed here.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationTogether2</td>\r\n\r\n<td>Similar in function to StationTogether2. Currently not in\r\nuse.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a name=\"Address\">Address Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>City</td>\r\n\r\n<td>City.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>State</td>\r\n\r\n<td>State (abbreviated).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Street</td>\r\n\r\n<td>Street address (for GPS use).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Zip</td>\r\n\r\n<td>Zip code.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Station Information
+      operationId: 5476364f031f5909e4fe3310
       parameters:
         - default: A01
           description: Station code.  Use the Station List method to return a list of all station codes.
@@ -1636,6 +1648,7 @@ paths:
               Name: Metro Center
               StationTogether1: C01
               StationTogether2: ''
+      summary: JSON - Station Information
   /json/jStationParking:
     get:
       description: |-
@@ -1784,7 +1797,7 @@ paths:
         </tr>
         </tbody>
         </table>
-      operationId: JSON - Parking Information
+      operationId: 5476364f031f5909e4fe330d
       parameters:
         - description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
@@ -1812,10 +1825,11 @@ paths:
                   ShortTermParking:
                     Notes: 'Short term parking available 5 am - 2 am, time limit 12 hours'
                     TotalCount: 15
+      summary: JSON - Parking Information
   /json/jStationTimes:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns opening and scheduled first/last train times based on a given\r\nStationCode. Omit the StationCode to return timing information for all\r\nstations.</p>\r\n\r\n<p>Note that for stations with multiple platforms (e.g.: Metro Center, L'Enfant\r\nPlaza, etc.), a distinct call is required for each StationCode to retrieve the\r\nfull set of train times at such stations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>StationTimes</td>\r\n\r\n<td>\r\nArray containing station timing information (<a href=\r\n\"#StationTime\">StationTime</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationTime\" name=\"StationTime\">StationTime\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Code</td>\r\n\r\n<td>Station code for this station. Use this value in other\r\nrail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationName</td>\r\n\r\n<td>Full name of the station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>*Day Elements</td>\r\n\r\n<td>\r\nContainer elements containing timing information based on\r\n<a href=\"#dow\">day of the week.</a>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"dow\" name=\"dow\">Monday/Tuesday/Wednesday/etc.\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>OpeningTime</td>\r\n\r\n<td>Station opening time. Format is HH:mm.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>FirstTrains</td>\r\n\r\n<td>\r\nStructure containing <a href=\"#first\">first train</a>\r\ninformation.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LastTrains</td>\r\n\r\n<td>\r\nStructure containing <a href=\"#last\">last train</a>\r\ninformation.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"first\" name=\"first\">FirstTrains Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Time</td>\r\n\r\n<td>First train leaves the station at this time. Format is\r\nHH:mm.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DestinationStation</td>\r\n\r\n<td>Station code for the train's destination. Use this value in\r\nother rail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"last\" name=\"last\">LastTrains Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Time</td>\r\n\r\n<td>Last train leaves the station at this time. Format is HH:mm.\r\nNote that when the time is AM, it signifies the next day. For\r\nexample, a value of 02:30 under a Saturday element means the last\r\ntrain leaves on Sunday at 2:30 AM.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DestinationStation</td>\r\n\r\n<td>Station code for the train's destination. Use this value in\r\nother rail-related APIs to retrieve data about a station.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Station Timings
+      operationId: 5476364f031f5909e4fe3312
       parameters:
         - default: E10
           description: Station code.  Use the Station List method to return a list of all station codes.
@@ -1890,10 +1904,11 @@ paths:
                       - DestinationStation: F11
                         Time: '23:30'
                     OpeningTime: '04:50'
+      summary: JSON - Station Timings
   /json/jStations:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of station location and address information based on a given\r\nLineCode. Omit the LineCode to return all stations. The response is an array of\r\nobjects identical to those returned in the Station Information method.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Stations</td>\r\n\r\n<td>\r\nArray containing station information (<a href=\r\n\"#Station\">Station</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Station\" name=\"Station\">Station Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Address</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#Address\">address</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Code</td>\r\n\r\n<td>Station code. Repeated from input.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode1</td>\r\n\r\n<td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r\nor SV) served by this station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode2</td>\r\n\r\n<td>Additional line served by this station. This is often the case\r\nwhen stations have multiple platforms (e.g.: Gallery Place, Fort\r\nTotten, L'Enfant Plaza, and Metro Center).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode3</td>\r\n\r\n<td>Similar to function as LineCodeX.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineCode4</td>\r\n\r\n<td>Similar to function as LineCodeX. Currently not in use.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Station name.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationTogether1</td>\r\n\r\n<td>For stations with multiple platforms (e.g.: Gallery Place, Fort\r\nTotten, L'Enfant Plaza, and Metro Center), the additional\r\nStationCode will be listed here.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationTogether2</td>\r\n\r\n<td>Similar in function to StationTogether2. Currently not in\r\nuse.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Address\" name=\"Address\">Address Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>City</td>\r\n\r\n<td>City.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>State</td>\r\n\r\n<td>State (abbreviated).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Street</td>\r\n\r\n<td>Street address (for GPS use).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Zip</td>\r\n\r\n<td>Zip code.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Station List
+      operationId: 5476364f031f5909e4fe3311
       parameters:
         - description: |-
             Two-letter line code abbreviation:
@@ -2248,3 +2263,4 @@ paths:
                   Name: Glenmont
                   StationTogether1: ''
                   StationTogether2: ''
+      summary: JSON - Station List

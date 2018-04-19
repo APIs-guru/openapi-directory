@@ -702,19 +702,28 @@ definitions:
   ParseRequest:
     properties:
       concept_types:
+        description: list of concept types that should be captured
         items:
           enum:
             - symptom
             - risk_factor
           type: string
         type: array
+      context:
+        description: ordered list of ids of present symptoms that were already captured and can be used as context
+        items:
+          type: string
+        type: array
       correct_spelling:
         default: false
+        description: correct spelling of input text before proper analysis
         type: boolean
       include_tokens:
         default: false
+        description: include tokenization details in output
         type: boolean
       text:
+        description: user text to process
         type: string
     required:
       - text

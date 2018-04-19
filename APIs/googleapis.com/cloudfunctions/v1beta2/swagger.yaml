@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: API for managing lightweight user-provided functions executed in response to events.
+  description: Manages lightweight user-provided functions executed in response to events.
   title: Google Cloud Functions
   version: v1beta2
   x-apiClientRegistration:
@@ -498,7 +498,7 @@ paths:
         When making a HTTP PUT request, these two headers need to be specified:
 
         * `content-type: application/zip`
-        * `x-google-content-length-range: 0,104857600`
+        * `x-goog-content-length-range: 0,104857600`
       operationId: cloudfunctions.projects.locations.functions.generateUploadUrl
       parameters:
         - in: body
@@ -778,6 +778,11 @@ definitions:
   Location:
     description: A resource that represents Google Cloud Platform location.
     properties:
+      displayName:
+        description: |-
+          The friendly name for this location, typically a nearby city name.
+          For example, "Tokyo".
+        type: string
       labels:
         additionalProperties:
           type: string

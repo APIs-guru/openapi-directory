@@ -2732,6 +2732,36 @@ definitions:
         description: The instruction start date.
         format: date-time
         type: string
+      UtilityCouncilTax:
+        description: Who's responsible for council tax bills.
+        enum:
+          - Tenant
+          - Landlord
+        type: string
+      UtilityElectricity:
+        description: Who's responsible for electricity bills.
+        enum:
+          - Tenant
+          - Landlord
+        type: string
+      UtilityGas:
+        description: Who's responsible for Gas bills.
+        enum:
+          - Tenant
+          - Landlord
+        type: string
+      UtilityTelephone:
+        description: Who's responsible for telephone bills.
+        enum:
+          - Tenant
+          - Landlord
+        type: string
+      UtilityWater:
+        description: Who's responsible for water bills.
+        enum:
+          - Tenant
+          - Landlord
+        type: string
     type: object
   TenancyModelResults:
     description: Holds results from a paged query returning TenancyModel values

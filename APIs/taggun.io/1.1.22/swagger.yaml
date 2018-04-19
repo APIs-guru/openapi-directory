@@ -10,7 +10,7 @@ info:
     x-twitter: taggun_io
   description: 'Expects only running software, real reactions, and beautifully crafted APIs to serve your every desire to transcript a piece of paper to digital form.'
   title: taggun.io
-  version: 1.1.14
+  version: 1.1.22
   x-apisguru-categories:
     - text
   x-logo:
@@ -28,6 +28,27 @@ securityDefinitions:
 tags:
   - name: api
 paths:
+  /api/account/v1/merchantname/add:
+    post:
+      operationId: postApiAccountV1MerchantnameAdd
+      parameters:
+        - description: API authentication key.
+          in: header
+          name: apikey
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Model%201'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Result'
+      summary: add a keyword to your account's model to predict merchant name
+      tags:
+        - api/account
   /api/article/v1/verbose/file:
     post:
       consumes:
@@ -85,7 +106,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Result'
+            $ref: '#/definitions/Model%203'
         '400':
           description: Bad Request
           schema:
@@ -171,7 +192,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%202'
+            $ref: '#/definitions/Model%204'
         '400':
           description: Bad Request
           schema:
@@ -191,12 +212,12 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Model%203'
+            $ref: '#/definitions/Model%205'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%205'
+            $ref: '#/definitions/Model%207'
         '400':
           description: Bad Request
           schema:
@@ -261,7 +282,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%205'
+            $ref: '#/definitions/Model%207'
         '400':
           description: Bad Request
           schema:
@@ -281,12 +302,12 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Model%206'
+            $ref: '#/definitions/Model%208'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%205'
+            $ref: '#/definitions/Model%207'
         '400':
           description: Bad Request
           schema:
@@ -306,12 +327,12 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Model%207'
+            $ref: '#/definitions/Model%209'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%205'
+            $ref: '#/definitions/Model%207'
         '400':
           description: Bad Request
           schema:
@@ -331,12 +352,12 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Model%203'
+            $ref: '#/definitions/Model%205'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%2015'
+            $ref: '#/definitions/Model%2017'
         '400':
           description: Bad Request
           schema:
@@ -401,7 +422,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%2015'
+            $ref: '#/definitions/Model%2017'
         '400':
           description: Bad Request
           schema:
@@ -421,12 +442,12 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Model%206'
+            $ref: '#/definitions/Model%208'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%2015'
+            $ref: '#/definitions/Model%2017'
         '400':
           description: Bad Request
           schema:
@@ -446,12 +467,12 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Model%207'
+            $ref: '#/definitions/Model%209'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/Model%2015'
+            $ref: '#/definitions/Model%2017'
         '400':
           description: Bad Request
           schema:
@@ -487,6 +508,8 @@ definitions:
   Model 13: {}
   Model 14: {}
   Model 15: {}
+  Model 16: {}
+  Model 17: {}
   Model 2: {}
   Model 3: {}
   Model 4: {}
@@ -496,6 +519,183 @@ definitions:
   Model 8: {}
   Model 9: {}
   Model_1:
+    properties:
+      merchantName:
+        example: Walmart
+        type: string
+    required:
+      - merchantName
+    type: object
+  Model_10:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: 23.3
+        type: number
+      index:
+        example: 11
+        type: number
+      keyword:
+        example: TOTAL
+        type: string
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: '23.30'
+        type: string
+    type: object
+  Model_11:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: 3.04
+        type: number
+      index:
+        example: 7
+        type: number
+      keyword:
+        example: GST
+        type: string
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: '3.04'
+        type: string
+    type: object
+  Model_12:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: NZD
+        type: string
+      index:
+        example: 10
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: NZD
+        type: string
+    type: object
+  Model_13:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: Adina Apartment Hotel Auckland Britomart
+        type: string
+      index:
+        example: 2
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: 22DEC'16
+        type: string
+    type: object
+  Model_14:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: '2 Tapora St, Auckland, 1010, New Zealand'
+        type: string
+      index:
+        example: 2
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: 22DEC'16
+        type: string
+    type: object
+  Model_15:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        $ref: '#/definitions/data'
+        type: array
+      index:
+        example: 2
+        type: number
+      regions:
+        $ref: '#/definitions/regions'
+        type: array
+      text:
+        example: 22DEC'16
+        type: string
+    type: object
+  Model_16:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: 0660914448
+        type: string
+      keyword:
+        example: ''
+        type: string
+      text:
+        example: BE0660.914.448
+        type: string
+    type: object
+  Model_17:
+    properties:
+      amounts:
+        $ref: '#/definitions/amounts'
+        type: array
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      currency:
+        $ref: '#/definitions/Model%2012'
+      date:
+        $ref: '#/definitions/date'
+      elapsed:
+        example: '24200'
+        type: number
+      entities:
+        $ref: '#/definitions/entities'
+      error:
+        type: string
+      lineAmounts:
+        $ref: '#/definitions/amounts'
+        type: array
+      location:
+        $ref: '#/definitions/Model%202'
+      merchantAddress:
+        $ref: '#/definitions/Model%2014'
+      merchantName:
+        $ref: '#/definitions/Model%2013'
+      merchantTypes:
+        $ref: '#/definitions/Model%2015'
+      numbers:
+        $ref: '#/definitions/amounts'
+        type: array
+      taxAmount:
+        $ref: '#/definitions/Model%2011'
+      text:
+        $ref: '#/definitions/text'
+      totalAmount:
+        $ref: '#/definitions/Model%2010'
+    type: object
+  Model_2:
     example:
       city:
         geoname_id: 2207724
@@ -559,134 +759,31 @@ definitions:
       location:
         $ref: '#/definitions/location'
     type: object
-  Model_10:
-    properties:
-      confidenceLevel:
-        example: 0.7216666666666667
-        type: number
-      data:
-        example: NZD
-        type: string
-      index:
-        example: 10
-        type: number
-      regions:
-        $ref: '#/definitions/regions'
-        type: array
-      text:
-        example: NZD
-        type: string
-    type: object
-  Model_11:
-    properties:
-      confidenceLevel:
-        example: 0.7216666666666667
-        type: number
-      data:
-        example: Adina Apartment Hotel Auckland Britomart
-        type: string
-      index:
-        example: 2
-        type: number
-      regions:
-        $ref: '#/definitions/regions'
-        type: array
-      text:
-        example: 22DEC'16
-        type: string
-    type: object
-  Model_12:
-    properties:
-      confidenceLevel:
-        example: 0.7216666666666667
-        type: number
-      data:
-        example: '2 Tapora St, Auckland, 1010, New Zealand'
-        type: string
-      index:
-        example: 2
-        type: number
-      regions:
-        $ref: '#/definitions/regions'
-        type: array
-      text:
-        example: 22DEC'16
-        type: string
-    type: object
-  Model_13:
-    properties:
-      confidenceLevel:
-        example: 0.7216666666666667
-        type: number
-      data:
-        $ref: '#/definitions/data'
-        type: array
-      index:
-        example: 2
-        type: number
-      regions:
-        $ref: '#/definitions/regions'
-        type: array
-      text:
-        example: 22DEC'16
-        type: string
-    type: object
-  Model_14:
-    properties:
-      confidenceLevel:
-        example: 0.7216666666666667
-        type: number
-      data:
-        example: 0660914448
-        type: string
-      keyword:
-        example: ''
-        type: string
-      text:
-        example: BE0660.914.448
-        type: string
-    type: object
-  Model_15:
+  Model_3:
     properties:
       amounts:
         $ref: '#/definitions/amounts'
         type: array
-      confidenceLevel:
-        example: 0.7216666666666667
-        type: number
-      currency:
-        $ref: '#/definitions/Model%2010'
-      date:
-        $ref: '#/definitions/date'
+      dates:
+        $ref: '#/definitions/amounts'
+        type: array
       elapsed:
         example: '24200'
         type: number
-      entities:
-        $ref: '#/definitions/entities'
       error:
         type: string
-      lineAmounts:
+      lines:
         $ref: '#/definitions/amounts'
         type: array
       location:
-        $ref: '#/definitions/Model%201'
-      merchantAddress:
-        $ref: '#/definitions/Model%2012'
-      merchantName:
-        $ref: '#/definitions/Model%2011'
-      merchantTypes:
-        $ref: '#/definitions/Model%2013'
+        $ref: '#/definitions/Model%202'
       numbers:
         $ref: '#/definitions/amounts'
         type: array
-      taxAmount:
-        $ref: '#/definitions/Model%209'
       text:
         $ref: '#/definitions/text'
-      totalAmount:
-        $ref: '#/definitions/Model%208'
     type: object
-  Model_2:
+  Model_4:
     properties:
       confidenceLevel:
         example: 0.7216666666666667
@@ -698,7 +795,7 @@ definitions:
       match:
         $ref: '#/definitions/match'
     type: object
-  Model_3:
+  Model_5:
     properties:
       contentType:
         example: image/jpeg
@@ -751,7 +848,7 @@ definitions:
       - filename
       - contentType
     type: object
-  Model_4:
+  Model_6:
     properties:
       confidenceLevel:
         example: 0.7216666666666667
@@ -761,7 +858,7 @@ definitions:
         format: date
         type: string
     type: object
-  Model_5:
+  Model_7:
     properties:
       confidenceLevel:
         description: Overall confidence level
@@ -770,7 +867,7 @@ definitions:
       currency:
         $ref: '#/definitions/currency'
       date:
-        $ref: '#/definitions/Model%204'
+        $ref: '#/definitions/Model%206'
       error:
         type: string
       merchantAddress:
@@ -784,7 +881,7 @@ definitions:
       totalAmount:
         $ref: '#/definitions/totalAmount'
     type: object
-  Model_6:
+  Model_8:
     properties:
       contentType:
         example: image/jpeg
@@ -828,7 +925,7 @@ definitions:
       - md5
       - contentType
     type: object
-  Model_7:
+  Model_9:
     properties:
       headers:
         $ref: '#/definitions/headers'
@@ -878,71 +975,12 @@ definitions:
     required:
       - url
     type: object
-  Model_8:
-    properties:
-      confidenceLevel:
-        example: 0.7216666666666667
-        type: number
-      data:
-        example: 23.3
-        type: number
-      index:
-        example: 11
-        type: number
-      keyword:
-        example: TOTAL
-        type: string
-      regions:
-        $ref: '#/definitions/regions'
-        type: array
-      text:
-        example: '23.30'
-        type: string
-    type: object
-  Model_9:
-    properties:
-      confidenceLevel:
-        example: 0.7216666666666667
-        type: number
-      data:
-        example: 3.04
-        type: number
-      index:
-        example: 7
-        type: number
-      keyword:
-        example: GST
-        type: string
-      regions:
-        $ref: '#/definitions/regions'
-        type: array
-      text:
-        example: '3.04'
-        type: string
-    type: object
   Result:
     properties:
-      amounts:
-        $ref: '#/definitions/amounts'
-        type: array
-      dates:
-        $ref: '#/definitions/amounts'
-        type: array
-      elapsed:
-        example: '24200'
-        type: number
       error:
         type: string
-      lines:
-        $ref: '#/definitions/amounts'
-        type: array
-      location:
-        $ref: '#/definitions/Model%201'
-      numbers:
-        $ref: '#/definitions/amounts'
-        type: array
-      text:
-        $ref: '#/definitions/text'
+      result:
+        type: string
     type: object
   amounts:
     items:
@@ -950,7 +988,7 @@ definitions:
     type: array
   belgiumVATNumbers:
     items:
-      $ref: '#/definitions/Model%2014'
+      $ref: '#/definitions/Model%2016'
     type: array
   currency:
     properties:

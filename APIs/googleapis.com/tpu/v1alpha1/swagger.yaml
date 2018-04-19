@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: content-tpu.googleapis.com
+host: tpu.googleapis.com
 basePath: /
 info:
   contact:
@@ -874,6 +874,8 @@ definitions:
           - DELETING
           - REPAIRING
           - STOPPED
+          - STOPPING
+          - STARTING
         type: string
       tensorflowVersion:
         description: |-

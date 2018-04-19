@@ -702,6 +702,13 @@ paths:
       description: Lists the statuses of the sub-accounts in your Merchant Center account.
       operationId: content.accountstatuses.list
       parameters:
+        - collectionFormat: multi
+          description: 'If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.'
+          in: query
+          items:
+            type: string
+          name: destinations
+          type: array
         - description: 'The maximum number of account statuses to return in the response, used for paging.'
           in: query
           name: maxResults
@@ -743,6 +750,13 @@ paths:
           name: accountId
           required: true
           type: string
+        - collectionFormat: multi
+          description: 'If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.'
+          in: query
+          items:
+            type: string
+          name: destinations
+          type: array
         - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
@@ -1080,6 +1094,43 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Datafeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeeds
+  '/{merchantId}/datafeeds/{datafeedId}/fetchNow':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Invokes a fetch for the datafeed in your Merchant Center account.
+      operationId: content.datafeeds.fetchnow
+      parameters:
+        - description: The ID of the datafeed to be fetched.
+          in: path
+          name: datafeedId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DatafeedsFetchNowResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -2470,6 +2521,13 @@ paths:
       description: Lists the statuses of the products in your Merchant Center account.
       operationId: content.productstatuses.list
       parameters:
+        - collectionFormat: multi
+          description: 'If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.'
+          in: query
+          items:
+            type: string
+          name: destinations
+          type: array
         - description: Flag to include full product data in the results of the list request. The default value is false.
           in: query
           name: includeAttributes
@@ -2514,6 +2572,13 @@ paths:
       description: Gets the status of a product from your Merchant Center account.
       operationId: content.productstatuses.get
       parameters:
+        - collectionFormat: multi
+          description: 'If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.'
+          in: query
+          items:
+            type: string
+          name: destinations
+          type: array
         - description: Flag to include full product data in the result of this get request. The default value is false.
           in: query
           name: includeAttributes
@@ -2943,6 +3008,9 @@ definitions:
       country:
         description: Country for which this issue is reported.
         type: string
+      destination:
+        description: The destination the issue applies to.
+        type: string
       detail:
         description: Additional details about the issue.
         type: string
@@ -2960,6 +3028,9 @@ definitions:
     properties:
       country:
         description: Country for which this issue is reported.
+        type: string
+      destination:
+        description: The destination the issue applies to.
         type: string
       detail:
         description: A more detailed description of the issue.
@@ -3187,6 +3258,11 @@ definitions:
         description: 'An entry ID, unique within the batch request.'
         format: uint32
         type: integer
+      destinations:
+        description: 'If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.'
+        items:
+          type: string
+        type: array
       merchantId:
         description: The ID of the managing account.
         format: uint64
@@ -3583,6 +3659,13 @@ definitions:
       errors:
         $ref: '#/definitions/Errors'
         description: A list of errors defined if and only if the request failed.
+    type: object
+  DatafeedsFetchNowResponse:
+    properties:
+      kind:
+        default: 'content#datafeedsFetchNowResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedsFetchNowResponse".'
+        type: string
     type: object
   DatafeedsListResponse:
     properties:
@@ -4311,10 +4394,25 @@ definitions:
         description: 'Email address that should be used for order related communications. In certain cases this might not be a real users email, but a proxy email.'
         type: string
       explicitMarketingPreference:
-        description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the checkout flow.'
+        description: Deprecated. Please use marketingRightsInfo instead.
         type: boolean
       fullName:
         description: Full name of the customer.
+        type: string
+      marketingRightsInfo:
+        $ref: '#/definitions/OrderCustomerMarketingRightsInfo'
+        description: Customer's marketing preferences.
+    type: object
+  OrderCustomerMarketingRightsInfo:
+    properties:
+      explicitMarketingPreference:
+        description: 'Last known user selection regarding marketing preferences. In certain cases this selection might not be known, so this field would be empty.'
+        type: string
+      lastUpdatedTimestamp:
+        description: 'Timestamp when last time marketing preference was updated. Could be empty, if user wasn''t offered a selection yet.'
+        type: string
+      marketingEmailAddress:
+        description: Email address that can be used for marketing purposes. This field is only filled when explicitMarketingPreference is equal to 'granted'.
         type: string
     type: object
   OrderDeliveryDetails:
@@ -5463,7 +5561,7 @@ definitions:
         $ref: '#/definitions/PosStore'
         description: The store information to submit. Set this only if the method is insert.
       storeCode:
-        description: The store code. Required only to get/submit store information.
+        description: The store code. Set this only if the method is delete or get.
         type: string
       targetMerchantId:
         description: The ID of the account for which to get/submit data.
@@ -6164,6 +6262,9 @@ definitions:
     type: object
   ProductStatusDataQualityIssue:
     properties:
+      destination:
+        description: The destination the issue applies to.
+        type: string
       detail:
         description: A more detailed error string.
         type: string
@@ -6212,8 +6313,17 @@ definitions:
       code:
         description: The error code of the issue.
         type: string
+      description:
+        description: A short issue description in English.
+        type: string
       destination:
         description: The destination the issue applies to.
+        type: string
+      detail:
+        description: A detailed issue description in English.
+        type: string
+      documentation:
+        description: The URL of a web page to help with resolving this issue.
         type: string
       resolution:
         description: Whether the issue can be resolved by the merchant.
@@ -6352,6 +6462,11 @@ definitions:
         description: 'An entry ID, unique within the batch request.'
         format: uint32
         type: integer
+      destinations:
+        description: 'If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.'
+        items:
+          type: string
+        type: array
       includeAttributes:
         type: boolean
       merchantId:
@@ -6454,6 +6569,9 @@ definitions:
       deliveryTime:
         $ref: '#/definitions/DeliveryTime'
         description: Time spent in various aspects from order to the delivery of the product. Required.
+      eligibility:
+        description: Eligibility for this service.
+        type: string
       minimumOrderValue:
         $ref: '#/definitions/Price'
         description: 'Minimum order value for this service. If set, indicates that customers will have to spend at least this amount. All prices within a service must have the same currency.'
@@ -6642,10 +6760,22 @@ definitions:
         description: Email address of the customer.
         type: string
       explicitMarketingPreference:
-        description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the checkout flow. Optional.'
+        description: Deprecated. Please use marketingRightsInfo instead.
         type: boolean
       fullName:
         description: Full name of the customer.
+        type: string
+      marketingRightsInfo:
+        $ref: '#/definitions/TestOrderCustomerMarketingRightsInfo'
+        description: Customer's marketing preferences.
+    type: object
+  TestOrderCustomerMarketingRightsInfo:
+    properties:
+      explicitMarketingPreference:
+        description: 'Last know user use selection regards marketing preferences. In certain cases selection might not be known, so this field would be empty.'
+        type: string
+      lastUpdatedTimestamp:
+        description: 'Timestamp when last time marketing preference was updated. Could be empty, if user wasn''t offered a selection yet.'
         type: string
     type: object
   TestOrderLineItem:

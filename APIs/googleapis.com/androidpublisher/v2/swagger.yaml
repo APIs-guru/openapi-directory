@@ -78,7 +78,6 @@ parameters:
     type: string
 tags:
   - name: edits
-  - name: entitlements
   - name: inappproducts
   - name: purchases
   - name: reviews
@@ -1541,44 +1540,6 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
-  '/{packageName}/entitlements':
-    get:
-      description: Lists the user's current inapp item or subscription entitlements
-      operationId: androidpublisher.entitlements.list
-      parameters:
-        - in: query
-          name: maxResults
-          type: integer
-        - description: 'The package name of the application the inapp product was sold in (for example, ''com.some.thing'').'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: 'The product id of the inapp product (for example, ''sku1''). This can be used to restrict the result set.'
-          in: query
-          name: productId
-          type: string
-        - in: query
-          name: startIndex
-          type: integer
-        - in: query
-          name: token
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/EntitlementsListResponse'
-      tags:
-        - entitlements
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
   '/{packageName}/inappproducts':
     get:
       description: 'List all the in-app products for an Android app, both subscriptions and managed in-app products..'
@@ -2302,37 +2263,6 @@ definitions:
         description: Screen width in pixels
         format: int32
         type: integer
-    type: object
-  Entitlement:
-    description: An Entitlement resource indicates a user's current entitlement to an inapp item or subscription.
-    properties:
-      kind:
-        default: 'androidpublisher#entitlement'
-        description: This kind represents an entitlement object in the androidpublisher service.
-        type: string
-      productId:
-        description: The SKU of the product.
-        type: string
-      productType:
-        description: |-
-          The type of the inapp product. Possible values are:  
-          - In-app item: "inapp" 
-          - Subscription: "subs"
-        type: string
-      token:
-        description: The token which can be verified using the subscriptions or products API.
-        type: string
-    type: object
-  EntitlementsListResponse:
-    properties:
-      pageInfo:
-        $ref: '#/definitions/PageInfo'
-      resources:
-        items:
-          $ref: '#/definitions/Entitlement'
-        type: array
-      tokenPagination:
-        $ref: '#/definitions/TokenPagination'
     type: object
   ExpansionFile:
     properties:

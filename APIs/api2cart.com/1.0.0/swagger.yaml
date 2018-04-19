@@ -1838,12 +1838,7 @@ paths:
           schema:
             properties:
               result:
-                properties:
-                  coupon:
-                    items:
-                      $ref: '#/definitions/Cart'
-                    type: array
-                type: object
+                $ref: '#/definitions/Cart'
               return_code:
                 type: integer
               return_message:
@@ -5215,6 +5210,16 @@ paths:
           name: special_price
           required: false
           type: number
+        - description: Defines the date of special price creation
+          in: query
+          name: sprice_create
+          required: false
+          type: string
+        - description: Defines the term of special price offer duration
+          in: query
+          name: sprice_expire
+          required: false
+          type: string
         - description: Defines new product's cost price
           in: query
           name: cost_price
@@ -5243,6 +5248,16 @@ paths:
         - description: Defines the decrement changes in product quantity
           in: query
           name: reduce_quantity
+          required: false
+          type: number
+        - description: 'This parameter is used for selecting a warehouse where you need to update a product quantity. Also, it has to be used along with this parameters: in_stock,quantity,increase_quantity,reduce_quantity.'
+          in: query
+          name: warehouse_id
+          required: false
+          type: string
+        - description: This parameter allows to reserve/unreserve product quantity.
+          in: query
+          name: reserve_quantity
           required: false
           type: number
         - description: Defines inventory tracking for product
@@ -6269,6 +6284,10 @@ definitions:
         type: string
       name:
         type: string
+      shipping_methods:
+        items:
+          $ref: '#/definitions/Order_ShippingMethod'
+        type: array
     type: object
   Cart:
     properties:
@@ -6292,6 +6311,10 @@ definitions:
         type: string
       version:
         type: string
+      warehouses:
+        items:
+          $ref: '#/definitions/Cart_Warehouse'
+        type: array
     type: object
   CartConfigUpdate:
     properties:
@@ -6364,6 +6387,31 @@ definitions:
         type: string
       weight_unit:
         type: string
+    type: object
+  Cart_Warehouse:
+    properties:
+      additional_fields:
+        type: object
+      address:
+        $ref: '#/definitions/Customer_Address'
+      avail:
+        type: boolean
+      carriers_ids:
+        items:
+          type: string
+        type: array
+      custom_fields:
+        type: object
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      stores_ids:
+        items:
+          type: string
+        type: array
     type: object
   Category:
     properties:
@@ -6455,6 +6503,10 @@ definitions:
         type: array
       in_stock:
         type: boolean
+      inventory:
+        items:
+          $ref: '#/definitions/Product_Inventory'
+        type: array
       inventory_level:
         type: number
       is_qty_in_pack_fixed:
@@ -7658,6 +7710,10 @@ definitions:
         items:
           $ref: '#/definitions/Image'
         type: array
+      inventory:
+        items:
+          $ref: '#/definitions/Product_Inventory'
+        type: array
       length:
         type: number
       manage_stock:
@@ -7915,6 +7971,14 @@ definitions:
         default: 0
         description: Weight
         type: number
+      weight_unit:
+        description: Weight Unit
+        enum:
+          - g
+          - kg
+          - oz
+          - lb
+        type: string
       wholesale_price:
         description: Defines product's sale price
         type: number
@@ -8103,6 +8167,21 @@ definitions:
       start_time:
         type: string
       store_id:
+        type: string
+    type: object
+  Product_Inventory:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      in_stock:
+        type: boolean
+      priority:
+        type: integer
+      quantity:
+        type: number
+      warehouse_id:
         type: string
     type: object
   Product_Option:

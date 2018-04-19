@@ -8,7 +8,7 @@ info:
     x-twitter: PayRun_io
   description: 'Open, scableable, transparent payroll API.'
   title: PayRun.IO
-  version: 18.19.1.130
+  version: 18.19.1.158
   x-apisguru-categories:
     - financial
   x-logo:
@@ -1562,6 +1562,59 @@ paths:
       tags:
         - PayRun
         - Employee
+  '/Employer/{EmployerId}/Employee/{EmployeeId}/Revisions':
+    get:
+      description: Gets links to all employee revisions
+      operationId: GetEmployeeRevisions
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The employee's unique identifier. E.g EE001
+          in: path
+          name: EmployeeId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get all employee revisions
+      tags:
+        - Employee
   '/Employer/{EmployerId}/Employee/{EmployeeId}/Tag/{TagId}':
     delete:
       description: Deletes a tag from the employee
@@ -2760,6 +2813,59 @@ paths:
           schema:
             $ref: '#/definitions/ErrorModel'
       summary: Updates a pay code
+      tags:
+        - PayCode
+  '/Employer/{EmployerId}/PayCode/{PayCodeId}/Revisions':
+    get:
+      description: Returns links to all revisions of the pay code
+      operationId: GetPayCodeRevisions
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The pay code unique identifier. E.g. CODE001
+          in: path
+          name: PayCodeId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get all revisions of the Pay Code
       tags:
         - PayCode
   '/Employer/{EmployerId}/PayCode/{PayCodeId}/Tag/{TagId}':
@@ -5037,6 +5143,59 @@ paths:
       summary: Updates the Pension
       tags:
         - Pension
+  '/Employer/{EmployerId}/Pension/{PensionId}/Revisions':
+    get:
+      description: Returns links to all revisions of the pension
+      operationId: GetPensionRevisions
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The pension's unique identifier. E.g PEN001
+          in: path
+          name: PensionId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get all pension revisions
+      tags:
+        - Pension
   '/Employer/{EmployerId}/Pension/{PensionId}/{EffectiveDate:datetime(yyyy-MM-dd)}':
     delete:
       description: Deletes the specified pension revision for the matching revision date
@@ -5525,6 +5684,12 @@ paths:
           name: ReportingInstructionId
           required: true
           type: string
+        - description: The reporting instruction object.
+          in: body
+          name: ReportingInstruction
+          required: true
+          schema:
+            $ref: '#/definitions/ReportingInstruction'
         - default: Auto
           description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
           format: string
@@ -5620,6 +5785,12 @@ paths:
           name: EmployerId
           required: true
           type: string
+        - description: The reporting instruction object.
+          in: body
+          name: ReportingInstruction
+          required: true
+          schema:
+            $ref: '#/definitions/ReportingInstruction'
         - default: Auto
           description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
           format: string
@@ -5658,6 +5829,54 @@ paths:
       summary: Creates a new Reporting Instruction
       tags:
         - ReportLineInstruction
+  '/Employer/{EmployerId}/Revisions':
+    get:
+      description: Gets links to all the employer revisions
+      operationId: GetEmployerRevisions
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Gets the employer revisions
+      tags:
+        - Employer
   '/Employer/{EmployerId}/RtiTransaction/{RtiTransactionId}':
     get:
       description: Returns the specified RTI transaction
@@ -7614,6 +7833,59 @@ paths:
           schema:
             $ref: '#/definitions/ErrorModel'
       summary: Runs the net pay report
+      tags:
+        - Reports
+  /Report/NEXTPERIOD/run:
+    get:
+      description: Returns the result of the executed next pay period report for the given query parameters
+      operationId: GetNextPayPeriodDates
+      parameters:
+        - description: The employer unique key. E.g. ER001
+          in: query
+          name: EmployerKey
+          required: true
+          type: string
+        - description: The pay schedule unique key. E.g. SCH001
+          in: query
+          name: PayScheduleKey
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The result of the next pay period report execution
+          schema:
+            type: file
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Runs the next pay period report
       tags:
         - Reports
   /Report/P11SUM/run:

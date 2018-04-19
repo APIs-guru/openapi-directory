@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Create bots and extend the new Hangouts Chat.
+  description: Enables bots to fetch information and perform actions in the new Hangouts Chat.
   title: Hangouts Chat
   version: v1
   x-apiClientRegistration:
@@ -103,8 +103,6 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: dms
-  - name: rooms
   - name: spaces
 paths:
   /v1/spaces:
