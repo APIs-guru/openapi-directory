@@ -345,6 +345,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateVPCEConfiguration':
+    post:
+      operationId: CreateVPCEConfiguration
+      description: Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateVPCEConfigurationResult'
+        '480':
+          description: ArgumentException
+          schema:
+            $ref: '#/definitions/ArgumentException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ServiceAccountException
+          schema:
+            $ref: '#/definitions/ServiceAccountException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateVPCEConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteDevicePool':
     post:
       operationId: DeleteDevicePool
@@ -622,6 +659,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUploadRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteVPCEConfiguration':
+    post:
+      operationId: DeleteVPCEConfiguration
+      description: Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteVPCEConfigurationResult'
+        '480':
+          description: ArgumentException
+          schema:
+            $ref: '#/definitions/ArgumentException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ServiceAccountException
+          schema:
+            $ref: '#/definitions/ServiceAccountException'
+        '483':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteVPCEConfigurationRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1246,6 +1324,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetUploadRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetVPCEConfiguration':
+    post:
+      operationId: GetVPCEConfiguration
+      description: Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVPCEConfigurationResult'
+        '480':
+          description: ArgumentException
+          schema:
+            $ref: '#/definitions/ArgumentException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ServiceAccountException
+          schema:
+            $ref: '#/definitions/ServiceAccountException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetVPCEConfigurationRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2112,6 +2227,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListVPCEConfigurations':
+    post:
+      operationId: ListVPCEConfigurations
+      description: Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListVPCEConfigurationsResult'
+        '480':
+          description: ArgumentException
+          schema:
+            $ref: '#/definitions/ArgumentException'
+        '481':
+          description: ServiceAccountException
+          schema:
+            $ref: '#/definitions/ServiceAccountException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListVPCEConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#PurchaseOffering':
     post:
       operationId: PurchaseOffering
@@ -2534,6 +2682,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateVPCEConfiguration':
+    post:
+      operationId: UpdateVPCEConfiguration
+      description: Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateVPCEConfigurationResult'
+        '480':
+          description: ArgumentException
+          schema:
+            $ref: '#/definitions/ArgumentException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ServiceAccountException
+          schema:
+            $ref: '#/definitions/ServiceAccountException'
+        '483':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateVPCEConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AWSAccountNumber:
     type: string
@@ -2939,6 +3128,31 @@ definitions:
         $ref: '#/definitions/Upload'
         description: The newly created upload.
     description: Represents the result of a create upload request.
+  CreateVPCEConfigurationRequest:
+    type: object
+    required:
+      - vpceConfigurationName
+      - vpceServiceName
+      - serviceDnsName
+    properties:
+      vpceConfigurationName:
+        $ref: '#/definitions/VPCEConfigurationName'
+        description: 'The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.'
+      vpceServiceName:
+        $ref: '#/definitions/VPCEServiceName'
+        description: The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+      serviceDnsName:
+        $ref: '#/definitions/ServiceDnsName'
+        description: The DNS name of the service running in your VPC that you want Device Farm to test.
+      vpceConfigurationDescription:
+        $ref: '#/definitions/VPCEConfigurationDescription'
+        description: 'An optional description, providing more details about your VPC endpoint configuration.'
+  CreateVPCEConfigurationResult:
+    type: object
+    properties:
+      vpceConfiguration:
+        $ref: '#/definitions/VPCEConfiguration'
+        description: An object containing information about your VPC endpoint configuration.
   CurrencyCode:
     type: string
     enum:
@@ -3061,6 +3275,17 @@ definitions:
     example: {}
     properties: {}
     description: Represents the result of a delete upload request.
+  DeleteVPCEConfigurationRequest:
+    type: object
+    required:
+      - arn
+    properties:
+      arn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to delete.
+  DeleteVPCEConfigurationResult:
+    type: object
+    properties: {}
   Device:
     type: object
     properties:
@@ -3137,6 +3362,7 @@ definitions:
       - APPIUM_VERSION
       - INSTANCE_ARN
       - INSTANCE_LABELS
+      - FLEET_TYPE
   DeviceFormFactor:
     type: string
     enum:
@@ -3272,6 +3498,7 @@ definitions:
     type: string
     enum:
       - PARSING_FAILED
+      - VPC_ENDPOINT_SETUP_FAILED
   ExecutionStatus:
     type: string
     enum:
@@ -3341,6 +3568,9 @@ definitions:
       test:
         $ref: '#/definitions/ScheduleRunTest'
         description: Information about the uploaded test to be run against the device pool.
+      configuration:
+        $ref: '#/definitions/ScheduleRunConfiguration'
+        description: An object containing information about the settings for a run.
     description: Represents a request to the get device pool compatibility operation.
   GetDevicePoolCompatibilityResult:
     type: object
@@ -3645,6 +3875,20 @@ definitions:
         $ref: '#/definitions/Upload'
         description: An app or a set of one or more tests to upload or that have been uploaded.
     description: Represents the result of a get upload request.
+  GetVPCEConfigurationRequest:
+    type: object
+    required:
+      - arn
+    properties:
+      arn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to describe.
+  GetVPCEConfigurationResult:
+    type: object
+    properties:
+      vpceConfiguration:
+        $ref: '#/definitions/VPCEConfiguration'
+        description: An object containing information about your VPC endpoint configuration.
   HostAddress:
     type: string
     maxLength: 1024
@@ -3741,6 +3985,12 @@ definitions:
       - VIDEO_ONLY
     minLength: 0
     maxLength: 64
+  InvalidOperationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    description: 'There was an error with the update request, or you do not have sufficient permissions to update this VPC endpoint configuration.'
   IosPaths:
     type: array
     items:
@@ -4371,6 +4621,24 @@ definitions:
         $ref: '#/definitions/PaginationToken'
         description: 'If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.'
     description: Represents the result of a list uploads request.
+  ListVPCEConfigurationsRequest:
+    type: object
+    properties:
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: An integer specifying the maximum number of items you want to return in the API response.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+  ListVPCEConfigurationsResult:
+    type: object
+    properties:
+      vpceConfigurations:
+        $ref: '#/definitions/VPCEConfigurations'
+        description: An array of <code>VPCEConfiguration</code> objects containing information about your VPC endpoint configuration.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
   Location:
     type: object
     required:
@@ -5024,6 +5292,9 @@ definitions:
       location:
         $ref: '#/definitions/Location'
         description: Information about the location that is used for the run.
+      vpceConfigurationArns:
+        $ref: '#/definitions/AmazonResourceNames'
+        description: An array of Amazon Resource Names (ARNs) for your VPC endpoint configurations.
       customerArtifactPaths:
         $ref: '#/definitions/CustomerArtifactPaths'
         description: Input <code>CustomerArtifactPaths</code> object for the scheduled run configuration.
@@ -5107,6 +5378,10 @@ definitions:
         $ref: '#/definitions/Message'
         description: Any additional information about the exception.
     description: There was a problem with the service account.
+  ServiceDnsName:
+    type: string
+    minLength: 0
+    maxLength: 2048
   SkipAppResign:
     type: boolean
   SshPublicKey:
@@ -5463,6 +5738,32 @@ definitions:
         $ref: '#/definitions/Project'
         description: The project you wish to update.
     description: Represents the result of an update project request.
+  UpdateVPCEConfigurationRequest:
+    type: object
+    required:
+      - arn
+    properties:
+      arn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to update.
+      vpceConfigurationName:
+        $ref: '#/definitions/VPCEConfigurationName'
+        description: 'The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.'
+      vpceServiceName:
+        $ref: '#/definitions/VPCEServiceName'
+        description: The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+      serviceDnsName:
+        $ref: '#/definitions/ServiceDnsName'
+        description: The DNS (domain) name used to connect to your private service in your Amazon VPC. The DNS name must not already be in use on the Internet.
+      vpceConfigurationDescription:
+        $ref: '#/definitions/VPCEConfigurationDescription'
+        description: 'An optional description, providing more details about your VPC endpoint configuration.'
+  UpdateVPCEConfigurationResult:
+    type: object
+    properties:
+      vpceConfiguration:
+        $ref: '#/definitions/VPCEConfiguration'
+        description: An object containing information about your VPC endpoint configuration.
   Upload:
     type: object
     properties:
@@ -5524,3 +5825,38 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Upload'
+  VPCEConfiguration:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the VPC endpoint configuration.
+      vpceConfigurationName:
+        $ref: '#/definitions/VPCEConfigurationName'
+        description: 'The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.'
+      vpceServiceName:
+        $ref: '#/definitions/VPCEServiceName'
+        description: The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+      serviceDnsName:
+        $ref: '#/definitions/ServiceDnsName'
+        description: The DNS name that maps to the private IP address of the service you want to access.
+      vpceConfigurationDescription:
+        $ref: '#/definitions/VPCEConfigurationDescription'
+        description: 'An optional description, providing more details about your VPC endpoint configuration.'
+    description: Represents an Amazon Virtual Private Cloud (VPC) endpoint configuration.
+  VPCEConfigurationDescription:
+    type: string
+    minLength: 0
+    maxLength: 2048
+  VPCEConfigurationName:
+    type: string
+    minLength: 0
+    maxLength: 1024
+  VPCEConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/VPCEConfiguration'
+  VPCEServiceName:
+    type: string
+    minLength: 0
+    maxLength: 2048

@@ -7050,6 +7050,9 @@ definitions:
       EnableIAMDatabaseAuthentication:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>'
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true.</p> <p>For a list of valid engine versions, see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>'
     description: <p/>
   ModifyDBClusterParameterGroupMessage:
     type: object

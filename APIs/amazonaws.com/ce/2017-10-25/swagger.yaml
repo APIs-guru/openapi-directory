@@ -3,7 +3,7 @@ info:
   version: '2017-10-25'
   x-release: v4
   title: AWS Cost Explorer Service
-  description: '<p>The Cost Explorer API allows you to programmatically query your cost and usage data. You can query for aggregated data such as total monthly costs or total daily usage. You can also query for granular data, such as the number of daily write operations for DynamoDB database tables in your production environment. </p> <p>Service Endpoint</p> <p>The Cost Explorer API provides the following endpoint:</p> <ul> <li> <p>https://ce.us-east-1.amazonaws.com</p> </li> </ul>'
+  description: '<p>The Cost Explorer API allows you to programmatically query your cost and usage data. You can query for aggregated data such as total monthly costs or total daily usage. You can also query for granular data, such as the number of daily write operations for Amazon DynamoDB database tables in your production environment. </p> <p>Service Endpoint</p> <p>The Cost Explorer API provides the following endpoint:</p> <ul> <li> <p>https://ce.us-east-1.amazonaws.com</p> </li> </ul> <p>For information about costs associated with the Cost Explorer API, see <a href="https://aws.amazon.com/aws-cost-management/pricing/">AWS Cost Management Pricing</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -124,6 +124,10 @@ paths:
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
+        '484':
+          description: RequestChangedException
+          schema:
+            $ref: '#/definitions/RequestChangedException'
       parameters:
         - name: body
           in: body
@@ -143,7 +147,7 @@ paths:
   '/#GetDimensionValues':
     post:
       operationId: GetDimensionValues
-      description: 'Retrieves all available filter values for a specific filter over a period of time. You can search the dimension values for an arbitrary string. '
+      description: 'Retrieves all available filter values for a specified filter over a period of time. You can search the dimension values for an arbitrary string. '
       responses:
         '200':
           description: Success
@@ -158,9 +162,17 @@ paths:
           schema:
             $ref: '#/definitions/BillExpirationException'
         '482':
+          description: DataUnavailableException
+          schema:
+            $ref: '#/definitions/DataUnavailableException'
+        '483':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
+        '484':
+          description: RequestChangedException
+          schema:
+            $ref: '#/definitions/RequestChangedException'
       parameters:
         - name: body
           in: body
@@ -180,7 +192,7 @@ paths:
   '/#GetReservationCoverage':
     post:
       operationId: GetReservationCoverage
-      description: '<p>Retrieves the reservation coverage for your account. This allows you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization''s master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>'
+      description: '<p>Retrieves the reservation coverage for your account. This allows you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization''s master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>'
       responses:
         '200':
           description: Success
@@ -254,7 +266,7 @@ paths:
   '/#GetReservationUtilization':
     post:
       operationId: GetReservationUtilization
-      description: 'You can retrieve the reservation utilization for your account. Master accounts in an organization in AWS Organizations have access to their associated member accounts. You can filter data by dimensions in a time period. You can use <code>GetDimensionValues</code> to determine the possible dimension values. Currently, you can group only by <code>SUBSCRIPTION_ID</code>. '
+      description: 'Retrieves the reservation utilization for your account. Master accounts in an organization have access to member accounts. You can filter data by dimensions in a time period. You can use <code>GetDimensionValues</code> to determine the possible dimension values. Currently, you can group only by <code>SUBSCRIPTION_ID</code>. '
       responses:
         '200':
           description: Success
@@ -291,7 +303,7 @@ paths:
   '/#GetTags':
     post:
       operationId: GetTags
-      description: 'You can query for available tag keys and tag values for a specified period. You can search the tag values for an arbitrary string. '
+      description: 'Queries for available tag keys and tag values for a specified period. You can search the tag values for an arbitrary string. '
       responses:
         '200':
           description: Success
@@ -306,9 +318,17 @@ paths:
           schema:
             $ref: '#/definitions/BillExpirationException'
         '482':
+          description: DataUnavailableException
+          schema:
+            $ref: '#/definitions/DataUnavailableException'
+        '483':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
+        '484':
+          description: RequestChangedException
+          schema:
+            $ref: '#/definitions/RequestChangedException'
       parameters:
         - name: body
           in: body
@@ -580,7 +600,7 @@ definitions:
         description: 'The name of the dimension. Each <code>Dimension</code> is available for different a <code>Context</code>. For more information, see <code>Context</code>.'
       Context:
         $ref: '#/definitions/Context'
-        description: '<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code> the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>CostAndUsage</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of instance. An example is an EC2 <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is <code>DataTransfer-In-Bytes</code>. The response for the <code>GetDimensionValues</code> operation includes a unit attribute, examples of which include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of instance. An example is an EC2 <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The specific combination of operating system, license model, and software on an instance. For example, a Windows instance with SQL Server Web and no license, or a Red Hat Enterprise Linux instance.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul>'
+        description: '<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code> the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as Amazon DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul>'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
@@ -593,7 +613,7 @@ definitions:
     properties:
       DimensionValues:
         $ref: '#/definitions/DimensionValuesWithAttributesList'
-        description: '<p>The filters that you used to filter your request. Some dimensions are available only for a specific context:</p> <p>If you set the context to <code>CostAndUsage</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of instance. An example is an EC2 <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is <code>DataTransfer-In-Bytes</code>. The response for the <code>GetDimensionValues</code> operation includes a unit attribute, examples of which include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of instance. An example is an EC2 <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The specific combination of operating system, license model, and software on an instance. For example, a Windows instance with SQL Server Web and no license, or a Red Hat Enterprise Linux instance.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul>'
+        description: '<p>The filters that you used to filter your request. Some dimensions are available only for a specific context:</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as Amazon DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul>'
       ReturnSize:
         $ref: '#/definitions/PageSize'
         description: The number of results that AWS returned at one time.
@@ -613,13 +633,13 @@ definitions:
         description: 'The start and end dates of the period for which you want to retrieve data about reservation coverage. You can retrieve data for a maximum of 13 months: the last 12 months and the current month. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. '
       GroupBy:
         $ref: '#/definitions/GroupDefinitions'
-        description: '<p>You can group the data by the following attributes:</p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul>'
+        description: '<p>You can group the data by the following attributes:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul>'
       Granularity:
         $ref: '#/definitions/Granularity'
-        description: '<p>The granularity of the AWS cost data for the reservation. Valid values are <code>MONTHLY</code> and <code>DAILY</code>.</p> <p>If <code>GroupBy</code> is set, <code>Granularity</code> can''t be set. If <code>Granularity</code> isn''t set, the response object doesn''t include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>.</p>'
+        description: '<p>The granularity of the AWS cost data for the reservation. Valid values are <code>MONTHLY</code> and <code>DAILY</code>.</p> <p>If <code>GroupBy</code> is set, <code>Granularity</code> can''t be set. If <code>Granularity</code> isn''t set, the response object doesn''t include <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>.</p>'
       Filter:
         $ref: '#/definitions/Expression'
-        description: '<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationCoverage</code> uses the same <code> <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> </code> object as the other operations, but only <code>AND</code> is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR''d together.</p>'
+        description: '<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationCoverage</code> uses the same <code> <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> </code> object as the other operations, but only <code>AND</code> is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR''d together.</p>'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
@@ -663,7 +683,7 @@ definitions:
         description: The reservation purchase option that you want recommendations for.
       ServiceSpecification:
         $ref: '#/definitions/ServiceSpecification'
-        description: 'The specific service, such as EC2, that you want recommendations for.'
+        description: 'The hardware specifications for the service instances that you want recommendations for, such as standard or convertible EC2 instances.'
       PageSize:
         $ref: '#/definitions/NonNegativeInteger'
         description: The number of recommendations that you want returned in a single response object.
@@ -689,16 +709,16 @@ definitions:
     properties:
       TimePeriod:
         $ref: '#/definitions/DateInterval'
-        description: 'Sets the start and end dates for retrieving reserve instance (RI) utilization. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. '
+        description: 'Sets the start and end dates for retrieving Reserved Instance (RI) utilization. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. '
       GroupBy:
         $ref: '#/definitions/GroupDefinitions'
         description: Groups only by <code>SUBSCRIPTION_ID</code>. Metadata is included.
       Granularity:
         $ref: '#/definitions/Granularity'
-        description: 'If <code>GroupBy</code> is set, <code>Granularity</code> can''t be set. If <code>Granularity</code> isn''t set, the response object doesn''t include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>. If both <code>GroupBy</code> and <code>Granularity</code> aren''t set, <code>GetReservationUtilization</code> defaults to <code>DAILY</code>.'
+        description: 'If <code>GroupBy</code> is set, <code>Granularity</code> can''t be set. If <code>Granularity</code> isn''t set, the response object doesn''t include <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>. If both <code>GroupBy</code> and <code>Granularity</code> aren''t set, <code>GetReservationUtilization</code> defaults to <code>DAILY</code>.'
       Filter:
         $ref: '#/definitions/Expression'
-        description: 'Filters utilization data by using different dimensions. <code>GetReservationUtilization</code> uses the same <code> <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> </code> object as the other operations, but only <code>AND</code> is supported among each dimension, and nesting is supported to only one level deep. If there are multiple values for a dimension, they are OR''d together.'
+        description: '<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>SCOPE</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationUtilization</code> uses the same <code> <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> </code> object as the other operations, but only <code>AND</code> is supported among each dimension, and nesting is supported up to only one level deep. If there are multiple values for a dimension, they are OR''d together.</p>'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
@@ -798,6 +818,9 @@ definitions:
       EC2InstanceDetails:
         $ref: '#/definitions/EC2InstanceDetails'
         description: The EC2 instances that AWS recommends that you purchase.
+      RDSInstanceDetails:
+        $ref: '#/definitions/RDSInstanceDetails'
+        description: The RDS instances that AWS recommends that you purchase.
     description: Details about the instances that AWS recommends that you purchase.
   InvalidNextTokenException:
     type: object
@@ -874,6 +897,40 @@ definitions:
       - ALL_UPFRONT
   PurchasedHours:
     type: string
+  RDSInstanceDetails:
+    type: object
+    properties:
+      Family:
+        $ref: '#/definitions/GenericString'
+        description: The instance family of the recommended reservation.
+      InstanceType:
+        $ref: '#/definitions/GenericString'
+        description: The type of instance that AWS recommends.
+      Region:
+        $ref: '#/definitions/GenericString'
+        description: The AWS Region of the recommended reservation.
+      DatabaseEngine:
+        $ref: '#/definitions/GenericString'
+        description: The database engine that the recommended reservation supports.
+      DeploymentOption:
+        $ref: '#/definitions/GenericString'
+        description: Whether the recommendation is for a reservation in a single availability zone or a reservation with a backup in a second availability zone.
+      LicenseModel:
+        $ref: '#/definitions/GenericString'
+        description: The license model that the recommended reservation supports.
+      CurrentGeneration:
+        $ref: '#/definitions/GenericBoolean'
+        description: 'Whether the recommendation is for a current generation instance. '
+      SizeFlexEligible:
+        $ref: '#/definitions/GenericBoolean'
+        description: Whether the recommended reservation is size flexible.
+    description: Details about the RDS instances that AWS recommends that you purchase.
+  RequestChangedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Your request parameters changed between pages. Try again with the old parameters or without a pagination token.
   ReservationAggregates:
     type: object
     properties:
@@ -983,7 +1040,7 @@ definitions:
         description: How much AWS estimates that you spend on On-Demand Instances in a month.
       EstimatedReservationCostForLookbackPeriod:
         $ref: '#/definitions/GenericString'
-        description: How much AWS estimates that you spent on Reserved Instances during the specified historical period.
+        description: How much AWS estimates that you would have spent for all usage during the specified historical period if you had had a reservation.
       UpfrontCost:
         $ref: '#/definitions/GenericString'
         description: How much purchasing this instance costs you upfront.

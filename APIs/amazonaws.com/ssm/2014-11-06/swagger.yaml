@@ -643,6 +643,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteInventory':
+    post:
+      operationId: DeleteInventory
+      description: 'Delete a custom inventory type, or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteInventoryResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidTypeNameException
+          schema:
+            $ref: '#/definitions/InvalidTypeNameException'
+        '482':
+          description: InvalidOptionException
+          schema:
+            $ref: '#/definitions/InvalidOptionException'
+        '483':
+          description: InvalidDeleteInventoryParametersException
+          schema:
+            $ref: '#/definitions/InvalidDeleteInventoryParametersException'
+        '484':
+          description: InvalidInventoryRequestException
+          schema:
+            $ref: '#/definitions/InvalidInventoryRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteInventoryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteMaintenanceWindow':
     post:
       operationId: DeleteMaintenanceWindow
@@ -1488,6 +1533,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeInstancePatchesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeInventoryDeletions':
+    post:
+      operationId: DescribeInventoryDeletions
+      description: Describes a specific delete inventory operation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeInventoryDeletionsResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidDeletionIdException
+          schema:
+            $ref: '#/definitions/InvalidDeletionIdException'
+        '482':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeInventoryDeletionsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3950,7 +4032,7 @@ paths:
   '/#UpdateMaintenanceWindowTask':
     post:
       operationId: UpdateMaintenanceWindowTask
-      description: '<p>Modifies a task assigned to a Maintenance Window. You can''t change the task type, but you can change the following values:</p> <p>Task ARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> <p>Service role ARN.</p> <p>Task parameters.</p> <p>Task priority.</p> <p>Task MaxConcurrency and MaxErrors.</p> <p>Log location.</p> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren''t specified are set to null.</p>'
+      description: '<p>Modifies a task assigned to a Maintenance Window. You can''t change the task type, but you can change the following values:</p> <ul> <li> <p>TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> </li> <li> <p>ServiceRoleArn</p> </li> <li> <p>TaskInvocationParameters</p> </li> <li> <p>Priority</p> </li> <li> <p>MaxConcurrency</p> </li> <li> <p>MaxErrors</p> </li> </ul> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the <a>RegisterTaskWithMaintenanceWindow</a> action are required for this request. Optional fields that aren''t specified are set to null.</p>'
       responses:
         '200':
           description: Success
@@ -4116,7 +4198,7 @@ definitions:
         description: '<p>The resource ID you want to tag.</p> <p>For the ManagedInstance, MaintenanceWindow, and PatchBaseline values, use the ID of the resource, such as mw-01234361858c9b57b for a Maintenance Window.</p> <p>For the Document and Parameter values, use the name of the resource.</p>'
       Tags:
         $ref: '#/definitions/TagList'
-        description: ' One or more tags. The value parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. '
+        description: '<p> One or more tags. The value parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>'
   AddTagsToResourceResult:
     type: object
     properties: {}
@@ -4694,7 +4776,7 @@ definitions:
         description: 'User-specified information about the command, such as a brief description of what the command should do.'
       ExpiresAfter:
         $ref: '#/definitions/DateTime'
-        description: 'If this time is reached and the command has not already started executing, it will not execute. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.'
+        description: 'If this time is reached and the command has not already started executing, it will not run. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.'
       Parameters:
         $ref: '#/definitions/Parameters'
         description: The parameter values to be inserted in the document when executing the command.
@@ -5141,10 +5223,10 @@ definitions:
     properties:
       Description:
         $ref: '#/definitions/ActivationDescription'
-        description: 'A userdefined description of the resource that you want to register with Amazon EC2. '
+        description: <p>A userdefined description of the resource that you want to register with Amazon EC2. </p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>
       DefaultInstanceName:
         $ref: '#/definitions/DefaultInstanceName'
-        description: 'The name of the registered, managed instance as it will appear in the Amazon EC2 console or when you use the AWS command line tools to list EC2 resources.'
+        description: '<p>The name of the registered, managed instance as it will appear in the Amazon EC2 console or when you use the AWS command line tools to list EC2 resources.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>'
       IamRole:
         $ref: '#/definitions/IamRole'
         description: 'The Amazon Identity and Access Management (IAM) role that you want to assign to the managed instance. '
@@ -5428,6 +5510,35 @@ definitions:
   DeleteDocumentResult:
     type: object
     properties: {}
+  DeleteInventoryRequest:
+    type: object
+    required:
+      - TypeName
+    properties:
+      TypeName:
+        $ref: '#/definitions/InventoryItemTypeName'
+        description: 'The name of the custom inventory type for which you want to delete either all previously collected data, or the inventory type itself. '
+      SchemaDeleteOption:
+        $ref: '#/definitions/InventorySchemaDeleteOption'
+        description: '<p>Use the <code>SchemaDeleteOption</code> to delete a custom inventory type (schema). If you don''t choose this option, the system only deletes existing inventory data associated with the custom inventory type. Choose one of the following options:</p> <p>DisableSchema: If you choose this option, the system ignores all inventory data for the specified version, and any earlier versions. To enable this schema again, you must call the <code>PutInventory</code> action for a version greater than the disbled version.</p> <p>DeleteSchema: This option deletes the specified custom type from the Inventory service. You can recreate the schema later, if you want.</p>'
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: 'Use this option to view a summary of the deletion request without deleting any data or the data type. This option is useful when you only want to understand what will be deleted. Once you validate that the data to be deleted is what you intend to delete, you can run the same command without specifying the <code>DryRun</code> option.'
+      ClientToken:
+        $ref: '#/definitions/ClientToken'
+        description: User-provided idempotency token.
+  DeleteInventoryResult:
+    type: object
+    properties:
+      DeletionId:
+        $ref: '#/definitions/InventoryDeletionId'
+        description: 'Every <code>DeleteInventory</code> action is assigned a unique ID. This option returns a unique ID. You can use this ID to query the status of a delete operation. This option is useful for ensuring that a delete operation has completed before you begin other actions. '
+      TypeName:
+        $ref: '#/definitions/InventoryItemTypeName'
+        description: The name of the inventory data type specified in the request.
+      DeletionSummary:
+        $ref: '#/definitions/InventoryDeletionSummary'
+        description: 'A summary of the delete operation. For more information about this summary, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary">Understanding the Delete Inventory Summary</a>.'
   DeleteMaintenanceWindowRequest:
     type: object
     required:
@@ -5908,6 +6019,27 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
+  DescribeInventoryDeletionsRequest:
+    type: object
+    properties:
+      DeletionId:
+        $ref: '#/definitions/InventoryDeletionId'
+        description: Specify the delete inventory ID for which you want information. This ID was returned by the <code>DeleteInventory</code> action.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to start the list. Use this token to get the next set of results. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+  DescribeInventoryDeletionsResult:
+    type: object
+    properties:
+      InventoryDeletions:
+        $ref: '#/definitions/InventoryDeletionsList'
+        description: A list of status items for deleted inventory.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
   DescribeMaintenanceWindowExecutionTaskInvocationsRequest:
     type: object
     required:
@@ -6456,6 +6588,8 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: '<p>Error returned when the ID specified for a resource, such as a Maintenance Window or Patch baseline, doesn''t exist.</p> <p>For information about resource limits in Systems Manager, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_ssm">AWS Systems Manager Limits</a>.</p>'
+  DryRun:
+    type: boolean
   DuplicateDocumentContent:
     type: object
     properties:
@@ -6597,7 +6731,7 @@ definitions:
         description: '<p>The date and time the plugin was finished executing. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to execute, the string is empty.</p>'
       Status:
         $ref: '#/definitions/CommandInvocationStatus'
-        description: The status of the parent command for this invocation. This status can be different than StatusDetails.
+        description: The status of this invocation plugin. This status can be different than StatusDetails.
       StatusDetails:
         $ref: '#/definitions/StatusDetails'
         description: '<p>A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, the instance was stopped, etc. The system will try to deliver the command again.</p> </li> <li> <p>Success: The command or plugin was executed successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command''s MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The command started to execute on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command wasn''t executed successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can''t be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don''t count against the parent command''s MaxErrors limit and don''t contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
@@ -6861,7 +6995,7 @@ definitions:
         description: The type of task executed.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParametersList'
-        description: '<p>The parameters passed to the task when it was executed. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
+        description: '<p>The parameters passed to the task when it was executed.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
         description: The priority of the task.
@@ -6959,7 +7093,7 @@ definitions:
         description: The type of task to execute.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: The parameters to pass to the task when it executes.
+        description: '<p>The parameters to pass to the task when it executes.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
         description: The parameters to pass to the task when it executes.
@@ -6974,7 +7108,7 @@ definitions:
         description: The maximum number of errors allowed before the task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: The location in Amazon S3 where the task results are logged.
+        description: '<p>The location in Amazon S3 where the task results are logged.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The retrieved task name.
@@ -7038,10 +7172,10 @@ definitions:
         description: 'The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33</code> '
       Recursive:
         $ref: '#/definitions/Boolean'
-        description: Retrieve all parameters within a hierarchy.
+        description: '<p>Retrieve all parameters within a hierarchy.</p> <important> <p>If a user has access to a path, then the user can access all levels of that path. For example, if a user has permission to access path /a, then the user can also access /a/b. Even if a user has explicitly been denied access in IAM for parameter /a, they can still call the GetParametersByPath API action recursively and view /a/b.</p> </important>'
       ParameterFilters:
         $ref: '#/definitions/ParameterStringFilterList'
-        description: Filters to limit the request results.
+        description: <p>Filters to limit the request results.</p> <note> <p>You can't filter using the parameter name.</p> </note>
       WithDecryption:
         $ref: '#/definitions/Boolean'
         description: Retrieve all parameters in a hierarchy with their value decrypted.
@@ -7583,6 +7717,18 @@ definitions:
   InvalidCommandId:
     type: object
     properties: {}
+  InvalidDeleteInventoryParametersException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: One or more of the parameters specified for the delete operation is not valid. Verify all parameters and try again.
+  InvalidDeletionIdException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The ID specified for the delete operation does not exist or is not valide. Verify the ID and try again.
   InvalidDocument:
     type: object
     properties:
@@ -7656,6 +7802,12 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: 'You specified invalid keys or values in the <code>Context</code> attribute for <code>InventoryItem</code>. Verify the keys and values, and try again.'
+  InvalidInventoryRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The request is not valid.
   InvalidItemContentException:
     type: object
     properties:
@@ -7682,6 +7834,12 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: One or more configuration items is not valid. Verify that a valid Amazon Resource Name (ARN) was provided for an Amazon SNS topic.
+  InvalidOptionException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The delete inventory option specified is not valid. Verify the option and try again.
   InvalidOutputFolder:
     type: object
     properties: {}
@@ -7775,6 +7933,80 @@ definitions:
     enum:
       - string
       - number
+  InventoryDeletionId:
+    type: string
+  InventoryDeletionLastStatusMessage:
+    type: string
+  InventoryDeletionLastStatusUpdateTime:
+    type: string
+    format: date-time
+  InventoryDeletionStartTime:
+    type: string
+    format: date-time
+  InventoryDeletionStatus:
+    type: string
+    enum:
+      - InProgress
+      - Complete
+  InventoryDeletionStatusItem:
+    type: object
+    properties:
+      DeletionId:
+        $ref: '#/definitions/InventoryDeletionId'
+        description: The deletion ID returned by the <code>DeleteInventory</code> action.
+      TypeName:
+        $ref: '#/definitions/InventoryItemTypeName'
+        description: The name of the inventory data type.
+      DeletionStartTime:
+        $ref: '#/definitions/InventoryDeletionStartTime'
+        description: The UTC timestamp when the delete operation started.
+      LastStatus:
+        $ref: '#/definitions/InventoryDeletionStatus'
+        description: The status of the operation. Possible values are InProgress and Complete.
+      LastStatusMessage:
+        $ref: '#/definitions/InventoryDeletionLastStatusMessage'
+        description: Information about the status.
+      DeletionSummary:
+        $ref: '#/definitions/InventoryDeletionSummary'
+        description: 'Information about the delete operation. For more information about this summary, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary">Understanding the Delete Inventory Summary</a>.'
+      LastStatusUpdateTime:
+        $ref: '#/definitions/InventoryDeletionLastStatusUpdateTime'
+        description: The UTC timestamp of when the last status report.
+    description: Status information returned by the <code>DeleteInventory</code> action.
+  InventoryDeletionSummary:
+    type: object
+    properties:
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of items to delete. This count does not change during the delete operation.
+      RemainingCount:
+        $ref: '#/definitions/RemainingCount'
+        description: Remaining number of items to delete.
+      SummaryItems:
+        $ref: '#/definitions/InventoryDeletionSummaryItems'
+        description: A list of counts and versions for deleted items.
+    description: Information about the delete operation.
+  InventoryDeletionSummaryItem:
+    type: object
+    properties:
+      Version:
+        $ref: '#/definitions/InventoryItemSchemaVersion'
+        description: The inventory type version.
+      Count:
+        $ref: '#/definitions/ResourceCount'
+        description: A count of the number of deleted items.
+      RemainingCount:
+        $ref: '#/definitions/RemainingCount'
+        description: The remaining number of items to delete.
+    description: 'Either a count, remaining count, or a version number in a delete inventory summary.'
+  InventoryDeletionSummaryItems:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryDeletionSummaryItem'
+  InventoryDeletionsList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryDeletionStatusItem'
   InventoryFilter:
     type: object
     required:
@@ -7989,6 +8221,11 @@ definitions:
           $ref: '#/definitions/InventoryResultItemKey'
         value:
           $ref: '#/definitions/InventoryResultItem'
+  InventorySchemaDeleteOption:
+    type: string
+    enum:
+      - DisableSchema
+      - DeleteSchema
   InventoryTypeDisplayName:
     type: string
   InvocationDoesNotExist:
@@ -8344,7 +8581,7 @@ definitions:
       S3Region:
         $ref: '#/definitions/S3Region'
         description: The region where the Amazon S3 bucket is located.
-    description: Information about an Amazon S3 bucket to write instance-level logs to.
+    description: '<p>Information about an Amazon S3 bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
   Long:
     type: integer
   MaintenanceWindowAllowUnassociatedTargets:
@@ -8357,7 +8594,7 @@ definitions:
         description: The version of an Automation document to use during task execution.
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
-        description: The parameters for the AUTOMATION task.
+        description: '<p>The parameters for the AUTOMATION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For AUTOMATION task types, Systems Manager ignores any values specified for these parameters.</p> </note>'
     description: The parameters for an AUTOMATION task type.
   MaintenanceWindowCutoff:
     type: integer
@@ -8590,7 +8827,7 @@ definitions:
       Payload:
         $ref: '#/definitions/MaintenanceWindowLambdaPayload'
         description: JSON to provide to your Lambda function as input.
-    description: The parameters for a LAMBDA task type.
+    description: '<p>The parameters for a LAMBDA task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and LoggingInfo.</p> </note>'
   MaintenanceWindowLambdaPayload:
     type: string
     maxLength: 4096
@@ -8642,7 +8879,7 @@ definitions:
       TimeoutSeconds:
         $ref: '#/definitions/TimeoutSeconds'
         description: 'If this time is reached and the command has not already started executing, it doesn not execute.'
-    description: The parameters for a RUN_COMMAND task type.
+    description: '<p>The parameters for a RUN_COMMAND task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Run Command tasks, Systems Manager uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for <code>TaskInvocationParameters</code>. </p> </note>'
   MaintenanceWindowSchedule:
     type: string
     minLength: 1
@@ -8664,7 +8901,7 @@ definitions:
       Name:
         $ref: '#/definitions/MaintenanceWindowStepFunctionsName'
         description: The name of the STEP_FUNCTION task.
-    description: The parameters for the STEP_FUNCTION execution.
+    description: '<p>The parameters for a STEP_FUNCTION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Step Functions tasks, Systems Manager ignores any values specified for <code>TaskParameters</code> and <code>LoggingInfo</code>.</p> </note>'
   MaintenanceWindowTarget:
     type: object
     properties:
@@ -8719,13 +8956,13 @@ definitions:
         description: 'The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.'
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: The parameters that should be passed to the task when it is executed.
+        description: '<p>The parameters that should be passed to the task when it is executed.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
         description: 'The priority of the task in the Maintenance Window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.'
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: Information about an Amazon S3 bucket to write task-level logs to.
+        description: '<p>Information about an Amazon S3 bucket to write task-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
         description: The role that should be assumed when executing the task
@@ -8759,7 +8996,7 @@ definitions:
         description: The parameters for a RUN_COMMAND task type.
       Automation:
         $ref: '#/definitions/MaintenanceWindowAutomationParameters'
-        description: The parameters for a AUTOMATION task type.
+        description: The parameters for an AUTOMATION task type.
       StepFunctions:
         $ref: '#/definitions/MaintenanceWindowStepFunctionsParameters'
         description: The parameters for a STEP_FUNCTION task type.
@@ -9594,6 +9831,8 @@ definitions:
   PutComplianceItemsResult:
     type: object
     properties: {}
+  PutInventoryMessage:
+    type: string
   PutInventoryRequest:
     type: object
     required:
@@ -9608,7 +9847,10 @@ definitions:
         description: The inventory items that you want to add or update on instances.
   PutInventoryResult:
     type: object
-    properties: {}
+    properties:
+      Message:
+        $ref: '#/definitions/PutInventoryMessage'
+        description: Information about the request.
   PutParameterRequest:
     type: object
     required:
@@ -9621,7 +9863,7 @@ definitions:
         description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>For information about parameter name requirements and restrictions, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about">About Creating Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>'
       Description:
         $ref: '#/definitions/ParameterDescription'
-        description: Information about the parameter that you want to add to the system.
+        description: <p>Information about the parameter that you want to add to the system.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>
       Value:
         $ref: '#/definitions/PSParameterValue'
         description: The parameter value that you want to add to the system.
@@ -9740,7 +9982,7 @@ definitions:
         description: The type of task being registered.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: The parameters that should be passed to the task when it is executed.
+        description: '<p>The parameters that should be passed to the task when it is executed.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
         description: 'The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty. '
@@ -9755,7 +9997,7 @@ definitions:
         description: The maximum number of errors allowed before this task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: 'A structure containing information about an Amazon S3 bucket to write instance-level logs to. '
+        description: '<p>A structure containing information about an Amazon S3 bucket to write instance-level logs to. </p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: An optional name for the task.
@@ -9779,6 +10021,8 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
+  RemainingCount:
+    type: integer
   RemoveTagsFromResourceRequest:
     type: object
     required:
@@ -9840,6 +10084,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceComplianceSummaryItem'
+  ResourceCount:
+    type: integer
   ResourceDataSyncAWSKMSKeyARN:
     type: string
     pattern: 'arn:.*'
@@ -10064,7 +10310,7 @@ definitions:
         description: <p>Sha256 or Sha1.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>
       TimeoutSeconds:
         $ref: '#/definitions/TimeoutSeconds'
-        description: 'If this time is reached and the command has not already started executing, it will not execute.'
+        description: 'If this time is reached and the command has not already started executing, it will not run.'
       Comment:
         $ref: '#/definitions/Comment'
         description: 'User-specified information about the command, such as a brief description of what the command should do.'
@@ -10412,6 +10658,8 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: There are concurrent updates for a resource that supports one update at a time.
+  TotalCount:
+    type: integer
   TotalSizeLimitExceededException:
     type: object
     properties:
@@ -10685,7 +10933,7 @@ definitions:
         description: 'The IAM service role ARN to modify. The system assumes this role during task execution. '
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: '<p>The parameters to modify. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
+        description: '<p>The parameters to modify.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
         description: The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.
@@ -10700,7 +10948,7 @@ definitions:
         description: The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum number of errors that are allowed before the task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: The new logging location in Amazon S3 to specify.
+        description: '<p>The new logging location in Amazon S3 to specify.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The new task name to specify.
@@ -10730,7 +10978,7 @@ definitions:
         description: The updated service role ARN value.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: The updated parameter values.
+        description: '<p>The updated parameter values.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
         description: The updated parameter values.
@@ -10745,7 +10993,7 @@ definitions:
         description: The updated MaxErrors value.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: The updated logging information in Amazon S3.
+        description: '<p>The updated logging information in Amazon S3.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The updated task name.

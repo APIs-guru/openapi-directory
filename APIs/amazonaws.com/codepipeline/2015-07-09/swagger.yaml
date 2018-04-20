@@ -2278,6 +2278,8 @@ definitions:
       lastUpdateTime:
         $ref: '#/definitions/Timestamp'
         description: 'The date and time of the last change to the pipeline execution, in timestamp format.'
+      sourceRevisions:
+        $ref: '#/definitions/SourceRevisionList'
     description: Summary information about a pipeline execution.
   PipelineExecutionSummaryList:
     type: array
@@ -2590,6 +2592,23 @@ definitions:
     type: string
   SessionToken:
     type: string
+  SourceRevision:
+    type: object
+    required:
+      - actionName
+    properties:
+      actionName:
+        $ref: '#/definitions/ActionName'
+      revisionId:
+        $ref: '#/definitions/Revision'
+      revisionSummary:
+        $ref: '#/definitions/RevisionSummary'
+      revisionUrl:
+        $ref: '#/definitions/Url'
+  SourceRevisionList:
+    type: array
+    items:
+      $ref: '#/definitions/SourceRevision'
   StageActionDeclarationList:
     type: array
     items:
