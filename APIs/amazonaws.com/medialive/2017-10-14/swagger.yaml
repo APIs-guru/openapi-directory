@@ -1368,6 +1368,12 @@ definitions:
       - UNDEFINED
       - VISUAL_IMPAIRED_COMMENTARY
     description: Placeholder documentation for AudioType
+  AuthenticationScheme:
+    type: string
+    enum:
+      - AKAMAI
+      - COMMON
+    description: Placeholder documentation for AuthenticationScheme
   AvailBlanking:
     type: object
     properties:
@@ -1579,6 +1585,8 @@ definitions:
         $ref: '#/definitions/EmbeddedDestinationSettings'
       EmbeddedPlusScte20DestinationSettings:
         $ref: '#/definitions/EmbeddedPlusScte20DestinationSettings'
+      RtmpCaptionInfoDestinationSettings:
+        $ref: '#/definitions/RtmpCaptionInfoDestinationSettings'
       Scte20PlusEmbeddedDestinationSettings:
         $ref: '#/definitions/Scte20PlusEmbeddedDestinationSettings'
       Scte27DestinationSettings:
@@ -3258,7 +3266,7 @@ definitions:
         description: key used to extract the password from EC2 Parameter store
       Uri:
         $ref: '#/definitions/__string'
-        description: 'Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a rtmpEndpoint should have a uri simliar to: "rtmp://fmsserver/live".'
+        description: 'Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: "rtmp://fmsserver/live".'
       Username:
         $ref: '#/definitions/__string'
         description: Documentation update needed
@@ -3877,6 +3885,9 @@ definitions:
       TimedMetadataBehavior:
         $ref: '#/definitions/M3u8TimedMetadataBehavior'
         description: 'When set to passthrough, timed metadata is passed through from input to output.'
+      TimedMetadataPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) of the timed metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
       TransportStreamId:
         $ref: '#/definitions/__integerMin0Max65535'
         description: The value of the transport stream ID field in the Program Map Table.
@@ -3927,7 +3938,7 @@ definitions:
         description: 'If set to passthrough for an audio-only MS Smooth output, the fragment absolute time will be set to the current timecode. This option does not write timecodes to the audio elementary stream.'
       CertificateMode:
         $ref: '#/definitions/SmoothGroupCertificateMode'
-        description: 'If set to verifyAuthenticity, verify the https certificate chain to a trusted Certificate Authority (CA).  This will cause https outputs to self-signed certificates to fail unless those certificates are manually added to the OS trusted keystore.'
+        description: 'If set to verifyAuthenticity, verify the https certificate chain to a trusted Certificate Authority (CA).  This will cause https outputs to self-signed certificates to fail.'
       ConnectionRetryInterval:
         $ref: '#/definitions/__integerMin0'
         description: Number of seconds to wait before retrying connection to the IIS server if the connection is lost. Content will be cached during this time and the cache will be be delivered to the IIS server once the connection is re-established.
@@ -4055,6 +4066,9 @@ definitions:
       PasswordParam:
         $ref: '#/definitions/__string'
         description: key used to extract the password from EC2 Parameter store
+      StreamName:
+        $ref: '#/definitions/__string'
+        description: 'Stream name for RTMP destinations (URLs of type rtmp://)'
       Url:
         $ref: '#/definitions/__string'
         description: A URL specifying a destination
@@ -4086,6 +4100,8 @@ definitions:
         $ref: '#/definitions/HlsGroupSettings'
       MsSmoothGroupSettings:
         $ref: '#/definitions/MsSmoothGroupSettings'
+      RtmpGroupSettings:
+        $ref: '#/definitions/RtmpGroupSettings'
       UdpGroupSettings:
         $ref: '#/definitions/UdpGroupSettings'
     description: Placeholder documentation for OutputGroupSettings
@@ -4104,6 +4120,8 @@ definitions:
         $ref: '#/definitions/HlsOutputSettings'
       MsSmoothOutputSettings:
         $ref: '#/definitions/MsSmoothOutputSettings'
+      RtmpOutputSettings:
+        $ref: '#/definitions/RtmpOutputSettings'
       UdpOutputSettings:
         $ref: '#/definitions/UdpOutputSettings'
     description: Placeholder documentation for OutputSettings
@@ -4140,6 +4158,66 @@ definitions:
       Message:
         $ref: '#/definitions/__string'
     description: Placeholder documentation for ResourceNotFound
+  RtmpCacheFullBehavior:
+    type: string
+    enum:
+      - DISCONNECT_IMMEDIATELY
+      - WAIT_FOR_SERVER
+    description: Placeholder documentation for RtmpCacheFullBehavior
+  RtmpCaptionData:
+    type: string
+    enum:
+      - ALL
+      - FIELD1_608
+      - FIELD1_AND_FIELD2_608
+    description: Placeholder documentation for RtmpCaptionData
+  RtmpCaptionInfoDestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for RtmpCaptionInfoDestinationSettings
+  RtmpGroupSettings:
+    type: object
+    properties:
+      AuthenticationScheme:
+        $ref: '#/definitions/AuthenticationScheme'
+        description: Authentication scheme to use when connecting with CDN
+      CacheFullBehavior:
+        $ref: '#/definitions/RtmpCacheFullBehavior'
+        description: 'Controls behavior when content cache fills up. If remote origin server stalls the RTMP connection and does not accept content fast enough the ''Media Cache'' will fill up. When the cache reaches the duration specified by cacheLength the cache will stop accepting new content. If set to disconnectImmediately, the RTMP output will force a disconnect. Clear the media cache, and reconnect after restartDelay seconds. If set to waitForServer, the RTMP output will wait up to 5 minutes to allow the origin server to begin accepting data again.'
+      CacheLength:
+        $ref: '#/definitions/__integerMin30'
+        description: 'Cache length, in seconds, is used to calculate buffer size.'
+      CaptionData:
+        $ref: '#/definitions/RtmpCaptionData'
+        description: 'Controls the types of data that passes to onCaptionInfo outputs.  If set to ''all'' then 608 and 708 carried DTVCC data will be passed.  If set to ''field1AndField2608'' then DTVCC data will be stripped out, but 608 data from both fields will be passed. If set to ''field1608'' then only the data carried in 608 from field 1 video will be passed.'
+      RestartDelay:
+        $ref: '#/definitions/__integerMin0'
+        description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
+    description: Placeholder documentation for RtmpGroupSettings
+  RtmpOutputCertificateMode:
+    type: string
+    enum:
+      - SELF_SIGNED
+      - VERIFY_AUTHENTICITY
+    description: Placeholder documentation for RtmpOutputCertificateMode
+  RtmpOutputSettings:
+    type: object
+    required:
+      - Destination
+    properties:
+      CertificateMode:
+        $ref: '#/definitions/RtmpOutputCertificateMode'
+        description: 'If set to verifyAuthenticity, verify the tls certificate chain to a trusted Certificate Authority (CA).  This will cause rtmps outputs with self-signed certificates to fail.'
+      ConnectionRetryInterval:
+        $ref: '#/definitions/__integerMin1'
+        description: Number of seconds to wait before retrying a connection to the Flash Media server if the connection is lost.
+      Destination:
+        $ref: '#/definitions/OutputLocationRef'
+        description: 'The RTMP endpoint excluding the stream name (eg. rtmp://host/appname). For connection to Akamai, a username and password must be supplied. URI fields accept format identifiers.'
+      NumRetries:
+        $ref: '#/definitions/__integerMin0'
+        description: Number of retry attempts.
+    description: Placeholder documentation for RtmpOutputSettings
   Scte20Convert608To708:
     type: string
     enum:
@@ -4897,6 +4975,10 @@ definitions:
     type: integer
     description: Placeholder documentation for __integerMin3
     minimum: 3
+  __integerMin30:
+    type: integer
+    description: Placeholder documentation for __integerMin30
+    minimum: 30
   __integerMin4Max20:
     type: integer
     description: Placeholder documentation for __integerMin4Max20

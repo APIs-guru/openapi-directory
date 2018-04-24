@@ -3,7 +3,7 @@ info:
   version: '2015-08-04'
   x-release: v4
   title: Amazon Kinesis Firehose
-  description: '<fullname>Amazon Kinesis Firehose API Reference</fullname> <p>Amazon Kinesis Firehose is a fully managed service that delivers real-time streaming data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon Elasticsearch Service (Amazon ES), and Amazon Redshift.</p>'
+  description: '<fullname>Amazon Kinesis Data Firehose API Reference</fullname> <p>Amazon Kinesis Data Firehose is a fully managed service that delivers real-time streaming data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon Elasticsearch Service (Amazon ES), Amazon Redshift, and Splunk.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: CreateDeliveryStream
-      description: '<p>Creates a delivery stream.</p> <p>By default, you can create up to 20 delivery streams per region.</p> <p>This is an asynchronous operation that immediately returns. The initial status of the delivery stream is <code>CREATING</code>. After the delivery stream is created, its status is <code>ACTIVE</code> and it now accepts data. Attempts to send data to a delivery stream that is not in the <code>ACTIVE</code> state cause an exception. To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>.</p> <p>A Kinesis Firehose delivery stream can be configured to receive records directly from providers using <a>PutRecord</a> or <a>PutRecordBatch</a>, or it can be configured to use an existing Kinesis stream as its source. To specify a Kinesis stream as input, set the <code>DeliveryStreamType</code> parameter to <code>KinesisStreamAsSource</code>, and provide the Kinesis stream ARN and role ARN in the <code>KinesisStreamSourceConfiguration</code> parameter.</p> <p>A delivery stream is configured with a single destination: Amazon S3, Amazon ES, or Amazon Redshift. You must specify only one of the following destination configuration parameters: <b>ExtendedS3DestinationConfiguration</b>, <b>S3DestinationConfiguration</b>, <b>ElasticsearchDestinationConfiguration</b>, or <b>RedshiftDestinationConfiguration</b>.</p> <p>When you specify <b>S3DestinationConfiguration</b>, you can also provide the following optional values: <b>BufferingHints</b>, <b>EncryptionConfiguration</b>, and <b>CompressionFormat</b>. By default, if no <b>BufferingHints</b> value is provided, Kinesis Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. Note that <b>BufferingHints</b> is a hint, so there are some cases where the service cannot adhere to these conditions strictly; for example, record boundaries are such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3.</p> <p>A few notes about Amazon Redshift as a destination:</p> <ul> <li> <p>An Amazon Redshift destination requires an S3 bucket as intermediate location, as Kinesis Firehose first delivers data to S3 and then uses <code>COPY</code> syntax to load data into an Amazon Redshift table. This is specified in the <b>RedshiftDestinationConfiguration.S3Configuration</b> parameter.</p> </li> <li> <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified in <b>RedshiftDestinationConfiguration.S3Configuration</b> because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn''t support these compression formats.</p> </li> <li> <p>We strongly recommend that you use the user name and password you provide exclusively with Kinesis Firehose, and that the permissions for the account are restricted for Amazon Redshift <code>INSERT</code> permissions.</p> </li> </ul> <p>Kinesis Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Kinesis Firehose principal to assume the role, and the role should have permissions that allow the service to deliver the data. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Amazon S3 Bucket Access</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.</p>'
+      description: '<p>Creates a delivery stream.</p> <p>By default, you can create up to 50 delivery streams per AWS Region.</p> <p>This is an asynchronous operation that immediately returns. The initial status of the delivery stream is <code>CREATING</code>. After the delivery stream is created, its status is <code>ACTIVE</code> and it now accepts data. Attempts to send data to a delivery stream that is not in the <code>ACTIVE</code> state cause an exception. To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>.</p> <p>A Kinesis Data Firehose delivery stream can be configured to receive records directly from providers using <a>PutRecord</a> or <a>PutRecordBatch</a>, or it can be configured to use an existing Kinesis data stream as its source. To specify a Kinesis data stream as input, set the <code>DeliveryStreamType</code> parameter to <code>KinesisStreamAsSource</code>, and provide the Kinesis data stream Amazon Resource Name (ARN) and role ARN in the <code>KinesisStreamSourceConfiguration</code> parameter.</p> <p>A delivery stream is configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or Splunk. Specify only one of the following destination configuration parameters: <code>ExtendedS3DestinationConfiguration</code>, <code>S3DestinationConfiguration</code>, <code>ElasticsearchDestinationConfiguration</code>, <code>RedshiftDestinationConfiguration</code>, or <code>SplunkDestinationConfiguration</code>.</p> <p>When you specify <code>S3DestinationConfiguration</code>, you can also provide the following optional values: <code>BufferingHints</code>, <code>EncryptionConfiguration</code>, and <code>CompressionFormat</code>. By default, if no <code>BufferingHints</code> value is provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. <code>BufferingHints</code> is a hint, so there are some cases where the service cannot adhere to these conditions strictly. For example, record boundaries are such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3.</p> <p>A few notes about Amazon Redshift as a destination:</p> <ul> <li> <p>An Amazon Redshift destination requires an S3 bucket as intermediate location. This is because Kinesis Data Firehose first delivers data to Amazon S3 and then uses <code>COPY</code> syntax to load data into an Amazon Redshift table. This is specified in the <code>RedshiftDestinationConfiguration.S3Configuration</code> parameter.</p> </li> <li> <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified in <code>RedshiftDestinationConfiguration.S3Configuration</code> because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn''t support these compression formats.</p> </li> <li> <p>We strongly recommend that you use the user name and password that you provide exclusively with Kinesis Data Firehose. In addition, the permissions for the account should be restricted for Amazon Redshift <code>INSERT</code> permissions.</p> </li> </ul> <p>Kinesis Data Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Kinesis Data Firehose principal to assume the role, and the role should have permissions that allow the service to deliver the data. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Grant Kinesis Firehose Access to an Amazon S3 Destination</a> in the <i>Amazon Kinesis Data Firehose Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -172,7 +172,7 @@ paths:
   '/#DescribeDeliveryStream':
     post:
       operationId: DescribeDeliveryStream
-      description: 'Describes the specified delivery stream and gets the status. For example, after your delivery stream is created, call <a>DescribeDeliveryStream</a> to see if the delivery stream is <code>ACTIVE</code> and therefore ready for data to be sent to it.'
+      description: 'Describes the specified delivery stream and gets the status. For example, after your delivery stream is created, call <code>DescribeDeliveryStream</code> to see whether the delivery stream is <code>ACTIVE</code> and therefore ready for data to be sent to it.'
       responses:
         '200':
           description: Success
@@ -201,7 +201,7 @@ paths:
   '/#ListDeliveryStreams':
     post:
       operationId: ListDeliveryStreams
-      description: '<p>Lists your delivery streams.</p> <p>The number of delivery streams might be too large to return using a single call to <a>ListDeliveryStreams</a>. You can limit the number of delivery streams returned, using the <b>Limit</b> parameter. To determine whether there are more delivery streams to list, check the value of <b>HasMoreDeliveryStreams</b> in the output. If there are more delivery streams to list, you can request them by specifying the name of the last delivery stream returned in the call in the <b>ExclusiveStartDeliveryStreamName</b> parameter of a subsequent call.</p>'
+      description: '<p>Lists your delivery streams.</p> <p>The number of delivery streams might be too large to return using a single call to <code>ListDeliveryStreams</code>. You can limit the number of delivery streams returned, using the <b>Limit</b> parameter. To determine whether there are more delivery streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If there are more delivery streams to list, you can request them by specifying the name of the last delivery stream returned in the call in the <code>ExclusiveStartDeliveryStreamName</code> parameter of a subsequent call.</p>'
       responses:
         '200':
           description: Success
@@ -223,10 +223,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForDeliveryStream':
+    post:
+      operationId: ListTagsForDeliveryStream
+      description: 'Lists the tags for the specified delivery stream. This operation has a limit of five transactions per second per account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForDeliveryStreamOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForDeliveryStreamInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#PutRecord':
     post:
       operationId: PutRecord
-      description: '<p>Writes a single data record into an Amazon Kinesis Firehose delivery stream. To write multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. Note that if you use <a>PutRecord</a> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Firehose Limits</a>. </p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data, for example, a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <a>PutRecord</a> operation returns a <b>RecordId</b>, which is a unique string assigned to each record. Producer applications can use this ID for purposes such as auditability and investigation.</p> <p>If the <a>PutRecord</a> operation throws a <b>ServiceUnavailableException</b>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. </p> <p>Data records sent to Kinesis Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p>'
+      description: '<p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To write multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. Note that if you use <code>PutRecord</code> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a>. </p> <p>You must specify the name of the delivery stream and the data record when using <code>PutRecord</code>. The data record consists of a data blob that can be up to 1,000 KB in size and any kind of data. For example, it can be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a unique string assigned to each record. Producer applications can use this ID for purposes such as auditability and investigation.</p> <p>If the <code>PutRecord</code> operation throws a <code>ServiceUnavailableException</code>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. </p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p>'
       responses:
         '200':
           description: Success
@@ -263,7 +300,7 @@ paths:
   '/#PutRecordBatch':
     post:
       operationId: PutRecordBatch
-      description: '<p>Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use <a>PutRecord</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Firehose Limits</a>.</p> <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed.</p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, web site clickstream data, and so on.</p> <p>Kinesis Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <a>PutRecordBatch</a> response includes a count of failed records, <b>FailedPutCount</b>, and an array of responses, <b>RequestResponses</b>. Each entry in the <b>RequestResponses</b> array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. <b>RequestResponses</b> includes both successfully and unsuccessfully processed records. Kinesis Firehose attempts to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing of subsequent records.</p> <p>A successfully processed record includes a <b>RecordId</b> value, which is unique for the record. An unsuccessfully processed record includes <b>ErrorCode</b> and <b>ErrorMessage</b> values. <b>ErrorCode</b> reflects the type of error, and is one of the following values: <code>ServiceUnavailable</code> or <code>InternalFailure</code>. <b>ErrorMessage</b> provides more detailed information about the error.</p> <p>If there is an internal server error or a timeout, the write might have completed or it might have failed. If <b>FailedPutCount</b> is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination.</p> <p>If <a>PutRecordBatch</a> throws <b>ServiceUnavailableException</b>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream.</p> <p>Data records sent to Kinesis Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p>'
+      description: '<p>Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use <a>PutRecord</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and <code>PutRecordBatch</code>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a>.</p> <p>Each <code>PutRecordBatch</code> request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed.</p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <code>PutRecordBatch</code> response includes a count of failed records, <code>FailedPutCount</code>, and an array of responses, <code>RequestResponses</code>. Each entry in the <code>RequestResponses</code> array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. <code>RequestResponses</code> includes both successfully and unsuccessfully processed records. Kinesis Data Firehose attempts to process all records in each <code>PutRecordBatch</code> request. A single record failure does not stop the processing of subsequent records.</p> <p>A successfully processed record includes a <code>RecordId</code> value, which is unique for the record. An unsuccessfully processed record includes <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error, and is one of the following values: <code>ServiceUnavailable</code> or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed information about the error.</p> <p>If there is an internal server error or a timeout, the write might have completed or it might have failed. If <code>FailedPutCount</code> is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination.</p> <p>If <code>PutRecordBatch</code> throws <code>ServiceUnavailableException</code>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream.</p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p>'
       responses:
         '200':
           description: Success
@@ -297,10 +334,92 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TagDeliveryStream':
+    post:
+      operationId: TagDeliveryStream
+      description: '<p>Adds or updates tags for the specified delivery stream. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p> <p> Each delivery stream can have up to 50 tags. </p> <p> This operation has a limit of five transactions per second per account. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagDeliveryStreamOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagDeliveryStreamInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UntagDeliveryStream':
+    post:
+      operationId: UntagDeliveryStream
+      description: '<p>Removes tags from the specified delivery stream. Removed tags are deleted, and you can''t recover them after this operation successfully completes.</p> <p>If you specify a tag that doesn''t exist, the operation ignores it.</p> <p>This operation has a limit of five transactions per second per account. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagDeliveryStreamOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagDeliveryStreamInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateDestination':
     post:
       operationId: UpdateDestination
-      description: '<p>Updates the specified destination of the specified delivery stream.</p> <p>You can use this operation to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a destination (for example, to change the bucket name of the Amazon S3 destination). The update might not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are usually effective within a few minutes.</p> <p>Note that switching between Amazon ES and other services is not supported. For an Amazon ES destination, you can only update to another Amazon ES destination.</p> <p>If the destination type is the same, Kinesis Firehose merges the configuration parameters specified with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the call, the existing values are retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a> is not specified, then the existing <a>EncryptionConfiguration</a> is maintained on the destination.</p> <p>If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Kinesis Firehose does not merge any parameters. In this case, all parameters must be specified.</p> <p>Kinesis Firehose uses <b>CurrentDeliveryStreamVersionId</b> to avoid race conditions and conflicting merges. This is a required field, and the service updates the configuration only if the existing configuration has a version ID that matches. After the update is applied successfully, the version ID is updated, and can be retrieved using <a>DescribeDeliveryStream</a>. Use the new version ID to set <b>CurrentDeliveryStreamVersionId</b> in the next call.</p>'
+      description: '<p>Updates the specified destination of the specified delivery stream.</p> <p>Use this operation to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a destination (for example, to change the bucket name of the Amazon S3 destination). The update might not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are usually effective within a few minutes.</p> <p>Switching between Amazon ES and other services is not supported. For an Amazon ES destination, you can only update to another Amazon ES destination.</p> <p>If the destination type is the same, Kinesis Data Firehose merges the configuration parameters specified with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the call, the existing values are retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a> is not specified, then the existing <code>EncryptionConfiguration</code> is maintained on the destination.</p> <p>If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Kinesis Data Firehose does not merge any parameters. In this case, all parameters must be specified.</p> <p>Kinesis Data Firehose uses <code>CurrentDeliveryStreamVersionId</code> to avoid race conditions and conflicting merges. This is a required field, and the service updates the configuration only if the existing configuration has a version ID that matches. After the update is applied successfully, the version ID is updated, and you can retrieve it using <a>DescribeDeliveryStream</a>. Use the new version ID to set <code>CurrentDeliveryStreamVersionId</code> in the next call.</p>'
       responses:
         '200':
           description: Success
@@ -360,7 +479,7 @@ definitions:
       IntervalInSeconds:
         $ref: '#/definitions/IntervalInSeconds'
         description: 'Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.'
-    description: 'Describes hints for the buffering to perform before delivering data to the destination. Please note that these options are treated as hints, and therefore Kinesis Firehose may choose to use different values when it is optimal.'
+    description: 'Describes hints for the buffering to perform before delivering data to the destination. These options are treated as hints, and therefore Kinesis Data Firehose might choose to use different values whenever it is optimal.'
   CloudWatchLoggingOptions:
     type: object
     properties:
@@ -405,7 +524,7 @@ definitions:
         description: A comma-separated list of column names.
       CopyOptions:
         $ref: '#/definitions/CopyOptions'
-        description: '<p>Optional parameters to use with the Amazon Redshift <code>COPY</code> command. For more information, see the "Optional Parameters" section of <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html">Amazon Redshift COPY command</a>. Some possible examples that would apply to Kinesis Firehose are as follows:</p> <p> <code>delimiter ''\t'' lzop;</code> - fields are delimited with "\t" (TAB character) and compressed using lzop.</p> <p> <code>delimiter ''|''</code> - fields are delimited with "|" (this is the default delimiter).</p> <p> <code>delimiter ''|'' escape</code> - the delimiter should be escaped.</p> <p> <code>fixedwidth ''venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6''</code> - fields are fixed width in the source, with each width specified after every column in the table.</p> <p> <code>JSON ''s3://mybucket/jsonpaths.txt''</code> - data is in JSON format, and the path specified is the format of the data.</p> <p>For more examples, see <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html">Amazon Redshift COPY command examples</a>.</p>'
+        description: '<p>Optional parameters to use with the Amazon Redshift <code>COPY</code> command. For more information, see the "Optional Parameters" section of <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html">Amazon Redshift COPY command</a>. Some possible examples that would apply to Kinesis Data Firehose are as follows:</p> <p> <code>delimiter ''\t'' lzop;</code> - fields are delimited with "\t" (TAB character) and compressed using lzop.</p> <p> <code>delimiter ''|''</code> - fields are delimited with "|" (this is the default delimiter).</p> <p> <code>delimiter ''|'' escape</code> - the delimiter should be escaped.</p> <p> <code>fixedwidth ''venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6''</code> - fields are fixed width in the source, with each width specified after every column in the table.</p> <p> <code>JSON ''s3://mybucket/jsonpaths.txt''</code> - data is in JSON format, and the path specified is the format of the data.</p> <p>For more examples, see <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html">Amazon Redshift COPY command examples</a>.</p>'
     description: Describes a <code>COPY</code> command for Amazon Redshift.
   CopyOptions:
     type: string
@@ -416,13 +535,13 @@ definitions:
     properties:
       DeliveryStreamName:
         $ref: '#/definitions/DeliveryStreamName'
-        description: 'The name of the delivery stream. This name must be unique per AWS account in the same region. If the delivery streams are in different accounts or different regions, you can have multiple delivery streams with the same name.'
+        description: 'The name of the delivery stream. This name must be unique per AWS account in the same Region. If the delivery streams are in different accounts or different Regions, you can have multiple delivery streams with the same name.'
       DeliveryStreamType:
         $ref: '#/definitions/DeliveryStreamType'
-        description: '<p>The delivery stream type. This parameter can be one of the following values:</p> <ul> <li> <p> <code>DirectPut</code>: Provider applications access the delivery stream directly.</p> </li> <li> <p> <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis stream as a source.</p> </li> </ul>'
+        description: '<p>The delivery stream type. This parameter can be one of the following values:</p> <ul> <li> <p> <code>DirectPut</code>: Provider applications access the delivery stream directly.</p> </li> <li> <p> <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data stream as a source.</p> </li> </ul>'
       KinesisStreamSourceConfiguration:
         $ref: '#/definitions/KinesisStreamSourceConfiguration'
-        description: 'When a Kinesis stream is used as the source for the delivery stream, a <a>KinesisStreamSourceConfiguration</a> containing the Kinesis stream ARN and the role ARN for the source stream.'
+        description: 'When a Kinesis data stream is used as the source for the delivery stream, a <a>KinesisStreamSourceConfiguration</a> containing the Kinesis data stream Amazon Resource Name (ARN) and the role ARN for the source stream.'
       S3DestinationConfiguration:
         $ref: '#/definitions/S3DestinationConfiguration'
         description: '[Deprecated] The destination in Amazon S3. You can specify only one destination.'
@@ -494,7 +613,7 @@ definitions:
         description: The status of the delivery stream.
       DeliveryStreamType:
         $ref: '#/definitions/DeliveryStreamType'
-        description: '<p>The delivery stream type. This can be one of the following values:</p> <ul> <li> <p> <code>DirectPut</code>: Provider applications access the delivery stream directly.</p> </li> <li> <p> <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis stream as a source.</p> </li> </ul>'
+        description: '<p>The delivery stream type. This can be one of the following values:</p> <ul> <li> <p> <code>DirectPut</code>: Provider applications access the delivery stream directly.</p> </li> <li> <p> <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data stream as a source.</p> </li> </ul>'
       VersionId:
         $ref: '#/definitions/DeliveryStreamVersionId'
         description: 'Each time the destination is updated for a delivery stream, the version ID is changed, and the current version ID is required when updating the destination. This is so that the service knows it is applying the changes to the correct version of the delivery stream.'
@@ -506,7 +625,7 @@ definitions:
         description: The date and time that the delivery stream was last updated.
       Source:
         $ref: '#/definitions/SourceDescription'
-        description: 'If the <code>DeliveryStreamType</code> parameter is <code>KinesisStreamAsSource</code>, a <a>SourceDescription</a> object describing the source Kinesis stream.'
+        description: 'If the <code>DeliveryStreamType</code> parameter is <code>KinesisStreamAsSource</code>, a <a>SourceDescription</a> object describing the source Kinesis data stream.'
       Destinations:
         $ref: '#/definitions/DestinationDescriptionList'
         description: The destinations.
@@ -552,7 +671,7 @@ definitions:
         description: 'The limit on the number of destinations to return. Currently, you can have one destination per delivery stream.'
       ExclusiveStartDestinationId:
         $ref: '#/definitions/DestinationId'
-        description: 'The ID of the destination to start returning the destination information. Currently, Kinesis Firehose supports one destination per delivery stream.'
+        description: 'The ID of the destination to start returning the destination information. Currently, Kinesis Data Firehose supports one destination per delivery stream.'
   DescribeDeliveryStreamInputLimit:
     type: integer
     minimum: 1
@@ -626,10 +745,10 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'The ARN of the IAM role to be assumed by Kinesis Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Amazon S3 Bucket Access</a>.'
+        description: 'The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Grant Kinesis Data Firehose Access to an Amazon Destination</a>.'
       DomainARN:
         $ref: '#/definitions/ElasticsearchDomainARN'
-        description: "The ARN of the Amazon ES domain. The IAM role must have permissions for\_<code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>, and <code>DescribeElasticsearchDomainConfig</code>\_after assuming the role specified in <b>RoleARN</b>."
+        description: "The ARN of the Amazon ES domain. The IAM role must have permissions for\_<code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>, and <code>DescribeElasticsearchDomainConfig</code>\_after assuming the role specified in <code>RoleARN</code>."
       IndexName:
         $ref: '#/definitions/ElasticsearchIndexName'
         description: The Elasticsearch index name.
@@ -638,16 +757,16 @@ definitions:
         description: The Elasticsearch type name.
       IndexRotationPeriod:
         $ref: '#/definitions/ElasticsearchIndexRotationPeriod'
-        description: "The Elasticsearch index rotation period. Index rotation appends a time stamp to the IndexName to facilitate the expiration of old data. For more information, see <a href=\"http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for Amazon Elasticsearch Service Destination</a>. The default value is\_<code>OneDay</code>."
+        description: "The Elasticsearch index rotation period. Index rotation appends a time stamp to the IndexName to facilitate the expiration of old data. For more information, see <a href=\"http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for the Amazon ES Destination</a>. The default value is\_<code>OneDay</code>."
       BufferingHints:
         $ref: '#/definitions/ElasticsearchBufferingHints'
-        description: 'The buffering options. If no value is specified, the default values for <b>ElasticsearchBufferingHints</b> are used.'
+        description: 'The buffering options. If no value is specified, the default values for <code>ElasticsearchBufferingHints</code> are used.'
       RetryOptions:
         $ref: '#/definitions/ElasticsearchRetryOptions'
-        description: The retry behavior in case Kinesis Firehose is unable to deliver documents to Amazon ES. The default value is 300 (5 minutes).
+        description: The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon ES. The default value is 300 (5 minutes).
       S3BackupMode:
         $ref: '#/definitions/ElasticsearchS3BackupMode'
-        description: 'Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly, Kinesis Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with elasticsearch-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Firehose delivers all incoming records to Amazon S3, and also writes failed documents with elasticsearch-failed/ appended to the prefix. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup">Amazon S3 Backup for Amazon Elasticsearch Service Destination</a>. Default value is FailedDocumentsOnly.'
+        description: 'Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with <code>elasticsearch-failed/</code> appended to the key prefix. When set to <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with <code>elasticsearch-failed/</code> appended to the prefix. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#retry">Data Delivery Failure Handling</a>. Default value is <code>FailedDocumentsOnly</code>.'
       S3Configuration:
         $ref: '#/definitions/S3DestinationConfiguration'
         description: The configuration for the backup Amazon S3 location.
@@ -663,7 +782,7 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       DomainARN:
         $ref: '#/definitions/ElasticsearchDomainARN'
         description: The ARN of the Amazon ES domain.
@@ -700,10 +819,10 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'The ARN of the IAM role to be assumed by Kinesis Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Amazon S3 Bucket Access</a>.'
+        description: 'The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Grant Kinesis Data Firehose Access to an Amazon S3 Destination</a>.'
       DomainARN:
         $ref: '#/definitions/ElasticsearchDomainARN'
-        description: "The ARN of the Amazon ES domain. The IAM role must have permissions for\_<code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>, and <code>DescribeElasticsearchDomainConfig</code>\_after assuming the IAM role specified in <b>RoleARN</b>."
+        description: "The ARN of the Amazon ES domain. The IAM role must have permissions for\_<code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>, and <code>DescribeElasticsearchDomainConfig</code>\_after assuming the IAM role specified in <code>RoleARN</code>."
       IndexName:
         $ref: '#/definitions/ElasticsearchIndexName'
         description: The Elasticsearch index name.
@@ -712,13 +831,13 @@ definitions:
         description: The Elasticsearch type name.
       IndexRotationPeriod:
         $ref: '#/definitions/ElasticsearchIndexRotationPeriod'
-        description: "The Elasticsearch index rotation period. Index rotation appends a time stamp to IndexName to facilitate the expiration of old data. For more information, see <a href=\"http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for Amazon Elasticsearch Service Destination</a>. Default value is\_<code>OneDay</code>."
+        description: "The Elasticsearch index rotation period. Index rotation appends a time stamp to IndexName to facilitate the expiration of old data. For more information, see <a href=\"http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for the Amazon ES Destination</a>. Default value is\_<code>OneDay</code>."
       BufferingHints:
         $ref: '#/definitions/ElasticsearchBufferingHints'
-        description: 'The buffering options. If no value is specified, <b>ElasticsearchBufferingHints</b> object default values are used. '
+        description: 'The buffering options. If no value is specified, <code>ElasticsearchBufferingHints</code> object default values are used. '
       RetryOptions:
         $ref: '#/definitions/ElasticsearchRetryOptions'
-        description: The retry behavior in case Kinesis Firehose is unable to deliver documents to Amazon ES. The default value is 300 (5 minutes).
+        description: The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon ES. The default value is 300 (5 minutes).
       S3Update:
         $ref: '#/definitions/S3DestinationUpdate'
         description: The Amazon S3 destination.
@@ -755,8 +874,8 @@ definitions:
     properties:
       DurationInSeconds:
         $ref: '#/definitions/ElasticsearchRetryDurationInSeconds'
-        description: 'After an initial failure to deliver to Amazon ES, the total amount of time during which Kinesis Firehose re-attempts delivery (including the first attempt). After this time has elapsed, the failed documents are written to Amazon S3. Default value is 300 seconds (5 minutes). A value of 0 (zero) results in no retries.'
-    description: Configures retry behavior in case Kinesis Firehose is unable to deliver documents to Amazon ES.
+        description: 'After an initial failure to deliver to Amazon ES, the total amount of time during which Kinesis Data Firehose re-attempts delivery (including the first attempt). After this time has elapsed, the failed documents are written to Amazon S3. Default value is 300 seconds (5 minutes). A value of 0 (zero) results in no retries.'
+    description: Configures retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon ES.
   ElasticsearchS3BackupMode:
     type: string
     enum:
@@ -788,13 +907,13 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       BucketARN:
         $ref: '#/definitions/BucketARN'
         description: The ARN of the S3 bucket.
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.'
+        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Data Firehose Developer Guide</i>.'
       BufferingHints:
         $ref: '#/definitions/BufferingHints'
         description: The buffering option.
@@ -828,13 +947,13 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       BucketARN:
         $ref: '#/definitions/BucketARN'
         description: The ARN of the S3 bucket.
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.'
+        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Data Firehose Developer Guide</i>.'
       BufferingHints:
         $ref: '#/definitions/BufferingHints'
         description: The buffering option.
@@ -862,13 +981,13 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       BucketARN:
         $ref: '#/definitions/BucketARN'
         description: The ARN of the S3 bucket.
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.'
+        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Data Firehose Developer Guide</i>.'
       BufferingHints:
         $ref: '#/definitions/BufferingHints'
         description: The buffering option.
@@ -922,7 +1041,7 @@ definitions:
     properties:
       AWSKMSKeyARN:
         $ref: '#/definitions/AWSKMSKeyARN'
-        description: The ARN of the encryption key. Must belong to the same region as the destination Amazon S3 bucket.
+        description: The Amazon Resource Name (ARN) of the encryption key. Must belong to the same AWS Region as the destination Amazon S3 bucket.
     description: Describes an encryption key for a destination in Amazon S3.
   KinesisStreamARN:
     type: string
@@ -937,24 +1056,24 @@ definitions:
     properties:
       KinesisStreamARN:
         $ref: '#/definitions/KinesisStreamARN'
-        description: The ARN of the source Kinesis stream.
+        description: The ARN of the source Kinesis data stream.
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the role that provides access to the source Kinesis stream.
-    description: The stream and role ARNs for a Kinesis stream used as the source for a delivery stream.
+        description: The ARN of the role that provides access to the source Kinesis data stream.
+    description: The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream.
   KinesisStreamSourceDescription:
     type: object
     properties:
       KinesisStreamARN:
         $ref: '#/definitions/KinesisStreamARN'
-        description: The ARN of the source Kinesis stream.
+        description: The Amazon Resource Name (ARN) of the source Kinesis data stream.
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the role used by the source Kinesis stream.
+        description: The ARN of the role used by the source Kinesis data stream.
       DeliveryStartTimestamp:
         $ref: '#/definitions/DeliveryStartTimestamp'
-        description: Kinesis Firehose starts retrieving records from the Kinesis stream starting with this time stamp.
-    description: Details about a Kinesis stream used as the source for a Kinesis Firehose delivery stream.
+        description: Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting with this time stamp.
+    description: Details about a Kinesis data stream used as the source for a Kinesis Data Firehose delivery stream.
   LimitExceededException:
     type: object
     properties:
@@ -970,7 +1089,7 @@ definitions:
         description: The maximum number of delivery streams to list. The default value is 10.
       DeliveryStreamType:
         $ref: '#/definitions/DeliveryStreamType'
-        description: '<p>The delivery stream type. This can be one of the following values:</p> <ul> <li> <p> <code>DirectPut</code>: Provider applications access the delivery stream directly.</p> </li> <li> <p> <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis stream as a source.</p> </li> </ul> <p>This parameter is optional. If this parameter is omitted, delivery streams of all types are returned.</p>'
+        description: '<p>The delivery stream type. This can be one of the following values:</p> <ul> <li> <p> <code>DirectPut</code>: Provider applications access the delivery stream directly.</p> </li> <li> <p> <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data stream as a source.</p> </li> </ul> <p>This parameter is optional. If this parameter is omitted, delivery streams of all types are returned.</p>'
       ExclusiveStartDeliveryStreamName:
         $ref: '#/definitions/DeliveryStreamName'
         description: The name of the delivery stream to start the list with.
@@ -990,6 +1109,42 @@ definitions:
       HasMoreDeliveryStreams:
         $ref: '#/definitions/BooleanObject'
         description: Indicates whether there are more delivery streams available to list.
+  ListTagsForDeliveryStreamInput:
+    type: object
+    required:
+      - DeliveryStreamName
+    properties:
+      DeliveryStreamName:
+        $ref: '#/definitions/DeliveryStreamName'
+        description: The name of the delivery stream whose tags you want to list.
+      ExclusiveStartTagKey:
+        $ref: '#/definitions/TagKey'
+        description: 'The key to use as the starting point for the list of tags. If you set this parameter, <code>ListTagsForDeliveryStream</code> gets all tags that occur after <code>ExclusiveStartTagKey</code>.'
+      Limit:
+        $ref: '#/definitions/ListTagsForDeliveryStreamInputLimit'
+        description: 'The number of tags to return. If this number is less than the total number of tags associated with the delivery stream, <code>HasMoreTags</code> is set to <code>true</code> in the response. To list additional tags, set <code>ExclusiveStartTagKey</code> to the last key in the response. '
+  ListTagsForDeliveryStreamInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 50
+  ListTagsForDeliveryStreamOutput:
+    type: object
+    required:
+      - Tags
+      - HasMoreTags
+    properties:
+      Tags:
+        $ref: '#/definitions/ListTagsForDeliveryStreamOutputTagList'
+        description: 'A list of tags associated with <code>DeliveryStreamName</code>, starting with the first tag after <code>ExclusiveStartTagKey</code> and up to the specified <code>Limit</code>.'
+      HasMoreTags:
+        $ref: '#/definitions/BooleanObject'
+        description: 'If this is <code>true</code> in the response, more tags are available. To list the remaining tags, set <code>ExclusiveStartTagKey</code> to the key of the last tag returned and call <code>ListTagsForDeliveryStream</code> again.'
+  ListTagsForDeliveryStreamOutputTagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
   LogGroupName:
     type: string
   LogStreamName:
@@ -1159,7 +1314,7 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       ClusterJDBCURL:
         $ref: '#/definitions/ClusterJDBCURL'
         description: The database connection string.
@@ -1174,10 +1329,10 @@ definitions:
         description: The user password.
       RetryOptions:
         $ref: '#/definitions/RedshiftRetryOptions'
-        description: The retry behavior in case Kinesis Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
+        description: The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
       S3Configuration:
         $ref: '#/definitions/S3DestinationConfiguration'
-        description: <p>The configuration for the intermediate Amazon S3 location from which Amazon Redshift obtains data. Restrictions are described in the topic for <a>CreateDeliveryStream</a>.</p> <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified in <b>RedshiftDestinationConfiguration.S3Configuration</b> because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't support these compression formats.</p>
+        description: <p>The configuration for the intermediate Amazon S3 location from which Amazon Redshift obtains data. Restrictions are described in the topic for <a>CreateDeliveryStream</a>.</p> <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified in <code>RedshiftDestinationConfiguration.S3Configuration</code> because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't support these compression formats.</p>
       ProcessingConfiguration:
         $ref: '#/definitions/ProcessingConfiguration'
         description: The data processing configuration.
@@ -1202,7 +1357,7 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       ClusterJDBCURL:
         $ref: '#/definitions/ClusterJDBCURL'
         description: The database connection string.
@@ -1214,7 +1369,7 @@ definitions:
         description: The name of the user.
       RetryOptions:
         $ref: '#/definitions/RedshiftRetryOptions'
-        description: The retry behavior in case Kinesis Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
+        description: The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
       S3DestinationDescription:
         $ref: '#/definitions/S3DestinationDescription'
         description: The Amazon S3 destination.
@@ -1236,7 +1391,7 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       ClusterJDBCURL:
         $ref: '#/definitions/ClusterJDBCURL'
         description: The database connection string.
@@ -1251,10 +1406,10 @@ definitions:
         description: The user password.
       RetryOptions:
         $ref: '#/definitions/RedshiftRetryOptions'
-        description: The retry behavior in case Kinesis Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
+        description: The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
       S3Update:
         $ref: '#/definitions/S3DestinationUpdate'
-        description: <p>The Amazon S3 destination.</p> <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified in <b>RedshiftDestinationUpdate.S3Update</b> because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't support these compression formats.</p>
+        description: <p>The Amazon S3 destination.</p> <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified in <code>RedshiftDestinationUpdate.S3Update</code> because the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't support these compression formats.</p>
       ProcessingConfiguration:
         $ref: '#/definitions/ProcessingConfiguration'
         description: The data processing configuration.
@@ -1277,8 +1432,8 @@ definitions:
     properties:
       DurationInSeconds:
         $ref: '#/definitions/RedshiftRetryDurationInSeconds'
-        description: 'The length of time during which Kinesis Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Kinesis Firehose does not retry if the value of <code>DurationInSeconds</code> is 0 (zero) or if the first delivery attempt takes longer than the current value.'
-    description: Configures retry behavior in case Kinesis Firehose is unable to deliver documents to Amazon Redshift.
+        description: 'The length of time during which Kinesis Data Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Kinesis Data Firehose does not retry if the value of <code>DurationInSeconds</code> is 0 (zero) or if the first delivery attempt takes longer than the current value.'
+    description: Configures retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon Redshift.
   RedshiftS3BackupMode:
     type: string
     enum:
@@ -1316,16 +1471,16 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       BucketARN:
         $ref: '#/definitions/BucketARN'
         description: The ARN of the S3 bucket.
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.'
+        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Data Firehose Developer Guide</i>.'
       BufferingHints:
         $ref: '#/definitions/BufferingHints'
-        description: 'The buffering option. If no value is specified, <b>BufferingHints</b> object default values are used.'
+        description: 'The buffering option. If no value is specified, <code>BufferingHints</code> object default values are used.'
       CompressionFormat:
         $ref: '#/definitions/CompressionFormat'
         description: '<p>The compression format. If no value is specified, the default is <code>UNCOMPRESSED</code>.</p> <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified for Amazon Redshift destinations because they are not supported by the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket.</p>'
@@ -1347,16 +1502,16 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       BucketARN:
         $ref: '#/definitions/BucketARN'
         description: The ARN of the S3 bucket.
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.'
+        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Data Firehose Developer Guide</i>.'
       BufferingHints:
         $ref: '#/definitions/BufferingHints'
-        description: 'The buffering option. If no value is specified, <b>BufferingHints</b> object default values are used.'
+        description: 'The buffering option. If no value is specified, <code>BufferingHints</code> object default values are used.'
       CompressionFormat:
         $ref: '#/definitions/CompressionFormat'
         description: 'The compression format. If no value is specified, the default is <code>UNCOMPRESSED</code>.'
@@ -1372,16 +1527,16 @@ definitions:
     properties:
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: The ARN of the AWS credentials.
+        description: The Amazon Resource Name (ARN) of the AWS credentials.
       BucketARN:
         $ref: '#/definitions/BucketARN'
         description: The ARN of the S3 bucket.
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Firehose Developer Guide</i>.'
+        description: 'The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name">Amazon S3 Object Name Format</a> in the <i>Amazon Kinesis Data Firehose Developer Guide</i>.'
       BufferingHints:
         $ref: '#/definitions/BufferingHints'
-        description: 'The buffering option. If no value is specified, <b>BufferingHints</b> object default values are used.'
+        description: 'The buffering option. If no value is specified, <code>BufferingHints</code> object default values are used.'
       CompressionFormat:
         $ref: '#/definitions/CompressionFormat'
         description: '<p>The compression format. If no value is specified, the default is <code>UNCOMPRESSED</code>.</p> <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified for Amazon Redshift destinations because they are not supported by the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket.</p>'
@@ -1398,7 +1553,7 @@ definitions:
       message:
         $ref: '#/definitions/ErrorMessage'
         description: A message that provides information about the error.
-    description: 'The service is unavailable, back off and retry the operation. If you continue to see the exception, throughput limits for the delivery stream may have been exceeded. For more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Firehose Limits</a>.'
+    description: 'The service is unavailable. Back off and retry the operation. If you continue to see the exception, throughput limits for the delivery stream may have been exceeded. For more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a>.'
   SizeInMBs:
     type: integer
     minimum: 1
@@ -1408,8 +1563,8 @@ definitions:
     properties:
       KinesisStreamSourceDescription:
         $ref: '#/definitions/KinesisStreamSourceDescription'
-        description: The <a>KinesisStreamSourceDescription</a> value for the source Kinesis stream.
-    description: Details about a Kinesis stream used as the source for a Kinesis Firehose delivery stream.
+        description: The <a>KinesisStreamSourceDescription</a> value for the source Kinesis data stream.
+    description: Details about a Kinesis data stream used as the source for a Kinesis Data Firehose delivery stream.
   SplunkDestinationConfiguration:
     type: object
     required:
@@ -1420,22 +1575,22 @@ definitions:
     properties:
       HECEndpoint:
         $ref: '#/definitions/HECEndpoint'
-        description: The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+        description: The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your data.
       HECEndpointType:
         $ref: '#/definitions/HECEndpointType'
-        description: This type can be either "Raw" or "Event".
+        description: This type can be either "Raw" or "Event."
       HECToken:
         $ref: '#/definitions/HECToken'
-        description: This is a GUID you obtain from your Splunk cluster when you create a new HEC endpoint.
+        description: This is a GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
       HECAcknowledgmentTimeoutInSeconds:
         $ref: '#/definitions/HECAcknowledgmentTimeoutInSeconds'
-        description: 'The amount of time that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data. At the end of the timeout period Kinesis Firehose either tries to send the data again or considers it an error, based on your retry settings.'
+        description: 'The amount of time that Kinesis Data Firehose waits to receive an acknowledgment from Splunk after it sends it data. At the end of the timeout period, Kinesis Data Firehose either tries to send the data again or considers it an error, based on your retry settings.'
       RetryOptions:
         $ref: '#/definitions/SplunkRetryOptions'
-        description: The retry behavior in case Kinesis Firehose is unable to deliver data to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+        description: 'The retry behavior in case Kinesis Data Firehose is unable to deliver data to Splunk, or if it doesn''t receive an acknowledgment of receipt from Splunk.'
       S3BackupMode:
         $ref: '#/definitions/SplunkS3BackupMode'
-        description: 'Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>, Kinesis Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. '
+        description: 'Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. '
       S3Configuration:
         $ref: '#/definitions/S3DestinationConfiguration'
         description: The configuration for the backup Amazon S3 location.
@@ -1451,22 +1606,22 @@ definitions:
     properties:
       HECEndpoint:
         $ref: '#/definitions/HECEndpoint'
-        description: The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+        description: The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your data.
       HECEndpointType:
         $ref: '#/definitions/HECEndpointType'
-        description: This type can be either "Raw" or "Event".
+        description: This type can be either "Raw" or "Event."
       HECToken:
         $ref: '#/definitions/HECToken'
         description: This is a GUID you obtain from your Splunk cluster when you create a new HEC endpoint.
       HECAcknowledgmentTimeoutInSeconds:
         $ref: '#/definitions/HECAcknowledgmentTimeoutInSeconds'
-        description: 'The amount of time that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data. At the end of the timeout period Kinesis Firehose either tries to send the data again or considers it an error, based on your retry settings.'
+        description: 'The amount of time that Kinesis Data Firehose waits to receive an acknowledgment from Splunk after it sends it data. At the end of the timeout period, Kinesis Data Firehose either tries to send the data again or considers it an error, based on your retry settings.'
       RetryOptions:
         $ref: '#/definitions/SplunkRetryOptions'
-        description: The retry behavior in case Kinesis Firehose is unable to deliver data to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+        description: The retry behavior in case Kinesis Data Firehose is unable to deliver data to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
       S3BackupMode:
         $ref: '#/definitions/SplunkS3BackupMode'
-        description: 'Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>, Kinesis Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. '
+        description: 'Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. '
       S3DestinationDescription:
         $ref: '#/definitions/S3DestinationDescription'
         description: The Amazon S3 destination.&gt;
@@ -1482,22 +1637,22 @@ definitions:
     properties:
       HECEndpoint:
         $ref: '#/definitions/HECEndpoint'
-        description: The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+        description: The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your data.
       HECEndpointType:
         $ref: '#/definitions/HECEndpointType'
-        description: This type can be either "Raw" or "Event".
+        description: This type can be either "Raw" or "Event."
       HECToken:
         $ref: '#/definitions/HECToken'
-        description: This is a GUID you obtain from your Splunk cluster when you create a new HEC endpoint.
+        description: A GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
       HECAcknowledgmentTimeoutInSeconds:
         $ref: '#/definitions/HECAcknowledgmentTimeoutInSeconds'
-        description: 'The amount of time that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data. At the end of the timeout period Kinesis Firehose either tries to send the data again or considers it an error, based on your retry settings.'
+        description: 'The amount of time that Kinesis Data Firehose waits to receive an acknowledgment from Splunk after it sends data. At the end of the timeout period, Kinesis Data Firehose either tries to send the data again or considers it an error, based on your retry settings.'
       RetryOptions:
         $ref: '#/definitions/SplunkRetryOptions'
-        description: The retry behavior in case Kinesis Firehose is unable to deliver data to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+        description: The retry behavior in case Kinesis Data Firehose is unable to deliver data to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
       S3BackupMode:
         $ref: '#/definitions/SplunkS3BackupMode'
-        description: 'Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>, Kinesis Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. '
+        description: 'Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. '
       S3Update:
         $ref: '#/definitions/S3DestinationUpdate'
         description: Your update to the configuration of the backup Amazon S3 location.
@@ -1517,16 +1672,78 @@ definitions:
     properties:
       DurationInSeconds:
         $ref: '#/definitions/SplunkRetryDurationInSeconds'
-        description: The total amount of time that Kinesis Firehose spends on retries. This duration starts after the initial attempt to send data to Splunk fails and doesn't include the periods during which Kinesis Firehose waits for acknowledgment from Splunk after each attempt.
-    description: Configures retry behavior in case Kinesis Firehose is unable to deliver documents to Splunk or if it doesn't receive an acknowledgment from Splunk.
+        description: The total amount of time that Kinesis Data Firehose spends on retries. This duration starts after the initial attempt to send data to Splunk fails. It doesn't include the periods during which Kinesis Data Firehose waits for acknowledgment from Splunk after each attempt.
+    description: 'Configures retry behavior in case Kinesis Data Firehose is unable to deliver documents to Splunk, or if it doesn''t receive an acknowledgment from Splunk.'
   SplunkS3BackupMode:
     type: string
     enum:
       - FailedEventsOnly
       - AllEvents
+  Tag:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: 'A unique identifier for the tag. Maximum length: 128 characters. Valid characters: Unicode letters, digits, white space, _ . / = + - % @'
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: 'An optional string, which you can use to describe or define the tag. Maximum length: 256 characters. Valid characters: Unicode letters, digits, white space, _ . / = + - % @'
+    description: 'Metadata that you can assign to a delivery stream, consisting of a key-value pair.'
+  TagDeliveryStreamInput:
+    type: object
+    required:
+      - DeliveryStreamName
+      - Tags
+    properties:
+      DeliveryStreamName:
+        $ref: '#/definitions/DeliveryStreamName'
+        description: The name of the delivery stream to which you want to add the tags.
+      Tags:
+        $ref: '#/definitions/TagDeliveryStreamInputTagList'
+        description: A set of key-value pairs to use to create the tags.
+  TagDeliveryStreamInputTagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  TagDeliveryStreamOutput:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
   Timestamp:
     type: string
     format: date-time
+  UntagDeliveryStreamInput:
+    type: object
+    required:
+      - DeliveryStreamName
+      - TagKeys
+    properties:
+      DeliveryStreamName:
+        $ref: '#/definitions/DeliveryStreamName'
+        description: The name of the delivery stream.
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: A list of tag keys. Each corresponding tag is removed from the delivery stream.
+  UntagDeliveryStreamOutput:
+    type: object
+    properties: {}
   UpdateDestinationInput:
     type: object
     required:
@@ -1539,7 +1756,7 @@ definitions:
         description: The name of the delivery stream.
       CurrentDeliveryStreamVersionId:
         $ref: '#/definitions/DeliveryStreamVersionId'
-        description: 'Obtain this value from the <b>VersionId</b> result of <a>DeliveryStreamDescription</a>. This value is required, and helps the service to perform conditional operations. For example, if there is an interleaving update and this value is null, then the update destination fails. After the update is successful, the <b>VersionId</b> value is updated. The service then performs a merge of the old configuration with the new configuration.'
+        description: 'Obtain this value from the <code>VersionId</code> result of <a>DeliveryStreamDescription</a>. This value is required, and it helps the service perform conditional operations. For example, if there is an interleaving update and this value is null, then the update destination fails. After the update is successful, the <code>VersionId</code> value is updated. The service then performs a merge of the old configuration with the new configuration.'
       DestinationId:
         $ref: '#/definitions/DestinationId'
         description: The ID of the destination.

@@ -3,7 +3,7 @@ info:
   version: '2018-01-06'
   x-release: v4
   title: AWS Auto Scaling Plans
-  description: '<p>Use AWS Auto Scaling to quickly discover all the scalable AWS resources for your application and configure dynamic scaling for your scalable resources.</p> <p>To get started, create a scaling plan with a set of instructions used to configure dynamic scaling for the scalable resources in your application. AWS Auto Scaling creates target tracking scaling policies for the scalable resources in your scaling plan. Target tracking scaling policies adjust the capacity of your scalable resource as required to maintain resource utilization at the target value that you specified.</p>'
+  description: '<fullname>AWS Auto Scaling</fullname> <p>Use AWS Auto Scaling to quickly discover all the scalable AWS resources for your application and configure dynamic scaling for your scalable resources.</p> <p>To get started, create a scaling plan with a set of instructions used to configure dynamic scaling for the scalable resources in your application. AWS Auto Scaling creates target tracking scaling policies for the scalable resources in your scaling plan. Target tracking scaling policies adjust the capacity of your scalable resource as required to maintain resource utilization at the target value that you specified.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -263,6 +263,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateScalingPlan':
+    post:
+      operationId: UpdateScalingPlan
+      description: '<p>Updates the scaling plan for the specified scaling plan.</p> <p>You cannot update a scaling plan if it is in the process of being created, updated, or deleted.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateScalingPlanResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: ObjectNotFoundException
+          schema:
+            $ref: '#/definitions/ObjectNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateScalingPlanRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   ApplicationSource:
     type: object
@@ -270,6 +311,9 @@ definitions:
       CloudFormationStackARN:
         $ref: '#/definitions/XmlString'
         description: The Amazon Resource Name (ARN) of a CloudFormation stack.
+      TagFilters:
+        $ref: '#/definitions/TagFilters'
+        description: A set of tags (up to 50).
     description: Represents an application source.
   ApplicationSources:
     type: array
@@ -292,10 +336,10 @@ definitions:
     properties:
       ScalingPlanName:
         $ref: '#/definitions/ScalingPlanName'
-        description: The name of the scaling plan.
+        description: 'The name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes.'
       ApplicationSource:
         $ref: '#/definitions/ApplicationSource'
-        description: The source for the application.
+        description: A CloudFormation stack or set of tags. You can create one scaling plan per application source.
       ScalingInstructions:
         $ref: '#/definitions/ScalingInstructions'
         description: The scaling instructions.
@@ -488,7 +532,7 @@ definitions:
         description: 'The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to Auto Scaling groups, Sport Fleet requests, and ECS services.'
       ResourceLabel:
         $ref: '#/definitions/ResourceLabel'
-        description: '<p>Identifies the resource associated with the metric type. You can''t specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group attached to the Auto Scaling group, Spot Fleet request, or ECS service.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>'
+        description: '<p>Identifies the resource associated with the metric type. You can''t specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group for an Application Load Balancer attached to the Auto Scaling group, Spot Fleet request, or ECS service.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>'
     description: Represents a predefined metric for a target tracking policy.
   ResourceCapacity:
     type: integer
@@ -588,13 +632,16 @@ definitions:
       StatusMessage:
         $ref: '#/definitions/XmlString'
         description: A simple message about the current status of the scaling plan.
+      StatusStartTime:
+        $ref: '#/definitions/TimestampType'
+        description: The Unix timestamp when the scaling plan entered the current status.
       CreationTime:
         $ref: '#/definitions/TimestampType'
         description: The Unix timestamp when the scaling plan was created.
     description: Represents a scaling plan.
   ScalingPlanName:
     type: string
-    pattern: '[\p{Print}&&[^|]]+'
+    pattern: '[\p{Print}&&[^|:/]]+'
     minLength: 1
     maxLength: 128
   ScalingPlanNames:
@@ -649,6 +696,8 @@ definitions:
       - CreationFailed
       - DeletionInProgress
       - DeletionFailed
+      - UpdateInProgress
+      - UpdateFailed
   ScalingPlanVersion:
     type: integer
   ScalingPlans:
@@ -689,6 +738,24 @@ definitions:
       - ec2
       - rds
       - dynamodb
+  TagFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/XmlStringMaxLen128'
+        description: The tag key.
+      Values:
+        $ref: '#/definitions/TagValues'
+        description: The tag values (0 to 20).
+    description: Represents a tag.
+  TagFilters:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+  TagValues:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen256'
   TargetTrackingConfiguration:
     type: object
     required:
@@ -723,6 +790,27 @@ definitions:
   TimestampType:
     type: string
     format: date-time
+  UpdateScalingPlanRequest:
+    type: object
+    required:
+      - ScalingPlanName
+      - ScalingPlanVersion
+    properties:
+      ApplicationSource:
+        $ref: '#/definitions/ApplicationSource'
+        description: A CloudFormation stack or set of tags.
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
+      ScalingInstructions:
+        $ref: '#/definitions/ScalingInstructions'
+        description: The scaling instructions.
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+        description: The version number.
+  UpdateScalingPlanResponse:
+    type: object
+    properties: {}
   ValidationException:
     type: object
     properties:
@@ -731,4 +819,14 @@ definitions:
     description: An exception was thrown for a validation issue. Review the parameters provided.
   XmlString:
     type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  XmlStringMaxLen128:
+    type: string
+    minLength: 1
+    maxLength: 128
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  XmlStringMaxLen256:
+    type: string
+    minLength: 1
+    maxLength: 256
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'

@@ -3,7 +3,7 @@ info:
   version: '2015-05-28'
   x-release: v4
   title: AWS IoT
-  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each thing (Thing Registry), configure logging, and create and manage policies and credentials to authenticate things.</p> <p>For more information about how AWS IoT works, see the <a href="http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p>'
+  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href="http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1975,7 +1975,7 @@ paths:
   '/things/{thingName}':
     post:
       operationId: CreateThing
-      description: Creates a thing record in the thing registry.
+      description: Creates a thing record in the registry.
       responses:
         '200':
           description: Success
@@ -5730,6 +5730,9 @@ definitions:
       salesforce:
         $ref: '#/definitions/SalesforceAction'
         description: Send a message to a Salesforce IoT Cloud Input Stream.
+      iotAnalytics:
+        $ref: '#/definitions/IotAnalyticsAction'
+        description: Sends message data to an AWS IoT Analytics channel.
     description: Describes the actions associated with a rule.
   ActionList:
     type: array
@@ -6026,10 +6029,13 @@ definitions:
         description: Whether the CA certificate configured for auto registration of device certificates. Valid values are "ENABLE" and "DISABLE"
       lastModifiedDate:
         $ref: '#/definitions/DateType'
+        description: The date the CA certificate was last modified.
       customerVersion:
         $ref: '#/definitions/CustomerVersion'
+        description: The customer version of the CA certificate.
       generationId:
         $ref: '#/definitions/GenerationId'
+        description: The generation ID of the CA certificate.
     description: Describes a CA certificate.
   CACertificateStatus:
     type: string
@@ -6083,7 +6089,7 @@ definitions:
         description: The ARN of the certificate.
       certificateId:
         $ref: '#/definitions/CertificateId'
-        description: The ID of the certificate.
+        description: The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
       status:
         $ref: '#/definitions/CertificateStatus'
         description: <p>The status of the certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
@@ -6132,11 +6138,13 @@ definitions:
         description: The date and time the certificate was last modified.
       customerVersion:
         $ref: '#/definitions/CustomerVersion'
+        description: The customer version of the certificate.
       transferData:
         $ref: '#/definitions/TransferData'
         description: The transfer data.
       generationId:
         $ref: '#/definitions/GenerationId'
+        description: The generation ID of the certificate.
     description: Describes a certificate.
   CertificateId:
     type: string
@@ -6180,6 +6188,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Certificate'
+  ChannelName:
+    type: string
   ClearDefaultAuthorizerRequest:
     type: object
     properties: {}
@@ -7333,10 +7343,13 @@ definitions:
         description: The default policy version ID.
       creationDate:
         $ref: '#/definitions/DateType'
+        description: The date the policy was created.
       lastModifiedDate:
         $ref: '#/definitions/DateType'
+        description: The date the policy was last modified.
       generationId:
         $ref: '#/definitions/GenerationId'
+        description: The generation ID of the policy.
     description: The output from the GetPolicy operation.
   GetPolicyVersionRequest:
     type: object
@@ -7362,10 +7375,13 @@ definitions:
         description: Specifies whether the policy version is the default.
       creationDate:
         $ref: '#/definitions/DateType'
+        description: The date the policy version was created.
       lastModifiedDate:
         $ref: '#/definitions/DateType'
+        description: The date the policy version was last modified.
       generationId:
         $ref: '#/definitions/GenerationId'
+        description: The generation ID of the policy version.
     description: The output from the GetPolicyVersion operation.
   GetRegistrationCodeRequest:
     type: object
@@ -7490,6 +7506,19 @@ definitions:
       message:
         $ref: '#/definitions/errorMessage'
     description: The response is invalid.
+  IotAnalyticsAction:
+    type: object
+    properties:
+      channelArn:
+        $ref: '#/definitions/AwsArn'
+        description: (deprecated) The ARN of the IoT Analytics channel to which message data will be sent.
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the IoT Analytics channel to which message data will be sent.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: 'The ARN of the role which has a policy that grants IoT permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).'
+    description: Sends message data to an AWS IoT Analytics channel.
   IsAuthenticated:
     type: boolean
   IsDefaultVersion:
@@ -8634,10 +8663,10 @@ definitions:
     properties:
       templateBody:
         $ref: '#/definitions/TemplateBody'
-        description: 'The provisioning template. '
+        description: 'The provisioning template. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
       parameters:
         $ref: '#/definitions/Parameters'
-        description: The parameters for provisioning a thing.
+        description: 'The parameters for provisioning a thing. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
   RegisterThingResponse:
     type: object
     properties:
@@ -8802,6 +8831,7 @@ definitions:
         description: The role alias.
       roleAliasArn:
         $ref: '#/definitions/RoleAliasArn'
+        description: The ARN of the role alias.
       roleArn:
         $ref: '#/definitions/RoleArn'
         description: The role ARN.
@@ -9320,7 +9350,7 @@ definitions:
         description: The attributes.
       shadow:
         $ref: '#/definitions/JsonDocument'
-        description: The thing shadow.
+        description: The shadow.
     description: The thing search index document.
   ThingDocumentList:
     type: array
