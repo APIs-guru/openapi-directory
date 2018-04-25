@@ -601,6 +601,10 @@ paths:
           description: InvalidIgnoreApplicationStopFailuresValueException
           schema:
             $ref: '#/definitions/InvalidIgnoreApplicationStopFailuresValueException'
+        '502':
+          description: InvalidGitHubAccountTokenException
+          schema:
+            $ref: '#/definitions/InvalidGitHubAccountTokenException'
       parameters:
         - name: body
           in: body
@@ -2981,7 +2985,7 @@ definitions:
     properties:
       actionOnTimeout:
         $ref: '#/definitions/DeploymentReadyAction'
-        description: '<p>Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.</p> <ul> <li> <p>CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment.</p> </li> <li> <p>STOP_DEPLOYMENT: Do not register new instances with load balancer unless traffic is rerouted manually. If traffic is not rerouted manually before the end of the specified wait period, the deployment status is changed to Stopped.</p> </li> </ul>'
+        description: '<p>Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.</p> <ul> <li> <p>CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment.</p> </li> <li> <p>STOP_DEPLOYMENT: Do not register new instances with a load balancer unless traffic rerouting is started using <a>ContinueDeployment</a>. If traffic rerouting is not started before the end of the specified wait period, the deployment status is changed to Stopped.</p> </li> </ul>'
       waitTimeInMinutes:
         $ref: '#/definitions/Duration'
         description: The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout
@@ -3552,6 +3556,10 @@ definitions:
     type: object
     properties: {}
     description: 'An invalid fileExistsBehavior option was specified to determine how AWS CodeDeploy handles files or directories that already exist in a deployment target location but weren''t part of the previous successful deployment. Valid values include "DISALLOW", "OVERWRITE", and "RETAIN".'
+  InvalidGitHubAccountTokenException:
+    type: object
+    properties: {}
+    description: The GitHub token is not valid.
   InvalidGitHubAccountTokenNameException:
     type: object
     properties: {}

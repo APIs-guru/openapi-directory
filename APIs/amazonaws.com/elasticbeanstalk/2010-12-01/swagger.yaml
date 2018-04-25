@@ -1457,9 +1457,14 @@ definitions:
       - InstanceRefresh
       - PlatformUpdate
       - Unknown
+  ApplicationArn:
+    type: string
   ApplicationDescription:
     type: object
     properties:
+      ApplicationArn:
+        $ref: '#/definitions/ApplicationArn'
+        description: The Amazon Resource Name (ARN) of the application.
       ApplicationName:
         $ref: '#/definitions/ApplicationName'
         description: The name of the application.
@@ -1578,9 +1583,14 @@ definitions:
       ResourceLifecycleConfig:
         $ref: '#/definitions/ApplicationResourceLifecycleConfig'
         description: The lifecycle configuration.
+  ApplicationVersionArn:
+    type: string
   ApplicationVersionDescription:
     type: object
     properties:
+      ApplicationVersionArn:
+        $ref: '#/definitions/ApplicationVersionArn'
+        description: The Amazon Resource Name (ARN) of the application version.
       ApplicationName:
         $ref: '#/definitions/ApplicationName'
         description: The name of the application to which the application version belongs.
@@ -2827,7 +2837,7 @@ definitions:
         description: A list of links to other environments in the same group.
       EnvironmentArn:
         $ref: '#/definitions/EnvironmentArn'
-        description: 'The environment''s Amazon Resource Name (ARN), which can be used in other API reuqests that require an ARN.'
+        description: 'The environment''s Amazon Resource Name (ARN), which can be used in other API requests that require an ARN.'
     description: Describes the properties of an environment.
   EnvironmentDescriptionsList:
     type: array
