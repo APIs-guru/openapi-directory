@@ -3,7 +3,7 @@ info:
   version: '2017-11-09'
   x-release: v4
   title: Alexa For Business
-  description: 'Alexa for Business makes it easy for you to use Alexa in your organization. Alexa for Business gives you the tools you need to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit, and the Alexa for Business APIs, and you can make these available as private skills for your organization. Alexa for Business also makes it easy to voice-enable your products and services, providing context-aware voice experiences for your customers.'
+  description: 'Alexa for Business makes it easy for you to use Alexa in your organization. Alexa for Business gives you the tools you need for managing Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations. You can make also these available as private skills for your organization. Alexa for Business makes it easy to voice-enable your products and services, providing context-aware voice experiences for your customers.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -102,12 +102,16 @@ paths:
   /:
     post:
       operationId: AssociateContactWithAddressBook
-      description: Associates a contact to a given address book.
+      description: Associates a contact with a given address book.
       responses:
         '200':
           description: Success
           schema:
             $ref: '#/definitions/AssociateContactWithAddressBookResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: body
           in: body
@@ -127,7 +131,7 @@ paths:
   '/#AssociateDeviceWithRoom':
     post:
       operationId: AssociateDeviceWithRoom
-      description: 'Associates a device to a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or a manual sync is required. '
+      description: 'Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. '
       responses:
         '200':
           description: Success
@@ -156,7 +160,7 @@ paths:
   '/#AssociateSkillGroupWithRoom':
     post:
       operationId: AssociateSkillGroupWithRoom
-      description: Associates a skill group to a given room. This enables all skills in the associated skill group on all devices in the room.
+      description: Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
       responses:
         '200':
           description: Success
@@ -853,6 +857,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListDeviceEvents':
+    post:
+      operationId: ListDeviceEvents
+      description: 'Lists the Device Event history for up to 30 days. If EventType isn''t specified in the request, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDeviceEventsResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDeviceEventsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListSkills':
     post:
       operationId: ListSkills
@@ -1291,7 +1334,7 @@ paths:
   '/#StartDeviceSync':
     post:
       operationId: StartDeviceSync
-      description: Resets a device and its account to the known default settings by clearing all information and settings set by previous users.
+      description: 'Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.'
       responses:
         '200':
           description: Success
@@ -1662,6 +1705,11 @@ definitions:
     description: User specified token that is used to support idempotency during Create Resource
     minLength: 10
     maxLength: 150
+  ConnectionStatus:
+    type: string
+    enum:
+      - ONLINE
+      - OFFLINE
   Contact:
     type: object
     properties:
@@ -1670,13 +1718,13 @@ definitions:
         description: The ARN of the contact.
       DisplayName:
         $ref: '#/definitions/ContactName'
-        description: The name of the contact to display on the AWS management console.
+        description: The name of the contact to display on the console.
       FirstName:
         $ref: '#/definitions/ContactName'
-        description: The first name of the contact that is used to call the contact on the device.
+        description: 'The first name of the contact, used to call the contact on the device.'
       LastName:
         $ref: '#/definitions/ContactName'
-        description: The last name of the contact that is used to call the contact on the device.
+        description: 'The last name of the contact, used to call the contact on the device.'
       PhoneNumber:
         $ref: '#/definitions/E164PhoneNumber'
         description: The phone number of the contact.
@@ -1689,13 +1737,13 @@ definitions:
         description: The ARN of the contact.
       DisplayName:
         $ref: '#/definitions/ContactName'
-        description: The name of the contact to display on the AWS management console.
+        description: The name of the contact to display on the console.
       FirstName:
         $ref: '#/definitions/ContactName'
-        description: The first name of the contact that is used to call the contact on the device.
+        description: 'The first name of the contact, used to call the contact on the device.'
       LastName:
         $ref: '#/definitions/ContactName'
-        description: The last name of the contact that is used to call the contact on the device.
+        description: 'The last name of the contact, used to call the contact on the device.'
       PhoneNumber:
         $ref: '#/definitions/E164PhoneNumber'
         description: The phone number of the contact.
@@ -1737,7 +1785,7 @@ definitions:
     properties:
       DisplayName:
         $ref: '#/definitions/ContactName'
-        description: The name of the contact to display on the AWS management console.
+        description: The name of the contact to display on the console.
       FirstName:
         $ref: '#/definitions/ContactName'
         description: The first name of the contact that is used to call the contact on the device.
@@ -1746,7 +1794,7 @@ definitions:
         description: The last name of the contact that is used to call the contact on the device.
       PhoneNumber:
         $ref: '#/definitions/E164PhoneNumber'
-        description: The phone number of the contact in E164 format.
+        description: The phone number of the contact in E.164 format.
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for this request that ensures idempotency.'
@@ -1987,7 +2035,7 @@ definitions:
         description: The room ARN of a device.
       DeviceStatus:
         $ref: '#/definitions/DeviceStatus'
-        description: 'The status of a device. If the status is not READY, check the DeviceStatusInfo for details.'
+        description: 'The status of a device. If the status is not READY, check the DeviceStatusInfo value for details.'
       DeviceStatusInfo:
         $ref: '#/definitions/DeviceStatusInfo'
         description: Detailed information about a device's status.
@@ -2030,6 +2078,29 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeviceData'
+  DeviceEvent:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/DeviceEventType'
+        description: The type of device event.
+      Value:
+        $ref: '#/definitions/DeviceEventValue'
+        description: The value of the event.
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time (in epoch) when the event occurred. '
+    description: The list of device events.
+  DeviceEventList:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceEvent'
+  DeviceEventType:
+    type: string
+    enum:
+      - CONNECTION_STATUS
+  DeviceEventValue:
+    type: string
   DeviceName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -2066,6 +2137,9 @@ definitions:
       DeviceStatusDetails:
         $ref: '#/definitions/DeviceStatusDetails'
         description: One or more device status detail descriptions.
+      ConnectionStatus:
+        $ref: '#/definitions/ConnectionStatus'
+        description: 'The latest available information about the connection status of a device. '
     description: Detailed information about a device's status.
   DeviceType:
     type: string
@@ -2129,6 +2203,7 @@ definitions:
       - INITIALIZED
       - PENDING
       - REGISTERED
+      - DISASSOCIATING
       - DEREGISTERING
   ErrorMessage:
     type: string
@@ -2285,6 +2360,32 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: 'You are performing an action that would put you beyond your account''s limits. HTTP Status Code: 400'
+  ListDeviceEventsRequest:
+    type: object
+    required:
+      - DeviceArn
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a device.
+      EventType:
+        $ref: '#/definitions/DeviceEventType'
+        description: The event type to filter device events.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. Required. '
+  ListDeviceEventsResponse:
+    type: object
+    properties:
+      DeviceEvents:
+        $ref: '#/definitions/DeviceEventList'
+        description: <p/>
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: <p/>
   ListSkillsRequest:
     type: object
     properties:
@@ -2632,10 +2733,10 @@ definitions:
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.'
+        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).'
       SortCriteria:
         $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, and DeviceSerialNumber.'
+        description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.'
   SearchDevicesResponse:
     type: object
     properties:
@@ -2928,6 +3029,9 @@ definitions:
     enum:
       - FAHRENHEIT
       - CELSIUS
+  Timestamp:
+    type: string
+    format: date-time
   Timezone:
     type: string
     minLength: 1

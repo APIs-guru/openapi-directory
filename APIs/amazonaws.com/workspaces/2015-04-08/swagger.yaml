@@ -101,8 +101,147 @@ security:
 paths:
   /:
     post:
+      operationId: AssociateIpGroups
+      description: Associates the specified IP access control group with the specified directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateIpGroupsResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
+          description: InvalidResourceStateException
+          schema:
+            $ref: '#/definitions/InvalidResourceStateException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateIpGroupsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AuthorizeIpRules':
+    post:
+      operationId: AuthorizeIpRules
+      description: <p>Adds one or more rules to the specified IP access control group.</p> <p>This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AuthorizeIpRulesResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
+          description: InvalidResourceStateException
+          schema:
+            $ref: '#/definitions/InvalidResourceStateException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AuthorizeIpRulesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateIpGroup':
+    post:
+      operationId: CreateIpGroup
+      description: '<p>Creates an IP access control group.</p> <p>An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using <a>AuthorizeIpRules</a>.</p> <p>There is a default IP access control group associated with your directory. If you don''t associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateIpGroupResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '482':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
+          description: ResourceCreationFailedException
+          schema:
+            $ref: '#/definitions/ResourceCreationFailedException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateIpGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTags':
+    post:
       operationId: CreateTags
-      description: Creates tags for the specified WorkSpace.
+      description: Creates the specified tags for the specified WorkSpace.
       responses:
         '200':
           description: Success
@@ -169,10 +308,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteIpGroup':
+    post:
+      operationId: DeleteIpGroup
+      description: <p>Deletes the specified IP access control group.</p> <p>You cannot delete an IP access control group that is associated with a directory.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteIpGroupResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceAssociatedException
+          schema:
+            $ref: '#/definitions/ResourceAssociatedException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteIpGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteTags':
     post:
       operationId: DeleteTags
-      description: Deletes the specified tags from a WorkSpace.
+      description: Deletes the specified tags from the specified WorkSpace.
       responses:
         '200':
           description: Success
@@ -202,10 +382,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeIpGroups':
+    post:
+      operationId: DescribeIpGroups
+      description: Describes one or more of your IP access control groups.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeIpGroupsResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeIpGroupsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeTags':
     post:
       operationId: DescribeTags
-      description: Describes the tags for the specified WorkSpace.
+      description: Describes the specified tags for the specified WorkSpace.
       responses:
         '200':
           description: Success
@@ -371,6 +584,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateIpGroups':
+    post:
+      operationId: DisassociateIpGroups
+      description: Disassociates the specified IP access control group from the specified directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateIpGroupsResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidResourceStateException
+          schema:
+            $ref: '#/definitions/InvalidResourceStateException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateIpGroupsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ModifyWorkspaceProperties':
     post:
       operationId: ModifyWorkspaceProperties
@@ -424,10 +678,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyWorkspaceState':
+    post:
+      operationId: ModifyWorkspaceState
+      description: '<p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyWorkspaceStateResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: InvalidResourceStateException
+          schema:
+            $ref: '#/definitions/InvalidResourceStateException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyWorkspaceStateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RebootWorkspaces':
     post:
       operationId: RebootWorkspaces
-      description: '<p>Reboots the specified WorkSpaces.</p> <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code>, <code>IMPAIRED</code>, or <code>INOPERABLE</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>'
+      description: <p>Reboots the specified WorkSpaces.</p> <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code> or <code>UNHEALTHY</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>
       responses:
         '200':
           description: Success
@@ -452,7 +743,7 @@ paths:
   '/#RebuildWorkspaces':
     post:
       operationId: RebuildWorkspaces
-      description: '<p>Rebuilds the specified WorkSpaces.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code> or <code>ERROR</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>'
+      description: '<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>'
       responses:
         '200':
           description: Success
@@ -464,6 +755,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RebuildWorkspacesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RevokeIpRules':
+    post:
+      operationId: RevokeIpRules
+      description: Removes one or more rules from the specified IP access control group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RevokeIpRulesResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidResourceStateException
+          schema:
+            $ref: '#/definitions/InvalidResourceStateException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RevokeIpRulesRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -549,6 +881,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateRulesOfIpGroup':
+    post:
+      operationId: UpdateRulesOfIpGroup
+      description: Replaces the current rules of the specified IP access control group with the specified rules.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateRulesOfIpGroupResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
+          description: InvalidResourceStateException
+          schema:
+            $ref: '#/definitions/InvalidResourceStateException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateRulesOfIpGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   ARN:
     type: string
@@ -561,6 +938,36 @@ definitions:
     description: The user is not authorized to access a resource.
   Alias:
     type: string
+  AssociateIpGroupsRequest:
+    type: object
+    required:
+      - DirectoryId
+      - GroupIds
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The ID of the directory.
+      GroupIds:
+        $ref: '#/definitions/IpGroupIdList'
+        description: The IDs of one or more IP access control groups.
+  AssociateIpGroupsResult:
+    type: object
+    properties: {}
+  AuthorizeIpRulesRequest:
+    type: object
+    required:
+      - GroupId
+      - UserRules
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the group.
+      UserRules:
+        $ref: '#/definitions/IpRuleList'
+        description: The rules to add to the group.
+  AuthorizeIpRulesResult:
+    type: object
+    properties: {}
   BooleanObject:
     type: boolean
   BundleId:
@@ -601,6 +1008,26 @@ definitions:
       - CONNECTED
       - DISCONNECTED
       - UNKNOWN
+  CreateIpGroupRequest:
+    type: object
+    required:
+      - GroupName
+    properties:
+      GroupName:
+        $ref: '#/definitions/IpGroupName'
+        description: The name of the group.
+      GroupDesc:
+        $ref: '#/definitions/IpGroupDesc'
+        description: The description of the group.
+      UserRules:
+        $ref: '#/definitions/IpRuleList'
+        description: The rules to add to the group.
+  CreateIpGroupResult:
+    type: object
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the group.
   CreateTagsRequest:
     type: object
     required:
@@ -609,10 +1036,10 @@ definitions:
     properties:
       ResourceId:
         $ref: '#/definitions/NonEmptyString'
-        description: The ID of the resource.
+        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
       Tags:
         $ref: '#/definitions/TagList'
-        description: The tags. Each resource can have a maximum of 50 tags.
+        description: The tags. Each WorkSpace can have a maximum of 50 tags.
   CreateTagsResult:
     type: object
     properties: {}
@@ -623,7 +1050,7 @@ definitions:
     properties:
       Workspaces:
         $ref: '#/definitions/WorkspaceRequestList'
-        description: Information about the WorkSpaces to create.
+        description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
   CreateWorkspacesResult:
     type: object
     properties:
@@ -654,6 +1081,17 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Indicates whether the WorkSpace user is an administrator on the WorkSpace.
     description: Information about defaults used to create a WorkSpace.
+  DeleteIpGroupRequest:
+    type: object
+    required:
+      - GroupId
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the IP access control group.
+  DeleteIpGroupResult:
+    type: object
+    properties: {}
   DeleteTagsRequest:
     type: object
     required:
@@ -662,13 +1100,34 @@ definitions:
     properties:
       ResourceId:
         $ref: '#/definitions/NonEmptyString'
-        description: The ID of the resource.
+        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
       TagKeys:
         $ref: '#/definitions/TagKeyList'
         description: The tag keys.
   DeleteTagsResult:
     type: object
     properties: {}
+  DescribeIpGroupsRequest:
+    type: object
+    properties:
+      GroupIds:
+        $ref: '#/definitions/IpGroupIdList'
+        description: The IDs of one or more IP access control groups.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token for the next set of results. (You received this token from a previous call.)
+      MaxResults:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of items to return.
+  DescribeIpGroupsResult:
+    type: object
+    properties:
+      Result:
+        $ref: '#/definitions/WorkspacesIpGroupsList'
+        description: Information about the IP access control groups.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
   DescribeTagsRequest:
     type: object
     required:
@@ -676,7 +1135,7 @@ definitions:
     properties:
       ResourceId:
         $ref: '#/definitions/NonEmptyString'
-        description: The ID of the resource.
+        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
   DescribeTagsResult:
     type: object
     properties:
@@ -727,7 +1186,7 @@ definitions:
     properties:
       WorkspaceIds:
         $ref: '#/definitions/WorkspaceIdList'
-        description: The identifiers of the WorkSpaces.
+        description: The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: The token for the next set of results. (You received this token from a previous call.)
@@ -787,6 +1246,21 @@ definitions:
       $ref: '#/definitions/WorkspaceDirectory'
   DirectoryName:
     type: string
+  DisassociateIpGroupsRequest:
+    type: object
+    required:
+      - DirectoryId
+      - GroupIds
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The ID of the directory.
+      GroupIds:
+        $ref: '#/definitions/IpGroupIdList'
+        description: The IDs of one or more IP access control groups.
+  DisassociateIpGroupsResult:
+    type: object
+    properties: {}
   DnsIpAddresses:
     type: array
     items:
@@ -857,9 +1331,42 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/ExceptionMessage'
-    description: The state of the WorkSpace is not valid for this operation.
+    description: The state of the resource is not valid for this operation.
   IpAddress:
     type: string
+  IpGroupDesc:
+    type: string
+  IpGroupId:
+    type: string
+    pattern: 'wsipg-[0-9a-z]{8,63}$'
+  IpGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/IpGroupId'
+  IpGroupName:
+    type: string
+  IpRevokedRuleList:
+    type: array
+    items:
+      $ref: '#/definitions/IpRule'
+  IpRule:
+    type: string
+  IpRuleDesc:
+    type: string
+  IpRuleItem:
+    type: object
+    properties:
+      ipRule:
+        $ref: '#/definitions/IpRule'
+        description: 'The IP address range, in CIDR notation.'
+      ruleDesc:
+        $ref: '#/definitions/IpRuleDesc'
+        description: The description.
+    description: Information about a rule for an IP access control group.
+  IpRuleList:
+    type: array
+    items:
+      $ref: '#/definitions/IpRuleItem'
   Limit:
     type: integer
     minimum: 1
@@ -904,6 +1411,21 @@ definitions:
   ModifyWorkspacePropertiesResult:
     type: object
     properties: {}
+  ModifyWorkspaceStateRequest:
+    type: object
+    required:
+      - WorkspaceId
+      - WorkspaceState
+    properties:
+      WorkspaceId:
+        $ref: '#/definitions/WorkspaceId'
+        description: The ID of the WorkSpace.
+      WorkspaceState:
+        $ref: '#/definitions/TargetWorkspaceState'
+        description: The WorkSpace state.
+  ModifyWorkspaceStateResult:
+    type: object
+    properties: {}
   NonEmptyString:
     type: string
     minLength: 1
@@ -913,6 +1435,12 @@ definitions:
       message:
         $ref: '#/definitions/ExceptionMessage'
     description: The properties of this WorkSpace are currently being modified. Try again in a moment.
+  OperationNotSupportedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: This operation is not supported.
   PaginationToken:
     type: string
     minLength: 1
@@ -924,7 +1452,7 @@ definitions:
     properties:
       WorkspaceId:
         $ref: '#/definitions/WorkspaceId'
-        description: The identifier of the WorkSpace.
+        description: The ID of the WorkSpace.
     description: Information used to reboot a WorkSpace.
   RebootWorkspaceRequests:
     type: array
@@ -939,7 +1467,7 @@ definitions:
     properties:
       RebootWorkspaceRequests:
         $ref: '#/definitions/RebootWorkspaceRequests'
-        description: The WorkSpaces to reboot.
+        description: The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
   RebootWorkspacesResult:
     type: object
     properties:
@@ -953,7 +1481,7 @@ definitions:
     properties:
       WorkspaceId:
         $ref: '#/definitions/WorkspaceId'
-        description: The identifier of the WorkSpace.
+        description: The ID of the WorkSpace.
     description: Information used to rebuild a WorkSpace.
   RebuildWorkspaceRequests:
     type: array
@@ -968,17 +1496,35 @@ definitions:
     properties:
       RebuildWorkspaceRequests:
         $ref: '#/definitions/RebuildWorkspaceRequests'
-        description: The WorkSpaces to rebuild.
+        description: The WorkSpace to rebuild. You can specify a single WorkSpace.
   RebuildWorkspacesResult:
     type: object
     properties:
       FailedRequests:
         $ref: '#/definitions/FailedRebuildWorkspaceRequests'
-        description: Information about the WorkSpaces that could not be rebuilt.
+        description: Information about the WorkSpace if it could not be rebuilt.
   RegistrationCode:
     type: string
     minLength: 1
     maxLength: 20
+  ResourceAlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The specified resource already exists.
+  ResourceAssociatedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The resource is associated with a directory.
+  ResourceCreationFailedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The resource could not be created.
   ResourceLimitExceededException:
     type: object
     properties:
@@ -1006,6 +1552,21 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: The identifier of the resource that is not available.
     description: The specified resource is not available.
+  RevokeIpRulesRequest:
+    type: object
+    required:
+      - GroupId
+      - UserRules
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the group.
+      UserRules:
+        $ref: '#/definitions/IpRevokedRuleList'
+        description: The rules to remove from the group.
+  RevokeIpRulesResult:
+    type: object
+    properties: {}
   RootStorage:
     type: object
     properties:
@@ -1045,7 +1606,7 @@ definitions:
     properties:
       StartWorkspaceRequests:
         $ref: '#/definitions/StartWorkspaceRequests'
-        description: The WorkSpaces to start.
+        description: The WorkSpaces to start. You can specify up to 25 WorkSpaces.
   StartWorkspacesResult:
     type: object
     properties:
@@ -1072,7 +1633,7 @@ definitions:
     properties:
       StopWorkspaceRequests:
         $ref: '#/definitions/StopWorkspaceRequests'
-        description: The WorkSpaces to stop.
+        description: The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
   StopWorkspacesResult:
     type: object
     properties:
@@ -1113,6 +1674,11 @@ definitions:
   TagValue:
     type: string
     maxLength: 255
+  TargetWorkspaceState:
+    type: string
+    enum:
+      - AVAILABLE
+      - ADMIN_MAINTENANCE
   TerminateRequest:
     type: object
     required:
@@ -1120,7 +1686,7 @@ definitions:
     properties:
       WorkspaceId:
         $ref: '#/definitions/WorkspaceId'
-        description: The identifier of the WorkSpace.
+        description: The ID of the WorkSpace.
     description: Information used to terminate a WorkSpace.
   TerminateWorkspaceRequests:
     type: array
@@ -1135,7 +1701,7 @@ definitions:
     properties:
       TerminateWorkspaceRequests:
         $ref: '#/definitions/TerminateWorkspaceRequests'
-        description: The WorkSpaces to terminate.
+        description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
   TerminateWorkspacesResult:
     type: object
     properties:
@@ -1151,6 +1717,21 @@ definitions:
       message:
         $ref: '#/definitions/ExceptionMessage'
     description: 'The configuration of this WorkSpace is not supported for this operation. For more information, see the <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/">Amazon WorkSpaces Administration Guide</a>. '
+  UpdateRulesOfIpGroupRequest:
+    type: object
+    required:
+      - GroupId
+      - UserRules
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the group.
+      UserRules:
+        $ref: '#/definitions/IpRuleList'
+        description: One or more rules.
+  UpdateRulesOfIpGroupResult:
+    type: object
+    properties: {}
   UserName:
     type: string
     minLength: 1
@@ -1299,7 +1880,10 @@ definitions:
       WorkspaceCreationProperties:
         $ref: '#/definitions/DefaultWorkspaceCreationProperties'
         description: The default creation properties for all WorkSpaces in the directory.
-    description: Contains information about an AWS Directory Service directory for use with Amazon WorkSpaces.
+      ipGroupIds:
+        $ref: '#/definitions/IpGroupIdList'
+        description: The identifiers of the IP access control groups associated with the directory.
+    description: Information about an AWS Directory Service directory for use with Amazon WorkSpaces.
   WorkspaceDirectoryState:
     type: string
     enum:
@@ -1396,6 +1980,7 @@ definitions:
       - STARTING
       - REBUILDING
       - MAINTENANCE
+      - ADMIN_MAINTENANCE
       - TERMINATING
       - TERMINATED
       - SUSPENDED
@@ -1403,3 +1988,23 @@ definitions:
       - STOPPING
       - STOPPED
       - ERROR
+  WorkspacesIpGroup:
+    type: object
+    properties:
+      groupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the group.
+      groupName:
+        $ref: '#/definitions/IpGroupName'
+        description: The name of the group.
+      groupDesc:
+        $ref: '#/definitions/IpGroupDesc'
+        description: The description of the group.
+      userRules:
+        $ref: '#/definitions/IpRuleList'
+        description: The rules.
+    description: Information about an IP access control group.
+  WorkspacesIpGroupsList:
+    type: array
+    items:
+      $ref: '#/definitions/WorkspacesIpGroup'

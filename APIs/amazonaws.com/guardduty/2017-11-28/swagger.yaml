@@ -1299,7 +1299,7 @@ paths:
   '/detector/{detectorId}/member/stop':
     post:
       operationId: StopMonitoringMembers
-      description: 'Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members'' findings.'
+      description: 'Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’ findings.'
       responses:
         '200':
           description: Success
@@ -1439,6 +1439,9 @@ definitions:
     description: The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.
   AccountDetail:
     type: object
+    required:
+      - Email
+      - AccountId
     properties:
       AccountId:
         $ref: '#/definitions/AccountId'
@@ -1780,6 +1783,17 @@ definitions:
     description: Finding Feedback Value
   Finding:
     type: object
+    required:
+      - AccountId
+      - SchemaVersion
+      - CreatedAt
+      - Resource
+      - Severity
+      - UpdatedAt
+      - Type
+      - Region
+      - Id
+      - Arn
     properties:
       AccountId:
         $ref: '#/definitions/__string'
@@ -1831,7 +1845,7 @@ definitions:
     type: object
     properties:
       Criterion:
-        $ref: '#/definitions/MapOfCondition'
+        $ref: '#/definitions/__mapOfCondition'
         description: Represents a map of finding properties that match specified conditions and values when querying findings.
     description: Represents the criteria used for querying findings.
   FindingId:
@@ -1856,7 +1870,7 @@ definitions:
     type: object
     properties:
       CountBySeverity:
-        $ref: '#/definitions/MapOfCountBySeverityFindingStatistic'
+        $ref: '#/definitions/__mapOfCountBySeverityFindingStatistic'
         description: Represents a map of severity to count statistic for a set of findings
     description: Finding statistics object.
   FindingType:
@@ -2081,9 +2095,11 @@ definitions:
       AccountIds:
         $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
+      DisableEmailNotification:
+        $ref: '#/definitions/__boolean'
       Message:
         $ref: '#/definitions/Message'
-        description: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
+        description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
     description: InviteMembers request body.
   InviteMembersResponse:
     type: object
@@ -2194,10 +2210,6 @@ definitions:
         $ref: '#/definitions/Members'
       NextToken:
         $ref: '#/definitions/NextToken'
-  ListOfPortProbeDetail:
-    type: array
-    items:
-      $ref: '#/definitions/PortProbeDetail'
   ListThreatIntelSetsRequest:
     type: object
     properties: {}
@@ -2221,24 +2233,6 @@ definitions:
   Location:
     type: string
     description: 'The location of the S3 bucket where the list resides. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
-  MapOfCondition:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/Condition'
-  MapOfCountBySeverityFindingStatistic:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/CountBySeverityFindingStatistic'
   Master:
     type: object
     properties:
@@ -2264,6 +2258,12 @@ definitions:
     maximum: 50
   Member:
     type: object
+    required:
+      - Email
+      - AccountId
+      - MasterId
+      - UpdatedAt
+      - RelationshipStatus
     properties:
       AccountId:
         $ref: '#/definitions/AccountId'
@@ -2290,7 +2290,7 @@ definitions:
       $ref: '#/definitions/Member'
   Message:
     type: string
-    description: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
+    description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
   Name:
     type: string
     description: The user-friendly name to identify the list.
@@ -2388,7 +2388,7 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Port probe blocked information.
       PortProbeDetails:
-        $ref: '#/definitions/ListOfPortProbeDetail'
+        $ref: '#/definitions/__listOfPortProbeDetail'
         description: A list of port probe details objects.
     description: Information about the PORT_PROBE action described in this finding.
   PortProbeDetail:
@@ -2618,6 +2618,9 @@ definitions:
     properties: {}
   UnprocessedAccount:
     type: object
+    required:
+      - AccountId
+      - Result
     properties:
       AccountId:
         $ref: '#/definitions/__string'
@@ -2699,6 +2702,30 @@ definitions:
     format: double
   __integer:
     type: integer
+  __listOfPortProbeDetail:
+    type: array
+    items:
+      $ref: '#/definitions/PortProbeDetail'
+  __long:
+    type: integer
+  __mapOfCondition:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/Condition'
+  __mapOfCountBySeverityFindingStatistic:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/CountBySeverityFindingStatistic'
   __string:
     type: string
   __timestamp:

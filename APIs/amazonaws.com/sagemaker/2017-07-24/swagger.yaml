@@ -156,7 +156,7 @@ paths:
   '/#CreateEndpointConfig':
     post:
       operationId: CreateEndpointConfig
-      description: '<p>Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the <code>CreateModel</code> API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> API. </p> <note> <p> Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production. </p> </note> <p>In the request, you define one or more <code>ProductionVariant</code>s, each of which identifies a model. Each <code>ProductionVariant</code> parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy. </p> <p>If you are hosting multiple models, you also assign a <code>VariantWeight</code> to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. </p>'
+      description: '<p>Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the <code>CreateModel</code> API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> API.</p> <note> <p> Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production. </p> </note> <p>In the request, you define one or more <code>ProductionVariant</code>s, each of which identifies a model. Each <code>ProductionVariant</code> parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy. </p> <p>If you are hosting multiple models, you also assign a <code>VariantWeight</code> to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. </p>'
       responses:
         '200':
           description: Success
@@ -1302,6 +1302,9 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'A object that specifies the VPC that you want your model to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>host-vpc</a>.'
   CreateModelOutput:
     type: object
     required:
@@ -1419,6 +1422,9 @@ definitions:
       ResourceConfig:
         $ref: '#/definitions/ResourceConfig'
         description: '<p>The resources, including the ML compute instances and ML storage volumes, to use for model training. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use ML storage volumes for scratch space. If you want Amazon SageMaker to use the ML storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'A object that specifies the VPC that you want your training job to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a> '
       StoppingCondition:
         $ref: '#/definitions/StoppingCondition'
         description: '<p>Sets a duration for training. Use this parameter to cap model training costs. To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts. </p> <p>When Amazon SageMaker terminates a job because the stopping condition has been met, training algorithms provided by Amazon SageMaker save the intermediate results of the job. This intermediate data is a valid model artifact. You can use it to create a model using the <code>CreateModel</code> API. </p>'
@@ -1599,6 +1605,9 @@ definitions:
       ExecutionRoleArn:
         $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'A object that specifies the VPC that this model has access to. For more information, see <a>host-vpc</a> '
       CreationTime:
         $ref: '#/definitions/Timestamp'
         description: A timestamp that shows when the model was created.
@@ -1748,6 +1757,9 @@ definitions:
       ResourceConfig:
         $ref: '#/definitions/ResourceConfig'
         description: 'Resources, including ML compute instances and ML storage volumes, that are configured for model training. '
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'A object that specifies the VPC that this training job has access to. For more information, see <a>train-vpc</a>.'
       StoppingCondition:
         $ref: '#/definitions/StoppingCondition'
         description: 'The condition under which to stop the training job. '
@@ -2669,6 +2681,12 @@ definitions:
   SubnetId:
     type: string
     maxLength: 32
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    minItems: 1
+    maxItems: 16
   Tag:
     type: object
     required:
@@ -2884,3 +2902,22 @@ definitions:
   VolumeSizeInGB:
     type: integer
     minimum: 1
+  VpcConfig:
+    type: object
+    required:
+      - SecurityGroupIds
+      - Subnets
+    properties:
+      SecurityGroupIds:
+        $ref: '#/definitions/VpcSecurityGroupIds'
+        description: 'The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the <code>Subnets</code> field.'
+      Subnets:
+        $ref: '#/definitions/Subnets'
+        description: The ID of the subnets in the VPC to which you want to connect your training job or model.
+    description: 'Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC. For more information, see <a>host-vpc</a> and <a>train-vpc</a>.'
+  VpcSecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+    minItems: 1
+    maxItems: 5
