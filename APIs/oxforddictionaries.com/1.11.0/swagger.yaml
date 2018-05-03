@@ -14,7 +14,7 @@ info:
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://developer.oxforddictionaries.com/images/logo.png'
+    url: 'https://twitter.com/OxfordWordsAPI/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://developer.oxforddictionaries.com/swagger/spec/public_doc_guest.json'
@@ -231,7 +231,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve definitions, [pronunciations](documentation/glossary?term=pronunciation), example sentences, [grammatical information](documentation/glossary?term=grammaticalfeatures) and [word origins](documentation/glossary?term=etymology). It only works for dictionary [headwords](documentation/glossary?term=headword), so you may need to use the [Lemmatron](documentation/glossary?term=lemma) first if your input is likely to be an [inflected](documentation/glossary?term=inflection) form (e.g., 'swimming'). This would return the linked [headword](documentation/glossary?term=headword) (e.g., 'swim') which you can then use in the Entries endpoint. Unless specified using a region filter, the default lookup will be the Oxford Dictionary of English (GB). 
+        Use this to retrieve definitions, [pronunciations](documentation/glossary?term=pronunciation), example sentences, [grammatical information](documentation/glossary?term=grammaticalfeatures) and [word origins](documentation/glossary?term=etymology). It only works for dictionary [headwords](documentation/glossary?term=headword), so you may need to use the [Lemmatron](documentation/glossary?term=lemma) first if your input is likely to be an [inflected](documentation/glossary?term=inflection) form (e.g., 'swimming'). This would return the linked [headword](documentation/glossary?term=headword) (e.g., 'swim') which you can then use in the Entries endpoint. Unless specified using a region filter, the default lookup will be the Oxford Dictionary of English (GB).
           <div id="dictionary_entries"></div>
       externalDocs:
         description: find more info here
@@ -322,7 +322,7 @@ paths:
         '404':
           description: |
             no entry is found matching supplied source_lang and id
-            and/or that entry has no senses with translations in the target language. 
+            and/or that entry has no senses with translations in the target language.
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
@@ -363,7 +363,7 @@ paths:
     get:
       description: |
 
-        Retrieve available [synonyms](documentation/glossary?term=thesaurus) and [antonyms](documentation/glossary?term=thesaurus) for a given word and language. 
+        Retrieve available [synonyms](documentation/glossary?term=thesaurus) and [antonyms](documentation/glossary?term=thesaurus) for a given word and language.
 
           <div id="synonyms_and_antonyms"></div>
       externalDocs:
@@ -411,7 +411,7 @@ paths:
         '404':
           description: |
             no entry is found matching supplied source_lang and id
-            and/or that entry has no senses with translations in the target language. 
+            and/or that entry has no senses with translations in the target language.
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
@@ -476,7 +476,7 @@ paths:
         '404':
           description: |
             no entry is found matching supplied source_lang and id
-            and/or that entry has no senses with translations in the target language(s). 
+            and/or that entry has no senses with translations in the target language(s).
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
@@ -601,7 +601,7 @@ paths:
     get:
       description: |
 
-        Retrieve available [lemmas](documentation/glossary?term=lemma) for a given [inflected](documentation/glossary?term=inflection) wordform. Filter results by categories.  
+        Retrieve available [lemmas](documentation/glossary?term=lemma) for a given [inflected](documentation/glossary?term=inflection) wordform. Filter results by categories.
 
           <div id="lemmatron_filters"></div>
       parameters:
@@ -847,7 +847,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve possible [headword](documentation/glossary?term=headword) matches for a given string of text. The results are culculated using headword matching, fuzzy matching, and [lemmatization](documentation/glossary?term=lemma) 
+        Use this to retrieve possible [headword](documentation/glossary?term=headword) matches for a given string of text. The results are culculated using headword matching, fuzzy matching, and [lemmatization](documentation/glossary?term=lemma)
 
           <div id="search"></div>
       externalDocs:
@@ -1352,7 +1352,7 @@ paths:
   '/wordlist/{source_lang}/{filters_advanced}':
     get:
       description: |
-        Use this to apply more complex filters to the [list of words](documentation/glossary?term=wordlist). For example, you may only want to filter out words for which all [senses](documentation/glossary?term=sense) match the filter, or only its 'prime sense'. You can also filter by word length or match by substring (prefix). 
+        Use this to apply more complex filters to the [list of words](documentation/glossary?term=wordlist). For example, you may only want to filter out words for which all [senses](documentation/glossary?term=sense) match the filter, or only its 'prime sense'. You can also filter by word length or match by substring (prefix).
 
           <div id="wordlist_advanced"></div>
       parameters:
