@@ -10,9 +10,14 @@ deploy:
     script: 'git fetch --unshallow && npm run deploy'
     on:
       branch: master
+  - provider: script
+    skip_cleanup: true
+    script: scripts/rearrange.sh
+    on:
+      branch: master
   - provider: pages
     skip-cleanup: true
-    local-dir: deploy
+    local-dir: output
     fqdn: api.apis.guru
     github-token: $GH_DEPLOY_TOKEN
     keep-history: false
