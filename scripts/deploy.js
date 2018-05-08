@@ -116,8 +116,8 @@ function buildVersionEntry(swagger, filename) {
   let target = 'swagger';
   if (swagger.openapi) target = 'openapi';
   var basename = 'specs/' + util.getSwaggerPath(swagger, target);
-  util.saveJson(deployDir(`${basename}.json`), swagger);
-  util.saveYaml(deployDir(`${basename}.yaml`), swagger);
+  util.saveJson(deployDir(`${basename}.json`), swagger, true);
+  util.saveYaml(deployDir(`${basename}.yaml`), swagger, true);
 
   var dates = util.exec(`git log --format=%aD --follow -- '${filename}'`);
   dates = _(dates).split('\n').compact();

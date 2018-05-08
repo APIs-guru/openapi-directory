@@ -33,17 +33,17 @@ exports.readJson = function (filename) {
   return JSON.parse(data);
 }
 
-exports.saveJson = function (path, json) {
+exports.saveJson = function (path, json, quiet) {
   json = exports.sortJson(json);
-  exports.saveFile(path, JSON.stringify(json, null, 2) + '\n');
+  exports.saveFile(path, JSON.stringify(json, null, 2) + '\n', quiet);
 }
 
-exports.saveYaml = function (path, json) {
-  exports.saveFile(path, exports.Yaml2String(json));
+exports.saveYaml = function (path, json, quiet) {
+  exports.saveFile(path, exports.Yaml2String(json), quiet);
 }
 
-exports.saveFile = function (path, data) {
-  console.log(path);
+exports.saveFile = function (path, data, quiet) {
+  if (!quiet) console.log(path);
   mkdirp(Path.dirname(path));
   fs.writeFileSync(path, data);
 }

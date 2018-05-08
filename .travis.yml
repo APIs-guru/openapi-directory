@@ -12,7 +12,7 @@ deploy:
       branch: master
   - provider: pages
     skip-cleanup: true
-    github-token: $GH_TOKEN
+    github-token: $GH_DEPLOY_TOKEN
     keep-history: false
     on:
       branch: master
