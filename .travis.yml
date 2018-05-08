@@ -12,6 +12,8 @@ deploy:
       branch: master
   - provider: pages
     skip-cleanup: true
+    local-dir: deploy
+    fqdn: api.apis.guru
     github-token: $GH_DEPLOY_TOKEN
     keep-history: false
     on:
