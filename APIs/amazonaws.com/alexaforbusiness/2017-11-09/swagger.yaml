@@ -2099,6 +2099,7 @@ definitions:
     type: string
     enum:
       - CONNECTION_STATUS
+      - DEVICE_STATUS
   DeviceEventValue:
     type: string
   DeviceName:
@@ -2115,6 +2116,7 @@ definitions:
       - READY
       - PENDING
       - WAS_OFFLINE
+      - DEREGISTERED
   DeviceStatusDetail:
     type: object
     properties:

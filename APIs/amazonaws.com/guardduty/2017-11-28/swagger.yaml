@@ -264,6 +264,79 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/detector/{detectorId}/filter':
+    post:
+      operationId: CreateFilter
+      description: Creates a filter using the specified finding criteria.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFilterResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFilterRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListFilters
+      description: Returns a paginated list of the current filters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFiltersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFiltersRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: detectorId
+          in: path
+          type: string
+          required: true
   '/detector/{detectorId}/ipset':
     post:
       operationId: CreateIPSet
@@ -639,6 +712,107 @@ paths:
           schema:
             $ref: '#/definitions/UpdateDetectorRequest'
         - name: detectorId
+          in: path
+          type: string
+          required: true
+  '/detector/{detectorId}/filter/{filterName}':
+    delete:
+      operationId: DeleteFilter
+      description: Deletes the filter specified by the filter name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFilterResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFilterRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: filterName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetFilter
+      description: Returns the details of the filter specified by the filter name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFilterResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFilterRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: filterName
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: UpdateFilter
+      description: Updates the filter specified by the filter name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFilterResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFilterRequest'
+        - name: detectorId
+          in: path
+          type: string
+          required: true
+        - name: filterName
           in: path
           type: string
           required: true
@@ -1582,6 +1756,34 @@ definitions:
       DetectorId:
         $ref: '#/definitions/DetectorId'
         description: The unique ID of the created detector.
+  CreateFilterRequest:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/FilterAction'
+        description: Specifies the action that is to be applied to the findings that match the filter.
+      ClientToken:
+        $ref: '#/definitions/__stringMin0Max64'
+        description: The idempotency token for the create request.
+      Description:
+        $ref: '#/definitions/FilterDescription'
+        description: The description of the filter.
+      FindingCriteria:
+        $ref: '#/definitions/FindingCriteria'
+        description: Represents the criteria to be used in the filter for querying findings.
+      Name:
+        $ref: '#/definitions/FilterName'
+        description: The name of the filter.
+      Rank:
+        $ref: '#/definitions/FilterRank'
+        description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+    description: CreateFilterRequest request body.
+  CreateFilterResponse:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/FilterName'
+        description: The name of the successfully created filter.
   CreateIPSetRequest:
     type: object
     properties:
@@ -1667,6 +1869,12 @@ definitions:
     type: object
     properties: {}
   DeleteDetectorResponse:
+    type: object
+    properties: {}
+  DeleteFilterRequest:
+    type: object
+    properties: {}
+  DeleteFilterResponse:
     type: object
     properties: {}
   DeleteIPSetRequest:
@@ -1781,6 +1989,26 @@ definitions:
       - USEFUL
       - NOT_USEFUL
     description: Finding Feedback Value
+  FilterAction:
+    type: string
+    enum:
+      - NOOP
+      - ARCHIVE
+    description: The action associated with a filter.
+  FilterDescription:
+    type: string
+    description: The filter description
+  FilterName:
+    type: string
+    description: The unique identifier for a filter
+  FilterNames:
+    type: array
+    description: A list of filter names
+    items:
+      $ref: '#/definitions/FilterName'
+  FilterRank:
+    type: integer
+    description: Relative position of filter among list of exisiting filters.
   Finding:
     type: object
     required:
@@ -1910,6 +2138,27 @@ definitions:
         $ref: '#/definitions/DetectorStatus'
       UpdatedAt:
         $ref: '#/definitions/UpdatedAt'
+  GetFilterRequest:
+    type: object
+    properties: {}
+  GetFilterResponse:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/FilterAction'
+        description: Specifies the action that is to be applied to the findings that match the filter.
+      Description:
+        $ref: '#/definitions/FilterDescription'
+        description: The description of the filter.
+      FindingCriteria:
+        $ref: '#/definitions/FindingCriteria'
+        description: Represents the criteria to be used in the filter for querying findings.
+      Name:
+        $ref: '#/definitions/FilterName'
+        description: The name of the filter.
+      Rank:
+        $ref: '#/definitions/FilterRank'
+        description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
   GetFindingsRequest:
     type: object
     properties:
@@ -2027,6 +2276,9 @@ definitions:
         description: The availability zone of the EC2 instance.
       IamInstanceProfile:
         $ref: '#/definitions/IamInstanceProfile'
+      ImageDescription:
+        $ref: '#/definitions/__string'
+        description: The image description of the EC2 instance.
       ImageId:
         $ref: '#/definitions/__string'
         description: The image ID of the EC2 instance.
@@ -2097,6 +2349,7 @@ definitions:
         description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
       DisableEmailNotification:
         $ref: '#/definitions/__boolean'
+        description: A boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
       Message:
         $ref: '#/definitions/Message'
         description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
@@ -2155,6 +2408,16 @@ definitions:
     properties:
       DetectorIds:
         $ref: '#/definitions/DetectorIds'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  ListFiltersRequest:
+    type: object
+    properties: {}
+  ListFiltersResponse:
+    type: object
+    properties:
+      FilterNames:
+        $ref: '#/definitions/FilterNames'
       NextToken:
         $ref: '#/definitions/NextToken'
   ListFindingsRequest:
@@ -2327,6 +2590,9 @@ definitions:
       Ipv6Addresses:
         $ref: '#/definitions/Ipv6Addresses'
         description: A list of EC2 instance IPv6 address information.
+      NetworkInterfaceId:
+        $ref: '#/definitions/NetworkInterfaceId'
+        description: The ID of the network interface
       PrivateDnsName:
         $ref: '#/definitions/PrivateDnsName'
         description: Private DNS name of the EC2 instance.
@@ -2352,6 +2618,9 @@ definitions:
         $ref: '#/definitions/__string'
         description: The VPC ID of the EC2 instance.
     description: The network interface information of the EC2 instance.
+  NetworkInterfaceId:
+    type: string
+    description: The ID of the network interface.
   NetworkInterfaces:
     type: array
     description: The network interface information of the EC2 instance.
@@ -2644,6 +2913,28 @@ definitions:
   UpdateDetectorResponse:
     type: object
     properties: {}
+  UpdateFilterRequest:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/FilterAction'
+        description: Specifies the action that is to be applied to the findings that match the filter.
+      Description:
+        $ref: '#/definitions/FilterDescription'
+        description: The description of the filter.
+      FindingCriteria:
+        $ref: '#/definitions/FindingCriteria'
+        description: Represents the criteria to be used in the filter for querying findings.
+      Rank:
+        $ref: '#/definitions/FilterRank'
+        description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+    description: UpdateFilterRequest request body.
+  UpdateFilterResponse:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/FilterName'
+        description: The name of the filter.
   UpdateFindingsFeedbackRequest:
     type: object
     properties:
@@ -2728,6 +3019,10 @@ definitions:
           $ref: '#/definitions/CountBySeverityFindingStatistic'
   __string:
     type: string
+  __stringMin0Max64:
+    type: string
+    minLength: 0
+    maxLength: 64
   __timestamp:
     type: string
     format: date-time

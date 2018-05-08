@@ -479,6 +479,108 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/reservedInstanceOfferings:
+    get:
+      operationId: DescribeReservedElasticsearchInstanceOfferings
+      description: Lists available reserved Elasticsearch instance offerings.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeReservedElasticsearchInstanceOfferingsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '483':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeReservedElasticsearchInstanceOfferingsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/reservedInstances:
+    get:
+      operationId: DescribeReservedElasticsearchInstances
+      description: Returns information about reserved Elasticsearch instances for this account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeReservedElasticsearchInstancesResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeReservedElasticsearchInstancesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2015-01-01/domain:
     get:
       operationId: ListDomainNames
@@ -643,6 +745,55 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/purchaseReservedInstanceOffering:
+    post:
+      operationId: PurchaseReservedElasticsearchInstanceOffering
+      description: Allows you to purchase reserved Elasticsearch instances.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PurchaseReservedElasticsearchInstanceOfferingResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '484':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '485':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PurchaseReservedElasticsearchInstanceOfferingRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -906,6 +1057,34 @@ definitions:
       LimitsByRole:
         $ref: '#/definitions/LimitsByRole'
     description: ' Container for the parameters received from <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
+  DescribeReservedElasticsearchInstanceOfferingsRequest:
+    type: object
+    properties: {}
+    description: Container for parameters to <code>DescribeReservedElasticsearchInstanceOfferings</code>
+  DescribeReservedElasticsearchInstanceOfferingsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: Provides an identifier to allow retrieval of paginated results.
+      ReservedElasticsearchInstanceOfferings:
+        $ref: '#/definitions/ReservedElasticsearchInstanceOfferingList'
+        description: List of reserved Elasticsearch instance offerings
+    description: Container for results from <code>DescribeReservedElasticsearchInstanceOfferings</code>
+  DescribeReservedElasticsearchInstancesRequest:
+    type: object
+    properties: {}
+    description: Container for parameters to <code>DescribeReservedElasticsearchInstances</code>
+  DescribeReservedElasticsearchInstancesResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Provides an identifier to allow retrieval of paginated results.
+      ReservedElasticsearchInstances:
+        $ref: '#/definitions/ReservedElasticsearchInstanceList'
+        description: List of reserved Elasticsearch instances.
+    description: Container for results from <code>DescribeReservedElasticsearchInstances</code>
   DisabledOperationException:
     type: object
     properties: {}
@@ -937,6 +1116,9 @@ definitions:
     description: A list of Elasticsearch domain names.
     items:
       $ref: '#/definitions/DomainName'
+  Double:
+    type: number
+    format: double
   EBSOptions:
     type: object
     properties:
@@ -1204,11 +1386,18 @@ definitions:
           $ref: '#/definitions/ServiceUrl'
   ErrorMessage:
     type: string
+  GUID:
+    type: string
+    pattern: '\p{XDigit}{8}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{12}'
   IdentityPoolId:
     type: string
     pattern: '[\w-]+:[0-9a-f-]+'
     minLength: 1
     maxLength: 55
+  InstanceCount:
+    type: integer
+    description: Specifies the number of EC2 instances in the Elasticsearch domain.
+    minimum: 1
   InstanceCountLimits:
     type: object
     properties:
@@ -1225,6 +1414,8 @@ definitions:
     description: 'InstanceLimits represents the list of instance related attributes that are available for given InstanceType. '
   InstanceRole:
     type: string
+  Integer:
+    type: integer
   IntegerClass:
     type: integer
   InternalException:
@@ -1397,6 +1588,46 @@ definitions:
   PolicyDocument:
     type: string
     description: 'Access policy rules for an Elasticsearch domain service endpoints. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank">Configuring Access Policies</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>. The maximum size of a policy document is 100 KB.'
+  PurchaseReservedElasticsearchInstanceOfferingRequest:
+    type: object
+    required:
+      - ReservedElasticsearchInstanceOfferingId
+      - ReservationName
+    properties:
+      ReservedElasticsearchInstanceOfferingId:
+        $ref: '#/definitions/GUID'
+        description: The ID of the reserved Elasticsearch instance offering to purchase.
+      ReservationName:
+        $ref: '#/definitions/ReservationToken'
+        description: A customer-specified identifier to track this reservation.
+      InstanceCount:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of Elasticsearch instances to reserve.
+    description: Container for parameters to <code>PurchaseReservedElasticsearchInstanceOffering</code>
+  PurchaseReservedElasticsearchInstanceOfferingResponse:
+    type: object
+    properties:
+      ReservedElasticsearchInstanceId:
+        $ref: '#/definitions/GUID'
+        description: Details of the reserved Elasticsearch instance which was purchased.
+      ReservationName:
+        $ref: '#/definitions/ReservationToken'
+        description: The customer-specified identifier used to track this reservation.
+    description: Represents the output of a <code>PurchaseReservedElasticsearchInstanceOffering</code> operation.
+  RecurringCharge:
+    type: object
+    properties:
+      RecurringChargeAmount:
+        $ref: '#/definitions/Double'
+        description: The monetary amount of the recurring charge.
+      RecurringChargeFrequency:
+        $ref: '#/definitions/String'
+        description: The frequency of the recurring charge.
+    description: 'Contains the specific price and frequency of a recurring charges for a reserved Elasticsearch instance, or for a reserved Elasticsearch instance offering.'
+  RecurringChargeList:
+    type: array
+    items:
+      $ref: '#/definitions/RecurringCharge'
   RemoveTagsRequest:
     type: object
     required:
@@ -1410,6 +1641,95 @@ definitions:
         $ref: '#/definitions/StringList'
         description: Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.
     description: Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.
+  ReservationToken:
+    type: string
+    minLength: 5
+    maxLength: 64
+  ReservedElasticsearchInstance:
+    type: object
+    properties:
+      ReservationName:
+        $ref: '#/definitions/ReservationToken'
+        description: The customer-specified identifier to track this reservation.
+      ReservedElasticsearchInstanceId:
+        $ref: '#/definitions/GUID'
+        description: The unique identifier for the reservation.
+      ReservedElasticsearchInstanceOfferingId:
+        $ref: '#/definitions/String'
+        description: The offering identifier.
+      ElasticsearchInstanceType:
+        $ref: '#/definitions/ESPartitionInstanceType'
+        description: The Elasticsearch instance type offered by the reserved instance offering.
+      StartTime:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: The time the reservation started.
+      Duration:
+        $ref: '#/definitions/Integer'
+        description: 'The duration, in seconds, for which the Elasticsearch instance is reserved.'
+      FixedPrice:
+        $ref: '#/definitions/Double'
+        description: 'The upfront fixed charge you will paid to purchase the specific reserved Elasticsearch instance offering. '
+      UsagePrice:
+        $ref: '#/definitions/Double'
+        description: The rate you are charged for each hour for the domain that is using this reserved instance.
+      CurrencyCode:
+        $ref: '#/definitions/String'
+        description: The currency code for the reserved Elasticsearch instance offering.
+      ElasticsearchInstanceCount:
+        $ref: '#/definitions/Integer'
+        description: The number of Elasticsearch instances that have been reserved.
+      State:
+        $ref: '#/definitions/String'
+        description: The state of the reserved Elasticsearch instance.
+      PaymentOption:
+        $ref: '#/definitions/ReservedElasticsearchInstancePaymentOption'
+        description: The payment option as defined in the reserved Elasticsearch instance offering.
+      RecurringCharges:
+        $ref: '#/definitions/RecurringChargeList'
+        description: The charge to your account regardless of whether you are creating any domains using the instance offering.
+    description: Details of a reserved Elasticsearch instance.
+  ReservedElasticsearchInstanceList:
+    type: array
+    items:
+      $ref: '#/definitions/ReservedElasticsearchInstance'
+  ReservedElasticsearchInstanceOffering:
+    type: object
+    properties:
+      ReservedElasticsearchInstanceOfferingId:
+        $ref: '#/definitions/GUID'
+        description: The Elasticsearch reserved instance offering identifier.
+      ElasticsearchInstanceType:
+        $ref: '#/definitions/ESPartitionInstanceType'
+        description: The Elasticsearch instance type offered by the reserved instance offering.
+      Duration:
+        $ref: '#/definitions/Integer'
+        description: 'The duration, in seconds, for which the offering will reserve the Elasticsearch instance.'
+      FixedPrice:
+        $ref: '#/definitions/Double'
+        description: 'The upfront fixed charge you will pay to purchase the specific reserved Elasticsearch instance offering. '
+      UsagePrice:
+        $ref: '#/definitions/Double'
+        description: The rate you are charged for each hour the domain that is using the offering is running.
+      CurrencyCode:
+        $ref: '#/definitions/String'
+        description: The currency code for the reserved Elasticsearch instance offering.
+      PaymentOption:
+        $ref: '#/definitions/ReservedElasticsearchInstancePaymentOption'
+        description: Payment option for the reserved Elasticsearch instance offering
+      RecurringCharges:
+        $ref: '#/definitions/RecurringChargeList'
+        description: The charge to your account regardless of whether you are creating any domains using the instance offering.
+    description: Details of a reserved Elasticsearch instance offering.
+  ReservedElasticsearchInstanceOfferingList:
+    type: array
+    items:
+      $ref: '#/definitions/ReservedElasticsearchInstanceOffering'
+  ReservedElasticsearchInstancePaymentOption:
+    type: string
+    enum:
+      - ALL_UPFRONT
+      - PARTIAL_UPFRONT
+      - NO_UPFRONT
   ResourceAlreadyExistsException:
     type: object
     properties: {}

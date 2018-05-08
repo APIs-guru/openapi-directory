@@ -2056,6 +2056,8 @@ definitions:
       $ref: '#/definitions/Bucket'
   BytesProcessed:
     type: integer
+  BytesReturned:
+    type: integer
   BytesScanned:
     type: integer
   CORSConfiguration:
@@ -4182,6 +4184,9 @@ definitions:
       BytesProcessed:
         $ref: '#/definitions/BytesProcessed'
         description: Current number of uncompressed object bytes processed.
+      BytesReturned:
+        $ref: '#/definitions/BytesReturned'
+        description: Current number of bytes of records payload data returned.
   ProgressEvent:
     type: object
     properties:
@@ -4988,6 +4993,9 @@ definitions:
       BytesProcessed:
         $ref: '#/definitions/BytesProcessed'
         description: Total number of uncompressed object bytes processed.
+      BytesReturned:
+        $ref: '#/definitions/BytesReturned'
+        description: Total number of bytes of records payload data returned.
   StatsEvent:
     type: object
     properties:
