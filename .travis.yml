@@ -3,10 +3,17 @@ node_js:
   - "8"
 env:
   global:
-    - GH_REF: "github.com/APIs-guru/api-models.git"
+    - GH_REF: "github.com/APIs-guru/openapi-directory.git"
 deploy:
-  skip_cleanup: true
-  provider: script
-  script: 'git fetch --unshallow && npm run deploy'
-  on:
-    branch: master
+  - provider: script
+    skip_cleanup: true
+    script: 'git fetch --unshallow && npm run deploy'
+    on:
+      branch: master
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GH_TOKEN
+    keep-history: false
+    on:
+      branch: master
+
