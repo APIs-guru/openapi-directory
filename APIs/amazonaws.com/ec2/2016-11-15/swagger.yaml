@@ -1011,7 +1011,7 @@ paths:
   '/#CreateFleet':
     post:
       operationId: CreateFleet
-      description: '<p>Launches an EC2 Fleet.</p> <p>You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-ec2-fleet.html">Launching an EC2 Fleet</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Launches an EC2 Fleet.</p> <p>You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html">Launching an EC2 Fleet</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -8577,9 +8577,6 @@ definitions:
       $ref: '#/definitions/String'
   ConversionTask:
     type: object
-    required:
-      - ConversionTaskId
-      - State
     properties:
       ConversionTaskId:
         $ref: '#/definitions/String'
@@ -8724,6 +8721,26 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the new snapshot.
     description: Contains the output of CopySnapshot.
+  CpuOptions:
+    type: object
+    properties:
+      CoreCount:
+        $ref: '#/definitions/Integer'
+        description: The number of CPU cores for the instance.
+      ThreadsPerCore:
+        $ref: '#/definitions/Integer'
+        description: The number of threads per CPU core.
+    description: The CPU options for the instance.
+  CpuOptionsRequest:
+    type: object
+    properties:
+      CoreCount:
+        $ref: '#/definitions/Integer'
+        description: The number of CPU cores for the instance.
+      ThreadsPerCore:
+        $ref: '#/definitions/Integer'
+        description: 'The number of threads per CPU core. To disable Intel Hyper-Threading Technology for the instance, specify a value of <code>1</code>. Otherwise, specify the default value of <code>2</code>.'
+    description: The CPU options for the instance. Both the core count and threads per core must be specified in the request.
   CreateCustomerGatewayRequest:
     type: object
     required:
@@ -13544,10 +13561,6 @@ definitions:
     description: Describes a disk image.
   DiskImageDescription:
     type: object
-    required:
-      - Format
-      - ImportManifestUrl
-      - Size
     properties:
       Checksum:
         $ref: '#/definitions/String'
@@ -13591,8 +13604,6 @@ definitions:
       $ref: '#/definitions/DiskImage'
   DiskImageVolumeDescription:
     type: object
-    required:
-      - Id
     properties:
       Id:
         $ref: '#/definitions/String'
@@ -15135,8 +15146,6 @@ definitions:
     description: Contains the output for ImportInstance.
   ImportInstanceTaskDetails:
     type: object
-    required:
-      - Volumes
     properties:
       Description:
         $ref: '#/definitions/String'
@@ -15300,11 +15309,6 @@ definitions:
     description: Contains the output for ImportVolume.
   ImportVolumeTaskDetails:
     type: object
-    required:
-      - AvailabilityZone
-      - BytesConverted
-      - Image
-      - Volume
     properties:
       AvailabilityZone:
         $ref: '#/definitions/String'
@@ -15442,6 +15446,9 @@ definitions:
       VirtualizationType:
         $ref: '#/definitions/VirtualizationType'
         description: The virtualization type of the instance.
+      CpuOptions:
+        $ref: '#/definitions/CpuOptions'
+        description: The CPU options for the instance.
     description: Describes an instance.
   InstanceAttribute:
     type: object
@@ -19908,6 +19915,9 @@ definitions:
       CreditSpecification:
         $ref: '#/definitions/CreditSpecificationRequest'
         description: '<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>. To change this attribute after launch, use <a>ModifyInstanceCreditSpecification</a>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>standard</code> </p>'
+      CpuOptions:
+        $ref: '#/definitions/CpuOptionsRequest'
+        description: 'The CPU options for the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
     description: Contains the parameters for RunInstances.
   RunScheduledInstancesRequest:
     type: object
