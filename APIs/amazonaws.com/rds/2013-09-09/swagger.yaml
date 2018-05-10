@@ -2309,15 +2309,15 @@ definitions:
   AuthorizationAlreadyExistsFault:
     type: object
     properties: {}
-    description: The specified CIDRIP or EC2 security group is already authorized for the specified DB security group.
+    description: The specified CIDRIP or Amazon EC2 security group is already authorized for the specified DB security group.
   AuthorizationNotFoundFault:
     type: object
     properties: {}
-    description: <p>Specified CIDRIP or EC2 security group is not authorized for the specified DB security group.</p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>
+    description: <p>The specified CIDRIP or Amazon EC2 security group isn't authorized for the specified DB security group.</p> <p>RDS also may not be authorized by using IAM to perform necessary actions on your behalf.</p>
   AuthorizationQuotaExceededFault:
     type: object
     properties: {}
-    description: DB security group authorization quota has been reached.
+    description: The DB security group authorization quota has been reached.
   AuthorizeDBSecurityGroupIngressMessage:
     type: object
     required:
@@ -2693,7 +2693,7 @@ definitions:
   DBInstanceAlreadyExistsFault:
     type: object
     properties: {}
-    description: User already has a DB instance with the given identifier.
+    description: The user already has a DB instance with the given identifier.
   DBInstanceList:
     type: array
     items:
@@ -2708,7 +2708,7 @@ definitions:
   DBInstanceNotFoundFault:
     type: object
     properties: {}
-    description: ' <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. '
+    description: ' <i>DBInstanceIdentifier</i> doesn''t refer to an existing DB instance. '
   DBInstanceStatusInfo:
     type: object
     properties:
@@ -2727,7 +2727,7 @@ definitions:
   DBLogFileNotFoundFault:
     type: object
     properties: {}
-    description: ' <i>LogFileName</i> does not refer to an existing DB log file.'
+    description: ' <i>LogFileName</i> doesn''t refer to an existing DB log file.'
   DBParameterGroup:
     type: object
     properties:
@@ -2760,11 +2760,11 @@ definitions:
   DBParameterGroupNotFoundFault:
     type: object
     properties: {}
-    description: ' <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. '
+    description: ' <i>DBParameterGroupName</i> doesn''t refer to an existing DB parameter group. '
   DBParameterGroupQuotaExceededFault:
     type: object
     properties: {}
-    description: Request would result in user exceeding the allowed number of DB parameter groups.
+    description: The request would result in the user exceeding the allowed number of DB parameter groups.
   DBParameterGroupStatus:
     type: object
     properties:
@@ -2827,15 +2827,15 @@ definitions:
   DBSecurityGroupNotFoundFault:
     type: object
     properties: {}
-    description: ' <i>DBSecurityGroupName</i> does not refer to an existing DB security group. '
+    description: ' <i>DBSecurityGroupName</i> doesn''t refer to an existing DB security group. '
   DBSecurityGroupNotSupportedFault:
     type: object
     properties: {}
-    description: A DB security group is not allowed for this action.
+    description: A DB security group isn't allowed for this action.
   DBSecurityGroupQuotaExceededFault:
     type: object
     properties: {}
-    description: Request would result in user exceeding the allowed number of DB security groups.
+    description: The request would result in the user exceeding the allowed number of DB security groups.
   DBSecurityGroups:
     type: array
     items:
@@ -2897,7 +2897,7 @@ definitions:
   DBSnapshotNotFoundFault:
     type: object
     properties: {}
-    description: ' <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. '
+    description: ' <i>DBSnapshotIdentifier</i> doesn''t refer to an existing DB snapshot. '
   DBSubnetGroup:
     type: object
     properties:
@@ -2929,15 +2929,15 @@ definitions:
   DBSubnetGroupNotAllowedFault:
     type: object
     properties: {}
-    description: Indicates that the DBSubnetGroup should not be specified while creating read replicas that lie in the same region as the source instance.
+    description: The DBSubnetGroup shouldn't be specified while creating read replicas that lie in the same region as the source instance.
   DBSubnetGroupNotFoundFault:
     type: object
     properties: {}
-    description: ' <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. '
+    description: ' <i>DBSubnetGroupName</i> doesn''t refer to an existing DB subnet group. '
   DBSubnetGroupQuotaExceededFault:
     type: object
     properties: {}
-    description: Request would result in user exceeding the allowed number of DB subnet groups.
+    description: The request would result in the user exceeding the allowed number of DB subnet groups.
   DBSubnetGroups:
     type: array
     items:
@@ -2945,11 +2945,11 @@ definitions:
   DBSubnetQuotaExceededFault:
     type: object
     properties: {}
-    description: Request would result in user exceeding the allowed number of subnets in a DB subnet groups.
+    description: The request would result in the user exceeding the allowed number of subnets in a DB subnet groups.
   DBUpgradeDependencyFailureFault:
     type: object
     properties: {}
-    description: The DB upgrade failed because a resource the DB depends on could not be modified.
+    description: The DB upgrade failed because a resource the DB depends on can't be modified.
   DeleteDBInstanceMessage:
     type: object
     required:
@@ -3471,11 +3471,11 @@ definitions:
   InstanceQuotaExceededFault:
     type: object
     properties: {}
-    description: Request would result in user exceeding the allowed number of DB instances.
+    description: The request would result in the user exceeding the allowed number of DB instances.
   InsufficientDBInstanceCapacityFault:
     type: object
     properties: {}
-    description: Specified DB instance class is not available in the specified Availability Zone.
+    description: The specified DB instance class isn't available in the specified Availability Zone.
   Integer:
     type: integer
   IntegerOptional:
@@ -3483,31 +3483,31 @@ definitions:
   InvalidDBInstanceStateFault:
     type: object
     properties: {}
-    description: ' The specified DB instance is not in the <i>available</i> state. '
+    description: ' The specified DB instance isn''t in the <i>available</i> state. '
   InvalidDBParameterGroupStateFault:
     type: object
     properties: {}
-    description: 'The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you cannot delete it when the parameter group is in this state.'
+    description: 'The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you can''t delete it when the parameter group is in this state.'
   InvalidDBSecurityGroupStateFault:
     type: object
     properties: {}
-    description: The state of the DB security group does not allow deletion.
+    description: The state of the DB security group doesn't allow deletion.
   InvalidDBSnapshotStateFault:
     type: object
     properties: {}
-    description: The state of the DB snapshot does not allow deletion.
+    description: The state of the DB snapshot doesn't allow deletion.
   InvalidDBSubnetGroupFault:
     type: object
     properties: {}
-    description: Indicates the DBSubnetGroup does not belong to the same VPC as that of an existing cross region read replica of the same source instance.
+    description: The DBSubnetGroup doesn't belong to the same VPC as that of an existing cross-region read replica of the same source instance.
   InvalidDBSubnetGroupStateFault:
     type: object
     properties: {}
-    description: The DB subnet group cannot be deleted because it is in use.
+    description: The DB subnet group cannot be deleted because it's in use.
   InvalidDBSubnetStateFault:
     type: object
     properties: {}
-    description: ' The DB subnet is not in the <i>available</i> state. '
+    description: ' The DB subnet isn''t in the <i>available</i> state. '
   InvalidEventSubscriptionStateFault:
     type: object
     properties: {}
@@ -3515,11 +3515,11 @@ definitions:
   InvalidOptionGroupStateFault:
     type: object
     properties: {}
-    description: ' The option group is not in the <i>available</i> state. '
+    description: ' The option group isn''t in the <i>available</i> state. '
   InvalidRestoreFault:
     type: object
     properties: {}
-    description: Cannot restore from vpc backup to non-vpc DB instance.
+    description: Cannot restore from VPC backup to non-VPC DB instance.
   InvalidSubnet:
     type: object
     properties: {}
@@ -3527,7 +3527,7 @@ definitions:
   InvalidVPCNetworkStateFault:
     type: object
     properties: {}
-    description: DB subnet group does not cover all Availability Zones after it is created because users' change.
+    description: The DB subnet group doesn't cover all Availability Zones after it's created because of users' change.
   KeyList:
     type: array
     items:
@@ -4237,7 +4237,7 @@ definitions:
   SnapshotQuotaExceededFault:
     type: object
     properties: {}
-    description: Request would result in user exceeding the allowed number of DB snapshots.
+    description: The request would result in the user exceeding the allowed number of DB snapshots.
   SourceIdsList:
     type: array
     items:
@@ -4256,7 +4256,7 @@ definitions:
   StorageQuotaExceededFault:
     type: object
     properties: {}
-    description: Request would result in user exceeding the allowed amount of storage available across all DB instances.
+    description: The request would result in the user exceeding the allowed amount of storage available across all DB instances.
   String:
     type: string
   Subnet:
