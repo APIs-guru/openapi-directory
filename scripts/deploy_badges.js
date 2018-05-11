@@ -40,6 +40,6 @@ function saveShield(subject, status, color, icon) {
 
   return makeRequest.getRaw(url.href(), { retries: 10 })
     .then(data => {
-      util.saveFile(`dist/badges/${subject.toLowerCase()}.svg`, data);
+      util.saveFile(`deploy/badges/${subject.toLowerCase()}.svg`, data);
     });
 }
