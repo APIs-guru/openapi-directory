@@ -3,14 +3,9 @@
     "api-spec-converter": "^2.6.2",
     "bluebird": "^3.3.4",
     "commander": "^2.8.1",
-    "concurrent-transform": "^1.0.0",
     "deep-sort-object": "^1.0.1",
-    "deploy-to-gh-pages": "^1.2.0",
     "editor": "^1.0.0",
     "glob": "^7.0.3",
-    "gulp": "^3.9.1",
-    "gulp-awspublish": "^3.2.0",
-    "gulp-rename": "^1.2.2",
     "jgexml": "^0.3.8",
     "jiff": "^0.7.3",
     "js-yaml": "^3.4.3",
@@ -21,7 +16,6 @@
     "jsonpath": "^0.2.0",
     "lodash": "^4.6.1",
     "makeRequest": "github:apis-guru/makeRequest",
-    "merge-stream": "^1.0.0",
     "mime-db": "^1.19.0",
     "mime-lookup": "0.0.2",
     "mkdirp": "^0.5.1",
@@ -42,7 +36,7 @@
   },
   "scripts": {
     "test": "scripts/collection.js validate -q",
-    "deploy": "scripts/deploy.js && scripts/deployRss.js && ./scripts/deploy_badges.js && gulp publish"
+    "deploy": "scripts/deploy.js && scripts/deployRss.js && ./scripts/deploy_badges.js"
   },
   "devDependencies": {
     "dredd": "^4.7.0"

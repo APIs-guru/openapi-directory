@@ -10,7 +10,7 @@ var makeRequest = require('makeRequest');
 
 Promise.all([
     makeRequest.getJson('https://api.apis.guru/v2/metrics.json'),
-    makeRequest.getRaw('https://apis.guru/branding/icon-16x16.png'),
+    makeRequest.getRaw('http://apis.guru/branding/icon-16x16.png'),
   ])
   .spread((metrics, logo) => {
     var badges = [
@@ -40,6 +40,6 @@ function saveShield(subject, status, color, icon) {
 
   return makeRequest.getRaw(url.href(), { retries: 10 })
     .then(data => {
-      util.saveFile(`badges/${subject.toLowerCase()}.svg`, data);
+      util.saveFile(`dist/badges/${subject.toLowerCase()}.svg`, data);
     });
 }

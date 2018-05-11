@@ -15,21 +15,22 @@ var MIME = new MimeLookup(require('mime-db'));
 var makeRequest = require('makeRequest');
 var util = require('./util');
 
+sh.set('-e');
+sh.set('-v');
+
+sh.mkdir('deploy');
+sh.cp('resources/index.html', 'deploy/');
+sh.mkdir('deploy/v2');
+
 function deployDir(path) {
   assert(_.isString(path) && path[0] !== '/');
-  return Path.join('deploy', path);
+  return Path.join('deploy/v2', path);
 }
 
 function rootUrl(url) {
   assert(_.isString(url) && url[0] !== '/');
   return URI('https://api.apis.guru/v2/' + url).href();
 }
-
-sh.set('-e');
-sh.set('-v');
-
-sh.mkdir(deployDir(''));
-sh.cp('resources/index.html', deployDir(''));
 
 var apisGuruSwagger = util.readYaml('resources/apis_guru_swagger.yaml');
 var baseUrl = URI(rootUrl(''));

@@ -60,6 +60,6 @@ function finish(data) {
   return s;
 }
 
-const listFile = './deploy/list.json';
+const listFile = './deploy/v2/list.json';
 let xml = finish(JSON.parse(fs.readFileSync(listFile,'utf8')));
-fs.writeFileSync('./deploy/list.rss',xml,'utf8');
+fs.writeFileSync('./deploy/v2/list.rss',xml,'utf8');
