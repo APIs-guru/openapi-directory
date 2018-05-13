@@ -3,7 +3,7 @@ node_js:
   - "8"
 env:
   global:
-    - GH_REF: "github.com/APIs-guru/openapi-directory.git"
+    - GH_REF: "github.com/APIs-guru/openapi-directory-api.git"
 deploy:
   - provider: script
     skip_cleanup: true
@@ -13,7 +13,6 @@ deploy:
   - provider: pages
     skip-cleanup: true
     local-dir: deploy
-    fqdn: api.apis.guru
     github-token: $GH_DEPLOY_TOKEN
     keep-history: false
     on:
