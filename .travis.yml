@@ -11,9 +11,9 @@ deploy:
     skip-cleanup: true
     local-dir: deploy
     repo: APIs-guru/openapi-directory-api
+    fqdn: api.apis.guru
     github-token: $GH_DEPLOY_TOKEN
     keep-history: false
-    verbose: true
     on:
       branch: master
 
