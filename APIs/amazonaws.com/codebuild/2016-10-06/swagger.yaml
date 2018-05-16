@@ -226,7 +226,7 @@ paths:
   '/#CreateWebhook':
     post:
       operationId: CreateWebhook
-      description: '<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in <a href="http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console">Change a Build Project''s Settings</a>.</p> </important>'
+      description: '<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in <a href="http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console">Change a Build Project''s Settings</a>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -904,6 +904,9 @@ definitions:
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information about the build environment for this build.
+      serviceRole:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of a service role used for this build.
       logs:
         $ref: '#/definitions/LogsLocation'
         description: Information about the build's logs in Amazon CloudWatch Logs.
@@ -1404,7 +1407,7 @@ definitions:
         description: '<p>Along with <code>path</code> and <code>name</code>, the pattern that AWS CodeBuild will use to determine the name and location to store the output artifact, as follows:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, then this value will be ignored if specified, because no build output will be produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, then valid values include:</p> <ul> <li> <p> <code>BUILD_ID</code>: Include the build ID in the location of the build output artifact.</p> </li> <li> <p> <code>NONE</code>: Do not include the build ID. This is the default if <code>namespaceType</code> is not specified.</p> </li> </ul> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, then the output artifact would be stored in <code>MyArtifacts/<i>build-ID</i>/MyArtifact.zip</code>.</p>'
       name:
         $ref: '#/definitions/String'
-        description: '<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that AWS CodeBuild will use to name and store the output artifact, as follows:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, then this value will be ignored if specified, because no build output will be produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output artifact object.</p> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, then the output artifact would be stored in <code>MyArtifacts/<i>build-ID</i>/MyArtifact.zip</code>.</p>'
+        description: '<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that AWS CodeBuild will use to name and store the output artifact, as follows:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, then this value will be ignored if specified, because no build output will be produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output artifact object. If you set the name to be a forward slash ("/"), then the artifact is stored in the root of the output bucket.</p> </li> </ul> <p>For example:</p> <ul> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, then the output artifact would be stored in <code>MyArtifacts/<i>build-ID</i>/MyArtifact.zip</code>. </p> </li> <li> <p> If <code>path</code> is empty, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to "<code>/</code>", then the output artifact would be stored in the root of the output bucket. </p> </li> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to "<code>/</code>", then the output artifact would be stored in <code>MyArtifacts/<i>build-ID</i> </code>. </p> </li> </ul>'
       packaging:
         $ref: '#/definitions/ArtifactPackaging'
         description: '<p>The type of build output artifact to create, as follows:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, then this value will be ignored if specified, because no build output will be produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild will create in the output bucket a folder containing the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild will create in the output bucket a ZIP file containing the build output.</p> </li> </ul> </li> </ul>'
@@ -1566,12 +1569,45 @@ definitions:
       environmentVariablesOverride:
         $ref: '#/definitions/EnvironmentVariables'
         description: 'A set of environment variables that overrides, for this build only, the latest ones already defined in the build project.'
+      sourceTypeOverride:
+        $ref: '#/definitions/SourceType'
+        description: A source input type for this build that overrides the source input defined in the build project
+      sourceLocationOverride:
+        $ref: '#/definitions/String'
+        description: A location that overrides for this build the source location for the one defined in the build project.
+      sourceAuthOverride:
+        $ref: '#/definitions/SourceAuth'
+        description: An authorization type for this build that overrides the one defined in the build project. This override applies only if the build project's source is BitBucket or GitHub.
       gitCloneDepthOverride:
         $ref: '#/definitions/GitCloneDepth'
         description: 'The user-defined depth of history, with a minimum value of 0, that overrides, for this build only, any previous depth of history defined in the build project.'
       buildspecOverride:
         $ref: '#/definitions/String'
         description: 'A build spec declaration that overrides, for this build only, the latest one already defined in the build project.'
+      insecureSslOverride:
+        $ref: '#/definitions/WrapperBoolean'
+        description: Enable this flag to override the insecure SSL setting that is specified in the build project. The insecure SSL setting determines whether to ignore SSL warnings while connecting to the project source code. This override applies only if the build's source is GitHub Enterprise.
+      environmentTypeOverride:
+        $ref: '#/definitions/EnvironmentType'
+        description: A container type for this build that overrides the one specified in the build project.
+      imageOverride:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of an image for this build that overrides the one specified in the build project.
+      computeTypeOverride:
+        $ref: '#/definitions/ComputeType'
+        description: The name of a compute type for this build that overrides the one specified in the build project.
+      certificateOverride:
+        $ref: '#/definitions/String'
+        description: The name of a certificate for this build that overrides the one specified in the build project.
+      cacheOverride:
+        $ref: '#/definitions/ProjectCache'
+        description: A ProjectCache object specified for this build that overrides the one defined in the build project.
+      serviceRoleOverride:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of a service role for this build that overrides the one specified in the build project.
+      privilegedModeOverride:
+        $ref: '#/definitions/WrapperBoolean'
+        description: Enable this flag to override privileged mode in the build project.
       timeoutInMinutesOverride:
         $ref: '#/definitions/TimeOut'
         description: 'The number of build timeout minutes, from 5 to 480 (8 hours), that overrides, for this build only, the latest setting already defined in the build project.'

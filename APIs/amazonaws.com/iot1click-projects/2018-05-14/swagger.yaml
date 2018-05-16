@@ -1,0 +1,1020 @@
+swagger: '2.0'
+info:
+  version: '2018-05-14'
+  x-release: v4
+  title: AWS IoT 1-Click Projects Service
+  description: The AWS IoT 1-Click Project API Reference
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: iot1click-projects
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iot1click-projects-2018-05-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/iot1click/'
+host: projects.iot1click.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/projects/{projectName}/placements/{placementName}/devices/{deviceTemplateName}':
+    put:
+      operationId: AssociateDeviceWithPlacement
+      description: Associates a physical device with a placement.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateDeviceWithPlacementResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateDeviceWithPlacementRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+        - name: placementName
+          in: path
+          type: string
+          required: true
+        - name: deviceTemplateName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DisassociateDeviceFromPlacement
+      description: Removes a physical device from a placement.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateDeviceFromPlacementResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateDeviceFromPlacementRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+        - name: placementName
+          in: path
+          type: string
+          required: true
+        - name: deviceTemplateName
+          in: path
+          type: string
+          required: true
+  '/projects/{projectName}/placements':
+    post:
+      operationId: CreatePlacement
+      description: Creates an empty placement.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePlacementResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePlacementRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListPlacements
+      description: Lists the placement(s) of a project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPlacementsResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPlacementsRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+  /projects:
+    post:
+      operationId: CreateProject
+      description: Creates an empty project with a placement template. A project contains zero or more placements that adhere to the placement template defined in the project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProjectResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateProjectRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProjects
+      description: Lists the AWS IoT 1-Click project(s) associated with your AWS account and region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProjectsResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListProjectsRequest'
+  '/projects/{projectName}/placements/{placementName}':
+    delete:
+      operationId: DeletePlacement
+      description: '<p>Deletes a placement. To delete a placement, it must not have any devices associated with it.</p> <note> <p>When you delete a placement, all associated data becomes irretrievable.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeletePlacementResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeletePlacementRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+        - name: placementName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribePlacement
+      description: Describes a placement in a project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribePlacementResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribePlacementRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+        - name: placementName
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdatePlacement
+      description: 'Updates a placement with the given attributes. To clear an attribute, pass an empty value (i.e., "").'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdatePlacementResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePlacementRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+        - name: placementName
+          in: path
+          type: string
+          required: true
+  '/projects/{projectName}':
+    delete:
+      operationId: DeleteProject
+      description: '<p>Deletes a project. To delete a project, it must not have any placements associated with it.</p> <note> <p>When you delete a project, all associated data becomes irretrievable.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteProjectResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteProjectRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeProject
+      description: Returns an object describing a project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProjectResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProjectRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateProject
+      description: 'Updates a project associated with your AWS account and region. With the exception of device template names, you can pass just the values that need to be updated because the update request will change only the values that are provided. To clear a value, pass the empty string (i.e., <code>""</code>).'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateProjectResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateProjectRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+  '/projects/{projectName}/placements/{placementName}/devices':
+    get:
+      operationId: GetDevicesInPlacement
+      description: Returns an object enumerating the devices in a placement.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDevicesInPlacementResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDevicesInPlacementRequest'
+        - name: projectName
+          in: path
+          type: string
+          required: true
+        - name: placementName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AssociateDeviceWithPlacementRequest:
+    type: object
+    required:
+      - deviceId
+    properties:
+      deviceId:
+        $ref: '#/definitions/DeviceId'
+        description: The ID of the physical device to be associated with the given placement in the project. Note that a mandatory 4 character prefix is required for all <code>deviceId</code> values.
+  AssociateDeviceWithPlacementResponse:
+    type: object
+    properties: {}
+  AttributeDefaultValue:
+    type: string
+    maxLength: 800
+  AttributeName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  AttributeValue:
+    type: string
+    maxLength: 800
+  Code:
+    type: string
+  CreatePlacementRequest:
+    type: object
+    required:
+      - placementName
+    properties:
+      placementName:
+        $ref: '#/definitions/PlacementName'
+        description: The name of the placement to be created.
+      attributes:
+        $ref: '#/definitions/PlacementAttributeMap'
+        description: Optional user-defined key/value pairs providing contextual data (such as location or function) for the placement.
+  CreatePlacementResponse:
+    type: object
+    properties: {}
+  CreateProjectRequest:
+    type: object
+    required:
+      - projectName
+    properties:
+      projectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the project to create.
+      description:
+        $ref: '#/definitions/Description'
+        description: An optional description for the project.
+      placementTemplate:
+        $ref: '#/definitions/PlacementTemplate'
+        description: 'The schema defining the placement to be created. A placement template defines placement default attributes and device templates. You cannot add or remove device templates after the project has been created. However, you can update <code>callbackOverrides</code> for the device templates using the <code>UpdateProject</code> API.'
+  CreateProjectResponse:
+    type: object
+    properties: {}
+  DefaultPlacementAttributeMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeDefaultValue'
+  DeletePlacementRequest:
+    type: object
+    properties: {}
+  DeletePlacementResponse:
+    type: object
+    properties: {}
+  DeleteProjectRequest:
+    type: object
+    properties: {}
+  DeleteProjectResponse:
+    type: object
+    properties: {}
+  DescribePlacementRequest:
+    type: object
+    properties: {}
+  DescribePlacementResponse:
+    type: object
+    required:
+      - placement
+    properties:
+      placement:
+        $ref: '#/definitions/PlacementDescription'
+        description: An object describing the placement.
+  DescribeProjectRequest:
+    type: object
+    properties: {}
+  DescribeProjectResponse:
+    type: object
+    required:
+      - project
+    properties:
+      project:
+        $ref: '#/definitions/ProjectDescription'
+        description: An object describing the project.
+  Description:
+    type: string
+    minLength: 0
+    maxLength: 500
+  DeviceCallbackKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  DeviceCallbackOverrideMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DeviceCallbackKey'
+        value:
+          $ref: '#/definitions/DeviceCallbackValue'
+  DeviceCallbackValue:
+    type: string
+    maxLength: 200
+  DeviceId:
+    type: string
+    minLength: 1
+    maxLength: 32
+  DeviceMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DeviceTemplateName'
+        value:
+          $ref: '#/definitions/DeviceId'
+  DeviceTemplate:
+    type: object
+    properties:
+      deviceType:
+        $ref: '#/definitions/DeviceType'
+        description: 'The device type, which currently must be <code>"button"</code>.'
+      callbackOverrides:
+        $ref: '#/definitions/DeviceCallbackOverrideMap'
+        description: An optional Lambda function to invoke instead of the default Lambda function provided by the placement template.
+    description: An object representing a device for a placement template (see <a>PlacementTemplate</a>).
+  DeviceTemplateMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DeviceTemplateName'
+        value:
+          $ref: '#/definitions/DeviceTemplate'
+  DeviceTemplateName:
+    type: string
+    pattern: '^[a-zA-Z0-9_-]+$'
+    minLength: 1
+    maxLength: 128
+  DeviceType:
+    type: string
+    maxLength: 128
+  DisassociateDeviceFromPlacementRequest:
+    type: object
+    properties: {}
+  DisassociateDeviceFromPlacementResponse:
+    type: object
+    properties: {}
+  GetDevicesInPlacementRequest:
+    type: object
+    properties: {}
+  GetDevicesInPlacementResponse:
+    type: object
+    required:
+      - devices
+    properties:
+      devices:
+        $ref: '#/definitions/DeviceMap'
+        description: An object containing the devices (zero or more) within the placement.
+  InternalFailureException:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        $ref: '#/definitions/Code'
+      message:
+        $ref: '#/definitions/Message'
+    description: <p/>
+  InvalidRequestException:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        $ref: '#/definitions/Code'
+      message:
+        $ref: '#/definitions/Message'
+    description: <p/>
+  ListPlacementsRequest:
+    type: object
+    properties: {}
+  ListPlacementsResponse:
+    type: object
+    required:
+      - placements
+    properties:
+      placements:
+        $ref: '#/definitions/PlacementSummaryList'
+        description: An object listing the requested placements.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
+  ListProjectsRequest:
+    type: object
+    properties: {}
+  ListProjectsResponse:
+    type: object
+    required:
+      - projects
+    properties:
+      projects:
+        $ref: '#/definitions/ProjectSummaryList'
+        description: An object containing the list of projects.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
+  Message:
+    type: string
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  PlacementAttributeMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValue'
+  PlacementDescription:
+    type: object
+    required:
+      - projectName
+      - placementName
+      - attributes
+      - createdDate
+      - updatedDate
+    properties:
+      projectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the project containing the placement.
+      placementName:
+        $ref: '#/definitions/PlacementName'
+        description: The name of the placement.
+      attributes:
+        $ref: '#/definitions/PlacementAttributeMap'
+        description: The user-defined attributes associated with the placement.
+      createdDate:
+        $ref: '#/definitions/Time'
+        description: 'The date when the placement was initially created, in UNIX epoch time format.'
+      updatedDate:
+        $ref: '#/definitions/Time'
+        description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+    description: An object describing a project's placement.
+  PlacementName:
+    type: string
+    pattern: '^[a-zA-Z0-9_-]+$'
+    minLength: 1
+    maxLength: 128
+  PlacementSummary:
+    type: object
+    required:
+      - projectName
+      - placementName
+      - createdDate
+      - updatedDate
+    properties:
+      projectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the project containing the placement.
+      placementName:
+        $ref: '#/definitions/PlacementName'
+        description: The name of the placement being summarized.
+      createdDate:
+        $ref: '#/definitions/Time'
+        description: 'The date when the placement was originally created, in UNIX epoch time format.'
+      updatedDate:
+        $ref: '#/definitions/Time'
+        description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+    description: An object providing summary information for a particular placement.
+  PlacementSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/PlacementSummary'
+  PlacementTemplate:
+    type: object
+    properties:
+      defaultAttributes:
+        $ref: '#/definitions/DefaultPlacementAttributeMap'
+        description: The default attributes (key/value pairs) to be applied to all placements using this template.
+      deviceTemplates:
+        $ref: '#/definitions/DeviceTemplateMap'
+        description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
+    description: An object defining the template for a placement.
+  ProjectDescription:
+    type: object
+    required:
+      - projectName
+      - createdDate
+      - updatedDate
+    properties:
+      projectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the project for which to obtain information from.
+      description:
+        $ref: '#/definitions/Description'
+        description: The description of the project.
+      createdDate:
+        $ref: '#/definitions/Time'
+        description: 'The date when the project was originally created, in UNIX epoch time format.'
+      updatedDate:
+        $ref: '#/definitions/Time'
+        description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+      placementTemplate:
+        $ref: '#/definitions/PlacementTemplate'
+        description: An object describing the project's placement specifications.
+    description: An object providing detailed information for a particular project associated with an AWS account and region.
+  ProjectName:
+    type: string
+    pattern: '^[0-9A-Za-z_-]+$'
+    minLength: 1
+    maxLength: 128
+  ProjectSummary:
+    type: object
+    required:
+      - projectName
+      - createdDate
+      - updatedDate
+    properties:
+      projectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the project being summarized.
+      createdDate:
+        $ref: '#/definitions/Time'
+        description: 'The date when the project was originally created, in UNIX epoch time format.'
+      updatedDate:
+        $ref: '#/definitions/Time'
+        description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+    description: An object providing summary information for a particular project for an associated AWS account and region.
+  ProjectSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ProjectSummary'
+  ResourceConflictException:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        $ref: '#/definitions/Code'
+      message:
+        $ref: '#/definitions/Message'
+    description: <p/>
+  ResourceNotFoundException:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        $ref: '#/definitions/Code'
+      message:
+        $ref: '#/definitions/Message'
+    description: <p/>
+  Time:
+    type: string
+    format: date-time
+  TooManyRequestsException:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        $ref: '#/definitions/Code'
+      message:
+        $ref: '#/definitions/Message'
+    description: <p/>
+  UpdatePlacementRequest:
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/PlacementAttributeMap'
+        description: The user-defined object of attributes used to update the placement. The maximum number of key/value pairs is 50.
+  UpdatePlacementResponse:
+    type: object
+    properties: {}
+  UpdateProjectRequest:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/Description'
+        description: An optional user-defined description for the project.
+      placementTemplate:
+        $ref: '#/definitions/PlacementTemplate'
+        description: 'An object defining the project update. Once a project has been created, you cannot add device template names to the project. However, for a given <code>placementTemplate</code>, you can update the associated <code>callbackOverrides</code> for the device definition using this API.'
+  UpdateProjectResponse:
+    type: object
+    properties: {}

@@ -1,0 +1,850 @@
+swagger: '2.0'
+info:
+  version: '2018-05-14'
+  x-release: v4
+  title: AWS IoT 1-Click Devices Service
+  description: Stub description
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: iot1click-devices
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iot1click-devices-2018-05-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/iot1click/'
+host: devices.iot1click.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/claims/{claimCode}':
+    put:
+      operationId: ClaimDevicesByClaimCode
+      description: |-
+        Adds device(s) to your account (i.e., claim one or more devices) if and only if
+         you received a claim code with the device(s).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ClaimDevicesByClaimCodeResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ClaimDevicesByClaimCodeRequest'
+        - name: claimCode
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/devices/{deviceId}':
+    get:
+      operationId: DescribeDevice
+      description: |-
+        Given a device ID, returns a DescribeDeviceResponse object describing
+         the details of the device.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDeviceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDeviceRequest'
+        - name: deviceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/devices/{deviceId}/finalize-claim':
+    put:
+      operationId: FinalizeDeviceClaim
+      description: |-
+        <p>Given a device ID, finalizes the claim request for the associated device.</p><note>
+         <p>Claiming a device consists of initiating a claim, then publishing a device
+         event, and finalizing the claim. For a device of type button, a
+         device event can be published by simply clicking the device.</p>
+         </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FinalizeDeviceClaimResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: PreconditionFailedException
+          schema:
+            $ref: '#/definitions/PreconditionFailedException'
+        '484':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/FinalizeDeviceClaimRequest'
+        - name: deviceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/devices/{deviceId}/methods':
+    get:
+      operationId: GetDeviceMethods
+      description: |-
+        Given a device ID, returns the invokable methods associated with the
+         device.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDeviceMethodsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDeviceMethodsRequest'
+        - name: deviceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: InvokeDeviceMethod
+      description: |-
+        Given a device ID, issues a request to invoke a named device method (with possible
+         parameters). See the "Example POST" code snippet below.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InvokeDeviceMethodResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: PreconditionFailedException
+          schema:
+            $ref: '#/definitions/PreconditionFailedException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: RangeNotSatisfiableException
+          schema:
+            $ref: '#/definitions/RangeNotSatisfiableException'
+        '485':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InvokeDeviceMethodRequest'
+        - name: deviceId
+          in: path
+          type: string
+          required: true
+  '/devices/{deviceId}/initiate-claim':
+    put:
+      operationId: InitiateDeviceClaim
+      description: |-
+        <p>Given a device ID, initiates a claim request for the associated device.</p><note>
+         <p>Claiming a device consists of initiating a claim, then publishing a device
+         event, and finalizing the claim. For a device of type button, a
+         device event can be published by simply clicking the device.</p>
+         </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InitiateDeviceClaimResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InitiateDeviceClaimRequest'
+        - name: deviceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/devices/{deviceId}/events':
+    get:
+      operationId: ListDeviceEvents
+      description: |-
+        Using a device ID, returns a DeviceEventsResponse object containing
+         an array of events for the device.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDeviceEventsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: RangeNotSatisfiableException
+          schema:
+            $ref: '#/definitions/RangeNotSatisfiableException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDeviceEventsRequest'
+        - name: deviceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /devices:
+    get:
+      operationId: ListDevices
+      description: Lists the 1-Click compatible devices associated with your AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDevicesResponse'
+        '480':
+          description: RangeNotSatisfiableException
+          schema:
+            $ref: '#/definitions/RangeNotSatisfiableException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDevicesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/devices/{deviceId}/unclaim':
+    put:
+      operationId: UnclaimDevice
+      description: Disassociates a device from your AWS account using its device ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UnclaimDeviceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UnclaimDeviceRequest'
+        - name: deviceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/devices/{deviceId}/state':
+    put:
+      operationId: UpdateDeviceState
+      description: |-
+        Using a Boolean value (true or false), this operation
+         enables or disables the device given a device ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDeviceStateResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDeviceStateRequest'
+        - name: deviceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  Attributes:
+    type: object
+    properties: {}
+  ClaimDevicesByClaimCodeRequest:
+    type: object
+    properties: {}
+  ClaimDevicesByClaimCodeResponse:
+    type: object
+    properties:
+      ClaimCode:
+        $ref: '#/definitions/__stringMin12Max40'
+        description: The claim code provided by the device manufacturer.
+      Total:
+        $ref: '#/definitions/__integer'
+        description: |-
+          The total number of devices associated with the claim code that has been processed
+           in the claim request.
+  DescribeDeviceRequest:
+    type: object
+    properties: {}
+  DescribeDeviceResponse:
+    type: object
+    properties:
+      DeviceDescription:
+        $ref: '#/definitions/DeviceDescription'
+        description: Device details.
+  Device:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/Attributes'
+        description: The user specified attributes associated with the device for an event.
+      DeviceId:
+        $ref: '#/definitions/__string'
+        description: The unique identifier of the device.
+      Type:
+        $ref: '#/definitions/__string'
+        description: 'The device type, such as "button".'
+  DeviceAttributes:
+    type: array
+    description: |-
+
+       DeviceAttributes is a string-to-string map specified by the user.
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
+  DeviceClaimResponse:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/__string'
+        description: The device's final claim state.
+  DeviceDescription:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/DeviceAttributes'
+        description: |-
+          An array of zero or more elements of DeviceAttribute objects
+           providing user specified device attributes.
+      DeviceId:
+        $ref: '#/definitions/__string'
+        description: The unique identifier of the device.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: A Boolean value indicating whether or not the device is enabled.
+      RemainingLife:
+        $ref: '#/definitions/__doubleMin0Max100'
+        description: |-
+          A value between 0 and 1 inclusive, representing the fraction of life remaining for
+           the device.
+      Type:
+        $ref: '#/definitions/__string'
+        description: 'The type of the device, such as "button".'
+  DeviceEvent:
+    type: object
+    properties:
+      Device:
+        $ref: '#/definitions/Device'
+        description: An object representing the device associated with the event.
+      StdEvent:
+        $ref: '#/definitions/__string'
+        description: A serialized JSON object representing the device-type specific event.
+  DeviceEventsResponse:
+    type: object
+    properties:
+      Events:
+        $ref: '#/definitions/__listOfDeviceEvent'
+        description: |-
+          An array of zero or more elements describing the event(s) associated with the
+           device.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The token to retrieve the next set of results.
+  DeviceMethod:
+    type: object
+    properties:
+      DeviceType:
+        $ref: '#/definitions/__string'
+        description: 'The type of the device, such as "button".'
+      MethodName:
+        $ref: '#/definitions/__string'
+        description: The name of the method applicable to the deviceType.
+  Empty:
+    type: object
+    properties: {}
+    description: 'On success, an empty object is returned.'
+  FinalizeDeviceClaimRequest:
+    type: object
+    properties: {}
+  FinalizeDeviceClaimResponse:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/__string'
+        description: The device's final claim state.
+  ForbiddenException:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+        description: '403'
+      Message:
+        $ref: '#/definitions/__string'
+        description: The 403 error message returned by the web server.
+  GetDeviceMethodsRequest:
+    type: object
+    properties: {}
+  GetDeviceMethodsResponse:
+    type: object
+    properties:
+      DeviceMethods:
+        $ref: '#/definitions/__listOfDeviceMethod'
+        description: List of available device APIs.
+  InitiateDeviceClaimRequest:
+    type: object
+    properties: {}
+  InitiateDeviceClaimResponse:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/__string'
+        description: The device's final claim state.
+  InternalFailureException:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+        description: '500'
+      Message:
+        $ref: '#/definitions/__string'
+        description: The 500 error message returned by the web server.
+  InvalidRequestException:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+        description: '400'
+      Message:
+        $ref: '#/definitions/__string'
+        description: The 400 error message returned by the web server.
+  InvokeDeviceMethodRequest:
+    type: object
+    properties:
+      DeviceMethod:
+        $ref: '#/definitions/DeviceMethod'
+        description: The device method to invoke.
+      DeviceMethodParameters:
+        $ref: '#/definitions/__string'
+        description: A JSON encoded string containing the device method request parameters.
+  InvokeDeviceMethodResponse:
+    type: object
+    properties:
+      DeviceMethodResponse:
+        $ref: '#/definitions/__string'
+        description: A JSON encoded string containing the device method response.
+  ListDeviceEventsRequest:
+    type: object
+    properties: {}
+  ListDeviceEventsResponse:
+    type: object
+    properties:
+      Events:
+        $ref: '#/definitions/__listOfDeviceEvent'
+        description: |-
+          An array of zero or more elements describing the event(s) associated with the
+           device.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The token to retrieve the next set of results.
+  ListDevicesRequest:
+    type: object
+    properties: {}
+  ListDevicesResponse:
+    type: object
+    properties:
+      Devices:
+        $ref: '#/definitions/__listOfDeviceDescription'
+        description: A list of devices.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The token to retrieve the next set of results.
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
+  PreconditionFailedException:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+        description: '412'
+      Message:
+        $ref: '#/definitions/__string'
+        description: An error message explaining the error or its remedy.
+  RangeNotSatisfiableException:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+        description: '416'
+      Message:
+        $ref: '#/definitions/__string'
+        description: |-
+          The requested number of results specified by nextToken cannot be
+           satisfied.
+  ResourceConflictException:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+        description: '409'
+      Message:
+        $ref: '#/definitions/__string'
+        description: An error message explaining the error or its remedy.
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+        description: '404'
+      Message:
+        $ref: '#/definitions/__string'
+        description: The requested device could not be found.
+  UnclaimDeviceRequest:
+    type: object
+    properties: {}
+  UnclaimDeviceResponse:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/__string'
+        description: The device's final claim state.
+  UpdateDeviceStateRequest:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: |-
+          If true, the device is enabled. If false, the device is
+           disabled.
+  UpdateDeviceStateResponse:
+    type: object
+    properties: {}
+  __boolean:
+    type: boolean
+  __double:
+    type: number
+    format: double
+  __doubleMin0Max100:
+    type: number
+    format: double
+  __integer:
+    type: integer
+  __listOfDeviceDescription:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceDescription'
+  __listOfDeviceEvent:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceEvent'
+  __listOfDeviceMethod:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceMethod'
+  __long:
+    type: integer
+  __string:
+    type: string
+  __stringMin12Max40:
+    type: string
+    minLength: 12
+    maxLength: 40
+  __timestampIso8601:
+    type: string
+    format: date-time
+  __timestampUnix:
+    type: string
+    format: date-time
