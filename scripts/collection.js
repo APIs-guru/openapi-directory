@@ -303,7 +303,7 @@ function validateCollection(dir, command) {
         }
         if (errors) {
           logYaml(errors);
-          throw Error('Validation errors detected');
+          throw Error('Validation errors detected '+filename);
         }
         else {
           if (command.fix) {
