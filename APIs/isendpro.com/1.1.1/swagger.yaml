@@ -21,7 +21,7 @@ info:
 
     [2] Pour utiliser cette API vous devez:
     - Créer un compte iSendPro sur https://isendpro.com/
-    - Créditer votre compte 
+    - Créditer votre compte
         - Remarque: obtention d'un crédit de test possible sous conditions
     - Noter votre clé de compte (keyid)
       - Elle vous sera indispensable à l'utilisation de l'API
@@ -36,7 +36,7 @@ info:
   x-apisguru-categories:
     - messaging
   x-logo:
-    url: 'https://twitter.com/isendpro/profile_image?size=original'
+    url: 'https://en.isendpro.com/img/logo-isendpro.png'
   x-origin:
     - format: swagger
       url: 'https://apirest.isendpro.com/isendpro.json'
@@ -48,9 +48,9 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       description: |
-        Retourne les SMS envoyés sur une période donnée en fonction d'une date de début et d'une date de fin. 
+        Retourne les SMS envoyés sur une période donnée en fonction d'une date de début et d'une date de fin.
 
-        Les dates sont au format YYYY-MM-DD hh:mm. 
+        Les dates sont au format YYYY-MM-DD hh:mm.
 
         Le fichier rapport de campagne est sous la forme d'un fichier zip + contenant un fichier csv contenant le détail des envois.
       operationId: getCampagne
@@ -244,7 +244,7 @@ paths:
       consumes:
         - application/json
       description: |
-        Réalise un lookup HLR sur les numéros 
+        Réalise un lookup HLR sur les numéros
       operationId: getHlr
       parameters:
         - description: ''
