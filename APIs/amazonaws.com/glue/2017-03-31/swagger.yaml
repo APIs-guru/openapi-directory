@@ -3431,6 +3431,9 @@ definitions:
       Timeout:
         $ref: '#/definitions/Timeout'
         description: The job run timeout in minutes. It overrides the timeout value of the job.
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job run notification.
     description: Defines an action to be initiated by a trigger.
   ActionList:
     type: array
@@ -4328,6 +4331,9 @@ definitions:
       Timeout:
         $ref: '#/definitions/Timeout'
         description: The job timeout in minutes. The default is 2880 minutes (48 hours).
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job notification.
   CreateJobResponse:
     type: object
     properties:
@@ -4837,6 +4843,8 @@ definitions:
         $ref: '#/definitions/MaxConcurrentRuns'
         description: The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
     description: An execution property of a job.
+  ExecutionTime:
+    type: integer
   FieldType:
     type: string
   FilterString:
@@ -5613,6 +5621,9 @@ definitions:
       Timeout:
         $ref: '#/definitions/Timeout'
         description: The job timeout in minutes.
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job notification.
     description: Specifies a job definition.
   JobBookmarkEntry:
     type: object
@@ -5692,11 +5703,14 @@ definitions:
         $ref: '#/definitions/IntegerValue'
         description: 'The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
       ExecutionTime:
-        $ref: '#/definitions/IntegerValue'
+        $ref: '#/definitions/ExecutionTime'
         description: The amount of time (in seconds) that the job run consumed resources.
       Timeout:
         $ref: '#/definitions/Timeout'
         description: The job run timeout in minutes.
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job run notification.
     description: Contains information about a job run.
   JobRunList:
     type: array
@@ -5745,6 +5759,9 @@ definitions:
       Timeout:
         $ref: '#/definitions/Timeout'
         description: The job timeout in minutes. The default is 2880 minutes (48 hours).
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job notification.
     description: Specifies information used to update an existing job definition. Note that the previous job definition will be completely overwritten by this information.
   JsonClassifier:
     type: object
@@ -5920,6 +5937,16 @@ definitions:
   NonNegativeInteger:
     type: integer
     minimum: 0
+  NotificationProperty:
+    type: object
+    properties:
+      NotifyDelayAfter:
+        $ref: '#/definitions/NotifyDelayAfter'
+        description: 'After a job run starts, the number of minutes to wait before sending a job run delay notification.'
+    description: Specifies configuration properties of a notification.
+  NotifyDelayAfter:
+    type: integer
+    minimum: 1
   OperationTimeoutException:
     type: object
     properties:
@@ -6302,6 +6329,9 @@ definitions:
       Timeout:
         $ref: '#/definitions/Timeout'
         description: The job run timeout in minutes. It overrides the timeout value of the job.
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job run notification.
   StartJobRunResponse:
     type: object
     properties:

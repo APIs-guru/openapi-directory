@@ -761,7 +761,7 @@ paths:
   '/#CancelSpotInstanceRequests':
     post:
       operationId: CancelSpotInstanceRequests
-      description: '<p>Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot price. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html">Spot Instance Requests</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <important> <p>Canceling a Spot Instance request does not terminate running Spot Instances associated with the request.</p> </important>'
+      description: <p>Cancels one or more Spot Instance requests.</p> <important> <p>Canceling a Spot Instance request does not terminate running Spot Instances associated with the request.</p> </important>
       responses:
         '200':
           description: Success
@@ -1334,7 +1334,7 @@ paths:
   '/#CreateNetworkInterfacePermission':
     post:
       operationId: CreateNetworkInterfacePermission
-      description: '<p>Grants an AWS authorized partner account permission to attach the specified network interface to an instance in their account.</p> <p>You can grant permission to a single AWS account only, and only one account at a time.</p>'
+      description: '<p>Grants an AWS-authorized account permission to attach the specified network interface to an instance in their account.</p> <p>You can grant permission to a single AWS account only, and only one account at a time.</p>'
       responses:
         '200':
           description: Success
@@ -4424,7 +4424,7 @@ paths:
   '/#DescribeSpotInstanceRequests':
     post:
       operationId: DescribeSpotInstanceRequests
-      description: '<p>Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the Spot price that you specify exceeds the current Spot price. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html">Spot Instance Requests</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot Instance by examining the response. If the status of the Spot Instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a>DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p> <p>Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.</p>'
+      description: '<p>Describes the specified Spot Instance requests.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot Instance by examining the response. If the status of the Spot Instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a>DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p> <p>Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.</p>'
       responses:
         '200':
           description: Success
@@ -6876,7 +6876,7 @@ paths:
   '/#RequestSpotInstances':
     post:
       operationId: RequestSpotInstances
-      description: 'Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the maximum price that you specify exceeds the current Spot price. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html">Spot Instance Requests</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+      description: '<p>Creates a Spot Instance request.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html">Spot Instance Requests</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>'
       responses:
         '200':
           description: Success
@@ -16023,6 +16023,7 @@ definitions:
       - i3.4xlarge
       - i3.8xlarge
       - i3.16xlarge
+      - i3.metal
       - hi1.4xlarge
       - hs1.8xlarge
       - c1.medium
@@ -16043,6 +16044,12 @@ definitions:
       - c5.4xlarge
       - c5.9xlarge
       - c5.18xlarge
+      - c5d.large
+      - c5d.xlarge
+      - c5d.2xlarge
+      - c5d.4xlarge
+      - c5d.9xlarge
+      - c5d.18xlarge
       - cc1.4xlarge
       - cc2.8xlarge
       - g2.2xlarge
@@ -21339,7 +21346,7 @@ definitions:
     properties:
       ResourceType:
         $ref: '#/definitions/ResourceType'
-        description: 'The type of resource to tag. Currently, the resource types that support tagging on creation are <code>instance</code> and <code>volume</code>. '
+        description: 'The type of resource to tag. Currently, the resource types that support tagging on creation are <code>instance</code>, <code>snapshot</code>, and <code>volume</code>. '
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags to apply to the resource.

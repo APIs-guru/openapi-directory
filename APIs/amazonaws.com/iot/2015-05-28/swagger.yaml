@@ -1132,6 +1132,46 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteJob
+      description: '<p>Deletes a job and its related job executions.</p> <p>Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error.</p> <p>Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InvalidStateTransitionException
+          schema:
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteJobRequest'
+        - name: jobId
+          in: path
+          type: string
+          required: true
     get:
       operationId: DescribeJob
       description: Describes a job.
@@ -2917,6 +2957,67 @@ paths:
           in: path
           type: string
           required: true
+  '/things/{thingName}/jobs/{jobId}/executionNumber/{executionNumber}':
+    delete:
+      operationId: DeleteJobExecution
+      description: Deletes a job execution.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InvalidStateTransitionException
+          schema:
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteJobExecutionRequest'
+        - name: jobId
+          in: path
+          type: string
+          required: true
+        - name: thingName
+          in: path
+          type: string
+          required: true
+        - name: executionNumber
+          in: path
+          type: string
+          required: true
+        - name: executionNumber
+          in: query
+          type: string
+        - name: thingName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/policies/{policyName}/version/{policyVersionId}':
     delete:
       operationId: DeletePolicyVersion
@@ -6687,6 +6788,12 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: You can't delete the resource because it is attached to one or more resources.
+  DeleteJobExecutionRequest:
+    type: object
+    properties: {}
+  DeleteJobRequest:
+    type: object
+    properties: {}
   DeleteOTAUpdateRequest:
     type: object
     properties: {}
@@ -7258,6 +7365,8 @@ definitions:
     type: boolean
   ForceDelete:
     type: boolean
+  ForceFlag:
+    type: boolean
   FunctionArn:
     type: string
   GEMaxResults:
@@ -7506,6 +7615,12 @@ definitions:
       message:
         $ref: '#/definitions/errorMessage'
     description: The response is invalid.
+  InvalidStateTransitionException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: 'An attempt was made to change to an invalid state, for example by deleting a job or a job execution which is "IN_PROGRESS" without setting the <code>force</code> parameter.'
   IotAnalyticsAction:
     type: object
     properties:
@@ -7517,8 +7632,8 @@ definitions:
         description: The name of the IoT Analytics channel to which message data will be sent.
       roleArn:
         $ref: '#/definitions/AwsArn'
-        description: 'The ARN of the role which has a policy that grants IoT permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).'
-    description: Sends message data to an AWS IoT Analytics channel.
+        description: 'The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).'
+    description: Sends messge data to an AWS IoT Analytics channel.
   IsAuthenticated:
     type: boolean
   IsDefaultVersion:
@@ -7732,6 +7847,7 @@ definitions:
       - IN_PROGRESS
       - CANCELED
       - COMPLETED
+      - DELETION_IN_PROGRESS
   JobSummary:
     type: object
     properties:
@@ -7829,7 +7945,7 @@ definitions:
       message:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
-    description: The number of attached entities exceeds the limit.
+    description: A limit has been exceeded.
   ListAttachedPoliciesRequest:
     type: object
     properties: {}

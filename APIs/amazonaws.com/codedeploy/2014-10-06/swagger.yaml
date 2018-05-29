@@ -2457,7 +2457,7 @@ definitions:
         description: '<p>The action to take on instances in the original environment after a successful blue/green deployment.</p> <ul> <li> <p>TERMINATE: Instances are terminated after a specified wait time.</p> </li> <li> <p>KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group.</p> </li> </ul>'
       terminationWaitTimeInMinutes:
         $ref: '#/definitions/Duration'
-        description: The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.
+        description: The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. The maximum setting is 2880 minutes (2 days).
     description: Information about whether instances in the original environment are terminated when a blue/green deployment is successful.
   Boolean:
     type: boolean
@@ -3953,10 +3953,10 @@ definitions:
     properties:
       elbInfoList:
         $ref: '#/definitions/ELBInfoList'
-        description: 'An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.'
+        description: '<p>An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p> <note> <p> Adding more than one load balancer to the array is not supported. </p> </note>'
       targetGroupInfoList:
         $ref: '#/definitions/TargetGroupInfoList'
-        description: 'An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.'
+        description: '<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p> <note> <p> Adding more than one target group to the array is not supported. </p> </note>'
     description: Information about the Elastic Load Balancing load balancer or target group used in a deployment.
   LogTail:
     type: string

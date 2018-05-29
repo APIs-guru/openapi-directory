@@ -1407,6 +1407,14 @@ definitions:
     minLength: 1
     maxLength: 127
     format: password
+  Action:
+    type: string
+    enum:
+      - CLIPBOARD_COPY_FROM_LOCAL_DEVICE
+      - CLIPBOARD_COPY_TO_LOCAL_DEVICE
+      - FILE_UPLOAD
+      - FILE_DOWNLOAD
+      - PRINTING_TO_LOCAL_DEVICE
   Application:
     type: object
     properties:
@@ -1681,6 +1689,9 @@ definitions:
       FeedbackURL:
         $ref: '#/definitions/FeedbackURL'
         description: 'The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.'
+      UserSettings:
+        $ref: '#/definitions/UserSettingList'
+        description: 'The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. '
   CreateStackResult:
     type: object
     properties:
@@ -2383,6 +2394,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OrganizationalUnitDistinguishedName'
+  Permission:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
   PlatformType:
     type: string
     enum:
@@ -2530,6 +2546,9 @@ definitions:
       StackErrors:
         $ref: '#/definitions/StackErrors'
         description: The errors for the stack.
+      UserSettings:
+        $ref: '#/definitions/UserSettingList'
+        description: The actions that are enabled or disabled for users during their streaming sessions. By default these actions are enabled.
     description: Describes a stack.
   StackAttribute:
     type: string
@@ -2538,6 +2557,7 @@ definitions:
       - REDIRECT_URL
       - FEEDBACK_URL
       - THEME_NAME
+      - USER_SETTINGS
   StackAttributes:
     type: array
     items:
@@ -2818,6 +2838,9 @@ definitions:
       AttributesToDelete:
         $ref: '#/definitions/StackAttributes'
         description: The stack attributes to delete.
+      UserSettings:
+        $ref: '#/definitions/UserSettingList'
+        description: 'The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.'
   UpdateStackResult:
     type: object
     properties:
@@ -2828,6 +2851,24 @@ definitions:
     type: string
     minLength: 2
     maxLength: 32
+  UserSetting:
+    type: object
+    required:
+      - Action
+      - Permission
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: The action that is enabled or disabled.
+      Permission:
+        $ref: '#/definitions/Permission'
+        description: Indicates whether the action is enabled or disabled.
+    description: Describes an action and whether the action is enabled or disabled for users during their streaming sessions.
+  UserSettingList:
+    type: array
+    items:
+      $ref: '#/definitions/UserSetting'
+    minItems: 1
   VisibilityType:
     type: string
     enum:

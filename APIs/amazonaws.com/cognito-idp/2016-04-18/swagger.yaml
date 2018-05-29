@@ -5253,7 +5253,7 @@ paths:
   '/#VerifySoftwareToken':
     post:
       operationId: VerifySoftwareToken
-      description: 'Use this API to register a user''s entered TOTP code and mark the user''s software token MFA status as "verified" if successful,'
+      description: 'Use this API to register a user''s entered TOTP code and mark the user''s software token MFA status as "verified" if successful. The request takes an access token or a session string, but not both.'
       responses:
         '200':
           description: Success
@@ -5757,7 +5757,7 @@ definitions:
     properties:
       ChallengeName:
         $ref: '#/definitions/ChallengeNameType'
-        description: '<p>The name of the challenge which you are responding to with this call. This is returned to you in the <code>AdminInitiateAuth</code> response if you need to pass another challenge.</p> <ul> <li> <p> <code>SMS_MFA</code>: Next challenge is to supply an <code>SMS_MFA_CODE</code>, delivered via SMS.</p> </li> <li> <p> <code>PASSWORD_VERIFIER</code>: Next challenge is to supply <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, and <code>TIMESTAMP</code> after the client-side SRP calculations.</p> </li> <li> <p> <code>CUSTOM_CHALLENGE</code>: This is returned if your custom authentication flow determines that the user should pass another challenge before tokens are issued.</p> </li> <li> <p> <code>DEVICE_SRP_AUTH</code>: If device tracking was enabled on your user pool and the previous challenges were passed, this challenge is returned so that Amazon Cognito can start tracking this device.</p> </li> <li> <p> <code>DEVICE_PASSWORD_VERIFIER</code>: Similar to <code>PASSWORD_VERIFIER</code>, but for devices only.</p> </li> <li> <p> <code>ADMIN_NO_SRP_AUTH</code>: This is returned if you need to authenticate with <code>USERNAME</code> and <code>PASSWORD</code> directly. An app client must be enabled to use this flow.</p> </li> <li> <p> <code>NEW_PASSWORD_REQUIRED</code>: For users which are required to change their passwords after successful first login. This challenge should be passed with <code>NEW_PASSWORD</code> and any other required attributes.</p> </li> </ul>'
+        description: '<p>The name of the challenge which you are responding to with this call. This is returned to you in the <code>AdminInitiateAuth</code> response if you need to pass another challenge.</p> <ul> <li> <p> <code>MFA_SETUP</code>: If MFA is required, users who do not have at least one of the MFA methods set up are presented with an <code>MFA_SETUP</code> challenge. The user must set up at least one MFA type to continue to authenticate.</p> </li> <li> <p> <code>SELECT_MFA_TYPE</code>: Selects the MFA type. Valid MFA options are <code>SMS_MFA</code> for text SMS MFA, and <code>SOFTWARE_TOKEN_MFA</code> for TOTP software token MFA.</p> </li> <li> <p> <code>SMS_MFA</code>: Next challenge is to supply an <code>SMS_MFA_CODE</code>, delivered via SMS.</p> </li> <li> <p> <code>PASSWORD_VERIFIER</code>: Next challenge is to supply <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, and <code>TIMESTAMP</code> after the client-side SRP calculations.</p> </li> <li> <p> <code>CUSTOM_CHALLENGE</code>: This is returned if your custom authentication flow determines that the user should pass another challenge before tokens are issued.</p> </li> <li> <p> <code>DEVICE_SRP_AUTH</code>: If device tracking was enabled on your user pool and the previous challenges were passed, this challenge is returned so that Amazon Cognito can start tracking this device.</p> </li> <li> <p> <code>DEVICE_PASSWORD_VERIFIER</code>: Similar to <code>PASSWORD_VERIFIER</code>, but for devices only.</p> </li> <li> <p> <code>ADMIN_NO_SRP_AUTH</code>: This is returned if you need to authenticate with <code>USERNAME</code> and <code>PASSWORD</code> directly. An app client must be enabled to use this flow.</p> </li> <li> <p> <code>NEW_PASSWORD_REQUIRED</code>: For users which are required to change their passwords after successful first login. This challenge should be passed with <code>NEW_PASSWORD</code> and any other required attributes.</p> </li> </ul>'
       Session:
         $ref: '#/definitions/SessionType'
         description: 'The session which should be passed both ways in challenge-response calls to the service. If <code>AdminInitiateAuth</code> or <code>AdminRespondToAuthChallenge</code> API call determines that the caller needs to go through another challenge, they return a session with other challenge parameters. This session should be passed as it is to the next <code>AdminRespondToAuthChallenge</code> API call.'
@@ -6255,7 +6255,7 @@ definitions:
         description: The access token.
       ExpiresIn:
         $ref: '#/definitions/IntegerType'
-        description: The expiration period of the authentication result.
+        description: The expiration period of the authentication result in seconds.
       TokenType:
         $ref: '#/definitions/StringType'
         description: The token type.
@@ -6731,13 +6731,13 @@ definitions:
         description: A list of provider names for the identity providers that are supported on this client.
       CallbackURLs:
         $ref: '#/definitions/CallbackURLsListType'
-        description: A list of allowed callback URLs for the identity providers.
+        description: '<p>A list of allowed redirect (callback) URLs for the identity providers.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p>'
       LogoutURLs:
         $ref: '#/definitions/LogoutURLsListType'
         description: A list of allowed logout URLs for the identity providers.
       DefaultRedirectURI:
         $ref: '#/definitions/RedirectUrlType'
-        description: The default redirect URI. Must be in the <code>CallbackURLs</code> list.
+        description: '<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p>'
       AllowedOAuthFlows:
         $ref: '#/definitions/OAuthFlowsType'
         description: '<p>Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.</p> <p>Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.</p>'
@@ -7683,6 +7683,7 @@ definitions:
       - Facebook
       - Google
       - LoginWithAmazon
+      - OIDC
   IdpIdentifierType:
     type: string
     pattern: '[\w\s+=.@-]+'
@@ -8552,7 +8553,7 @@ definitions:
         description: Specifies whether the attribute type is developer only.
       Mutable:
         $ref: '#/definitions/BooleanType'
-        description: Specifies whether the attribute can be changed once it has been created.
+        description: Specifies whether the value of the attribute can be changed.
       Required:
         $ref: '#/definitions/BooleanType'
         description: 'Specifies whether a user pool attribute is required. If the attribute is required and the user does not provide a value, registration or sign-in will fail.'
@@ -9138,13 +9139,13 @@ definitions:
         description: A list of provider names for the identity providers that are supported on this client.
       CallbackURLs:
         $ref: '#/definitions/CallbackURLsListType'
-        description: A list of allowed callback URLs for the identity providers.
+        description: '<p>A list of allowed redirect (callback) URLs for the identity providers.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p>'
       LogoutURLs:
         $ref: '#/definitions/LogoutURLsListType'
         description: A list of allowed logout URLs for the identity providers.
       DefaultRedirectURI:
         $ref: '#/definitions/RedirectUrlType'
-        description: The default redirect URI. Must be in the <code>CallbackURLs</code> list.
+        description: '<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p>'
       AllowedOAuthFlows:
         $ref: '#/definitions/OAuthFlowsType'
         description: '<p>Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.</p> <p>Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.</p>'
@@ -9405,13 +9406,13 @@ definitions:
         description: A list of provider names for the identity providers that are supported on this client.
       CallbackURLs:
         $ref: '#/definitions/CallbackURLsListType'
-        description: A list of allowed callback URLs for the identity providers.
+        description: '<p>A list of allowed redirect (callback) URLs for the identity providers.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p>'
       LogoutURLs:
         $ref: '#/definitions/LogoutURLsListType'
         description: A list of allowed logout URLs for the identity providers.
       DefaultRedirectURI:
         $ref: '#/definitions/RedirectUrlType'
-        description: The default redirect URI. Must be in the <code>CallbackURLs</code> list.
+        description: '<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p>'
       AllowedOAuthFlows:
         $ref: '#/definitions/OAuthFlowsType'
         description: '<p>Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.</p> <p>Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.</p>'
@@ -9503,7 +9504,7 @@ definitions:
         description: The policies associated with the user pool.
       LambdaConfig:
         $ref: '#/definitions/LambdaConfigType'
-        description: The AWS Lambda triggers associated with tue user pool.
+        description: The AWS Lambda triggers associated with the user pool.
       Status:
         $ref: '#/definitions/StatusType'
         description: The status of a user pool.
@@ -9573,6 +9574,9 @@ definitions:
       UserPoolAddOns:
         $ref: '#/definitions/UserPoolAddOnsType'
         description: The user pool add-ons.
+      Arn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name (ARN) for the user pool.
     description: A container for information about the user pool.
   UserStatusType:
     type: string

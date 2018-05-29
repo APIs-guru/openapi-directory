@@ -1150,6 +1150,7 @@ definitions:
   EnvironmentType:
     type: string
     enum:
+      - WINDOWS_CONTAINER
       - LINUX_CONTAINER
   EnvironmentVariable:
     type: object
@@ -1336,6 +1337,7 @@ definitions:
       - DEBIAN
       - AMAZON_LINUX
       - UBUNTU
+      - WINDOWS_SERVER
   Project:
     type: object
     properties:

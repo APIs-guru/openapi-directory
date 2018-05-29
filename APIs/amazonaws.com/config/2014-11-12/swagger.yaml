@@ -335,6 +335,37 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRetentionConfiguration':
+    post:
+      operationId: DeleteRetentionConfiguration
+      description: Deletes the retention configuration.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: NoSuchRetentionConfigurationException
+          schema:
+            $ref: '#/definitions/NoSuchRetentionConfigurationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRetentionConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeliverConfigSnapshot':
     post:
       operationId: DeliverConfigSnapshot
@@ -825,6 +856,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeRetentionConfigurations':
+    post:
+      operationId: DescribeRetentionConfigurations
+      description: '<p>Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.</p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRetentionConfigurationsResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: NoSuchRetentionConfigurationException
+          schema:
+            $ref: '#/definitions/NoSuchRetentionConfigurationException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeRetentionConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetAggregateComplianceDetailsByConfigRule':
     post:
       operationId: GetAggregateComplianceDetailsByConfigRule
@@ -1061,7 +1129,7 @@ paths:
   '/#GetResourceConfigHistory':
     post:
       operationId: GetResourceConfigHistory
-      description: '<p>Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval.</p> <p>The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string. To get the next page of results, run the request again and specify the string for the <code>nextToken</code> parameter.</p> <note> <p>Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified <code>limit</code>. In such cases, you can make another call, using the <code>nextToken</code>.</p> </note>'
+      description: '<p>Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your <code>ConfigurationItems</code> between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the <code>ConfigurationItems</code> for the specified retention period. </p> <p>The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string. To get the next page of results, run the request again and specify the string for the <code>nextToken</code> parameter.</p> <note> <p>Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified <code>limit</code>. In such cases, you can make another call, using the <code>nextToken</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1406,6 +1474,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutRetentionConfiguration':
+    post:
+      operationId: PutRetentionConfiguration
+      description: '<p>Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the <code>RetentionConfiguration</code> object and names the object as <b>default</b>. When you have a <code>RetentionConfiguration</code> object named <b>default</b>, calling the API modifies the default object. </p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutRetentionConfigurationResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: MaxNumberOfRetentionConfigurationsExceededException
+          schema:
+            $ref: '#/definitions/MaxNumberOfRetentionConfigurationsExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutRetentionConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StartConfigRulesEvaluation':
     post:
       operationId: StartConfigRulesEvaluation
@@ -1518,7 +1619,7 @@ definitions:
         description: 'The 12-digit account ID of the account being aggregated. '
       AllAwsRegions:
         $ref: '#/definitions/Boolean'
-        description: 'If true, aggreagate existing AWS Config regions and future regions.'
+        description: 'If true, aggregate existing AWS Config regions and future regions.'
       AwsRegions:
         $ref: '#/definitions/AggregatorRegionList'
         description: The source regions being aggregated.
@@ -2275,6 +2376,14 @@ definitions:
       RequesterAwsRegion:
         $ref: '#/definitions/AwsRegion'
         description: The region requesting to aggregate data.
+  DeleteRetentionConfigurationRequest:
+    type: object
+    required:
+      - RetentionConfigurationName
+    properties:
+      RetentionConfigurationName:
+        $ref: '#/definitions/RetentionConfigurationName'
+        description: The name of the retention configuration to delete.
   DeliverConfigSnapshotRequest:
     type: object
     required:
@@ -2505,7 +2614,7 @@ definitions:
     properties:
       AggregatedSourceStatusList:
         $ref: '#/definitions/AggregatedSourceStatusList'
-        description: 'Retuns an AggregatedSourceStatus object. '
+        description: 'Returns an AggregatedSourceStatus object. '
       NextToken:
         $ref: '#/definitions/String'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
@@ -2608,6 +2717,24 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+  DescribeRetentionConfigurationsRequest:
+    type: object
+    properties:
+      RetentionConfigurationNames:
+        $ref: '#/definitions/RetentionConfigurationNameList'
+        description: '<p>A list of names of retention configurations for which you want details. If you do not specify a name, AWS Config returns details for all the retention configurations for that account.</p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
+  DescribeRetentionConfigurationsResponse:
+    type: object
+    properties:
+      RetentionConfigurations:
+        $ref: '#/definitions/RetentionConfigurationList'
+        description: Returns a retention configuration object.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   EarlierTime:
     type: string
     format: date-time
@@ -3031,6 +3158,10 @@ definitions:
     type: object
     properties: {}
     description: You have reached the limit of the number of delivery channels you can create.
+  MaxNumberOfRetentionConfigurationsExceededException:
+    type: object
+    properties: {}
+    description: Failed to add the retention configuration because a retention configuration with that name already exists.
   MaximumExecutionFrequency:
     type: string
     enum:
@@ -3086,6 +3217,10 @@ definitions:
     type: object
     properties: {}
     description: You have specified a delivery channel that does not exist.
+  NoSuchRetentionConfigurationException:
+    type: object
+    properties: {}
+    description: You have specified a retention configuration that does not exist.
   OrderingTimestamp:
     type: string
     format: date-time
@@ -3106,7 +3241,7 @@ definitions:
         description: The source regions being aggregated.
       AllAwsRegions:
         $ref: '#/definitions/Boolean'
-        description: 'If true, aggreagate existing AWS Config regions and future regions.'
+        description: 'If true, aggregate existing AWS Config regions and future regions.'
     description: This object contains regions to setup the aggregator and an IAM role to retrieve organization details.
   OrganizationAllFeaturesNotEnabledException:
     type: object
@@ -3217,6 +3352,20 @@ definitions:
         $ref: '#/definitions/Evaluations'
         description: Requests that failed because of a client or server error.
     description: <p/>
+  PutRetentionConfigurationRequest:
+    type: object
+    required:
+      - RetentionPeriodInDays
+    properties:
+      RetentionPeriodInDays:
+        $ref: '#/definitions/RetentionPeriodInDays'
+        description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
+  PutRetentionConfigurationResponse:
+    type: object
+    properties:
+      RetentionConfiguration:
+        $ref: '#/definitions/RetentionConfiguration'
+        description: Returns a retention configuration object.
   RecorderName:
     type: string
     minLength: 1
@@ -3420,6 +3569,38 @@ definitions:
       $ref: '#/definitions/StringWithCharLimit256'
     minItems: 0
     maxItems: 20
+  RetentionConfiguration:
+    type: object
+    required:
+      - Name
+      - RetentionPeriodInDays
+    properties:
+      Name:
+        $ref: '#/definitions/RetentionConfigurationName'
+        description: The name of the retention configuration object.
+      RetentionPeriodInDays:
+        $ref: '#/definitions/RetentionPeriodInDays'
+        description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
+    description: An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in AWS Config.
+  RetentionConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/RetentionConfiguration'
+  RetentionConfigurationName:
+    type: string
+    pattern: '[\w\-]+'
+    minLength: 1
+    maxLength: 256
+  RetentionConfigurationNameList:
+    type: array
+    items:
+      $ref: '#/definitions/RetentionConfigurationName'
+    minItems: 0
+    maxItems: 1
+  RetentionPeriodInDays:
+    type: integer
+    minimum: 30
+    maximum: 2557
   RuleLimit:
     type: integer
     minimum: 0

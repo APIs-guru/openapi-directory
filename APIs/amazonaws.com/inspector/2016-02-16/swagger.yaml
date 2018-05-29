@@ -169,6 +169,10 @@ paths:
           description: NoSuchEntityException
           schema:
             $ref: '#/definitions/NoSuchEntityException'
+        '485':
+          description: InvalidCrossAccountRoleException
+          schema:
+            $ref: '#/definitions/InvalidCrossAccountRoleException'
       parameters:
         - name: body
           in: body
@@ -1957,7 +1961,6 @@ definitions:
     required:
       - arn
       - name
-      - resourceGroupArn
       - createdAt
       - updatedAt
     properties:
@@ -2139,7 +2142,6 @@ definitions:
     type: object
     required:
       - assessmentTargetName
-      - resourceGroupArn
     example:
       assessmentTargetName: ExampleAssessmentTarget
       resourceGroupArn: 'arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-AB6DMKnv'
@@ -3823,7 +3825,6 @@ definitions:
     required:
       - assessmentTargetArn
       - assessmentTargetName
-      - resourceGroupArn
     example:
       assessmentTargetArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX'
       assessmentTargetName: Example
