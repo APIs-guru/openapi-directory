@@ -386,7 +386,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the addons of a specific cluster.
+      description: Sets the addons for a specific cluster.
       operationId: container.projects.zones.clusters.addons
       parameters:
         - in: body
@@ -500,7 +500,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the locations of a specific cluster.
+      description: Sets the locations for a specific cluster.
       operationId: container.projects.zones.clusters.locations
       parameters:
         - in: body
@@ -557,7 +557,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the logging service of a specific cluster.
+      description: Sets the logging service for a specific cluster.
       operationId: container.projects.zones.clusters.logging
       parameters:
         - in: body
@@ -614,7 +614,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Updates the master of a specific cluster.
+      description: Updates the master for a specific cluster.
       operationId: container.projects.zones.clusters.master
       parameters:
         - in: body
@@ -671,7 +671,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the monitoring service of a specific cluster.
+      description: Sets the monitoring service for a specific cluster.
       operationId: container.projects.zones.clusters.monitoring
       parameters:
         - in: body
@@ -948,7 +948,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the autoscaling settings of a specific node pool.
+      description: Sets the autoscaling settings for a specific node pool.
       operationId: container.projects.zones.clusters.nodePools.autoscaling
       parameters:
         - in: body
@@ -1076,7 +1076,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the size of a specific node pool.
+      description: Sets the size for a specific node pool.
       operationId: container.projects.zones.clusters.nodePools.setSize
       parameters:
         - in: body
@@ -1140,7 +1140,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Updates the version and/or image type of a specific node pool.
+      description: Updates the version and/or image type for a specific node pool.
       operationId: container.projects.zones.clusters.nodePools.update
       parameters:
         - in: body
@@ -1439,7 +1439,7 @@ paths:
     post:
       description: |-
         Used to set master auth materials. Currently supports :-
-        Changing the admin password of a specific cluster.
+        Changing the admin password for a specific cluster.
         This can be either via password generation or explicitly set the password.
       operationId: container.projects.zones.clusters.setMasterAuth
       parameters:
@@ -1865,8 +1865,8 @@ paths:
       tags:
         - projects
     get:
-      description: Retrieves the node pool requested.
-      operationId: container.projects.locations.clusters.nodePools.get
+      description: Gets the specified operation.
+      operationId: container.projects.locations.operations.get
       parameters:
         - description: |-
             Deprecated. The name of the cluster.
@@ -1875,23 +1875,22 @@ paths:
           name: clusterId
           type: string
         - description: |-
-            The name (project, location, cluster, node pool id) of the node pool to
-            get. Specified in the format
-            'projects/*/locations/*/clusters/*/nodePools/*'.
+            The name (project, location, operation id) of the operation to get.
+            Specified in the format 'projects/*/locations/*/operations/*'.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            Deprecated. The name of the node pool.
+            Deprecated. The server-assigned `name` of the operation.
             This field has been deprecated and replaced by the name field.
           in: query
-          name: nodePoolId
+          name: operationId
           type: string
         - description: |-
             Deprecated. The Google Developers Console [project ID or project
-            number](https://developers.google.com/console/help/new/#projectnumber).
+            number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: query
           name: projectId
@@ -1908,7 +1907,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/NodePool'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1929,7 +1928,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates the version and/or image type of a specific node pool.
+      description: Updates the version and/or image type for a specific node pool.
       operationId: container.projects.locations.clusters.nodePools.update
       parameters:
         - in: body
@@ -2148,7 +2147,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the addons of a specific cluster.
+      description: Sets the addons for a specific cluster.
       operationId: container.projects.locations.clusters.setAddons
       parameters:
         - in: body
@@ -2189,7 +2188,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the autoscaling settings of a specific node pool.
+      description: Sets the autoscaling settings for a specific node pool.
       operationId: container.projects.locations.clusters.nodePools.setAutoscaling
       parameters:
         - in: body
@@ -2272,7 +2271,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the locations of a specific cluster.
+      description: Sets the locations for a specific cluster.
       operationId: container.projects.locations.clusters.setLocations
       parameters:
         - in: body
@@ -2313,7 +2312,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the logging service of a specific cluster.
+      description: Sets the logging service for a specific cluster.
       operationId: container.projects.locations.clusters.setLogging
       parameters:
         - in: body
@@ -2440,7 +2439,7 @@ paths:
     post:
       description: |-
         Used to set master auth materials. Currently supports :-
-        Changing the admin password of a specific cluster.
+        Changing the admin password for a specific cluster.
         This can be either via password generation or explicitly set the password.
       operationId: container.projects.locations.clusters.setMasterAuth
       parameters:
@@ -2482,7 +2481,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the monitoring service of a specific cluster.
+      description: Sets the monitoring service for a specific cluster.
       operationId: container.projects.locations.clusters.setMonitoring
       parameters:
         - in: body
@@ -2605,7 +2604,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the size of a specific node pool.
+      description: Sets the size for a specific node pool.
       operationId: container.projects.locations.clusters.nodePools.setSize
       parameters:
         - in: body
@@ -2688,7 +2687,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Updates the master of a specific cluster.
+      description: Updates the master for a specific cluster.
       operationId: container.projects.locations.clusters.updateMaster
       parameters:
         - in: body
@@ -3175,9 +3174,7 @@ definitions:
         description: The authentication information for accessing the master endpoint.
       masterAuthorizedNetworksConfig:
         $ref: '#/definitions/MasterAuthorizedNetworksConfig'
-        description: |-
-          Master authorized networks is a Beta feature.
-          The configuration options for master authorized networks feature.
+        description: The configuration options for master authorized networks feature.
       monitoringService:
         description: |-
           The monitoring service the cluster should use to write metrics.
@@ -3310,9 +3307,7 @@ definitions:
         type: array
       desiredMasterAuthorizedNetworksConfig:
         $ref: '#/definitions/MasterAuthorizedNetworksConfig'
-        description: |-
-          Master authorized networks is a Beta feature.
-          The desired configuration options for master authorized networks feature.
+        description: The desired configuration options for master authorized networks feature.
       desiredMasterVersion:
         description: |-
           The Kubernetes version to change the master to.
@@ -3723,7 +3718,6 @@ definitions:
     type: object
   MasterAuthorizedNetworksConfig:
     description: |-
-      Master authorized networks is a Beta feature.
       Configuration options for the master authorized networks feature. Enabled
       master authorized networks will disallow all external traffic to access
       Kubernetes master through HTTPS except traffic from the given CIDR blocks,

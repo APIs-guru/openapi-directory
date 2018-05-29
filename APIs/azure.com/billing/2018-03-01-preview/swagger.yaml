@@ -84,6 +84,8 @@ paths:
                     properties:
                       principalName: dan@contoso.com
                     type: Microsoft.Billing/enrollmentAccounts
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/enrollmentAccounts/{name}':
     get:
       description: Gets a enrollment account by name.

@@ -354,8 +354,14 @@ parameters:
     name: Text Content
     required: true
     schema:
-      format: binary
-      type: string
+      format: file
+      type: object
+    x-ms-parameter-location: method
+  textLanguage:
+    description: Language of the text.
+    in: query
+    name: language
+    type: string
     x-ms-parameter-location: method
   timescale:
     description: Timescale of the video.
@@ -1405,7 +1411,7 @@ paths:
       description: Detects profanity in more than 100 languages and match against custom and shared blacklists.
       operationId: TextModeration_ScreenText
       parameters:
-        - $ref: '#/parameters/language'
+        - $ref: '#/parameters/textLanguage'
         - $ref: '#/parameters/autocorrect'
         - $ref: '#/parameters/PII'
         - $ref: '#/parameters/listIdQueryParameter'
@@ -1451,10 +1457,38 @@ paths:
           responses:
             '200':
               body:
+                Classification:
+                  Category1:
+                    Score: 0.00040505084325559437
+                  Category2:
+                    Score: 0.2234508991241455
+                  Category3:
+                    Score: 0.9879999756813049
+                  ReviewRecommended: true
                 Language: eng
                 Misrepresentation: []
                 NormalizedText: 'Is this a crap email abcdef@ abcd. com, phone: 6657789887, IP: 255. 255. 255. 255, 1 Microsoft Way, Redmond, WA 98052'
                 OriginalText: 'Is this a crap email abcdef@abcd.com, phone: 6657789887, IP: 255.255.255.255, 1 Microsoft Way, Redmond, WA 98052'
+                PII:
+                  Address:
+                    - Index: 78
+                      Text: '1 Microsoft Way, Redmond, WA 98052'
+                  Email:
+                    - Detected: abcdef@abcd.com
+                      Index: 21
+                      SubType: Regular
+                      Text: abcdef@abcd.com
+                  IPA:
+                    - Index: 61
+                      SubType: IPV4
+                      Text: 255.255.255.255
+                  Phone:
+                    - CountryCode: US
+                      Index: 45
+                      Text: '6657789887'
+                  SSN:
+                    - Index: 45
+                      Text: '665778988'
                 Status:
                   Code: 3000
                   Description: OK
@@ -2380,6 +2414,10 @@ definitions:
         items:
           $ref: '#/definitions/Phone'
         type: array
+      SSN:
+        items:
+          $ref: '#/definitions/SSN'
+        type: array
   Phone:
     description: Phone Property details.
     properties:
@@ -2461,6 +2499,15 @@ definitions:
     items:
       type: string
     type: array
+  SSN:
+    description: Detected SSN details.
+    properties:
+      Index:
+        description: Index(Location) of the SSN in the input text content.
+        type: integer
+      Text:
+        description: Detected SSN in the input text content.
+        type: string
   Screen:
     description: The response for a Screen text request.
     properties:

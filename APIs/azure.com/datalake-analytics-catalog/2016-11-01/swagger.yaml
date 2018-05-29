@@ -1629,6 +1629,134 @@ paths:
                 partitionName: test_partition_name
                 schemaName: dbo
                 version: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+  '/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/partitions/{partitionName}/previewrows':
+    get:
+      description: Retrieves a preview set of rows in given partition.
+      operationId: Catalog_PreviewTablePartition
+      parameters:
+        - description: The name of the database containing the partition.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: The name of the schema containing the partition.
+          in: path
+          name: schemaName
+          required: true
+          type: string
+        - description: The name of the table containing the partition.
+          in: path
+          name: tableName
+          required: true
+          type: string
+        - description: The name of the table partition.
+          in: path
+          name: partitionName
+          required: true
+          type: string
+        - description: The maximum number of preview rows to be retrieved.Rows returned may be less than or equal to this number depending on row sizes and number of rows in the partition.
+          format: int64
+          in: query
+          name: maxRows
+          required: false
+          type: integer
+        - description: The maximum number of columns to be retrieved.
+          format: int64
+          in: query
+          name: maxColumns
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved preview rows for the specified partition.
+          schema:
+            $ref: '#/definitions/USqlTablePreview'
+      tags:
+        - Catalog
+      x-ms-examples:
+        Retrieves a preview set of rows in given partition:
+          parameters:
+            accountName: contosoadla
+            adlaCatalogDnsSuffix: azuredatalakeanalytics.net
+            api-version: '2016-11-01'
+            databaseName: master
+            partitionName: test_partition_name
+            schemaName: dbo
+            tableName: test_table_name
+          responses:
+            '200':
+              body:
+                rows:
+                  - - value_a
+                    - value_b
+                schema:
+                  - name: test_column_name
+                    type: test_data_type
+                totalColumnCount: 2
+                totalRowCount: 1
+                truncated: false
+  '/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/previewrows':
+    get:
+      description: Retrieves a preview set of rows in given table.
+      operationId: Catalog_PreviewTable
+      parameters:
+        - description: The name of the database containing the table.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: The name of the schema containing the table.
+          in: path
+          name: schemaName
+          required: true
+          type: string
+        - description: The name of the table.
+          in: path
+          name: tableName
+          required: true
+          type: string
+        - description: The maximum number of preview rows to be retrieved. Rows returned may be less than or equal to this number depending on row sizes and number of rows in the table.
+          format: int64
+          in: query
+          name: maxRows
+          required: false
+          type: integer
+        - description: The maximum number of columns to be retrieved.
+          format: int64
+          in: query
+          name: maxColumns
+          required: false
+          type: integer
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved preview rows for the specified table.
+          schema:
+            $ref: '#/definitions/USqlTablePreview'
+      tags:
+        - Catalog
+      x-ms-examples:
+        Retrieves a preview set of rows in given table:
+          parameters:
+            accountName: contosoadla
+            adlaCatalogDnsSuffix: azuredatalakeanalytics.net
+            api-version: '2016-11-01'
+            databaseName: master
+            schemaName: dbo
+            tableName: test_table_name
+          responses:
+            '200':
+              body:
+                rows:
+                  - - value_a
+                    - value_b
+                schema:
+                  - name: test_column_name
+                    type: test_data_type
+                totalColumnCount: 2
+                totalRowCount: 1
+                truncated: false
   '/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics':
     get:
       description: Retrieves the list of table statistics from the Data Lake Analytics catalog.
@@ -1794,6 +1922,97 @@ paths:
                 updateTime: '2017-04-14T13:21:56.6819037-07:00'
                 userStatName: test_user_stat_name
                 version: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+  '/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/tablefragments':
+    get:
+      description: Retrieves the list of table fragments from the Data Lake Analytics catalog.
+      operationId: Catalog_ListTableFragments
+      parameters:
+        - description: The name of the database containing the table fragments.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: The name of the schema containing the table fragments.
+          in: path
+          name: schemaName
+          required: true
+          type: string
+        - description: The name of the table containing the table fragments.
+          in: path
+          name: tableName
+          required: true
+          type: string
+        - description: OData filter. Optional.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: The number of items to return. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+        - description: The number of items to skip over before returning elements. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $skip
+          required: false
+          type: integer
+        - description: 'OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional.'
+          in: query
+          name: $select
+          required: false
+          type: string
+        - description: 'OrderBy clause. One or more comma-separated expressions with an optional "asc" (the default) or "desc" depending on the order you''d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional.'
+          in: query
+          name: $orderby
+          required: false
+          type: string
+        - description: 'The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional.'
+          in: query
+          name: $count
+          required: false
+          type: boolean
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of table fragments in the specified database and schema.
+          schema:
+            $ref: '#/definitions/USqlTableFragmentList'
+      tags:
+        - Catalog
+      x-ms-examples:
+        Retrieves the list of table fragments from the Data Lake Analytics catalog:
+          parameters:
+            $count: false
+            $filter: test_filter
+            $orderby: test_orderby
+            $select: test_select
+            $skip: 1
+            $top: 1
+            accountName: contosoadla
+            adlaCatalogDnsSuffix: azuredatalakeanalytics.net
+            api-version: '2016-11-01'
+            databaseName: master
+            schemaName: dbo
+            tableName: test_table_name
+          responses:
+            '200':
+              body:
+                nextLink: 'https://contosoadla.datalakeanalytics.net/catalog/usql/databases/master/schema/dbo/tables/test_table_name/tablefragments?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - createDate: '2017-10-11T06:38:31.567-07:00'
+                    fragmentId: 797d2643-eed9-4900-8090-0f8ddd9e8ba7
+                    indexId: 1
+                    parentId: 9d2d7abd-c641-4ddb-88ab-90cafdfe1c1b
+                    rowCount: 1
+                    size: 33786
+      x-ms-odata: '#/definitions/USqlTableFragment'
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tabletypes':
     get:
       description: Retrieves the list of table types from the Data Lake Analytics catalog.
@@ -3456,6 +3675,44 @@ definitions:
       type:
         description: the object type of the specified column (such as System.String).
         type: string
+  USqlTableFragment:
+    description: A Data Lake Analytics catalog U-SQL table fragment item.
+    properties:
+      createDate:
+        description: the creation time of the table fragment.
+        format: date-time
+        type: string
+      fragmentId:
+        description: the version of the catalog item.
+        format: uuid
+        type: string
+      indexId:
+        description: the ordinal of the index which contains the table fragment.
+        format: int32
+        type: integer
+      parentId:
+        description: the parent object Id of the table fragment. The parent could be a table or table partition.
+        format: uuid
+        type: string
+      rowCount:
+        description: the number of rows in the table fragment.
+        format: int64
+        type: integer
+      size:
+        description: the data size of the table fragment in bytes.
+        format: int64
+        type: integer
+  USqlTableFragmentList:
+    allOf:
+      - $ref: '#/definitions/CatalogItemList'
+    description: A Data Lake Analytics catalog U-SQL table fragment item list.
+    properties:
+      value:
+        description: 'the list of table fragments in the database, schema and table combination'
+        items:
+          $ref: '#/definitions/USqlTableFragment'
+        readOnly: true
+        type: array
   USqlTableList:
     allOf:
       - $ref: '#/definitions/CatalogItemList'
@@ -3509,6 +3766,32 @@ definitions:
           $ref: '#/definitions/USqlTablePartition'
         readOnly: true
         type: array
+  USqlTablePreview:
+    description: A Data Lake Analytics catalog table or partition preview rows item.
+    properties:
+      rows:
+        description: 'the rows of the table or partition preview, where each row is an array of string representations the row''s values. Note: Byte arrays will appear as base-64 encoded values, SqlMap and SqlArray objects will appear as escaped JSON objects, and DateTime objects will appear as ISO formatted UTC date-times.'
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      schema:
+        description: the schema of the table or partition.
+        items:
+          $ref: '#/definitions/USqlTableColumn'
+        type: array
+      totalColumnCount:
+        description: the total number of columns in the table or partition.
+        format: int64
+        type: integer
+      totalRowCount:
+        description: the total number of rows in the table or partition.
+        format: int64
+        type: integer
+      truncated:
+        description: true if the amount of data in the response is less than expected due to the preview operation's size limitations. This can occur if the requested rows or row counts are too large.
+        type: boolean
   USqlTableStatistics:
     allOf:
       - $ref: '#/definitions/CatalogItem'

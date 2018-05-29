@@ -36,10 +36,93 @@ securityDefinitions:
 security:
   - apim_key: []
 paths:
+  /v2.0/entities:
+    post:
+      deprecated: false
+      description: 'To get even more information on each recognized entity we recommend using the Bing Entity Search API by querying for the recognized entities names. See the <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages">Supported languages in Text Analytics API</a> for the list of enabled languages.'
+      operationId: Entities
+      parameters:
+        - description: Collection of documents to analyze.
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/MultiLanguageBatchInput'
+      responses:
+        '200':
+          description: A successful call results in a list of recognized entities returned for each valid document
+          schema:
+            $ref: '#/definitions/EntitiesBatchResult'
+        default:
+          description: Error Response
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: The API returns a list of recognized entities in a given document.
+      tags:
+        - Entities
+      x-ms-examples:
+        Successful Entities request:
+          parameters:
+            AzureRegion: westus
+            Ocp-Apim-Subscription-Key: '{API key}'
+            input:
+              documents:
+                - id: '1'
+                  language: en
+                  text: Microsoft released Windows 10
+                - id: '2'
+                  language: en
+                  text: 'In 1975, Bill Gates III and Paul Allen founded the company.'
+          responses:
+            '200':
+              body:
+                documents:
+                  - entities:
+                      - bingId: 5f9fbd03-49c4-39ef-cc95-de83ab897b94
+                        matches:
+                          - length: 10
+                            offset: 19
+                            text: Windows 10
+                        name: Windows 10
+                        wikipediaId: Windows 10
+                        wikipediaLanguage: en
+                        wikipediaUrl: 'https://en.wikipedia.org/wiki/Windows_10'
+                      - bingId: a093e9b9-90f5-a3d5-c4b8-5855e1b01f85
+                        matches:
+                          - length: 9
+                            offset: 0
+                            text: Microsoft
+                        name: Microsoft
+                        wikipediaId: Microsoft
+                        wikipediaLanguage: en
+                        wikipediaUrl: 'https://en.wikipedia.org/wiki/Microsoft'
+                    id: '1'
+                  - entities:
+                      - bingId: 0d47c987-0042-5576-15e8-97af601614fa
+                        matches:
+                          - length: 14
+                            offset: 9
+                            text: Bill Gates III
+                        name: Bill Gates
+                        wikipediaId: Bill Gates
+                        wikipediaLanguage: en
+                        wikipediaUrl: 'https://en.wikipedia.org/wiki/Bill_Gates'
+                      - bingId: df2c4376-9923-6a54-893f-2ee5a5badbc7
+                        matches:
+                          - length: 10
+                            offset: 28
+                            text: Paul Allen
+                        name: Paul Allen
+                        wikipediaId: Paul Allen
+                        wikipediaLanguage: en
+                        wikipediaUrl: 'https://en.wikipedia.org/wiki/Paul_Allen'
+                    id: '2'
+                errors: []
+              headers: {}
   /v2.0/keyPhrases:
     post:
       deprecated: false
-      description: 'We employ techniques from Microsoft Office''s sophisticated Natural Language Processing toolkit. See the <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.'
+      description: 'See the <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.'
       operationId: Key Phrases
       parameters:
         - description: Collection of documents to analyze. Documents can now contain a language field to indicate the text language
@@ -63,8 +146,9 @@ paths:
       x-ms-examples:
         Successful Key Phrase request:
           parameters:
+            AzureRegion: westus
             Ocp-Apim-Subscription-Key: '{API key}'
-            body:
+            input:
               documents:
                 - id: '1'
                   language: en
@@ -121,10 +205,11 @@ paths:
       tags:
         - Detect Language
       x-ms-examples:
-        Successful Key Phrase request:
+        Successful Detect Language request:
           parameters:
+            AzureRegion: westus
             Ocp-Apim-Subscription-Key: '{API key}'
-            body:
+            input:
               documents:
                 - id: '1'
                   text: If this demo doesn't work I will be super sad
@@ -163,7 +248,7 @@ paths:
   /v2.0/sentiment:
     post:
       deprecated: false
-      description: 'Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. Sentiment score is generated using classification techniques. The input features to the classifier include n-grams, features generated from part-of-speech tags, and word embeddings. See the <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages">Text Analytics Documentation</a> for details about the languages that are supported by sentiment analysis.'
+      description: 'Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. A score of 0.5 indicates the lack of sentiment (e.g. a factoid statement). See the <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages">Text Analytics Documentation</a> for details about the languages that are supported by sentiment analysis.'
       operationId: Sentiment
       parameters:
         - description: Collection of documents to analyze.
@@ -185,10 +270,11 @@ paths:
       tags:
         - Sentiment
       x-ms-examples:
-        Successful Key Phrase request:
+        Successful Sentiment request:
           parameters:
+            AzureRegion: westus
             Ocp-Apim-Subscription-Key: '{API key}'
-            body:
+            input:
               documents:
                 - id: '1'
                   language: en
@@ -246,6 +332,57 @@ definitions:
         description: A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
         format: double
         type: number
+    type: object
+  EntitiesBatchResult:
+    properties:
+      documents:
+        items:
+          $ref: '#/definitions/EntitiesBatchResultItem'
+        readOnly: true
+        type: array
+      errors:
+        items:
+          $ref: '#/definitions/ErrorRecord'
+        readOnly: true
+        type: array
+    type: object
+  EntitiesBatchResultItem:
+    properties:
+      entities:
+        description: Recognized entities in the document.
+        items:
+          $ref: '#/definitions/EntityRecord'
+        readOnly: true
+        type: array
+      id:
+        description: Unique document identifier.
+        readOnly: true
+        type: string
+    type: object
+  EntityRecord:
+    properties:
+      bingId:
+        description: Bing unique identifier of the recognized entity. Use in conjunction with the Bing Entity Search API to fetch additional relevant information.
+        type: string
+      matches:
+        description: List of instances this entity appears in the text.
+        items:
+          $ref: '#/definitions/MatchRecord'
+        readOnly: true
+        type: array
+      name:
+        description: Entity formal name.
+        type: string
+      wikipediaId:
+        description: Wikipedia unique identifier of the recognized entity.
+        type: string
+      wikipediaLanguage:
+        description: Wikipedia language for which the WikipediaId and WikipediaUrl refers to.
+        type: string
+      wikipediaUrl:
+        description: URL for the entity's English Wikipedia page.
+        readOnly: true
+        type: string
     type: object
   ErrorRecord:
     properties:
@@ -334,6 +471,20 @@ definitions:
       id:
         description: Unique document identifier.
         readOnly: true
+        type: string
+    type: object
+  MatchRecord:
+    properties:
+      length:
+        description: Length (in Unicode characters) for the entity match text.
+        format: int32
+        type: integer
+      offset:
+        description: Start position (in Unicode characters) for the entity match text.
+        format: int32
+        type: integer
+      text:
+        description: Entity text as appears in the request.
         type: string
     type: object
   MultiLanguageBatchInput:

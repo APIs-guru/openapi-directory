@@ -3223,6 +3223,18 @@ paths:
       summary: 'Returns all orders, newest first.'
       tags:
         - my
+  '/my/orders/buying/by_uuid/{uuid}':
+    get:
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - my
   /my/orders/buying/unpaid:
     get:
       description: 'Returns unpaid orders, newest first.'
@@ -3308,6 +3320,18 @@ paths:
         - oauth2:
             - read_orders
       summary: See previous orders from buyer
+      tags:
+        - my
+  '/my/orders/selling/by_uuid/{uuid}':
+    get:
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
       tags:
         - my
   /my/orders/selling/unpaid:

@@ -209,32 +209,28 @@ paths:
                   unit: Count
                 type: Microsoft.Sql/locations/usages
 definitions:
-  ProxyResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM proxy resource.
-    properties: {}
-    type: object
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    type: object
-    x-ms-azure-resource: true
   SubscriptionUsage:
     allOf:
-      - $ref: '#/definitions/ProxyResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+        properties: {}
+        type: object
     description: Usage Metric of a Subscription in a Location.
     properties:
       properties:

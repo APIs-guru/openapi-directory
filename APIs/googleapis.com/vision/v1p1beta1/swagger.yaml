@@ -115,8 +115,50 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: files
   - name: images
 paths:
+  '/v1p1beta1/files:asyncBatchAnnotate':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Run asynchronous image detection and annotation for a list of generic
+        files, such as PDF files, which may contain multiple pages and multiple
+        images per page. Progress and results can be retrieved through the
+        `google.longrunning.Operations` interface.
+        `Operation.metadata` contains `OperationMetadata` (metadata).
+        `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
+      operationId: vision.files.asyncBatchAnnotate
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-vision'
+      tags:
+        - files
   '/v1p1beta1/images:annotate':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -153,6 +195,160 @@ paths:
       tags:
         - images
 definitions:
+  AnnotateFileResponse:
+    description: |-
+      Response to a single file annotation request. A file may contain one or more
+      images, which individually have their own responses.
+    properties:
+      inputConfig:
+        $ref: '#/definitions/InputConfig'
+        description: Information about the file for which this response is generated.
+      responses:
+        description: Individual responses to images found within the file.
+        items:
+          $ref: '#/definitions/AnnotateImageResponse'
+        type: array
+    type: object
+  AnnotateImageResponse:
+    description: Response to an image annotation request.
+    properties:
+      context:
+        $ref: '#/definitions/ImageAnnotationContext'
+        description: |-
+          If present, contextual information is needed to understand where this image
+          comes from.
+      cropHintsAnnotation:
+        $ref: '#/definitions/CropHintsAnnotation'
+        description: 'If present, crop hints have completed successfully.'
+      error:
+        $ref: '#/definitions/Status'
+        description: |-
+          If set, represents the error message for the operation.
+          Note that filled-in image annotations are guaranteed to be
+          correct, even when `error` is set.
+      faceAnnotations:
+        description: 'If present, face detection has completed successfully.'
+        items:
+          $ref: '#/definitions/FaceAnnotation'
+        type: array
+      fullTextAnnotation:
+        $ref: '#/definitions/TextAnnotation'
+        description: |-
+          If present, text (OCR) detection or document (OCR) text detection has
+          completed successfully.
+          This annotation provides the structural hierarchy for the OCR detected
+          text.
+      imagePropertiesAnnotation:
+        $ref: '#/definitions/ImageProperties'
+        description: 'If present, image properties were extracted successfully.'
+      labelAnnotations:
+        description: 'If present, label detection has completed successfully.'
+        items:
+          $ref: '#/definitions/EntityAnnotation'
+        type: array
+      landmarkAnnotations:
+        description: 'If present, landmark detection has completed successfully.'
+        items:
+          $ref: '#/definitions/EntityAnnotation'
+        type: array
+      logoAnnotations:
+        description: 'If present, logo detection has completed successfully.'
+        items:
+          $ref: '#/definitions/EntityAnnotation'
+        type: array
+      safeSearchAnnotation:
+        $ref: '#/definitions/SafeSearchAnnotation'
+        description: 'If present, safe-search annotation has completed successfully.'
+      textAnnotations:
+        description: 'If present, text (OCR) detection has completed successfully.'
+        items:
+          $ref: '#/definitions/EntityAnnotation'
+        type: array
+      webDetection:
+        $ref: '#/definitions/WebDetection'
+        description: 'If present, web detection has completed successfully.'
+    type: object
+  AsyncAnnotateFileResponse:
+    description: The response for a single offline file annotation request.
+    properties:
+      outputConfig:
+        $ref: '#/definitions/OutputConfig'
+        description: The output location and metadata from AsyncAnnotateFileRequest.
+    type: object
+  AsyncBatchAnnotateFilesResponse:
+    description: Response to an async batch file annotation request.
+    properties:
+      responses:
+        description: |-
+          The list of file annotation responses, one for each request in
+          AsyncBatchAnnotateFilesRequest.
+        items:
+          $ref: '#/definitions/AsyncAnnotateFileResponse'
+        type: array
+    type: object
+  Block:
+    description: Logical element on the page.
+    properties:
+      blockType:
+        description: 'Detected block type (text, image etc) for this block.'
+        enum:
+          - UNKNOWN
+          - TEXT
+          - TABLE
+          - PICTURE
+          - RULER
+          - BARCODE
+        type: string
+      boundingBox:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding box for the block.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+
+          * when the text is horizontal it might look like:
+
+                  0----1
+                  |    |
+                  3----2
+
+          * when it's rotated 180 degrees around the top-left corner it becomes:
+
+                  2----3
+                  |    |
+                  1----0
+
+            and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results on the block. Range [0, 1].'
+        format: float
+        type: number
+      paragraphs:
+        description: List of paragraphs in this block (if this blocks is of type text).
+        items:
+          $ref: '#/definitions/Paragraph'
+        type: array
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected for the block.
+    type: object
+  BoundingPoly:
+    description: A bounding polygon for the detected image annotation.
+    properties:
+      normalizedVertices:
+        description: The bounding polygon normalized vertices.
+        items:
+          $ref: '#/definitions/NormalizedVertex'
+        type: array
+      vertices:
+        description: The bounding polygon vertices.
+        items:
+          $ref: '#/definitions/Vertex'
+        type: array
+    type: object
   Color:
     description: |-
       Represents a color in the RGBA color space. This representation is designed
@@ -298,6 +494,312 @@ definitions:
         format: float
         type: number
     type: object
+  ColorInfo:
+    description: |-
+      Color information consists of RGB channels, score, and the fraction of
+      the image that the color occupies in the image.
+    properties:
+      color:
+        $ref: '#/definitions/Color'
+        description: RGB components of the color.
+      pixelFraction:
+        description: |-
+          The fraction of pixels the color occupies in the image.
+          Value in range [0, 1].
+        format: float
+        type: number
+      score:
+        description: 'Image-specific score for this color. Value in range [0, 1].'
+        format: float
+        type: number
+    type: object
+  CropHint:
+    description: Single crop hint that is used to generate a new crop when serving an image.
+    properties:
+      boundingPoly:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding polygon for the crop region. The coordinates of the bounding
+          box are in the original image's scale, as returned in `ImageParams`.
+      confidence:
+        description: 'Confidence of this being a salient region.  Range [0, 1].'
+        format: float
+        type: number
+      importanceFraction:
+        description: |-
+          Fraction of importance of this salient region with respect to the original
+          image.
+        format: float
+        type: number
+    type: object
+  CropHintsAnnotation:
+    description: Set of crop hints that are used to generate new crops when serving images.
+    properties:
+      cropHints:
+        description: Crop hint results.
+        items:
+          $ref: '#/definitions/CropHint'
+        type: array
+    type: object
+  DetectedBreak:
+    description: Detected start or end of a structural component.
+    properties:
+      isPrefix:
+        description: True if break prepends the element.
+        type: boolean
+      type:
+        description: Detected break type.
+        enum:
+          - UNKNOWN
+          - SPACE
+          - SURE_SPACE
+          - EOL_SURE_SPACE
+          - HYPHEN
+          - LINE_BREAK
+        type: string
+    type: object
+  DetectedLanguage:
+    description: Detected language for a structural component.
+    properties:
+      confidence:
+        description: 'Confidence of detected language. Range [0, 1].'
+        format: float
+        type: number
+      languageCode:
+        description: |-
+          The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+          information, see
+          http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+        type: string
+    type: object
+  DominantColorsAnnotation:
+    description: Set of dominant colors and their corresponding scores.
+    properties:
+      colors:
+        description: RGB color values with their score and pixel fraction.
+        items:
+          $ref: '#/definitions/ColorInfo'
+        type: array
+    type: object
+  EntityAnnotation:
+    description: Set of detected entity features.
+    properties:
+      boundingPoly:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          Image region to which this entity belongs. Not produced
+          for `LABEL_DETECTION` features.
+      confidence:
+        description: |-
+          **Deprecated. Use `score` instead.**
+          The accuracy of the entity detection in an image.
+          For example, for an image in which the "Eiffel Tower" entity is detected,
+          this field represents the confidence that there is a tower in the query
+          image. Range [0, 1].
+        format: float
+        type: number
+      description:
+        description: 'Entity textual description, expressed in its `locale` language.'
+        type: string
+      locale:
+        description: |-
+          The language code for the locale in which the entity textual
+          `description` is expressed.
+        type: string
+      locations:
+        description: |-
+          The location information for the detected entity. Multiple
+          `LocationInfo` elements can be present because one location may
+          indicate the location of the scene in the image, and another location
+          may indicate the location of the place where the image was taken.
+          Location information is usually present for landmarks.
+        items:
+          $ref: '#/definitions/LocationInfo'
+        type: array
+      mid:
+        description: |-
+          Opaque entity ID. Some IDs may be available in
+          [Google Knowledge Graph Search
+          API](https://developers.google.com/knowledge-graph/).
+        type: string
+      properties:
+        description: |-
+          Some entities may have optional user-supplied `Property` (name/value)
+          fields, such a score or string that qualifies the entity.
+        items:
+          $ref: '#/definitions/Property'
+        type: array
+      score:
+        description: 'Overall score of the result. Range [0, 1].'
+        format: float
+        type: number
+      topicality:
+        description: |-
+          The relevancy of the ICA (Image Content Annotation) label to the
+          image. For example, the relevancy of "tower" is likely higher to an image
+          containing the detected "Eiffel Tower" than to an image containing a
+          detected distant towering building, even though the confidence that
+          there is a tower in each image may be the same. Range [0, 1].
+        format: float
+        type: number
+    type: object
+  FaceAnnotation:
+    description: A face annotation object contains the results of face detection.
+    properties:
+      angerLikelihood:
+        description: Anger likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      blurredLikelihood:
+        description: Blurred likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      boundingPoly:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding polygon around the face. The coordinates of the bounding box
+          are in the original image's scale, as returned in `ImageParams`.
+          The bounding box is computed to "frame" the face in accordance with human
+          expectations. It is based on the landmarker results.
+          Note that one or more x and/or y coordinates may not be generated in the
+          `BoundingPoly` (the polygon will be unbounded) if only a partial face
+          appears in the image to be annotated.
+      detectionConfidence:
+        description: 'Detection confidence. Range [0, 1].'
+        format: float
+        type: number
+      fdBoundingPoly:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The `fd_bounding_poly` bounding polygon is tighter than the
+          `boundingPoly`, and encloses only the skin part of the face. Typically, it
+          is used to eliminate the face from any image analysis that detects the
+          "amount of skin" visible in an image. It is not based on the
+          landmarker results, only on the initial face detection, hence
+          the <code>fd</code> (face detection) prefix.
+      headwearLikelihood:
+        description: Headwear likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      joyLikelihood:
+        description: Joy likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      landmarkingConfidence:
+        description: 'Face landmarking confidence. Range [0, 1].'
+        format: float
+        type: number
+      landmarks:
+        description: Detected face landmarks.
+        items:
+          $ref: '#/definitions/Landmark'
+        type: array
+      panAngle:
+        description: |-
+          Yaw angle, which indicates the leftward/rightward angle that the face is
+          pointing relative to the vertical plane perpendicular to the image. Range
+          [-180,180].
+        format: float
+        type: number
+      rollAngle:
+        description: |-
+          Roll angle, which indicates the amount of clockwise/anti-clockwise rotation
+          of the face relative to the image vertical about the axis perpendicular to
+          the face. Range [-180,180].
+        format: float
+        type: number
+      sorrowLikelihood:
+        description: Sorrow likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      surpriseLikelihood:
+        description: Surprise likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      tiltAngle:
+        description: |-
+          Pitch angle, which indicates the upwards/downwards angle that the face is
+          pointing relative to the image's horizontal plane. Range [-180,180].
+        format: float
+        type: number
+      underExposedLikelihood:
+        description: Under-exposed likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+    type: object
+  GcsDestination:
+    description: The Google Cloud Storage location where the output will be written to.
+    properties:
+      uri:
+        description: |-
+          Google Cloud Storage URI where the results will be stored. Results will
+          be in JSON format and preceded by its corresponding input URI. This field
+          can either represent a single file, or a prefix for multiple outputs.
+          Prefixes must end in a `/`.
+
+          Examples:
+
+          *    File: gs://bucket-name/filename.json
+          *    Prefix: gs://bucket-name/prefix/here/
+          *    File: gs://bucket-name/prefix/here
+
+          If multiple outputs, each response is still AnnotateFileResponse, each of
+          which contains some subset of the full list of AnnotateImageResponse.
+          Multiple outputs can happen if, for example, the output JSON is too large
+          and overflows into multiple sharded files.
+        type: string
+    type: object
+  GcsSource:
+    description: The Google Cloud Storage location where the input will be read from.
+    properties:
+      uri:
+        description: |-
+          Google Cloud Storage URI for the input file. This must only be a
+          Google Cloud Storage object. Wildcards are not currently supported.
+        type: string
+    type: object
   GoogleCloudVisionV1p1beta1AnnotateImageRequest:
     description: |-
       Request for performing Google Cloud Vision API tasks over a user-provided
@@ -318,6 +820,11 @@ definitions:
   GoogleCloudVisionV1p1beta1AnnotateImageResponse:
     description: Response to an image annotation request.
     properties:
+      context:
+        $ref: '#/definitions/GoogleCloudVisionV1p1beta1ImageAnnotationContext'
+        description: |-
+          If present, contextual information is needed to understand where this image
+          comes from.
       cropHintsAnnotation:
         $ref: '#/definitions/GoogleCloudVisionV1p1beta1CropHintsAnnotation'
         description: 'If present, crop hints have completed successfully.'
@@ -368,6 +875,35 @@ definitions:
       webDetection:
         $ref: '#/definitions/GoogleCloudVisionV1p1beta1WebDetection'
         description: 'If present, web detection has completed successfully.'
+    type: object
+  GoogleCloudVisionV1p1beta1AsyncAnnotateFileRequest:
+    description: An offline file annotation request.
+    properties:
+      features:
+        description: Required. Requested features.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p1beta1Feature'
+        type: array
+      imageContext:
+        $ref: '#/definitions/GoogleCloudVisionV1p1beta1ImageContext'
+        description: Additional context that may accompany the image(s) in the file.
+      inputConfig:
+        $ref: '#/definitions/GoogleCloudVisionV1p1beta1InputConfig'
+        description: Required. Information about the input file.
+      outputConfig:
+        $ref: '#/definitions/GoogleCloudVisionV1p1beta1OutputConfig'
+        description: Required. The desired output location and metadata (e.g. format).
+    type: object
+  GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesRequest:
+    description: |-
+      Multiple async file annotation requests are batched into a single service
+      call.
+    properties:
+      requests:
+        description: Individual async file annotation requests for this batch.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p1beta1AsyncAnnotateFileRequest'
+        type: array
     type: object
   GoogleCloudVisionV1p1beta1BatchAnnotateImagesRequest:
     description: Multiple image annotation requests are batched into a single service call.
@@ -785,6 +1321,37 @@ definitions:
           - WEB_DETECTION
         type: string
     type: object
+  GoogleCloudVisionV1p1beta1GcsDestination:
+    description: The Google Cloud Storage location where the output will be written to.
+    properties:
+      uri:
+        description: |-
+          Google Cloud Storage URI where the results will be stored. Results will
+          be in JSON format and preceded by its corresponding input URI. This field
+          can either represent a single file, or a prefix for multiple outputs.
+          Prefixes must end in a `/`.
+
+          Examples:
+
+          *    File: gs://bucket-name/filename.json
+          *    Prefix: gs://bucket-name/prefix/here/
+          *    File: gs://bucket-name/prefix/here
+
+          If multiple outputs, each response is still AnnotateFileResponse, each of
+          which contains some subset of the full list of AnnotateImageResponse.
+          Multiple outputs can happen if, for example, the output JSON is too large
+          and overflows into multiple sharded files.
+        type: string
+    type: object
+  GoogleCloudVisionV1p1beta1GcsSource:
+    description: The Google Cloud Storage location where the input will be read from.
+    properties:
+      uri:
+        description: |-
+          Google Cloud Storage URI for the input file. This must only be a
+          Google Cloud Storage object. Wildcards are not currently supported.
+        type: string
+    type: object
   GoogleCloudVisionV1p1beta1Image:
     description: Client image to perform Google Cloud Vision API tasks over.
     properties:
@@ -801,6 +1368,21 @@ definitions:
           Google Cloud Storage image location, or publicly-accessible image
           URL. If both `content` and `source` are provided for an image, `content`
           takes precedence and is used to perform the image annotation request.
+    type: object
+  GoogleCloudVisionV1p1beta1ImageAnnotationContext:
+    description: |-
+      If an image was produced from a file (e.g. a PDF), this message gives
+      information about the source of that image.
+    properties:
+      pageNumber:
+        description: |-
+          If the file was a PDF or TIFF, this field gives the page number within
+          the file used to produce the image.
+        format: int32
+        type: integer
+      uri:
+        description: The URI of the file used to produce the image.
+        type: string
     type: object
   GoogleCloudVisionV1p1beta1ImageContext:
     description: Image context and/or feature-specific parameters.
@@ -868,6 +1450,18 @@ definitions:
           precedence.
         type: string
     type: object
+  GoogleCloudVisionV1p1beta1InputConfig:
+    description: The desired input location and metadata.
+    properties:
+      gcsSource:
+        $ref: '#/definitions/GoogleCloudVisionV1p1beta1GcsSource'
+        description: The Google Cloud Storage location to read the input from.
+      mimeType:
+        description: |-
+          The type of the file. Currently only "application/pdf" and "image/tiff"
+          are supported. Wildcards are not supported.
+        type: string
+    type: object
   GoogleCloudVisionV1p1beta1LatLongRect:
     description: Rectangle determined by min and max `LatLng` pairs.
     properties:
@@ -884,6 +1478,28 @@ definitions:
       latLng:
         $ref: '#/definitions/LatLng'
         description: lat/long location coordinates.
+    type: object
+  GoogleCloudVisionV1p1beta1OutputConfig:
+    description: The desired output location and metadata.
+    properties:
+      batchSize:
+        description: |-
+          The max number of response protos to put into each output JSON file on
+          Google Cloud Storage.
+          The valid range is [1, 100]. If not specified, the default value is 20.
+
+          For example, for one pdf file with 100 pages, 100 response protos will
+          be generated. If `batch_size` = 20, then 5 json files each
+          containing 20 response protos will be written under the prefix
+          `gcs_destination`.`uri`.
+
+          Currently, batch_size only applies to GcsDestination, with potential future
+          support for other output configurations.
+        format: int32
+        type: integer
+      gcsDestination:
+        $ref: '#/definitions/GoogleCloudVisionV1p1beta1GcsDestination'
+        description: The Google Cloud Storage location to write the output(s) to.
     type: object
   GoogleCloudVisionV1p1beta1Page:
     description: Detected page from OCR.
@@ -1307,6 +1923,79 @@ definitions:
           $ref: '#/definitions/GoogleCloudVisionV1p1beta1Symbol'
         type: array
     type: object
+  GoogleCloudVisionV1p2beta1AnnotateFileResponse:
+    description: |-
+      Response to a single file annotation request. A file may contain one or more
+      images, which individually have their own responses.
+    properties:
+      inputConfig:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1InputConfig'
+        description: Information about the file for which this response is generated.
+      responses:
+        description: Individual responses to images found within the file.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1AnnotateImageResponse'
+        type: array
+    type: object
+  GoogleCloudVisionV1p2beta1AnnotateImageResponse:
+    description: Response to an image annotation request.
+    properties:
+      context:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1ImageAnnotationContext'
+        description: |-
+          If present, contextual information is needed to understand where this image
+          comes from.
+      cropHintsAnnotation:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1CropHintsAnnotation'
+        description: 'If present, crop hints have completed successfully.'
+      error:
+        $ref: '#/definitions/Status'
+        description: |-
+          If set, represents the error message for the operation.
+          Note that filled-in image annotations are guaranteed to be
+          correct, even when `error` is set.
+      faceAnnotations:
+        description: 'If present, face detection has completed successfully.'
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1FaceAnnotation'
+        type: array
+      fullTextAnnotation:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1TextAnnotation'
+        description: |-
+          If present, text (OCR) detection or document (OCR) text detection has
+          completed successfully.
+          This annotation provides the structural hierarchy for the OCR detected
+          text.
+      imagePropertiesAnnotation:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1ImageProperties'
+        description: 'If present, image properties were extracted successfully.'
+      labelAnnotations:
+        description: 'If present, label detection has completed successfully.'
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1EntityAnnotation'
+        type: array
+      landmarkAnnotations:
+        description: 'If present, landmark detection has completed successfully.'
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1EntityAnnotation'
+        type: array
+      logoAnnotations:
+        description: 'If present, logo detection has completed successfully.'
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1EntityAnnotation'
+        type: array
+      safeSearchAnnotation:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1SafeSearchAnnotation'
+        description: 'If present, safe-search annotation has completed successfully.'
+      textAnnotations:
+        description: 'If present, text (OCR) detection has completed successfully.'
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1EntityAnnotation'
+        type: array
+      webDetection:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetection'
+        description: 'If present, web detection has completed successfully.'
+    type: object
   GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse:
     description: The response for a single offline file annotation request.
     properties:
@@ -1324,6 +2013,359 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse'
         type: array
+    type: object
+  GoogleCloudVisionV1p2beta1Block:
+    description: Logical element on the page.
+    properties:
+      blockType:
+        description: 'Detected block type (text, image etc) for this block.'
+        enum:
+          - UNKNOWN
+          - TEXT
+          - TABLE
+          - PICTURE
+          - RULER
+          - BARCODE
+        type: string
+      boundingBox:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
+        description: |-
+          The bounding box for the block.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+
+          * when the text is horizontal it might look like:
+
+                  0----1
+                  |    |
+                  3----2
+
+          * when it's rotated 180 degrees around the top-left corner it becomes:
+
+                  2----3
+                  |    |
+                  1----0
+
+            and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results on the block. Range [0, 1].'
+        format: float
+        type: number
+      paragraphs:
+        description: List of paragraphs in this block (if this blocks is of type text).
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1Paragraph'
+        type: array
+      property:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
+        description: Additional information detected for the block.
+    type: object
+  GoogleCloudVisionV1p2beta1BoundingPoly:
+    description: A bounding polygon for the detected image annotation.
+    properties:
+      normalizedVertices:
+        description: The bounding polygon normalized vertices.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1NormalizedVertex'
+        type: array
+      vertices:
+        description: The bounding polygon vertices.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1Vertex'
+        type: array
+    type: object
+  GoogleCloudVisionV1p2beta1ColorInfo:
+    description: |-
+      Color information consists of RGB channels, score, and the fraction of
+      the image that the color occupies in the image.
+    properties:
+      color:
+        $ref: '#/definitions/Color'
+        description: RGB components of the color.
+      pixelFraction:
+        description: |-
+          The fraction of pixels the color occupies in the image.
+          Value in range [0, 1].
+        format: float
+        type: number
+      score:
+        description: 'Image-specific score for this color. Value in range [0, 1].'
+        format: float
+        type: number
+    type: object
+  GoogleCloudVisionV1p2beta1CropHint:
+    description: Single crop hint that is used to generate a new crop when serving an image.
+    properties:
+      boundingPoly:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
+        description: |-
+          The bounding polygon for the crop region. The coordinates of the bounding
+          box are in the original image's scale, as returned in `ImageParams`.
+      confidence:
+        description: 'Confidence of this being a salient region.  Range [0, 1].'
+        format: float
+        type: number
+      importanceFraction:
+        description: |-
+          Fraction of importance of this salient region with respect to the original
+          image.
+        format: float
+        type: number
+    type: object
+  GoogleCloudVisionV1p2beta1CropHintsAnnotation:
+    description: Set of crop hints that are used to generate new crops when serving images.
+    properties:
+      cropHints:
+        description: Crop hint results.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1CropHint'
+        type: array
+    type: object
+  GoogleCloudVisionV1p2beta1DominantColorsAnnotation:
+    description: Set of dominant colors and their corresponding scores.
+    properties:
+      colors:
+        description: RGB color values with their score and pixel fraction.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1ColorInfo'
+        type: array
+    type: object
+  GoogleCloudVisionV1p2beta1EntityAnnotation:
+    description: Set of detected entity features.
+    properties:
+      boundingPoly:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
+        description: |-
+          Image region to which this entity belongs. Not produced
+          for `LABEL_DETECTION` features.
+      confidence:
+        description: |-
+          **Deprecated. Use `score` instead.**
+          The accuracy of the entity detection in an image.
+          For example, for an image in which the "Eiffel Tower" entity is detected,
+          this field represents the confidence that there is a tower in the query
+          image. Range [0, 1].
+        format: float
+        type: number
+      description:
+        description: 'Entity textual description, expressed in its `locale` language.'
+        type: string
+      locale:
+        description: |-
+          The language code for the locale in which the entity textual
+          `description` is expressed.
+        type: string
+      locations:
+        description: |-
+          The location information for the detected entity. Multiple
+          `LocationInfo` elements can be present because one location may
+          indicate the location of the scene in the image, and another location
+          may indicate the location of the place where the image was taken.
+          Location information is usually present for landmarks.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1LocationInfo'
+        type: array
+      mid:
+        description: |-
+          Opaque entity ID. Some IDs may be available in
+          [Google Knowledge Graph Search
+          API](https://developers.google.com/knowledge-graph/).
+        type: string
+      properties:
+        description: |-
+          Some entities may have optional user-supplied `Property` (name/value)
+          fields, such a score or string that qualifies the entity.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1Property'
+        type: array
+      score:
+        description: 'Overall score of the result. Range [0, 1].'
+        format: float
+        type: number
+      topicality:
+        description: |-
+          The relevancy of the ICA (Image Content Annotation) label to the
+          image. For example, the relevancy of "tower" is likely higher to an image
+          containing the detected "Eiffel Tower" than to an image containing a
+          detected distant towering building, even though the confidence that
+          there is a tower in each image may be the same. Range [0, 1].
+        format: float
+        type: number
+    type: object
+  GoogleCloudVisionV1p2beta1FaceAnnotation:
+    description: A face annotation object contains the results of face detection.
+    properties:
+      angerLikelihood:
+        description: Anger likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      blurredLikelihood:
+        description: Blurred likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      boundingPoly:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
+        description: |-
+          The bounding polygon around the face. The coordinates of the bounding box
+          are in the original image's scale, as returned in `ImageParams`.
+          The bounding box is computed to "frame" the face in accordance with human
+          expectations. It is based on the landmarker results.
+          Note that one or more x and/or y coordinates may not be generated in the
+          `BoundingPoly` (the polygon will be unbounded) if only a partial face
+          appears in the image to be annotated.
+      detectionConfidence:
+        description: 'Detection confidence. Range [0, 1].'
+        format: float
+        type: number
+      fdBoundingPoly:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
+        description: |-
+          The `fd_bounding_poly` bounding polygon is tighter than the
+          `boundingPoly`, and encloses only the skin part of the face. Typically, it
+          is used to eliminate the face from any image analysis that detects the
+          "amount of skin" visible in an image. It is not based on the
+          landmarker results, only on the initial face detection, hence
+          the <code>fd</code> (face detection) prefix.
+      headwearLikelihood:
+        description: Headwear likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      joyLikelihood:
+        description: Joy likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      landmarkingConfidence:
+        description: 'Face landmarking confidence. Range [0, 1].'
+        format: float
+        type: number
+      landmarks:
+        description: Detected face landmarks.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1FaceAnnotationLandmark'
+        type: array
+      panAngle:
+        description: |-
+          Yaw angle, which indicates the leftward/rightward angle that the face is
+          pointing relative to the vertical plane perpendicular to the image. Range
+          [-180,180].
+        format: float
+        type: number
+      rollAngle:
+        description: |-
+          Roll angle, which indicates the amount of clockwise/anti-clockwise rotation
+          of the face relative to the image vertical about the axis perpendicular to
+          the face. Range [-180,180].
+        format: float
+        type: number
+      sorrowLikelihood:
+        description: Sorrow likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      surpriseLikelihood:
+        description: Surprise likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      tiltAngle:
+        description: |-
+          Pitch angle, which indicates the upwards/downwards angle that the face is
+          pointing relative to the image's horizontal plane. Range [-180,180].
+        format: float
+        type: number
+      underExposedLikelihood:
+        description: Under-exposed likelihood.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1FaceAnnotationLandmark:
+    description: 'A face-specific landmark (for example, a face feature).'
+    properties:
+      position:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1Position'
+        description: Face landmark position.
+      type:
+        description: Face landmark type.
+        enum:
+          - UNKNOWN_LANDMARK
+          - LEFT_EYE
+          - RIGHT_EYE
+          - LEFT_OF_LEFT_EYEBROW
+          - RIGHT_OF_LEFT_EYEBROW
+          - LEFT_OF_RIGHT_EYEBROW
+          - RIGHT_OF_RIGHT_EYEBROW
+          - MIDPOINT_BETWEEN_EYES
+          - NOSE_TIP
+          - UPPER_LIP
+          - LOWER_LIP
+          - MOUTH_LEFT
+          - MOUTH_RIGHT
+          - MOUTH_CENTER
+          - NOSE_BOTTOM_RIGHT
+          - NOSE_BOTTOM_LEFT
+          - NOSE_BOTTOM_CENTER
+          - LEFT_EYE_TOP_BOUNDARY
+          - LEFT_EYE_RIGHT_CORNER
+          - LEFT_EYE_BOTTOM_BOUNDARY
+          - LEFT_EYE_LEFT_CORNER
+          - RIGHT_EYE_TOP_BOUNDARY
+          - RIGHT_EYE_RIGHT_CORNER
+          - RIGHT_EYE_BOTTOM_BOUNDARY
+          - RIGHT_EYE_LEFT_CORNER
+          - LEFT_EYEBROW_UPPER_MIDPOINT
+          - RIGHT_EYEBROW_UPPER_MIDPOINT
+          - LEFT_EAR_TRAGION
+          - RIGHT_EAR_TRAGION
+          - LEFT_EYE_PUPIL
+          - RIGHT_EYE_PUPIL
+          - FOREHEAD_GLABELLA
+          - CHIN_GNATHION
+          - CHIN_LEFT_GONION
+          - CHIN_RIGHT_GONION
+        type: string
     type: object
   GoogleCloudVisionV1p2beta1GcsDestination:
     description: The Google Cloud Storage location where the output will be written to.
@@ -1346,6 +2388,71 @@ definitions:
           Multiple outputs can happen if, for example, the output JSON is too large
           and overflows into multiple sharded files.
         type: string
+    type: object
+  GoogleCloudVisionV1p2beta1GcsSource:
+    description: The Google Cloud Storage location where the input will be read from.
+    properties:
+      uri:
+        description: |-
+          Google Cloud Storage URI for the input file. This must only be a
+          Google Cloud Storage object. Wildcards are not currently supported.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1ImageAnnotationContext:
+    description: |-
+      If an image was produced from a file (e.g. a PDF), this message gives
+      information about the source of that image.
+    properties:
+      pageNumber:
+        description: |-
+          If the file was a PDF or TIFF, this field gives the page number within
+          the file used to produce the image.
+        format: int32
+        type: integer
+      uri:
+        description: The URI of the file used to produce the image.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1ImageProperties:
+    description: 'Stores image properties, such as dominant colors.'
+    properties:
+      dominantColors:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1DominantColorsAnnotation'
+        description: 'If present, dominant colors completed successfully.'
+    type: object
+  GoogleCloudVisionV1p2beta1InputConfig:
+    description: The desired input location and metadata.
+    properties:
+      gcsSource:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1GcsSource'
+        description: The Google Cloud Storage location to read the input from.
+      mimeType:
+        description: |-
+          The type of the file. Currently only "application/pdf" and "image/tiff"
+          are supported. Wildcards are not supported.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1LocationInfo:
+    description: Detected entity location information.
+    properties:
+      latLng:
+        $ref: '#/definitions/LatLng'
+        description: lat/long location coordinates.
+    type: object
+  GoogleCloudVisionV1p2beta1NormalizedVertex:
+    description: |-
+      A vertex represents a 2D point in the image.
+      NOTE: the normalized vertex coordinates are relative to the original image
+      and range from 0 to 1.
+    properties:
+      x:
+        description: X coordinate.
+        format: float
+        type: number
+      'y':
+        description: Y coordinate.
+        format: float
+        type: number
     type: object
   GoogleCloudVisionV1p2beta1OperationMetadata:
     description: Contains metadata for the BatchAnnotateImages operation.
@@ -1373,7 +2480,8 @@ definitions:
     properties:
       batchSize:
         description: |-
-          The max number of response protos to put into each output JSON file on GCS.
+          The max number of response protos to put into each output JSON file on
+          Google Cloud Storage.
           The valid range is [1, 100]. If not specified, the default value is 20.
 
           For example, for one pdf file with 100 pages, 100 response protos will
@@ -1388,6 +2496,633 @@ definitions:
       gcsDestination:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1GcsDestination'
         description: The Google Cloud Storage location to write the output(s) to.
+    type: object
+  GoogleCloudVisionV1p2beta1Page:
+    description: Detected page from OCR.
+    properties:
+      blocks:
+        description: 'List of blocks of text, images etc on this page.'
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1Block'
+        type: array
+      confidence:
+        description: 'Confidence of the OCR results on the page. Range [0, 1].'
+        format: float
+        type: number
+      height:
+        description: |-
+          Page height. For PDFs the unit is points. For images (including
+          TIFFs) the unit is pixels.
+        format: int32
+        type: integer
+      property:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
+        description: Additional information detected on the page.
+      width:
+        description: |-
+          Page width. For PDFs the unit is points. For images (including
+          TIFFs) the unit is pixels.
+        format: int32
+        type: integer
+    type: object
+  GoogleCloudVisionV1p2beta1Paragraph:
+    description: Structural unit of text representing a number of words in certain order.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
+        description: |-
+          The bounding box for the paragraph.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the paragraph. Range [0, 1].'
+        format: float
+        type: number
+      property:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
+        description: Additional information detected for the paragraph.
+      words:
+        description: List of words in this paragraph.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1Word'
+        type: array
+    type: object
+  GoogleCloudVisionV1p2beta1Position:
+    description: |-
+      A 3D position in the image, used primarily for Face detection landmarks.
+      A valid Position must have both x and y coordinates.
+      The position coordinates are in the same scale as the original image.
+    properties:
+      x:
+        description: X coordinate.
+        format: float
+        type: number
+      'y':
+        description: Y coordinate.
+        format: float
+        type: number
+      z:
+        description: Z coordinate (or depth).
+        format: float
+        type: number
+    type: object
+  GoogleCloudVisionV1p2beta1Property:
+    description: A `Property` consists of a user-supplied name/value pair.
+    properties:
+      name:
+        description: Name of the property.
+        type: string
+      uint64Value:
+        description: Value of numeric properties.
+        format: uint64
+        type: string
+      value:
+        description: Value of the property.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1SafeSearchAnnotation:
+    description: |-
+      Set of features pertaining to the image, computed by computer vision
+      methods over safe-search verticals (for example, adult, spoof, medical,
+      violence).
+    properties:
+      adult:
+        description: |-
+          Represents the adult content likelihood for the image. Adult content may
+          contain elements such as nudity, pornographic images or cartoons, or
+          sexual activities.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      medical:
+        description: Likelihood that this is a medical image.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      racy:
+        description: |-
+          Likelihood that the request image contains racy content. Racy content may
+          include (but is not limited to) skimpy or sheer clothing, strategically
+          covered nudity, lewd or provocative poses, or close-ups of sensitive
+          body areas.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      spoof:
+        description: |-
+          Spoof likelihood. The likelihood that an modification
+          was made to the image's canonical version to make it appear
+          funny or offensive.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      violence:
+        description: Likelihood that this image contains violent content.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1Symbol:
+    description: A single symbol representation.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
+        description: |-
+          The bounding box for the symbol.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the symbol. Range [0, 1].'
+        format: float
+        type: number
+      property:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
+        description: Additional information detected for the symbol.
+      text:
+        description: The actual UTF-8 representation of the symbol.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1TextAnnotation:
+    description: |-
+      TextAnnotation contains a structured representation of OCR extracted text.
+      The hierarchy of an OCR extracted text structure is like this:
+          TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
+      Each structural component, starting from Page, may further have their own
+      properties. Properties describe detected languages, breaks etc.. Please refer
+      to the TextAnnotation.TextProperty message definition below for more
+      detail.
+    properties:
+      pages:
+        description: List of pages detected by OCR.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1Page'
+        type: array
+      text:
+        description: UTF-8 text detected on the pages.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak:
+    description: Detected start or end of a structural component.
+    properties:
+      isPrefix:
+        description: True if break prepends the element.
+        type: boolean
+      type:
+        description: Detected break type.
+        enum:
+          - UNKNOWN
+          - SPACE
+          - SURE_SPACE
+          - EOL_SURE_SPACE
+          - HYPHEN
+          - LINE_BREAK
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage:
+    description: Detected language for a structural component.
+    properties:
+      confidence:
+        description: 'Confidence of detected language. Range [0, 1].'
+        format: float
+        type: number
+      languageCode:
+        description: |-
+          The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+          information, see
+          http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1TextAnnotationTextProperty:
+    description: Additional information detected on the structural component.
+    properties:
+      detectedBreak:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak'
+        description: Detected start or end of a text segment.
+      detectedLanguages:
+        description: A list of detected languages together with confidence.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage'
+        type: array
+    type: object
+  GoogleCloudVisionV1p2beta1Vertex:
+    description: |-
+      A vertex represents a 2D point in the image.
+      NOTE: the vertex coordinates are in the same scale as the original image.
+    properties:
+      x:
+        description: X coordinate.
+        format: int32
+        type: integer
+      'y':
+        description: Y coordinate.
+        format: int32
+        type: integer
+    type: object
+  GoogleCloudVisionV1p2beta1WebDetection:
+    description: Relevant information for the image from the Internet.
+    properties:
+      bestGuessLabels:
+        description: Best guess text labels for the request image.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionWebLabel'
+        type: array
+      fullMatchingImages:
+        description: |-
+          Fully matching images from the Internet.
+          Can include resized copies of the query image.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionWebImage'
+        type: array
+      pagesWithMatchingImages:
+        description: Web pages containing the matching images from the Internet.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionWebPage'
+        type: array
+      partialMatchingImages:
+        description: |-
+          Partial matching images from the Internet.
+          Those images are similar enough to share some key-point features. For
+          example an original image will likely have partial matching for its crops.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionWebImage'
+        type: array
+      visuallySimilarImages:
+        description: The visually similar image results.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionWebImage'
+        type: array
+      webEntities:
+        description: Deduced entities from similar images on the Internet.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionWebEntity'
+        type: array
+    type: object
+  GoogleCloudVisionV1p2beta1WebDetectionWebEntity:
+    description: Entity deduced from similar images on the Internet.
+    properties:
+      description:
+        description: 'Canonical description of the entity, in English.'
+        type: string
+      entityId:
+        description: Opaque entity ID.
+        type: string
+      score:
+        description: |-
+          Overall relevancy score for the entity.
+          Not normalized and not comparable across different image queries.
+        format: float
+        type: number
+    type: object
+  GoogleCloudVisionV1p2beta1WebDetectionWebImage:
+    description: Metadata for online images.
+    properties:
+      score:
+        description: (Deprecated) Overall relevancy score for the image.
+        format: float
+        type: number
+      url:
+        description: The result image URL.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1WebDetectionWebLabel:
+    description: Label to provide extra metadata for the web detection.
+    properties:
+      label:
+        description: Label for extra metadata.
+        type: string
+      languageCode:
+        description: |-
+          The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
+          For more information, see
+          http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1WebDetectionWebPage:
+    description: Metadata for web pages.
+    properties:
+      fullMatchingImages:
+        description: |-
+          Fully matching images on the page.
+          Can include resized copies of the query image.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionWebImage'
+        type: array
+      pageTitle:
+        description: 'Title for the web page, may contain HTML markups.'
+        type: string
+      partialMatchingImages:
+        description: |-
+          Partial matching images on the page.
+          Those images are similar enough to share some key-point features. For
+          example an original image will likely have partial matching for its
+          crops.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1WebDetectionWebImage'
+        type: array
+      score:
+        description: (Deprecated) Overall relevancy score for the web page.
+        format: float
+        type: number
+      url:
+        description: The result web page URL.
+        type: string
+    type: object
+  GoogleCloudVisionV1p2beta1Word:
+    description: A word representation.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
+        description: |-
+          The bounding box for the word.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the word. Range [0, 1].'
+        format: float
+        type: number
+      property:
+        $ref: '#/definitions/GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
+        description: Additional information detected for the word.
+      symbols:
+        description: |-
+          List of symbols in the word.
+          The order of the symbols follows the natural reading order.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p2beta1Symbol'
+        type: array
+    type: object
+  GoogleCloudVisionV1p3beta1BatchOperationMetadata:
+    description: |-
+      Metadata for the batch operations such as the current state.
+
+      This is included in the `metadata` field of the `Operation` returned by the
+      `GetOperation` call of the `google::longrunning::Operations` service.
+    properties:
+      endTime:
+        description: |-
+          The time when the batch request is finished and
+          google.longrunning.Operation.done is set to true.
+        format: google-datetime
+        type: string
+      state:
+        description: The current state of the batch operation.
+        enum:
+          - STATE_UNSPECIFIED
+          - PROCESSING
+          - SUCCESSFUL
+          - FAILED
+          - CANCELLED
+        type: string
+      submitTime:
+        description: The time when the batch request was submitted to the server.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudVisionV1p3beta1BoundingPoly:
+    description: A bounding polygon for the detected image annotation.
+    properties:
+      normalizedVertices:
+        description: The bounding polygon normalized vertices.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p3beta1NormalizedVertex'
+        type: array
+      vertices:
+        description: The bounding polygon vertices.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p3beta1Vertex'
+        type: array
+    type: object
+  GoogleCloudVisionV1p3beta1ImportProductSetsResponse:
+    description: |-
+      Response message for the `ImportProductSets` method.
+
+      This message is returned by the
+      google.longrunning.Operations.GetOperation method in the returned
+      google.longrunning.Operation.response field.
+    properties:
+      referenceImages:
+        description: The list of reference_images that are imported successfully.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p3beta1ReferenceImage'
+        type: array
+      statuses:
+        description: |-
+          The rpc status for each ImportProductSet request, including both successes
+          and errors.
+
+          The number of statuses here matches the number of lines in the csv file,
+          and statuses[i] stores the success or failure status of processing the i-th
+          line of the csv, starting from line 0.
+        items:
+          $ref: '#/definitions/Status'
+        type: array
+    type: object
+  GoogleCloudVisionV1p3beta1NormalizedVertex:
+    description: |-
+      A vertex represents a 2D point in the image.
+      NOTE: the normalized vertex coordinates are relative to the original image
+      and range from 0 to 1.
+    properties:
+      x:
+        description: X coordinate.
+        format: float
+        type: number
+      'y':
+        description: Y coordinate.
+        format: float
+        type: number
+    type: object
+  GoogleCloudVisionV1p3beta1ReferenceImage:
+    description: |-
+      A `ReferenceImage` represents a product image and its associated metadata,
+      such as bounding boxes.
+    properties:
+      boundingPolys:
+        description: |-
+          Bounding polygons around the areas of interest in the reference image.
+          Optional. If this field is empty, the system will try to detect regions of
+          interest. At most 10 bounding polygons will be used.
+
+          The provided shape is converted into a non-rotated rectangle. Once
+          converted, the small edge of the rectangle must be greater than or equal
+          to 300 pixels. The aspect ratio must be 1:4 or less (i.e. 1:3 is ok; 1:5
+          is not).
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p3beta1BoundingPoly'
+        type: array
+      name:
+        description: |-
+          The resource name of the reference image.
+
+          Format is:
+
+          `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`.
+
+          This field is ignored when creating a reference image.
+        type: string
+      uri:
+        description: |-
+          The Google Cloud Storage URI of the reference image.
+
+          The URI must start with `gs://`.
+
+          Required.
+        type: string
+    type: object
+  GoogleCloudVisionV1p3beta1Vertex:
+    description: |-
+      A vertex represents a 2D point in the image.
+      NOTE: the vertex coordinates are in the same scale as the original image.
+    properties:
+      x:
+        description: X coordinate.
+        format: int32
+        type: integer
+      'y':
+        description: Y coordinate.
+        format: int32
+        type: integer
+    type: object
+  ImageAnnotationContext:
+    description: |-
+      If an image was produced from a file (e.g. a PDF), this message gives
+      information about the source of that image.
+    properties:
+      pageNumber:
+        description: |-
+          If the file was a PDF or TIFF, this field gives the page number within
+          the file used to produce the image.
+        format: int32
+        type: integer
+      uri:
+        description: The URI of the file used to produce the image.
+        type: string
+    type: object
+  ImageProperties:
+    description: 'Stores image properties, such as dominant colors.'
+    properties:
+      dominantColors:
+        $ref: '#/definitions/DominantColorsAnnotation'
+        description: 'If present, dominant colors completed successfully.'
+    type: object
+  InputConfig:
+    description: The desired input location and metadata.
+    properties:
+      gcsSource:
+        $ref: '#/definitions/GcsSource'
+        description: The Google Cloud Storage location to read the input from.
+      mimeType:
+        description: |-
+          The type of the file. Currently only "application/pdf" and "image/tiff"
+          are supported. Wildcards are not supported.
+        type: string
+    type: object
+  Landmark:
+    description: 'A face-specific landmark (for example, a face feature).'
+    properties:
+      position:
+        $ref: '#/definitions/Position'
+        description: Face landmark position.
+      type:
+        description: Face landmark type.
+        enum:
+          - UNKNOWN_LANDMARK
+          - LEFT_EYE
+          - RIGHT_EYE
+          - LEFT_OF_LEFT_EYEBROW
+          - RIGHT_OF_LEFT_EYEBROW
+          - LEFT_OF_RIGHT_EYEBROW
+          - RIGHT_OF_RIGHT_EYEBROW
+          - MIDPOINT_BETWEEN_EYES
+          - NOSE_TIP
+          - UPPER_LIP
+          - LOWER_LIP
+          - MOUTH_LEFT
+          - MOUTH_RIGHT
+          - MOUTH_CENTER
+          - NOSE_BOTTOM_RIGHT
+          - NOSE_BOTTOM_LEFT
+          - NOSE_BOTTOM_CENTER
+          - LEFT_EYE_TOP_BOUNDARY
+          - LEFT_EYE_RIGHT_CORNER
+          - LEFT_EYE_BOTTOM_BOUNDARY
+          - LEFT_EYE_LEFT_CORNER
+          - RIGHT_EYE_TOP_BOUNDARY
+          - RIGHT_EYE_RIGHT_CORNER
+          - RIGHT_EYE_BOTTOM_BOUNDARY
+          - RIGHT_EYE_LEFT_CORNER
+          - LEFT_EYEBROW_UPPER_MIDPOINT
+          - RIGHT_EYEBROW_UPPER_MIDPOINT
+          - LEFT_EAR_TRAGION
+          - RIGHT_EAR_TRAGION
+          - LEFT_EYE_PUPIL
+          - RIGHT_EYE_PUPIL
+          - FOREHEAD_GLABELLA
+          - CHIN_GNATHION
+          - CHIN_LEFT_GONION
+          - CHIN_RIGHT_GONION
+        type: string
     type: object
   LatLng:
     description: |-
@@ -1405,6 +3140,276 @@ definitions:
         description: 'The longitude in degrees. It must be in the range [-180.0, +180.0].'
         format: double
         type: number
+    type: object
+  LocationInfo:
+    description: Detected entity location information.
+    properties:
+      latLng:
+        $ref: '#/definitions/LatLng'
+        description: lat/long location coordinates.
+    type: object
+  NormalizedVertex:
+    description: |-
+      A vertex represents a 2D point in the image.
+      NOTE: the normalized vertex coordinates are relative to the original image
+      and range from 0 to 1.
+    properties:
+      x:
+        description: X coordinate.
+        format: float
+        type: number
+      'y':
+        description: Y coordinate.
+        format: float
+        type: number
+    type: object
+  Operation:
+    description: |-
+      This resource represents a long-running operation that is the result of a
+      network API call.
+    properties:
+      done:
+        description: |-
+          If the value is `false`, it means the operation is still in progress.
+          If `true`, the operation is completed, and either `error` or `response` is
+          available.
+        type: boolean
+      error:
+        $ref: '#/definitions/Status'
+        description: The error result of the operation in case of failure or cancellation.
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Service-specific metadata associated with the operation.  It typically
+          contains progress information and common metadata such as create time.
+          Some services might not provide such metadata.  Any method that returns a
+          long-running operation should document the metadata type, if any.
+        type: object
+      name:
+        description: |-
+          The server-assigned name, which is only unique within the same service that
+          originally returns it. If you use the default HTTP mapping, the
+          `name` should have the format of `operations/some/unique/name`.
+        type: string
+      response:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          The normal response of the operation in case of success.  If the original
+          method returns no data on success, such as `Delete`, the response is
+          `google.protobuf.Empty`.  If the original method is standard
+          `Get`/`Create`/`Update`, the response should be the resource.  For other
+          methods, the response should have the type `XxxResponse`, where `Xxx`
+          is the original method name.  For example, if the original method name
+          is `TakeSnapshot()`, the inferred response type is
+          `TakeSnapshotResponse`.
+        type: object
+    type: object
+  OperationMetadata:
+    description: Contains metadata for the BatchAnnotateImages operation.
+    properties:
+      createTime:
+        description: The time when the batch request was received.
+        format: google-datetime
+        type: string
+      state:
+        description: Current state of the batch operation.
+        enum:
+          - STATE_UNSPECIFIED
+          - CREATED
+          - RUNNING
+          - DONE
+          - CANCELLED
+        type: string
+      updateTime:
+        description: The time when the operation result was last updated.
+        format: google-datetime
+        type: string
+    type: object
+  OutputConfig:
+    description: The desired output location and metadata.
+    properties:
+      batchSize:
+        description: |-
+          The max number of response protos to put into each output JSON file on
+          Google Cloud Storage.
+          The valid range is [1, 100]. If not specified, the default value is 20.
+
+          For example, for one pdf file with 100 pages, 100 response protos will
+          be generated. If `batch_size` = 20, then 5 json files each
+          containing 20 response protos will be written under the prefix
+          `gcs_destination`.`uri`.
+
+          Currently, batch_size only applies to GcsDestination, with potential future
+          support for other output configurations.
+        format: int32
+        type: integer
+      gcsDestination:
+        $ref: '#/definitions/GcsDestination'
+        description: The Google Cloud Storage location to write the output(s) to.
+    type: object
+  Page:
+    description: Detected page from OCR.
+    properties:
+      blocks:
+        description: 'List of blocks of text, images etc on this page.'
+        items:
+          $ref: '#/definitions/Block'
+        type: array
+      confidence:
+        description: 'Confidence of the OCR results on the page. Range [0, 1].'
+        format: float
+        type: number
+      height:
+        description: |-
+          Page height. For PDFs the unit is points. For images (including
+          TIFFs) the unit is pixels.
+        format: int32
+        type: integer
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected on the page.
+      width:
+        description: |-
+          Page width. For PDFs the unit is points. For images (including
+          TIFFs) the unit is pixels.
+        format: int32
+        type: integer
+    type: object
+  Paragraph:
+    description: Structural unit of text representing a number of words in certain order.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding box for the paragraph.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the paragraph. Range [0, 1].'
+        format: float
+        type: number
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected for the paragraph.
+      words:
+        description: List of words in this paragraph.
+        items:
+          $ref: '#/definitions/Word'
+        type: array
+    type: object
+  Position:
+    description: |-
+      A 3D position in the image, used primarily for Face detection landmarks.
+      A valid Position must have both x and y coordinates.
+      The position coordinates are in the same scale as the original image.
+    properties:
+      x:
+        description: X coordinate.
+        format: float
+        type: number
+      'y':
+        description: Y coordinate.
+        format: float
+        type: number
+      z:
+        description: Z coordinate (or depth).
+        format: float
+        type: number
+    type: object
+  Property:
+    description: A `Property` consists of a user-supplied name/value pair.
+    properties:
+      name:
+        description: Name of the property.
+        type: string
+      uint64Value:
+        description: Value of numeric properties.
+        format: uint64
+        type: string
+      value:
+        description: Value of the property.
+        type: string
+    type: object
+  SafeSearchAnnotation:
+    description: |-
+      Set of features pertaining to the image, computed by computer vision
+      methods over safe-search verticals (for example, adult, spoof, medical,
+      violence).
+    properties:
+      adult:
+        description: |-
+          Represents the adult content likelihood for the image. Adult content may
+          contain elements such as nudity, pornographic images or cartoons, or
+          sexual activities.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      medical:
+        description: Likelihood that this is a medical image.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      racy:
+        description: |-
+          Likelihood that the request image contains racy content. Racy content may
+          include (but is not limited to) skimpy or sheer clothing, strategically
+          covered nudity, lewd or provocative poses, or close-ups of sensitive
+          body areas.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      spoof:
+        description: |-
+          Spoof likelihood. The likelihood that an modification
+          was made to the image's canonical version to make it appear
+          funny or offensive.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      violence:
+        description: Likelihood that this image contains violent content.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
     type: object
   Status:
     description: |-
@@ -1480,4 +3485,226 @@ definitions:
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
         type: string
+    type: object
+  Symbol:
+    description: A single symbol representation.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding box for the symbol.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the symbol. Range [0, 1].'
+        format: float
+        type: number
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected for the symbol.
+      text:
+        description: The actual UTF-8 representation of the symbol.
+        type: string
+    type: object
+  TextAnnotation:
+    description: |-
+      TextAnnotation contains a structured representation of OCR extracted text.
+      The hierarchy of an OCR extracted text structure is like this:
+          TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
+      Each structural component, starting from Page, may further have their own
+      properties. Properties describe detected languages, breaks etc.. Please refer
+      to the TextAnnotation.TextProperty message definition below for more
+      detail.
+    properties:
+      pages:
+        description: List of pages detected by OCR.
+        items:
+          $ref: '#/definitions/Page'
+        type: array
+      text:
+        description: UTF-8 text detected on the pages.
+        type: string
+    type: object
+  TextProperty:
+    description: Additional information detected on the structural component.
+    properties:
+      detectedBreak:
+        $ref: '#/definitions/DetectedBreak'
+        description: Detected start or end of a text segment.
+      detectedLanguages:
+        description: A list of detected languages together with confidence.
+        items:
+          $ref: '#/definitions/DetectedLanguage'
+        type: array
+    type: object
+  Vertex:
+    description: |-
+      A vertex represents a 2D point in the image.
+      NOTE: the vertex coordinates are in the same scale as the original image.
+    properties:
+      x:
+        description: X coordinate.
+        format: int32
+        type: integer
+      'y':
+        description: Y coordinate.
+        format: int32
+        type: integer
+    type: object
+  WebDetection:
+    description: Relevant information for the image from the Internet.
+    properties:
+      bestGuessLabels:
+        description: Best guess text labels for the request image.
+        items:
+          $ref: '#/definitions/WebLabel'
+        type: array
+      fullMatchingImages:
+        description: |-
+          Fully matching images from the Internet.
+          Can include resized copies of the query image.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
+      pagesWithMatchingImages:
+        description: Web pages containing the matching images from the Internet.
+        items:
+          $ref: '#/definitions/WebPage'
+        type: array
+      partialMatchingImages:
+        description: |-
+          Partial matching images from the Internet.
+          Those images are similar enough to share some key-point features. For
+          example an original image will likely have partial matching for its crops.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
+      visuallySimilarImages:
+        description: The visually similar image results.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
+      webEntities:
+        description: Deduced entities from similar images on the Internet.
+        items:
+          $ref: '#/definitions/WebEntity'
+        type: array
+    type: object
+  WebEntity:
+    description: Entity deduced from similar images on the Internet.
+    properties:
+      description:
+        description: 'Canonical description of the entity, in English.'
+        type: string
+      entityId:
+        description: Opaque entity ID.
+        type: string
+      score:
+        description: |-
+          Overall relevancy score for the entity.
+          Not normalized and not comparable across different image queries.
+        format: float
+        type: number
+    type: object
+  WebImage:
+    description: Metadata for online images.
+    properties:
+      score:
+        description: (Deprecated) Overall relevancy score for the image.
+        format: float
+        type: number
+      url:
+        description: The result image URL.
+        type: string
+    type: object
+  WebLabel:
+    description: Label to provide extra metadata for the web detection.
+    properties:
+      label:
+        description: Label for extra metadata.
+        type: string
+      languageCode:
+        description: |-
+          The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
+          For more information, see
+          http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+        type: string
+    type: object
+  WebPage:
+    description: Metadata for web pages.
+    properties:
+      fullMatchingImages:
+        description: |-
+          Fully matching images on the page.
+          Can include resized copies of the query image.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
+      pageTitle:
+        description: 'Title for the web page, may contain HTML markups.'
+        type: string
+      partialMatchingImages:
+        description: |-
+          Partial matching images on the page.
+          Those images are similar enough to share some key-point features. For
+          example an original image will likely have partial matching for its
+          crops.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
+      score:
+        description: (Deprecated) Overall relevancy score for the web page.
+        format: float
+        type: number
+      url:
+        description: The result web page URL.
+        type: string
+    type: object
+  Word:
+    description: A word representation.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding box for the word.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the word. Range [0, 1].'
+        format: float
+        type: number
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected for the word.
+      symbols:
+        description: |-
+          List of symbols in the word.
+          The order of the symbols follows the natural reading order.
+        items:
+          $ref: '#/definitions/Symbol'
+        type: array
     type: object

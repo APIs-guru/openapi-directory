@@ -430,32 +430,28 @@ paths:
             '202': {}
       x-ms-long-running-operation: true
 definitions:
-  ProxyResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM proxy resource.
-    properties: {}
-    type: object
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    type: object
-    x-ms-azure-resource: true
   ServerDnsAlias:
     allOf:
-      - $ref: '#/definitions/ProxyResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+        properties: {}
+        type: object
     description: A server DNS alias.
     properties:
       properties:

@@ -1117,7 +1117,7 @@ definitions:
         example: JOHN CUSTOMER
         type: string
       cavv_3ds:
-        description: CAVV returned from the merchants 3DS MPI (Base64 encoded).
+        description: Base 64 encoded CAVV returned from the merchant’s third-party 3-D Secure Merchant Plug-in (MPI). Use for Visa 3D Secure transactions.
         example: ASNFZ4kBI0VniQEjRWeJASNFZ4k=
         type: string
       customer:
@@ -1169,11 +1169,11 @@ definitions:
         example: '0001'
         type: string
       mc_ucaf_data:
-        description: MasterCard UCAF Field Data returned from the merchants 3DS MPI (Base64 encoded).
+        description: Base64 encoded MasterCard UCAF Field Data returned from the merchant’s third-party 3D Secure Merchant Plug-in (MPI). Use for MasterCard 3-D Secure transactions.
         example: ASNFZ4nwEjRWeI8BI0VnifASNFZ4jwHyL0U=
         type: string
       mc_ucaf_ind:
-        description: MasterCard UCAF Collection Indicator returned from the merchants 3DS MPI.
+        description: MasterCard UCAF Collection Indicator returned from the merchant’s third-party 3D Secure Merchant Plug-in (MPI). Use for MasterCard 3-D Secure transactions.
         example: '2'
         type: string
       merch_ref_num:
@@ -1189,7 +1189,7 @@ definitions:
         description: 'Indicates type of MOTO transaction: 0 = Card Present (not MOTO/e-Commerce), 1 = One Time MOTO transaction, 2 = Recurring, 3 = Installment, 5 = Full 3D-Secure transaction, 6 = Merchant 3D-Secure transaction, 7 = e-Commerce Channel Encrypted (SSL).'
         example: '1'
         type: string
-      partial_Auth:
+      partial_auth:
         description: 'This field must be present and set to a value of ''true'' in order for the request to allow for approval of a partial amount. This would be used to allow a merchant to accept a partial payment from pre-paid and debit cards. When only part of the requested amount is available, the response code will be 010 and the amt_tran field in the response will contain the amount that was approved. A second sale on a different card is required to capture the remaining amount. Applicable only for ''auth'' and ''sale'' requests. '
         example: true
         type: boolean
@@ -1233,7 +1233,7 @@ definitions:
         format: int64
         type: integer
       xid_3ds:
-        description: Transaction ID (XID) returned from the merchants 3DS MPI (Base64 encoded).
+        description: Base64 encoded transaction ID (XID) returned from the merchant’s third-party 3D Secure Merchant Plug-in (MPI). Use for Visa 3-D Secure transactions.
         example: ASNFZ4kBI0VniQEjRWeJASNFZ4k=
         type: string
     required:

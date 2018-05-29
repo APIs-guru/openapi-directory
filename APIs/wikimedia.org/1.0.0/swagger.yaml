@@ -1893,7 +1893,7 @@ paths:
       tags:
         - Transform
       x-monitor: false
-  '/transform/list/tool/{tool}/':
+  '/transform/list/tool/{tool}':
     get:
       description: |
         Fetches the list of tools and all of the language pairs it can translate
@@ -1923,6 +1923,84 @@ paths:
       tags:
         - Transform
       x-monitor: false
+    parameters: []
+  '/transform/list/tool/{tool}/{from}':
+    get:
+      description: |
+        Fetches the list of tools and all of the language pairs it can translate
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The tool category to list tools and language pairs for
+          enum:
+            - mt
+            - dictionary
+          in: path
+          name: tool
+          required: true
+          type: string
+        - description: The source language code
+          in: path
+          name: from
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the list of language pairs available for a given translation tool
+          schema:
+            $ref: '#/definitions/cx_list_pairs_for_tool'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Lists the tools and language pairs available for the given tool category
+      tags:
+        - Transform
+      x-monitor: false
+    parameters: []
+  '/transform/list/tool/{tool}/{from}/{to}':
+    get:
+      description: |
+        Fetches the list of tools and all of the language pairs it can translate
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The tool category to list tools and language pairs for
+          enum:
+            - mt
+            - dictionary
+          in: path
+          name: tool
+          required: true
+          type: string
+        - description: The source language code
+          in: path
+          name: from
+          required: true
+          type: string
+        - description: The target language code
+          in: path
+          name: to
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the list of language pairs available for a given translation tool
+          schema:
+            $ref: '#/definitions/cx_list_pairs_for_tool'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Lists the tools and language pairs available for the given tool category
+      tags:
+        - Transform
+      x-monitor: false
+    parameters: []
   '/transform/word/from/{from_lang}/to/{to_lang}/{word}':
     get:
       description: |

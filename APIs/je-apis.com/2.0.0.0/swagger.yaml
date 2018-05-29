@@ -31,8 +31,6 @@ tags:
     name: consumerhelp
   - description: Operations about countries
     name: countries
-  - description: Operations about discovery
-    name: discovery
   - description: Operations about experiments
     name: experiments
   - description: Operations about health
@@ -1166,6 +1164,79 @@ paths:
       summary: Get customisation info for Consumer Help
       tags:
         - consumerhelp
+  '/consumerhelp/flows/{flow}/{orderId}/{action}':
+    get:
+      description: 'Uri template /consumerhelp/flows/{flow}/{orderId}/{action}'
+      operationId: GetFlowStep1
+      parameters:
+        - description: uk
+          in: header
+          name: Accept-Tenant
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          required: true
+          type: string
+        - in: path
+          name: flow
+          required: true
+          type: string
+        - in: path
+          name: orderId
+          required: true
+          type: string
+        - in: path
+          name: action
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+        '400':
+          description: Bad request
+      summary: Get the next flow step in a Consumer Help flow
+      tags:
+        - consumerhelp
+    post:
+      description: 'Uri template /consumerhelp/flows/{flow}/{orderId}/{action}'
+      operationId: PostFlowStep1
+      parameters:
+        - description: uk
+          in: header
+          name: Accept-Tenant
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          required: true
+          type: string
+        - in: path
+          name: flow
+          required: true
+          type: string
+        - in: path
+          name: orderId
+          required: true
+          type: string
+        - in: path
+          name: action
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+            items:
+              $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+        '400':
+          description: Bad request
+      summary: Post to a Consumer Help flow and get the next step
+      tags:
+        - consumerhelp
   '/consumerhelp/flows/{flow}/{orderId}/{action}/{subaction}':
     get:
       description: 'Uri template /consumerhelp/flows/{flow}/{orderId}/{action}/{subaction}'
@@ -1201,6 +1272,8 @@ paths:
           description: Operation successful
           schema:
             $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
+            items:
+              $ref: '#/definitions/JustEat.ConsumerHelpApi.Contracts.Flows.FlowResponse'
         '400':
           description: Bad request
       summary: Get the next flow step in a Consumer Help flow; extra URL segment
@@ -1269,81 +1342,6 @@ paths:
       summary: Get all country codes - response is an array of strings
       tags:
         - countries
-  /discovery/metadata:
-    get:
-      description: 'Uri template /discovery/metadata?postcode={postcode}'
-      operationId: GetMetadata
-      parameters:
-        - description: uk
-          in: header
-          name: Accept-Tenant
-          required: true
-          type: string
-        - in: header
-          name: Authorization
-          required: true
-          type: string
-        - in: query
-          name: postcode
-          required: false
-          type: string
-        - format: int32
-          in: query
-          maximum: 0
-          minimum: 0
-          name: userId
-          required: false
-          type: integer
-      responses:
-        '200':
-          description: Operation successful
-          schema:
-            items:
-              $ref: '#/definitions/JE.Api.RestaurantMenu.DTOs.Discovery.DiscoveryMetadata'
-            type: array
-      summary: Get discovery metadata
-      tags:
-        - discovery
-  '/discovery/{postcode}/restaurants/{categoryId}':
-    get:
-      description: 'Uri template /discovery/{postcode}/restaurants/{categoryId}'
-      operationId: GetRestaurants
-      parameters:
-        - description: uk
-          in: header
-          name: Accept-Tenant
-          required: true
-          type: string
-        - in: header
-          name: Authorization
-          required: true
-          type: string
-        - in: path
-          name: postcode
-          required: true
-          type: string
-        - format: int32
-          in: path
-          maximum: 0
-          minimum: 0
-          name: categoryId
-          required: true
-          type: integer
-        - format: int32
-          in: query
-          maximum: 0
-          minimum: 0
-          name: userId
-          required: false
-          type: integer
-      responses:
-        '200':
-          description: Operation successful
-          schema:
-            $ref: '#/definitions/JE.Api.RestaurantMenu.DTOs.Restaurants.Version2.ConsumerSearchResponse'
-      summary: Get discovery restaurants
-      tags:
-        - discovery
   /experiments/active:
     post:
       description: Uri template /experiments/active
@@ -4493,28 +4491,6 @@ definitions:
         description: String
         type: string
       Uri:
-        description: String
-        type: string
-  JE.Api.RestaurantMenu.DTOs.Discovery.DiscoveryMetadata:
-    properties:
-      Id:
-        description: Int32
-        format: int32
-        type: integer
-      ImageUrl:
-        description: String
-        type: string
-      Index:
-        description: Int32
-        format: int32
-        type: integer
-      Link:
-        description: String
-        type: string
-      Name:
-        description: String
-        type: string
-      TagLine:
         description: String
         type: string
   JE.Api.RestaurantMenu.DTOs.Restaurants.Version1.SearchedTerms:

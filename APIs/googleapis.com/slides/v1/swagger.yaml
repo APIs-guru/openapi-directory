@@ -2981,10 +2981,14 @@ definitions:
       relevant for pages with page_type SLIDE.
     properties:
       layoutObjectId:
-        description: The object ID of the layout that this slide is based on.
+        description: |-
+          The object ID of the layout that this slide is based on. This property is
+          read-only.
         type: string
       masterObjectId:
-        description: The object ID of the master that this slide is based on.
+        description: |-
+          The object ID of the master that this slide is based on. This property is
+          read-only.
         type: string
       notesPage:
         $ref: '#/definitions/Page'
@@ -2997,7 +3001,7 @@ definitions:
           notes for this slide. The ID of this shape is identified by the
           speakerNotesObjectId field.
           The notes page is read-only except for the text content and styles of the
-          speaker notes shape.
+          speaker notes shape. This property is read-only.
     type: object
   SolidFill:
     description: |-

@@ -581,7 +581,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: cloudiot.projects.locations.registries.getIamPolicy
+      operationId: cloudiot.projects.locations.registries.groups.getIamPolicy
       parameters:
         - in: body
           name: body
@@ -626,7 +626,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: cloudiot.projects.locations.registries.setIamPolicy
+      operationId: cloudiot.projects.locations.registries.groups.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -672,7 +672,7 @@ paths:
         Returns permissions that a caller has on the specified resource.
         If the resource does not exist, this will return an empty set of
         permissions, not a NOT_FOUND error.
-      operationId: cloudiot.projects.locations.registries.testIamPermissions
+      operationId: cloudiot.projects.locations.registries.groups.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -714,7 +714,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` or `joe@example.com`.
+             account. For example, `alice@gmail.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1122,12 +1122,12 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
       `members` to a `role`, where the members can be user accounts, Google groups,
       Google domains, and service accounts. A `role` is a named list of permissions
       defined by IAM.
 
-      **Example**
+      **JSON Example**
 
           {
             "bindings": [
@@ -1137,7 +1137,7 @@ definitions:
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
                 ]
               },
               {
@@ -1146,6 +1146,20 @@ definitions:
               }
             ]
           }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).

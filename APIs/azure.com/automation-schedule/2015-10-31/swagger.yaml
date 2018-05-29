@@ -42,12 +42,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/scheduleoperations'
       operationId: Schedule_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -96,6 +99,7 @@ paths:
                               items:
                                 format: int32
                                 type: integer
+                                x-nullable: false
                               type: array
                             monthlyOccurrences:
                               description: Occurrences of days within a month.
@@ -103,7 +107,7 @@ paths:
                                 description: The properties of the create advanced schedule monthly occurrence.
                                 properties:
                                   day:
-                                    description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
+                                    description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
                                     enum:
                                       - Monday
                                       - Tuesday
@@ -130,6 +134,7 @@ paths:
                           description: Gets or sets the creation time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -137,10 +142,12 @@ paths:
                           description: Gets or sets the end time of the schedule.
                           format: date-time
                           type: string
+                          x-nullable: true
                         expiryTimeOffsetMinutes:
                           description: Gets or sets the expiry time's offset in minutes.
                           format: double
                           type: number
+                          x-nullable: false
                         frequency:
                           description: Gets or sets the frequency of the schedule.
                           enum:
@@ -163,23 +170,28 @@ paths:
                           description: Gets or sets the last modified time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         nextRun:
                           description: Gets or sets the next run time of the schedule.
                           format: date-time
                           type: string
+                          x-nullable: true
                         nextRunOffsetMinutes:
                           description: Gets or sets the next run time's offset in minutes.
                           format: double
                           type: number
+                          x-nullable: false
                         startTime:
                           description: Gets or sets the start time of the schedule.
                           format: date-time
                           type: string
+                          x-nullable: false
                         startTimeOffsetMinutes:
                           description: Gets the start time's offset in minutes.
                           format: double
                           readOnly: true
                           type: number
+                          x-nullable: false
                         timeZone:
                           description: Gets or sets the time zone of the schedule.
                           type: string
@@ -3067,12 +3079,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/scheduleoperations'
       operationId: Schedule_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -3129,12 +3144,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/scheduleoperations'
       operationId: Schedule_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -3180,6 +3198,7 @@ paths:
                         items:
                           format: int32
                           type: integer
+                          x-nullable: false
                         type: array
                       monthlyOccurrences:
                         description: Occurrences of days within a month.
@@ -3187,7 +3206,7 @@ paths:
                           description: The properties of the create advanced schedule monthly occurrence.
                           properties:
                             day:
-                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
+                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
                               enum:
                                 - Monday
                                 - Tuesday
@@ -3214,6 +3233,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -3221,10 +3241,12 @@ paths:
                     description: Gets or sets the end time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: true
                   expiryTimeOffsetMinutes:
                     description: Gets or sets the expiry time's offset in minutes.
                     format: double
                     type: number
+                    x-nullable: false
                   frequency:
                     description: Gets or sets the frequency of the schedule.
                     enum:
@@ -3247,23 +3269,28 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   nextRun:
                     description: Gets or sets the next run time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: true
                   nextRunOffsetMinutes:
                     description: Gets or sets the next run time's offset in minutes.
                     format: double
                     type: number
+                    x-nullable: false
                   startTime:
                     description: Gets or sets the start time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: false
                   startTimeOffsetMinutes:
                     description: Gets the start time's offset in minutes.
                     format: double
                     readOnly: true
                     type: number
+                    x-nullable: false
                   timeZone:
                     description: Gets or sets the time zone of the schedule.
                     type: string
@@ -3299,6 +3326,7 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/schedules/mySchedule
                 name: mySchedule
                 properties:
+                  advancedSchedule: null
                   creationTime: '2017-03-27T16:59:22.697+00:00'
                   description: my description of schedule goes here
                   expiryTime: '2017-04-01T17:28:00+00:00'
@@ -3319,12 +3347,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/scheduleoperations'
       operationId: Schedule_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -3389,6 +3420,7 @@ paths:
                         items:
                           format: int32
                           type: integer
+                          x-nullable: false
                         type: array
                       monthlyOccurrences:
                         description: Occurrences of days within a month.
@@ -3396,7 +3428,7 @@ paths:
                           description: The properties of the create advanced schedule monthly occurrence.
                           properties:
                             day:
-                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
+                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
                               enum:
                                 - Monday
                                 - Tuesday
@@ -3423,6 +3455,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -3430,10 +3463,12 @@ paths:
                     description: Gets or sets the end time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: true
                   expiryTimeOffsetMinutes:
                     description: Gets or sets the expiry time's offset in minutes.
                     format: double
                     type: number
+                    x-nullable: false
                   frequency:
                     description: Gets or sets the frequency of the schedule.
                     enum:
@@ -3456,23 +3491,28 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   nextRun:
                     description: Gets or sets the next run time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: true
                   nextRunOffsetMinutes:
                     description: Gets or sets the next run time's offset in minutes.
                     format: double
                     type: number
+                    x-nullable: false
                   startTime:
                     description: Gets or sets the start time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: false
                   startTimeOffsetMinutes:
                     description: Gets the start time's offset in minutes.
                     format: double
                     readOnly: true
                     type: number
+                    x-nullable: false
                   timeZone:
                     description: Gets or sets the time zone of the schedule.
                     type: string
@@ -3513,6 +3553,7 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/schedules/mySchedule
                 name: mySchedule
                 properties:
+                  advancedSchedule: null
                   creationTime: '2017-03-27T16:59:22.697+00:00'
                   description: my updated description of schedule goes here
                   expiryTime: '2017-04-01T17:28:00+00:00'
@@ -3533,12 +3574,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/scheduleoperations'
       operationId: Schedule_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -3570,6 +3614,7 @@ paths:
                         items:
                           format: int32
                           type: integer
+                          x-nullable: false
                         type: array
                       monthlyOccurrences:
                         description: Occurrences of days within a month.
@@ -3577,7 +3622,7 @@ paths:
                           description: The properties of the create advanced schedule monthly occurrence.
                           properties:
                             day:
-                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
+                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
                               enum:
                                 - Monday
                                 - Tuesday
@@ -3607,6 +3652,7 @@ paths:
                     description: Gets or sets the end time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: true
                   frequency:
                     description: Gets or sets the frequency of the schedule.
                     enum:
@@ -3625,6 +3671,7 @@ paths:
                     description: Gets or sets the start time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: false
                   timeZone:
                     description: Gets or sets the time zone of the schedule.
                     type: string
@@ -3669,6 +3716,7 @@ paths:
                         items:
                           format: int32
                           type: integer
+                          x-nullable: false
                         type: array
                       monthlyOccurrences:
                         description: Occurrences of days within a month.
@@ -3676,7 +3724,7 @@ paths:
                           description: The properties of the create advanced schedule monthly occurrence.
                           properties:
                             day:
-                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
+                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
                               enum:
                                 - Monday
                                 - Tuesday
@@ -3703,6 +3751,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -3710,10 +3759,12 @@ paths:
                     description: Gets or sets the end time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: true
                   expiryTimeOffsetMinutes:
                     description: Gets or sets the expiry time's offset in minutes.
                     format: double
                     type: number
+                    x-nullable: false
                   frequency:
                     description: Gets or sets the frequency of the schedule.
                     enum:
@@ -3736,23 +3787,28 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   nextRun:
                     description: Gets or sets the next run time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: true
                   nextRunOffsetMinutes:
                     description: Gets or sets the next run time's offset in minutes.
                     format: double
                     type: number
+                    x-nullable: false
                   startTime:
                     description: Gets or sets the start time of the schedule.
                     format: date-time
                     type: string
+                    x-nullable: false
                   startTimeOffsetMinutes:
                     description: Gets the start time's offset in minutes.
                     format: double
                     readOnly: true
                     type: number
+                    x-nullable: false
                   timeZone:
                     description: Gets or sets the time zone of the schedule.
                     type: string
@@ -3799,6 +3855,7 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/schedules/mySchedule
                 name: mySchedule
                 properties:
+                  advancedSchedule: null
                   creationTime: '2017-03-27T16:59:22.697+00:00'
                   description: my description of schedule goes here
                   expiryTime: '2017-04-01T17:28:00+00:00'

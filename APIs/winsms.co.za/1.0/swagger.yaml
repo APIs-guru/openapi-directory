@@ -884,6 +884,66 @@ paths:
       summary: Delete scheduled SMS messages and refund credits
       tags:
         - sms
+  /subaccounts:
+    get:
+      description: Get a list of all Sub Accounts.<br>
+      operationId: getSubAccounts
+      responses:
+        '200':
+          description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/subAccountsListResponse'
+        '401':
+          description: Unauthorized
+          examples:
+            application/json:
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              statusCode: 401
+              timeStamp: '20170120152253514'
+              version: '1.0'
+          schema:
+            $ref: '#/definitions/errorDetails'
+        '404':
+          description: Not found
+          examples:
+            application/json:
+              errorMessage: 'The resource requested does not exist. Please verify the path, spelling, and capitalisation'
+              statusCode: 404
+              timeStamp: '20170120152253514'
+              version: '1.0'
+          schema:
+            $ref: '#/definitions/errorDetails'
+        '405':
+          description: Method Not Allowed
+          examples:
+            application/json:
+              errorMessage: 'Request method should be set to ''GET'', not ''PUT''.'
+              statusCode: 405
+              timeStamp: '20170120152253514'
+              version: '1.0'
+          schema:
+            $ref: '#/definitions/errorDetails'
+        '500':
+          description: Internal Server Error
+          examples:
+            application/json:
+              errorMessage: An unknown error has occurred - authorising API Key
+              statusCode: 500
+              timeStamp: '20170120152253514'
+              version: '1.0'
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: Get a list of all the Sub Accounts owned by the Main Account.
+      tags:
+        - subaccounts
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
 definitions:
   creditBalanceResponse:
     example:
@@ -1456,4 +1516,54 @@ definitions:
     required:
       - shortcodeMessages
     title: shortcodeMessageResponse
+    type: object
+  subAccount:
+    properties:
+      accountNumber:
+        description: 'The WinSMS account number of the Sub Account. This is supplied as an integer, without the leading ''W'' displayed in the WinSMS Client Zone.'
+        example: 58324
+        type: integer
+      creditBalance:
+        description: The remaining credit balance for the Sub Account.
+        example: 201.4
+        type: number
+      firstName:
+        description: The first name of the user that the Sub Account is registered to.
+        example: Jon
+        type: integer
+      loginName:
+        description: The login name of the user that the Sub Account is registered to.
+        example: jon@castleblack.com
+        type: string
+      surname:
+        description: The surname of the user that the Sub Account is registered to.
+        example: Snow
+        type: string
+    required:
+      - accountNumber
+      - loginName
+      - firstName
+      - surname
+    title: subAccount
+    type: object
+  subAccountsListResponse:
+    example:
+      subAccounts:
+        - accountNumber: 58324
+          creditBalance: 201.4
+          firstName: Jon
+          loginName: jon@castleblack.com
+          surname: Snow
+        - accountNumber: 98676
+          creditBalance: 1936
+          firstName: Daenerys
+          loginName: khaleesi
+          surname: Targaryen
+    properties:
+      subAccounts:
+        description: An array of subAccount objects containing properties of each Sub Account owned by the Main Account.
+        items:
+          $ref: '#/definitions/subAccount'
+        type: array
+    title: subAccountsListResponse
     type: object

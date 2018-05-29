@@ -67,18 +67,19 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
 tags:
   - name: edits
   - name: inappproducts
+  - name: orders
   - name: purchases
   - name: reviews
 paths:
@@ -684,6 +685,63 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ApkListing'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - edits
+  '/{packageName}/edits/{editId}/bundles':
+    get:
+      operationId: androidpublisher.edits.bundles.list
+      parameters:
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BundlesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - edits
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      consumes:
+        - application/octet-stream
+      operationId: androidpublisher.edits.bundles.upload
+      parameters:
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Bundle'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
@@ -1385,7 +1443,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1426,7 +1484,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1459,7 +1517,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1722,6 +1780,41 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - inappproducts
+  '/{packageName}/orders/{orderId}:refund':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Refund a user's subscription or in-app purchase order.
+      operationId: androidpublisher.orders.refund
+      parameters:
+        - description: The order ID provided to the user when the subscription or in-app order was purchased.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - description: 'The package name of the application for which this subscription or in-app item was purchased (for example, ''com.some.thing'').'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - description: 'Whether to revoke the purchased item. If set to true, access to the subscription or in-app item will be terminated immediately. If the item is a recurring subscription, all future payments will also be terminated. Consumed in-app items need to be handled by developer''s app. (optional)'
+          in: query
+          name: revoke
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - orders
   '/{packageName}/purchases/products/{productId}/tokens/{token}':
     get:
       description: Checks the purchase and consumption status of an inapp item.
@@ -2193,6 +2286,30 @@ definitions:
         description: The ID of the edit that can be used in subsequent API calls.
         type: string
     type: object
+  Bundle:
+    properties:
+      sha1:
+        description: 'A sha1 hash of the upload payload, encoded as a hex string and matching the output of the sha1sum command.'
+        type: string
+      sha256:
+        description: 'A sha256 hash of the upload payload, encoded as a hex string and matching the output of the sha256sum command.'
+        type: string
+      versionCode:
+        description: The version code of the Android App Bundle. As specified in the Android App Bundle's base module APK manifest file.
+        format: int32
+        type: integer
+    type: object
+  BundlesListResponse:
+    properties:
+      bundles:
+        items:
+          $ref: '#/definitions/Bundle'
+        type: array
+      kind:
+        default: 'androidpublisher#bundlesListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidpublisher#bundlesListResponse".'
+        type: string
+    type: object
   Comment:
     properties:
       developerComment:
@@ -2614,6 +2731,23 @@ definitions:
         $ref: '#/definitions/MonthDay'
         description: Inclusive start date of the recurrence period.
     type: object
+  SubscriptionCancelSurveyResult:
+    description: Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
+    properties:
+      cancelSurveyReason:
+        description: |-
+          The cancellation reason the user chose in the survey. Possible values are:  
+          - Other 
+          - I don't use this service enough 
+          - Technical issues 
+          - Cost-related reasons 
+          - I found a better app
+        format: int32
+        type: integer
+      userInputCancelReason:
+        description: The customized input cancel reason from the user. Only present when cancelReason is 0.
+        type: string
+    type: object
   SubscriptionDeferralInfo:
     description: A SubscriptionDeferralInfo contains the data needed to defer a subscription purchase to a future expiry time.
     properties:
@@ -2641,6 +2775,9 @@ definitions:
           - Subscription was canceled by the developer
         format: int32
         type: integer
+      cancelSurveyResult:
+        $ref: '#/definitions/SubscriptionCancelSurveyResult'
+        description: Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
       countryCode:
         description: ISO 3166-1 alpha-2 billing country/region code of the user at the time the subscription was granted.
         type: string
@@ -2758,6 +2895,7 @@ definitions:
         format: double
         type: number
       versionCodes:
+        description: 'Version codes to make active on this track. Note that this list should contain all versions you wish to be active, including those you wish to retain from previous releases.'
         items:
           format: int32
           type: integer

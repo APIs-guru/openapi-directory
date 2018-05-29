@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/DfsrFantasyDefenseProjectionsByGame/{season}/{week}':
     get:
-      operationId: 57d9aabd35491a1da044c7d5
+      operationId: DfsrProjectedFantasyDefenseGameStats
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -76,7 +76,7 @@ paths:
       summary: DFSR Projected Fantasy Defense Game Stats
   '/{format}/DfsrPlayerGameProjectionStatsByWeek/{season}/{week}':
     get:
-      operationId: 57d9aab835491a1da044c7d4
+      operationId: DfsrProjectedPlayerGameStats
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

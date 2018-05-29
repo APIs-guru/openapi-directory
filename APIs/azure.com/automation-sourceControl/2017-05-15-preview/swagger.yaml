@@ -41,18 +41,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/sourcecontroloperations'
       operationId: SourceControl_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The filter to apply on the operation.
           in: query
           name: $filter
@@ -103,6 +106,7 @@ paths:
                           description: Gets or sets the creation time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -113,6 +117,7 @@ paths:
                           description: Gets or sets the last modified time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         publishRunbook:
                           description: Gets or sets the auto publish of the source control. Default is true.
                           type: boolean
@@ -228,18 +233,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/sourcecontroloperations'
       operationId: SourceControl_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of source control.
           in: path
           name: sourceControlName
@@ -288,18 +296,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/sourcecontroloperations'
       operationId: SourceControl_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of source control.
           in: path
           name: sourceControlName
@@ -342,6 +353,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -352,6 +364,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   publishRunbook:
                     description: Gets or sets the auto publish of the source control. Default is true.
                     type: boolean
@@ -415,18 +428,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/sourcecontroloperations'
       operationId: SourceControl_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The source control name.
           in: path
           name: sourceControlName
@@ -497,6 +513,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -507,6 +524,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   publishRunbook:
                     description: Gets or sets the auto publish of the source control. Default is true.
                     type: boolean
@@ -580,18 +598,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/sourcecontroloperations'
       operationId: SourceControl_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The source control name.
           in: path
           name: sourceControlName
@@ -682,6 +703,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -692,6 +714,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   publishRunbook:
                     description: Gets or sets the auto publish of the source control. Default is true.
                     type: boolean
@@ -739,6 +762,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -749,6 +773,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   publishRunbook:
                     description: Gets or sets the auto publish of the source control. Default is true.
                     type: boolean

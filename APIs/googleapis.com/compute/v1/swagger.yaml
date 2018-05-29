@@ -70,12 +70,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -111,6 +111,8 @@ tags:
   - name: regionAutoscalers
   - name: regionBackendServices
   - name: regionCommitments
+  - name: regionDiskTypes
+  - name: regionDisks
   - name: regionInstanceGroupManagers
   - name: regionInstanceGroups
   - name: regionOperations
@@ -1776,7 +1778,7 @@ paths:
       tags:
         - globalAddresses
     get:
-      description: Returns the specified address resource. Get a list of available addresses by making a list() request.
+      description: Returns the specified address resource. Gets a list of available addresses by making a list() request.
       operationId: compute.globalAddresses.get
       parameters:
         - description: Name of the address resource to return.
@@ -1944,7 +1946,7 @@ paths:
       tags:
         - backendBuckets
     get:
-      description: Returns the specified BackendBucket resource. Get a list of available backend buckets by making a list() request.
+      description: Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.
       operationId: compute.backendBuckets.get
       parameters:
         - description: Name of the BackendBucket resource to return.
@@ -2190,7 +2192,7 @@ paths:
       tags:
         - backendServices
     get:
-      description: Returns the specified BackendService resource. Get a list of available backend services by making a list() request.
+      description: Returns the specified BackendService resource. Gets a list of available backend services by making a list() request.
       operationId: compute.backendServices.get
       parameters:
         - description: Name of the BackendService resource to return.
@@ -2722,7 +2724,7 @@ paths:
       tags:
         - globalForwardingRules
     get:
-      description: Returns the specified GlobalForwardingRule resource. Get a list of available forwarding rules by making a list() request.
+      description: Returns the specified GlobalForwardingRule resource. Gets a list of available forwarding rules by making a list() request.
       operationId: compute.globalForwardingRules.get
       parameters:
         - description: Name of the ForwardingRule resource to return.
@@ -2938,7 +2940,7 @@ paths:
       tags:
         - healthChecks
     get:
-      description: Returns the specified HealthCheck resource. Get a list of available health checks by making a list() request.
+      description: Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
       operationId: compute.healthChecks.get
       parameters:
         - description: Name of the HealthCheck resource to return.
@@ -3184,7 +3186,7 @@ paths:
       tags:
         - httpHealthChecks
     get:
-      description: Returns the specified HttpHealthCheck resource. Get a list of available HTTP health checks by making a list() request.
+      description: Returns the specified HttpHealthCheck resource. Gets a list of available HTTP health checks by making a list() request.
       operationId: compute.httpHealthChecks.get
       parameters:
         - description: Name of the HttpHealthCheck resource to return.
@@ -3430,7 +3432,7 @@ paths:
       tags:
         - httpsHealthChecks
     get:
-      description: Returns the specified HttpsHealthCheck resource. Get a list of available HTTPS health checks by making a list() request.
+      description: Returns the specified HttpsHealthCheck resource. Gets a list of available HTTPS health checks by making a list() request.
       operationId: compute.httpsHealthChecks.get
       parameters:
         - description: Name of the HttpsHealthCheck resource to return.
@@ -3723,7 +3725,7 @@ paths:
       tags:
         - images
     get:
-      description: Returns the specified image. Get a list of available images by making a list() request.
+      description: Returns the specified image. Gets a list of available images by making a list() request.
       operationId: compute.images.get
       parameters:
         - description: Name of the image resource to return.
@@ -4080,7 +4082,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/interconnectLocations/{interconnectLocation}':
     get:
-      description: Returns the details for the specified interconnect location. Get a list of available interconnect locations by making a list() request.
+      description: Returns the details for the specified interconnect location. Gets a list of available interconnect locations by making a list() request.
       operationId: compute.interconnectLocations.get
       parameters:
         - description: Name of the interconnect location to return.
@@ -4402,7 +4404,7 @@ paths:
         - licenseCodes
   '/{project}/global/licenses':
     get:
-      description: 'Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 8. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
+      description: 'Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 9. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
       operationId: compute.licenses.list
       parameters:
         - description: |-
@@ -4748,7 +4750,7 @@ paths:
       tags:
         - networks
     get:
-      description: Returns the specified network. Get a list of available networks by making a list() request.
+      description: Returns the specified network. Gets a list of available networks by making a list() request.
       operationId: compute.networks.get
       parameters:
         - description: Name of the network to return.
@@ -5050,7 +5052,7 @@ paths:
       tags:
         - globalOperations
     get:
-      description: Retrieves the specified Operations resource. Get a list of operations by making a list() request.
+      description: Retrieves the specified Operations resource. Gets a list of operations by making a list() request.
       operationId: compute.globalOperations.get
       parameters:
         - description: Name of the Operations resource to return.
@@ -5218,7 +5220,7 @@ paths:
       tags:
         - routes
     get:
-      description: Returns the specified Route resource. Get a list of available routes by making a list() request.
+      description: Returns the specified Route resource. Gets a list of available routes by making a list() request.
       operationId: compute.routes.get
       parameters:
         - description: Project ID for this request.
@@ -5394,7 +5396,7 @@ paths:
       tags:
         - snapshots
     get:
-      description: Returns the specified Snapshot resource. Get a list of available snapshots by making a list() request.
+      description: Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.
       operationId: compute.snapshots.get
       parameters:
         - description: Project ID for this request.
@@ -5562,7 +5564,7 @@ paths:
       tags:
         - sslCertificates
     get:
-      description: Returns the specified SslCertificate resource. Get a list of available SSL certificates by making a list() request.
+      description: Returns the specified SslCertificate resource. Gets a list of available SSL certificates by making a list() request.
       operationId: compute.sslCertificates.get
       parameters:
         - description: Project ID for this request.
@@ -5660,7 +5662,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Returns the specified SSL policy resource. Get a list of available SSL policies by making a list() request.
+      description: Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.
       operationId: compute.sslPolicies.insert
       parameters:
         - in: body
@@ -5999,7 +6001,7 @@ paths:
       tags:
         - targetHttpProxies
     get:
-      description: Returns the specified TargetHttpProxy resource. Get a list of available target HTTP proxies by making a list() request.
+      description: Returns the specified TargetHttpProxy resource. Gets a list of available target HTTP proxies by making a list() request.
       operationId: compute.targetHttpProxies.get
       parameters:
         - description: Project ID for this request.
@@ -6167,7 +6169,7 @@ paths:
       tags:
         - targetHttpsProxies
     get:
-      description: Returns the specified TargetHttpsProxy resource. Get a list of available target HTTPS proxies by making a list() request.
+      description: Returns the specified TargetHttpsProxy resource. Gets a list of available target HTTPS proxies by making a list() request.
       operationId: compute.targetHttpsProxies.get
       parameters:
         - description: Project ID for this request.
@@ -6383,7 +6385,7 @@ paths:
       tags:
         - targetSslProxies
     get:
-      description: Returns the specified TargetSslProxy resource. Get a list of available target SSL proxies by making a list() request.
+      description: Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.
       operationId: compute.targetSslProxies.get
       parameters:
         - description: Project ID for this request.
@@ -6743,7 +6745,7 @@ paths:
       tags:
         - targetTcpProxies
     get:
-      description: Returns the specified TargetTcpProxy resource. Get a list of available target TCP proxies by making a list() request.
+      description: Returns the specified TargetTcpProxy resource. Gets a list of available target TCP proxies by making a list() request.
       operationId: compute.targetTcpProxies.get
       parameters:
         - description: Project ID for this request.
@@ -7007,7 +7009,7 @@ paths:
       tags:
         - urlMaps
     get:
-      description: Returns the specified UrlMap resource. Get a list of available URL maps by making a list() request.
+      description: Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
       operationId: compute.urlMaps.get
       parameters:
         - description: Project ID for this request.
@@ -7405,7 +7407,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}':
     get:
-      description: Returns the specified Region resource. Get a list of available regions by making a list() request.
+      description: Returns the specified Region resource. Gets a list of available regions by making a list() request.
       operationId: compute.regions.get
       parameters:
         - description: Project ID for this request.
@@ -8331,7 +8333,7 @@ paths:
         - regionCommitments
   '/{project}/regions/{region}/commitments/{commitment}':
     get:
-      description: Returns the specified commitment resource. Get a list of available commitments by making a list() request.
+      description: Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
       operationId: compute.regionCommitments.get
       parameters:
         - description: Name of the commitment to return.
@@ -8371,6 +8373,512 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/diskTypes':
+    get:
+      description: Retrieves a list of regional disk types available to the specified project.
+      operationId: compute.regionDiskTypes.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RegionDiskTypeList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionDiskTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/diskTypes/{diskType}':
+    get:
+      description: Returns the specified regional disk type. Gets a list of available disk types by making a list() request.
+      operationId: compute.regionDiskTypes.get
+      parameters:
+        - description: Name of the disk type to return.
+          in: path
+          name: diskType
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DiskType'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionDiskTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/disks':
+    get:
+      description: Retrieves the list of persistent disks contained within the specified region.
+      operationId: compute.regionDisks.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DiskList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionDisks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a persistent regional disk in the specified project using the data included in the request.
+      operationId: compute.regionDisks.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Disk'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Optional. Source image to restore onto a disk.
+          in: query
+          name: sourceImage
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionDisks
+  '/{project}/regions/{region}/disks/{disk}':
+    delete:
+      description: 'Deletes the specified regional persistent disk. Deleting a regional disk removes all the replicas of its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.'
+      operationId: compute.regionDisks.delete
+      parameters:
+        - description: Name of the regional persistent disk to delete.
+          in: path
+          name: disk
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionDisks
+    get:
+      description: Returns a specified regional persistent disk.
+      operationId: compute.regionDisks.get
+      parameters:
+        - description: Name of the regional persistent disk to return.
+          in: path
+          name: disk
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Disk'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionDisks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/disks/{disk}/createSnapshot':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a snapshot of this regional disk.
+      operationId: compute.regionDisks.createSnapshot
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Snapshot'
+        - description: Name of the regional persistent disk to snapshot.
+          in: path
+          name: disk
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionDisks
+  '/{project}/regions/{region}/disks/{disk}/resize':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Resizes the specified regional persistent disk.
+      operationId: compute.regionDisks.resize
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionDisksResizeRequest'
+        - description: Name of the regional persistent disk.
+          in: path
+          name: disk
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionDisks
+  '/{project}/regions/{region}/disks/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the labels on the target regional disk.
+      operationId: compute.regionDisks.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionDisks
+  '/{project}/regions/{region}/disks/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionDisks.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionDisks
   '/{project}/regions/{region}/forwardingRules':
     get:
       description: Retrieves a list of ForwardingRule resources available to the specified project and region.
@@ -9909,7 +10417,7 @@ paths:
       tags:
         - routers
     get:
-      description: Returns the specified Router resource. Get a list of available routers by making a list() request.
+      description: Returns the specified Router resource. Gets a list of available routers by making a list() request.
       operationId: compute.routers.get
       parameters:
         - description: Project ID for this request.
@@ -10273,7 +10781,7 @@ paths:
       tags:
         - subnetworks
     get:
-      description: Returns the specified subnetwork. Get a list of available subnetworks list() request.
+      description: Returns the specified subnetwork. Gets a list of available subnetworks list() request.
       operationId: compute.subnetworks.get
       parameters:
         - description: Project ID for this request.
@@ -10611,7 +11119,7 @@ paths:
       tags:
         - targetPools
     get:
-      description: Returns the specified target pool. Get a list of available target pools by making a list() request.
+      description: Returns the specified target pool. Gets a list of available target pools by making a list() request.
       operationId: compute.targetPools.get
       parameters:
         - description: Project ID for this request.
@@ -11114,7 +11622,7 @@ paths:
       tags:
         - targetVpnGateways
     get:
-      description: Returns the specified target VPN gateway. Get a list of available target VPN gateways by making a list() request.
+      description: Returns the specified target VPN gateway. Gets a list of available target VPN gateways by making a list() request.
       operationId: compute.targetVpnGateways.get
       parameters:
         - description: Project ID for this request.
@@ -11302,7 +11810,7 @@ paths:
       tags:
         - vpnTunnels
     get:
-      description: Returns the specified VpnTunnel resource. Get a list of available VPN tunnels by making a list() request.
+      description: Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.
       operationId: compute.vpnTunnels.get
       parameters:
         - description: Project ID for this request.
@@ -11642,7 +12150,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}':
     get:
-      description: Returns the specified Zone resource. Get a list of available zones by making a list() request.
+      description: Returns the specified Zone resource. Gets a list of available zones by making a list() request.
       operationId: compute.zones.get
       parameters:
         - description: Project ID for this request.
@@ -11746,7 +12254,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/acceleratorTypes/{acceleratorType}':
     get:
-      description: Returns the specified accelerator type. Get a list of available accelerator types by making a list() request.
+      description: Returns the specified accelerator type.
       operationId: compute.acceleratorTypes.get
       parameters:
         - description: Name of the accelerator type to return.
@@ -12020,7 +12528,7 @@ paths:
       tags:
         - autoscalers
     get:
-      description: Returns the specified autoscaler resource. Get a list of available autoscalers by making a list() request.
+      description: Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.
       operationId: compute.autoscalers.get
       parameters:
         - description: Name of the autoscaler to return.
@@ -12129,7 +12637,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/diskTypes/{diskType}':
     get:
-      description: Returns the specified disk type. Get a list of available disk types by making a list() request.
+      description: Returns the specified disk type. Gets a list of available disk types by making a list() request.
       operationId: compute.diskTypes.get
       parameters:
         - description: Name of the disk type to return.
@@ -12321,7 +12829,7 @@ paths:
       tags:
         - disks
     get:
-      description: Returns a specified persistent disk. Get a list of available persistent disks by making a list() request.
+      description: Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.
       operationId: compute.disks.get
       parameters:
         - description: Name of the persistent disk to return.
@@ -13255,7 +13763,7 @@ paths:
       tags:
         - instanceGroups
     get:
-      description: Returns the specified instance group. Get a list of available instance groups by making a list() request.
+      description: Returns the specified instance group. Gets a list of available instance groups by making a list() request.
       operationId: compute.instanceGroups.get
       parameters:
         - description: The name of the instance group.
@@ -13691,7 +14199,7 @@ paths:
       tags:
         - instances
     get:
-      description: Returns the specified Instance resource. Get a list of available instances by making a list() request.
+      description: Returns the specified Instance resource. Gets a list of available instances by making a list() request.
       operationId: compute.instances.get
       parameters:
         - description: Name of the instance resource to return.
@@ -13806,6 +14314,10 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/AttachedDisk'
+        - description: Whether to force attach the disk even if it's currently attached to another instance. This is only available for regional disks.
+          in: query
+          name: forceAttach
+          type: boolean
         - description: The instance name for this request.
           in: path
           name: instance
@@ -14622,7 +15134,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.'
+      description: 'Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.'
       operationId: compute.instances.start
       parameters:
         - description: Name of the instance resource to start.
@@ -14671,7 +15183,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.'
+      description: 'Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.'
       operationId: compute.instances.startWithEncryptionKey
       parameters:
         - in: body
@@ -15328,7 +15840,7 @@ paths:
       tags:
         - targetInstances
     get:
-      description: Returns the specified TargetInstance resource. Get a list of available target instances by making a list() request.
+      description: Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.
       operationId: compute.targetInstances.get
       parameters:
         - description: Project ID for this request.
@@ -17307,6 +17819,14 @@ definitions:
       options:
         description: Internal use only.
         type: string
+      region:
+        description: '[Output Only] URL of the region where the disk resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
+        type: string
+      replicaZones:
+        description: URLs of the zones where the disk should be replicated to. Only applicable for regional resources.
+        items:
+          type: string
+        type: array
       selfLink:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
         type: string
@@ -17559,6 +18079,9 @@ definitions:
       name:
         description: '[Output Only] Name of the resource.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      region:
+        description: '[Output Only] URL of the region where the disk type resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -19060,7 +19583,7 @@ definitions:
         type: string
       labelFingerprint:
         description: |-
-          A fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+          A fingerprint for this request, which is essentially a hash of the label's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
 
           To see the latest fingerprint, make get() request to the instance.
         format: byte
@@ -19420,7 +19943,7 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       fingerprint:
-        description: '[Output Only] The fingerprint of the resource data. You can use this optional field for optimistic locking when you update the resource.'
+        description: Fingerprint of this resource. This field may be used in optimistic locking. It will be ignored when inserting an InstanceGroupManager. An up-to-date fingerprint must be provided in order to update the InstanceGroupManager or the field need to be unset.
         format: byte
         type: string
       id:
@@ -20935,7 +21458,7 @@ definitions:
     description: 'Description of a planned outage on this Interconnect. Next id: 9'
     properties:
       affectedCircuits:
-        description: 'Iff issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs that will be affected.'
+        description: 'If issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs that will be affected.'
         items:
           type: string
         type: array
@@ -21726,7 +22249,7 @@ definitions:
     description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
     properties:
       clientOperationId:
-        description: '[Output Only] Reserved for future use.'
+        description: '[Output Only] The value of `requestId` if you provided it in the request. Not present otherwise.'
         type: string
       creationTimestamp:
         description: '[Deprecated] This field is deprecated.'
@@ -22205,6 +22728,8 @@ definitions:
           - INSTANCE_GROUP_MANAGERS
           - INSTANCE_TEMPLATES
           - INTERCONNECTS
+          - INTERCONNECT_ATTACHMENTS_PER_REGION
+          - INTERCONNECT_ATTACHMENTS_TOTAL_MBPS
           - INTERNAL_ADDRESSES
           - IN_USE_ADDRESSES
           - LOCAL_SSD_TOTAL_GB
@@ -22373,6 +22898,82 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  RegionDiskTypeList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of DiskType resources.
+        items:
+          $ref: '#/definitions/DiskType'
+        type: array
+      kind:
+        default: 'compute#regionDiskTypeList'
+        description: '[Output Only] Type of resource. Always compute#regionDiskTypeList for region disk types.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  RegionDisksResizeRequest:
+    properties:
+      sizeGb:
+        description: 'The new size of the regional persistent disk, which is specified in GB.'
+        format: int64
+        type: string
     type: object
   RegionInstanceGroupList:
     description: Contains a list of InstanceGroup resources.
@@ -22726,6 +23327,18 @@ definitions:
           message:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
+        type: object
+    type: object
+  RegionSetLabelsRequest:
+    properties:
+      labelFingerprint:
+        description: 'The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels. Make a get() request to the resource to get the latest fingerprint.'
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: The labels to set for this resource.
         type: object
     type: object
   ResourceCommitment:
@@ -23789,12 +24402,11 @@ definitions:
         description: '[Output only] Type of the resource. Always compute#sslPolicyfor SSL policies.'
         type: string
       minTlsVersion:
-        description: 'The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS_1_0, TLS_1_1, TLS_1_2, TLS_1_3.'
+        description: 'The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS_1_0, TLS_1_1, TLS_1_2.'
         enum:
           - TLS_1_0
           - TLS_1_1
           - TLS_1_2
-          - TLS_1_3
         type: string
       name:
         description: 'Name of the resource. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
@@ -23877,6 +24489,9 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource. This field can be set only at resource creation time.
         type: string
+      enableFlowLogs:
+        description: Whether to enable flow logging for this subnetwork.
+        type: boolean
       fingerprint:
         description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a Subnetwork. An up-to-date fingerprint must be provided in order to update the Subnetwork.
         format: byte
@@ -24161,7 +24776,7 @@ definitions:
     properties:
       fingerprint:
         description: |-
-          Specifies a fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+          Specifies a fingerprint for this request, which is essentially a hash of the tags' contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update tags. You must always provide an up-to-date fingerprint hash in order to update or change tags.
 
           To see the latest fingerprint, make get() request to the instance.
         format: byte

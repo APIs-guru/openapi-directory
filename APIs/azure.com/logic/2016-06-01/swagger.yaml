@@ -161,7 +161,7 @@ paths:
       tags:
         - IntegrationAccounts
       x-ms-examples:
-        List IntegrationAccounts by resourcegroup name:
+        List IntegrationAccounts by resource group name:
           parameters:
             api-version: '2016-06-01'
             resourceGroupName: testResourceGroup
@@ -404,7 +404,7 @@ paths:
       tags:
         - IntegrationAccountAgreements
       x-ms-examples:
-        Get agreements by integrationaccount name:
+        Get agreements by integration account name:
           parameters:
             api-version: '2016-06-01'
             integrationAccountName: testIntegrationAccount
@@ -1555,6 +1555,582 @@ paths:
                   hostPartner: HostPartner
                   metadata: {}
                 type: Microsoft.Logic/integrationAccounts/agreements
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/agreements/{agreementName}/listContentCallbackUrl':
+    post:
+      description: Get the content callback url.
+      operationId: Agreements_ListContentCallbackUrl
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The integration account agreement name.
+          in: path
+          name: agreementName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - in: body
+          name: listContentCallbackUrl
+          required: true
+          schema:
+            $ref: '#/definitions/GetCallbackUrlParameters'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowTriggerCallbackUrl'
+      tags:
+        - IntegrationAccountAgreements
+      x-ms-examples:
+        Get the content callback url:
+          parameters:
+            agreementName: testAgreement
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            listContentCallbackUrl:
+              keyType: Primary
+              notAfter: '2018-04-19T16:00:00Z'
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                basePath: 'https://prod-00.westus.logic.azure.com/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/agreements/testAgreement/contents/Value'
+                method: GET
+                queries:
+                  api-version: 2015-08-01-preview
+                value: 'https://prod-00.westus.logic.azure.com:443/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/agreements/testAgreement/contents/Value?api-version=2015-08-01-preview&sp=%2Fagreements%2FtestAgreement%2Fread&sv=1.0&sig=VK_mbQPTHTa3ezhsrI8IctckwjlL3GdJmroQH_baYj4'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/assemblies':
+    get:
+      description: List the assemblies for an integration account.
+      operationId: IntegrationAccountAssemblies_List
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AssemblyCollection'
+      tags:
+        - IntegrationAccountAssemblies
+      x-ms-examples:
+        List integration account assemblies.:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/assemblies/testAssembly
+                    name: testAssembly
+                    properties:
+                      assemblyName: System.IdentityModel.Tokens.Jwt
+                      assemblyVersion: 0.0.0.0
+                      changedTime: '2017-02-24T18:45:23.4137139Z'
+                      contentLink:
+                        contentHash:
+                          algorithm: md5
+                          value: A2avz/M0ov2FPI3+Je8vDw==
+                        contentSize: 3056
+                        contentVersion: '"0x8D45CE54B058881"'
+                        uri: <Uri>
+                      createdTime: '2017-02-24T18:45:23.4129778Z'
+                      metadata: {}
+                    type: Microsoft.Logic/integrationAccounts/assemblies
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/assemblies/{assemblyArtifactName}':
+    delete:
+      description: Delete an assembly for an integration account.
+      operationId: IntegrationAccountAssemblies_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The assembly artifact name.
+          in: path
+          name: assemblyArtifactName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - IntegrationAccountAssemblies
+      x-ms-examples:
+        Delete an integration account assembly.:
+          parameters:
+            api-version: '2016-06-01'
+            assemblyArtifactName: testAssembly
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Get an assembly for an integration account.
+      operationId: IntegrationAccountAssemblies_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The assembly artifact name.
+          in: path
+          name: assemblyArtifactName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AssemblyDefinition'
+      tags:
+        - IntegrationAccountAssemblies
+      x-ms-examples:
+        Get an integration account assembly.:
+          parameters:
+            api-version: '2016-06-01'
+            assemblyArtifactName: testAssembly
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/assemblies/testAssembly
+                name: testAssembly
+                properties:
+                  assemblyName: System.IdentityModel.Tokens.Jwt
+                  assemblyVersion: 0.0.0.0
+                  changedTime: '2017-02-24T18:45:23.4137139Z'
+                  contentLink:
+                    contentHash:
+                      algorithm: md5
+                      value: A2avz/M0ov2FPI3+Je8vDw==
+                    contentSize: 3056
+                    contentVersion: '"0x8D45CE54B058881"'
+                    uri: <Uri>
+                  createdTime: '2017-02-24T18:45:23.4129778Z'
+                  metadata: {}
+                type: Microsoft.Logic/integrationAccounts/assemblies
+    put:
+      description: Create or update an assembly for an integration account.
+      operationId: IntegrationAccountAssemblies_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The assembly artifact name.
+          in: path
+          name: assemblyArtifactName
+          required: true
+          type: string
+        - description: The assembly artifact.
+          in: body
+          name: assemblyArtifact
+          required: true
+          schema:
+            $ref: '#/definitions/AssemblyDefinition'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AssemblyDefinition'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/AssemblyDefinition'
+      tags:
+        - IntegrationAccountAssemblies
+      x-ms-examples:
+        Create or update an account assembly.:
+          parameters:
+            api-version: '2016-06-01'
+            assemblyArtifact:
+              location: westus
+              properties:
+                assemblyName: System.IdentityModel.Tokens.Jwt
+                content: Base64 encoded Assembly Content
+                metadata: {}
+            assemblyArtifactName: testAssembly
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/assemblies/testAssembly
+                name: testAssembly
+                properties:
+                  assemblyName: System.IdentityModel.Tokens.Jwt
+                  assemblyVersion: 0.0.0.0
+                  changedTime: '2017-02-24T18:45:23.4137139Z'
+                  contentLink:
+                    contentHash:
+                      algorithm: md5
+                      value: A2avz/M0ov2FPI3+Je8vDw==
+                    contentSize: 3056
+                    contentVersion: '"0x8D45CE54B058881"'
+                    uri: <Uri>
+                  createdTime: '2017-02-24T18:45:23.4129778Z'
+                  metadata: {}
+                type: Microsoft.Logic/integrationAccounts/assemblies
+            '201':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/assemblies/testAssembly
+                name: testAssembly
+                properties:
+                  assemblyName: System.IdentityModel.Tokens.Jwt
+                  assemblyVersion: 0.0.0.0
+                  changedTime: '2017-02-24T18:45:23.4137139Z'
+                  contentLink:
+                    contentHash:
+                      algorithm: md5
+                      value: A2avz/M0ov2FPI3+Je8vDw==
+                    contentSize: 3056
+                    contentVersion: '"0x8D45CE54B058881"'
+                    uri: <Uri>
+                  createdTime: '2017-02-24T18:45:23.4129778Z'
+                  metadata: {}
+                type: Microsoft.Logic/integrationAccounts/assemblies
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/assemblies/{assemblyArtifactName}/listContentCallbackUrl':
+    post:
+      description: Get the content callback url for an integration account assembly.
+      operationId: IntegrationAccountAssemblies_ListContentCallbackUrl
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The assembly artifact name.
+          in: path
+          name: assemblyArtifactName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowTriggerCallbackUrl'
+      tags:
+        - IntegrationAccountAssemblies
+      x-ms-examples:
+        Get the callback url for an integration account assembly.:
+          parameters:
+            api-version: '2016-06-01'
+            assemblyArtifactName: testAssembly
+            integrationAccountName: testIntegrationAccount
+            listContentCallbackUrl:
+              keyType: Primary
+              notAfter: '2018-04-19T16:00:00Z'
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                basePath: 'https://prod-00.westus.logic.azure.com/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/assemblies/testAssembly/contents/Value'
+                method: GET
+                queries:
+                  api-version: 2015-08-01-preview
+                value: 'https://prod-00.westus.logic.azure.com:443/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/assemblies/testAssembly/contents/Value?api-version=2015-08-01-preview&sp=%2Fassemblies%2FtestAssembly%2Fread&sv=1.0&sig=VK_mbQPTHTa3ezhsrI8IctckwjlL3GdJmroQH_baYj4'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/batchConfigurations':
+    get:
+      description: List the batch configurations for an integration account.
+      operationId: IntegrationAccountBatchConfigurations_List
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BatchConfigurationCollection'
+      tags:
+        - IntegrationAccountBatchConfigurations
+      x-ms-examples:
+        List batch configurations.:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/batchConfigurations/testBatchConfiguration
+                    name: testBatchConfiguration
+                    properties:
+                      batchGroupName: DEFAULT
+                      changedTime: '2018-03-26T06:14:16.7042301Z'
+                      createdTime: '2018-03-26T06:14:16.6518552Z'
+                      releaseCriteria:
+                        batchSize: 234567
+                        messageCount: 10
+                        recurrence:
+                          frequency: Minute
+                          interval: 1
+                          startTime: '2017-03-24T11:43:00'
+                          timeZone: India Standard Time
+                    type: Microsoft.Logic/integrationAccounts/batchConfigurations
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/batchConfigurations/{batchConfigurationName}':
+    delete:
+      description: Delete a batch configuration for an integration account.
+      operationId: IntegrationAccountBatchConfigurations_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The batch configuration name.
+          in: path
+          name: batchConfigurationName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - IntegrationAccountBatchConfigurations
+      x-ms-examples:
+        Delete a batch configuration.:
+          parameters:
+            api-version: '2016-06-01'
+            batchConfigurationName: testBatchConfiguration
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Get a batch configuration for an integration account.
+      operationId: IntegrationAccountBatchConfigurations_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The batch configuration name.
+          in: path
+          name: batchConfigurationName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BatchConfiguration'
+      tags:
+        - IntegrationAccountBatchConfigurations
+      x-ms-examples:
+        Get a batch configuration.:
+          parameters:
+            api-version: '2016-06-01'
+            batchConfigurationName: testBatchConfiguration
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/batchConfigurations/testBatchConfiguration
+                name: testBatchConfiguration
+                properties:
+                  batchGroupName: DEFAULT
+                  changedTime: '2018-03-26T06:14:16.7042301Z'
+                  createdTime: '2018-03-26T06:14:16.6518552Z'
+                  releaseCriteria:
+                    batchSize: 234567
+                    messageCount: 10
+                    recurrence:
+                      frequency: Minute
+                      interval: 1
+                      startTime: '2017-03-24T11:43:00'
+                      timeZone: India Standard Time
+                type: Microsoft.Logic/integrationAccounts/batchConfigurations
+    put:
+      description: Create or update a batch configuration for an integration account.
+      operationId: IntegrationAccountBatchConfigurations_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The batch configuration name.
+          in: path
+          name: batchConfigurationName
+          required: true
+          type: string
+        - description: The batch configuration.
+          in: body
+          name: batchConfiguration
+          required: true
+          schema:
+            $ref: '#/definitions/BatchConfiguration'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BatchConfiguration'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/BatchConfiguration'
+      tags:
+        - IntegrationAccountBatchConfigurations
+      x-ms-examples:
+        Create or update a batch configuration.:
+          parameters:
+            api-version: '2016-06-01'
+            batchConfiguration:
+              location: westus
+              properties:
+                properties:
+                  batchGroupName: DEFAULT
+                  releaseCriteria:
+                    batchSize: 234567
+                    messageCount: 10
+                    recurrence:
+                      frequency: Minute
+                      interval: 1
+                      startTime: '2017-03-24T11:43:00'
+                      timeZone: India Standard Time
+            batchConfigurationName: testBatchConfiguration
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/batchConfigurations/testBatchConfiguration
+                name: testBatchConfiguration
+                properties:
+                  batchGroupName: DEFAULT
+                  changedTime: '2018-03-26T06:14:16.7042301Z'
+                  createdTime: '2018-03-26T06:14:16.6518552Z'
+                  releaseCriteria:
+                    batchSize: 234567
+                    messageCount: 10
+                    recurrence:
+                      frequency: Minute
+                      interval: 1
+                      startTime: '2017-03-24T11:43:00'
+                      timeZone: India Standard Time
+                type: Microsoft.Logic/integrationAccounts/batchConfigurations
+            '201':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/batchConfigurations/testBatchConfiguration
+                name: testBatchConfiguration
+                properties:
+                  batchGroupName: DEFAULT
+                  changedTime: '2018-03-26T06:14:16.7042301Z'
+                  createdTime: '2018-03-26T06:14:16.6518552Z'
+                  releaseCriteria:
+                    batchSize: 234567
+                    messageCount: 10
+                    recurrence:
+                      frequency: Minute
+                      interval: 1
+                      startTime: '2017-03-24T11:43:00'
+                      timeZone: India Standard Time
+                type: Microsoft.Logic/integrationAccounts/batchConfigurations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/certificates':
     get:
       description: Gets a list of integration account certificates.
@@ -1837,6 +2413,131 @@ paths:
             '200':
               body:
                 value: 'https://testprod-westus.logic.azure.com:443/integrationAccounts/ce41a499a1e64d95b874f5f14b4bf3b6?api-version=2015-08-01-preview&se=2017-03-17T07%3A00%3A00.0000000Z&sp=%2F%2F%2A&sv=1.0'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/listKeyVaultKeys':
+    post:
+      description: Gets the integration account's Key Vault keys.
+      operationId: IntegrationAccounts_ListKeyVaultKeys
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - description: The key vault parameters.
+          in: body
+          name: listKeyVaultKeys
+          required: true
+          schema:
+            $ref: '#/definitions/ListKeyVaultKeysDefinition'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/KeyVaultKeyCollection'
+      tags:
+        - IntegrationAccounts
+      x-ms-examples:
+        Get Integration Account callback URL:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            listKeyVaultKeys:
+              keyVault:
+                id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.KeyVault/vaults/testKeyVault
+              skipToken: testSkipToken
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                skipToken: testSkipToken
+                value:
+                  - attributes:
+                      created: 1498072075
+                      enabled: true
+                      updated: 1498072075
+                    kid: 'https://testKeyVault.vault.azure.net/keys/testkey'
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/logTrackingEvents':
+    post:
+      description: Logs the integration account's tracking events.
+      operationId: IntegrationAccounts_LogTrackingEvents
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - description: The callback URL parameters.
+          in: body
+          name: logTrackingEvents
+          required: true
+          schema:
+            $ref: '#/definitions/TrackingEventsDefinition'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - IntegrationAccounts
+      x-ms-examples:
+        Log a tracked event:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            logTrackingEvents:
+              events:
+                - error:
+                    code: NotFound
+                    message: Some error occurred
+                  eventTime: '2016-08-05T01:54:49.505567Z'
+                  eventlevel: Informational
+                  record:
+                    agreementProperties:
+                      agreementName: testAgreement
+                      as2From: testas2from
+                      as2To: testas2to
+                      receiverPartnerName: testPartner2
+                      senderPartnerName: testPartner1
+                    messageProperties:
+                      IsMessageEncrypted: false
+                      IsMessageSigned: false
+                      correlationMessageId: Unique message identifier
+                      direction: Receive
+                      dispositionType: received-success
+                      fileName: test
+                      isMdnExpected: true
+                      isMessageCompressed: false
+                      isMessageFailed: false
+                      isNrrEnabled: true
+                      mdnType: Async
+                      messageId: '12345'
+                  recordType: AS2Message
+              source:
+                operation:
+                  operationName: httpgetaction
+                runInstance:
+                  runId: 08586772141809790618914792486CU03
+                workflow:
+                  systemId: /locations/westus/scaleunits/test-01/workflows/bf501b3fceaa4a858a166aa64768ced5
+              sourceType: Microsoft.Logic/workflows
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/maps':
     get:
       description: Gets a list of integration account maps.
@@ -2083,6 +2784,59 @@ paths:
                   mapType: Xslt
                   metadata: {}
                 type: Microsoft.Logic/integrationAccounts/maps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/maps/{mapName}/listContentCallbackUrl':
+    post:
+      description: Get the content callback url.
+      operationId: Maps_ListContentCallbackUrl
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The integration account map name.
+          in: path
+          name: mapName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - in: body
+          name: listContentCallbackUrl
+          required: true
+          schema:
+            $ref: '#/definitions/GetCallbackUrlParameters'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowTriggerCallbackUrl'
+      tags:
+        - IntegrationAccountMaps
+      x-ms-examples:
+        Get the content callback url:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            listContentCallbackUrl:
+              keyType: Primary
+              notAfter: '2018-04-19T16:00:00Z'
+            mapName: testMap
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                basePath: 'https://prod-00.brazilus.logic.azure.com/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/maps/testmap/contents/Value'
+                method: GET
+                queries:
+                  api-version: 2015-08-01-preview
+                value: 'https://prod-00.westus.logic.azure.com:443/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/maps/testMap/contents/Value?api-version=2015-08-01-preview&sp=%2Fmaps%2Ftestmap%2Fread&sv=1.0&sig=VK_mbQPTHTa3ezhsrI8IctckwjlL3GdJmroQH_baYj4'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/partners':
     get:
       description: Gets a list of integration account partners.
@@ -2119,7 +2873,7 @@ paths:
       tags:
         - IntegrationAccountPartners
       x-ms-examples:
-        Get partners by integrationaccount name:
+        Get partners by integration account name:
           parameters:
             api-version: '2016-06-01'
             integrationAccountName: testIntegrationAccount
@@ -2325,6 +3079,108 @@ paths:
                   metadata: {}
                   partnerType: B2B
                 type: Microsoft.Logic/integrationAccounts/partners
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/partners/{partnerName}/listContentCallbackUrl':
+    post:
+      description: Get the content callback url.
+      operationId: Partners_ListContentCallbackUrl
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The integration account partner name.
+          in: path
+          name: partnerName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - in: body
+          name: listContentCallbackUrl
+          required: true
+          schema:
+            $ref: '#/definitions/GetCallbackUrlParameters'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowTriggerCallbackUrl'
+      tags:
+        - IntegrationAccountPartners
+      x-ms-examples:
+        Get the content callback url:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            listContentCallbackUrl:
+              keyType: Primary
+              notAfter: '2018-04-19T16:00:00Z'
+            partnerName: testPartner
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                basePath: 'https://prod-00.westus.logic.azure.com/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/partners/testPartner/contents/Value'
+                method: GET
+                queries:
+                  api-version: 2015-08-01-preview
+                value: 'https://prod-00.westus.logic.azure.com:443/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/partners/testPartner/contents/Value?api-version=2015-08-01-preview&sp=%2Fpartners%2FtestPartner%2Fread&sv=1.0&sig=VK_mbQPTHTa3ezhsrI8IctckwjlL3GdJmroQH_baYj4'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/regenerateAccessKey':
+    post:
+      description: Regenerates the integration account access key.
+      operationId: IntegrationAccounts_RegenerateAccessKey
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - description: The access key type.
+          in: body
+          name: regenerateAccessKey
+          required: true
+          schema:
+            $ref: '#/definitions/RegenerateActionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IntegrationAccount'
+      tags:
+        - IntegrationAccounts
+      x-ms-examples:
+        Regenerate access key:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            regenerateAccessKey:
+              KeyType: Primary
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount
+                location: westus
+                name: testIntegrationAccount
+                properties: {}
+                sku:
+                  name: Standard
+                type: Microsoft.Logic/integrationAccounts
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/schemas':
     get:
       description: Gets a list of integration account schemas.
@@ -2581,6 +3437,59 @@ paths:
                   schemaType: Xml
                   targetNamespace: 'http://Inbound_EDI.OrderFile'
                 type: Microsoft.Logic/integrationAccounts/schemas
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/schemas/{schemaName}/listContentCallbackUrl':
+    post:
+      description: Get the content callback url.
+      operationId: Schemas_ListContentCallbackUrl
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The integration account schema name.
+          in: path
+          name: schemaName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - in: body
+          name: listContentCallbackUrl
+          required: true
+          schema:
+            $ref: '#/definitions/GetCallbackUrlParameters'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowTriggerCallbackUrl'
+      tags:
+        - IntegrationAccountSchemas
+      x-ms-examples:
+        Get the content callback url:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            listContentCallbackUrl:
+              keyType: Primary
+              notAfter: '2018-04-19T16:00:00Z'
+            resourceGroupName: testResourceGroup
+            schemaName: testSchema
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                basePath: 'https://prod-00.westus.logic.azure.com/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/schemas/testSchema/contents/Value'
+                method: GET
+                queries:
+                  api-version: 2015-08-01-preview
+                value: 'https://prod-00.westus.logic.azure.com:443/integrationAccounts/0fdabc3a76514ca48dede71c73d9fe97/schemas/testSchema/contents/Value?api-version=2015-08-01-preview&sp=%2Fschemas%2FtestSchema%2Fread&sv=1.0&sig=VK_mbQPTHTa3ezhsrI8IctckwjlL3GdJmroQH_baYj4'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/sessions':
     get:
       description: Gets a list of integration account sessions.
@@ -3127,6 +4036,58 @@ paths:
             $ref: '#/definitions/Object'
       tags:
         - Workflows
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/listCallbackUrl':
+    post:
+      description: Get the workflow callback Url.
+      operationId: Workflows_ListCallbackUrl
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: Which callback url to list.
+          in: body
+          name: listCallbackUrl
+          required: true
+          schema:
+            $ref: '#/definitions/GetCallbackUrlParameters'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowTriggerCallbackUrl'
+      tags:
+        - Workflows
+      x-ms-examples:
+        Get callback url:
+          parameters:
+            api-version: '2016-06-01'
+            listCallbackUrl:
+              keyType: Primary
+              notAfter: '2018-04-19T16:00:00Z'
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testWorkflow
+          responses:
+            '200':
+              body:
+                basePath: 'https://prod-03.westus.logic.azure.com/workflows/d4690301f3b340de9330256bb2e83974'
+                method: POST
+                queries:
+                  api-version: '2016-06-01'
+                  se: '2018-04-19T16:00:00.0000000Z'
+                  sig: JXbHjs3qzLPDyk-IM_VzsN-WL_mNql3v_uWbBbKgtVk
+                  sp: //*
+                  sv: '1.0'
+                value: 'https://prod-03.westus.logic.azure.com/workflows/d4690301f3b340de9330256bb2e83974/triggers/requestTrigger/paths/invoke?api-version=2016-06-01&se=2018-04-19T16%3A00%3A00.0000000Z&sp=%2Ftriggers%2FrequestTrigger%2Frun&sv=1.0&sig=JXbHjs3qzLPDyk-IM_VzsN-WL_mNql3v_uWbBbKgtVk'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/listSwagger':
     post:
       description: Gets an OpenAPI definition for the workflow.
@@ -3151,6 +4112,48 @@ paths:
             $ref: '#/definitions/Object'
       tags:
         - Workflows
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/move':
+    post:
+      description: Moves an existing workflow.
+      operationId: Workflows_Move
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow to move.
+          in: body
+          name: move
+          required: true
+          schema:
+            $ref: '#/definitions/Workflow'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: No Content
+      tags:
+        - Workflows
+      x-ms-examples:
+        Move a workflow:
+          parameters:
+            api-version: '2016-06-01'
+            move:
+              id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/newResourceGroup/providers/Microsoft.Logic/workflows/newWorkflowName
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testWorkflow
+          responses:
+            '200': {}
+            '202': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/regenerateAccessKey':
     post:
       description: Regenerates the callback URL access key for request triggers.
@@ -3334,6 +4337,445 @@ paths:
             $ref: '#/definitions/WorkflowRunAction'
       tags:
         - WorkflowRunActions
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/listExpressionTraces':
+    post:
+      description: Lists a workflow run expression trace.
+      operationId: WorkflowRunActions_ListExpressionTraces
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          type: string
+        - description: The workflow action name.
+          in: path
+          name: actionName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ExpressionTraces'
+      tags:
+        - WorkflowRunActions
+      x-ms-examples:
+        List expression traces:
+          parameters:
+            actionName: testAction
+            api-version: '2016-06-01'
+            repetitionName: '000001'
+            resourceGroupName: testResourceGroup
+            runName: 08586776228332053161046300351
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testFlow
+          responses:
+            '200':
+              body:
+                inputs:
+                  - path: ''
+                    text: 'add(4, 4)'
+                    value: 8
+      x-ms-pageable:
+        itemName: inputs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions':
+    get:
+      description: Get all of a workflow run action repetitions.
+      operationId: WorkflowRunActionRepetitions_List
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          type: string
+        - description: The workflow action name.
+          in: path
+          name: actionName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowRunActionRepetitionDefinitionCollection'
+      tags:
+        - WorkflowRunActions
+      x-ms-examples:
+        List repetitions:
+          parameters:
+            actionName: testAction
+            api-version: '2016-06-01'
+            resourceGroupName: testResourceGroup
+            runName: 08586776228332053161046300351
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testFlow
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testFlow/runs/08586776228332053161046300351/actions/testAction/repetitions/000000
+                    name: '000000'
+                    properties:
+                      code: OK
+                      correlation:
+                        actionTrackingId: 0d8152bb-e198-44a9-bde8-5138eea16dd4
+                        clientTrackingId: 08586775357427610445444523191
+                      endTime: '2018-04-18T17:05:57.2264835Z'
+                      inputsLink:
+                        contentHash:
+                          algorithm: md5
+                          value: 8q1zMKS5ZyHBrPF+qF1xXw==
+                        contentSize: 8
+                        contentVersion: 8q1zMKS5ZyHBrPF+qF1xXw==
+                        uri: 'https://prod-08.northcentralus.logic.azure.com:443/workflows/2dfde2fce2584c49bea17ef0b04c95f4/runs/08586776228332053161046300351/actions/testAction/repetitions/000000/contents/ActionInputs?api-version=2016-10-01&se=2018-04-18T21%3A00%3A00.0000000Z&sp=%2Fruns%2F08586776228332053161046300351%2Factions%2FtestAction%2Frepetitions%2F000000%2Fcontents%2FActionInputs%2Fread&sv=1.0&sig=vw4BDdYp4Ap5RXdM7tY_wl9C38DeAHfnixLBEOpideA'
+                      outputsLink:
+                        contentHash:
+                          algorithm: md5
+                          value: 8q1zMKS5ZyHBrPF+qF1xXw==
+                        contentSize: 8
+                        contentVersion: 8q1zMKS5ZyHBrPF+qF1xXw==
+                        uri: 'https://prod-08.northcentralus.logic.azure.com:443/workflows/2dfde2fce2584c49bea17ef0b04c95f4/runs/08586776228332053161046300351/actions/testAction/repetitions/000000/contents/ActionOutputs?api-version=2016-10-01&se=2018-04-18T21%3A00%3A00.0000000Z&sp=%2Fruns%2F08586776228332053161046300351%2Factions%2FtestAction%2Frepetitions%2F000000%2Fcontents%2FActionOutputs%2Fread&sv=1.0&sig=y8Wq7jbu85tmlMo_1zpRyqNJuoCaQCFQtZ3bgSovLY0'
+                      repetitionIndexes:
+                        - itemIndex: 0
+                          scopeName: For_each
+                      startTime: '2018-04-18T17:05:57.217991Z'
+                      status: Succeeded
+                      trackingId: 0d8152bb-e198-44a9-bde8-5138eea16dd4
+                    type: Microsoft.Logic/workflows/runs/actions/repetitions
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testFlow/runs/08586776228332053161046300351/actions/testAction/repetitions/000001
+                    name: '000001'
+                    properties:
+                      code: OK
+                      correlation:
+                        actionTrackingId: f84f23eb-b331-4772-9f39-cc307fa83bc3
+                        clientTrackingId: 08586775357427610445444523191
+                      endTime: '2018-04-18T17:05:57.1015421Z'
+                      inputsLink:
+                        contentHash:
+                          algorithm: md5
+                          value: OA3i83YHGYVch+N8BQJIRQ==
+                        contentSize: 6
+                        contentVersion: OA3i83YHGYVch+N8BQJIRQ==
+                        uri: 'https://prod-08.northcentralus.logic.azure.com:443/workflows/2dfde2fce2584c49bea17ef0b04c95f4/runs/08586776228332053161046300351/actions/testAction/repetitions/000001/contents/ActionInputs?api-version=2016-10-01&se=2018-04-18T21%3A00%3A00.0000000Z&sp=%2Fruns%2F08586776228332053161046300351%2Factions%2FtestAction%2Frepetitions%2F000001%2Fcontents%2FActionInputs%2Fread&sv=1.0&sig=dLmnt50joimEMK4k9rR6njHQh94iSFJ9rrDxFbkEg5M'
+                      outputsLink:
+                        contentHash:
+                          algorithm: md5
+                          value: OA3i83YHGYVch+N8BQJIRQ==
+                        contentSize: 6
+                        contentVersion: OA3i83YHGYVch+N8BQJIRQ==
+                        uri: 'https://prod-08.northcentralus.logic.azure.com:443/workflows/2dfde2fce2584c49bea17ef0b04c95f4/runs/08586776228332053161046300351/actions/testAction/repetitions/000001/contents/ActionOutputs?api-version=2016-10-01&se=2018-04-18T21%3A00%3A00.0000000Z&sp=%2Fruns%2F08586776228332053161046300351%2Factions%2FtestAction%2Frepetitions%2F000001%2Fcontents%2FActionOutputs%2Fread&sv=1.0&sig=B3-X5sqIAv1Lb31GOD34ZgIRUXGuiM2QllWiNwXFYAw'
+                      repetitionIndexes:
+                        - itemIndex: 1
+                          scopeName: For_each
+                      startTime: '2018-04-18T17:05:57.0929911Z'
+                      status: Succeeded
+                      trackingId: f84f23eb-b331-4772-9f39-cc307fa83bc3
+                    type: Microsoft.Logic/workflows/runs/actions/repetitions
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}':
+    get:
+      description: Get a workflow run action repetition.
+      operationId: WorkflowRunActionRepetitions_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          type: string
+        - description: The workflow action name.
+          in: path
+          name: actionName
+          required: true
+          type: string
+        - description: The workflow repetition.
+          in: path
+          name: repetitionName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowRunActionRepetitionDefinition'
+      tags:
+        - WorkflowRunActions
+      x-ms-examples:
+        Get a repetition:
+          parameters:
+            actionName: testAction
+            api-version: '2016-06-01'
+            repetitionName: '000001'
+            resourceGroupName: testResourceGroup
+            runName: 08586776228332053161046300351
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testFlow
+          responses:
+            '200':
+              body:
+                id: api/management/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testFlow/runs/08586776228332053161046300351/actions/testAction/repetitions/000001
+                name: '000001'
+                properties:
+                  code: OK
+                  correlation:
+                    actionTrackingId: f84f23eb-b331-4772-9f39-cc307fa83bc3
+                    clientTrackingId: 08586775357427610445444523191
+                  endTime: '2018-04-18T17:05:57.1015421Z'
+                  inputsLink:
+                    contentHash:
+                      algorithm: md5
+                      value: OA3i83YHGYVch+N8BQJIRQ==
+                    contentSize: 6
+                    contentVersion: OA3i83YHGYVch+N8BQJIRQ==
+                    uri: 'https://prod-08.northcentralus.logic.azure.com:443/workflows/2dfde2fce2584c49bea17ef0b04c95f4/runs/08586776228332053161046300351/actions/testAction/repetitions/000001/contents/ActionInputs?api-version=2016-10-01&se=2018-04-18T21%3A00%3A00.0000000Z&sp=%2Fruns%2F08586776228332053161046300351%2Factions%2FtestAction%2Frepetitions%2F000001%2Fcontents%2FActionInputs%2Fread&sv=1.0&sig=dLmnt50joimEMK4k9rR6njHQh94iSFJ9rrDxFbkEg5M'
+                  outputsLink:
+                    contentHash:
+                      algorithm: md5
+                      value: OA3i83YHGYVch+N8BQJIRQ==
+                    contentSize: 6
+                    contentVersion: OA3i83YHGYVch+N8BQJIRQ==
+                    uri: 'https://prod-08.northcentralus.logic.azure.com:443/workflows/2dfde2fce2584c49bea17ef0b04c95f4/runs/08586776228332053161046300351/actions/testAction/repetitions/000001/contents/ActionOutputs?api-version=2016-10-01&se=2018-04-18T21%3A00%3A00.0000000Z&sp=%2Fruns%2F08586776228332053161046300351%2Factions%2FtestAction%2Frepetitions%2F000001%2Fcontents%2FActionOutputs%2Fread&sv=1.0&sig=B3-X5sqIAv1Lb31GOD34ZgIRUXGuiM2QllWiNwXFYAw'
+                  repetitionIndexes:
+                    - itemIndex: 1
+                      scopeName: For_each
+                  startTime: '2018-04-18T17:05:57.0929911Z'
+                  status: Succeeded
+                  trackingId: f84f23eb-b331-4772-9f39-cc307fa83bc3
+                type: Microsoft.Logic/workflows/runs/actions/repetitions
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/listExpressionTraces':
+    post:
+      description: Lists a workflow run expression trace.
+      operationId: WorkflowRunActionRepetitions_ListExpressionTraces
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          type: string
+        - description: The workflow action name.
+          in: path
+          name: actionName
+          required: true
+          type: string
+        - description: The workflow repetition.
+          in: path
+          name: repetitionName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ExpressionTraces'
+      tags:
+        - WorkflowRunActions
+      x-ms-examples:
+        List expression traces:
+          parameters:
+            actionName: testAction
+            api-version: '2016-06-01'
+            repetitionName: '000001'
+            resourceGroupName: testResourceGroup
+            runName: 08586776228332053161046300351
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testFlow
+          responses:
+            '200':
+              body:
+                inputs:
+                  - path: ''
+                    text: 'add(4, 4)'
+                    value: 8
+      x-ms-pageable:
+        itemName: inputs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions':
+    get:
+      description: List the workflow run action scoped repetitions.
+      operationId: WorkflowRunActionScopedRepetitions_List
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          type: string
+        - description: The workflow action name.
+          in: path
+          name: actionName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowRunActionRepetitionDefinitionCollection'
+      tags:
+        - WorkflowRunActions
+      x-ms-examples:
+        List the scoped repetitions:
+          parameters:
+            actionName: for_each
+            api-version: '2016-06-01'
+            resourceGroupName: testResourceGroup
+            runName: 08586776228332053161046300351
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testFlow
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testFlow/runs/08586776228332053161046300351/actions/for_each/scopeRepetitions/000000
+                    name: '000000'
+                    properties:
+                      code: NotSpecified
+                      correlation:
+                        actionTrackingId: 5c0e7c24-4891-44e8-b631-8084c5531dd5
+                        clientTrackingId: 08586775357427610445444523191
+                      endTime: '2018-04-18T17:05:57.6240967Z'
+                      repetitionIndexes:
+                        - itemIndex: 0
+                          scopeName: For_each
+                      startTime: '2018-04-18T17:05:57.209588Z'
+                      status: Succeeded
+                    type: Microsoft.Logic/workflows/runs/actions/scopeRepetitions
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testFlow/runs/08586776228332053161046300351/actions/for_each/scopeRepetitions/000001
+                    name: '000001'
+                    properties:
+                      code: NotSpecified
+                      correlation:
+                        actionTrackingId: 1682d0bd-7189-4478-b333-fe364a80bd69
+                        clientTrackingId: 08586775357427610445444523191
+                      endTime: '2018-04-18T17:05:57.2272796Z'
+                      repetitionIndexes:
+                        - itemIndex: 1
+                          scopeName: For_each
+                      startTime: '2018-04-18T17:05:57.0686808Z'
+                      status: Succeeded
+                    type: Microsoft.Logic/workflows/runs/actions/scopeRepetitions
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions/{repetitionName}':
+    get:
+      description: Get a workflow run action scoped repetition.
+      operationId: WorkflowRunActionScopedRepetitions_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          type: string
+        - description: The workflow action name.
+          in: path
+          name: actionName
+          required: true
+          type: string
+        - description: The workflow repetition.
+          in: path
+          name: repetitionName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowRunActionRepetitionDefinition'
+      tags:
+        - WorkflowRunActions
+      x-ms-examples:
+        Get a scoped repetition:
+          parameters:
+            actionName: for_each
+            api-version: '2016-06-01'
+            repetitionName: '000000'
+            resourceGroupName: testResourceGroup
+            runName: 08586776228332053161046300351
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testFlow
+          responses:
+            '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testFlow/runs/08586776228332053161046300351/actions/for_each/scopeRepetitions/000000
+                name: '000000'
+                properties:
+                  code: NotSpecified
+                  correlation:
+                    actionTrackingId: 5c0e7c24-4891-44e8-b631-8084c5531dd5
+                    clientTrackingId: 08586775357427610445444523191
+                  endTime: '2018-04-18T17:05:57.6240967Z'
+                  repetitionIndexes:
+                    - itemIndex: 0
+                      scopeName: For_each
+                  startTime: '2018-04-18T17:05:57.209588Z'
+                  status: Succeeded
+                type: Microsoft.Logic/workflows/runs/actions/scopeRepetitions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/cancel':
     post:
       description: Cancels a workflow run.
@@ -3361,6 +4803,76 @@ paths:
           description: OK
       tags:
         - WorkflowRuns
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/operations/{operationId}':
+    get:
+      description: Gets an operation for a run.
+      operationId: WorkflowRunOperations_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          type: string
+        - description: The workflow operation id.
+          in: path
+          name: operationId
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowRun'
+      tags:
+        - WorkflowRunOperations
+      x-ms-examples:
+        Get a run operation:
+          parameters:
+            api-version: '2016-06-01'
+            operationId: ebdcbbde-c4db-43ec-987c-fd0f7726f43b
+            resourceGroupName: testResourceGroup
+            runName: 08586774142730039209110422528
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testFlow
+          responses:
+            '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testFlow/runs/08586774142730039209110422528
+                name: 08586774142730039209110422528
+                properties:
+                  correlation:
+                    clientTrackingId: 08586774142730039209110422528
+                  endTime: '2018-04-20T02:50:13.7177644Z'
+                  outputs: {}
+                  startTime: '2018-04-20T02:50:12.4741081Z'
+                  status: Succeeded
+                  trigger:
+                    code: OK
+                    correlation:
+                      clientTrackingId: 08586774142730039209110422528
+                    endTime: '2018-04-20T02:50:12.460076Z'
+                    name: Recurrence
+                    scheduledTime: '2018-04-20T02:50:12.1412543Z'
+                    startTime: '2018-04-20T02:50:12.460076Z'
+                    status: Succeeded
+                  waitEndTime: '2018-04-20T02:50:12.4741081Z'
+                  workflow:
+                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testFlow/versions/08586993867806980512
+                    name: 08586993867806980512
+                    type: Microsoft.Logic/workflows/versions
+                type: Microsoft.Logic/workflows/runs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/':
     get:
       description: Gets a list of workflow triggers.
@@ -3550,7 +5062,7 @@ paths:
             '202': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/listCallbackUrl':
     post:
-      description: Gets the callback URL for a workflow trigger.
+      description: Get the callback URL for a workflow trigger.
       operationId: WorkflowTriggers_ListCallbackUrl
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -3577,6 +5089,43 @@ paths:
             $ref: '#/definitions/WorkflowTriggerCallbackUrl'
       tags:
         - WorkflowTriggers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/reset':
+    post:
+      description: Resets a workflow trigger.
+      operationId: WorkflowTriggers_Reset
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - WorkflowTriggers
+      x-ms-examples:
+        Reset trigger:
+          parameters:
+            api-version: '2016-06-01'
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            triggerName: testTrigger
+            workflowName: testWorkflow
+          responses:
+            '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/run':
     post:
       description: Runs a workflow trigger.
@@ -3606,6 +5155,122 @@ paths:
             $ref: '#/definitions/Object'
       tags:
         - WorkflowTriggers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/schemas/json':
+    get:
+      description: Get the trigger schema as JSON.
+      operationId: WorkflowTriggers_GetSchemaJson
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JsonSchema'
+      tags:
+        - WorkflowTriggers
+      x-ms-examples:
+        Get trigger schema:
+          parameters:
+            api-version: '2016-06-01'
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            triggerName: testTrigger
+            workflowName: testWorkflow
+          responses:
+            '200':
+              body:
+                content: JsonContent
+                title: JsonTitle
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/setState':
+    post:
+      description: Sets the state of a workflow trigger.
+      operationId: WorkflowTriggers_SetState
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          type: string
+        - description: The workflow trigger state.
+          in: body
+          name: setState
+          required: true
+          schema:
+            $ref: '#/definitions/SetTriggerStateActionDefinition'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - WorkflowTriggers
+      x-ms-examples:
+        Set trigger state:
+          parameters:
+            api-version: '2016-06-01'
+            resourceGroupName: testResourceGroup
+            setState:
+              source:
+                id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/sourceResGroup/providers/Microsoft.Logic/workflows/sourceWorkflow/triggers/sourceTrigger
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            triggerName: testTrigger
+            workflowName: testWorkflow
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/validate':
+    post:
+      description: Validates the workflow.
+      operationId: Workflows_ValidateWorkflow
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow.
+          in: body
+          name: validate
+          required: true
+          schema:
+            $ref: '#/definitions/Workflow'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Workflows
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions':
     get:
       description: Gets a list of workflow versions.
@@ -3669,7 +5334,7 @@ paths:
         - WorkflowVersions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions/{versionId}/triggers/{triggerName}/listCallbackUrl':
     post:
-      description: Lists the callback URL for a trigger of a workflow version.
+      description: Get the callback url for a trigger of a workflow version.
       operationId: WorkflowVersions_ListCallbackUrl
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -3708,7 +5373,7 @@ paths:
       tags:
         - WorkflowTriggers
       x-ms-examples:
-        Get callback URL for a trigger of a workflow version:
+        Get the callback url for a trigger of a workflow version:
           parameters:
             api-version: '2016-06-01'
             parameters:
@@ -3732,7 +5397,7 @@ paths:
                 value: 'http://test-host:100/workflows/fb9c8d79b15f41ce9b12861862f43546/versions/08587100027316071865/triggers/manualTrigger/paths/invoke?api-version=2015-08-01-preview&sp=%2Fversions%2F08587100027316071865%2Ftriggers%2FmanualTrigger%2Frun&sv=1.0&sig=IxEQ_ygZf6WNEQCbjV0Vs6p6Y4DyNEJVAa86U5B4xhk'
 definitions:
   AS2AcknowledgementConnectionSettings:
-    description: The AS2 agreement acknowledegment connection settings.
+    description: The AS2 agreement acknowledgement connection settings.
     properties:
       ignoreCertificateNameMismatch:
         description: The value indicating whether to ignore mismatch in certificate name.
@@ -3863,7 +5528,7 @@ definitions:
       - unfoldHttpHeaders
     type: object
   AS2OneWayAgreement:
-    description: The integration account AS2 oneway agreement.
+    description: The integration account AS2 one-way agreement.
     properties:
       protocolSettings:
         $ref: '#/definitions/AS2ProtocolSettings'
@@ -3999,6 +5664,24 @@ definitions:
       - checkCertificateRevocationListOnReceive
       - encryptionAlgorithm
     type: object
+  AccessKeyRegenerateActionDefinition:
+    additionalProperties: false
+    properties:
+      keyType:
+        $ref: '#/definitions/AccessKeyType'
+    required:
+      - keyType
+    type: object
+  AccessKeyType:
+    description: The access key type.
+    enum:
+      - NotSpecified
+      - Primary
+      - Secondary
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: AccessKeyType
   AgreementContent:
     description: The integration account agreement content.
     properties:
@@ -4022,6 +5705,92 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: AgreementType
+  ArtifactContentPropertiesDefinition:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/ArtifactProperties'
+    description: The artifact content properties definition.
+    properties:
+      content: {}
+      contentLink:
+        $ref: '#/definitions/ContentLink'
+        description: The content link.
+      contentType:
+        description: The content type.
+        type: string
+    type: object
+  ArtifactProperties:
+    additionalProperties: false
+    description: The artifact properties definition.
+    properties:
+      changedTime:
+        description: The artifact changed time.
+        format: date-time
+        type: string
+      createdTime:
+        description: The artifact creation time.
+        format: date-time
+        type: string
+      metadata: {}
+    type: object
+  AssemblyCollection:
+    description: A collection of assembly definitions.
+    properties:
+      value:
+        items:
+          $ref: '#/definitions/AssemblyDefinition'
+        type: array
+    type: object
+  AssemblyDefinition:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The assembly definition.
+    properties:
+      properties:
+        $ref: '#/definitions/AssemblyProperties'
+        description: The assembly properties.
+    required:
+      - properties
+    type: object
+  AssemblyProperties:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/ArtifactContentPropertiesDefinition'
+    description: The assembly properties definition.
+    properties:
+      assemblyCulture:
+        description: The assembly culture.
+        type: string
+      assemblyName:
+        description: The assembly name.
+        type: string
+      assemblyPublicKeyToken:
+        description: The assembly public key token.
+        type: string
+      assemblyVersion:
+        description: The assembly version.
+        type: string
+    required:
+      - assemblyName
+    type: object
+  AzureResourceErrorInfo:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/ErrorInfo'
+    description: The azure resource error info.
+    properties:
+      details:
+        description: The error details.
+        items:
+          $ref: '#/definitions/AzureResourceErrorInfo'
+        type: array
+      message:
+        description: The error message.
+        type: string
+    required:
+      - message
+    type: object
   B2BPartnerContent:
     description: The B2B partner content.
     properties:
@@ -4030,6 +5799,66 @@ definitions:
         items:
           $ref: '#/definitions/BusinessIdentity'
         type: array
+    type: object
+  BatchConfiguration:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The batch configuration resource definition.
+    properties:
+      properties:
+        $ref: '#/definitions/BatchConfigurationProperties'
+        description: The batch configuration properties.
+    required:
+      - properties
+    type: object
+  BatchConfigurationCollection:
+    description: A collection of batch configurations.
+    properties:
+      value:
+        items:
+          $ref: '#/definitions/BatchConfiguration'
+        type: array
+    type: object
+  BatchConfigurationProperties:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/ArtifactProperties'
+    description: The batch configuration properties definition.
+    properties:
+      batchGroupName:
+        description: The name of the batch group.
+        type: string
+      changedTime:
+        description: The changed time.
+        format: date-time
+        type: string
+      createdTime:
+        description: The created time.
+        format: date-time
+        type: string
+      releaseCriteria:
+        $ref: '#/definitions/BatchReleaseCriteria'
+        description: The batch release criteria.
+    required:
+      - batchGroupName
+      - releaseCriteria
+    type: object
+  BatchReleaseCriteria:
+    additionalProperties: false
+    description: The batch release criteria.
+    properties:
+      batchSize:
+        description: The batch size in bytes.
+        format: int32
+        type: integer
+      messageCount:
+        description: The message count.
+        format: int32
+        type: integer
+      recurrence:
+        $ref: '#/definitions/WorkflowTriggerRecurrence'
+        description: The recurrence.
     type: object
   BusinessIdentity:
     description: The integration account partner's business identity.
@@ -4214,7 +6043,7 @@ definitions:
         description: The message id.
         type: string
       messageRelease:
-        description: The message releaseversion.
+        description: The message release.
         type: string
       messageVersion:
         description: The message version.
@@ -4247,7 +6076,7 @@ definitions:
       - releaseIndicator
     type: object
   EdifactEnvelopeOverride:
-    description: The Edifact enevlope override settings.
+    description: The Edifact envelope override settings.
     properties:
       applicationPassword:
         description: The application password.
@@ -4733,6 +6562,16 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: EncryptionAlgorithm
+  ErrorInfo:
+    additionalProperties: false
+    description: The error info.
+    properties:
+      code:
+        description: The error code.
+        type: string
+    required:
+      - code
+    type: object
   ErrorProperties:
     description: Error properties indicate why the Logic service was not able to process the incoming request. The reason is provided in the error message.
     properties:
@@ -4744,11 +6583,52 @@ definitions:
         type: string
     type: object
   ErrorResponse:
-    description: Error reponse indicates Logic service is not able to process the incoming request. The error property contains the error details.
+    description: Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.
     properties:
       error:
         $ref: '#/definitions/ErrorProperties'
         description: The error properties.
+    type: object
+  EventLevel:
+    description: The event level.
+    enum:
+      - LogAlways
+      - Critical
+      - Error
+      - Warning
+      - Informational
+      - Verbose
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: EventLevel
+  Expression:
+    additionalProperties: false
+    properties:
+      error:
+        $ref: '#/definitions/AzureResourceErrorInfo'
+      subexpressions:
+        items:
+          $ref: '#/definitions/Expression'
+        type: array
+      text:
+        type: string
+      value: {}
+    type: object
+  ExpressionRoot:
+    allOf:
+      - $ref: '#/definitions/Expression'
+    properties:
+      path:
+        description: The path.
+        type: string
+    type: object
+  ExpressionTraces:
+    properties:
+      inputs:
+        items:
+          $ref: '#/definitions/ExpressionRoot'
+        type: array
     type: object
   GenerateUpgradedDefinitionParameters:
     description: The parameters to generate upgraded definition.
@@ -5212,6 +7092,16 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: IntegrationAccountSkuName
+  JsonSchema:
+    description: The JSON schema.
+    properties:
+      content:
+        description: The JSON content.
+        type: string
+      title:
+        description: The JSON title.
+        type: string
+    type: object
   KeyType:
     enum:
       - NotSpecified
@@ -5221,6 +7111,40 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: KeyType
+  KeyVaultKey:
+    description: The key vault key.
+    properties:
+      attributes:
+        description: The key attributes.
+        properties:
+          created:
+            description: When the key was created.
+            format: int64
+            type: integer
+          enabled:
+            description: Whether the key is enabled or not.
+            type: boolean
+          updated:
+            description: When the key was updated.
+            format: int64
+            type: integer
+        type: object
+      kid:
+        description: The key id.
+        type: string
+    type: object
+  KeyVaultKeyCollection:
+    description: Collection of key vault keys.
+    properties:
+      skipToken:
+        description: The skip token.
+        type: string
+      value:
+        description: The key vault keys.
+        items:
+          $ref: '#/definitions/KeyVaultKey'
+        type: array
+    type: object
   KeyVaultKeyReference:
     description: The reference to the key vault key.
     properties:
@@ -5248,6 +7172,29 @@ definitions:
     required:
       - keyVault
       - keyName
+    type: object
+  KeyVaultReference:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/ResourceReference'
+    description: The key vault reference.
+    properties:
+      name:
+        description: The key vault name.
+        type: string
+    type: object
+  ListKeyVaultKeysDefinition:
+    additionalProperties: false
+    description: The list key vault keys definition.
+    properties:
+      keyVault:
+        $ref: '#/definitions/KeyVaultReference'
+        description: The key vault reference.
+      skipToken:
+        description: The skip token.
+        type: string
+    required:
+      - keyVault
     type: object
   MapType:
     enum:
@@ -5299,6 +7246,69 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+  OperationResult:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/OperationResultProperties'
+    description: The operation result definition.
+    properties:
+      inputs:
+        $ref: '#/definitions/Object'
+        description: Gets the inputs.
+        readOnly: true
+      inputsLink:
+        $ref: '#/definitions/ContentLink'
+        description: Gets the link to inputs.
+        readOnly: true
+      iterationCount:
+        format: int32
+        type: integer
+      outputs:
+        $ref: '#/definitions/Object'
+        description: Gets the outputs.
+        readOnly: true
+      outputsLink:
+        $ref: '#/definitions/ContentLink'
+        description: Gets the link to outputs.
+        readOnly: true
+      retryHistory:
+        description: Gets the retry histories.
+        items:
+          $ref: '#/definitions/RetryHistory'
+        type: array
+      trackedProperties:
+        $ref: '#/definitions/Object'
+        description: Gets the tracked properties.
+        readOnly: true
+      trackingId:
+        description: Gets the tracking id.
+        readOnly: true
+        type: string
+    type: object
+  OperationResultProperties:
+    additionalProperties: false
+    description: The run operation result properties.
+    properties:
+      code:
+        description: The workflow scope repetition code.
+        type: string
+      correlation:
+        $ref: '#/definitions/RunActionCorrelation'
+        description: The correlation properties.
+      endTime:
+        description: The end time of the workflow scope repetition.
+        format: date-time
+        type: string
+      error: {}
+      startTime:
+        description: The start time of the workflow scope repetition.
+        format: date-time
+        type: string
+      status:
+        $ref: '#/definitions/WorkflowStatus'
+        description: The status of the workflow scope repetition.
+    type: object
+    x-abstract: true
   ParameterType:
     enum:
       - NotSpecified
@@ -5387,7 +7397,7 @@ definitions:
         type: array
     type: object
   RecurrenceScheduleOccurrence:
-    description: The recurrence schedule occurence.
+    description: The recurrence schedule occurrence.
     properties:
       day:
         $ref: '#/definitions/DayOfWeek'
@@ -5403,6 +7413,20 @@ definitions:
       keyType:
         $ref: '#/definitions/KeyType'
         description: The key type.
+    type: object
+  RepetitionIndex:
+    additionalProperties: false
+    description: The workflow run action repetition index.
+    properties:
+      itemIndex:
+        description: The index.
+        format: int32
+        type: integer
+      scopeName:
+        description: The scope.
+        type: string
+    required:
+      - itemIndex
     type: object
   Resource:
     description: The base resource type.
@@ -5468,6 +7492,29 @@ definitions:
         format: date-time
         type: string
     type: object
+  RunActionCorrelation:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/RunCorrelation'
+    description: The workflow run action correlation properties.
+    properties:
+      actionTrackingId:
+        description: The action tracking identifier.
+        type: string
+    type: object
+  RunCorrelation:
+    additionalProperties: false
+    description: The correlation properties.
+    properties:
+      clientKeywords:
+        description: The client keywords.
+        items:
+          type: string
+        type: array
+      clientTrackingId:
+        description: The client tracking identifier.
+        type: string
+    type: object
   SchemaType:
     enum:
       - NotSpecified
@@ -5487,6 +7534,14 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: SegmentTerminatorSuffix
+  SetTriggerStateActionDefinition:
+    additionalProperties: false
+    properties:
+      source:
+        $ref: '#/definitions/WorkflowTrigger'
+    required:
+      - source
+    type: object
   SigningAlgorithm:
     enum:
       - NotSpecified
@@ -5532,6 +7587,78 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  TrackEventsOperationOptions:
+    description: The track events operation options.
+    enum:
+      - None
+      - DisableSourceInfoEnrich
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: TrackEventsOperationOptions
+  TrackingEvent:
+    additionalProperties: false
+    properties:
+      error:
+        $ref: '#/definitions/TrackingEventErrorInfo'
+      eventLevel:
+        $ref: '#/definitions/EventLevel'
+      eventTime:
+        format: date-time
+        type: string
+      recordType:
+        $ref: '#/definitions/TrackingRecordType'
+    required:
+      - eventLevel
+      - eventTime
+      - recordType
+    type: object
+  TrackingEventErrorInfo:
+    additionalProperties: false
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    type: object
+  TrackingEventsDefinition:
+    additionalProperties: false
+    properties:
+      events:
+        items:
+          $ref: '#/definitions/TrackingEvent'
+        type: array
+      sourceType:
+        type: string
+      trackEventsOptions:
+        $ref: '#/definitions/TrackEventsOperationOptions'
+    required:
+      - sourceType
+      - events
+    type: object
+  TrackingRecordType:
+    description: The tracking record type.
+    enum:
+      - NotSpecified
+      - Custom
+      - AS2Message
+      - AS2MDN
+      - X12Interchange
+      - X12FunctionalGroup
+      - X12TransactionSet
+      - X12InterchangeAcknowledgment
+      - X12FunctionalGroupAcknowledgment
+      - X12TransactionSetAcknowledgment
+      - EdifactInterchange
+      - EdifactFunctionalGroup
+      - EdifactTransactionSet
+      - EdifactInterchangeAcknowledgment
+      - EdifactFunctionalGroupAcknowledgment
+      - EdifactTransactionSetAcknowledgment
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: TrackingRecordType
   TrailingSeparatorPolicy:
     enum:
       - NotSpecified
@@ -5779,6 +7906,39 @@ definitions:
         readOnly: true
         type: string
     type: object
+  WorkflowRunActionRepetitionDefinition:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The workflow run action repetition definition.
+    properties:
+      properties:
+        $ref: '#/definitions/WorkflowRunActionRepetitionProperties'
+        description: The workflow run action repetition properties definition.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  WorkflowRunActionRepetitionDefinitionCollection:
+    description: A collection of workflow run action repetitions.
+    properties:
+      value:
+        items:
+          $ref: '#/definitions/WorkflowRunActionRepetitionDefinition'
+        type: array
+    type: object
+  WorkflowRunActionRepetitionProperties:
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/OperationResult'
+    description: The workflow run action repetition properties definition.
+    properties:
+      repetitionIndexes:
+        description: The repetition indexes.
+        items:
+          $ref: '#/definitions/RepetitionIndex'
+        type: array
+    type: object
   WorkflowRunFilter:
     description: The workflow run filter.
     properties:
@@ -5844,6 +8004,11 @@ definitions:
         $ref: '#/definitions/WorkflowRunTrigger'
         description: Gets the fired trigger.
         readOnly: true
+      waitEndTime:
+        description: Gets the wait end time.
+        format: date-time
+        readOnly: true
+        type: string
       workflow:
         $ref: '#/definitions/ResourceReference'
         description: Gets the reference to workflow version.
@@ -5888,6 +8053,11 @@ definitions:
         $ref: '#/definitions/ContentLink'
         description: Gets the link to outputs.
         readOnly: true
+      scheduledTime:
+        description: Gets the scheduled time.
+        format: date-time
+        readOnly: true
+        type: string
       startTime:
         description: Gets the start time.
         format: date-time
@@ -6082,6 +8252,9 @@ definitions:
       api-version:
         description: The api version.
         type: string
+      se:
+        description: The SAS timestamp.
+        type: string
       sig:
         description: The SAS signature.
         type: string
@@ -6177,7 +8350,6 @@ definitions:
     properties:
       endTime:
         description: The end time.
-        format: date-time
         type: string
       frequency:
         $ref: '#/definitions/RecurrenceFrequency'
@@ -6191,7 +8363,6 @@ definitions:
         description: The recurrence schedule.
       startTime:
         description: The start time.
-        format: date-time
         type: string
       timeZone:
         description: The time zone.
@@ -6600,7 +8771,7 @@ definitions:
       - messageId
     type: object
   X12OneWayAgreement:
-    description: The X12 oneway agreement.
+    description: The X12 one-way agreement.
     properties:
       protocolSettings:
         $ref: '#/definitions/X12ProtocolSettings'

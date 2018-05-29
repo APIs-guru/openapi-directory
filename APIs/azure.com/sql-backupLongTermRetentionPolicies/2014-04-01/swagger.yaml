@@ -231,7 +231,26 @@ paths:
 definitions:
   BackupLongTermRetentionPolicy:
     allOf:
-      - $ref: '#/definitions/ProxyResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+        properties: {}
+        type: object
     description: A backup long term retention policy
     properties:
       location:
@@ -269,23 +288,3 @@ definitions:
     required:
       - state
       - recoveryServicesBackupPolicyResourceId
-  ProxyResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM proxy resource.
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    x-ms-azure-resource: true

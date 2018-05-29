@@ -905,6 +905,86 @@ paths:
           store_key: []
       tags:
         - attribute
+  /basket.item.add.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Add item to basket
+      operationId: BasketItemAdd
+      parameters:
+        - description: Retrieves orders specified by customer id
+          in: query
+          name: customer_id
+          required: true
+          type: string
+        - description: Defines id of the product which should be added to the basket
+          in: query
+          name: product_id
+          required: true
+          type: string
+        - description: Defines product's variants specified by variant id
+          in: query
+          name: variant_id
+          required: false
+          type: string
+        - default: 0
+          description: Defines new items quantity
+          in: query
+          name: quantity
+          required: false
+          type: number
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  added:
+                    type: boolean
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - basket
+  /bridge.delete.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Delete bridge from the store.
+      operationId: BridgeDelete
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  deleted:
+                    type: boolean
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - bridge
   /bridge.download.json:
     get:
       consumes:
@@ -929,6 +1009,33 @@ paths:
           store_key: []
       tags:
         - cart
+  /bridge.update.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Update bridge in the store.
+      operationId: BridgeUpdate
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  updated:
+                    type: boolean
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - bridge
   /cart.bridge.json:
     get:
       consumes:
@@ -1498,16 +1605,6 @@ paths:
           name: apiPass
           required: false
           type: string
-        - description: MobiCart API Key
-          in: query
-          name: apiKey_mobicart
-          required: false
-          type: string
-        - description: MobiCart User Name
-          in: query
-          name: userName
-          required: false
-          type: string
         - description: Shopping Cart Elite Access Key
           in: query
           name: accessKey_scelite
@@ -1596,6 +1693,16 @@ paths:
           in: query
           name: store_id
           required: false
+          type: string
+        - description: Seller Id
+          in: query
+          name: seller_id
+          required: true
+          type: string
+        - description: Comma separated marketplaces ids
+          in: query
+          name: marketplaces_ids
+          required: true
           type: string
       responses:
         '200':
@@ -3876,6 +3983,64 @@ paths:
           store_key: []
       tags:
         - product
+  /product.child_item.find.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Search product child item (bundled item or configurable product variant) in store catalog.
+      operationId: ProductChildItemFind
+      parameters:
+        - description: Entity search that is specified by some value
+          in: query
+          name: find_value
+          required: true
+          type: string
+        - default: name
+          description: Entity search that is specified by the comma-separated unique fields
+          enum:
+            - name
+            - sku
+            - description
+          in: query
+          name: find_where
+          required: false
+          type: string
+        - default: whole_words
+          description: Entity search that is specified by comma-separated parameters
+          enum:
+            - regex
+            - case_sensitive
+            - whole_words
+          in: query
+          name: find_params
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  children:
+                    items:
+                      $ref: '#/definitions/Child'
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - product
   /product.child_item.list.json:
     get:
       consumes:
@@ -4007,6 +4172,17 @@ paths:
           name: product_ids
           required: false
           type: string
+        - description: Report request id
+          in: query
+          name: report_request_id
+          required: false
+          type: string
+        - default: false
+          description: Disable report cache for current request
+          in: query
+          name: disable_report_cache
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -4340,6 +4516,11 @@ paths:
           name: product_variant_id
           required: false
           type: integer
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
       responses:
         '200':
           description: successful operation
@@ -4514,6 +4695,17 @@ paths:
           name: product_variant_params
           required: false
           type: string
+        - description: Report request id
+          in: query
+          name: report_request_id
+          required: false
+          type: string
+        - default: false
+          description: Disable report cache for current request
+          in: query
+          name: disable_report_cache
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -4622,6 +4814,17 @@ paths:
           name: since_id
           required: false
           type: integer
+        - description: Report request id
+          in: query
+          name: report_request_id
+          required: false
+          type: string
+        - default: false
+          description: Disable report cache for current request
+          in: query
+          name: disable_report_cache
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -5285,6 +5488,16 @@ paths:
           name: visible
           required: false
           type: string
+        - description: Defines product's manufacturer
+          in: query
+          name: manufacturer
+          required: false
+          type: string
+        - description: Defines product's manufacturer by manufacturer_id
+          in: query
+          name: manufacturer_id
+          required: false
+          type: string
         - description: Defines new product's description
           in: query
           name: description
@@ -5338,6 +5551,17 @@ paths:
           name: seo_url
           required: false
           type: string
+        - description: Report request id
+          in: query
+          name: report_request_id
+          required: false
+          type: string
+        - default: false
+          description: Disable report cache for current request
+          in: query
+          name: disable_report_cache
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -5843,6 +6067,11 @@ paths:
         - description: Defines variant update specified by variant id
           in: query
           name: id
+          required: true
+          type: string
+        - description: Defines product's id where the variant has to be updated
+          in: query
+          name: product_id
           required: true
           type: string
         - description: Defines new products' variants quantity
@@ -7021,6 +7250,8 @@ definitions:
         type: string
       state:
         type: string
+      state_code:
+        type: string
       street_address:
         type: string
       street_address_line_2:
@@ -7504,6 +7735,8 @@ definitions:
         type: string
       price:
         type: number
+      product_option_value_id:
+        type: integer
       type:
         type: string
       value:
@@ -7714,6 +7947,10 @@ definitions:
         items:
           $ref: '#/definitions/Product_Inventory'
         type: array
+      is_downloadable:
+        type: boolean
+      is_virtual:
+        type: boolean
       length:
         type: number
       manage_stock:
@@ -8225,6 +8462,8 @@ definitions:
         type: string
       quantity:
         type: integer
+      sku:
+        type: string
       sort_order:
         type: integer
       type_price:

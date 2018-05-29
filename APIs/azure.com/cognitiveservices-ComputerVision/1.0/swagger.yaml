@@ -38,7 +38,7 @@ parameters:
     x-ms-parameter-location: method
   HandwritingBoolean:
     default: false
-    description: 'If “true” is specified, handwriting recognition is performed. If this parameter is set to “false” or is not specified, printed text recognition is performed.'
+    description: 'If ''true'' is specified, handwriting recognition is performed. If this parameter is set to ''false'' or is not specified, printed text recognition is performed.'
     in: query
     name: detectHandwriting
     required: false
@@ -84,6 +84,20 @@ parameters:
       name: OcrLanguages
     x-ms-parameter-location: method
     x-nullable: false
+  ServiceLanguage:
+    default: en
+    description: 'The desired language for output generation. If this parameter is not specified, the default value is &quot;en&quot;.Supported languages:en - English, Default.ja - Japanese pt - Portuguese zh - Simplified Chinese.'
+    enum:
+      - en
+      - ja
+      - pt
+      - zh
+    in: query
+    name: language
+    required: false
+    type: string
+    x-ms-parameter-location: method
+    x-nullable: false
   VisualFeatures:
     collectionFormat: csv
     description: 'A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include:Categories - categorizes image content according to a taxonomy defined in documentation. Tags - tags the image with a detailed list of words related to the image content. Description - describes the image content with a complete English sentence. Faces - detects if faces are present. If present, generate coordinates, gender and age. ImageType - detects if image is clipart or a line drawing. Color - determines the accent color, dominant color, and whether an image is black&white.Adult - detects if the image is pornographic in nature (depicts nudity or a sex act).  Sexually suggestive content is also detected.'
@@ -107,7 +121,7 @@ parameters:
     type: array
     x-ms-parameter-location: method
 paths:
-  /analyze?overload=url:
+  /analyze:
     post:
       consumes:
         - application/json
@@ -130,19 +144,7 @@ paths:
           name: details
           required: false
           type: array
-        - default: en
-          description: 'A string indicating which language to return. The service will return recognition results in specified language. If this parameter is not specified, the default value is &quot;en&quot;.Supported languages:en - English, Default.zh - Simplified Chinese.'
-          enum:
-            - en
-            - zh
-          in: query
-          name: language
-          required: false
-          type: string
-          x-ms-enum:
-            modelAsString: false
-            name: Language
-          x-nullable: false
+        - $ref: '#/parameters/ServiceLanguage'
         - description: A JSON document with a URL pointing to the image that is to be analyzed.
           in: body
           name: ImageUrl
@@ -150,6 +152,7 @@ paths:
           schema:
             properties:
               url:
+                description: Publicly reachable URL of an image
                 type: string
             required:
               - url
@@ -246,7 +249,7 @@ paths:
                   - confidence: 0.8951393961906433
                     name: window
               headers: {}
-  /describe?overload=url:
+  /describe:
     post:
       consumes:
         - application/json
@@ -259,6 +262,7 @@ paths:
           name: maxCandidates
           required: false
           type: string
+        - $ref: '#/parameters/ServiceLanguage'
         - description: A JSON document with a URL pointing to the image that is to be analyzed.
           in: body
           name: ImageUrl
@@ -266,6 +270,7 @@ paths:
           schema:
             properties:
               url:
+                description: Publicly reachable URL of an image
                 type: string
             required:
               - url
@@ -313,7 +318,7 @@ paths:
                   height: 1000
                   width: 1500
                 requestId: ed2de1c6-fb55-4686-b0da-4da6e05d283f
-  /generateThumbnail?overload=url:
+  /generateThumbnail:
     post:
       consumes:
         - application/json
@@ -341,6 +346,7 @@ paths:
           schema:
             properties:
               url:
+                description: Publicly reachable URL of an image
                 type: string
             required:
               - url
@@ -409,7 +415,7 @@ paths:
                       - building_
                     name: landmarks
               headers: {}
-  '/models/{model}/analyze?overload=url':
+  '/models/{model}/analyze':
     post:
       consumes:
         - application/json
@@ -435,6 +441,7 @@ paths:
           schema:
             properties:
               url:
+                description: Publicly reachable URL of an image
                 type: string
             required:
               - url
@@ -477,7 +484,7 @@ paths:
                         top: 162
                         width: 248
                       name: Satya Nadella
-  /ocr?overload=url:
+  /ocr:
     post:
       consumes:
         - application/json
@@ -492,6 +499,7 @@ paths:
           schema:
             properties:
               url:
+                description: Publicly reachable URL of an image
                 type: string
             required:
               - url
@@ -553,11 +561,11 @@ paths:
                             text: WISH
                 textAngle: -2.0000000000000338
               headers: {}
-  /recognizeText?overload=url:
+  /recognizeText:
     post:
       consumes:
         - application/json
-      description: 'Recognize Text operation. When you use the Recognize Text interface, the response contains a field called “Operation-Location”. The “Operation-Location” field contains the URL that you must use for your Get Handwritten Text Operation Result operation.'
+      description: 'Recognize Text operation. When you use the Recognize Text interface, the response contains a field called ''Operation-Location''. The ''Operation-Location'' field contains the URL that you must use for your Get Handwritten Text Operation Result operation.'
       operationId: RecognizeText
       parameters:
         - description: A JSON document with a URL pointing to the image that is to be analyzed.
@@ -567,6 +575,7 @@ paths:
           schema:
             properties:
               url:
+                description: Publicly reachable URL of an image
                 type: string
             required:
               - url
@@ -599,13 +608,14 @@ paths:
             '202':
               header:
                 Operation-Location: 'https://{domain}/vision/v1.0/textOperations/49a36324-fc4b-4387-aa06-090cfbf0064f'
-  /tag?overload=url:
+  /tag:
     post:
       consumes:
         - application/json
-      description: 'This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag “cello” may be accompanied by the hint “musical instrument”. All tags are in English.'
+      description: 'This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag ''cello'' may be accompanied by the hint ''musical instrument''. All tags are in English.'
       operationId: TagImage
       parameters:
+        - $ref: '#/parameters/ServiceLanguage'
         - description: A JSON document with a URL pointing to the image that is to be analyzed.
           in: body
           name: ImageUrl
@@ -613,6 +623,7 @@ paths:
           schema:
             properties:
               url:
+                description: Publicly reachable URL of an image
                 type: string
             required:
               - url
@@ -921,8 +932,6 @@ definitions:
     properties:
       detail:
         $ref: '#/definitions/CategoryDetail'
-        description: Additional category detail if available.
-        type: object
       name:
         description: Name of the category.
         type: string
@@ -1019,13 +1028,11 @@ definitions:
     properties:
       metadata:
         $ref: '#/definitions/ImageMetadata'
-        description: Additional image metadata
       requestId:
         description: Id of the REST API request.
         type: string
       result:
         $ref: '#/definitions/DomainModelResult'
-        description: Result of the image analysis.
         x-ms-client-flatten: true
     type: object
   FaceDescription:
@@ -1042,6 +1049,9 @@ definitions:
           - Male
           - Female
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Gender-
     type: object
   FaceRectangle:
     description: An object describing face rectangle.
@@ -1064,7 +1074,6 @@ definitions:
     properties:
       adult:
         $ref: '#/definitions/AdultInfo'
-        description: A property scoring on whether the image is adult-oriented and/or racy.
       categories:
         description: An array indicating identified categories.
         items:
@@ -1072,10 +1081,8 @@ definitions:
         type: array
       color:
         $ref: '#/definitions/ColorInfo'
-        description: A property scoring on color spectrums.
       description:
         $ref: '#/definitions/ImageDescriptionDetails'
-        description: Description of the image.
       faces:
         description: An array of possible faces within the image.
         items:
@@ -1083,10 +1090,8 @@ definitions:
         type: array
       imageType:
         $ref: '#/definitions/ImageType'
-        description: A property indicating type of image (whether it's clipart or line drawing)
       metadata:
         $ref: '#/definitions/ImageMetadata'
-        description: Image metadata
       requestId:
         description: Id of the request for tracking purposes.
         type: string
@@ -1124,7 +1129,6 @@ definitions:
         type: array
       metadata:
         $ref: '#/definitions/ImageMetadata'
-        description: Image metadata
       requestId:
         description: Id of the REST API request.
         type: string
@@ -1258,12 +1262,13 @@ definitions:
           $ref: '#/definitions/Line'
         type: array
     type: object
+  ServiceLanguage:
+    type: string
   TagResult:
     description: 'The results of a image tag operation, including any tags and image metadata.'
     properties:
       metadata:
         $ref: '#/definitions/ImageMetadata'
-        description: Image metadata
       requestId:
         description: Id of the REST API request.
         type: string
@@ -1328,6 +1333,7 @@ x-ms-paths:
     post:
       consumes:
         - application/octet-stream
+        - multipart/form-data
       description: This operation extracts a rich set of visual features based on the image content.
       operationId: AnalyzeImageInStream
       parameters:
@@ -1340,15 +1346,7 @@ x-ms-paths:
           name: details
           required: false
           type: string
-        - default: en
-          description: 'A string indicating which language to return. The service will return recognition results in specified language. If this parameter is not specified, the default value is &quot;en&quot;.Supported languages:en - English, Default.zh - Simplified Chinese.'
-          enum:
-            - en
-            - zh
-          in: query
-          name: language
-          required: false
-          type: string
+        - $ref: '#/parameters/ServiceLanguage'
         - description: An image stream.
           in: body
           name: Image
@@ -1368,10 +1366,89 @@ x-ms-paths:
           description: Error response.
           schema:
             $ref: '#/definitions/ComputerVisionError'
+      x-ms-examples:
+        Successful Analyze with Url request:
+          parameters:
+            Content-Type: application/octet-stream
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: '{binary}'
+            details: Celebrities
+            language: en
+            visualFeatures: 'Categories,Adult,Tags,Description,Faces,Color,ImageType'
+          responses:
+            '200':
+              body:
+                adult:
+                  adultScore: 0.0934349000453949
+                  isAdultContent: false
+                  isRacyContent: false
+                  racyScore: 0.06861349195241928
+                categories:
+                  - name: abstract_
+                    score: 0.00390625
+                  - detail:
+                      celebrities:
+                        - confidence: 0.999028444
+                          faceRectangle:
+                            height: 248
+                            left: 597
+                            top: 162
+                            width: 248
+                          name: Satya Nadella
+                      landmarks:
+                        - confidence: 0.9978346
+                          name: Forbidden City
+                    name: people_
+                    score: 0.83984375
+                color:
+                  accentColor: 873B59
+                  dominantColorBackground: Brown
+                  dominantColorForeground: Brown
+                  dominantColors:
+                    - Brown
+                    - Black
+                  isBWImg: false
+                description:
+                  captions:
+                    - confidence: 0.48293603002174407
+                      text: Satya Nadella sitting on a bench
+                  tags:
+                    - person
+                    - man
+                    - outdoor
+                    - window
+                    - glasses
+                faces:
+                  - age: 44
+                    faceRectangle:
+                      height: 250
+                      left: 593
+                      top: 160
+                      width: 250
+                    gender: Male
+                imageType:
+                  clipArtType: 0
+                  lineDrawingType: 0
+                metadata:
+                  format: Jpeg
+                  height: 1000
+                  width: 1500
+                requestId: 0dbec5ad-a3d3-4f7e-96b4-dfd57efe967d
+                tags:
+                  - confidence: 0.9897908568382263
+                    name: person
+                  - confidence: 0.9449388980865479
+                    name: man
+                  - confidence: 0.938492476940155
+                    name: outdoor
+                  - confidence: 0.8951393961906433
+                    name: window
+              headers: {}
   /describe?overload=stream:
     post:
       consumes:
         - application/octet-stream
+        - multipart/form-data
       description: 'This operation generates a description of an image in human readable language with complete sentences.  The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image.  Descriptions are ordered by their confidence score. All descriptions are in English. Two input methods are supported -- (1) Uploading an image or (2) specifying an image URL.A successful response will be returned in JSON.  If the request failed, the response will contain an error code and a message to help understand what went wrong.'
       operationId: DescribeImageInStream
       parameters:
@@ -1381,6 +1458,7 @@ x-ms-paths:
           name: maxCandidates
           required: false
           type: string
+        - $ref: '#/parameters/ServiceLanguage'
         - description: An image stream.
           in: body
           name: Image
@@ -1400,10 +1478,40 @@ x-ms-paths:
           description: Error response.
           schema:
             $ref: '#/definitions/ComputerVisionError'
+      x-ms-examples:
+        Successful Describe request:
+          parameters:
+            Content-Type: application/octet-stream
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: '{binary}'
+            maxCandidates: '1'
+          responses:
+            '200':
+              body:
+                description:
+                  captions:
+                    - confidence: 0.48293603002174407
+                      text: Satya Nadella sitting on a bench
+                    - confidence: 0.4003700681542283
+                      text: Satya Nadella is sitting on a bench
+                    - confidence: 0.38035155997373377
+                      text: Satya Nadella sitting in front of a building
+                  tags:
+                    - person
+                    - man
+                    - outdoor
+                    - window
+                    - glasses
+                metadata:
+                  format: Jpeg
+                  height: 1000
+                  width: 1500
+                requestId: ed2de1c6-fb55-4686-b0da-4da6e05d283f
   /generateThumbnail?overload=stream:
     post:
       consumes:
         - application/octet-stream
+        - multipart/form-data
       description: 'This operation generates a thumbnail image with the user-specified width and height. By default, the service analyzes the image, identifies the region of interest (ROI), and generates smart cropping coordinates based on the ROI. Smart cropping helps when you specify an aspect ratio that differs from that of the input image. A successful response contains the thumbnail image binary. If the request failed, the response contains an error code and a message to help determine what went wrong.'
       operationId: GenerateThumbnailInStream
       parameters:
@@ -1437,7 +1545,6 @@ x-ms-paths:
           type: boolean
       produces:
         - application/octet-stream
-        - application/json
       responses:
         '200':
           description: The generated thumbnail in binary format.
@@ -1447,10 +1554,24 @@ x-ms-paths:
           description: Error response.
           schema:
             $ref: '#/definitions/ComputerVisionError'
+      x-ms-examples:
+        Successful Generate Thumbnail request:
+          parameters:
+            Content-Type: application/octet-stream
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: '{binary}'
+            height: '500'
+            smartCropping: true
+            width: '500'
+          responses:
+            '200':
+              body: '{Binary}'
+              headers: {}
   '/models/{model}/analyze?overload=stream':
     post:
       consumes:
         - application/octet-stream
+        - multipart/form-data
       description: 'This operation recognizes content within an image by applying a domain-specific model.  The list of domain-specific models that are supported by the Computer Vision API can be retrieved using the /models GET request.  Currently, the API only provides a single domain-specific model: celebrities. Two input methods are supported -- (1) Uploading an image or (2) specifying an image URL. A successful response will be returned in JSON.  If the request failed, the response will contain an error code and a message to help understand what went wrong.'
       operationId: AnalyzeImageByDomainInStream
       parameters:
@@ -1478,10 +1599,35 @@ x-ms-paths:
           description: Error response.
           schema:
             $ref: '#/definitions/ComputerVisionError'
+      x-ms-examples:
+        Successful Domain Model analysis request:
+          parameters:
+            Content-Type: application/octet-stream
+            Model: Celebrities
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: '{binary}'
+          responses:
+            '200':
+              body:
+                metadata:
+                  format: Jpeg
+                  height: 1000
+                  width: 1500
+                requestId: f0027b4b-dc0d-4082-9228-1545ed246b03
+                result:
+                  celebrities:
+                    - confidence: 0.999028444
+                      faceRectangle:
+                        height: 248
+                        left: 597
+                        top: 162
+                        width: 248
+                      name: Satya Nadella
   /ocr?overload=stream:
     post:
       consumes:
         - application/octet-stream
+        - multipart/form-data
       description: 'Optical Character Recognition (OCR) detects printed text in an image and extracts the recognized characters into a machine-usable character stream.   Upon success, the OCR results will be returned. Upon failure, the error code together with an error message will be returned. The error code can be one of InvalidImageUrl, InvalidImageFormat, InvalidImageSize, NotSupportedImage,  NotSupportedLanguage, or InternalServerError.'
       operationId: RecognizePrintedTextInStream
       parameters:
@@ -1506,11 +1652,53 @@ x-ms-paths:
           description: Error response.
           schema:
             $ref: '#/definitions/ComputerVisionError'
+      x-ms-examples:
+        Successful Ocr request:
+          parameters:
+            Content-Type: application/octet-stream
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: '{binary}'
+            detectOrientation: 'true'
+            language: en
+          responses:
+            '200':
+              body:
+                language: en
+                orientation: Up
+                regions:
+                  - boundingBox: '462,379,497,258'
+                    lines:
+                      - boundingBox: '462,379,497,74'
+                        words:
+                          - boundingBox: '462,379,41,73'
+                            text: A
+                          - boundingBox: '523,379,153,73'
+                            text: GOAL
+                          - boundingBox: '694,379,265,74'
+                            text: WITHOUT
+                      - boundingBox: '565,471,289,74'
+                        words:
+                          - boundingBox: '565,471,41,73'
+                            text: A
+                          - boundingBox: '626,471,150,73'
+                            text: PLAN
+                          - boundingBox: '801,472,53,73'
+                            text: IS
+                      - boundingBox: '519,563,375,74'
+                        words:
+                          - boundingBox: '519,563,149,74'
+                            text: JUST
+                          - boundingBox: '683,564,41,72'
+                            text: A
+                          - boundingBox: '741,564,153,73'
+                            text: WISH
+                textAngle: -2.0000000000000338
+              headers: {}
   /recognizeText?overload=stream:
     post:
       consumes:
         - application/octet-stream
-      description: 'Recognize Text operation. When you use the Recognize Text interface, the response contains a field called “Operation-Location”. The “Operation-Location” field contains the URL that you must use for your Get Handwritten Text Operation Result operation.'
+      description: 'Recognize Text operation. When you use the Recognize Text interface, the response contains a field called ''Operation-Location''. The ''Operation-Location'' field contains the URL that you must use for your Get Handwritten Text Operation Result operation.'
       operationId: RecognizeTextInStream
       parameters:
         - $ref: '#/parameters/HandwritingBoolean'
@@ -1535,11 +1723,23 @@ x-ms-paths:
           description: Error response.
           schema:
             $ref: '#/definitions/ComputerVisionError'
+      x-ms-examples:
+        Successful Domain Model analysis request:
+          parameters:
+            Content-Type: application/octet-stream
+            Handwriting: 'true'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: '{binary}'
+          responses:
+            '202':
+              header:
+                Operation-Location: 'https://{domain}/vision/v1.0/textOperations/49a36324-fc4b-4387-aa06-090cfbf0064f'
   /tag?overload=stream:
     post:
       consumes:
         - application/octet-stream
-      description: 'This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag “cello” may be accompanied by the hint “musical instrument”. All tags are in English.'
+        - multipart/form-data
+      description: 'This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag ''cello'' may be accompanied by the hint ''musical instrument''. All tags are in English.'
       operationId: TagImageInStream
       parameters:
         - description: An image stream.
@@ -1561,3 +1761,34 @@ x-ms-paths:
           description: Error response.
           schema:
             $ref: '#/definitions/ComputerVisionError'
+      x-ms-examples:
+        Successful Tag request:
+          parameters:
+            Content-Type: application/octet-stream
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: '{binary}'
+          responses:
+            '200':
+              body:
+                metadata:
+                  format: Jpeg
+                  height: 400
+                  width: 400
+                requestId: 1ad0e45e-b7b4-4be3-8042-53be96103337
+                tags:
+                  - confidence: 0.9999997615814209
+                    name: grass
+                  - confidence: 0.9999706745147705
+                    name: outdoor
+                  - confidence: 0.9992897510528564
+                    name: sky
+                  - confidence: 0.9964632391929626
+                    name: building
+                  - confidence: 0.9927980303764343
+                    name: house
+                  - confidence: 0.8226802945137024
+                    name: lawn
+                  - confidence: 0.6412225365638733
+                    name: green
+                  - confidence: 0.31403225660324097
+                    name: residential

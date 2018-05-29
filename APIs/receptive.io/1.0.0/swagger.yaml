@@ -881,6 +881,8 @@ definitions:
     type: array
   User:
     properties:
+      account:
+        $ref: '#/definitions/UserAccount'
       created_at:
         format: dateTime
         type: string
@@ -895,6 +897,22 @@ definitions:
       roles:
         enum:
           - endUser
+        type: string
+    type: object
+  UserAccount:
+    properties:
+      id:
+        type: string
+      monthly_value:
+        format: float
+        type: number
+      name:
+        type: string
+      status:
+        enum:
+          - paying
+          - prospect
+          - not_paying
         type: string
     type: object
   Vote:

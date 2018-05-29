@@ -703,20 +703,12 @@ paths:
       description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
       operationId: dataproc.projects.locations.workflowTemplates.get
       parameters:
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
         - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
         - description: 'Optional. The version of workflow template to retrieve. Only previously instatiated versions can be retrieved.If unspecified, retrieves the current version.'
           in: query
           name: version
@@ -1086,7 +1078,7 @@ definitions:
           Specifies the identities requesting access for a Cloud Platform resource. members can have the following values:
           allUsers: A special identifier that represents anyone who is  on the internet; with or without a Google account.
           allAuthenticatedUsers: A special identifier that represents anyone  who is authenticated with a Google account or a service account.
-          user:{emailid}: An email address that represents a specific Google  account. For example, alice@gmail.com or joe@example.com.
+          user:{emailid}: An email address that represents a specific Google  account. For example, alice@gmail.com .
           serviceAccount:{emailid}: An email address that represents a service  account. For example, my-other-app@appspot.gserviceaccount.com.
           group:{emailid}: An email address that represents a Google group.  For example, admins@example.com.
           domain:{domain}: A Google Apps domain name that represents all the  users of that domain. For example, google.com or example.com.
@@ -1387,6 +1379,10 @@ definitions:
           us-central1-f
         type: string
     type: object
+  GetIamPolicyRequest:
+    description: Request message for GetIamPolicy method.
+    properties: {}
+    type: object
   HadoopJob:
     description: 'A Cloud Dataproc job for running Apache Hadoop MapReduce (https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) jobs on Apache Hadoop YARN (https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).'
     properties:
@@ -1468,7 +1464,7 @@ definitions:
         description: Output only. The Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
         type: string
       instanceNames:
-        description: 'Optional. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group if not set by user (recommended practice is to let Cloud Dataproc derive the name).'
+        description: 'Output only. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group.'
         items:
           type: string
         type: array
@@ -1499,6 +1495,11 @@ definitions:
       instanceId:
         description: 'Optional. A tag that prevents multiple concurrent workflow instances with the same tag from running. This mitigates risk of concurrent instances started due to retries.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The tag must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
         type: string
+      parameters:
+        additionalProperties:
+          type: string
+        description: Optional. Map from parameter names to values that should be used for those parameters.
+        type: object
       version:
         description: 'Optional. The version of workflow template to instantiate. If specified, the workflow will be instantiated only if the current version of the workflow template has the supplied version.This option cannot be used to instantiate a previous version of workflow template.'
         format: int32
@@ -1800,6 +1801,16 @@ definitions:
         description: 'Required. The step id. The id must be unique among all jobs within the template.The step id is used as prefix for job id, as job goog-dataproc-workflow-step-id label, and in prerequisiteStepIds field from other steps.The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end with underscore or hyphen. Must consist of between 3 and 50 characters.'
         type: string
     type: object
+  ParameterValidation:
+    description: Configuration for parameter validation.
+    properties:
+      regex:
+        $ref: '#/definitions/RegexValidation'
+        description: Validation based on regular expressions.
+      values:
+        $ref: '#/definitions/ValueValidation'
+        description: Validation based on a list of allowed values.
+    type: object
   PigJob:
     description: 'A Cloud Dataproc job for running Apache Pig (https://pig.apache.org/) queries on YARN.'
     properties:
@@ -1937,6 +1948,15 @@ definitions:
           type: string
         type: array
     type: object
+  RegexValidation:
+    description: Validation based on regular expressions.
+    properties:
+      regexes:
+        description: 'Required. RE2 regular expressions used to validate the parameter''s value. The provided value must match the regexes in its entirety, e.g. substring matches are not enough.'
+        items:
+          type: string
+        type: array
+    type: object
   SetIamPolicyRequest:
     description: Request message for SetIamPolicy method.
     properties:
@@ -2068,6 +2088,28 @@ definitions:
         description: 'Optional. A unique id used to identify the request. If the server receives two SubmitJobRequest requests with the same id, then the second request will be ignored and the first Job created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
         type: string
     type: object
+  TemplateParameter:
+    description: A configurable parameter that replaces one or more fields in the template.
+    properties:
+      description:
+        description: Optional. User-friendly description of the parameter. Must not exceed 1024 characters.
+        type: string
+      fields:
+        description: |-
+          Required. Paths to all fields that this parameter replaces. Each field may appear in at most one Parameter's fields list.Field path syntax:A field path is similar to a FieldMask. For example, a field path that references the zone field of the template's cluster selector would look like:placement.clusterSelector.zoneThe only differences between field paths and standard field masks are that:
+          Values in maps can be referenced by key.Example: placement.clusterSelector.clusterLabels'key'
+          Jobs in the jobs list can be referenced by step id.Example: jobs'step-id'.hadoopJob.mainJarFileUri
+          Items in repeated fields can be referenced by zero-based index.Example: jobs'step-id'.sparkJob.args0NOTE: Maps and repeated fields may not be parameterized in their entirety. Only individual map values and items in repeated fields may be referenced. For example, the following field paths are invalid: - placement.clusterSelector.clusterLabels - jobs'step-id'.sparkJob.argsParameterizable fields:Only certain types of fields may be parameterized, specifically: - Labels - File uris - Job properties - Job arguments - Script variables - Main class (in HadoopJob and SparkJob) - Zone (in ClusterSelector)Examples of parameterizable fields:Labels:labels'key' placement.managedCluster.labels'key' placement.clusterSelector.clusterLabels'key' jobs'step-id'.labels'key'File uris:jobs'step-id'.hadoopJob.mainJarFileUri jobs'step-id'.hiveJob.queryFileUri jobs'step-id'.pySparkJob.mainPythonFileUri jobs'step-id'.hadoopJob.jarFileUris0 jobs'step-id'.hadoopJob.archiveUris0 jobs'step-id'.hadoopJob.fileUris0 jobs'step-id'.pySparkJob.pythonFileUris0Other:jobs'step-id'.hadoopJob.properties'key' jobs'step-id'.hadoopJob.args0 jobs'step-id'.hiveJob.scriptVariables'key' jobs'step-id'.hadoopJob.mainJarFileUri placement.clusterSelector.zone
+        items:
+          type: string
+        type: array
+      name:
+        description: 'Required. User-friendly parameter name. This name is used as a key when providing a value for this parameter when the template is instantiated. Must contain only capital letters (A-Z), numbers (0-9), and underscores (_), and must not start with a number. The maximum length is 40 characters.'
+        type: string
+      validation:
+        $ref: '#/definitions/ParameterValidation'
+        description: Optional. Validation rules to be applied to this parameter's value.
+    type: object
   TestIamPermissionsRequest:
     description: Request message for TestIamPermissions method.
     properties:
@@ -2082,6 +2124,15 @@ definitions:
     properties:
       permissions:
         description: A subset of TestPermissionsRequest.permissions that the caller is allowed.
+        items:
+          type: string
+        type: array
+    type: object
+  ValueValidation:
+    description: Validation based on a list of allowed values.
+    properties:
+      values:
+        description: Required. List of allowed values for this parameter.
         items:
           type: string
         type: array
@@ -2182,6 +2233,11 @@ definitions:
       name:
         description: 'Output only. The "resource name" of the template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
         type: string
+      parameters:
+        description: Optional. Template parameters whose values are substituted into the template. Values for these parameters must be provided when the template is instantiated.
+        items:
+          $ref: '#/definitions/TemplateParameter'
+        type: array
       placement:
         $ref: '#/definitions/WorkflowTemplatePlacement'
         description: Required. WorkflowTemplate scheduling information.

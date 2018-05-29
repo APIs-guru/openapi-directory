@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/RotoBallerPremiumNews':
     get:
-      operationId: 596958a835491a09e8d4d50c
+      operationId: PremiumNews
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -57,7 +57,7 @@ paths:
       summary: Premium News
   '/{format}/RotoBallerPremiumNewsByDate/{date}':
     get:
-      operationId: 5969590035491a09e8d4d511
+      operationId: PremiumNewsByDate
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -85,7 +85,7 @@ paths:
       summary: Premium News by Date
   '/{format}/RotoBallerPremiumNewsByPlayerID/{playerid}':
     get:
-      operationId: 596958fc35491a09e8d4d510
+      operationId: PremiumNewsByPlayer
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

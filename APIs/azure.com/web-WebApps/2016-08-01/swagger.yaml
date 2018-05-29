@@ -22595,7 +22595,15 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: Successfully retrieved source control for web app.
+          schema:
+            $ref: '#/definitions/SiteSourceControl'
+        '201':
+          description: Create or update source control for web app still in progress.
+          schema:
+            $ref: '#/definitions/SiteSourceControl'
+        '202':
+          description: Create or update source control for web app still in progress.
           schema:
             $ref: '#/definitions/SiteSourceControl'
       summary: Gets the source control configuration of an app.
@@ -22661,10 +22669,14 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Succesfully created or updated source control for web app.
+          description: Successfully created or updated source control for web app.
           schema:
             $ref: '#/definitions/SiteSourceControl'
         '201':
+          description: Create or update source control for web app in progress.
+          schema:
+            $ref: '#/definitions/SiteSourceControl'
+        '202':
           description: Create or update source control for web app in progress.
           schema:
             $ref: '#/definitions/SiteSourceControl'
@@ -24318,7 +24330,15 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: Successfully retrieved source control for web app.
+          schema:
+            $ref: '#/definitions/SiteSourceControl'
+        '201':
+          description: Create or update source control for web app still in progress.
+          schema:
+            $ref: '#/definitions/SiteSourceControl'
+        '202':
+          description: Create or update source control for web app still in progress.
           schema:
             $ref: '#/definitions/SiteSourceControl'
       summary: Gets the source control configuration of an app.
@@ -24374,10 +24394,14 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Succesfully created or updated source control for web app.
+          description: Successfully created or updated source control for web app.
           schema:
             $ref: '#/definitions/SiteSourceControl'
         '201':
+          description: Create or update source control for web app in progress.
+          schema:
+            $ref: '#/definitions/SiteSourceControl'
+        '202':
           description: Create or update source control for web app in progress.
           schema:
             $ref: '#/definitions/SiteSourceControl'
@@ -26509,7 +26533,6 @@ definitions:
         description: 'True if configuration is enabled, false if it is disabled and null if configuration is not set.'
         type: boolean
     type: object
-  ErrorEntity: {}
   FileSystemApplicationLogsConfig:
     description: Application logs to file system configuration.
     properties:

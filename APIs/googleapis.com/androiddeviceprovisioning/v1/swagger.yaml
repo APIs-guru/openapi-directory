@@ -514,12 +514,13 @@ paths:
       tags:
         - customers
     get:
-      description: Gets a device.
-      operationId: androiddeviceprovisioning.partners.devices.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: androiddeviceprovisioning.operations.get
       parameters:
-        - description: |-
-            Required. The device API resource name in the format
-            `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -529,9 +530,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Operation'
       tags:
-        - partners
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -958,6 +959,17 @@ definitions:
         items:
           type: string
         type: array
+      termsStatus:
+        description: |-
+          Output only. Whether any user from the company has accepted the latest
+          Terms of Service (ToS). See
+          TermsStatus.
+        enum:
+          - TERMS_STATUS_UNSPECIFIED
+          - TERMS_STATUS_NOT_ACCEPTED
+          - TERMS_STATUS_ACCEPTED
+          - TERMS_STATUS_STALE
+        type: string
     type: object
   Configuration:
     description: |-

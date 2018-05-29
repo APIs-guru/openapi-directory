@@ -239,10 +239,12 @@ paths:
             vaultName: NetSDKTestRsVault
           responses:
             '202':
+              body: null
               headers:
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Retry-After: 60
             '204':
+              body: null
               headers: {}
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectableContainers':
     get:
@@ -345,14 +347,20 @@ paths:
               body:
                 friendlyName: testVault
                 id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupOperationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01
+                location: null
                 name: testVault
                 providerName: Microsoft.RecoveryServices
                 resourceGroup: testRg
                 resourceName: testVault
                 resourceType: vaults
                 status:
+                  displayName: null
+                  infoText: null
+                  name: null
                   operationState: InProgress
+                  severity: null
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+                type: null
     get:
       deprecated: false
       description: Gets details of the specific container registered to your Recovery Services Vault.
@@ -392,15 +400,19 @@ paths:
           responses:
             '200':
               body:
+                continuationToken: null
                 resultArray:
                   - backupManagementType: AzureWorkload
                     backupReadiness: Success
                     backupReadinessText: Ready
+                    containerId: null
+                    containerName: null
                     containerType: VMAppContainer
                     details: 14 DB(s) Found
                     friendlyName: testSQL
                     hostServerName: testsql
                     id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL
+                    inquiryErrorDetails: null
                     inquiryInfo:
                       errorDetails:
                         errorCode: Success
@@ -418,6 +430,7 @@ paths:
                             status: Success
                           itemCount: 14
                           type: sql
+                    location: null
                     name: VMAppContainer;Compute;testRG;testSQL
                     nodeList: []
                     providerName: Microsoft.RecoveryServices
@@ -427,8 +440,10 @@ paths:
                     resourceType: vaults
                     sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL
                     sourceResourceRG: testRG
+                    status: null
                     subscriptionId: 00000000-0000-0000-0000-000000000000
                     type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers
+                    workloadType: null
                 totalCount: 0
     put:
       deprecated: false
@@ -578,15 +593,32 @@ paths:
           responses:
             '200':
               body:
+                nextLink: null
                 value:
                   - backupManagementType: AzureWorkload
                     dataDirectoryPaths:
-                      - path: 'F:\Data\'
+                      - logicalName: null
+                        path: 'F:\Data\'
                         type: Data
-                      - path: 'F:\Log\'
+                      - logicalName: null
+                        path: 'F:\Log\'
                         type: Log
                     friendlyName: MSSQLSERVER
-                    status: {}
+                    id: null
+                    location: null
+                    name: null
+                    providerName: null
+                    resourceGroup: null
+                    resourceName: null
+                    resourceType: null
+                    status:
+                      displayName: null
+                      infoText: null
+                      name: null
+                      operationState: null
+                      severity: null
+                    subscriptionId: null
+                    type: null
       x-ms-odata: '#/definitions/BMSWorkloadItemQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -1551,6 +1583,7 @@ paths:
             vaultName: PySDKBackupTestRsVault
           responses:
             '202':
+              body: null
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupOperations/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupOperationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
@@ -2268,15 +2301,19 @@ paths:
           responses:
             '200':
               body:
+                continuationToken: null
                 resultArray:
                   - backupManagementType: AzureWorkload
                     backupReadiness: Success
                     backupReadinessText: Ready
+                    containerId: null
+                    containerName: null
                     containerType: VMAppContainer
                     details: 14 DB(s) Found
                     friendlyName: testSQL
                     hostServerName: testsql
                     id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL
+                    inquiryErrorDetails: null
                     inquiryInfo:
                       errorDetails:
                         errorCode: Success
@@ -2294,6 +2331,7 @@ paths:
                             status: Success
                           itemCount: 14
                           type: sql
+                    location: null
                     name: VMAppContainer;Compute;testRG;testSQL
                     nodeList: []
                     providerName: Microsoft.RecoveryServices
@@ -2303,8 +2341,10 @@ paths:
                     resourceType: vaults
                     sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL
                     sourceResourceRG: testRG
+                    status: null
                     subscriptionId: 00000000-0000-0000-0000-000000000000
                     type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers
+                    workloadType: null
                 totalCount: 0
       x-ms-odata: '#/definitions/BMSContainerQueryObject'
       x-ms-pageable:
@@ -2479,6 +2519,7 @@ paths:
             vaultName: PySDKBackupTestRsVault
           responses:
             '204':
+              body: null
               headers: {}
 definitions:
   AzureBackupServerContainer:

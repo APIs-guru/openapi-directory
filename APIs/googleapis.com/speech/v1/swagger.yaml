@@ -438,7 +438,10 @@ definitions:
         description: Output only. Transcript text representing the words that the user spoke.
         type: string
       words:
-        description: Output only. A list of word-specific information for each recognized word.
+        description: |-
+          Output only. A list of word-specific information for each recognized word.
+          Note: When enable_speaker_diarization is true, you will see all the words
+          from the beginning of the audio.
         items:
           $ref: '#/definitions/WordInfo'
         type: array
@@ -544,6 +547,15 @@ definitions:
           vary.
         format: google-duration
         type: string
+      speakerTag:
+        description: |-
+          Output only. A distinct integer value is assigned for every speaker within
+          the audio. This field specifies which one of those speakers was detected to
+          have spoken this word. Value ranges from '1' to diarization_speaker_count.
+          speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+          top alternative.
+        format: int32
+        type: integer
       startTime:
         description: |-
           Output only. Time offset relative to the beginning of the audio,

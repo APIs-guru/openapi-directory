@@ -99,6 +99,7 @@ paths:
                       provisioningState: Succeeded
                       servicePrincipalProfile:
                         clientId: clientid
+                        keyVaultSecretRef: null
                         secret: secret
                     tags: managed-cluster
                     type: Microsoft.ContainerService/ManagedClusters
@@ -159,6 +160,7 @@ paths:
                       provisioningState: Succeeded
                       servicePrincipalProfile:
                         clientId: clientid
+                        keyVaultSecretRef: null
                         secret: secret
                     tags: managed-cluster
                     type: Microsoft.ContainerService/ManagedClusters
@@ -259,6 +261,7 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
+                    keyVaultSecretRef: null
                     secret: secret
                 tags: managed-cluster
                 type: Microsoft.ContainerService/ManagedClusters
@@ -340,6 +343,7 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
+                    keyVaultSecretRef: null
                     secret: secret
                 tags: managedcluster
                 type: Microsoft.ContainerService/ManagedClusters
@@ -370,13 +374,15 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
+                    keyVaultSecretRef: null
                     secret: secret
                 tags: managedcluster
                 type: Microsoft.ContainerService/ManagedClusters
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}':
     get:
-      description: Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name.
+      deprecated: true
+      description: Use ManagedClusters_GetAccessProfile instead.
       operationId: ManagedClusters_GetAccessProfiles
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -402,6 +408,53 @@ paths:
           schema:
             $ref: '#/definitions/ManagedClusterAccessProfile'
       summary: Gets access profile of a managed cluster.
+      tags:
+        - ManagedClusters
+      x-ms-examples:
+        Get Managed Cluster:
+          parameters:
+            api-version: '2017-08-31'
+            resourceGroupName: rg1
+            resourceName: clustername1
+            roleName: clusterUser
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/accessProfiles/clusterUser
+                location: location1
+                name: clusterUser
+                properties:
+                  kubeConfig: kubeConfig1
+                type: Microsoft.ContainerService/ManagedClusters/AccessProfiles
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}/listCredential':
+    post:
+      description: Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name.
+      operationId: ManagedClusters_GetAccessProfile
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the managed cluster resource.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - description: The name of the role for managed cluster accessProfile resource.
+          in: path
+          name: roleName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ManagedClusterAccessProfile'
+      summary: Gets an access profile of a managed cluster.
       tags:
         - ManagedClusters
       x-ms-examples:
@@ -650,7 +703,6 @@ definitions:
   ContainerServiceVMSize:
     description: Size of agent VMs.
     enum:
-      - Standard_A0
       - Standard_A1
       - Standard_A10
       - Standard_A11
@@ -669,8 +721,6 @@ definitions:
       - Standard_A8_v2
       - Standard_A8m_v2
       - Standard_A9
-      - Standard_B1ms
-      - Standard_B1s
       - Standard_B2ms
       - Standard_B2s
       - Standard_B4ms

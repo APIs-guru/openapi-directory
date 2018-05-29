@@ -43,8 +43,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/joboperations'
       operationId: Job_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -91,21 +93,23 @@ paths:
                 description: List of jobs.
                 items:
                   allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                   description: Job collection item properties.
                   properties:
                     properties:
@@ -116,36 +120,32 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         endTime:
                           description: The end time of the job.
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: true
                         jobId:
                           description: The id of the job.
                           format: uuid
                           readOnly: true
                           type: string
+                          x-nullable: false
                         lastModifiedTime:
                           description: The last modified time of the job.
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: true
                         provisioningState:
-                          description: The provisioning state property.
-                          properties:
-                            provisioningState:
-                              description: The provisioning state of the resource.
-                              enum:
-                                - Failed
-                                - Succeeded
-                                - Suspended
-                                - Processing
-                              readOnly: true
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: JobProvisioningState
+                          description: The provisioning state of a resource.
+                          readOnly: true
+                          type: string
+                        runOn:
+                          description: Specifies the runOn group name where the job was executed.
+                          type: string
                         runbook:
                           description: The runbook property associated with the entity.
                           properties:
@@ -157,6 +157,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: true
                         status:
                           description: The status of the job.
                           enum:
@@ -213,11 +214,13 @@ paths:
                     name: job1
                     properties:
                       creationTime: '2017-03-30T05:53:30.243+00:00'
+                      endTime: null
                       jobId: 45203a94-a8cb-47c3-8ce4-4dcc3a5f7d23
                       lastModifiedTime: '2017-03-30T05:53:30.243+00:00'
                       provisioningState: Succeeded
                       runbook:
                         name: TestRunbook
+                      startTime: null
                       status: New
                     type: Microsoft.Automation/AutomationAccounts/Jobs
                   - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobs/job2
@@ -234,6 +237,7 @@ paths:
                       status: Completed
                     type: Microsoft.Automation/AutomationAccounts/Jobs
               headers: {}
+      x-ms-odata: './definitions.json#/definitions/JobCollectionItem'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}':
@@ -248,8 +252,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -282,21 +288,23 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the job.
             properties:
               properties:
@@ -306,10 +314,12 @@ paths:
                     description: Gets or sets the creation time of the job.
                     format: date-time
                     type: string
+                    x-nullable: false
                   endTime:
                     description: Gets or sets the end time of the job.
                     format: date-time
                     type: string
+                    x-nullable: true
                   exception:
                     description: Gets or sets the exception of the job.
                     type: string
@@ -317,34 +327,26 @@ paths:
                     description: Gets or sets the id of the job.
                     format: uuid
                     type: string
+                    x-nullable: false
                   lastModifiedTime:
                     description: Gets or sets the last modified time of the job.
                     format: date-time
                     type: string
+                    x-nullable: true
                   lastStatusModifiedTime:
                     description: Gets or sets the last status modified time of the job.
                     format: date-time
                     type: string
+                    x-nullable: true
                   parameters:
                     additionalProperties:
                       type: string
                     description: Gets or sets the parameters of the job.
                     type: object
                   provisioningState:
-                    description: The provisioning state property.
-                    properties:
-                      provisioningState:
-                        description: The provisioning state of the resource.
-                        enum:
-                          - Failed
-                          - Succeeded
-                          - Suspended
-                          - Processing
-                        readOnly: true
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: JobProvisioningState
+                    description: The provisioning state of a resource.
+                    readOnly: true
+                    type: string
                   runOn:
                     description: Gets or sets the runOn which specifies the group name where the job is to be executed.
                     type: string
@@ -358,6 +360,7 @@ paths:
                     description: Gets or sets the start time of the job.
                     format: date-time
                     type: string
+                    x-nullable: true
                   startedBy:
                     description: Gets or sets the job started by.
                     type: string
@@ -416,6 +419,8 @@ paths:
                 name: foo
                 properties:
                   creationTime: '2018-02-01T05:53:30.243+00:00'
+                  endTime: null
+                  exception: null
                   jobId: 5b8a3960-e8ab-45f6-bec6-567df8467d1a
                   lastModifiedTime: '2018-02-01T05:53:30.243+00:00'
                   lastStatusModifiedTime: '2018-02-01T05:53:30.243+00:00'
@@ -426,6 +431,7 @@ paths:
                   runOn: ''
                   runbook:
                     name: TestRunbook
+                  startTime: null
                   status: New
                   statusDetails: None
                 type: Microsoft.Automation/AutomationAccounts/Jobs
@@ -441,8 +447,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -467,7 +475,6 @@ paths:
             description: The parameters supplied to the create job operation.
             properties:
               properties:
-                description: The parameters supplied to the create job operation.
                 properties:
                   parameters:
                     additionalProperties:
@@ -483,8 +490,6 @@ paths:
                       name:
                         description: Gets or sets the name of the runbook.
                         type: string
-                required:
-                  - runbook
             required:
               - properties
         - description: Client Api Version.
@@ -503,21 +508,23 @@ paths:
           description: Created
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the job.
             properties:
               properties:
@@ -527,10 +534,12 @@ paths:
                     description: Gets or sets the creation time of the job.
                     format: date-time
                     type: string
+                    x-nullable: false
                   endTime:
                     description: Gets or sets the end time of the job.
                     format: date-time
                     type: string
+                    x-nullable: true
                   exception:
                     description: Gets or sets the exception of the job.
                     type: string
@@ -538,34 +547,26 @@ paths:
                     description: Gets or sets the id of the job.
                     format: uuid
                     type: string
+                    x-nullable: false
                   lastModifiedTime:
                     description: Gets or sets the last modified time of the job.
                     format: date-time
                     type: string
+                    x-nullable: true
                   lastStatusModifiedTime:
                     description: Gets or sets the last status modified time of the job.
                     format: date-time
                     type: string
+                    x-nullable: true
                   parameters:
                     additionalProperties:
                       type: string
                     description: Gets or sets the parameters of the job.
                     type: object
                   provisioningState:
-                    description: The provisioning state property.
-                    properties:
-                      provisioningState:
-                        description: The provisioning state of the resource.
-                        enum:
-                          - Failed
-                          - Succeeded
-                          - Suspended
-                          - Processing
-                        readOnly: true
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: JobProvisioningState
+                    description: The provisioning state of a resource.
+                    readOnly: true
+                    type: string
                   runOn:
                     description: Gets or sets the runOn which specifies the group name where the job is to be executed.
                     type: string
@@ -579,6 +580,7 @@ paths:
                     description: Gets or sets the start time of the job.
                     format: date-time
                     type: string
+                    x-nullable: true
                   startedBy:
                     description: Gets or sets the job started by.
                     type: string
@@ -645,6 +647,8 @@ paths:
                 name: foo
                 properties:
                   creationTime: '2018-02-01T05:53:30.243+00:00'
+                  endTime: null
+                  exception: null
                   jobId: 5b8a3960-e8ab-45f6-bec6-567df8467d1a
                   lastModifiedTime: '2018-02-01T05:53:30.243+00:00'
                   lastStatusModifiedTime: '2018-02-01T05:53:30.243+00:00'
@@ -655,6 +659,7 @@ paths:
                   runOn: ''
                   runbook:
                     name: TestRunbook
+                  startTime: null
                   status: New
                   statusDetails: None
                 type: Microsoft.Automation/AutomationAccounts/Jobs
@@ -671,8 +676,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -741,8 +748,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/joboperations'
       operationId: Job_Resume
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -814,8 +823,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -884,8 +895,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/joboperations'
       operationId: Job_Stop
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -952,8 +965,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/jobstreamoperations'
       operationId: JobStream_ListByJob
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -1038,12 +1053,12 @@ paths:
                           description: Gets or sets the creation time of the job.
                           format: date-time
                           type: string
+                          x-nullable: false
                         value:
                           additionalProperties:
                             type: object
                           description: Gets or sets the values of the job stream.
                           type: object
-                      x-ms-client-flatten: true
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -1076,11 +1091,13 @@ paths:
                     properties:
                       jobStreamId: 24456a8a-2857-4af6-932c-3455f38bd05e_00636535675981232703_00000000000000000001
                       streamType: Output
+                      summary: null
                       time: '2018-02-07T02:33:18.1232703+00:00'
                   - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourcegroups/mygroup/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobs/jobName/streams/24456a8a-2857-4af6-932c-3455f38bd05e_00636535675984691350_00000000000000000002
                     properties:
                       jobStreamId: 24456a8a-2857-4af6-932c-3455f38bd05e_00636535675984691350_00000000000000000002
                       streamType: Output
+                      summary: null
                       time: '2018-02-07T02:33:18.469135+00:00'
               headers: {}
       x-ms-pageable:
@@ -1097,8 +1114,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -1170,12 +1189,12 @@ paths:
                     description: Gets or sets the creation time of the job.
                     format: date-time
                     type: string
+                    x-nullable: false
                   value:
                     additionalProperties:
                       type: object
                     description: Gets or sets the values of the job stream.
                     type: object
-                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1207,6 +1226,7 @@ paths:
                   jobStreamId: '851b2101-686f-40e2-8a4b-5b8df08afbd1:00636535684910693884:00000000000000000001'
                   streamText: ''
                   streamType: Output
+                  summary: null
                   time: '2018-02-07T02:48:11.0693884+00:00'
                   value: {}
               headers: {}
@@ -1222,8 +1242,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true

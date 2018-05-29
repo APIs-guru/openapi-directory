@@ -38,7 +38,7 @@ paths:
   '/{format}/AreAnyGamesInProgress':
     get:
       description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
-      operationId: 57b77d0a14338d151caae777
+      operationId: AreGamesInProgress
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -57,7 +57,7 @@ paths:
       summary: Are Games In Progress
   '/{format}/CurrentSeason':
     get:
-      operationId: 57b77d0a14338d151caae778
+      operationId: CurrentSeason
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -76,7 +76,7 @@ paths:
       summary: Current Season
   '/{format}/CurrentWeek':
     get:
-      operationId: 57b77d0a14338d151caae779
+      operationId: CurrentWeek
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -95,7 +95,7 @@ paths:
       summary: Current Week
   '/{format}/Games/{season}':
     get:
-      operationId: 57b77d0a14338d151caae77c
+      operationId: Schedules
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -121,7 +121,7 @@ paths:
       summary: Schedules
   '/{format}/GamesByDate/{date}':
     get:
-      operationId: 57b77d0a14338d151caae77d
+      operationId: GamesByDate
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -151,7 +151,7 @@ paths:
       summary: Games by Date
   '/{format}/GamesByWeek/{season}/{week}':
     get:
-      operationId: 57b77d0a14338d151caae77e
+      operationId: GamesByWeek
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -190,7 +190,7 @@ paths:
       summary: Games by Week
   '/{format}/LeagueHierarchy':
     get:
-      operationId: 57b77d0a14338d151caae77a
+      operationId: ConferenceHierarchyWithTeams
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -211,7 +211,7 @@ paths:
       summary: Conference Hierarchy (with Teams)
   '/{format}/Stadiums':
     get:
-      operationId: 57b86b4935491a0cc0b4d554
+      operationId: Stadiums
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -232,7 +232,7 @@ paths:
       summary: Stadiums
   '/{format}/TeamGameStatsByWeek/{season}/{week}':
     get:
-      operationId: 57b77d0a14338d151caae77f
+      operationId: TeamGameStatsByWeek
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -271,7 +271,7 @@ paths:
       summary: Team Game Stats by Week
   '/{format}/TeamSeasonStats/{season}':
     get:
-      operationId: 57b77d0a14338d151caae780
+      operationId: TeamSeasonStatsStandings
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
@@ -297,7 +297,7 @@ paths:
       summary: Team Season Stats & Standings
   '/{format}/Teams':
     get:
-      operationId: 57b77d0a14338d151caae77b
+      operationId: Teams
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.

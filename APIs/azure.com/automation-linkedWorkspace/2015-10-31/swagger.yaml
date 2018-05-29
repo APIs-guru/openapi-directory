@@ -42,8 +42,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/linkedworkspaceoperations'
       operationId: LinkedWorkspace_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true

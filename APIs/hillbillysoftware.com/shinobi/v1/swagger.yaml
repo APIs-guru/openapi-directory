@@ -2,7 +2,6 @@ swagger: '2.0'
 schemes:
   - https
 host: api.hillbillysoftware.com
-x-hasEquivalentPaths: true
 info:
   title: shinobiapi
   version: v1
@@ -17,70 +16,15 @@ info:
       version: '2.0'
   x-providerName: hillbillysoftware.com
   x-serviceName: shinobi
+consumes: []
 produces:
   - application/json
   - text/json
   - application/xml
   - text/xml
 paths:
-  '/Actors/Add/{AccesToken}':
-    post:
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      parameters:
-        - description: ''
-          in: path
-          name: AccesToken
-          required: true
-          type: string
-        - description: ''
-          in: body
-          name: Data
-          required: true
-          schema:
-            $ref: '#/definitions/ActorPut'
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object
-      summary: Add new actor/actress to server
-      tags:
-        - Actors
-    put:
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      parameters:
-        - description: ''
-          in: path
-          name: AccesToken
-          required: true
-          type: string
-        - description: ''
-          in: body
-          name: Data
-          required: true
-          schema:
-            $ref: '#/definitions/ActorPut'
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object
-      summary: Add new actor/actress to server
-      tags:
-        - Actors
   '/Actors/Search/{accesstoken}/{Query}':
     get:
-      consumes: []
       operationId: Actor_Get
       parameters:
         - description: ''
@@ -95,16 +39,17 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: List of Actors
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/Actor'
+            type: array
       summary: Returns data on queried actor/actress. Result set limited to 5 records
       tags:
-        - Actors
-  '/Awards/{AccessToken}/{Year}':
+        - Cast & Crew
+  '/Awards/ByWinner/{AccessToken}/{Nominee}':
     get:
-      consumes: []
-      operationId: Awards_Get
+      operationId: AwardsbyWinner_Get
       parameters:
         - description: ''
           in: path
@@ -113,20 +58,198 @@ paths:
           type: string
         - description: ''
           in: path
+          name: Nominee
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of awards
+          schema:
+            items:
+              $ref: '#/definitions/_Awards'
+            type: array
+      summary: Gets all awards by nominiee
+      tags:
+        - Awards
+  '/Awards/ByYear/{Year}':
+    get:
+      operationId: awards_Get
+      parameters:
+        - description: ''
+          in: path
           name: Year
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: List of awards
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/_Awards'
+            type: array
       summary: Gets all awards for requested year
       tags:
-        - Miscellaneous
-  '/Episodes/{AccessToken}/{ID}':
+        - Awards
+  '/Calendar/ByDate/{AccessToken}/{Date}/{Country}':
     get:
-      consumes: []
+      operationId: ScheduleByDate_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: date format year-month-day
+          in: path
+          name: Date
+          required: true
+          type: string
+        - description: US / CA / NL / BE / DE / GB or FR
+          in: path
+          name: Country
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of schedules/calendar entries
+          schema:
+            items:
+              $ref: '#/definitions/schedule'
+            type: array
+      summary: Gets TV Schedule for selected data
+      tags:
+        - Calendar
+  '/Calendar/Countries/{AccessToken}':
+    get:
+      operationId: CalendarCountries_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of countries
+          schema:
+            items:
+              $ref: '#/definitions/Country'
+            type: array
+      summary: Returns list of available countries in calendar database
+      tags:
+        - Calendar
+  '/Calendar/Networks/{AccessToken}':
+    get:
+      operationId: CalendarNetworks_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of networks
+          schema:
+            items:
+              $ref: '#/definitions/Networks'
+            type: array
+      summary: Gets a list of available networks
+      tags:
+        - Calendar
+  '/Calendar/Today/{AccessToken}':
+    get:
+      operationId: CalendarToday_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of schedules/calendar entries
+          schema:
+            items:
+              $ref: '#/definitions/schedule'
+            type: array
+      summary: Will return show schedule for today for all countries in database
+      tags:
+        - Calendar
+  '/Cast/ByTVShow/{accesstoken}/{ShowName}':
+    get:
+      operationId: ActorsInTVShow_Get
+      parameters:
+        - description: ''
+          in: path
+          name: accesstoken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: ShowName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of actors in show
+          schema:
+            items:
+              $ref: '#/definitions/TVShowActor'
+            type: array
+      summary: Returns all actors in queried tvshow
+      tags:
+        - Cast & Crew
+  '/Cast/InTVShow/{accesstoken}/{Actor}':
+    get:
+      operationId: ActorInShows_Get
+      parameters:
+        - description: ''
+          in: path
+          name: accesstoken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Actor
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of actors in show
+          schema:
+            items:
+              $ref: '#/definitions/TVShowActor'
+            type: array
+      summary: Returns all shows queried actor/actress is or has been in
+      tags:
+        - Cast & Crew
+  '/Crew/Search/{AccessToken}/{ShowName}':
+    get:
+      operationId: Crew_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: ShowName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of crew
+          schema:
+            items:
+              $ref: '#/definitions/Crew'
+            type: array
+      summary: Returns crew for queried show.
+      tags:
+        - Cast & Crew
+  '/Episodes/ByID/{AccessToken}/{ID}':
+    get:
       operationId: EpisodesByID_Get
       parameters:
         - description: ''
@@ -141,15 +264,16 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: List of episodes
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/Episode'
+            type: array
       summary: Gets all episodes for selected ID
       tags:
         - TVShows
-  '/Episodes/{AccessToken}/{Showname}':
+  '/Episodes/ByShowName/{AccessToken}/{Showname}':
     get:
-      consumes: []
       operationId: Episodes_Get
       parameters:
         - description: ''
@@ -164,16 +288,17 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: List of episodes
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/Episode'
+            type: array
       summary: Gets all episodes for selected show
       tags:
         - TVShows
-  '/GetIMDBid/{AccessToken}/{Query}':
+  '/GetIMDBid/ByID/{AccessToken}/{Query}':
     get:
-      consumes: []
-      operationId: GetIMDBid_Get
+      operationId: GetIMDBid_GetAsync
       parameters:
         - description: ''
           in: path
@@ -187,15 +312,40 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: List of imdb ID's
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/imdbID'
+            type: array
       summary: 'Gets list of avaiable IMDB ids from Movies and TV Show databases, you can use those to query other end points that need ID''s'
       tags:
         - Miscellaneous
+  '/Images/ByID/{AccessToken}/{imdbID}':
+    get:
+      operationId: Images_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: imdbID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of images
+          schema:
+            items:
+              $ref: '#/definitions/imdbImages'
+            type: array
+      summary: Get images available for movie/tv show with passed imdbID
+      tags:
+        - Images
   '/Images/Search/{Accesstoken}/{Query}':
     get:
-      consumes: []
       operationId: ImageSearch_Get
       parameters:
         - description: ''
@@ -214,47 +364,92 @@ paths:
           type: boolean
       responses:
         '200':
-          description: OK
+          description: List of images
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/Images'
+            type: array
       summary: Get images available for movie/tv show with passed query
       tags:
         - Images
-  '/Images/{accesstoken}/{imdbID}':
+  '/Magnets/ByDate/{AccessToken}/{Date}':
     get:
-      consumes: []
-      operationId: Images_Get
+      operationId: MagnetsByDate_GetAsync
       parameters:
         - description: ''
           in: path
-          name: accesstoken
+          name: AccessToken
           required: true
           type: string
         - description: ''
           in: path
-          name: imdbID
+          name: Date
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: List of magnet hashes
           schema:
-            type: string
-      summary: Get images available for movie/tv show with passed imdbID
+            items:
+              $ref: '#/definitions/Magnets'
+            type: array
+      summary: Gets available magnet hashes on passed date (yyyy-mm-dd)
       tags:
-        - Images
-  '/Movie/ID/{accesstoken}/{imdbID}':
+        - Magnets
+  '/Magnets/Movie/{AccessToken}/{Movie}':
     get:
-      consumes: []
+      operationId: magnetsMovieByID_GetAsync
       parameters:
         - description: ''
           in: path
-          name: accesstoken
+          name: AccessToken
           required: true
           type: string
         - description: ''
-          in: query
-          name: id
+          in: path
+          name: Movie
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of magnet hashes
+          schema:
+            items:
+              $ref: '#/definitions/Magnets'
+            type: array
+      summary: 'Try and find magnet links for queried movie.  Feature not available on free plan, please donate to be able to use this feature'
+      tags:
+        - Magnets
+  '/Magnets/TVShow/{AccessToken}/{TVShow}':
+    get:
+      operationId: magnetsTVShowSearch_GetAsync
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: TVShow
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of magnet hashes
+          schema:
+            items:
+              $ref: '#/definitions/Magnets'
+            type: array
+      summary: 'Returns results based on query, Feature not available on free plan, please donate to be able to use this feature.'
+      tags:
+        - Magnets
+  '/Movie/ByID/{accesstoken}/{imdbID}':
+    get:
+      operationId: MovieID_Get
+      parameters:
+        - in: path
+          name: accesstoken
           required: true
           type: string
         - in: path
@@ -263,102 +458,37 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: Movie information
           schema:
-            type: string
-      summary: Returns information on movie based on IMDBid
+            $ref: '#/definitions/MovieInformation'
       tags:
         - Movies
-  '/Movie/ID/{accesstoken}/{imdbID}/{IncludeMagnets}':
+  '/Movie/Search/{AccessToken}/{Query}':
     get:
-      consumes: []
+      operationId: MovieSearch_GetAsync
       parameters:
         - description: ''
           in: path
-          name: accesstoken
+          name: AccessToken
           required: true
           type: string
         - description: ''
-          in: query
-          name: id
-          required: true
-          type: string
-        - description: ''
-          in: query
-          name: incmagnets
-          required: false
-          type: boolean
-        - in: path
-          name: imdbID
-          required: true
-          type: string
-        - in: path
-          name: IncludeMagnets
+          in: path
+          name: Query
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: List of information about queried movie(s)
           schema:
-            type: string
-      summary: 'Returns information on movie based on IMDBid, magnet links are included.'
-      tags:
-        - Movies
-  '/Movie/Search/{accesstoken}/{query}':
-    get:
-      consumes: []
-      parameters:
-        - description: ''
-          in: path
-          name: accesstoken
-          required: true
-          type: string
-        - description: ''
-          in: path
-          name: query
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: string
+            items:
+              $ref: '#/definitions/MovieInformation'
+            type: array
       summary: 'Searches for movies, result set limited to 5 records'
       tags:
         - Movies
-  '/Movie/Search/{accesstoken}/{query}/{IncludeMagnets}':
+  '/Rating/ByID/{AccessToken}/{imdbID}':
     get:
-      consumes: []
-      parameters:
-        - description: ''
-          in: path
-          name: accesstoken
-          required: true
-          type: string
-        - description: ''
-          in: path
-          name: query
-          required: true
-          type: string
-        - in: query
-          name: incmagnets
-          required: false
-          type: boolean
-        - in: path
-          name: IncludeMagnets
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: string
-      summary: 'Searches for movies, if matches are found magnet links will be included in the result set. Result set is limited to 5 records'
-      tags:
-        - Movies
-  '/Rating/{AccessToken}/{imdbID}':
-    get:
-      consumes: []
       operationId: Rating_Get
       parameters:
         - description: ''
@@ -373,15 +503,14 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: Ratings
           schema:
-            type: string
+            $ref: '#/definitions/RatingItem'
       summary: 'Returns ratings from various resources(IMDB,Rotten Tomatoes, metaCritics, TVMaze etc) of passed IMDBid'
       tags:
         - Miscellaneous
   '/Status/{AccessToken}/{Query}':
     get:
-      consumes: []
       operationId: ShowStatus_Get
       parameters:
         - description: ''
@@ -396,15 +525,16 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: List of statuses
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/_ShowStatus'
+            type: array
       summary: 'Returns status of queried show (query can be IMDB, TVDB, or showname)'
       tags:
         - TVShows
-  '/TV/ID/{accesstoken}/{imdbID}':
+  '/TV/ByID/{accesstoken}/{imdbID}':
     get:
-      consumes: []
       operationId: TVShowID_Get
       parameters:
         - description: ''
@@ -423,15 +553,15 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: Television show information
           schema:
-            type: string
+            $ref: '#/definitions/TVInformation'
       summary: Returns TVShow information based on IMDBid
       tags:
         - TVShows
   '/TV/Search/{accesstoken}/{query}':
     get:
-      consumes: []
+      operationId: TVShowSearch_GetAsync
       parameters:
         - description: ''
           in: path
@@ -445,45 +575,40 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: List of television show information
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/TVInformation'
+            type: array
       summary: 'Returns results based on query, result set limited to 5 records'
       tags:
         - TVShows
-  '/TV/Search/{accesstoken}/{query}/{IncludeMagnets}':
+  '/Trailers/ByID/{AccessToken}/{imdbID}':
     get:
-      consumes: []
+      operationId: TrailersbyID_Get
       parameters:
         - description: ''
           in: path
-          name: accesstoken
+          name: AccessToken
           required: true
           type: string
         - description: ''
           in: path
-          name: query
-          required: true
-          type: string
-        - description: ''
-          in: query
-          name: incmagnets
-          required: false
-          type: boolean
-        - in: path
-          name: IncludeMagnets
+          name: imdbID
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: List of trailers
           schema:
-            type: string
-      summary: 'Returns results based on query, magnet links are included, result set limited to 5 records'
+            items:
+              $ref: '#/definitions/Trailer'
+            type: array
+      summary: Get Trailers for passed imdbID
       tags:
-        - TVShows
+        - Trailers
 definitions:
-  ActorPut:
+  Actor:
     properties:
       Bio:
         type: string
@@ -495,6 +620,259 @@ definitions:
         type: string
       Name:
         type: string
+      PopularityIndex:
+        type: string
       ProfileImage:
+        type: string
+    type: object
+  Country:
+    properties:
+      Name:
+        type: string
+    type: object
+  Crew:
+    properties:
+      Name:
+        type: string
+      ShowName:
+        type: string
+      Type:
+        type: string
+    type: object
+  Episode:
+    properties:
+      Airdate:
+        type: string
+      Airtime:
+        type: string
+      EpisodeNo:
+        type: string
+      ImageHash:
+        type: string
+      Season:
+        type: string
+      Synopsis:
+        type: string
+      Title:
+        type: string
+      imdbID:
+        type: string
+      tvdbID:
+        type: string
+      tvmazeID:
+        type: string
+    type: object
+  Images:
+    properties:
+      ID:
+        type: string
+      ImageURI:
+        type: string
+      imdbID:
+        type: string
+      isValidated:
+        type: string
+    type: object
+  Links:
+    properties:
+      Magnet:
+        type: string
+      Title:
+        type: string
+    type: object
+  Magnets:
+    properties:
+      Hash:
+        type: string
+      Name:
+        type: string
+      Size:
+        type: string
+      Title:
+        type: string
+      Type:
+        type: string
+    type: object
+  MovieInformation:
+    properties:
+      ID:
+        type: string
+      ImdbID:
+        type: string
+      ReleaseYear:
+        type: string
+      Runtime:
+        type: string
+      Synopsis:
+        type: string
+      Title:
+        type: string
+      Urls:
+        items:
+          $ref: '#/definitions/Links'
+        type: array
+    type: object
+  Networks:
+    properties:
+      Country:
+        type: string
+      Network:
+        type: string
+    type: object
+  RatingItem:
+    properties:
+      ID:
+        type: string
+      MetaCritics:
+        type: string
+      Name:
+        type: string
+      Rating:
+        type: string
+      RottenTomatoes:
+        type: string
+      TVMaze:
+        type: string
+      imdbID:
+        type: string
+    type: object
+  TVInformation:
+    properties:
+      EpisodeCount:
+        type: string
+      EpisodeRuntime:
+        type: string
+      ID:
+        type: string
+      ImdbID:
+        type: string
+      ReleaseYear:
+        type: string
+      Seasons:
+        type: string
+      ShowImage:
+        type: string
+      ShowStatus:
+        type: string
+      Synopsis:
+        type: string
+      Title:
+        type: string
+      Urls:
+        items:
+          $ref: '#/definitions/Links'
+        type: array
+    type: object
+  TVShowActor:
+    properties:
+      Name:
+        type: string
+      Role:
+        type: string
+      ShowID:
+        type: string
+      ShowName:
+        type: string
+    type: object
+  Trailer:
+    properties:
+      Key:
+        type: string
+      MediaType:
+        type: string
+      Site:
+        type: string
+      TrailerName:
+        type: string
+      TrailerSize:
+        type: string
+      TrailerType:
+        type: string
+      YouTubeEmbeddedCode:
+        type: string
+      YouTubeURL:
+        type: string
+    type: object
+  _Awards:
+    properties:
+      Category:
+        type: string
+      Nominee:
+        type: string
+      Type:
+        type: string
+      Winner:
+        type: string
+      Year:
+        type: string
+    type: object
+  _ShowStatus:
+    properties:
+      Enddate:
+        type: string
+      ID:
+        type: string
+      Title:
+        type: string
+      YearsOn:
+        type: string
+      imdbID:
+        type: string
+      status:
+        type: string
+      tvdbID:
+        type: string
+    type: object
+  imdbID:
+    properties:
+      ID:
+        type: string
+      ShinobiID:
+        type: string
+      Title:
+        type: string
+      Type:
+        type: string
+    type: object
+  imdbImages:
+    properties:
+      Backdrops:
+        items:
+          type: string
+        type: array
+      Posters:
+        items:
+          type: string
+        type: array
+      Type:
+        type: string
+      imdbID:
+        type: string
+    type: object
+  schedule:
+    properties:
+      AirDate:
+        type: string
+      AirTime:
+        type: string
+      Country:
+        type: string
+      DaysOn:
+        type: string
+      ID:
+        type: string
+      Image:
+        type: string
+      Network:
+        type: string
+      PremiereDate:
+        type: string
+      Runtime:
+        type: string
+      ShowName:
+        type: string
+      Summary:
+        type: string
+      Title:
         type: string
     type: object

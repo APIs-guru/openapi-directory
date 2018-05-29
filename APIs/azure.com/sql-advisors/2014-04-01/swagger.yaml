@@ -76,6 +76,221 @@ parameters:
     type: string
     x-ms-parameter-location: client
 paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors':
+    get:
+      description: Gets a list of server advisors.
+      operationId: ServerAdvisors_ListByServer
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of server advisors.
+          schema:
+            $ref: '#/definitions/AdvisorListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 AdvisorNotFound - The requested advisor was not found.
+
+             * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.
+      tags:
+        - ServerAdvisors
+      x-ms-examples:
+        List of server advisors:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: workloadinsight-demos
+            serverName: misosisvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/CreateIndex
+                  name: CreateIndex
+                  properties:
+                    advisorStatus: GA
+                    autoExecuteValue: Disabled
+                  type: Microsoft.Sql/servers/advisors
+                - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/DropIndex
+                  name: DropIndex
+                  properties:
+                    advisorStatus: GA
+                    autoExecuteValue: Disabled
+                  type: Microsoft.Sql/servers/advisors
+                - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/DbParameterization
+                  name: DbParameterization
+                  properties:
+                    advisorStatus: GA
+                    autoExecuteValue: Disabled
+                  type: Microsoft.Sql/servers/advisors
+                - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/ForceLastGoodPlan
+                  name: ForceLastGoodPlan
+                  properties:
+                    advisorStatus: PrivatePreview
+                    autoExecuteValue: Disabled
+                  type: Microsoft.Sql/servers/advisors
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors/{advisorName}':
+    get:
+      description: Gets a server advisor.
+      operationId: ServerAdvisors_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Server Advisor.
+          in: path
+          name: advisorName
+          required: true
+          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved details of specified server advisor.
+          schema:
+            $ref: '#/definitions/Advisor'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 AdvisorNotFound - The requested advisor was not found.
+
+             * 405 NotSupported - This functionality is not supported.
+
+             * 409 Conflict - Request could not be processed because of conflict in the request.
+
+             * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.
+      tags:
+        - ServerAdvisors
+      x-ms-examples:
+        Get server advisor:
+          parameters:
+            advisorName: CreateIndex
+            api-version: '2014-04-01'
+            resourceGroupName: workloadinsight-demos
+            serverName: misosisvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/CreateIndex
+                name: CreateIndex
+                properties:
+                  advisorStatus: GA
+                  autoExecuteValue: Disabled
+                type: Microsoft.Sql/servers/advisors
+    patch:
+      description: Updates a server advisor.
+      operationId: ServerAdvisors_Update
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Server Advisor.
+          in: path
+          name: advisorName
+          required: true
+          type: string
+        - description: The requested advisor resource state.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Advisor'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully updated the specified server advisor.
+          schema:
+            $ref: '#/definitions/Advisor'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 AdvisorNotFound - The requested advisor was not found.
+
+             * 405 NotSupported - This functionality is not supported.
+
+             * 409 Conflict - Request could not be processed because of conflict in the request.
+
+             * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.
+      tags:
+        - ServerAdvisors
+      x-ms-examples:
+        Update server advisor:
+          parameters:
+            advisorName: CreateIndex
+            api-version: '2014-04-01'
+            parameters:
+              properties:
+                autoExecuteValue: Disabled
+            resourceGroupName: workloadinsight-demos
+            serverName: misosisvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/CreateIndex
+                name: CreateIndex
+                properties:
+                  advisorStatus: GA
+                  autoExecuteValue: Disabled
+                type: Microsoft.Sql/servers/advisors
+    put:
+      description: Creates or updates a server advisor.
+      operationId: ServerAdvisors_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Server Advisor.
+          in: path
+          name: advisorName
+          required: true
+          type: string
+        - description: The requested advisor resource state.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Advisor'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully updated the specified server advisor.
+          schema:
+            $ref: '#/definitions/Advisor'
+      tags:
+        - ServerAdvisors
+      x-ms-examples:
+        Update server advisor:
+          parameters:
+            advisorName: CreateIndex
+            api-version: '2014-04-01'
+            parameters:
+              properties:
+                autoExecuteValue: Disabled
+            resourceGroupName: workloadinsight-demos
+            serverName: misosisvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/CreateIndex
+                name: CreateIndex
+                properties:
+                  advisorStatus: GA
+                  autoExecuteValue: Disabled
+                type: Microsoft.Sql/servers/advisors
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors':
     get:
       description: Returns a list of database advisors.
@@ -142,6 +357,8 @@ paths:
                     properties:
                       advisorStatus: PrivatePreview
                       autoExecuteValue: Disabled
+                      lastChecked: null
+                      recommendationsStatus: null
                     type: Microsoft.Sql/servers/databases/advisors
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}':
     get:
@@ -230,7 +447,26 @@ paths:
 definitions:
   Advisor:
     allOf:
-      - $ref: '#/definitions/ProxyResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+        properties: {}
+        type: object
     description: Database Advisor.
     properties:
       kind:
@@ -291,26 +527,3 @@ definitions:
     required:
       - autoExecuteValue
     type: object
-  ProxyResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM proxy resource.
-    properties: {}
-    type: object
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    type: object
-    x-ms-azure-resource: true

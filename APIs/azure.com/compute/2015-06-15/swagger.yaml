@@ -1436,6 +1436,41 @@ paths:
             $ref: '#/definitions/VirtualMachineExtension'
       tags:
         - VirtualMachineExtensions
+    patch:
+      description: The operation to update the extension.
+      operationId: VirtualMachineExtensions_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual machine where the extension should be updated.
+          in: path
+          name: vmName
+          required: true
+          type: string
+        - description: The name of the virtual machine extension.
+          in: path
+          name: vmExtensionName
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Virtual Machine Extension operation.
+          in: body
+          name: extensionParameters
+          required: true
+          schema:
+            $ref: '#/definitions/VirtualMachineExtensionUpdate'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualMachineExtension'
+      tags:
+        - VirtualMachineExtensions
+      x-ms-long-running-operation: true
     put:
       description: The operation to create or update the extension.
       operationId: VirtualMachineExtensions_CreateOrUpdate
@@ -1445,7 +1480,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine where the extension should be create or updated.
+        - description: The name of the virtual machine where the extension should be created or updated.
           in: path
           name: vmName
           required: true
@@ -2242,6 +2277,15 @@ definitions:
         description: Resource Id
         type: string
     x-ms-azure-resource: true
+  UpdateResource:
+    description: The Update Resource model definition.
+    properties:
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+    x-ms-azure-resource: true
   UpgradePolicy:
     description: Describes an upgrade policy - automatic or manual.
     properties:
@@ -2473,6 +2517,38 @@ definitions:
         description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
+      publisher:
+        description: The name of the extension handler publisher.
+        type: string
+      settings:
+        description: Json formatted public settings for the extension.
+        type: object
+      type:
+        description: Specifies the type of the extension; an example is "CustomScriptExtension".
+        type: string
+      typeHandlerVersion:
+        description: Specifies the version of the script handler.
+        type: string
+  VirtualMachineExtensionUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Describes a Virtual Machine Extension.
+    properties:
+      properties:
+        $ref: '#/definitions/VirtualMachineExtensionUpdateProperties'
+        x-ms-client-flatten: true
+  VirtualMachineExtensionUpdateProperties:
+    description: Describes the properties of a Virtual Machine Extension.
+    properties:
+      autoUpgradeMinorVersion:
+        description: 'Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.'
+        type: boolean
+      forceUpdateTag:
+        description: How the extension handler should be forced to update even if the extension configuration has not changed.
+        type: string
+      protectedSettings:
+        description: The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
+        type: object
       publisher:
         description: The name of the extension handler publisher.
         type: string

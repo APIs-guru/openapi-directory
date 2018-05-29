@@ -4,11 +4,11 @@ schemes:
 host: wft-geo-db.p.mashape.com
 basePath: /
 info:
-  description: 'This developer-centric REST API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li><li>Sort cities by name, country code, elevation, and population - or any combination of these.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li> <li>Developer-friendly RESTful API adheres to industry best-practices, including HATEOAS-style links to facilitate paging results.</li> <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames.org.</li></ul><p>Notes:<ul><li>All endpoints implicitly support JSONP-style invocation via an optional <tt>callback</tt> param.</li><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geo-db-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geo-db-java-client''>Java</a></li><li><a href=''https://www.npmjs.com/package/wft-geodb-js-client''>JavaScript</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
+  description: 'The GeoDB API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li><li>Sort cities by name, country code, elevation, and population - or any combination of these.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li><li>Display results in multiple languages.</li> <li>RESTful API adheres to industry best-practices, including HATEOAS-style links to facilitate paging results.</li> <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames and WikiData.</li></ul><p>Notes:<ul><li>All endpoints implicitly support JSONP-style invocation via an optional <tt>callback</tt> param.</li><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geo-db-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geo-db-java-client''>Java</a></li><li><a href=''https://www.npmjs.com/package/wft-geodb-js-client''>JavaScript</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
-  title: Geo DB
+  title: GeoDB
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
@@ -22,8 +22,6 @@ info:
       version: '2.0'
   x-providerName: mashape.com
   x-serviceName: geodb
-consumes:
-  - application/json
 produces:
   - application/json
 securityDefinitions:
@@ -41,22 +39,24 @@ tags:
 paths:
   /v1/geo/cities:
     get:
-      description: 'Find cities, filtering by optional criteria. If no criteria are set, you will get back all known cities with a population of at least 1000. (Currently over 115,000.) If countryCode is specified, the country info will be omitted in the response.'
+      consumes:
+        - application/json
+      description: 'Find cities, filtering by optional criteria. If no criteria are set, you will get back all known cities.'
       operationId: findCitiesUsingGET
       parameters:
-        - description: Only cities whose names start with this prefix
+        - description: 'Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
           in: query
           name: namePrefix
           required: false
           type: string
-        - description: Only cities in these countries (comma-delimited country codes)
+        - description: Only cities in these countries (comma-delimited country codes or WikiData ids)
           in: query
-          name: countryCodes
+          name: countryIds
           required: false
           type: string
-        - description: Only cities NOT in these countries (comma-delimited country codes)
+        - description: Only cities NOT in these countries (comma-delimited country codes or WikiData ids)
           in: query
-          name: excludedCountryCodes
+          name: excludedCountryIds
           required: false
           type: string
         - description: Only cities having at least this population
@@ -87,9 +87,15 @@ paths:
           name: timeZoneIds
           required: false
           type: string
-        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+        - default: false
+          description: Display results using ASCII characters
           in: query
-          name: sort
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
           required: false
           type: string
         - default: 10
@@ -106,6 +112,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
         - default: NONE
           description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
           in: query
@@ -128,15 +139,27 @@ paths:
         - Geo
   '/v1/geo/cities/{cityId}':
     get:
+      consumes:
+        - application/json
       description: 'Get the details for a specific city, including location coordinates, population, and elevation above sea-level (if available).'
       operationId: getCityUsingGET
       parameters:
-        - description: The city id
-          format: int32
+        - description: The city id (either native 'id' or 'wikiDataId')
           in: path
           name: cityId
           required: true
-          type: integer
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -153,15 +176,16 @@ paths:
         - Geo
   '/v1/geo/cities/{cityId}/dateTime':
     get:
+      consumes:
+        - application/json
       description: Get city date-time
       operationId: getCityDateTimeUsingGET
       parameters:
-        - description: cityId
-          format: int32
+        - description: The city id (either native 'id' or 'wikiDataId')
           in: path
           name: cityId
           required: true
-          type: integer
+          type: string
       responses:
         '200':
           description: OK
@@ -178,21 +202,21 @@ paths:
         - Geo
   '/v1/geo/cities/{cityId}/distance':
     get:
+      consumes:
+        - application/json
       description: Get distance to the given city
       operationId: getCityDistanceUsingGET
       parameters:
-        - description: cityId
-          format: int32
+        - description: The city id (either native 'id' or 'wikiDataId')
           in: path
           name: cityId
           required: true
-          type: integer
+          type: string
         - description: Distance from this city
-          format: int32
           in: query
           name: fromCityId
           required: true
-          type: integer
+          type: string
         - default: MI
           description: 'The unit of distance: MI | KM'
           in: query
@@ -215,15 +239,16 @@ paths:
         - Geo
   '/v1/geo/cities/{cityId}/nearbyCities':
     get:
-      description: 'Find cities near the given origin city, filtering by optional criteria. If no criteria are set, you will get back all known cities with a population of at least 1000. (Currently over 115,000.)'
+      consumes:
+        - application/json
+      description: 'Find cities near the given origin city, filtering by optional criteria. If no criteria are set, you will get back all known cities.'
       operationId: findCitiesNearCityUsingGET
       parameters:
-        - description: cityId
-          format: int32
+        - description: The city id (either native 'id' or 'wikiDataId')
           in: path
           name: cityId
           required: true
-          type: integer
+          type: string
         - description: Only cities having at least this population
           format: int32
           in: query
@@ -242,9 +267,15 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+        - default: false
+          description: Display results using ASCII characters
           in: query
-          name: sort
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
           required: false
           type: string
         - default: 10
@@ -261,6 +292,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
         - default: NONE
           description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
           in: query
@@ -283,15 +319,16 @@ paths:
         - Geo
   '/v1/geo/cities/{cityId}/time':
     get:
+      consumes:
+        - application/json
       description: Get city time
       operationId: getCityTimeUsingGET
       parameters:
-        - description: cityId
-          format: int32
+        - description: The city id (either native 'id' or 'wikiDataId')
           in: path
           name: cityId
           required: true
-          type: integer
+          type: string
       responses:
         '200':
           description: OK
@@ -308,10 +345,12 @@ paths:
         - Geo
   /v1/geo/countries:
     get:
+      consumes:
+        - application/json
       description: 'Find countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.'
       operationId: getCountriesUsingGET
       parameters:
-        - description: Only countries whose names start with this prefix
+        - description: 'Only countries whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
           in: query
           name: namePrefix
           required: false
@@ -319,6 +358,17 @@ paths:
         - description: Only countries supporting this currency
           in: query
           name: currencyCode
+          required: false
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
           required: false
           type: string
         - default: 10
@@ -349,15 +399,28 @@ paths:
       summary: Find countries
       tags:
         - Geo
-  '/v1/geo/countries/{countryCode}':
+  '/v1/geo/countries/{countryId}':
     get:
+      consumes:
+        - application/json
       description: 'Get the details for a specific country, including number of regions.'
       operationId: getCountryUsingGET
       parameters:
-        - description: An ISO-3166 country code
+        - description: An ISO-3166 country code or WikiData id
           in: path
-          name: countryCode
+          name: countryId
           required: true
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
           type: string
       responses:
         '200':
@@ -373,19 +436,32 @@ paths:
       summary: Get country details
       tags:
         - Geo
-  '/v1/geo/countries/{countryCode}/regions':
+  '/v1/geo/countries/{countryId}/regions':
     get:
+      consumes:
+        - application/json
       description: 'Get all regions in a specific country. These could be states, provinces, districts, or otherwise major political divisions.'
       operationId: getRegionsUsingGET
       parameters:
-        - description: An ISO-3166 country code
+        - description: An ISO-3166 country code or WikiData id
           in: path
-          name: countryCode
+          name: countryId
           required: true
           type: string
-        - description: Only regions whose names start with this prefix
+        - description: 'Only regions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
           in: query
           name: namePrefix
+          required: false
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
           required: false
           type: string
         - default: 10
@@ -416,20 +492,33 @@ paths:
       summary: Find country regions
       tags:
         - Geo
-  '/v1/geo/countries/{countryCode}/regions/{regionCode}':
+  '/v1/geo/countries/{countryId}/regions/{regionCode}':
     get:
+      consumes:
+        - application/json
       description: 'Get the details of a specific country region, including number of cities.'
       operationId: getRegionUsingGET
       parameters:
-        - description: An ISO-3166 country code
+        - description: An ISO-3166 country code or WikiData id
           in: path
-          name: countryCode
+          name: countryId
           required: true
           type: string
-        - description: 'An HASC, ISO-3166, or FIPS region code'
+        - description: An ISO-3166 or FIPS region code
           in: path
           name: regionCode
           required: true
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
           type: string
       responses:
         '200':
@@ -445,17 +534,19 @@ paths:
       summary: Get region details
       tags:
         - Geo
-  '/v1/geo/countries/{countryCode}/regions/{regionCode}/cities':
+  '/v1/geo/countries/{countryId}/regions/{regionCode}/cities':
     get:
+      consumes:
+        - application/json
       description: Get the cities in a specific country region. The country and region info is omitted in the response.
       operationId: findRegionCitiesUsingGET
       parameters:
-        - description: An ISO-3166 country code
+        - description: An ISO-3166 country code or WikiData id
           in: path
-          name: countryCode
+          name: countryId
           required: true
           type: string
-        - description: 'An HASC, ISO-3166, or FIPS region code'
+        - description: An ISO-3166 or FIPS region code
           in: path
           name: regionCode
           required: true
@@ -466,9 +557,15 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = elevation | name | population'
+        - default: false
+          description: Display results using ASCII characters
           in: query
-          name: sort
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
           required: false
           type: string
         - default: 10
@@ -485,6 +582,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
         - default: NONE
           description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
           in: query
@@ -507,7 +609,9 @@ paths:
         - Geo
   '/v1/geo/locations/{locationId}/nearbyCities':
     get:
-      description: 'Find cities near the given location, filtering by optional criteria. If no criteria are set, you will get back all known cities with a population of at least 1000. (Currently over 115,000.)'
+      consumes:
+        - application/json
+      description: 'Find cities near the given location, filtering by optional criteria. If no criteria are set, you will get back all known cities.'
       operationId: findCitiesNearLocationUsingGET
       parameters:
         - description: 'Only cities near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
@@ -521,11 +625,6 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only cities whose names start with this prefix
-          in: query
-          name: namePrefix
-          required: false
-          type: string
         - description: The location radius within which to find cities
           format: int32
           in: query
@@ -538,9 +637,15 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+        - default: false
+          description: Display results using ASCII characters
           in: query
-          name: sort
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
           required: false
           type: string
         - default: 5
@@ -557,6 +662,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
         - default: NONE
           description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
           in: query
@@ -579,12 +689,14 @@ paths:
         - Geo
   /v1/locale/currencies:
     get:
+      consumes:
+        - application/json
       description: 'Find currencies, filtering by optional criteria. If no criteria are set, you will get back all known currencies.'
       operationId: getCurrenciesUsingGET
       parameters:
         - description: Only currencies supported by this country
           in: query
-          name: countryCode
+          name: countryId
           required: false
           type: string
         - default: 10
@@ -615,8 +727,43 @@ paths:
       summary: Find currencies
       tags:
         - Locale
+  /v1/locale/languages:
+    get:
+      description: Get all supported languages
+      operationId: getLanguagesUsingGET
+      parameters:
+        - default: 5
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LanguagesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get languages
+      tags:
+        - Locale
   /v1/locale/locales:
     get:
+      consumes:
+        - application/json
       description: Get all known locales
       operationId: getLocalesUsingGET
       parameters:
@@ -650,6 +797,8 @@ paths:
         - Locale
   /v1/locale/timezones:
     get:
+      consumes:
+        - application/json
       description: Get all known time-zones
       operationId: getTimezonesUsingGET
       parameters:
@@ -683,10 +832,12 @@ paths:
         - Locale
   '/v1/locale/timezones/{zoneId}/dateTime':
     get:
+      consumes:
+        - application/json
       description: Get time-zone date-time
       operationId: getTimeZoneDateTimeUsingGET
       parameters:
-        - description: zoneId
+        - description: The time-zone id
           in: path
           name: zoneId
           required: true
@@ -707,10 +858,12 @@ paths:
         - Locale
   '/v1/locale/timezones/{zoneId}/time':
     get:
+      consumes:
+        - application/json
       description: Get time-zone time
       operationId: getTimeZoneTimeUsingGET
       parameters:
-        - description: zoneId
+        - description: The time-zone id
           in: path
           name: zoneId
           required: true
@@ -753,29 +906,48 @@ definitions:
   CityDetails:
     properties:
       city:
+        description: The city name (varies by languageCode)
         type: string
       country:
+        description: The country name (varies by languageCode)
         type: string
       countryCode:
+        description: The ISO-3166 country code
         type: string
       deleted:
+        description: If this city has been soft-deleted
         type: boolean
       elevationMeters:
+        description: The city elevation (meters) above sea level
         format: int32
         type: integer
       id:
+        description: The city GeoDB native id
         format: int32
         type: integer
-      location:
-        $ref: '#/definitions/GeoLocation'
+      latitude:
+        description: The city latittude (-90.0 to 90.0)
+        format: double
+        type: number
+      longitude:
+        description: The city longitude (-180.0 to 180.0)
+        format: double
+        type: number
       population:
+        description: The city population
         format: int32
         type: integer
       region:
+        description: The region name (varies by languageCode)
         type: string
       regionCode:
+        description: The ISO or FIPS region code
         type: string
       timezone:
+        description: The city timezone id
+        type: string
+      wikiDataId:
+        description: The city WikiData id
         type: string
     type: object
   CityResponse:
@@ -791,27 +963,38 @@ definitions:
   CitySummary:
     properties:
       city:
+        description: The city name (varies by languageCode)
         type: string
       country:
+        description: The country name (varies by languageCode)
         type: string
       countryCode:
+        description: The ISO-3166 country code
         type: string
       distance:
-        description: Included if the result of a distance query
+        description: Included if this is the result of a distance query
         format: double
         type: number
       id:
+        description: The city GeoDB native id
         format: int32
         type: integer
       latitude:
+        description: The city latittude (-90.0 to 90.0)
         format: double
         type: number
       longitude:
+        description: The city longitude (-180.0 to 180.0)
         format: double
         type: number
       region:
+        description: The region name (varies by languageCode)
         type: string
       regionCode:
+        description: The ISO or FIPS region code
+        type: string
+      wikiDataId:
+        description: The city WikiData id
         type: string
     type: object
   CountriesResponse:
@@ -837,15 +1020,26 @@ definitions:
   CountryDetails:
     properties:
       code:
+        description: The ISO-3166 country code
         type: string
-      currencyCode:
-        description: A ISO-4217 currency code
+      currencyCodes:
+        description: A list of supported ISO-4217 currency codes
+        items:
+          type: string
+        type: array
+      flagImageUri:
+        description: The country flag image
         type: string
       name:
+        description: The country name (varies by languageCode)
         type: string
       numRegions:
+        description: The number of regions in this country
         format: int32
         type: integer
+      wikiDataId:
+        description: The country WikiData id
+        type: string
     type: object
   CountryResponse:
     properties:
@@ -860,11 +1054,18 @@ definitions:
   CountrySummary:
     properties:
       code:
+        description: The ISO-3166 country code
         type: string
-      currencyCode:
-        description: A ISO-4217 currency code
-        type: string
+      currencyCodes:
+        description: A list of supported ISO-4217 currency codes
+        items:
+          type: string
+        type: array
       name:
+        description: The country name (varies by languageCode)
+        type: string
+      wikiDataId:
+        description: The country WikiData id
         type: string
     type: object
   CurrenciesResponse:
@@ -901,6 +1102,7 @@ definitions:
   DateTimeResponse:
     properties:
       data:
+        description: 'The date-time in ISO-6801 format: yyyyMMdd''T''HHmmssZ'
         format: date-time
         type: string
       errors:
@@ -911,6 +1113,7 @@ definitions:
   DistanceResponse:
     properties:
       data:
+        description: The distance in units as set by the distanceUnit param (defaults to miles)
         format: double
         type: number
       errors:
@@ -918,14 +1121,217 @@ definitions:
           $ref: '#/definitions/WftError'
         type: array
     type: object
-  GeoLocation:
+  LanguageDescriptor:
     properties:
-      latitude:
-        format: double
-        type: number
-      longitude:
-        format: double
-        type: number
+      code:
+        enum:
+          - undefined
+          - aa
+          - ab
+          - ae
+          - af
+          - ak
+          - am
+          - an
+          - ar
+          - as
+          - av
+          - ay
+          - az
+          - ba
+          - be
+          - bg
+          - bh
+          - bi
+          - bm
+          - bn
+          - bo
+          - br
+          - bs
+          - ca
+          - ce
+          - ch
+          - co
+          - cr
+          - cs
+          - cu
+          - cv
+          - cy
+          - da
+          - de
+          - dv
+          - dz
+          - ee
+          - el
+          - en
+          - eo
+          - es
+          - et
+          - eu
+          - fa
+          - ff
+          - fi
+          - fj
+          - fo
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - gn
+          - gu
+          - gv
+          - ha
+          - he
+          - hi
+          - ho
+          - hr
+          - ht
+          - hu
+          - hy
+          - hz
+          - ia
+          - id
+          - ie
+          - ig
+          - ii
+          - ik
+          - io
+          - is
+          - it
+          - iu
+          - ja
+          - jv
+          - ka
+          - kg
+          - ki
+          - kj
+          - kk
+          - kl
+          - km
+          - kn
+          - ko
+          - kr
+          - ks
+          - ku
+          - kv
+          - kw
+          - ky
+          - la
+          - lb
+          - lg
+          - li
+          - ln
+          - lo
+          - lt
+          - lu
+          - lv
+          - mg
+          - mh
+          - mi
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - mt
+          - my
+          - na
+          - nb
+          - nd
+          - ne
+          - ng
+          - nl
+          - nn
+          - 'no'
+          - nr
+          - nv
+          - ny
+          - oc
+          - oj
+          - om
+          - or
+          - os
+          - pa
+          - pi
+          - pl
+          - ps
+          - pt
+          - qu
+          - rm
+          - rn
+          - ro
+          - ru
+          - rw
+          - sa
+          - sc
+          - sd
+          - se
+          - sg
+          - si
+          - sk
+          - sl
+          - sm
+          - sn
+          - so
+          - sq
+          - sr
+          - ss
+          - st
+          - su
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - ti
+          - tk
+          - tl
+          - tn
+          - to
+          - tr
+          - ts
+          - tt
+          - tw
+          - ty
+          - ug
+          - uk
+          - ur
+          - uz
+          - ve
+          - vi
+          - vo
+          - wa
+          - wo
+          - xh
+          - yi
+          - yo
+          - za
+          - zh
+          - zu
+        type: string
+      name:
+        type: string
+    title: LanguageDescriptor
+    type: object
+  LanguagesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/LanguageDescriptor'
+        type: array
+      errors:
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      metadata:
+        $ref: '#/definitions/Metadata'
+    title: LanguagesResponse
     type: object
   Link:
     properties:
@@ -937,6 +1343,7 @@ definitions:
   LocaleDescriptor:
     properties:
       code:
+        description: The locale code
         type: string
     type: object
   LocalesResponse:
@@ -962,31 +1369,38 @@ definitions:
   Metadata:
     properties:
       currentOffset:
+        description: The zero-ary offset into the results (0 is the first result)
         format: int64
         type: integer
       totalCount:
+        description: The total number of results across pages
         format: int64
         type: integer
     type: object
   RegionDetails:
     properties:
       capital:
+        description: The region's capital city (varies by languageCode)
         type: string
       countryCode:
         description: An ISO-3166 country code
         type: string
       fipsCode:
-        type: string
-      hascCode:
+        description: The FIPS 10-4 region code
         type: string
       isoCode:
+        description: The ISO region code
         type: string
       name:
-        description: The well-known internationally recognized name for this region
+        description: The region name (varies by languageCode)
         type: string
       numCities:
+        description: The number of cities in this region
         format: int32
         type: integer
+      wikiDataId:
+        description: The region WikiData id
+        type: string
     type: object
   RegionResponse:
     properties:
@@ -1004,12 +1418,16 @@ definitions:
         description: An ISO-3166 country code
         type: string
       fipsCode:
-        type: string
-      hascCode:
+        description: The FIPS 10-4 region code
         type: string
       isoCode:
+        description: The ISO region code
         type: string
       name:
+        description: The region name (varies by languageCode)
+        type: string
+      wikiDataId:
+        description: The region WikiData id
         type: string
     type: object
   RegionsResponse:
@@ -1035,6 +1453,7 @@ definitions:
   TimeResponse:
     properties:
       data:
+        description: 'The time in ISO-8601 format: HHmmss.SSSZ'
         type: string
       errors:
         items:
@@ -1044,10 +1463,13 @@ definitions:
   TimeZoneDescriptor:
     properties:
       id:
+        description: The time-zone id
         type: string
       name:
+        description: The time-zone name
         type: string
       rawUtcOffsetHours:
+        description: The number of hours this time-zone is offset from UTC
         format: int32
         type: integer
     type: object

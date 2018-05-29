@@ -44,8 +44,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/configurationoperations'
       operationId: DscConfiguration_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -66,6 +68,26 @@ paths:
           name: api-version
           required: true
           type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: The number of rows to skip.
+          in: query
+          name: $skip
+          required: false
+          type: integer
+        - description: The the number of rows to take.
+          in: query
+          name: $top
+          required: false
+          type: integer
+        - description: Return total rows.
+          in: query
+          name: $inlinecount
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -75,35 +97,46 @@ paths:
               nextLink:
                 description: Gets or sets the next link.
                 type: string
+              totalCount:
+                description: Gets the total number of configurations matching filter criteria.
+                type: integer
               value:
                 description: Gets or sets a list of configurations.
                 items:
                   allOf:
-                    - description: The Resource definition.
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM tracked top level resource
                       properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
                         location:
-                          description: Resource location
+                          description: The Azure Region where the resource lives
                           type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
+                          x-ms-mutability:
+                            - read
+                            - create
                         tags:
                           additionalProperties:
                             type: string
-                          description: Resource tags
+                          description: Resource tags.
                           type: object
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      required:
-                        - location
-                      x-ms-azure-resource: true
+                          x-ms-mutability:
+                            - read
+                            - create
+                            - update
                   description: Definition of the configuration type.
                   properties:
                     etag:
@@ -116,6 +149,7 @@ paths:
                           description: Gets or sets the creation time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -127,9 +161,14 @@ paths:
                           description: Gets or sets the last modified time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         logVerbose:
                           description: Gets or sets verbose log option.
                           type: boolean
+                        nodeConfigurationCount:
+                          description: Gets the number of compiled node configurations.
+                          type: integer
+                          x-nullable: false
                         parameters:
                           additionalProperties:
                             description: Definition of the configuration parameter type.
@@ -233,6 +272,83 @@ paths:
                       state: Published
                     type: Microsoft.Automation/AutomationAccounts/Configurations
               headers: {}
+        List Paged DSC Configurations with name filter:
+          parameters:
+            $filter: 'contains(name,''server'')'
+            $inlinecount: allpages
+            $skip: 0
+            $top: 2
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                totalCount: 4
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/configurations/SqlServerBig
+                    location: East US 2
+                    name: SqlServerBig
+                    properties:
+                      creationTime: '2017-03-28T18:53:24.997+00:00'
+                      lastModifiedTime: '2017-03-28T18:53:24.997+00:00'
+                      nodeConfigurationCount: 1
+                      state: Published
+                    type: Microsoft.Automation/AutomationAccounts/Configurations
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/configurations/SqlServerLittle
+                    location: East US 2
+                    name: SqlServerLittle
+                    properties:
+                      creationTime: '2017-03-28T18:53:24.997+00:00'
+                      lastModifiedTime: '2017-03-28T18:53:24.997+00:00'
+                      nodeConfigurationCount: 1
+                      state: Published
+                    type: Microsoft.Automation/AutomationAccounts/Configurations
+              headers: {}
+        List Paged DSC Configurations with no filter:
+          parameters:
+            $inlinecount: allpages
+            $skip: 0
+            $top: 3
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                totalCount: 12
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/configurations/SqlServerBig
+                    location: East US 2
+                    name: SqlServerBig
+                    properties:
+                      creationTime: '2017-03-28T18:53:24.997+00:00'
+                      lastModifiedTime: '2017-03-28T18:53:24.997+00:00'
+                      nodeConfigurationCount: 1
+                      state: Published
+                    type: Microsoft.Automation/AutomationAccounts/Configurations
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/configurations/SqlServerLittle
+                    location: East US 2
+                    name: SqlServerLittle
+                    properties:
+                      creationTime: '2017-03-28T18:53:24.997+00:00'
+                      lastModifiedTime: '2017-03-28T18:53:24.997+00:00'
+                      nodeConfigurationCount: 1
+                      state: Published
+                    type: Microsoft.Automation/AutomationAccounts/Configurations
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/configurations/SetupServer
+                    location: East US 2
+                    name: SetupServer
+                    properties:
+                      creationTime: '2017-03-28T18:53:24.997+00:00'
+                      lastModifiedTime: '2017-03-28T18:53:24.997+00:00'
+                      nodeConfigurationCount: 1
+                      state: Published
+                    type: Microsoft.Automation/AutomationAccounts/Configurations
+              headers: {}
+      x-ms-odata: './definitions.json#/definitions/DscConfiguration'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/configurations/{configurationName}':
@@ -242,8 +358,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/configurationoperations'
       operationId: DscConfiguration_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -305,8 +423,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/configurationoperations'
       operationId: DscConfiguration_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -337,31 +457,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the configuration type.
             properties:
               etag:
@@ -374,6 +502,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -385,9 +514,14 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   logVerbose:
                     description: Gets or sets verbose log option.
                     type: boolean
+                  nodeConfigurationCount:
+                    description: Gets the number of compiled node configurations.
+                    type: integer
+                    x-nullable: false
                   parameters:
                     additionalProperties:
                       description: Definition of the configuration parameter type.
@@ -492,6 +626,7 @@ paths:
                   lastModifiedTime: '2017-03-28T23:14:23.56+00:00'
                   logVerbose: false
                   parameters: {}
+                  provisioningState: null
                   state: Published
                 tags: {}
                 type: Microsoft.Automation/AutomationAccounts/Configurations
@@ -502,8 +637,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/configurationoperations'
       operationId: DscConfiguration_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -611,31 +748,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the configuration type.
             properties:
               etag:
@@ -648,6 +793,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -659,9 +805,14 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   logVerbose:
                     description: Gets or sets verbose log option.
                     type: boolean
+                  nodeConfigurationCount:
+                    description: Gets the number of compiled node configurations.
+                    type: integer
+                    x-nullable: false
                   parameters:
                     additionalProperties:
                       description: Definition of the configuration parameter type.
@@ -771,6 +922,7 @@ paths:
                   logVerbose: false
                   parameters: {}
                   provisioningState: Succeeded
+                  state: null
                 tags:
                   Hello: World
                 type: Microsoft.Automation/AutomationAccounts/Configurations
@@ -781,8 +933,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/configurationoperations'
       operationId: DscConfiguration_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -896,31 +1050,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the configuration type.
             properties:
               etag:
@@ -933,6 +1095,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -944,9 +1107,14 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   logVerbose:
                     description: Gets or sets verbose log option.
                     type: boolean
+                  nodeConfigurationCount:
+                    description: Gets the number of compiled node configurations.
+                    type: integer
+                    x-nullable: false
                   parameters:
                     additionalProperties:
                       description: Definition of the configuration parameter type.
@@ -1019,31 +1187,39 @@ paths:
           description: Created
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the configuration type.
             properties:
               etag:
@@ -1056,6 +1232,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1067,9 +1244,14 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   logVerbose:
                     description: Gets or sets verbose log option.
                     type: boolean
+                  nodeConfigurationCount:
+                    description: Gets the number of compiled node configurations.
+                    type: integer
+                    x-nullable: false
                   parameters:
                     additionalProperties:
                       description: Definition of the configuration parameter type.
@@ -1174,6 +1356,7 @@ paths:
           responses:
             '200':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/configurations/SetupServer
                 location: East US 2
                 name: SetupServer
@@ -1185,6 +1368,7 @@ paths:
                   logVerbose: false
                   parameters: {}
                   provisioningState: Succeeded
+                  state: null
                 tags: {}
                 type: Microsoft.Automation/AutomationAccounts/Configurations
               headers: {}
@@ -1213,8 +1397,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/configurationoperations'
       operationId: DscConfiguration_GetContent
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true

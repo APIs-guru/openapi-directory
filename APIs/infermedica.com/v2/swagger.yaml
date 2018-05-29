@@ -731,13 +731,21 @@ definitions:
   ParseResponse:
     properties:
       mentions:
+        description: list of recognized symptom or risk factor mentions
         items:
           $ref: '#/definitions/ObservationMention'
         type: array
+      obvious:
+        default: false
+        description: indicates that entire input text has been parsed successfully and unambiguously
+        type: boolean
       tokens:
         items:
           type: string
         type: array
+    required:
+      - mentions
+      - obvious
     type: object
   Question:
     properties:

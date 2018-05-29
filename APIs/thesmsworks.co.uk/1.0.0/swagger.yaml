@@ -75,7 +75,7 @@ paths:
     x-swagger-router-controller: authentication
   /batch/schedule:
     post:
-      description: Schedules a batch of SMS messages to be sent at the date-time you specify
+      description: Schedules a batch of SMS messages to be sent at the date time you specify
       operationId: scheduleBatch
       parameters:
         - description: Message properties
@@ -216,6 +216,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/SendMessageResponse'
+        '402':
+          description: Error
+          schema:
+            $ref: '#/definitions/ExtendedErrorModel'
         default:
           description: Error
           schema:
@@ -368,6 +372,14 @@ definitions:
         description: The sender of the message. Should be no longer than 11 characters for alphanumeric or 15 characters for numeric sender ID's. No spaces or special characters.
         example: YourCompany
         type: string
+      tag:
+        description: 'An identifying label for the message, which you can use to filter and report on messages you''ve sent later. Ideal for campaigns.'
+        example: SummerSpecial
+        type: string
+      ttl:
+        description: The number of minutes before the message is deleted. Optional. Omit to prevent delivery report deletion.
+        example: 10
+        type: number
     required:
       - sender
       - destinations
@@ -449,6 +461,10 @@ definitions:
         description: 'An identifying label for the message, which you can use to filter and report on messages you''ve sent later. Ideal for campaigns.'
         example: SummerSpecial
         type: string
+      ttl:
+        description: The number of minutes before the message is deleted. Optional. Omit to prevent delivery report deletion.
+        example: 10
+        type: number
     required:
       - sender
       - destination

@@ -34,81 +34,6 @@ securityDefinitions:
     name: token
     type: apiKey
 paths:
-  '/api/v{version}/Currencies/bbo':
-    get:
-      description: Current Best Bid and Offer
-      operationId: 'ApiV{versionCurrenciesBboGet'
-      parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          type: string
-        - description: 'comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD'
-          in: query
-          name: pairs
-          required: true
-          type: string
-        - description: to override content negotiation specify a value of json or xml
-          in: query
-          name: format
-          required: false
-          type: string
-        - default: '1'
-          description: The requested API version
-          in: path
-          name: version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            items:
-              $ref: '#/definitions/Response[FullQuote]'
-            type: array
-        '400':
-          description: bad request
-        '401':
-          description: unauthorized
-      summary: Get latest BBO for requested currency pairs
-      tags:
-        - Currencies
-  '/api/v{version}/Currencies/bbo/supported':
-    get:
-      description: "Only the currency pairs in the direction noted can be used with the BBO endpoint.\r\nFor example: USD/CAD is not the same as CAD/USD"
-      operationId: 'ApiV{versionCurrenciesBboSupportedGet'
-      parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          type: string
-        - description: to override content negotiation specify a value of json or xml
-          in: query
-          name: format
-          required: false
-          type: string
-        - default: '1'
-          description: The requested API version
-          in: path
-          name: version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            items:
-              type: string
-            type: array
-        '400':
-          description: bad request
-        '401':
-          description: unauthorized
-      summary: Get list of currency pairs supported by the BBO endpoint
-      tags:
-        - Currencies
   '/api/v{version}/Currencies/history':
     get:
       description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
@@ -199,41 +124,6 @@ paths:
         '401':
           description: unauthorized
       summary: Get list of currency pairs supported by the history endpoint
-      tags:
-        - Currencies
-  '/api/v{version}/Currencies/level2/supported':
-    get:
-      description: "Only the currency pairs in the direction noted can be used with the Level2 endpoint.\r\nFor example: USD/CAD is not the same as CAD/USD"
-      operationId: 'ApiV{versionCurrenciesLevel2SupportedGet'
-      parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          type: string
-        - description: to override content negotiation specify a value of json or xml
-          in: query
-          name: format
-          required: false
-          type: string
-        - default: '1'
-          description: The requested API version
-          in: path
-          name: version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            items:
-              type: string
-            type: array
-        '400':
-          description: bad request
-        '401':
-          description: unauthorized
-      summary: Get list of currency pairs supported by the Level2 endpoint
       tags:
         - Currencies
   '/api/v{version}/Currencies/rate':
@@ -386,10 +276,82 @@ paths:
       summary: Get list of currency pairs supported by the Summary endpoint
       tags:
         - Currencies
-  '/api/v{version}/Metals/spot/bbo':
+  '/api/v{version}/Metals/benchmark/history':
     get:
-      description: Current Spot Price Best Bid and Offer
-      operationId: 'ApiV{versionMetalsSpotBboGet'
+      description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.\r\n\r\nThe historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
+      operationId: 'ApiV{versionMetalsBenchmarkHistoryGet'
+      parameters:
+        - description: auth token
+          in: query
+          name: token
+          required: true
+          type: string
+        - description: comma separated list of metals
+          in: query
+          name: metals
+          required: true
+          type: string
+        - description: start date of time period. format is <i>yyyy-mm-dd</i>
+          format: date-time
+          in: query
+          name: start
+          required: true
+          type: string
+        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
+          format: date-time
+          in: query
+          name: end
+          required: false
+          type: string
+        - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
+          in: query
+          name: interval
+          required: false
+          type: string
+        - description: if true use historical currency rates otherwise current currency rates. Defaults to false.
+          in: query
+          name: historicalfx
+          required: false
+          type: boolean
+        - description: 'currency for pricing, defaults to USD'
+          in: query
+          name: currency
+          required: false
+          type: string
+        - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          in: query
+          name: unitofmeasure
+          required: false
+          type: string
+        - description: to override content negotiation specify a value of json or xml
+          in: query
+          name: format
+          required: false
+          type: string
+        - default: '1'
+          description: The requested API version
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Response[IntervalCollection]'
+            type: array
+        '400':
+          description: bad request
+        '401':
+          description: unauthorized
+      summary: Get historical benchmark prices for requested metals
+      tags:
+        - Metals
+  '/api/v{version}/Metals/benchmark/summary':
+    get:
+      description: Benchmark price information
+      operationId: 'ApiV{versionMetalsBenchmarkSummaryGet'
       parameters:
         - description: auth token
           in: query
@@ -427,13 +389,48 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/Response[FullQuote]'
+              $ref: '#/definitions/Response[Summary]'
             type: array
         '400':
           description: bad request
         '401':
           description: unauthorized
-      summary: Get latest Spot BBO for requested metals
+      summary: Get latest Benchmark prices for requested metals
+      tags:
+        - Metals
+  '/api/v{version}/Metals/benchmark/supported':
+    get:
+      description: ''
+      operationId: 'ApiV{versionMetalsBenchmarkSupportedGet'
+      parameters:
+        - description: auth token
+          in: query
+          name: token
+          required: true
+          type: string
+        - description: to override content negotiation specify a value of json or xml
+          in: query
+          name: format
+          required: false
+          type: string
+        - default: '1'
+          description: The requested API version
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              type: string
+            type: array
+        '400':
+          description: bad request
+        '401':
+          description: unauthorized
+      summary: Get list of symbols supported by the benchmark endpoints
       tags:
         - Metals
   '/api/v{version}/Metals/spot/history':
@@ -598,10 +595,10 @@ paths:
       summary: Get list of symbols supported by the spot endpoints
       tags:
         - Metals
-  '/api/v{version}/Metals/spot/supported/currency':
+  '/api/v{version}/Metals/supported/currency':
     get:
       description: ''
-      operationId: 'ApiV{versionMetalsSpotSupportedCurrencyGet'
+      operationId: 'ApiV{versionMetalsSupportedCurrencyGet'
       parameters:
         - description: auth token
           in: query
@@ -630,21 +627,10 @@ paths:
           description: bad request
         '401':
           description: unauthorized
-      summary: Get list of currencies supported by the spot endpoints for currency conversion
+      summary: Get list of currencies supported by metals endpoints for currency conversion
       tags:
         - Metals
 definitions:
-  FullQuote:
-    properties:
-      ask:
-        $ref: '#/definitions/SingleQuote'
-      baseCurrency:
-        type: string
-      bid:
-        $ref: '#/definitions/SingleQuote'
-      symbol:
-        type: string
-    type: object
   Interval:
     properties:
       end:
@@ -690,19 +676,6 @@ definitions:
         format: double
         type: number
     type: object
-  'Response[FullQuote]':
-    properties:
-      data:
-        $ref: '#/definitions/FullQuote'
-      error:
-        type: string
-      requestedCurrency:
-        type: string
-      requestedSymbol:
-        type: string
-      success:
-        type: boolean
-    type: object
   'Response[IntervalCollection]':
     properties:
       data:
@@ -742,17 +715,6 @@ definitions:
       success:
         type: boolean
     type: object
-  SingleQuote:
-    properties:
-      marketMaker:
-        type: string
-      price:
-        format: double
-        type: number
-      timestamp:
-        format: date-time
-        type: string
-    type: object
   Summary:
     properties:
       ask:
@@ -779,6 +741,9 @@ definitions:
         format: double
         type: number
       oneDayValue:
+        format: double
+        type: number
+      open:
         format: double
         type: number
       symbol:

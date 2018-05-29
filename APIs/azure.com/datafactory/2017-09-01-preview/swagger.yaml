@@ -80,6 +80,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  locationId:
+    description: The location identifier.
+    in: path
+    name: locationId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   nodeName:
     description: The integration runtime node name.
     in: path
@@ -353,6 +360,74 @@ paths:
                 x-ms-request-id: 85e53e59-e56e-4878-a1ff-aaa27f52b466
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo':
+    post:
+      description: Updates a factory's repo information.
+      operationId: Factories_ConfigureFactoryRepo
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/locationId'
+        - $ref: '#/parameters/api-version'
+        - description: Update factory repo request definition.
+          in: body
+          name: factoryRepoUpdate
+          required: true
+          schema:
+            $ref: '#/definitions/FactoryRepoUpdate'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/Factory'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - configureFactoryRepo
+      x-ms-examples:
+        Factories_ConfigureFactoryRepo:
+          parameters:
+            api-version: 2017-09-01-preview
+            factoryRepoUpdate:
+              factoryId: /subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleresourcegroup/providers/Microsoft.DataFactory/factories/examplefactoryname
+              resourceGroupName: exampleResourceGroup
+              vstsConfiguration:
+                accountName: msdata
+                collaborationBranch: master
+                lastCommitId: ''
+                projectName: datafactory
+                repositoryName: exampleRepo
+                rootFolder: /
+                tenantId: 12f988bf-86d1-41af-91ab-2d7cd011db49
+            locationId: eastus
+            subscriptionId: 12345678-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                id: /subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleresourcegroup/providers/Microsoft.DataFactory/factories/examplefactoryname
+                location: East US
+                name: exampleFactoryName
+                properties:
+                  createTime: '2017-09-13T17:33:54.0294655Z'
+                  provisioningState: Succeeded
+                  version: 2017-09-01-preview
+                  vstsConfiguration:
+                    accountName: msdata
+                    collaborationBranch: master
+                    lastCommitId: ''
+                    projectName: datafactory
+                    repositoryName: exampleRepo
+                    rootFolder: /
+                    tenantId: 12f988bf-86d1-41af-91ab-2d7cd011db49
+                tags: {}
+                type: Microsoft.DataFactory/factories
+              headers:
+                Date: 'Wed, 13 Sep 2017 17:33:54 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 8d66d31c-23f3-4ac1-bc8c-1b6464342ad1
+                x-ms-ratelimit-remaining-subscription-writes: '1198'
+                x-ms-request-id: dc1954ed-a1d3-4437-bd73-480ffdf1ea5a
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories':
     get:
       description: Lists factories.
@@ -439,6 +514,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:31 GMT'
                 X-Content-Type-Options: nosniff
@@ -446,6 +522,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1177'
                 x-ms-request-id: 00d8b4cd-058f-4da8-a3a9-7a7a9ae772f0
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:31 GMT'
                 x-ms-correlation-request-id: 95fce457-ddee-44a2-84a1-05c33b32d807
@@ -581,6 +658,15 @@ paths:
             api-version: 2017-09-01-preview
             factory:
               location: East US
+              properties:
+                vstsConfiguration:
+                  accountName: msdata
+                  collaborationBranch: master
+                  lastCommitId: ''
+                  projectName: datafactory
+                  repositoryName: exampleRepo
+                  rootFolder: /
+                  tenantId: 12f988bf-86d1-41af-91ab-2d7cd011db49
             factoryName: exampleFactoryName
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
@@ -594,6 +680,14 @@ paths:
                   createTime: '2017-09-13T17:33:54.0294655Z'
                   provisioningState: Succeeded
                   version: 2017-09-01-preview
+                  vstsConfiguration:
+                    accountName: msdata
+                    collaborationBranch: master
+                    lastCommitId: ''
+                    projectName: datafactory
+                    repositoryName: exampleRepo
+                    rootFolder: /
+                    tenantId: 12f988bf-86d1-41af-91ab-2d7cd011db49
                 tags: {}
                 type: Microsoft.DataFactory/factories
               headers:
@@ -631,6 +725,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Mon, 02 Oct 2017 17:27:33 GMT'
                 X-Content-Type-Options: nosniff
@@ -730,6 +825,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
                 X-Content-Type-Options: nosniff
@@ -737,6 +833,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1183'
                 x-ms-request-id: 70d3cf1f-bf14-40f5-bb56-1550a317ce8b
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
                 X-Content-Type-Options: nosniff
@@ -860,6 +957,7 @@ paths:
                     type: TextFormat
             datasetName: exampleDataset
             factoryName: exampleFactoryName
+            ifMatch: null
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
@@ -919,6 +1017,7 @@ paths:
                     type: TextFormat
             datasetName: exampleDataset
             factoryName: exampleFactoryName
+            ifMatch: null
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
@@ -1042,6 +1141,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:29 GMT'
                 X-Content-Type-Options: nosniff
@@ -1049,6 +1149,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1179'
                 x-ms-request-id: 6d1ee741-7850-484b-99cd-b42ef08fd18c
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:29 GMT'
                 X-Content-Type-Options: nosniff
@@ -1233,6 +1334,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             integrationRuntime:
               properties:
                 description: A managed reserved integration runtime
@@ -1568,11 +1670,13 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Thu, 19 Oct 2017 15:22:16 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: 75a166f9-75ed-48d9-bc9b-08682dfdd0eb
             '204':
+              body: null
               headers:
                 Date: 'Thu, 19 Oct 2017 15:22:16 GMT'
                 X-Content-Type-Options: nosniff
@@ -2001,11 +2105,13 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 06:05:42 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: f1b13f98-0659-4eaa-a676-29912ae0a4f3
             '204':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 06:05:44 GMT'
                 X-Content-Type-Options: nosniff
@@ -2070,6 +2176,7 @@ paths:
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: a0190274-060e-43a0-84ea-403d1c0c4a06
             '202':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 07:17:56 GMT'
                 Location: 'https://adfrpnightly.svc.datafactory-test.azure.com/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/exampleManagedIntegrationRuntime/start/operationresults/9a070152cddb4c839d482ccfb76a7537?api-version=2017-09-01-preview'
@@ -2108,11 +2215,13 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 07:40:23 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: bcff281c-ae61-4e2d-8a0c-044e34c1d04a
             '202':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 07:39:21 GMT'
                 Location: 'https://adfrpnightly.svc.datafactory-test.azure.com/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/exampleManagedIntegrationRuntime/stop/operationresults/50799841b7f94497ae43291b791db7e0?api-version=2017-09-01-preview'
@@ -2149,6 +2258,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Sun, 20 Aug 2017 08:46:58 GMT'
                 X-Content-Type-Options: nosniff
@@ -2182,6 +2292,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Tue, 14 Nov 2017 03:42:42 GMT'
                 X-Content-Type-Options: nosniff
@@ -2266,6 +2377,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:28 GMT'
                 X-Content-Type-Options: nosniff
@@ -2273,6 +2385,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1181'
                 x-ms-request-id: 7383dae8-e077-4472-8f2e-91e1163dcbb2
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:28 GMT'
                 X-Content-Type-Options: nosniff
@@ -2362,6 +2475,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             linkedService:
               properties:
                 type: AzureStorage
@@ -2394,6 +2508,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             linkedService:
               properties:
                 description: Example description
@@ -2593,12 +2708,15 @@ paths:
       x-ms-examples:
         ActivityRuns_ListByPipelineRun:
           parameters:
+            activityName: null
             api-version: 2017-09-01-preview
             endTime: 2017-09-13T18%3A07%3A59.6211018Z
             factoryName: exampleFactoryName
+            linkedServiceName: null
             resourceGroupName: exampleResourceGroup
             runId: a420e4fd-ebe9-4758-8db7-852b4d06245e
             startTime: 2017-09-13T17%3A54%3A57.0811551Z
+            status: null
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
@@ -2785,6 +2903,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
                 X-Content-Type-Options: nosniff
@@ -2792,6 +2911,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1185'
                 x-ms-request-id: 74ec3492-79c4-4028-9db1-fe7054e794d4
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
                 X-Content-Type-Options: nosniff
@@ -2909,6 +3029,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             pipeline:
               properties:
                 activities:
@@ -2997,6 +3118,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             pipeline:
               properties:
                 activities:
@@ -3222,6 +3344,7 @@ paths:
             triggerName: exampleTrigger
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:26 GMT'
                 X-Content-Type-Options: nosniff
@@ -3229,6 +3352,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1187'
                 x-ms-request-id: 797186e9-af57-4d6c-8b4b-c363df9e9bf1
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:26 GMT'
                 X-Content-Type-Options: nosniff
@@ -3329,6 +3453,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
             trigger:
@@ -3382,6 +3507,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
             trigger:
@@ -3462,6 +3588,7 @@ paths:
             triggerName: exampleTrigger
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 17:58:23 GMT'
                 X-Content-Type-Options: nosniff
@@ -3498,6 +3625,7 @@ paths:
             triggerName: exampleTrigger
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:25 GMT'
                 X-Content-Type-Options: nosniff
@@ -3885,6 +4013,21 @@ definitions:
         description: Version of the factory.
         readOnly: true
         type: string
+      vstsConfiguration:
+        $ref: '#/definitions/FactoryVSTSConfiguration'
+        description: VSTS repo information of the factory.
+  FactoryRepoUpdate:
+    description: Factory's VSTS repo information.
+    properties:
+      factoryResourceId:
+        description: The factory resource id.
+        type: string
+      resourceGroupName:
+        description: The resource group name.
+        type: string
+      vstsConfiguration:
+        $ref: '#/definitions/FactoryVSTSConfiguration'
+        description: VSTS repo information of the factory.
   FactoryUpdateParameters:
     description: Parameters for updating a factory resource.
     properties:
@@ -3896,6 +4039,30 @@ definitions:
           type: string
         description: The resource tags.
         type: object
+  FactoryVSTSConfiguration:
+    description: Factory's VSTS repo information.
+    properties:
+      accountName:
+        description: VSTS account name.
+        type: string
+      collaborationBranch:
+        description: VSTS collaboration branch.
+        type: string
+      lastCommitId:
+        description: VSTS last commit id.
+        type: string
+      projectName:
+        description: VSTS project name.
+        type: string
+      repositoryName:
+        description: VSTS repository name.
+        type: string
+      rootFolder:
+        description: VSTS root folder.
+        type: string
+      tenantId:
+        description: VSTS tenant id.
+        type: string
   IntegrationRuntimeListResponse:
     description: A list of integration runtime resources.
     properties:

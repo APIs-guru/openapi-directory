@@ -238,8 +238,10 @@ paths:
             subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
           responses:
             '200':
+              body: null
               headers: {}
             '204':
+              body: null
               headers: {}
     get:
       description: Get an action group.
@@ -570,7 +572,7 @@ paths:
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}/subscribe':
     post:
-      description: Enable a receiver in an action group. This changes the receiver's status from Disabled to Enabled.
+      description: Enable a receiver in an action group. This changes the receiver's status from Disabled to Enabled. This operation is only supported for Email or SMS receivers.
       operationId: ActionGroups_EnableReceiver
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -603,8 +605,10 @@ paths:
             subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
           responses:
             '200':
+              body: null
               headers: {}
             '409':
+              body: null
               headers: {}
 definitions:
   ActionGroup:
@@ -636,7 +640,7 @@ definitions:
         type: boolean
       groupShortName:
         description: The short name of the action group. This will be used in SMS messages.
-        maxLength: 15
+        maxLength: 12
         type: string
       itsmReceivers:
         description: The list of ITSM receivers that are part of this action group.

@@ -67,12 +67,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -4155,6 +4155,13 @@ definitions:
         type: string
       method:
         type: string
+      posExternalAccountId:
+        description: The account ID by which this merchant is known to the POS provider.
+        type: string
+      posProviderId:
+        description: The ID of POS provider. Required only for SetPosProvider.
+        format: uint64
+        type: string
     type: object
   LiasettingsCustomBatchResponse:
     properties:
@@ -4187,6 +4194,11 @@ definitions:
       liaSettings:
         $ref: '#/definitions/LiaSettings'
         description: The retrieved or updated Lia settings.
+      posProviders:
+        description: The list of POS providers.
+        items:
+          $ref: '#/definitions/PosProviders'
+        type: array
     type: object
   LiasettingsGetAccessibleGmbAccountsResponse:
     properties:
@@ -4382,7 +4394,7 @@ definitions:
         format: uint32
         type: integer
       reason:
-        description: The reason for the cancellation. Orders that are cancelled with a noInventory reason will lead to the removal of the product from POG until you make an update to that product. This will not affect your Shopping ads.
+        description: The reason for the cancellation. Orders that are cancelled with a noInventory reason will lead to the removal of the product from Shopping Actions until you make an update to that product. This will not affect your Shopping ads.
         type: string
       reasonText:
         description: The explanation of the reason.
@@ -5706,6 +5718,30 @@ definitions:
         items:
           $ref: '#/definitions/PosStore'
         type: array
+    type: object
+  PosProviders:
+    properties:
+      country:
+        description: Country code.
+        type: string
+      posProviders:
+        description: A list of POS providers.
+        items:
+          $ref: '#/definitions/PosProvidersPosProvider'
+        type: array
+    type: object
+  PosProvidersPosProvider:
+    properties:
+      displayName:
+        description: The display name of Pos Provider.
+        type: string
+      fullName:
+        description: The full name of this POS Provider.
+        type: string
+      providerId:
+        description: The ID of the account.
+        format: uint64
+        type: string
     type: object
   PosSale:
     description: The change of the available quantity of an item at the given store.

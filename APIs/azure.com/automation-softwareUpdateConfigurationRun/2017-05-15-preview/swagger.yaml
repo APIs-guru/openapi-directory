@@ -50,8 +50,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -131,11 +133,13 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         endTime:
                           description: End time of the software update configuration run.
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: true
                         failedCount:
                           description: Number of computers with failed status.
                           readOnly: true
@@ -149,6 +153,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         osType:
                           description: Operating system target of the software update configuration triggered this run
                           readOnly: true
@@ -166,6 +171,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         status:
                           description: Status of the software update configuration run.
                           readOnly: true
@@ -175,6 +181,18 @@ paths:
                 type: array
         '404':
           description: 'Resource group, or account doesn''t exist.'
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Software Update Configuration Run
       x-ms-examples:
@@ -283,8 +301,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -347,11 +367,13 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   endTime:
                     description: End time of the software update configuration run.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: true
                   failedCount:
                     description: Number of computers with failed status.
                     readOnly: true
@@ -365,6 +387,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   osType:
                     description: Operating system target of the software update configuration triggered this run
                     readOnly: true
@@ -382,6 +405,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   status:
                     description: Status of the software update configuration run.
                     readOnly: true
@@ -390,6 +414,18 @@ paths:
             x-ms-azure-resource: false
         '404':
           description: 'Resource group, account, or software update configuration doesn''t exist.'
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Software Update Configuration Run
       x-ms-examples:

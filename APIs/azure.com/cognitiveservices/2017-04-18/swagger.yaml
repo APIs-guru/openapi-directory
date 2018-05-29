@@ -58,7 +58,7 @@ parameters:
     name: $filter
     required: false
     type: string
-    x-ms-parameter-location: client
+    x-ms-parameter-location: method
 paths:
   /providers/Microsoft.CognitiveServices/operations:
     get:
@@ -395,9 +395,1542 @@ paths:
               body:
                 value:
                   - kind: Face
+                    message: null
+                    reason: null
                     skuAvailable: true
                     skuName: S0
                     type: Microsoft.CognitiveServices/accounts
+  '/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/skus':
+    get:
+      description: Gets the list of Microsoft.CognitiveServices SKUs available for your Subscription.
+      operationId: ResourceSkus_List
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ResourceSkusResult'
+      tags:
+        - Skus
+        - CognitiveServicesAccounts
+      x-ms-examples:
+        Regenerate Keys:
+          parameters:
+            api-version: '2017-04-18'
+            subscriptionId: f1c637e4-72ec-4f89-8d2b-0f933c036002
+          responses:
+            '200':
+              body:
+                value:
+                  - kind: Bing.Speech
+                    locations:
+                      - GLOBAL
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Bing.Speech
+                    locations:
+                      - GLOBAL
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: SpeechTranslation
+                    locations:
+                      - GLOBAL
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: SpeechTranslation
+                    locations:
+                      - GLOBAL
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: SpeechTranslation
+                    locations:
+                      - GLOBAL
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: SpeechTranslation
+                    locations:
+                      - GLOBAL
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: SpeechTranslation
+                    locations:
+                      - GLOBAL
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextTranslation
+                    locations:
+                      - GLOBAL
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextTranslation
+                    locations:
+                      - GLOBAL
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextTranslation
+                    locations:
+                      - GLOBAL
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextTranslation
+                    locations:
+                      - GLOBAL
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextTranslation
+                    locations:
+                      - GLOBAL
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Search.v7
+                    locations:
+                      - GLOBAL
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Search.v7
+                    locations:
+                      - GLOBAL
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Search.v7
+                    locations:
+                      - GLOBAL
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Search.v7
+                    locations:
+                      - GLOBAL
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Search.v7
+                    locations:
+                      - GLOBAL
+                    name: S5
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Search.v7
+                    locations:
+                      - GLOBAL
+                    name: S6
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Search.v7
+                    locations:
+                      - GLOBAL
+                    name: S7
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Search.v7
+                    locations:
+                      - GLOBAL
+                    name: S8
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.Autosuggest.v7
+                    locations:
+                      - GLOBAL
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.CustomSearch
+                    locations:
+                      - GLOBAL
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.SpellCheck.v7
+                    locations:
+                      - GLOBAL
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Bing.EntitySearch
+                    locations:
+                      - GLOBAL
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Bing.EntitySearch
+                    locations:
+                      - GLOBAL
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - AUSTRALIAEAST
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - AUSTRALIAEAST
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - AUSTRALIAEAST
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - AUSTRALIAEAST
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - AUSTRALIAEAST
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - AUSTRALIAEAST
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - BRAZILSOUTH
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - BRAZILSOUTH
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - BRAZILSOUTH
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - BRAZILSOUTH
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - BRAZILSOUTH
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - BRAZILSOUTH
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - BRAZILSOUTH
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - BRAZILSOUTH
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - BRAZILSOUTH
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - BRAZILSOUTH
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - BRAZILSOUTH
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - BRAZILSOUTH
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - BRAZILSOUTH
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - BRAZILSOUTH
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - CENTRALUSEUAP
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - CENTRALUSEUAP
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - CENTRALUSEUAP
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - CENTRALUSEUAP
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - CENTRALUSEUAP
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - CENTRALUSEUAP
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - WESTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - WESTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - WESTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - WESTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - WESTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - WESTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: SpeakerRecognition
+                    locations:
+                      - WESTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: SpeakerRecognition
+                    locations:
+                      - WESTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: CustomSpeech
+                    locations:
+                      - WESTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: CustomSpeech
+                    locations:
+                      - WESTUS
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - WESTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - WESTUS
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - WESTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - WESTUS2
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - WESTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - WESTUS2
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - WESTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - WESTUS2
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS2
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS2
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS2
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS2
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTUS2
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - WESTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - WESTUS2
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - WESTEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - WESTEUROPE
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - WESTEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - WESTEUROPE
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - WESTEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - WESTEUROPE
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - WESTEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - WESTEUROPE
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTEUROPE
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTEUROPE
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTEUROPE
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTEUROPE
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTEUROPE
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - NORTHEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - NORTHEUROPE
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - NORTHEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - NORTHEUROPE
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - NORTHEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - NORTHEUROPE
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - NORTHEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - NORTHEUROPE
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - NORTHEUROPE
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - NORTHEUROPE
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - NORTHEUROPE
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - NORTHEUROPE
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - NORTHEUROPE
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - NORTHEUROPE
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - SOUTHEASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - SOUTHEASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - SOUTHEASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - SOUTHEASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHEASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHEASTASIA
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - EASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - EASTASIA
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - EASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - EASTASIA
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - EASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - EASTASIA
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTASIA
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTASIA
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTASIA
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTASIA
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTASIA
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - EASTASIA
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - EASTASIA
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - WESTCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - WESTCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - WESTCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - WESTCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - WESTCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - WESTCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - WESTCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - WESTCENTRALUS
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTCENTRALUS
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTCENTRALUS
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTCENTRALUS
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - WESTCENTRALUS
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: CustomVision.Training
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: CustomVision.Training
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: CustomVision.Prediction
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: CustomVision.Prediction
+                    locations:
+                      - SOUTHCENTRALUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - EASTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - EASTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - EASTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - EASTUS
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - EASTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - EASTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - EASTUS
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - EASTUS
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ContentModerator
+                    locations:
+                      - EASTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ContentModerator
+                    locations:
+                      - EASTUS2
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: Face
+                    locations:
+                      - EASTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: Face
+                    locations:
+                      - EASTUS2
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: LUIS
+                    locations:
+                      - EASTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: LUIS
+                    locations:
+                      - EASTUS2
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: ComputerVision
+                    locations:
+                      - EASTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: ComputerVision
+                    locations:
+                      - EASTUS2
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS2
+                    name: F0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Free
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS2
+                    name: S0
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS2
+                    name: S1
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS2
+                    name: S2
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS2
+                    name: S3
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+                  - kind: TextAnalytics
+                    locations:
+                      - EASTUS2
+                    name: S4
+                    resourceType: accounts
+                    restrictions: []
+                    tier: Standard
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts':
     get:
       description: Returns all the resources of a particular type belonging to a resource group
@@ -1209,6 +2742,97 @@ definitions:
           name: KeyName
     required:
       - keyName
+  ResourceSku:
+    description: Describes an available Cognitive Services SKU.
+    properties:
+      kind:
+        description: The Kind of resources that are supported in this SKU.
+        readOnly: true
+        type: string
+      locations:
+        description: The set of locations that the SKU is available.
+        items:
+          type: string
+        readOnly: true
+        type: array
+      name:
+        description: The name of SKU.
+        readOnly: true
+        type: string
+      resourceType:
+        description: The type of resource the SKU applies to.
+        readOnly: true
+        type: string
+      restrictions:
+        description: The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
+        items:
+          $ref: '#/definitions/ResourceSkuRestrictions'
+        readOnly: true
+        type: array
+      tier:
+        description: Specifies the tier of Cognitive Services account.
+        readOnly: true
+        type: string
+  ResourceSkuRestrictionInfo:
+    properties:
+      locations:
+        description: Locations where the SKU is restricted
+        items:
+          type: string
+        readOnly: true
+        type: array
+      zones:
+        description: List of availability zones where the SKU is restricted.
+        items:
+          type: string
+        readOnly: true
+        type: array
+  ResourceSkuRestrictions:
+    description: Describes restrictions of a SKU.
+    properties:
+      reasonCode:
+        description: The reason for restriction.
+        enum:
+          - QuotaId
+          - NotAvailableForSubscription
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ResourceSkuRestrictionsReasonCode
+      restrictionInfo:
+        $ref: '#/definitions/ResourceSkuRestrictionInfo'
+        description: The information about the restriction where the SKU cannot be used.
+        readOnly: true
+      type:
+        description: The type of restrictions.
+        enum:
+          - Location
+          - Zone
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ResourceSkuRestrictionsType
+      values:
+        description: The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.
+        items:
+          type: string
+        readOnly: true
+        type: array
+  ResourceSkusResult:
+    description: The Get Skus operation response.
+    properties:
+      nextLink:
+        description: The uri to fetch the next page of Skus.
+        type: string
+      value:
+        description: The list of skus available for the subscription.
+        items:
+          $ref: '#/definitions/ResourceSku'
+        type: array
+    required:
+      - value
   Sku:
     description: The SKU of the cognitive services account.
     properties:

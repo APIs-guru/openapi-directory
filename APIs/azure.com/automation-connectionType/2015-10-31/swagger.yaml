@@ -42,12 +42,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/connectiontypeoperations'
       operationId: ConnectionType_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -93,6 +96,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -121,6 +125,7 @@ paths:
                           description: Gets or sets the last modified time.
                           format: date-time
                           type: string
+                          x-nullable: false
                     type:
                       description: Resource type
                       readOnly: true
@@ -3593,12 +3598,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/connectiontypeoperations'
       operationId: ConnectionType_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -3655,12 +3663,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/connectiontypeoperations'
       operationId: ConnectionType_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -3703,6 +3714,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -3731,6 +3743,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
               type:
                 description: Resource type
                 readOnly: true
@@ -3786,12 +3799,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/connectiontypeoperations'
       operationId: ConnectionType_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -3872,6 +3888,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -3900,6 +3917,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
               type:
                 description: Resource type
                 readOnly: true
@@ -3925,6 +3943,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -3953,6 +3972,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
               type:
                 description: Resource type
                 readOnly: true

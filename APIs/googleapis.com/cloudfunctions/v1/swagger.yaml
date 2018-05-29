@@ -9,7 +9,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages lightweight user-provided functions executed in response to events.
-  title: Google Cloud Functions
+  title: Cloud Functions
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -608,6 +608,11 @@ definitions:
         description: |-
           A user-defined name of the function. Function names must be unique
           globally and match pattern `projects/*/locations/*/functions/*`
+        type: string
+      runtime:
+        description: |-
+          The runtime in which the function is going to run. If empty, defaults to
+          Node.js 6.
         type: string
       serviceAccountEmail:
         description: Output only. The email of the function's service account.

@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/RotoBallerArticles':
     get:
-      operationId: 597a438714338d078cae549d
+      operationId: RotoballerArticles
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -57,7 +57,7 @@ paths:
       summary: RotoBaller Articles
   '/{format}/RotoBallerArticlesByDate/{date}':
     get:
-      operationId: 597a439514338d078cae54a0
+      operationId: RotoballerArticlesByDate
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -85,7 +85,7 @@ paths:
       summary: RotoBaller Articles by Date
   '/{format}/RotoBallerArticlesByPlayerID/{playerid}':
     get:
-      operationId: 597a439814338d078cae54a1
+      operationId: RotoballerArticlesByPlayer
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

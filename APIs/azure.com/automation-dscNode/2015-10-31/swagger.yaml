@@ -42,8 +42,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/agentregistrationoperations'
       operationId: AgentRegistrationInformation_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -126,8 +128,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/agentregistrationoperations'
       operationId: AgentRegistrationInformation_RegenerateKey
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -227,7 +231,9 @@ paths:
           responses:
             '200':
               body:
+                dscMetaConfiguration: null
                 endpoint: 'https://wcus-agentservice-prod-1.azure-automation.net/accounts/ea8cd428-7887-4020-883d-ec6c5f2c06c2'
+                id: null
                 keys:
                   primary: DXW********************************************************ZqnQ==
                   secondary: UM4A********************************************************66pg==
@@ -239,8 +245,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodeoperations'
       operationId: DscNode_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -315,8 +323,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodeoperations'
       operationId: DscNode_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -377,8 +387,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodeoperations'
       operationId: DscNode_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -450,8 +462,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodeoperations'
       operationId: DscNode_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -535,6 +549,7 @@ paths:
                   name: SetupServer.localhost
                 nodeId: nodeId
                 registrationTime: '2017-03-28T20:19:24.7915026+00:00'
+                status: null
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}/reports':
     get:
@@ -543,8 +558,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodereportoperations'
       operationId: NodeReports_ListByNode
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -596,6 +613,7 @@ paths:
                       description: Gets or sets the end time of the node report.
                       format: date-time
                       type: string
+                      x-nullable: true
                     errors:
                       description: Gets or sets the errors for the node report.
                       items:
@@ -640,6 +658,7 @@ paths:
                       description: Gets or sets the lastModifiedTime of the node report.
                       format: date-time
                       type: string
+                      x-nullable: false
                     metaConfiguration:
                       description: Definition of the DSC Meta Configuration.
                       properties:
@@ -725,6 +744,7 @@ paths:
                             description: Gets or sets the start date of the resource.
                             format: date-time
                             type: string
+                            x-nullable: false
                           status:
                             description: Gets or sets the status of the resource.
                             type: string
@@ -733,6 +753,7 @@ paths:
                       description: Gets or sets the start time of the node report.
                       format: date-time
                       type: string
+                      x-nullable: true
                     status:
                       description: Gets or sets the status of the node report.
                       type: string
@@ -975,8 +996,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodereportoperations'
       operationId: NodeReports_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -1020,6 +1043,7 @@ paths:
                 description: Gets or sets the end time of the node report.
                 format: date-time
                 type: string
+                x-nullable: true
               errors:
                 description: Gets or sets the errors for the node report.
                 items:
@@ -1064,6 +1088,7 @@ paths:
                 description: Gets or sets the lastModifiedTime of the node report.
                 format: date-time
                 type: string
+                x-nullable: false
               metaConfiguration:
                 description: Definition of the DSC Meta Configuration.
                 properties:
@@ -1149,6 +1174,7 @@ paths:
                       description: Gets or sets the start date of the resource.
                       format: date-time
                       type: string
+                      x-nullable: false
                     status:
                       description: Gets or sets the status of the resource.
                       type: string
@@ -1157,6 +1183,7 @@ paths:
                 description: Gets or sets the start time of the node report.
                 format: date-time
                 type: string
+                x-nullable: true
               status:
                 description: Gets or sets the status of the node report.
                 type: string
@@ -1214,6 +1241,7 @@ paths:
                   rebootNodeIfNeeded: false
                   refreshFrequencyMins: 30
                 numberOfResources: 1
+                rawErrors: null
                 rebootRequested: 'False'
                 refreshMode: Pull
                 reportFormatVersion: '2.0'
@@ -1221,6 +1249,7 @@ paths:
                 resources:
                   - dependsOn: []
                     durationInSeconds: 0.25
+                    error: null
                     moduleName: PsDesiredStateConfiguration
                     moduleVersion: '1.1'
                     resourceId: '[WindowsFeature]IIS'
@@ -1239,8 +1268,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodereportoperations'
       operationId: NodeReports_GetContent
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -1505,21 +1536,23 @@ paths:
 definitions:
   DscNode:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource Id
-            readOnly: true
-            type: string
-          name:
-            description: Resource name
-            readOnly: true
-            type: string
-          type:
-            description: Resource type
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - allOf:
+          - description: The core properties of ARM resources
+            properties:
+              id:
+                description: Fully qualified resource Id for the resource
+                readOnly: true
+                type: string
+              name:
+                description: The name of the resource
+                readOnly: true
+                type: string
+              type:
+                description: The type of the resource.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
     description: Definition of the dsc node type.
     properties:
       accountId:
@@ -1547,6 +1580,7 @@ definitions:
         description: Gets or sets the last seen time of the node.
         format: date-time
         type: string
+        x-nullable: false
       nodeConfiguration:
         description: The dsc nodeconfiguration property associated with the entity.
         properties:
@@ -1560,6 +1594,7 @@ definitions:
         description: Gets or sets the registration time of the node.
         format: date-time
         type: string
+        x-nullable: false
       status:
         description: Gets or sets the status of the node.
         type: string

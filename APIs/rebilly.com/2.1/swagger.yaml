@@ -15,7 +15,7 @@ info:
     accepts and returns JSON in the HTTP body.  You can use your favorite
     HTTP/REST library for your programming language to use Rebilly's API, or
     you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php)
-    and [Javascript](https://github.com/Rebilly/rebilly-js-sdk).
+    and [Javascript](https://github.com/Rebilly/rebilly-js-sdk)).
 
     We have other APIs that are also available.  Every action from our [app](https://app.rebilly.com)
     is supported by an API which is documented and available for use so that you
@@ -28,24 +28,12 @@ info:
     need to rotate your keys in the future). You authenticate to the
     Rebilly API by providing your secret key in the request header.
 
-    Rebilly offers three forms of authentication:  private key, JSON Web Tokens, and
-    public key.
-    - private key: authenticates each request by searching for the presence
-    of an HTTP header: REB-APIKEY.
-    - JWT: authenticates each request by the HTTP header: Authorization.
-    - public key: authenticates by the HTTP header: REB-AUTH (read more on this below).
-
-    Rebilly also offers JSON Web Tokens (JWT) authentication, where you can control
-    the specific granular permissions and expiration for that JWT.  We call our resource
-    for generating JWT [Sessions](#tag/Sessions).
-
-    Rebilly also has a client-side authentication scheme that uses an
-    apiUser and HMAC-SHA1 signature (only for the Tokens resource), so
-    that you may safely create tokens from the client-side without compromising
-    your secret keys.
+    Rebilly offers three forms of authentication:  secret key, publishable key, JSON Web Tokens, and public signature key.
+    - [Secret API key](#section/Authentication/SecretApiKey): used for requests made from the server side. Never share these keys. Keep them guarded and secure
+    - [Publishable API key](#section/Authentication/PublishableApiKey): used for requests from the client side. For now can only be used on the [Tokens resource](#tag/Payment-Tokens%2Fpaths%2F~1tokens%2Fpost)
+    - [JWT](#section/Authentication/JWT): short lifetime tokens that can be assigned a specific expiration time
 
     Never share your secret keys. Keep them guarded and secure.
-    The client-side authentication scheme uses one HTTP header named REB-AUTH.
 
     <!-- ReDoc-Inject: <security-definitions> -->
 
@@ -59,6 +47,25 @@ info:
         'baseUrl' => 'https://api.rebilly.com',
     ]);
     ```
+
+    # Using filter
+    Rebilly provides collections filtering. You can use `?filter` param on collection to define which records should be shown in the response.
+
+    Here is filter format description:
+
+    - Fields and values in filter are separated with `:`: `?filter=firstName:John`.
+
+    - Fields in filter are separated with `;`: `?filter=firstName:John;lastName:Doe`.
+
+    - You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`.
+
+    - To negate the filter use `!`: `?filter=firstName:!John`. Note that you can negate multiple values like this: `?filter=firstName:!John,Bob`. This filter rule will exclude all Johns and Bobs from the response.
+
+    - You can use range filters like this: `?filter=amount:1..10`.
+
+    - You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`.
+
+    - You can create some [predefined values lists](https://rebilly.github.io/RebillyUserAPI/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`
   license:
     name: Rebilly
     url: 'https://www.rebilly.com/api-license/'
@@ -79,45 +86,33 @@ info:
 consumes:
   - application/json
 produces:
-  - application/json
+  - application/json; charset=utf-8
 securityDefinitions:
-  ApiKey:
+  JWT:
     description: |
-      When you sign up for an account, you are given your first API key.
+      You can create a JSON Web Token (JWT) via our [Sessions resource](https://rebilly.github.io/RebillyUserAPI/#tag/Sessions%2Fpaths%2F~1signin%2Fpost).
+    in: header
+    name: 'Authorization: Bearer jwt'
+    type: apiKey
+  PublishableApiKey:
+    description: |
+      Only for the Tokens resource.
+      You can create a Publishable API Key via our [API Keys resource](https://rebilly.github.io/RebillyUserAPI/#tag/API-Keys), by specifying the type as `publishable`.
+    in: header
+    name: 'Authorization: Bearer pk_live_xxxx'
+    type: apiKey
+  SecretApiKey:
+    description: |
+      When you sign up for an account, you are given your first secret API key.
       To do so please [follow this link.](https://app.rebilly.com/signup)
       Also you can generate additional API keys, and delete API keys (as you may
       need to rotate your keys in the future).
     in: header
-    name: REB-APIKEY
-    type: apiKey
-  JWT:
-    description: |
-      You can create a JSON Web Token (JWT) via our Sessions resource.
-    type: basic
-  RebAuth:
-    description: |
-      Only for the Tokens resource.
-      The REB-AUTH value is created in this way
-      Generate a Nonce (random string), and a Timestamp (unix timestamp)
-      Concatenate the values of ApiUser, Nonce, and Timestamp (in that order).
-      Use that value as the input data when you calculate the <a href="http://tools.ietf.org/html/rfc2104">HMAC-SHA1</a> with your secret key, called the signature.
-      Forming the four data points into a JSON object.
-
-      ```json
-      {
-        "REB-APIUSER": "abcdefg",
-        "REB-NONCE": "adfsjtreitou345fgkdafgj",
-        "REB-TIMESTAMP": "1382591345",
-        "REB-SIGNATURE": "a234fc95460401cfg09c9d09"
-      }
-      ```
-
-      Then base64 encode that JSON object. This is the final value of the REB-AUTH HTTP header
-    in: header
-    name: REB-AUTH
+    name: 'REB-APIKEY: sk_live_xxxx'
     type: apiKey
 security:
-  - ApiKey: []
+  - SecretApiKey: []
+  - JWT: []
 parameters:
   collectionCriteria:
     description: The json criteria for collection
@@ -138,7 +133,7 @@ parameters:
     description: |
       The collection items filter requires a special format.
       Use "," for multiple allowed values.  Use ";" for multiple fields.
-      See the filter guide for more options and examples about this format.
+      See the [filter guide](https://rebilly.github.io/RebillyAPI/#section/Using-filter) for more options and examples about this format.
     in: query
     name: filter
     type: string
@@ -543,6 +538,8 @@ paths:
             $ref: '#/definitions/Attachment'
         '401':
           $ref: '#/responses/AccessForbidden'
+        '409':
+          $ref: '#/responses/Conflict'
         '422':
           $ref: '#/responses/InvalidDataError'
       summary: Create an Attachment
@@ -671,6 +668,8 @@ paths:
           $ref: '#/responses/AccessForbidden'
         '404':
           $ref: '#/responses/NotFound'
+        '409':
+          $ref: '#/responses/Conflict'
         '422':
           description: Invalid data was sent
           schema:
@@ -2401,39 +2400,6 @@ paths:
         required: true
         type: string
   '/custom-fields/{resource}/{name}':
-    delete:
-      description: |
-        Delete a custom field by its name
-      responses:
-        '204':
-          description: Custom field has been deleted
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '409':
-          description: 'The field is in use: remove all the associated data first'
-          schema:
-            $ref: '#/definitions/Error'
-      summary: Delete a custom field
-      tags:
-        - Custom Fields
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $client->customFields()->delete('customers', 'testFieldName');
     get:
       description: |
         Retrieve a schema of the given Custom Field for the given resource type
@@ -2657,6 +2623,8 @@ paths:
             $ref: '#/definitions/Customer'
         '401':
           $ref: '#/responses/AccessForbidden'
+        '409':
+          $ref: '#/responses/Conflict'
         '422':
           $ref: '#/responses/InvalidDataError'
       summary: Create a customer
@@ -2784,6 +2752,8 @@ paths:
             $ref: '#/definitions/Customer'
         '401':
           $ref: '#/responses/AccessForbidden'
+        '409':
+          $ref: '#/responses/Conflict'
         '422':
           $ref: '#/responses/InvalidDataError'
       summary: Create a customer with predefined ID
@@ -3271,18 +3241,27 @@ paths:
             ]);
     post:
       description: |
-        Create a file
+        Additionally, a file can be sent with:
+         - multipart/form-data POST request: in this case all property names are the same as the JSON ones (`file` is an uploaded file)
+         - file body request: the file body is sent as the request body, with the appropriate `Content-Type`. No aditional
+         properties can be set along the request data
+
+        The following file types only are allowed:
+         - jpg
+         - png
+         - gif
+         - pdf
+         - mp3
+
+
+        If using a Publishable Api Key, only private files can be created. The files can later on be modified or used using
+         a secret API key.
       parameters:
-        - description: 'Additionally, a file can be sent with a multipart/form-data POST request or the file''s raw body can be sent as a request body'
-          in: body
+        - in: body
           name: body
           required: true
           schema:
-            properties:
-              url:
-                description: The file URL
-                type: string
-            type: object
+            $ref: '#/definitions/FileCreateRequest'
       responses:
         '201':
           description: File was created
@@ -3304,6 +3283,10 @@ paths:
           $ref: '#/responses/AccessForbidden'
         '422':
           $ref: '#/responses/InvalidDataError'
+      security:
+        - SecretApiKey: []
+        - JWT: []
+        - PublishableApiKey: []
       summary: Create a file
       tags:
         - Files
@@ -6644,7 +6627,7 @@ paths:
           schema:
             $ref: '#/definitions/InvalidError'
       security:
-        - RebAuth: []
+        - PublishableApiKey: []
       summary: Create a payment token
       tags:
         - Payment Tokens
@@ -6725,7 +6708,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       security:
-        - RebAuth: []
+        - PublishableApiKey: []
       summary: Retrieve a token
       tags:
         - Payment Tokens
@@ -7177,6 +7160,7 @@ definitions:
         allOf:
           - $ref: '#/definitions/MpiName'
         enum:
+          - PaayMpi
           - Other
     required:
       - name
@@ -7246,136 +7230,6 @@ definitions:
     required:
       - currency
       - min
-    type: object
-  ApiKey:
-    description: API secret Key.
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      apiUser:
-        description: API user name
-        readOnly: true
-        type: string
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The API key created time
-      datetimeFormat:
-        default: iso8601
-        description: Date time format
-        enum:
-          - mysql
-          - iso8601
-        type: string
-      description:
-        description: API key description
-        type: string
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        readOnly: true
-      secretKey:
-        description: API secret key's value
-        readOnly: true
-        type: string
-    type: object
-  ApiTracking:
-    description: Tracking API Requests.
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The log created time
-      duration:
-        description: Request duration in milliseconds
-        type: integer
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-      method:
-        description: HTTP method
-        enum:
-          - HEAD
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-        type: string
-      request:
-        description: Request JSON-string
-        type: string
-      requestHeaders:
-        additionalProperties:
-          type: string
-        example:
-          Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-          User-Agent: Mozilla/5.0
-        type: object
-      response:
-        description: Response JSON-string
-        type: string
-      responseHeaders:
-        additionalProperties:
-          type: string
-        example:
-          Rate-Limit-Limit: 5000
-          Rate-Limit-Remaining: 4999
-          Rate-Limit-Reset: 'Mon, 31 Jul 2017 04:16:00 +0000'
-        type: object
-      status:
-        description: HTTP response code
-        type: integer
-      url:
-        description: API request address
-        type: string
-      user:
-        description: The user who has made a request
-        properties:
-          apiKeyId:
-            allOf:
-              - $ref: '#/definitions/ResourceId'
-          email:
-            description: The user email
-            format: email
-            type: string
-          fingerprint:
-            description: The user device fingerprint hash
-            type: string
-          firstName:
-            description: The user first name
-            type: string
-          ipAddress:
-            description: Client IP address
-            format: ipv4
-            type: string
-          isSupport:
-            description: If user from support
-            type: boolean
-          lastName:
-            description: The user last name
-            type: string
-          userAgent:
-            description: The software that is acting on behalf of a user
-            type: string
-          userId:
-            allOf:
-              - $ref: '#/definitions/ResourceId'
-        readOnly: true
-        type: object
-    readOnly: true
     type: object
   ApprovalUrlLink:
     allOf:
@@ -7914,6 +7768,11 @@ definitions:
       firstName:
         description: The contact first name
         type: string
+      hash:
+        description: 'A hash that can be used to compare multiple contacts for identical attribute values, excluding id, customer id, createdTime, updatedTime.'
+        example: 056ae6d97c788b9e98b049ebafd7b229bf852221
+        maxLength: 40
+        type: string
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -7980,6 +7839,11 @@ definitions:
         $ref: '#/definitions/ContactEmails'
       firstName:
         description: The contact first name
+        type: string
+      hash:
+        description: A hash that can be used to compare multiple contacts for identical attribute values
+        example: 056ae6d97c788b9e98b049ebafd7b229bf852221
+        maxLength: 40
         type: string
       lastName:
         description: The contact last name
@@ -8104,6 +7968,11 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: Coupon redemption canceled time
         readOnly: true
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Coupon redeem time
+        readOnly: true
       customerId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -8111,11 +7980,6 @@ definitions:
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
-        readOnly: true
-      redeemedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Coupon redeem time
         readOnly: true
       redemptionCode:
         allOf:
@@ -8195,51 +8059,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Credorax Gateway config
-  CustomEvent:
-    properties:
-      chronology:
-        description: The emitting time of the custom event relatively to the system event
-        enum:
-          - before
-          - after
-        type: string
-      createdTime:
-        $ref: '#/definitions/ServerTimestamp'
-      description:
-        description: The custom event description
-        type: string
-      eventType:
-        description: The system event type
-        enum:
-          - subscription-ended
-          - subscription-trial-ended
-          - subscription-renewed
-          - payment-card-expired
-          - invoice-past-due
-          - invoice-issued
-          - invoice-voided
-          - invoice-paid
-          - invoice-abandoned
-        type: string
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The custom event identifier string
-        readOnly: true
-      rulesCount:
-        readOnly: true
-        type: integer
-      scheduleInstruction:
-        $ref: '#/definitions/CustomEventScheduleInstruction'
-      title:
-        description: The custom event title
-        type: string
-    required:
-      - eventType
-      - title
-      - chronology
-      - scheduleInstruction
-    type: object
   CustomEventScheduleInstruction:
     description: The calculation instruction of scheduled time
     discriminator: method
@@ -8272,9 +8091,6 @@ definitions:
       description:
         description: The custom field description
         type: string
-      isUsed:
-        description: A flag to represent that the custom field is used on a record of the resource.
-        type: boolean
       name:
         description: The name of the custom field
         type: string
@@ -8721,51 +8537,6 @@ definitions:
     required:
       - rel
     type: object
-  EmailNotification:
-    properties:
-      bcc:
-        description: The hidden recipients addresses. The template palceholders are allowed.
-        items:
-          type: string
-        type: array
-      bodyHtml:
-        description: |
-          Leave empty to recieve "text/plain" email.
-          The template palceholders are allowed.
-        type: string
-      bodyText:
-        description: |
-          Leave empty to use text from "bodyHtml" without tags.
-          The template palceholders are allowed.
-        type: string
-      cc:
-        description: The recipients addresses. The template palceholders are allowed.
-        items:
-          type: string
-        type: array
-      credentialHash:
-        description: SMTP Credential identifier string.
-        type: string
-      recipients:
-        description: The recipients addresses. The template palceholders are allowed.
-        items:
-          type: string
-        minItems: 1
-        type: array
-      sender:
-        description: The sender address. The template palceholders are allowed.
-        type: string
-      subject:
-        description: The message subject. The template palceholders are allowed.
-        type: string
-    required:
-      - credentialHash
-      - sender
-      - recipients
-      - subject
-      - bodyText
-      - bodyHtml
-    type: object
   Error:
     properties:
       error:
@@ -8787,7 +8558,7 @@ definitions:
       - subscription-renewed
       - payment-card-expired
       - invoice-past-due
-      - payment-declined
+      - transaction-declined
       - transaction-process-requested
       - risk-score-changed
     readOnly: true
@@ -8863,6 +8634,40 @@ definitions:
         readOnly: true
         type: integer
     type: object
+  FileCreateRequest:
+    properties:
+      description:
+        description: The file description
+        example: My file description
+        type: string
+      file:
+        description: The file in base64 encoded format. This or `url` is required.
+        example: R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=
+        type: string
+      isPublic:
+        description: The File visibility. If public a permalink is provided.
+        example: false
+        type: boolean
+      name:
+        description: The file name used for downloading
+        example: logo.png
+        type: string
+      tags:
+        description: The tags list
+        example:
+          - test
+          - tags
+        items:
+          type: string
+        type: array
+      url:
+        description: The URL of the file to upload. This or `file` is required.
+        example: 'https://blog.rebilly.com/wp-content/uploads/2017/09/rb_LogoInverted_Small.png'
+        type: string
+    required:
+      - file
+      - url
+    type: object
   FileDownloadLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -8908,15 +8713,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Flexepin Gateway config
-  ForgotPassword:
-    properties:
-      email:
-        description: Email
-        format: email
-        type: string
-    required:
-      - email
-    type: object
   Forte:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -8994,6 +8790,7 @@ definitions:
         allOf:
           - $ref: '#/definitions/MpiName'
         enum:
+          - PaayMpi
           - Other
     required:
       - name
@@ -9031,6 +8828,7 @@ definitions:
           - BMO Harris Bank
           - Borgun
           - BraintreePayments
+          - Cardknox
           - Catalunya Caixa
           - Chase
           - ChinaUnionPay
@@ -9139,6 +8937,7 @@ definitions:
           - AuthorizeNet
           - Bambora
           - BraintreePayments
+          - Cardknox
           - Cashflows
           - Cayan
           - Chase
@@ -9174,7 +8973,7 @@ definitions:
           - Payvision
           - Plugnpay
           - Realex
-          - RealTime
+          - Realtime
           - RebillyProcessor
           - Redsys
           - RPN
@@ -9273,17 +9072,6 @@ definitions:
     required:
       - rel
     type: object
-  GatewayAccountPickInstruction:
-    discriminator: method
-    properties:
-      method:
-        enum:
-          - gateway-account-weights
-          - gateway-acquirer-weights
-        type: string
-    required:
-      - method
-    type: object
   GlobalCollect:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -9351,75 +9139,6 @@ definitions:
           - gatewayConfig
         type: object
     description: GlobalOne Gateway config
-  GlobalWebhook:
-    properties:
-      _links:
-        description: Links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: List created time
-      credentialHash:
-        description: Hash from Credentials which is used for authentication by the given URL
-        type: string
-      eventsFilter:
-        default: []
-        description: An array of System event type
-        items:
-          $ref: '#/definitions/GlobalWebhookEventType'
-        type: array
-      headers:
-        description: Map of elements with header name - header value association
-        type: object
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The webhook identifier string
-        readOnly: true
-      method:
-        enum:
-          - GET
-          - POST
-          - PUT
-          - PATCH
-          - DELETE
-        type: string
-      status:
-        $ref: '#/definitions/OnOff'
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: List updated time
-      url:
-        description: URL that will be triggered when the given event occurs.
-        format: uri
-        type: string
-    required:
-      - method
-      - url
-      - credentialHash
-    type: object
-  GlobalWebhookEventType:
-    description: Rebilly webhooks event type
-    enum:
-      - gateway-account-requested
-      - subscription-trial-ended
-      - subscription-activated
-      - subscription-canceled
-      - subscription-renewed
-      - transaction-processed
-      - payment-card-expired
-      - payment-declined
-      - invoice-modified
-      - invoice-created
-      - dispute-created
-      - suspended-payment-completed
-    type: string
   Gpaysafe:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -9574,6 +9293,10 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The invoice identifier string
         readOnly: true
+      invoiceNumber:
+        description: An auto-incrementing number based on the sequence of invoices for any particular customer.
+        readOnly: true
+        type: integer
       issuedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -9795,59 +9518,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Jeton Gateway config
-  Layout:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-          - $ref: '#/definitions/ItemsLink'
-        minItems: 2
-        readOnly: true
-        type: array
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Layout created time
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The layout identifier string
-        readOnly: true
-      items:
-        description: The array of layout items (planId and starred)
-        items:
-          $ref: '#/definitions/LayoutItem'
-        type: array
-      name:
-        description: The name of the layout string
-        type: string
-    required:
-      - name
-    type: object
-  LayoutItem:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      order:
-        description: Item's order in Layout
-        readOnly: true
-        type: integer
-      planId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The plan identifier string
-      starred:
-        description: Boolean if the plan should be starred (special callout presentation)
-        type: boolean
-    required:
-      - planId
-    type: object
   LeadSource:
     properties:
       _links:
@@ -9886,9 +9556,6 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The lead source identifier string
         readOnly: true
-      ipAddress:
-        description: Customer's IP Address
-        type: string
       medium:
         description: 'Lead Source''s medium (eg search, display)'
         type: string
@@ -9923,45 +9590,6 @@ definitions:
         type: string
     required:
       - rel
-    type: object
-  List:
-    properties:
-      _links:
-        description: Links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: List created time
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: List ID
-        readOnly: true
-      name:
-        description: List name
-        type: string
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: List updated time
-      values:
-        description: List values
-        items:
-          type: string
-        type: array
-      version:
-        description: List version
-        minimum: 1
-        readOnly: true
-        type: integer
-    required:
-      - name
-      - values
     type: object
   MatchedRule:
     properties:
@@ -10033,31 +9661,6 @@ definitions:
       - phone
       - voucher
       - QQPay
-      - miscellaneous1
-      - miscellaneous2
-      - miscellaneous3
-      - miscellaneous4
-      - miscellaneous5
-      - miscellaneous6
-      - miscellaneous7
-      - miscellaneous8
-      - miscellaneous9
-      - miscellaneous10
-      - miscellaneous11
-      - miscellaneous12
-      - miscellaneous13
-      - miscellaneous14
-      - miscellaneous15
-      - miscellaneous16
-      - miscellaneous17
-      - miscellaneous18
-      - miscellaneous19
-      - miscellaneous20
-      - miscellaneous21
-      - miscellaneous22
-      - miscellaneous23
-      - miscellaneous24
-      - miscellaneous25
     type: string
   Moneris:
     allOf:
@@ -10090,6 +9693,7 @@ definitions:
       - OptimalMpi
       - GlobalCollectMpi
       - CardinalCommerce
+      - PaayMpi
       - Other
     type: string
   MtaPay:
@@ -10156,6 +9760,7 @@ definitions:
         allOf:
           - $ref: '#/definitions/MpiName'
         enum:
+          - PaayMpi
           - Other
     required:
       - name
@@ -10167,60 +9772,6 @@ definitions:
         type: string
     required:
       - href
-    type: object
-  Note:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      archived:
-        description: Is the note archived (excluded from List method)
-        type: boolean
-      archivedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Note archived time
-      content:
-        description: The note's name
-        type: string
-      createdBy:
-        description: The note's creator
-        readOnly: true
-        type: string
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Note created time
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The note identifier string
-        readOnly: true
-      relatedId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The note's related resource ID
-      relatedType:
-        description: The note's related resource type
-        enum:
-          - customer
-          - payment-card
-          - payment-gateway
-          - subscription
-          - transaction
-        type: string
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Note updated time
-    required:
-      - content
-      - relatedType
-      - relatedId
     type: object
   NotesLink:
     allOf:
@@ -10321,59 +9872,6 @@ definitions:
     required:
       - name
     type: object
-  Organization:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      address:
-        description: The organization street address
-        maxLength: 60
-        type: string
-      address2:
-        description: The organization street address
-        maxLength: 60
-        type: string
-      city:
-        description: The organization city
-        maxLength: 45
-        type: string
-      country:
-        description: The organization country ISO Alpha-2 code
-        pattern: '^[A-Z]{2}$'
-        type: string
-      createdTime:
-        $ref: '#/definitions/ServerTimestamp'
-        description: The organization created time
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The organization identifier string
-        readOnly: true
-      name:
-        description: The organization name
-        maxLength: 60
-        type: string
-      postalCode:
-        description: The organization postal code
-        maxLength: 10
-        type: string
-      region:
-        description: The organization region (state)
-        maxLength: 45
-        type: string
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The organization updated time
-    required:
-      - name
-      - country
-    type: object
   OrganizationLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -10397,6 +9895,37 @@ definitions:
       - $ref: '#/definitions/WalpayMpis'
       - $ref: '#/definitions/WorldpayMpis'
     description: Other
+  PaayMpi:
+    allOf:
+      - $ref: '#/definitions/A1GatewayMpis'
+      - $ref: '#/definitions/eMerchantPayMpis'
+      - $ref: '#/definitions/GETMpis'
+      - $ref: '#/definitions/NMIMpis'
+      - $ref: '#/definitions/PayvisionMpis'
+      - $ref: '#/definitions/VantivLitleMpis'
+      - $ref: '#/definitions/WalpayMpis'
+      - $ref: '#/definitions/WorldpayMpis'
+      - properties:
+          apiKey:
+            description: Paay ApiKey
+            type: string
+          mpiUrl:
+            description: Paay MPI url
+            type: string
+          sandboxMpiUrl:
+            description: Paay sandbox MPI url
+            type: string
+          secret:
+            description: Paay secret
+            format: password
+            type: string
+        required:
+          - apiKey
+          - secret
+          - mpiUrl
+          - sandboxMpiUrl
+        type: object
+    description: Paay
   PandaGateway:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -10859,7 +10388,11 @@ definitions:
         description: The token identifier string
         readOnly: true
       method:
-        $ref: '#/definitions/Method'
+        description: The payment method
+        enum:
+          - payment-card
+          - ach
+        type: string
       paymentInstrument:
         $ref: '#/definitions/PaymentTokenInstrument'
     required:
@@ -10870,7 +10403,7 @@ definitions:
     description: Payment Token instrument object
     properties:
       accountNumber:
-        description: AccountNumber
+        description: 'AccountNumber, required if the method is `bank-account`'
         type: integer
       accountType:
         description: Account Type
@@ -10882,16 +10415,16 @@ definitions:
         description: The CVV/CVC of the payment card
         type: string
       expMonth:
-        description: Card's expiry month
+        description: 'Card''s expiry month, required if the method is `payment-card`'
         type: integer
       expYear:
-        description: Card's expiry year
+        description: 'Card''s expiry year, required if the method is `payment-card`'
         type: integer
       pan:
-        description: The card PAN (Primary Account Number)
+        description: 'The card PAN (Primary Account Number), required if the method is `payment-card`'
         type: string
       routingNumber:
-        description: Routing Number
+        description: 'Routing Number, required if the method is `bank-account`'
         type: integer
     type: object
   Payr:
@@ -10960,6 +10493,7 @@ definitions:
         enum:
           - PayvisionMpi
           - CardinalCommerce
+          - PaayMpi
           - Other
     required:
       - name
@@ -11220,65 +10754,6 @@ definitions:
     required:
       - name
     type: object
-  Profile:
-    properties:
-      availableCurrencies:
-        description: An array of reporting currencies enabled for the merchant
-        items:
-          type: string
-        readOnly: true
-        type: array
-      businessPhone:
-        description: The user business phone number
-        readOnly: true
-        type: string
-      country:
-        description: The user country setting - two letter code
-        readOnly: true
-        type: string
-      email:
-        description: The user email
-        format: email
-        maxLength: 100
-        readOnly: true
-        type: string
-      firstName:
-        description: User's first name
-        readOnly: true
-        type: string
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The user identifier string
-        readOnly: true
-      lastName:
-        description: User's last name
-        readOnly: true
-        type: string
-      mobilePhone:
-        description: The user mobile phone number
-        readOnly: true
-        type: string
-      preferences:
-        description: 'User preferences like timezone, language and many more. This is an object with custom properties.'
-        type: object
-      reportingCurrency:
-        description: The user's ISO Alpha-3 code used for reports
-        type: string
-      totpRequired:
-        description: The user setting of two-factor authentification
-        readOnly: true
-        type: boolean
-      totpSecret:
-        description: The user TOTP key for authentification app (if TOTP enabled)
-        readOnly: true
-        type: string
-      totpUrl:
-        description: The user link to QR-code for TOTP authentification app (if TOTP enabled)
-        format: url
-        readOnly: true
-        type: string
-    type: object
   RPN:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -11446,15 +10921,6 @@ definitions:
     required:
       - rel
     type: object
-  ResetPassword:
-    properties:
-      newPassword:
-        description: New password
-        format: password
-        type: string
-    required:
-      - newPassword
-    type: object
   ResetPasswordToken:
     properties:
       _links:
@@ -11593,90 +11059,6 @@ definitions:
         readOnly: true
         type: string
     type: object
-  Rule:
-    description: The rule
-    properties:
-      actions:
-        items:
-          $ref: '#/definitions/RuleAction'
-        type: array
-        uniqueItems: true
-      criteria:
-        $ref: '#/definitions/Condition'
-      final:
-        default: true
-        description: 'Whether rule is final, meaning stop further matching rules if this is matched'
-        type: boolean
-      name:
-        type: string
-      status:
-        $ref: '#/definitions/OnOff'
-    required:
-      - name
-      - actions
-    type: object
-  RuleAction:
-    discriminator: name
-    properties:
-      name:
-        description: The action name
-        enum:
-          - blacklist
-          - cancel-scheduled-payments
-          - guess-payment-card-expiration
-          - pick-gateway-account
-          - schedule-payment-retry
-          - schedule-payment
-          - send-email
-          - trigger-webhook
-          - stop-subscriptions
-          - add-risk-score
-        type: string
-      status:
-        $ref: '#/definitions/OnOff'
-    required:
-      - name
-    type: object
-  RuleSet:
-    description: Set of rules for particular event
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      rules:
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
-      updatedTime:
-        $ref: '#/definitions/ServerTimestamp'
-      version:
-        readOnly: true
-        type: integer
-    required:
-      - rules
-    type: object
-  RuleSetHistoryItem:
-    description: Version of rules
-    properties:
-      _links:
-        description: The links related to a resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-          - $ref: '#/definitions/RuleSetHistoryLink'
-          - $ref: '#/definitions/RuleSetVersionLink'
-        minItems: 3
-        readOnly: true
-        type: array
-      createdTime:
-        $ref: '#/definitions/ServerTimestamp'
-      version:
-        type: integer
-    readOnly: true
-    type: object
   RuleSetHistoryLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -11688,26 +11070,6 @@ definitions:
         type: string
     required:
       - rel
-    type: object
-  RuleSetVersion:
-    description: Version of rules
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      createdTime:
-        $ref: '#/definitions/ServerTimestamp'
-      rules:
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
-      version:
-        type: integer
-    readOnly: true
     type: object
   RuleSetVersionLink:
     allOf:
@@ -11770,60 +11132,11 @@ definitions:
     required:
       - rel
     type: object
-  SendPreviewWebhook:
-    allOf:
-      - $ref: '#/definitions/Webhook'
-    description: Trigger a test webhook
-  SendTestEmail:
-    allOf:
-      - $ref: '#/definitions/EmailNotification'
-    description: Send a test email
   ServerTimestamp:
     description: 'Read-only timestamp, automatically assigned on back-end.'
     format: date-time
     readOnly: true
     type: string
-  Session:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Session created time
-      expiredTime:
-        description: Session expired time. Defaults to one hour
-        format: date-time
-        type: string
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The session identifier string
-        readOnly: true
-      permissions:
-        allOf:
-          - $ref: '#/definitions/UserPermissions'
-        description: The session's permissions. See the format in example
-      token:
-        description: The session's token used for authentication
-        type: string
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Session updated time
-      userId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The user identifier string
-        readOnly: true
-    required:
-      - permissions
-    type: object
   ShippingZone:
     properties:
       _links:
@@ -11884,136 +11197,11 @@ definitions:
     required:
       - rel
     type: object
-  Signin:
-    properties:
-      email:
-        description: Email
-        type: string
-      expiredTime:
-        description: Session expired time. Defaults to one hour
-        format: date-time
-        type: string
-      password:
-        description: Password
-        format: password
-        type: string
-    required:
-      - email
-      - password
-    type: object
-  Signup:
-    properties:
-      businessPhone:
-        description: The user business phone number
-        type: string
-      company:
-        description: The user's company name
-        type: string
-      currencies:
-        default:
-          - USD
-        description: An array of currencies codes
-        items:
-          description: 3 letters ISO 4217 currency code
-          type: string
-        type: array
-      email:
-        description: The user email
-        format: email
-        maxLength: 100
-        type: string
-      firstName:
-        description: The user first name
-        type: string
-      lastName:
-        description: The user last name
-        type: string
-      merchantCategoryCode:
-        default: 5734
-        description: Merchant category code. Defaults to "Computer Software Stores"
-        type: integer
-      password:
-        description: The user password
-        format: password
-        type: string
-      website:
-        description: The user's website address
-        type: string
-    required:
-      - email
-      - company
-      - firstName
-      - lastName
-      - businessPhone
-      - password
-      - website
-    type: object
-  SmtpAuthorization:
-    discriminator: type
-    properties:
-      type:
-        default: none
-        enum:
-          - none
-          - plain
-          - login
-          - cram-md5
-        type: string
-    type: object
-  SmtpCredential:
-    description: SMTP Credential
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      auth:
-        $ref: '#/definitions/SmtpAuthorization'
-      encryption:
-        default: none
-        description: The encryption value
-        enum:
-          - none
-          - tls
-          - ssl
-        type: string
-      hash:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        readOnly: true
-      host:
-        description: The host name
-        type: string
-      port:
-        default: 25
-        description: The port value
-        maximum: 65535
-        minimum: 1
-        type: integer
-    required:
-      - host
-    type: object
   StaticGateway:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
       - type: object
     description: StaticGateway Gateway config
-  Status:
-    properties:
-      status:
-        description: The API status. If everything is ok - value is 'ok'
-        enum:
-          - ok
-        readOnly: true
-        type: string
-      time:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Current time
-    type: object
   Stripe:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -12191,7 +11379,14 @@ definitions:
         format: date-time
         type: string
       status:
-        description: Subscription status
+        description: 'Subscription status is deprecated and the values will change to `active`, `canceled`.'
+        enum:
+          - Active
+          - Will become active at a future date
+          - Active but set to cancel at next rebill date
+          - Cancelled
+          - Inactive
+          - Suspended
         readOnly: true
         type: string
       updatedTime:
@@ -12293,63 +11488,6 @@ definitions:
         type: string
     required:
       - rel
-    type: object
-  SubscriptionTracking:
-    description: Tracking subscription log
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The log created time
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-      invoiceItemId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-      message:
-        description: It contains the transaction number and renewal time
-        type: string
-      result:
-        description: Subscription's result
-        enum:
-          - created
-          - postponed
-          - stopped
-          - error
-        type: string
-      subscriptionId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-    readOnly: true
-    type: object
-  SystemEvent:
-    description: The application event
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      description:
-        type: string
-      eventType:
-        $ref: '#/definitions/EventType'
-      rulesCount:
-        readOnly: true
-        type: integer
-      title:
-        type: string
-    readOnly: true
     type: object
   TaxCategory:
     properties:
@@ -12557,6 +11695,7 @@ definitions:
               - BMO Harris Bank
               - Borgun
               - BraintreePayments
+              - Cardknox
               - Catalunya Caixa
               - Chase
               - ChinaUnionPay
@@ -12766,6 +11905,7 @@ definitions:
               - AuthorizeNet
               - Bambora
               - BraintreePayments
+              - Cardknox
               - Cashflows
               - Cayan
               - Chase
@@ -12801,7 +11941,7 @@ definitions:
               - Payvision
               - Plugnpay
               - Realex
-              - RealTime
+              - Realtime
               - RebillyProcessor
               - Redsys
               - RPN
@@ -12892,6 +12032,7 @@ definitions:
       result:
         description: Transaction result
         enum:
+          - abandoned
           - approved
           - canceled
           - declined
@@ -13085,192 +12226,6 @@ definitions:
         format: password
         type: string
     type: object
-  User:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      availableCurrencies:
-        description: An array of reporting currencies enabled for the merchant
-        items:
-          type: string
-        readOnly: true
-        type: array
-      businessPhone:
-        description: The user business phone number
-        type: string
-      country:
-        description: The user country setting - two letter code
-        type: string
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The user created time
-      email:
-        description: The user email
-        format: email
-        maxLength: 100
-        type: string
-      firstName:
-        description: User's first name
-        type: string
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The user identifier string
-        readOnly: true
-      lastName:
-        description: User's last name
-        type: string
-      loginTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The user last login time
-      mobilePhone:
-        description: The user mobile phone number
-        type: string
-      password:
-        description: 'User''s password. If not provided, password reset email will be sent'
-        format: password
-        type: string
-      permissions:
-        allOf:
-          - $ref: '#/definitions/UserPermissions'
-        description: The user's permissions. See the format in example
-      preferences:
-        description: 'User preferences like timezone, language and many more. This is an object with custom properties.'
-        type: object
-      reportingCurrency:
-        description: The user's ISO Alpha-3 code used for reports
-        readOnly: true
-        type: string
-      status:
-        description: The user status
-        enum:
-          - active
-          - inactive
-          - pending-confirmation
-        readOnly: true
-        type: string
-      totpRequired:
-        description: The user setting of two-factor authentification
-        type: boolean
-      totpSecret:
-        description: The user TOTP key for authentification app (if TOTP enabled)
-        type: string
-      totpUrl:
-        description: The user link to QR-code for TOTP authentification app (if TOTP enabled)
-        format: url
-        type: string
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The user updated time
-    required:
-      - email
-      - firstName
-      - lastName
-    type: object
-  UserPasswordAuthorization:
-    properties:
-      password:
-        format: password
-        type: string
-      username:
-        type: string
-    required:
-      - username
-      - password
-    type: object
-  UserPermissions:
-    example:
-      - methods:
-          - GET
-          - POST
-          - PUT
-          - HEAD
-          - DELETE
-        resourceName: plans
-      - methods:
-          - GET
-          - HEAD
-        resourceIds:
-          - 4f6cf35x-2c4y-483z-a0a9-158621f77a21
-          - 1586f35x-4f6c-483z-a0a9-2c4y21f77a21
-        resourceName: invoices
-      - {}
-    items:
-      properties:
-        methods:
-          items:
-            enum:
-              - HEAD
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - PATCH
-            type: string
-          minItems: 1
-          type: array
-        resourceIds:
-          items:
-            $ref: '#/definitions/ResourceId'
-          type: array
-        resourceName:
-          enum:
-            - 3dsecure
-            - api-keys
-            - api-tracking
-            - authentication-options
-            - authentication-tokens
-            - bank-accounts
-            - blacklists
-            - checkout-pages
-            - contacts
-            - coupons
-            - coupons-redemptions
-            - credentials
-            - custom-events
-            - custom-fields
-            - customers
-            - disputes
-            - events
-            - gateway-accounts
-            - invoices
-            - layouts
-            - lead-sources
-            - lists
-            - matched-rules
-            - notes
-            - oct-batch
-            - organizations
-            - password-tokens
-            - payments
-            - payment-cards
-            - payment-cards-migrations
-            - paypal-accounts
-            - plans
-            - reports
-            - reset-sandbox
-            - rulesets
-            - sessions
-            - subscriptions
-            - subscription-tracking
-            - tokens
-            - transactions
-            - users
-            - webhook
-            - webhook-tracking
-            - websites
-          type: string
-      type: object
-    minItems: 1
-    type: array
   VantivLitle:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -13306,6 +12261,7 @@ definitions:
         allOf:
           - $ref: '#/definitions/MpiName'
         enum:
+          - PaayMpi
           - Other
     required:
       - name
@@ -13341,149 +12297,10 @@ definitions:
         allOf:
           - $ref: '#/definitions/MpiName'
         enum:
+          - PaayMpi
           - Other
     required:
       - name
-    type: object
-  Webhook:
-    properties:
-      body:
-        type: string
-      credentialHash:
-        description: Webhook Credential identifier string.
-        type: string
-      headers:
-        items:
-          $ref: '#/definitions/WebhookHeader'
-        type: array
-      method:
-        enum:
-          - GET
-          - POST
-          - PUT
-          - PATCH
-          - DELETE
-        type: string
-      query:
-        additionalProperties:
-          example:
-            param1: value1
-            param2: value2
-          type: string
-        description: The URI parameters
-        type: object
-      url:
-        format: uri
-        type: string
-    required:
-      - method
-      - url
-    type: object
-  WebhookAuthorization:
-    discriminator: type
-    properties:
-      type:
-        default: none
-        description: The authorization type
-        enum:
-          - none
-          - basic
-          - digest
-          - oauth1
-        type: string
-    required:
-      - type
-    type: object
-  WebhookCredential:
-    description: Webhook credential
-    properties:
-      auth:
-        $ref: '#/definitions/WebhookAuthorization'
-      hash:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        readOnly: true
-      host:
-        description: The host name
-        type: string
-    required:
-      - host
-    type: object
-  WebhookHeader:
-    properties:
-      name:
-        type: string
-      status:
-        $ref: '#/definitions/OnOff'
-      value:
-        example:
-          Header1: value1
-          Header2: value2;value3
-        type: string
-    required:
-      - name
-      - value
-    type: object
-  WebhookTracking:
-    description: Webhook Tracking Requests.
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      attempt:
-        description: The Webhook's attempt number
-        type: integer
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The log created time
-      eventType:
-        $ref: '#/definitions/EventType'
-      headers:
-        additionalProperties:
-          type: string
-        description: HTTP headers which were used to send webhook
-        example:
-          My-Header: Cool-Value
-        type: object
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-      initiatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Initiated time
-      method:
-        description: HTTP method which was used to send webhook
-        example: POST
-        type: string
-      payload:
-        description: Webhook's payload
-        type: string
-      responseBody:
-        description: Response body received
-        type: string
-      responseCode:
-        description: HTTP code response
-        type: integer
-      sentTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Sent time
-      source:
-        description: The Webhook's source
-        enum:
-          - webhooks
-          - rules
-        type: string
-      url:
-        description: Url where webhook was sent
-        type: string
-    readOnly: true
     type: object
   Website:
     properties:
@@ -13540,51 +12357,6 @@ definitions:
         type: string
     required:
       - rel
-    type: object
-  WebsiteWebhookTracking:
-    description: Webhook Tracking Requests.
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: The log created time
-      eventName:
-        description: Event name for which webhook was called
-        type: string
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-      nextSendTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Next send time
-      pushData:
-        description: Event's data information JSON-string
-        type: string
-      response:
-        description: HTTP code response
-        type: integer
-      sentTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Sent time
-      status:
-        description: Event's status
-        enum:
-          - fail
-          - success
-        type: string
-      websiteId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-    readOnly: true
     type: object
   Wirecard:
     allOf:
@@ -13666,6 +12438,7 @@ definitions:
         allOf:
           - $ref: '#/definitions/MpiName'
         enum:
+          - PaayMpi
           - Other
     required:
       - name
@@ -13686,15 +12459,6 @@ definitions:
           - bankAccountId
         type: object
     description: ACH payment instrument object
-  add-risk-score:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-      - description: Add risk score
-        properties:
-          score:
-            default: 0
-            type: integer
-        type: object
   and:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -13704,19 +12468,6 @@ definitions:
   auto:
     allOf:
       - $ref: '#/definitions/CommonScheduleInstruction'
-  basic:
-    allOf:
-      - $ref: '#/definitions/WebhookAuthorization'
-      - properties:
-          password:
-            format: password
-            type: string
-          username:
-            type: string
-        required:
-          - username
-          - password
-        type: object
   between:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -13734,30 +12485,6 @@ definitions:
         type: object
     description: Between condition
     type: object
-  blacklist:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-      - properties:
-          ttl:
-            default: 0
-            description: 'Blacklist TTL. Defaults to zero, meaning blacklist record won''t expire ever.'
-            type: integer
-          type:
-            enum:
-              - customer-id
-              - email
-              - fingerprint
-              - ip-address
-              - payment-card-id
-            type: string
-        required:
-          - type
-        type: object
-    description: Add customer data to blacklist
-  cancel-scheduled-payments:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-    description: ''
   cash:
     allOf:
       - $ref: '#/definitions/PaymentInstrument'
@@ -13777,10 +12504,6 @@ definitions:
       - path
       - value
     type: object
-  cram-md5:
-    allOf:
-      - $ref: '#/definitions/SmtpAuthorization'
-      - $ref: '#/definitions/UserPasswordAuthorization'
   date-interval:
     allOf:
       - $ref: '#/definitions/CommonScheduleInstruction'
@@ -13832,19 +12555,6 @@ definitions:
             type: string
         required:
           - day
-        type: object
-  digest:
-    allOf:
-      - $ref: '#/definitions/WebhookAuthorization'
-      - properties:
-          password:
-            format: password
-            type: string
-          username:
-            type: string
-        required:
-          - username
-          - password
         type: object
   discount:
     allOf:
@@ -13907,6 +12617,7 @@ definitions:
         allOf:
           - $ref: '#/definitions/MpiName'
         enum:
+          - PaayMpi
           - Other
     required:
       - name
@@ -13933,197 +12644,6 @@ definitions:
           - currency
         type: object
     description: Coupon fixed amount discount
-  gateway-account-weights:
-    allOf:
-      - $ref: '#/definitions/GatewayAccountPickInstruction'
-      - properties:
-          weightedList:
-            example: |
-              [
-                {"gatewayAccountId": "my_gateway_account_1", "weight": 80},
-                {"gatewayAccountId": "my_gateway_account_2", "weight": 20}
-              ]
-            items:
-              properties:
-                gatewayAccountId:
-                  $ref: '#/definitions/ResourceId'
-                weight:
-                  type: integer
-              required:
-                - gatewayAccountId
-                - weight
-              type: object
-            minimum: 0
-            type: array
-            uniqueItems: true
-        required:
-          - weightedList
-        type: object
-  gateway-acquirer-weights:
-    allOf:
-      - $ref: '#/definitions/GatewayAccountPickInstruction'
-      - properties:
-          weightedList:
-            example: |
-              [
-                {"gatewayName": "RebillyProcessor", "acquirerName": "AIB", "weight": 80},
-                {"gatewayName": "RebillyProcessor", "acquirerName": "B+S", "weight": 20}
-            items:
-              properties:
-                acquirerName:
-                  description: The acquirer name
-                  enum:
-                    - Alipay
-                    - AIB
-                    - ApcoPay
-                    - AstroPay Card
-                    - Ipay Options
-                    - B+S
-                    - Bambora
-                    - Bank of America
-                    - Bank of Moscow
-                    - Bank of Rebilly
-                    - Bank One
-                    - BMO Harris Bank
-                    - Borgun
-                    - BraintreePayments
-                    - Catalunya Caixa
-                    - Chase
-                    - ChinaUnionPay
-                    - CIM
-                    - Credorax
-                    - Cryptonator
-                    - Elavon
-                    - EMS
-                    - Fifth Third Bank
-                    - First Data Buypass
-                    - First Data Nashville
-                    - First Data North
-                    - First Data Omaha
-                    - FinTecSystems
-                    - Flexepin
-                    - Forte
-                    - FundSend
-                    - Global East
-                    - Gpaysafe
-                    - Heartland
-                    - HSBC
-                    - iCheque
-                    - Ilixium
-                    - Ingenico
-                    - Intuit
-                    - Jeton
-                    - Masapay
-                    - Merrick
-                    - Mission Valley Bank
-                    - Moneris
-                    - NATWEST
-                    - NMI
-                    - OchaPay
-                    - Other
-                    - Panda Bank
-                    - PayPal
-                    - Payr
-                    - Payvision
-                    - Peoples Trust Company
-                    - Privatbank
-                    - QQPay
-                    - RBC
-                    - RBS WorldPay
-                    - RealTime
-                    - RebillyProcessor
-                    - Skrill
-                    - SMSVoucher
-                    - State Bank of Mauritius
-                    - Stripe
-                    - TBI
-                    - TrustPay
-                    - TSYS
-                    - UPayCard
-                    - Vantiv
-                    - VoicePay
-                    - WeChat Pay
-                    - Wells Fargo
-                    - Wing Hang Bank
-                    - Wirecard
-                    - WorldPay
-                  type: string
-                gatewayName:
-                  description: The payment gateway name
-                  enum:
-                    - A1Gateway
-                    - AmexVPC
-                    - ApcoPay
-                    - AstroPay
-                    - AstroPayCard
-                    - AuthorizeNet
-                    - Bambora
-                    - BraintreePayments
-                    - Cashflows
-                    - Cayan
-                    - Chase
-                    - Credorax
-                    - Cryptonator
-                    - DataCash
-                    - Dengi
-                    - eMerchantPay
-                    - Flexepin
-                    - FinTecSystems
-                    - FundSend
-                    - Forte
-                    - GET
-                    - GlobalOnePay
-                    - Gpaysafe
-                    - iCheque
-                    - Ilixium
-                    - Ingenico
-                    - Intuit
-                    - IpayOptions
-                    - JetPay
-                    - Jeton
-                    - Moneris
-                    - MtaPay
-                    - NMI
-                    - OchaPay
-                    - PandaGateway
-                    - Payeezy
-                    - Payflow
-                    - PayPal
-                    - Payr
-                    - Paysafe
-                    - Payvision
-                    - Plugnpay
-                    - Realex
-                    - RealTime
-                    - RebillyProcessor
-                    - Redsys
-                    - RPN
-                    - Sagepay
-                    - Skrill
-                    - SMSVoucher
-                    - StaticGateway
-                    - Stripe
-                    - UPayCard
-                    - USAePay
-                    - VantivLitle
-                    - vegaaH
-                    - Walpay
-                    - Wirecard
-                    - Worldpay
-                  type: string
-                weight:
-                  type: integer
-              required:
-                - gatewayName
-                - acquirerName
-                - weight
-              type: object
-            minimum: 0
-            type: array
-            uniqueItems: true
-        required:
-          - weightedList
-        type: object
   gt:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -14136,10 +12656,6 @@ definitions:
       - $ref: '#/definitions/compare'
     description: Greater than or equals condition
     type: object
-  guess-payment-card-expiration:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-    description: ''
   iCheque:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -14203,10 +12719,6 @@ definitions:
     required:
       - condition
     type: object
-  login:
-    allOf:
-      - $ref: '#/definitions/SmtpAuthorization'
-      - $ref: '#/definitions/UserPasswordAuthorization'
   lt:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -14235,35 +12747,12 @@ definitions:
           - currency
         type: object
     description: minimum-order-amount restrictions
-  none:
-    allOf:
-      - $ref: '#/definitions/AmountAdjustment'
-      - $ref: '#/definitions/SmtpAuthorization'
-      - $ref: '#/definitions/WebhookAuthorization'
   not:
     allOf:
       - $ref: '#/definitions/Condition'
       - $ref: '#/definitions/logical-not'
     description: Logical NOT
     type: object
-  oauth1:
-    allOf:
-      - $ref: '#/definitions/WebhookAuthorization'
-      - properties:
-          consumerKey:
-            type: string
-          consumerSecret:
-            type: string
-          token:
-            type: string
-          tokenSecret:
-            type: string
-        required:
-          - consumerKey
-          - consumerSecret
-          - token
-          - tokenSecret
-        type: object
   or:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -14332,20 +12821,6 @@ definitions:
           - value
         type: object
     description: Coupon percent discount
-  pick-gateway-account:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-      - properties:
-          pickInstruction:
-            $ref: '#/definitions/GatewayAccountPickInstruction'
-        required:
-          - pickInstruction
-        type: object
-    description: ''
-  plain:
-    allOf:
-      - $ref: '#/definitions/SmtpAuthorization'
-      - $ref: '#/definitions/UserPasswordAuthorization'
   redemptions-per-customer:
     allOf:
       - $ref: '#/definitions/CouponRestriction'
@@ -14400,37 +12875,6 @@ definitions:
           - subscriptionIds
         type: object
     description: restrict-to-subscriptions restrictions
-  schedule-payment:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-      - description: The calculation instruction of scheduled time for payment
-        properties:
-          amountPolicy:
-            enum:
-              - balance-outstanding
-              - invoice-total
-            type: string
-          scheduleInstruction:
-            $ref: '#/definitions/CommonScheduleInstruction'
-        required:
-          - scheduleInstruction
-          - amountPolicy
-        type: object
-    description: ''
-  schedule-payment-retry:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-      - $ref: '#/definitions/PaymentRetry'
-    description: ''
-  send-email:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-      - $ref: '#/definitions/EmailNotification'
-    description: ''
-  stop-subscriptions:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-    description: Stop active subscriptions
   total-redemptions:
     allOf:
       - $ref: '#/definitions/CouponRestriction'
@@ -14443,11 +12887,6 @@ definitions:
           - quantity
         type: object
     description: total-redemptions restrictions
-  trigger-webhook:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-      - $ref: '#/definitions/Webhook'
-    description: ''
   vegaaH:
     allOf:
       - $ref: '#/definitions/GatewayAccount'

@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: firebasedynamiclinks-ipv6.googleapis.com
+host: firebasedynamiclinks.googleapis.com
 basePath: /
 info:
   contact:
@@ -447,6 +447,7 @@ definitions:
           - ANDROID
           - IOS
           - DESKTOP
+          - OTHER
         type: string
     type: object
   DynamicLinkInfo:
@@ -661,6 +662,13 @@ definitions:
         description: |-
           Describes why match failed, ie: "discarded due to low confidence".
           This message will be publicly visible.
+        type: string
+      requestIpVersion:
+        description: Which IP version the request was made from.
+        enum:
+          - UNKNOWN_IP_VERSION
+          - IP_V4
+          - IP_V6
         type: string
       requestedLink:
         description: |-

@@ -221,6 +221,7 @@ paths:
           responses:
             '200':
               body:
+                nextLink: null
                 value:
                   - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
                     name: 20000000-0001-0000-0000-000000000000
@@ -270,6 +271,7 @@ paths:
           responses:
             '200':
               body:
+                nextLink: null
                 value:
                   - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
                     name: 20000000-0001-0000-0000-000000000000
@@ -655,13 +657,13 @@ definitions:
       type:
         description: fully qualified resource type which includes provider namespace
         enum:
-          - /providers/Microsoft.Management/managementGroup
+          - /providers/Microsoft.Management/managementGroups
         type: string
         x-ms-enum:
           modelAsString: false
           name: Type
           values:
-            - value: /providers/Microsoft.Management/managementGroup
+            - value: /providers/Microsoft.Management/managementGroups
     type: object
   CheckNameAvailabilityResult:
     description: Describes the result of the request to check management group name availability.

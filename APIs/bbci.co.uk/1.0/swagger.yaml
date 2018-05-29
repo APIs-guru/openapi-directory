@@ -25,7 +25,7 @@ info:
       url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
       version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: 1.0.0-342
+  x-release: 1.0.0-375
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -750,6 +750,25 @@ definitions:
       - urn
       - type
       - programme
+    type: object
+  autoplay:
+    additionalProperties: false
+    properties:
+      episode:
+        $ref: '#/definitions/episode'
+      source:
+        enum:
+          - precs
+          - receng
+          - next
+          - watching
+      type:
+        enum:
+          - autoplay
+    required:
+      - episode
+      - type
+      - source
     type: object
   broadcast:
     additionalProperties: false
@@ -1524,6 +1543,12 @@ definitions:
           - per_page
           - elements
         type: object
+      autoplay:
+        items:
+          $ref: '#/definitions/autoplay'
+        maxItems: 1
+        minItems: 0
+        type: array
       broadcasts:
         additionalProperties: false
         properties:

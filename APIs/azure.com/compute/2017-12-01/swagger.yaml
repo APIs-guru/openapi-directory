@@ -80,7 +80,7 @@ paths:
       x-ms-examples:
         List all virtual machine images in a subscription.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             subscriptionId: '{subscription-id}'
           responses:
             '200':
@@ -757,7 +757,7 @@ paths:
       x-ms-examples:
         List all virtual machine images in a resource group.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
@@ -850,7 +850,7 @@ paths:
       x-ms-examples:
         Get information about a virtual machine image.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             imageName: myImage
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
@@ -952,7 +952,7 @@ paths:
       x-ms-examples:
         Create a virtual machine image from a blob.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             imageName: myImage
             parameters:
               location: West US
@@ -965,6 +965,21 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -982,7 +997,7 @@ paths:
                 type: Microsoft.Compute/images
         Create a virtual machine image from a managed disk.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             imageName: myImage
             parameters:
               location: West US
@@ -996,6 +1011,22 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -1014,7 +1045,7 @@ paths:
                 type: Microsoft.Compute/images
         Create a virtual machine image from a snapshot.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             imageName: myImage
             parameters:
               location: West US
@@ -1028,6 +1059,22 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                      snapshot:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -1046,7 +1093,7 @@ paths:
                 type: Microsoft.Compute/images
         Create a virtual machine image from an existing virtual machine.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             imageName: myImage
             parameters:
               location: West US
@@ -1056,6 +1103,24 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  sourceVirtualMachine:
+                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM'
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVM_OsDisk_1_6dc293b7d811433196903acf92665022'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -1076,7 +1141,7 @@ paths:
                 type: Microsoft.Compute/images
         Create a virtual machine image that includes a data disk from a blob.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             imageName: myImage
             parameters:
               location: West US
@@ -1092,6 +1157,23 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - blobUri: 'https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd'
+                        lun: 1
+                    osDisk:
+                      blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -1111,7 +1193,7 @@ paths:
                 type: Microsoft.Compute/images
         Create a virtual machine image that includes a data disk from a managed disk.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             imageName: myImage
             parameters:
               location: West US
@@ -1129,6 +1211,25 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - lun: 1
+                        managedDisk:
+                          id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2'
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -1150,7 +1251,7 @@ paths:
                 type: Microsoft.Compute/images
         Create a virtual machine image that includes a data disk from a snapshot.:
           parameters:
-            api-version: '2017-03-30'
+            api-version: '2017-12-01'
             imageName: myImage
             parameters:
               location: West US
@@ -1168,6 +1269,25 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - lun: 1
+                        snapshot:
+                          id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2'
+                    osDisk:
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                      snapshot:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -1407,6 +1527,54 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: d6e9ab29-f8c9-4792-978c-ae2c07b98f17
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        image:
+                          uri: 'https://{existing-storage-account-name}.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/{existing-generalized-os-image-blob-name}.vhd'
+                        name: osDisk
+                        osType: Windows
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -1504,6 +1672,58 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: 77b7df9a-32fe-45e3-8911-60ac9c9b9c64
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        name: osDisk
+                        vhdContainers:
+                          - 'http://{existing-storage-account-name}.blob.core.windows.net/vhds'
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -1597,6 +1817,53 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: afa2afa8-9e49-48fb-9d18-c86323b5d064
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      linuxConfiguration:
+                        disablePasswordAuthentication: false
+                      secrets: []
+                    storageProfile:
+                      imageReference:
+                        id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/nsgcustom'
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -1692,6 +1959,61 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                plan:
+                  name: standard-data-science-vm
+                  product: standard-data-science-vm
+                  publisher: microsoft-ads
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: b9e23088-6ffc-46e0-9e02-b0a6eeef47db
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: standard-data-science-vm
+                        publisher: microsoft-ads
+                        sku: standard-data-science-vm
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -1793,6 +2115,59 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: a0134477-b9d9-484b-b0e3-205c1c089ffa
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  applicationGatewayBackendAddressPools:
+                                    - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/applicationGateways/nsgExistingAppGw/backendAddressPools/appGatewayBackendPool'
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -1894,6 +2269,61 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: ec0b21ca-51ec-414b-9323-f236ffc21479
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  loadBalancerBackendAddressPools:
+                                    - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLb/backendAddressPools/lbBackendPool'
+                                  loadBalancerInboundNatPools:
+                                    - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLb/inboundNatPools/lbNatPool'
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -1997,6 +2427,61 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: d053ec5a-8da6-495f-ab13-38216503c6d7
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    diagnosticsProfile:
+                      bootDiagnostics:
+                        enabled: true
+                        storageUri: 'http://nsgdiagnostic.blob.core.windows.net'
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -2103,6 +2588,70 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: 8042c376-4690-4c47-9fa2-fbdad70e32fa
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      dataDisks:
+                        - caching: None
+                          createOption: Empty
+                          diskSizeGB: 1023
+                          lun: 0
+                          managedDisk:
+                            storageAccountType: Standard_LRS
+                        - caching: None
+                          createOption: Empty
+                          diskSizeGB: 1023
+                          lun: 1
+                          managedDisk:
+                            storageAccountType: Standard_LRS
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D2_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -2211,6 +2760,57 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: ffb27c5c-39a5-4d4e-b307-b32598689813
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -2306,6 +2906,57 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: 19fd38a2-f50a-42c6-9dc7-3f9cf3791225
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Premium_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_DS1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -2406,6 +3057,60 @@ paths:
             subscriptionId: '{subscription-id}'
             vmScaleSetName: '{vmss-name}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: fb73af19-0090-467c-9ced-b00bceab1c45
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      linuxConfiguration:
+                        disablePasswordAuthentication: true
+                        ssh:
+                          publicKeys:
+                            - keyData: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1
+                              path: '/home/{your-username}/.ssh/authorized_keys'
+                      secrets: []
+                    storageProfile:
+                      imageReference:
+                        offer: UbuntuServer
+                        publisher: Canonical
+                        sku: 16.04-LTS
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
@@ -2772,6 +3477,32 @@ paths:
       tags:
         - VirtualMachineScaleSetRollingUpgrades
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory':
+    get:
+      description: Gets list of OS upgrades on a VM scale set instance.
+      operationId: VirtualMachineScaleSets_GetOSUpgradeHistory
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the VM scale set.
+          in: path
+          name: vmScaleSetName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSetListOSUpgradeHistory'
+      tags:
+        - VirtualMachineScaleSets
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance':
     post:
       description: Perform maintenance on one or more virtual machines in a VM scale set.
@@ -5327,6 +6058,12 @@ definitions:
       target:
         description: The target of the particular error.
         type: string
+  AutoOSUpgradePolicy:
+    description: The configuration parameters used for performing automatic OS upgrade.
+    properties:
+      disableAutoRollback:
+        description: Whether OS image rollback feature should be disabled. Default value is false.
+        type: boolean
   AvailabilitySet:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -5371,7 +6108,7 @@ definitions:
   AvailabilitySetUpdate:
     allOf:
       - $ref: '#/definitions/UpdateResource'
-    description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
+    description: Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated.
     properties:
       properties:
         $ref: '#/definitions/AvailabilitySetProperties'
@@ -5456,7 +6193,7 @@ definitions:
         readOnly: true
         type: string
   CreateOption:
-    description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
+    description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
     enum:
       - FromImage
       - Empty
@@ -5473,7 +6210,7 @@ definitions:
         description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
+        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       diskSizeGB:
         description: Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB
         format: int32
@@ -5871,7 +6608,7 @@ definitions:
   ImageUpdate:
     allOf:
       - $ref: '#/definitions/UpdateResource'
-    description: 'The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.'
+    description: The source user image virtual hard disk. Only tags may be updated.
     properties:
       properties:
         $ref: '#/definitions/ImageProperties'
@@ -6074,7 +6811,7 @@ definitions:
         description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
+        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       diskSizeGB:
         description: Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB
         format: int32
@@ -6259,6 +6996,23 @@ definitions:
     required:
       - location
     x-ms-azure-resource: true
+  RollbackStatusInfo:
+    description: Information about rollback on failed VM instances after a OS Upgrade operation
+    properties:
+      failedRolledbackInstanceCount:
+        description: The number of instances which failed to rollback.
+        format: int32
+        readOnly: true
+        type: integer
+      rollbackError:
+        $ref: '#/definitions/ApiError'
+        description: Error Details if OS rollback failed.
+        readOnly: true
+      successfullyRolledbackInstanceCount:
+        description: The number of instances which have been successfully rolled back.
+        format: int32
+        readOnly: true
+        type: integer
   RollingUpgradePolicy:
     description: The configuration parameters used while performing a rolling upgrade.
     properties:
@@ -6447,9 +7201,86 @@ definitions:
         description: Resource tags
         type: object
     x-ms-azure-resource: true
+  UpgradeOperationHistoricalStatusInfo:
+    description: Virtual Machine Scale Set OS Upgrade History operation response.
+    properties:
+      location:
+        description: Resource location
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/UpgradeOperationHistoricalStatusInfoProperties'
+        description: Information about the properties of the upgrade operation.
+        readOnly: true
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+  UpgradeOperationHistoricalStatusInfoProperties:
+    description: Describes each OS upgrade on the Virtual Machine Scale Set.
+    properties:
+      error:
+        $ref: '#/definitions/ApiError'
+        description: Error Details for this upgrade if there are any.
+        readOnly: true
+      progress:
+        $ref: '#/definitions/RollingUpgradeProgressInfo'
+        description: Counts of the VM's in each state.
+        readOnly: true
+      rollbackInfo:
+        $ref: '#/definitions/RollbackStatusInfo'
+        description: Information about OS rollback if performed
+        readOnly: true
+      runningStatus:
+        $ref: '#/definitions/UpgradeOperationHistoryStatus'
+        description: Information about the overall status of the upgrade operation.
+        readOnly: true
+      startedBy:
+        description: Invoker of the Upgrade Operation
+        enum:
+          - Unknown
+          - User
+          - Platform
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: UpgradeOperationInvoker
+      targetImageReference:
+        $ref: '#/definitions/ImageReference'
+        description: Image Reference details
+        readOnly: true
+  UpgradeOperationHistoryStatus:
+    description: Information about the current running state of the overall upgrade.
+    properties:
+      code:
+        description: Code indicating the current status of the upgrade.
+        enum:
+          - RollingForward
+          - Cancelled
+          - Completed
+          - Faulted
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: UpgradeState
+      endTime:
+        description: End time of the upgrade.
+        format: date-time
+        readOnly: true
+        type: string
+      startTime:
+        description: Start time of the upgrade.
+        format: date-time
+        readOnly: true
+        type: string
   UpgradePolicy:
     description: 'Describes an upgrade policy - automatic, manual, or rolling.'
     properties:
+      autoOSUpgradePolicy:
+        $ref: '#/definitions/AutoOSUpgradePolicy'
+        description: Configuration parameters used for performing automatic OS Upgrade.
       automaticOSUpgrade:
         description: Whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the image becomes available.
         type: boolean
@@ -7130,6 +7961,19 @@ definitions:
           $ref: '#/definitions/VirtualMachineStatusCodeCount'
         readOnly: true
         type: array
+  VirtualMachineScaleSetListOSUpgradeHistory:
+    description: List of Virtual Machine Scale Set OS Upgrade History operation response.
+    properties:
+      nextLink:
+        description: The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades.
+        type: string
+      value:
+        description: The list of OS upgrades performed on the virtual machine scale set.
+        items:
+          $ref: '#/definitions/UpgradeOperationHistoricalStatusInfo'
+        type: array
+    required:
+      - value
   VirtualMachineScaleSetListResult:
     description: The List Virtual Machine operation response.
     properties:
@@ -7240,7 +8084,7 @@ definitions:
         description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: 'Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
+        description: 'Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       image:
         $ref: '#/definitions/VirtualHardDisk'
         description: Specifies information about the unmanaged user image to base the scale set on.
@@ -7743,6 +8587,15 @@ definitions:
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
         description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'
+      evictionPolicy:
+        description: 'Specifies the eviction policy for virtual machines in a low priority scale set. <br><br>Minimum api-version: 2017-10-30-preview'
+        enum:
+          - Deallocate
+          - Delete
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: VirtualMachineEvictionPolicyTypes
       extensionProfile:
         $ref: '#/definitions/VirtualMachineScaleSetExtensionProfile'
         description: Specifies a collection of settings for extensions installed on virtual machines in the scale set.
@@ -7856,7 +8709,7 @@ definitions:
   VirtualMachineUpdate:
     allOf:
       - $ref: '#/definitions/UpdateResource'
-    description: Describes a Virtual Machine.
+    description: Describes a Virtual Machine Update.
     properties:
       identity:
         $ref: '#/definitions/VirtualMachineIdentity'

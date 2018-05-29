@@ -116,31 +116,39 @@ paths:
                 description: Gets or sets list of accounts.
                 items:
                   allOf:
-                    - description: The Resource definition.
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM tracked top level resource
                       properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
                         location:
-                          description: Resource location
+                          description: The Azure Region where the resource lives
                           type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
+                          x-ms-mutability:
+                            - read
+                            - create
                         tags:
                           additionalProperties:
                             type: string
-                          description: Resource tags
+                          description: Resource tags.
                           type: object
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      required:
-                        - location
-                      x-ms-azure-resource: true
+                          x-ms-mutability:
+                            - read
+                            - create
+                            - update
                   description: Definition of the automation account type.
                   properties:
                     etag:
@@ -154,6 +162,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -165,6 +174,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         sku:
                           description: The account SKU.
                           properties:
@@ -730,31 +740,39 @@ paths:
                 description: Gets or sets list of accounts.
                 items:
                   allOf:
-                    - description: The Resource definition.
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM tracked top level resource
                       properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
                         location:
-                          description: Resource location
+                          description: The Azure Region where the resource lives
                           type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
+                          x-ms-mutability:
+                            - read
+                            - create
                         tags:
                           additionalProperties:
                             type: string
-                          description: Resource tags
+                          description: Resource tags.
                           type: object
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      required:
-                        - location
-                      x-ms-azure-resource: true
+                          x-ms-mutability:
+                            - read
+                            - create
+                            - update
                   description: Definition of the automation account type.
                   properties:
                     etag:
@@ -768,6 +786,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -779,6 +798,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         sku:
                           description: The account SKU.
                           properties:
@@ -1018,31 +1038,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the automation account type.
             properties:
               etag:
@@ -1056,6 +1084,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1067,6 +1096,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   sku:
                     description: The account SKU.
                     properties:
@@ -1123,6 +1153,7 @@ paths:
           responses:
             '200':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -1131,6 +1162,8 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
+                    capacity: null
+                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1210,31 +1243,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the automation account type.
             properties:
               etag:
@@ -1248,6 +1289,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1259,6 +1301,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   sku:
                     description: The account SKU.
                     properties:
@@ -1321,6 +1364,7 @@ paths:
           responses:
             '200':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -1329,6 +1373,8 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
+                    capacity: null
+                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1408,31 +1454,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the automation account type.
             properties:
               etag:
@@ -1446,6 +1500,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1457,6 +1512,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   sku:
                     description: The account SKU.
                     properties:
@@ -1493,31 +1549,39 @@ paths:
           description: Created
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the automation account type.
             properties:
               etag:
@@ -1531,6 +1595,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1542,6 +1607,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   sku:
                     description: The account SKU.
                     properties:
@@ -1604,6 +1670,7 @@ paths:
           responses:
             '200':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: ContoseAutomationAccount
@@ -1612,6 +1679,8 @@ paths:
                   lastModifiedBy: myEmaild@microsoft.com
                   lastModifiedTime: '2017-03-28T18:21:15.187+00:00'
                   sku:
+                    capacity: null
+                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1619,6 +1688,7 @@ paths:
               headers: {}
             '201':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -1627,6 +1697,8 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
+                    capacity: null
+                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1637,8 +1709,10 @@ paths:
       description: Retrieve the automation keys for an account.
       operationId: Keys_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -1781,6 +1855,7 @@ paths:
                       format: date-time
                       readOnly: true
                       type: string
+                      x-nullable: true
                     id:
                       description: Gets the id.
                       readOnly: true
@@ -1790,6 +1865,7 @@ paths:
                       format: date-time
                       readOnly: true
                       type: string
+                      x-nullable: false
                 type: array
         default:
           description: Error response describing why the operation failed.

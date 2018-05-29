@@ -270,31 +270,43 @@ paths:
           description: OK
           examples:
             application/json:
-              - accountNumber: fe71c33f
-                balance: 0.27
-                code: express_1
-                name: Express 1
-                requiresFundedAccount: true
               - accountNumber: SS123
-                balance: 24.14
+                balance: 24.27
                 code: stamps_com
                 name: Stamps.com
+                primary: true
                 requiresFundedAccount: true
+                shippingProviderId: 12345
+              - accountNumber: SS1234
+                balance: 2400.27
+                code: stamps_com
+                name: Stamps.com
+                nickname: Stamps.com 2
+                primary: false
+                requiresFundedAccount: true
+                shippingProviderId: 12346
               - accountNumber: ABCR80
                 balance: 0
                 code: ups
                 name: UPS
+                primary: true
                 requiresFundedAccount: false
-              - accountNumber: '297929999'
+                shippingProviderId: 12347
+              - accountNumber: 297929999
                 balance: 0
                 code: fedex
                 name: FedEx
+                nickname: SS
+                primary: true
                 requiresFundedAccount: false
+                shippingProviderId: 12348
               - accountNumber: '913999'
-                balance: 84.86
+                balance: 0
                 code: endicia
                 name: Endicia
+                primary: true
                 requiresFundedAccount: true
+                shippingProviderId: 12349
           headers: {}
       summary: List Carriers
       tags:
@@ -342,10 +354,12 @@ paths:
           examples:
             application/json:
               accountNumber: SS123
-              balance: 24.14
+              balance: 24.27
               code: stamps_com
               name: Stamps.com
+              primary: true
               requiresFundedAccount: true
+              shippingProviderId: 12345
           headers: {}
       summary: Get Carrier
       tags:
@@ -1384,6 +1398,7 @@ paths:
         ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.  Use the [**InsuranceOptions**](http://www.shipstation.com/developer-api/#/reference/model-insuranceoptions) model.
         ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](http://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
         ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order. Use the [**AdvancedOptions**](http://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model.
+        ``tagIds``|number[]|Array of tagIds.  Each tagId identifies a tag that has been associated with this order.
       parameters:
         - in: body
           name: body
@@ -1621,6 +1636,10 @@ paths:
                 type: object
               shippingAmount:
                 type: number
+              tagIds:
+                items:
+                  type: number
+                type: array
               taxAmount:
                 type: number
               weight:
@@ -1987,6 +2006,10 @@ paths:
                   type: object
                 shippingAmount:
                   type: number
+                tagIds:
+                  items:
+                    type: number
+                  type: array
                 taxAmount:
                   type: number
                 weight:
@@ -3278,12 +3301,13 @@ paths:
          ``carrierCode`` | string, required | Identifies the carrier to be used for this label.
          ``serviceCode`` | string, required | Identifies the shipping service to be used for this label.
          ``packageCode`` | string, required | Identifies the packing type that should be used for this label.
-         ``confirmation`` | string, optional | Identifies the delivery confirmation type to be used for this label.
+         ``confirmation`` | string, optional | The type of delivery confirmation that is to be used once the shipment is created.  Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.
          ``shipDate`` | string, required | The date the shipment will be shipped.
          ``weight`` | Weight, required | Shipment's weight.  Use the [**Weight**](https://www.shipstation.com/developer-api/#/reference/model-weight) model.
          ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use the [**Dimensions**](https://www.shipstation.com/developer-api/#/reference/model-dimensions) model.
          ``shipFrom`` | Address, required | Address indicating shipment's origin.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
          ``shipTo`` | Address, required | Address indicating shipment's destination.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
+         ``returnTo`` | Address, optional | Address indicating return address displayed on the label.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
          ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.  
          ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](https://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
          ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order.  Use the [**AdvancedOptions**](https://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model. 
@@ -3422,7 +3446,7 @@ paths:
          ``toCity`` | string, optional | Destination City.
          ``weight`` | Weight, required | Shipment's weight.  Use ``Weight`` object.
          ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use ``Dimensions`` object. 
-         ``confirmation`` | string, optional | Returns rates that account for the specified delivery confirmation type.
+         ``confirmation`` | string, optional | The type of delivery confirmation that is to be used once the shipment is created.  Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.
          ``residential`` | boolean, optional | Returns rates that account for the specified delivery confirmation type. Default value: false
       parameters:
         - in: body

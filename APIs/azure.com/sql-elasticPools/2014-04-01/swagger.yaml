@@ -106,6 +106,7 @@ paths:
               body:
                 value:
                   - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-2729
+                    kind: null
                     location: Japan East
                     name: sqlcrudtest-2729
                     properties:
@@ -118,6 +119,7 @@ paths:
                       storageMB: 5000
                     type: Microsoft.Sql/servers/elasticPools
                   - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-3191
+                    kind: null
                     location: Japan East
                     name: sqlcrudtest-3191
                     properties:
@@ -130,6 +132,7 @@ paths:
                       storageMB: 5000
                     type: Microsoft.Sql/servers/elasticPools
                   - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                    kind: null
                     location: Japan East
                     name: sqlcrudtest-8102
                     properties:
@@ -174,6 +177,8 @@ paths:
           responses:
             '200':
               body: ''
+            '202':
+              body: ''
             '204':
               body: ''
     get:
@@ -208,6 +213,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
                 location: Japan East
                 name: sqlcrudtest-8102
                 properties:
@@ -268,6 +274,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
                 location: Japan East
                 name: sqlcrudtest-8102
                 properties:
@@ -292,6 +299,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
                 location: Japan East
                 name: sqlcrudtest-8102
                 properties:
@@ -359,6 +367,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
                 location: Japan East
                 name: sqlcrudtest-8102
                 properties:
@@ -373,6 +382,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
                 location: Japan East
                 name: sqlcrudtest-8102
                 properties:
@@ -398,6 +408,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
                 location: Japan East
                 name: sqlcrudtest-8102
                 properties:
@@ -412,6 +423,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
                 location: Japan East
                 name: sqlcrudtest-8102
                 properties:
@@ -428,7 +440,39 @@ paths:
 definitions:
   ElasticPool:
     allOf:
-      - $ref: '#/definitions/TrackedResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM tracked top level resource.
+        properties:
+          location:
+            description: Resource location.
+            type: string
+            x-ms-mutability:
+              - read
+              - create
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+        required:
+          - location
+        type: object
     description: Represents a database elastic pool.
     properties:
       kind:
@@ -502,7 +546,22 @@ definitions:
         type: boolean
   ElasticPoolUpdate:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - description: ARM resource.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
     description: Represents an elastic pool update.
     properties:
       properties:
@@ -514,41 +573,3 @@ definitions:
           type: string
         description: Resource tags.
         type: object
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    x-ms-azure-resource: true
-  TrackedResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM tracked top level resource.
-    properties:
-      location:
-        description: Resource location.
-        type: string
-        x-ms-mutability:
-          - read
-          - create
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags.
-        type: object
-        x-ms-mutability:
-          - read
-          - create
-          - update
-    required:
-      - location

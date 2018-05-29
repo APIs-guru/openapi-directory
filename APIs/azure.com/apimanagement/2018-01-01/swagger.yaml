@@ -250,29 +250,32 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            description: Error Body contract.
+            description: Error Response.
             properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
       tags:
         - Policy
       x-ms-examples:
@@ -437,6 +440,33 @@ definitions:
         description: Property name.
         type: string
   ErrorResponse:
+    description: Error Response.
+    properties:
+      error:
+        description: Error Body contract.
+        properties:
+          code:
+            description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+            type: string
+          details:
+            description: 'The list of invalid fields send in request, in case of validation error.'
+            items:
+              description: Error Field contract.
+              properties:
+                code:
+                  description: Property level error code.
+                  type: string
+                message:
+                  description: Human-readable representation of property-level error.
+                  type: string
+                target:
+                  description: Property name.
+                  type: string
+            type: array
+          message:
+            description: Human-readable representation of the error.
+            type: string
+  ErrorResponseBody:
     description: Error Body contract.
     properties:
       code:
@@ -489,6 +519,8 @@ definitions:
         enum:
           - xml
           - xml-link
+          - rawxml
+          - rawxml-link
         type: string
         x-ms-enum:
           modelAsString: true
@@ -498,6 +530,10 @@ definitions:
               value: xml
             - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
               value: xml-link
+            - description: The contents are inline and Content type is a non XML encoded policy document.
+              value: rawxml
+            - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
+              value: rawxml-link
       policyContent:
         description: Json escaped Xml Encoded contents of the Policy.
         type: string

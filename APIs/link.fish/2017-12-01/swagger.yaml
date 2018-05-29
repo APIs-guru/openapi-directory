@@ -208,7 +208,7 @@ paths:
               });
         - lang: Curl
           source: |-
-            curl https://api.link.fish/Url/apps \
+            curl https://api.link.fish/Urls/apps \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com"
@@ -324,7 +324,7 @@ paths:
               });
         - lang: Curl
           source: |-
-            curl https://api.link.fish/Url/browser-data \
+            curl https://api.link.fish/Urls/browser-data \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com"
@@ -417,7 +417,7 @@ paths:
             });
         - lang: Curl
           source: |-
-            curl https://api.link.fish/Url/browser-screenshot \
+            curl https://api.link.fish/Urls/browser-screenshot \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com" \
@@ -511,7 +511,7 @@ paths:
               });
         - lang: Curl
           source: |-
-            curl https://api.link.fish/Url/data \
+            curl https://api.link.fish/Urls/data \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com"
@@ -594,7 +594,7 @@ paths:
               });
         - lang: Curl
           source: |-
-            curl https://api.link.fish/Url/geo-coordinates \
+            curl https://api.link.fish/Urls/geo-coordinates \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com"
@@ -699,7 +699,7 @@ paths:
               });
         - lang: Curl
           source: |-
-            curl https://api.link.fish/Url/social-media \
+            curl https://api.link.fish/Urls/social-media \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com"

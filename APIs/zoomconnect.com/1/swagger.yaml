@@ -906,6 +906,11 @@ paths:
           name: read
           required: false
           type: boolean
+        - description: return only inbox messages which are a reply to the message with the given message id
+          in: query
+          name: repliesToMessageId
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -1830,9 +1835,20 @@ definitions:
         type: integer
       read:
         type: boolean
+      repliedToMessage:
+        $ref: '#/definitions/WebServiceMessageLink'
       toNumber:
         type: string
       userDataField:
+        type: string
+  WebServiceMessageLink:
+    description: WebServiceMessageLink
+    properties:
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      messageId:
         type: string
   WebServiceMessages:
     description: WebServiceMessages

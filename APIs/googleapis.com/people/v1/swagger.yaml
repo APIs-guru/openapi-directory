@@ -275,9 +275,11 @@ paths:
             * relationshipInterests
             * relationshipStatuses
             * residences
+            * sipAddresses
             * skills
             * taglines
             * urls
+            * userDefined
           in: query
           name: personFields
           type: string
@@ -548,9 +550,11 @@ paths:
             * relationshipInterests
             * relationshipStatuses
             * residences
+            * sipAddresses
             * skills
             * taglines
             * urls
+            * userDefined
           in: query
           name: personFields
           type: string
@@ -757,7 +761,9 @@ paths:
             * phoneNumbers
             * relations
             * residences
+            * sipAddresses
             * urls
+            * userDefined
           in: query
           name: updatePersonFields
           type: string
@@ -818,8 +824,8 @@ definitions:
         type: string
       type:
         description: |-
-          The type of the address. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the address. The type can be custom or one of these predefined
+          values:
 
           * `home`
           * `work`
@@ -949,8 +955,7 @@ definitions:
       contactGroupId:
         description: |-
           The contact group ID for the contact group membership. The contact group
-          ID can be custom or predefined. Possible values include, but are not
-          limited to, the following:
+          ID can be custom or one of these predefined values:
 
           *  `myContacts`
           *  `starred`
@@ -1060,8 +1065,8 @@ definitions:
         description: Metadata about the email address.
       type:
         description: |-
-          The type of the email address. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the email address. The type can be custom or one of these
+          predefined values:
 
           * `home`
           * `work`
@@ -1100,8 +1105,8 @@ definitions:
         description: Metadata about the event.
       type:
         description: |-
-          The type of the event. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the event. The type can be custom or one of these predefined
+          values:
 
           * `anniversary`
           * `other`
@@ -1138,9 +1143,8 @@ definitions:
         description: Metadata about the gender.
       value:
         description: |-
-          The gender for the person. The gender can be custom or predefined.
-          Possible values include, but are not limited to, the
-          following:
+          The gender for the person. The gender can be custom or one of these
+          predefined values:
 
           * `male`
           * `female`
@@ -1174,8 +1178,8 @@ definitions:
         description: Metadata about the IM client.
       protocol:
         description: |-
-          The protocol of the IM client. The protocol can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The protocol of the IM client. The protocol can be custom or one of these
+          predefined values:
 
           * `aim`
           * `msn`
@@ -1189,8 +1193,8 @@ definitions:
         type: string
       type:
         description: |-
-          The type of the IM client. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the IM client. The type can be custom or one of these
+          predefined values:
 
           * `home`
           * `work`
@@ -1442,8 +1446,8 @@ definitions:
         type: string
       type:
         description: |-
-          The type of the organization. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the organization. The type can be custom or  one of these
+          predefined values:
 
           * `work`
           * `school`
@@ -1598,6 +1602,11 @@ definitions:
           with a max length of 27 characters, in the form of
           `people/`<var>person_id</var>.
         type: string
+      sipAddresses:
+        description: The person's SIP addresses.
+        items:
+          $ref: '#/definitions/SipAddress'
+        type: array
       skills:
         description: The person's skills.
         items:
@@ -1707,8 +1716,8 @@ definitions:
         description: Metadata about the phone number.
       type:
         description: |-
-          The type of the phone number. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the phone number. The type can be custom or one of these
+          predefined values:
 
           * `home`
           * `work`
@@ -1784,8 +1793,8 @@ definitions:
         type: string
       type:
         description: |-
-          The person's relation to the other person. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following values:
+          The person's relation to the other person. The type can be custom or one of
+          these predefined values:
 
           * `spouse`
           * `child`
@@ -1818,8 +1827,7 @@ definitions:
       value:
         description: |-
           The kind of relationship the person is looking for. The value can be custom
-          or predefined. Possible values include, but are not limited to, the
-          following values:
+          or one of these predefined values:
 
           * `friend`
           * `date`
@@ -1840,8 +1848,8 @@ definitions:
         description: Metadata about the relationship status.
       value:
         description: |-
-          The relationship status. The value can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The relationship status. The value can be custom or one of these
+          predefined values:
 
           * `single`
           * `inARelationship`
@@ -1867,6 +1875,36 @@ definitions:
         description: Metadata about the residence.
       value:
         description: The address of the residence.
+        type: string
+    type: object
+  SipAddress:
+    description: |-
+      A person's SIP address. Session Initial Protocol addresses are used for VoIP
+      communications to make voice or video calls over the internet.
+    properties:
+      formattedType:
+        description: |-
+          The read-only type of the SIP address translated and formatted in the
+          viewer's account locale or the `Accept-Language` HTTP header locale.
+        type: string
+      metadata:
+        $ref: '#/definitions/FieldMetadata'
+        description: Metadata about the SIP address.
+      type:
+        description: |-
+          The type of the SIP address. The type can be custom or or one of these
+          predefined values:
+
+          * `home`
+          * `work`
+          * `mobile`
+          * `other`
+        type: string
+      value:
+        description: |-
+          The SIP address in the
+          [RFC 3261 19.1](https://tools.ietf.org/html/rfc3261#section-19.1) SIP URI
+          format.
         type: string
     type: object
   Skill:
@@ -2022,8 +2060,8 @@ definitions:
         description: Metadata about the URL.
       type:
         description: |-
-          The type of the URL. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the URL. The type can be custom or one of these predefined
+          values:
 
           * `home`
           * `work`

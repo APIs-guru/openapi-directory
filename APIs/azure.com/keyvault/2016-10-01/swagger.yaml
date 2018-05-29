@@ -2790,6 +2790,15 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: JsonWebKeyCurveName
+          values:
+            - description: 'The NIST P-256 elliptic curve, AKA SECG curve SECP256R1.'
+              value: P-256
+            - description: 'The NIST P-384 elliptic curve, AKA SECG curve SECP384R1.'
+              value: P-384
+            - description: 'The NIST P-521 elliptic curve, AKA SECG curve SECP521R1.'
+              value: P-521
+            - description: The SECG SECP256K1 elliptic curve.
+              value: SECP256K1
       d:
         description: 'RSA private exponent, or the D component of an EC private key.'
         format: base64url
@@ -2879,6 +2888,15 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: DeletionRecoveryLevel
+          values:
+            - description: Soft-delete is not enabled for this vault. A DELETE operation results in immediate and irreversible data loss.
+              value: Purgeable
+            - description: 'Soft-delete is enabled for this vault; A priveleged user may trigger an immediate, irreversible deletion(purge) of a deleted entity.'
+              value: Recoverable+Purgeable
+            - description: 'Soft-delete is enabled for this vault and purge has been disabled. A deleted entity will remain in this state until recovered, or the end of the retention interval.'
+              value: Recoverable
+            - description: 'Soft-delete is enabled for this vault, and the subscription is protected against immediate deletion.'
+              value: Recoverable+ProtectedSubscription
         x-nullable: false
   KeyBundle:
     description: A KeyBundle consisting of a WebKey plus its attributes.
@@ -2932,7 +2950,7 @@ definitions:
             name: JsonWebKeyOperation
         type: array
       key_size:
-        description: 'The key size in bytes. For example, 1024 or 2048.'
+        description: 'The key size in bits. For example: 2048, 3072, or 4096 for RSA.'
         format: int32
         type: integer
       kty:
@@ -3046,7 +3064,7 @@ definitions:
         description: Indicates if the private key can be exported.
         type: boolean
       key_size:
-        description: The key size in bytes. For example;  1024 or 2048.
+        description: 'The key size in bits. For example: 2048, 3072, or 4096 for RSA.'
         format: int32
         type: integer
       kty:

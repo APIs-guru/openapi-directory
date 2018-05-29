@@ -336,8 +336,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/OperationStatusResponse'
         '202':
           description: Accepted
         '204':
@@ -688,8 +686,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/OperationStatusResponse'
         '202':
           description: Accepted
       tags:
@@ -759,8 +755,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/OperationStatusResponse'
         '202':
           description: Accepted
         '204':
@@ -1006,8 +1000,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/OperationStatusResponse'
         '202':
           description: Accepted
       tags:
@@ -1017,55 +1009,9 @@ definitions:
   AccessUri:
     description: A disk access SAS uri.
     properties:
-      properties:
-        $ref: '#/definitions/AccessUriOutput'
-        description: Operation output data (raw JSON)
-        x-ms-client-flatten: true
-  AccessUriOutput:
-    description: 'Azure properties, including output.'
-    properties:
-      output:
-        $ref: '#/definitions/AccessUriRaw'
-        description: Operation output data (raw JSON)
-        x-ms-client-flatten: true
-  AccessUriRaw:
-    description: This object gets 'bubbled up' through flattening.
-    properties:
       accessSAS:
         description: A SAS uri for accessing a disk.
         readOnly: true
-        type: string
-  ApiError:
-    description: Api error.
-    properties:
-      code:
-        description: The error code.
-        type: string
-      details:
-        description: The Api error details
-        items:
-          $ref: '#/definitions/ApiErrorBase'
-        type: array
-      innererror:
-        $ref: '#/definitions/InnerError'
-        description: The Api inner error
-      message:
-        description: The error message.
-        type: string
-      target:
-        description: The target of the particular error.
-        type: string
-  ApiErrorBase:
-    description: Api error base.
-    properties:
-      code:
-        description: The error code.
-        type: string
-      message:
-        description: The error message.
-        type: string
-      target:
-        description: The target of the particular error.
         type: string
   CreationData:
     description: Data used when creating a disk.
@@ -1248,15 +1194,6 @@ definitions:
         type: integer
     required:
       - id
-  InnerError:
-    description: Inner error details.
-    properties:
-      errordetail:
-        description: The internal error message or exception dump.
-        type: string
-      exceptiontype:
-        description: The exception type.
-        type: string
   KeyVaultAndKeyReference:
     description: 'Key Vault Key Url and vault id of KeK, KeK is optional and when provided is used to unwrap the encryptionKey'
     properties:
@@ -1281,31 +1218,6 @@ definitions:
     required:
       - secretUrl
       - sourceVault
-  OperationStatusResponse:
-    description: Operation status response
-    properties:
-      endTime:
-        description: End time of the operation
-        format: date-time
-        readOnly: true
-        type: string
-      error:
-        $ref: '#/definitions/ApiError'
-        description: Api error
-        readOnly: true
-      name:
-        description: Operation ID
-        readOnly: true
-        type: string
-      startTime:
-        description: Start time of the operation
-        format: date-time
-        readOnly: true
-        type: string
-      status:
-        description: Operation status
-        readOnly: true
-        type: string
   Resource:
     description: The Resource model definition.
     properties:

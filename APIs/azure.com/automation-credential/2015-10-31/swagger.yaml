@@ -42,12 +42,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/credentialoperations'
       operationId: Credential_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -75,16 +78,26 @@ paths:
               value:
                 description: Gets or sets a list of credentials.
                 items:
+                  allOf:
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                   description: Definition of the credential.
                   properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Gets the name of the credential.
-                      readOnly: true
-                      type: string
                     properties:
                       description: Definition of the credential properties
                       properties:
@@ -93,6 +106,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -101,15 +115,11 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         userName:
                           description: Gets the user name of the credential.
                           readOnly: true
                           type: string
-                    type:
-                      description: Resource type
-                      readOnly: true
-                      type: string
-                  x-ms-azure-resource: true
                 type: array
       tags:
         - Credential
@@ -1547,12 +1557,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/credentialoperations'
       operationId: Credential_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1606,12 +1619,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/credentialoperations'
       operationId: Credential_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1636,16 +1652,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the credential.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the credential.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the credential properties
                 properties:
@@ -1654,6 +1680,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1662,15 +1689,11 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   userName:
                     description: Gets the user name of the credential.
                     readOnly: true
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1710,12 +1733,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/credentialoperations'
       operationId: Credential_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1762,16 +1788,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the credential.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the credential.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the credential properties
                 properties:
@@ -1780,6 +1816,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1788,15 +1825,11 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   userName:
                     description: Gets the user name of the credential.
                     readOnly: true
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1842,12 +1875,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/credentialoperations'
       operationId: Credential_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1900,16 +1936,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the credential.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the credential.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the credential properties
                 properties:
@@ -1918,6 +1964,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1926,28 +1973,34 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   userName:
                     description: Gets the user name of the credential.
                     readOnly: true
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         '201':
           description: Created
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the credential.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the credential.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the credential properties
                 properties:
@@ -1956,6 +2009,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1964,15 +2018,11 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   userName:
                     description: Gets the user name of the credential.
                     readOnly: true
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

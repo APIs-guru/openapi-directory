@@ -232,7 +232,6 @@ paths:
         - NetworkInterfaces
       x-ms-long-running-operation: true
 definitions:
-  BackendAddressPoolPropertiesFormat: {}
   EffectiveNetworkSecurityGroup:
     description: Effective network security group.
     properties:
@@ -479,7 +478,6 @@ definitions:
           properties:
             $ref: '#/definitions/SubnetPropertiesFormat'
             x-ms-client-flatten: true
-  InboundNatRulePropertiesFormat: {}
   NetworkInterface:
     allOf:
       - properties:
@@ -771,6 +769,3 @@ definitions:
             description: Resource ID.
             type: string
         x-ms-azure-resource: true
-  NetworkSecurityGroupPropertiesFormat: {}
-  PublicIPAddressPropertiesFormat: {}
-  SubnetPropertiesFormat: {}

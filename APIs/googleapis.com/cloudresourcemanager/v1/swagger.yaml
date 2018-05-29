@@ -340,6 +340,11 @@ paths:
         `resourcemanager.projects.create` on the specified parent for the new
         project. The parent is identified by a specified ResourceId,
         which must include both an ID and a type, such as organization.
+
+        This method does not associate the new project with a billing account.
+        You can set or update the billing account associated with a project using
+        the [`projects.updateBillingInfo`]
+        (/billing/reference/rest/v1/projects/updateBillingInfo) method.
       operationId: cloudresourcemanager.projects.create
       parameters:
         - in: body
@@ -831,7 +836,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Clears a `Policy` from a resource.
-      operationId: cloudresourcemanager.organizations.clearOrgPolicy
+      operationId: cloudresourcemanager.projects.clearOrgPolicy
       parameters:
         - in: body
           name: body
@@ -852,7 +857,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getEffectiveOrgPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -873,7 +878,7 @@ paths:
         Gets the effective `Policy` on a resource. This is the result of merging
         `Policies` in the resource hierarchy. The returned `Policy` will not have
         an `etag`set because it is a computed `Policy` across multiple resources.
-      operationId: cloudresourcemanager.organizations.getEffectiveOrgPolicy
+      operationId: cloudresourcemanager.projects.getEffectiveOrgPolicy
       parameters:
         - in: body
           name: body
@@ -896,7 +901,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -969,7 +974,7 @@ paths:
         values including `POLICY_TYPE_NOT_SET` for the `policy_type oneof`. The
         `etag` value can be used with `SetOrgPolicy()` to create or update a
         `Policy` during read-modify-write.
-      operationId: cloudresourcemanager.organizations.getOrgPolicy
+      operationId: cloudresourcemanager.projects.getOrgPolicy
       parameters:
         - in: body
           name: body
@@ -992,7 +997,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:listAvailableOrgPolicyConstraints':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1010,7 +1015,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists `Constraints` that could be applied on the specified resource.
-      operationId: cloudresourcemanager.organizations.listAvailableOrgPolicyConstraints
+      operationId: cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
       parameters:
         - in: body
           name: body
@@ -1033,7 +1038,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:listOrgPolicies':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1051,7 +1056,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists all the `Policies` set for a particular resource.
-      operationId: cloudresourcemanager.organizations.listOrgPolicies
+      operationId: cloudresourcemanager.projects.listOrgPolicies
       parameters:
         - in: body
           name: body
@@ -1074,7 +1079,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1144,7 +1149,7 @@ paths:
 
         Not supplying an `etag` on the request `Policy` results in an unconditional
         write of the `Policy`.
-      operationId: cloudresourcemanager.organizations.setOrgPolicy
+      operationId: cloudresourcemanager.projects.setOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1165,7 +1170,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1342,7 +1347,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` or `joe@example.com`.
+             account. For example, `alice@gmail.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1617,7 +1622,7 @@ definitions:
       reason:
         description: |-
           Concise user-visible strings indicating why an action cannot be performed
-          on a resource. Maximum lenth of 200 characters.
+          on a resource. Maximum length of 200 characters.
 
           Example: 'Holds production API key'
         type: string

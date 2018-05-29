@@ -135,9 +135,12 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates an existing snapshot. Note that certain properties of a
-        snapshot are not modifiable.
-        [ALPHA] This method is a part of a closed Alpha API.
+        Updates an existing snapshot.<br><br>
+        Lists the names of the snapshots on this topic.<br><br>
+        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.
+        Note that certain properties of a snapshot are not modifiable.
       operationId: pubsub.projects.snapshots.patch
       parameters:
         - in: body
@@ -163,20 +166,35 @@ paths:
       tags:
         - projects
     put:
-      description: Creates the given topic with the given name.
-      operationId: pubsub.projects.topics.create
+      description: |-
+        Creates a snapshot from the requested subscription.<br><br>
+        Lists the names of the snapshots on this topic.<br><br>
+        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.
+        If the snapshot already exists, returns `ALREADY_EXISTS`.
+        If the requested subscription doesn't exist, returns `NOT_FOUND`.
+        If the backlog in the subscription is too old -- and the resulting snapshot
+        would expire in less than 1 hour -- then `FAILED_PRECONDITION` is returned.
+        See also the `Snapshot.expire_time` field. If the name is not provided in
+        the request, the server will assign a random
+        name for this snapshot on the same project as the subscription, conforming
+        to the [resource name format](https://cloud.google.com/pubsub/docs/overview#names).
+        The generated
+        name is populated in the returned Snapshot object. Note that for REST API
+        requests, you must specify a name in the request.
+      operationId: pubsub.projects.snapshots.create
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/CreateSnapshotRequest'
         - description: |-
-            The name of the topic. It must have the format
-            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
-            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
-            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
-            signs (`%`). It must be between 3 and 255 characters in length, and it
-            must not start with `"goog"`.
+            Optional user-provided name for this snapshot.
+            If the name is not provided in the request, the server will assign a random
+            name for this snapshot on the same project as the subscription.
+            Note that for REST API requests, you must specify a name.
+            Format is `projects/{project}/snapshots/{snap}`.
           in: path
           name: name
           required: true
@@ -186,7 +204,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/Snapshot'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -197,8 +215,11 @@ paths:
   '/v1/{project}/snapshots':
     get:
       description: |-
-        Lists the existing snapshots.
-        [ALPHA] This method is a part of a closed Alpha API.
+        Lists the existing snapshots.<br><br>
+        Lists the names of the snapshots on this topic.<br><br>
+        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.
       operationId: pubsub.projects.snapshots.list
       parameters:
         - description: Maximum number of snapshots to return.
@@ -352,7 +373,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: pubsub.projects.topics.getIamPolicy
+      operationId: pubsub.projects.snapshots.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -407,7 +428,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: pubsub.projects.topics.setIamPolicy
+      operationId: pubsub.projects.snapshots.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -457,7 +478,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: pubsub.projects.topics.testIamPermissions
+      operationId: pubsub.projects.snapshots.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -486,11 +507,15 @@ paths:
   '/v1/{snapshot}':
     delete:
       description: |-
-        Removes an existing snapshot. All messages retained in the snapshot
+        Removes an existing snapshot. <br><br>
+        Lists the names of the snapshots on this topic.<br><br>
+        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.
+        When the snapshot is deleted, all messages retained in the snapshot
         are immediately dropped. After a snapshot is deleted, a new one may be
         created with the same name, but the new one has no association with the old
         snapshot or its subscription, unless the same subscription is specified.
-        [ALPHA] This method is a part of a closed Alpha API.
       operationId: pubsub.projects.snapshots.delete
       parameters:
         - description: |-
@@ -515,8 +540,11 @@ paths:
         - projects
     get:
       description: |-
-        Gets the configuration details of a snapshot.
-        [ALPHA] This method is a part of a closed Alpha API.
+        Gets the configuration details of a snapshot.<br><br>
+        Lists the names of the snapshots on this topic.<br><br>
+        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.
       operationId: pubsub.projects.snapshots.get
       parameters:
         - description: |-
@@ -833,8 +861,11 @@ paths:
     post:
       description: |-
         Seeks an existing subscription to a point in time or to a given snapshot,
-        whichever is provided in the request.
-        [ALPHA] This method is a part of a closed Alpha API.
+        whichever is provided in the request.<br><br>
+        Lists the names of the snapshots on this topic.<br><br>
+        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.
       operationId: pubsub.projects.subscriptions.seek
       parameters:
         - in: body
@@ -930,8 +961,10 @@ paths:
   '/v1/{topic}/snapshots':
     get:
       description: |-
-        Lists the names of the snapshots on this topic.
-        [ALPHA] This method is a part of a closed Alpha API.
+        Lists the names of the snapshots on this topic.<br><br>
+        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.
       operationId: pubsub.projects.topics.snapshots.list
       parameters:
         - description: Maximum number of snapshot names to return.
@@ -1102,7 +1135,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` or `joe@example.com`.
+             account. For example, `alice@gmail.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1126,7 +1159,11 @@ definitions:
         type: string
     type: object
   CreateSnapshotRequest:
-    description: Request for the `CreateSnapshot` method.
+    description: |-
+      Request for the `CreateSnapshot` method.<br><br>
+      <b>ALPHA:</b> This feature is part of an alpha release. This API might be changed in
+      backward-incompatible ways and is not recommended for production use.
+      It is not subject to any SLA or deprecation policy.
     properties:
       subscription:
         description: |-
@@ -1155,7 +1192,12 @@ definitions:
     properties: {}
     type: object
   ListSnapshotsResponse:
-    description: Response for the `ListSnapshots` method.
+    description: |-
+      Response for the `ListSnapshots` method.<br><br>
+      Lists the names of the snapshots on this topic.<br><br>
+      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      changed in backward-incompatible ways and is not recommended for production
+      use. It is not subject to any SLA or deprecation policy.
     properties:
       nextPageToken:
         description: |-
@@ -1185,8 +1227,11 @@ definitions:
     type: object
   ListTopicSnapshotsResponse:
     description: |-
-      Response for the `ListTopicSnapshots` method.
-      [ALPHA] This method is a part of a closed Alpha API.
+      Response for the `ListTopicSnapshots` method.<br><br>
+      Lists the names of the snapshots on this topic.<br><br>
+      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      changed in backward-incompatible ways and is not recommended for production
+      use. It is not subject to any SLA or deprecation policy.
     properties:
       nextPageToken:
         description: |-
@@ -1268,12 +1313,12 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
       `members` to a `role`, where the members can be user accounts, Google groups,
       Google domains, and service accounts. A `role` is a named list of permissions
       defined by IAM.
 
-      **Example**
+      **JSON Example**
 
           {
             "bindings": [
@@ -1283,7 +1328,7 @@ definitions:
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
                 ]
               },
               {
@@ -1292,6 +1337,20 @@ definitions:
               }
             ]
           }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -1450,7 +1509,12 @@ definitions:
         description: The message.
     type: object
   SeekRequest:
-    description: Request for the `Seek` method.
+    description: |-
+      Request for the `Seek` method.<br><br>
+      Lists the names of the snapshots on this topic.<br><br>
+      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      changed in backward-incompatible ways and is not recommended for production
+      use. It is not subject to any SLA or deprecation policy.
     properties:
       snapshot:
         description: |-
@@ -1489,7 +1553,12 @@ definitions:
           might reject them.
     type: object
   Snapshot:
-    description: A snapshot resource.
+    description: |-
+      A snapshot resource.<br><br>
+      Lists the names of the snapshots on this topic.<br><br>
+      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      changed in backward-incompatible ways and is not recommended for production
+      use. It is not subject to any SLA or deprecation policy.
     properties:
       expireTime:
         description: |-
@@ -1546,8 +1615,11 @@ definitions:
           If `retain_acked_messages` is true, then this also configures the retention
           of acknowledged messages, and thus configures how far back in time a `Seek`
           can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-          minutes.
-          [ALPHA] This field is a part of a closed Alpha API.
+          minutes.<br><br>
+          Lists the names of the snapshots on this topic.<br><br>
+          <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          changed in backward-incompatible ways and is not recommended for production
+          use. It is not subject to any SLA or deprecation policy.
         format: google-duration
         type: string
       name:
@@ -1570,8 +1642,11 @@ definitions:
           Indicates whether to retain acknowledged messages. If true, then
           messages are not expunged from the subscription's backlog, even if they are
           acknowledged, until they fall out of the `message_retention_duration`
-          window.
-          [ALPHA] This field is a part of a closed Alpha API.
+          window.<br><br>
+          Lists the names of the snapshots on this topic.<br><br>
+          <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          changed in backward-incompatible ways and is not recommended for production
+          use. It is not subject to any SLA or deprecation policy.
         type: boolean
       topic:
         description: |-
@@ -1619,11 +1694,16 @@ definitions:
         type: string
     type: object
   UpdateSnapshotRequest:
-    description: Request for the UpdateSnapshot method.
+    description: |-
+      Request for the UpdateSnapshot method.<br><br>
+      Lists the names of the snapshots on this topic.<br><br>
+      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      changed in backward-incompatible ways and is not recommended for production
+      use. It is not subject to any SLA or deprecation policy.
     properties:
       snapshot:
         $ref: '#/definitions/Snapshot'
-        description: The updated snpashot object.
+        description: The updated snapshot object.
       updateMask:
         description: |-
           Indicates which fields in the provided snapshot to update.

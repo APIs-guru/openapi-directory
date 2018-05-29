@@ -1431,7 +1431,8 @@ paths:
             body:
               filters:
                 - column: TimeGenerated
-                  filter: < ago(30d)
+                  operator: '>'
+                  value: '2017-09-01T00:00:00'
               table: Heartbeat
             resourceGroupName: OIAutoRest5123
             subscriptionId: 00000000-0000-0000-0000-00000000000
@@ -1791,6 +1792,7 @@ paths:
                   - common: false
                     display: false
                     displayName: TenantId
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: true
@@ -1827,6 +1829,7 @@ paths:
                   - common: false
                     display: false
                     displayName: MG
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: true
@@ -1844,6 +1847,7 @@ paths:
                   - common: true
                     display: false
                     displayName: SourceSystem
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -1880,6 +1884,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Description
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -1892,6 +1897,7 @@ paths:
                   - common: false
                     display: true
                     displayName: TimeGenerated
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -1928,6 +1934,7 @@ paths:
                   - common: true
                     display: true
                     displayName: Computer
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -1952,6 +1959,7 @@ paths:
                   - common: false
                     display: true
                     displayName: HelpLink
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -1963,6 +1971,7 @@ paths:
                   - common: false
                     display: true
                     displayName: AlertName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -1974,6 +1983,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertDescription
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -1985,6 +1995,7 @@ paths:
                   - common: false
                     display: true
                     displayName: AlertState
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -1996,6 +2007,7 @@ paths:
                   - common: false
                     display: true
                     displayName: PriorityNumber
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2007,6 +2019,7 @@ paths:
                   - common: false
                     display: true
                     displayName: HostName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2019,6 +2032,7 @@ paths:
                   - common: false
                     display: false
                     displayName: StateType
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2030,6 +2044,7 @@ paths:
                   - common: false
                     display: true
                     displayName: AlertSeverity
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2041,6 +2056,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SourceDisplayName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2052,6 +2068,7 @@ paths:
                   - common: false
                     display: false
                     displayName: QueryExecutionStartTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2063,6 +2080,7 @@ paths:
                   - common: false
                     display: false
                     displayName: QueryExecutionEndTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2074,6 +2092,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Query
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2085,6 +2104,7 @@ paths:
                   - common: false
                     display: false
                     displayName: RemediationJobId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2096,6 +2116,7 @@ paths:
                   - common: false
                     display: false
                     displayName: RemediationRunbookName
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2107,6 +2128,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertRuleId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2118,6 +2140,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertRuleInstanceId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2129,6 +2152,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ThresholdOperator
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2140,6 +2164,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ThresholdValue
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2151,6 +2176,7 @@ paths:
                   - common: false
                     display: false
                     displayName: LinkToSearchResults
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2162,6 +2188,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ServiceDeskConnectionName
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2173,6 +2200,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ServiceDeskId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2184,6 +2212,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ServiceDeskWorkItemLink
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2195,6 +2224,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ServiceDeskWorkItemType
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2206,6 +2236,7 @@ paths:
                   - common: true
                     display: false
                     displayName: ResourceId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2221,6 +2252,7 @@ paths:
                   - common: true
                     display: false
                     displayName: ResourceType
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2234,6 +2266,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ResourceValue
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2245,6 +2278,7 @@ paths:
                   - common: false
                     display: true
                     displayName: RootObjectName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2256,6 +2290,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ObjectDisplayName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2267,6 +2302,7 @@ paths:
                   - common: false
                     display: true
                     displayName: AlertPriority
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2278,6 +2314,7 @@ paths:
                   - common: false
                     display: false
                     displayName: SourceFullName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2289,6 +2326,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2300,6 +2338,7 @@ paths:
                   - common: false
                     display: true
                     displayName: RepeatCount
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2311,6 +2350,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ResolvedBy
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2322,6 +2362,7 @@ paths:
                   - common: false
                     display: false
                     displayName: LastModifiedBy
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2333,6 +2374,7 @@ paths:
                   - common: false
                     display: true
                     displayName: TimeRaised
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2344,6 +2386,7 @@ paths:
                   - common: false
                     display: false
                     displayName: TimeResolved
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2355,6 +2398,7 @@ paths:
                   - common: false
                     display: true
                     displayName: TimeLastModified
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2366,6 +2410,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertContext
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2377,6 +2422,7 @@ paths:
                   - common: false
                     display: false
                     displayName: TicketId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2388,6 +2434,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom1
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2399,6 +2446,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom2
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2410,6 +2458,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom3
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2421,6 +2470,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom4
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2432,6 +2482,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom5
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2443,6 +2494,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom6
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2454,6 +2506,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom7
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2465,6 +2518,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom8
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2476,6 +2530,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom9
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2487,6 +2542,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Custom10
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2498,6 +2554,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ManagementGroupName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2513,6 +2570,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertUniqueId
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: false
@@ -2524,6 +2582,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertTypeDescription
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2535,6 +2594,7 @@ paths:
                   - common: false
                     display: true
                     displayName: AlertTypeNumber
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2546,6 +2606,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertError
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2557,6 +2618,7 @@ paths:
                   - common: false
                     display: false
                     displayName: StatusDescription
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2568,6 +2630,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertStatus
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2579,6 +2642,7 @@ paths:
                   - common: false
                     display: false
                     displayName: TriggerId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2590,6 +2654,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Url
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2601,6 +2666,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ValueDescription
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2612,6 +2678,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AlertValue
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2623,6 +2690,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Comments
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2634,6 +2702,7 @@ paths:
                   - common: false
                     display: false
                     displayName: TemplateId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2645,6 +2714,7 @@ paths:
                   - common: false
                     display: false
                     displayName: FlagsDescription
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2656,6 +2726,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Flags
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2667,6 +2738,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ValueFlagsDescription
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2678,6 +2750,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ValueFlags
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2689,6 +2762,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Expression
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2700,6 +2774,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ApplicationName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2713,6 +2788,7 @@ paths:
                   - common: true
                     display: true
                     displayName: OperationName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2726,6 +2802,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Role
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2742,6 +2819,7 @@ paths:
                   - common: false
                     display: false
                     displayName: RoleInstance
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2753,6 +2831,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csUserAgent
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2764,6 +2843,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ApplicationTypeVersion
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2775,6 +2855,7 @@ paths:
                   - common: false
                     display: false
                     displayName: sPort
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2786,6 +2867,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ResponseCode
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2797,6 +2879,7 @@ paths:
                   - common: true
                     display: false
                     displayName: OperationVersion
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2809,6 +2892,7 @@ paths:
                   - common: true
                     display: true
                     displayName: Category
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2823,6 +2907,7 @@ paths:
                   - common: true
                     display: true
                     displayName: ResultType
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2835,6 +2920,7 @@ paths:
                   - common: true
                     display: false
                     displayName: ResultSignature
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2847,6 +2933,7 @@ paths:
                   - common: true
                     display: false
                     displayName: ResultDescription
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -2859,6 +2946,7 @@ paths:
                   - common: true
                     display: true
                     displayName: DurationMs
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2871,6 +2959,7 @@ paths:
                   - common: false
                     display: false
                     displayName: CallerIpAddress
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2883,6 +2972,7 @@ paths:
                   - common: true
                     display: false
                     displayName: CorrelationId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2897,6 +2987,7 @@ paths:
                   - common: true
                     display: true
                     displayName: Resource
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2911,6 +3002,7 @@ paths:
                   - common: true
                     display: false
                     displayName: ResourceGroup
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2925,6 +3017,7 @@ paths:
                   - common: true
                     display: false
                     displayName: ResourceProvider
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2939,6 +3032,7 @@ paths:
                   - common: true
                     display: false
                     displayName: SubscriptionId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2953,6 +3047,7 @@ paths:
                   - common: false
                     display: true
                     displayName: RunbookName_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2964,6 +3059,7 @@ paths:
                   - common: false
                     display: true
                     displayName: JobId_g
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -2975,6 +3071,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Caller_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2986,6 +3083,7 @@ paths:
                   - common: false
                     display: true
                     displayName: StreamType_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -2997,6 +3095,7 @@ paths:
                   - common: false
                     display: true
                     displayName: RemoteIPCountry
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3010,6 +3109,7 @@ paths:
                   - common: false
                     display: false
                     displayName: RemoteIPLatitude
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3023,6 +3123,7 @@ paths:
                   - common: false
                     display: false
                     displayName: RemoteIPLongitude
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3036,6 +3137,7 @@ paths:
                   - common: false
                     display: true
                     displayName: MaliciousIP
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3048,6 +3150,7 @@ paths:
                   - common: false
                     display: false
                     displayName: IndicatorThreatType
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3060,6 +3163,7 @@ paths:
                   - common: false
                     display: false
                     displayName: TLPLevel
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3072,6 +3176,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Confidence
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3084,6 +3189,7 @@ paths:
                   - common: true
                     display: true
                     displayName: Severity
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3097,6 +3203,7 @@ paths:
                   - common: false
                     display: false
                     displayName: FirstReportedDateTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3109,6 +3216,7 @@ paths:
                   - common: false
                     display: false
                     displayName: LastReportedDateTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3121,6 +3229,7 @@ paths:
                   - common: false
                     display: false
                     displayName: IsActive
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3133,6 +3242,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ReportReferenceLink
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: true
@@ -3145,6 +3255,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AdditionalInformation
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: true
@@ -3157,6 +3268,7 @@ paths:
                   - common: true
                     display: true
                     displayName: Level
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3173,6 +3285,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ActivityStatus
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3184,6 +3297,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ActivitySubstatus
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3195,6 +3309,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Caller
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3206,6 +3321,7 @@ paths:
                   - common: false
                     display: false
                     displayName: HTTPRequest
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3217,6 +3333,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Properties
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3228,6 +3345,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventSubmissionTimestamp
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3239,6 +3357,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Authorization
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3250,6 +3369,7 @@ paths:
                   - common: false
                     display: false
                     displayName: OperationId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3261,6 +3381,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventDataId
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: true
@@ -3273,6 +3394,7 @@ paths:
                   - common: false
                     display: true
                     displayName: MetricName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3284,6 +3406,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Total
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3295,6 +3418,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Count
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3306,6 +3430,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Maximum
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3317,6 +3442,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Minimum
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3328,6 +3454,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Average
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3339,6 +3466,7 @@ paths:
                   - common: false
                     display: true
                     displayName: TimeGrain
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3350,6 +3478,7 @@ paths:
                   - common: false
                     display: true
                     displayName: UnitName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3361,6 +3490,7 @@ paths:
                   - common: true
                     display: true
                     displayName: SourceIP
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3372,6 +3502,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ProcessName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3383,6 +3514,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ProcessID
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3394,6 +3526,7 @@ paths:
                   - common: false
                     display: false
                     displayName: FilePath
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3405,6 +3538,7 @@ paths:
                   - common: true
                     display: false
                     displayName: Message
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3418,6 +3552,7 @@ paths:
                   - common: false
                     display: false
                     displayName: StartTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3429,6 +3564,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EndTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3440,6 +3576,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Version
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3451,6 +3588,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Group
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3462,6 +3600,7 @@ paths:
                   - common: false
                     display: false
                     displayName: GroupId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3473,6 +3612,7 @@ paths:
                   - common: false
                     display: true
                     displayName: GroupSourceName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3484,6 +3624,7 @@ paths:
                   - common: false
                     display: true
                     displayName: GroupSource
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3495,6 +3636,7 @@ paths:
                   - common: false
                     display: true
                     displayName: GroupFullName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3506,6 +3648,7 @@ paths:
                   - common: false
                     display: false
                     displayName: SourceComputerId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -3518,6 +3661,7 @@ paths:
                   - common: false
                     display: true
                     displayName: EventId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3532,6 +3676,7 @@ paths:
                   - common: false
                     display: true
                     displayName: QueryType
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3543,6 +3688,7 @@ paths:
                   - common: false
                     display: false
                     displayName: PartitionKey
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: false
@@ -3557,6 +3703,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ProviderGuid
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3571,6 +3718,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventSourceName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3585,6 +3733,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Pid
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3599,6 +3748,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Tid
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3613,6 +3763,7 @@ paths:
                   - common: false
                     display: false
                     displayName: OpcodeName
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3627,6 +3778,7 @@ paths:
                   - common: false
                     display: false
                     displayName: KeywordName
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3641,6 +3793,7 @@ paths:
                   - common: false
                     display: true
                     displayName: TaskName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3655,6 +3808,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ChannelName
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3669,6 +3823,7 @@ paths:
                   - common: false
                     display: false
                     displayName: RowKey
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: false
@@ -3683,6 +3838,7 @@ paths:
                   - common: false
                     display: false
                     displayName: AzureDeploymentID
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3699,6 +3855,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventMessage
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3713,6 +3870,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Source
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3724,6 +3882,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventLog
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3735,6 +3894,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventCategory
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3746,6 +3906,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventLevel
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3757,6 +3918,7 @@ paths:
                   - common: false
                     display: true
                     displayName: EventLevelName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3768,6 +3930,7 @@ paths:
                   - common: false
                     display: false
                     displayName: UserName
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3779,6 +3942,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ParameterXml
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3790,6 +3954,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventData
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3801,6 +3966,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventID
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3812,6 +3978,7 @@ paths:
                   - common: false
                     display: false
                     displayName: RenderedDescription
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3823,6 +3990,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SourceLocation
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3841,6 +4009,7 @@ paths:
                   - common: false
                     display: true
                     displayName: DestinationAddress
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3858,6 +4027,7 @@ paths:
                   - common: false
                     display: true
                     displayName: User
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3871,6 +4041,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Method
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3884,6 +4055,7 @@ paths:
                   - common: false
                     display: true
                     displayName: DestinationPortNumber
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3897,6 +4069,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SourcePortNumber
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -3910,6 +4083,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Duration_ms
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3922,6 +4096,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ResponseTTLB_ms
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3934,6 +4109,7 @@ paths:
                   - common: false
                     display: true
                     displayName: HOPName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3946,6 +4122,7 @@ paths:
                   - common: false
                     display: true
                     displayName: QueryString
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3958,6 +4135,7 @@ paths:
                   - common: false
                     display: true
                     displayName: DBErrorCode
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3969,6 +4147,7 @@ paths:
                   - common: false
                     display: true
                     displayName: DataCenter
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3981,6 +4160,7 @@ paths:
                   - common: false
                     display: true
                     displayName: QueryResult
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -3992,6 +4172,7 @@ paths:
                   - common: false
                     display: true
                     displayName: StatusCode
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4003,6 +4184,7 @@ paths:
                   - common: false
                     display: true
                     displayName: URIString
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4014,6 +4196,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Recipient
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4025,6 +4208,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SenderName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4036,6 +4220,7 @@ paths:
                   - common: false
                     display: true
                     displayName: AttachmentFileSize
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4047,6 +4232,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SYNSENT_NEWCONNESTAB
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4058,6 +4244,7 @@ paths:
                   - common: false
                     display: true
                     displayName: PeerListSize
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4069,6 +4256,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ComputerIP
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4080,6 +4268,7 @@ paths:
                   - common: false
                     display: true
                     displayName: OSType
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4091,6 +4280,7 @@ paths:
                   - common: false
                     display: true
                     displayName: OSName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4102,6 +4292,7 @@ paths:
                   - common: false
                     display: true
                     displayName: OSMajorVersion
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4113,6 +4304,7 @@ paths:
                   - common: false
                     display: true
                     displayName: OSMinorVersion
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4124,6 +4316,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SCAgentChannel
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4135,6 +4328,7 @@ paths:
                   - common: false
                     display: true
                     displayName: IsGatewayInstalled
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4146,6 +4340,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ComputerEnvironment
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4157,6 +4352,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Solutions
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4168,6 +4364,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ClientInfo_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4179,6 +4376,7 @@ paths:
                   - common: false
                     display: true
                     displayName: RequestUri_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4190,6 +4388,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Id_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4201,6 +4400,7 @@ paths:
                   - common: false
                     display: true
                     displayName: HttpStatusCode_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4212,6 +4412,7 @@ paths:
                   - common: false
                     display: true
                     displayName: InstanceId_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4223,6 +4424,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ClientIP_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4234,6 +4436,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ClientPort_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4245,6 +4448,7 @@ paths:
                   - common: false
                     display: true
                     displayName: HttpMethod_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4256,6 +4460,7 @@ paths:
                   - common: false
                     display: true
                     displayName: RequestQuery_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4267,6 +4472,7 @@ paths:
                   - common: false
                     display: true
                     displayName: UserAgent_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4278,6 +4484,7 @@ paths:
                   - common: false
                     display: true
                     displayName: HttpStatus_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4289,6 +4496,7 @@ paths:
                   - common: false
                     display: true
                     displayName: HttpVersion_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4300,6 +4508,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ReceivedBytes_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4311,6 +4520,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SentBytes_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4322,6 +4532,7 @@ paths:
                   - common: false
                     display: true
                     displayName: TimeTaken_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4333,6 +4544,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SslEnabled_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4344,6 +4556,7 @@ paths:
                   - common: false
                     display: true
                     displayName: HealthyHostCount_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4355,6 +4568,7 @@ paths:
                   - common: false
                     display: true
                     displayName: UnHealthyHostCount_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4366,6 +4580,7 @@ paths:
                   - common: false
                     display: true
                     displayName: RequestCount_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4377,6 +4592,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Latency_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4388,6 +4604,7 @@ paths:
                   - common: false
                     display: true
                     displayName: FailedRequestCount_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4399,6 +4616,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Throughput_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4410,6 +4628,7 @@ paths:
                   - common: false
                     display: true
                     displayName: VnetResourceGuid_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4421,6 +4640,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SubnetPrefix_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4432,6 +4652,7 @@ paths:
                   - common: false
                     display: true
                     displayName: MacAddress_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4443,6 +4664,7 @@ paths:
                   - common: false
                     display: true
                     displayName: RuleName_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4454,6 +4676,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Direction_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4465,6 +4688,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Priority_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4476,6 +4700,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Type_s
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4487,6 +4712,7 @@ paths:
                   - common: false
                     display: true
                     displayName: MatchedConnections_d
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4498,6 +4724,7 @@ paths:
                   - common: false
                     display: false
                     displayName: OperationStatus
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4509,6 +4736,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Detail
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4520,6 +4748,7 @@ paths:
                   - common: false
                     display: true
                     displayName: OperationCategory
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4531,6 +4760,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Solution
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4543,6 +4773,7 @@ paths:
                   - common: false
                     display: true
                     displayName: OperationKey
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4554,6 +4785,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ErrorId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4565,6 +4797,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ObjectName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4576,6 +4809,7 @@ paths:
                   - common: false
                     display: true
                     displayName: CounterName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4587,6 +4821,7 @@ paths:
                   - common: false
                     display: true
                     displayName: InstanceName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4598,6 +4833,7 @@ paths:
                   - common: false
                     display: true
                     displayName: CounterValue
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4609,6 +4845,7 @@ paths:
                   - common: false
                     display: true
                     displayName: CounterPath
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4620,6 +4857,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Min
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4631,6 +4869,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Max
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4642,6 +4881,7 @@ paths:
                   - common: false
                     display: false
                     displayName: SampleCount
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4653,6 +4893,7 @@ paths:
                   - common: false
                     display: false
                     displayName: BucketStartTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4664,6 +4905,7 @@ paths:
                   - common: false
                     display: false
                     displayName: BucketEndTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4675,6 +4917,7 @@ paths:
                   - common: false
                     display: true
                     displayName: StandardDeviation
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4686,6 +4929,7 @@ paths:
                   - common: true
                     display: true
                     displayName: IPAddress
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4697,6 +4941,7 @@ paths:
                   - common: true
                     display: true
                     displayName: CallerIPAddress
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4708,6 +4953,7 @@ paths:
                   - common: false
                     display: false
                     displayName: ServiceName
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -4721,6 +4967,7 @@ paths:
                   - common: false
                     display: false
                     displayName: StorageAccount
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4732,6 +4979,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ApplicationTypeName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4745,6 +4993,7 @@ paths:
                   - common: false
                     display: true
                     displayName: UpgradeDomains
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4756,6 +5005,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ServiceTypeName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4769,6 +5019,7 @@ paths:
                   - common: false
                     display: true
                     displayName: PartitionId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -4782,6 +5033,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ActorType
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4793,6 +5045,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ActorId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4804,6 +5057,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ActorIdKind
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4815,6 +5069,7 @@ paths:
                   - common: false
                     display: true
                     displayName: IsStateful
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4826,6 +5081,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ReplicaOrInstanceId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4837,6 +5093,7 @@ paths:
                   - common: false
                     display: true
                     displayName: NodeName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4848,6 +5105,7 @@ paths:
                   - common: false
                     display: true
                     displayName: NodeId
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -4859,6 +5117,7 @@ paths:
                   - common: false
                     display: true
                     displayName: CountOfWaitingMethodCalls
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4870,6 +5129,7 @@ paths:
                   - common: false
                     display: true
                     displayName: MethodName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4881,6 +5141,7 @@ paths:
                   - common: false
                     display: true
                     displayName: MethodSignature
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4892,6 +5153,7 @@ paths:
                   - common: false
                     display: true
                     displayName: MethodExecutionTimeTicks
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4903,6 +5165,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Exception
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4915,6 +5178,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SaveStateExecutionTimeTicks
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4926,6 +5190,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ReplicaId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4938,6 +5203,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SlowCancellationTimeMillis
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4949,6 +5215,7 @@ paths:
                   - common: false
                     display: true
                     displayName: WasCanceled
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4960,6 +5227,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ActualCancellationTimeMillis
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4971,6 +5239,7 @@ paths:
                   - common: false
                     display: true
                     displayName: InstanceId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -4982,6 +5251,7 @@ paths:
                   - common: false
                     display: false
                     displayName: EventTime
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -4993,6 +5263,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Facility
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5004,6 +5275,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SeverityLevel
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5015,6 +5287,7 @@ paths:
                   - common: false
                     display: true
                     displayName: SyslogMessage
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -5026,6 +5299,7 @@ paths:
                   - common: false
                     display: false
                     displayName: HostIP
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5037,6 +5311,7 @@ paths:
                   - common: false
                     display: true
                     displayName: ResourceUri
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5048,6 +5323,7 @@ paths:
                   - common: false
                     display: true
                     displayName: LinkedResourceUri
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5059,6 +5335,7 @@ paths:
                   - common: false
                     display: true
                     displayName: DataType
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5070,6 +5347,7 @@ paths:
                   - common: false
                     display: true
                     displayName: BatchesWithinSla
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5081,6 +5359,7 @@ paths:
                   - common: false
                     display: true
                     displayName: BatchesOutsideSla
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5092,6 +5371,7 @@ paths:
                   - common: false
                     display: true
                     displayName: BatchesCapped
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5103,6 +5383,7 @@ paths:
                   - common: false
                     display: true
                     displayName: TotalBatches
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5114,6 +5395,7 @@ paths:
                   - common: false
                     display: true
                     displayName: AvgLatencyInSeconds
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5125,6 +5407,7 @@ paths:
                   - common: false
                     display: true
                     displayName: Quantity
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5136,6 +5419,7 @@ paths:
                   - common: false
                     display: true
                     displayName: QuantityUnit
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5147,6 +5431,7 @@ paths:
                   - common: false
                     display: true
                     displayName: IsBillable
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5158,6 +5443,7 @@ paths:
                   - common: false
                     display: true
                     displayName: MeterId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5169,6 +5455,7 @@ paths:
                   - common: false
                     display: true
                     displayName: LinkedMeterId
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5180,6 +5467,7 @@ paths:
                   - common: false
                     display: false
                     displayName: FileUri
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: false
@@ -5191,6 +5479,7 @@ paths:
                   - common: false
                     display: false
                     displayName: FileOffset
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: false
@@ -5202,6 +5491,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Date
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: false
@@ -5213,6 +5503,7 @@ paths:
                   - common: false
                     display: false
                     displayName: Time
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: false
@@ -5224,6 +5515,7 @@ paths:
                   - common: false
                     display: true
                     displayName: sSiteName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5235,6 +5527,7 @@ paths:
                   - common: false
                     display: false
                     displayName: sComputerName
+                    extraction: null
                     facet: true
                     hidden: true
                     indexed: true
@@ -5246,6 +5539,7 @@ paths:
                   - common: false
                     display: true
                     displayName: sIP
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5257,6 +5551,7 @@ paths:
                   - common: false
                     display: true
                     displayName: csMethod
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5268,6 +5563,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csUriStem
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5279,6 +5575,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csUriQuery
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5290,6 +5587,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csUserName
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5301,6 +5599,7 @@ paths:
                   - common: false
                     display: true
                     displayName: cIP
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5312,6 +5611,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csVersion
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5323,6 +5623,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csCookie
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: false
@@ -5334,6 +5635,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csReferer
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5345,6 +5647,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csHost
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5356,6 +5659,7 @@ paths:
                   - common: false
                     display: true
                     displayName: scStatus
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5367,6 +5671,7 @@ paths:
                   - common: false
                     display: false
                     displayName: scSubStatus
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5378,6 +5683,7 @@ paths:
                   - common: false
                     display: false
                     displayName: scWin32Status
+                    extraction: null
                     facet: true
                     hidden: false
                     indexed: true
@@ -5389,6 +5695,7 @@ paths:
                   - common: false
                     display: false
                     displayName: scBytes
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5400,6 +5707,7 @@ paths:
                   - common: false
                     display: false
                     displayName: csBytes
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5411,6 +5719,7 @@ paths:
                   - common: false
                     display: true
                     displayName: TimeTaken
+                    extraction: null
                     facet: false
                     hidden: false
                     indexed: true
@@ -5422,18 +5731,23 @@ paths:
                   - common: false
                     display: true
                     displayName: Type
+                    extraction: null
                     facet: true
                     hidden: true
                     indexed: true
                     name: Type
+                    ownerType: null
                     stored: true
                     type: string
                   - common: false
                     display: false
+                    displayName: null
+                    extraction: null
                     facet: false
                     hidden: true
                     indexed: true
                     name: id
+                    ownerType: null
                     stored: true
                     type: uuid
             '202': {}
@@ -6155,9 +6469,11 @@ definitions:
       column:
         description: The column of the table over which the given query should run
         type: string
-      filter:
-        description: A query to to run over the provided table and column to purge the corresponding data.
+      operator:
+        description: A query operator to evaluate over the provided column and value(s).
         type: string
+      value:
+        description: 'the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= ''2017-09-01'') or array of values.'
   WorkspacePurgeResponse:
     description: Response containing operationId for a specific purge action.
     properties:

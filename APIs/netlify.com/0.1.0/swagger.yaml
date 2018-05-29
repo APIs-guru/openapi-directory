@@ -330,6 +330,10 @@ paths:
   /forms:
     get:
       operationId: listForms
+      parameters:
+        - in: query
+          name: site_id
+          type: string
       responses:
         '200':
           description: OK
@@ -1115,6 +1119,34 @@ paths:
             type: array
         default:
           $ref: '#/responses/error'
+  '/submissions/{submission_id}':
+    delete:
+      operationId: deleteSubmission
+      responses:
+        '204':
+          description: Deleted
+        default:
+          $ref: '#/responses/error'
+    get:
+      operationId: listFormSubmission
+      parameters:
+        - in: query
+          name: query
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/submission'
+            type: array
+        default:
+          $ref: '#/responses/error'
+    parameters:
+      - in: path
+        name: submission_id
+        required: true
+        type: string
   '/{account_slug}/members':
     get:
       operationId: listMembersForAccount

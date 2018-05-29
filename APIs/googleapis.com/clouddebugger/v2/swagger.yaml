@@ -26,7 +26,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: clouddebugger
 externalDocs:
-  url: 'http://cloud.google.com/debugger'
+  url: 'https://cloud.google.com/debugger'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -630,7 +630,9 @@ definitions:
           `expressions` = `[ message.id, message.count ]`.
         type: string
       stackFrames:
-        description: The stack at breakpoint time.
+        description: |-
+          The stack at breakpoint time, where stack_frames[0] represents the most
+          recently entered function.
         items:
           $ref: '#/definitions/StackFrame'
         type: array

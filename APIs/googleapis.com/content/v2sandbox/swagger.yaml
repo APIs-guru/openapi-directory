@@ -67,12 +67,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -985,7 +985,7 @@ definitions:
         format: uint32
         type: integer
       reason:
-        description: The reason for the cancellation. Orders that are cancelled with a noInventory reason will lead to the removal of the product from POG until you make an update to that product. This will not affect your Shopping ads.
+        description: The reason for the cancellation. Orders that are cancelled with a noInventory reason will lead to the removal of the product from Shopping Actions until you make an update to that product. This will not affect your Shopping ads.
         type: string
       reasonText:
         description: The explanation of the reason.

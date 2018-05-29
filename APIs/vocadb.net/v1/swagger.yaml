@@ -435,6 +435,24 @@ paths:
           name: languagePreference
           required: false
           type: string
+        - enum:
+            - None
+            - AdditionalNames
+            - Artists
+            - Description
+            - Discs
+            - Identifiers
+            - MainPicture
+            - Names
+            - PVs
+            - ReleaseEvent
+            - Tags
+            - Tracks
+            - WebLinks
+          in: query
+          name: fields
+          required: false
+          type: string
       produces:
         - application/json
         - text/json
@@ -448,7 +466,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/AlbumContract'
+              $ref: '#/definitions/AlbumForApiContract'
             type: array
       summary: 'Gets list of upcoming or recent albums, same as front page.'
       tags:
@@ -482,6 +500,24 @@ paths:
           name: languagePreference
           required: false
           type: string
+        - enum:
+            - None
+            - AdditionalNames
+            - Artists
+            - Description
+            - Discs
+            - Identifiers
+            - MainPicture
+            - Names
+            - PVs
+            - ReleaseEvent
+            - Tags
+            - Tracks
+            - WebLinks
+          in: query
+          name: fields
+          required: false
+          type: string
       produces:
         - application/json
         - text/json
@@ -495,7 +531,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/AlbumContract'
+              $ref: '#/definitions/AlbumForApiContract'
             type: array
       summary: 'Gets list of top rated albums, same as front page.'
       tags:
@@ -5989,6 +6025,8 @@ definitions:
           - Romaji
           - English
         type: string
+      deleted:
+        type: boolean
       description:
         type: string
       discType:
@@ -6446,7 +6484,7 @@ definitions:
     properties:
       latestAlbums:
         items:
-          $ref: '#/definitions/AlbumContract'
+          $ref: '#/definitions/AlbumForApiContract'
         type: array
       latestEvents:
         items:
@@ -6458,7 +6496,7 @@ definitions:
         type: array
       popularAlbums:
         items:
-          $ref: '#/definitions/AlbumContract'
+          $ref: '#/definitions/AlbumForApiContract'
         type: array
       popularSongs:
         items:
@@ -6731,6 +6769,8 @@ definitions:
     type: object
   EntryThumbForApiContract:
     properties:
+      mime:
+        type: string
       urlSmallThumb:
         type: string
       urlThumb:

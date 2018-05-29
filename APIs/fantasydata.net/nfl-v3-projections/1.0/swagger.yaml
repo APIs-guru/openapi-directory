@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/DfsSlatesByDate/{date}':
     get:
-      operationId: 5a05bf1514338d154014bf24
+      operationId: DfsSlatesByDate
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -65,7 +65,7 @@ paths:
       summary: DFS Slates by Date
   '/{format}/DfsSlatesByWeek/{season}/{week}':
     get:
-      operationId: 5a05bf1c14338d154014bf25
+      operationId: DfsSlatesByWeek
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -100,7 +100,7 @@ paths:
       summary: DFS Slates by Week
   '/{format}/FantasyDefenseProjectionsByGame/{season}/{week}':
     get:
-      operationId: 57a021f314338d0a985480f1
+      operationId: ProjectedFantasyDefenseGameStatsWDfsSalaries
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -139,7 +139,7 @@ paths:
       summary: Projected Fantasy Defense Game Stats (w/ DFS Salaries)
   '/{format}/FantasyDefenseProjectionsBySeason/{season}':
     get:
-      operationId: 57a021f314338d0a985480f0
+      operationId: ProjectedFantasyDefenseSeasonStatsWByeWeekAdp
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -169,7 +169,7 @@ paths:
       summary: 'Projected Fantasy Defense Season Stats (w/ Bye Week, ADP)'
   '/{format}/PlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}':
     get:
-      operationId: 57a021f314338d0a985480f2
+      operationId: ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -211,7 +211,7 @@ paths:
       summary: 'Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerGameProjectionStatsByTeam/{season}/{week}/{team}':
     get:
-      operationId: 57a021f314338d0a985480f4
+      operationId: ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -255,7 +255,7 @@ paths:
       summary: 'Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerGameProjectionStatsByWeek/{season}/{week}':
     get:
-      operationId: 57a021f314338d0a985480f7
+      operationId: ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -294,7 +294,7 @@ paths:
       summary: 'Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerSeasonProjectionStats/{season}':
     get:
-      operationId: 57a021f314338d0a985480f5
+      operationId: ProjectedPlayerSeasonStatsWByeWeekAdp
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -324,7 +324,7 @@ paths:
       summary: 'Projected Player Season Stats (w/ Bye Week, ADP)'
   '/{format}/PlayerSeasonProjectionStatsByPlayerID/{season}/{playerid}':
     get:
-      operationId: 57a021f314338d0a985480f3
+      operationId: ProjectedPlayerSeasonStatsByPlayerWByeWeekAdp
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -357,7 +357,7 @@ paths:
       summary: 'Projected Player Season Stats by Player (w/ Bye Week, ADP)'
   '/{format}/PlayerSeasonProjectionStatsByTeam/{season}/{team}':
     get:
-      operationId: 57a021f314338d0a985480f6
+      operationId: ProjectedPlayerSeasonStatsByTeamWByeWeekAdp
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

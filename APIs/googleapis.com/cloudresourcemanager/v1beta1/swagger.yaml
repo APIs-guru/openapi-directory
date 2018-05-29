@@ -278,6 +278,11 @@ paths:
         Google Cloud Storage. The parent is identified by a specified
         ResourceId, which must include both an ID and a type, such as
         project, folder, or organization.
+
+        This method does not associate the new project with a billing account.
+        You can set or update the billing account associated with a project using
+        the [`projects.updateBillingInfo`]
+        (/billing/reference/rest/v1/projects/updateBillingInfo) method.
       operationId: cloudresourcemanager.projects.create
       parameters:
         - in: body
@@ -1011,7 +1016,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` or `joe@example.com`.
+             account. For example, `alice@gmail.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service

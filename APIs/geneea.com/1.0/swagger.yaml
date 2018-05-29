@@ -144,6 +144,11 @@ paths:
       description: '<br/><strong>Possible options:</strong><p class="markdown">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>'
       operationId: correctionGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -223,6 +228,11 @@ paths:
       description: entitiesGet
       operationId: entitiesGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -302,6 +312,11 @@ paths:
       description: lemmatizeGet
       operationId: lemmatizeGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -381,6 +396,11 @@ paths:
       description: sentimentGet
       operationId: sentimentGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -460,6 +480,11 @@ paths:
       description: topicGet
       operationId: topicGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -564,6 +589,9 @@ definitions:
         items:
           $ref: '#/definitions/Entity'
         type: array
+      id:
+        description: Unique identifier of the document
+        type: string
       language:
         description: The used language of the document
         type: string
@@ -630,6 +658,9 @@ definitions:
   LemmatizeResponse:
     description: Response for the lemmatization
     properties:
+      id:
+        description: Unique identifier of the document
+        type: string
       language:
         description: The used language of the document
         type: string
@@ -651,6 +682,9 @@ definitions:
           - default
           - article
           - keep-everything
+        type: string
+      id:
+        description: 'Unique identifier of the document, it''s optional'
         type: string
       language:
         description: '[optional] The language of the document, auto-detection will be used if omitted'
@@ -677,6 +711,9 @@ definitions:
         type: string
       diacritized:
         type: boolean
+      id:
+        description: Unique identifier of the document
+        type: string
       language:
         description: The used language of the document
         type: string
@@ -689,6 +726,9 @@ definitions:
   SentimentResponse:
     description: Response for the sentiment analysis
     properties:
+      id:
+        description: Unique identifier of the document
+        type: string
       language:
         description: The used language of the document
         type: string
@@ -709,6 +749,9 @@ definitions:
         description: Confidence for the detected topic
         format: double
         type: number
+      id:
+        description: Unique identifier of the document
+        type: string
       labels:
         description: Probabilistic distribution over possible topic labels
         items:

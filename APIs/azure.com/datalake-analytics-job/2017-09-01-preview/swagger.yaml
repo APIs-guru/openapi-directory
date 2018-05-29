@@ -905,9 +905,9 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/CreateJobProperties'
-        description: the job specific properties.
+        description: The job specific properties.
       type:
-        description: 'the job type of the current job (Hive, USql, or Scope (for internal use only)).'
+        description: 'The job type of the current job (Hive, USql, or Scope (for internal use only)).'
         enum:
           - USql
           - Hive
@@ -925,7 +925,7 @@ definitions:
     description: The parameters used to build a new Data Lake Analytics job.
     properties:
       name:
-        description: the friendly name of the job to build.
+        description: The friendly name of the job to build.
         type: string
   CreateJobParameters:
     allOf:
@@ -934,24 +934,24 @@ definitions:
     properties:
       degreeOfParallelism:
         default: 1
-        description: 'the degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
+        description: 'The degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
         format: int32
         type: integer
       logFilePatterns:
-        description: 'the list of log file name patterns to find in the logFolder. ''*'' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt'
+        description: 'The list of log file name patterns to find in the logFolder. ''*'' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt'
         items:
           type: string
         type: array
       name:
-        description: the friendly name of the job to submit.
+        description: The friendly name of the job to submit.
         type: string
       priority:
-        description: 'the priority value to use for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0.'
+        description: 'The priority value to use for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0.'
         format: int32
         type: integer
       related:
         $ref: '#/definitions/JobRelationshipProperties'
-        description: the recurring job relationship information properties.
+        description: The recurring job relationship information properties.
     required:
       - name
   CreateJobProperties:
@@ -959,13 +959,13 @@ definitions:
     discriminator: type
     properties:
       runtimeVersion:
-        description: the runtime version of the Data Lake Analytics engine to use for the specific type of job being run.
+        description: The runtime version of the Data Lake Analytics engine to use for the specific type of job being run.
         type: string
       script:
-        description: the script to run. Please note that the maximum script size is 3 MB.
+        description: The script to run. Please note that the maximum script size is 3 MB.
         type: string
       type:
-        description: 'the job type of the current job (Hive, USql, or Scope (for internal use only)).'
+        description: 'The job type of the current job (Hive, USql, or Scope (for internal use only)).'
         type: string
     required:
       - script
@@ -978,18 +978,18 @@ definitions:
       tags:
         additionalProperties:
           type: string
-        description: the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)
+        description: The key-value pairs used to add additional metadata to the job information.
         type: object
   CreateScopeJobProperties:
     allOf:
       - $ref: '#/definitions/CreateJobProperties'
-    description: Scope job properties used when submitting Scope jobs.
+    description: Scope job properties used when submitting Scope jobs. (Only for use internally with Scope job type.)
     properties:
       notifier:
-        description: 'the list of email addresses, separated by semi-colons, to notify when the job reaches a terminal state.'
+        description: 'The list of email addresses, separated by semi-colons, to notify when the job reaches a terminal state.'
         type: string
       resources:
-        description: the list of resources that are required by the job.
+        description: The list of resources that are required by the job.
         items:
           $ref: '#/definitions/ScopeJobResource'
         type: array
@@ -1000,7 +1000,7 @@ definitions:
     description: U-SQL job properties used when submitting U-SQL jobs.
     properties:
       compileMode:
-        description: 'the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.'
+        description: 'The specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.'
         enum:
           - Semantic
           - Full
@@ -1014,26 +1014,26 @@ definitions:
     description: Error diagnostic information for failed jobs.
     properties:
       columnNumber:
-        description: the column where the error occured.
+        description: The column where the error occured.
         format: int32
         readOnly: true
         type: integer
       end:
-        description: the ending index of the error.
+        description: The ending index of the error.
         format: int32
         readOnly: true
         type: integer
       lineNumber:
-        description: the line number the error occured on.
+        description: The line number the error occured on.
         format: int32
         readOnly: true
         type: integer
       message:
-        description: the error message.
+        description: The error message.
         readOnly: true
         type: string
       severity:
-        description: the severity of the error.
+        description: The severity of the error.
         enum:
           - Warning
           - Error
@@ -1047,7 +1047,7 @@ definitions:
           modelAsString: false
           name: SeverityTypes
       start:
-        description: the starting index of the error.
+        description: The starting index of the error.
         format: int32
         readOnly: true
         type: integer
@@ -1057,20 +1057,20 @@ definitions:
     description: Hive job properties used when retrieving Hive jobs.
     properties:
       executedStatementCount:
-        description: the number of statements that have been run based on the script
+        description: The number of statements that have been run based on the script.
         format: int32
         readOnly: true
         type: integer
       logsLocation:
-        description: the Hive logs location
+        description: The Hive logs location.
         readOnly: true
         type: string
       outputLocation:
-        description: the location of Hive job output files (both execution output and results)
+        description: The location of Hive job output files (both execution output and results).
         readOnly: true
         type: string
       statementCount:
-        description: the number of statements that will be run based on the script
+        description: The number of statements that will be run based on the script.
         format: int32
         readOnly: true
         type: integer
@@ -1079,16 +1079,16 @@ definitions:
     description: A Data Lake Analytics job data path item.
     properties:
       command:
-        description: the command that this job data relates to.
+        description: The command that this job data relates to.
         readOnly: true
         type: string
       jobId:
-        description: the id of the job this data is for.
+        description: The ID of the job this data is for.
         format: uuid
         readOnly: true
         type: string
       paths:
-        description: the list of paths to all of the job data.
+        description: The list of paths to all of the job data.
         items:
           type: string
         readOnly: true
@@ -1097,53 +1097,53 @@ definitions:
     description: The Data Lake Analytics job error details.
     properties:
       description:
-        description: the error message description
+        description: The error message description.
         readOnly: true
         type: string
       details:
-        description: the details of the error message.
+        description: The details of the error message.
         readOnly: true
         type: string
       endOffset:
-        description: the end offset in the job where the error was found.
+        description: The end offset in the job where the error was found.
         format: int32
         readOnly: true
         type: integer
       errorId:
-        description: the specific identifier for the type of error encountered in the job.
+        description: The specific identifier for the type of error encountered in the job.
         readOnly: true
         type: string
       filePath:
-        description: 'the path to any supplemental error files, if any.'
+        description: 'The path to any supplemental error files, if any.'
         readOnly: true
         type: string
       helpLink:
-        description: 'the link to MSDN or Azure help for this type of error, if any.'
+        description: 'The link to MSDN or Azure help for this type of error, if any.'
         readOnly: true
         type: string
       innerError:
         $ref: '#/definitions/JobInnerError'
-        description: 'the inner error of this specific job error message, if any.'
+        description: 'The inner error of this specific job error message, if any.'
         readOnly: true
       internalDiagnostics:
-        description: 'the internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty.'
+        description: 'The internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty.'
         readOnly: true
         type: string
       lineNumber:
-        description: the specific line number in the job where the error occured.
+        description: The specific line number in the job where the error occured.
         format: int32
         readOnly: true
         type: integer
       message:
-        description: the user friendly error message for the failure.
+        description: The user friendly error message for the failure.
         readOnly: true
         type: string
       resolution:
-        description: 'the recommended resolution for the failure, if any.'
+        description: 'The recommended resolution for the failure, if any.'
         readOnly: true
         type: string
       severity:
-        description: the severity level of the failure.
+        description: The severity level of the failure.
         enum:
           - Warning
           - Error
@@ -1157,11 +1157,11 @@ definitions:
           modelAsString: false
           name: SeverityTypes
       source:
-        description: the ultimate source of the failure (usually either SYSTEM or USER).
+        description: The ultimate source of the failure (usually either SYSTEM or USER).
         readOnly: true
         type: string
       startOffset:
-        description: the start offset in the job where the error was found
+        description: The start offset in the job where the error was found
         format: int32
         readOnly: true
         type: integer
@@ -1169,11 +1169,11 @@ definitions:
     description: List of JobInfo items.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the list of JobInfo items.
+        description: The list of JobInfo items.
         items:
           $ref: '#/definitions/JobInformationBasic'
         readOnly: true
@@ -1184,16 +1184,16 @@ definitions:
     description: The extended Data Lake Analytics job information properties returned when retrieving a specific job.
     properties:
       errorMessage:
-        description: 'the error message details for the job, if the job failed.'
+        description: 'The error message details for the job, if the job failed.'
         items:
           $ref: '#/definitions/JobErrorDetails'
         readOnly: true
         type: array
       properties:
         $ref: '#/definitions/JobProperties'
-        description: the job specific properties.
+        description: The job specific properties.
       stateAuditRecords:
-        description: 'the job state audit records, indicating when various operations have been performed on this job.'
+        description: 'The job state audit records, indicating when various operations have been performed on this job.'
         items:
           $ref: '#/definitions/JobStateAuditRecord'
         readOnly: true
@@ -1205,40 +1205,40 @@ definitions:
     properties:
       degreeOfParallelism:
         default: 1
-        description: 'the degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
+        description: 'The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
         format: int32
         type: integer
       endTime:
-        description: the completion time of the job.
+        description: The completion time of the job.
         format: date-time
         readOnly: true
         type: string
       jobId:
-        description: the job's unique identifier (a GUID).
+        description: The job's unique identifier (a GUID).
         format: uuid
         readOnly: true
         type: string
       logFilePatterns:
-        description: 'the list of log file name patterns to find in the logFolder. ''*'' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt'
+        description: 'The list of log file name patterns to find in the logFolder. ''*'' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt'
         items:
           type: string
         type: array
       logFolder:
-        description: 'the log folder path to use in the following format: adl://<accountName>.azuredatalakestore.net/system/jobservice/jobs/Usql/2016/03/13/17/18/5fe51957-93bc-4de0-8ddc-c5a4753b068b/logs/.'
+        description: 'The log folder path to use in the following format: adl://<accountName>.azuredatalakestore.net/system/jobservice/jobs/Usql/2016/03/13/17/18/5fe51957-93bc-4de0-8ddc-c5a4753b068b/logs/.'
         readOnly: true
         type: string
       name:
-        description: the friendly name of the job.
+        description: The friendly name of the job.
         type: string
       priority:
-        description: 'the priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0.'
+        description: 'The priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0.'
         format: int32
         type: integer
       related:
         $ref: '#/definitions/JobRelationshipProperties'
-        description: the recurring job relationship information properties.
+        description: The recurring job relationship information properties.
       result:
-        description: the result of job execution or the current result of the running job.
+        description: The result of job execution or the current result of the running job.
         enum:
           - None
           - Succeeded
@@ -1250,12 +1250,12 @@ definitions:
           modelAsString: false
           name: JobResult
       startTime:
-        description: the start time of the job.
+        description: The start time of the job.
         format: date-time
         readOnly: true
         type: string
       state:
-        description: 'the job state. When the job is in the Ended state, refer to Result and ErrorMessage for details.'
+        description: 'The job state. When the job is in the Ended state, refer to Result and ErrorMessage for details.'
         enum:
           - Accepted
           - Compiling
@@ -1273,21 +1273,21 @@ definitions:
           modelAsString: false
           name: JobState
       submitTime:
-        description: the time the job was submitted to the service.
+        description: The time the job was submitted to the service.
         format: date-time
         readOnly: true
         type: string
       submitter:
-        description: the user or account that submitted the job.
+        description: The user or account that submitted the job.
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)
+        description: The key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)
         type: object
       type:
-        description: 'the job type of the current job (Hive, USql, or Scope (for internal use only)).'
+        description: 'The job type of the current job (Hive, USql, or Scope (for internal use only)).'
         enum:
           - USql
           - Hive
@@ -1303,48 +1303,48 @@ definitions:
     description: The Data Lake Analytics job error details.
     properties:
       component:
-        description: the component that failed.
+        description: The component that failed.
         readOnly: true
         type: string
       description:
-        description: the error message description
+        description: The error message description.
         readOnly: true
         type: string
       details:
-        description: the details of the error message.
+        description: The details of the error message.
         readOnly: true
         type: string
       diagnosticCode:
-        description: the diagnostic error code.
+        description: The diagnostic error code.
         format: int32
         readOnly: true
         type: integer
       errorId:
-        description: the specific identifier for the type of error encountered in the job.
+        description: The specific identifier for the type of error encountered in the job.
         readOnly: true
         type: string
       helpLink:
-        description: 'the link to MSDN or Azure help for this type of error, if any.'
+        description: 'The link to MSDN or Azure help for this type of error, if any.'
         readOnly: true
         type: string
       innerError:
         $ref: '#/definitions/JobInnerError'
-        description: 'the inner error of this specific job error message, if any.'
+        description: 'The inner error of this specific job error message, if any.'
         readOnly: true
       internalDiagnostics:
-        description: 'the internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty.'
+        description: 'The internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty.'
         readOnly: true
         type: string
       message:
-        description: the user friendly error message for the failure.
+        description: The user friendly error message for the failure.
         readOnly: true
         type: string
       resolution:
-        description: 'the recommended resolution for the failure, if any.'
+        description: 'The recommended resolution for the failure, if any.'
         readOnly: true
         type: string
       severity:
-        description: the severity level of the failure.
+        description: The severity level of the failure.
         enum:
           - Warning
           - Error
@@ -1358,70 +1358,70 @@ definitions:
           modelAsString: false
           name: SeverityTypes
       source:
-        description: the ultimate source of the failure (usually either SYSTEM or USER).
+        description: The ultimate source of the failure (usually either SYSTEM or USER).
         readOnly: true
         type: string
   JobPipelineInformation:
     description: 'Job Pipeline Information, showing the relationship of jobs and recurrences of those jobs in a pipeline.'
     properties:
       auHoursCanceled:
-        description: the number of job execution hours that resulted in canceled jobs.
+        description: The number of job execution hours that resulted in canceled jobs.
         format: double
         readOnly: true
         type: number
       auHoursFailed:
-        description: the number of job execution hours that resulted in failed jobs.
+        description: The number of job execution hours that resulted in failed jobs.
         format: double
         readOnly: true
         type: number
       auHoursSucceeded:
-        description: the number of job execution hours that resulted in successful jobs.
+        description: The number of job execution hours that resulted in successful jobs.
         format: double
         readOnly: true
         type: number
       lastSubmitTime:
-        description: the last time a job in this pipeline was submitted.
+        description: The last time a job in this pipeline was submitted.
         format: date-time
         readOnly: true
         type: string
       numJobsCanceled:
-        description: the number of jobs in this pipeline that have been canceled.
+        description: The number of jobs in this pipeline that have been canceled.
         format: int32
         readOnly: true
         type: integer
       numJobsFailed:
-        description: the number of jobs in this pipeline that have failed.
+        description: The number of jobs in this pipeline that have failed.
         format: int32
         readOnly: true
         type: integer
       numJobsSucceeded:
-        description: the number of jobs in this pipeline that have succeeded.
+        description: The number of jobs in this pipeline that have succeeded.
         format: int32
         readOnly: true
         type: integer
       pipelineId:
-        description: the job relationship pipeline identifier (a GUID).
+        description: The job relationship pipeline identifier (a GUID).
         format: uuid
         readOnly: true
         type: string
       pipelineName:
-        description: 'the friendly name of the job relationship pipeline, which does not need to be unique.'
+        description: 'The friendly name of the job relationship pipeline, which does not need to be unique.'
         maxLength: 260
         readOnly: true
         type: string
       pipelineUri:
-        description: 'the pipeline uri, unique, links to the originating service for this pipeline.'
+        description: 'The pipeline uri, unique, links to the originating service for this pipeline.'
         readOnly: true
         type: string
       recurrences:
-        description: the list of recurrence identifiers representing each run of this pipeline.
+        description: The list of recurrence identifiers representing each run of this pipeline.
         items:
           format: uuid
           type: string
         readOnly: true
         type: array
       runs:
-        description: the list of recurrence identifiers representing each run of this pipeline.
+        description: The list of recurrence identifiers representing each run of this pipeline.
         items:
           $ref: '#/definitions/JobPipelineRunInformation'
         readOnly: true
@@ -1430,11 +1430,11 @@ definitions:
     description: List of job pipeline information items.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the list of job pipeline information items.
+        description: The list of job pipeline information items.
         items:
           $ref: '#/definitions/JobPipelineInformation'
         readOnly: true
@@ -1443,12 +1443,12 @@ definitions:
     description: Run info for a specific job pipeline.
     properties:
       lastSubmitTime:
-        description: the time this instance was last submitted.
+        description: The time this instance was last submitted.
         format: date-time
         readOnly: true
         type: string
       runId:
-        description: the run identifier of an instance of pipeline executions (a GUID).
+        description: The run identifier of an instance of pipeline executions (a GUID).
         format: uuid
         readOnly: true
         type: string
@@ -1457,13 +1457,13 @@ definitions:
     discriminator: type
     properties:
       runtimeVersion:
-        description: the runtime version of the Data Lake Analytics engine to use for the specific type of job being run.
+        description: The runtime version of the Data Lake Analytics engine to use for the specific type of job being run.
         type: string
       script:
-        description: the script to run. Please note that the maximum script size is 3 MB.
+        description: The script to run. Please note that the maximum script size is 3 MB.
         type: string
       type:
-        description: 'the job type of the current job (Hive, USql, or Scope (for internal use only)).'
+        description: 'The job type of the current job (Hive, USql, or Scope (for internal use only)).'
         type: string
     required:
       - script
@@ -1472,58 +1472,58 @@ definitions:
     description: Recurrence job information for a specific recurrence.
     properties:
       auHoursCanceled:
-        description: the number of job execution hours that resulted in canceled jobs.
+        description: The number of job execution hours that resulted in canceled jobs.
         format: double
         readOnly: true
         type: number
       auHoursFailed:
-        description: the number of job execution hours that resulted in failed jobs.
+        description: The number of job execution hours that resulted in failed jobs.
         format: double
         readOnly: true
         type: number
       auHoursSucceeded:
-        description: the number of job execution hours that resulted in successful jobs.
+        description: The number of job execution hours that resulted in successful jobs.
         format: double
         readOnly: true
         type: number
       lastSubmitTime:
-        description: the last time a job in this recurrence was submitted.
+        description: The last time a job in this recurrence was submitted.
         format: date-time
         readOnly: true
         type: string
       numJobsCanceled:
-        description: the number of jobs in this recurrence that have been canceled.
+        description: The number of jobs in this recurrence that have been canceled.
         format: int32
         readOnly: true
         type: integer
       numJobsFailed:
-        description: the number of jobs in this recurrence that have failed.
+        description: The number of jobs in this recurrence that have failed.
         format: int32
         readOnly: true
         type: integer
       numJobsSucceeded:
-        description: the number of jobs in this recurrence that have succeeded.
+        description: The number of jobs in this recurrence that have succeeded.
         format: int32
         readOnly: true
         type: integer
       recurrenceId:
-        description: 'the recurrence identifier (a GUID), unique per activity/script, regardless of iterations. This is something to link different occurrences of the same job together.'
+        description: 'The recurrence identifier (a GUID), unique per activity/script, regardless of iterations. This is something to link different occurrences of the same job together.'
         format: uuid
         readOnly: true
         type: string
       recurrenceName:
-        description: 'the recurrence name, user friendly name for the correlation between jobs.'
+        description: 'The recurrence name, user friendly name for the correlation between jobs.'
         readOnly: true
         type: string
   JobRecurrenceInformationListResult:
     description: List of job recurrence information items.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the list of job recurrence information items.
+        description: The list of job recurrence information items.
         items:
           $ref: '#/definitions/JobRecurrenceInformation'
         readOnly: true
@@ -1532,26 +1532,26 @@ definitions:
     description: 'Job relationship information properties including pipeline information, correlation information, etc.'
     properties:
       pipelineId:
-        description: the job relationship pipeline identifier (a GUID).
+        description: The job relationship pipeline identifier (a GUID).
         format: uuid
         type: string
       pipelineName:
-        description: 'the friendly name of the job relationship pipeline, which does not need to be unique.'
+        description: 'The friendly name of the job relationship pipeline, which does not need to be unique.'
         maxLength: 260
         type: string
       pipelineUri:
-        description: 'the pipeline uri, unique, links to the originating service for this pipeline.'
+        description: 'The pipeline uri, unique, links to the originating service for this pipeline.'
         type: string
       recurrenceId:
-        description: 'the recurrence identifier (a GUID), unique per activity/script, regardless of iterations. This is something to link different occurrences of the same job together.'
+        description: 'The recurrence identifier (a GUID), unique per activity/script, regardless of iterations. This is something to link different occurrences of the same job together.'
         format: uuid
         type: string
       recurrenceName:
-        description: 'the recurrence name, user friendly name for the correlation between jobs.'
+        description: 'The recurrence name, user friendly name for the correlation between jobs.'
         maxLength: 260
         type: string
       runId:
-        description: 'the run identifier (a GUID), unique identifier of the iteration of this pipeline.'
+        description: 'The run identifier (a GUID), unique identifier of the iteration of this pipeline.'
         format: uuid
         type: string
     required:
@@ -1560,13 +1560,13 @@ definitions:
     description: The Data Lake Analytics job resources.
     properties:
       name:
-        description: the name of the resource.
+        description: The name of the resource.
         type: string
       resourcePath:
-        description: the path to the resource.
+        description: The path to the resource.
         type: string
       type:
-        description: the job resource type.
+        description: The job resource type.
         enum:
           - VertexResource
           - JobManagerResource
@@ -1582,19 +1582,19 @@ definitions:
     description: The Data Lake Analytics job state audit records for tracking the lifecycle of a job.
     properties:
       details:
-        description: the details of the audit log.
+        description: The details of the audit log.
         readOnly: true
         type: string
       newState:
-        description: the new state the job is in.
+        description: The new state the job is in.
         readOnly: true
         type: string
       requestedByUser:
-        description: the user who requests the change.
+        description: The user who requests the change.
         readOnly: true
         type: string
       timeStamp:
-        description: the time stamp that the state change took place.
+        description: The time stamp that the state change took place.
         format: date-time
         readOnly: true
         type: string
@@ -1602,45 +1602,45 @@ definitions:
     description: The Data Lake Analytics job execution statistics.
     properties:
       finalizingTimeUtc:
-        description: the job finalizing start time.
+        description: The job finalizing start time.
         format: date-time
         readOnly: true
         type: string
       lastUpdateTimeUtc:
-        description: the last update time for the statistics.
+        description: The last update time for the statistics.
         format: date-time
         readOnly: true
         type: string
       stages:
-        description: the list of stages for the job.
+        description: The list of stages for the job.
         items:
           $ref: '#/definitions/JobStatisticsVertexStage'
         readOnly: true
         type: array
   JobStatisticsVertex:
-    description: the detailed information for a vertex.
+    description: The detailed information for a vertex.
     properties:
       dataRead:
-        description: 'the amount of data read of the vertex, in bytes.'
+        description: 'The amount of data read of the vertex, in bytes.'
         format: int64
         readOnly: true
         type: integer
       executionTime:
-        description: the amount of execution time of the vertex.
+        description: The amount of execution time of the vertex.
         format: duration
         readOnly: true
         type: string
       name:
-        description: the name of the vertex.
+        description: The name of the vertex.
         readOnly: true
         type: string
       peakMemUsage:
-        description: 'the amount of peak memory usage of the vertex, in bytes.'
+        description: 'The amount of peak memory usage of the vertex, in bytes.'
         format: int64
         readOnly: true
         type: integer
       vertexId:
-        description: the id of the vertex.
+        description: The id of the vertex.
         format: uuid
         readOnly: true
         type: string
@@ -1649,57 +1649,57 @@ definitions:
     properties:
       allocatedContainerCpuCoreCount:
         $ref: '#/definitions/ResourceUsageStatistics'
-        description: the statistics information for the allocated container CPU core count.
+        description: The statistics information for the allocated container CPU core count.
       allocatedContainerMemSize:
         $ref: '#/definitions/ResourceUsageStatistics'
-        description: the statistics information for the allocated container memory size.
+        description: The statistics information for the allocated container memory size.
       dataRead:
-        description: 'the amount of data read, in bytes.'
+        description: 'The amount of data read, in bytes.'
         format: int64
         readOnly: true
         type: integer
       dataReadCrossPod:
-        description: 'the amount of data read across multiple pods, in bytes.'
+        description: 'The amount of data read across multiple pods, in bytes.'
         format: int64
         readOnly: true
         type: integer
       dataReadIntraPod:
-        description: 'the amount of data read in one pod, in bytes.'
+        description: 'The amount of data read in one pod, in bytes.'
         format: int64
         readOnly: true
         type: integer
       dataToRead:
-        description: 'the amount of data remaining to be read, in bytes.'
+        description: 'The amount of data remaining to be read, in bytes.'
         format: int64
         readOnly: true
         type: integer
       dataWritten:
-        description: 'the amount of data written, in bytes.'
+        description: 'The amount of data written, in bytes.'
         format: int64
         readOnly: true
         type: integer
       duplicateDiscardCount:
-        description: the number of duplicates that were discarded.
+        description: The number of duplicates that were discarded.
         format: int32
         readOnly: true
         type: integer
       estimatedVertexCpuCoreCount:
-        description: the estimated vertex CPU core count.
+        description: The estimated vertex CPU core count.
         format: int32
         readOnly: true
         type: integer
       estimatedVertexMemSize:
-        description: 'the estimated vertex memory size, in bytes.'
+        description: 'The estimated vertex memory size, in bytes.'
         format: int64
         readOnly: true
         type: integer
       estimatedVertexPeakCpuCoreCount:
-        description: the estimated vertex peak CPU core count.
+        description: The estimated vertex peak CPU core count.
         format: int32
         readOnly: true
         type: integer
       failedCount:
-        description: the number of failures that occured in this stage.
+        description: The number of failures that occured in this stage.
         format: int32
         readOnly: true
         type: integer
@@ -1713,100 +1713,100 @@ definitions:
         $ref: '#/definitions/JobStatisticsVertex'
         description: the vertex with the maximum peak memory usage.
       maxVertexDataRead:
-        description: 'the maximum amount of data read in a single vertex, in bytes.'
+        description: 'The maximum amount of data read in a single vertex, in bytes.'
         format: int64
         readOnly: true
         type: integer
       minVertexDataRead:
-        description: 'the minimum amount of data read in a single vertex, in bytes.'
+        description: 'The minimum amount of data read in a single vertex, in bytes.'
         format: int64
         readOnly: true
         type: integer
       readFailureCount:
-        description: the number of read failures in this stage.
+        description: The number of read failures in this stage.
         format: int32
         readOnly: true
         type: integer
       revocationCount:
-        description: the number of vertices that were revoked during this stage.
+        description: The number of vertices that were revoked during this stage.
         format: int32
         readOnly: true
         type: integer
       runningCount:
-        description: the number of currently running vertices in this stage.
+        description: The number of currently running vertices in this stage.
         format: int32
         readOnly: true
         type: integer
       scheduledCount:
-        description: the number of currently scheduled vertices in this stage
+        description: The number of currently scheduled vertices in this stage.
         format: int32
         readOnly: true
         type: integer
       stageName:
-        description: the name of this stage in job execution.
+        description: The name of this stage in job execution.
         readOnly: true
         type: string
       succeededCount:
-        description: the number of vertices that succeeded in this stage.
+        description: The number of vertices that succeeded in this stage.
         format: int32
         readOnly: true
         type: integer
       tempDataWritten:
-        description: 'the amount of temporary data written, in bytes.'
+        description: 'The amount of temporary data written, in bytes.'
         format: int64
         readOnly: true
         type: integer
       totalCount:
-        description: the total vertex count for this stage.
+        description: The total vertex count for this stage.
         format: int32
         readOnly: true
         type: integer
       totalExecutionTime:
-        description: the sum of the total execution time of all the vertices in the stage.
+        description: The sum of the total execution time of all the vertices in the stage.
         format: duration
         readOnly: true
         type: string
       totalFailedTime:
-        description: the amount of time that failed vertices took up in this stage.
+        description: The amount of time that failed vertices took up in this stage.
         format: duration
         readOnly: true
         type: string
       totalPeakMemUsage:
-        description: 'the sum of the peak memory usage of all the vertices in the stage, in bytes.'
+        description: 'The sum of the peak memory usage of all the vertices in the stage, in bytes.'
         format: int64
         readOnly: true
         type: integer
       totalProgress:
-        description: 'the current progress of this stage, as a percentage.'
+        description: 'The current progress of this stage, as a percentage.'
         format: int32
         readOnly: true
         type: integer
       totalSucceededTime:
-        description: the amount of time all successful vertices took in this stage.
+        description: The amount of time all successful vertices took in this stage.
         format: duration
         readOnly: true
         type: string
       usedVertexCpuCoreCount:
         $ref: '#/definitions/ResourceUsageStatistics'
-        description: the statistics information for the used vertex CPU core count.
+        description: The statistics information for the used vertex CPU core count.
       usedVertexPeakMemSize:
         $ref: '#/definitions/ResourceUsageStatistics'
-        description: the statistics information for the used vertex peak memory size.
+        description: The statistics information for the used vertex peak memory size.
   ResourceUsageStatistics:
-    description: the statistics information for resource usage.
+    description: The statistics information for resource usage.
     properties:
       average:
-        description: the average value.
+        description: The average value.
         format: double
         readOnly: true
         type: number
       maximum:
-        description: the maximum value.
+        description: The maximum value.
         format: int64
         readOnly: true
         type: integer
       minimum:
-        description: the minimum value.
+        description: The minimum value.
         format: int64
         readOnly: true
         type: integer
@@ -1816,44 +1816,44 @@ definitions:
     description: Scope job properties used when submitting and retrieving Scope jobs. (Only for use internally with Scope job type.)
     properties:
       notifier:
-        description: 'the list of email addresses, separated by semi-colons, to notify when the job reaches a terminal state.'
+        description: 'The list of email addresses, separated by semi-colons, to notify when the job reaches a terminal state.'
         type: string
       resources:
-        description: the list of resources that are required by the job
+        description: The list of resources that are required by the job.
         items:
           $ref: '#/definitions/ScopeJobResource'
         readOnly: true
         type: array
       rootProcessNodeId:
-        description: the ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is.
+        description: The ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is.
         readOnly: true
         type: string
       totalCompilationTime:
-        description: the total time this job spent compiling. This value should not be set by the user and will be ignored if it is.
+        description: The total time this job spent compiling. This value should not be set by the user and will be ignored if it is.
         format: duration
         readOnly: true
         type: string
       totalPausedTime:
-        description: the total time this job spent paused. This value should not be set by the user and will be ignored if it is.
+        description: The total time this job spent paused. This value should not be set by the user and will be ignored if it is.
         format: duration
         readOnly: true
         type: string
       totalQueuedTime:
-        description: the total time this job spent queued. This value should not be set by the user and will be ignored if it is.
+        description: The total time this job spent queued. This value should not be set by the user and will be ignored if it is.
         format: duration
         readOnly: true
         type: string
       totalRunningTime:
-        description: the total time this job spent executing. This value should not be set by the user and will be ignored if it is.
+        description: The total time this job spent executing. This value should not be set by the user and will be ignored if it is.
         format: duration
         readOnly: true
         type: string
       userAlgebraPath:
-        description: the algebra file path after the job has completed
+        description: The algebra file path after the job has completed.
         readOnly: true
         type: string
       yarnApplicationId:
-        description: the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is.
+        description: The ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is.
         readOnly: true
         type: string
     x-ms-discriminator-value: Scope
@@ -1861,10 +1861,10 @@ definitions:
     description: The Scope job resources. (Only for use internally with Scope job type.)
     properties:
       name:
-        description: the name of the resource.
+        description: The name of the resource.
         type: string
       path:
-        description: the path to the resource.
+        description: The path to the resource.
         type: string
   USqlJobProperties:
     allOf:
@@ -1872,11 +1872,11 @@ definitions:
     description: U-SQL job properties used when retrieving U-SQL jobs.
     properties:
       algebraFilePath:
-        description: the algebra file path after the job has completed
+        description: The algebra file path after the job has completed.
         readOnly: true
         type: string
       compileMode:
-        description: 'the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.'
+        description: 'The specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.'
         enum:
           - Semantic
           - Full
@@ -1888,52 +1888,52 @@ definitions:
           name: CompileMode
       debugData:
         $ref: '#/definitions/JobDataPath'
-        description: the job specific debug data locations.
+        description: The job specific debug data locations.
       diagnostics:
-        description: the diagnostics for the job.
+        description: The diagnostics for the job.
         items:
           $ref: '#/definitions/Diagnostics'
         readOnly: true
         type: array
       resources:
-        description: the list of resources that are required by the job
+        description: The list of resources that are required by the job.
         items:
           $ref: '#/definitions/JobResource'
         readOnly: true
         type: array
       rootProcessNodeId:
-        description: the ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is.
+        description: The ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is.
         readOnly: true
         type: string
       statistics:
         $ref: '#/definitions/JobStatistics'
-        description: the job specific statistics.
+        description: The job specific statistics.
       totalCompilationTime:
-        description: the total time this job spent compiling. This value should not be set by the user and will be ignored if it is.
+        description: The total time this job spent compiling. This value should not be set by the user and will be ignored if it is.
         format: duration
         readOnly: true
         type: string
       totalPausedTime:
-        description: the total time this job spent paused. This value should not be set by the user and will be ignored if it is.
+        description: The total time this job spent paused. This value should not be set by the user and will be ignored if it is.
         format: duration
         readOnly: true
         type: string
       totalQueuedTime:
-        description: the total time this job spent queued. This value should not be set by the user and will be ignored if it is.
+        description: The total time this job spent queued. This value should not be set by the user and will be ignored if it is.
         format: duration
         readOnly: true
         type: string
       totalRunningTime:
-        description: the total time this job spent executing. This value should not be set by the user and will be ignored if it is.
+        description: The total time this job spent executing. This value should not be set by the user and will be ignored if it is.
         format: duration
         readOnly: true
         type: string
       yarnApplicationId:
-        description: the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is.
+        description: The ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is.
         readOnly: true
         type: string
       yarnApplicationTimeStamp:
-        description: the timestamp (in ticks) for the yarn application executing the job. This value should not be set by the user and will be ignored if it is.
+        description: The timestamp (in ticks) for the yarn application executing the job. This value should not be set by the user and will be ignored if it is.
         format: int64
         readOnly: true
         type: integer
@@ -1942,17 +1942,17 @@ definitions:
     description: The parameters that can be used to update existing Data Lake Analytics job information properties. (Only for use internally with Scope job type.)
     properties:
       degreeOfParallelism:
-        description: 'the degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
+        description: 'The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
         format: int32
         type: integer
       priority:
-        description: 'the priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0.'
+        description: 'The priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0.'
         format: int32
         type: integer
       tags:
         additionalProperties:
           type: string
-        description: the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)
+        description: The key-value pairs used to add additional metadata to the job information.
         type: object
 x-ms-parameterized-host:
   hostTemplate: '{accountName}.{adlaJobDnsSuffix}'

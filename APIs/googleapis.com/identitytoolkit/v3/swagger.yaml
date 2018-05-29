@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Help the third party sites to implement federated login.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Identity Toolkit
   version: v3
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/identitytoolkit/v3/rest'
       version: v1
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -81,12 +68,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -118,8 +105,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /deleteAccount:
@@ -146,8 +131,6 @@ paths:
             $ref: '#/definitions/DeleteAccountResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -176,11 +159,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
@@ -209,8 +188,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getAccountInfo:
@@ -237,8 +214,6 @@ paths:
             $ref: '#/definitions/GetAccountInfoResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -267,8 +242,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getProjectConfig:
@@ -292,8 +265,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
@@ -316,8 +287,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
@@ -339,8 +308,6 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartyGetPublicKeysResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -377,8 +344,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /sendVerificationCode:
@@ -405,8 +370,6 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartySendVerificationCodeResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -435,8 +398,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /setProjectConfig:
@@ -463,8 +424,6 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartySetProjectConfigResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -493,8 +452,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /signupNewUser:
@@ -521,8 +478,6 @@ paths:
             $ref: '#/definitions/SignupNewUserResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -551,11 +506,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
@@ -584,8 +535,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyCustomToken:
@@ -612,8 +561,6 @@ paths:
             $ref: '#/definitions/VerifyCustomTokenResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -642,8 +589,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyPhoneNumber:
@@ -670,8 +615,6 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -873,6 +816,13 @@ definitions:
         type: string
       sessionId:
         description: The session_id passed by client.
+        type: string
+      tenantId:
+        description: 'For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.'
+        type: string
+      tenantProjectNumber:
+        description: Tenant project number to be used for idp discovery.
+        format: uint64
         type: string
     type: object
   IdentitytoolkitRelyingpartyDeleteAccountRequest:
@@ -1221,6 +1171,13 @@ definitions:
       photoUrl:
         description: The photo url of the user.
         type: string
+      tenantId:
+        description: 'For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.'
+        type: string
+      tenantProjectNumber:
+        description: Tenant project number to be used for idp discovery.
+        format: uint64
+        type: string
     type: object
   IdentitytoolkitRelyingpartyUploadAccountRequest:
     description: Request to upload user account in batch.
@@ -1313,6 +1270,13 @@ definitions:
       sessionId:
         description: 'Session ID, which should match the one in previous createAuthUri request.'
         type: string
+      tenantId:
+        description: 'For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.'
+        type: string
+      tenantProjectNumber:
+        description: Tenant project number to be used for idp discovery.
+        format: uint64
+        type: string
     type: object
   IdentitytoolkitRelyingpartyVerifyCustomTokenRequest:
     description: Request to verify a custom token
@@ -1362,6 +1326,13 @@ definitions:
       returnSecureToken:
         description: Whether return sts id token and refresh token instead of gitkit token.
         type: boolean
+      tenantId:
+        description: 'For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.'
+        type: string
+      tenantProjectNumber:
+        description: Tenant project number to be used for idp discovery.
+        format: uint64
+        type: string
     type: object
   IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest:
     description: Request for Identitytoolkit-VerifyPhoneNumber

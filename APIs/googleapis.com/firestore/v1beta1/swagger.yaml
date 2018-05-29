@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  title: Google Cloud Firestore
+  title: Cloud Firestore
   version: v1beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -380,8 +380,8 @@ paths:
         - projects
   '/v1beta1/{name}':
     delete:
-      description: Deletes a document.
-      operationId: firestore.projects.databases.documents.delete
+      description: Deletes an index.
+      operationId: firestore.projects.databases.indexes.delete
       parameters:
         - description: |-
             When set to `true`, the target document must exist.
@@ -396,8 +396,8 @@ paths:
           name: currentDocument.updateTime
           type: string
         - description: |-
-            The resource name of the Document to delete. In the format:
-            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            The index name. For example:
+            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
           in: path
           name: name
           required: true
@@ -416,8 +416,8 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single document.
-      operationId: firestore.projects.databases.documents.get
+      description: Gets an index.
+      operationId: firestore.projects.databases.indexes.get
       parameters:
         - collectionFormat: multi
           description: |-
@@ -429,8 +429,8 @@ paths:
           name: mask.fieldPaths
           type: array
         - description: |-
-            The resource name of the Document to get. In the format:
-            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            The name of the index. For example:
+            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
           in: path
           name: name
           required: true
@@ -450,7 +450,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Document'
+            $ref: '#/definitions/Index'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1911,7 +1911,8 @@ definitions:
         description: |-
           An array value.
 
-          Cannot contain another array value.
+          Cannot directly contain another array value, though can contain an
+          map which contains another array.
       booleanValue:
         description: A boolean value.
         type: boolean

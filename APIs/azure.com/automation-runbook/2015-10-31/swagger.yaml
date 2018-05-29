@@ -47,8 +47,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -77,31 +79,39 @@ paths:
                 description: Gets or sets a list of runbooks.
                 items:
                   allOf:
-                    - description: The Resource definition.
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM tracked top level resource
                       properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
                         location:
-                          description: Resource location
+                          description: The Azure Region where the resource lives
                           type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
+                          x-ms-mutability:
+                            - read
+                            - create
                         tags:
                           additionalProperties:
                             type: string
-                          description: Resource tags
+                          description: Resource tags.
                           type: object
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      required:
-                        - location
-                      x-ms-azure-resource: true
+                          x-ms-mutability:
+                            - read
+                            - create
+                            - update
                   description: Definition of the runbook type.
                   properties:
                     etag:
@@ -114,6 +124,7 @@ paths:
                           description: Gets or sets the creation time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -124,6 +135,7 @@ paths:
                               description: Gets or sets the creation time of the runbook draft.
                               format: date-time
                               type: string
+                              x-nullable: false
                             draftContentLink:
                               description: Definition of the content link.
                               properties:
@@ -152,6 +164,7 @@ paths:
                               description: Gets or sets the last modified time of the runbook draft.
                               format: date-time
                               type: string
+                              x-nullable: false
                             outputTypes:
                               description: Gets or sets the runbook output types.
                               items:
@@ -187,6 +200,7 @@ paths:
                           description: Gets or sets the last modified time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         logActivityTrace:
                           description: Gets or sets the option to log activity trace of the runbook.
                           format: int32
@@ -350,8 +364,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -413,8 +429,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -440,31 +458,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the runbook type.
             properties:
               etag:
@@ -477,6 +503,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -487,6 +514,7 @@ paths:
                         description: Gets or sets the creation time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       draftContentLink:
                         description: Definition of the content link.
                         properties:
@@ -515,6 +543,7 @@ paths:
                         description: Gets or sets the last modified time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       outputTypes:
                         description: Gets or sets the runbook output types.
                         items:
@@ -550,6 +579,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   logActivityTrace:
                     description: Gets or sets the option to log activity trace of the runbook.
                     format: int32
@@ -695,8 +725,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -756,31 +788,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the runbook type.
             properties:
               etag:
@@ -793,6 +833,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -803,6 +844,7 @@ paths:
                         description: Gets or sets the creation time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       draftContentLink:
                         description: Definition of the content link.
                         properties:
@@ -831,6 +873,7 @@ paths:
                         description: Gets or sets the last modified time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       outputTypes:
                         description: Gets or sets the runbook output types.
                         items:
@@ -866,6 +909,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   logActivityTrace:
                     description: Gets or sets the option to log activity trace of the runbook.
                     format: int32
@@ -1015,8 +1059,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -1058,6 +1104,7 @@ paths:
                         description: Gets or sets the creation time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       draftContentLink:
                         description: Definition of the content link.
                         properties:
@@ -1086,6 +1133,7 @@ paths:
                         description: Gets or sets the last modified time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       outputTypes:
                         description: Gets or sets the runbook output types.
                         items:
@@ -1173,31 +1221,39 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the runbook type.
             properties:
               etag:
@@ -1210,6 +1266,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1220,6 +1277,7 @@ paths:
                         description: Gets or sets the creation time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       draftContentLink:
                         description: Definition of the content link.
                         properties:
@@ -1248,6 +1306,7 @@ paths:
                         description: Gets or sets the last modified time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       outputTypes:
                         description: Gets or sets the runbook output types.
                         items:
@@ -1283,6 +1342,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   logActivityTrace:
                     description: Gets or sets the option to log activity trace of the runbook.
                     format: int32
@@ -1373,31 +1433,39 @@ paths:
           description: Created
           schema:
             allOf:
-              - description: The Resource definition.
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM tracked top level resource
                 properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
                   location:
-                    description: Resource location
+                    description: The Azure Region where the resource lives
                     type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
+                    x-ms-mutability:
+                      - read
+                      - create
                   tags:
                     additionalProperties:
                       type: string
-                    description: Resource tags
+                    description: Resource tags.
                     type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+                    x-ms-mutability:
+                      - read
+                      - create
+                      - update
             description: Definition of the runbook type.
             properties:
               etag:
@@ -1410,6 +1478,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -1420,6 +1489,7 @@ paths:
                         description: Gets or sets the creation time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       draftContentLink:
                         description: Definition of the content link.
                         properties:
@@ -1448,6 +1518,7 @@ paths:
                         description: Gets or sets the last modified time of the runbook draft.
                         format: date-time
                         type: string
+                        x-nullable: false
                       outputTypes:
                         description: Gets or sets the runbook output types.
                         items:
@@ -1483,6 +1554,7 @@ paths:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   logActivityTrace:
                     description: Gets or sets the option to log activity trace of the runbook.
                     format: int32
@@ -1746,8 +1818,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -1814,8 +1888,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -1846,6 +1922,7 @@ paths:
                 description: Gets or sets the creation time of the runbook draft.
                 format: date-time
                 type: string
+                x-nullable: false
               draftContentLink:
                 description: Definition of the content link.
                 properties:
@@ -1874,6 +1951,7 @@ paths:
                 description: Gets or sets the last modified time of the runbook draft.
                 format: date-time
                 type: string
+                x-nullable: false
               outputTypes:
                 description: Gets or sets the runbook output types.
                 items:
@@ -1940,8 +2018,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2009,8 +2089,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2088,8 +2170,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2160,8 +2244,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2192,10 +2278,12 @@ paths:
                 description: Gets or sets the creation time of the test job.
                 format: date-time
                 type: string
+                x-nullable: false
               endTime:
                 description: Gets or sets the end time of the test job.
                 format: date-time
                 type: string
+                x-nullable: true
               exception:
                 description: Gets or sets the exception of the test job.
                 type: string
@@ -2203,10 +2291,12 @@ paths:
                 description: Gets or sets the last modified time of the test job.
                 format: date-time
                 type: string
+                x-nullable: false
               lastStatusModifiedTime:
                 description: Gets or sets the last status modified time of the test job.
                 format: date-time
                 type: string
+                x-nullable: true
               logActivityTrace:
                 description: The activity-level tracing options of the runbook.
                 format: int32
@@ -2223,6 +2313,7 @@ paths:
                 description: Gets or sets the start time of the test job.
                 format: date-time
                 type: string
+                x-nullable: true
               status:
                 description: Gets or sets the status of the test job.
                 type: string
@@ -2259,9 +2350,12 @@ paths:
               body:
                 creationTime: '2018-02-09T05:52:00.9344172+00:00'
                 endTime: '2018-02-09T05:55:16.7827254+00:00'
+                exception: null
                 lastModifiedTime: '2018-02-09T05:55:16.7827254+00:00'
                 lastStatusModifiedTime: '2018-02-09T05:55:16.7827254+00:00'
+                logActivityTrace: null
                 parameters: {}
+                runOn: null
                 startTime: '2018-02-09T05:55:10.8344743+00:00'
                 status: Completed
                 statusDetails: None
@@ -2277,8 +2371,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2324,10 +2420,12 @@ paths:
                 description: Gets or sets the creation time of the test job.
                 format: date-time
                 type: string
+                x-nullable: false
               endTime:
                 description: Gets or sets the end time of the test job.
                 format: date-time
                 type: string
+                x-nullable: true
               exception:
                 description: Gets or sets the exception of the test job.
                 type: string
@@ -2335,10 +2433,12 @@ paths:
                 description: Gets or sets the last modified time of the test job.
                 format: date-time
                 type: string
+                x-nullable: false
               lastStatusModifiedTime:
                 description: Gets or sets the last status modified time of the test job.
                 format: date-time
                 type: string
+                x-nullable: true
               logActivityTrace:
                 description: The activity-level tracing options of the runbook.
                 format: int32
@@ -2355,6 +2455,7 @@ paths:
                 description: Gets or sets the start time of the test job.
                 format: date-time
                 type: string
+                x-nullable: true
               status:
                 description: Gets or sets the status of the test job.
                 type: string
@@ -2395,9 +2496,14 @@ paths:
             '201':
               body:
                 creationTime: '2018-02-09T05:51:59.82+00:00'
+                endTime: null
+                exception: null
                 lastModifiedTime: '2018-02-09T05:51:59.82+00:00'
                 lastStatusModifiedTime: '2018-02-09T05:51:59.82+00:00'
+                logActivityTrace: null
                 parameters: {}
+                runOn: null
+                startTime: null
                 status: New
                 statusDetails: None
               headers: {}
@@ -2413,8 +2519,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2474,8 +2582,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2535,8 +2645,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2609,6 +2721,7 @@ paths:
                           description: Gets or sets the creation time of the job.
                           format: date-time
                           type: string
+                          x-nullable: false
                         value:
                           additionalProperties:
                             type: object
@@ -2647,11 +2760,13 @@ paths:
                     properties:
                       jobStreamId: 24456a8a-2857-4af6-932c-3455f38bd05e_00636535675981232703_00000000000000000001
                       streamType: Output
+                      summary: null
                       time: '2018-02-07T02:33:18.1232703+00:00'
                   - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourcegroups/mygroup/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobs/jobName/streams/24456a8a-2857-4af6-932c-3455f38bd05e_00636535675984691350_00000000000000000002
                     properties:
                       jobStreamId: 24456a8a-2857-4af6-932c-3455f38bd05e_00636535675984691350_00000000000000000002
                       streamType: Output
+                      summary: null
                       time: '2018-02-07T02:33:18.469135+00:00'
               headers: {}
       x-ms-pageable:
@@ -2668,8 +2783,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2734,6 +2851,7 @@ paths:
                     description: Gets or sets the creation time of the job.
                     format: date-time
                     type: string
+                    x-nullable: false
                   value:
                     additionalProperties:
                       type: object
@@ -2771,6 +2889,7 @@ paths:
                   jobStreamId: '851b2101-686f-40e2-8a4b-5b8df08afbd1:00636535684910693884:00000000000000000001'
                   streamText: ''
                   streamType: Output
+                  summary: null
                   time: '2018-02-07T02:48:11.0693884+00:00'
                   value: {}
               headers: {}
@@ -2786,8 +2905,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -2847,8 +2968,10 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true

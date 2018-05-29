@@ -323,7 +323,7 @@ paths:
         '200':
           description: An array of results that match the provided query.
           schema:
-            $ref: '#/definitions/SeriesSearchData'
+            $ref: '#/definitions/SeriesSearchResults'
         '401':
           description: Returned if your JWT token is missing or expired
           schema:
@@ -911,6 +911,8 @@ definitions:
         type: string
       id:
         type: integer
+      language:
+        $ref: '#/definitions/EpisodeLanguageInfo'
       lastUpdated:
         type: integer
       overview:
@@ -998,6 +1000,13 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  EpisodeLanguageInfo:
+    properties:
+      episodeName:
+        type: string
+      overview:
+        type: string
     type: object
   EpisodeRecordData:
     properties:
@@ -1104,7 +1113,7 @@ definitions:
       runtime:
         type: string
       seriesId:
-        type: integer
+        type: string
       seriesName:
         type: string
       siteRating:
@@ -1267,7 +1276,7 @@ definitions:
         items:
           $ref: '#/definitions/SeriesImagesQueryParam'
         type: array
-  SeriesSearchData:
+  SeriesSearchResult:
     properties:
       aliases:
         items:
@@ -1288,6 +1297,12 @@ definitions:
       status:
         type: string
     type: object
+  SeriesSearchResults:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/SeriesSearchResult'
+        type: array
   Token:
     properties:
       token:

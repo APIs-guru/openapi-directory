@@ -1205,43 +1205,7 @@ definitions:
       name:
         description: Repository name
         type: string
-      openDoarId:
-        description: ID of the repository in Open DOAR
-        type: integer
-      repositoryLocation:
-        $ref: '#/definitions/RepositoryLocation'
-        description: Location of the repository
-      repositoryStats:
-        $ref: '#/definitions/RepositoryStats'
-        description: Statistics about the repository
-      uri:
-        description: Repository URI
-        type: string
-      urlHomepage:
-        description: Repository homepage
-        type: string
-      urlOaipmh:
-        description: Repository OAI-PMH endpoint
-        type: string
   RepositoryDocument: {}
-  RepositoryLocation:
-    properties:
-      country:
-        description: Country name
-        type: string
-      countryCode:
-        description: Two letter country code
-        type: string
-      id:
-        description: CORE repository ID
-        type: integer
-      latitude:
-        type: integer
-      longitude:
-        type: integer
-      repositoryName:
-        description: Repository name
-        type: string
   RepositoryResponse:
     properties:
       data:
@@ -1282,23 +1246,6 @@ definitions:
     required:
       - status
       - totalHits
-  RepositoryStats:
-    properties:
-      countFulltext:
-        description: Repository fulltext count
-        type: integer
-      countMetadata:
-        description: Repository metadata count
-        type: integer
-      dateLastProcessed:
-        description: Last repository processing date
-        type: string
-      historyFulltext:
-        description: Fulltext count over time
-        type: object
-      historyMetadata:
-        description: Metadata count over time
-        type: object
   Resource:
     properties:
       id:

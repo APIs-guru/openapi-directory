@@ -469,6 +469,66 @@ paths:
                   key: value
                 type: Microsoft.ContainerRegistry/registries
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importImage':
+    post:
+      description: Copies an image to this container registry from the specified container registry.
+      operationId: Registries_ImportImage
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/RegistryNameParameter'
+        - description: The parameters specifying the image to copy and the source container registry.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ImportImageParameters'
+      responses:
+        '200':
+          description: The request was successful; the operation has completed successfully.
+        '202':
+          description: The request was successful; the operation will complete asynchronously.
+      tags:
+        - Registries
+      x-ms-examples:
+        ImportImageByManifestDigest:
+          parameters:
+            api-version: '2017-10-01'
+            parameters:
+              mode: Force
+              source:
+                resourceId: /subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/sourceResourceGroup/providers/Microsoft.ContainerRegistry/registries/sourceRegistry
+                sourceImage: 'sourceRepository@sha256:0000000000000000000000000000000000000000000000000000000000000000'
+              targetTags:
+                - 'targetRepository:targetTag'
+              untaggedTargetRepositories:
+                - targetRepository1
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '202': {}
+        ImportImageByTag:
+          parameters:
+            api-version: '2017-10-01'
+            parameters:
+              mode: Force
+              source:
+                resourceId: /subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/sourceResourceGroup/providers/Microsoft.ContainerRegistry/registries/sourceRegistry
+                sourceImage: 'sourceRepository:sourceTag'
+              targetTags:
+                - 'targetRepository:targetTag'
+              untaggedTargetRepositories:
+                - targetRepository1
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listCredentials':
     post:
       description: Lists the login credentials for the specified container registry.
@@ -1220,6 +1280,7 @@ definitions:
       name:
         description: The subject or username associated with the request context that generated the event.
         type: string
+    type: object
   CallbackConfig:
     description: The configuration of service URI and custom headers for the webhook.
     properties:
@@ -1233,6 +1294,7 @@ definitions:
         type: string
     required:
       - serviceUri
+    type: object
   Event:
     allOf:
       - $ref: '#/definitions/EventInfo'
@@ -1244,6 +1306,7 @@ definitions:
       eventResponseMessage:
         $ref: '#/definitions/EventResponseMessage'
         description: The event response message received from the service URI.
+    type: object
   EventContent:
     description: The content of the event request message.
     properties:
@@ -1269,12 +1332,14 @@ definitions:
         description: The time at which the event occurred.
         format: date-time
         type: string
+    type: object
   EventInfo:
     description: The basic information of an event.
     properties:
       id:
         description: The event ID.
         type: string
+    type: object
   EventListResult:
     description: The result of a request to list events for a webhook.
     properties:
@@ -1286,6 +1351,7 @@ definitions:
         items:
           $ref: '#/definitions/Event'
         type: array
+    type: object
   EventRequestMessage:
     description: The event request message sent to the service URI.
     properties:
@@ -1306,6 +1372,7 @@ definitions:
       version:
         description: The HTTP message version.
         type: string
+    type: object
   EventResponseMessage:
     description: The event response message received from the service URI.
     properties:
@@ -1326,6 +1393,47 @@ definitions:
       version:
         description: The HTTP message version.
         type: string
+    type: object
+  ImportImageParameters:
+    properties:
+      mode:
+        default: NoForce
+        description: 'When Force, any existing target tags will be overwritten. When NoForce, any existing target tags will fail the operation before any copying begins.'
+        enum:
+          - NoForce
+          - Force
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ImportMode
+      source:
+        $ref: '#/definitions/ImportSource'
+        description: The source of the image.
+      targetTags:
+        description: 'List of strings of the form repo[:tag]. When tag is omitted the source will be used (or ''latest'' if source tag is also omitted).'
+        items:
+          type: string
+        type: array
+      untaggedTargetRepositories:
+        description: List of strings of repository names to do a manifest only copy. No tag will be created.
+        items:
+          type: string
+        type: array
+    required:
+      - source
+    type: object
+  ImportSource:
+    properties:
+      resourceId:
+        description: The resource identifier of the target Azure Container Registry.
+        type: string
+      sourceImage:
+        description: "Repository name of the source image.\r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123')."
+        type: string
+    required:
+      - resourceId
+      - sourceImage
+    type: object
   OperationDefinition:
     description: The definition of a container registry operation.
     properties:
@@ -1335,6 +1443,7 @@ definitions:
       name:
         description: 'Operation name: {provider}/{resource}/{operation}.'
         type: string
+    type: object
   OperationDisplayDefinition:
     description: The display information for a container registry operation.
     properties:
@@ -1350,6 +1459,7 @@ definitions:
       resource:
         description: The resource on which the operation is performed.
         type: string
+    type: object
   OperationListResult:
     description: The result of a request to list container registry operations.
     properties:
@@ -1361,6 +1471,7 @@ definitions:
         items:
           $ref: '#/definitions/OperationDefinition'
         type: array
+    type: object
   RegenerateCredentialParameters:
     description: The parameters used to regenerate the login credential.
     properties:
@@ -1375,6 +1486,7 @@ definitions:
           name: PasswordName
     required:
       - name
+    type: object
   Registry:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1389,6 +1501,7 @@ definitions:
         description: The SKU of the container registry.
     required:
       - sku
+    type: object
   RegistryListCredentialsResult:
     description: The response from the ListCredentials operation.
     properties:
@@ -1400,6 +1513,7 @@ definitions:
       username:
         description: The username for a container registry.
         type: string
+    type: object
   RegistryListResult:
     description: The result of a request to list container registries.
     properties:
@@ -1411,6 +1525,7 @@ definitions:
         items:
           $ref: '#/definitions/Registry'
         type: array
+    type: object
   RegistryNameCheckRequest:
     description: A request to check whether a container registry name is available.
     properties:
@@ -1431,6 +1546,7 @@ definitions:
     required:
       - name
       - type
+    type: object
   RegistryNameStatus:
     description: The result of a request to check the availability of a container registry name.
     properties:
@@ -1443,6 +1559,7 @@ definitions:
       reason:
         description: 'If any, the reason that the name is not available.'
         type: string
+    type: object
   RegistryPassword:
     description: The login password for the container registry.
     properties:
@@ -1458,6 +1575,7 @@ definitions:
       value:
         description: The password value.
         type: string
+    type: object
   RegistryProperties:
     description: The properties of a container registry.
     properties:
@@ -1495,6 +1613,7 @@ definitions:
       storageAccount:
         $ref: '#/definitions/StorageAccountProperties'
         description: The properties of the storage account for the container registry. Only applicable to Classic SKU.
+    type: object
   RegistryPropertiesUpdateParameters:
     description: The parameters for updating the properties of a container registry.
     properties:
@@ -1504,6 +1623,7 @@ definitions:
       storageAccount:
         $ref: '#/definitions/StorageAccountProperties'
         description: 'The parameters of a storage account for the container registry. Only applicable to Classic SKU. If specified, the storage account must be in the same physical location as the container registry.'
+    type: object
   RegistryUpdateParameters:
     description: The parameters for updating a container registry.
     properties:
@@ -1519,6 +1639,7 @@ definitions:
           type: string
         description: The tags for the container registry.
         type: object
+    type: object
   RegistryUsage:
     description: The quota usage for a container registry.
     properties:
@@ -1542,6 +1663,7 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: RegistryUsageUnit
+    type: object
   RegistryUsageListResult:
     description: The result of a request to get container registry quota usages.
     properties:
@@ -1550,6 +1672,7 @@ definitions:
         items:
           $ref: '#/definitions/RegistryUsage'
         type: array
+    type: object
   Replication:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1559,6 +1682,7 @@ definitions:
         $ref: '#/definitions/ReplicationProperties'
         description: The properties of the replication.
         x-ms-client-flatten: true
+    type: object
   ReplicationListResult:
     description: The result of a request to list replications for a container registry.
     properties:
@@ -1570,6 +1694,7 @@ definitions:
         items:
           $ref: '#/definitions/Replication'
         type: array
+    type: object
   ReplicationProperties:
     description: The properties of a replication.
     properties:
@@ -1591,6 +1716,7 @@ definitions:
         $ref: '#/definitions/Status'
         description: The status of the replication at the time the operation was called.
         readOnly: true
+    type: object
   ReplicationUpdateParameters:
     description: The parameters for updating a replication.
     properties:
@@ -1599,6 +1725,7 @@ definitions:
           type: string
         description: The tags for the replication.
         type: object
+    type: object
   Request:
     description: The request that generated the event.
     properties:
@@ -1617,6 +1744,7 @@ definitions:
       useragent:
         description: The user agent header of the request.
         type: string
+    type: object
   Resource:
     description: An Azure resource.
     properties:
@@ -1674,6 +1802,7 @@ definitions:
           name: SkuTier
     required:
       - name
+    type: object
   Source:
     description: 'The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.'
     properties:
@@ -1683,6 +1812,7 @@ definitions:
       instanceID:
         description: The running instance of an application. Changes after each restart.
         type: string
+    type: object
   Status:
     description: The status of an Azure resource at the time the operation was called.
     properties:
@@ -1699,6 +1829,7 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+    type: object
   StorageAccountProperties:
     description: The properties of a storage account for a container registry. Only applicable to Classic SKU.
     properties:
@@ -1707,6 +1838,7 @@ definitions:
         type: string
     required:
       - id
+    type: object
   Target:
     description: The target of the event.
     properties:
@@ -1733,6 +1865,7 @@ definitions:
       url:
         description: The direct URL to the content.
         type: string
+    type: object
   Webhook:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1742,6 +1875,7 @@ definitions:
         $ref: '#/definitions/WebhookProperties'
         description: The properties of the webhook.
         x-ms-client-flatten: true
+    type: object
   WebhookCreateParameters:
     description: The parameters for creating a webhook.
     properties:
@@ -1759,6 +1893,7 @@ definitions:
         type: object
     required:
       - location
+    type: object
   WebhookListResult:
     description: The result of a request to list webhooks for a container registry.
     properties:
@@ -1770,6 +1905,7 @@ definitions:
         items:
           $ref: '#/definitions/Webhook'
         type: array
+    type: object
   WebhookProperties:
     description: The properties of a webhook.
     properties:
@@ -1812,6 +1948,7 @@ definitions:
           name: WebhookStatus
     required:
       - actions
+    type: object
   WebhookPropertiesCreateParameters:
     description: The parameters for creating the properties of a webhook.
     properties:
@@ -1849,6 +1986,7 @@ definitions:
     required:
       - serviceUri
       - actions
+    type: object
   WebhookPropertiesUpdateParameters:
     description: The parameters for updating the properties of a webhook.
     properties:
@@ -1883,6 +2021,7 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: WebhookStatus
+    type: object
   WebhookUpdateParameters:
     description: The parameters for updating a webhook.
     properties:
@@ -1895,3 +2034,4 @@ definitions:
           type: string
         description: The tags for the webhook.
         type: object
+    type: object

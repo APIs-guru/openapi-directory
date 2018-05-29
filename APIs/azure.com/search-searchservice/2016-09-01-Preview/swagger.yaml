@@ -107,6 +107,8 @@ paths:
         SearchServiceListDataSources:
           parameters:
             api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -114,7 +116,8 @@ paths:
                   - container:
                       name: myDocDbCollectionId
                       query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                    credentials: {}
+                    credentials:
+                      connectionString: null
                     dataChangeDetectionPolicy:
                       '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                       highWaterMarkColumnName: _ts
@@ -127,7 +130,10 @@ paths:
                     type: documentdb
                   - container:
                       name: mycontainer
-                    credentials: {}
+                    credentials:
+                      connectionString: null
+                    dataChangeDetectionPolicy: null
+                    dataDeletionDetectionPolicy: null
                     description: My Azure Blob data source.
                     name: myblobdatasource
                     type: azureblob
@@ -173,13 +179,16 @@ paths:
               description: My Cosmos DB data source.
               name: mydocdbdatasource
               type: documentdb
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '201':
               body:
                 container:
                   name: myDocDbCollectionId
                   query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                credentials: {}
+                credentials:
+                  connectionString: null
                 dataChangeDetectionPolicy:
                   '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                   highWaterMarkColumnName: _ts
@@ -219,6 +228,8 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             dataSourceName: mydatasource
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '204': {}
             '404': {}
@@ -248,13 +259,16 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             dataSourceName: mydatasource
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
                 container:
                   name: myDocDbCollectionId
                   query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                credentials: {}
+                credentials:
+                  connectionString: null
                 dataChangeDetectionPolicy:
                   '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                   highWaterMarkColumnName: _ts
@@ -302,6 +316,7 @@ paths:
       x-ms-examples:
         SearchServiceCreateOrUpdateDataSource:
           parameters:
+            Prefer: return=representation
             api-version: 2016-09-01-Preview
             dataSource:
               container:
@@ -320,13 +335,16 @@ paths:
               name: mydocdbdatasource
               type: documentdb
             dataSourceName: mydatasource
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
                 container:
                   name: myDocDbCollectionId
                   query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                credentials: {}
+                credentials:
+                  connectionString: null
                 dataChangeDetectionPolicy:
                   '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                   highWaterMarkColumnName: _ts
@@ -342,7 +360,8 @@ paths:
                 container:
                   name: myDocDbCollectionId
                   query: 'SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts'
-                credentials: {}
+                credentials:
+                  connectionString: null
                 dataChangeDetectionPolicy:
                   '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
                   highWaterMarkColumnName: _ts
@@ -374,6 +393,8 @@ paths:
         SearchServiceListIndexers:
           parameters:
             api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -413,7 +434,6 @@ paths:
                       batchSize: 15
                       maxFailedItems: 10
                       maxFailedItemsPerBatch: 5
-                    schedule: {}
                     targetIndexName: orders
       x-ms-request-id: request-id
     post:
@@ -452,6 +472,8 @@ paths:
                 interval: PT1H
                 startTime: '2015-01-01T00:00:00Z'
               targetIndexName: orders
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '201':
               body:
@@ -496,6 +518,8 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             indexerName: myindexer
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '204': {}
             '404': {}
@@ -525,6 +549,8 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             indexerName: myindexer
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -577,6 +603,7 @@ paths:
       x-ms-examples:
         SearchServiceCreateOrUpdateIndexer:
           parameters:
+            Prefer: return=representation
             api-version: 2016-09-01-Preview
             indexer:
               dataSourceName: mydatasource
@@ -590,6 +617,8 @@ paths:
                 startTime: '2015-01-01T00:00:00Z'
               targetIndexName: orders
             indexerName: myindexer
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -644,6 +673,8 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             indexerName: myindexer
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '204': {}
       x-ms-request-id: request-id
@@ -671,6 +702,8 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             indexerName: myindexer
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '202': {}
       x-ms-request-id: request-id
@@ -700,23 +733,31 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             indexerName: myindexer
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
                 executionHistory:
                   - endTime: '2014-11-26T03:37:19.012Z'
+                    errorMessage: null
                     errors: []
+                    finalTrackingState: null
+                    initialTrackingState: null
                     itemsFailed: 0
                     itemsProcessed: 11
                     startTime: '2014-11-26T03:37:18.853Z'
                     status: success
                     warnings: []
                   - endTime: '2014-11-26T03:28:12.007Z'
+                    errorMessage: null
                     errors:
                       - errorMessage: Document key cannot be missing or empty.
                         key: ''
                         status: false
                         statusCode: 400
+                    finalTrackingState: null
+                    initialTrackingState: null
                     itemsFailed: 1
                     itemsProcessed: 1
                     startTime: '2014-11-26T03:28:10.125Z'
@@ -726,7 +767,10 @@ paths:
                         message: 'A warning doesn''t stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob.'
                 lastResult:
                   endTime: '2014-11-26T03:37:19.012Z'
+                  errorMessage: null
                   errors: []
+                  finalTrackingState: null
+                  initialTrackingState: null
                   itemsFailed: 0
                   itemsProcessed: 11
                   startTime: '2014-11-26T03:37:18.853Z'
@@ -760,6 +804,8 @@ paths:
           parameters:
             $select: name
             api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -777,29 +823,38 @@ paths:
                       maxAgeInSeconds: 60
                     defaultScoringProfile: geo
                     fields:
-                      - facetable: true
+                      - analyzer: null
+                        facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: true
                         name: hotelId
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.String
-                      - facetable: true
+                      - analyzer: null
+                        facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: baseRate
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.Double
-                      - facetable: false
+                      - analyzer: null
+                        facetable: false
                         filterable: false
+                        indexAnalyzer: null
                         key: false
                         name: description
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: true
                         sortable: false
                         synonymMaps: []
@@ -807,27 +862,35 @@ paths:
                       - analyzer: fr.lucene
                         facetable: false
                         filterable: false
+                        indexAnalyzer: null
                         key: false
                         name: description_fr
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: true
                         sortable: false
                         synonymMaps: []
                         type: Edm.String
-                      - facetable: true
+                      - analyzer: null
+                        facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: hotelName
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: true
                         sortable: true
                         synonymMaps: []
                         type: Edm.String
-                      - facetable: true
+                      - analyzer: null
+                        facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: category
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: true
                         sortable: true
                         synonymMaps: []
@@ -835,54 +898,71 @@ paths:
                       - analyzer: tagsAnalyzer
                         facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: tags
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: true
                         sortable: false
                         synonymMaps: []
                         type: Collection(Edm.String)
-                      - facetable: true
+                      - analyzer: null
+                        facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: parkingIncluded
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.Boolean
-                      - facetable: true
+                      - analyzer: null
+                        facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: smokingAllowed
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.Boolean
-                      - facetable: true
+                      - analyzer: null
+                        facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: lastRenovationDate
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.DateTimeOffset
-                      - facetable: true
+                      - analyzer: null
+                        facetable: true
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: rating
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
                         type: Edm.Int32
-                      - facetable: false
+                      - analyzer: null
+                        facetable: false
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: location
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
@@ -910,21 +990,29 @@ paths:
                     tokenizers: []
                   - analyzers: []
                     charFilters: []
+                    corsOptions: null
+                    defaultScoringProfile: null
                     fields:
-                      - facetable: false
+                      - analyzer: null
+                        facetable: false
                         filterable: false
+                        indexAnalyzer: null
                         key: true
                         name: id
                         retrievable: true
+                        searchAnalyzer: null
                         searchable: false
                         sortable: false
                         synonymMaps: []
                         type: Edm.String
-                      - facetable: false
+                      - analyzer: null
+                        facetable: false
                         filterable: true
+                        indexAnalyzer: null
                         key: false
                         name: hidden
                         retrievable: false
+                        searchAnalyzer: null
                         searchable: false
                         sortable: true
                         synonymMaps: []
@@ -1026,6 +1114,8 @@ paths:
                   searchMode: analyzingInfixMatching
                   sourceFields:
                     - hotelName
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '201':
               body:
@@ -1042,29 +1132,38 @@ paths:
                   maxAgeInSeconds: 60
                 defaultScoringProfile: geo
                 fields:
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: true
                     name: hotelId
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: baseRate
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Double
-                  - facetable: false
+                  - analyzer: null
+                    facetable: false
                     filterable: false
+                    indexAnalyzer: null
                     key: false
                     name: description
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
@@ -1072,27 +1171,35 @@ paths:
                   - analyzer: fr.lucene
                     facetable: false
                     filterable: false
+                    indexAnalyzer: null
                     key: false
                     name: description_fr
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: hotelName
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: category
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
@@ -1100,54 +1207,71 @@ paths:
                   - analyzer: tagsAnalyzer
                     facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: tags
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Collection(Edm.String)
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: parkingIncluded
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: smokingAllowed
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: lastRenovationDate
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.DateTimeOffset
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: rating
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Int32
-                  - facetable: false
+                  - analyzer: null
+                    facetable: false
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: location
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
@@ -1202,6 +1326,8 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             indexName: myindex
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '204': {}
             '404': {}
@@ -1231,6 +1357,8 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             indexName: hotels
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -1247,29 +1375,38 @@ paths:
                   maxAgeInSeconds: 60
                 defaultScoringProfile: geo
                 fields:
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: true
                     name: hotelId
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: baseRate
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Double
-                  - facetable: false
+                  - analyzer: null
+                    facetable: false
                     filterable: false
+                    indexAnalyzer: null
                     key: false
                     name: description
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
@@ -1277,27 +1414,35 @@ paths:
                   - analyzer: fr.lucene
                     facetable: false
                     filterable: false
+                    indexAnalyzer: null
                     key: false
                     name: description_fr
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: hotelName
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: category
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
@@ -1305,54 +1450,71 @@ paths:
                   - analyzer: tagsAnalyzer
                     facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: tags
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Collection(Edm.String)
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: parkingIncluded
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: smokingAllowed
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: lastRenovationDate
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.DateTimeOffset
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: rating
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Int32
-                  - facetable: false
+                  - analyzer: null
+                    facetable: false
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: location
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
@@ -1420,6 +1582,7 @@ paths:
       x-ms-examples:
         SearchServiceCreateOrUpdateIndex:
           parameters:
+            Prefer: return=representation
             allowIndexDowntime: false
             api-version: 2016-09-01-Preview
             index:
@@ -1489,6 +1652,8 @@ paths:
                   sourceFields:
                     - hotelName
             indexName: hotels
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -1505,29 +1670,38 @@ paths:
                   maxAgeInSeconds: 60
                 defaultScoringProfile: geo
                 fields:
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: true
                     name: hotelId
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: baseRate
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Double
-                  - facetable: false
+                  - analyzer: null
+                    facetable: false
                     filterable: false
+                    indexAnalyzer: null
                     key: false
                     name: description
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
@@ -1535,27 +1709,35 @@ paths:
                   - analyzer: fr.lucene
                     facetable: false
                     filterable: false
+                    indexAnalyzer: null
                     key: false
                     name: description_fr
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: hotelName
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: category
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
@@ -1563,54 +1745,71 @@ paths:
                   - analyzer: tagsAnalyzer
                     facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: tags
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Collection(Edm.String)
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: parkingIncluded
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: smokingAllowed
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: lastRenovationDate
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.DateTimeOffset
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: rating
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Int32
-                  - facetable: false
+                  - analyzer: null
+                    facetable: false
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: location
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
@@ -1651,29 +1850,38 @@ paths:
                   maxAgeInSeconds: 60
                 defaultScoringProfile: geo
                 fields:
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: true
                     name: hotelId
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: baseRate
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Double
-                  - facetable: false
+                  - analyzer: null
+                    facetable: false
                     filterable: false
+                    indexAnalyzer: null
                     key: false
                     name: description
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
@@ -1681,27 +1889,35 @@ paths:
                   - analyzer: fr.lucene
                     facetable: false
                     filterable: false
+                    indexAnalyzer: null
                     key: false
                     name: description_fr
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: hotelName
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
                     type: Edm.String
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: category
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: true
                     synonymMaps: []
@@ -1709,54 +1925,71 @@ paths:
                   - analyzer: tagsAnalyzer
                     facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: tags
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: true
                     sortable: false
                     synonymMaps: []
                     type: Collection(Edm.String)
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: parkingIncluded
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: smokingAllowed
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Boolean
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: lastRenovationDate
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.DateTimeOffset
-                  - facetable: true
+                  - analyzer: null
+                    facetable: true
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: rating
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
                     type: Edm.Int32
-                  - facetable: false
+                  - analyzer: null
+                    facetable: false
                     filterable: true
+                    indexAnalyzer: null
                     key: false
                     name: location
                     retrievable: true
+                    searchAnalyzer: null
                     searchable: false
                     sortable: true
                     synonymMaps: []
@@ -1818,6 +2051,8 @@ paths:
             request:
               analyzer: standard
               text: Text to analyze
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -1861,11 +2096,60 @@ paths:
           parameters:
             api-version: 2016-09-01-Preview
             indexName: hotels
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
                 documentCount: 239572
                 storageSize: 72375920
+      x-ms-request-id: request-id
+  /servicestats:
+    get:
+      description: Gets service level statistics for an Azure Search service.
+      operationId: GetServiceStatistics
+      parameters:
+        - $ref: '#/parameters/ClientRequestIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ServiceStatistics'
+      tags:
+        - Service
+      x-ms-examples:
+        SearchServiceGetServiceStatistics:
+          parameters:
+            api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
+          responses:
+            '200':
+              body:
+                counters:
+                  dataSourcesCount:
+                    quota: 3
+                    usage: 1
+                  documentCount:
+                    quota: 10000
+                    usage: 7093
+                  indexersCount:
+                    quota: 3
+                    usage: 3
+                  indexesCount:
+                    quota: 3
+                    usage: 3
+                  storageSize:
+                    quota: 52428800
+                    usage: 914529
+                  synonymMaps:
+                    quota: 3
+                    usage: 2
+                limits:
+                  maxComplexCollectionFieldsPerIndex: 100
+                  maxFieldNestingDepthPerIndex: 10
+                  maxFieldsPerIndex: 1000
       x-ms-request-id: request-id
   /synonymmaps:
     get:
@@ -1887,6 +2171,8 @@ paths:
         SearchServiceListSynonymMaps:
           parameters:
             api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body:
@@ -1928,6 +2214,8 @@ paths:
         SearchServiceCreateSynonymMap:
           parameters:
             api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
             synonymMap:
               format: solr
               name: mysynonymmap
@@ -1970,6 +2258,8 @@ paths:
         SearchServiceDeleteSynonymMap:
           parameters:
             api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
             synonymMapName: mysynonymmap
           responses:
             '204': {}
@@ -1999,6 +2289,8 @@ paths:
         SearchServiceGetSynonymMap:
           parameters:
             api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
             synonymMapName: mysynonymmap
           responses:
             '200':
@@ -2045,7 +2337,10 @@ paths:
       x-ms-examples:
         SearchServiceCreateOrUpdateSynonymMap:
           parameters:
+            Prefer: return=representation
             api-version: 2016-09-01-Preview
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
             synonymMap:
               format: solr
               name: mysynonymmap
@@ -2852,6 +3147,12 @@ definitions:
         $ref: '#/definitions/IndexerExecutionStatus'
         description: The outcome of this indexer execution.
         readOnly: true
+      warnings:
+        description: The item-level indexing warnings.
+        items:
+          $ref: '#/definitions/ItemWarning'
+        readOnly: true
+        type: array
   IndexerExecutionStatus:
     description: Represents the status of an individual indexer execution.
     enum:
@@ -2927,11 +3228,22 @@ definitions:
     description: Represents an item- or document-level indexing error.
     properties:
       errorMessage:
-        description: The message describing the error that occurred while attempting to index the item.
+        description: The message describing the error that occurred while processing the item.
         readOnly: true
         type: string
       key:
         description: The key of the item for which indexing failed.
+        readOnly: true
+        type: string
+  ItemWarning:
+    description: Represents an item-level warning.
+    properties:
+      key:
+        description: The key of the item which generated a warning.
+        readOnly: true
+        type: string
+      message:
+        description: The message describing the warning that occurred while processing the item.
         readOnly: true
         type: string
   KeepTokenFilter:
@@ -3500,6 +3812,19 @@ definitions:
       name:
         type: string
     x-ms-external: true
+  ResourceCounter:
+    description: Represents a resource's usage and quota.
+    properties:
+      quota:
+        description: The resource amount quota.
+        format: int64
+        type: integer
+        x-nullable: true
+      usage:
+        description: The resource usage amount.
+        format: int64
+        type: integer
+        x-nullable: false
   ScoringFunction:
     description: Abstract base class for functions that can modify document scores during ranking.
     discriminator: type
@@ -3567,6 +3892,60 @@ definitions:
         x-ms-client-name: TextWeights
     required:
       - name
+  ServiceCounters:
+    description: Represents service-level resource counters and quotas.
+    properties:
+      dataSourcesCount:
+        $ref: '#/definitions/ResourceCounter'
+        description: Total number of data sources.
+        x-ms-client-name: dataSourceCounter
+      documentCount:
+        $ref: '#/definitions/ResourceCounter'
+        description: Total number of documents across all indexes in the service.
+        x-ms-client-name: documentCounter
+      indexersCount:
+        $ref: '#/definitions/ResourceCounter'
+        description: Total number of indexers.
+        x-ms-client-name: indexerCounter
+      indexesCount:
+        $ref: '#/definitions/ResourceCounter'
+        description: Total number of indexes.
+        x-ms-client-name: indexCounter
+      storageSize:
+        $ref: '#/definitions/ResourceCounter'
+        description: Total size of used storage in bytes.
+        x-ms-client-name: storageSizeCounter
+      synonymMaps:
+        $ref: '#/definitions/ResourceCounter'
+        description: Total number of synonym maps.
+        x-ms-client-name: synonymMapCounter
+  ServiceLimits:
+    description: Represents various service level limits.
+    properties:
+      maxComplexCollectionFieldsPerIndex:
+        description: The maximum number of fields of type Collection(Edm.ComplexType) allowed in an index.
+        format: int32
+        type: integer
+        x-nullable: true
+      maxFieldNestingDepthPerIndex:
+        description: 'The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3.'
+        format: int32
+        type: integer
+        x-nullable: true
+      maxFieldsPerIndex:
+        description: The maximum allowed fields per index.
+        format: int32
+        type: integer
+        x-nullable: true
+  ServiceStatistics:
+    description: 'Response from a get service statistics request. If successful, it includes service level counters and limits.'
+    properties:
+      counters:
+        $ref: '#/definitions/ServiceCounters'
+        description: Service level resource counters.
+      limits:
+        $ref: '#/definitions/ServiceLimits'
+        description: Service level general limits.
   ShingleTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'

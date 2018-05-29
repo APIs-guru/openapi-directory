@@ -36,7 +36,7 @@ security:
 paths:
   '/{format}/AllTeams':
     get:
-      operationId: 589b8fd814338d11bc8c130c
+      operationId: TeamsAll
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -58,7 +58,7 @@ paths:
   '/{format}/AreAnyGamesInProgress':
     get:
       description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
-      operationId: 584f725535491a0d440a48e1
+      operationId: AreGamesInProgress
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -77,7 +77,7 @@ paths:
       summary: Are Games In Progress
   '/{format}/CurrentSeason':
     get:
-      operationId: 584f725535491a0d440a48e2
+      operationId: CurrentSeason
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -98,7 +98,7 @@ paths:
       summary: Current Season
   '/{format}/Games/{season}':
     get:
-      operationId: 584f725535491a0d440a48da
+      operationId: Schedules
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -124,7 +124,7 @@ paths:
       summary: Schedules
   '/{format}/GamesByDate/{date}':
     get:
-      operationId: 584f725535491a0d440a48d9
+      operationId: GamesByDate
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -152,7 +152,7 @@ paths:
       summary: Games by Date
   '/{format}/News':
     get:
-      operationId: 584f725535491a0d440a48db
+      operationId: News
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -173,7 +173,7 @@ paths:
       summary: News
   '/{format}/NewsByDate/{date}':
     get:
-      operationId: 584f725535491a0d440a48dc
+      operationId: NewsByDate
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -201,7 +201,7 @@ paths:
       summary: News by Date
   '/{format}/NewsByPlayerID/{playerid}':
     get:
-      operationId: 584f725535491a0d440a48dd
+      operationId: NewsByPlayer
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -229,7 +229,7 @@ paths:
       summary: News by Player
   '/{format}/Stadiums':
     get:
-      operationId: 584f725535491a0d440a48de
+      operationId: Stadiums
       parameters:
         - default: xml
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -250,7 +250,7 @@ paths:
       summary: Stadiums
   '/{format}/Standings/{season}':
     get:
-      operationId: 584f725535491a0d440a48e3
+      operationId: Standings
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -278,7 +278,7 @@ paths:
       summary: Standings
   '/{format}/TeamGameStatsByDate/{date}':
     get:
-      operationId: 584f725535491a0d440a48df
+      operationId: TeamGameStatsByDate
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -306,7 +306,7 @@ paths:
       summary: Team Game Stats by Date
   '/{format}/TeamSeasonStats/{season}':
     get:
-      operationId: 584f725535491a0d440a48e0
+      operationId: TeamSeasonStats
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -334,7 +334,7 @@ paths:
       summary: Team Season Stats
   '/{format}/teams':
     get:
-      operationId: 584f725535491a0d440a48d8
+      operationId: TeamsActive
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

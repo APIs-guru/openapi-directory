@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/PlayByPlay/{gameid}':
     get:
-      operationId: 5944019314338d0eb80b27cf
+      operationId: PlayByPlay
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -61,7 +61,7 @@ paths:
       summary: Play By Play
   '/{format}/PlayByPlayDelta/{date}/{minutes}':
     get:
-      operationId: 5944019314338d0eb80b27d0
+      operationId: PlayByPlayDelta
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

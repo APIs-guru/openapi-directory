@@ -50,17 +50,21 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Client Api Version.
           in: query
           name: api-version
@@ -71,6 +75,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
         - description: 'The filter to apply on the operation. You can use the following filters: ''properties/osType'', ''properties/status'', ''properties/startTime'', and ''properties/softwareUpdateConfiguration/name'''
           in: query
           name: $filter
@@ -129,11 +134,13 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         endTime:
                           description: End time of the software update configuration machine run.
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: true
                         job:
                           description: Software update configuration machine run job navigation properties.
                           properties:
@@ -151,6 +158,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         osType:
                           description: Operating system target of the software update configuration triggered this run
                           readOnly: true
@@ -173,6 +181,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         status:
                           description: Status of the software update configuration machine run.
                           readOnly: true
@@ -190,6 +199,18 @@ paths:
                 type: array
         '404':
           description: 'Resource group, or account doesn''t exist.'
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Software Update Configuration Machine Run
       x-ms-examples:
@@ -308,17 +329,21 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The Id of the software update configuration machine run.
           format: uuid
           in: path
@@ -335,6 +360,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: A single software update configuration machine run.
@@ -370,11 +396,13 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   endTime:
                     description: End time of the software update configuration machine run.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: true
                   job:
                     description: Software update configuration machine run job navigation properties.
                     properties:
@@ -392,6 +420,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   osType:
                     description: Operating system target of the software update configuration triggered this run
                     readOnly: true
@@ -414,6 +443,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   status:
                     description: Status of the software update configuration machine run.
                     readOnly: true
@@ -430,6 +460,18 @@ paths:
             x-ms-azure-resource: false
         '404':
           description: 'Resource group, account, or software update configuration machine run doesn''t exist.'
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Software Update Configuration Machine Run
       x-ms-examples:

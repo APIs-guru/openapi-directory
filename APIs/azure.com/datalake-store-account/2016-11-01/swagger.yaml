@@ -810,7 +810,7 @@ paths:
       tags:
         - FirewallRules
       x-ms-examples:
-        Lists the Data Lake Store firewall rules within the specified Data Lake Store account:
+        Lists the Data Lake Store firewall rules within the specified Data Lake Store account.:
           parameters:
             accountName: contosoadla
             api-version: '2016-11-01'
@@ -831,7 +831,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}':
     delete:
-      description: Deletes the specified firewall rule from the specified Data Lake Store account
+      description: Deletes the specified firewall rule from the specified Data Lake Store account.
       operationId: FirewallRules_Delete
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -851,7 +851,7 @@ paths:
       tags:
         - FirewallRules
       x-ms-examples:
-        Deletes the specified firewall rule from the specified Data Lake Store account:
+        Deletes the specified firewall rule from the specified Data Lake Store account.:
           parameters:
             accountName: contosoadla
             api-version: '2016-11-01'
@@ -882,7 +882,7 @@ paths:
       tags:
         - FirewallRules
       x-ms-examples:
-        Gets the specified Data Lake Store firewall rule:
+        Gets the specified Data Lake Store firewall rule.:
           parameters:
             accountName: contosoadla
             api-version: '2016-11-01'
@@ -925,7 +925,7 @@ paths:
       tags:
         - FirewallRules
       x-ms-examples:
-        Updates the specified firewall rule:
+        Updates the specified firewall rule.:
           parameters:
             accountName: contosoadla
             api-version: '2016-11-01'
@@ -1185,6 +1185,199 @@ paths:
                 properties:
                   idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
                 type: test_type
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/virtualNetworkRules':
+    get:
+      description: Lists the Data Lake Store virtual network rules within the specified Data Lake Store account.
+      operationId: VirtualNetworkRules_ListByAccount
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of virtual network rules.
+          schema:
+            $ref: '#/definitions/VirtualNetworkRuleListResult'
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        Lists the Data Lake Store virtual network rules within the specified Data Lake Store account.:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeStore/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    name: test_virtual_network_rules_name
+                    properties:
+                      subnetId: test_subnetId
+                    type: test_type
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/virtualNetworkRules/{virtualNetworkRuleName}':
+    delete:
+      description: Deletes the specified virtual network rule from the specified Data Lake Store account.
+      operationId: VirtualNetworkRules_Delete
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the virtual network rule to delete.
+          in: path
+          name: virtualNetworkRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully deleted the specified virtual network rule.
+        '204':
+          description: The specified virtual network rule does not exist or was already deleted.
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        Deletes the specified virtual network rule from the specified Data Lake Store account.:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            virtualNetworkRuleName: test_virtual_network_rules_name
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets the specified Data Lake Store virtual network rule.
+      operationId: VirtualNetworkRules_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the virtual network rule to retrieve.
+          in: path
+          name: virtualNetworkRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the virtual network rule.
+          schema:
+            $ref: '#/definitions/VirtualNetworkRule'
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        Gets the specified Data Lake Store virtual network rule.:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            virtualNetworkRuleName: test_virtual_network_rules_name
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_virtual_network_rules_name
+                properties:
+                  subnetId: test_subnetId
+                type: test_type
+    patch:
+      description: Updates the specified virtual network rule.
+      operationId: VirtualNetworkRules_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the virtual network rule to update.
+          in: path
+          name: virtualNetworkRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to update the virtual network rule.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/UpdateVirtualNetworkRuleParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully updated the specified virtual network rule.
+          schema:
+            $ref: '#/definitions/VirtualNetworkRule'
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        Updates the specified virtual network rule.:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            parameters:
+              properties:
+                subnetId: test_subnetId
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            virtualNetworkRuleName: test_virtual_network_rules_name
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_virtual_network_rules_name
+                properties:
+                  subnetId: test_subnetId
+                type: test_type
+    put:
+      description: 'Creates or updates the specified virtual network rule. During update, the virtual network rule with the specified name will be replaced with this new virtual network rule.'
+      operationId: VirtualNetworkRules_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the virtual network rule to create or update.
+          in: path
+          name: virtualNetworkRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to create or update the virtual network rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOrUpdateVirtualNetworkRuleParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the specified virtual network rule.
+          schema:
+            $ref: '#/definitions/VirtualNetworkRule'
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        'Creates or updates the specified virtual network rule. During update, the virtual network rule with the specified name will be replaced with this new virtual network rule.':
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            parameters:
+              properties:
+                subnetId: test_subnetId
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            virtualNetworkRuleName: test_virtual_network_rules_name
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_virtual_network_rules_name
+                properties:
+                  subnetId: test_subnetId
+                type: test_type
 definitions:
   CapabilityInformation:
     description: Subscription-level properties and limits for Data Lake Store.
@@ -1322,6 +1515,11 @@ definitions:
         items:
           $ref: '#/definitions/CreateTrustedIdProviderWithAccountParameters'
         type: array
+      virtualNetworkRules:
+        description: The list of virtual network rules associated with this Data Lake Store account.
+        items:
+          $ref: '#/definitions/CreateVirtualNetworkRuleWithAccountParameters'
+        type: array
   CreateFirewallRuleWithAccountParameters:
     description: The parameters used to create a new firewall rule while creating a new Data Lake Store account.
     properties:
@@ -1373,6 +1571,23 @@ definitions:
         type: string
     required:
       - idProvider
+  CreateOrUpdateVirtualNetworkRuleParameters:
+    description: The parameters used to create a new virtual network rule.
+    properties:
+      properties:
+        $ref: '#/definitions/CreateOrUpdateVirtualNetworkRuleProperties'
+        description: The virtual network rule properties to use when creating a new virtual network rule.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  CreateOrUpdateVirtualNetworkRuleProperties:
+    description: The virtual network rule properties to use when creating a new virtual network rule.
+    properties:
+      subnetId:
+        description: The resource identifier for the subnet.
+        type: string
+    required:
+      - subnetId
   CreateTrustedIdProviderWithAccountParameters:
     description: The parameters used to create a new trusted identity provider while creating a new Data Lake Store account.
     properties:
@@ -1382,6 +1597,19 @@ definitions:
       properties:
         $ref: '#/definitions/CreateOrUpdateTrustedIdProviderProperties'
         description: The trusted identity provider properties to use when creating a new trusted identity provider.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  CreateVirtualNetworkRuleWithAccountParameters:
+    description: The parameters used to create a new virtual network rule while creating a new Data Lake Store account.
+    properties:
+      name:
+        description: The unique name of the virtual network rule to create.
+        type: string
+      properties:
+        $ref: '#/definitions/CreateOrUpdateVirtualNetworkRuleProperties'
+        description: The virtual network rule properties to use when creating a new virtual network rule.
         x-ms-client-flatten: true
     required:
       - name
@@ -1526,6 +1754,12 @@ definitions:
         description: The list of trusted identity providers associated with this Data Lake Store account.
         items:
           $ref: '#/definitions/TrustedIdProvider'
+        readOnly: true
+        type: array
+      virtualNetworkRules:
+        description: The list of virtual network rules associated with this Data Lake Store account.
+        items:
+          $ref: '#/definitions/VirtualNetworkRule'
         readOnly: true
         type: array
   DataLakeStoreAccountPropertiesBasic:
@@ -1881,6 +2115,11 @@ definitions:
         items:
           $ref: '#/definitions/UpdateTrustedIdProviderWithAccountParameters'
         type: array
+      virtualNetworkRules:
+        description: The list of virtual network rules associated with this Data Lake Store account.
+        items:
+          $ref: '#/definitions/UpdateVirtualNetworkRuleWithAccountParameters'
+        type: array
   UpdateEncryptionConfig:
     description: The encryption configuration used to update a user managed Key Vault key.
     properties:
@@ -1946,3 +2185,58 @@ definitions:
         x-ms-client-flatten: true
     required:
       - name
+  UpdateVirtualNetworkRuleParameters:
+    description: The parameters used to update a virtual network rule.
+    properties:
+      properties:
+        $ref: '#/definitions/UpdateVirtualNetworkRuleProperties'
+        description: The virtual network rule properties to use when updating a virtual network rule.
+        x-ms-client-flatten: true
+  UpdateVirtualNetworkRuleProperties:
+    description: The virtual network rule properties to use when updating a virtual network rule.
+    properties:
+      subnetId:
+        description: The resource identifier for the subnet.
+        type: string
+  UpdateVirtualNetworkRuleWithAccountParameters:
+    description: The parameters used to update a virtual network rule while updating a Data Lake Store account.
+    properties:
+      name:
+        description: The unique name of the virtual network rule to update.
+        type: string
+      properties:
+        $ref: '#/definitions/UpdateVirtualNetworkRuleProperties'
+        description: The virtual network rule properties to use when updating a virtual network rule.
+        x-ms-client-flatten: true
+    required:
+      - name
+  VirtualNetworkRule:
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Data Lake Store virtual network rule information.
+    properties:
+      properties:
+        $ref: '#/definitions/VirtualNetworkRuleProperties'
+        description: The virtual network rule properties.
+        readOnly: true
+        x-ms-client-flatten: true
+  VirtualNetworkRuleListResult:
+    description: Data Lake Store virtual network rule list information.
+    properties:
+      nextLink:
+        description: The link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The results of the list operation.
+        items:
+          $ref: '#/definitions/VirtualNetworkRule'
+        readOnly: true
+        type: array
+  VirtualNetworkRuleProperties:
+    description: The virtual network rule properties.
+    properties:
+      subnetId:
+        description: The resource identifier for the subnet.
+        readOnly: true
+        type: string

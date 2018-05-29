@@ -490,7 +490,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog':
     post:
-      description: Configures flow log on a specified resource.
+      description: Configures flow log and traffic analytics (optional) on a specified resource.
       operationId: NetworkWatchers_SetFlowLogConfiguration
       parameters:
         - description: The name of the network watcher resource group.
@@ -513,7 +513,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Successful request for setting flow log configuration.
+          description: Successful request for setting flow log and traffic analytics (if opted) configuration.
           schema:
             $ref: '#/definitions/FlowLogInformation'
         '202':
@@ -522,6 +522,7 @@ paths:
             $ref: '#/definitions/FlowLogInformation'
       tags:
         - NetworkWatchers
+        - TrafficAnalytics
       x-ms-examples:
         Configure flow log:
           parameters:
@@ -537,12 +538,24 @@ paths:
           responses:
             '200':
               body:
+                flowAnalyticsConfiguration:
+                  networkWatcherFlowAnalyticsConfiguration:
+                    enabled: true
+                    workspaceId: 00000000-0000-0000-0000-000000000000
+                    workspaceRegion: location1
+                    workspaceResourceId: /subscriptions/ws_subid/resourcegroups/ws_rg/providers/microsoft.operationalinsights/workspaces/ws1
                 properties:
                   enabled: true
                   storageId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1
                 targetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1
             '202':
               body:
+                flowAnalyticsConfiguration:
+                  networkWatcherFlowAnalyticsConfiguration:
+                    enabled: true
+                    workspaceId: 00000000-0000-0000-0000-000000000000
+                    workspaceRegion: location1
+                    workspaceResourceId: /subscriptions/ws_subid/resourcegroups/ws_rg/providers/microsoft.operationalinsights/workspaces/ws1
                 properties:
                   enabled: true
                   storageId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1
@@ -1528,7 +1541,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus':
     post:
-      description: Queries status of flow log on a specified resource.
+      description: Queries status of flow log and traffic analytics (optional) on a specified resource.
       operationId: NetworkWatchers_GetFlowLogStatus
       parameters:
         - description: The name of the network watcher resource group.
@@ -1541,7 +1554,7 @@ paths:
           name: networkWatcherName
           required: true
           type: string
-        - description: Parameters that define a resource to query flow log status.
+        - description: Parameters that define a resource to query flow log and traffic analytics (optional) status.
           in: body
           name: parameters
           required: true
@@ -1551,7 +1564,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Successful request for query flow log status.
+          description: Successful request for query flow log and traffic analytics status.
           schema:
             $ref: '#/definitions/FlowLogInformation'
         '202':
@@ -1560,6 +1573,7 @@ paths:
             $ref: '#/definitions/FlowLogInformation'
       tags:
         - NetworkWatchers
+        - TrafficAnalytics
       x-ms-examples:
         Get flow log status:
           parameters:
@@ -1572,12 +1586,24 @@ paths:
           responses:
             '200':
               body:
+                flowAnalyticsConfiguration:
+                  networkWatcherFlowAnalyticsConfiguration:
+                    enabled: true
+                    workspaceId: 00000000-0000-0000-0000-000000000000
+                    workspaceRegion: location1
+                    workspaceResourceId: /subscriptions/ws_subid/resourcegroups/ws_rg/providers/microsoft.operationalinsights/workspaces/ws1
                 properties:
                   enabled: true
                   storageId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1
                 targetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1
             '202':
               body:
+                flowAnalyticsConfiguration:
+                  networkWatcherFlowAnalyticsConfiguration:
+                    enabled: true
+                    workspaceId: 00000000-0000-0000-0000-000000000000
+                    workspaceRegion: location1
+                    workspaceResourceId: /subscriptions/ws_subid/resourcegroups/ws_rg/providers/microsoft.operationalinsights/workspaces/ws1
                 properties:
                   enabled: true
                   storageId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1
@@ -2448,8 +2474,11 @@ definitions:
     required:
       - resourceId
   FlowLogInformation:
-    description: Information on the configuration of flow log.
+    description: Information on the configuration of flow log and traffic analytics (optional).
     properties:
+      flowAnalyticsConfiguration:
+        $ref: '#/definitions/TrafficAnalyticsProperties'
+        x-ms-client-flatten: true
       properties:
         $ref: '#/definitions/FlowLogProperties'
         x-ms-client-flatten: true
@@ -2474,10 +2503,10 @@ definitions:
       - storageId
       - enabled
   FlowLogStatusParameters:
-    description: Parameters that define a resource to query flow log status.
+    description: Parameters that define a resource to query flow log and traffic analytics (optional) status.
     properties:
       targetResourceId:
-        description: The target resource where getting the flow logging status.
+        description: The target resource where getting the flow logging and traffic analytics (optional) status.
         type: string
     required:
       - targetResourceId
@@ -3548,6 +3577,33 @@ definitions:
       name:
         description: Name of the resource.
         type: string
+  TrafficAnalyticsConfigurationProperties:
+    description: Parameters that define the configuration of traffic analytics.
+    properties:
+      enabled:
+        description: Flag to enable/disable traffic analytics.
+        type: boolean
+      workspaceId:
+        description: The resource guid of the attached workspace
+        type: string
+      workspaceRegion:
+        description: The location of the attached workspace
+        type: string
+      workspaceResourceId:
+        description: 'Resource Id of the attached workspace '
+        type: string
+    required:
+      - enabled
+      - workspaceId
+      - workspaceRegion
+      - workspaceResourceId
+  TrafficAnalyticsProperties:
+    description: Parameters that define the configuration of traffic analytics.
+    properties:
+      networkWatcherFlowAnalyticsConfiguration:
+        $ref: '#/definitions/TrafficAnalyticsConfigurationProperties'
+    required:
+      - networkWatcherFlowAnalyticsConfiguration
   TroubleshootingDetails:
     description: Information gained from troubleshooting of specified resource.
     properties:

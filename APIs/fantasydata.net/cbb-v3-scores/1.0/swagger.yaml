@@ -37,7 +37,7 @@ paths:
   '/{format}/AreAnyGamesInProgress':
     get:
       description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
-      operationId: 5944071635491a0cc050ffcc
+      operationId: AreGamesInProgress
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -56,7 +56,7 @@ paths:
       summary: Are Games In Progress
   '/{format}/CurrentSeason':
     get:
-      operationId: 5944071635491a0cc050ffce
+      operationId: CurrentSeason
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -75,7 +75,7 @@ paths:
       summary: Current Season
   '/{format}/Games/{season}':
     get:
-      operationId: 5944071635491a0cc050ffc8
+      operationId: Schedules
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -101,7 +101,7 @@ paths:
       summary: Schedules
   '/{format}/GamesByDate/{date}':
     get:
-      operationId: 5944071635491a0cc050ffc7
+      operationId: GamesByDate
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -129,7 +129,7 @@ paths:
       summary: Games by Date
   '/{format}/LeagueHierarchy':
     get:
-      operationId: 5944071635491a0cc050ffcf
+      operationId: LeagueHierarchy
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -150,7 +150,7 @@ paths:
       summary: League Hierarchy
   '/{format}/Player/{playerid}':
     get:
-      operationId: 5944071635491a0cc050ffcd
+      operationId: PlayerDetailsByPlayer
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -176,7 +176,7 @@ paths:
       summary: Player Details by Player
   '/{format}/Players':
     get:
-      operationId: 5944071635491a0cc050ffc5
+      operationId: PlayerDetailsByActive
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -197,7 +197,7 @@ paths:
       summary: Player Details by Active
   '/{format}/Players/{team}':
     get:
-      operationId: 5944071635491a0cc050ffc9
+      operationId: PlayerDetailsByTeam
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -225,7 +225,7 @@ paths:
       summary: Player Details by Team
   '/{format}/TeamGameStatsByDate/{date}':
     get:
-      operationId: 5944071635491a0cc050ffca
+      operationId: TeamGameStatsByDate
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -253,7 +253,7 @@ paths:
       summary: Team Game Stats by Date
   '/{format}/TeamSeasonStats/{season}':
     get:
-      operationId: 5944071635491a0cc050ffcb
+      operationId: TeamSeasonStats
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -279,7 +279,7 @@ paths:
       summary: Team Season Stats
   '/{format}/Tournament/{season}':
     get:
-      operationId: 5944071635491a0cc050ffd0
+      operationId: TournamentHierarchy
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -303,7 +303,7 @@ paths:
       summary: Tournament Hierarchy
   '/{format}/teams':
     get:
-      operationId: 5944071635491a0cc050ffc6
+      operationId: Teams
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

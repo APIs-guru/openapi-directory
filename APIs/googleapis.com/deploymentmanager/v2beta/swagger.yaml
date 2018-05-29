@@ -68,12 +68,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -934,7 +934,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/GlobalSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -1591,7 +1591,7 @@ definitions:
 
           * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
 
-          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` .
 
 
 
@@ -1854,6 +1854,21 @@ definitions:
         description: 'An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.'
         type: string
     type: object
+  GlobalSetPolicyRequest:
+    properties:
+      bindings:
+        description: Flatten Policy to create a backwacd compatible wire-format. Deprecated. Use 'policy' to specify bindings.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: Flatten Policy to create a backward compatible wire-format. Deprecated. Use 'policy' to specify the etag.
+        format: byte
+        type: string
+      policy:
+        $ref: '#/definitions/Policy'
+        description: 'REQUIRED: The complete policy to be applied to the ''resource''. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.'
+    type: object
   ImportFile:
     description: ''
     properties:
@@ -1981,7 +1996,7 @@ definitions:
     description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
     properties:
       clientOperationId:
-        description: '[Output Only] Reserved for future use.'
+        description: '[Output Only] The value of `requestId` if you provided it in the request. Not present otherwise.'
         type: string
       creationTimestamp:
         description: '[Deprecated] This field is deprecated.'
@@ -2132,11 +2147,17 @@ definitions:
 
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
 
-      **Example**
+      **JSON Example**
 
-      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com" ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+
+      **YAML Example**
+
+      bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-other-app@appspot.gserviceaccount.com role: roles/owner - members: - user:sean@example.com role: roles/viewer
+
+
 
       For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:

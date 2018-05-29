@@ -285,6 +285,25 @@ paths:
       tags:
         - projects
 definitions:
+  Accelerator:
+    description: Carries information about an accelerator that can be attached to a VM.
+    properties:
+      count:
+        description: How many accelerators of this type to attach.
+        format: int64
+        type: string
+      type:
+        description: |-
+          The accelerator type string (eg nvidia-tesla-k80).
+
+          Only NVIDIA GPU accelerators are currently supported.  If an NVIDIA GPU is
+          attached, the required runtime libraries will be made available to all
+          containers under `/usr/local/nvidia`.  The driver version to install must
+          be specified using the NVIDIA driver version parameter on the virtual
+          machine specification.  Note that attaching a GPU increases the worker VM
+          startup time by a few minutes.
+        type: string
+    type: object
   Action:
     description: Action specifies a single action that runs a docker container.
     properties:
@@ -297,6 +316,15 @@ definitions:
         items:
           type: string
         type: array
+      credentials:
+        $ref: '#/definitions/Secret'
+        description: |-
+          If the specified image is hosted on a private repository other than Google
+          Container Registry, the credentials required to pull the image must be
+          specified here as a encrypted secret.
+
+          The secret must decrypt to a JSON encoded dictionary containing both
+          `username` and `password` keys.
       entrypoint:
         description: 'If specified, overrides the ENTRYPOINT specified in the container.'
         type: string
@@ -332,6 +360,7 @@ definitions:
             - ENABLE_FUSE
             - PUBLISH_EXPOSED_PORTS
             - DISABLE_IMAGE_PREFETCH
+            - DISABLE_STANDARD_ERROR_CAPTURE
           type: string
         type: array
       imageUri:
@@ -488,6 +517,17 @@ definitions:
         description: The exit status of the container.
         format: int32
         type: integer
+      stderr:
+        description: |-
+          The tail end of any content written to standard error by the container.
+          To prevent this from being recorded if the action is known to emit
+          large amounts of debugging noise or sensitive information, set the
+          DISABLE_STANDARD_ERROR_CAPTURE flag.
+
+          Note that only a small amount of the end of the stream is captured here.
+          The entire stream is stored in the /google/logs directory mounted into
+          each action, and may be copied off the machine as described elsewhere.
+        type: string
     type: object
   DelayedEvent:
     description: |-
@@ -635,6 +675,10 @@ definitions:
         description: The time that the operation was created by the API.
         format: google-datetime
         type: string
+      endTime:
+        description: The time at which execution was completed and resources were cleaned up.
+        format: google-datetime
+        type: string
       events:
         description: |-
           The list of events that have happened so far during the execution of this
@@ -650,6 +694,10 @@ definitions:
       pipeline:
         $ref: '#/definitions/Pipeline'
         description: The pipeline this operation represents.
+      startTime:
+        description: The first time at which resources were allocated to execute the pipeline.
+        format: google-datetime
+        type: string
     type: object
   Mount:
     description: Mount carries information about a particular disk mount inside a container.
@@ -873,6 +921,21 @@ definitions:
         $ref: '#/definitions/ComputeEngine'
         description: Execution information specific to Google Compute Engine.
     type: object
+  Secret:
+    description: |-
+      Secret holds encrypted information that is only decrypted and stored in RAM
+      by the worker VM when running the pipeline.
+    properties:
+      cipherText:
+        description: The value of the cipherText response from the `encrypt` method.
+        type: string
+      keyName:
+        description: |-
+          The name of the Cloud KMS key that will be used to decrypt the secret
+          value.  The VM service account must have the required permissions and
+          authentication scopes to invoke the `decrypt` method on the specified key.
+        type: string
+    type: object
   ServiceAccount:
     description: Carries information about a Google Cloud Service Account.
     properties:
@@ -983,6 +1046,11 @@ definitions:
   VirtualMachine:
     description: Carries information about a Compute Engine VM resource.
     properties:
+      accelerators:
+        description: The list of accelerators to attach to the VM.
+        items:
+          $ref: '#/definitions/Accelerator'
+        type: array
       bootDiskSizeGb:
         description: |-
           The size of the boot disk, in gigabytes. The boot disk must be large
@@ -1043,6 +1111,13 @@ definitions:
       network:
         $ref: '#/definitions/Network'
         description: The VM network configuration.
+      nvidiaDriverVersion:
+        description: |-
+          The NVIDIA driver version to use when attaching an NVIDIA GPU accelerator.
+          The version specified here must be compatible with the GPU libraries
+          contained in the container being executed, and must be one of the drivers
+          hosted in the 'nvidia-drivers-us-public' bucket on Google Cloud Storage.
+        type: string
       preemptible:
         description: 'If true, allocate a preemptible VM.'
         type: boolean

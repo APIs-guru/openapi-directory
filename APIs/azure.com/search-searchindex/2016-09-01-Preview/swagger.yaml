@@ -91,6 +91,9 @@ paths:
         SearchIndexCountDocuments:
           parameters:
             api-version: 2016-09-01-Preview
+            indexName: myindex
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
           responses:
             '200':
               body: 427

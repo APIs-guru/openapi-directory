@@ -2420,6 +2420,11 @@ paths:
           name: protectionContainerName
           required: true
           type: string
+        - description: OData filter options.
+          in: query
+          name: $filter
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -2466,6 +2471,7 @@ paths:
                       supportedReplicationProviders:
                         - HyperVReplicaAzure
                     type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems
+      x-ms-odata: '#/definitions/ProtectableItemQueryParameter'
       x-ms-pageable:
         nextLinkName: nextLink
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectableItems/{protectableItemName}':
@@ -3587,11 +3593,13 @@ paths:
           responses:
             '200':
               body:
+                nextLink: null
                 value:
                   - id: /Subscriptions/6808dbbc-98c7-431f-a1b1-9580902423b7/resourceGroups/avraiMgDiskVaultRG/providers/Microsoft.RecoveryServices/vaults/avraiMgDiskVault/replicationFabrics/asr-a2a-default-centraluseuap/replicationProtectionContainers/asr-a2a-default-centraluseuap-container/replicationProtectedItems/468c912d-b1ab-4ea2-97eb-4b5095155db2/targetComputeSizes/Basic_A0
                     name: Basic_A0
                     properties:
                       cpuCoresCount: 1
+                      errors: null
                       friendlyName: Basic_A0
                       highIopsSupported: NotSupported
                       maxDataDiskCount: 1
@@ -3603,6 +3611,7 @@ paths:
                     name: Standard_A0
                     properties:
                       cpuCoresCount: 1
+                      errors: null
                       friendlyName: Standard_A0
                       highIopsSupported: NotSupported
                       maxDataDiskCount: 1
@@ -4147,6 +4156,86 @@ paths:
                   targetProtectionContainerFriendlyName: Microsoft Azure
                   targetProtectionContainerId: Microsoft Azure
                 type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings
+    patch:
+      description: The operation to update protection container mapping.
+      operationId: ReplicationProtectionContainerMappings_Update
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Protection container mapping name.
+          in: path
+          name: mappingName
+          required: true
+          type: string
+        - description: Mapping update input.
+          in: body
+          name: updateInput
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateProtectionContainerMappingInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProtectionContainerMapping'
+        '202':
+          description: Accepted
+      summary: Update protection container mapping.
+      tags:
+        - ReplicationProtectionContainerMappings
+      x-ms-examples:
+        Update protection container mapping.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: cloud1
+            mappingName: cloud1protectionprofile1
+            protectionContainerName: cloud_6d224fc6-f326-5d35-96de-fbf51efb3179
+            resourceGroupName: resourceGroupPS1
+            resourceName: vault1
+            subscriptionId: c183865e-6077-46f2-a3b1-deb0f4f4650a
+            updateInput:
+              properties:
+                providerSpecificInput:
+                  agentAutoUpdateStatus: Enabled
+                  automationAccountArmId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/automationrg1/providers/Microsoft.Automation/automationAccounts/automationaccount1
+                  instanceType: A2A
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1/replicationProtectionContainers/cloud_6d224fc6-f326-5d35-96de-fbf51efb3179/replicationProtectionContainerMappings/cloud1protectionprofile1
+                name: cloud1protectionprofile1
+                properties:
+                  health: Normal
+                  healthErrorDetails: []
+                  policyFriendlyName: protectionprofile1
+                  policyId: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/protectionprofile1
+                  providerSpecificDetails:
+                    agentAutoUpdateStatus: Enabled
+                    automationAccountArmId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/automationrg1/providers/Microsoft.Automation/automationAccounts/automationaccount1
+                    instanceType: A2A
+                    jobScheduleName: ffd503ec-5f88-4b58-97c8-841466e7aa47
+                    scheduleName: cloud1protectionprofile1_a85ea38f-62a8-471b-93cc-69b74fd9578c
+                  sourceFabricFriendlyName: cloud1
+                  sourceProtectionContainerFriendlyName: cloud1
+                  state: Paired
+                  targetFabricFriendlyName: Microsoft Azure
+                  targetProtectionContainerFriendlyName: Microsoft Azure
+                  targetProtectionContainerId: Microsoft Azure
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings
+            '202': {}
+      x-ms-long-running-operation: true
     put:
       description: The operation to create a protection container mapping.
       operationId: ReplicationProtectionContainerMappings_Create
@@ -7186,6 +7275,25 @@ definitions:
     properties: {}
     type: object
     x-ms-discriminator-value: A2A
+  A2AContainerMappingInput:
+    allOf:
+      - $ref: '#/definitions/ReplicationProviderSpecificContainerMappingInput'
+    description: A2A container mapping input.
+    properties:
+      agentAutoUpdateStatus:
+        description: A value indicating whether the auto update is enabled.
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AgentAutoUpdateStatus
+      automationAccountArmId:
+        description: The automation account arm id.
+        type: string
+    type: object
+    x-ms-discriminator-value: A2A
   A2AEnableProtectionInput:
     allOf:
       - $ref: '#/definitions/EnableProtectionProviderSpecificInput'
@@ -7282,7 +7390,7 @@ definitions:
           - Disable
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: SetMultiVmSyncStatus
       recoveryPointHistory:
         description: The duration in minutes until which the recovery points need to be stored.
@@ -7418,6 +7526,31 @@ definitions:
         description: A value indicating whether resync is required for this disk.
         type: boolean
     type: object
+  A2AProtectionContainerMappingDetails:
+    allOf:
+      - $ref: '#/definitions/ProtectionContainerMappingProviderSpecificDetails'
+    description: A2A provider specific settings.
+    properties:
+      agentAutoUpdateStatus:
+        description: A value indicating whether the auto update is enabled.
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AgentAutoUpdateStatus
+      automationAccountArmId:
+        description: The automation account arm id.
+        type: string
+      jobScheduleName:
+        description: The job schedule arm name.
+        type: string
+      scheduleName:
+        description: The schedule arm name.
+        type: string
+    type: object
+    x-ms-discriminator-value: A2A
   A2ARecoveryPointDetails:
     allOf:
       - $ref: '#/definitions/ProviderSpecificRecoveryPointDetails'
@@ -7430,7 +7563,7 @@ definitions:
           - PerVmRecoveryPoint
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: RecoveryPointSyncType
     type: object
     x-ms-discriminator-value: A2A
@@ -7476,7 +7609,7 @@ definitions:
           - UserSpecified
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: MultiVmGroupCreateOption
       multiVmGroupId:
         description: The multi vm group Id.
@@ -7610,6 +7743,25 @@ definitions:
         items:
           $ref: '#/definitions/A2AVmManagedDiskInputDetails'
         type: array
+    type: object
+    x-ms-discriminator-value: A2A
+  A2AUpdateContainerMappingInput:
+    allOf:
+      - $ref: '#/definitions/ReplicationProviderSpecificUpdateContainerMappingInput'
+    description: A2A update protection container mapping.
+    properties:
+      agentAutoUpdateStatus:
+        description: A value indicating whether the auto update is enabled.
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AgentAutoUpdateStatus
+      automationAccountArmId:
+        description: The automation account arm id.
+        type: string
     type: object
     x-ms-discriminator-value: A2A
   A2AUpdateReplicationProtectedItemInput:
@@ -8097,7 +8249,7 @@ definitions:
           - ResourceManager
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: FailoverDeploymentModel
       groups:
         description: The recovery plan groups.
@@ -8165,7 +8317,7 @@ definitions:
           - MigrationComplete
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: DisableProtectionReason
       replicationProviderInput:
         $ref: '#/definitions/DisableProtectionProviderSpecificInput'
@@ -8669,9 +8821,10 @@ definitions:
           - Configuration
           - FabricInfrastructure
           - VersionExpiry
+          - AgentAutoUpdate
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: HealthErrorCategory
       severity:
         description: Severity of error.
@@ -8682,7 +8835,7 @@ definitions:
           - Info
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: Severity
       summaryCode:
         description: The code of the health error.
@@ -9383,14 +9536,35 @@ definitions:
         description: The id of the object in fabric.
         type: string
       hasFibreChannelAdapter:
-        description: A value indicating whether the VM has a fibre channel adapter attached.
-        type: boolean
+        description: 'A value indicating whether the VM has a fibre channel adapter attached. String value of {SrsDataContract.PresenceStatus} enum.'
+        enum:
+          - Unknown
+          - Present
+          - NotPresent
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PresenceStatus
       hasPhysicalDisk:
-        description: A value indicating whether the VM has a physical disk attached.
-        type: boolean
+        description: 'A value indicating whether the VM has a physical disk attached. String value of {SrsDataContract.PresenceStatus} enum.'
+        enum:
+          - Unknown
+          - Present
+          - NotPresent
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PresenceStatus
       hasSharedVhd:
-        description: A value indicating whether the VM has a shared VHD attached.
-        type: boolean
+        description: 'A value indicating whether the VM has a shared VHD attached. String value of {SrsDataContract.PresenceStatus} enum.'
+        enum:
+          - Unknown
+          - Present
+          - NotPresent
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PresenceStatus
       osDetails:
         $ref: '#/definitions/OSDetails'
         description: The Last replication time.
@@ -9420,7 +9594,7 @@ definitions:
           - RecoveryServicesActiveDirectory
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: IdentityProviderType
       objectId:
         description: The object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.
@@ -9466,7 +9640,7 @@ definitions:
           - SecurityUpdateRequired
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: AgentVersionStatus
       version:
         description: The agent version.
@@ -9625,7 +9799,7 @@ definitions:
           - Disable
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: SetMultiVmSyncStatus
       recoveryPointHistory:
         description: The duration in minutes until which the recovery points need to be stored.
@@ -10065,7 +10239,7 @@ definitions:
           - Custom
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: RecoveryPointType
     type: object
     x-ms-discriminator-value: InMage
@@ -10107,7 +10281,7 @@ definitions:
           - Disable
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: SetMultiVmSyncStatus
       recoveryPointHistory:
         description: The duration in minutes until which the recovery points need to be stored.
@@ -10603,9 +10777,7 @@ definitions:
     properties:
       affectedObjectTypes:
         description: The type of objects.
-        items:
-          type: string
-        type: array
+        type: string
       endTime:
         description: Date time to get jobs upto.
         type: string
@@ -10614,9 +10786,7 @@ definitions:
         type: string
       jobStatus:
         description: The states of the job to be filtered can be in.
-        items:
-          type: string
-        type: array
+        type: string
       startTime:
         description: Date time to get jobs from.
         type: string
@@ -11172,6 +11342,13 @@ definitions:
           type: string
         type: array
     type: object
+  ProtectableItemQueryParameter:
+    description: Query parameter to enumerate Protectable items.
+    properties:
+      state:
+        description: State of the Protectable item query filter.
+        type: string
+    type: object
   ProtectedItemsQueryParameter:
     description: Query parameter to enumerate protected items.
     properties:
@@ -11185,7 +11362,7 @@ definitions:
           - UserSpecified
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: MultiVmGroupCreateOption
       recoveryPlanName:
         description: The recovery plan filter.
@@ -11288,6 +11465,7 @@ definitions:
     type: object
   ProtectionContainerMappingProviderSpecificDetails:
     description: Container mapping provider specific details.
+    discriminator: instanceType
     properties:
       instanceType:
         description: Gets the class type. Overriden in derived classes.
@@ -11377,7 +11555,7 @@ definitions:
           - Disabled
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: MultiVmSyncStatus
       recoveryPointHistory:
         description: The duration in minutes until which the recovery points need to be stored.
@@ -11413,7 +11591,7 @@ definitions:
           - UsePerVmRecoveryPoint
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: MultiVmSyncPointOption
       recoveryPointType:
         description: The recovery point type.
@@ -11424,7 +11602,7 @@ definitions:
           - LatestProcessed
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: A2ARpRecoveryPointType
     required:
       - recoveryPointType
@@ -11447,7 +11625,7 @@ definitions:
             - RecoveryToPrimary
           type: string
           x-ms-enum:
-            modelAsString: false
+            modelAsString: true
             name: PossibleOperationsDirections
         type: array
       failoverTypes:
@@ -11469,7 +11647,7 @@ definitions:
             - CompleteMigration
           type: string
           x-ms-enum:
-            modelAsString: false
+            modelAsString: true
             name: ReplicationProtectedItemOperation
         type: array
     required:
@@ -11499,7 +11677,7 @@ definitions:
           - Recovery
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: RecoveryPlanActionLocation
       runbookId:
         description: The runbook ARM Id.
@@ -11539,7 +11717,7 @@ definitions:
           - Failover
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: RecoveryPlanGroupType
       replicationProtectedItems:
         description: The list of protected items.
@@ -11582,7 +11760,7 @@ definitions:
           - ForSynchronization
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: DataSyncStatus
       recoveryVmCreationOption:
         description: The ALR option.
@@ -11591,7 +11769,7 @@ definitions:
           - NoAction
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: AlternateLocationRecoveryOption
     required:
       - dataSyncOption
@@ -11614,7 +11792,7 @@ definitions:
           - LatestProcessed
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: HyperVReplicaAzureRpRecoveryPointType
       secondaryKekCertificatePfx:
         description: The secondary KEK certificate PFX.
@@ -11640,7 +11818,7 @@ definitions:
           - LatestProcessed
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: InMageV2RpRecoveryPointType
       useMultiVmSyncPoint:
         description: A value indicating whether multi VM sync enabled VMs should use multi VM sync points for failover.
@@ -11666,7 +11844,7 @@ definitions:
           - Custom
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: RpInMageRecoveryPointType
     required:
       - recoveryPointType
@@ -11701,7 +11879,7 @@ definitions:
           - RecoveryToPrimary
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: PossibleOperationsDirections
       providerSpecificDetails:
         description: The provider specific properties.
@@ -11799,7 +11977,7 @@ definitions:
           - Recovery
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: RecoveryPlanActionLocation
       path:
         description: The script path.
@@ -11863,7 +12041,7 @@ definitions:
           - RecoveryToPrimary
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: PossibleOperationsDirections
       networkId:
         description: The Id of the network to be used for test failover.
@@ -11902,7 +12080,7 @@ definitions:
           - RecoveryToPrimary
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: PossibleOperationsDirections
       providerSpecificDetails:
         description: The provider specific properties.
@@ -11916,7 +12094,7 @@ definitions:
           - NotRequired
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: SourceSiteOperations
     required:
       - failoverDirection
@@ -12198,6 +12376,7 @@ definitions:
     type: object
   ReplicationProviderSpecificContainerMappingInput:
     description: Provider specific input for pairing operations.
+    discriminator: instanceType
     properties:
       instanceType:
         description: The class type.
@@ -12210,6 +12389,14 @@ definitions:
       instanceType:
         description: Gets the Instance type.
         readOnly: true
+        type: string
+    type: object
+  ReplicationProviderSpecificUpdateContainerMappingInput:
+    description: Provider specific input for update pairing operations.
+    discriminator: instanceType
+    properties:
+      instanceType:
+        description: The class type.
         type: string
     type: object
   Resource:
@@ -12704,6 +12891,20 @@ definitions:
         $ref: '#/definitions/PolicyProviderSpecificInput'
         description: The ReplicationProviderSettings.
     type: object
+  UpdateProtectionContainerMappingInput:
+    description: Container pairing update input.
+    properties:
+      properties:
+        $ref: '#/definitions/UpdateProtectionContainerMappingInputProperties'
+        description: Update protection container mapping input properties.
+    type: object
+  UpdateProtectionContainerMappingInputProperties:
+    description: Container pairing update input.
+    properties:
+      providerSpecificInput:
+        $ref: '#/definitions/ReplicationProviderSpecificUpdateContainerMappingInput'
+        description: Provider specific input for updating protection container mapping.
+    type: object
   UpdateRecoveryPlanInput:
     description: Update recovery plan input class.
     properties:
@@ -12741,7 +12942,7 @@ definitions:
           - WindowsServer
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: LicenseType
       providerSpecificDetails:
         $ref: '#/definitions/UpdateReplicationProtectedItemProviderInput'
@@ -13139,6 +13340,9 @@ definitions:
   VaultHealthProperties:
     description: class to define the health summary of the Vault.
     properties:
+      containersHealth:
+        $ref: '#/definitions/ResourceHealthSummary'
+        description: The list of the health detail of the containers in the vault.
       fabricsHealth:
         $ref: '#/definitions/ResourceHealthSummary'
         description: The list of the health detail of the fabrics in the vault.
@@ -13152,7 +13356,7 @@ definitions:
         type: array
     type: object
   VersionDetails:
-    description: Version related deatils.
+    description: Version related details.
     properties:
       expiryDate:
         description: Version expiry date.
@@ -13168,7 +13372,7 @@ definitions:
           - SecurityUpdateRequired
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: AgentVersionStatus
       version:
         description: The agent version.
@@ -13269,14 +13473,35 @@ definitions:
         description: The id of the object in fabric.
         type: string
       hasFibreChannelAdapter:
-        description: A value indicating whether the VM has a fibre channel adapter attached.
-        type: boolean
+        description: 'A value indicating whether the VM has a fibre channel adapter attached. String value of {SrsDataContract.PresenceStatus} enum.'
+        enum:
+          - Unknown
+          - Present
+          - NotPresent
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PresenceStatus
       hasPhysicalDisk:
-        description: A value indicating whether the VM has a physical disk attached.
-        type: boolean
+        description: 'A value indicating whether the VM has a physical disk attached. String value of {SrsDataContract.PresenceStatus} enum.'
+        enum:
+          - Unknown
+          - Present
+          - NotPresent
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PresenceStatus
       hasSharedVhd:
-        description: A value indicating whether the VM has a shared VHD attached.
-        type: boolean
+        description: 'A value indicating whether the VM has a shared VHD attached. String value of {SrsDataContract.PresenceStatus} enum.'
+        enum:
+          - Unknown
+          - Present
+          - NotPresent
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PresenceStatus
       osDetails:
         $ref: '#/definitions/OSDetails'
         description: The Last replication time.

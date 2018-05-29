@@ -42,8 +42,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations'
       operationId: HybridRunbookWorkerGroup_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -53,6 +55,11 @@ paths:
           in: path
           name: automationAccountName
           required: true
+          type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
           type: string
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
@@ -92,6 +99,11 @@ paths:
                           ip:
                             description: Gets or sets the assigned machine IP address.
                             type: string
+                          lastSeenDateTime:
+                            description: Last Heartbeat from the Worker
+                            format: date-time
+                            type: string
+                            x-nullable: false
                           name:
                             description: Gets or sets the worker machine name.
                             type: string
@@ -99,6 +111,7 @@ paths:
                             description: Gets or sets the registration time of the worker machine.
                             format: date-time
                             type: string
+                            x-nullable: false
                       type: array
                     id:
                       description: Gets or sets the id of the resource.
@@ -142,6 +155,7 @@ paths:
                     id: /subscriptions/subid/resourceGroups/udtest/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestWorkerGroup
                     name: TestWorkerGroup
               headers: {}
+      x-ms-odata: './definitions.json#/definitions/HybridRunbookWorkerGroup'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}':
@@ -151,8 +165,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations'
       operationId: HybridRunbookWorkerGroup_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -211,8 +227,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations'
       operationId: HybridRunbookWorkerGroup_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -258,6 +276,11 @@ paths:
                     ip:
                       description: Gets or sets the assigned machine IP address.
                       type: string
+                    lastSeenDateTime:
+                      description: Last Heartbeat from the Worker
+                      format: date-time
+                      type: string
+                      x-nullable: false
                     name:
                       description: Gets or sets the worker machine name.
                       type: string
@@ -265,6 +288,7 @@ paths:
                       description: Gets or sets the registration time of the worker machine.
                       format: date-time
                       type: string
+                      x-nullable: false
                 type: array
               id:
                 description: Gets or sets the id of the resource.
@@ -312,8 +336,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations'
       operationId: HybridRunbookWorkerGroup_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -372,6 +398,11 @@ paths:
                     ip:
                       description: Gets or sets the assigned machine IP address.
                       type: string
+                    lastSeenDateTime:
+                      description: Last Heartbeat from the Worker
+                      format: date-time
+                      type: string
+                      x-nullable: false
                     name:
                       description: Gets or sets the worker machine name.
                       type: string
@@ -379,6 +410,7 @@ paths:
                       description: Gets or sets the registration time of the worker machine.
                       format: date-time
                       type: string
+                      x-nullable: false
                 type: array
               id:
                 description: Gets or sets the id of the resource.

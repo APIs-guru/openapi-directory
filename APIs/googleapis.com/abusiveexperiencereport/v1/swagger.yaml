@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'View Abusive Experience Report data, and get a list of sites that have a significant number of abusive experiences.'
-  title: Google Abusive Experience Report
+  title: Abusive Experience Report
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -187,7 +187,9 @@ paths:
       - $ref: '#/parameters/upload_protocol'
 definitions:
   SiteSummaryResponse:
-    description: Response message for GetSiteSummary.
+    description: |-
+      Response message for GetSiteSummary.
+      Do not confuse with same message in google.ads.experiencereport.v1
     properties:
       abusiveStatus:
         description: The status of the site reviewed for the abusive experiences.

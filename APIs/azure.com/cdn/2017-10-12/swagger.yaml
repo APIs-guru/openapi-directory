@@ -402,6 +402,7 @@ paths:
               body:
                 errorCode: None
                 isValid: true
+                message: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles':
     get:
       description: Lists all of the CDN profiles within a resource group.
@@ -741,6 +742,7 @@ paths:
                       isHttpsAllowed: true
                       optimizationType: DynamicSiteAcceleration
                       originHostHeader: www.bing.com
+                      originPath: null
                       origins:
                         - name: www-bing-com
                           properties:
@@ -848,6 +850,7 @@ paths:
                   isHttpsAllowed: true
                   optimizationType: DynamicSiteAcceleration
                   originHostHeader: www.bing.com
+                  originPath: null
                   origins:
                     - name: www-bing-com
                       properties:
@@ -923,12 +926,16 @@ paths:
                   isCompressionEnabled: false
                   isHttpAllowed: true
                   isHttpsAllowed: true
+                  optimizationType: null
+                  originHostHeader: null
+                  originPath: null
                   origins:
                     - name: www-bing-com
                       properties:
                         hostName: www.bing.com
                         httpPort: 80
                         httpsPort: 443
+                  probePath: null
                   provisioningState: Creating
                   queryStringCachingBehavior: IgnoreQueryString
                   resourceState: Creating
@@ -1009,12 +1016,16 @@ paths:
                   isCompressionEnabled: false
                   isHttpAllowed: true
                   isHttpsAllowed: true
+                  optimizationType: null
+                  originHostHeader: null
+                  originPath: null
                   origins:
                     - name: www-bing-com
                       properties:
                         hostName: www.bing.com
                         httpPort: 80
                         httpsPort: 443
+                  probePath: null
                   provisioningState: Creating
                   queryStringCachingBehavior: IgnoreQueryString
                   resourceState: Creating
@@ -1121,6 +1132,7 @@ paths:
                       hostName: www.someDomain.net
                       provisioningState: Succeeded
                       resourceState: Active
+                      validationData: null
                     type: Microsoft.Cdn/profiles/endpoints/customdomains
       x-ms-pageable:
         nextLinkName: nextLink
@@ -1228,6 +1240,7 @@ paths:
                   hostName: www.someDomain.net
                   provisioningState: Succeeded
                   resourceState: Active
+                  validationData: null
                 type: Microsoft.Cdn/profiles/endpoints/customdomains
     put:
       description: Creates a new custom domain within an endpoint.
@@ -1298,6 +1311,7 @@ paths:
                   hostName: www.someDomain.net
                   provisioningState: Succeeded
                   resourceState: Active
+                  validationData: null
                 type: Microsoft.Cdn/profiles/endpoints/customdomains
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/disableCustomHttps':
@@ -1491,6 +1505,8 @@ paths:
                     name: www-someDomain-net
                     properties:
                       hostName: www.someDomain.net
+                      httpPort: null
+                      httpsPort: null
                       provisioningState: Succeeded
                       resourceState: Active
                     type: Microsoft.Cdn/profiles/endpoints/origins
@@ -1546,6 +1562,8 @@ paths:
                 name: www-someDomain-net
                 properties:
                   hostName: www.someDomain.net
+                  httpPort: null
+                  httpsPort: null
                   provisioningState: Succeeded
                   resourceState: Active
                 type: Microsoft.Cdn/profiles/endpoints/origins
@@ -1720,6 +1738,7 @@ paths:
                 isHttpsAllowed: true
                 optimizationType: DynamicSiteAcceleration
                 originHostHeader: www.bing.com
+                originPath: null
                 origins:
                   - name: www-bing-com
                     properties:
@@ -1784,6 +1803,7 @@ paths:
                 isHttpsAllowed: true
                 optimizationType: DynamicSiteAcceleration
                 originHostHeader: www.bing.com
+                originPath: null
                 origins:
                   - name: www-bing-com
                     properties:
@@ -1844,6 +1864,8 @@ paths:
             '200':
               body:
                 customDomainValidated: true
+                message: null
+                reason: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/generateSsoUri':
     post:
       description: 'Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.'

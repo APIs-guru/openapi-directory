@@ -701,6 +701,9 @@ definitions:
         items:
           $ref: '#/definitions/Annotation'
         type: array
+      argumentText:
+        description: Plain-text body of the message with all bot mentions stripped out.
+        type: string
       cards:
         description: |-
           Rich, formatted and interactive cards that can be used to display UI

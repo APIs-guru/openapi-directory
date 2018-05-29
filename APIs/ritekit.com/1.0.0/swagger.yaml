@@ -27,7 +27,7 @@ info:
 
     You can directly connect to our API using your **client ID** by sending it as a GET query parameter. This option is simple (no need for oAuth) but it should be used only in case the Client ID is not exposed publicly.
 
-    GET  https://api.ritekit.com/v1/stats/basic/php?client_id=292c6912e7710c838347ae178b4a
+    GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a
 
     #### B) Using Access token (oAuth 2.0)
 
@@ -37,7 +37,7 @@ info:
 
     Or
 
-    GET  https://api.ritekit.com/v1/stats/basic/php?access_token=292c6912e7710c838347ae178b4a
+    GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&access_token=292c6912e7710c838347ae178b4a
 
     ## oAuth 2.0
 
@@ -287,11 +287,15 @@ paths:
           required: true
           type: string
         - description: 'Animation type: none, rays, glint, circle'
-          in: body
+          in: query
           name: animation
           required: true
-          schema:
-            type: string
+          type: string
+        - description: showing/hiding quote mark
+          in: query
+          name: showQuoteMark
+          required: false
+          type: integer
       produces:
         - application/json; charset=utf-8
       responses:
@@ -593,14 +597,26 @@ paths:
           headers: {}
       summary: Trending Hashtags
       tags: []
-  '/v1/stats/auto-hashtag?post={post}':
+  /v1/stats/auto-hashtag:
     get:
       description: Returns auto-hashtagged text of the post.
       parameters:
         - description: Text of the post
-          in: path
+          in: query
           name: post
           required: true
+          type: string
+        - default: 2
+          description: Max number of hashtags.
+          in: query
+          name: maxHashtags
+          required: false
+          type: integer
+        - default: auto
+          description: 'Position of hashtags: end => at the end, auto => anywhere'
+          in: query
+          name: hashtagPosition
+          required: false
           type: string
       produces:
         - application/json; charset=utf-8
@@ -616,13 +632,13 @@ paths:
           headers: {}
       summary: Auto-Hashtag
       tags: []
-  '/v1/stats/hashtag-suggestions/{topic}':
+  /v1/stats/hashtag-suggestions:
     get:
-      description: Returns list of hashtag suggestions and their real-time stats for a given topic
+      description: Returns list of hashtag suggestions for a single-word topic or a shorter text up to 1000 characters. Takes into account both semantic relevancy and real-time hashtag popularity.
       parameters:
         - description: Topic
-          in: path
-          name: topic
+          in: query
+          name: text
           required: true
           type: string
       produces:

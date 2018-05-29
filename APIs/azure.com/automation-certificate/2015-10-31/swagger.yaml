@@ -42,12 +42,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/certificateoperations'
       operationId: Certificate_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -75,16 +78,26 @@ paths:
               value:
                 description: Gets or sets a list of certificates.
                 items:
+                  allOf:
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                   description: Definition of the certificate.
                   properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Gets the name of the certificate.
-                      readOnly: true
-                      type: string
                     properties:
                       description: Properties of the certificate.
                       properties:
@@ -93,6 +106,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -101,24 +115,22 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         isExportable:
                           description: Gets the is exportable flag of the certificate.
                           readOnly: true
                           type: boolean
+                          x-nullable: false
                         lastModifiedTime:
                           description: Gets the last modified time.
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         thumbprint:
                           description: Gets the thumbprint of the certificate.
                           readOnly: true
                           type: string
-                    type:
-                      description: Resource type
-                      readOnly: true
-                      type: string
-                  x-ms-azure-resource: true
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -164,12 +176,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/certificateoperations'
       operationId: Certificate_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -223,12 +238,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/certificateoperations'
       operationId: Certificate_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -253,16 +271,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the certificate.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the certificate.
-                readOnly: true
-                type: string
               properties:
                 description: Properties of the certificate.
                 properties:
@@ -271,6 +299,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -279,24 +308,22 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   isExportable:
                     description: Gets the is exportable flag of the certificate.
                     readOnly: true
                     type: boolean
+                    x-nullable: false
                   lastModifiedTime:
                     description: Gets the last modified time.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   thumbprint:
                     description: Gets the thumbprint of the certificate.
                     readOnly: true
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -338,12 +365,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/certificateoperations'
       operationId: Certificate_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -384,16 +414,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the certificate.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the certificate.
-                readOnly: true
-                type: string
               properties:
                 description: Properties of the certificate.
                 properties:
@@ -402,6 +442,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -410,24 +451,22 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   isExportable:
                     description: Gets the is exportable flag of the certificate.
                     readOnly: true
                     type: boolean
+                    x-nullable: false
                   lastModifiedTime:
                     description: Gets the last modified time.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   thumbprint:
                     description: Gets the thumbprint of the certificate.
                     readOnly: true
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -473,12 +512,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/certificateoperations'
       operationId: Certificate_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -511,6 +553,7 @@ paths:
                   isExportable:
                     description: Gets or sets the is exportable flag of the certificate.
                     type: boolean
+                    x-nullable: false
                   thumbprint:
                     description: Gets or sets the thumbprint of the certificate.
                     type: string
@@ -533,16 +576,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the certificate.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the certificate.
-                readOnly: true
-                type: string
               properties:
                 description: Properties of the certificate.
                 properties:
@@ -551,6 +604,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -559,37 +613,45 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   isExportable:
                     description: Gets the is exportable flag of the certificate.
                     readOnly: true
                     type: boolean
+                    x-nullable: false
                   lastModifiedTime:
                     description: Gets the last modified time.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   thumbprint:
                     description: Gets the thumbprint of the certificate.
                     readOnly: true
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         '201':
           description: Created
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the certificate.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the certificate.
-                readOnly: true
-                type: string
               properties:
                 description: Properties of the certificate.
                 properties:
@@ -598,6 +660,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -606,24 +669,22 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   isExportable:
                     description: Gets the is exportable flag of the certificate.
                     readOnly: true
                     type: boolean
+                    x-nullable: false
                   lastModifiedTime:
                     description: Gets the last modified time.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   thumbprint:
                     description: Gets the thumbprint of the certificate.
                     readOnly: true
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

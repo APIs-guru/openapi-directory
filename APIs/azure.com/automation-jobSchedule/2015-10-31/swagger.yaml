@@ -42,16 +42,24 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/jobscheduleoperations'
       operationId: JobSchedule_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
           required: true
+          type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
           type: string
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
@@ -144,6 +152,8 @@ paths:
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobSchedules/2f4d8f35-ecd5-44ee-a019-2382fec58fb7
                     properties:
                       jobScheduleId: 2f4d8f35-ecd5-44ee-a019-2382fec58fb7
+                      parameters: null
+                      runOn: null
                       runbook:
                         name: TestRunbook
                       schedule:
@@ -151,6 +161,8 @@ paths:
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobSchedules/446f7a33-86ff-45a1-b71c-f998f701b443
                     properties:
                       jobScheduleId: 446f7a33-86ff-45a1-b71c-f998f701b443
+                      parameters: null
+                      runOn: null
                       runbook:
                         name: TestRunbook
                       schedule:
@@ -158,11 +170,14 @@ paths:
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobSchedules/0fa462ba-3aa2-4138-83ca-9ebc3bc55cdc
                     properties:
                       jobScheduleId: 0fa462ba-3aa2-4138-83ca-9ebc3bc55cdc
+                      parameters: null
+                      runOn: null
                       runbook:
                         name: TestRunbook
                       schedule:
                         name: ScheduleNameGoesHere332204b5-debe-4348-a5c7-6357457189f2
               headers: {}
+      x-ms-odata: './definitions.json#/definitions/JobSchedule'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobSchedules/{jobScheduleId}':
@@ -172,12 +187,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/jobscheduleoperations'
       operationId: JobSchedule_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -232,12 +250,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/jobscheduleoperations'
       operationId: JobSchedule_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -334,6 +355,7 @@ paths:
                   parameters:
                     jobscheduletag01: jobschedulevalue01
                     jobscheduletag02: jobschedulevalue02
+                  runOn: null
                   runbook:
                     name: TestRunbook
                   schedule:
@@ -345,12 +367,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/jobscheduleoperations'
       operationId: JobSchedule_Create
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -491,6 +516,7 @@ paths:
                   parameters:
                     jobscheduletag01: jobschedulevalue01
                     jobscheduletag02: jobschedulevalue02
+                  runOn: null
                   runbook:
                     name: TestRunbook
                   schedule:

@@ -281,21 +281,21 @@ definitions:
     properties:
       inputUri:
         description: |-
-          Video file location in
+          Output only. Video file location in
           [Google Cloud Storage](https://cloud.google.com/storage/).
         type: string
       progressPercent:
         description: |-
-          Approximate percentage processed thus far.
-          Guaranteed to be 100 when fully processed.
+          Output only. Approximate percentage processed thus far. Guaranteed to be
+          100 when fully processed.
         format: int32
         type: integer
       startTime:
-        description: Time when the request was received.
+        description: Output only. Time when the request was received.
         format: google-datetime
         type: string
       updateTime:
-        description: Time of the most recent update.
+        description: Output only. Time of the most recent update.
         format: google-datetime
         type: string
     type: object
@@ -305,8 +305,9 @@ definitions:
       error:
         $ref: '#/definitions/GoogleRpc_Status'
         description: |-
-          If set, indicates an error. Note that for a single `AnnotateVideoRequest`
-          some videos may succeed and some may fail.
+          Output only. Non-streaming error only. If set, indicates an error. Note
+          that for a single `AnnotateVideoRequest` some videos may succeed and some
+          may fail.
       explicitAnnotation:
         $ref: '#/definitions/GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'
         description: Explicit content annotation.
@@ -319,7 +320,7 @@ definitions:
         type: array
       inputUri:
         description: |-
-          Video file location in
+          Output only. Video file location in
           [Google Cloud Storage](https://cloud.google.com/storage/).
         type: string
       segmentLabelAnnotations:
@@ -771,21 +772,21 @@ definitions:
     properties:
       inputUri:
         description: |-
-          Video file location in
+          Output only. Video file location in
           [Google Cloud Storage](https://cloud.google.com/storage/).
         type: string
       progressPercent:
         description: |-
-          Approximate percentage processed thus far.
-          Guaranteed to be 100 when fully processed.
+          Output only. Approximate percentage processed thus far. Guaranteed to be
+          100 when fully processed.
         format: int32
         type: integer
       startTime:
-        description: Time when the request was received.
+        description: Output only. Time when the request was received.
         format: google-datetime
         type: string
       updateTime:
-        description: Time of the most recent update.
+        description: Output only. Time of the most recent update.
         format: google-datetime
         type: string
     type: object
@@ -795,8 +796,9 @@ definitions:
       error:
         $ref: '#/definitions/GoogleRpc_Status'
         description: |-
-          If set, indicates an error. Note that for a single `AnnotateVideoRequest`
-          some videos may succeed and some may fail.
+          Output only. Non-streaming error only. If set, indicates an error. Note
+          that for a single `AnnotateVideoRequest` some videos may succeed and some
+          may fail.
       explicitAnnotation:
         $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation'
         description: Explicit content annotation.
@@ -809,7 +811,7 @@ definitions:
         type: array
       inputUri:
         description: |-
-          Video file location in
+          Output only. Video file location in
           [Google Cloud Storage](https://cloud.google.com/storage/).
         type: string
       segmentLabelAnnotations:
@@ -1111,21 +1113,21 @@ definitions:
     properties:
       inputUri:
         description: |-
-          Video file location in
+          Output only. Video file location in
           [Google Cloud Storage](https://cloud.google.com/storage/).
         type: string
       progressPercent:
         description: |-
-          Approximate percentage processed thus far.
-          Guaranteed to be 100 when fully processed.
+          Output only. Approximate percentage processed thus far. Guaranteed to be
+          100 when fully processed.
         format: int32
         type: integer
       startTime:
-        description: Time when the request was received.
+        description: Output only. Time when the request was received.
         format: google-datetime
         type: string
       updateTime:
-        description: Time of the most recent update.
+        description: Output only. Time of the most recent update.
         format: google-datetime
         type: string
     type: object
@@ -1135,8 +1137,9 @@ definitions:
       error:
         $ref: '#/definitions/GoogleRpc_Status'
         description: |-
-          If set, indicates an error. Note that for a single `AnnotateVideoRequest`
-          some videos may succeed and some may fail.
+          Output only. Non-streaming error only. If set, indicates an error. Note
+          that for a single `AnnotateVideoRequest` some videos may succeed and some
+          may fail.
       explicitAnnotation:
         $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation'
         description: Explicit content annotation.
@@ -1154,7 +1157,7 @@ definitions:
         type: array
       inputUri:
         description: |-
-          Video file location in
+          Output only. Video file location in
           [Google Cloud Storage](https://cloud.google.com/storage/).
         type: string
       segmentLabelAnnotations:

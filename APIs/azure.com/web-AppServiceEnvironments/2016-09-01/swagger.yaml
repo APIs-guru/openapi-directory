@@ -714,7 +714,7 @@ paths:
         - AppServiceEnvironments
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}metrics':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metrics':
     get:
       description: Get metrics for a specific instance of a multi-role pool of an App Service Environment.
       operationId: AppServiceEnvironments_ListMultiRolePoolInstanceMetrics
@@ -6281,7 +6281,7 @@ paths:
         - AppServiceEnvironments
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}metrics':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metrics':
     get:
       description: Get metrics for a specific instance of a worker pool of an App Service Environment.
       operationId: AppServiceEnvironments_ListWorkerPoolInstanceMetrics
@@ -7532,7 +7532,6 @@ definitions:
           - workerPools
         type: object
     type: object
-  ErrorEntity: {}
   HostingEnvironmentDiagnostics:
     description: Diagnostics for an App Service Environment.
     properties:

@@ -563,56 +563,65 @@ paths:
             '202': {}
       x-ms-long-running-operation: true
 definitions:
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    type: object
-    x-ms-azure-resource: true
-  ResourceIdentity:
-    description: Azure Active Directory identity configuration for a resource.
-    properties:
-      principalId:
-        description: The Azure Active Directory principal id.
-        format: uuid
-        readOnly: true
-        type: string
-      tenantId:
-        description: The Azure Active Directory tenant id.
-        format: uuid
-        readOnly: true
-        type: string
-      type:
-        description: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.
-        enum:
-          - SystemAssigned
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: IdentityType
-    type: object
   Server:
     allOf:
-      - $ref: '#/definitions/TrackedResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM tracked top level resource.
+        properties:
+          location:
+            description: Resource location.
+            type: string
+            x-ms-mutability:
+              - read
+              - create
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+        required:
+          - location
+        type: object
     description: An Azure SQL Database server.
     properties:
       identity:
-        $ref: '#/definitions/ResourceIdentity'
-        description: The Azure Active Directory identity of the server.
-        x-ms-mutability:
-          - read
-          - create
+        description: Azure Active Directory identity configuration for a resource.
+        properties:
+          principalId:
+            description: The Azure Active Directory principal id.
+            format: uuid
+            readOnly: true
+            type: string
+          tenantId:
+            description: The Azure Active Directory tenant id.
+            format: uuid
+            readOnly: true
+            type: string
+          type:
+            description: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.
+            enum:
+              - SystemAssigned
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: IdentityType
+        type: object
       kind:
         description: Kind of sql server. This is metadata used for the Azure portal experience.
         readOnly: true
@@ -677,23 +686,4 @@ definitions:
           type: string
         description: Resource tags.
         type: object
-    type: object
-  TrackedResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM tracked top level resource.
-    properties:
-      location:
-        description: Resource location.
-        type: string
-        x-ms-mutability:
-          - read
-          - create
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags.
-        type: object
-    required:
-      - location
     type: object

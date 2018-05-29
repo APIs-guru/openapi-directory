@@ -154,8 +154,8 @@ paths:
                     properties:
                       hanaInstanceId: 00000000-0000-0000-0000-000000000000
                       hardwareProfile:
-                        hanaInstanceSize: S72
-                        hardwareType: Cisco_UCS
+                        hanaInstanceSize: S384
+                        hardwareType: HPE
                       networkProfile:
                         circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
                         networkInterfaces:
@@ -168,6 +168,25 @@ paths:
                         nfsIpAddress: 200.200.200.201
                     tags:
                       key: value
+                    type: Microsoft.HanaOnAzure/hanaInstances
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance3
+                    location: westus
+                    name: myHanaInstance3
+                    properties:
+                      hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                      hardwareProfile:
+                        hanaInstanceSize: S960m
+                        hardwareType: HPE
+                      networkProfile:
+                        circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.Network/expressRouteCircuit
+                        networkInterfaces:
+                          - ipAddress: 100.100.100.102
+                      osProfile:
+                        computerName: myComputerName3
+                        osType: SUSE
+                        version: 12 SP1
+                      storageProfile:
+                        nfsIpAddress: 200.200.200.202
                     type: Microsoft.HanaOnAzure/hanaInstances
       x-ms-pageable:
         nextLinkName: nextLink
@@ -228,8 +247,8 @@ paths:
                     properties:
                       hanaInstanceId: 00000000-0000-0000-0000-000000000000
                       hardwareProfile:
-                        hanaInstanceSize: S72
-                        hardwareType: Cisco_UCS
+                        hanaInstanceSize: S384
+                        hardwareType: HPE
                       networkProfile:
                         circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
                         networkInterfaces:
@@ -398,15 +417,27 @@ definitions:
           - S144
           - S192
           - S192m
+          - S192xm
+          - S384
+          - S384m
+          - S384xm
+          - S384xxm
+          - S576m
+          - S576xm
+          - S768
+          - S768m
+          - S768xm
+          - S960m
         readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: HanaInstanceSizeNamesEnum
       hardwareType:
-        description: Name of the hardware type (vendor and/or thrie product name)
+        description: Name of the hardware type (vendor and/or their product name)
         enum:
           - Cisco_UCS
+          - HPE
         readOnly: true
         type: string
         x-ms-enum:

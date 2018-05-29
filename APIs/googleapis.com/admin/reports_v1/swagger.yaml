@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Fetches reports for the administrators of G Suite customers about the usage, collaboration, security, and risk for their users.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Admin Reports
   version: reports_v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/admin/reports_v1/rest'
       version: v1
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/admin.reports.audit.readonly': View audit reports for your G Suite domain
       'https://www.googleapis.com/auth/admin.reports.usage.readonly': View usage reports for your G Suite domain
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/admin.reports.audit.readonly': View audit reports for your G Suite domain
-      'https://www.googleapis.com/auth/admin.reports.usage.readonly': View usage reports for your G Suite domain
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -81,12 +68,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -153,8 +140,6 @@ paths:
             $ref: '#/definitions/Activities'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.reports.audit.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.reports.audit.readonly'
       tags:
         - activities
@@ -235,8 +220,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.reports.audit.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.reports.audit.readonly'
       tags:
         - activities
   /admin/reports_v1/channels/stop:
@@ -261,8 +244,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.reports.audit.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.reports.audit.readonly'
       tags:
         - channels
@@ -295,8 +276,6 @@ paths:
             $ref: '#/definitions/UsageReports'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.reports.usage.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.reports.usage.readonly'
       tags:
         - customerUsageReports
@@ -351,8 +330,6 @@ paths:
             $ref: '#/definitions/UsageReports'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.reports.usage.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.reports.usage.readonly'
       tags:
         - userUsageReport
@@ -412,8 +389,6 @@ paths:
             $ref: '#/definitions/UsageReports'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.reports.usage.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.reports.usage.readonly'
       tags:
         - entityUsageReports

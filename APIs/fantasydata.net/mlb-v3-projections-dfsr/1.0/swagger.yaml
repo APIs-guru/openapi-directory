@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/DfsrPlayerGameProjectionStatsByDate/{date}':
     get:
-      operationId: 5944043735491a0cc050ffaa
+      operationId: ProjectedPlayerGameStatsByDateWInjuriesLineupsDfsSalaries
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -65,7 +65,7 @@ paths:
       summary: 'Projected Player Game Stats by Date (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/DfsrPlayerGameProjectionStatsByPlayer/{date}/{playerid}':
     get:
-      operationId: 5944043735491a0cc050ffab
+      operationId: ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

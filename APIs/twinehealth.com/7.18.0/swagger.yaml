@@ -4143,7 +4143,12 @@ definitions:
     properties:
       attributes:
         properties:
+          bio:
+            description: A description of the group
+            example: Team Health is all about the patient experience.
+            type: string
           name:
+            description: The name of the group
             example: Team Health
             type: string
         required:

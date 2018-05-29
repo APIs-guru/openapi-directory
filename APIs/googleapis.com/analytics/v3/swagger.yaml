@@ -40,6 +40,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/analytics.manage.users.readonly': View Google Analytics user permissions
       'https://www.googleapis.com/auth/analytics.provision': Create a new Google Analytics account along with its default property and view
       'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
+      'https://www.googleapis.com/auth/analytics.user.deletion': Manage Google Analytics user deletion requests
     type: oauth2
 parameters:
   alt:
@@ -72,12 +73,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -86,6 +87,7 @@ tags:
   - name: management
   - name: metadata
   - name: provisioning
+  - name: userDeletion
 paths:
   /data/ga:
     get:
@@ -3318,6 +3320,33 @@ paths:
             - 'https://www.googleapis.com/auth/analytics.provision'
       tags:
         - provisioning
+  '/userDeletion/userDeletionRequests:upsert':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Insert or update a user deletion requests.
+      operationId: analytics.userDeletion.userDeletionRequest.upsert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserDeletionRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UserDeletionRequest'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.user.deletion'
+      tags:
+        - userDeletion
 definitions:
   Account:
     description: JSON template for Analytics account entry.
@@ -5779,6 +5808,34 @@ definitions:
         format: int32
         type: integer
     type: object
+  UserDeletionRequest:
+    description: JSON template for a user deletion request resource.
+    properties:
+      deletionRequestTime:
+        description: This marks the point in time for which all user data before should be deleted
+        format: date-time
+        type: string
+      firebaseProjectId:
+        description: Firebase Project Id
+        type: string
+      id:
+        description: User ID.
+        properties:
+          type:
+            description: Type of user
+            type: string
+          userId:
+            description: The User's id
+            type: string
+        type: object
+      kind:
+        default: 'analytics#userDeletionRequest'
+        description: 'Value is "analytics#userDeletionRequest".'
+        type: string
+      webPropertyId:
+        description: Web property ID of the form UA-XXXXX-YY.
+        type: string
+    type: object
   UserRef:
     description: JSON template for a user reference.
     properties:
@@ -5901,6 +5958,17 @@ definitions:
         description: Time this web property was created.
         format: date-time
         readOnly: true
+        type: string
+      dataRetentionResetOnNewActivity:
+        description: |-
+          Set to true to reset the retention period of the user identifier with each new event from that user (thus setting the expiration date to current time plus retention period).
+          Set to false to delete data associated with the user identifer automatically after the rentention period.
+          This property cannot be set on insert.
+        type: boolean
+      dataRetentionTtl:
+        description: |-
+          The length of time for which user and event data is retained.
+          This property cannot be set on insert.
         type: string
       defaultProfileId:
         description: Default view (profile) ID.

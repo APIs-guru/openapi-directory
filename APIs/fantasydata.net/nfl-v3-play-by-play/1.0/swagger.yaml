@@ -37,7 +37,7 @@ security:
 paths:
   '/{format}/PlayByPlay/{season}/{week}/{hometeam}':
     get:
-      operationId: 578e4c7835491a147898b4a4
+      operationId: PlayByPlay
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -77,7 +77,7 @@ paths:
       summary: Play By Play
   '/{format}/PlayByPlayDelta/{season}/{week}/{minutes}':
     get:
-      operationId: 5ac7906f14338d21bc296407
+      operationId: PlayByPlayDelta
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -123,7 +123,7 @@ paths:
   '/{format}/SimulatedPlayByPlay/{numberofplays}':
     get:
       description: 'Gets simulated live play-by-play of NFL games, covering the Conference Championship games on January 21, 2018.'
-      operationId: 578e4ce914338d1fc0b406be
+      operationId: PlayByPlaySimulation
       parameters:
         - default: XML
           description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

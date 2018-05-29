@@ -323,6 +323,7 @@ paths:
             - ENVIRONMENT_TYPE_UNSPECIFIED
             - ANDROID
             - NETWORK_CONFIGURATION
+            - PROVIDED_SOFTWARE
           in: path
           name: environmentType
           required: true
@@ -1140,6 +1141,15 @@ definitions:
           type: string
         type: array
     type: object
+  ProvidedSoftwareCatalog:
+    description: The currently provided software environment on the devices under test.
+    properties:
+      orchestratorVersion:
+        description: |-
+          A string representing the current version of Android Test Orchestrator that
+          is provided by TestExecutionService. Example: "1.0.2 beta"
+        type: string
+    type: object
   RegularFile:
     description: A file or directory to install on the device before the test starts
     properties:
@@ -1285,6 +1295,9 @@ definitions:
       networkConfigurationCatalog:
         $ref: '#/definitions/NetworkConfigurationCatalog'
         description: Supported network configurations
+      softwareCatalog:
+        $ref: '#/definitions/ProvidedSoftwareCatalog'
+        description: The software test environment provided by TestExecutionService.
     type: object
   TestExecution:
     description: Specifies a single test to be executed in a single environment.
@@ -1389,7 +1402,9 @@ definitions:
           - SCENARIO_NOT_DECLARED
           - DEVICE_ADMIN_RECEIVER
           - TEST_ONLY_APK
+          - MALFORMED_IPA
           - NO_CODE_APK
+          - INVALID_INPUT_APK
         type: string
       projectId:
         description: |-

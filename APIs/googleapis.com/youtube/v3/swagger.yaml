@@ -73,12 +73,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -90,7 +90,6 @@ tags:
   - name: channels
   - name: commentThreads
   - name: comments
-  - name: fanFundingEvents
   - name: guideCategories
   - name: i18nLanguages
   - name: i18nRegions
@@ -1120,56 +1119,6 @@ paths:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - comments
-  /fanFundingEvents:
-    get:
-      description: Lists fan funding events for a channel.
-      operationId: youtube.fanFundingEvents.list
-      parameters:
-        - description: |-
-            The hl parameter instructs the API to retrieve localized resource metadata for a specific application language that the YouTube website supports. The parameter value must be a language code included in the list returned by the i18nLanguages.list method.
-
-            If localized resource details are available in that language, the resource's snippet.localized object will contain the localized values. However, if localized details are not available, the snippet.localized object will contain resource details in the resource's default language.
-          in: query
-          name: hl
-          type: string
-        - default: 5
-          description: The maxResults parameter specifies the maximum number of items that should be returned in the result set.
-          in: query
-          maximum: 50
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
-          in: query
-          name: pageToken
-          type: string
-        - description: The part parameter specifies the fanFundingEvent resource parts that the API response will include. Supported values are id and snippet.
-          in: query
-          name: part
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/FanFundingEventListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/youtube'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/youtube.force-ssl'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/youtube.readonly'
-      tags:
-        - fanFundingEvents
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
   /guideCategories:
     get:
       description: Returns a list of categories that can be associated with YouTube channels.
@@ -5475,77 +5424,6 @@ definitions:
           - ytAgeRestricted
         type: string
     type: object
-  FanFundingEvent:
-    description: A fanFundingEvent resource represents a fan funding event on a YouTube channel. Fan funding events occur when a user gives one-time monetary support to the channel owner.
-    properties:
-      etag:
-        description: Etag of this resource.
-        type: string
-      id:
-        description: The ID that YouTube assigns to uniquely identify the fan funding event.
-        type: string
-      kind:
-        default: 'youtube#fanFundingEvent'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#fanFundingEvent".'
-        type: string
-      snippet:
-        $ref: '#/definitions/FanFundingEventSnippet'
-        description: The snippet object contains basic details about the fan funding event.
-    type: object
-  FanFundingEventListResponse:
-    properties:
-      etag:
-        description: Etag of this resource.
-        type: string
-      eventId:
-        description: Serialized EventId of the request which produced this response.
-        type: string
-      items:
-        description: A list of fan funding events that match the request criteria.
-        items:
-          $ref: '#/definitions/FanFundingEvent'
-        type: array
-      kind:
-        default: 'youtube#fanFundingEventListResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#fanFundingEventListResponse".'
-        type: string
-      nextPageToken:
-        description: The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
-        type: string
-      pageInfo:
-        $ref: '#/definitions/PageInfo'
-      tokenPagination:
-        $ref: '#/definitions/TokenPagination'
-      visitorId:
-        description: The visitorId identifies the visitor.
-        type: string
-    type: object
-  FanFundingEventSnippet:
-    properties:
-      amountMicros:
-        description: 'The amount of funding in micros of fund_currency. e.g., 1 is represented'
-        format: uint64
-        type: string
-      channelId:
-        description: Channel id where the funding event occurred.
-        type: string
-      commentText:
-        description: The text contents of the comment left by the user.
-        type: string
-      createdAt:
-        description: 'The date and time when the funding occurred. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
-        format: date-time
-        type: string
-      currency:
-        description: The currency in which the fund was made. ISO 4217.
-        type: string
-      displayString:
-        description: 'A rendered string that displays the fund amount and currency (e.g., "$1.00"). The string is rendered for the given language.'
-        type: string
-      supporterDetails:
-        $ref: '#/definitions/ChannelProfileDetails'
-        description: Details about the supporter. Only filled if the event was made public by the user.
-    type: object
   GeoPoint:
     description: 'Geographical coordinates of a point, in WGS84.'
     properties:
@@ -7112,9 +6990,6 @@ definitions:
     properties:
       etag:
         description: Etag of this resource.
-        type: string
-      id:
-        description: The ID that YouTube assigns to uniquely identify the sponsor.
         type: string
       kind:
         default: 'youtube#sponsor'

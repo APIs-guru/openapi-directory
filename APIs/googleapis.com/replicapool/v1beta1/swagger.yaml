@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: The Replica Pool API allows users to declaratively provision and manage groups of Google Compute Engine instances based on a common template.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Replica Pool
   version: v1beta1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/replicapool/v1beta1/rest'
       version: v1
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
@@ -44,19 +40,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
       'https://www.googleapis.com/auth/replicapool': View and manage replica pools
       'https://www.googleapis.com/auth/replicapool.readonly': View replica pools
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
-      'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
-      'https://www.googleapis.com/auth/replicapool': View and manage replica pools
-      'https://www.googleapis.com/auth/replicapool.readonly': View replica pools
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -89,12 +72,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -136,27 +119,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - pools
@@ -194,15 +165,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - pools
@@ -234,27 +199,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - pools
@@ -295,15 +248,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - pools
@@ -346,27 +293,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - replicas
@@ -411,27 +346,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - replicas
@@ -479,15 +402,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - replicas
@@ -532,15 +449,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - replicas
@@ -584,15 +495,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - pools
@@ -634,15 +539,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/replicapool'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - pools

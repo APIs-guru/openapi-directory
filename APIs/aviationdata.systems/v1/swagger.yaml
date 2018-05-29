@@ -1,6 +1,5 @@
 swagger: '2.0'
 schemes:
-  - http
   - https
 host: api.aviationdata.systems
 info:
@@ -26,43 +25,7 @@ securityDefinitions:
     description: Basic HTTP Authentication
     type: basic
 paths:
-  '/v1/airport/iata/{airport_iata}':
-    get:
-      description: 'Required parameters: airport_iata'
-      operationId: AirportIATA_AirportIATASearch
-      parameters:
-        - description: 'Required: The airports IATA code'
-          in: path
-          name: airport_iata
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/AirportsAPI.Controllers.AirportIATAController.Response'
-      summary: Search for airport by IATA code
-      tags:
-        - AirportIATA
-  '/v1/airport/name/{airport_name}':
-    get:
-      description: 'Required parameters: airport_name'
-      operationId: AirportDetails_AirportNameSearch
-      parameters:
-        - description: 'Required: The airports name'
-          in: path
-          name: airport_name
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/AirportsAPI.Controllers.AirportDetailsController.Response'
-      summary: Search for airport by name
-      tags:
-        - AirportDetails
-  '/v1/autocomplete/airport/name/{airport_name}':
+  '/v1/airport/autocomplete/{airport_name}':
     get:
       description: 'Required parameters: airport_name, airport_service_type. Optional parameter: country code (ISO 3166-1).'
       operationId: AutoCompleteAirportName_AirportNameSearch
@@ -94,45 +57,43 @@ paths:
       summary: Autocomplete airport names. Returns a maximum of 10 airport names.
       tags:
         - AutoCompleteAirportName
-  /v1/countries:
+  '/v1/airport/iata/{airport_iata}':
     get:
-      operationId: CountryList_CountryAirportList
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/AirportsAPI.Controllers.CountryListController.CountryListResponse'
-      summary: Country list. Returns a list of countries where airport data is available
-      tags:
-        - CountryList
-  '/v1/country/airport_list/{country_code}':
-    get:
-      description: 'Required parameters: country code (ISO 3166-1), airport_service_type.'
-      operationId: CountryAirportList_CountryAirportList
+      description: 'Required parameters: airport_iata'
+      operationId: AirportIATA_AirportIATASearch
       parameters:
-        - description: Country code (ISO 3166-1). This can be found via /countries
+        - description: 'Required: The airports IATA code'
           in: path
-          name: country_code
-          required: true
-          type: string
-        - description: 'Required: Needs to be: All, Scheduled or NonScheduled'
-          enum:
-            - All
-            - Scheduled
-            - NonScheduled
-          in: query
-          name: airport_service_type
+          name: airport_iata
           required: true
           type: string
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AirportsAPI.Controllers.CountryAirportListController.AirportListResponse'
-      summary: Country airports. Returns a list of airports for a country code(ISO 3166-1 alpha-2 code)
+            $ref: '#/definitions/AirportsAPI.Controllers.AirportIATAController.Response'
+      summary: Search for airport by IATA code
       tags:
-        - CountryAirportList
-  '/v1/nearest/airport_list/{result_count}/{latitude}/{longitude}':
+        - AirportIATA
+  '/v1/airport/name/{airport_name}':
+    get:
+      description: 'Required parameters: airport_name, api_mode'
+      operationId: AirportDetails_AirportNameSearch
+      parameters:
+        - description: 'Required: The airports name'
+          in: path
+          name: airport_name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AirportsAPI.Controllers.AirportDetailsController.Response'
+      summary: Search for airport by name
+      tags:
+        - AirportDetails
+  '/v1/airport/nearest/{result_count}/{latitude}/{longitude}':
     get:
       description: 'Required parameters: result_count, latitude, longitude, airport_service_type'
       operationId: NearestAirports_NearestAirportList
@@ -163,6 +124,44 @@ paths:
       summary: Search for airports by location
       tags:
         - NearestAirports
+  '/v1/country/code/{country_code}':
+    get:
+      description: 'Required parameters: country code (ISO 3166-1), airport_service_type.'
+      operationId: CountryAirportList_CountryAirportList
+      parameters:
+        - description: Country code (ISO 3166-1). This can be found via /countries
+          in: path
+          name: country_code
+          required: true
+          type: string
+        - description: 'Required: Needs to be: All, Scheduled or NonScheduled'
+          enum:
+            - All
+            - Scheduled
+            - NonScheduled
+          in: query
+          name: airport_service_type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AirportsAPI.Controllers.CountryAirportListController.AirportListResponse'
+      summary: Country airports. Returns a list of airports for a country code(ISO 3166-1 alpha-2 code)
+      tags:
+        - CountryAirportList
+  /v1/country_list:
+    get:
+      operationId: CountryList_CountryAirportList
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AirportsAPI.Controllers.CountryListController.CountryListResponse'
+      summary: Country list. Returns a list of countries where airport data is available
+      tags:
+        - CountryList
 definitions:
   AirportsAPI.Controllers.AirportDetailsController.Response:
     properties:
@@ -273,6 +272,8 @@ definitions:
       local_code:
         type: string
       location:
+        type: string
+      logo_url:
         type: string
       longitude:
         type: string

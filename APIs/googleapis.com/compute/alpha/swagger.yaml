@@ -70,12 +70,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -126,6 +126,7 @@ tags:
   - name: regionTargetHttpProxies
   - name: regionUrlMaps
   - name: regions
+  - name: resourcePolicies
   - name: routers
   - name: routes
   - name: securityPolicies
@@ -141,6 +142,7 @@ tags:
   - name: targetTcpProxies
   - name: targetVpnGateways
   - name: urlMaps
+  - name: vpnGateways
   - name: vpnTunnels
   - name: zoneOperations
   - name: zones
@@ -1479,6 +1481,68 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/resourcePolicies':
+    get:
+      description: Retrieves an aggregated list of resource policies.
+      operationId: compute.resourcePolicies.aggregatedList
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ResourcePolicyAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - resourcePolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/aggregated/routers':
     get:
       description: Retrieves an aggregated list of routers.
@@ -1905,6 +1969,68 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - targetVpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/vpnGateways':
+    get:
+      description: Retrieves an aggregated list of VPN gateways.
+      operationId: compute.vpnGateways.aggregatedList
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VpnGatewayAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -2346,7 +2472,7 @@ paths:
       tags:
         - globalAddresses
     get:
-      description: Returns the specified address resource. Get a list of available addresses by making a list() request.
+      description: Returns the specified address resource. Gets a list of available addresses by making a list() request.
       operationId: compute.globalAddresses.get
       parameters:
         - description: Name of the address resource to return.
@@ -2594,7 +2720,7 @@ paths:
       tags:
         - backendBuckets
     get:
-      description: Returns the specified BackendBucket resource. Get a list of available backend buckets by making a list() request.
+      description: Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.
       operationId: compute.backendBuckets.get
       parameters:
         - description: Name of the BackendBucket resource to return.
@@ -2857,7 +2983,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/GlobalSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -3054,7 +3180,7 @@ paths:
       tags:
         - backendServices
     get:
-      description: Returns the specified BackendService resource. Get a list of available backend services by making a list() request.
+      description: Returns the specified BackendService resource. Gets a list of available backend services by making a list() request.
       operationId: compute.backendServices.get
       parameters:
         - description: Name of the BackendService resource to return.
@@ -3813,7 +3939,7 @@ paths:
       tags:
         - globalForwardingRules
     get:
-      description: Returns the specified GlobalForwardingRule resource. Get a list of available forwarding rules by making a list() request.
+      description: Returns the specified GlobalForwardingRule resource. Gets a list of available forwarding rules by making a list() request.
       operationId: compute.globalForwardingRules.get
       parameters:
         - description: Name of the ForwardingRule resource to return.
@@ -4148,7 +4274,7 @@ paths:
       tags:
         - healthChecks
     get:
-      description: Returns the specified HealthCheck resource. Get a list of available health checks by making a list() request.
+      description: Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
       operationId: compute.healthChecks.get
       parameters:
         - description: Name of the HealthCheck resource to return.
@@ -4435,7 +4561,7 @@ paths:
       tags:
         - httpHealthChecks
     get:
-      description: Returns the specified HttpHealthCheck resource. Get a list of available HTTP health checks by making a list() request.
+      description: Returns the specified HttpHealthCheck resource. Gets a list of available HTTP health checks by making a list() request.
       operationId: compute.httpHealthChecks.get
       parameters:
         - description: Name of the HttpHealthCheck resource to return.
@@ -4722,7 +4848,7 @@ paths:
       tags:
         - httpsHealthChecks
     get:
-      description: Returns the specified HttpsHealthCheck resource. Get a list of available HTTPS health checks by making a list() request.
+      description: Returns the specified HttpsHealthCheck resource. Gets a list of available HTTPS health checks by making a list() request.
       operationId: compute.httpsHealthChecks.get
       parameters:
         - description: Name of the HttpsHealthCheck resource to return.
@@ -5056,7 +5182,7 @@ paths:
       tags:
         - images
     get:
-      description: Returns the specified image. Get a list of available images by making a list() request.
+      description: Returns the specified image. Gets a list of available images by making a list() request.
       operationId: compute.images.get
       parameters:
         - description: Name of the image resource to return.
@@ -5195,7 +5321,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/GlobalSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -5571,7 +5697,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/interconnectLocations/{interconnectLocation}':
     get:
-      description: Returns the details for the specified interconnect location. Get a list of available interconnect locations by making a list() request.
+      description: Returns the details for the specified interconnect location. Gets a list of available interconnect locations by making a list() request.
       operationId: compute.interconnectLocations.get
       parameters:
         - description: Name of the interconnect location to return.
@@ -5907,7 +6033,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/GlobalSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -6100,7 +6226,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/GlobalSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -6166,7 +6292,7 @@ paths:
         - licenseCodes
   '/{project}/global/licenses':
     get:
-      description: 'Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 8. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
+      description: 'Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 9. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
       operationId: compute.licenses.list
       parameters:
         - description: |-
@@ -6391,7 +6517,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/GlobalSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -6588,7 +6714,7 @@ paths:
       tags:
         - networks
     get:
-      description: Returns the specified network. Get a list of available networks by making a list() request.
+      description: Returns the specified network. Gets a list of available networks by making a list() request.
       operationId: compute.networks.get
       parameters:
         - description: Name of the network to return.
@@ -7018,7 +7144,7 @@ paths:
       tags:
         - globalOperations
     get:
-      description: Retrieves the specified Operations resource. Get a list of operations by making a list() request.
+      description: Retrieves the specified Operations resource. Gets a list of operations by making a list() request.
       operationId: compute.globalOperations.get
       parameters:
         - description: Name of the Operations resource to return.
@@ -7053,6 +7179,43 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/operations/{operation}/wait':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Waits for the specified Operations resource until it is done or timeout, and retrieves the specified Operations resource. 1. Immediately returns when the operation is already done. 2. Waits for no more than the default deadline (2 minutes, subject to change) and then returns the current state of the operation, which may be DONE or still in progress. 3. Is best-effort: a. The server can wait less than the default deadline or zero seconds, in overload situations. b. There is no guarantee that the operation is actually done when returns. 4. User should be prepared to retry if the operation is not DONE.'
+      operationId: compute.globalOperations.wait
+      parameters:
+        - description: Name of the Operations resource to return.
+          in: path
+          name: operation
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - globalOperations
   '/{project}/global/routes':
     get:
       description: Retrieves the list of Route resources available to the specified project.
@@ -7227,7 +7390,7 @@ paths:
       tags:
         - routes
     get:
-      description: Returns the specified Route resource. Get a list of available routes by making a list() request.
+      description: Returns the specified Route resource. Gets a list of available routes by making a list() request.
       operationId: compute.routes.get
       parameters:
         - description: Project ID for this request.
@@ -7362,6 +7525,66 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - securityPolicies
+  '/{project}/global/securityPolicies/listPreconfiguredExpressionSets':
+    get:
+      description: Gets the current list of preconfigured Web Application Firewall (WAF) expressions.
+      operationId: compute.securityPolicies.listPreconfiguredExpressionSets
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SecurityPoliciesListPreconfiguredExpressionSetsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/global/securityPolicies/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -7799,7 +8022,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/GlobalSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -7942,7 +8165,7 @@ paths:
       tags:
         - snapshots
     get:
-      description: Returns the specified Snapshot resource. Get a list of available snapshots by making a list() request.
+      description: Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.
       operationId: compute.snapshots.get
       parameters:
         - description: Project ID for this request.
@@ -8151,7 +8374,7 @@ paths:
       tags:
         - sslCertificates
     get:
-      description: Returns the specified SslCertificate resource. Get a list of available SSL certificates by making a list() request.
+      description: Returns the specified SslCertificate resource. Gets a list of available SSL certificates by making a list() request.
       operationId: compute.sslCertificates.get
       parameters:
         - description: Project ID for this request.
@@ -8249,7 +8472,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Returns the specified SSL policy resource. Get a list of available SSL policies by making a list() request.
+      description: Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.
       operationId: compute.sslPolicies.insert
       parameters:
         - in: body
@@ -8670,7 +8893,7 @@ paths:
       tags:
         - targetHttpProxies
     get:
-      description: Returns the specified TargetHttpProxy resource. Get a list of available target HTTP proxies by making a list() request.
+      description: Returns the specified TargetHttpProxy resource. Gets a list of available target HTTP proxies by making a list() request.
       operationId: compute.targetHttpProxies.get
       parameters:
         - description: Project ID for this request.
@@ -8879,7 +9102,7 @@ paths:
       tags:
         - targetHttpsProxies
     get:
-      description: Returns the specified TargetHttpsProxy resource. Get a list of available target HTTPS proxies by making a list() request.
+      description: Returns the specified TargetHttpsProxy resource. Gets a list of available target HTTPS proxies by making a list() request.
       operationId: compute.targetHttpsProxies.get
       parameters:
         - description: Project ID for this request.
@@ -9184,7 +9407,7 @@ paths:
       tags:
         - targetSslProxies
     get:
-      description: Returns the specified TargetSslProxy resource. Get a list of available target SSL proxies by making a list() request.
+      description: Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.
       operationId: compute.targetSslProxies.get
       parameters:
         - description: Project ID for this request.
@@ -9585,7 +9808,7 @@ paths:
       tags:
         - targetTcpProxies
     get:
-      description: Returns the specified TargetTcpProxy resource. Get a list of available target TCP proxies by making a list() request.
+      description: Returns the specified TargetTcpProxy resource. Gets a list of available target TCP proxies by making a list() request.
       operationId: compute.targetTcpProxies.get
       parameters:
         - description: Project ID for this request.
@@ -9890,7 +10113,7 @@ paths:
       tags:
         - urlMaps
     get:
-      description: Returns the specified UrlMap resource. Get a list of available URL maps by making a list() request.
+      description: Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
       operationId: compute.urlMaps.get
       parameters:
         - description: Project ID for this request.
@@ -10288,7 +10511,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}':
     get:
-      description: Returns the specified Region resource. Get a list of available regions by making a list() request.
+      description: Returns the specified Region resource. Gets a list of available regions by making a list() request.
       operationId: compute.regions.get
       parameters:
         - description: Project ID for this request.
@@ -11405,7 +11628,7 @@ paths:
         - regionCommitments
   '/{project}/regions/{region}/commitments/{commitment}':
     get:
-      description: Returns the specified commitment resource. Get a list of available commitments by making a list() request.
+      description: Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
       operationId: compute.regionCommitments.get
       parameters:
         - description: Name of the commitment to return.
@@ -11560,7 +11783,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}/diskTypes/{diskType}':
     get:
-      description: Returns the specified regional disk type. Get a list of available disk types by making a list() request.
+      description: Returns the specified regional disk type. Gets a list of available disk types by making a list() request.
       operationId: compute.regionDiskTypes.get
       parameters:
         - description: Name of the disk type to return.
@@ -12532,7 +12755,7 @@ paths:
       tags:
         - regionHealthChecks
     get:
-      description: Returns the specified HealthCheck resource. Get a list of available health checks by making a list() request.
+      description: Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
       operationId: compute.regionHealthChecks.get
       parameters:
         - description: Name of the HealthCheck resource to return.
@@ -14256,7 +14479,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/RegionSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -14531,7 +14754,7 @@ paths:
       tags:
         - nodeTemplates
     get:
-      description: Returns the specified node template. Get a list of available node templates by making a list() request.
+      description: Returns the specified node template. Gets a list of available node templates by making a list() request.
       operationId: compute.nodeTemplates.get
       parameters:
         - description: Name of the node template to return.
@@ -14629,7 +14852,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/RegionSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -14841,6 +15064,368 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/operations/{operation}/wait':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Waits for the specified region-specific Operations resource until it is done or timeout, and retrieves the specified Operations resource. 1. Immediately returns when the operation is already done. 2. Waits for no more than the default deadline (2 minutes, subject to change) and then returns the current state of the operation, which may be DONE or still in progress. 3. Is best-effort: a. The server can wait less than the default deadline or zero seconds, in overload situations. b. There is no guarantee that the operation is actually done when returns. 4. User should be prepared to retry if the operation is not DONE.'
+      operationId: compute.regionOperations.wait
+      parameters:
+        - description: Name of the Operations resource to return.
+          in: path
+          name: operation
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionOperations
+  '/{project}/regions/{region}/resourcePolicies':
+    get:
+      description: A list all the resource policies that have been configured for the specified project in specified region.
+      operationId: compute.resourcePolicies.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ResourcePoliciesList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - resourcePolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new resource policy.
+      operationId: compute.resourcePolicies.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ResourcePolicy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - resourcePolicies
+  '/{project}/regions/{region}/resourcePolicies/{resourcePolicy}':
+    delete:
+      description: Deletes the specified resource policy.
+      operationId: compute.resourcePolicies.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the resource policy to delete.
+          in: path
+          name: resourcePolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - resourcePolicies
+    get:
+      description: Retrieves all information of the specified resource policy.
+      operationId: compute.resourcePolicies.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource policy to retrieve.
+          in: path
+          name: resourcePolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ResourcePolicy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - resourcePolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/resourcePolicies/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.resourcePolicies.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - resourcePolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/resourcePolicies/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.resourcePolicies.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetPolicyRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - resourcePolicies
+  '/{project}/regions/{region}/resourcePolicies/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.resourcePolicies.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - resourcePolicies
   '/{project}/regions/{region}/routers':
     get:
       description: Retrieves a list of Router resources available to the specified project.
@@ -15035,7 +15620,7 @@ paths:
       tags:
         - routers
     get:
-      description: Returns the specified Router resource. Get a list of available routers by making a list() request.
+      description: Returns the specified Router resource. Gets a list of available routers by making a list() request.
       operationId: compute.routers.get
       parameters:
         - description: Project ID for this request.
@@ -15415,7 +16000,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/RegionSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -15531,7 +16116,7 @@ paths:
       tags:
         - subnetworks
     get:
-      description: Returns the specified subnetwork. Get a list of available subnetworks list() request.
+      description: Returns the specified subnetwork. Gets a list of available subnetworks list() request.
       operationId: compute.subnetworks.get
       parameters:
         - description: Project ID for this request.
@@ -16202,7 +16787,7 @@ paths:
       tags:
         - targetPools
     get:
-      description: Returns the specified target pool. Get a list of available target pools by making a list() request.
+      description: Returns the specified target pool. Gets a list of available target pools by making a list() request.
       operationId: compute.targetPools.get
       parameters:
         - description: Project ID for this request.
@@ -16804,7 +17389,7 @@ paths:
       tags:
         - targetVpnGateways
     get:
-      description: Returns the specified target VPN gateway. Get a list of available target VPN gateways by making a list() request.
+      description: Returns the specified target VPN gateway. Gets a list of available target VPN gateways by making a list() request.
       operationId: compute.targetVpnGateways.get
       parameters:
         - description: Project ID for this request.
@@ -17028,7 +17613,7 @@ paths:
       tags:
         - regionUrlMaps
     get:
-      description: Returns the specified UrlMap resource. Get a list of available URL maps by making a list() request.
+      description: Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
       operationId: compute.regionUrlMaps.get
       parameters:
         - description: Project ID for this request.
@@ -17190,6 +17775,293 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - regionUrlMaps
+  '/{project}/regions/{region}/vpnGateways':
+    get:
+      description: Retrieves a list of VPN gateways available to the specified project and region.
+      operationId: compute.vpnGateways.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VpnGatewayList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a VPN gateway in the specified project and region using the data included in the request.
+      operationId: compute.vpnGateways.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/VpnGateway'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - vpnGateways
+  '/{project}/regions/{region}/vpnGateways/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on a VpnGateway. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.vpnGateways.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - vpnGateways
+  '/{project}/regions/{region}/vpnGateways/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.vpnGateways.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
+  '/{project}/regions/{region}/vpnGateways/{vpnGateway}':
+    delete:
+      description: Deletes the specified VPN gateway.
+      operationId: compute.vpnGateways.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the VPN gateway to delete.
+          in: path
+          name: vpnGateway
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - vpnGateways
+    get:
+      description: Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.
+      operationId: compute.vpnGateways.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the VPN gateway to return.
+          in: path
+          name: vpnGateway
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VpnGateway'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}/vpnTunnels':
     get:
       description: Retrieves a list of VpnTunnel resources contained in the specified project and region.
@@ -17437,7 +18309,7 @@ paths:
       tags:
         - vpnTunnels
     get:
-      description: Returns the specified VpnTunnel resource. Get a list of available VPN tunnels by making a list() request.
+      description: Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.
       operationId: compute.vpnTunnels.get
       parameters:
         - description: Project ID for this request.
@@ -17863,7 +18735,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}':
     get:
-      description: Returns the specified Zone resource. Get a list of available zones by making a list() request.
+      description: Returns the specified Zone resource. Gets a list of available zones by making a list() request.
       operationId: compute.zones.get
       parameters:
         - description: Project ID for this request.
@@ -17967,7 +18839,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/acceleratorTypes/{acceleratorType}':
     get:
-      description: Returns the specified accelerator type. Get a list of available accelerator types by making a list() request.
+      description: Returns the specified accelerator type.
       operationId: compute.acceleratorTypes.get
       parameters:
         - description: Name of the accelerator type to return.
@@ -18241,7 +19113,7 @@ paths:
       tags:
         - autoscalers
     get:
-      description: Returns the specified autoscaler resource. Get a list of available autoscalers by making a list() request.
+      description: Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.
       operationId: compute.autoscalers.get
       parameters:
         - description: Name of the autoscaler to return.
@@ -18396,7 +19268,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/diskTypes/{diskType}':
     get:
-      description: Returns the specified disk type. Get a list of available disk types by making a list() request.
+      description: Returns the specified disk type. Gets a list of available disk types by making a list() request.
       operationId: compute.diskTypes.get
       parameters:
         - description: Name of the disk type to return.
@@ -18588,7 +19460,7 @@ paths:
       tags:
         - disks
     get:
-      description: Returns a specified persistent disk. Get a list of available persistent disks by making a list() request.
+      description: Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.
       operationId: compute.disks.get
       parameters:
         - description: Name of the persistent disk to return.
@@ -18628,6 +19500,59 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/disks/{disk}/addResourcePolicies':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds existing resource policies to a disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
+      operationId: compute.disks.addResourcePolicies
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DisksAddResourcePoliciesRequest'
+        - description: The disk name for this request.
+          in: path
+          name: disk
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - disks
   '/{project}/zones/{zone}/disks/{disk}/createSnapshot':
     parameters:
       - $ref: '#/parameters/alt'
@@ -18653,6 +19578,59 @@ paths:
         - in: query
           name: guestFlush
           type: boolean
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - disks
+  '/{project}/zones/{zone}/disks/{disk}/removeResourcePolicies':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Removes resource policies from a disk.
+      operationId: compute.disks.removeResourcePolicies
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DisksRemoveResourcePoliciesRequest'
+        - description: The disk name for this request.
+          in: path
+          name: disk
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -18795,7 +19773,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/ZoneSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -18991,7 +19969,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/hostTypes/{hostType}':
     get:
-      description: Returns the specified host type. Get a list of available host types by making a list() request.
+      description: Returns the specified host type. Gets a list of available host types by making a list() request.
       operationId: compute.hostTypes.get
       parameters:
         - description: Name of the host type to return.
@@ -19179,7 +20157,7 @@ paths:
       tags:
         - hosts
     get:
-      description: Returns the specified host. Get a list of available hosts by making a list() request.
+      description: Returns the specified host. Gets a list of available hosts by making a list() request.
       operationId: compute.hosts.get
       parameters:
         - description: Name of the host to return.
@@ -19277,7 +20255,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/ZoneSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -20541,7 +21519,7 @@ paths:
       tags:
         - instanceGroups
     get:
-      description: Returns the specified instance group. Get a list of available instance groups by making a list() request.
+      description: Returns the specified instance group. Gets a list of available instance groups by making a list() request.
       operationId: compute.instanceGroups.get
       parameters:
         - description: The name of the instance group.
@@ -21023,7 +22001,7 @@ paths:
       tags:
         - instances
     get:
-      description: Returns the specified Instance resource. Get a list of available instances by making a list() request.
+      description: Returns the specified Instance resource. Gets a list of available instances by making a list() request.
       operationId: compute.instances.get
       parameters:
         - description: Name of the instance resource to return.
@@ -21088,6 +22066,59 @@ paths:
         - description: The name of the network interface to add to this instance.
           in: query
           name: networkInterface
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
+  '/{project}/zones/{zone}/instances/{instance}/addResourcePolicies':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds existing resource policies to an instance. You can only add one policy right now which will be applied to this instance for scheduling live migrations.
+      operationId: compute.instances.addResourcePolicies
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesAddResourcePoliciesRequest'
+        - description: The instance name for this request.
+          in: path
+          name: instance
           required: true
           type: string
         - description: Project ID for this request.
@@ -21409,6 +22440,59 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/instances/{instance}/removeResourcePolicies':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Removes resource policies from an instance.
+      operationId: compute.instances.removeResourcePolicies
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesRemoveResourcePoliciesRequest'
+        - description: The instance name for this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/reset':
     parameters:
       - $ref: '#/parameters/alt'
@@ -22150,7 +23234,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.'
+      description: 'Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.'
       operationId: compute.instances.start
       parameters:
         - description: Name of the instance resource to start.
@@ -22199,7 +23283,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.'
+      description: 'Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.'
       operationId: compute.instances.startWithEncryptionKey
       parameters:
         - in: body
@@ -22629,7 +23713,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/ZoneSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -22960,7 +24044,7 @@ paths:
       tags:
         - networkEndpointGroups
     get:
-      description: Returns the specified network endpoint group. Get a list of available network endpoint groups by making a list() request.
+      description: Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.
       operationId: compute.networkEndpointGroups.get
       parameters:
         - description: The name of the network endpoint group. It should comply with RFC1035.
@@ -23381,7 +24465,7 @@ paths:
       tags:
         - nodeGroups
     get:
-      description: Returns the specified NodeGroup. Get a list of available NodeGroups by making a list() request.
+      description: Returns the specified NodeGroup. Gets a list of available NodeGroups by making a list() request.
       operationId: compute.nodeGroups.get
       parameters:
         - description: Name of the node group to return.
@@ -23638,7 +24722,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/ZoneSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -23781,7 +24865,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/nodeTypes/{nodeType}':
     get:
-      description: Returns the specified node type. Get a list of available node types by making a list() request.
+      description: Returns the specified node type. Gets a list of available node types by making a list() request.
       operationId: compute.nodeTypes.get
       parameters:
         - description: Name of the node type to return.
@@ -23959,6 +25043,48 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/operations/{operation}/wait':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Waits for the specified zone-specific Operations resource until it is done or timeout, and retrieves the specified Operations resource. 1. Immediately returns when the operation is already done. 2. Waits for no more than the default deadline (2 minutes, subject to change) and then returns the current state of the operation, which may be DONE or still in progress. 3. Is best-effort: a. The server can wait less than the default deadline or zero seconds, in overload situations. b. There is no guarantee that the operation is actually done when returns. 4. User should be prepared to retry if the operation is not DONE.'
+      operationId: compute.zoneOperations.wait
+      parameters:
+        - description: Name of the Operations resource to return.
+          in: path
+          name: operation
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - zoneOperations
   '/{project}/zones/{zone}/targetInstances':
     get:
       description: Retrieves a list of TargetInstance resources available to the specified project and zone.
@@ -24153,7 +25279,7 @@ paths:
       tags:
         - targetInstances
     get:
-      description: Returns the specified TargetInstance resource. Get a list of available target instances by making a list() request.
+      description: Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.
       operationId: compute.targetInstances.get
       parameters:
         - description: Project ID for this request.
@@ -24851,7 +25977,7 @@ definitions:
           - READ_WRITE
         type: string
       savedState:
-        description: 'For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this field is set to PRESERVED iff the LocalSSD data has been saved to a persistent location by customer request. (see the discard_local_ssd option on Stop/Suspend). Read-only in the api.'
+        description: 'For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this field is set to PRESERVED if the LocalSSD data has been saved to a persistent location by customer request. (see the discard_local_ssd option on Stop/Suspend). Read-only in the api.'
         enum:
           - DISK_SAVED_STATE_UNSPECIFIED
           - PRESERVED
@@ -25682,6 +26808,7 @@ definitions:
         enum:
           - EXTERNAL
           - INTERNAL
+          - INTERNAL_SELF_MANAGED
           - INVALID_LOAD_BALANCING_SCHEME
         type: string
       name:
@@ -26051,7 +27178,7 @@ definitions:
 
           * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
 
-          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` .
 
 
 
@@ -26550,6 +27677,11 @@ definitions:
         items:
           type: string
         type: array
+      resourcePolicies:
+        description: Resource policies applied to this disk for automatic snapshot creations.
+        items:
+          type: string
+        type: array
       selfLink:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
         type: string
@@ -26839,6 +27971,9 @@ definitions:
         description: '[Output Only] Name of the resource.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
+      region:
+        description: '[Output Only] URL of the region where the disk type resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
+        type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
@@ -27044,6 +28179,22 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  DisksAddResourcePoliciesRequest:
+    properties:
+      resourcePolicies:
+        description: Resource policies to be added to this disk.
+        items:
+          type: string
+        type: array
+    type: object
+  DisksRemoveResourcePoliciesRequest:
+    properties:
+      resourcePolicies:
+        description: Resource policies to be removed from this disk.
+        items:
+          type: string
+        type: array
     type: object
   DisksResizeRequest:
     properties:
@@ -27726,6 +28877,21 @@ definitions:
           type: string
         description: 'A list of labels to apply for this resource. Each label key & value must comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").'
         type: object
+    type: object
+  GlobalSetPolicyRequest:
+    properties:
+      bindings:
+        description: Flatten Policy to create a backwacd compatible wire-format. Deprecated. Use 'policy' to specify bindings.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: Flatten Policy to create a backward compatible wire-format. Deprecated. Use 'policy' to specify the etag.
+        format: byte
+        type: string
+      policy:
+        $ref: '#/definitions/Policy'
+        description: 'REQUIRED: The complete policy to be applied to the ''resource''. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.'
     type: object
   GuestAttributes:
     description: A guest attributes entry.
@@ -29240,7 +30406,7 @@ definitions:
         type: string
       labelFingerprint:
         description: |-
-          A fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+          A fingerprint for this request, which is essentially a hash of the label's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
 
           To see the latest fingerprint, make get() request to the instance.
         format: byte
@@ -29283,6 +30449,11 @@ definitions:
         description: Total amount of preserved state for SUSPENDED instances. Read-only in the api.
         format: int64
         type: string
+      resourcePolicies:
+        description: Resource policies applied to this instance.
+        items:
+          type: string
+        type: array
       scheduling:
         $ref: '#/definitions/Scheduling'
         description: Sets the scheduling options for this instance.
@@ -29624,7 +30795,7 @@ definitions:
           - UNKNOWN
         type: string
       fingerprint:
-        description: '[Output Only] The fingerprint of the resource data. You can use this optional field for optimistic locking when you update the resource.'
+        description: Fingerprint of this resource. This field may be used in optimistic locking. It will be ignored when inserting an InstanceGroupManager. An up-to-date fingerprint must be provided in order to update the InstanceGroupManager or the field need to be unset.
         format: byte
         type: string
       id:
@@ -29660,7 +30831,7 @@ definitions:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
         type: string
       serviceAccount:
-        description: '[Output Only] The service account to be used as credentials for all operations performed by the managed instance group on instances. The service accounts needs all permissions required to create and delete instances. By default, the service account {projectNumber}@cloudservices.gserviceaccount.com is used.'
+        description: 'The service account to be used as credentials for all operations performed by the managed instance group on instances. The service accounts needs all permissions required to create and delete instances. By default, the service account {projectNumber}@cloudservices.gserviceaccount.com is used.'
         type: string
       statefulPolicy:
         $ref: '#/definitions/StatefulPolicy'
@@ -29949,6 +31120,11 @@ definitions:
     type: object
   InstanceGroupManagerUpdatePolicy:
     properties:
+      instanceRedistributionType:
+        enum:
+          - NONE
+          - PROACTIVE
+        type: string
       maxSurge:
         $ref: '#/definitions/FixedOrPercent'
         description: |-
@@ -30742,6 +31918,22 @@ definitions:
           - SUSPENDING
           - TERMINATED
         type: string
+    type: object
+  InstancesAddResourcePoliciesRequest:
+    properties:
+      resourcePolicies:
+        description: Resource policies to be added to this instance.
+        items:
+          type: string
+        type: array
+    type: object
+  InstancesRemoveResourcePoliciesRequest:
+    properties:
+      resourcePolicies:
+        description: Resource policies to be removed from this instance.
+        items:
+          type: string
+        type: array
     type: object
   InstancesResumeRequest:
     properties:
@@ -31569,7 +32761,7 @@ definitions:
     description: 'Description of a planned outage on this Interconnect. Next id: 9'
     properties:
       affectedCircuits:
-        description: 'Iff issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs that will be affected.'
+        description: 'If issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs that will be affected.'
         items:
           type: string
         type: array
@@ -32889,6 +34081,12 @@ definitions:
       autoCreateRoutes:
         description: 'Whether full mesh connectivity is created and managed automatically. When it is set to true, Google Compute Engine will automatically create and manage the routes between two networks when the state is ACTIVE. Otherwise, user needs to create routes manually to route packets to peer network.'
         type: boolean
+      exportCustomRoutes:
+        description: Whether to export the custom routes to peer network.
+        type: boolean
+      importCustomRoutes:
+        description: Whether to import the custom routes from peer network.
+        type: boolean
       name:
         description: 'Name of this peering. Provided by the client when the peering is created. The name must comply with RFC1035. Specifically, the name must be 1-63 characters long and match regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all the following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         type: string
@@ -32920,6 +34118,12 @@ definitions:
       autoCreateRoutes:
         description: Whether Google Compute Engine manages the routes automatically.
         type: boolean
+      exportCustomRoutes:
+        description: Whether to export the custom routes to peer network.
+        type: boolean
+      importCustomRoutes:
+        description: Whether to import the custom routes from peer network.
+        type: boolean
       name:
         description: 'Name of the peering, which should conform to RFC1035.'
         type: string
@@ -32940,7 +34144,7 @@ definitions:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
       description:
-        description: '[Output Only] An optional textual description of the resource.'
+        description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -33710,7 +34914,7 @@ definitions:
     description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
     properties:
       clientOperationId:
-        description: '[Output Only] Reserved for future use.'
+        description: '[Output Only] The value of `requestId` if you provided it in the request. Not present otherwise.'
         type: string
       creationTimestamp:
         description: '[Deprecated] This field is deprecated.'
@@ -34083,8 +35287,12 @@ definitions:
     type: object
   PerInstanceConfig:
     properties:
+      fingerprint:
+        description: Fingerprint of this per-instance config. This field may be used in optimistic locking. It will be ignored when inserting a per-instance config. An up-to-date fingerprint must be provided in order to update an existing per-instance config or the field needs to be unset.
+        format: byte
+        type: string
       instance:
-        description: The URL of the instance. Serves as a merge key during UpdatePerInstanceConfigs operation.
+        description: 'The URL of the instance. Serves as a merge key during UpdatePerInstanceConfigs operation, i.e. if per-instance config with the same instance URL exists then it will be updated, otherwise a new one will be created.'
         type: string
       override:
         $ref: '#/definitions/ManagedInstanceOverride'
@@ -34095,11 +35303,17 @@ definitions:
 
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
 
-      **Example**
+      **JSON Example**
 
-      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com" ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+
+      **YAML Example**
+
+      bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-other-app@appspot.gserviceaccount.com role: roles/owner - members: - user:sean@example.com role: roles/viewer
+
+
 
       For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
@@ -34132,6 +35346,14 @@ definitions:
         description: Deprecated.
         format: int32
         type: integer
+    type: object
+  PreconfiguredWafSet:
+    properties:
+      expressionSets:
+        description: List of entities that are currently supported for WAF rules.
+        items:
+          $ref: '#/definitions/WafExpressionSet'
+        type: array
     type: object
   Project:
     description: 'A Project resource. For an overview of projects, see  Cloud Platform Resource Hierarchy. (== resource_for v1.projects ==) (== resource_for beta.projects ==)'
@@ -34265,8 +35487,11 @@ definitions:
           - INSTANCE_GROUP_MANAGERS
           - INSTANCE_TEMPLATES
           - INTERCONNECTS
+          - INTERCONNECT_ATTACHMENTS_PER_REGION
+          - INTERCONNECT_ATTACHMENTS_TOTAL_MBPS
           - INTERNAL_ADDRESSES
           - IN_USE_ADDRESSES
+          - IN_USE_MAINTENANCE_WINDOWS
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
           - NVIDIA_K80_GPUS
@@ -34280,6 +35505,7 @@ definitions:
           - PRIVATE_V6_ACCESS_SUBNETWORKS
           - REGIONAL_AUTOSCALERS
           - REGIONAL_INSTANCE_GROUP_MANAGERS
+          - RESOURCE_POLICIES
           - ROUTERS
           - ROUTES
           - SECURITY_POLICIES
@@ -34990,6 +36216,21 @@ definitions:
         description: The labels to set for this resource.
         type: object
     type: object
+  RegionSetPolicyRequest:
+    properties:
+      bindings:
+        description: Flatten Policy to create a backwacd compatible wire-format. Deprecated. Use 'policy' to specify bindings.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: Flatten Policy to create a backward compatible wire-format. Deprecated. Use 'policy' to specify the etag.
+        format: byte
+        type: string
+      policy:
+        $ref: '#/definitions/Policy'
+        description: 'REQUIRED: The complete policy to be applied to the ''resource''. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.'
+    type: object
   RegionUrlMapsValidateRequest:
     properties:
       resource:
@@ -35016,6 +36257,359 @@ definitions:
     properties:
       group:
         description: A URI referencing one of the instance groups listed in the backend service.
+        type: string
+    type: object
+  ResourcePoliciesList:
+    properties:
+      etag:
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of ResourcePolicy resources.'
+        items:
+          $ref: '#/definitions/ResourcePolicy'
+        type: array
+      kind:
+        default: 'compute#resourcePoliciesList'
+        description: '[Output Only] Type of resource.Always compute#resourcePoliciesList for listsof resourcePolicies'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  ResourcePoliciesScopedList:
+    properties:
+      resourcePolicies:
+        description: A list of resourcePolicies contained in this scope.
+        items:
+          $ref: '#/definitions/ResourcePolicy'
+        type: array
+      warning:
+        description: Informational warning which replaces the list of resourcePolicies when the list is empty.
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  ResourcePolicy:
+    properties:
+      backupSchedulePolicy:
+        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicy'
+        description: Resource policy for persistent disks for creating snapshots.
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#resourcePolicy'
+        description: '[Output Only] Type of the resource. Always compute#resource_policies for resource policies.'
+        type: string
+      name:
+        description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      region:
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+        type: string
+      vmMaintenancePolicy:
+        $ref: '#/definitions/ResourcePolicyVmMaintenancePolicy'
+        description: Resource policy applicable to VMs for infrastructure maintenance.
+    type: object
+  ResourcePolicyAggregatedList:
+    description: Contains a list of resourcePolicies.
+    properties:
+      etag:
+        type: string
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/ResourcePoliciesScopedList'
+          description: Name of the scope containing this set of resourcePolicies.
+        description: A list of ResourcePolicy resources.
+        type: object
+      kind:
+        default: 'compute#resourcePolicyAggregatedList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  ResourcePolicyBackupSchedulePolicy:
+    description: A backup schedule policy specifies when and how frequently snapshots are to be created for the target disk. Also specifies how many and how long these automatically created snapshot should be retained.
+    properties:
+      retentionPolicy:
+        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicyRetentionPolicy'
+        description: Retention policy applied to snapshots created by this resource policy.
+      schedule:
+        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicySchedule'
+        description: A Vm Maintenance Policy specifies what kind of infrastructure maintenance we are allowed to perform on this VM and when. Schedule that is applied to disks covered by this policy.
+      snapshotProperties:
+        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicySnapshotProperties'
+        description: 'Properties with which snapshots are created such as lables, encryption keys.'
+    type: object
+  ResourcePolicyBackupSchedulePolicyRetentionPolicy:
+    description: Policy for retention of automatically created snapshots.
+    properties:
+      maxRetentionDays:
+        description: Maximum age of the snapshot that is allowed to be kept.
+        format: int32
+        type: integer
+    type: object
+  ResourcePolicyBackupSchedulePolicySchedule:
+    description: A schedule for disks where the schedueled operations are performed.
+    properties:
+      dailySchedule:
+        $ref: '#/definitions/ResourcePolicyDailyCycle'
+      hourlySchedule:
+        $ref: '#/definitions/ResourcePolicyHourlyCycle'
+      weeklySchedule:
+        $ref: '#/definitions/ResourcePolicyWeeklyCycle'
+    type: object
+  ResourcePolicyBackupSchedulePolicySnapshotProperties:
+    description: Specified snapshot properties for automatic snapshots created by this policy.
+    properties:
+      guestFlush:
+        description: Indication to perform a ?guest aware? snapshot.
+        type: boolean
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to automatic snapshots. These can be later modified by the setLabels method. Label values may be empty.
+        type: object
+    type: object
+  ResourcePolicyDailyCycle:
+    description: Time window specified for daily operations.
+    properties:
+      daysInCycle:
+        description: Allows to define schedule that runs every nth day of the month.
+        format: int32
+        type: integer
+      duration:
+        description: '[Output only] Duration of the time window, automatically chosen to be smallest possible in the given scenario.'
+        type: string
+      startTime:
+        description: 'Time within the window to start the operations. It must be in format "HH:MM?, where HH : [00-23] and MM : [00-59] GMT.'
+        type: string
+    type: object
+  ResourcePolicyHourlyCycle:
+    description: Time window specified for hourly operations.
+    properties:
+      duration:
+        description: '[Output only] Duration of the time window, automatically chosen to be smallest possible in the given scenario.'
+        type: string
+      hoursInCycle:
+        description: Allows to define schedule that runs every nth hour.
+        format: int32
+        type: integer
+      startTime:
+        description: 'Time within the window to start the operations. It must be in format "HH:MM?, where HH : [00-23] and MM : [00-59] GMT.'
+        type: string
+    type: object
+  ResourcePolicyVmMaintenancePolicy:
+    properties:
+      maintenanceEnvironment:
+        description: A hint about the environment this VM belongs to (production vs develoment)
+        enum:
+          - DEVELOPMENT
+          - MAINTENANCE_ENVIRONMENT_UNSPECIFIED
+          - PRODUCTION
+        type: string
+      maintenanceWindow:
+        $ref: '#/definitions/ResourcePolicyVmMaintenancePolicyMaintenanceWindow'
+        description: Maintenance windows that are applied to VMs covered by this policy.
+    type: object
+  ResourcePolicyVmMaintenancePolicyMaintenanceWindow:
+    description: 'A maintenance window for VMs. When set, we restrict our maintenance operations to this window.'
+    properties:
+      dailyMaintenanceWindow:
+        $ref: '#/definitions/ResourcePolicyDailyCycle'
+      weeklyMaintenanceWindow:
+        $ref: '#/definitions/ResourcePolicyWeeklyCycle'
+    type: object
+  ResourcePolicyWeeklyCycle:
+    description: Time window specified for weekly operations.
+    properties:
+      dayOfWeeks:
+        description: 'Up to 7 intervals/windows, one for each day of the week.'
+        items:
+          $ref: '#/definitions/ResourcePolicyWeeklyCycleDayOfWeek'
+        type: array
+    type: object
+  ResourcePolicyWeeklyCycleDayOfWeek:
+    properties:
+      day:
+        description: Allows to define schedule that runs specified day of the week.
+        enum:
+          - FRIDAY
+          - INVALID
+          - MONDAY
+          - SATURDAY
+          - SUNDAY
+          - THURSDAY
+          - TUESDAY
+          - WEDNESDAY
+        type: string
+      duration:
+        description: '[Output only] Duration of the time window, automatically chosen to be smallest possible in the given scenario.'
+        type: string
+      startTime:
+        description: 'Time within the window to start the operations. It must be in format "HH:MM?, where HH : [00-23] and MM : [00-59] GMT.'
         type: string
     type: object
   Route:
@@ -35052,6 +36646,12 @@ definitions:
         type: string
       nextHopGateway:
         description: 'The URL to a gateway that should handle matching packets. You can only specify the internet gateway using a full or partial valid URL:  projects/<project-id>/global/gateways/default-internet-gateway'
+        type: string
+      nextHopIlb:
+        description: |-
+          The URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets. You can only specify the forwarding rule as a partial or full URL. For example, the following are all valid URLs:  
+          - https://www.googleapis.com/compute/v1/projects/project/regions/region/forwardingRules/forwardingRule 
+          - regions/region/forwardingRules/forwardingRule  Note that this can only be used when the destination_range is a public (non-RFC 1918) IP CIDR range.
         type: string
       nextHopInstance:
         description: |-
@@ -35262,16 +36862,6 @@ definitions:
         description: The IP range to advertise. The value must be a CIDR-formatted string.
         type: string
     type: object
-  RouterAdvertisedPrefix:
-    description: Description-tagged prefixes for the router to advertise.
-    properties:
-      description:
-        description: User-specified description for the prefix.
-        type: string
-      prefix:
-        description: The prefix to advertise. The value must be a CIDR-formatted string.
-        type: string
-    type: object
   RouterAggregatedList:
     description: Contains a list of routers.
     properties:
@@ -35363,11 +36953,6 @@ definitions:
         items:
           $ref: '#/definitions/RouterAdvertisedIpRange'
         type: array
-      advertisedPrefixs:
-        description: User-specified list of individual prefixes to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and is advertised to all peers of the router. These prefixes will be advertised in addition to any specified groups. Leave this field blank to advertise no custom prefixes.
-        items:
-          $ref: '#/definitions/RouterAdvertisedPrefix'
-        type: array
       asn:
         description: 'Local BGP Autonomous System Number (ASN). Must be an RFC6996 private ASN, either 16-bit or 32-bit. The value will be fixed for this router resource. All VPN tunnels that link to this router will have the same local ASN.'
         format: uint32
@@ -35392,11 +36977,6 @@ definitions:
         description: User-specified list of individual IP ranges to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in Bgp message). These IP ranges will be advertised in addition to any specified groups. Leave this field blank to advertise no custom IP ranges.
         items:
           $ref: '#/definitions/RouterAdvertisedIpRange'
-        type: array
-      advertisedPrefixs:
-        description: User-specified list of individual prefixes to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in Bgp message). These prefixes will be advertised in addition to any specified groups. Leave this field blank to advertise no custom prefixes.
-        items:
-          $ref: '#/definitions/RouterAdvertisedPrefix'
         type: array
       advertisedRoutePriority:
         description: 'The priority of routes advertised to this BGP peer. In the case where there is more than one matching route of maximum length, the routes with lowest priority value win.'
@@ -35869,6 +37449,16 @@ definitions:
           type: string
         type: array
     type: object
+  SecurityPoliciesListPreconfiguredExpressionSetsResponse:
+    properties:
+      preconfiguredExpressionSets:
+        $ref: '#/definitions/SecurityPoliciesWafConfig'
+    type: object
+  SecurityPoliciesWafConfig:
+    properties:
+      wafRules:
+        $ref: '#/definitions/PreconfiguredWafSet'
+    type: object
   SecurityPolicy:
     description: A security policy is comprised of one or more rules. It can also be associated with one or more 'targets'.
     properties:
@@ -36098,6 +37688,9 @@ definitions:
   Snapshot:
     description: A persistent disk snapshot resource. (== resource_for beta.snapshots ==) (== resource_for v1.snapshots ==)
     properties:
+      autoCreated:
+        description: '[Output Only] Set to true if snapshots are autoamtically by applying resource policy on the target disk.'
+        type: boolean
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -36547,12 +38140,11 @@ definitions:
         description: '[Output only] Type of the resource. Always compute#sslPolicyfor SSL policies.'
         type: string
       minTlsVersion:
-        description: 'The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS_1_0, TLS_1_1, TLS_1_2, TLS_1_3.'
+        description: 'The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS_1_0, TLS_1_1, TLS_1_2.'
         enum:
           - TLS_1_0
           - TLS_1_1
           - TLS_1_2
-          - TLS_1_3
         type: string
       name:
         description: 'Name of the resource. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
@@ -36992,7 +38584,7 @@ definitions:
     properties:
       fingerprint:
         description: |-
-          Specifies a fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+          Specifies a fingerprint for this request, which is essentially a hash of the tags' contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update tags. You must always provide an up-to-date fingerprint hash in order to update or change tags.
 
           To see the latest fingerprint, make get() request to the instance.
         format: byte
@@ -38654,8 +40246,23 @@ definitions:
       network:
         description: Network URL.
         type: string
+      secondaryIpRanges:
+        description: Secondary IP ranges.
+        items:
+          $ref: '#/definitions/UsableSubnetworkSecondaryRange'
+        type: array
       subnetwork:
         description: Subnetwork URL.
+        type: string
+    type: object
+  UsableSubnetworkSecondaryRange:
+    description: Secondary IP range of a usable subnetwork.
+    properties:
+      ipCidrRange:
+        description: The range of IP addresses belonging to this subnetwork secondary range.
+        type: string
+      rangeName:
+        description: 'The name associated with this subnetwork secondary range, used when adding an alias IP range to a VM instance. The name must be 1-63 characters long, and comply with RFC1035. The name must be unique within the subnetwork.'
         type: string
     type: object
   UsableSubnetworksAggregatedList:
@@ -38736,6 +40343,271 @@ definitions:
       reportNamePrefix:
         description: 'An optional prefix for the name of the usage report object stored in bucketName. If not supplied, defaults to usage. The report is stored as a CSV file named report_name_prefix_gce_YYYYMMDD.csv where YYYYMMDD is the day of the usage according to Pacific Time. If you supply a prefix, it should conform to Cloud Storage object naming conventions.'
         type: string
+    type: object
+  VpnGateway:
+    description: Represents a VPN gateway resource.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#vpnGateway'
+        description: '[Output Only] Type of resource. Always compute#vpnGateway for VPN gateways.'
+        type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this VpnGateway, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve an VpnGateway.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this VpnGateway resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      network:
+        description: URL of the network to which this VPN gateway is attached. Provided by the client when the VPN gateway is created.
+        type: string
+      redundancy:
+        description: |-
+          The redundancy mode configured for this VPN gateway. Possible values are ACTIVE_ACTIVE and NONE. If set to ACTIVE_ACTIVE, two VPN interfaces are created thereby providing higher availability. If set to NONE, only one interface is created with a lower availability SLA.
+
+          If this field is specified, either 2 or 1 external IP addresses (depending on the value of specified redundancy) are automatically allocated for use with this VPN gateway, and incoming traffic on the external addresses to ports ESP, UDP:500 and UDP:4500 are automatically forwarded to this gateway.
+        enum:
+          - ACTIVE_ACTIVE
+          - NONE
+          - REDUNDANCY_UNSPECIFIED
+        type: string
+      region:
+        description: '[Output Only] URL of the region where the VPN gateway resides.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      vpnInterfaces:
+        description: '[Output Only] A list of interfaces on this VPN gateway.'
+        items:
+          $ref: '#/definitions/VpnGatewayVpnGatewayInterface'
+        type: array
+    type: object
+  VpnGatewayAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/VpnGatewaysScopedList'
+          description: '[Output Only] Name of the scope containing this set of VPN gateways.'
+        description: A list of VpnGateway resources.
+        type: object
+      kind:
+        default: 'compute#vpnGatewayAggregatedList'
+        description: '[Output Only] Type of resource. Always compute#vpnGateway for VPN gateways.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  VpnGatewayList:
+    description: Contains a list of VpnGateway resources.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of VpnGateway resources.
+        items:
+          $ref: '#/definitions/VpnGateway'
+        type: array
+      kind:
+        default: 'compute#vpnGatewayList'
+        description: '[Output Only] Type of resource. Always compute#vpnGateway for VPN gateways.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  VpnGatewayVpnGatewayInterface:
+    description: A VPN gateway interface.
+    properties:
+      id:
+        description: The numeric ID of this VPN gateway interface.
+        format: uint32
+        type: integer
+      ipAddress:
+        description: The external IP address for this VPN gateway interface.
+        type: string
+    type: object
+  VpnGatewaysScopedList:
+    properties:
+      vpnGateways:
+        description: '[Output Only] A list of VPN gateways contained in this scope.'
+        items:
+          $ref: '#/definitions/VpnGateway'
+        type: array
+      warning:
+        description: '[Output Only] Informational warning which replaces the list of addresses when the list is empty.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   VpnTunnel:
     description: VPN tunnel resource. (== resource_for beta.vpnTunnels ==) (== resource_for v1.vpnTunnels ==)
@@ -38824,6 +40696,16 @@ definitions:
       targetVpnGateway:
         description: URL of the Target VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.
         type: string
+      vpnGateway:
+        description: |-
+          URL of the VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created. This must be used (instead of target_vpn_gateway) if a VPN gateway resource is created with redundancy.
+
+          VPN gateway resource provides a way to create a highly available VPN setup.
+        type: string
+      vpnGatewayInterface:
+        description: 'The interface ID of the VPN gateway with which this VPN tunnel is associated. If the VPN gateway has redundancy other than NONE, this field is required to identify which interface of the VPN gateway to use.'
+        format: int32
+        type: integer
     type: object
   VpnTunnelAggregatedList:
     properties:
@@ -39020,6 +40902,28 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  WafExpressionSet:
+    properties:
+      aliases:
+        description: 'A list of alternate IDs. The format should be: - E.g. XSS-stable Generic suffix like "stable" is particularly useful if a policy likes to avail newer set of expressions without having to change the policy. A given alias name can''t be used for more than one entity set.'
+        items:
+          type: string
+        type: array
+      expressions:
+        description: List of available expressions.
+        items:
+          $ref: '#/definitions/WafExpressionSetExpression'
+        type: array
+      id:
+        description: 'Google specified expression set ID. The format should be: - E.g. XSS-20170329'
+        type: string
+    type: object
+  WafExpressionSetExpression:
+    properties:
+      id:
+        description: Expression ID should uniquely identify the origin of the expression. E.g. owasp-crs-v020901-id973337 identifies Owasp core rule set version 2.9.1 rule id 973337. The ID could be used to determine the individual attack definition that has been detected. It could also be used to exclude it from the policy in case of false positive.
+        type: string
     type: object
   XpnHostList:
     properties:
@@ -39225,4 +41129,19 @@ definitions:
           type: string
         description: The labels to set for this resource.
         type: object
+    type: object
+  ZoneSetPolicyRequest:
+    properties:
+      bindings:
+        description: Flatten Policy to create a backwacd compatible wire-format. Deprecated. Use 'policy' to specify bindings.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: Flatten Policy to create a backward compatible wire-format. Deprecated. Use 'policy' to specify the etag.
+        format: byte
+        type: string
+      policy:
+        $ref: '#/definitions/Policy'
+        description: 'REQUIRED: The complete policy to be applied to the ''resource''. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.'
     type: object

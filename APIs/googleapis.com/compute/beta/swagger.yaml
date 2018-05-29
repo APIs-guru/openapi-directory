@@ -70,12 +70,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -1841,7 +1841,7 @@ paths:
       tags:
         - globalAddresses
     get:
-      description: Returns the specified address resource. Get a list of available addresses by making a list() request.
+      description: Returns the specified address resource. Gets a list of available addresses by making a list() request.
       operationId: compute.globalAddresses.get
       parameters:
         - description: Name of the address resource to return.
@@ -2089,7 +2089,7 @@ paths:
       tags:
         - backendBuckets
     get:
-      description: Returns the specified BackendBucket resource. Get a list of available backend buckets by making a list() request.
+      description: Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.
       operationId: compute.backendBuckets.get
       parameters:
         - description: Name of the BackendBucket resource to return.
@@ -2432,7 +2432,7 @@ paths:
       tags:
         - backendServices
     get:
-      description: Returns the specified BackendService resource. Get a list of available backend services by making a list() request.
+      description: Returns the specified BackendService resource. Gets a list of available backend services by making a list() request.
       operationId: compute.backendServices.get
       parameters:
         - description: Name of the BackendService resource to return.
@@ -3191,7 +3191,7 @@ paths:
       tags:
         - globalForwardingRules
     get:
-      description: Returns the specified GlobalForwardingRule resource. Get a list of available forwarding rules by making a list() request.
+      description: Returns the specified GlobalForwardingRule resource. Gets a list of available forwarding rules by making a list() request.
       operationId: compute.globalForwardingRules.get
       parameters:
         - description: Name of the ForwardingRule resource to return.
@@ -3487,7 +3487,7 @@ paths:
       tags:
         - healthChecks
     get:
-      description: Returns the specified HealthCheck resource. Get a list of available health checks by making a list() request.
+      description: Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
       operationId: compute.healthChecks.get
       parameters:
         - description: Name of the HealthCheck resource to return.
@@ -3774,7 +3774,7 @@ paths:
       tags:
         - httpHealthChecks
     get:
-      description: Returns the specified HttpHealthCheck resource. Get a list of available HTTP health checks by making a list() request.
+      description: Returns the specified HttpHealthCheck resource. Gets a list of available HTTP health checks by making a list() request.
       operationId: compute.httpHealthChecks.get
       parameters:
         - description: Name of the HttpHealthCheck resource to return.
@@ -4061,7 +4061,7 @@ paths:
       tags:
         - httpsHealthChecks
     get:
-      description: Returns the specified HttpsHealthCheck resource. Get a list of available HTTPS health checks by making a list() request.
+      description: Returns the specified HttpsHealthCheck resource. Gets a list of available HTTPS health checks by making a list() request.
       operationId: compute.httpsHealthChecks.get
       parameters:
         - description: Name of the HttpsHealthCheck resource to return.
@@ -4395,7 +4395,7 @@ paths:
       tags:
         - images
     get:
-      description: Returns the specified image. Get a list of available images by making a list() request.
+      description: Returns the specified image. Gets a list of available images by making a list() request.
       operationId: compute.images.get
       parameters:
         - description: Name of the image resource to return.
@@ -4834,7 +4834,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/interconnectLocations/{interconnectLocation}':
     get:
-      description: Returns the details for the specified interconnect location. Get a list of available interconnect locations by making a list() request.
+      description: Returns the details for the specified interconnect location. Gets a list of available interconnect locations by making a list() request.
       operationId: compute.interconnectLocations.get
       parameters:
         - description: Name of the interconnect location to return.
@@ -5195,7 +5195,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/licenses':
     get:
-      description: 'Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 8. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
+      description: 'Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 9. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
       operationId: compute.licenses.list
       parameters:
         - description: |-
@@ -5500,7 +5500,7 @@ paths:
       tags:
         - networks
     get:
-      description: Returns the specified network. Get a list of available networks by making a list() request.
+      description: Returns the specified network. Gets a list of available networks by making a list() request.
       operationId: compute.networks.get
       parameters:
         - description: Name of the network to return.
@@ -5843,7 +5843,7 @@ paths:
       tags:
         - globalOperations
     get:
-      description: Retrieves the specified Operations resource. Get a list of operations by making a list() request.
+      description: Retrieves the specified Operations resource. Gets a list of operations by making a list() request.
       operationId: compute.globalOperations.get
       parameters:
         - description: Name of the Operations resource to return.
@@ -6052,7 +6052,7 @@ paths:
       tags:
         - routes
     get:
-      description: Returns the specified Route resource. Get a list of available routes by making a list() request.
+      description: Returns the specified Route resource. Gets a list of available routes by making a list() request.
       operationId: compute.routes.get
       parameters:
         - description: Project ID for this request.
@@ -6679,7 +6679,7 @@ paths:
       tags:
         - snapshots
     get:
-      description: Returns the specified Snapshot resource. Get a list of available snapshots by making a list() request.
+      description: Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.
       operationId: compute.snapshots.get
       parameters:
         - description: Project ID for this request.
@@ -6888,7 +6888,7 @@ paths:
       tags:
         - sslCertificates
     get:
-      description: Returns the specified SslCertificate resource. Get a list of available SSL certificates by making a list() request.
+      description: Returns the specified SslCertificate resource. Gets a list of available SSL certificates by making a list() request.
       operationId: compute.sslCertificates.get
       parameters:
         - description: Project ID for this request.
@@ -6986,7 +6986,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Returns the specified SSL policy resource. Get a list of available SSL policies by making a list() request.
+      description: Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.
       operationId: compute.sslPolicies.insert
       parameters:
         - in: body
@@ -7407,7 +7407,7 @@ paths:
       tags:
         - targetHttpProxies
     get:
-      description: Returns the specified TargetHttpProxy resource. Get a list of available target HTTP proxies by making a list() request.
+      description: Returns the specified TargetHttpProxy resource. Gets a list of available target HTTP proxies by making a list() request.
       operationId: compute.targetHttpProxies.get
       parameters:
         - description: Project ID for this request.
@@ -7616,7 +7616,7 @@ paths:
       tags:
         - targetHttpsProxies
     get:
-      description: Returns the specified TargetHttpsProxy resource. Get a list of available target HTTPS proxies by making a list() request.
+      description: Returns the specified TargetHttpsProxy resource. Gets a list of available target HTTPS proxies by making a list() request.
       operationId: compute.targetHttpsProxies.get
       parameters:
         - description: Project ID for this request.
@@ -7921,7 +7921,7 @@ paths:
       tags:
         - targetSslProxies
     get:
-      description: Returns the specified TargetSslProxy resource. Get a list of available target SSL proxies by making a list() request.
+      description: Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.
       operationId: compute.targetSslProxies.get
       parameters:
         - description: Project ID for this request.
@@ -8281,7 +8281,7 @@ paths:
       tags:
         - targetTcpProxies
     get:
-      description: Returns the specified TargetTcpProxy resource. Get a list of available target TCP proxies by making a list() request.
+      description: Returns the specified TargetTcpProxy resource. Gets a list of available target TCP proxies by making a list() request.
       operationId: compute.targetTcpProxies.get
       parameters:
         - description: Project ID for this request.
@@ -8586,7 +8586,7 @@ paths:
       tags:
         - urlMaps
     get:
-      description: Returns the specified UrlMap resource. Get a list of available URL maps by making a list() request.
+      description: Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
       operationId: compute.urlMaps.get
       parameters:
         - description: Project ID for this request.
@@ -8984,7 +8984,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}':
     get:
-      description: Returns the specified Region resource. Get a list of available regions by making a list() request.
+      description: Returns the specified Region resource. Gets a list of available regions by making a list() request.
       operationId: compute.regions.get
       parameters:
         - description: Project ID for this request.
@@ -10101,7 +10101,7 @@ paths:
         - regionCommitments
   '/{project}/regions/{region}/commitments/{commitment}':
     get:
-      description: Returns the specified commitment resource. Get a list of available commitments by making a list() request.
+      description: Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
       operationId: compute.regionCommitments.get
       parameters:
         - description: Name of the commitment to return.
@@ -10210,7 +10210,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}/diskTypes/{diskType}':
     get:
-      description: Returns the specified regional disk type. Get a list of available disk types by making a list() request.
+      description: Returns the specified regional disk type. Gets a list of available disk types by making a list() request.
       operationId: compute.regionDiskTypes.get
       parameters:
         - description: Name of the disk type to return.
@@ -12706,7 +12706,7 @@ paths:
       tags:
         - routers
     get:
-      description: Returns the specified Router resource. Get a list of available routers by making a list() request.
+      description: Returns the specified Router resource. Gets a list of available routers by making a list() request.
       operationId: compute.routers.get
       parameters:
         - description: Project ID for this request.
@@ -13086,7 +13086,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/RegionSetPolicyRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -13202,7 +13202,7 @@ paths:
       tags:
         - subnetworks
     get:
-      description: Returns the specified subnetwork. Get a list of available subnetworks list() request.
+      description: Returns the specified subnetwork. Gets a list of available subnetworks list() request.
       operationId: compute.subnetworks.get
       parameters:
         - description: Project ID for this request.
@@ -13586,7 +13586,7 @@ paths:
       tags:
         - targetPools
     get:
-      description: Returns the specified target pool. Get a list of available target pools by making a list() request.
+      description: Returns the specified target pool. Gets a list of available target pools by making a list() request.
       operationId: compute.targetPools.get
       parameters:
         - description: Project ID for this request.
@@ -14188,7 +14188,7 @@ paths:
       tags:
         - targetVpnGateways
     get:
-      description: Returns the specified target VPN gateway. Get a list of available target VPN gateways by making a list() request.
+      description: Returns the specified target VPN gateway. Gets a list of available target VPN gateways by making a list() request.
       operationId: compute.targetVpnGateways.get
       parameters:
         - description: Project ID for this request.
@@ -14475,7 +14475,7 @@ paths:
       tags:
         - vpnTunnels
     get:
-      description: Returns the specified VpnTunnel resource. Get a list of available VPN tunnels by making a list() request.
+      description: Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.
       operationId: compute.vpnTunnels.get
       parameters:
         - description: Project ID for this request.
@@ -14858,7 +14858,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}':
     get:
-      description: Returns the specified Zone resource. Get a list of available zones by making a list() request.
+      description: Returns the specified Zone resource. Gets a list of available zones by making a list() request.
       operationId: compute.zones.get
       parameters:
         - description: Project ID for this request.
@@ -14962,7 +14962,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/acceleratorTypes/{acceleratorType}':
     get:
-      description: Returns the specified accelerator type. Get a list of available accelerator types by making a list() request.
+      description: Returns the specified accelerator type.
       operationId: compute.acceleratorTypes.get
       parameters:
         - description: Name of the accelerator type to return.
@@ -15236,7 +15236,7 @@ paths:
       tags:
         - autoscalers
     get:
-      description: Returns the specified autoscaler resource. Get a list of available autoscalers by making a list() request.
+      description: Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.
       operationId: compute.autoscalers.get
       parameters:
         - description: Name of the autoscaler to return.
@@ -15391,7 +15391,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/diskTypes/{diskType}':
     get:
-      description: Returns the specified disk type. Get a list of available disk types by making a list() request.
+      description: Returns the specified disk type. Gets a list of available disk types by making a list() request.
       operationId: compute.diskTypes.get
       parameters:
         - description: Name of the disk type to return.
@@ -15583,7 +15583,7 @@ paths:
       tags:
         - disks
     get:
-      description: Returns a specified persistent disk. Get a list of available persistent disks by making a list() request.
+      description: Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.
       operationId: compute.disks.get
       parameters:
         - description: Name of the persistent disk to return.
@@ -16808,7 +16808,7 @@ paths:
       tags:
         - instanceGroups
     get:
-      description: Returns the specified instance group. Get a list of available instance groups by making a list() request.
+      description: Returns the specified instance group. Gets a list of available instance groups by making a list() request.
       operationId: compute.instanceGroups.get
       parameters:
         - description: The name of the instance group.
@@ -17290,7 +17290,7 @@ paths:
       tags:
         - instances
     get:
-      description: Returns the specified Instance resource. Get a list of available instances by making a list() request.
+      description: Returns the specified Instance resource. Gets a list of available instances by making a list() request.
       operationId: compute.instances.get
       parameters:
         - description: Name of the instance resource to return.
@@ -18265,7 +18265,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.'
+      description: 'Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.'
       operationId: compute.instances.start
       parameters:
         - description: Name of the instance resource to start.
@@ -18314,7 +18314,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.'
+      description: 'Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.'
       operationId: compute.instances.startWithEncryptionKey
       parameters:
         - in: body
@@ -19063,7 +19063,7 @@ paths:
       tags:
         - targetInstances
     get:
-      description: Returns the specified TargetInstance resource. Get a list of available target instances by making a list() request.
+      description: Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.
       operationId: compute.targetInstances.get
       parameters:
         - description: Project ID for this request.
@@ -20521,6 +20521,7 @@ definitions:
           For internal load balancing, the possible values are TCP and UDP, and the default is TCP.
         enum:
           - HTTP
+          - HTTP2
           - HTTPS
           - SSL
           - TCP
@@ -20807,7 +20808,7 @@ definitions:
 
           * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
 
-          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` .
 
 
 
@@ -21583,6 +21584,9 @@ definitions:
       name:
         description: '[Output Only] Name of the resource.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      region:
+        description: '[Output Only] URL of the region where the disk type resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -22469,6 +22473,31 @@ definitions:
           - WINDOWS
         type: string
     type: object
+  HTTP2HealthCheck:
+    properties:
+      host:
+        description: 'The value of the host header in the HTTP/2 health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
+        type: string
+      port:
+        description: The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
+        format: int32
+        type: integer
+      portName:
+        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+      requestPath:
+        description: The request path of the HTTP/2 health check request. The default value is /.
+        type: string
+      response:
+        description: 'The string to match anywhere in the first 1024 bytes of the response body. If left empty (the default value), the status code determines health. The response data can only be ASCII.'
+        type: string
+    type: object
   HTTPHealthCheck:
     properties:
       host:
@@ -22536,6 +22565,8 @@ definitions:
         description: A so-far unhealthy instance will be marked healthy after this many consecutive successes. The default value is 2.
         format: int32
         type: integer
+      http2HealthCheck:
+        $ref: '#/definitions/HTTP2HealthCheck'
       httpHealthCheck:
         $ref: '#/definitions/HTTPHealthCheck'
       httpsHealthCheck:
@@ -22567,6 +22598,7 @@ definitions:
         description: 'Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
         enum:
           - HTTP
+          - HTTP2
           - HTTPS
           - INVALID
           - SSL
@@ -23190,7 +23222,7 @@ definitions:
         type: string
       labelFingerprint:
         description: |-
-          A fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+          A fingerprint for this request, which is essentially a hash of the label's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
 
           To see the latest fingerprint, make get() request to the instance.
         format: byte
@@ -23564,7 +23596,7 @@ definitions:
           - UNKNOWN
         type: string
       fingerprint:
-        description: '[Output Only] The fingerprint of the resource data. You can use this optional field for optimistic locking when you update the resource.'
+        description: Fingerprint of this resource. This field may be used in optimistic locking. It will be ignored when inserting an InstanceGroupManager. An up-to-date fingerprint must be provided in order to update the InstanceGroupManager or the field need to be unset.
         format: byte
         type: string
       id:
@@ -23600,7 +23632,7 @@ definitions:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
         type: string
       serviceAccount:
-        description: '[Output Only] The service account to be used as credentials for all operations performed by the managed instance group on instances. The service accounts needs all permissions required to create and delete instances. By default, the service account {projectNumber}@cloudservices.gserviceaccount.com is used.'
+        description: 'The service account to be used as credentials for all operations performed by the managed instance group on instances. The service accounts needs all permissions required to create and delete instances. By default, the service account {projectNumber}@cloudservices.gserviceaccount.com is used.'
         type: string
       targetPools:
         description: The URLs for all TargetPool resources to which instances in the instanceGroup field are added. The target pools automatically apply to all of the instances in the managed instance group.
@@ -25317,7 +25349,7 @@ definitions:
     description: 'Description of a planned outage on this Interconnect. Next id: 9'
     properties:
       affectedCircuits:
-        description: 'Iff issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs that will be affected.'
+        description: 'If issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs that will be affected.'
         items:
           type: string
         type: array
@@ -26165,7 +26197,7 @@ definitions:
     description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
     properties:
       clientOperationId:
-        description: '[Output Only] Reserved for future use.'
+        description: '[Output Only] The value of `requestId` if you provided it in the request. Not present otherwise.'
         type: string
       creationTimestamp:
         description: '[Deprecated] This field is deprecated.'
@@ -26542,11 +26574,17 @@ definitions:
 
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
 
-      **Example**
+      **JSON Example**
 
-      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com" ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+
+      **YAML Example**
+
+      bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-other-app@appspot.gserviceaccount.com role: roles/owner - members: - user:sean@example.com role: roles/viewer
+
+
 
       For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
@@ -26703,6 +26741,8 @@ definitions:
           - INSTANCE_GROUP_MANAGERS
           - INSTANCE_TEMPLATES
           - INTERCONNECTS
+          - INTERCONNECT_ATTACHMENTS_PER_REGION
+          - INTERCONNECT_ATTACHMENTS_TOTAL_MBPS
           - INTERNAL_ADDRESSES
           - IN_USE_ADDRESSES
           - LOCAL_SSD_TOTAL_GB
@@ -27324,6 +27364,21 @@ definitions:
         description: The labels to set for this resource.
         type: object
     type: object
+  RegionSetPolicyRequest:
+    properties:
+      bindings:
+        description: Flatten Policy to create a backwacd compatible wire-format. Deprecated. Use 'policy' to specify bindings.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: Flatten Policy to create a backward compatible wire-format. Deprecated. Use 'policy' to specify the etag.
+        format: byte
+        type: string
+      policy:
+        $ref: '#/definitions/Policy'
+        description: 'REQUIRED: The complete policy to be applied to the ''resource''. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.'
+    type: object
   ResourceCommitment:
     description: Commitment for a particular resource (a Commitment is composed of one or more of these).
     properties:
@@ -27710,6 +27765,12 @@ definitions:
       ipAddress:
         description: IP address of the interface inside Google Cloud Platform. Only IPv4 is supported.
         type: string
+      managementType:
+        description: '[Output Only] Type of how the resource/configuration of the BGP peer is managed. MANAGED_BY_USER is the default value; MANAGED_BY_ATTACHMENT represents an BGP peer that is automatically created for PARTNER interconnectAttachment, Google will automatically create/delete this type of BGP peer when the PARTNER interconnectAttachment is created/deleted.'
+        enum:
+          - MANAGED_BY_ATTACHMENT
+          - MANAGED_BY_USER
+        type: string
       name:
         description: Name of this BGP peer. The name must be 1-63 characters long and comply with RFC1035.
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -27732,6 +27793,12 @@ definitions:
         type: string
       linkedVpnTunnel:
         description: URI of the linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource and it could either be a VPN Tunnel or an interconnect attachment.
+        type: string
+      managementType:
+        description: '[Output Only] Type of how the resource/configuration of the interface is managed. MANAGED_BY_USER is the default value; MANAGED_BY_ATTACHMENT represents an interface that is automatically created for PARTNER type interconnectAttachment, Google will automatically create/update/delete this type of interface when the PARTNER interconnectAttachment is created/provisioned/deleted.'
+        enum:
+          - MANAGED_BY_ATTACHMENT
+          - MANAGED_BY_USER
         type: string
       name:
         description: Name of this interface entry. The name must be 1-63 characters long and comply with RFC1035.
@@ -28608,12 +28675,11 @@ definitions:
         description: '[Output only] Type of the resource. Always compute#sslPolicyfor SSL policies.'
         type: string
       minTlsVersion:
-        description: 'The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS_1_0, TLS_1_1, TLS_1_2, TLS_1_3.'
+        description: 'The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS_1_0, TLS_1_1, TLS_1_2.'
         enum:
           - TLS_1_0
           - TLS_1_1
           - TLS_1_2
-          - TLS_1_3
         type: string
       name:
         description: 'Name of the resource. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
@@ -28993,7 +29059,7 @@ definitions:
     properties:
       fingerprint:
         description: |-
-          Specifies a fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+          Specifies a fingerprint for this request, which is essentially a hash of the tags' contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update tags. You must always provide an up-to-date fingerprint hash in order to update or change tags.
 
           To see the latest fingerprint, make get() request to the instance.
         format: byte

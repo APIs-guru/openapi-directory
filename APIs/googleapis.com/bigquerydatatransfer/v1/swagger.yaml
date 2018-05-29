@@ -486,13 +486,16 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |-
+        - collectionFormat: multi
+          description: |-
             Pagination token, which can be used to request a specific page
             of `ListTransfersRequest` list results. For multiple-page
             results, `ListTransfersResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
           in: query
+          items:
+            type: string
           name: pageToken
           type: string
         - description: |-
@@ -799,9 +802,7 @@ definitions:
           When set to `true`, user can override default schedule.
         type: boolean
       supportsMultipleTransfers:
-        description: |-
-          Indicates whether the data source supports multiple transfers
-          to different BigQuery targets.
+        description: Deprecated. This field has no effect.
         type: boolean
       transferType:
         description: Deprecated. This field has no effect.
@@ -813,7 +814,7 @@ definitions:
       updateDeadlineSeconds:
         description: |-
           The number of seconds to wait for an update from the data source
-          before BigQuery marks the transfer as failed.
+          before the Data Transfer Service marks the transfer as FAILED.
         format: int32
         type: integer
     type: object
@@ -838,7 +839,7 @@ definitions:
         description: Parameter display name in the user interface.
         type: string
       fields:
-        description: 'When parameter is a record, describes child fields.'
+        description: Deprecated. This field has no effect.
         items:
           $ref: '#/definitions/DataSourceParameter'
         type: array
@@ -857,12 +858,10 @@ definitions:
         description: Parameter identifier.
         type: string
       recurse:
-        description: |-
-          If set to true, schema should be taken from the parent with the same
-          parameter_id. Only applicable when parameter type is RECORD.
+        description: Deprecated. This field has no effect.
         type: boolean
       repeated:
-        description: Can parameter have multiple values.
+        description: Deprecated. This field has no effect.
         type: boolean
       required:
         description: Is parameter required.

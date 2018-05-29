@@ -42,12 +42,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/webhookoperations'
       operationId: Webhook_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -80,16 +83,26 @@ paths:
               value:
                 description: Gets or sets a list of webhooks.
                 items:
+                  allOf:
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                   description: Definition of the webhook type.
                   properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Gets the name of the webhook.
-                      readOnly: true
-                      type: string
                     properties:
                       description: Definition of the webhook properties
                       properties:
@@ -97,6 +110,7 @@ paths:
                           description: Gets or sets the creation time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
@@ -104,6 +118,7 @@ paths:
                           description: Gets or sets the expiry time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         isEnabled:
                           default: false
                           description: Gets or sets the value of the enabled flag of the webhook.
@@ -112,10 +127,15 @@ paths:
                           description: Gets or sets the last invoked time.
                           format: date-time
                           type: string
+                          x-nullable: true
+                        lastModifiedBy:
+                          description: Details of the user who last modified the Webhook
+                          type: string
                         lastModifiedTime:
                           description: Gets or sets the last modified time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         parameters:
                           additionalProperties:
                             type: string
@@ -133,11 +153,6 @@ paths:
                         uri:
                           description: Gets or sets the webhook uri.
                           type: string
-                    type:
-                      description: Gets the type of the resource.
-                      readOnly: true
-                      type: string
-                  x-ms-azure-resource: true
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -170,11 +185,16 @@ paths:
                       creationTime: '2017-03-29T22:18:14.6651862+00:00'
                       expiryTime: '2018-03-29T22:18:13.7002872+00:00'
                       isEnabled: true
+                      lastInvokedTime: null
                       lastModifiedBy: ''
                       lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
+                      parameters: null
+                      runOn: null
                       runbook:
                         name: TestRunbook
+                      uri: null
               headers: {}
+      x-ms-odata: './definitions.json#/definitions/Webhook'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks/generateUri':
@@ -184,12 +204,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/webhookoperations'
       operationId: Webhook_GenerateUri
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -242,12 +265,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/webhookoperations'
       operationId: Webhook_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -301,12 +327,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/webhookoperations'
       operationId: Webhook_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -331,16 +360,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the webhook type.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the webhook.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the webhook properties
                 properties:
@@ -348,6 +387,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -355,6 +395,7 @@ paths:
                     description: Gets or sets the expiry time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   isEnabled:
                     default: false
                     description: Gets or sets the value of the enabled flag of the webhook.
@@ -363,10 +404,15 @@ paths:
                     description: Gets or sets the last invoked time.
                     format: date-time
                     type: string
+                    x-nullable: true
+                  lastModifiedBy:
+                    description: Details of the user who last modified the Webhook
+                    type: string
                   lastModifiedTime:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   parameters:
                     additionalProperties:
                       type: string
@@ -384,11 +430,6 @@ paths:
                   uri:
                     description: Gets or sets the webhook uri.
                     type: string
-              type:
-                description: Gets the type of the resource.
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -420,8 +461,11 @@ paths:
                   creationTime: '2017-03-29T22:18:14.6651862+00:00'
                   expiryTime: '2018-03-29T22:18:13.7002872+00:00'
                   isEnabled: true
+                  lastInvokedTime: null
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
+                  parameters: null
+                  runOn: null
                   runbook:
                     name: TestRunbook
                   uri: ''
@@ -432,12 +476,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/webhookoperations'
       operationId: Webhook_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -489,16 +536,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the webhook type.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the webhook.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the webhook properties
                 properties:
@@ -506,6 +563,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -513,6 +571,7 @@ paths:
                     description: Gets or sets the expiry time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   isEnabled:
                     default: false
                     description: Gets or sets the value of the enabled flag of the webhook.
@@ -521,10 +580,15 @@ paths:
                     description: Gets or sets the last invoked time.
                     format: date-time
                     type: string
+                    x-nullable: true
+                  lastModifiedBy:
+                    description: Details of the user who last modified the Webhook
+                    type: string
                   lastModifiedTime:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   parameters:
                     additionalProperties:
                       type: string
@@ -542,11 +606,6 @@ paths:
                   uri:
                     description: Gets or sets the webhook uri.
                     type: string
-              type:
-                description: Gets the type of the resource.
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -583,8 +642,11 @@ paths:
                   creationTime: '2017-03-30T21:52:01.272378+00:00'
                   expiryTime: '2018-03-30T23:03:14.5752078+00:00'
                   isEnabled: false
+                  lastInvokedTime: null
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-03-30T23:03:14.9069441+00:00'
+                  parameters: null
+                  runOn: null
                   runbook:
                     name: TestRunbook
                   uri: ''
@@ -595,12 +657,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/webhookoperations'
       operationId: Webhook_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -628,6 +693,7 @@ paths:
                     description: Gets or sets the expiry time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   isEnabled:
                     description: Gets or sets the value of the enabled flag of webhook.
                     type: boolean
@@ -665,16 +731,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the webhook type.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the webhook.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the webhook properties
                 properties:
@@ -682,6 +758,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -689,6 +766,7 @@ paths:
                     description: Gets or sets the expiry time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   isEnabled:
                     default: false
                     description: Gets or sets the value of the enabled flag of the webhook.
@@ -697,10 +775,15 @@ paths:
                     description: Gets or sets the last invoked time.
                     format: date-time
                     type: string
+                    x-nullable: true
+                  lastModifiedBy:
+                    description: Details of the user who last modified the Webhook
+                    type: string
                   lastModifiedTime:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   parameters:
                     additionalProperties:
                       type: string
@@ -718,24 +801,29 @@ paths:
                   uri:
                     description: Gets or sets the webhook uri.
                     type: string
-              type:
-                description: Gets the type of the resource.
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         '201':
           description: Created
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the webhook type.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the webhook.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the webhook properties
                 properties:
@@ -743,6 +831,7 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
@@ -750,6 +839,7 @@ paths:
                     description: Gets or sets the expiry time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   isEnabled:
                     default: false
                     description: Gets or sets the value of the enabled flag of the webhook.
@@ -758,10 +848,15 @@ paths:
                     description: Gets or sets the last invoked time.
                     format: date-time
                     type: string
+                    x-nullable: true
+                  lastModifiedBy:
+                    description: Details of the user who last modified the Webhook
+                    type: string
                   lastModifiedTime:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   parameters:
                     additionalProperties:
                       type: string
@@ -779,11 +874,6 @@ paths:
                   uri:
                     description: Gets or sets the webhook uri.
                     type: string
-              type:
-                description: Gets the type of the resource.
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -823,8 +913,11 @@ paths:
                   creationTime: '2017-03-29T22:18:14.6651862+00:00'
                   expiryTime: '2018-03-29T22:18:13.7002872+00:00'
                   isEnabled: true
+                  lastInvokedTime: null
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
+                  parameters: null
+                  runOn: null
                   runbook:
                     name: TestRunbook
                   uri: ''
@@ -838,8 +931,11 @@ paths:
                   creationTime: '2017-03-29T22:18:14.6651862+00:00'
                   expiryTime: '2018-03-29T22:18:13.7002872+00:00'
                   isEnabled: true
+                  lastInvokedTime: null
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
+                  parameters: null
+                  runOn: null
                   runbook:
                     name: TestRunbook
                   uri: ''

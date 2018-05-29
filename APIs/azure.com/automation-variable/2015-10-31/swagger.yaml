@@ -42,12 +42,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/variableoperations'
       operationId: Variable_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -75,16 +78,26 @@ paths:
               value:
                 description: Gets or sets a list of variables.
                 items:
+                  allOf:
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                   description: Definition of the varible.
                   properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Gets the name of the variable.
-                      readOnly: true
-                      type: string
                     properties:
                       description: Definition of the varible properties
                       properties:
@@ -92,24 +105,22 @@ paths:
                           description: Gets or sets the creation time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         description:
                           description: Gets or sets the description.
                           type: string
                         isEncrypted:
                           description: Gets or sets the encrypted flag of the variable.
                           type: boolean
+                          x-nullable: true
                         lastModifiedTime:
                           description: Gets or sets the last modified time.
                           format: date-time
                           type: string
+                          x-nullable: false
                         value:
                           description: Gets or sets the value of the variable.
                           type: string
-                    type:
-                      description: Resource type
-                      readOnly: true
-                      type: string
-                  x-ms-azure-resource: true
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -140,6 +151,7 @@ paths:
                   name: sampleVariable
                   properties:
                     creationTime: '2017-03-28T23:00:53.363+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:00:57.987+00:00'
                     value: '"ComputerName3.domain.com"'
@@ -147,6 +159,7 @@ paths:
                   name: sampleVariable0
                   properties:
                     creationTime: '2017-03-28T23:00:58.847+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:00:58.847+00:00'
                     value: '"server0.domain.com"'
@@ -154,6 +167,7 @@ paths:
                   name: sampleVariable1
                   properties:
                     creationTime: '2017-03-28T23:00:59.69+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:00:59.69+00:00'
                     value: '"server1.domain.com"'
@@ -161,6 +175,7 @@ paths:
                   name: sampleVariable10
                   properties:
                     creationTime: '2017-03-28T23:01:08.393+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:08.393+00:00'
                     value: '"server10.domain.com"'
@@ -168,6 +183,7 @@ paths:
                   name: sampleVariable100
                   properties:
                     creationTime: '2017-03-28T23:02:27.38+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:27.38+00:00'
                     value: '"server100.domain.com"'
@@ -175,6 +191,7 @@ paths:
                   name: sampleVariable101
                   properties:
                     creationTime: '2017-03-28T23:02:28.223+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:28.223+00:00'
                     value: '"server101.domain.com"'
@@ -182,6 +199,7 @@ paths:
                   name: sampleVariable102
                   properties:
                     creationTime: '2017-03-28T23:02:28.99+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:28.99+00:00'
                     value: '"server102.domain.com"'
@@ -189,6 +207,7 @@ paths:
                   name: sampleVariable103
                   properties:
                     creationTime: '2017-03-28T23:02:29.77+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:29.77+00:00'
                     value: '"server103.domain.com"'
@@ -196,6 +215,7 @@ paths:
                   name: sampleVariable104
                   properties:
                     creationTime: '2017-03-28T23:02:30.647+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:30.647+00:00'
                     value: '"server104.domain.com"'
@@ -203,6 +223,7 @@ paths:
                   name: sampleVariable105
                   properties:
                     creationTime: '2017-03-28T23:02:31.49+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:31.49+00:00'
                     value: '"server105.domain.com"'
@@ -210,6 +231,7 @@ paths:
                   name: sampleVariable106
                   properties:
                     creationTime: '2017-03-28T23:02:32.303+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:32.303+00:00'
                     value: '"server106.domain.com"'
@@ -217,6 +239,7 @@ paths:
                   name: sampleVariable107
                   properties:
                     creationTime: '2017-03-28T23:02:34.583+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:34.583+00:00'
                     value: '"server107.domain.com"'
@@ -224,6 +247,7 @@ paths:
                   name: sampleVariable108
                   properties:
                     creationTime: '2017-03-28T23:02:35.367+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:35.367+00:00'
                     value: '"server108.domain.com"'
@@ -231,6 +255,7 @@ paths:
                   name: sampleVariable109
                   properties:
                     creationTime: '2017-03-28T23:02:36.147+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:36.147+00:00'
                     value: '"server109.domain.com"'
@@ -238,6 +263,7 @@ paths:
                   name: sampleVariable11
                   properties:
                     creationTime: '2017-03-28T23:01:09.27+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:09.27+00:00'
                     value: '"server11.domain.com"'
@@ -245,6 +271,7 @@ paths:
                   name: sampleVariable12
                   properties:
                     creationTime: '2017-03-28T23:01:10.16+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:10.16+00:00'
                     value: '"server12.domain.com"'
@@ -252,6 +279,7 @@ paths:
                   name: sampleVariable13
                   properties:
                     creationTime: '2017-03-28T23:01:11.003+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:11.003+00:00'
                     value: '"server13.domain.com"'
@@ -259,6 +287,7 @@ paths:
                   name: sampleVariable14
                   properties:
                     creationTime: '2017-03-28T23:01:11.863+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:11.863+00:00'
                     value: '"server14.domain.com"'
@@ -266,6 +295,7 @@ paths:
                   name: sampleVariable15
                   properties:
                     creationTime: '2017-03-28T23:01:12.74+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:12.74+00:00'
                     value: '"server15.domain.com"'
@@ -273,6 +303,7 @@ paths:
                   name: sampleVariable16
                   properties:
                     creationTime: '2017-03-28T23:01:13.597+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:13.597+00:00'
                     value: '"server16.domain.com"'
@@ -280,6 +311,7 @@ paths:
                   name: sampleVariable17
                   properties:
                     creationTime: '2017-03-28T23:01:16.287+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:16.287+00:00'
                     value: '"server17.domain.com"'
@@ -287,6 +319,7 @@ paths:
                   name: sampleVariable18
                   properties:
                     creationTime: '2017-03-28T23:01:17.16+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:17.16+00:00'
                     value: '"server18.domain.com"'
@@ -294,6 +327,7 @@ paths:
                   name: sampleVariable19
                   properties:
                     creationTime: '2017-03-28T23:01:18.02+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:18.02+00:00'
                     value: '"server19.domain.com"'
@@ -301,6 +335,7 @@ paths:
                   name: sampleVariable2
                   properties:
                     creationTime: '2017-03-28T23:01:00.567+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:00.567+00:00'
                     value: '"server2.domain.com"'
@@ -308,6 +343,7 @@ paths:
                   name: sampleVariable20
                   properties:
                     creationTime: '2017-03-28T23:01:18.847+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:18.847+00:00'
                     value: '"server20.domain.com"'
@@ -315,6 +351,7 @@ paths:
                   name: sampleVariable21
                   properties:
                     creationTime: '2017-03-28T23:01:19.723+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:19.723+00:00'
                     value: '"server21.domain.com"'
@@ -322,6 +359,7 @@ paths:
                   name: sampleVariable22
                   properties:
                     creationTime: '2017-03-28T23:01:21.597+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:21.597+00:00'
                     value: '"server22.domain.com"'
@@ -329,6 +367,7 @@ paths:
                   name: sampleVariable23
                   properties:
                     creationTime: '2017-03-28T23:01:22.393+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:22.393+00:00'
                     value: '"server23.domain.com"'
@@ -336,6 +375,7 @@ paths:
                   name: sampleVariable24
                   properties:
                     creationTime: '2017-03-28T23:01:23.207+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:23.207+00:00'
                     value: '"server24.domain.com"'
@@ -343,6 +383,7 @@ paths:
                   name: sampleVariable25
                   properties:
                     creationTime: '2017-03-28T23:01:23.973+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:23.973+00:00'
                     value: '"server25.domain.com"'
@@ -350,6 +391,7 @@ paths:
                   name: sampleVariable26
                   properties:
                     creationTime: '2017-03-28T23:01:24.8+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:24.8+00:00'
                     value: '"server26.domain.com"'
@@ -357,6 +399,7 @@ paths:
                   name: sampleVariable27
                   properties:
                     creationTime: '2017-03-28T23:01:25.597+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:25.597+00:00'
                     value: '"server27.domain.com"'
@@ -364,6 +407,7 @@ paths:
                   name: sampleVariable28
                   properties:
                     creationTime: '2017-03-28T23:01:26.55+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:26.55+00:00'
                     value: '"server28.domain.com"'
@@ -371,6 +415,7 @@ paths:
                   name: sampleVariable29
                   properties:
                     creationTime: '2017-03-28T23:01:27.457+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:27.457+00:00'
                     value: '"server29.domain.com"'
@@ -378,6 +423,7 @@ paths:
                   name: sampleVariable3
                   properties:
                     creationTime: '2017-03-28T23:01:01.427+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:01.427+00:00'
                     value: '"server3.domain.com"'
@@ -385,6 +431,7 @@ paths:
                   name: sampleVariable30
                   properties:
                     creationTime: '2017-03-28T23:01:28.253+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:28.253+00:00'
                     value: '"server30.domain.com"'
@@ -392,6 +439,7 @@ paths:
                   name: sampleVariable31
                   properties:
                     creationTime: '2017-03-28T23:01:29.05+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:29.05+00:00'
                     value: '"server31.domain.com"'
@@ -399,6 +447,7 @@ paths:
                   name: sampleVariable32
                   properties:
                     creationTime: '2017-03-28T23:01:29.817+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:29.817+00:00'
                     value: '"server32.domain.com"'
@@ -406,6 +455,7 @@ paths:
                   name: sampleVariable33
                   properties:
                     creationTime: '2017-03-28T23:01:30.643+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:30.643+00:00'
                     value: '"server33.domain.com"'
@@ -413,6 +463,7 @@ paths:
                   name: sampleVariable34
                   properties:
                     creationTime: '2017-03-28T23:01:31.473+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:31.473+00:00'
                     value: '"server34.domain.com"'
@@ -420,6 +471,7 @@ paths:
                   name: sampleVariable35
                   properties:
                     creationTime: '2017-03-28T23:01:32.253+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:32.253+00:00'
                     value: '"server35.domain.com"'
@@ -427,6 +479,7 @@ paths:
                   name: sampleVariable36
                   properties:
                     creationTime: '2017-03-28T23:01:33.27+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:33.27+00:00'
                     value: '"server36.domain.com"'
@@ -434,6 +487,7 @@ paths:
                   name: sampleVariable37
                   properties:
                     creationTime: '2017-03-28T23:01:34.037+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:34.037+00:00'
                     value: '"server37.domain.com"'
@@ -441,6 +495,7 @@ paths:
                   name: sampleVariable38
                   properties:
                     creationTime: '2017-03-28T23:01:34.817+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:34.817+00:00'
                     value: '"server38.domain.com"'
@@ -448,6 +503,7 @@ paths:
                   name: sampleVariable39
                   properties:
                     creationTime: '2017-03-28T23:01:35.613+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:35.613+00:00'
                     value: '"server39.domain.com"'
@@ -455,6 +511,7 @@ paths:
                   name: sampleVariable4
                   properties:
                     creationTime: '2017-03-28T23:01:02.38+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:02.38+00:00'
                     value: '"server4.domain.com"'
@@ -462,6 +519,7 @@ paths:
                   name: sampleVariable40
                   properties:
                     creationTime: '2017-03-28T23:01:36.397+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:36.397+00:00'
                     value: '"server40.domain.com"'
@@ -469,6 +527,7 @@ paths:
                   name: sampleVariable41
                   properties:
                     creationTime: '2017-03-28T23:01:37.19+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:37.19+00:00'
                     value: '"server41.domain.com"'
@@ -476,6 +535,7 @@ paths:
                   name: sampleVariable42
                   properties:
                     creationTime: '2017-03-28T23:01:38.037+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:38.037+00:00'
                     value: '"server42.domain.com"'
@@ -483,6 +543,7 @@ paths:
                   name: sampleVariable43
                   properties:
                     creationTime: '2017-03-28T23:01:38.88+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:38.88+00:00'
                     value: '"server43.domain.com"'
@@ -490,6 +551,7 @@ paths:
                   name: sampleVariable44
                   properties:
                     creationTime: '2017-03-28T23:01:39.707+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:39.707+00:00'
                     value: '"server44.domain.com"'
@@ -497,6 +559,7 @@ paths:
                   name: sampleVariable45
                   properties:
                     creationTime: '2017-03-28T23:01:41.457+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:41.457+00:00'
                     value: '"server45.domain.com"'
@@ -504,6 +567,7 @@ paths:
                   name: sampleVariable46
                   properties:
                     creationTime: '2017-03-28T23:01:42.253+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:42.253+00:00'
                     value: '"server46.domain.com"'
@@ -511,6 +575,7 @@ paths:
                   name: sampleVariable47
                   properties:
                     creationTime: '2017-03-28T23:01:43.083+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:43.083+00:00'
                     value: '"server47.domain.com"'
@@ -518,6 +583,7 @@ paths:
                   name: sampleVariable48
                   properties:
                     creationTime: '2017-03-28T23:01:43.957+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:43.957+00:00'
                     value: '"server48.domain.com"'
@@ -525,6 +591,7 @@ paths:
                   name: sampleVariable49
                   properties:
                     creationTime: '2017-03-28T23:01:44.74+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:44.74+00:00'
                     value: '"server49.domain.com"'
@@ -532,6 +599,7 @@ paths:
                   name: sampleVariable5
                   properties:
                     creationTime: '2017-03-28T23:01:03.253+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:03.253+00:00'
                     value: '"server5.domain.com"'
@@ -539,6 +607,7 @@ paths:
                   name: sampleVariable50
                   properties:
                     creationTime: '2017-03-28T23:01:46.35+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:46.35+00:00'
                     value: '"server50.domain.com"'
@@ -546,6 +615,7 @@ paths:
                   name: sampleVariable51
                   properties:
                     creationTime: '2017-03-28T23:01:47.1+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:47.1+00:00'
                     value: '"server51.domain.com"'
@@ -553,6 +623,7 @@ paths:
                   name: sampleVariable52
                   properties:
                     creationTime: '2017-03-28T23:01:47.88+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:47.88+00:00'
                     value: '"server52.domain.com"'
@@ -560,6 +631,7 @@ paths:
                   name: sampleVariable53
                   properties:
                     creationTime: '2017-03-28T23:01:48.677+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:48.677+00:00'
                     value: '"server53.domain.com"'
@@ -567,6 +639,7 @@ paths:
                   name: sampleVariable54
                   properties:
                     creationTime: '2017-03-28T23:01:49.473+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:49.473+00:00'
                     value: '"server54.domain.com"'
@@ -574,6 +647,7 @@ paths:
                   name: sampleVariable55
                   properties:
                     creationTime: '2017-03-28T23:01:51.16+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:51.16+00:00'
                     value: '"server55.domain.com"'
@@ -581,6 +655,7 @@ paths:
                   name: sampleVariable56
                   properties:
                     creationTime: '2017-03-28T23:01:51.927+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:51.927+00:00'
                     value: '"server56.domain.com"'
@@ -588,6 +663,7 @@ paths:
                   name: sampleVariable57
                   properties:
                     creationTime: '2017-03-28T23:01:52.757+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:52.757+00:00'
                     value: '"server57.domain.com"'
@@ -595,6 +671,7 @@ paths:
                   name: sampleVariable58
                   properties:
                     creationTime: '2017-03-28T23:01:53.55+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:53.55+00:00'
                     value: '"server58.domain.com"'
@@ -602,6 +679,7 @@ paths:
                   name: sampleVariable59
                   properties:
                     creationTime: '2017-03-28T23:01:54.317+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:54.317+00:00'
                     value: '"server59.domain.com"'
@@ -609,6 +687,7 @@ paths:
                   name: sampleVariable6
                   properties:
                     creationTime: '2017-03-28T23:01:04.143+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:04.143+00:00'
                     value: '"server6.domain.com"'
@@ -616,6 +695,7 @@ paths:
                   name: sampleVariable60
                   properties:
                     creationTime: '2017-03-28T23:01:55.177+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:55.177+00:00'
                     value: '"server60.domain.com"'
@@ -623,6 +703,7 @@ paths:
                   name: sampleVariable61
                   properties:
                     creationTime: '2017-03-28T23:01:56.583+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:56.583+00:00'
                     value: '"server61.domain.com"'
@@ -630,6 +711,7 @@ paths:
                   name: sampleVariable62
                   properties:
                     creationTime: '2017-03-28T23:01:57.27+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:57.27+00:00'
                     value: '"server62.domain.com"'
@@ -637,6 +719,7 @@ paths:
                   name: sampleVariable63
                   properties:
                     creationTime: '2017-03-28T23:01:57.943+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:57.943+00:00'
                     value: '"server63.domain.com"'
@@ -644,6 +727,7 @@ paths:
                   name: sampleVariable64
                   properties:
                     creationTime: '2017-03-28T23:01:58.66+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:58.66+00:00'
                     value: '"server64.domain.com"'
@@ -651,6 +735,7 @@ paths:
                   name: sampleVariable65
                   properties:
                     creationTime: '2017-03-28T23:01:59.35+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:59.35+00:00'
                     value: '"server65.domain.com"'
@@ -658,6 +743,7 @@ paths:
                   name: sampleVariable66
                   properties:
                     creationTime: '2017-03-28T23:02:00.02+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:00.02+00:00'
                     value: '"server66.domain.com"'
@@ -665,6 +751,7 @@ paths:
                   name: sampleVariable67
                   properties:
                     creationTime: '2017-03-28T23:02:01.507+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:01.507+00:00'
                     value: '"server67.domain.com"'
@@ -672,6 +759,7 @@ paths:
                   name: sampleVariable68
                   properties:
                     creationTime: '2017-03-28T23:02:02.177+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:02.177+00:00'
                     value: '"server68.domain.com"'
@@ -679,6 +767,7 @@ paths:
                   name: sampleVariable69
                   properties:
                     creationTime: '2017-03-28T23:02:02.863+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:02.863+00:00'
                     value: '"server69.domain.com"'
@@ -686,6 +775,7 @@ paths:
                   name: sampleVariable7
                   properties:
                     creationTime: '2017-03-28T23:01:05.393+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:05.393+00:00'
                     value: '"server7.domain.com"'
@@ -693,6 +783,7 @@ paths:
                   name: sampleVariable70
                   properties:
                     creationTime: '2017-03-28T23:02:03.6+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:03.6+00:00'
                     value: '"server70.domain.com"'
@@ -700,6 +791,7 @@ paths:
                   name: sampleVariable71
                   properties:
                     creationTime: '2017-03-28T23:02:04.333+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:04.333+00:00'
                     value: '"server71.domain.com"'
@@ -707,6 +799,7 @@ paths:
                   name: sampleVariable72
                   properties:
                     creationTime: '2017-03-28T23:02:05.1+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:05.1+00:00'
                     value: '"server72.domain.com"'
@@ -714,6 +807,7 @@ paths:
                   name: sampleVariable73
                   properties:
                     creationTime: '2017-03-28T23:02:05.833+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:05.833+00:00'
                     value: '"server73.domain.com"'
@@ -721,6 +815,7 @@ paths:
                   name: sampleVariable74
                   properties:
                     creationTime: '2017-03-28T23:02:06.647+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:06.647+00:00'
                     value: '"server74.domain.com"'
@@ -728,6 +823,7 @@ paths:
                   name: sampleVariable75
                   properties:
                     creationTime: '2017-03-28T23:02:07.363+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:07.363+00:00'
                     value: '"server75.domain.com"'
@@ -735,6 +831,7 @@ paths:
                   name: sampleVariable76
                   properties:
                     creationTime: '2017-03-28T23:02:08.1+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:08.1+00:00'
                     value: '"server76.domain.com"'
@@ -742,6 +839,7 @@ paths:
                   name: sampleVariable77
                   properties:
                     creationTime: '2017-03-28T23:02:08.82+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:08.82+00:00'
                     value: '"server77.domain.com"'
@@ -749,6 +847,7 @@ paths:
                   name: sampleVariable78
                   properties:
                     creationTime: '2017-03-28T23:02:09.553+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:09.553+00:00'
                     value: '"server78.domain.com"'
@@ -756,6 +855,7 @@ paths:
                   name: sampleVariable79
                   properties:
                     creationTime: '2017-03-28T23:02:10.63+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:10.63+00:00'
                     value: '"server79.domain.com"'
@@ -763,6 +863,7 @@ paths:
                   name: sampleVariable8
                   properties:
                     creationTime: '2017-03-28T23:01:06.52+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:06.52+00:00'
                     value: '"server8.domain.com"'
@@ -770,6 +871,7 @@ paths:
                   name: sampleVariable80
                   properties:
                     creationTime: '2017-03-28T23:02:11.32+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:11.32+00:00'
                     value: '"server80.domain.com"'
@@ -777,6 +879,7 @@ paths:
                   name: sampleVariable81
                   properties:
                     creationTime: '2017-03-28T23:02:12.02+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:12.02+00:00'
                     value: '"server81.domain.com"'
@@ -784,6 +887,7 @@ paths:
                   name: sampleVariable82
                   properties:
                     creationTime: '2017-03-28T23:02:12.723+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:12.723+00:00'
                     value: '"server82.domain.com"'
@@ -791,6 +895,7 @@ paths:
                   name: sampleVariable83
                   properties:
                     creationTime: '2017-03-28T23:02:13.443+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:13.443+00:00'
                     value: '"server83.domain.com"'
@@ -798,6 +903,7 @@ paths:
                   name: sampleVariable84
                   properties:
                     creationTime: '2017-03-28T23:02:14.16+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:14.16+00:00'
                     value: '"server84.domain.com"'
@@ -805,6 +911,7 @@ paths:
                   name: sampleVariable85
                   properties:
                     creationTime: '2017-03-28T23:02:15.177+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:15.177+00:00'
                     value: '"server85.domain.com"'
@@ -812,6 +919,7 @@ paths:
                   name: sampleVariable86
                   properties:
                     creationTime: '2017-03-28T23:02:16.053+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:16.053+00:00'
                     value: '"server86.domain.com"'
@@ -819,6 +927,7 @@ paths:
                   name: sampleVariable87
                   properties:
                     creationTime: '2017-03-28T23:02:16.82+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:16.82+00:00'
                     value: '"server87.domain.com"'
@@ -826,6 +935,7 @@ paths:
                   name: sampleVariable88
                   properties:
                     creationTime: '2017-03-28T23:02:17.583+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:17.583+00:00'
                     value: '"server88.domain.com"'
@@ -833,6 +943,7 @@ paths:
                   name: sampleVariable89
                   properties:
                     creationTime: '2017-03-28T23:02:18.333+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:18.333+00:00'
                     value: '"server89.domain.com"'
@@ -850,6 +961,7 @@ paths:
                   name: sampleVariable9
                   properties:
                     creationTime: '2017-03-28T23:01:07.38+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:01:07.38+00:00'
                     value: '"server9.domain.com"'
@@ -857,6 +969,7 @@ paths:
                   name: sampleVariable90
                   properties:
                     creationTime: '2017-03-28T23:02:19.147+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:19.147+00:00'
                     value: '"server90.domain.com"'
@@ -864,6 +977,7 @@ paths:
                   name: sampleVariable91
                   properties:
                     creationTime: '2017-03-28T23:02:20.257+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:20.257+00:00'
                     value: '"server91.domain.com"'
@@ -871,6 +985,7 @@ paths:
                   name: sampleVariable92
                   properties:
                     creationTime: '2017-03-28T23:02:21.037+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:21.037+00:00'
                     value: '"server92.domain.com"'
@@ -878,6 +993,7 @@ paths:
                   name: sampleVariable93
                   properties:
                     creationTime: '2017-03-28T23:02:21.803+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:21.803+00:00'
                     value: '"server93.domain.com"'
@@ -885,6 +1001,7 @@ paths:
                   name: sampleVariable94
                   properties:
                     creationTime: '2017-03-28T23:02:22.583+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:22.583+00:00'
                     value: '"server94.domain.com"'
@@ -892,6 +1009,7 @@ paths:
                   name: sampleVariable95
                   properties:
                     creationTime: '2017-03-28T23:02:23.333+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:23.333+00:00'
                     value: '"server95.domain.com"'
@@ -899,6 +1017,7 @@ paths:
                   name: sampleVariable96
                   properties:
                     creationTime: '2017-03-28T23:02:24.163+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:24.163+00:00'
                     value: '"server96.domain.com"'
@@ -906,6 +1025,7 @@ paths:
                   name: sampleVariable97
                   properties:
                     creationTime: '2017-03-28T23:02:24.973+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:24.973+00:00'
                     value: '"server97.domain.com"'
@@ -913,6 +1033,7 @@ paths:
                   name: sampleVariable98
                   properties:
                     creationTime: '2017-03-28T23:02:25.757+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:25.757+00:00'
                     value: '"server98.domain.com"'
@@ -920,6 +1041,7 @@ paths:
                   name: sampleVariable99
                   properties:
                     creationTime: '2017-03-28T23:02:26.553+00:00'
+                    description: null
                     isEncrypted: false
                     lastModifiedTime: '2017-03-28T23:02:26.553+00:00'
                     value: '"server99.domain.com"'
@@ -932,12 +1054,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/variableoperations'
       operationId: Variable_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -991,12 +1116,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/variableoperations'
       operationId: Variable_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1021,16 +1149,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the varible.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the variable.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the varible properties
                 properties:
@@ -1038,24 +1176,22 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
                   isEncrypted:
                     description: Gets or sets the encrypted flag of the variable.
                     type: boolean
+                    x-nullable: true
                   lastModifiedTime:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1094,12 +1230,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/variableoperations'
       operationId: Variable_Update
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1143,16 +1282,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the varible.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the variable.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the varible properties
                 properties:
@@ -1160,24 +1309,22 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
                   isEncrypted:
                     description: Gets or sets the encrypted flag of the variable.
                     type: boolean
+                    x-nullable: true
                   lastModifiedTime:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1222,12 +1369,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/variableoperations'
       operationId: Variable_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1277,16 +1427,26 @@ paths:
         '200':
           description: OK
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the varible.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the variable.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the varible properties
                 properties:
@@ -1294,37 +1454,45 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
                   isEncrypted:
                     description: Gets or sets the encrypted flag of the variable.
                     type: boolean
+                    x-nullable: true
                   lastModifiedTime:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         '201':
           description: Created
           schema:
+            allOf:
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the varible.
             properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the variable.
-                readOnly: true
-                type: string
               properties:
                 description: Definition of the varible properties
                 properties:
@@ -1332,24 +1500,22 @@ paths:
                     description: Gets or sets the creation time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   description:
                     description: Gets or sets the description.
                     type: string
                   isEncrypted:
                     description: Gets or sets the encrypted flag of the variable.
                     type: boolean
+                    x-nullable: true
                   lastModifiedTime:
                     description: Gets or sets the last modified time.
                     format: date-time
                     type: string
+                    x-nullable: false
                   value:
                     description: Gets or sets the value of the variable.
                     type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

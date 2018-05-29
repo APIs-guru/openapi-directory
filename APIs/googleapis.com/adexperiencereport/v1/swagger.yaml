@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'View Ad Experience Report data, and get a list of sites that have a significant number of annoying ads.'
-  title: Google Ad Experience Report
+  title: Ad Experience Report
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -230,7 +230,9 @@ definitions:
         type: boolean
     type: object
   SiteSummaryResponse:
-    description: Response message for GetSiteSummary.
+    description: |-
+      Response message for GetSiteSummary.
+      Do not confuse with same message in google.chrome.abusiveexperiencereport.v1
     properties:
       desktopSummary:
         $ref: '#/definitions/PlatformSummary'

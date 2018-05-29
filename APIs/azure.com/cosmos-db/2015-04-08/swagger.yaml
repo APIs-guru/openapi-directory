@@ -344,6 +344,7 @@ paths:
                       id: ddb1-eastus
                       locationName: East US
                   ipRangeFilter: ''
+                  isVirtualNetworkFilterEnabled: false
                   provisioningState: Succeeded
                   readLocations:
                     - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
@@ -351,6 +352,7 @@ paths:
                       id: ddb1-eastus
                       locationName: East US
                       provisioningState: Succeeded
+                  virtualNetworkRules: []
                   writeLocations:
                     - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
                       failoverPriority: 0
@@ -457,11 +459,14 @@ paths:
                   maxStalenessPrefix: 200
                 databaseAccountOfferType: Standard
                 ipRangeFilter: 10.10.10.10
+                isVirtualNetworkFilterEnabled: true
                 locations:
                   - failoverPriority: 0
                     locationName: southcentralus
                   - failoverPriority: 1
                     locationName: eastus
+                virtualNetworkRules:
+                  - id: /subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
               tags: {}
             resourceGroupName: rg1
             subscriptionId: subid
@@ -486,6 +491,7 @@ paths:
                       id: ddb1-eastus
                       locationName: East US
                   ipRangeFilter: 10.10.10.10
+                  isVirtualNetworkFilterEnabled: true
                   provisioningState: Initializing
                   readLocations:
                     - failoverPriority: 0
@@ -496,6 +502,8 @@ paths:
                       id: ddb1-eastus
                       locationName: East US
                       provisioningState: Initializing
+                  virtualNetworkRules:
+                    - id: /subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
                   writeLocations:
                     - failoverPriority: 0
                       id: ddb1-southcentralus
@@ -1162,6 +1170,78 @@ paths:
                     timeGrain: PT5M
                     unit: Count
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/offlineRegion':
+    post:
+      description: Offline the specified region for the specified Azure Cosmos DB database account.
+      operationId: DatabaseAccounts_OfflineRegion
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Cosmos DB region to offline for the database account.
+          in: body
+          name: regionParameterForOffline
+          required: true
+          schema:
+            $ref: '#/definitions/RegionForOnlineOffline'
+      responses:
+        '200':
+          description: The offline region operation is completed successfully.
+        '202':
+          description: Accepted. The offline region operation will complete asynchronously.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        CosmosDBDatabaseAccountOfflineRegion:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            region: North Europe
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/onlineRegion':
+    post:
+      description: Online the specified region for the specified Azure Cosmos DB database account.
+      operationId: DatabaseAccounts_OnlineRegion
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Cosmos DB region to online for the database account.
+          in: body
+          name: regionParameterForOnline
+          required: true
+          schema:
+            $ref: '#/definitions/RegionForOnlineOffline'
+      responses:
+        '200':
+          description: The online region operation is completed successfully.
+        '202':
+          description: Accepted. The online region operation will complete asynchronously.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        CosmosDBDatabaseAccountOnlineRegion:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            region: North Europe
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/percentile/metrics':
     get:
       description: Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and Replication Latency data
@@ -1762,10 +1842,18 @@ definitions:
       ipRangeFilter:
         $ref: '#/definitions/IPRangeFilter'
         description: 'Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.'
+      isVirtualNetworkFilterEnabled:
+        description: Flag to indicate whether to enable/disable Virtual Network ACL rules.
+        type: boolean
       locations:
         description: An array that contains the georeplication locations enabled for the Cosmos DB account.
         items:
           $ref: '#/definitions/Location'
+        type: array
+      virtualNetworkRules:
+        description: List of Virtual Network ACL rules configured for the Cosmos DB account.
+        items:
+          $ref: '#/definitions/VirtualNetworkRule'
         type: array
     required:
       - locations
@@ -1861,6 +1949,9 @@ definitions:
       ipRangeFilter:
         $ref: '#/definitions/IPRangeFilter'
         description: 'Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.'
+      isVirtualNetworkFilterEnabled:
+        description: Flag to indicate whether to enable/disable Virtual Network ACL rules.
+        type: boolean
       provisioningState:
         $ref: '#/definitions/ProvisioningState'
       readLocations:
@@ -1868,6 +1959,11 @@ definitions:
         items:
           $ref: '#/definitions/Location'
         readOnly: true
+        type: array
+      virtualNetworkRules:
+        description: List of Virtual Network ACL rules configured for the Cosmos DB account.
+        items:
+          $ref: '#/definitions/VirtualNetworkRule'
         type: array
       writeLocations:
         description: An array that contains the write location for the Cosmos DB account.
@@ -1902,6 +1998,15 @@ definitions:
           $ref: '#/definitions/DatabaseAccount'
         readOnly: true
         type: array
+  ErrorResponse:
+    description: Error Response.
+    properties:
+      code:
+        description: Error code.
+        type: string
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
   FailoverPolicies:
     description: The list of new failover policies for the failover priority change.
     properties:
@@ -2250,6 +2355,14 @@ definitions:
     description: 'The status of the Cosmos DB account at the time the operation was called. The status can be one of following. ''Creating'' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. ''Succeeded'' – the Cosmos DB account is active for use. ''Updating'' – the Cosmos DB account is being updated. ''Deleting'' – the Cosmos DB account is being deleted. ''Failed'' – the Cosmos DB account failed creation.'
     readOnly: true
     type: string
+  RegionForOnlineOffline:
+    description: Cosmos DB region to online or offline.
+    properties:
+      region:
+        description: 'Cosmos DB region, with spaces between words and each word capitalized.'
+        type: string
+    required:
+      - region
   Resource:
     description: A database account resource.
     properties:
@@ -2325,3 +2438,10 @@ definitions:
           $ref: '#/definitions/Usage'
         readOnly: true
         type: array
+  VirtualNetworkRule:
+    description: Virtual Network ACL Rule object
+    properties:
+      id:
+        description: 'Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}.'
+        type: string
+    type: object

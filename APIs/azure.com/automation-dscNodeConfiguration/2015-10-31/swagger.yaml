@@ -42,8 +42,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodeconfigurations'
       operationId: DscNodeConfiguration_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -115,8 +117,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodeconfigurations'
       operationId: DscNodeConfiguration_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -176,8 +180,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodeconfigurations'
       operationId: DscNodeConfiguration_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -246,8 +252,10 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscnodeconfigurations'
       operationId: DscNodeConfiguration_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
@@ -268,54 +276,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the create or update node configuration operation.
-            properties:
-              configuration:
-                description: The Dsc configuration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the Dsc configuration.
-                    type: string
-              name:
-                description: Gets or sets the type of the parameter.
-                type: string
-              newNodeConfigurationBuildVersionRequired:
-                description: If a new build version of NodeConfiguration is required.
-                type: boolean
-              source:
-                description: Definition of the content source.
-                properties:
-                  hash:
-                    description: Definition of the runbook property type.
-                    properties:
-                      algorithm:
-                        description: Gets or sets the content hash algorithm used to hash the content.
-                        type: string
-                      value:
-                        description: Gets or sets expected hash value of the content.
-                        type: string
-                    required:
-                      - algorithm
-                      - value
-                  type:
-                    description: Gets or sets the content source type.
-                    enum:
-                      - embeddedContent
-                      - uri
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: ContentSourceType
-                  value:
-                    description: Gets or sets the value of the content. This is based on the content source type.
-                    type: string
-                  version:
-                    description: Gets or sets the version of the content.
-                    type: string
-            required:
-              - source
-              - name
-              - configuration
+            $ref: '#/definitions/DscNodeConfigurationCreateOrUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -377,23 +338,58 @@ paths:
                 name: nodeConfigName
               headers: {}
 definitions:
+  ContentHash:
+    description: Definition of the runbook property type.
+    properties:
+      algorithm:
+        description: Gets or sets the content hash algorithm used to hash the content.
+        type: string
+      value:
+        description: Gets or sets expected hash value of the content.
+        type: string
+    required:
+      - algorithm
+      - value
+  ContentSource:
+    description: Definition of the content source.
+    properties:
+      hash:
+        $ref: '#/definitions/ContentHash'
+        description: Gets or sets the hash.
+      type:
+        description: Gets or sets the content source type.
+        enum:
+          - embeddedContent
+          - uri
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ContentSourceType
+      value:
+        description: Gets or sets the value of the content. This is based on the content source type.
+        type: string
+      version:
+        description: Gets or sets the version of the content.
+        type: string
   DscNodeConfiguration:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource Id
-            readOnly: true
-            type: string
-          name:
-            description: Resource name
-            readOnly: true
-            type: string
-          type:
-            description: Resource type
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - allOf:
+          - description: The core properties of ARM resources
+            properties:
+              id:
+                description: Fully qualified resource Id for the resource
+                readOnly: true
+                type: string
+              name:
+                description: The name of the resource
+                readOnly: true
+                type: string
+              type:
+                description: The type of the resource.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
     description: Definition of the dsc node configuration.
     properties:
       configuration:
@@ -406,10 +402,34 @@ definitions:
         description: Gets or sets creation time.
         format: date-time
         type: string
+        x-nullable: false
       lastModifiedTime:
         description: Gets or sets the last modified time.
         format: date-time
         type: string
+        x-nullable: false
+  DscNodeConfigurationCreateOrUpdateParameters:
+    description: The parameters supplied to the create or update node configuration operation.
+    properties:
+      configuration:
+        description: The Dsc configuration property associated with the entity.
+        properties:
+          name:
+            description: Gets or sets the name of the Dsc configuration.
+            type: string
+      incrementNodeConfigurationBuild:
+        description: If a new build version of NodeConfiguration is required.
+        type: boolean
+      name:
+        description: Name of the node configuration.
+        type: string
+      source:
+        $ref: '#/definitions/ContentSource'
+        description: Gets or sets the source.
+    required:
+      - source
+      - name
+      - configuration
   DscNodeConfigurationListResult:
     description: The response model for the list job operation.
     properties:

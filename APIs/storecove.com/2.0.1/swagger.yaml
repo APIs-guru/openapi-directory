@@ -642,6 +642,12 @@ paths:
         Get all available shops.
         include::examples/shops/shops_index/tabs.adoc[]
       operationId: shops_index
+      parameters:
+        - description: Include creditcards in list. Add ?cc=true to URL to use.
+          in: query
+          name: cc
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -692,6 +698,46 @@ definitions:
     required:
       - party
     title: Customer
+    type: object
+  AllowanceCharge:
+    properties:
+      amountExcludingVat:
+        description: 'The amount for the allowance charge, excluding VAT'
+        title: Amount
+        type: number
+      reason:
+        default: Agreed settlement
+        description: 'The reason for the allowance charge, free text'
+        title: Reason
+        type: string
+      reasonCode:
+        default: '1'
+        description: 'The reason code for the allowance charge. Uses list http://www.unece.org/trade/untdid/d12a/tred/tred4465.htm , defaults to 1 - Agreed settlement'
+        title: Reason Code
+        type: string
+      tax:
+        description: The tax for this allowance charge.
+        properties:
+          amount:
+            description: The amount of VAT. Should equal percentage x amountExcludingVat. A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
+            title: Amount of VAT for the allowance charge
+            type: number
+          country:
+            $ref: '#/definitions/Country'
+          percentage:
+            description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice.
+            title: Percentage VAT
+            type: number
+        required:
+          - amount
+          - percentage
+          - country
+        title: Tax
+        type: object
+    required:
+      - amountExcludingVat
+      - tax
+    title: Allowance Charge
     type: object
   Country:
     description: An ISO 3166-1 alpha-2 country code.
@@ -1321,6 +1367,13 @@ definitions:
           accountingCustomerParty:
             $ref: '#/definitions/AccountingCustomerParty'
             description: The receiving party
+          allowanceCharges:
+            description: An array of allowance charges.
+            items:
+              $ref: '#/definitions/AllowanceCharge'
+            minItems: 0
+            title: Allowance Charges
+            type: array
           amountIncludingVat:
             description: 'amountIncludingVat is important because of rounding differences. In many invoices, the sum of the line item amounts excluding VAT and the VAT amounts is not equal to first summing the line items without VAT, and then applying VAT. The difference is automatically calculated and included in the electronic invoice, so the receiving accounting package can process the electronic invoice without problems.'
             title: Amount including VAT
@@ -1995,6 +2048,10 @@ definitions:
       logo:
         $ref: '#/definitions/Logos'
       name:
+        type: string
+      purpose:
+        description: The purpose of the shop. Either "invoice" or "statement"
+        title: Purpose
         type: string
   ShopAccountInput:
     properties:

@@ -42,6 +42,7 @@ paths:
           required: false
           type: integer
         - description: Page Size
+          format: int32
           in: query
           name: size
           required: false
@@ -51,6 +52,11 @@ paths:
           name: only_success
           required: false
           type: boolean
+        - description: Which fields to return (comma-separated)
+          in: query
+          name: fields
+          required: false
+          type: string
       responses:
         '200':
           description: Successful operation
@@ -93,7 +99,12 @@ paths:
     get:
       description: Get an Analysis detail
       operationId: getAnalysisSummary
-      parameters: []
+      parameters:
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
+          required: false
+          type: string
       responses:
         '200':
           description: Successful operation
@@ -987,6 +998,11 @@ paths:
           name: size
           required: false
           type: integer
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
+          required: false
+          type: string
       responses:
         '200':
           description: Successful operation
@@ -1648,6 +1664,9 @@ definitions:
       results:
         readOnly: true
         type: string
+      user:
+        readOnly: true
+        type: string
     required:
       - advanced_export_type
     type: object
@@ -1721,6 +1740,9 @@ definitions:
     type: object
   Analysis:
     properties:
+      comparable:
+        readOnly: true
+        type: string
       computing_revision:
         readOnly: true
         type: string
@@ -1796,6 +1818,9 @@ definitions:
     type: object
   AnalysisDetail:
     properties:
+      comparable:
+        readOnly: true
+        type: string
       computing_revision:
         readOnly: true
         type: string
@@ -2098,6 +2123,9 @@ definitions:
       size:
         format: int64
         type: integer
+      user:
+        readOnly: true
+        type: string
     required:
       - query
       - size
@@ -2489,6 +2517,8 @@ definitions:
     properties:
       active:
         type: boolean
+      auto_pin_first_analysis:
+        type: boolean
       current_settings:
         $ref: '#/definitions/ProjectSettings'
       date_created:
@@ -2502,7 +2532,22 @@ definitions:
         type: object
       name:
         type: string
+      pins_balance:
+        format: int64
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      retention_period:
+        format: int64
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      settings_url:
+        readOnly: true
+        type: string
       slug:
+        type: string
+      timezone:
         type: string
       url:
         readOnly: true

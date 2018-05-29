@@ -642,33 +642,31 @@ paths:
       description: |-
         Forces a task to run now.
 
+        When this method is called, Cloud Tasks will dispatch the task, even if
+        the task is already running, the queue has reached its RateLimits or
+        is PAUSED.
+
         This command is meant to be used for manual debugging. For
         example, RunTask can be used to retry a failed
         task after a fix has been made or to manually force a task to be
         dispatched now.
-
-        When this method is called, Cloud Tasks will dispatch the task to its
-        target, even if the queue is PAUSED.
 
         The dispatched task is returned. That is, the task that is returned
         contains the status after the task is dispatched but
         before the task is received by its target.
 
         If Cloud Tasks receives a successful response from the task's
-        handler, then the task will be deleted; otherwise the task's
+        target, then the task will be deleted; otherwise the task's
         schedule_time will be reset to the time that
         RunTask was called plus the retry delay specified
-        in the queue and task's RetryConfig.
+        in the queue's RetryConfig.
 
         RunTask returns
         NOT_FOUND when it is called on a
-        task that has already succeeded or permanently
-        failed. FAILED_PRECONDITION
-        is returned when RunTask is called on task
-        that is dispatched or already running.
+        task that has already succeeded or permanently failed.
 
-        RunTask cannot be called on
-        pull tasks.
+        RunTask cannot be called on a
+        pull task.
       operationId: cloudtasks.projects.locations.queues.tasks.run
       parameters:
         - in: body
@@ -1532,7 +1530,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` or `joe@example.com`.
+             account. For example, `alice@gmail.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1847,12 +1845,12 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
       `members` to a `role`, where the members can be user accounts, Google groups,
       Google domains, and service accounts. A `role` is a named list of permissions
       defined by IAM.
 
-      **Example**
+      **JSON Example**
 
           {
             "bindings": [
@@ -1862,7 +1860,7 @@ definitions:
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
                 ]
               },
               {
@@ -1871,6 +1869,20 @@ definitions:
               }
             ]
           }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -2048,6 +2060,9 @@ definitions:
 
       This message determines the maximum rate that tasks can be dispatched by a
       queue, regardless of whether the dispatch is a first task attempt or a retry.
+
+      Note: The debugging command, RunTask, will run a task
+      even if the queue has reached its RateLimits.
     properties:
       maxBurstSize:
         description: |
@@ -2096,10 +2111,12 @@ definitions:
           default.
 
 
-          The maximum allowed value is 5,000. -1 indicates no limit.
+          The maximum allowed value is 5,000.
 
           This field is output only for
-          [pull queues](google.cloud.tasks.v2beta2.PullTarget).
+          [pull queues](google.cloud.tasks.v2beta2.PullTarget) and always -1, which
+          indicates no limit. No other queue types can have `max_concurrent_tasks`
+          set to -1.
 
 
           This field has the same meaning as

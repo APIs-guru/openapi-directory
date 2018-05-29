@@ -2685,12 +2685,12 @@ definitions:
           modelAsString: false
           name: FirewallAllowAzureIpsState
       firewallRules:
-        description: The list of firewall rules associated with this Data Lake Analytics account.
+        description: The list of firewall rules associated with this account.
         items:
           $ref: '#/definitions/UpdateFirewallRuleWithAccountParameters'
         type: array
       firewallState:
-        description: The current state of the IP address firewall for this Data Lake Analytics account.
+        description: 'The current state of the IP address firewall for this account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled.'
         enum:
           - Enabled
           - Disabled

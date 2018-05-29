@@ -42,12 +42,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/compilationjoboperations'
       operationId: DscCompilationJob_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -81,21 +84,23 @@ paths:
                 description: Gets or sets a list of Dsc Compilation jobs.
                 items:
                   allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
+                    - allOf:
+                        - description: The core properties of ARM resources
+                          properties:
+                            id:
+                              description: Fully qualified resource Id for the resource
+                              readOnly: true
+                              type: string
+                            name:
+                              description: The name of the resource
+                              readOnly: true
+                              type: string
+                            type:
+                              description: The type of the resource.
+                              readOnly: true
+                              type: string
+                          x-ms-azure-resource: true
+                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
                   description: Definition of the Dsc Compilation job.
                   properties:
                     properties:
@@ -112,11 +117,13 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         endTime:
                           description: Gets the end time of the job.
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: true
                         exception:
                           description: Gets the exception of the job.
                           readOnly: true
@@ -126,16 +133,19 @@ paths:
                           format: uuid
                           readOnly: true
                           type: string
+                          x-nullable: false
                         lastModifiedTime:
                           description: Gets the last modified time of the job.
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: false
                         lastStatusModifiedTime:
                           description: Gets the last status modified time of the job.
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: true
                         parameters:
                           additionalProperties:
                             type: string
@@ -146,8 +156,16 @@ paths:
                           properties:
                             provisioningState:
                               description: The provisioning state of the resource.
+                              enum:
+                                - Failed
+                                - Succeeded
+                                - Suspended
+                                - Processing
                               readOnly: true
                               type: string
+                              x-ms-enum:
+                                modelAsString: true
+                                name: JobProvisioningState
                         runOn:
                           description: Gets or sets the runOn which specifies the group name where the job is to be executed.
                           type: string
@@ -156,6 +174,7 @@ paths:
                           format: date-time
                           readOnly: true
                           type: string
+                          x-nullable: true
                         startedBy:
                           description: Gets the compilation job started by.
                           readOnly: true
@@ -210,15 +229,19 @@ paths:
               body:
                 value:
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/e6e7fbab-183c-405a-afe6-9eb5db97921a
+                    name: e6e7fbab-183c-405a-afe6-9eb5db97921a
                     properties:
                       configuration:
                         name: TestDscConfiguration
                       creationTime: '2017-11-17T19:45:24.59+00:00'
+                      endTime: null
                       jobId: e6e7fbab-183c-405a-afe6-9eb5db97921a
                       lastModifiedTime: '2017-11-17T19:45:58.5933333+00:00'
                       startTime: '2017-11-17T19:45:52.9833333+00:00'
                       status: Suspended
+                    type: Microsoft.Automation/AutomationAccounts/compilationjobs
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/111d4e06-2d88-46b4-8500-7febd4906838
+                    name: 111d4e06-2d88-46b4-8500-7febd4906838
                     properties:
                       configuration:
                         name: NewDscConfiguration
@@ -228,6 +251,7 @@ paths:
                       lastModifiedTime: '2017-12-05T21:30:42.6+00:00'
                       startTime: '2017-12-05T21:30:26.48+00:00'
                       status: Completed
+                    type: Microsoft.Automation/AutomationAccounts/compilationjobs
               headers: {}
       x-ms-pageable:
         nextLinkName: nextLink
@@ -238,12 +262,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dsccompilationjoboperations'
       operationId: DscCompilationJob_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -270,21 +297,23 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the Dsc Compilation job.
             properties:
               properties:
@@ -301,11 +330,13 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   endTime:
                     description: Gets the end time of the job.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: true
                   exception:
                     description: Gets the exception of the job.
                     readOnly: true
@@ -315,16 +346,19 @@ paths:
                     format: uuid
                     readOnly: true
                     type: string
+                    x-nullable: false
                   lastModifiedTime:
                     description: Gets the last modified time of the job.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   lastStatusModifiedTime:
                     description: Gets the last status modified time of the job.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: true
                   parameters:
                     additionalProperties:
                       type: string
@@ -335,8 +369,16 @@ paths:
                     properties:
                       provisioningState:
                         description: The provisioning state of the resource.
+                        enum:
+                          - Failed
+                          - Succeeded
+                          - Suspended
+                          - Processing
                         readOnly: true
                         type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: JobProvisioningState
                   runOn:
                     description: Gets or sets the runOn which specifies the group name where the job is to be executed.
                     type: string
@@ -345,6 +387,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: true
                   startedBy:
                     description: Gets the compilation job started by.
                     readOnly: true
@@ -398,16 +441,23 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                name: null
                 properties:
                   configuration:
                     name: SetupServer
                   creationTime: '2017-03-28T23:14:26.903+00:00'
+                  endTime: null
+                  exception: null
                   jobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
                   lastModifiedTime: '2017-03-28T23:14:26.903+00:00'
                   lastStatusModifiedTime: '2017-03-28T23:14:26.903+00:00'
+                  parameters: null
                   provisioningState: Processing
+                  runOn: null
+                  startTime: null
                   status: New
                   statusDetails: None
+                type: Microsoft.Automation/AutomationAccounts/compilationjobs
               headers: {}
     put:
       description: Creates the Dsc compilation job of the configuration.
@@ -415,12 +465,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/dscconfigurationcompilejoboperations'
       operationId: DscCompilationJob_Create
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -486,21 +539,23 @@ paths:
           description: Created
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - allOf:
+                  - description: The core properties of ARM resources
+                    properties:
+                      id:
+                        description: Fully qualified resource Id for the resource
+                        readOnly: true
+                        type: string
+                      name:
+                        description: The name of the resource
+                        readOnly: true
+                        type: string
+                      type:
+                        description: The type of the resource.
+                        readOnly: true
+                        type: string
+                    x-ms-azure-resource: true
+                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
             description: Definition of the Dsc Compilation job.
             properties:
               properties:
@@ -517,11 +572,13 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   endTime:
                     description: Gets the end time of the job.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: true
                   exception:
                     description: Gets the exception of the job.
                     readOnly: true
@@ -531,16 +588,19 @@ paths:
                     format: uuid
                     readOnly: true
                     type: string
+                    x-nullable: false
                   lastModifiedTime:
                     description: Gets the last modified time of the job.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: false
                   lastStatusModifiedTime:
                     description: Gets the last status modified time of the job.
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: true
                   parameters:
                     additionalProperties:
                       type: string
@@ -551,8 +611,16 @@ paths:
                     properties:
                       provisioningState:
                         description: The provisioning state of the resource.
+                        enum:
+                          - Failed
+                          - Succeeded
+                          - Suspended
+                          - Processing
                         readOnly: true
                         type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: JobProvisioningState
                   runOn:
                     description: Gets or sets the runOn which specifies the group name where the job is to be executed.
                     type: string
@@ -561,6 +629,7 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                    x-nullable: true
                   startedBy:
                     description: Gets the compilation job started by.
                     readOnly: true
@@ -607,7 +676,7 @@ paths:
           parameters:
             api-version: '2015-10-31'
             automationAccountName: myAutomationAccount33
-            compilationJobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+            compilationJobId: 111d4e06-2d88-46b4-8500-7febd4906838
             parameters:
               properties:
                 configuration:
@@ -617,18 +686,24 @@ paths:
           responses:
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/111d4e06-2d88-46b4-8500-7febd4906838
+                name: 111d4e06-2d88-46b4-8500-7febd4906838
                 properties:
                   configuration:
                     name: SetupServer
                   creationTime: '2017-03-28T23:14:26.903+00:00'
-                  jobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                  endTime: null
+                  exception: null
+                  jobId: 111d4e06-2d88-46b4-8500-7febd4906838
                   lastModifiedTime: '2017-03-28T23:14:26.903+00:00'
                   lastStatusModifiedTime: '2017-03-28T23:14:26.903+00:00'
                   parameters: {}
                   provisioningState: Processing
+                  runOn: null
+                  startTime: null
                   status: New
                   statusDetails: None
+                type: Microsoft.Automation/AutomationAccounts/compilationjobs
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/':
     get:
@@ -637,12 +712,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/jobstreamoperations'
       operationId: DscCompilationJobStream_ListByJob
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -711,6 +789,7 @@ paths:
                           description: Gets or sets the creation time of the job.
                           format: date-time
                           type: string
+                          x-nullable: false
                         value:
                           additionalProperties:
                             type: object
@@ -800,12 +879,15 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/jobstreamoperations'
       operationId: DscCompilationJob_GetStream
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -871,6 +953,7 @@ paths:
                     description: Gets or sets the creation time of the job.
                     format: date-time
                     type: string
+                    x-nullable: false
                   value:
                     additionalProperties:
                       type: object
