@@ -1615,6 +1615,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ResetUserPassword':
+    post:
+      operationId: ResetUserPassword
+      description: Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResetUserPasswordResult'
+        '480':
+          description: DirectoryUnavailableException
+          schema:
+            $ref: '#/definitions/DirectoryUnavailableException'
+        '481':
+          description: UserDoesNotExistException
+          schema:
+            $ref: '#/definitions/UserDoesNotExistException'
+        '482':
+          description: InvalidPasswordException
+          schema:
+            $ref: '#/definitions/InvalidPasswordException'
+        '483':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '484':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '485':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '486':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResetUserPasswordRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RestoreFromSnapshot':
     post:
       operationId: RestoreFromSnapshot
@@ -2285,6 +2338,11 @@ definitions:
   CreatedDateTime:
     type: string
     format: date-time
+  CustomerUserName:
+    type: string
+    pattern: '^(?!.*\\|.*"|.*\/|.*\[|.*\]|.*:|.*;|.*\||.*=|.*,|.*\+|.*\*|.*\?|.*<|.*>|.*@).*$'
+    minLength: 1
+    maxLength: 64
   DeleteAssociatedConditionalForwarder:
     type: boolean
   DeleteConditionalForwarderRequest:
@@ -2982,6 +3040,14 @@ definitions:
       RequestId:
         $ref: '#/definitions/RequestId'
     description: One or more parameters are not valid.
+  InvalidPasswordException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+      RequestId:
+        $ref: '#/definitions/RequestId'
+    description: The new password provided by the user does not meet the password complexity requirements defined in your directory.
   IpAddr:
     type: string
     pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
@@ -3266,6 +3332,25 @@ definitions:
     type: string
     pattern: '^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$'
     description: The AWS request identifier.
+  ResetUserPasswordRequest:
+    type: object
+    required:
+      - DirectoryId
+      - UserName
+      - NewPassword
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the user resides.
+      UserName:
+        $ref: '#/definitions/CustomerUserName'
+        description: The username of the user whose password will be reset.
+      NewPassword:
+        $ref: '#/definitions/UserPassword'
+        description: The new password that will be reset.
+  ResetUserPasswordResult:
+    type: object
+    properties: {}
   ResourceId:
     type: string
     pattern: '^[d]-[0-9a-f]{10}$'
@@ -3665,10 +3750,23 @@ definitions:
     type: boolean
   UseSameUsername:
     type: boolean
+  UserDoesNotExistException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+      RequestId:
+        $ref: '#/definitions/RequestId'
+    description: The user provided a username that does not exist in your directory.
   UserName:
     type: string
     pattern: '[a-zA-Z0-9._-]+'
     minLength: 1
+  UserPassword:
+    type: string
+    minLength: 1
+    maxLength: 127
+    format: password
   VerifyTrustRequest:
     type: object
     required:

@@ -182,6 +182,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateHyperParameterTuningJob':
+    post:
+      operationId: CreateHyperParameterTuningJob
+      description: Starts a hyperparameter tuning job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateHyperParameterTuningJobResponse'
+        '480':
+          description: ResourceInUse
+          schema:
+            $ref: '#/definitions/ResourceInUse'
+        '481':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateHyperParameterTuningJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateModel':
     post:
       operationId: CreateModel
@@ -272,7 +305,7 @@ paths:
   '/#CreatePresignedNotebookInstanceUrl':
     post:
       operationId: CreatePresignedNotebookInstanceUrl
-      description: 'Returns a URL that you can use to connect to the Juypter server from a notebook instance. In the Amazon SageMaker console, when you choose <code>Open</code> next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page. '
+      description: 'Returns a URL that you can use to connect to the Jupyter server from a notebook instance. In the Amazon SageMaker console, when you choose <code>Open</code> next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page. '
       responses:
         '200':
           description: Success
@@ -297,7 +330,7 @@ paths:
   '/#CreateTrainingJob':
     post:
       operationId: CreateTrainingJob
-      description: '<p> Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify. </p> <p>If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a deep learning service other than Amazon SageMaker, provided that you know how to use them for inferences. </p> <p>In the request body, you provide the following: </p> <ul> <li> <p> <code>AlgorithmSpecification</code> - Identifies the training algorithm to use. </p> </li> <li> <p> <code>HyperParameters</code> - Specify these algorithm-specific parameters to influence the quality of the final model. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p> </li> <li> <p> <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>OutputDataConfig</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results of model training. </p> <p/> </li> <li> <p> <code>ResourceConfig</code> - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance. </p> </li> <li> <p> <code>RoleARN</code> - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training. </p> </li> <li> <p> <code>StoppingCondition</code> - Sets a duration for training. Use this parameter to cap model training costs. </p> </li> </ul> <p> For more information about Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p>'
+      description: '<p>Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify. </p> <p>If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a deep learning service other than Amazon SageMaker, provided that you know how to use them for inferences. </p> <p>In the request body, you provide the following: </p> <ul> <li> <p> <code>AlgorithmSpecification</code> - Identifies the training algorithm to use. </p> </li> <li> <p> <code>HyperParameters</code> - Specify these algorithm-specific parameters to influence the quality of the final model. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p> </li> <li> <p> <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>OutputDataConfig</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results of model training. </p> <p/> </li> <li> <p> <code>ResourceConfig</code> - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance. </p> </li> <li> <p> <code>RoleARN</code> - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training. </p> </li> <li> <p> <code>StoppingCondition</code> - Sets a duration for training. Use this parameter to cap model training costs. </p> </li> </ul> <p> For more information about Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p>'
       responses:
         '200':
           description: Success
@@ -353,7 +386,7 @@ paths:
   '/#DeleteEndpointConfig':
     post:
       operationId: DeleteEndpointConfig
-      description: 'Deletes an endpoint configuration. The <code>DeleteEndpoingConfig</code> API deletes only the specified configuration. It does not delete endpoints created using the configuration. '
+      description: 'Deletes an endpoint configuration. The <code>DeleteEndpointConfig</code> API deletes only the specified configuration. It does not delete endpoints created using the configuration. '
       responses:
         '200':
           description: Success
@@ -534,6 +567,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeEndpointConfigInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeHyperParameterTuningJob':
+    post:
+      operationId: DescribeHyperParameterTuningJob
+      description: Gets a description of a hyperparameter tuning job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeHyperParameterTuningJobResponse'
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeHyperParameterTuningJobRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -774,6 +836,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListHyperParameterTuningJobs':
+    post:
+      operationId: ListHyperParameterTuningJobs
+      description: Gets a list of objects that describe the hyperparameter tuning jobs launched in your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListHyperParameterTuningJobsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListHyperParameterTuningJobsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListModels':
     post:
       operationId: ListModels
@@ -949,6 +1046,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTrainingJobsForHyperParameterTuningJob':
+    post:
+      operationId: ListTrainingJobsForHyperParameterTuningJob
+      description: Gets a list of objects that describe the training jobs that a hyperparameter tuning job launched.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTrainingJobsForHyperParameterTuningJobResponse'
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTrainingJobsForHyperParameterTuningJobRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StartNotebookInstance':
     post:
       operationId: StartNotebookInstance
@@ -966,6 +1102,33 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartNotebookInstanceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopHyperParameterTuningJob':
+    post:
+      operationId: StopHyperParameterTuningJob
+      description: '<p>Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched.</p> <p>All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write toAmazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the <code>Stopped</code> state, it releases all reserved resources for the tuning job.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopHyperParameterTuningJobRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1176,7 +1339,26 @@ definitions:
       TrainingInputMode:
         $ref: '#/definitions/TrainingInputMode'
         description: '<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won''t be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>'
-    description: '<p>Specifies the training algorithm to use in a <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html">CreateTrainingJob</a> request. </p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a>your-algorithms</a>. </p>'
+    description: '<p>Specifies the training algorithm to use in a <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html">CreateTrainingJob</a> request.</p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a>your-algorithms</a>. </p>'
+  CategoricalParameterRange:
+    type: object
+    required:
+      - Name
+      - Values
+    properties:
+      Name:
+        $ref: '#/definitions/ParameterKey'
+        description: The name of the categorical hyperparameter to tune.
+      Values:
+        $ref: '#/definitions/ParameterValues'
+        description: A list of the categories for the hyperparameter.
+    description: A list of categorical hyperparameters to tune.
+  CategoricalParameterRanges:
+    type: array
+    items:
+      $ref: '#/definitions/CategoricalParameterRange'
+    minItems: 0
+    maxItems: 20
   Channel:
     type: object
     required:
@@ -1194,10 +1376,10 @@ definitions:
         description: The MIME type of the data.
       CompressionType:
         $ref: '#/definitions/CompressionType'
-        description: 'If training data is compressed, the compression type. The default value is <code>None</code>. <code>CompressionType</code> is used only in PIPE input mode. In FILE mode, leave this field unset or set it to None.'
+        description: 'If training data is compressed, the compression type. The default value is <code>None</code>. <code>CompressionType</code> is used only in Pipe input mode. In File mode, leave this field unset or set it to None.'
       RecordWrapperType:
         $ref: '#/definitions/RecordWrapper'
-        description: '<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which caseAmazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don''t need to set this attribute. For more information, see <a href="https://mxnet.incubator.apache.org/how_to/recordio.html?highlight=im2rec">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>'
+        description: '<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which case, Amazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don''t need to set this attribute. For more information, see <a href="https://mxnet.incubator.apache.org/how_to/recordio.html?highlight=im2rec">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>'
     description: 'A channel is a named input source that training algorithms can consume. '
   ChannelName:
     type: string
@@ -1234,6 +1416,29 @@ definitions:
   ContentType:
     type: string
     maxLength: 256
+  ContinuousParameterRange:
+    type: object
+    required:
+      - Name
+      - MinValue
+      - MaxValue
+    properties:
+      Name:
+        $ref: '#/definitions/ParameterKey'
+        description: The name of the continuous hyperparameter to tune.
+      MinValue:
+        $ref: '#/definitions/ParameterValue'
+        description: The minimum value for the hyperparameter. The tuning job uses floating-point values between this value and <code>MaxValue</code>for tuning.
+      MaxValue:
+        $ref: '#/definitions/ParameterValue'
+        description: The maximum value for the hyperparameter. The tuning job uses floating-point values between <code>MinValue</code> value and this value for tuning.
+    description: A list of continuous hyperparameters to tune.
+  ContinuousParameterRanges:
+    type: array
+    items:
+      $ref: '#/definitions/ContinuousParameterRange'
+    minItems: 0
+    maxItems: 20
   CreateEndpointConfigInput:
     type: object
     required:
@@ -1283,6 +1488,33 @@ definitions:
       EndpointArn:
         $ref: '#/definitions/EndpointArn'
         description: The Amazon Resource Name (ARN) of the endpoint.
+  CreateHyperParameterTuningJobRequest:
+    type: object
+    required:
+      - HyperParameterTuningJobName
+      - HyperParameterTuningJobConfig
+      - TrainingJobDefinition
+    properties:
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: 'The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. Names are not case sensitive, and must be between 1-32 characters.'
+      HyperParameterTuningJobConfig:
+        $ref: '#/definitions/HyperParameterTuningJobConfig'
+        description: 'The object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.'
+      TrainingJobDefinition:
+        $ref: '#/definitions/HyperParameterTrainingJobDefinition'
+        description: 'The object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="http://docs.aws.amazon.com//awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
+  CreateHyperParameterTuningJobResponse:
+    type: object
+    required:
+      - HyperParameterTuningJobArn
+    properties:
+      HyperParameterTuningJobArn:
+        $ref: '#/definitions/HyperParameterTuningJobArn'
+        description: The Amazon Resource Name (ARN) of the tuning job.
   CreateModelInput:
     type: object
     required:
@@ -1298,13 +1530,13 @@ definitions:
         description: 'The location of the primary docker image containing inference code, associated artifacts, and custom environment map that the inference code uses when the model is deployed into production. '
       ExecutionRoleArn:
         $ref: '#/definitions/RoleArn'
-        description: 'The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute instances. Deploying on ML compute instances is part of model hosting. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. '
+        description: '<p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute instances. Deploying on ML compute instances is part of model hosting. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p> <note> <p>To be able to pass this role to Amazon SageMaker, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>'
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'A object that specifies the VPC that you want your model to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>host-vpc</a>.'
+        description: 'A object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. For more information, see <a>host-vpc</a>.'
   CreateModelOutput:
     type: object
     required:
@@ -1334,7 +1566,7 @@ definitions:
         description: 'The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet. '
       RoleArn:
         $ref: '#/definitions/RoleArn'
-        description: ' When you send any requests to AWS resources from the notebook instance, Amazon SageMaker assumes this role to perform tasks on your behalf. You must grant this role necessary permissions so Amazon SageMaker can perform these tasks. The policy must allow the Amazon SageMaker service principal (sagemaker.amazonaws.com) permissions to assume this role. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. '
+        description: '<p> When you send any requests to AWS resources from the notebook instance, Amazon SageMaker assumes this role to perform tasks on your behalf. You must grant this role necessary permissions so Amazon SageMaker can perform these tasks. The policy must allow the Amazon SageMaker service principal (sagemaker.amazonaws.com) permissions to assume this role. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p> <note> <p>To be able to pass this role to Amazon SageMaker, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>'
       KmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: ' If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. '
@@ -1406,13 +1638,13 @@ definitions:
         description: 'The name of the training job. The name must be unique within an AWS Region in an AWS account. It appears in the Amazon SageMaker console. '
       HyperParameters:
         $ref: '#/definitions/HyperParameters'
-        description: '<p>Algorithm-specific parameters. You set hyperparameters before you start the learning process. Hyperparameters influence the quality of the model. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p> <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value pair. Each key and value is limited to 256 characters, as specified by the <code>Length Constraint</code>. </p>'
+        description: '<p>Algorithm-specific parameters that influence the quality of the model. You set hyperparameters before you start the learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p> <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value pair. Each key and value is limited to 256 characters, as specified by the <code>Length Constraint</code>. </p>'
       AlgorithmSpecification:
         $ref: '#/definitions/AlgorithmSpecification'
         description: 'The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about providing your own algorithms, see <a>your-algorithms</a>. '
       RoleArn:
         $ref: '#/definitions/RoleArn'
-        description: '<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf. </p> <p>During model training, Amazon SageMaker needs your permission to read input data from an S3 bucket, download a Docker image that contains training code, write model artifacts to an S3 bucket, write logs to Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch. You grant permissions for all of these tasks to an IAM role. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p>'
+        description: '<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf. </p> <p>During model training, Amazon SageMaker needs your permission to read input data from an S3 bucket, download a Docker image that contains training code, write model artifacts to an S3 bucket, write logs to Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch. You grant permissions for all of these tasks to an IAM role. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p> <note> <p>To be able to pass this role to Amazon SageMaker, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>'
       InputDataConfig:
         $ref: '#/definitions/InputDataConfig'
         description: '<p>An array of <code>Channel</code> objects. Each channel is a named input source. <code>InputDataConfig</code> describes the input data and its location. </p> <p>Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of input data, <code>training_data</code> and <code>validation_data</code>. The configuration for each channel provides the S3 location where the input data is stored. It also provides information about the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format. </p> <p>Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files from an S3 bucket to a local directory in the Docker container, or makes it available as input streams. </p>'
@@ -1579,6 +1811,62 @@ definitions:
       LastModifiedTime:
         $ref: '#/definitions/Timestamp'
         description: A timestamp that shows when the endpoint was last modified.
+  DescribeHyperParameterTuningJobRequest:
+    type: object
+    required:
+      - HyperParameterTuningJobName
+    properties:
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: The name of the tuning job to describe.
+  DescribeHyperParameterTuningJobResponse:
+    type: object
+    required:
+      - HyperParameterTuningJobName
+      - HyperParameterTuningJobArn
+      - HyperParameterTuningJobConfig
+      - TrainingJobDefinition
+      - HyperParameterTuningJobStatus
+      - CreationTime
+      - TrainingJobStatusCounters
+      - ObjectiveStatusCounters
+    properties:
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: The name of the tuning job.
+      HyperParameterTuningJobArn:
+        $ref: '#/definitions/HyperParameterTuningJobArn'
+        description: The Amazon Resource Name (ARN) of the tuning job.
+      HyperParameterTuningJobConfig:
+        $ref: '#/definitions/HyperParameterTuningJobConfig'
+        description: The object that specifies the configuration of the tuning job.
+      TrainingJobDefinition:
+        $ref: '#/definitions/HyperParameterTrainingJobDefinition'
+        description: The object that specifies the definition of the training jobs that this tuning job launches.
+      HyperParameterTuningJobStatus:
+        $ref: '#/definitions/HyperParameterTuningJobStatus'
+        description: 'The status of the tuning job: InProgress, Completed, Failed, Stopping, or Stopped.'
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the tuning job started.
+      HyperParameterTuningEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the tuning job ended.
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time that the status of the tuning job was modified. '
+      TrainingJobStatusCounters:
+        $ref: '#/definitions/TrainingJobStatusCounters'
+        description: 'The object that specifies the number of training jobs, categorized by status, that this tuning job launched.'
+      ObjectiveStatusCounters:
+        $ref: '#/definitions/ObjectiveStatusCounters'
+        description: 'The object that specifies the number of training jobs, categorized by the status of their final objective metric, that this tuning job launched.'
+      BestTrainingJob:
+        $ref: '#/definitions/HyperParameterTrainingJobSummary'
+        description: A object that describes the training job that completed with the best current .
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the tuning job failed, the reason it failed.'
   DescribeModelInput:
     type: object
     required:
@@ -1727,6 +2015,9 @@ definitions:
       TrainingJobArn:
         $ref: '#/definitions/TrainingJobArn'
         description: The Amazon Resource Name (ARN) of the training job.
+      TuningJobArn:
+        $ref: '#/definitions/HyperParameterTuningJobArn'
+        description: The Amazon Resource Name (ARN) of the associated hyperparameter tuning job if the training job was launched by a hyperparameter tuning job.
       ModelArtifacts:
         $ref: '#/definitions/ModelArtifacts'
         description: 'Information about the Amazon S3 location that is configured for storing model artifacts. '
@@ -1768,10 +2059,10 @@ definitions:
         description: A timestamp that indicates when the training job was created.
       TrainingStartTime:
         $ref: '#/definitions/Timestamp'
-        description: A timestamp that indicates when training started.
+        description: Indicates the time when the training job starts on training instances. You are billed for the time interval between this time and the value of <code>TrainingEndTime</code>. The start time in CloudWatch Logs might be later than this time. The difference is due to the time it takes to download the training data and to the size of the training container.
       TrainingEndTime:
         $ref: '#/definitions/Timestamp'
-        description: A timestamp that indicates when model training ended.
+        description: 'Indicates the time when the training job ends on training instances. You are billed for the time interval between the value of <code>TrainingStartTime</code> and this time. For successful jobs and stopped jobs, this is the time after model artifacts are uploaded. For failed jobs, this is the time when Amazon SageMaker detects a job failure.'
       LastModifiedTime:
         $ref: '#/definitions/Timestamp'
         description: A timestamp that indicates when the status of the training job was last modified.
@@ -1913,6 +2204,230 @@ definitions:
   FailureReason:
     type: string
     maxLength: 1024
+  FinalHyperParameterTuningJobObjectiveMetric:
+    type: object
+    required:
+      - MetricName
+      - Value
+    properties:
+      Type:
+        $ref: '#/definitions/HyperParameterTuningJobObjectiveType'
+        description: Whether to minimize or maximize the objective metric. Valid values are Minimize and Maximize.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: The name of the objective metric.
+      Value:
+        $ref: '#/definitions/MetricValue'
+        description: The value of the objective metric.
+    description: Shows the final value for the objective metric for a training job that was launched by a hyperparameter tuning job. You define the objective metric in the <code>HyperParameterTuningJobObjective</code> parameter of <a>HyperParameterTuningJobConfig</a>.
+  HyperParameterAlgorithmSpecification:
+    type: object
+    required:
+      - TrainingImage
+      - TrainingInputMode
+    properties:
+      TrainingImage:
+        $ref: '#/definitions/AlgorithmImage'
+        description: ' The registry path of the Docker image that contains the training algorithm. For information about Docker registry paths for built-in algorithms, see <a>sagemaker-algo-docker-registry-paths</a>.'
+      TrainingInputMode:
+        $ref: '#/definitions/TrainingInputMode'
+        description: '<p>The input mode that the algorithm supports: File or Pipe. In File input mode, Amazon SageMaker downloads the training data from Amazon S3 to the storage volume that is attached to the training instance and mounts the directory to the Docker volume for the training container. In Pipe input mode, Amazon SageMaker streams data directly from Amazon S3 to the container. </p> <p>If you specify File mode, make sure that you provision the storage volume that is attached to the training instance with enough capacity to accommodate the training data downloaded from Amazon S3, the model artifacts, and intermediate information.</p> <p/> <p>For more information about input modes, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p>'
+      MetricDefinitions:
+        $ref: '#/definitions/MetricDefinitionList'
+        description: An array of objects that specify the metrics that the algorithm emits.
+    description: Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.
+  HyperParameterTrainingJobDefinition:
+    type: object
+    required:
+      - AlgorithmSpecification
+      - RoleArn
+      - InputDataConfig
+      - OutputDataConfig
+      - ResourceConfig
+      - StoppingCondition
+    properties:
+      StaticHyperParameters:
+        $ref: '#/definitions/HyperParameters'
+        description: Specifies the values of hyperparameters that do not change for the tuning job.
+      AlgorithmSpecification:
+        $ref: '#/definitions/HyperParameterAlgorithmSpecification'
+        description: The object that specifies the algorithm to use for the training jobs that the tuning job launches.
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role associated with the training jobs that the tuning job launches.
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: An array of objects that specify the input for the training jobs that the tuning job launches.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'The object that specifies the VPC that you want the training jobs that this hyperparameter tuning job launches to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a>.'
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: Specifies the path to the Amazon S3 bucket where you store model artifacts from the training jobs that the tuning job launches.
+      ResourceConfig:
+        $ref: '#/definitions/ResourceConfig'
+        description: '<p>The resources, including the compute instances and storage volumes, to use for the training jobs that the tuning job launches.</p> <p>Storage volumes store model artifacts and incremental states. Training algorithms might also use storage volumes for scratch space. If you want Amazon SageMaker to use the storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p>'
+      StoppingCondition:
+        $ref: '#/definitions/StoppingCondition'
+        description: '<p>Sets a maximum duration for the training jobs that the tuning job launches. Use this parameter to limit model training costs. </p> <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal. This delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts.</p> <p>When Amazon SageMaker terminates a job because the stopping condition has been met, training algorithms provided by Amazon SageMaker save the intermediate results of the job.</p>'
+    description: Defines the training jobs launched by a hyperparameter tuning job.
+  HyperParameterTrainingJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/HyperParameterTrainingJobSummary'
+  HyperParameterTrainingJobSummary:
+    type: object
+    required:
+      - TrainingJobName
+      - TrainingJobArn
+      - CreationTime
+      - TrainingJobStatus
+      - TunedHyperParameters
+    properties:
+      TrainingJobName:
+        $ref: '#/definitions/TrainingJobName'
+        description: The name of the training job.
+      TrainingJobArn:
+        $ref: '#/definitions/TrainingJobArn'
+        description: The Amazon Resource Name (ARN) of the training job.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the training job was created.
+      TrainingStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the training job started.
+      TrainingEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the training job ended.
+      TrainingJobStatus:
+        $ref: '#/definitions/TrainingJobStatus'
+        description: The status of the training job.
+      TunedHyperParameters:
+        $ref: '#/definitions/HyperParameters'
+        description: A list of the hyperparameters for which you specified ranges to search.
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'The reason that the '
+      FinalHyperParameterTuningJobObjectiveMetric:
+        $ref: '#/definitions/FinalHyperParameterTuningJobObjectiveMetric'
+        description: The object that specifies the value of the objective metric of the tuning job that launched this training job.
+      ObjectiveStatus:
+        $ref: '#/definitions/ObjectiveStatus'
+        description: '<p>The status of the objective metric for the training job:</p> <ul> <li> <p>Succeeded: The final objective metric for the training job was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.</p> </li> </ul> <ul> <li> <p>Pending: The training job is in progress and evaluation of its final objective metric is pending.</p> </li> </ul> <ul> <li> <p>Failed: The final objective metric for the training job was not evaluated, and was not used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.</p> </li> </ul>'
+    description: Specifies summary information about a training job.
+  HyperParameterTuningJobArn:
+    type: string
+    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*'
+    maxLength: 256
+  HyperParameterTuningJobConfig:
+    type: object
+    required:
+      - Strategy
+      - HyperParameterTuningJobObjective
+      - ResourceLimits
+      - ParameterRanges
+    properties:
+      Strategy:
+        $ref: '#/definitions/HyperParameterTuningJobStrategyType'
+        description: 'Specifies the search strategy for hyperparameters. Currently, the only valid value is <code>Bayesian</code>.'
+      HyperParameterTuningJobObjective:
+        $ref: '#/definitions/HyperParameterTuningJobObjective'
+        description: The object that specifies the objective metric for this tuning job.
+      ResourceLimits:
+        $ref: '#/definitions/ResourceLimits'
+        description: The object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.
+      ParameterRanges:
+        $ref: '#/definitions/ParameterRanges'
+        description: The object that specifies the ranges of hyperparameters that this tuning job searches.
+    description: Configures a hyperparameter tuning job.
+  HyperParameterTuningJobName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    minLength: 1
+    maxLength: 32
+  HyperParameterTuningJobObjective:
+    type: object
+    required:
+      - Type
+      - MetricName
+    properties:
+      Type:
+        $ref: '#/definitions/HyperParameterTuningJobObjectiveType'
+        description: Whether to minimize or maximize the objective metric.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: The name of the metric to use for the objective metric.
+    description: 'Defines the objective metric for a hyperparameter tuning job. Hyperparameter tuning uses the value of this metric to evaluate the training jobs it launches, and returns the training job that results in either the highest or lowest value for this metric, depending on the value you specify for the <code>Type</code> parameter.'
+  HyperParameterTuningJobObjectiveType:
+    type: string
+    enum:
+      - Maximize
+      - Minimize
+  HyperParameterTuningJobSortByOptions:
+    type: string
+    enum:
+      - Name
+      - Status
+      - CreationTime
+  HyperParameterTuningJobStatus:
+    type: string
+    enum:
+      - Completed
+      - InProgress
+      - Failed
+      - Stopped
+      - Stopping
+  HyperParameterTuningJobStrategyType:
+    type: string
+    enum:
+      - Bayesian
+    description: 'The strategy hyperparameter tuning uses to find the best combination of hyperparameters for your model. Currently, the only supported value is <code>Bayesian</code>.'
+  HyperParameterTuningJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/HyperParameterTuningJobSummary'
+  HyperParameterTuningJobSummary:
+    type: object
+    required:
+      - HyperParameterTuningJobName
+      - HyperParameterTuningJobArn
+      - HyperParameterTuningJobStatus
+      - Strategy
+      - CreationTime
+      - TrainingJobStatusCounters
+      - ObjectiveStatusCounters
+    properties:
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: The name of the tuning job.
+      HyperParameterTuningJobArn:
+        $ref: '#/definitions/HyperParameterTuningJobArn'
+        description: The Amazon Resource Name (ARN) of the tuning job.
+      HyperParameterTuningJobStatus:
+        $ref: '#/definitions/HyperParameterTuningJobStatus'
+        description: The status of the tuning job.
+      Strategy:
+        $ref: '#/definitions/HyperParameterTuningJobStrategyType'
+        description: 'Specifies the search strategy hyperparameter tuning uses to choose which hyperparameters to use for each iteration. Currently, the only valid value is Bayesian.'
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the tuning job was created.
+      HyperParameterTuningEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the tuning job ended.
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the tuning job was modified.
+      TrainingJobStatusCounters:
+        $ref: '#/definitions/TrainingJobStatusCounters'
+        description: 'The object that specifies the numbers of training jobs, categorized by status, that this tuning job launched.'
+      ObjectiveStatusCounters:
+        $ref: '#/definitions/ObjectiveStatusCounters'
+        description: 'The object that specifies the numbers of training jobs, categorized by objective metric status, that this tuning job launched.'
+      ResourceLimits:
+        $ref: '#/definitions/ResourceLimits'
+        description: The object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.
+    description: Provides summary information about a hyperparameter tuning job.
   HyperParameters:
     type: array
     minItems: 0
@@ -1952,6 +2467,29 @@ definitions:
       - ml.p3.2xlarge
       - ml.p3.8xlarge
       - ml.p3.16xlarge
+  IntegerParameterRange:
+    type: object
+    required:
+      - Name
+      - MinValue
+      - MaxValue
+    properties:
+      Name:
+        $ref: '#/definitions/ParameterKey'
+        description: The name of the hyperparameter to search.
+      MinValue:
+        $ref: '#/definitions/ParameterValue'
+        description: The minimum value of the hyperparameter to search.
+      MaxValue:
+        $ref: '#/definitions/ParameterValue'
+        description: The maximum value of the hyperparameter to search.
+    description: 'For a hyperparameter of the integer type, specifies the range that a hyperparameter tuning job searches.'
+  IntegerParameterRanges:
+    type: array
+    items:
+      $ref: '#/definitions/IntegerParameterRange'
+    minItems: 0
+    maxItems: 20
   KmsKeyId:
     type: string
     maxLength: 2048
@@ -2037,6 +2575,50 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request. '
+  ListHyperParameterTuningJobsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of tuning jobs to return.
+      SortBy:
+        $ref: '#/definitions/HyperParameterTuningJobSortByOptions'
+        description: The field to sort results by. The default is <code>Name</code>.
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The sort order for results. The default is <code>Ascending</code>.
+      NameContains:
+        $ref: '#/definitions/NameContains'
+        description: A string in the tuning job name. This filter returns only tuning jobs whose name contains the specified string.
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only tuning jobs that were created after the specified time.
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only tuning jobs that were created before the specified time.
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only tuning jobs that were modified after the specified time.
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only tuning jobs that were modified before the specified time.
+      StatusEquals:
+        $ref: '#/definitions/HyperParameterTuningJobStatus'
+        description: A filter that returns only tuning jobs with the specified status.
+  ListHyperParameterTuningJobsResponse:
+    type: object
+    required:
+      - HyperParameterTuningJobSummaries
+    properties:
+      HyperParameterTuningJobSummaries:
+        $ref: '#/definitions/HyperParameterTuningJobSummaries'
+        description: A list of objects that describe the tuning jobs that the <code>ListHyperParameterTuningJobs</code> request returned.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of this <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.'
   ListModelsInput:
     type: object
     properties:
@@ -2182,6 +2764,40 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: ' If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens. '
+  ListTrainingJobsForHyperParameterTuningJobRequest:
+    type: object
+    required:
+      - HyperParameterTuningJobName
+    properties:
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: The name of the tuning job whose training jobs you want to list.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of training jobs to return.
+      StatusEquals:
+        $ref: '#/definitions/TrainingJobStatus'
+        description: A filter that returns only training jobs with the specified status.
+      SortBy:
+        $ref: '#/definitions/TrainingJobSortByOptions'
+        description: The field to sort results by. The default is <code>Name</code>.
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The sort order for results. The default is <code>Ascending</code>.
+  ListTrainingJobsForHyperParameterTuningJobResponse:
+    type: object
+    required:
+      - TrainingJobSummaries
+    properties:
+      TrainingJobSummaries:
+        $ref: '#/definitions/HyperParameterTrainingJobSummaries'
+        description: A list of objects that describe the training jobs that the <code>ListTrainingJobsForHyperParameterTuningJob</code> request returned.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of this <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.'
   ListTrainingJobsRequest:
     type: object
     properties:
@@ -2205,7 +2821,7 @@ definitions:
         description: A filter that returns only training jobs modified before the specified time (timestamp).
       NameContains:
         $ref: '#/definitions/NameContains'
-        description: A string in the training job name. This filter returns only models whose name contains the specified string.
+        description: A string in the training job name. This filter returns only training jobs whose name contains the specified string.
       StatusEquals:
         $ref: '#/definitions/TrainingJobStatus'
         description: A filter that retrieves only training jobs with a specific status.
@@ -2226,6 +2842,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request.'
+  MaxNumberOfTrainingJobs:
+    type: integer
+    minimum: 1
+  MaxParallelTrainingJobs:
+    type: integer
+    minimum: 1
   MaxResults:
     type: integer
     minimum: 1
@@ -2233,6 +2855,36 @@ definitions:
   MaxRuntimeInSeconds:
     type: integer
     minimum: 1
+  MetricDefinition:
+    type: object
+    required:
+      - Name
+      - Regex
+    properties:
+      Name:
+        $ref: '#/definitions/MetricName'
+        description: The name of the metric.
+      Regex:
+        $ref: '#/definitions/MetricRegex'
+        description: 'A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a>hpo-define-metrics</a>.'
+    description: Specifies a metric that the training algorithm writes to <code>stderr</code> or <code>stdout</code>. Amazon SageMakerHyperparamter tuning captures all defined metrics. You specify one metric that a hyperparameter tuning job uses as its objective metric to choose the best training job.
+  MetricDefinitionList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDefinition'
+    minItems: 0
+    maxItems: 20
+  MetricName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  MetricRegex:
+    type: string
+    minLength: 1
+    maxLength: 500
+  MetricValue:
+    type: number
+    format: float
   ModelArn:
     type: string
     minLength: 20
@@ -2415,6 +3067,28 @@ definitions:
       $ref: '#/definitions/NotebookInstanceSummary'
   NotebookInstanceUrl:
     type: string
+  ObjectiveStatus:
+    type: string
+    enum:
+      - Succeeded
+      - Pending
+      - Failed
+  ObjectiveStatusCounter:
+    type: integer
+    minimum: 0
+  ObjectiveStatusCounters:
+    type: object
+    properties:
+      Succeeded:
+        $ref: '#/definitions/ObjectiveStatusCounter'
+        description: The number of training jobs whose final objective metric was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.
+      Pending:
+        $ref: '#/definitions/ObjectiveStatusCounter'
+        description: The number of training jobs that are in progress and pending evaluation of their final objective metric.
+      Failed:
+        $ref: '#/definitions/ObjectiveStatusCounter'
+        description: The number of training jobs whose final objective metric was not evaluated and used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.
+    description: 'Specifies the number of training jobs that this hyperparameter tuning job launched, categorized by the status of their objective metric. The objective metric status shows whether the final objective metric for the training job has been evaluated by the tuning job and used in the hyperparameter tuning process.'
   OrderKey:
     type: string
     enum:
@@ -2427,7 +3101,7 @@ definitions:
     properties:
       KmsKeyId:
         $ref: '#/definitions/KmsKeyId'
-        description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. </p> <note> <p>If the configuration of the output S3 bucket requires server-side encryption for objects, and you don''t provide the KMS key ID, Amazon SageMaker uses the default service key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in Amazon Simple Storage Service developer guide.</p> </note> <note> <p> The KMS key policy must grant permission to the IAM role you specify in your <code>CreateTrainingJob</code> request. <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the AWS Key Management Service Developer Guide. </p> </note>'
+        description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. </p> <note> <p>If you don''t provide the KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in Amazon Simple Storage Service developer guide.</p> </note> <note> <p> The KMS key policy must grant permission to the IAM role you specify in your <code>CreateTrainingJob</code> request. <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the AWS Key Management Service Developer Guide. </p> </note>'
       S3OutputPath:
         $ref: '#/definitions/S3Uri'
         description: 'Identifies the S3 path where you want Amazon SageMaker to store the model artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>. '
@@ -2438,9 +3112,28 @@ definitions:
   ParameterKey:
     type: string
     maxLength: 256
+  ParameterRanges:
+    type: object
+    properties:
+      IntegerParameterRanges:
+        $ref: '#/definitions/IntegerParameterRanges'
+        description: The array of <a>IntegerParameterRange</a> objects that specify ranges of integer hyperparameters that a hyperparameter tuning job searches.
+      ContinuousParameterRanges:
+        $ref: '#/definitions/ContinuousParameterRanges'
+        description: The array of <a>ContinuousParameterRange</a> objects that specify ranges of continuous hyperparameters that a hyperparameter tuning job searches.
+      CategoricalParameterRanges:
+        $ref: '#/definitions/CategoricalParameterRanges'
+        description: The array of <a>CategoricalParameterRange</a> objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.
+    description: 'Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches.'
   ParameterValue:
     type: string
     maxLength: 256
+  ParameterValues:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterValue'
+    minItems: 1
+    maxItems: 20
   ProductionVariant:
     type: object
     required:
@@ -2571,6 +3264,19 @@ definitions:
       Message:
         $ref: '#/definitions/FailureReason'
     description: ' You have exceeded an Amazon SageMaker resource limit. For example, you might have too many training jobs created. '
+  ResourceLimits:
+    type: object
+    required:
+      - MaxNumberOfTrainingJobs
+      - MaxParallelTrainingJobs
+    properties:
+      MaxNumberOfTrainingJobs:
+        $ref: '#/definitions/MaxNumberOfTrainingJobs'
+        description: The maximum number of training jobs that a hyperparameter tuning job can launch.
+      MaxParallelTrainingJobs:
+        $ref: '#/definitions/MaxParallelTrainingJobs'
+        description: The maximum number of concurrent training jobs that a hyperparameter tuning job can launch.
+    description: Specifies the maximum number of training jobs and parallel training jobs that a hyperparameter tuning job can launch.
   ResourceNotFound:
     type: object
     properties:
@@ -2655,6 +3361,14 @@ definitions:
       NotebookInstanceName:
         $ref: '#/definitions/NotebookInstanceName'
         description: The name of the notebook instance to start.
+  StopHyperParameterTuningJobRequest:
+    type: object
+    required:
+      - HyperParameterTuningJobName
+    properties:
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: The name of the tuning job to stop.
   StopNotebookInstanceInput:
     type: object
     required:
@@ -2767,13 +3481,20 @@ definitions:
       - ml.c5.18xlarge
   TrainingJobArn:
     type: string
-    pattern: 'arn:aws[a-z\-]*:sagemaker:[\p{Alnum}\-]*:[0-9]{12}:training-job/.*'
+    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:training-job/.*'
     maxLength: 256
   TrainingJobName:
     type: string
     pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
     minLength: 1
     maxLength: 63
+  TrainingJobSortByOptions:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - Status
+      - FinalObjectiveMetricValue
   TrainingJobStatus:
     type: string
     enum:
@@ -2782,6 +3503,28 @@ definitions:
       - Failed
       - Stopping
       - Stopped
+  TrainingJobStatusCounter:
+    type: integer
+    minimum: 0
+  TrainingJobStatusCounters:
+    type: object
+    properties:
+      Completed:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: The number of completed training jobs launched by a hyperparameter tuning job.
+      InProgress:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: The number of in-progress training jobs launched by a hyperparameter tuning job.
+      RetryableError:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: 'The number of training jobs that failed, but can be retried. A failed training job can be retried only if it failed because an internal service error occurred.'
+      NonRetryableError:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: The number of training jobs that failed and can't be retried. A failed training job can't be retried if it failed because a client error occurred.
+      Stopped:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: The number of training jobs launched by a hyperparameter tuning job that were manually stopped.
+    description: 'The numbers of training jobs launched by a hyperparameter tuning job, categorized by status.'
   TrainingJobSummaries:
     type: array
     items:
@@ -2866,7 +3609,7 @@ definitions:
         description: The Amazon ML compute instance type.
       RoleArn:
         $ref: '#/definitions/RoleArn'
-        description: Amazon Resource Name (ARN) of the IAM role to associate with the instance.
+        description: '<p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access the notebook instance. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p> <note> <p>To be able to pass this role to Amazon SageMaker, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>'
   UpdateNotebookInstanceLifecycleConfigInput:
     type: object
     required:

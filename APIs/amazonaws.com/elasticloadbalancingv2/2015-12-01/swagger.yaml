@@ -236,6 +236,14 @@ paths:
           description: TooManyTargetsException
           schema:
             $ref: '#/definitions/TooManyTargetsException'
+        '493':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '494':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
       parameters:
         - name: body
           in: body
@@ -332,7 +340,7 @@ paths:
   '/#CreateRule':
     post:
       operationId: CreateRule
-      description: '<p>Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer.</p> <p>Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the action for the default rule is taken. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules">Listener Rules</a> in the <i>Application Load Balancers Guide</i>.</p> <p>To view your current rules, use <a>DescribeRules</a>. To update a rule, use <a>ModifyRule</a>. To set the priorities of your rules, use <a>SetRulePriorities</a>. To delete a rule, use <a>DeleteRule</a>.</p>'
+      description: '<p>Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer.</p> <p>Rules are evaluated in priority order, from the lowest value to the highest value. When the conditions for a rule are met, its actions are performed. If the conditions for no rules are met, the actions for the default rule are performed. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules">Listener Rules</a> in the <i>Application Load Balancers Guide</i>.</p> <p>To view your current rules, use <a>DescribeRules</a>. To update a rule, use <a>ModifyRule</a>. To set the priorities of your rules, use <a>SetRulePriorities</a>. To delete a rule, use <a>DeleteRule</a>.</p>'
       responses:
         '200':
           description: Success
@@ -378,6 +386,18 @@ paths:
           description: TooManyTargetsException
           schema:
             $ref: '#/definitions/TooManyTargetsException'
+        '490':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+        '491':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '492':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
       parameters:
         - name: body
           in: body
@@ -663,6 +683,10 @@ paths:
           description: LoadBalancerNotFoundException
           schema:
             $ref: '#/definitions/LoadBalancerNotFoundException'
+        '482':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
       parameters:
         - name: body
           in: body
@@ -801,6 +825,10 @@ paths:
           description: RuleNotFoundException
           schema:
             $ref: '#/definitions/RuleNotFoundException'
+        '482':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
       parameters:
         - name: body
           in: body
@@ -1075,6 +1103,14 @@ paths:
           description: TooManyTargetsException
           schema:
             $ref: '#/definitions/TooManyTargetsException'
+        '493':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '494':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
       parameters:
         - name: body
           in: body
@@ -1127,7 +1163,7 @@ paths:
   '/#ModifyRule':
     post:
       operationId: ModifyRule
-      description: '<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the default action, use <a>ModifyListener</a>.</p>'
+      description: '<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the actions for the default rule, use <a>ModifyListener</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1161,6 +1197,18 @@ paths:
           description: TargetGroupNotFoundException
           schema:
             $ref: '#/definitions/TargetGroupNotFoundException'
+        '487':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+        '488':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '489':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
       parameters:
         - name: body
           in: body
@@ -1527,19 +1575,33 @@ definitions:
     type: object
     required:
       - Type
-      - TargetGroupArn
     properties:
       Type:
         $ref: '#/definitions/ActionTypeEnum'
-        description: The type of action.
+        description: The type of action. Each rule must include one forward action.
       TargetGroupArn:
         $ref: '#/definitions/TargetGroupArn'
-        description: The Amazon Resource Name (ARN) of the target group.
+        description: '<p>The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is <code>forward</code>.</p> <p>For a default rule, the protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p>'
+      AuthenticateOidcConfig:
+        $ref: '#/definitions/AuthenticateOidcActionConfig'
+        description: '[HTTPS listener] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when <code>Type</code> is <code>authenticate-oidc</code>.'
+      AuthenticateCognitoConfig:
+        $ref: '#/definitions/AuthenticateCognitoActionConfig'
+        description: '[HTTPS listener] Information for using Amazon Cognito to authenticate users. Specify only when <code>Type</code> is <code>authenticate-cognito</code>.'
+      Order:
+        $ref: '#/definitions/ActionOrder'
+        description: The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. The forward action must be performed last.
     description: Information about an action.
+  ActionOrder:
+    type: integer
+    minimum: 1
+    maximum: 50000
   ActionTypeEnum:
     type: string
     enum:
       - forward
+      - authenticate-oidc
+      - authenticate-cognito
   Actions:
     type: array
     items:
@@ -1591,6 +1653,150 @@ definitions:
     type: object
     properties: {}
     description: The specified allocation ID does not exist.
+  AuthenticateCognitoActionAuthenticationRequestExtraParams:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestParamName'
+        value:
+          $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestParamValue'
+  AuthenticateCognitoActionAuthenticationRequestParamName:
+    type: string
+  AuthenticateCognitoActionAuthenticationRequestParamValue:
+    type: string
+  AuthenticateCognitoActionConditionalBehaviorEnum:
+    type: string
+    enum:
+      - deny
+      - allow
+      - authenticate
+  AuthenticateCognitoActionConfig:
+    type: object
+    required:
+      - UserPoolArn
+      - UserPoolClientId
+      - UserPoolDomain
+    properties:
+      UserPoolArn:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolArn'
+        description: The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
+      UserPoolClientId:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolClientId'
+        description: The ID of the Amazon Cognito user pool client.
+      UserPoolDomain:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolDomain'
+        description: The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.
+      SessionCookieName:
+        $ref: '#/definitions/AuthenticateCognitoActionSessionCookieName'
+        description: The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
+      Scope:
+        $ref: '#/definitions/AuthenticateCognitoActionScope'
+        description: '<p>The set of user claims to be requested from the IdP. The default is <code>openid</code>.</p> <p>To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.</p>'
+      SessionTimeout:
+        $ref: '#/definitions/AuthenticateCognitoActionSessionTimeout'
+        description: 'The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).'
+      AuthenticationRequestExtraParams:
+        $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestExtraParams'
+        description: The query parameters (up to 10) to include in the redirect request to the authorization endpoint.
+      OnUnauthenticatedRequest:
+        $ref: '#/definitions/AuthenticateCognitoActionConditionalBehaviorEnum'
+        description: '<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>'
+    description: Request parameters to use when integrating with Amazon Cognito to authenticate users.
+  AuthenticateCognitoActionScope:
+    type: string
+  AuthenticateCognitoActionSessionCookieName:
+    type: string
+  AuthenticateCognitoActionSessionTimeout:
+    type: integer
+  AuthenticateCognitoActionUserPoolArn:
+    type: string
+  AuthenticateCognitoActionUserPoolClientId:
+    type: string
+  AuthenticateCognitoActionUserPoolDomain:
+    type: string
+  AuthenticateOidcActionAuthenticationRequestExtraParams:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestParamName'
+        value:
+          $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestParamValue'
+  AuthenticateOidcActionAuthenticationRequestParamName:
+    type: string
+  AuthenticateOidcActionAuthenticationRequestParamValue:
+    type: string
+  AuthenticateOidcActionAuthorizationEndpoint:
+    type: string
+  AuthenticateOidcActionClientId:
+    type: string
+  AuthenticateOidcActionClientSecret:
+    type: string
+  AuthenticateOidcActionConditionalBehaviorEnum:
+    type: string
+    enum:
+      - deny
+      - allow
+      - authenticate
+  AuthenticateOidcActionConfig:
+    type: object
+    required:
+      - Issuer
+      - AuthorizationEndpoint
+      - TokenEndpoint
+      - UserInfoEndpoint
+      - ClientId
+      - ClientSecret
+    properties:
+      Issuer:
+        $ref: '#/definitions/AuthenticateOidcActionIssuer'
+        description: 'The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.'
+      AuthorizationEndpoint:
+        $ref: '#/definitions/AuthenticateOidcActionAuthorizationEndpoint'
+        description: 'The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.'
+      TokenEndpoint:
+        $ref: '#/definitions/AuthenticateOidcActionTokenEndpoint'
+        description: 'The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.'
+      UserInfoEndpoint:
+        $ref: '#/definitions/AuthenticateOidcActionUserInfoEndpoint'
+        description: 'The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.'
+      ClientId:
+        $ref: '#/definitions/AuthenticateOidcActionClientId'
+        description: The OAuth 2.0 client identifier.
+      ClientSecret:
+        $ref: '#/definitions/AuthenticateOidcActionClientSecret'
+        description: The OAuth 2.0 client secret.
+      SessionCookieName:
+        $ref: '#/definitions/AuthenticateOidcActionSessionCookieName'
+        description: The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
+      Scope:
+        $ref: '#/definitions/AuthenticateOidcActionScope'
+        description: '<p>The set of user claims to be requested from the IdP. The default is <code>openid</code>.</p> <p>To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.</p>'
+      SessionTimeout:
+        $ref: '#/definitions/AuthenticateOidcActionSessionTimeout'
+        description: 'The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).'
+      AuthenticationRequestExtraParams:
+        $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestExtraParams'
+        description: The query parameters (up to 10) to include in the redirect request to the authorization endpoint.
+      OnUnauthenticatedRequest:
+        $ref: '#/definitions/AuthenticateOidcActionConditionalBehaviorEnum'
+        description: '<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>'
+    description: Request parameters when using an identity provider (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users.
+  AuthenticateOidcActionIssuer:
+    type: string
+  AuthenticateOidcActionScope:
+    type: string
+  AuthenticateOidcActionSessionCookieName:
+    type: string
+  AuthenticateOidcActionSessionTimeout:
+    type: integer
+  AuthenticateOidcActionTokenEndpoint:
+    type: string
+  AuthenticateOidcActionUserInfoEndpoint:
+    type: string
   AvailabilityZone:
     type: object
     properties:
@@ -1687,10 +1893,10 @@ definitions:
         description: '[HTTPS listeners] The security policy that defines which ciphers and protocols are supported. The default is the current predefined security policy.'
       Certificates:
         $ref: '#/definitions/CertificateList'
-        description: '[HTTPS listeners] The SSL server certificate. You must provide exactly one certificate.'
+        description: '[HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. To create a certificate list, use <a>AddListenerCertificates</a>.'
       DefaultActions:
         $ref: '#/definitions/Actions'
-        description: 'The default action for the listener. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.'
+        description: '<p>The actions for the default rule. The rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
   CreateListenerOutput:
     type: object
     example:
@@ -1796,10 +2002,10 @@ definitions:
         description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
       Priority:
         $ref: '#/definitions/RulePriority'
-        description: The priority for the rule. A listener can't have multiple rules with the same priority.
+        description: The rule priority. A listener can't have multiple rules with the same priority.
       Actions:
         $ref: '#/definitions/Actions'
-        description: An action. Each action has the type <code>forward</code> and specifies a target group.
+        description: '<p>The actions. Each rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
   CreateRuleOutput:
     type: object
     example:
@@ -2405,6 +2611,10 @@ definitions:
     type: object
     properties: {}
     description: The requested configuration is not valid.
+  InvalidLoadBalancerActionException:
+    type: object
+    properties: {}
+    description: The requested action is not valid.
   InvalidSchemeException:
     type: object
     properties: {}
@@ -2643,13 +2853,13 @@ definitions:
         description: The protocol for connections from clients to the load balancer. Application Load Balancers support HTTP and HTTPS and Network Load Balancers support TCP.
       SslPolicy:
         $ref: '#/definitions/SslPolicyName'
-        description: 'The security policy that defines which protocols and ciphers are supported. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.'
+        description: '[HTTPS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.'
       Certificates:
         $ref: '#/definitions/CertificateList'
-        description: The default SSL server certificate.
+        description: '[HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. To create a certificate list, use <a>AddListenerCertificates</a>.'
       DefaultActions:
         $ref: '#/definitions/Actions'
-        description: 'The default action. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.'
+        description: '<p>The actions for the default rule. The rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
   ModifyListenerOutput:
     type: object
     example:
@@ -2667,7 +2877,7 @@ definitions:
     properties:
       Listeners:
         $ref: '#/definitions/Listeners'
-        description: Information about the modified listeners.
+        description: Information about the modified listener.
   ModifyLoadBalancerAttributesInput:
     type: object
     required:
@@ -2723,10 +2933,10 @@ definitions:
         description: The Amazon Resource Name (ARN) of the rule.
       Conditions:
         $ref: '#/definitions/RuleConditionList'
-        description: The conditions.
+        description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
       Actions:
         $ref: '#/definitions/Actions'
-        description: The actions. The target group must use the HTTP or HTTPS protocol.
+        description: '<p>The actions.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
   ModifyRuleOutput:
     type: object
     example:
@@ -2744,7 +2954,7 @@ definitions:
     properties:
       Rules:
         $ref: '#/definitions/Rules'
-        description: Information about the rule.
+        description: Information about the modified rule.
   ModifyTargetGroupAttributesInput:
     type: object
     required:
@@ -2836,7 +3046,7 @@ definitions:
     properties:
       TargetGroups:
         $ref: '#/definitions/TargetGroups'
-        description: Information about the target group.
+        description: Information about the modified target group.
   Name:
     type: string
   OperationNotPermittedException:
@@ -3085,7 +3295,6 @@ definitions:
     type: object
     required:
       - LoadBalancerArn
-      - Subnets
     example:
       LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
       Subnets:
@@ -3389,6 +3598,10 @@ definitions:
     enum:
       - instance
       - ip
+  TooManyActionsException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of actions per rule.
   TooManyCertificatesException:
     type: object
     properties: {}

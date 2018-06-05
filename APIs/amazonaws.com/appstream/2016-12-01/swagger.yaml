@@ -1965,6 +1965,10 @@ definitions:
   DisplayName:
     type: string
     maxLength: 100
+  Domain:
+    type: string
+    description: GSuite domain for GDrive integration.
+    maxLength: 64
   DomainJoinInfo:
     type: object
     properties:
@@ -1975,6 +1979,11 @@ definitions:
         $ref: '#/definitions/OrganizationalUnitDistinguishedName'
         description: The distinguished name of the organizational unit for computer accounts.
     description: Contains the information needed to join a Microsoft Active Directory domain.
+  DomainList:
+    type: array
+    items:
+      $ref: '#/definitions/Domain'
+    maxItems: 10
   ErrorMessage:
     type: string
     description: The error message in the exception.
@@ -2554,6 +2563,8 @@ definitions:
     type: string
     enum:
       - STORAGE_CONNECTORS
+      - STORAGE_CONNECTOR_HOMEFOLDERS
+      - STORAGE_CONNECTOR_GOOGLE_DRIVE
       - REDIRECT_URL
       - FEEDBACK_URL
       - THEME_NAME
@@ -2651,7 +2662,10 @@ definitions:
       ResourceIdentifier:
         $ref: '#/definitions/ResourceIdentifier'
         description: The ARN of the storage connector.
-    description: Describes a storage connector.
+      Domains:
+        $ref: '#/definitions/DomainList'
+        description: The names of the domains for the G Suite account.
+    description: Describes a connector to enable persistent storage for users.
   StorageConnectorList:
     type: array
     description: The storage connectors.
@@ -2661,6 +2675,7 @@ definitions:
     type: string
     enum:
       - HOMEFOLDERS
+      - GOOGLE_DRIVE
     description: The type of storage connector.
   StreamingUrlUserId:
     type: string
