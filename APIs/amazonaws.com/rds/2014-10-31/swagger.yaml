@@ -3897,7 +3897,7 @@ paths:
   '/#RestoreDBInstanceToPointInTime':
     post:
       operationId: RestoreDBInstanceToPointInTime
-      description: '<p>Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p>The target database is created with most of the original configuration, but in a system-selected availability zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <a>RestoreDBClusterToPointInTime</a>.</p> </note>'
+      description: '<p>Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p>The target database is created with most of the original configuration, but in a system-selected Availability Zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <a>RestoreDBClusterToPointInTime</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4288,7 +4288,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The name of the availability zone.
+        description: The name of the Availability Zone.
     description: '<p>Contains Availability Zone information.</p> <p> This data type is used as an element in the following data type:</p> <ul> <li> <p> <a>OrderableDBInstanceOption</a> </p> </li> </ul>'
   AvailabilityZoneList:
     type: array
@@ -4298,6 +4298,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  AvailableProcessorFeature:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the processor feature. Valid names are <code>coreCount</code> and <code>threadsPerCore</code>.
+      DefaultValue:
+        $ref: '#/definitions/String'
+        description: The default value for the processor feature of the DB instance class.
+      AllowedValues:
+        $ref: '#/definitions/String'
+        description: The allowed values for the processor feature of the DB instance class.
+    description: '<p>Contains the available processor feature information for the DB instance class of a DB instance.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor">Configuring the Processor of the DB Instance Class</a> in the <i>Amazon RDS User Guide. </i> </p>'
+  AvailableProcessorFeatureList:
+    type: array
+    items:
+      $ref: '#/definitions/AvailableProcessorFeature'
   BacktrackDBClusterMessage:
     type: object
     required:
@@ -4782,6 +4799,9 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: The list of log types that need to be enabled for exporting to CloudWatch Logs.
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
     description: <p/>
   CreateDBInstanceReadReplicaMessage:
     type: object
@@ -4854,6 +4874,12 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: The list of logs that the new DB instance is to export to CloudWatch Logs.
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+      UseDefaultProcessorFeatures:
+        $ref: '#/definitions/BooleanOptional'
+        description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
       SourceRegion:
         $ref: '#/definitions/String'
         description: The ID of the region that contains the source for the read replica.
@@ -5636,6 +5662,9 @@ definitions:
       EnabledCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: A list of log types that this DB instance is configured to export to CloudWatch Logs.
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
     description: <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>
   DBInstanceAlreadyExistsFault:
     type: object
@@ -5910,6 +5939,9 @@ definitions:
       IAMDatabaseAuthenticationEnabled:
         $ref: '#/definitions/Boolean'
         description: 'True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.
     description: <p>Contains the details of an Amazon RDS DB snapshot. </p> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action. </p>
   DBSnapshotAlreadyExistsFault:
     type: object
@@ -6734,7 +6766,7 @@ definitions:
         description: '<p>Duration filter value, specified in years or seconds. Specify this parameter to show only reservations for this duration.</p> <p>Valid Values: <code>1 | 3 | 31536000 | 94608000</code> </p>'
       ProductDescription:
         $ref: '#/definitions/String'
-        description: Product description filter value. Specify this parameter to show only the available offerings matching the specified product description.
+        description: <p>Product description filter value. Specify this parameter to show only the available offerings that contain the specified product description.</p> <note> <p>The results show offerings that partially match the filter value.</p> </note>
       OfferingType:
         $ref: '#/definitions/String'
         description: '<p>The offering type filter value. Specify this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>"Partial Upfront" | "All Upfront" | "No Upfront" </code> </p>'
@@ -7381,6 +7413,12 @@ definitions:
       CloudwatchLogsExportConfiguration:
         $ref: '#/definitions/CloudwatchLogsExportConfiguration'
         description: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+      UseDefaultProcessorFeatures:
+        $ref: '#/definitions/BooleanOptional'
+        description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
     description: <p/>
   ModifyDBInstanceResult:
     type: object
@@ -7864,6 +7902,9 @@ definitions:
       MaxIopsPerGib:
         $ref: '#/definitions/DoubleOptional'
         description: Maximum provisioned IOPS per GiB for a DB instance.
+      AvailableProcessorFeatures:
+        $ref: '#/definitions/AvailableProcessorFeatureList'
+        description: A list of the available processor features for the DB instance class of a DB instance.
     description: <p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <a>DescribeOrderableDBInstanceOptions</a> action. </p>
   OrderableDBInstanceOptionsList:
     type: array
@@ -8011,11 +8052,28 @@ definitions:
         description: 'The new DB subnet group for the DB instance. '
       PendingCloudwatchLogsExports:
         $ref: '#/definitions/PendingCloudwatchLogsExports'
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
     description: ' This data type is used as a response element in the <a>ModifyDBInstance</a> action. '
   PointInTimeRestoreNotEnabledFault:
     type: object
     properties: {}
     description: ' <i>SourceDBInstanceIdentifier</i> refers to a DB instance with <i>BackupRetentionPeriod</i> equal to 0. '
+  ProcessorFeature:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the processor feature. Valid names are <code>coreCount</code> and <code>threadsPerCore</code>.
+      Value:
+        $ref: '#/definitions/String'
+        description: The value of a processor feature name.
+    description: '<p>Contains the processor features of a DB instance class.</p> <p>To specify the number of CPU cores, use the <code>coreCount</code> feature name for the <code>Name</code> parameter. To specify the number of threads per core, use the <code>threadsPerCore</code> feature name for the <code>Name</code> parameter.</p> <p>You can set the processor features of the DB instance class for a DB instance when you call one of the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>ModifyDBInstance</a> </p> </li> <li> <p> <a>RestoreDBInstanceFromDBSnapshot</a> </p> </li> <li> <p> <a>RestoreDBInstanceFromS3</a> </p> </li> <li> <p> <a>RestoreDBInstanceToPointInTime</a> </p> </li> </ul> <p>You can view the valid processor values for a particular instance class by calling the <a>DescribeOrderableDBInstanceOptions</a> action and specifying the instance class for the <code>DBInstanceClass</code> parameter.</p> <p>In addition, you can use the following actions for DB instance class processor information:</p> <ul> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DescribeDBSnapshots</a> </p> </li> <li> <p> <a>DescribeValidDBInstanceModifications</a> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor">Configuring the Processor of the DB Instance Class</a> in the <i>Amazon RDS User Guide. </i> </p>'
+  ProcessorFeatureList:
+    type: array
+    items:
+      $ref: '#/definitions/ProcessorFeature'
   PromoteReadReplicaDBClusterMessage:
     type: object
     required:
@@ -8528,7 +8586,7 @@ definitions:
         description: '<p>A value that is set to <code>true</code> to restore the DB cluster to the latest restorable backup time, and <code>false</code> otherwise. </p> <p>Default: <code>false</code> </p> <p>Constraints: Cannot be specified if <code>RestoreToTime</code> parameter is provided.</p>'
       Port:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The port number on which the new DB cluster accepts connections.</p> <p>Constraints: Value must be <code>1150-65535</code> </p> <p>Default: The same port as the original DB cluster.</p>'
+        description: '<p>The port number on which the new DB cluster accepts connections.</p> <p>Constraints: A value from <code>1150-65535</code>. </p> <p>Default: The default port for the engine.</p>'
       DBSubnetGroupName:
         $ref: '#/definitions/String'
         description: '<p>The DB subnet group name to use for the new DB cluster.</p> <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p> <p>Example: <code>mySubnetgroup</code> </p>'
@@ -8632,6 +8690,12 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+      UseDefaultProcessorFeatures:
+        $ref: '#/definitions/BooleanOptional'
+        description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
     description: <p/>
   RestoreDBInstanceFromDBSnapshotResult:
     type: object
@@ -8766,6 +8830,12 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+      UseDefaultProcessorFeatures:
+        $ref: '#/definitions/BooleanOptional'
+        description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
   RestoreDBInstanceFromS3Result:
     type: object
     properties:
@@ -8851,6 +8921,12 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+      UseDefaultProcessorFeatures:
+        $ref: '#/definitions/BooleanOptional'
+        description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
     description: <p/>
   RestoreDBInstanceToPointInTimeResult:
     type: object
@@ -9087,6 +9163,9 @@ definitions:
       Storage:
         $ref: '#/definitions/ValidStorageOptionsList'
         description: 'Valid storage options for your DB instance. '
+      ValidProcessorFeatures:
+        $ref: '#/definitions/AvailableProcessorFeatureList'
+        description: 'Valid processor features for your DB instance. '
     description: 'Information about valid modifications that you can make to your DB instance. Contains the result of a successful call to the <a>DescribeValidDBInstanceModifications</a> action. You can use this information when you call <a>ModifyDBInstance</a>. '
   ValidStorageOptions:
     type: object

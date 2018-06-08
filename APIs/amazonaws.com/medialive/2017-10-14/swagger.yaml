@@ -109,13 +109,13 @@ paths:
           schema:
             $ref: '#/definitions/CreateChannelResponse'
         '480':
-          description: UnprocessableEntityException
-          schema:
-            $ref: '#/definitions/UnprocessableEntityException'
-        '481':
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
         '482':
           description: InternalServerErrorException
           schema:
@@ -514,13 +514,13 @@ paths:
           schema:
             $ref: '#/definitions/UpdateChannelResponse'
         '480':
-          description: UnprocessableEntityException
-          schema:
-            $ref: '#/definitions/UnprocessableEntityException'
-        '481':
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
         '482':
           description: InternalServerErrorException
           schema:
@@ -1673,6 +1673,9 @@ definitions:
         description: List of input attachments for channel.
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level being written to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -1737,6 +1740,9 @@ definitions:
         description: List of input attachments for channel.
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level being written to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -1768,6 +1774,9 @@ definitions:
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
         description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level to write to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: Name of channel.
@@ -1796,6 +1805,9 @@ definitions:
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
         description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level to write to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: Name of channel.
@@ -1935,6 +1947,9 @@ definitions:
         description: List of input attachments for channel.
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level being written to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -1992,6 +2007,9 @@ definitions:
         description: List of input attachments for channel.
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level being written to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -3572,6 +3590,15 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
     description: Placeholder documentation for ListInputsResultModel
+  LogLevel:
+    type: string
+    enum:
+      - ERROR
+      - WARNING
+      - INFO
+      - DEBUG
+      - DISABLED
+    description: The log level the user wants for their channel.
   M2tsAbsentInputAudioBehavior:
     type: string
     enum:
@@ -4397,6 +4424,9 @@ definitions:
         description: List of input attachments for channel.
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level being written to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -4450,6 +4480,9 @@ definitions:
         description: List of input attachments for channel.
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level being written to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -4582,6 +4615,9 @@ definitions:
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
         description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level to write to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel.
@@ -4603,6 +4639,9 @@ definitions:
       InputSpecification:
         $ref: '#/definitions/InputSpecification'
         description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level to write to CloudWatch Logs.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel.
