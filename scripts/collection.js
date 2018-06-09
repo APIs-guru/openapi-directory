@@ -1164,7 +1164,7 @@ function parseHost(swagger, altSource) {
     swHost = u.hostname;
   }
 
-  if ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('github.io')) || (swHost.indexOf('example.com')>=0) || (swHost.startsWith('localhost'))) {
+  if ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('github.io')) || (swHost.indexOf('example.com')>=0) || (swHost.indexOf('foo.bar')>=0) || (swHost.startsWith('localhost'))) {
     let port = '';
     if (swHost.indexOf(':')>=0) port = swHost.split(':')[1];
     swHost = altSource;
