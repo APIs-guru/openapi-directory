@@ -1854,6 +1854,67 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateFacetRequest'
+  /amazonclouddirectory/2017-01-11/typedlink/attributes/get:
+    post:
+      operationId: GetLinkAttributes
+      description: Retrieves attributes that are associated with a typed link.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLinkAttributesResponse'
+        '480':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '481':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '482':
+          description: RetryableConflictException
+          schema:
+            $ref: '#/definitions/RetryableConflictException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
+          description: DirectoryNotEnabledException
+          schema:
+            $ref: '#/definitions/DirectoryNotEnabledException'
+        '487':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '488':
+          description: FacetValidationException
+          schema:
+            $ref: '#/definitions/FacetValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLinkAttributesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /amazonclouddirectory/2017-01-11/object/attributes/get:
     post:
       operationId: GetObjectAttributes
@@ -3764,6 +3825,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /amazonclouddirectory/2017-01-11/typedlink/attributes/update:
+    post:
+      operationId: UpdateLinkAttributes
+      description: 'Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateLinkAttributesResponse'
+        '480':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '481':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '482':
+          description: RetryableConflictException
+          schema:
+            $ref: '#/definitions/RetryableConflictException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
+          description: DirectoryNotEnabledException
+          schema:
+            $ref: '#/definitions/DirectoryNotEnabledException'
+        '487':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '488':
+          description: FacetValidationException
+          schema:
+            $ref: '#/definitions/FacetValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateLinkAttributesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /amazonclouddirectory/2017-01-11/object/update:
     put:
       operationId: UpdateObjectAttributes
@@ -3806,6 +3928,10 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '488':
+          description: LinkNameAlreadyInUseException
+          schema:
+            $ref: '#/definitions/LinkNameAlreadyInUseException'
+        '489':
           description: FacetValidationException
           schema:
             $ref: '#/definitions/FacetValidationException'
@@ -4512,6 +4638,26 @@ definitions:
     type: object
     properties: {}
     description: Represents the output of a <a>DetachTypedLink</a> response operation.
+  BatchGetLinkAttributes:
+    type: object
+    required:
+      - TypedLinkSpecifier
+      - AttributeNames
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Allows a typed link specifier to be accepted as input.
+      AttributeNames:
+        $ref: '#/definitions/AttributeNameList'
+        description: A list of attribute names whose values will be retrieved.
+    description: 'Retrieves attributes that are associated with a typed link inside a <a>BatchRead</a> operation. For more information, see <a>GetLinkAttributes</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchGetLinkAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/AttributeKeyAndValueList'
+        description: The attributes that are associated with the typed link.
+    description: Represents the output of a <a>GetLinkAttributes</a> response operation.
   BatchGetObjectAttributes:
     type: object
     required:
@@ -4890,6 +5036,9 @@ definitions:
       ListIncomingTypedLinks:
         $ref: '#/definitions/BatchListIncomingTypedLinks'
         description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      GetLinkAttributes:
+        $ref: '#/definitions/BatchGetLinkAttributes'
+        description: Retrieves attributes that are associated with a typed link.
     description: Represents the output of a <code>BatchRead</code> operation.
   BatchReadOperationList:
     type: array
@@ -4962,6 +5111,9 @@ definitions:
       ListIncomingTypedLinks:
         $ref: '#/definitions/BatchListIncomingTypedLinksResponse'
         description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      GetLinkAttributes:
+        $ref: '#/definitions/BatchGetLinkAttributesResponse'
+        description: The list of attributes to retrieve from the typed link.
     description: Represents the output of a <code>BatchRead</code> success response operation.
   BatchReferenceName:
     type: string
@@ -4982,6 +5134,23 @@ definitions:
     type: object
     properties: {}
     description: An empty result that represents success.
+  BatchUpdateLinkAttributes:
+    type: object
+    required:
+      - TypedLinkSpecifier
+      - AttributeUpdates
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Allows a typed link specifier to be accepted as input.
+      AttributeUpdates:
+        $ref: '#/definitions/LinkAttributeUpdateList'
+        description: The attributes update structure.
+    description: 'Updates a given typed link’s attributes inside a <a>BatchRead</a> operation. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>. For more information, see <a>UpdateLinkAttributes</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchUpdateLinkAttributesResponse:
+    type: object
+    properties: {}
+    description: Represents the output of a <a>UpdateLinkAttributes</a> response operation.
   BatchUpdateObjectAttributes:
     type: object
     required:
@@ -5078,6 +5247,9 @@ definitions:
       DetachTypedLink:
         $ref: '#/definitions/BatchDetachTypedLink'
         description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      UpdateLinkAttributes:
+        $ref: '#/definitions/BatchUpdateLinkAttributes'
+        description: Updates a given object's attributes.
     description: 'Represents the output of a <code>BatchWrite</code> operation. '
   BatchWriteOperationList:
     type: array
@@ -5128,6 +5300,9 @@ definitions:
       DetachTypedLink:
         $ref: '#/definitions/BatchDetachTypedLinkResponse'
         description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      UpdateLinkAttributes:
+        $ref: '#/definitions/BatchUpdateLinkAttributesResponse'
+        description: Represents the output of a <code>BatchWrite</code> response operation.
     description: Represents the output of a <code>BatchWrite</code> response operation.
   BatchWriteOperationResponseList:
     type: array
@@ -5638,6 +5813,27 @@ definitions:
       Facet:
         $ref: '#/definitions/Facet'
         description: The <a>Facet</a> structure that is associated with the facet.
+  GetLinkAttributesRequest:
+    type: object
+    required:
+      - TypedLinkSpecifier
+      - AttributeNames
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Allows a typed link specifier to be accepted as input.
+      AttributeNames:
+        $ref: '#/definitions/AttributeNameList'
+        description: A list of attribute names whose values will be retrieved.
+      ConsistencyLevel:
+        $ref: '#/definitions/ConsistencyLevel'
+        description: The consistency level at which to retrieve the attributes on a typed link.
+  GetLinkAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/AttributeKeyAndValueList'
+        description: The attributes that are associated with the typed link.
   GetObjectAttributesRequest:
     type: object
     required:
@@ -5783,6 +5979,30 @@ definitions:
       Message:
         $ref: '#/definitions/ExceptionMessage'
     description: 'Indicates that limits are exceeded. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html">Limits</a> for more information.'
+  LinkAttributeAction:
+    type: object
+    properties:
+      AttributeActionType:
+        $ref: '#/definitions/UpdateActionType'
+        description: A type that can be either <code>UPDATE_OR_CREATE</code> or <code>DELETE</code>.
+      AttributeUpdateValue:
+        $ref: '#/definitions/TypedAttributeValue'
+        description: The value that you want to update to.
+    description: The action to take on a typed link attribute value. Updates are only supported for attributes which don’t contribute to link identity.
+  LinkAttributeUpdate:
+    type: object
+    properties:
+      AttributeKey:
+        $ref: '#/definitions/AttributeKey'
+        description: The key of the attribute being updated.
+      AttributeAction:
+        $ref: '#/definitions/LinkAttributeAction'
+        description: The action to perform as part of the attribute update.
+    description: Structure that contains attribute update information.
+  LinkAttributeUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/LinkAttributeUpdate'
   LinkName:
     type: string
     pattern: '[^\/\[\]\(\):\{\}#@!?\s\\;]+'
@@ -6831,6 +7051,21 @@ definitions:
         $ref: '#/definitions/ObjectType'
         description: The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.
   UpdateFacetResponse:
+    type: object
+    properties: {}
+  UpdateLinkAttributesRequest:
+    type: object
+    required:
+      - TypedLinkSpecifier
+      - AttributeUpdates
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Allows a typed link specifier to be accepted as input.
+      AttributeUpdates:
+        $ref: '#/definitions/LinkAttributeUpdateList'
+        description: The attributes update structure.
+  UpdateLinkAttributesResponse:
     type: object
     properties: {}
   UpdateObjectAttributesRequest:

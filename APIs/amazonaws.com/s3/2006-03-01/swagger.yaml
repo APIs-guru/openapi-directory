@@ -1780,6 +1780,31 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?select&select-type=2#SelectObjectContent':
+    post:
+      operationId: SelectObjectContent
+      description: 'This operation filters the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SelectObjectContentOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SelectObjectContentRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}/{Key}#UploadPart':
     put:
       operationId: UploadPart

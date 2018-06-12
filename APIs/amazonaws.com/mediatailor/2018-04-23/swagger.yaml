@@ -98,7 +98,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/prod/playbackConfiguration/{Name}':
+  '/playbackConfiguration/{Name}':
     delete:
       operationId: DeletePlaybackConfiguration
       description: 'Deletes the configuration for the specified name. '
@@ -145,7 +145,7 @@ paths:
           in: path
           type: string
           required: true
-  /prod/playbackConfigurations:
+  /playbackConfigurations:
     get:
       operationId: ListPlaybackConfigurations
       description: 'Returns a list of the configurations defined in AWS Elemental MediaTailor. You can specify a max number of configurations to return at a time. The default max is 50. Results are returned in pagefuls. If AWS Elemental MediaTailor has more configurations than the specified max, it provides parameters in the response that you can use to retrieve the next pageful. '
@@ -170,7 +170,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /prod/playbackConfiguration:
+  /playbackConfiguration:
     put:
       operationId: PutPlaybackConfiguration
       description: Adds a new configuration to AWS Elemental MediaTailor.

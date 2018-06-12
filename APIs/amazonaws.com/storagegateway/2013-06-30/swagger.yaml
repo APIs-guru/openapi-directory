@@ -2438,6 +2438,8 @@ definitions:
       VolumeUsedInBytes:
         $ref: '#/definitions/VolumeUsedInBytes'
         description: '<p>The size of the data stored on the volume in bytes.</p> <note> <p>This value is not available for volumes created prior to May 13, 2015, until you store data on the volume.</p> </note>'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
     description: Describes an iSCSI cached volume.
   CachediSCSIVolumes:
     type: array
@@ -2550,6 +2552,12 @@ definitions:
         $ref: '#/definitions/NetworkInterfaceId'
       ClientToken:
         $ref: '#/definitions/ClientToken'
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
   CreateCachediSCSIVolumeOutput:
     type: object
     example:
@@ -2582,7 +2590,7 @@ definitions:
         description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
       KMSKey:
         $ref: '#/definitions/KMSKey'
-        description: The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional.
+        description: The Amazon Resource Name (ARN) KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
       Role:
         $ref: '#/definitions/Role'
         description: 'The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage. '
@@ -2591,7 +2599,7 @@ definitions:
         description: 'The ARN of the backed storage used for storing file data. '
       DefaultStorageClass:
         $ref: '#/definitions/StorageClass'
-        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
       ObjectACL:
         $ref: '#/definitions/ObjectACL'
         description: Sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is "private".
@@ -2744,6 +2752,12 @@ definitions:
       TapeBarcode:
         $ref: '#/definitions/TapeBarcode'
         description: <p>The barcode that you want to assign to the tape.</p> <note> <p>Barcodes cannot be reused. This includes barcodes used for tapes that have been deleted.</p> </note>
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the KMS Key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
     description: CreateTapeWithBarcodeInput
   CreateTapeWithBarcodeOutput:
     type: object
@@ -2784,6 +2798,12 @@ definitions:
       TapeBarcodePrefix:
         $ref: '#/definitions/TapeBarcodePrefix'
         description: <p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
     description: CreateTapesInput
   CreateTapesOutput:
     type: object
@@ -3787,7 +3807,7 @@ definitions:
     maxLength: 255
   KMSKey:
     type: string
-    description: 'The ARN of the KMS key used for Amazon S3 server side encryption. '
+    description: The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
     minLength: 20
     maxLength: 2048
   LastSoftwareUpdate:
@@ -4081,7 +4101,7 @@ definitions:
         $ref: '#/definitions/LocationARN'
       DefaultStorageClass:
         $ref: '#/definitions/StorageClass'
-        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
       ObjectACL:
         $ref: '#/definitions/ObjectACL'
       ClientList:
@@ -4484,10 +4504,12 @@ definitions:
       TapeUsedInBytes:
         $ref: '#/definitions/TapeUsage'
         description: '<p>The size, in bytes, of data stored on the virtual tape.</p> <note> <p>This value is not available for tapes created prior to May 13, 2015.</p> </note>'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
     description: Describes a virtual tape object.
   TapeARN:
     type: string
-    pattern: '^arn:(aws|aws-cn):storagegateway:[a-z\-0-9]+:[0-9]+:tape\/[0-9A-Z]{7,16}$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\-0-9]+:[0-9]+:tape\/[0-9A-Z]{7,16}$'
     minLength: 50
     maxLength: 500
   TapeARNs:
@@ -4506,12 +4528,13 @@ definitions:
         description: The barcode that identifies the archived virtual tape.
       TapeCreatedDate:
         $ref: '#/definitions/Time'
+        description: The date the virtual tape was created.
       TapeSizeInBytes:
         $ref: '#/definitions/TapeSize'
         description: 'The size, in bytes, of the archived virtual tape.'
       CompletionTime:
         $ref: '#/definitions/Time'
-        description: '<p>The time that the archiving of the virtual tape was completed.</p> <p>The string format of the completion time is in the ISO8601 extended YYYY-MM-DD''T''HH:MM:SS''Z'' format.</p>'
+        description: '<p>The time that the archiving of the virtual tape was completed.</p> <p>The default time stamp format is in the ISO8601 extended YYYY-MM-DD''T''HH:MM:SS''Z'' format.</p>'
       RetrievedTo:
         $ref: '#/definitions/GatewayARN'
         description: <p>The Amazon Resource Name (ARN) of the tape gateway that the virtual tape is being retrieved to.</p> <p>The virtual tape is retrieved from the virtual tape shelf (VTS).</p>
@@ -4521,6 +4544,8 @@ definitions:
       TapeUsedInBytes:
         $ref: '#/definitions/TapeUsage'
         description: '<p>The size, in bytes, of data stored on the virtual tape.</p> <note> <p>This value is not available for tapes created prior to May 13, 2015.</p> </note>'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
     description: Represents a virtual tape that is archived in the virtual tape shelf (VTS).
   TapeArchiveStatus:
     type: string
@@ -4574,7 +4599,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the virtual tape.
       TapeRecoveryPointTime:
         $ref: '#/definitions/Time'
-        description: '<p>The time when the point-in-time view of the virtual tape was replicated for later recovery.</p> <p>The string format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD''T''HH:MM:SS''Z'' format.</p>'
+        description: '<p>The time when the point-in-time view of the virtual tape was replicated for later recovery.</p> <p>The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD''T''HH:MM:SS''Z'' format.</p>'
       TapeSizeInBytes:
         $ref: '#/definitions/TapeSize'
         description: 'The size, in bytes, of the virtual tapes to recover.'
@@ -4763,13 +4788,13 @@ definitions:
         description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
       KMSKey:
         $ref: '#/definitions/KMSKey'
-        description: 'The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional. '
+        description: 'The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional. '
       NFSFileShareDefaults:
         $ref: '#/definitions/NFSFileShareDefaults'
         description: The default values for the file share. Optional.
       DefaultStorageClass:
         $ref: '#/definitions/StorageClass'
-        description: 'The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
       ObjectACL:
         $ref: '#/definitions/ObjectACL'
         description: Sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
