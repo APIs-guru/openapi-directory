@@ -851,6 +851,11 @@ function fixSpec(swagger, errors) {
         }
         break;
       case 'UNRESOLVABLE_REFERENCE':
+        if (error.message.startsWith('Security scope definition could not be resolved')) {
+          console.log(error.message);
+          break;
+        }
+
         if (value.indexOf(' ') !== -1) {
           if (value !== encodeURI(value)) {
             newValue = encodeURI(value);
@@ -860,6 +865,7 @@ function fixSpec(swagger, errors) {
         }
         else
           newValue = value;
+
 
         if (!swagger.definitions)
           swagger.definitions = {};
