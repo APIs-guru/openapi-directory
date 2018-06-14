@@ -3711,6 +3711,7 @@ definitions:
     enum:
       - CLOUD_FORMATION_TEMPLATE
       - MARKETPLACE
+    maxLength: 8191
   ProductViewAggregationType:
     type: string
   ProductViewAggregationValue:
@@ -3782,10 +3783,13 @@ definitions:
           $ref: '#/definitions/ProductViewFilterValues'
   ProductViewName:
     type: string
+    maxLength: 8191
   ProductViewOwner:
     type: string
+    maxLength: 8191
   ProductViewShortDescription:
     type: string
+    maxLength: 8191
   ProductViewSortBy:
     type: string
     enum:
@@ -4695,10 +4699,13 @@ definitions:
     pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
   SupportDescription:
     type: string
+    maxLength: 8191
   SupportEmail:
     type: string
+    maxLength: 254
   SupportUrl:
     type: string
+    maxLength: 2083
   Tag:
     type: object
     required:

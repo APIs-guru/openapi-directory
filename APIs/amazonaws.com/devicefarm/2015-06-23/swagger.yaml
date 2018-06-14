@@ -3030,6 +3030,9 @@ definitions:
       billingMethod:
         $ref: '#/definitions/BillingMethod'
         description: The billing method for the remote access session.
+      vpceConfigurationArns:
+        $ref: '#/definitions/AmazonResourceNames'
+        description: An array of Amazon Resource Names (ARNs) included in the VPC endpoint configuration.
     description: 'Configuration settings for a remote access session, including billing method.'
   CreateRemoteAccessSessionRequest:
     type: object
