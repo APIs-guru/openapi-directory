@@ -234,7 +234,7 @@ paths:
   '/#CreateGlobalTable':
     post:
       operationId: CreateGlobalTable
-      description: '<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions. </p> <p> Tables can only be added as the replicas of a global table group under the following conditions: </p> <ul> <li> <p> The tables must have the same name. </p> </li> <li> <p> The tables must contain no items. </p> </li> <li> <p> The tables must have the same hash key and sort key (if present). </p> </li> <li> <p> The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES). </p> </li> <li> <p> The tables must have same provisioned and maximum write capacity units. </p> </li> </ul> <p> If global secondary indexes are specified, then the following conditions must also be met: </p> <ul> <li> <p> The global secondary indexes must have the same name. </p> </li> <li> <p> The global secondary indexes must have the same hash key and sort key (if present). </p> </li> <li> <p> The global secondary indexes must have the same provisioned and maximum write capacity units. </p> </li> </ul>'
+      description: '<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions. </p> <p>If you want to add a new replica table to a global table, each of the following conditions must be true:</p> <ul> <li> <p>The table must have the same primary key as all of the other replicas.</p> </li> <li> <p>The table must have the same name as all of the other replicas.</p> </li> <li> <p>The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.</p> </li> <li> <p>None of the replica tables in the global table can contain any data.</p> </li> </ul> <p> If global secondary indexes are specified, then the following conditions must also be met: </p> <ul> <li> <p> The global secondary indexes must have the same name. </p> </li> <li> <p> The global secondary indexes must have the same hash key and sort key (if present). </p> </li> </ul> <important> <p> Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes. </p> <p> If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table. </p> </important>'
       responses:
         '200':
           description: Success
@@ -2178,7 +2178,7 @@ definitions:
     properties:
       ContinuousBackupsDescription:
         $ref: '#/definitions/ContinuousBackupsDescription'
-        description: ' <code>ContinuousBackupsDescription</code> can be one of the following : ENABLED, DISABLED. '
+        description: Represents the continuous backups and point in time recovery settings on the table.
   DescribeGlobalTableInput:
     type: object
     required:
@@ -2654,6 +2654,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AttributeMap'
+  KMSMasterKeyArn:
+    type: string
   Key:
     type: array
     items:
@@ -2735,7 +2737,7 @@ definitions:
       message:
         $ref: '#/definitions/ErrorMessage'
         description: Too many operations for a given subscriber.
-    description: '<p>Up to 50 <code>CreateBackup</code> operations are allowed per second, per account. There is no limit to the number of daily on-demand backups that can be taken. </p> <p>Up to 10 simultaneous table operations are allowed per account. These operations include <code>CreateTable</code>, <code>UpdateTable</code>, <code>DeleteTable</code>,<code>UpdateTimeToLive</code>, <code>RestoreTableFromBackup</code>, and <code>RestoreTableToPointInTime</code>. </p> <p>For tables with secondary indexes, only one of those tables can be in the <code>CREATING</code> state at any point in time. Do not attempt to create more than one such table simultaneously.</p> <p>The total limit of tables in the <code>ACTIVE</code> state is 250.</p>'
+    description: '<p>There is no limit to the number of daily on-demand backups that can be taken. </p> <p>Up to 10 simultaneous table operations are allowed per account. These operations include <code>CreateTable</code>, <code>UpdateTable</code>, <code>DeleteTable</code>,<code>UpdateTimeToLive</code>, <code>RestoreTableFromBackup</code>, and <code>RestoreTableToPointInTime</code>. </p> <p>For tables with secondary indexes, only one of those tables can be in the <code>CREATING</code> state at any point in time. Do not attempt to create more than one such table simultaneously.</p> <p>The total limit of tables in the <code>ACTIVE</code> state is 250.</p>'
   ListAttributeValue:
     type: array
     items:
@@ -2757,7 +2759,7 @@ definitions:
         description: 'Only backups created before this time are listed. <code>TimeRangeUpperBound</code> is exclusive. '
       ExclusiveStartBackupArn:
         $ref: '#/definitions/BackupArn'
-        description: ' <code>LastEvaluatedBackupARN</code> returned by the previous ListBackups call. '
+        description: ' <code>LastEvaluatedBackupArn</code> is the ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the <code>ExclusiveStartBackupArn</code> of a new <code>ListBackups</code> operation in order to fetch the next page of results. '
   ListBackupsOutput:
     type: object
     properties:
@@ -2766,7 +2768,7 @@ definitions:
         description: List of <code>BackupSummary</code> objects.
       LastEvaluatedBackupArn:
         $ref: '#/definitions/BackupArn'
-        description: Last evaluated BackupARN.
+        description: '<p> The ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the <code>ExclusiveStartBackupArn</code> of a new <code>ListBackups</code> operation in order to fetch the next page of results. </p> <p> If <code>LastEvaluatedBackupArn</code> is empty, then the last page of results has been processed and there are no more results to be retrieved. </p> <p> If <code>LastEvaluatedBackupArn</code> is not empty, this may or may not indicate there is more data to be returned. All results are guaranteed to have been returned if and only if no value for <code>LastEvaluatedBackupArn</code> is returned. </p>'
   ListGlobalTablesInput:
     type: object
     properties:
@@ -3450,6 +3452,12 @@ definitions:
       Status:
         $ref: '#/definitions/SSEStatus'
         description: '<p>The current state of server-side encryption:</p> <ul> <li> <p> <code>ENABLING</code> - Server-side encryption is being enabled.</p> </li> <li> <p> <code>ENABLED</code> - Server-side encryption is enabled.</p> </li> <li> <p> <code>DISABLING</code> - Server-side encryption is being disabled.</p> </li> <li> <p> <code>DISABLED</code> - Server-side encryption is disabled.</p> </li> </ul>'
+      SSEType:
+        $ref: '#/definitions/SSEType'
+        description: '<p>Server-side encryption type:</p> <ul> <li> <p> <code>AES256</code> - Server-side encryption which uses the AES256 algorithm.</p> </li> <li> <p> <code>KMS</code> - Server-side encryption which uses AWS Key Management Service.</p> </li> </ul>'
+      KMSMasterKeyArn:
+        $ref: '#/definitions/KMSMasterKeyArn'
+        description: The KMS master key ARN used for the KMS encryption.
     description: The description of the server-side encryption status on the specified table.
   SSEEnabled:
     type: boolean
@@ -3469,6 +3477,11 @@ definitions:
       - ENABLED
       - DISABLING
       - DISABLED
+  SSEType:
+    type: string
+    enum:
+      - AES256
+      - KMS
   ScalarAttributeType:
     type: string
     enum:

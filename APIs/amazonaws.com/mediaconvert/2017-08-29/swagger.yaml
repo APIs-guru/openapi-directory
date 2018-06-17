@@ -1226,6 +1226,9 @@ definitions:
         $ref: '#/definitions/AudioTypeControl'
       CodecSettings:
         $ref: '#/definitions/AudioCodecSettings'
+      CustomLanguageCode:
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
+        description: 'Specify the language for this audio output track, using the ISO 639-2 or ISO 639-3 three-letter language code. The language specified will be used when ''Follow Input Language Code'' is not selected or when ''Follow Input Language Code'' is selected but there is no ISO 639 language code specified by the input.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: Indicates the language of the audio output track. The ISO 639 language specified in the 'Language Code' drop down will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input.
@@ -1289,6 +1292,9 @@ definitions:
   AudioSelector:
     type: object
     properties:
+      CustomLanguageCode:
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
+        description: 'Selects a specific language code from within an audio source, using the ISO 639-2 or ISO 639-3 three-letter language code'
       DefaultSelection:
         $ref: '#/definitions/AudioDefaultSelection'
       ExternalAudioFileInput:
@@ -1470,6 +1476,9 @@ definitions:
       CaptionSelectorName:
         $ref: '#/definitions/__stringMin1'
         description: 'Specifies which "Caption Selector":#inputs-caption_selector to use from each input when generating captions. The name should be of the format "Caption Selector <N>", which denotes that the Nth Caption Selector will be used from each input.'
+      CustomLanguageCode:
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
+        description: 'Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code'
       DestinationSettings:
         $ref: '#/definitions/CaptionDestinationSettings'
       LanguageCode:
@@ -1484,6 +1493,9 @@ definitions:
     required:
       - DestinationSettings
     properties:
+      CustomLanguageCode:
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
+        description: 'Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code'
       DestinationSettings:
         $ref: '#/definitions/CaptionDestinationSettings'
       LanguageCode:
@@ -1528,6 +1540,9 @@ definitions:
     required:
       - SourceSettings
     properties:
+      CustomLanguageCode:
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
+        description: 'The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: 'The specific language to extract from source. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
@@ -1590,7 +1605,6 @@ definitions:
     type: object
     required:
       - Type
-      - StaticKeyProvider
     properties:
       ConstantInitializationVector:
         $ref: '#/definitions/__stringMin32Max32Pattern09aFAF32'
@@ -1649,7 +1663,7 @@ definitions:
         $ref: '#/definitions/CmafWriteDASHManifest'
       WriteHlsManifest:
         $ref: '#/definitions/CmafWriteHLSManifest'
-    description: Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS.
+    description: 'Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output.'
   CmafInitializationVectorInManifest:
     type: string
     enum:
@@ -3015,6 +3029,9 @@ definitions:
       CaptionChannel:
         $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Caption channel.
+      CustomLanguageCode:
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
+        description: 'Specify the language for this caption channel, using the ISO 639-2 or ISO 639-3 three-letter language code'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
       LanguageDescription:
@@ -3734,7 +3751,7 @@ definitions:
       - ORJ
       - QPC
       - TNG
-    description: 'Code to specify the language, following the specification "ISO 639-2 three-digit code":http://www.loc.gov/standards/iso639-2/'
+    description: 'Specify the language, using the ISO 639-2 three-letter code listed at https://www.loc.gov/standards/iso639-2/php/code_list.php.'
   ListJobTemplatesRequest:
     type: object
     properties: {}
@@ -4850,6 +4867,7 @@ definitions:
     properties:
       Id3Insertions:
         $ref: '#/definitions/__listOfId3Insertion'
+        description: Id3Insertions contains the array of Id3Insertion instances.
     description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
   Timing:
     type: object
@@ -5518,6 +5536,11 @@ definitions:
   __stringMin3Max3Pattern1809aFAF09aEAE:
     type: string
     pattern: '^[1-8][0-9a-fA-F][0-9a-eA-E]$'
+    minLength: 3
+    maxLength: 3
+  __stringMin3Max3PatternAZaZ3:
+    type: string
+    pattern: '^[A-Za-z]{3}$'
     minLength: 3
     maxLength: 3
   __stringPattern:

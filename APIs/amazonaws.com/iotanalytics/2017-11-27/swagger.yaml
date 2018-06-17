@@ -3,7 +3,7 @@ info:
   version: '2017-11-27'
   x-release: v4
   title: AWS IoT Analytics
-  description: '<p>AWS IoT Analytics provides advanced data analysis for AWS IoT. It allows you to collect large amounts of device data, process messages, store them, and then query the data and run sophisticated analytics to make accurate decisions in your IoT applications and machine learning use cases. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.</p> <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result, the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. </p> <p>AWS IoT Analytics automates each of the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.</p>'
+  description: '<p>AWS IoT Analytics allows you to collect large amounts of device data, process messages, and store them. You can then query the data and run sophisticated analytics on it. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.</p> <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. </p> <p>AWS IoT Analytics automates the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes pre-built models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1209,7 +1209,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutLoggingOptions
-      description: Sets or updates the AWS IoT Analytics logging options.
+      description: '<p>Sets or updates the AWS IoT Analytics logging options.</p> <p>Note that if you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to 5 minutes for that change to take effect. </p>'
       responses:
         '200':
           description: Success
@@ -1235,6 +1235,131 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutLoggingOptionsRequest'
+  /tags:
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags (metadata) which you have assigned to the resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+    delete:
+      operationId: UntagResource
+      description: Removes the given tags (metadata) from the resource.
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
   /pipelineactivities/run:
     post:
       operationId: RunPipelineActivity
@@ -1547,6 +1672,9 @@ definitions:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the channel.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the channel.
   CreateChannelResponse:
     type: object
     properties:
@@ -1577,6 +1705,9 @@ definitions:
       triggers:
         $ref: '#/definitions/DatasetTriggers'
         description: A list of triggers. A trigger causes data set content to be populated at a specified time or time interval. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the data set.
   CreateDatasetResponse:
     type: object
     properties:
@@ -1597,6 +1728,9 @@ definitions:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the data store.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the data store.
   CreateDatastoreResponse:
     type: object
     properties:
@@ -1621,6 +1755,9 @@ definitions:
       pipelineActivities:
         $ref: '#/definitions/PipelineActivities'
         description: '<p>A list of pipeline activities.</p> <p>The list can be 1-25 <b>PipelineActivity</b> objects. Activities perform transformations on your messages, such as removing, renaming, or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the pipeline.
   CreatePipelineResponse:
     type: object
     properties:
@@ -2065,6 +2202,15 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags (metadata) which you have assigned to the resource.
   LogResult:
     type: string
   LoggingEnabled:
@@ -2130,7 +2276,7 @@ definitions:
     properties:
       messageId:
         $ref: '#/definitions/MessageId'
-        description: The ID you wish to assign to the message.
+        description: The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
       payload:
         $ref: '#/definitions/MessagePayload'
         description: The payload of the message.
@@ -2308,6 +2454,10 @@ definitions:
         $ref: '#/definitions/resourceArn'
         description: The ARN of the resource.
     description: A resource with the same name already exists.
+  ResourceArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
   ResourceNotFoundException:
     type: object
     properties:
@@ -2421,6 +2571,50 @@ definitions:
   StartTime:
     type: string
     format: date-time
+  Tag:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The tag's key.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The tag's value.
+    description: A set of key/value pairs which are used to manage the resource.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The new or modified tags for the resource.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagValue:
+    type: string
+    minLength: 1
+    maxLength: 256
   ThrottlingException:
     type: object
     properties:
@@ -2432,6 +2626,12 @@ definitions:
     format: date-time
   UnlimitedRetentionPeriod:
     type: boolean
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
   UpdateChannelRequest:
     type: object
     properties:
